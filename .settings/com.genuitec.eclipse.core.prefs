@@ -1,0 +1,3 @@
+eclipse.preferences.version=1
+validator.Checked=WebRoot/WEB-INF/commons/js,WebRoot/WEB-INF/js/Highcharts-3.0.1,WebRoot/WEB-INF/view/patient,WebRoot/WEB-INF/js/jquery-easyui-1.4
+validator.Unchecked=

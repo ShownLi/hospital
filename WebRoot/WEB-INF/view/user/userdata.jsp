@@ -1,0 +1,29 @@
+<%@ page language="java" pageEncoding="utf-8"%>
+{
+  "data": [
+    {
+      "id":"1",
+      "name":"张三",
+      "loginname":"zhangsan",
+      "upttime":"2011/04/25"
+    },
+    {
+      "id":"2",
+      "name":"李四",
+      "loginname":"lisi",
+      "upttime":"2011/04/25"
+    },
+    {
+      "id":"20",
+      "name":"李四20",
+      "loginname":"lisi",
+      "upttime":"2011/04/25"
+    },
+    {
+      "id":"21",
+      "name":"李四21",
+      "loginname":"lisi",
+      "upttime":"2011/04/25"
+    }
+    ]
+}

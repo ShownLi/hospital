@@ -1,0 +1,140 @@
+﻿<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<%@ include file="./assets/pages/head.jsp" %>
+</head>
+
+<body class="signin">
+
+	<section>
+
+		<div class="signinpanel">
+
+			<div class="row">
+
+				<div class="col-md-7">
+
+					<div class="signin-info">
+						<div class="logopanel">
+							<h1>
+								<span>[</span> demo <span>]</span>
+							</h1>
+						</div>
+						<!-- logopanel -->
+
+						<div class="mb20"></div>
+
+						<h5>
+							<strong>Welcome to Bracket Bootstrap 3 Template!</strong>
+						</h5>
+						<ul>
+							<li><i class="fa fa-arrow-circle-o-right mr5"></i> Fully
+								Responsive Layout</li>
+							<li><i class="fa fa-arrow-circle-o-right mr5"></i>
+								HTML5/CSS3 Valid</li>
+							<li><i class="fa fa-arrow-circle-o-right mr5"></i> Retina
+								Ready</li>
+							<li><i class="fa fa-arrow-circle-o-right mr5"></i> WYSIWYG
+								CKEditor</li>
+							<li><i class="fa fa-arrow-circle-o-right mr5"></i> and much
+								more...</li>
+						</ul>
+						<div class="mb20"></div>
+						<strong>Not a member? <a href="#">Sign Up</a></strong>
+					</div>
+					<!-- signin0-info -->
+
+				</div>
+				<!-- col-sm-7 -->
+
+				<div class="col-md-5">
+
+					<form method="post" id="form">
+						<h4 class="nomargin">Sign In</h4>
+						<p class="mt5 mb20">Login to access your account.</p>
+						<div class="error">
+							<label class="error"></label>
+						</div>
+						<input type="text" class="form-control uname"
+							placeholder="Username" name="loginname" required /> <input
+							type="password" class="form-control pword" placeholder="Password"
+							name="pwd" required /> <br><a href="#"><small>Forgot Your
+								Password?</small></a>
+						<button class="btn btn-success btn-block">Sign In</button>
+
+					</form>
+				</div>
+				<!-- col-sm-5 -->
+
+			</div>
+			<!-- row -->
+
+			<div class="signup-footer">
+				<div class="pull-left">&copy; 2014. All Rights Reserved.
+					Bracket Bootstrap 3 Admin Template</div>
+				<div class="pull-right">
+					Created By: <a href="http://themepixels.com/" target="_blank">ThemePixels</a>
+				</div>
+			</div>
+
+		</div>
+		<!-- signin -->
+
+	</section>
+
+	<%@ include file="./assets/pages/foot.jsp" %>
+	<script src="${rootPath}assets/js/jquery.validate.min.js"></script>
+	
+	<script type="text/javascript">
+		jQuery(document).ready(function() {
+			jQuery("#form").validate({
+			    highlight: function(element) {
+			      jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+			    },
+			    success: function(element) {
+			      jQuery(element).closest('.form-group').removeClass('has-error');
+			    },
+			    invalidHandler : function(){
+			      return false;
+			    },
+			    submitHandler : function(){
+			      signin();
+			      return false;
+			    }
+			  });
+		});
+//			      
+		function signin() {
+			var f = $("#form").serialize();
+			$.post('${rootPath}signin.do', f, function(result) {
+				
+				$("#form div.error").hide();
+				$("#form div.error label.error").hide();
+				jQuery("#form div.error label.error").text("");
+				
+				var rmsg = result.msg;
+				
+				if (result.success) {
+					$("#form div.error").hide();
+					$("#form div.error label.error").hide();
+					jQuery("#form div.error label.error").text("");
+					window.parent.location = "${rootPath}/main.html";
+				} else {
+					//submitCount = '';
+					/* $("#errorLable").show();
+					$("#errorLable").text(result.msg); */
+					//alert(result.msg);
+					//$("#loginButt").attr('disabled', "true");
+					$("#form div.error").show();
+					$("#form div.error label.error").show();
+					jQuery("#form div.error label.error").text(rmsg);
+				}
+			}, "JSON");
+		}
+	</script>
+</body>
+</html>

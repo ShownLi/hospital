@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+  <display-name>TMCrm</display-name>
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>WEB-INF/config/spring-mybatis.xml</param-value>
+  </context-param>
+  <context-param>
+    <param-name>proxoolXmlFile</param-name>
+    <param-value>WEB-INF/config/proxool.xml</param-value>
+  </context-param>
+
+  <listener>
+    <listener-class>com.tourmade.crm.common.proxool.ProxoolListener</listener-class>
+  </listener>
+  <listener>
+    <listener-class>com.tourmade.crm.common.listener.StartupListener</listener-class>
+  </listener>
+  <listener>
+    <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
+  </listener>
+  <filter>
+    <filter-name>charFilter</filter-name>
+    <filter-class>com.tourmade.crm.common.filter.EncodingFilter</filter-class>
+  </filter>
+
+  <filter-mapping>
+    <filter-name>charFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
+  <servlet>
+    <servlet-name>dispatcher</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <init-param>
+      <param-name>contextConfigLocation</param-name>
+      <param-value>WEB-INF/config/spring-mvc.xml</param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>dispatcher</servlet-name>
+    <url-pattern>/</url-pattern>
+  </servlet-mapping>
+  <error-page>
+    <error-code>404</error-code>
+    <location>/</location>
+  </error-page>
+  <error-page>
+    <error-code>405</error-code>
+    <location>/</location>
+  </error-page>
+  <session-config>
+    <session-timeout>1440</session-timeout>
+  </session-config>
+  <context-param>
+    <param-name>log4jConfigLocation</param-name>
+    <param-value>WEB-INF/config/log4j.xml</param-value>
+  </context-param>
+  <listener>
+    <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+  </listener>
+  <welcome-file-list>
+    <welcome-file>/signin.html</welcome-file>
+  </welcome-file-list>
+</web-app>

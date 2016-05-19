@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="GBK" ?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tourmade.crm.mapper.user.DemoUserMapper">
+
+	<select id="queryUser" parameterType="Map" resultType="DemoUser">
+		SELECT *
+		FROM (
+		select
+		u.userid as userid,
+		u.name as name,
+		u.loginname as loginname,
+		u.pwd as pwd,
+		u.upttime as upttime,
+		u.delflag as delflag
+		from demo_user u where u.delflag = 0
+		<if test="pojo.seachValue!=null and pojo.seachValue!=''">
+			and
+			(
+			u.loginname like '%${pojo.seachValue}%'
+			or
+			u.name like
+			'%${pojo.seachValue}%'
+			)
+		</if>
+		order by u.upttime desc
+		) table_alias
+		limit #{b},#{e}
+	</select>
+
+
+	<select id="countUser" parameterType="DemoUser" resultType="long">
+		select count(u.userid) from demo_user u
+		where
+		u.delflag = 0
+		<if test="seachValue!=null and seachValue!=''">
+			and
+			(
+			u.loginname like '%${seachValue}%'
+			or
+			u.name like
+			'%${seachValue}%'
+			)
+		</if>
+	</select>
+
+	<insert id="saveUser" parameterType="DemoUser" flushCache="true" useGeneratedKeys="true" keyProperty="userid" keyColumn="GENERATED_KEY">
+		insert into demo_user(
+		name,
+		loginname,
+		pwd,
+		upttime,
+		delflag
+		)values(
+		#{name,jdbcType=VARCHAR},
+		#{loginname,jdbcType=VARCHAR},
+		#{pwd,jdbcType=VARCHAR},
+		NOW(),
+		0
+		)
+	</insert>
+
+	<update id="updateUser" parameterType="DemoUser" flushCache="true">
+		update demo_user
+		set
+		loginname=#{loginname},
+		name=#{name},
+		pwd=#{pwd},
+		upttime=NOW()
+		where
+		userid=#{userid}
+	</update>
+
+	<select id="getUserById" parameterType="int" resultType="DemoUser">
+		select
+		u.userid as userid,
+		u.loginname as loginname,
+		u.pwd as pwd,
+		u.name as name,
+		u.upttime as upttime,
+		u.delflag as delflag
+		from demo_user u where u.userid = #{userid}
+	</select>
+
+	<update id="deleteUserById" parameterType="int" flushCache="true"
+		statementType="PREPARED">
+		update demo_user
+		set
+		delflag=1
+		where
+		userid = #{userid}
+	</update>
+
+	<select id="signin" parameterType="DemoUser" resultType="DemoUser">
+		select
+		u.userid as userid,
+		u.loginname as loginname,
+		u.pwd as pwd,
+		u.name as name,
+		u.upttime as upttime,
+		u.delflag as delflag
+		from demo_user u where
+		u.loginname = #{loginname} and u.pwd = #{pwd}
+	</select>
+
+</mapper>
