@@ -36,7 +36,13 @@
                     
                 </ul>
             </li>
-            
+            <li class="nav-parent"><a href=""><i class="fa fa-user"></i> <span>地接社管理</span></a>
+                <ul class="children">
+                    <li><a href="${rootPath }agency/list.html"><i class="fa fa-caret-right"></i> 地接社列表</a></li>
+                    <li><a href="${rootPath }agency/add.html"><i class="fa fa-caret-right"></i> 新增地接社</a></li>
+                    
+                </ul>
+            </li>            
             
             <li><a href="email.html"><span class="pull-right badge badge-success">2</span><i class="fa fa-envelope-o"></i> <span>Email</span></a></li>
             <li class="nav-parent"><a href=""><i class="fa fa-edit"></i> <span>Forms</span></a>

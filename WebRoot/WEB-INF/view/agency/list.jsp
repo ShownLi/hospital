@@ -14,13 +14,13 @@
 			<%@ include file="../assets/pages/headerbar.jsp"%>
 			<div class="pageheader">
 				<h2>
-					<i class="fa fa-user"></i> 用户管理 <span>用户列表</span>
+					<i class="fa fa-user"></i> 地接社管理 <span>地接社列表</span>
 				</h2>
 				<div class="breadcrumb-wrapper">
 					<span class="label">你在这里:</span>
 					<ol class="breadcrumb">
 						<li><a href="#">Demo</a></li>
-						<li class="active">用户管理</li>
+						<li class="active">地接社管理</li>
 					</ol>
 				</div>
 			</div>
@@ -53,9 +53,9 @@
 								<thead>
 									<tr>
 										<th>#</th>
-										<th>用户名</th>
-										<th>姓名</th>
-										<th>更新时间</th>
+										<th>地接社名</th>
+										<th>国家</th>
+										<th>语言</th>
 										<th>操作</th>
 									</tr>
 								</thead>
@@ -117,7 +117,7 @@
 				language: datatable_local_language, // my.js
 				serverSide: true,
 				ajax: {
-					url: '${rootPath}user/list.do',
+					url: '${rootPath}agency/list.do',
 					dataFilter: function(data){
 			            var json = jQuery.parseJSON( data );
 			            json.recordsTotal = json.countTotal;
@@ -128,7 +128,7 @@
 				},
 				columnDefs: [
 				  {
-	                  data: "userid",
+	                  data: "agency_id",
 	                  //defaultContent: '<a class="btn btn-success btn-xs"><span class="fa fa-edit"></span> 编辑</a>&nbsp;<a class="btn btn-danger btn-xs"><span class="fa fa-minus-circle"></span> 删除</a>',
 	                  orderable: false,
 	                  render: function ( data, type, full, meta ) {
@@ -141,19 +141,13 @@
 					  searchable: false,
 				      targets: [0,1,2]
 				  },
-				  {
-					  data: "upttime",
-					  render: function ( data, type, full, meta ) {
-						  var upttime = new Date(data.time);
-	                      return upttime.format("yyyy/MM/dd");
-	                  },
-	                  targets: 3
-				  }
+
 				],
 				columns: [
-		            { data: "userid" },
-		            { data: "loginname" },
-		            { data: "name" }
+		            { data: "agency_id" },
+		            { data: "name" },
+		            { data: "country" },
+					{ data: "language" }
 		        ]
 			});
 			
@@ -185,7 +179,7 @@
 		});
 		
 		function edit(id) {
-			window.parent.location = "${rootPath}user/edit.html?id="+id;
+			window.parent.location = "${rootPath}agency/edit.html?id="+id;
 		}
 		
 		function del(id) {
@@ -196,7 +190,7 @@
 		
 		function doDel(id){
 			$.ajax({
-				url: "${rootPath}user/del.do?id=" + id, 
+				url: "${rootPath}agency/del.do?id=" + id, 
 				async: true,
 				success: function(o) {
 					window.location.reload();
