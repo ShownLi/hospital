@@ -13,28 +13,27 @@ import org.springframework.transaction.annotation.Transactional;
 import com.tourmade.crm.common.framework.BaseService;
 import com.tourmade.crm.common.framework.bean.QueryResult;
 import com.tourmade.crm.common.model.base.value.baseconfig.PageHelper;
-import com.tourmade.crm.mapper.agency.DemoAgencyMapper;
-import com.tourmade.crm.model.DemoAgency;
-import com.tourmade.crm.model.DemoUser;
+import com.tourmade.crm.mapper.parameter.DemoParameterMapper;
+import com.tourmade.crm.model.DemoParameter;
 
 @Service
 @Transactional(readOnly = false)
-public class AgencyService extends BaseService {
+public class ParameterService extends BaseService {
 	
 	@Autowired
-	private DemoAgencyMapper agencyMapper;
+	private DemoParameterMapper ParameterMapper;
 
 	/**
 	 * 查询地接社数据，分页展示
 	 * 
-	 * @param agency
+	 * @param Parameter
 	 * @param ph
 	 * @param request
 	 * @return
 	 */
-	public QueryResult<DemoAgency> queryAgency(DemoAgency agency, PageHelper ph, HttpServletRequest request) {
+	public QueryResult<DemoParameter> queryParameter(DemoParameter Parameter, PageHelper ph, HttpServletRequest request) {
 
-		QueryResult<DemoAgency> r = new QueryResult<DemoAgency>();
+		QueryResult<DemoParameter> r = new QueryResult<DemoParameter>();
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		System.out.println(ph);
@@ -42,22 +41,22 @@ public class AgencyService extends BaseService {
 		String seachValue = ph.getSearch().get("value");
 		
 		if (null != seachValue && !"".equals(seachValue)) {
-			if (null == agency) {
-				agency = new DemoAgency();
+			if (null == Parameter) {
+				Parameter = new DemoParameter();
 			}
-			agency.setSeachValue(seachValue);
+			Parameter.setSeachValue(seachValue);
 		}
 			
 		
 		
-		map.put("pojo", agency);
+		map.put("pojo", Parameter);
 		map.put("b", ph.getStart());
 		map.put("e", ph.getLength());
 //		map.put("s", ph.getSort());
 //		map.put("o", ph.getOrder());
 
-		List<DemoAgency> data = agencyMapper.queryAgency(map);
-		long count = agencyMapper.countAgency(agency);
+		List<DemoParameter> data = ParameterMapper.queryParameter(map);
+		long count = ParameterMapper.countParameter(Parameter);
 			
 		r.setData(data);
 		r.setCountTotal(count);
@@ -71,19 +70,19 @@ public class AgencyService extends BaseService {
 	/**
 	 * 新增地接社
 	 * 
-	 * @param agency
+	 * @param Parameter
 	 * @return
 	 */
-	public int saveAgency(DemoAgency agency) {
+	public int saveParameter(DemoParameter Parameter) {
 
 		try {
-			agencyMapper.saveAgency(agency);
+			ParameterMapper.saveParameter(Parameter);
 		} catch (Exception e) {
-			logger.error("AgencyService.saveAgency() --> " + agency + "-->" + e.getMessage());
+			logger.error("ParameterService.saveParameter() --> " + Parameter + "-->" + e.getMessage());
 			e.printStackTrace();
 			return 0;
 		}
-		return agency.getAgency_id();
+		return Parameter.getParameter_id();
 	}
 
 	/**
@@ -92,12 +91,12 @@ public class AgencyService extends BaseService {
 	 * @param id
 	 * @return
 	 */
-	public DemoAgency getAgencyById(int id) {
-		DemoAgency r = null;
+	public DemoParameter getParameterById(int id) {
+		DemoParameter r = null;
 		try {
-			r = agencyMapper.getAgencyById(id);
+			r = ParameterMapper.getParameterById(id);
 		} catch (Exception e) {
-			logger.error("AgencyService.getAgencyById() --> " + id + "-->" + e.getMessage());
+			logger.error("ParameterService.getParameterById() --> " + id + "-->" + e.getMessage());
 			r = null;
 		}
 		return r;
@@ -106,26 +105,23 @@ public class AgencyService extends BaseService {
 	/**
 	 * 更新地接社信息(不修改密码)
 	 * 
-	 * @param agency
+	 * @param Parameter
 	 * @return
 	 */
-	public boolean updateAgency(DemoAgency agency) {
+	public boolean updateParameter(DemoParameter Parameter) {
 
 		boolean r = false;
 
 		try {
-			DemoAgency u = agencyMapper.getAgencyById(agency.getAgency_id());
+			DemoParameter u = ParameterMapper.getParameterById(Parameter.getParameter_id());
 			if (u != null) {
-				u.setName(agency.getName());
-				u.setCountry(agency.getCountry());
-				u.setLanguage(agency.getLanguage());
-				agencyMapper.updateAgency(u);
+				ParameterMapper.updateParameter(u);
 				r = true;
 			} else {
 				r = false;
 			}
 		} catch (Exception e) {
-			logger.error("AgencyService.updateAgency() --> " + agency + "-->" + e.getMessage());
+			logger.error("ParameterService.updateParameter() --> " + Parameter + "-->" + e.getMessage());
 			r = false;
 		}
 
@@ -135,18 +131,18 @@ public class AgencyService extends BaseService {
 	/**
 	 * 删除地接社（假删除）
 	 * 
-	 * @param agency_id
+	 * @param Parameter_id
 	 * @return
 	 */
-	public boolean deleteAgencyById(int agency_id) {
+	public boolean deleteParameterById(int Parameter_id) {
 
 		boolean r = false;
 
 		try {
-			agencyMapper.deleteAgencyById(agency_id);
+			ParameterMapper.deleteParameterById(Parameter_id);
 			r = true;
 		} catch (Exception e) {
-			logger.error("AgencyService.deleteAgencyById() --> " + agency_id + "-->" + e.getMessage());
+			logger.error("ParameterService.deleteParameterById() --> " + Parameter_id + "-->" + e.getMessage());
 			r = false;
 		}
 

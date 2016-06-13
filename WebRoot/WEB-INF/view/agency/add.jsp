@@ -43,27 +43,43 @@
           
             
             <div class="form-group">
-              <label class="col-sm-3 control-label">地接社名</label>
+              <label class="col-sm-3 control-label">地接社名 <span class="asterisk">*</span></label>
               <div class="col-sm-6">
                 <input type="text" name="name" placeholder="地接社名" class="form-control" />
               </div>
             </div>
             <div class="form-group">
-              <label class="col-sm-3 control-label">国家</label>
+              <label class="col-sm-3 control-label">国家 <span class="asterisk">*</span></label>
               <div class="col-sm-6">
                 <input type="text" name="country" placeholder="国家" class="form-control" />
               </div>
-            </div> 
-			<div class="form-group">
-              <label class="col-sm-3 control-label">语言</label>
-              <div class="col-sm-6">
-                <input type="text" name="language" placeholder="语言" class="form-control" />
+            </div> 			
+                <div class="form-group">
+                  <label class="col-sm-3 control-label">语言 <span class="asterisk">*</span></label>
+                  <div class="col-sm-9">
+                    <div class="ckbox ckbox-primary">
+                      <input type="checkbox" id="int_chinese" value="zh" name="int[]" required />
+                      <label for="int_chinese">中文</label>
+                    </div><!-- rdio -->
+                    <div class="ckbox ckbox-primary">
+                      <input type="checkbox" value="en" id="int_english" name="int[]" />
+                      <label for="int_english">英文</label>
+                    </div><!-- rdio -->
+                    <label class="error" for="int[]"></label>
+                  </div>
+                </div><!-- form-group -->          
+            <div class="form-group">
+              <label class="col-sm-3 control-label">Select2</label>
+              <div class="col-sm-5">
+                <select class="select2" data-placeholder="Choose a Country...">
+                  <option value=""></option>
+                  <option value="United States">United States</option>
+                  <option value="United Kingdom">United Kingdom</option>
+                  <option value="Afghanistan">Afghanistan</option>
+                  <option value="Aland Islands">Aland Islands</option>
+                </select>
               </div>
-            </div>			
-            
-            
-            
-          
+            </div>   
           
         </div><!-- panel-body -->
         
@@ -112,10 +128,18 @@
 
 	<%@ include file="../assets/pages/foot.jsp"%>
 	<script src="${rootPath}assets/js/jquery.validate.min.js"></script>
+	
 	<script type="text/javascript">
-	jQuery(document).ready(function() {
+	jQuery(document).ready(function() {		  
 		jQuery("#form").validate({
-
+			rules: {
+				name: "required",
+				country: "required",
+			},
+			messages: {
+				name: "This field is required.",
+				country: "This field is required.",
+			},
 		    highlight: function(element) {
 		      jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
 		    },
@@ -130,11 +154,9 @@
 		      return false;
 		    }
 		  });
-		
 		$("#btn-back").click( function () {
 			history.go(-1);
 	    } ); 
-		
 	});
 //			      
 		function form_submit() {

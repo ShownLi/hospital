@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tourmade.crm.mapper.Sale.DemoSaleMapper">
+
+	<select id="querySale" parameterType="Map" resultType="DemoSale">
+		SELECT *
+		FROM (
+		select
+		u.Sale_id as Sale_id,
+		u.Sale_name as name,
+		u.country as country,
+		u.language as language,
+		u.creat_time as creat_time,
+		u.isdel as isdel
+		from tm_Sale u where u.isdel = 0
+		order by u.creat_time
+		) table_alias
+		limit #{b},#{e}
+	</select>
+
+	<select id="countSale" parameterType="DemoSale" resultType="long">
+		select count(u.Sale_id) from tm_Sale u
+		where
+		u.isdel = 0
+
+	</select>
+	
+	<insert id="saveSale" parameterType="DemoSale" flushCache="true" useGeneratedKeys="true" keyProperty="Sale_id" keyColumn="GENERATED_KEY">
+		insert into tm_Sale(
+		Sale_name,
+		country,
+		language,
+		creat_time,
+		isdel
+		)values(
+		#{name,jdbcType=VARCHAR},
+		#{country,jdbcType=VARCHAR},
+		#{language,jdbcType=VARCHAR},
+		NOW(),
+		0
+		)
+	</insert>
+
+	<update id="updateSale" parameterType="DemoSale" flushCache="true">
+		update tm_Sale
+		set
+		Sale_name=#{name},
+		country=#{country},
+		language=#{language},
+		update_time=NOW()
+		where
+		Sale_id=#{Sale_id}
+	</update>
+	
+	<select id="getSaleById" parameterType="int" resultType="DemoSale">
+		select
+		u.Sale_id as Sale_id,
+		u.Sale_name as name,
+		u.country as country,
+		u.language as language,
+		u.isdel as isdel
+		from tm_Sale u where u.Sale_id = #{Sale_id}
+	</select>
+
+	<update id="deleteSaleById" parameterType="int" flushCache="true"
+		statementType="PREPARED">
+		update tm_Sale
+		set
+		isdel=1
+		where
+		Sale_id = #{Sale_id}
+	</update>
+</mapper>

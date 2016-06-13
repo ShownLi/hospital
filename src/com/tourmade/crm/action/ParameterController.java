@@ -15,28 +15,27 @@ import com.tourmade.crm.common.framework.bean.QueryResult;
 import com.tourmade.crm.common.framework.util.JSONUtilS;
 import com.tourmade.crm.common.model.base.value.baseconfig.Json;
 import com.tourmade.crm.common.model.base.value.baseconfig.PageHelper;
-import com.tourmade.crm.model.DemoAgency;
-import com.tourmade.crm.model.DemoUser;
-import com.tourmade.crm.service.AgencyService;
-import com.tourmade.crm.service.UserService;
+import com.tourmade.crm.model.DemoParameter;
+import com.tourmade.crm.service.ParameterService;
+
 
 @Controller
-@RequestMapping("/agency")
-public class AgencyController extends BaseSimpleFormController {
+@RequestMapping("/Parameter")
+public class ParameterController extends BaseSimpleFormController {
 	
 	@Autowired
-	private AgencyService service;
+	private ParameterService service;
 
 	@RequestMapping(value = "/list.html", method = { RequestMethod.POST, RequestMethod.GET })
 	public String list(Model model) {
-		return "/agency/list";
+		return "/Parameter/list";
 	}
 	
 	@RequestMapping(value = "/list.do",produces="application/json;charset=utf-8")
 	@ResponseBody
-	public String queryData(HttpServletRequest request, HttpSession session, Model model, DemoAgency agency, PageHelper page) {
+	public String queryData(HttpServletRequest request, HttpSession session, Model model, DemoParameter Parameter, PageHelper page) {
 
-		QueryResult<DemoAgency> r = service.queryAgency(agency, page, request);
+		QueryResult<DemoParameter> r = service.queryParameter(Parameter, page, request);
 		String result = JSONUtilS.object2json(r);
 
 		return result;
@@ -44,21 +43,21 @@ public class AgencyController extends BaseSimpleFormController {
 	
 	@RequestMapping(value = "/add.html", method = { RequestMethod.POST, RequestMethod.GET })
 	public String add(Model model) {
-		return "/agency/add";
+		return "/Parameter/add";
 	}
 
 	@RequestMapping(value = "/add.do")
 	@ResponseBody
-	public Json doAdd(HttpServletRequest request, HttpSession session, Model model, DemoAgency agency) {
+	public Json doAdd(HttpServletRequest request, HttpSession session, Model model, DemoParameter Parameter) {
 
 		Json j = new Json();
 		
 		try {
-			service.saveAgency(agency);
+			service.saveParameter(Parameter);
 			j.setSuccess(true);
 		} catch (Exception e) {
 			j.setSuccess(false);
-			logger.error("AgencyController.doAdd() --> " + agency.toString() + "\n" + e.getMessage());
+			logger.error("ParameterController.doAdd() --> " + Parameter.toString() + "\n" + e.getMessage());
 		}
 		
 		return j;
@@ -69,24 +68,24 @@ public class AgencyController extends BaseSimpleFormController {
 		
 		if (null != id && !"".equals(id)) {
 			int i = Integer.parseInt(id);
-			DemoAgency u = service.getAgencyById(i);
-			model.addAttribute("agency",u);
+			DemoParameter u = service.getParameterById(i);
+			model.addAttribute("Parameter",u);
 		}
-		return "/agency/edit";
+		return "/Parameter/edit";
 	}
 
 	@RequestMapping(value = "/edit.do")
 	@ResponseBody
-	public Json doEdit(HttpServletRequest request, HttpSession session, Model model, DemoAgency agency) {
+	public Json doEdit(HttpServletRequest request, HttpSession session, Model model, DemoParameter Parameter) {
 
 		Json j = new Json();
 		
 		try {
-			service.updateAgency(agency);
+			service.updateParameter(Parameter);
 			j.setSuccess(true);
 		} catch (Exception e) {
 			j.setSuccess(false);
-			logger.error("AgencyController.doEdit() --> " + agency.toString() + "\n" + e.getMessage());
+			logger.error("ParameterController.doEdit() --> " + Parameter.toString() + "\n" + e.getMessage());
 		}
 		
 		return j;
@@ -101,14 +100,14 @@ public class AgencyController extends BaseSimpleFormController {
 		try {
 			if (null != id && !"".equals(id)) {
 				int i = Integer.parseInt(id);
-				service.deleteAgencyById(i);
+				service.deleteParameterById(i);
 				j.setSuccess(true);
 			} else {
 				j.setSuccess(false);
 			}
 		} catch (Exception e) {
 			j.setSuccess(false);
-			logger.error("AgencyController.doDel() --> " + id + "\n" + e.getMessage());
+			logger.error("ParameterController.doDel() --> " + id + "\n" + e.getMessage());
 		}
 		
 		return j;

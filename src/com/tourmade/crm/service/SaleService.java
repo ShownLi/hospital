@@ -13,28 +13,28 @@ import org.springframework.transaction.annotation.Transactional;
 import com.tourmade.crm.common.framework.BaseService;
 import com.tourmade.crm.common.framework.bean.QueryResult;
 import com.tourmade.crm.common.model.base.value.baseconfig.PageHelper;
-import com.tourmade.crm.mapper.agency.DemoAgencyMapper;
-import com.tourmade.crm.model.DemoAgency;
+import com.tourmade.crm.mapper.sale.DemoSaleMapper;
+import com.tourmade.crm.model.DemoSale;
 import com.tourmade.crm.model.DemoUser;
 
 @Service
 @Transactional(readOnly = false)
-public class AgencyService extends BaseService {
+public class SaleService extends BaseService {
 	
 	@Autowired
-	private DemoAgencyMapper agencyMapper;
+	private DemoSaleMapper SaleMapper;
 
 	/**
 	 * 查询地接社数据，分页展示
 	 * 
-	 * @param agency
+	 * @param Sale
 	 * @param ph
 	 * @param request
 	 * @return
 	 */
-	public QueryResult<DemoAgency> queryAgency(DemoAgency agency, PageHelper ph, HttpServletRequest request) {
+	public QueryResult<DemoSale> querySale(DemoSale Sale, PageHelper ph, HttpServletRequest request) {
 
-		QueryResult<DemoAgency> r = new QueryResult<DemoAgency>();
+		QueryResult<DemoSale> r = new QueryResult<DemoSale>();
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		System.out.println(ph);
@@ -42,22 +42,22 @@ public class AgencyService extends BaseService {
 		String seachValue = ph.getSearch().get("value");
 		
 		if (null != seachValue && !"".equals(seachValue)) {
-			if (null == agency) {
-				agency = new DemoAgency();
+			if (null == Sale) {
+				Sale = new DemoSale();
 			}
-			agency.setSeachValue(seachValue);
+			Sale.setSeachValue(seachValue);
 		}
 			
 		
 		
-		map.put("pojo", agency);
+		map.put("pojo", Sale);
 		map.put("b", ph.getStart());
 		map.put("e", ph.getLength());
 //		map.put("s", ph.getSort());
 //		map.put("o", ph.getOrder());
 
-		List<DemoAgency> data = agencyMapper.queryAgency(map);
-		long count = agencyMapper.countAgency(agency);
+		List<DemoSale> data = SaleMapper.querySale(map);
+		long count = SaleMapper.countSale(Sale);
 			
 		r.setData(data);
 		r.setCountTotal(count);
@@ -71,19 +71,19 @@ public class AgencyService extends BaseService {
 	/**
 	 * 新增地接社
 	 * 
-	 * @param agency
+	 * @param Sale
 	 * @return
 	 */
-	public int saveAgency(DemoAgency agency) {
+	public int saveSale(DemoSale Sale) {
 
 		try {
-			agencyMapper.saveAgency(agency);
+			SaleMapper.saveSale(Sale);
 		} catch (Exception e) {
-			logger.error("AgencyService.saveAgency() --> " + agency + "-->" + e.getMessage());
+			logger.error("SaleService.saveSale() --> " + Sale + "-->" + e.getMessage());
 			e.printStackTrace();
 			return 0;
 		}
-		return agency.getAgency_id();
+		return Sale.getSale_id();
 	}
 
 	/**
@@ -92,12 +92,12 @@ public class AgencyService extends BaseService {
 	 * @param id
 	 * @return
 	 */
-	public DemoAgency getAgencyById(int id) {
-		DemoAgency r = null;
+	public DemoSale getSaleById(int id) {
+		DemoSale r = null;
 		try {
-			r = agencyMapper.getAgencyById(id);
+			r = SaleMapper.getSaleById(id);
 		} catch (Exception e) {
-			logger.error("AgencyService.getAgencyById() --> " + id + "-->" + e.getMessage());
+			logger.error("SaleService.getSaleById() --> " + id + "-->" + e.getMessage());
 			r = null;
 		}
 		return r;
@@ -106,26 +106,24 @@ public class AgencyService extends BaseService {
 	/**
 	 * 更新地接社信息(不修改密码)
 	 * 
-	 * @param agency
+	 * @param Sale
 	 * @return
 	 */
-	public boolean updateAgency(DemoAgency agency) {
+	public boolean updateSale(DemoSale Sale) {
 
 		boolean r = false;
 
 		try {
-			DemoAgency u = agencyMapper.getAgencyById(agency.getAgency_id());
+			DemoSale u = SaleMapper.getSaleById(Sale.getSale_id());
 			if (u != null) {
-				u.setName(agency.getName());
-				u.setCountry(agency.getCountry());
-				u.setLanguage(agency.getLanguage());
-				agencyMapper.updateAgency(u);
+				u.setName(Sale.getName());
+				SaleMapper.updateSale(u);
 				r = true;
 			} else {
 				r = false;
 			}
 		} catch (Exception e) {
-			logger.error("AgencyService.updateAgency() --> " + agency + "-->" + e.getMessage());
+			logger.error("SaleService.updateSale() --> " + Sale + "-->" + e.getMessage());
 			r = false;
 		}
 
@@ -135,18 +133,18 @@ public class AgencyService extends BaseService {
 	/**
 	 * 删除地接社（假删除）
 	 * 
-	 * @param agency_id
+	 * @param Sale_id
 	 * @return
 	 */
-	public boolean deleteAgencyById(int agency_id) {
+	public boolean deleteSaleById(int Sale_id) {
 
 		boolean r = false;
 
 		try {
-			agencyMapper.deleteAgencyById(agency_id);
+			SaleMapper.deleteSaleById(Sale_id);
 			r = true;
 		} catch (Exception e) {
-			logger.error("AgencyService.deleteAgencyById() --> " + agency_id + "-->" + e.getMessage());
+			logger.error("SaleService.deleteSaleById() --> " + Sale_id + "-->" + e.getMessage());
 			r = false;
 		}
 

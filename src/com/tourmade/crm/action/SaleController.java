@@ -15,28 +15,25 @@ import com.tourmade.crm.common.framework.bean.QueryResult;
 import com.tourmade.crm.common.framework.util.JSONUtilS;
 import com.tourmade.crm.common.model.base.value.baseconfig.Json;
 import com.tourmade.crm.common.model.base.value.baseconfig.PageHelper;
-import com.tourmade.crm.model.DemoAgency;
-import com.tourmade.crm.model.DemoUser;
-import com.tourmade.crm.service.AgencyService;
-import com.tourmade.crm.service.UserService;
-
+import com.tourmade.crm.model.DemoSale;
+import com.tourmade.crm.service.SaleService;
 @Controller
-@RequestMapping("/agency")
-public class AgencyController extends BaseSimpleFormController {
+@RequestMapping("/sale")
+public class SaleController extends BaseSimpleFormController {
 	
 	@Autowired
-	private AgencyService service;
+	private SaleService service;
 
 	@RequestMapping(value = "/list.html", method = { RequestMethod.POST, RequestMethod.GET })
 	public String list(Model model) {
-		return "/agency/list";
+		return "/sale/list";
 	}
 	
 	@RequestMapping(value = "/list.do",produces="application/json;charset=utf-8")
 	@ResponseBody
-	public String queryData(HttpServletRequest request, HttpSession session, Model model, DemoAgency agency, PageHelper page) {
+	public String queryData(HttpServletRequest request, HttpSession session, Model model, DemoSale sale, PageHelper page) {
 
-		QueryResult<DemoAgency> r = service.queryAgency(agency, page, request);
+		QueryResult<DemoSale> r = service.querySale(sale, page, request);
 		String result = JSONUtilS.object2json(r);
 
 		return result;
@@ -44,21 +41,21 @@ public class AgencyController extends BaseSimpleFormController {
 	
 	@RequestMapping(value = "/add.html", method = { RequestMethod.POST, RequestMethod.GET })
 	public String add(Model model) {
-		return "/agency/add";
+		return "/sale/add";
 	}
 
 	@RequestMapping(value = "/add.do")
 	@ResponseBody
-	public Json doAdd(HttpServletRequest request, HttpSession session, Model model, DemoAgency agency) {
+	public Json doAdd(HttpServletRequest request, HttpSession session, Model model, DemoSale sale) {
 
 		Json j = new Json();
 		
 		try {
-			service.saveAgency(agency);
+			service.saveSale(sale);
 			j.setSuccess(true);
 		} catch (Exception e) {
 			j.setSuccess(false);
-			logger.error("AgencyController.doAdd() --> " + agency.toString() + "\n" + e.getMessage());
+			logger.error("SaleController.doAdd() --> " + sale.toString() + "\n" + e.getMessage());
 		}
 		
 		return j;
@@ -69,24 +66,24 @@ public class AgencyController extends BaseSimpleFormController {
 		
 		if (null != id && !"".equals(id)) {
 			int i = Integer.parseInt(id);
-			DemoAgency u = service.getAgencyById(i);
-			model.addAttribute("agency",u);
+			DemoSale u = service.getSaleById(i);
+			model.addAttribute("Sale",u);
 		}
-		return "/agency/edit";
+		return "/Sale/edit";
 	}
 
 	@RequestMapping(value = "/edit.do")
 	@ResponseBody
-	public Json doEdit(HttpServletRequest request, HttpSession session, Model model, DemoAgency agency) {
+	public Json doEdit(HttpServletRequest request, HttpSession session, Model model, DemoSale Sale) {
 
 		Json j = new Json();
 		
 		try {
-			service.updateAgency(agency);
+			service.updateSale(Sale);
 			j.setSuccess(true);
 		} catch (Exception e) {
 			j.setSuccess(false);
-			logger.error("AgencyController.doEdit() --> " + agency.toString() + "\n" + e.getMessage());
+			logger.error("SaleController.doEdit() --> " + Sale.toString() + "\n" + e.getMessage());
 		}
 		
 		return j;
@@ -101,14 +98,14 @@ public class AgencyController extends BaseSimpleFormController {
 		try {
 			if (null != id && !"".equals(id)) {
 				int i = Integer.parseInt(id);
-				service.deleteAgencyById(i);
+				service.deleteSaleById(i);
 				j.setSuccess(true);
 			} else {
 				j.setSuccess(false);
 			}
 		} catch (Exception e) {
 			j.setSuccess(false);
-			logger.error("AgencyController.doDel() --> " + id + "\n" + e.getMessage());
+			logger.error("SaleController.doDel() --> " + id + "\n" + e.getMessage());
 		}
 		
 		return j;

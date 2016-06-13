@@ -30,7 +30,7 @@ public class UserController extends BaseSimpleFormController {
 		return "/user/list";
 	}
 	
-	@RequestMapping(value = "/list.do")
+	@RequestMapping(value = "/list.do",produces="application/json;charset=utf-8")
 	@ResponseBody
 	public String queryData(HttpServletRequest request, HttpSession session, Model model, DemoUser user, PageHelper page) {
 
