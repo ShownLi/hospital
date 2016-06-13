@@ -13,7 +13,7 @@
                 <img alt="" src="${rootPath}assets/images/photos/loggeduser.png" class="media-object">
                 <div class="media-body">
                     <h4>John Doe</h4>
-                    <span>"Life is so..."</span>
+                    <span>"Life is so."</span>
                 </div>
             </div>
 
