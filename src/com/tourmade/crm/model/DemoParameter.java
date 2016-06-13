@@ -5,7 +5,7 @@ import java.util.Date;
 import com.tourmade.crm.common.framework.BaseBean;
 
 /**
- * 地接社model
+ * 系统参数model
  * 
  * @author lianzheng
  *
@@ -19,7 +19,7 @@ public class DemoParameter extends BaseBean<DemoAgency> {
 
 	private int parameter_id;
 	
-	private String key;
+	private String domain;
 	
 	private String value;
 	
@@ -29,7 +29,7 @@ public class DemoParameter extends BaseBean<DemoAgency> {
 	
 	private String sort;
 	
-	private Boolean isdisplay;
+	private int isdisplay;
 	
 	private Date creat_time;
 	
@@ -43,12 +43,12 @@ public class DemoParameter extends BaseBean<DemoAgency> {
 		this.parameter_id = parameter_id;
 	}
 
-	public String getKey() {
-		return key;
+	public String getDomain() {
+		return domain;
 	}
 
-	public void setKey(String key) {
-		this.key = key;
+	public void setDomain(String domain) {
+		this.domain = domain;
 	}
 
 	public String getValue() {
@@ -83,11 +83,11 @@ public class DemoParameter extends BaseBean<DemoAgency> {
 		this.sort = sort;
 	}
 
-	public Boolean getIsdisplay() {
+	public int getIsdisplay() {
 		return isdisplay;
 	}
 
-	public void setIsdisplay(Boolean isdisplay) {
+	public void setIsdisplay(int isdisplay) {
 		this.isdisplay = isdisplay;
 	}
 
@@ -113,9 +113,10 @@ public class DemoParameter extends BaseBean<DemoAgency> {
 
 	@Override
 	public String toString() {
-		return "DemoParameter [parameter_id=" + parameter_id + ", key=" + key + ", value=" + value + ", chinese="
+		return "DemoParameter [parameter_id=" + parameter_id + ", domain=" + domain + ", value=" + value + ", chinese="
 				+ chinese + ", english=" + english + ", sort=" + sort + ", isdisplay=" + isdisplay + ", creat_time="
 				+ creat_time + ", update_time=" + update_time + "]";
 	}
+
 	
 }

@@ -20,7 +20,7 @@ import com.tourmade.crm.service.ParameterService;
 
 
 @Controller
-@RequestMapping("/Parameter")
+@RequestMapping("/parameter")
 public class ParameterController extends BaseSimpleFormController {
 	
 	@Autowired
@@ -28,7 +28,7 @@ public class ParameterController extends BaseSimpleFormController {
 
 	@RequestMapping(value = "/list.html", method = { RequestMethod.POST, RequestMethod.GET })
 	public String list(Model model) {
-		return "/Parameter/list";
+		return "/parameter/list";
 	}
 	
 	@RequestMapping(value = "/list.do",produces="application/json;charset=utf-8")
@@ -43,7 +43,7 @@ public class ParameterController extends BaseSimpleFormController {
 	
 	@RequestMapping(value = "/add.html", method = { RequestMethod.POST, RequestMethod.GET })
 	public String add(Model model) {
-		return "/Parameter/add";
+		return "/parameter/add";
 	}
 
 	@RequestMapping(value = "/add.do")
@@ -71,7 +71,7 @@ public class ParameterController extends BaseSimpleFormController {
 			DemoParameter u = service.getParameterById(i);
 			model.addAttribute("Parameter",u);
 		}
-		return "/Parameter/edit";
+		return "/parameter/edit";
 	}
 
 	@RequestMapping(value = "/edit.do")

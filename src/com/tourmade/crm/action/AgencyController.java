@@ -16,9 +16,7 @@ import com.tourmade.crm.common.framework.util.JSONUtilS;
 import com.tourmade.crm.common.model.base.value.baseconfig.Json;
 import com.tourmade.crm.common.model.base.value.baseconfig.PageHelper;
 import com.tourmade.crm.model.DemoAgency;
-import com.tourmade.crm.model.DemoUser;
 import com.tourmade.crm.service.AgencyService;
-import com.tourmade.crm.service.UserService;
 
 @Controller
 @RequestMapping("/agency")

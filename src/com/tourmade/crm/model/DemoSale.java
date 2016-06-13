@@ -26,15 +26,7 @@ public class DemoSale extends BaseBean<DemoSale> {
 	private String name;
 	
 	private String email;
-	
-	private String telephone;
-	
-	private String mobilephone;
-	
-	private String wechat;
-	
-	private String qq;
-	
+
 	private Date creat_time;
 	
 	private Date update_time;
@@ -79,38 +71,6 @@ public class DemoSale extends BaseBean<DemoSale> {
 		this.email = email;
 	}
 
-	public String getTelephone() {
-		return telephone;
-	}
-
-	public void setTelephone(String telephone) {
-		this.telephone = telephone;
-	}
-
-	public String getMobilephone() {
-		return mobilephone;
-	}
-
-	public void setMobilephone(String mobilephone) {
-		this.mobilephone = mobilephone;
-	}
-
-	public String getWechat() {
-		return wechat;
-	}
-
-	public void setWechat(String wechat) {
-		this.wechat = wechat;
-	}
-
-	public String getQq() {
-		return qq;
-	}
-
-	public void setQq(String qq) {
-		this.qq = qq;
-	}
-
 	public Date getCreat_time() {
 		return creat_time;
 	}
@@ -134,8 +94,7 @@ public class DemoSale extends BaseBean<DemoSale> {
 	@Override
 	public String toString() {
 		return "DemoSale [sale_id=" + sale_id + ", agency_id=" + agency_id + ", sale_code=" + sale_code + ", name="
-				+ name + ", email=" + email + ", telephone=" + telephone + ", mobilephone=" + mobilephone + ", wechat="
-				+ wechat + ", qq=" + qq + ", creat_time=" + creat_time + ", update_time=" + update_time + "]";
+				+ name + ", email=" + email + ", creat_time=" + creat_time + ", update_time=" + update_time + "]";
 	}
 
 }

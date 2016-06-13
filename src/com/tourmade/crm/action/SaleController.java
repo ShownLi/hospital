@@ -17,6 +17,7 @@ import com.tourmade.crm.common.model.base.value.baseconfig.Json;
 import com.tourmade.crm.common.model.base.value.baseconfig.PageHelper;
 import com.tourmade.crm.model.DemoSale;
 import com.tourmade.crm.service.SaleService;
+
 @Controller
 @RequestMapping("/sale")
 public class SaleController extends BaseSimpleFormController {
@@ -69,7 +70,7 @@ public class SaleController extends BaseSimpleFormController {
 			DemoSale u = service.getSaleById(i);
 			model.addAttribute("Sale",u);
 		}
-		return "/Sale/edit";
+		return "/sale/edit";
 	}
 
 	@RequestMapping(value = "/edit.do")

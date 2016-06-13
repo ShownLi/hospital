@@ -43,7 +43,20 @@
                     
                 </ul>
             </li>            
-            
+            <li class="nav-parent"><a href=""><i class="fa fa-user"></i> <span>销售管理</span></a>
+                <ul class="children">
+                    <li><a href="${rootPath }sale/list.html"><i class="fa fa-caret-right"></i> 销售列表</a></li>
+                    <li><a href="${rootPath }sale/add.html"><i class="fa fa-caret-right"></i> 新增销售</a></li>
+                    
+                </ul>
+            </li> 
+            <li class="nav-parent"><a href=""><i class="fa fa-user"></i> <span>系统参数管理</span></a>
+                <ul class="children">
+                    <li><a href="${rootPath }parameter/list.html"><i class="fa fa-caret-right"></i> 系统参数列表</a></li>
+                    <li><a href="${rootPath }parameter/add.html"><i class="fa fa-caret-right"></i> 新增系统参数</a></li>
+                    
+                </ul>
+            </li>             
             <li><a href="email.html"><span class="pull-right badge badge-success">2</span><i class="fa fa-envelope-o"></i> <span>Email</span></a></li>
             <li class="nav-parent"><a href=""><i class="fa fa-edit"></i> <span>Forms</span></a>
                 <ul class="children">

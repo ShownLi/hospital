@@ -21,17 +21,17 @@ import com.tourmade.crm.model.DemoParameter;
 public class ParameterService extends BaseService {
 	
 	@Autowired
-	private DemoParameterMapper ParameterMapper;
+	private DemoParameterMapper parameterMapper;
 
 	/**
-	 * 查询地接社数据，分页展示
+	 * 查询系统参数数据，分页展示
 	 * 
 	 * @param Parameter
 	 * @param ph
 	 * @param request
 	 * @return
 	 */
-	public QueryResult<DemoParameter> queryParameter(DemoParameter Parameter, PageHelper ph, HttpServletRequest request) {
+	public QueryResult<DemoParameter> queryParameter(DemoParameter parameter, PageHelper ph, HttpServletRequest request) {
 
 		QueryResult<DemoParameter> r = new QueryResult<DemoParameter>();
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -41,22 +41,22 @@ public class ParameterService extends BaseService {
 		String seachValue = ph.getSearch().get("value");
 		
 		if (null != seachValue && !"".equals(seachValue)) {
-			if (null == Parameter) {
-				Parameter = new DemoParameter();
+			if (null == parameter) {
+				parameter = new DemoParameter();
 			}
-			Parameter.setSeachValue(seachValue);
+			parameter.setSeachValue(seachValue);
 		}
 			
 		
 		
-		map.put("pojo", Parameter);
+		map.put("pojo", parameter);
 		map.put("b", ph.getStart());
 		map.put("e", ph.getLength());
 //		map.put("s", ph.getSort());
 //		map.put("o", ph.getOrder());
 
-		List<DemoParameter> data = ParameterMapper.queryParameter(map);
-		long count = ParameterMapper.countParameter(Parameter);
+		List<DemoParameter> data = parameterMapper.queryParameter(map);
+		long count = parameterMapper.countParameter(parameter);
 			
 		r.setData(data);
 		r.setCountTotal(count);
@@ -68,25 +68,25 @@ public class ParameterService extends BaseService {
 	}
 
 	/**
-	 * 新增地接社
+	 * 新增系统参数
 	 * 
 	 * @param Parameter
 	 * @return
 	 */
-	public int saveParameter(DemoParameter Parameter) {
+	public int saveParameter(DemoParameter parameter) {
 
 		try {
-			ParameterMapper.saveParameter(Parameter);
+			parameterMapper.saveParameter(parameter);
 		} catch (Exception e) {
-			logger.error("ParameterService.saveParameter() --> " + Parameter + "-->" + e.getMessage());
+			logger.error("ParameterService.saveParameter() --> " + parameter + "-->" + e.getMessage());
 			e.printStackTrace();
 			return 0;
 		}
-		return Parameter.getParameter_id();
+		return parameter.getParameter_id();
 	}
 
 	/**
-	 * 根据主键获取地接社信息
+	 * 根据主键获取系统参数信息
 	 * 
 	 * @param id
 	 * @return
@@ -94,7 +94,7 @@ public class ParameterService extends BaseService {
 	public DemoParameter getParameterById(int id) {
 		DemoParameter r = null;
 		try {
-			r = ParameterMapper.getParameterById(id);
+			r = parameterMapper.getParameterById(id);
 		} catch (Exception e) {
 			logger.error("ParameterService.getParameterById() --> " + id + "-->" + e.getMessage());
 			r = null;
@@ -103,25 +103,25 @@ public class ParameterService extends BaseService {
 	}
 
 	/**
-	 * 更新地接社信息(不修改密码)
+	 * 更新系统参数信息
 	 * 
 	 * @param Parameter
 	 * @return
 	 */
-	public boolean updateParameter(DemoParameter Parameter) {
+	public boolean updateParameter(DemoParameter parameter) {
 
 		boolean r = false;
 
 		try {
-			DemoParameter u = ParameterMapper.getParameterById(Parameter.getParameter_id());
+			DemoParameter u = parameterMapper.getParameterById(parameter.getParameter_id());
 			if (u != null) {
-				ParameterMapper.updateParameter(u);
+				parameterMapper.updateParameter(u);
 				r = true;
 			} else {
 				r = false;
 			}
 		} catch (Exception e) {
-			logger.error("ParameterService.updateParameter() --> " + Parameter + "-->" + e.getMessage());
+			logger.error("ParameterService.updateParameter() --> " + parameter + "-->" + e.getMessage());
 			r = false;
 		}
 
@@ -129,20 +129,20 @@ public class ParameterService extends BaseService {
 	}
 
 	/**
-	 * 删除地接社（假删除）
+	 * 删除系统参数（假删除）
 	 * 
 	 * @param Parameter_id
 	 * @return
 	 */
-	public boolean deleteParameterById(int Parameter_id) {
+	public boolean deleteParameterById(int parameter_id) {
 
 		boolean r = false;
 
 		try {
-			ParameterMapper.deleteParameterById(Parameter_id);
+			parameterMapper.deleteParameterById(parameter_id);
 			r = true;
 		} catch (Exception e) {
-			logger.error("ParameterService.deleteParameterById() --> " + Parameter_id + "-->" + e.getMessage());
+			logger.error("ParameterService.deleteParameterById() --> " + parameter_id + "-->" + e.getMessage());
 			r = false;
 		}
 

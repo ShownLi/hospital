@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8" ?> 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.tourmade.crm.mapper.Sale.DemoSaleMapper">
+<mapper namespace="com.tourmade.crm.mapper.sale.DemoSaleMapper">
 
 	<select id="querySale" parameterType="Map" resultType="DemoSale">
 		SELECT *
 		FROM (
 		select
-		u.Sale_id as Sale_id,
-		u.Sale_name as name,
-		u.country as country,
-		u.language as language,
+		u.sale_id as sale_id,
+		u.sale_name as name,
+		u.agency_id as agency,
+		u.sale_email as email,
 		u.creat_time as creat_time,
 		u.isdel as isdel
-		from tm_Sale u where u.isdel = 0
+		from tm_sale u where u.isdel = 0
 		order by u.creat_time
 		) table_alias
 		limit #{b},#{e}
@@ -27,16 +27,16 @@
 	</select>
 	
 	<insert id="saveSale" parameterType="DemoSale" flushCache="true" useGeneratedKeys="true" keyProperty="Sale_id" keyColumn="GENERATED_KEY">
-		insert into tm_Sale(
-		Sale_name,
-		country,
-		language,
+		insert into tm_sale(
+		sale_name,
+		agency_id,
+		sale_email,
 		creat_time,
 		isdel
 		)values(
 		#{name,jdbcType=VARCHAR},
-		#{country,jdbcType=VARCHAR},
-		#{language,jdbcType=VARCHAR},
+		#{agency_id,jdbcType=VARCHAR},
+		#{sale_email,jdbcType=VARCHAR},
 		NOW(),
 		0
 		)
@@ -45,30 +45,30 @@
 	<update id="updateSale" parameterType="DemoSale" flushCache="true">
 		update tm_Sale
 		set
-		Sale_name=#{name},
-		country=#{country},
-		language=#{language},
+		sale_name=#{name},
+		agency_id=#{agency},
+		sale_email=#{email},
 		update_time=NOW()
 		where
-		Sale_id=#{Sale_id}
+		sale_id=#{sale_id}
 	</update>
 	
 	<select id="getSaleById" parameterType="int" resultType="DemoSale">
 		select
-		u.Sale_id as Sale_id,
-		u.Sale_name as name,
-		u.country as country,
-		u.language as language,
+		u.sale_id as sale_id,
+		u.sale_name as name,
+		u.sale_email as email,
+		u.agency_id as agency,
 		u.isdel as isdel
-		from tm_Sale u where u.Sale_id = #{Sale_id}
+		from tm_sale u where u.sale_id = #{sale_id}
 	</select>
 
 	<update id="deleteSaleById" parameterType="int" flushCache="true"
 		statementType="PREPARED">
-		update tm_Sale
+		update tm_sale
 		set
 		isdel=1
 		where
-		Sale_id = #{Sale_id}
+		sale_id = #{sale_id}
 	</update>
 </mapper>
