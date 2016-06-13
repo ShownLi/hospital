@@ -51,9 +51,15 @@
             <div class="form-group">
               <label class="col-sm-3 control-label">所属地接社 <span class="asterisk">*</span></label>
               <div class="col-sm-6">
-                <input type="text" name="country" placeholder="国家" class="form-control" />
+                <input type="text" name="agency" placeholder="所属地接社" class="form-control" />
               </div>
-            </div> 			
+            </div> 
+            <div class="form-group">
+              <label class="col-sm-3 control-label">销售编码 <span class="asterisk">*</span></label>
+              <div class="col-sm-6">
+                <input type="text" name="sale_code" placeholder="销售编码" class="form-control" />
+              </div>
+            </div> 	            			
             <div class="form-group">
               <label class="col-sm-3 control-label">邮件地址 <span class="asterisk">*</span></label>
               <div class="col-sm-6">
@@ -114,10 +120,12 @@
 			rules: {
 				name: "required",
 				email: "required",
+				sale_code: "required",
 			},
 			messages: {
 				name: "This field is required.",
-				country: "This field is required.",
+				email: "This field is required.",
+				sale_code: "This field is required.",
 			},
 		    highlight: function(element) {
 		      jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');

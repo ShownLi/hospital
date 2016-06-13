@@ -10,6 +10,9 @@
 		u.parameter_id as parameter_id,
 		u.domain as domain,
 		u.value as value,
+		u.chinese as chinese,
+		u.english as english,
+		u.describe as desc,
 		u.sort as sort,
 		u.isdisplay as isdisplay,
 		u.creat_time as creat_time,
@@ -29,13 +32,13 @@
 	
 	<insert id="saveParameter" parameterType="DemoParameter" flushCache="true" useGeneratedKeys="true" keyProperty="Parameter_id" keyColumn="GENERATED_KEY">
 		insert into tm_parameter(
-		parameter_id,
 		domain,
 		value,
 		chinese,
 		english,
+		describe,
 		sort,
-		isdisplay
+		isdisplay,
 		creat_time,
 		isdel
 		)values(
@@ -43,6 +46,7 @@
 		#{value,jdbcType=VARCHAR},
 		#{chinese,jdbcType=VARCHAR},
 		#{english,jdbcType=VARCHAR},
+		#{describe,jdbcType=VARCHAR},
 		#{sort,jdbcType=VARCHAR},
 		#{isdisplay,jdbcType=VARCHAR},
 		NOW(),
@@ -56,6 +60,7 @@
 		value=#{value},
 		chinese=#{chinese},
 		english=#{english},
+		describe=#{describe},
 		sort=#{sort},
 		isdisplay=#{isdisplay},
 		update_time=NOW()

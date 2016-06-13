@@ -15,7 +15,6 @@ import com.tourmade.crm.common.framework.bean.QueryResult;
 import com.tourmade.crm.common.model.base.value.baseconfig.PageHelper;
 import com.tourmade.crm.mapper.agency.DemoAgencyMapper;
 import com.tourmade.crm.model.DemoAgency;
-import com.tourmade.crm.model.DemoUser;
 
 @Service
 @Transactional(readOnly = false)

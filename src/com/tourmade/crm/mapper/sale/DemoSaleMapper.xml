@@ -20,7 +20,7 @@
 	</select>
 
 	<select id="countSale" parameterType="DemoSale" resultType="long">
-		select count(u.Sale_id) from tm_Sale u
+		select count(u.Sale_id) from tm_sale u
 		where
 		u.isdel = 0
 
@@ -30,20 +30,22 @@
 		insert into tm_sale(
 		sale_name,
 		agency_id,
+		sale_code,
 		sale_email,
 		creat_time,
 		isdel
 		)values(
 		#{name,jdbcType=VARCHAR},
 		#{agency_id,jdbcType=VARCHAR},
-		#{sale_email,jdbcType=VARCHAR},
+		#{sale_code,jdbcType=VARCHAR},
+		#{email,jdbcType=VARCHAR},
 		NOW(),
 		0
 		)
 	</insert>
 
 	<update id="updateSale" parameterType="DemoSale" flushCache="true">
-		update tm_Sale
+		update tm_sale
 		set
 		sale_name=#{name},
 		agency_id=#{agency},

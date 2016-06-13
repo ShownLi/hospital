@@ -13,14 +13,14 @@
 			<%@ include file="../assets/pages/headerbar.jsp"%>
 			<div class="pageheader">
 				<h2>
-					<i class="fa fa-user"></i> 地接社管理 <span>编辑地接社</span>
+					<i class="fa fa-user"></i> 系统参数管理 <span>编辑系统参数</span>
 				</h2>
 				<div class="breadcrumb-wrapper">
 					<span class="label">你在这里:</span>
 					<ol class="breadcrumb">
 						<li><a href="＃">Demo</a></li>
-						<li><a href="${rootPath }user/list.html">地接社管理</a></li>
-						<li class="active">编辑地接社</li>
+						<li><a href="${rootPath }user/list.html">系统参数管理</a></li>
+						<li class="active">编辑系统参数</li>
 					</ol>
 				</div>
 			</div>
@@ -34,8 +34,8 @@
             <a href="" class="panel-close">&times;</a>
             <a href="" class="minimize">&minus;</a>
           </div>
-          <h4 class="panel-title">地接社基本信息</h4>
-          <p>填写下表，完成地接社信息修改。</p>
+          <h4 class="panel-title">系统参数基本信息</h4>
+          <p>填写下表，完成系统参数信息修改。</p>
         </div>
         <form class="form-horizontal form-bordered" id="form">
         <div class="panel-body panel-body-nopadding">
@@ -43,25 +43,47 @@
           
             
             <div class="form-group">
-              <label class="col-sm-3 control-label">地接社名</label>
+              <label class="col-sm-3 control-label">作用域</label>
               <div class="col-sm-6">
-                <input type="text" name="name" placeholder="地接社名" class="form-control" value="${agency.name }" />
+                <input type="text" name="domain" placeholder="作用域" class="form-control" value="${parameter.domain }" />
               </div>
             </div>
             <div class="form-group">
-              <label class="col-sm-3 control-label">国家</label>
+              <label class="col-sm-3 control-label">值</label>
               <div class="col-sm-6">
-                <input type="text" name="country" placeholder="国家" class="form-control" value="${agency.country }" />
+                <input type="text" name="value" placeholder="值" class="form-control" value="${parameter.value }" />
               </div>
             </div>            
             <div class="form-group">
-              <label class="col-sm-3 control-label">语言</label>
+              <label class="col-sm-3 control-label">描述</label>
               <div class="col-sm-6">
-                <input type="text" name="language" placeholder="语言" class="form-control" value="${agency.language }" />
+                <input type="text" name="describe" placeholder="描述" class="form-control" value="${parameter.desc }" />
               </div>
             </div>      
-          
-          
+            <div class="form-group">
+              <label class="col-sm-3 control-label">中文</label>
+              <div class="col-sm-6">
+                <input type="text" name="chinese" placeholder="中文" class="form-control" value="${parameter.chinese }" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">英文</label>
+              <div class="col-sm-6">
+                <input type="text" name="english" placeholder="英文" class="form-control" value="${parameter.english }" />
+              </div>
+            </div>            
+            <div class="form-group">
+              <label class="col-sm-3 control-label">排序标记</label>
+              <div class="col-sm-6">
+                <input type="text" name="sort" placeholder="排序标记" class="form-control" value="${parameter.sort }" />
+              </div>
+            </div>            
+            <div class="form-group">
+              <label class="col-sm-3 control-label">是否显示</label>
+              <div class="col-sm-6">
+                <input type="text" name="isdisplay" placeholder="是否显示" class="form-control" value="${parameter.isdisplay }" />
+              </div>
+            </div>           
         </div><!-- panel-body -->
         
         <div class="panel-footer">
@@ -69,7 +91,7 @@
 				<div class="col-sm-6 col-sm-offset-3">
 				  <button class="btn btn-primary">提交</button>&nbsp;
 				  <button class="btn btn-default" id="btn-back">取消</button>
-				  <input type="hidden" name="agency_id" value="${agency.agency_id }" />
+				  <input type="hidden" name="parameter_id" value="${parameter.parameter_id }" />
 				</div>
 			 </div>
 		  </div><!-- panel-footer -->
@@ -138,10 +160,10 @@
 //			      
 		function form_submit() {
 			var f = $("#form").serialize();
-			$.post('${rootPath}agency/edit.do', f, function(result) {
+			$.post('${rootPath}parameter/edit.do', f, function(result) {
 				var rmsg = result.msg;
 				if (result.success) {
-					window.parent.location = "${rootPath}agency/list.html";
+					window.parent.location = "${rootPath}parameter/list.html";
 				} else {
 					$("#msgModal").modal('show');
 				}

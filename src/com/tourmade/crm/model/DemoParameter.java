@@ -27,6 +27,8 @@ public class DemoParameter extends BaseBean<DemoAgency> {
 	
 	private String english;
 	
+	private String describe;
+	
 	private String sort;
 	
 	private int isdisplay;
@@ -75,6 +77,14 @@ public class DemoParameter extends BaseBean<DemoAgency> {
 		this.english = english;
 	}
 
+	public String getDescribe() {
+		return describe;
+	}
+
+	public void setDescribe(String describe) {
+		this.describe = describe;
+	}
+
 	public String getSort() {
 		return sort;
 	}
@@ -114,9 +124,8 @@ public class DemoParameter extends BaseBean<DemoAgency> {
 	@Override
 	public String toString() {
 		return "DemoParameter [parameter_id=" + parameter_id + ", domain=" + domain + ", value=" + value + ", chinese="
-				+ chinese + ", english=" + english + ", sort=" + sort + ", isdisplay=" + isdisplay + ", creat_time="
-				+ creat_time + ", update_time=" + update_time + "]";
+				+ chinese + ", english=" + english + ", describe=" + describe + ", sort=" + sort + ", isdisplay="
+				+ isdisplay + ", creat_time=" + creat_time + ", update_time=" + update_time + "]";
 	}
 
-	
 }

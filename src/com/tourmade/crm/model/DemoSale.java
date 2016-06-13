@@ -97,4 +97,5 @@ public class DemoSale extends BaseBean<DemoSale> {
 				+ name + ", email=" + email + ", creat_time=" + creat_time + ", update_time=" + update_time + "]";
 	}
 
+
 }

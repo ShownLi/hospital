@@ -13,14 +13,14 @@
 			<%@ include file="../assets/pages/headerbar.jsp"%>
 			<div class="pageheader">
 				<h2>
-					<i class="fa fa-user"></i> 地接社管理 <span>新增地接社</span>
+					<i class="fa fa-user"></i> 系统参数管理 <span>新增系统参数</span>
 				</h2>
 				<div class="breadcrumb-wrapper">
 					<span class="label">你在这里:</span>
 					<ol class="breadcrumb">
 						<li><a href="＃">Demo</a></li>
-						<li><a href="${rootPath }agency/list.html">地接社管理</a></li>
-						<li class="active">新增地接社</li>
+						<li><a href="${rootPath }parameter/list.html">系统参数管理</a></li>
+						<li class="active">新增系统参数</li>
 					</ol>
 				</div>
 			</div>
@@ -34,8 +34,8 @@
             <a href="" class="panel-close">&times;</a>
             <a href="" class="minimize">&minus;</a>
           </div>
-          <h4 class="panel-title">地接社基本信息</h4>
-          <p>填写下表，完成地接社创建。</p>
+          <h4 class="panel-title">系统参数基本信息</h4>
+          <p>填写下表，完成系统参数创建。</p>
         </div>
         <form class="form-horizontal form-bordered" id="form">
         <div class="panel-body panel-body-nopadding">
@@ -43,44 +43,48 @@
           
             
             <div class="form-group">
-              <label class="col-sm-3 control-label">地接社名 <span class="asterisk">*</span></label>
+              <label class="col-sm-3 control-label">作用域 <span class="asterisk">*</span></label>
               <div class="col-sm-6">
-                <input type="text" name="name" placeholder="地接社名" class="form-control" />
+                <input type="text" name="domain" placeholder="系统参数名" class="form-control" />
               </div>
             </div>
             <div class="form-group">
-              <label class="col-sm-3 control-label">国家 <span class="asterisk">*</span></label>
+              <label class="col-sm-3 control-label">值 <span class="asterisk">*</span></label>
               <div class="col-sm-6">
-                <input type="text" name="country" placeholder="国家" class="form-control" />
+                <input type="text" name="value" placeholder="值" class="form-control" />
               </div>
             </div> 			
-                <div class="form-group">
-                  <label class="col-sm-3 control-label">语言 <span class="asterisk">*</span></label>
-                  <div class="col-sm-9">
-                    <div class="ckbox ckbox-primary">
-                      <input type="checkbox" id="int_chinese" value="zh" name="int[]" required />
-                      <label for="int_chinese">中文</label>
-                    </div><!-- rdio -->
-                    <div class="ckbox ckbox-primary">
-                      <input type="checkbox" value="en" id="int_english" name="int[]" />
-                      <label for="int_english">英文</label>
-                    </div><!-- rdio -->
-                    <label class="error" for="int[]"></label>
-                  </div>
-                </div><!-- form-group -->          
             <div class="form-group">
-              <label class="col-sm-3 control-label">Select2</label>
-              <div class="col-sm-5">
-                <select class="select2" data-placeholder="Choose a Country...">
-                  <option value=""></option>
-                  <option value="United States">United States</option>
-                  <option value="United Kingdom">United Kingdom</option>
-                  <option value="Afghanistan">Afghanistan</option>
-                  <option value="Aland Islands">Aland Islands</option>
-                </select>
+              <label class="col-sm-3 control-label">描述 <span class="asterisk">*</span></label>
+              <div class="col-sm-6">
+                <input type="text" name="describe" placeholder="描述" class="form-control" />
               </div>
-            </div>   
-          
+            </div> 	
+            <div class="form-group">
+              <label class="col-sm-3 control-label">中文 <span class="asterisk">*</span></label>
+              <div class="col-sm-6">
+                <input type="text" name="chinese" placeholder="中文" class="form-control" />
+              </div>
+            </div>    
+            <div class="form-group">
+              <label class="col-sm-3 control-label">英文 <span class="asterisk">*</span></label>
+              <div class="col-sm-6">
+                <input type="text" name="english" placeholder="描述" class="form-control" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">排序标记 <span class="asterisk">*</span></label>
+              <div class="col-sm-6">
+                <input type="text" name="sort" placeholder="排序标记" class="form-control" />
+              </div>
+            </div>
+                        
+            <div class="form-group">
+              <label class="col-sm-3 control-label">是否显示 <span class="asterisk">*</span></label>
+              <div class="col-sm-6">
+                <input type="text" name="isdisplay" placeholder="描述" class="form-control" />
+              </div>
+            </div>                     
         </div><!-- panel-body -->
         
         <div class="panel-footer">
@@ -161,10 +165,10 @@
 //			      
 		function form_submit() {
 			var f = $("#form").serialize();
-			$.post('${rootPath}agency/add.do', f, function(result) {
+			$.post('${rootPath}parameter/add.do', f, function(result) {
 				var rmsg = result.msg;
 				if (result.success) {
-					window.parent.location = "${rootPath}agency/list.html";
+					window.parent.location = "${rootPath}parameter/list.html";
 				} else {
 					$("#msgModal").modal('show');
 				}
