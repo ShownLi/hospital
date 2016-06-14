@@ -27,7 +27,7 @@ public class DemoParameter extends BaseBean<DemoParameter> {
 	
 	private String english;
 	
-	private String describe;
+	private String depict;
 	
 	private String sort;
 	
@@ -77,12 +77,12 @@ public class DemoParameter extends BaseBean<DemoParameter> {
 		this.english = english;
 	}
 
-	public String getDescribe() {
-		return describe;
+	public String getDepict() {
+		return depict;
 	}
 
-	public void setDescribe(String describe) {
-		this.describe = describe;
+	public void setDepict(String depict) {
+		this.depict = depict;
 	}
 
 	public String getSort() {
@@ -124,7 +124,7 @@ public class DemoParameter extends BaseBean<DemoParameter> {
 	@Override
 	public String toString() {
 		return "DemoParameter [parameterid=" + parameterid + ", domain=" + domain + ", value=" + value + ", chinese="
-				+ chinese + ", english=" + english + ", describe=" + describe + ", sort=" + sort + ", isdisplay="
+				+ chinese + ", english=" + english + ", depict=" + depict + ", sort=" + sort + ", isdisplay="
 				+ isdisplay + ", creat_time=" + creat_time + ", update_time=" + update_time + "]";
 	}
 

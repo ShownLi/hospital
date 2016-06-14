@@ -118,7 +118,7 @@ public class ParameterService extends BaseService {
 				u.setValue(parameter.getValue());
 				u.setChinese(parameter.getChinese());
 				u.setEnglish(parameter.getEnglish());
-				u.setDescribe(parameter.getDescribe());
+				u.setDepict(parameter.getDepict());
 				u.setSort(parameter.getSort());
 				u.setIsdisplay(parameter.getIsdisplay());
 				// u.setPwd(parameter.getPwd());

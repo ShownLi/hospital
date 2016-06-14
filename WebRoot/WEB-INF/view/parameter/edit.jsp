@@ -1,4 +1,4 @@
-﻿<%@ page language="java" pageEncoding="utf-8"%>
+﻿<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -65,7 +65,13 @@
               <div class="col-sm-6">
                 <input type="text" name="english" placeholder="英文" class="form-control" value="${parameter.english }" />
               </div>
-            </div>    
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">描述</label>
+              <div class="col-sm-6">
+                <input type="text" name="depict" placeholder="描述" class="form-control" value="${parameter.depict }" />
+              </div>
+            </div>       
             <div class="form-group">
               <label class="col-sm-3 control-label">排序标记</label>
               <div class="col-sm-6">

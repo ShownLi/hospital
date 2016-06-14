@@ -7,12 +7,13 @@
 		SELECT *
 		FROM (
 		select
-		u.parameter_id as parameterid,
-		u.domain as domain,
-		u.value as value,
+		u.para_id as parameterid,
+		u.para_domain as domain,
+		u.para_value as value,
 		u.chinese as chinese,
 		u.english as english,
-		u.sort as sort,
+		u.para_sort as sort,
+		u.para_desc as depict,
 		u.isdisplay as isdisplay,
 		u.creat_time as creat_time,
 		u.isdel as isdel
@@ -20,9 +21,9 @@
 		<if test="pojo.seachValue!=null and pojo.seachValue!=''">
 			and
 			(
-			u.domain like '%${pojo.seachValue}%'
+			u.para_domain like '%${pojo.seachValue}%'
 			or
-			u.value like '%${pojo.seachValue}%'
+			u.para_value like '%${pojo.seachValue}%'
 			or
 			u.chinese like '%${pojo.seachValue}%'
 			or
@@ -36,15 +37,15 @@
 	</select>
 
 	<select id="countParameter" parameterType="DemoParameter" resultType="long">
-		select count(u.parameter_id) from tm_parameter u
+		select count(u.para_id) from tm_parameter u
 		where
 		u.isdel = 0
 		<if test="seachValue!=null and seachValue!=''">
 			and
 			(
-			u.domain like '%${seachValue}%'
+			u.para_domain like '%${seachValue}%'
 			or
-			u.value like '%${seachValue}%'
+			u.para_value like '%${seachValue}%'
 			or
 			u.chinese like '%${seachValue}%'
 			or
@@ -56,11 +57,12 @@
 	
 	<insert id="saveParameter" parameterType="DemoParameter" flushCache="true" useGeneratedKeys="true" keyProperty="Parameter_id" keyColumn="GENERATED_KEY">
 		insert into tm_parameter(
-		domain,
-		value,
+		para_domain,
+		para_value,
 		chinese,
 		english,
-		sort,
+		para_desc,
+		para_sort,
 		isdisplay,
 		creat_time,
 		isdel
@@ -69,6 +71,7 @@
 		#{value,jdbcType=VARCHAR},
 		#{chinese,jdbcType=VARCHAR},
 		#{english,jdbcType=VARCHAR},
+		#{depict,jdbcType=VARCHAR},
 		#{sort,jdbcType=VARCHAR},
 		#{isdisplay,jdbcType=VARCHAR},
 		NOW(),
@@ -79,27 +82,29 @@
 	<update id="updateParameter" parameterType="DemoParameter" flushCache="true">
 		update tm_parameter
 		set
-		value=#{value},
+		para_value=#{value},
 		chinese=#{chinese},
 		english=#{english},
-		sort=#{sort},
+		para_desc=#{depict},
+		para_sort=#{sort},
 		isdisplay=#{isdisplay},
 		update_time=NOW()
 		where
-		parameter_id=#{parameterid}
+		para_id=#{parameterid}
 	</update>
 	
 	<select id="getParameterById" parameterType="int" resultType="DemoParameter">
 		select
-		u.parameter_id as parameterid,
-		u.domain as domain,
-		u.value as value,
+		u.para_id as parameterid,
+		u.para_domain as domain,
+		u.para_value as value,
 		u.chinese as chinese,
 		u.english as english,
-		u.sort as sort,
+		u.para_desc as depict,
+		u.para_sort as sort,
 		u.isdisplay as isdisplay,
 		u.isdel as isdel
-		from tm_parameter u where u.parameter_id = #{parameterid}
+		from tm_parameter u where u.para_id = #{parameterid}
 	</select>
 
 	<update id="deleteParameterById" parameterType="int" flushCache="true"
@@ -108,6 +113,6 @@
 		set
 		isdel=1
 		where
-		parameter_id = #{parameterid}
+		para_id = #{parameterid}
 	</update>
 </mapper>

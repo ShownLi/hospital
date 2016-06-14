@@ -1,4 +1,5 @@
-﻿<%@ page language="java" pageEncoding="utf-8"%>
+﻿<%@ page language="java" pageEncoding="utf-8"%> 
+<%@ page contentType="text/html; charset=utf-8"%> 
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -57,7 +58,7 @@
             <div class="form-group">
               <label class="col-sm-3 control-label">描述 <span class="asterisk">*</span></label>
               <div class="col-sm-6">
-                <input type="text" name="describe" placeholder="描述" class="form-control" />
+                <input type="text" name="depict" placeholder="描述" class="form-control" />
               </div>
             </div> 	
             <div class="form-group">
@@ -137,12 +138,12 @@
 	jQuery(document).ready(function() {		  
 		jQuery("#form").validate({
 			rules: {
-				name: "required",
-				country: "required",
+				value: "required",
+				chinese: "required",
 			},
 			messages: {
-				name: "This field is required.",
-				country: "This field is required.",
+				value: "This field is required.",
+				chinese: "This field is required.",
 			},
 		    highlight: function(element) {
 		      jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
