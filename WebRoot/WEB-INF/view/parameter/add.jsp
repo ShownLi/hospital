@@ -56,7 +56,7 @@
               </div>
             </div> 			
             <div class="form-group">
-              <label class="col-sm-3 control-label">描述 <span class="asterisk">*</span></label>
+              <label class="col-sm-3 control-label">描述 <span class="asterisk">&nbsp;</span></label>
               <div class="col-sm-6">
                 <input type="text" name="depict" placeholder="描述" class="form-control" />
               </div>
@@ -68,7 +68,7 @@
               </div>
             </div>    
             <div class="form-group">
-              <label class="col-sm-3 control-label">英文 <span class="asterisk">*</span></label>
+              <label class="col-sm-3 control-label">英文 <span class="asterisk">&nbsp;</span></label>
               <div class="col-sm-6">
                 <input type="text" name="english" placeholder="描述" class="form-control" />
               </div>
@@ -79,13 +79,20 @@
                 <input type="text" name="sort" placeholder="排序标记" class="form-control" />
               </div>
             </div>
-                        
-            <div class="form-group">
-              <label class="col-sm-3 control-label">是否显示 <span class="asterisk">*</span></label>
-              <div class="col-sm-6">
-                <input type="text" name="isdisplay" placeholder="描述" class="form-control" />
-              </div>
-            </div>                     
+                <div class="form-group">
+                  <label class="col-sm-3 control-label">是否显示 <span class="asterisk">&nbsp;</span></label>
+                  <div class="col-sm-9">
+                    <div class="rdio rdio-primary">
+                      <input type="radio" id="yes" value="1" name="isdisplay" checked="true" />
+                      <label for="yes">是</label>
+                    </div><!-- rdio -->
+                    <div class="rdio rdio-primary">
+                      <input type="radio" id="no" value="0" name="isdisplay">
+                      <label for="no">否</label>
+                    </div><!-- rdio -->
+                    <label class="error" for="language"></label>
+                  </div>
+                </div><!-- form-group -->                                             
         </div><!-- panel-body -->
         
         <div class="panel-footer">
@@ -138,12 +145,10 @@
 	jQuery(document).ready(function() {		  
 		jQuery("#form").validate({
 			rules: {
+				domain: "required",
 				value: "required",
 				chinese: "required",
-			},
-			messages: {
-				value: "This field is required.",
-				chinese: "This field is required.",
+				sort: "required",
 			},
 		    highlight: function(element) {
 		      jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');

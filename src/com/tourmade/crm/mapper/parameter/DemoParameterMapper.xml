@@ -82,6 +82,7 @@
 	<update id="updateParameter" parameterType="DemoParameter" flushCache="true">
 		update tm_parameter
 		set
+		para_domain=#{domain},
 		para_value=#{value},
 		chinese=#{chinese},
 		english=#{english},

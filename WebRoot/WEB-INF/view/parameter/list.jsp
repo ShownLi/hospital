@@ -46,7 +46,8 @@
 									<tr>
 										<th>#</th>
 										<th>作用域</th>
-										<th>值</th>
+										<th>中文名称</th>
+										<th>排序</th>
 										<th>是否显示</th>
 										<th>操作</th>
 									</tr>
@@ -123,8 +124,18 @@
 	                  data: "parameterid",
 	                  //defaultContent: '<a class="btn btn-success btn-xs"><span class="fa fa-edit"></span> 编辑</a>&nbsp;<a class="btn btn-danger btn-xs"><span class="fa fa-minus-circle"></span> 删除</a>',
 	                  orderable: false,
-	                  render: function ( data, type, full, meta ) {
+	                  render: function ( data ) {
 	                      return '<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a>&nbsp;<a class="btn btn-danger btn-xs" id="'+data+'"><span class="fa fa-minus-circle"></span> 删除</a>';
+	                  },
+	                  targets: 5
+				  },
+				  {
+	                  data: "isdisplay",
+	                  //defaultContent: '<a class="btn btn-success btn-xs"><span class="fa fa-edit"></span> 编辑</a>&nbsp;<a class="btn btn-danger btn-xs"><span class="fa fa-minus-circle"></span> 删除</a>',
+	                  orderable: false,
+	                  render: function ( data ) {
+	                      if(data==1){return '是';}
+	                      else{return '否';}
 	                  },
 	                  targets: 4
 				  },
@@ -138,7 +149,8 @@
 				columns: [
 		            { data: "parameterid" },
 		            { data: "domain" },
-		            { data: "value" },
+		            { data: "chinese" },
+		            { data: "sort" },
 		            { data: "isdisplay" }
 		        ]
 			});
