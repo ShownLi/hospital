@@ -6,7 +6,7 @@
 <meta name="author" content="">
 <link rel="shortcut icon" href="${rootPath}assets/images/favicon.png" type="image/png">
 
-<title>Bracket Responsive Bootstrap3 Admin</title>
+<title>特美旅行CRM系统</title>
 
 <link href="${rootPath}assets/css/style.default.css" rel="stylesheet">
 

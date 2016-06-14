@@ -19,7 +19,7 @@
 				<div class="breadcrumb-wrapper">
 					<span class="label">你在这里:</span>
 					<ol class="breadcrumb">
-						<li><a href="#">Demo</a></li>
+						<li><a href="#">CRM</a></li>
 						<li class="active">用户管理</li>
 					</ol>
 				</div>
@@ -35,17 +35,9 @@
 								class="minimize">&minus;</a>
 						</div>
 						<!-- panel-btns -->
-						<h3 class="panel-title">Data Tables</h3>
-						<p>DataTables is a plug-in for the jQuery Javascript library.
-							It is a highly flexible tool, based upon the foundations of
-							progressive enhancement, which will add advanced interaction
-							controls to any HTML table.</p>
+						<h3 class="panel-title">数据列表</h3>
 					</div>
 					<div class="panel-body">
-						<h5 class="subtitle mb5">Basic Table</h5>
-						<p class="m20">DataTables has most features enabled by
-							default, so all you need to do to use it with one of your own
-							tables is to call the construction function.</p>
 						<br />
 						<div class="table-responsive">
 

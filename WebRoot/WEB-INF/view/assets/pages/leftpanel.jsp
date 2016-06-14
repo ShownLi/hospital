@@ -2,7 +2,7 @@
 <div class="leftpanel">
 
     <div class="logopanel">
-        <h1><span>[</span> bracket <span>]</span></h1>
+        <h1><span>[</span> 特美旅行 <span>]</span></h1>
     </div><!-- logopanel -->
 
     <div class="leftpanelinner">
@@ -26,37 +26,35 @@
             </ul>
         </div>
 
-        <h5 class="sidebartitle">Navigation</h5>
+        <h5 class="sidebartitle">导航栏</h5>
         <ul class="nav nav-pills nav-stacked nav-bracket">
-            <li><a href="index.html"><i class="fa fa-home"></i> <span>Dashboard</span></a></li>
-            <li class="nav-parent"><a href=""><i class="fa fa-user"></i> <span>用户管理</span></a>
-                <ul class="children">
-                    <li><a href="${rootPath }user/list.html"><i class="fa fa-caret-right"></i> 用户列表</a></li>
-                    <li><a href="${rootPath }user/add.html"><i class="fa fa-caret-right"></i> 新增用户</a></li>
-                    
-                </ul>
-            </li>
-            <li class="nav-parent"><a href=""><i class="fa fa-user"></i> <span>地接社管理</span></a>
+            <li class="nav-parent"><a href=""><i class="glyphicon glyphicon-briefcase"></i> <span>地接社管理</span></a>
                 <ul class="children">
                     <li><a href="${rootPath }agency/list.html"><i class="fa fa-caret-right"></i> 地接社列表</a></li>
                     <li><a href="${rootPath }agency/add.html"><i class="fa fa-caret-right"></i> 新增地接社</a></li>
                     
                 </ul>
             </li>            
-            <li class="nav-parent"><a href=""><i class="fa fa-user"></i> <span>销售管理</span></a>
+            <li class="nav-parent"><a href=""><i class="fa fa-group"></i> <span>销售管理</span></a>
                 <ul class="children">
                     <li><a href="${rootPath }sale/list.html"><i class="fa fa-caret-right"></i> 销售列表</a></li>
                     <li><a href="${rootPath }sale/add.html"><i class="fa fa-caret-right"></i> 新增销售</a></li>
                     
                 </ul>
             </li> 
-            <li class="nav-parent"><a href=""><i class="fa fa-user"></i> <span>系统参数管理</span></a>
+            <li class="nav-parent"><a href=""><i class="glyphicon glyphicon-cog"></i> <span>系统参数管理</span></a>
                 <ul class="children">
                     <li><a href="${rootPath }parameter/list.html"><i class="fa fa-caret-right"></i> 系统参数列表</a></li>
-                    <li><a href="${rootPath }parameter/add.html"><i class="fa fa-caret-right"></i> 新增系统参数</a></li>
+                    <li><a href="${rootPath }parameter/add.html"><i class="fa fa-caret-right"></i> 新增系统参数</a></li>                   
+                </ul>
+            </li> 
+            <li class="nav-parent"><a href=""><i class="fa fa-user"></i> <span>用户管理</span></a>
+                <ul class="children">
+                    <li><a href="${rootPath }user/list.html"><i class="fa fa-caret-right"></i> 用户列表</a></li>
+                    <li><a href="${rootPath }user/add.html"><i class="fa fa-caret-right"></i> 新增用户</a></li>
                     
                 </ul>
-            </li>             
+            </li>                         
         </ul>
 
     </div><!-- leftpanelinner -->
