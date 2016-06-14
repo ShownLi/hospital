@@ -21,7 +21,7 @@ import com.tourmade.crm.service.SaleService;
 @Controller
 @RequestMapping("/sale")
 public class SaleController extends BaseSimpleFormController {
-	
+
 	@Autowired
 	private SaleService service;
 
@@ -61,30 +61,32 @@ public class SaleController extends BaseSimpleFormController {
 		
 		return j;
 	}
-	
+
 	@RequestMapping(value = "/edit.html", method = { RequestMethod.POST, RequestMethod.GET })
 	public String edit(Model model, String id) {
 		
 		if (null != id && !"".equals(id)) {
 			int i = Integer.parseInt(id);
 			DemoSale u = service.getSaleById(i);
-			model.addAttribute("Sale",u);
+			model.addAttribute("sale",u);
 		}
+		
+		
 		return "/sale/edit";
 	}
 
 	@RequestMapping(value = "/edit.do")
 	@ResponseBody
-	public Json doEdit(HttpServletRequest request, HttpSession session, Model model, DemoSale Sale) {
+	public Json doEdit(HttpServletRequest request, HttpSession session, Model model, DemoSale sale) {
 
 		Json j = new Json();
 		
 		try {
-			service.updateSale(Sale);
+			service.updateSale(sale);
 			j.setSuccess(true);
 		} catch (Exception e) {
 			j.setSuccess(false);
-			logger.error("SaleController.doEdit() --> " + Sale.toString() + "\n" + e.getMessage());
+			logger.error("SaleController.doEdit() --> " + sale.toString() + "\n" + e.getMessage());
 		}
 		
 		return j;
@@ -111,5 +113,5 @@ public class SaleController extends BaseSimpleFormController {
 		
 		return j;
 	}
-
+	
 }

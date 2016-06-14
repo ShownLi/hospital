@@ -10,14 +10,14 @@ import com.tourmade.crm.common.framework.BaseBean;
  * @author lianzheng
  *
  */
-public class DemoParameter extends BaseBean<DemoAgency> {
+public class DemoParameter extends BaseBean<DemoParameter> {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1423523863575074623L;
 
-	private int parameter_id;
+	private int parameterid;
 	
 	private String domain;
 	
@@ -37,12 +37,12 @@ public class DemoParameter extends BaseBean<DemoAgency> {
 	
 	private Date update_time;
 
-	public int getParameter_id() {
-		return parameter_id;
+	public int getParameterid() {
+		return parameterid;
 	}
 
-	public void setParameter_id(int parameter_id) {
-		this.parameter_id = parameter_id;
+	public void setParameterid(int parameterid) {
+		this.parameterid = parameterid;
 	}
 
 	public String getDomain() {
@@ -123,7 +123,7 @@ public class DemoParameter extends BaseBean<DemoAgency> {
 
 	@Override
 	public String toString() {
-		return "DemoParameter [parameter_id=" + parameter_id + ", domain=" + domain + ", value=" + value + ", chinese="
+		return "DemoParameter [parameterid=" + parameterid + ", domain=" + domain + ", value=" + value + ", chinese="
 				+ chinese + ", english=" + english + ", describe=" + describe + ", sort=" + sort + ", isdisplay="
 				+ isdisplay + ", creat_time=" + creat_time + ", update_time=" + update_time + "]";
 	}

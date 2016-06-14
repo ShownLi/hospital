@@ -61,9 +61,7 @@ public class AgencyService extends BaseService {
 		r.setData(data);
 		r.setCountTotal(count);
 		r.setCountFiltered(count);
-
-		
-		
+	
 		return r;
 	}
 
@@ -75,6 +73,7 @@ public class AgencyService extends BaseService {
 	 */
 	public int saveAgency(DemoAgency agency) {
 
+		
 		try {
 			agencyMapper.saveAgency(agency);
 		} catch (Exception e) {

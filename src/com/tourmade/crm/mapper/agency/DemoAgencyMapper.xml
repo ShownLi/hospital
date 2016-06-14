@@ -14,6 +14,16 @@
 		u.creat_time as creat_time,
 		u.isdel as isdel
 		from tm_agency u where u.isdel = 0
+		<if test="pojo.seachValue!=null and pojo.seachValue!=''">
+			and
+			(
+			u.agency_name like '%${pojo.seachValue}%'
+			or
+			u.country like '%${pojo.seachValue}%'
+			or
+			u.language like '%${pojo.seachValue}%'
+			)
+		</if>
 		order by u.creat_time
 		) table_alias
 		limit #{b},#{e}
@@ -23,6 +33,16 @@
 		select count(u.agency_id) from tm_agency u
 		where
 		u.isdel = 0
+		<if test="seachValue!=null and seachValue!=''">
+			and
+			(
+			u.agency_name like '%${seachValue}%'
+			or
+			u.country like '%${seachValue}%'
+			or
+			u.language like '%${seachValue}%'
+			)
+		</if>
 
 	</select>
 	

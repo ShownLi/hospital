@@ -7,17 +7,29 @@
 		SELECT *
 		FROM (
 		select
-		u.parameter_id as parameter_id,
+		u.parameter_id as parameterid,
 		u.domain as domain,
 		u.value as value,
 		u.chinese as chinese,
 		u.english as english,
-		u.describe as desc,
 		u.sort as sort,
 		u.isdisplay as isdisplay,
 		u.creat_time as creat_time,
 		u.isdel as isdel
 		from tm_parameter u where u.isdel = 0
+		<if test="pojo.seachValue!=null and pojo.seachValue!=''">
+			and
+			(
+			u.domain like '%${pojo.seachValue}%'
+			or
+			u.value like '%${pojo.seachValue}%'
+			or
+			u.chinese like '%${pojo.seachValue}%'
+			or
+			u.english like '%${pojo.seachValue}%'
+			)
+		</if>
+
 		order by u.creat_time
 		) table_alias
 		limit #{b},#{e}
@@ -27,6 +39,18 @@
 		select count(u.parameter_id) from tm_parameter u
 		where
 		u.isdel = 0
+		<if test="seachValue!=null and seachValue!=''">
+			and
+			(
+			u.domain like '%${seachValue}%'
+			or
+			u.value like '%${seachValue}%'
+			or
+			u.chinese like '%${seachValue}%'
+			or
+			u.english like '%${seachValue}%'
+			)
+		</if>
 
 	</select>
 	
@@ -36,7 +60,6 @@
 		value,
 		chinese,
 		english,
-		describe,
 		sort,
 		isdisplay,
 		creat_time,
@@ -46,7 +69,6 @@
 		#{value,jdbcType=VARCHAR},
 		#{chinese,jdbcType=VARCHAR},
 		#{english,jdbcType=VARCHAR},
-		#{describe,jdbcType=VARCHAR},
 		#{sort,jdbcType=VARCHAR},
 		#{isdisplay,jdbcType=VARCHAR},
 		NOW(),
@@ -60,17 +82,16 @@
 		value=#{value},
 		chinese=#{chinese},
 		english=#{english},
-		describe=#{describe},
 		sort=#{sort},
 		isdisplay=#{isdisplay},
 		update_time=NOW()
 		where
-		parameter_id=#{parameter_id}
+		parameter_id=#{parameterid}
 	</update>
 	
 	<select id="getParameterById" parameterType="int" resultType="DemoParameter">
 		select
-		u.parameter_id as parameter_id,
+		u.parameter_id as parameterid,
 		u.domain as domain,
 		u.value as value,
 		u.chinese as chinese,
@@ -78,7 +99,7 @@
 		u.sort as sort,
 		u.isdisplay as isdisplay,
 		u.isdel as isdel
-		from tm_parameter u where u.parameter_id = #{parameter_id}
+		from tm_parameter u where u.parameter_id = #{parameterid}
 	</select>
 
 	<update id="deleteParameterById" parameterType="int" flushCache="true"
@@ -87,6 +108,6 @@
 		set
 		isdel=1
 		where
-		parameter_id = #{parameter_id}
+		parameter_id = #{parameterid}
 	</update>
 </mapper>

@@ -16,7 +16,7 @@ public interface DemoParameterMapper extends BaseMapper {
 
 	public void updateParameter(DemoParameter Parameter);
 
-	public void deleteParameterById(int Parameter_id);
+	public void deleteParameterById(int Parameterid);
 	
-	public DemoParameter getParameterById(int Parameter_id);
+	public DemoParameter getParameterById(int Parameterid);
 }

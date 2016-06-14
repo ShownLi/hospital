@@ -18,8 +18,8 @@
 				<div class="breadcrumb-wrapper">
 					<span class="label">你在这里:</span>
 					<ol class="breadcrumb">
-						<li><a href="＃">Demo</a></li>
-						<li><a href="${rootPath }user/list.html">销售管理</a></li>
+						<li><a href="＃">CRM</a></li>
+						<li><a href="${rootPath }sale/list.html">销售管理</a></li>
 						<li class="active">编辑销售</li>
 					</ol>
 				</div>
@@ -51,13 +51,19 @@
             <div class="form-group">
               <label class="col-sm-3 control-label">所属地接社</label>
               <div class="col-sm-6">
-                <input type="text" name="country" placeholder="国家" class="form-control" value="${sale.agency_id }" />
+                <input type="text" name="agency" placeholder="地接社编号" class="form-control" value="${sale.agency }" />
               </div>
             </div>            
             <div class="form-group">
+              <label class="col-sm-3 control-label">销售编码</label>
+              <div class="col-sm-6">
+                <input type="text" name="code" placeholder="销售编码" class="form-control" value="${sale.code }" />
+              </div>
+            </div>   
+            <div class="form-group">
               <label class="col-sm-3 control-label">邮件地址</label>
               <div class="col-sm-6">
-                <input type="text" name="language" placeholder="语言" class="form-control" value="${sale.email }" />
+                <input type="text" name="email" placeholder="邮件地址" class="form-control" value="${sale.email }" />
               </div>
             </div>      
           
@@ -69,7 +75,7 @@
 				<div class="col-sm-6 col-sm-offset-3">
 				  <button class="btn btn-primary">提交</button>&nbsp;
 				  <button class="btn btn-default" id="btn-back">取消</button>
-				  <input type="hidden" name="sale_id" value="${sale.sale_id }" />
+				  <input type="hidden" name="saleid" value="${sale.saleid }" />
 				</div>
 			 </div>
 		  </div><!-- panel-footer -->

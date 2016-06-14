@@ -10,13 +10,13 @@ public interface DemoSaleMapper extends BaseMapper {
 	
 	public List<DemoSale> querySale(Map<String, Object> params);
 	
-	public long countSale(DemoSale Sale);
+	public long countSale(DemoSale sale);
 	
-	public void saveSale(DemoSale Sale);
+	public void saveSale(DemoSale sale);
 
-	public void updateSale(DemoSale Sale);
+	public void updateSale(DemoSale sale);
 
-	public void deleteSaleById(int Sale_id);
+	public void deleteSaleById(int sale_id);
 	
-	public DemoSale getSaleById(int Sale_id);
+	public DemoSale getSaleById(int sale_id);
 }

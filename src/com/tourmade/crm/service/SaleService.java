@@ -19,14 +19,14 @@ import com.tourmade.crm.model.DemoSale;
 @Service
 @Transactional(readOnly = false)
 public class SaleService extends BaseService {
-	
+
 	@Autowired
 	private DemoSaleMapper saleMapper;
 
 	/**
 	 * 查询销售数据，分页展示
 	 * 
-	 * @param Sale
+	 * @param sale
 	 * @param ph
 	 * @param request
 	 * @return
@@ -57,24 +57,23 @@ public class SaleService extends BaseService {
 
 		List<DemoSale> data = saleMapper.querySale(map);
 		long count = saleMapper.countSale(sale);
-			
+		
 		r.setData(data);
 		r.setCountTotal(count);
 		r.setCountFiltered(count);
 
-		
-		
 		return r;
 	}
 
 	/**
 	 * 新增销售
 	 * 
-	 * @param Sale
+	 * @param sale
 	 * @return
 	 */
 	public int saveSale(DemoSale sale) {
-
+		// sale.setPwd("123456");
+		// sale.setPwd(MD5.MD5Encode("123456"));
 		try {
 			saleMapper.saveSale(sale);
 		} catch (Exception e) {
@@ -82,7 +81,7 @@ public class SaleService extends BaseService {
 			e.printStackTrace();
 			return 0;
 		}
-		return sale.getSale_id();
+		return sale.getSaleid();
 	}
 
 	/**
@@ -103,9 +102,9 @@ public class SaleService extends BaseService {
 	}
 
 	/**
-	 * 更新销售信息
+	 * 更新销售信息(不修改密码)
 	 * 
-	 * @param Sale
+	 * @param sale
 	 * @return
 	 */
 	public boolean updateSale(DemoSale sale) {
@@ -113,9 +112,10 @@ public class SaleService extends BaseService {
 		boolean r = false;
 
 		try {
-			DemoSale u = saleMapper.getSaleById(sale.getSale_id());
+			DemoSale u = saleMapper.getSaleById(sale.getSaleid());
 			if (u != null) {
 				u.setName(sale.getName());
+				// u.setPwd(sale.getPwd());
 				saleMapper.updateSale(u);
 				r = true;
 			} else {
@@ -132,22 +132,21 @@ public class SaleService extends BaseService {
 	/**
 	 * 删除销售（假删除）
 	 * 
-	 * @param Sale_id
+	 * @param saleid
 	 * @return
 	 */
-	public boolean deleteSaleById(int sale_id) {
+	public boolean deleteSaleById(int saleid) {
 
 		boolean r = false;
 
 		try {
-			saleMapper.deleteSaleById(sale_id);
+			saleMapper.deleteSaleById(saleid);
 			r = true;
 		} catch (Exception e) {
-			logger.error("SaleService.deleteSaleById() --> " + sale_id + "-->" + e.getMessage());
+			logger.error("SaleService.deleteSaleById() --> " + saleid + "-->" + e.getMessage());
 			r = false;
 		}
 
 		return r;
 	}
-
 }

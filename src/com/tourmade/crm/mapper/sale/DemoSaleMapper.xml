@@ -7,23 +7,47 @@
 		SELECT *
 		FROM (
 		select
-		u.sale_id as sale_id,
+		u.sale_id as saleid,
 		u.sale_name as name,
 		u.agency_id as agency,
+		u.sale_code as code,
 		u.sale_email as email,
 		u.creat_time as creat_time,
 		u.isdel as isdel
 		from tm_sale u where u.isdel = 0
+		<if test="pojo.seachValue!=null and pojo.seachValue!=''">
+			and
+			(
+			u.sale_name like '%${pojo.seachValue}%'
+			or
+			u.agency_id like '%${pojo.seachValue}%'
+			or
+			u.sale_code like '%${pojo.seachValue}%'
+			or
+			u.sale_email like '%${pojo.seachValue}%'
+			)
+		</if>
 		order by u.creat_time
 		) table_alias
 		limit #{b},#{e}
 	</select>
 
 	<select id="countSale" parameterType="DemoSale" resultType="long">
-		select count(u.Sale_id) from tm_sale u
+		select count(u.sale_id) from tm_sale u
 		where
 		u.isdel = 0
-
+		<if test="seachValue!=null and seachValue!=''">
+			and
+			(
+			u.sale_name like '%${seachValue}%'
+			or
+			u.agency_id like '%${seachValue}%'
+			or
+			u.sale_code like '%${seachValue}%'
+			or
+			u.sale_email like '%${seachValue}%'
+			)
+		</if>
 	</select>
 	
 	<insert id="saveSale" parameterType="DemoSale" flushCache="true" useGeneratedKeys="true" keyProperty="Sale_id" keyColumn="GENERATED_KEY">
@@ -36,8 +60,8 @@
 		isdel
 		)values(
 		#{name,jdbcType=VARCHAR},
-		#{agency_id,jdbcType=VARCHAR},
-		#{sale_code,jdbcType=VARCHAR},
+		#{agency,jdbcType=VARCHAR},
+		#{code,jdbcType=VARCHAR},
 		#{email,jdbcType=VARCHAR},
 		NOW(),
 		0
@@ -52,17 +76,18 @@
 		sale_email=#{email},
 		update_time=NOW()
 		where
-		sale_id=#{sale_id}
+		sale_id=#{saleid}
 	</update>
 	
 	<select id="getSaleById" parameterType="int" resultType="DemoSale">
 		select
-		u.sale_id as sale_id,
+		u.sale_id as saleid,
 		u.sale_name as name,
-		u.sale_email as email,
 		u.agency_id as agency,
+		u.sale_code as code,
+		u.sale_email as email,
 		u.isdel as isdel
-		from tm_sale u where u.sale_id = #{sale_id}
+		from tm_sale u where u.sale_id = #{saleid}
 	</select>
 
 	<update id="deleteSaleById" parameterType="int" flushCache="true"
@@ -71,6 +96,6 @@
 		set
 		isdel=1
 		where
-		sale_id = #{sale_id}
+		sale_id = #{saleid}
 	</update>
 </mapper>

@@ -47,7 +47,7 @@
 										<th>#</th>
 										<th>作用域</th>
 										<th>值</th>
-										<th>描述</th>
+										<th>是否显示</th>
 										<th>操作</th>
 									</tr>
 								</thead>
@@ -120,7 +120,7 @@
 				},
 				columnDefs: [
 				  {
-	                  data: "parameter_id",
+	                  data: "parameterid",
 	                  //defaultContent: '<a class="btn btn-success btn-xs"><span class="fa fa-edit"></span> 编辑</a>&nbsp;<a class="btn btn-danger btn-xs"><span class="fa fa-minus-circle"></span> 删除</a>',
 	                  orderable: false,
 	                  render: function ( data, type, full, meta ) {
@@ -136,10 +136,10 @@
 
 				],
 				columns: [
-		            { data: "parameter_id" },
+		            { data: "parameterid" },
 		            { data: "domain" },
 		            { data: "value" },
-					{ data: "desc" }
+		            { data: "isdisplay" }
 		        ]
 			});
 			

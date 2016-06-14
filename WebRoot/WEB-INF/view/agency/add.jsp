@@ -18,7 +18,7 @@
 				<div class="breadcrumb-wrapper">
 					<span class="label">你在这里:</span>
 					<ol class="breadcrumb">
-						<li><a href="＃">Demo</a></li>
+						<li><a href="＃">CRM</a></li>
 						<li><a href="${rootPath }agency/list.html">地接社管理</a></li>
 						<li class="active">新增地接社</li>
 					</ol>
@@ -53,23 +53,23 @@
               <div class="col-sm-6">
                 <input type="text" name="country" placeholder="国家" class="form-control" />
               </div>
-            </div> 			
+            </div> 			  
                 <div class="form-group">
                   <label class="col-sm-3 control-label">语言 <span class="asterisk">*</span></label>
                   <div class="col-sm-9">
-                    <div class="ckbox ckbox-primary">
-                      <input type="checkbox" id="int_chinese" value="zh" name="int[]" required />
-                      <label for="int_chinese">中文</label>
+                    <div class="rdio rdio-primary">
+                      <input type="radio" id="chinese" value="chinese" name="language" required />
+                      <label for="chinese">可以中文</label>
                     </div><!-- rdio -->
-                    <div class="ckbox ckbox-primary">
-                      <input type="checkbox" value="en" id="int_english" name="int[]" />
-                      <label for="int_english">英文</label>
+                    <div class="rdio rdio-primary">
+                      <input type="radio" value="english" id="english" name="language">
+                      <label for="english">只会英文</label>
                     </div><!-- rdio -->
-                    <label class="error" for="int[]"></label>
+                    <label class="error" for="language"></label>
                   </div>
-                </div><!-- form-group -->          
+                </div><!-- form-group -->                     
             <div class="form-group">
-              <label class="col-sm-3 control-label">Select2</label>
+              <label class="col-sm-3 control-label">所在国家</label>
               <div class="col-sm-5">
                 <select class="select2" data-placeholder="Choose a Country...">
                   <option value=""></option>

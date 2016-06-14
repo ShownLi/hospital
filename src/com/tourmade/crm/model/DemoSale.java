@@ -17,42 +17,40 @@ public class DemoSale extends BaseBean<DemoSale> {
 	 */
 	private static final long serialVersionUID = 1423523863575074623L;
 
-	private int sale_id;
+	private int saleid;
 	
-	private int agency_id;
+	private int agency;
 	
-	private String sale_code;
+	private String code;
 	
 	private String name;
 	
 	private String email;
-
-	private Date creat_time;
 	
 	private Date update_time;
 
-	public int getSale_id() {
-		return sale_id;
+	public int getSaleid() {
+		return saleid;
 	}
 
-	public void setSale_id(int sale_id) {
-		this.sale_id = sale_id;
+	public void setSaleid(int saleid) {
+		this.saleid = saleid;
 	}
 
-	public int getAgency_id() {
-		return agency_id;
+	public int getAgency() {
+		return agency;
 	}
 
-	public void setAgency_id(int agency_id) {
-		this.agency_id = agency_id;
+	public void setAgency(int agency) {
+		this.agency = agency;
 	}
 
-	public String getSale_code() {
-		return sale_code;
+	public String getCode() {
+		return code;
 	}
 
-	public void setSale_code(String sale_code) {
-		this.sale_code = sale_code;
+	public void setCode(String code) {
+		this.code = code;
 	}
 
 	public String getName() {
@@ -71,14 +69,6 @@ public class DemoSale extends BaseBean<DemoSale> {
 		this.email = email;
 	}
 
-	public Date getCreat_time() {
-		return creat_time;
-	}
-
-	public void setCreat_time(Date creat_time) {
-		this.creat_time = creat_time;
-	}
-
 	public Date getUpdate_time() {
 		return update_time;
 	}
@@ -93,9 +83,8 @@ public class DemoSale extends BaseBean<DemoSale> {
 
 	@Override
 	public String toString() {
-		return "DemoSale [sale_id=" + sale_id + ", agency_id=" + agency_id + ", sale_code=" + sale_code + ", name="
-				+ name + ", email=" + email + ", creat_time=" + creat_time + ", update_time=" + update_time + "]";
+		return "DemoSale [saleid=" + saleid + ", agency=" + agency + ", code=" + code + ", name=" + name + ", email="
+				+ email + ", update_time=" + update_time + "]";
 	}
-
 
 }

@@ -18,11 +18,10 @@ import com.tourmade.crm.common.model.base.value.baseconfig.PageHelper;
 import com.tourmade.crm.model.DemoParameter;
 import com.tourmade.crm.service.ParameterService;
 
-
 @Controller
 @RequestMapping("/parameter")
 public class ParameterController extends BaseSimpleFormController {
-	
+
 	@Autowired
 	private ParameterService service;
 
@@ -33,9 +32,9 @@ public class ParameterController extends BaseSimpleFormController {
 	
 	@RequestMapping(value = "/list.do",produces="application/json;charset=utf-8")
 	@ResponseBody
-	public String queryData(HttpServletRequest request, HttpSession session, Model model, DemoParameter Parameter, PageHelper page) {
+	public String queryData(HttpServletRequest request, HttpSession session, Model model, DemoParameter parameter, PageHelper page) {
 
-		QueryResult<DemoParameter> r = service.queryParameter(Parameter, page, request);
+		QueryResult<DemoParameter> r = service.queryParameter(parameter, page, request);
 		String result = JSONUtilS.object2json(r);
 
 		return result;
@@ -48,44 +47,46 @@ public class ParameterController extends BaseSimpleFormController {
 
 	@RequestMapping(value = "/add.do")
 	@ResponseBody
-	public Json doAdd(HttpServletRequest request, HttpSession session, Model model, DemoParameter Parameter) {
+	public Json doAdd(HttpServletRequest request, HttpSession session, Model model, DemoParameter parameter) {
 
 		Json j = new Json();
 		
 		try {
-			service.saveParameter(Parameter);
+			service.saveParameter(parameter);
 			j.setSuccess(true);
 		} catch (Exception e) {
 			j.setSuccess(false);
-			logger.error("ParameterController.doAdd() --> " + Parameter.toString() + "\n" + e.getMessage());
+			logger.error("ParameterController.doAdd() --> " + parameter.toString() + "\n" + e.getMessage());
 		}
 		
 		return j;
 	}
-	
+
 	@RequestMapping(value = "/edit.html", method = { RequestMethod.POST, RequestMethod.GET })
 	public String edit(Model model, String id) {
 		
 		if (null != id && !"".equals(id)) {
 			int i = Integer.parseInt(id);
 			DemoParameter u = service.getParameterById(i);
-			model.addAttribute("Parameter",u);
+			model.addAttribute("parameter",u);
 		}
+		
+		
 		return "/parameter/edit";
 	}
 
 	@RequestMapping(value = "/edit.do")
 	@ResponseBody
-	public Json doEdit(HttpServletRequest request, HttpSession session, Model model, DemoParameter Parameter) {
+	public Json doEdit(HttpServletRequest request, HttpSession session, Model model, DemoParameter parameter) {
 
 		Json j = new Json();
 		
 		try {
-			service.updateParameter(Parameter);
+			service.updateParameter(parameter);
 			j.setSuccess(true);
 		} catch (Exception e) {
 			j.setSuccess(false);
-			logger.error("ParameterController.doEdit() --> " + Parameter.toString() + "\n" + e.getMessage());
+			logger.error("ParameterController.doEdit() --> " + parameter.toString() + "\n" + e.getMessage());
 		}
 		
 		return j;
@@ -112,5 +113,5 @@ public class ParameterController extends BaseSimpleFormController {
 		
 		return j;
 	}
-
+	
 }

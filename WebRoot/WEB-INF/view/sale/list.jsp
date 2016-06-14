@@ -14,7 +14,7 @@
 			<%@ include file="../assets/pages/headerbar.jsp"%>
 			<div class="pageheader">
 				<h2>
-					<i class="fa fa-user"></i> 销售管理 <span>销售列表</span>
+					<i class="fa fa-sale"></i> 销售管理 <span>销售列表</span>
 				</h2>
 				<div class="breadcrumb-wrapper">
 					<span class="label">你在这里:</span>
@@ -35,7 +35,7 @@
 								class="minimize">&minus;</a>
 						</div>
 						<!-- panel-btns -->
-						<h3 class="panel-title">数据表</h3>
+						<h3 class="panel-title">数据列表</h3>
 					</div>
 					<div class="panel-body">
 						<br />
@@ -47,7 +47,8 @@
 										<th>#</th>
 										<th>销售名</th>
 										<th>所属地接社</th>
-										<th>电子邮件</th>
+										<th>编码</th>
+										<th>邮箱</th>
 										<th>操作</th>
 									</tr>
 								</thead>
@@ -120,26 +121,21 @@
 				},
 				columnDefs: [
 				  {
-	                  data: "sale_id",
+	                  data: "saleid",
 	                  //defaultContent: '<a class="btn btn-success btn-xs"><span class="fa fa-edit"></span> 编辑</a>&nbsp;<a class="btn btn-danger btn-xs"><span class="fa fa-minus-circle"></span> 删除</a>',
 	                  orderable: false,
 	                  render: function ( data, type, full, meta ) {
 	                      return '<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a>&nbsp;<a class="btn btn-danger btn-xs" id="'+data+'"><span class="fa fa-minus-circle"></span> 删除</a>';
 	                  },
-	                  targets: 4
+	                  targets: 5
 				  },
-				  {
-					  orderable: false,
-					  searchable: false,
-				      targets: [0,1,2]
-				  },
-
 				],
 				columns: [
-		            { data: "sale_id" },
+		            { data: "saleid" },
 		            { data: "name" },
-		            { data: "agency_id" },
-					{ data: "email" }
+		            { data: "agency"},
+		            { data: "code" },
+		            { data: "email" }
 		        ]
 			});
 			

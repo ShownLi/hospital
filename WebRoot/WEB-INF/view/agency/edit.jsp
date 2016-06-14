@@ -18,8 +18,8 @@
 				<div class="breadcrumb-wrapper">
 					<span class="label">你在这里:</span>
 					<ol class="breadcrumb">
-						<li><a href="＃">Demo</a></li>
-						<li><a href="${rootPath }user/list.html">地接社管理</a></li>
+						<li><a href="＃">CRM</a></li>
+						<li><a href="${rootPath }agency/list.html">地接社管理</a></li>
 						<li class="active">编辑地接社</li>
 					</ol>
 				</div>
