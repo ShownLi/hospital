@@ -82,7 +82,7 @@
 		u.isdel as isdel
 		from tm_agency u where u.agency_id = #{agency_id}
 	</select>
-
+	
 	<update id="deleteAgencyById" parameterType="int" flushCache="true"
 		statementType="PREPARED">
 		update tm_agency

@@ -108,6 +108,16 @@
 		from tm_parameter u where u.para_id = #{parameterid}
 	</select>
 
+	<select id="getParameterInfo" parameterType="String" resultType="DemoParameter">
+		select
+		u.para_value as value,
+		u.chinese as chinese,
+		u.para_sort as sort,
+		u.isdisplay as isdisplay,
+		u.isdel as isdel
+		from tm_parameter u where u.isdisplay = 1 and u.isdel = 0 and u.para_domain = #{domain}
+	</select>
+	
 	<update id="deleteParameterById" parameterType="int" flushCache="true"
 		statementType="PREPARED">
 		update tm_parameter

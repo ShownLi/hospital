@@ -47,18 +47,12 @@
               <div class="col-sm-6">
                 <input type="text" name="name" placeholder="地接社名" class="form-control" />
               </div>
-            </div>
-            <div class="form-group">
-              <label class="col-sm-3 control-label">国家 <span class="asterisk">*</span></label>
-              <div class="col-sm-6">
-                <input type="text" name="country" placeholder="国家" class="form-control" />
-              </div>
-            </div> 			  
+            </div>			  
                 <div class="form-group">
                   <label class="col-sm-3 control-label">语言 <span class="asterisk">*</span></label>
                   <div class="col-sm-9">
                     <div class="rdio rdio-primary">
-                      <input type="radio" id="chinese" value="chinese" name="language" required />
+                      <input type="radio" id="chinese" value="chinese" name="language" checked="true" />
                       <label for="chinese">可以中文</label>
                     </div><!-- rdio -->
                     <div class="rdio rdio-primary">
@@ -134,10 +128,12 @@
 		jQuery("#form").validate({
 			rules: {
 				name: "required",
+				language: "required",
 				country: "required",
 			},
 			messages: {
 				name: "This field is required.",
+				language: "This field is required.",
 				country: "This field is required.",
 			},
 		    highlight: function(element) {

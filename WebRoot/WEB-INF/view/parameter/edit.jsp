@@ -82,7 +82,7 @@
                   <label class="col-sm-3 control-label">是否显示 <span class="asterisk">&nbsp;</span></label>
                   <div class="col-sm-9">
                     <div class="rdio rdio-primary">
-                      <input type="radio" id="yes" value="1" name="isdisplay">
+                      <input type="radio" id="yes" value="1" name="isdisplay" checked="true"/>
                       <label for="yes">是</label>
                     </div><!-- rdio -->
                     <div class="rdio rdio-primary">
