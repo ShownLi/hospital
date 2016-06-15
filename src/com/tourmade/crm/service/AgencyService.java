@@ -15,6 +15,7 @@ import com.tourmade.crm.common.framework.bean.QueryResult;
 import com.tourmade.crm.common.model.base.value.baseconfig.PageHelper;
 import com.tourmade.crm.mapper.agency.DemoAgencyMapper;
 import com.tourmade.crm.model.DemoAgency;
+import com.tourmade.crm.model.DemoList;
 
 @Service
 @Transactional(readOnly = false)
@@ -100,7 +101,22 @@ public class AgencyService extends BaseService {
 		}
 		return r;
 	}
-
+	/**
+	 * 根据作用域获得参数
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public List<DemoList> getParameterInfo(String domain) {
+		List<DemoList> r = null;
+		try {
+			r = agencyMapper.getParameterInfo(domain);
+		} catch (Exception e) {
+			logger.error("AgencyService.getParameterInfo() --> " + domain + "-->" + e.getMessage());
+			r = null;
+		}
+		return r;
+	}	
 	/**
 	 * 更新地接社信息(不修改密码)
 	 * 

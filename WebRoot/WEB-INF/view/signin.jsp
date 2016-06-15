@@ -21,7 +21,7 @@
 					<div class="signin-info">
 						<div class="logopanel">
 							<h1>
-								<span>[</span> demo <span>]</span>
+								<span>[</span> 特美旅行CRM系统 <span>]</span>
 							</h1>
 						</div>
 						<!-- logopanel -->
@@ -29,9 +29,9 @@
 						<div class="mb20"></div>
 
 						<h5>
-							<strong>Welcome to Bracket Bootstrap 3 Template!</strong>
+							<strong>欢  迎</strong>
 						</h5>
-						<ul>
+						<ul><!-- 
 							<li><i class="fa fa-arrow-circle-o-right mr5"></i> Fully
 								Responsive Layout</li>
 							<li><i class="fa fa-arrow-circle-o-right mr5"></i>
@@ -41,10 +41,9 @@
 							<li><i class="fa fa-arrow-circle-o-right mr5"></i> WYSIWYG
 								CKEditor</li>
 							<li><i class="fa fa-arrow-circle-o-right mr5"></i> and much
-								more...</li>
+								more...</li> -->
 						</ul>
 						<div class="mb20"></div>
-						<strong>Not a member? <a href="#">Sign Up</a></strong>
 					</div>
 					<!-- signin0-info -->
 
@@ -54,17 +53,16 @@
 				<div class="col-md-5">
 
 					<form method="post" id="form">
-						<h4 class="nomargin">Sign In</h4>
-						<p class="mt5 mb20">Login to access your account.</p>
+						<h4 class="nomargin">登  录</h4>
+						<p class="mt5 mb20">输入您的账号和密码</p>
 						<div class="error">
 							<label class="error"></label>
 						</div>
 						<input type="text" class="form-control uname"
-							placeholder="Username" name="loginname" required /> <input
-							type="password" class="form-control pword" placeholder="Password"
-							name="pwd" required /> <br><a href="#"><small>Forgot Your
-								Password?</small></a>
-						<button class="btn btn-success btn-block">Sign In</button>
+							placeholder="账号" name="loginname" required /> <input
+							type="password" class="form-control pword" placeholder="密码"
+							name="pwd" required /> <br><a href="#"><small></small></a>
+						<button class="btn btn-success btn-block">确  定</button>
 
 					</form>
 				</div>
@@ -73,12 +71,12 @@
 			</div>
 			<!-- row -->
 
-			<div class="signup-footer">
+			<div class="signup-footer"><!-- 
 				<div class="pull-left">&copy; 2014. All Rights Reserved.
 					Bracket Bootstrap 3 Admin Template</div>
 				<div class="pull-right">
 					Created By: <a href="http://themepixels.com/" target="_blank">ThemePixels</a>
-				</div>
+				</div> -->
 			</div>
 
 		</div>

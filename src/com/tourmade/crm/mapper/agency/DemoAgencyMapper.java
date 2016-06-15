@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.tourmade.crm.common.framework.BaseMapper;
 import com.tourmade.crm.model.DemoAgency;
+import com.tourmade.crm.model.DemoList;
 
 public interface DemoAgencyMapper extends BaseMapper {
 	
@@ -20,4 +21,5 @@ public interface DemoAgencyMapper extends BaseMapper {
 	
 	public DemoAgency getAgencyById(int agency_id);
 	
+	public List<DemoList> getParameterInfo(String domain);
 }

@@ -83,6 +83,16 @@
 		from tm_agency u where u.agency_id = #{agency_id}
 	</select>
 	
+	<select id="getParameterInfo" parameterType="String" resultType="DemoList">
+		select
+		u.para_domain,
+		u.para_id as id,
+		u.chinese as text,
+		u.isdisplay,
+		u.isdel 
+		from tm_parameter u where u.isdisplay = 1 and u.isdel = 0 and u.para_domain = #{domain}
+	</select>
+	
 	<update id="deleteAgencyById" parameterType="int" flushCache="true"
 		statementType="PREPARED">
 		update tm_agency

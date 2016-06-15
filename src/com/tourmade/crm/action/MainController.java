@@ -18,7 +18,7 @@ public class MainController extends BaseSimpleFormController {
 
 	@RequestMapping(value = "/main.html", method = { RequestMethod.POST, RequestMethod.GET })
 	public String main(Model model) {
-		return "redirect:/user/list.html";
+		return "redirect:/agency/list.html";
 	}
 	
 }

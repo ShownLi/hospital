@@ -19,6 +19,4 @@ public interface DemoParameterMapper extends BaseMapper {
 	public void deleteParameterById(int Parameterid);
 	
 	public DemoParameter getParameterById(int Parameterid);
-	
-	public DemoParameter getParameterInfo(String domain);
 }

@@ -43,24 +43,31 @@
           
             
             <div class="form-group">
-              <label class="col-sm-3 control-label">地接社名</label>
+              <label class="col-sm-3 control-label">地接社名 <span class="asterisk">*</span></label>
               <div class="col-sm-6">
                 <input type="text" name="name" placeholder="地接社名" class="form-control" value="${agency.name }" />
               </div>
             </div>
             <div class="form-group">
-              <label class="col-sm-3 control-label">国家</label>
+              <label class="col-sm-3 control-label">国家 <span class="asterisk">*</span></label>
               <div class="col-sm-6">
                 <input type="text" name="country" placeholder="国家" class="form-control" value="${agency.country }" />
               </div>
             </div>            
-            <div class="form-group">
-              <label class="col-sm-3 control-label">语言</label>
-              <div class="col-sm-6">
-                <input type="text" name="language" placeholder="语言" class="form-control" value="${agency.language }" />
-              </div>
-            </div>      
-          
+                <div class="form-group">
+                  <label class="col-sm-3 control-label">语言 <span class="asterisk">*</span></label>
+                  <div class="col-sm-5">
+                    <div class="rdio rdio-primary">
+                      <input type="radio" id="chinese" value="chinese" name="language" checked />
+                      <label for="chinese">可以中文</label>
+                    </div><!-- rdio -->
+                    <div class="rdio rdio-primary">
+                      <input type="radio" value="english" id="english" name="language">
+                      <label for="english">只会英文</label>
+                    </div><!-- rdio -->
+                    <label class="error" for="language"></label>
+                  </div>
+                </div><!-- form-group -->               
           
         </div><!-- panel-body -->
         
@@ -75,8 +82,6 @@
 		  </div><!-- panel-footer -->
      </form>   
       </div><!-- panel -->
-
-
 
 
 
@@ -112,6 +117,12 @@
 	<script src="${rootPath}assets/js/jquery.validate.min.js"></script>
 	
 	<script type="text/javascript">
+	if("${agency.language}"=="chinese"){
+		$('#chinese').attr('checked','true');
+	}
+	else{
+		$('#english').attr('checked','true');
+	}
 	jQuery(document).ready(function() {
 		jQuery("#form").validate({
 

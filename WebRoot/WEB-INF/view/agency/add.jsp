@@ -44,15 +44,15 @@
             
             <div class="form-group">
               <label class="col-sm-3 control-label">地接社名 <span class="asterisk">*</span></label>
-              <div class="col-sm-6">
+              <div class="col-sm-5">
                 <input type="text" name="name" placeholder="地接社名" class="form-control" />
               </div>
             </div>			  
                 <div class="form-group">
                   <label class="col-sm-3 control-label">语言 <span class="asterisk">*</span></label>
-                  <div class="col-sm-9">
+                  <div class="col-sm-5">
                     <div class="rdio rdio-primary">
-                      <input type="radio" id="chinese" value="chinese" name="language" checked="true" />
+                      <input type="radio" id="chinese" value="chinese" name="language" checked />
                       <label for="chinese">可以中文</label>
                     </div><!-- rdio -->
                     <div class="rdio rdio-primary">
@@ -63,20 +63,13 @@
                   </div>
                 </div><!-- form-group -->                     
             <div class="form-group">
-              <label class="col-sm-3 control-label">所在国家</label>
-              <div class="col-sm-5">
-                <select class="select2" data-placeholder="Choose a Country...">
-                  <option value=""></option>
-                  <option value="United States">United States</option>
-                  <option value="United Kingdom">United Kingdom</option>
-                  <option value="Afghanistan">Afghanistan</option>
-                  <option value="Aland Islands">Aland Islands</option>
-                </select>
+              <label  class="col-sm-3 control-label">所在国家 <span class="asterisk">*</span></label>
+              <div class="js-example-data-array col-sm-5">
+                <select data-placeholder="选择一个国家..."></select>
               </div>
-            </div>   
-          
+            </div>
         </div><!-- panel-body -->
-        
+<input type="text" name="country" id="country" class="form-control"/>
         <div class="panel-footer">
 			 <div class="row">
 				<div class="col-sm-6 col-sm-offset-3">
@@ -121,9 +114,16 @@
 
 
 	<%@ include file="../assets/pages/foot.jsp"%>
+	<script src="${rootPath}assets/js/select2.min.js"></script>
 	<script src="${rootPath}assets/js/jquery.validate.min.js"></script>
 	
 	<script type="text/javascript">
+	var p = ${parameter};
+	
+	$(".js-example-data-array").select2({
+	  data: p
+	})
+	
 	jQuery(document).ready(function() {		  
 		jQuery("#form").validate({
 			rules: {
@@ -150,6 +150,7 @@
 		      return false;
 		    }
 		  });
+		
 		$("#btn-back").click( function () {
 			history.go(-1);
 	    } ); 
@@ -166,8 +167,7 @@
 				}
 			}, "JSON");
 		}
-	
-		
+	$("#country").select2("val");
 	</script>
 
 </body>
