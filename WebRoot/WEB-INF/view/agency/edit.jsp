@@ -40,20 +40,12 @@
         <form class="form-horizontal form-bordered" id="form">
         <div class="panel-body panel-body-nopadding">
           
-          
-            
             <div class="form-group">
               <label class="col-sm-3 control-label">地接社名 <span class="asterisk">*</span></label>
-              <div class="col-sm-6">
+              <div class="col-sm-5">
                 <input type="text" name="name" placeholder="地接社名" class="form-control" value="${agency.name }" />
               </div>
-            </div>
-            <div class="form-group">
-              <label class="col-sm-3 control-label">国家 <span class="asterisk">*</span></label>
-              <div class="col-sm-6">
-                <input type="text" name="country" placeholder="国家" class="form-control" value="${agency.country }" />
-              </div>
-            </div>            
+            </div>         
                 <div class="form-group">
                   <label class="col-sm-3 control-label">语言 <span class="asterisk">*</span></label>
                   <div class="col-sm-5">
@@ -68,7 +60,12 @@
                     <label class="error" for="language"></label>
                   </div>
                 </div><!-- form-group -->               
-          
+            <div class="form-group">
+              <label class="col-sm-3 control-label">国家 <span class="asterisk">*</span></label>
+
+                <input type="text" id="country" name="country" class="js-example-data-array col-sm-5" value="${agency.country }"/>
+
+            </div>            
         </div><!-- panel-body -->
         
         <div class="panel-footer">
@@ -114,9 +111,15 @@
 
 
 	<%@ include file="../assets/pages/foot.jsp"%>
+	<script src="${rootPath}assets/js/select2.min.js"></script>
 	<script src="${rootPath}assets/js/jquery.validate.min.js"></script>
 	
 	<script type="text/javascript">
+	var p = ${parameter};
+	
+	$(".js-example-data-array").select2({
+	  	data: p
+	})
 	if("${agency.language}"=="chinese"){
 		$('#chinese').attr('checked','true');
 	}
@@ -125,7 +128,16 @@
 	}
 	jQuery(document).ready(function() {
 		jQuery("#form").validate({
-
+			rules: {
+				name: "required",
+				language: "required",
+				country: "required",
+			},
+			messages: {
+				name: "This field is required.",
+				language: "This field is required.",
+				country: "This field is required.",
+			},
 		    highlight: function(element) {
 		      jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
 		    },

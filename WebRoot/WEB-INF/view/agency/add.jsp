@@ -64,12 +64,11 @@
                 </div><!-- form-group -->                     
             <div class="form-group">
               <label  class="col-sm-3 control-label">所在国家 <span class="asterisk">*</span></label>
-              <div class="js-example-data-array col-sm-5">
-                <select data-placeholder="选择一个国家..."></select>
-              </div>
+
+                <input type="text" name="country" class="js-example-data-array col-sm-5"/>
+
             </div>
         </div><!-- panel-body -->
-<input type="text" name="country" id="country" class="form-control"/>
         <div class="panel-footer">
 			 <div class="row">
 				<div class="col-sm-6 col-sm-offset-3">
@@ -121,7 +120,8 @@
 	var p = ${parameter};
 	
 	$(".js-example-data-array").select2({
-	  data: p
+		placeholder: '选择一个国家',
+	  	data: p
 	})
 	
 	jQuery(document).ready(function() {		  
@@ -155,10 +155,12 @@
 			history.go(-1);
 	    } ); 
 	});
-//			      
+//		
+		var str = $('#country').select2("val").text;
+	      
 		function form_submit() {
 			var f = $("#form").serialize();
-			$.post('${rootPath}agency/add.do', f, function(result) {
+			$.post('${rootPath}agency/add.do',f, function(result) {
 				var rmsg = result.msg;
 				if (result.success) {
 					window.parent.location = "${rootPath}agency/list.html";
@@ -167,7 +169,6 @@
 				}
 			}, "JSON");
 		}
-	$("#country").select2("val");
 	</script>
 
 </body>

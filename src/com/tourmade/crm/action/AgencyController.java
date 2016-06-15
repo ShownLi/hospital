@@ -79,6 +79,10 @@ public class AgencyController extends BaseSimpleFormController {
 		if (null != id && !"".equals(id)) {
 			int i = Integer.parseInt(id);
 			DemoAgency u = service.getAgencyById(i);
+			String domain = "agency.country";
+			List<DemoList> v = service.getParameterInfo(domain);
+			JSONArray result = JSONArray.fromObject(v);
+			model.addAttribute("parameter",result);
 			model.addAttribute("agency",u);
 		}
 		return "/agency/edit";

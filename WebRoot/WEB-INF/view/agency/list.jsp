@@ -130,6 +130,16 @@
 	                  targets: 4
 				  },
 				  {
+	                  data: "language",
+	                  //defaultContent: '<a class="btn btn-success btn-xs"><span class="fa fa-edit"></span> 编辑</a>&nbsp;<a class="btn btn-danger btn-xs"><span class="fa fa-minus-circle"></span> 删除</a>',
+	                  orderable: false,
+	                  render: function ( data ) {
+	                      if(data =='chinese'){return '可以中文';}
+	                      else{return '只会英文';}
+	                  },
+	                  targets: 3
+				  },
+				  {
 					  orderable: false,
 					  searchable: false,
 				      targets: [0,1,2]

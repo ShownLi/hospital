@@ -9,11 +9,13 @@
 		select
 		u.agency_id as agency_id,
 		u.agency_name as name,
-		u.country as country,
+		u.country as cname,
 		u.language as language,
 		u.creat_time as creat_time,
-		u.isdel as isdel
-		from tm_agency u where u.isdel = 0
+		u.isdel as isdel,
+		v.para_value,
+		v.chinese as country
+		from tm_agency u join tm_parameter v on u.country = v.para_value where u.isdel = 0
 		<if test="pojo.seachValue!=null and pojo.seachValue!=''">
 			and
 			(
@@ -86,7 +88,7 @@
 	<select id="getParameterInfo" parameterType="String" resultType="DemoList">
 		select
 		u.para_domain,
-		u.para_id as id,
+		u.para_value as id,
 		u.chinese as text,
 		u.isdisplay,
 		u.isdel 
