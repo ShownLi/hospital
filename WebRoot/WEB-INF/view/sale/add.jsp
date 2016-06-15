@@ -49,11 +49,11 @@
               </div>
             </div>
             <div class="form-group">
-              <label class="col-sm-3 control-label">所属地接社 <span class="asterisk">*</span></label>
-              <div class="col-sm-6">
-                <input type="text" name="agency" placeholder="所属地接社" class="form-control" />
-              </div>
-            </div> 
+              <label  class="col-sm-3 control-label">所属地接社 <span class="asterisk">*</span></label>
+
+                <input type="text" name="agency" class="js-example-data-array col-sm-6"/>
+
+            </div>       
             <div class="form-group">
               <label class="col-sm-3 control-label">销售编码 <span class="asterisk">*</span></label>
               <div class="col-sm-6">
@@ -112,20 +112,24 @@
 
 
 	<%@ include file="../assets/pages/foot.jsp"%>
+	<script src="${rootPath}assets/js/select2.min.js"></script>
 	<script src="${rootPath}assets/js/jquery.validate.min.js"></script>
 	
 	<script type="text/javascript">
+	var p = ${agency};
+	
+	$(".js-example-data-array").select2({
+		placeholder: '选择一个地接社',
+	  	data: p
+	})
+
 	jQuery(document).ready(function() {		  
 		jQuery("#form").validate({
 			rules: {
 				name: "required",
+				agency: "required",
 				email: "required",
 				code: "required",
-			},
-			messages: {
-				name: "This field is required.",
-				email: "This field is required.",
-				code: "This field is required.",
 			},
 		    highlight: function(element) {
 		      jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');

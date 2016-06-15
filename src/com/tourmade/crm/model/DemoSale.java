@@ -19,7 +19,7 @@ public class DemoSale extends BaseBean<DemoSale> {
 
 	private int saleid;
 	
-	private int agency;
+	private String agency;
 	
 	private String code;
 	
@@ -37,11 +37,11 @@ public class DemoSale extends BaseBean<DemoSale> {
 		this.saleid = saleid;
 	}
 
-	public int getAgency() {
+	public String getAgency() {
 		return agency;
 	}
 
-	public void setAgency(int agency) {
+	public void setAgency(String agency) {
 		this.agency = agency;
 	}
 

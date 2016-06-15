@@ -131,11 +131,6 @@
 				language: "required",
 				country: "required",
 			},
-			messages: {
-				name: "This field is required.",
-				language: "This field is required.",
-				country: "This field is required.",
-			},
 		    highlight: function(element) {
 		      jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
 		    },

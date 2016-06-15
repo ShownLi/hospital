@@ -1,5 +1,7 @@
 package com.tourmade.crm.action;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -15,8 +17,11 @@ import com.tourmade.crm.common.framework.bean.QueryResult;
 import com.tourmade.crm.common.framework.util.JSONUtilS;
 import com.tourmade.crm.common.model.base.value.baseconfig.Json;
 import com.tourmade.crm.common.model.base.value.baseconfig.PageHelper;
+import com.tourmade.crm.model.DemoList;
 import com.tourmade.crm.model.DemoSale;
 import com.tourmade.crm.service.SaleService;
+
+import net.sf.json.JSONArray;
 
 @Controller
 @RequestMapping("/sale")
@@ -42,6 +47,10 @@ public class SaleController extends BaseSimpleFormController {
 	
 	@RequestMapping(value = "/add.html", method = { RequestMethod.POST, RequestMethod.GET })
 	public String add(Model model) {
+		
+		List<DemoList> u = service.getAgency();
+		JSONArray result = JSONArray.fromObject(u);
+		model.addAttribute("agency",result);
 		return "/sale/add";
 	}
 
@@ -68,6 +77,9 @@ public class SaleController extends BaseSimpleFormController {
 		if (null != id && !"".equals(id)) {
 			int i = Integer.parseInt(id);
 			DemoSale u = service.getSaleById(i);
+			List<DemoList> v = service.getAgency();
+			JSONArray result = JSONArray.fromObject(v);
+			model.addAttribute("agency",result);
 			model.addAttribute("sale",u);
 		}
 		

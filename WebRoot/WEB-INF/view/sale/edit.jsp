@@ -49,10 +49,10 @@
               </div>
             </div>
             <div class="form-group">
-              <label class="col-sm-3 control-label">所属地接社</label>
-              <div class="col-sm-6">
-                <input type="text" name="agency" placeholder="地接社编号" class="form-control" value="${sale.agency }" />
-              </div>
+              <label class="col-sm-3 control-label">所属地接社 <span class="asterisk">*</span></label>
+
+                <input type="text" id="agency" name="agency" class="js-example-data-array col-sm-6" value="${sale.agency }"/>
+
             </div>            
             <div class="form-group">
               <label class="col-sm-3 control-label">销售编码</label>
@@ -115,9 +115,15 @@
 
 
 	<%@ include file="../assets/pages/foot.jsp"%>
+	<script src="${rootPath}assets/js/select2.min.js"></script>
 	<script src="${rootPath}assets/js/jquery.validate.min.js"></script>
 	
 	<script type="text/javascript">
+	var p = ${agency};
+	
+	$(".js-example-data-array").select2({
+	  	data: p
+	})
 	jQuery(document).ready(function() {
 		jQuery("#form").validate({
 

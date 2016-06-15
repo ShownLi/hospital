@@ -101,6 +101,7 @@ public class AgencyService extends BaseService {
 		}
 		return r;
 	}
+	
 	/**
 	 * 根据作用域获得参数
 	 * 
@@ -116,7 +117,8 @@ public class AgencyService extends BaseService {
 			r = null;
 		}
 		return r;
-	}	
+	}
+	
 	/**
 	 * 更新地接社信息(不修改密码)
 	 * 

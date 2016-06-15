@@ -14,6 +14,7 @@ import com.tourmade.crm.common.framework.BaseService;
 import com.tourmade.crm.common.framework.bean.QueryResult;
 import com.tourmade.crm.common.model.base.value.baseconfig.PageHelper;
 import com.tourmade.crm.mapper.sale.DemoSaleMapper;
+import com.tourmade.crm.model.DemoList;
 import com.tourmade.crm.model.DemoSale;
 
 @Service
@@ -100,7 +101,24 @@ public class SaleService extends BaseService {
 		}
 		return r;
 	}
-
+	
+	/**
+	 * 获取地接社列表
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public List<DemoList> getAgency() {
+		List<DemoList> r = null;
+		try {
+			r = saleMapper.getAgency();
+		} catch (Exception e) {
+			logger.error("SaleService.getAgency() -->" + e.getMessage());
+			r = null;
+		}
+		return r;
+	}
+	
 	/**
 	 * 更新销售信息(不修改密码)
 	 * 
@@ -115,6 +133,9 @@ public class SaleService extends BaseService {
 			DemoSale u = saleMapper.getSaleById(sale.getSaleid());
 			if (u != null) {
 				u.setName(sale.getName());
+				u.setAgency(sale.getAgency());
+				u.setCode(sale.getCode());
+				u.setEmail(sale.getEmail());
 				// u.setPwd(sale.getPwd());
 				saleMapper.updateSale(u);
 				r = true;

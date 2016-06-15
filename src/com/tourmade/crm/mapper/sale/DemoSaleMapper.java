@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.tourmade.crm.common.framework.BaseMapper;
+import com.tourmade.crm.model.DemoList;
 import com.tourmade.crm.model.DemoSale;
 
 public interface DemoSaleMapper extends BaseMapper {
@@ -19,4 +20,6 @@ public interface DemoSaleMapper extends BaseMapper {
 	public void deleteSaleById(int sale_id);
 	
 	public DemoSale getSaleById(int sale_id);
+
+	public List<DemoList> getAgency();
 }
