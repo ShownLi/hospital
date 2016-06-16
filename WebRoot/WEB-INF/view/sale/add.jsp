@@ -13,7 +13,7 @@
 			<%@ include file="../assets/pages/headerbar.jsp"%>
 			<div class="pageheader">
 				<h2>
-					<i class="fa fa-user"></i> 销售管理 <span>新增销售</span>
+					<i class="fa fa-group"></i> 销售管理 <span>新增销售</span>
 				</h2>
 				<div class="breadcrumb-wrapper">
 					<span class="label">你在这里:</span>

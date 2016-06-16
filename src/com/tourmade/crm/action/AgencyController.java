@@ -54,7 +54,7 @@ public class AgencyController extends BaseSimpleFormController {
 		List<DemoList> v = service.getParameterInfo(language);
 		JSONArray countryresult = JSONArray.fromObject(u);
 		JSONArray  languageresult = JSONArray.fromObject(v);
-		model.addAttribute("parameter",countryresult);
+		model.addAttribute("country",countryresult);
 		model.addAttribute("language",languageresult);
 		
 		return "/agency/add";

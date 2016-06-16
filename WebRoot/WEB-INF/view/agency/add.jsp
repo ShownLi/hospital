@@ -13,7 +13,7 @@
 			<%@ include file="../assets/pages/headerbar.jsp"%>
 			<div class="pageheader">
 				<h2>
-					<i class="fa fa-user"></i> 地接社管理 <span>新增地接社</span>
+					<i class="glyphicon glyphicon-briefcase"></i> 地接社管理 <span>新增地接社</span>
 				</h2>
 				<div class="breadcrumb-wrapper">
 					<span class="label">你在这里:</span>
@@ -105,11 +105,11 @@
 	<script src="${rootPath}assets/js/jquery.validate.min.js"></script>
 	
 	<script type="text/javascript">
-	var p = ${parameter};
+	var c = ${country};
 	var l = ${language};
 	$(".country-select").select2({
 		placeholder: '选择一个国家',
-	  	data: p
+	  	data: c
 	})
 
 	$(".language-select").select2({

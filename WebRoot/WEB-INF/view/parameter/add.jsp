@@ -14,7 +14,7 @@
 			<%@ include file="../assets/pages/headerbar.jsp"%>
 			<div class="pageheader">
 				<h2>
-					<i class="fa fa-user"></i> 系统参数管理 <span>新增系统参数</span>
+					<i class="glyphicon glyphicon-cog"></i> 系统参数管理 <span>新增系统参数</span>
 				</h2>
 				<div class="breadcrumb-wrapper">
 					<span class="label">你在这里:</span>
