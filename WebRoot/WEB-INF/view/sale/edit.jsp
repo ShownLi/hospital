@@ -43,7 +43,7 @@
           
             
             <div class="form-group">
-              <label class="col-sm-3 control-label">销售名</label>
+              <label class="col-sm-3 control-label">销售名 <span class="asterisk">*</span></label>
               <div class="col-sm-6">
                 <input type="text" name="name" placeholder="销售名" class="form-control" value="${sale.name }" />
               </div>
@@ -55,13 +55,13 @@
 
             </div>            
             <div class="form-group">
-              <label class="col-sm-3 control-label">销售编码</label>
+              <label class="col-sm-3 control-label">销售编码 <span class="asterisk">*</span></label>
               <div class="col-sm-6">
                 <input type="text" name="code" placeholder="销售编码" class="form-control" value="${sale.code }" />
               </div>
             </div>   
             <div class="form-group">
-              <label class="col-sm-3 control-label">邮件地址</label>
+              <label class="col-sm-3 control-label">邮件地址 <span class="asterisk">*</span></label>
               <div class="col-sm-6">
                 <input type="text" name="email" placeholder="邮件地址" class="form-control" value="${sale.email }" />
               </div>
@@ -126,7 +126,19 @@
 	})
 	jQuery(document).ready(function() {
 		jQuery("#form").validate({
+			rules: {
+				name: "required",
+				agency: "required",
+				email: "required",
+				code: "required",
+			},
+			messages: {
+				name: "请输入销售名称",
+				agency: "请选择所属地接社",
+				email: "请输入邮箱地址",
+				code: "请输入销售编码",
 
+			},
 		    highlight: function(element) {
 		      jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
 		    },

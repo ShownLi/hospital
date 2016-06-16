@@ -41,7 +41,6 @@
         <div class="panel-body panel-body-nopadding">
           
           
-            
             <div class="form-group">
               <label class="col-sm-3 control-label">登录名</label>
               <div class="col-sm-6">
@@ -53,30 +52,31 @@
               <div class="col-sm-6">
                 <input type="text" name="name" placeholder="姓名" class="form-control" />
               </div>
-            </div>            
+            </div> 
             <div class="form-group">
               <label class="col-sm-3 control-label">密码</label>
               <div class="col-sm-6">
-                <input type="password" class="form-control pword" placeholder="密码" name="pwd" />
+                <input type="text" name="pwd" placeholder="登录名" class="form-control" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">重复密码</label>
+              <div class="col-sm-6">
+                <input type="text" name="repwd" placeholder="姓名" class="form-control" />
+              </div>
+            </div>             
+            <div class="form-group">
+              <label class="col-sm-3 control-label">手机</label>
+              <div class="col-sm-6">
+                <input type="text" name="mobilephone" placeholder="手机" class="form-control" />
               </div>
             </div>            
             <div class="form-group">
-              <label class="col-sm-3 control-label">密码确认</label>
+              <label class="col-sm-3 control-label">邮箱</label>
               <div class="col-sm-6">
-                <input type="password" class="form-control pword" placeholder="密码确认" name="repwd" />
+                <input type="text" name="email" placeholder="邮箱" class="form-control"  />
               </div>
-            </div>
-            <div class="form-group">
-              <label class="col-sm-3 control-label">用户描述</label>
-              <div class="col-sm-6">
-                <textarea class="form-control" name="userdesc" rows="5"></textarea>
-              </div>
-            </div>
-            
-            
-            
-          
-          
+            </div>      
         </div><!-- panel-body -->
         
         <div class="panel-footer">

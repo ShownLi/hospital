@@ -116,6 +116,8 @@ public class UserService extends BaseService {
 			if (u != null) {
 				u.setName(user.getName());
 				u.setLoginname(user.getLoginname());
+				u.setEmail(user.getEmail());
+				u.setMobilephone(user.getMobilephone());
 				// u.setPwd(user.getPwd());
 				userMapper.updateUser(u);
 				r = true;

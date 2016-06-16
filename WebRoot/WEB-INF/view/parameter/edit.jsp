@@ -79,14 +79,14 @@
               </div>
             </div>  
                 <div class="form-group">
-                  <label class="col-sm-3 control-label">是否显示 <span class="asterisk">&nbsp;</span></label>
+                  <label class="col-sm-3 control-label" >是否显示 <span class="asterisk">&nbsp;</span></label>
                   <div class="col-sm-9">
                     <div class="rdio rdio-primary">
-                      <input type="radio" id="yes" value="1" name="isdisplay"/>
+                      <input type="radio" id="yes" value="1" name="isdisplay">
                       <label for="yes">是</label>
                     </div><!-- rdio -->
                     <div class="rdio rdio-primary">
-                      <input type="radio" id="no" value="0" name="isdisplay">
+                      <input type="radio" id="no" value="0" name="isdisplay" >
                       <label for="no">否</label>
                     </div><!-- rdio -->
                     <label class="error" for="language"></label>
@@ -154,6 +154,19 @@
 
 		jQuery("#form").validate({
 			
+			rules: {
+				domain: "required",
+				value: "required",
+				chinese: "required",
+				sort: "required",
+			},
+			messages: {
+				domain: "请输入作用域",
+				value: "请输入值",
+				chinese: "请输入中文",
+				sort: "请输入排序标识",
+
+			},
 		    highlight: function(element) {
 		      jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
 		    },

@@ -48,10 +48,14 @@ public class AgencyController extends BaseSimpleFormController {
 	@RequestMapping(value = "/add.html", method = { RequestMethod.POST, RequestMethod.GET })
 	public String add(Model model) {
 		
-		String domain = "agency.country";
-		List<DemoList> u = service.getParameterInfo(domain);
-		JSONArray result = JSONArray.fromObject(u);
-		model.addAttribute("parameter",result);
+		String country = "agency.country";
+		String language = "agency.language";
+		List<DemoList> u = service.getParameterInfo(country);
+		List<DemoList> v = service.getParameterInfo(language);
+		JSONArray countryresult = JSONArray.fromObject(u);
+		JSONArray  languageresult = JSONArray.fromObject(v);
+		model.addAttribute("parameter",countryresult);
+		model.addAttribute("language",languageresult);
 		
 		return "/agency/add";
 	}
@@ -79,10 +83,14 @@ public class AgencyController extends BaseSimpleFormController {
 		if (null != id && !"".equals(id)) {
 			int i = Integer.parseInt(id);
 			DemoAgency u = service.getAgencyById(i);
-			String domain = "agency.country";
-			List<DemoList> v = service.getParameterInfo(domain);
-			JSONArray result = JSONArray.fromObject(v);
-			model.addAttribute("parameter",result);
+			String country = "agency.country";
+			String language = "agency.language";
+			List<DemoList> v = service.getParameterInfo(country);
+			List<DemoList> w = service.getParameterInfo(language);
+			JSONArray countryresult = JSONArray.fromObject(v);
+			JSONArray languageresult = JSONArray.fromObject(w);
+			model.addAttribute("country",countryresult);
+			model.addAttribute("language",languageresult);
 			model.addAttribute("agency",u);
 		}
 		return "/agency/edit";

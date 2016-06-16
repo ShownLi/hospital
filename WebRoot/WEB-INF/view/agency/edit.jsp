@@ -46,24 +46,16 @@
                 <input type="text" name="name" placeholder="地接社名" class="form-control" value="${agency.name }" />
               </div>
             </div>         
-                <div class="form-group">
-                  <label class="col-sm-3 control-label">语言 <span class="asterisk">*</span></label>
-                  <div class="col-sm-5">
-                    <div class="rdio rdio-primary">
-                      <input type="radio" id="chinese" value="chinese" name="language" checked />
-                      <label for="chinese">可以中文</label>
-                    </div><!-- rdio -->
-                    <div class="rdio rdio-primary">
-                      <input type="radio" value="english" id="english" name="language">
-                      <label for="english">只会英文</label>
-                    </div><!-- rdio -->
-                    <label class="error" for="language"></label>
-                  </div>
-                </div><!-- form-group -->               
             <div class="form-group">
               <label class="col-sm-3 control-label">国家 <span class="asterisk">*</span></label>
 
-                <input type="text" id="country" name="country" class="js-example-data-array col-sm-5" value="${agency.country }"/>
+                <input type="text" id="language" name="language" class="language-select col-sm-5" value="${agency.language }"/>
+
+            </div>              
+            <div class="form-group">
+              <label class="col-sm-3 control-label">国家 <span class="asterisk">*</span></label>
+
+                <input type="text" id="country" name="country" class="country-select col-sm-5" value="${agency.country }"/>
 
             </div>            
         </div><!-- panel-body -->
@@ -115,28 +107,22 @@
 	<script src="${rootPath}assets/js/jquery.validate.min.js"></script>
 	
 	<script type="text/javascript">
-	var p = ${parameter};
-	
-	$(".js-example-data-array").select2({
+	var p = ${country};
+	var l = ${language};
+	$(".country-select").select2({
 	  	data: p
 	})
-	if("${agency.language}"=="chinese"){
-		$('#chinese').attr('checked','true');
-	}
-	else{
-		$('#english').attr('checked','true');
-	}
+	$(".language-select").select2({
+	  	data: l
+	})
+
 	jQuery(document).ready(function() {
 		jQuery("#form").validate({
 			rules: {
 				name: "required",
-				language: "required",
-				country: "required",
 			},
 			messages: {
-				name: "This field is required.",
-				language: "This field is required.",
-				country: "This field is required.",
+				name: "请输入地接社名",
 			},
 		    highlight: function(element) {
 		      jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');

@@ -150,6 +150,13 @@
 				chinese: "required",
 				sort: "required",
 			},
+			messages: {
+				domain: "请输入作用域",
+				value: "请输入值",
+				chinese: "请输入中文",
+				sort: "请输入排序标识",
+
+			},
 		    highlight: function(element) {
 		      jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
 		    },

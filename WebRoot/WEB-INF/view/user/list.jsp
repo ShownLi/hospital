@@ -45,10 +45,11 @@
 								<thead>
 									<tr>
 										<th>#</th>
-										<th>用户名</th>
+										<th>登录名</th>
 										<th>姓名</th>
-										<th>更新时间</th>
-										<th>操作</th>
+										<th>手机</th>
+										<th>邮箱</th>
+										<th>编辑</th>
 									</tr>
 								</thead>
 								
@@ -119,33 +120,27 @@
 			        }
 				},
 				columnDefs: [
-				  {
-	                  data: "userid",
-	                  //defaultContent: '<a class="btn btn-success btn-xs"><span class="fa fa-edit"></span> 编辑</a>&nbsp;<a class="btn btn-danger btn-xs"><span class="fa fa-minus-circle"></span> 删除</a>',
-	                  orderable: false,
-	                  render: function ( data, type, full, meta ) {
-	                      return '<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a>&nbsp;<a class="btn btn-danger btn-xs" id="'+data+'"><span class="fa fa-minus-circle"></span> 删除</a>';
-	                  },
-	                  targets: 4
+			      {
+			          data: "userid",
+			          //defaultContent: '<a class="btn btn-success btn-xs"><span class="fa fa-edit"></span> 编辑</a>&nbsp;<a class="btn btn-danger btn-xs"><span class="fa fa-minus-circle"></span> 删除</a>',
+				      orderable: false,
+				      render: function ( data, type, full, meta ) {
+		              return '<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a>&nbsp;';
 				  },
+				              targets: 5
+							  },				             
 				  {
 					  orderable: false,
 					  searchable: false,
 				      targets: [0,1,2]
 				  },
-				  {
-					  data: "upttime",
-					  render: function ( data, type, full, meta ) {
-						  var upttime = new Date(data.time);
-	                      return upttime.format("yyyy/MM/dd");
-	                  },
-	                  targets: 3
-				  }
 				],
 				columns: [
 		            { data: "userid" },
 		            { data: "loginname" },
-		            { data: "name" }
+		            { data: "name" },
+		            { data: "mobilephone" },
+		            { data: "email" }
 		        ]
 			});
 			

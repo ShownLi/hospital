@@ -18,7 +18,7 @@
 				<div class="breadcrumb-wrapper">
 					<span class="label">你在这里:</span>
 					<ol class="breadcrumb">
-						<li><a href="＃">Demo</a></li>
+						<li><a href="＃">CRM</a></li>
 						<li><a href="${rootPath }sale/list.html">销售管理</a></li>
 						<li class="active">新增销售</li>
 					</ol>
@@ -43,15 +43,15 @@
           
             
             <div class="form-group">
-              <label class="col-sm-3 control-label">销售名 <span class="asterisk">*</span></label>
+              <label class="col-sm-3 control-label">销售名称 <span class="asterisk">*</span></label>
               <div class="col-sm-6">
-                <input type="text" name="name" placeholder="销售名" class="form-control" />
+                <input type="text" name="name" placeholder="销售名称" class="form-control" />
               </div>
             </div>
             <div class="form-group">
               <label  class="col-sm-3 control-label">所属地接社 <span class="asterisk">*</span></label>
 
-                <input type="text" name="agency" class="js-example-data-array col-sm-6"/>
+                <input type="text" name="agency" class="agency-select col-sm-6"/>
 
             </div>       
             <div class="form-group">
@@ -116,11 +116,11 @@
 	<script src="${rootPath}assets/js/jquery.validate.min.js"></script>
 	
 	<script type="text/javascript">
-	var p = ${agency};
+	var a = ${agency};
 	
-	$(".js-example-data-array").select2({
+	$(".agency-select").select2({
 		placeholder: '选择一个地接社',
-	  	data: p
+	  	data: a
 	})
 
 	jQuery(document).ready(function() {		  
@@ -130,6 +130,13 @@
 				agency: "required",
 				email: "required",
 				code: "required",
+			},
+			messages: {
+				name: "请输入销售名称",
+				agency: "请选择所属地接社",
+				email: "请输入邮箱地址",
+				code: "请输入销售编码",
+
 			},
 		    highlight: function(element) {
 		      jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');

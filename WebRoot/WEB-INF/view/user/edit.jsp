@@ -45,7 +45,7 @@
             <div class="form-group">
               <label class="col-sm-3 control-label">登录名</label>
               <div class="col-sm-6">
-                <input type="text" name="loginname" placeholder="登录名" class="form-control" value="${user.loginname }" />
+                <input type="text" name="loginname" placeholder="登录名" class="form-control" disabled value="${user.loginname }" />
               </div>
             </div>
             <div class="form-group">
@@ -53,14 +53,19 @@
               <div class="col-sm-6">
                 <input type="text" name="name" placeholder="姓名" class="form-control" value="${user.name }" />
               </div>
+            </div>              
+            <div class="form-group">
+              <label class="col-sm-3 control-label">手机</label>
+              <div class="col-sm-6">
+                <input type="text" name="mobilephone" placeholder="手机" class="form-control" value="${user.mobilephone }" />
+              </div>
             </div>            
             <div class="form-group">
-              <label class="col-sm-3 control-label">用户描述</label>
+              <label class="col-sm-3 control-label">邮箱</label>
               <div class="col-sm-6">
-                <textarea class="form-control" name="userdesc" rows="5"></textarea>
+                <input type="text" name="email" placeholder="邮箱" class="form-control" value="${user.email }" />
               </div>
             </div>
-          
           
         </div><!-- panel-body -->
         
@@ -116,11 +121,9 @@
 			jQuery("#form").validate({
 				
 				rules: {
-					loginname: "required",
 					name: "required"
 				},
 				messages: {
-					loginname: "请输入登录名",
 					name: "请输入姓名"
 				},
 				

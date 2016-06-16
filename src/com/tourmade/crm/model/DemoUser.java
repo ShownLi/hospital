@@ -25,8 +25,12 @@ public class DemoUser extends BaseBean<DemoUser> {
 
 	private String pwd;
 	
-	private Date upttime;
+	private String email;
 	
+	private String mobilephone;
+	
+	private Date creattime;
+
 	public int getUserid() {
 		return userid;
 	}
@@ -59,21 +63,38 @@ public class DemoUser extends BaseBean<DemoUser> {
 		this.pwd = pwd;
 	}
 
-	public Date getUpttime() {
-		return upttime;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setUpttime(Date upttime) {
-		this.upttime = upttime;
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getMobilephone() {
+		return mobilephone;
+	}
+
+	public void setMobilephone(String mobilephone) {
+		this.mobilephone = mobilephone;
+	}
+
+	public Date getCreattime() {
+		return creattime;
+	}
+
+	public void setCreattime(Date creattime) {
+		this.creattime = creattime;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 	@Override
 	public String toString() {
 		return "DemoUser [userid=" + userid + ", name=" + name + ", loginname=" + loginname + ", pwd=" + pwd
-				+ ", upttime=" + upttime + "]";
+				+ ", email=" + email + ", mobilephone=" + mobilephone + ", creattime=" + creattime + "]";
 	}
-
-
 	
-
 }

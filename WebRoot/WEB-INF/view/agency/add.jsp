@@ -47,26 +47,14 @@
               <div class="col-sm-5">
                 <input type="text" name="name" placeholder="地接社名" class="form-control" />
               </div>
-            </div>			  
-                <div class="form-group">
-                  <label class="col-sm-3 control-label">语言 <span class="asterisk">*</span></label>
-                  <div class="col-sm-5">
-                    <div class="rdio rdio-primary">
-                      <input type="radio" id="chinese" value="chinese" name="language" checked />
-                      <label for="chinese">可以中文</label>
-                    </div><!-- rdio -->
-                    <div class="rdio rdio-primary">
-                      <input type="radio" value="english" id="english" name="language">
-                      <label for="english">只会英文</label>
-                    </div><!-- rdio -->
-                    <label class="error" for="language"></label>
-                  </div>
-                </div><!-- form-group -->                     
+            </div>			   
+            <div class="form-group">
+              <label  class="col-sm-3 control-label">语言 <span class="asterisk">*</span></label>
+                <input type="text" name="language" class="language-select col-sm-5"/>
+            </div>                                 
             <div class="form-group">
               <label  class="col-sm-3 control-label">所在国家 <span class="asterisk">*</span></label>
-
-                <input type="text" name="country" class="js-example-data-array col-sm-5"/>
-
+                <input type="text" name="country" class="country-select col-sm-5"/>
             </div>
         </div><!-- panel-body -->
         <div class="panel-footer">
@@ -118,18 +106,28 @@
 	
 	<script type="text/javascript">
 	var p = ${parameter};
-	
-	$(".js-example-data-array").select2({
+	var l = ${language};
+	$(".country-select").select2({
 		placeholder: '选择一个国家',
 	  	data: p
 	})
-	
+
+	$(".language-select").select2({
+	    placeholder: '选择一个语言选项',
+     	data: l
+	})
 	jQuery(document).ready(function() {		  
 		jQuery("#form").validate({
 			rules: {
 				name: "required",
 				language: "required",
 				country: "required",
+			},
+			messages: {
+				name: "请输入地接社名",
+				language: "请选择语言",
+				country: "请选择所在国家",
+
 			},
 		    highlight: function(element) {
 		      jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
@@ -151,7 +149,6 @@
 	    } ); 
 	});
 //		
-		var str = $('#country').select2("val").text;
 	      
 		function form_submit() {
 			var f = $("#form").serialize();

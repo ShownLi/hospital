@@ -7,100 +7,106 @@
 		SELECT *
 		FROM (
 		select
-		u.userid as userid,
-		u.name as name,
+		u.user_id as userid,
+		u.user_name as name,
 		u.loginname as loginname,
-		u.pwd as pwd,
-		u.upttime as upttime,
-		u.delflag as delflag
-		from demo_user u where u.delflag = 0
+		u.password as pwd,
+		u.user_email as email,
+		u.mobilephone as mobilephone,
+		u.creat_time as creattime,
+		u.isdel as isdel
+		from tm_user u where u.isdel = 0
 		<if test="pojo.seachValue!=null and pojo.seachValue!=''">
 			and
 			(
 			u.loginname like '%${pojo.seachValue}%'
 			or
-			u.name like
-			'%${pojo.seachValue}%'
+			u.user_name like '%${pojo.seachValue}%'
 			)
 		</if>
-		order by u.upttime desc
+		order by u.creat_time desc
 		) table_alias
 		limit #{b},#{e}
 	</select>
 
 
 	<select id="countUser" parameterType="DemoUser" resultType="long">
-		select count(u.userid) from demo_user u
+		select count(u.user_id) from tm_user u
 		where
-		u.delflag = 0
+		u.isdel = 0
 		<if test="seachValue!=null and seachValue!=''">
 			and
 			(
 			u.loginname like '%${seachValue}%'
 			or
-			u.name like
-			'%${seachValue}%'
+			u.user_name like '%${seachValue}%'
 			)
 		</if>
 	</select>
 
 	<insert id="saveUser" parameterType="DemoUser" flushCache="true" useGeneratedKeys="true" keyProperty="userid" keyColumn="GENERATED_KEY">
-		insert into demo_user(
-		name,
+		insert into tm_user(
+		user_name,
 		loginname,
-		pwd,
-		upttime,
-		delflag
+		password,
+		user_email,
+		mobilephone,
+		creat_time,
+		isdel
 		)values(
 		#{name,jdbcType=VARCHAR},
 		#{loginname,jdbcType=VARCHAR},
 		#{pwd,jdbcType=VARCHAR},
+		#{email,jdbcType=VARCHAR},
+		#{mobilephone,jdbcType=VARCHAR},
 		NOW(),
 		0
 		)
 	</insert>
 
 	<update id="updateUser" parameterType="DemoUser" flushCache="true">
-		update demo_user
+		update tm_user
 		set
 		loginname=#{loginname},
-		name=#{name},
-		pwd=#{pwd},
-		upttime=NOW()
+		user_name=#{name},
+		password=#{pwd},
+		user_email=#{email},
+		mobilephone=#{mobilephone},
+		update_time=NOW()
 		where
-		userid=#{userid}
+		user_id=#{userid}
 	</update>
 
 	<select id="getUserById" parameterType="int" resultType="DemoUser">
 		select
-		u.userid as userid,
+		u.user_id as userid,
 		u.loginname as loginname,
-		u.pwd as pwd,
-		u.name as name,
-		u.upttime as upttime,
-		u.delflag as delflag
-		from demo_user u where u.userid = #{userid}
+		u.password as pwd,
+		u.user_name as name,
+		u.user_email as email,
+		u.mobilephone as mobilephone,
+		u.creat_time as creattime,
+		u.isdel as isdel
+		from tm_user u where u.user_id = #{userid}
 	</select>
 
 	<update id="deleteUserById" parameterType="int" flushCache="true"
 		statementType="PREPARED">
-		update demo_user
+		update tm_user
 		set
-		delflag=1
+		isdel=1
 		where
-		userid = #{userid}
+		user_id = #{userid}
 	</update>
 
 	<select id="signin" parameterType="DemoUser" resultType="DemoUser">
 		select
-		u.userid as userid,
+		u.user_id as userid,
 		u.loginname as loginname,
-		u.pwd as pwd,
-		u.name as name,
-		u.upttime as upttime,
-		u.delflag as delflag
-		from demo_user u where
-		u.loginname = #{loginname} and u.pwd = #{pwd}
+		u.password as pwd,
+		u.isdel as isdel
+		from tm_user u where
+		u.loginname = #{loginname} and u.password = #{pwd} and u.isdel = 0
 	</select>
 
 </mapper>

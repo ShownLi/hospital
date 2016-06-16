@@ -9,13 +9,11 @@
 		select
 		u.agency_id as agency_id,
 		u.agency_name as name,
-		u.country as cname,
+		u.country as country,
 		u.language as language,
 		u.creat_time as creat_time,
-		u.isdel as isdel,
-		v.para_value,
-		v.chinese as country
-		from tm_agency u join tm_parameter v on u.country = v.para_value where u.isdel = 0
+		u.isdel as isdel
+		from tm_agency u  where u.isdel = 0
 		<if test="pojo.seachValue!=null and pojo.seachValue!=''">
 			and
 			(
