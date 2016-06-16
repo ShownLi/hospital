@@ -47,7 +47,7 @@
               </div>
             </div>         
             <div class="form-group">
-              <label class="col-sm-3 control-label">国家 <span class="asterisk">*</span></label>
+              <label class="col-sm-3 control-label">语言 <span class="asterisk">*</span></label>
 
                 <input type="text" id="language" name="language" class="language-select col-sm-5" value="${agency.language }"/>
 

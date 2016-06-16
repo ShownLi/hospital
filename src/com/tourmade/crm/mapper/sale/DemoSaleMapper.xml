@@ -21,7 +21,7 @@
 			(
 			u.sale_name like '%${pojo.seachValue}%'
 			or
-			u.agency_id like '%${pojo.seachValue}%'
+			v.agency_name like '%${pojo.seachValue}%'
 			or
 			u.sale_code like '%${pojo.seachValue}%'
 			or
