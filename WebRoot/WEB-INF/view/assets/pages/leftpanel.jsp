@@ -32,7 +32,6 @@
                 <ul class="children">
                     <li><a href="${rootPath }customer/list.html"><i class="fa fa-caret-right"></i> 客人列表</a></li>
                     <li><a href="${rootPath }customer/add.html"><i class="fa fa-caret-right"></i> 新增客人</a></li>
-                    <li><a href="${rootPath }customer/add.html"><i class="fa fa-caret-right"></i> 编辑客人</a></li>
                 </ul>
             </li>    
             <li class="nav-parent"><a href=""><i class="fa fa-user"></i> <span>询单管理</span></a>

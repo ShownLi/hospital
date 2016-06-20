@@ -14,13 +14,13 @@
 			<%@ include file="../assets/pages/headerbar.jsp"%>
 			<div class="pageheader">
 				<h2>
-					<i class="fa fa-user"></i> 用户管理 <span>用户列表</span>
+					<i class="fa fa-user"></i> 客人管理 <span>客人列表</span>
 				</h2>
 				<div class="breadcrumb-wrapper">
 					<span class="label">你在这里:</span>
 					<ol class="breadcrumb">
 						<li><a href="#">CRM</a></li>
-						<li class="active">用户管理</li>
+						<li class="active">客人管理</li>
 					</ol>
 				</div>
 			</div>
@@ -35,7 +35,7 @@
 								class="minimize">&minus;</a>
 						</div>
 						<!-- panel-btns -->
-						<h3 class="panel-title">数据列表</h3>
+						<h3 class="panel-title">客人列表</h3>
 					</div>
 					<div class="panel-body">
 						<br />
@@ -45,8 +45,12 @@
 								<thead>
 									<tr>
 										<th>#</th>
-										<th>登录名</th>
-										<th>姓名</th>
+										<th>中文名</th>
+										<th>英文名</th>
+										<th>所在地</th>
+										<th>客人级别</th>
+										<th>年龄段</th>
+										<th>性别</th>
 										<th>手机</th>
 										<th>邮箱</th>
 										<th>编辑</th>
@@ -127,7 +131,7 @@
 				      render: function ( data, type, full, meta ) {
 		              return '<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a>&nbsp;';
 				  },
-				              targets: 5
+				              targets: 9
 							  },				             
 				  {
 					  orderable: false,
@@ -136,6 +140,11 @@
 				  },
 				],
 				columns: [
+		            { data: "userid" },
+		            { data: "loginname" },
+		            { data: "name" },
+		            { data: "mobilephone" },
+		            { data: "email" },
 		            { data: "userid" },
 		            { data: "loginname" },
 		            { data: "name" },
@@ -172,7 +181,7 @@
 		});
 		
 		function edit(id) {
-			window.parent.location = "${rootPath}user/edit.html?id="+id;
+			window.parent.location = "${rootPath}customer/edit.html?id="+id;
 		}
 		
 		function del(id) {

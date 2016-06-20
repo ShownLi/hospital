@@ -39,34 +39,81 @@
         </div>
         <form class="form-horizontal form-bordered" id="form">
         <div class="panel-body panel-body-nopadding">
-          
-          
-            
-            <div class="form-group">
-              <label class="col-sm-3 control-label">登录名</label>
+			<div class="form-group">
+              <label class="col-sm-3 control-label">中文名</label>
               <div class="col-sm-6">
-                <input type="text" name="loginname" placeholder="登录名" class="form-control" disabled value="${user.loginname }" />
+                <input type="text" name="namezh" placeholder="中文名" class="form-control" />
               </div>
             </div>
             <div class="form-group">
-              <label class="col-sm-3 control-label">姓名</label>
+              <label class="col-sm-3 control-label">英文名</label>
               <div class="col-sm-6">
-                <input type="text" name="name" placeholder="姓名" class="form-control" value="${user.name }" />
+                <input type="text" name="nameen" placeholder="英文名" class="form-control" />
               </div>
-            </div>              
+            </div> 
+            <div class="form-group">
+              <label class="col-sm-3 control-label">客人级别</label>
+              <div class="col-sm-6">
+                <input type="text" name="customerlevel" placeholder="客人级别" class="form-control" readonly />
+              </div>
+            </div> 
+            <div class="form-group">
+              <label class="col-sm-3 control-label">所在地</label>
+              <div class="col-sm-6">
+                <input type="text" name="location" placeholder="所在地" class="form-control" />
+              </div>
+            </div> 
+            
+            <div class="form-group">
+              <label class="col-sm-3 control-label" >年龄段 <span class="asterisk">&nbsp;</span></label>
+              <div class="col-sm-9">
+                <div class="rdio rdio-primary">
+                  <input type="radio" id="a5" value="a5" name="age_group">
+                  <label for="a5">50后</label>
+                </div><!-- rdio -->
+                <div class="rdio rdio-primary">
+                  <input type="radio" id="a6" value="a6" name="age_group" >
+                  <label for="a6">60后</label>
+                </div><!-- rdio -->
+                <div class="rdio rdio-primary">
+                  <input type="radio" id="a7" value="a7" name="age_group" >
+                  <label for="a7">70后</label>
+                </div><!-- rdio -->
+                <div class="rdio rdio-primary">
+                  <input type="radio" id="a8" value="a8" name="age_group" >
+                  <label for="a8">80后</label>
+                </div><!-- rdio -->
+                <div class="rdio rdio-primary">
+                  <input type="radio" id="a9" value="a9" name="age_group" >
+                  <label for="a9">90后</label>
+                </div><!-- rdio -->
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label" >性别 <span class="asterisk">&nbsp;</span></label>
+              <div class="col-sm-9">
+                <div class="rdio rdio-primary">
+                  <input type="radio" id="male" value="male" name="gender">
+                  <label for="male">男</label>
+                </div><!-- rdio -->
+                <div class="rdio rdio-primary">
+                  <input type="radio" id="female" value="female" name="gender" >
+                  <label for="female">女</label>
+                </div><!-- rdio -->
+              </div>
+            </div>
             <div class="form-group">
               <label class="col-sm-3 control-label">手机</label>
               <div class="col-sm-6">
-                <input type="text" name="mobilephone" placeholder="手机" class="form-control" value="${user.mobilephone }" />
+                <input type="text" name="mobilephone" placeholder="手机" class="form-control" />
               </div>
-            </div>            
+            </div>    
             <div class="form-group">
               <label class="col-sm-3 control-label">邮箱</label>
               <div class="col-sm-6">
-                <input type="text" name="email" placeholder="邮箱" class="form-control" value="${user.email }" />
+                <input type="text" name="email" placeholder="邮箱" class="form-control"  />
               </div>
-            </div>
-          
+            </div>         
         </div><!-- panel-body -->
         
         <div class="panel-footer">

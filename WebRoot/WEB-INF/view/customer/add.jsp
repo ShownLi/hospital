@@ -13,14 +13,14 @@
 			<%@ include file="../assets/pages/headerbar.jsp"%>
 			<div class="pageheader">
 				<h2>
-					<i class="fa fa-user"></i> 用户管理 <span>新增用户</span>
+					<i class="fa fa-user"></i> 客人管理 <span>新增客人</span>
 				</h2>
 				<div class="breadcrumb-wrapper">
 					<span class="label">你在这里:</span>
 					<ol class="breadcrumb">
 						<li><a href="＃">CRM</a></li>
-						<li><a href="${rootPath }user/list.html">用户管理</a></li>
-						<li class="active">新增用户</li>
+						<li><a href="${rootPath }user/list.html">客人管理</a></li>
+						<li class="active">新增客人</li>
 					</ol>
 				</div>
 			</div>
@@ -34,43 +34,80 @@
             <a href="" class="panel-close">&times;</a>
             <a href="" class="minimize">&minus;</a>
           </div>
-          <h4 class="panel-title">用户基本信息</h4>
-          <p>填写下表，完成用户创建。</p>
+          <h4 class="panel-title">客人基本信息</h4>
+          <p>填写下表，完成客人创建。</p>
         </div>
         <form class="form-horizontal form-bordered" id="form">
         <div class="panel-body panel-body-nopadding">
-          
-          
             <div class="form-group">
-              <label class="col-sm-3 control-label">登录名</label>
+              <label class="col-sm-3 control-label">中文名</label>
               <div class="col-sm-6">
-                <input type="text" name="loginname" placeholder="登录名" class="form-control" />
+                <input type="text" name="namezh" placeholder="中文名" class="form-control" />
               </div>
             </div>
             <div class="form-group">
-              <label class="col-sm-3 control-label">姓名</label>
+              <label class="col-sm-3 control-label">英文名</label>
               <div class="col-sm-6">
-                <input type="text" name="name" placeholder="姓名" class="form-control" />
+                <input type="text" name="nameen" placeholder="英文名" class="form-control" />
               </div>
             </div> 
             <div class="form-group">
-              <label class="col-sm-3 control-label">密码</label>
+              <label class="col-sm-3 control-label">客人级别</label>
               <div class="col-sm-6">
-                <input type="text" name="pwd" placeholder="登录名" class="form-control" />
+                <input type="text" name="customerlevel" placeholder="客人级别" class="form-control" readonly />
+              </div>
+            </div> 
+            <div class="form-group">
+              <label class="col-sm-3 control-label">所在地</label>
+              <div class="col-sm-6">
+                <input type="text" name="location" placeholder="所在地" class="form-control" />
+              </div>
+            </div> 
+            
+            <div class="form-group">
+              <label class="col-sm-3 control-label" >年龄段 <span class="asterisk">&nbsp;</span></label>
+              <div class="col-sm-9">
+                <div class="rdio rdio-primary">
+                  <input type="radio" id="a5" value="a5" name="age_group">
+                  <label for="a5">50后</label>
+                </div><!-- rdio -->
+                <div class="rdio rdio-primary">
+                  <input type="radio" id="a6" value="a6" name="age_group" >
+                  <label for="a6">60后</label>
+                </div><!-- rdio -->
+                <div class="rdio rdio-primary">
+                  <input type="radio" id="a7" value="a7" name="age_group" >
+                  <label for="a7">70后</label>
+                </div><!-- rdio -->
+                <div class="rdio rdio-primary">
+                  <input type="radio" id="a8" value="a8" name="age_group" >
+                  <label for="a8">80后</label>
+                </div><!-- rdio -->
+                <div class="rdio rdio-primary">
+                  <input type="radio" id="a9" value="a9" name="age_group" >
+                  <label for="a9">90后</label>
+                </div><!-- rdio -->
               </div>
             </div>
             <div class="form-group">
-              <label class="col-sm-3 control-label">重复密码</label>
-              <div class="col-sm-6">
-                <input type="text" name="repwd" placeholder="姓名" class="form-control" />
+              <label class="col-sm-3 control-label" >性别 <span class="asterisk">&nbsp;</span></label>
+              <div class="col-sm-9">
+                <div class="rdio rdio-primary">
+                  <input type="radio" id="male" value="male" name="gender">
+                  <label for="male">男</label>
+                </div><!-- rdio -->
+                <div class="rdio rdio-primary">
+                  <input type="radio" id="female" value="female" name="gender" >
+                  <label for="female">女</label>
+                </div><!-- rdio -->
               </div>
-            </div>             
+            </div>
             <div class="form-group">
               <label class="col-sm-3 control-label">手机</label>
               <div class="col-sm-6">
                 <input type="text" name="mobilephone" placeholder="手机" class="form-control" />
               </div>
-            </div>            
+            </div>    
             <div class="form-group">
               <label class="col-sm-3 control-label">邮箱</label>
               <div class="col-sm-6">
