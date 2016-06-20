@@ -7,26 +7,28 @@
 		SELECT *
 		FROM (
 		select
-		u.customer_id as customer_id,
-		u.customer_name as name,
-		u.country as cname,
-		u.language as vlanguage,
+		u.customer_id as customerid,
+		u.customer_name_zh as zname,
+		u.customer_name_en as ename,
+		u.customer_level as level,
+		u.location as location,
+		u.promote as promote,
+		u.age_group as agegroup,
+		u.gender as gender,
+		u.telephone as telephone,
+		u.mobilephone as mobilephone,
+		u.wechat as wechat,
+		u.qq as qq,
+		u.email as email,
+		u.birthday as birthday,
 		u.creat_time as creat_time,
-		v.chinese as country,
-		x.chinese as language,
 		u.isdel as isdel
 		from tm_customer u  
-		left join tm_parameter v on u.country = v.para_value
-		left join tm_parameter x on u.language = x.para_value
-		where u.isdel = 0 and v.isdel = 0 and x.isdel = 0
+		where u.isdel = 0 
 		<if test="pojo.seachValue!=null and pojo.seachValue!=''">
 			and
 			(
-			u.customer_name like '%${pojo.seachValue}%'
-			or
-			v.chinese like '%${pojo.seachValue}%'
-			or
-			x.chinese like '%${pojo.seachValue}%'
+			u.customer_name_zh like '%${pojo.seachValue}%'
 			)
 		</if>
 		order by u.creat_time
@@ -41,11 +43,7 @@
 		<if test="seachValue!=null and seachValue!=''">
 			and
 			(
-			u.customer_name like '%${seachValue}%'
-			or
-			u.country like '%${seachValue}%'
-			or
-			u.language like '%${seachValue}%'
+			u.customer_name_zh like '%${seachValue}%'
 			)
 		</if>
 
@@ -53,15 +51,35 @@
 	
 	<insert id="saveCustomer" parameterType="DemoCustomer" flushCache="true" useGeneratedKeys="true" keyProperty="customer_id" keyColumn="GENERATED_KEY">
 		insert into tm_customer(
-		customer_name,
-		country,
-		language,
+		customer_name_zh,
+		customer_name_en,
+		customer_level,
+		location,
+		promote,
+		age_group,
+		gender,
+		telephone,
+		mobilephone,
+		wechat,
+		qq,
+		email,
+		birthday,
 		creat_time,
 		isdel
 		)values(
-		#{name,jdbcType=VARCHAR},
-		#{country,jdbcType=VARCHAR},
-		#{language,jdbcType=VARCHAR},
+		#{zname,jdbcType=VARCHAR},
+		#{ename,jdbcType=VARCHAR},
+		#{level,jdbcType=VARCHAR},
+		#{location,jdbcType=VARCHAR},
+		#{promote,jdbcType=VARCHAR},
+		#{age_group,jdbcType=VARCHAR},
+		#{gender,jdbcType=VARCHAR},
+		#{telephone,jdbcType=VARCHAR},
+		#{mobilephone,jdbcType=VARCHAR},
+		#{wechat,jdbcType=VARCHAR},
+		#{qq,jdbcType=VARCHAR},
+		#{email,jdbcType=VARCHAR},
+		#{birthday,jdbcType=VARCHAR},
 		NOW(),
 		0
 		)
@@ -70,22 +88,42 @@
 	<update id="updateCustomer" parameterType="DemoCustomer" flushCache="true">
 		update tm_customer
 		set
-		customer_name=#{name},
-		country=#{country},
-		language=#{language},
+		customer_name_zh=#{zname},
+		customer_name_en=#{ename},
+		customer_level=#{level},
+		location=#{location},
+		promote=#{promote},
+		age_group=#{agegroup},
+		gender=#{gender},
+		telephone=#{telephone},
+		mobilephone=#{mobilephone},
+		wechat=#{wechat},
+		qq=#{qq},
+		email=#{email},
+		birthday=#{birthday},
 		update_time=NOW()
 		where
-		customer_id=#{customer_id}
+		customer_id=#{customerid}
 	</update>
 	
 	<select id="getCustomerById" parameterType="int" resultType="DemoCustomer">
 		select
-		u.customer_id as customer_id,
-		u.customer_name as name,
-		u.country as country,
-		u.language as language,
+		u.customer_name_zh as zname,
+		u.customer_name_en as ename,
+		u.customer_level as level,
+		u.location as location,
+		u.promote as promote,
+		u.age_group as agegroup,
+		u.gender as gender,
+		u.telephone as telephone,
+		u.mobilephone as mobilephone,
+		u.wechat as wechat,
+		u.qq as qq,
+		u.email as email,
+		u.birthday as birthday,
+		u.creat_time as creat_time,
 		u.isdel as isdel
-		from tm_customer u where u.customer_id = #{customer_id}
+		from tm_customer u where u.customer_id = #{customerid}
 	</select>
 	
 	<select id="getParameterInfo" parameterType="String" resultType="DemoList">
@@ -104,6 +142,6 @@
 		set
 		isdel=1
 		where
-		customer_id = #{customer_id}
+		customer_id = #{customerid}
 	</update>
 </mapper>

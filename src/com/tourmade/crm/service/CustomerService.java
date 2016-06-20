@@ -82,7 +82,7 @@ public class CustomerService extends BaseService {
 			e.printStackTrace();
 			return 0;
 		}
-		return customer.getCustomer_id();
+		return customer.getCustomerid();
 	}
 
 	/**
@@ -130,9 +130,9 @@ public class CustomerService extends BaseService {
 		boolean r = false;
 
 		try {
-			DemoCustomer u = customerMapper.getCustomerById(customer.getCustomer_id());
+			DemoCustomer u = customerMapper.getCustomerById(customer.getCustomerid());
 			if (u != null) {
-				u.setName(customer.getName());
+				u.setZname(customer.getZname());
 				customerMapper.updateCustomer(u);
 				r = true;
 			} else {

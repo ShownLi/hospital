@@ -114,7 +114,7 @@
 				language: datatable_local_language, // my.js
 				serverSide: true,
 				ajax: {
-					url: '${rootPath}user/list.do',
+					url: '${rootPath}customer/list.do',
 					dataFilter: function(data){
 			            var json = jQuery.parseJSON( data );
 			            json.recordsTotal = json.countTotal;
@@ -125,7 +125,7 @@
 				},
 				columnDefs: [
 			      {
-			          data: "userid",
+			          data: "customerid",
 			          //defaultContent: '<a class="btn btn-success btn-xs"><span class="fa fa-edit"></span> 编辑</a>&nbsp;<a class="btn btn-danger btn-xs"><span class="fa fa-minus-circle"></span> 删除</a>',
 				      orderable: false,
 				      render: function ( data, type, full, meta ) {
@@ -140,16 +140,15 @@
 				  },
 				],
 				columns: [
-		            { data: "userid" },
-		            { data: "loginname" },
-		            { data: "name" },
+		            { data: "customerid" },
+		            { data: "cname" },
+		            { data: "ename" },
+		            { data: "location" },
+		            { data: "level" },
+		            { data: "agegroup" },
+		            { data: "gender" },
 		            { data: "mobilephone" },
-		            { data: "email" },
-		            { data: "userid" },
-		            { data: "loginname" },
-		            { data: "name" },
-		            { data: "mobilephone" },
-		            { data: "email" }
+		            { data: "emial" }
 		        ]
 			});
 			

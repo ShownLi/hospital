@@ -48,14 +48,18 @@ public class CustomerController extends BaseSimpleFormController {
 	@RequestMapping(value = "/add.html", method = { RequestMethod.POST, RequestMethod.GET })
 	public String add(Model model) {
 		
-		String country = "customer.country";
-		String language = "customer.language";
-		List<DemoList> u = service.getParameterInfo(country);
-		List<DemoList> v = service.getParameterInfo(language);
-		JSONArray countryresult = JSONArray.fromObject(u);
-		JSONArray  languageresult = JSONArray.fromObject(v);
-		model.addAttribute("country",countryresult);
-		model.addAttribute("language",languageresult);
+		String level = "customer.level";
+		String promote = "customer.promote";
+		String agegroup = "customer.agegroup";
+		List<DemoList> u = service.getParameterInfo(level);
+		List<DemoList> v = service.getParameterInfo(promote);
+		List<DemoList> w = service.getParameterInfo(agegroup);
+		JSONArray levelresult = JSONArray.fromObject(u);
+		JSONArray  promoteresult = JSONArray.fromObject(v);
+		JSONArray  agegroupresult = JSONArray.fromObject(w);
+		model.addAttribute("level",levelresult);
+		model.addAttribute("promote",promoteresult);
+		model.addAttribute("agegroup",agegroupresult);
 		
 		return "/customer/add";
 	}
@@ -82,16 +86,20 @@ public class CustomerController extends BaseSimpleFormController {
 		
 		if (null != id && !"".equals(id)) {
 			int i = Integer.parseInt(id);
-			DemoCustomer u = service.getCustomerById(i);
-			String country = "customer.country";
-			String language = "customer.language";
-			List<DemoList> v = service.getParameterInfo(country);
-			List<DemoList> w = service.getParameterInfo(language);
-			JSONArray countryresult = JSONArray.fromObject(v);
-			JSONArray languageresult = JSONArray.fromObject(w);
-			model.addAttribute("country",countryresult);
-			model.addAttribute("language",languageresult);
-			model.addAttribute("customer",u);
+			DemoCustomer customer = service.getCustomerById(i);
+			String level = "customer.level";
+			String promote = "customer.promote";
+			String agegroup = "customer.agegroup";
+			List<DemoList> u = service.getParameterInfo(level);
+			List<DemoList> v = service.getParameterInfo(promote);
+			List<DemoList> w = service.getParameterInfo(agegroup);
+			JSONArray levelresult = JSONArray.fromObject(u);
+			JSONArray  promoteresult = JSONArray.fromObject(v);
+			JSONArray  agegroupresult = JSONArray.fromObject(w);
+			model.addAttribute("level",levelresult);
+			model.addAttribute("promote",promoteresult);
+			model.addAttribute("agegroup",agegroupresult);
+			model.addAttribute("customer",customer);
 		}
 		return "/customer/edit";
 	}
