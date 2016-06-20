@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tourmade.crm.mapper.order.DemoOrderMapper">
+
+	<select id="queryOrder" parameterType="Map" resultType="DemoOrder">
+		SELECT *
+		FROM (
+		select
+		u.order_id as order_id,
+		u.order_name as name,
+		u.country as cname,
+		u.language as vlanguage,
+		u.creat_time as creat_time,
+		v.chinese as country,
+		x.chinese as language,
+		u.isdel as isdel
+		from tm_order u  
+		left join tm_parameter v on u.country = v.para_value
+		left join tm_parameter x on u.language = x.para_value
+		where u.isdel = 0 and v.isdel = 0 and x.isdel = 0
+		<if test="pojo.seachValue!=null and pojo.seachValue!=''">
+			and
+			(
+			u.order_name like '%${pojo.seachValue}%'
+			or
+			v.chinese like '%${pojo.seachValue}%'
+			or
+			x.chinese like '%${pojo.seachValue}%'
+			)
+		</if>
+		order by u.creat_time
+		) table_alias
+		limit #{b},#{e}
+	</select>
+
+	<select id="countOrder" parameterType="DemoOrder" resultType="long">
+		select count(u.order_id) from tm_order u
+		where
+		u.isdel = 0
+		<if test="seachValue!=null and seachValue!=''">
+			and
+			(
+			u.order_name like '%${seachValue}%'
+			or
+			u.country like '%${seachValue}%'
+			or
+			u.language like '%${seachValue}%'
+			)
+		</if>
+
+	</select>
+	
+	<insert id="saveOrder" parameterType="DemoOrder" flushCache="true" useGeneratedKeys="true" keyProperty="order_id" keyColumn="GENERATED_KEY">
+		insert into tm_order(
+		order_name,
+		country,
+		language,
+		creat_time,
+		isdel
+		)values(
+		#{name,jdbcType=VARCHAR},
+		#{country,jdbcType=VARCHAR},
+		#{language,jdbcType=VARCHAR},
+		NOW(),
+		0
+		)
+	</insert>
+
+	<update id="updateOrder" parameterType="DemoOrder" flushCache="true">
+		update tm_order
+		set
+		order_name=#{name},
+		country=#{country},
+		language=#{language},
+		update_time=NOW()
+		where
+		order_id=#{order_id}
+	</update>
+	
+	<select id="getOrderById" parameterType="int" resultType="DemoOrder">
+		select
+		u.order_id as order_id,
+		u.order_name as name,
+		u.country as country,
+		u.language as language,
+		u.isdel as isdel
+		from tm_order u where u.order_id = #{order_id}
+	</select>
+	
+	<select id="getParameterInfo" parameterType="String" resultType="DemoList">
+		select
+		u.para_domain,
+		u.para_value as id,
+		u.chinese as text,
+		u.isdisplay,
+		u.isdel 
+		from tm_parameter u where u.isdisplay = 1 and u.isdel = 0 and u.para_domain = #{domain}
+	</select>
+	
+	<update id="deleteOrderById" parameterType="int" flushCache="true"
+		statementType="PREPARED">
+		update tm_order
+		set
+		isdel=1
+		where
+		order_id = #{order_id}
+	</update>
+</mapper>
