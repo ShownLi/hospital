@@ -1,0 +1,17 @@
+.align-center{
+	text-align:center;
+}
+.rdio-inline{
+	display:inline-block;
+	margin:10px 15px 0 0;
+}
+.input-group.input-datepicker{
+	padding-left:15px;
+	padding-right:15px;
+}
+.nextModal .modal-body{
+	padding:66px 0;
+}
+.nextModal-title{
+	font-size:16px;
+}

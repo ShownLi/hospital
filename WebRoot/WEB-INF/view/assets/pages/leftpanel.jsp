@@ -36,9 +36,8 @@
             </li>    
             <li class="nav-parent"><a href=""><i class="fa fa-user"></i> <span>询单管理</span></a>
                 <ul class="children">
-                    <li><a href="${rootPath }askorder/list.html"><i class="fa fa-caret-right"></i> 询单列表</a></li>
-                    <li><a href="${rootPath }askorder/add.html"><i class="fa fa-caret-right"></i> 新增询单</a></li>
-                    <li><a href="${rootPath }askorder/add.html"><i class="fa fa-caret-right"></i> 编辑询单</a></li>
+                    <li><a href="${rootPath }case/list.html"><i class="fa fa-caret-right"></i> 询单列表</a></li>
+                    <li><a href="${rootPath }case/add.html"><i class="fa fa-caret-right"></i> 新增询单</a></li>
                 </ul>
             </li> 
             <li class="nav-parent"><a href=""><i class="fa fa-user"></i> <span>订单管理</span></a>

@@ -63,45 +63,37 @@
                 <input type="text" name="location" placeholder="所在地" class="form-control" />
               </div>
             </div> 
-            
+            <div class="form-group">
+              <label class="col-sm-3 control-label" >推广渠道 </label>
+              <div class="col-sm-6">
+                <input type="text" name="promote" placeholder="推广渠道" class="promote-select form-control" />
+              </div>
+            </div>
             <div class="form-group">
               <label class="col-sm-3 control-label" >年龄段 <span class="asterisk">&nbsp;</span></label>
-              <div class="col-sm-9">
-                <div class="rdio rdio-primary">
-                  <input type="radio" id="a5" value="a5" name="age_group">
-                  <label for="a5">50后</label>
-                </div><!-- rdio -->
-                <div class="rdio rdio-primary">
-                  <input type="radio" id="a6" value="a6" name="age_group" >
-                  <label for="a6">60后</label>
-                </div><!-- rdio -->
-                <div class="rdio rdio-primary">
-                  <input type="radio" id="a7" value="a7" name="age_group" >
-                  <label for="a7">70后</label>
-                </div><!-- rdio -->
-                <div class="rdio rdio-primary">
-                  <input type="radio" id="a8" value="a8" name="age_group" >
-                  <label for="a8">80后</label>
-                </div><!-- rdio -->
-                <div class="rdio rdio-primary">
-                  <input type="radio" id="a9" value="a9" name="age_group" >
-                  <label for="a9">90后</label>
-                </div><!-- rdio -->
+              <div class="col-sm-6">
+                <input type="text" name="agegroup" placeholder="年龄段" class="agegroup-select form-control" />
               </div>
             </div>
             <div class="form-group">
               <label class="col-sm-3 control-label" >性别 <span class="asterisk">&nbsp;</span></label>
               <div class="col-sm-9">
-                <div class="rdio rdio-primary">
+                <div class="rdio rdio-primary rdio-inline">
                   <input type="radio" id="male" value="male" name="gender">
                   <label for="male">男</label>
                 </div><!-- rdio -->
-                <div class="rdio rdio-primary">
+                <div class="rdio rdio-primary rdio-inline">
                   <input type="radio" id="female" value="female" name="gender" >
                   <label for="female">女</label>
                 </div><!-- rdio -->
               </div>
             </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">固定电话</label>
+              <div class="col-sm-6">
+                <input type="text" name="telephone" placeholder="固定电话" class="form-control" />
+              </div>
+            </div>    
             <div class="form-group">
               <label class="col-sm-3 control-label">手机</label>
               <div class="col-sm-6">
@@ -109,11 +101,30 @@
               </div>
             </div>    
             <div class="form-group">
+              <label class="col-sm-3 control-label">微信</label>
+              <div class="col-sm-6">
+                <input type="text" name="wechat" placeholder="微信" class="form-control" />
+              </div>
+            </div>       
+            <div class="form-group">
+              <label class="col-sm-3 control-label">QQ</label>
+              <div class="col-sm-6">
+                <input type="text" name="qq" placeholder="QQ" class="form-control" />
+              </div>
+            </div>            
+            <div class="form-group">
               <label class="col-sm-3 control-label">邮箱</label>
               <div class="col-sm-6">
                 <input type="text" name="email" placeholder="邮箱" class="form-control"  />
               </div>
-            </div>      
+            </div>  
+            <div class="form-group">
+            	<label class="col-sm-3 control-label">生日</label>
+            	<div class="col-sm-6 input-group input-datepicker">
+	                <input type="text" class="form-control" placeholder="mm/dd/yyyy" id="birthday">
+	                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                </div>
+            </div>    
         </div><!-- panel-body -->
         
         <div class="panel-footer">
@@ -157,13 +168,44 @@
   </div><!-- modal-dialog -->
 </div><!-- modal -->
 
+<div class="nextModal modal fade" id="nextModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <div class="nextModal-title">您可以继续添加询单，或返回到客人列表页面</div>
+      </div>
+      <div class="modal-body align-center">
+        	<a class="btn btn-primary" href="${rootPath}case/add.html">添加询单</a>
+        	<a class="btn btn-primary" href="${rootPath}customer/list.html">返回列表</a>
+      </div>
+    </div><!-- modal-content -->
+  </div><!-- modal-dialog -->
+</div><!-- modal -->
 
 
 	<%@ include file="../assets/pages/foot.jsp"%>
+	<script src="${rootPath}assets/js/jquery-ui-1.10.3.min.js"></script>
 	<script src="${rootPath}assets/js/jquery.validate.min.js"></script>
 	
 	<script type="text/javascript">
+		//var p = ${promote};
+		//var a = ${agegroup};
+		//$(".promote-select").select2({
+			//placeholder: '选择一个推广渠道',
+		  	//data: p
+		//});
+		//$(".agegroup-select").select2({
+			//placeholder: '选择一个推广渠道',
+		  	//data: a
+		//});
+	
+		
 		jQuery(document).ready(function() {
+			
+			 // Date Picker
+			  jQuery("#birthday").datepicker();
+			 
 			jQuery("#form").validate({
 				
 				rules: {
@@ -208,13 +250,14 @@
 				history.go(-1);
 		    } ); 
 		});
-//			      
+			      
 		function form_submit() {
 			var f = $("#form").serialize();
 			$.post('${rootPath}user/add.do', f, function(result) {
 				var rmsg = result.msg;
 				if (result.success) {
-					window.parent.location = "${rootPath}user/list.html";
+					//window.parent.location = "${rootPath}customer/list.html";
+					$("#nextModal").modal('show');
 				} else {
 					$("#msgModal").modal('show');
 				}
