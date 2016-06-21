@@ -5,13 +5,28 @@
 	display:inline-block;
 	margin:10px 15px 0 0;
 }
+.rdio.rdio-inline label{
+	margin-bottom:10px !important;
+}
+.form-bordered .form-group{
+	border-color: #f0f0f0;
+}
 .input-group.input-datepicker{
-	padding-left:15px;
-	padding-right:15px;
+	padding-left:10px;
+	padding-right:10px;
 }
 .nextModal .modal-body{
 	padding:66px 0;
 }
 .nextModal-title{
 	font-size:16px;
+}
+.section-block{
+	overflow:hidden;
+	border-bottom:1px solid #dedede;
+	padding: 15px;
+}
+.section-title{
+	font-size:16px;
+	margin-bottom:18px;
 }
