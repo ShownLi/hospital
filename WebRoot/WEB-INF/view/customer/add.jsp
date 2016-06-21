@@ -42,19 +42,19 @@
             <div class="form-group">
               <label class="col-sm-3 control-label">中文名</label>
               <div class="col-sm-6">
-                <input type="text" name="namezh" placeholder="中文名" class="form-control" />
+                <input type="text" name="zname" placeholder="中文名" class="form-control" />
               </div>
             </div>
             <div class="form-group">
               <label class="col-sm-3 control-label">英文名</label>
               <div class="col-sm-6">
-                <input type="text" name="nameen" placeholder="英文名" class="form-control" />
+                <input type="text" name="ename" placeholder="英文名" class="form-control" />
               </div>
             </div> 
             <div class="form-group">
               <label class="col-sm-3 control-label">客人级别</label>
               <div class="col-sm-6">
-                <input type="text" name="customerlevel" placeholder="客人级别" class="form-control" readonly />
+                <input type="text" name="level" placeholder="客人级别" class="form-control" disabled />
               </div>
             </div> 
             <div class="form-group">
@@ -253,7 +253,7 @@
 			      
 		function form_submit() {
 			var f = $("#form").serialize();
-			$.post('${rootPath}user/add.do', f, function(result) {
+			$.post('${rootPath}customer/add.do', f, function(result) {
 				var rmsg = result.msg;
 				if (result.success) {
 					//window.parent.location = "${rootPath}customer/list.html";
