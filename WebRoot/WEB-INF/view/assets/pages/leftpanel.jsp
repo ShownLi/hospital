@@ -70,7 +70,8 @@
             </li> 
             <li class="nav-parent"><a href=""><i class="fa fa-user"></i> <span>邮件管理</span></a>
                 <ul class="children">
-                    <li><a href="${rootPath }user/list.html"><i class="fa fa-caret-right"></i> 邮件队列</a></li>
+                    <li><a href="${rootPath }email/list.html"><i class="fa fa-caret-right"></i> 邮件队列</a></li>
+                    <li><a href="${rootPath }email/add.html"><i class="fa fa-caret-right"></i> 添加邮件</a></li>
                 </ul>
             </li>                     
         </ul>
