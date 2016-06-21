@@ -24,7 +24,7 @@ import com.tourmade.crm.service.CaseService;
 import net.sf.json.JSONArray;
 
 @Controller
-@RequestMapping("/crmcase")
+@RequestMapping("/case")
 public class CaseController extends BaseSimpleFormController {
 	
 	@Autowired
@@ -32,7 +32,7 @@ public class CaseController extends BaseSimpleFormController {
 
 	@RequestMapping(value = "/list.html", method = { RequestMethod.POST, RequestMethod.GET })
 	public String list(Model model) {
-		return "/crmcase/list";
+		return "/case/list";
 	}
 	
 	@RequestMapping(value = "/list.do",produces="application/json;charset=utf-8")
@@ -57,7 +57,7 @@ public class CaseController extends BaseSimpleFormController {
 		model.addAttribute("country",countryresult);
 		model.addAttribute("language",languageresult);
 		
-		return "/crmcase/add";
+		return "/case/add";
 	}
 
 	@RequestMapping(value = "/add.do")
@@ -93,7 +93,7 @@ public class CaseController extends BaseSimpleFormController {
 			model.addAttribute("language",languageresult);
 			model.addAttribute("crmcase",u);
 		}
-		return "/crmcase/edit";
+		return "/case/edit";
 	}
 
 	@RequestMapping(value = "/edit.do")
