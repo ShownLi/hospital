@@ -148,7 +148,7 @@
 				  <a href="" class="panel-close">&times;</a>
 				  <a href="" class="minimize">&minus;</a>
 				</div>
-				<h4 class="panel-title">询单列表</h4>
+				<h4 class="panel-title">询单列表 <a href="#" style="color:#428bca;">添加询单</a></h4>
 	        </div>
 	        <div class="panel-body panel-body-nopadding">
 	        </div>
