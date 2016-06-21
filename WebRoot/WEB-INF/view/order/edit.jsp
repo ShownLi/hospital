@@ -19,7 +19,7 @@
 					<span class="label">你在这里:</span>
 					<ol class="breadcrumb">
 						<li><a href="＃">CRM</a></li>
-						<li><a href="${rootPath }user/list.html"订单管理</a></li>
+						<li><a href="${rootPath }user/list.html">订单管理</a></li>
 						<li class="active">编辑订单</li>
 					</ol>
 				</div>
