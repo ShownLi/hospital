@@ -43,8 +43,7 @@
             <li class="nav-parent"><a href=""><i class="fa fa-user"></i> <span>订单管理</span></a>
                 <ul class="children">
                     <li><a href="${rootPath }order/list.html"><i class="fa fa-caret-right"></i> 订单列表</a></li>
-                    <li><a href="${rootPath }order/add.html"><i class="fa fa-caret-right"></i> 新增订单</a></li>
-                    <li><a href="${rootPath }order/add.html"><i class="fa fa-caret-right"></i> 编辑订单</a></li>
+                    <li><a href="${rootPath }order/edit.html"><i class="fa fa-caret-right"></i> 编辑订单</a></li>
                 </ul>
             </li> 
             <li class="nav-parent"><a href=""><i class="glyphicon glyphicon-briefcase"></i> <span>地接社管理</span></a>
