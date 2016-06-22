@@ -172,7 +172,7 @@
 		});
 		
 		function edit(id) {
-			window.parent.location = "${rootPath}user/edit.html?id="+id;
+			window.parent.location = "${rootPath}order/edit.html?id="+id;
 		}
 		
 		function del(id) {

@@ -54,8 +54,7 @@
             </div>              
             <div class="form-group">
               <label class="col-sm-3 control-label">国家 <span class="asterisk">*</span></label>
-
-                <input type="text" id="country" name="country" class="country-select col-sm-5" value="${agency.country }"/>
+              <input type="text" id="country" name="country" class="country-select col-sm-5" value="${agency.country }"/>
 
             </div>            
         </div><!-- panel-body -->

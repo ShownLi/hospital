@@ -13,14 +13,14 @@
 			<%@ include file="../assets/pages/headerbar.jsp"%>
 			<div class="pageheader">
 				<h2>
-					<i class="fa fa-user"></i> 询单管理 <span>新增询单</span>
+					<i class="fa fa-user"></i> 询单管理 <span>编辑询单</span>
 				</h2>
 				<div class="breadcrumb-wrapper">
 					<span class="label">你在这里:</span>
 					<ol class="breadcrumb">
 						<li><a href="＃">CRM</a></li>
 						<li><a href="${rootPath }user/list.html">询单管理</a></li>
-						<li class="active">新增询单</li>
+						<li class="active">编辑询单</li>
 					</ol>
 				</div>
 			</div>
@@ -35,7 +35,7 @@
             <a href="" class="minimize">&minus;</a>
           </div>
           <h4 class="panel-title">询单基本信息</h4>
-          <p>填写下表，完成询单创建。</p>
+          <p>填写下表，完成询单编辑。</p>
         </div>
         <form class="form-horizontal" id="form">
         <div class="panel-body panel-body-nopadding">
@@ -43,7 +43,7 @@
                 <div class="form-group col-sm-4">
                   <label class="col-sm-4 control-label">称呼</label>
                   <div class="col-sm-8">
-                    <input type="text" name="customer_name" placeholder="称呼" class="form-control" value="" />
+                    <input type="text" name="customer_name" placeholder="称呼" class="form-control" readonly value="" />
                   </div>
                 </div>
                 <div class="form-group col-sm-4">
@@ -150,25 +150,25 @@
                 <div class="form-group col-sm-4">
                   <label class="col-sm-4 control-label">销售姓名</label>
                   <div class="col-sm-8">
-                    <input type="text" name="sales_name" placeholder="销售姓名" class="form-control" value="" />
+                    <input type="text" name="sales_name" placeholder="销售姓名" class="form-control" readonly value="" />
                   </div>
                 </div>
                 <div class="form-group col-sm-4">
                   <label class="col-sm-4 control-label">目的地</label>
                   <div class="col-sm-8">
-                    <input type="text" name="destination" class="destination-select form-control" value="" />
+                    <input type="text" name="destination" class="destination-select form-control" readonly value="" />
                   </div>
                 </div>
                 <div class="form-group col-sm-4">
                   <label class="col-sm-4 control-label">行程</label>
                   <div class="col-sm-8">
-                    <input type="text" name="budget" placeholder="行程" class="form-control" value="" />
+                    <input type="text" name="budget" placeholder="行程" class="form-control" readonly value="" />
                   </div>
                 </div>
                 <div class="form-group col-sm-4">
                   <label class="col-sm-4 control-label">表单类型</label>
                   <div class="col-sm-8">
-                    <input type="text" name="submit_type" class="submittype-select form-control" value="" />
+                    <input type="text" name="submit_type" class="submittype-select form-control" readonly value="" />
                   </div>
                 </div>
                 <div class="form-group col-sm-4">
@@ -180,29 +180,80 @@
                 <div class="form-group col-sm-4">
                   <label class="col-sm-4 control-label">状态</label>
                   <div class="col-sm-8">
-                    <input type="text" name="status" placeholder="状态" class="form-control" value="" />
+                    <input type="text" name="status" placeholder="状态" class="form-control" readonly value="" />
                   </div>
                 </div>
             </div>
         </div><!-- panel-body -->
         
         <div class="panel-footer align-center">
-            <button class="btn btn-primary">保存</button>&nbsp;
-            <button class="btn btn-default">取消</button>
-		</div><!-- panel-footer -->
+            <button class="btn btn-primary">保存2</button>&nbsp;
+            <button class="btn btn-default">无效</button>
+		    </div><!-- panel-footer -->
      </form>   
       </div><!-- panel -->
 
+      <!-- panel 订单列表  -->
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <div class="panel-btns">
+          <a href="" class="panel-close">&times;</a>
+          <a href="" class="minimize">&minus;</a>
+        </div>
+        <h4 class="panel-title">订单列表</h4>
+      </div>
+      <div class="panel-body panel-body-nopadding">
+        这里是订单列表
+      </div>
+    </div><!-- end of panel 询单  -->
 
+      <!-- panel 沟通列表  -->
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <div class="panel-btns">
+          <a href="" class="panel-close">&times;</a>
+          <a href="" class="minimize">&minus;</a>
+        </div>
+        <h4 class="panel-title">沟通列表</h4>
+      </div>
+      <div class="panel-body panel-body-nopadding">
+        <div class="form-group col-sm-4">
+          <label class="col-sm-4 control-label">按订单筛选</label>
+          <div class="col-sm-8">
+            <input type="text" name="submit_type" class="order-select form-control" value="" />
+          </div>
+        </div>
+        <div class="col-sm-12">这里是沟通列表这里是沟通列表</div>
+      </div>
+    </div><!-- end of panel 询单  -->
 
-
+    <!-- panel 注释 -->
+    <div class="panel panel-default">
+        <div class="panel-heading">
+        <div class="panel-btns">
+            <a href="" class="panel-close">&times;</a>
+            <a href="" class="minimize">&minus;</a>
+        </div>
+        <h4 class="panel-title">注释列表 </h4>
+        </div>
+        <div class="panel-body panel-body-nopadding">
+          <div>这里是注释列表</div>
+          
+          <!-- 添加注释 -->
+          <div class="form-group col-sm-6 col-sm-offset-3">
+                <textarea class="form-control" rows="5"></textarea>
+          </div>
+          <div class="form-group col-sm-12 align-center">
+            <a class="btn btn-primary" href="#">添加注释</a>
+        </div>
+        </div>
+    </div><!-- end of panel 注释 -->
 
 			</div>
 
 		</div>
 		<!-- mainpanel -->
 		<%@ include file="../assets/pages/rightpanel.jsp"%>
-
 	</section>
 
 
@@ -246,7 +297,7 @@
                 </div>
             </div>
             <div class="col-sm-12">
-        	   <a class="btn btn-primary" href="#">保存</a>
+             <a class="btn btn-primary" href="#">保存</a>
             </div>
         </div>
       </div>
@@ -254,62 +305,23 @@
   </div><!-- modal-dialog -->
 </div><!-- modal -->
 
-
 	<%@ include file="../assets/pages/foot.jsp"%>
 	<script src="${rootPath}assets/js/jquery-ui-1.10.3.min.js"></script>
 	<script src="${rootPath}assets/js/jquery.validate.min.js"></script>
 	
 	<script type="text/javascript">
 		// var p = ${promote};
-		// var a = ${agegroup};
-		// $(".language-select").select2({
-		// 	placeholder: '选择一个推广渠道',
+		// $(".order-select").select2({
+		// 	placeholder: '订单筛选',
 		//   	data: p
 		// });
-		// $(".withwho-select").select2({
-		// 	placeholder: '选择一个推广渠道',
-		//   	data: a
-		// });
-  //       $(".time-select").select2({
-  //           placeholder: '选择一个推广渠道',
-  //           data: a
-  //       });
-  //       $(".hotel-select").select2({
-  //           placeholder: '选择一个推广渠道',
-  //           data: a
-  //       });
-  //       $(".meals-select").select2({
-  //           placeholder: '选择一个推广渠道',
-  //           data: a
-  //       });
-  //       $(".guide-select").select2({
-  //           placeholder: '选择一个推广渠道',
-  //           data: a
-  //       });
-  //       $(".contact-select").select2({
-  //           placeholder: '选择一个推广渠道',
-  //           data: a
-  //       });
-  //       $(".destination-select").select2({
-  //           placeholder: '选择一个推广渠道',
-  //           data: a
-  //       });
-  //       $(".submittype-select").select2({
-  //           placeholder: '选择一个推广渠道',
-  //           data: a
-  //       });
-	 //    $(".source-select").select2({
-  //           placeholder: '选择一个推广渠道',
-  //           data: a
-  //       });
-		   // $(".country-select").select2({
-     //           placeholder: '国家',
-     //           data: a
-     //       })
+
+
+		
 		jQuery(document).ready(function() {
 			
 			 // Date Picker
-			  jQuery(".datepicker").datepicker();
+			  jQuery(". datepicker").datepicker();
 			 
 			jQuery("#form").validate({
 				

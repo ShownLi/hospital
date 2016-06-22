@@ -181,7 +181,7 @@
 		});
 		
 		function edit(id) {
-			window.parent.location = "${rootPath}customer/edit.html?id="+id;
+			window.parent.location = "${rootPath}case/edit.html?id="+id;
 		}
 		
 		function del(id) {
