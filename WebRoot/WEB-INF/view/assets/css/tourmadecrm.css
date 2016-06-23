@@ -1,6 +1,9 @@
 .align-center{
 	text-align:center;
 }
+.fullwidth{
+	width: 100%;
+}
 .rdio-inline{
 	display:inline-block;
 	margin:10px 15px 0 0;

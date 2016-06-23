@@ -13,14 +13,14 @@
 			<%@ include file="../assets/pages/headerbar.jsp"%>
 			<div class="pageheader">
 				<h2>
-					<i class="fa fa-user"></i> 客人管理 <span>新增客人</span>
+					<i class="fa fa-user"></i> 邮件管理 <span>新增邮件</span>
 				</h2>
 				<div class="breadcrumb-wrapper">
 					<span class="label">你在这里:</span>
 					<ol class="breadcrumb">
 						<li><a href="＃">CRM</a></li>
-						<li><a href="${rootPath }user/list.html">客人管理</a></li>
-						<li class="active">新增客人</li>
+						<li><a href="${rootPath }user/list.html">邮件管理</a></li>
+						<li class="active">新增邮件</li>
 					</ol>
 				</div>
 			</div>
@@ -34,55 +34,35 @@
             <a href="" class="panel-close">&times;</a>
             <a href="" class="minimize">&minus;</a>
           </div>
-          <h4 class="panel-title">客人信息</h4>
-          <p>填写下表，完成客人创建。</p>
+          <h4 class="panel-title">邮件信息</h4>
+          <p>填写下表，完成邮件创建。</p>
         </div>
         <form class="form-horizontal" id="form">
         <div class="panel-body panel-body-nopadding">
         	<div class="section-block">
-        		<h5 class="section-title">客人基本信息</h5>
+        		<h5 class="section-title">邮件基本信息</h5>
 	            <div class="form-group col-sm-4">
-	              <label class="col-sm-3 control-label">中文名<span class="asterisk">*</span></label>
+	              <label class="col-sm-3 control-label">订单ID<span class="asterisk">*</span></label>
 	              <div class="col-sm-9">
-	                <input type="text" name="zname" placeholder="中文名" class="form-control" />
+	                <input type="text" name="order_id" placeholder="订单ID" class="form-control" />
 	              </div>
 	            </div>
 	            <div class="form-group col-sm-4">
-	              <label class="col-sm-3 control-label">英文名</label>
+	              <label class="col-sm-3 control-label">邮件类型</label>
 	              <div class="col-sm-9">
-	                <input type="text" name="ename" placeholder="英文名" class="form-control" />
+	                <input type="text" name="mail_type" placeholder="邮件类型" class="form-control" />
 	              </div>
 	            </div> 
 	            <div class="form-group col-sm-4">
-	              <label class="col-sm-3 control-label" >性别 <span class="asterisk">&nbsp;</span></label>
+	              <label class="col-sm-3 control-label" >发件人</label>
 	              <div class="col-sm-9">
-	                <div class="rdio rdio-primary rdio-inline">
-	                  <input type="radio" id="male" value="male" name="gender">
-	                  <label for="male">男</label>
-	                </div><!-- rdio -->
-	                <div class="rdio rdio-primary rdio-inline">
-	                  <input type="radio" id="female" value="female" name="gender" >
-	                  <label for="female">女</label>
-	                </div><!-- rdio -->
+	                <input type="text" name="sender" placeholder="发件人" class="form-control" />
 	              </div>
 	            </div>
 	            <div class="form-group col-sm-4">
-	            	<label class="col-sm-3 control-label">生日</label>
-	            	<div class="col-sm-9 input-group input-datepicker">
-		                <input type="text" class="form-control" placeholder="mm/dd/yyyy" id="birthday">
-		                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-	                </div>
-	            </div> 
-	            <div class="form-group col-sm-4">
-	              <label class="col-sm-3 control-label" >年龄段</label>
+	              <label class="col-sm-3 control-label">收件人</label>
 	              <div class="col-sm-9">
-	                <input type="text" name="agegroup" placeholder="年龄段" class="agegroup-select form-control" />
-	              </div>
-	            </div>
-	            <div class="form-group col-sm-4">
-	              <label class="col-sm-3 control-label">客人级别</label>
-	              <div class="col-sm-9">
-	                <input type="text" name="level" placeholder="客人级别" class="form-control" disabled />
+	                <input type="text" name="reciever" placeholder="收件人" class="form-control" disabled />
 	              </div>
 	            </div> 
 	        </div>
