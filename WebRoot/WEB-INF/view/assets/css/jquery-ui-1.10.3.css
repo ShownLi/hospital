@@ -602,7 +602,7 @@ button.ui-button::-moz-focus-inner {
 	height: 100%;
 }
 .ui-progressbar .ui-progressbar-overlay {
-	background: url(images/animated-overlay.gif.htmlf");
+	background: url(images/animated-overlay.gif.htmlf);
 	height: 100%;
 	filter: alpha(opacity=25);
 	opacity: 0.25;

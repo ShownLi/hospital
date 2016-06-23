@@ -2,7 +2,7 @@
 <div class="leftpanel">
 
     <div class="logopanel">
-        <h1><span>[</span> 特美旅行 <span>]</span></h1>
+        <h1><span></span> 特美旅行 <span></span></h1>
     </div><!-- logopanel -->
 
     <div class="leftpanelinner">
@@ -43,14 +43,12 @@
             <li class="nav-parent"><a href=""><i class="fa fa-user"></i> <span>订单管理</span></a>
                 <ul class="children">
                     <li><a href="${rootPath }order/list.html"><i class="fa fa-caret-right"></i> 订单列表</a></li>
-                    <li><a href="${rootPath }order/edit.html"><i class="fa fa-caret-right"></i> 编辑订单</a></li>
                 </ul>
             </li> 
             <li class="nav-parent"><a href=""><i class="glyphicon glyphicon-briefcase"></i> <span>地接社管理</span></a>
                 <ul class="children">
                     <li><a href="${rootPath }agency/list.html"><i class="fa fa-caret-right"></i> 地接社列表</a></li>
                     <li><a href="${rootPath }agency/add.html"><i class="fa fa-caret-right"></i> 新增地接社</a></li>
-                    <li><a href="${rootPath }agency/list.html"><i class="fa fa-caret-right"></i> 编辑地接社</a></li>
                     <li><a href="${rootPath }agency/add.html"><i class="fa fa-caret-right"></i> 新增销售</a></li>
                 </ul>
             </li>
@@ -70,7 +68,6 @@
             <li class="nav-parent"><a href=""><i class="fa fa-user"></i> <span>邮件管理</span></a>
                 <ul class="children">
                     <li><a href="${rootPath }email/list.html"><i class="fa fa-caret-right"></i> 邮件队列</a></li>
-                    <li><a href="${rootPath }email/add.html"><i class="fa fa-caret-right"></i> 添加邮件</a></li>
                 </ul>
             </li>                     
         </ul>

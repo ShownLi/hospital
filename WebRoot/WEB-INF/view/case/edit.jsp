@@ -187,7 +187,7 @@
         </div><!-- panel-body -->
         
         <div class="panel-footer align-center">
-            <button class="btn btn-primary">保存2</button>&nbsp;
+            <button id="submit" class="btn btn-primary">保存</button>&nbsp;
             <button class="btn btn-default">无效</button>
 		    </div><!-- panel-footer -->
      </form>   
@@ -203,7 +203,68 @@
         <h4 class="panel-title">订单列表</h4>
       </div>
       <div class="panel-body panel-body-nopadding">
-        这里是订单列表
+          <div class="table-responsive">
+
+              <table id="dataTable" class="table">
+                <thead>
+                  <tr>
+                    <th>序号</th>
+                    <th>客人姓名</th>
+                    <th>地接社</th>
+                    <th>销售姓名</th>
+                    <th>目的地</th>
+                    <th>预算</th>
+                    <th>状态</th>
+                    <th>成团人数</th>
+                    <th>成团价格</th>
+                    <th>编辑</th>
+                    <th>删除</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1</td>
+                    <td>张三</td>
+                    <td>龙润国际旅行</td>
+                    <td>李四</td>
+                    <td>埃及</td>
+                    <td>40,000</td>
+                    <td>成交</td>
+                    <td>6人</td>
+                    <td>45,000</td>
+                    <td><a href="edit.html" class="btn btn-success btn-xs"><span class="fa fa-edit"></span> 编辑</a>
+                    <td><a class="btn btn-danger btn-xs"><span class="fa fa-minus-circle"></span> 删除</a></td>
+                  </tr>
+                  <tr>
+                    <td>2</td>
+                    <td>张三</td>
+                    <td>龙润国际旅行</td>
+                    <td>李四</td>
+                    <td>埃及</td>
+                    <td>40,000</td>
+                    <td>成交</td>
+                    <td>6人</td>
+                    <td>45,000</td>
+                    <td><a href="edit.html" class="btn btn-success btn-xs"><span class="fa fa-edit"></span> 编辑</a>
+                    <td><a class="btn btn-danger btn-xs"><span class="fa fa-minus-circle"></span> 删除</a></td>
+                  </tr>
+                  <tr>
+                    <td>3</td>
+                    <td>张三</td>
+                    <td>龙润国际旅行</td>
+                    <td>李四</td>
+                    <td>埃及</td>
+                    <td>40,000</td>
+                    <td>成交</td>
+                    <td>6人</td>
+                    <td>45,000</td>
+                    <td><a href="edit.html" class="btn btn-success btn-xs"><span class="fa fa-edit"></span> 编辑</a>
+                    <td><a class="btn btn-danger btn-xs"><span class="fa fa-minus-circle"></span> 删除</a></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <!-- table-responsive -->
       </div>
     </div><!-- end of panel 询单  -->
 
@@ -280,7 +341,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <div class="nextModal-title">您可以继续添加订单，或 <a style="text-decoration:underline;" href="${rootPath}case/list.html">回到客人列表页面</a></div>
+        <div class="nextModal-title">您可以继续添加订单，或 <a style="text-decoration:underline;" href="${rootPath}case/list.html">回到询单列表页面</a></div>
       </div>
       <div class="modal-body align-center">
         <div class="section-block">
@@ -321,65 +382,34 @@
 		jQuery(document).ready(function() {
 			
 			 // Date Picker
-			  jQuery(". datepicker").datepicker();
+			  jQuery(".datepicker").datepicker();
 			 
-			jQuery("#form").validate({
-				
-				rules: {
-					loginname: "required",
-					name: "required",
-					pwd: {
-						required: true,
-					},
-					repwd: {
-						required: true,
-						equalTo: "[name='pwd']"
-					}
-				},
-				messages: {
-					loginname: "请输入登录名",
-					name: "请输入姓名",
-					pwd: {
-						required: "请输入密码"
-					},
-					repwd: {
-						required: "请输入密码确认",
-						equalTo: "两次输入的密码不一致"
-					}
-				},
-				
-			    highlight: function(element) {
-			      jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
-			    },
-			    success: function(element) {
-			      jQuery(element).closest('.form-group').removeClass('has-error');
-			    },
-			    invalidHandler : function(){
-			      return false;
-			    },
-			    submitHandler : function(){
-			      form_submit();
-			      return false;
-			    }
-			  });
 			
-			$("#btn-back").click( function () {
-				history.go(-1);
-		    } ); 
-		});
+  			$("#btn-back").click( function () {
+  				history.go(-1);
+  		  }); 
+
+        $("#submit").click(function(){
+          $("#nextModal").modal('show');
+          return false;
+        });
+
+    });
+
+      
 			      
-		function form_submit() {
-			var f = $("#form").serialize();
-			$.post('${rootPath}user/add.do', f, function(result) {
-				var rmsg = result.msg;
-				if (result.success) {
-					//window.parent.location = "${rootPath}customer/list.html";
-					$("#nextModal").modal('show');
-				} else {
-					$("#msgModal").modal('show');
-				}
-			}, "JSON");
-		}
+  		function form_submit() {
+  			var f = $("#form").serialize();
+  			$.post('${rootPath}case/edit.do', f, function(result) {
+  				var rmsg = result.msg;
+  				if (result.success) {
+  					//window.parent.location = "${rootPath}customer/list.html";
+  					$("#nextModal").modal('show');
+  				} else {
+  					$("#msgModal").modal('show');
+  				}
+  			}, "JSON");
+  		}
 	</script>
 
 

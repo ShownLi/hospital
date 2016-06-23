@@ -138,15 +138,11 @@
          
         </div><!-- panel-body -->
         
-        <div class="panel-footer">
-			 <div class="row">
-				<div class="col-sm-6 col-sm-offset-3">
-				  <button class="btn btn-primary">提交</button>&nbsp;
-				  <button class="btn btn-default" id="btn-back">取消</button>
-				  <input type="hidden" name="customerid" value="${customer.customerid }" />
-				</div>
-			 </div>
-		  </div><!-- panel-footer -->
+        <div class="panel-footer align-center">
+			<button class="btn btn-primary">提交</button>&nbsp;
+			<button class="btn btn-default" id="btn-back">取消</button>
+			<input type="hidden" name="customerid" value="${customer.customerid }" />
+		</div><!-- panel-footer -->
      </form>   
       </div><!-- panel -->
 		<!-- panel 询单  -->
@@ -156,10 +152,62 @@
 				  <a href="" class="panel-close">&times;</a>
 				  <a href="" class="minimize">&minus;</a>
 				</div>
-				<h4 class="panel-title">询单列表 <a href="#" style="color:#428bca;">添加询单</a></h4>
+				<h4 class="panel-title">询单列表</h4>
 			</div>
 			<div class="panel-body panel-body-nopadding">
-				这里是询单列表 
+				<div class="table-responsive">
+					<table id="dataTable" class="table">
+						<thead>
+							<tr>
+								<th>序号</th>
+								<th>称呼</th>
+								<th>预算</th>
+								<th>目的地</th>
+								<th>询单来源</th>
+								<th>状态</th>
+								<th>邮箱</th>
+								<th>编辑</th>
+								<th>删除</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>1</td>
+								<td>张三</td>
+								<td>30,000</td>
+								<td>瑞士</td>
+								<td>官网表单</td>
+								<td>成交</td>
+								<td>balbala@tourmade.com</td>
+								<td><a href="edit.html" class="btn btn-success btn-xs"><span class="fa fa-edit"></span> 编辑</a>
+								<td><a class="btn btn-danger btn-xs"><span class="fa fa-minus-circle"></span> 删除</a></td>
+							</tr>
+							<tr>
+								<td>2</td>
+								<td>李四</td>
+								<td>35,000</td>
+								<td>埃及</td>
+								<td>在线客服</td>
+								<td>下单</td>
+								<td>balbala@tourmade.com</td>
+								<td><a href="edit.html" class="btn btn-success btn-xs"><span class="fa fa-edit"></span> 编辑</a>
+								<td><a class="btn btn-danger btn-xs"><span class="fa fa-minus-circle"></span> 删除</a></td>
+							</tr>
+							<tr>
+								<td>3</td>
+								<td>张三</td>
+								<td>2,000</td>
+								<td>澳大利亚</td>
+								<td>微信咨询</td>
+								<td>待处理</td>
+								<td>balbala@tourmade.com</td>
+								<td><a href="edit.html" class="btn btn-success btn-xs"><span class="fa fa-edit"></span> 编辑</a>
+								<td><a class="btn btn-danger btn-xs"><span class="fa fa-minus-circle"></span> 删除</a></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<!-- table-responsive -->
 			</div>
 		    <div class="panel-footer align-center">
 			    <a class="btn btn-primary" href="#">添加询单</a>
@@ -176,7 +224,9 @@
 				<h4 class="panel-title">注释列表 </h4>
 		    </div>
 		    <div class="panel-body panel-body-nopadding">
-		    	<div>这里是注释列表</div>
+		    	<div class="note-list">这里是注释列表</div>
+		    	<div class="note-list">这里是注释列表</div>
+		    	<div class="note-list">这里是注释列表</div>
 		    	
 		    	<!-- 添加注释 -->
 			    <div class="form-group col-sm-6 col-sm-offset-3">

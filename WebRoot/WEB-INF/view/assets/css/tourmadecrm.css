@@ -29,7 +29,19 @@
 	border-bottom:1px solid #dedede;
 	padding: 15px;
 }
+.section-block.noline{
+	border-bottom: none;
+}
 .section-title{
 	font-size:16px;
 	margin-bottom:18px;
+}
+
+.form3,
+.form4{
+	display: none;
+}
+
+.note-list{
+	padding: 5px 15px;
 }

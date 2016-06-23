@@ -229,10 +229,11 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <div class="nextModal-title">您可以继续添加订单，或 <a style="text-decoration:underline;" href="${rootPath}case/list.html">回到客人列表页面</a></div>
+        <div class="nextModal-title">您可以继续添加订单，或 <a style="text-decoration:underline;" href="${rootPath}case/list.html">回到询单列表页面</a></div>
       </div>
       <div class="modal-body align-center">
         <div class="section-block">
+            <div class="section-title">选择国家及目的地,继续添加订单</div>
             <div class="form-group col-sm-8 col-sm-offset-2">
                 <label class="col-sm-3 control-label">国家</label>
                 <div class="col-sm-9">
