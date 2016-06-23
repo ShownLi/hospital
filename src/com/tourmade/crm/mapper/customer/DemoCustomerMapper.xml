@@ -108,6 +108,7 @@
 	
 	<select id="getCustomerById" parameterType="int" resultType="DemoCustomer">
 		select
+		u.customer_id as customerid,
 		u.customer_name_zh as zname,
 		u.customer_name_en as ename,
 		u.customer_level as level,
@@ -121,7 +122,6 @@
 		u.qq as qq,
 		u.email as email,
 		u.birthday as birthday,
-		u.creat_time as creat_time,
 		u.isdel as isdel
 		from tm_customer u where u.customer_id = #{customerid}
 	</select>

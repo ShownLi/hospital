@@ -13,33 +13,33 @@
 			<%@ include file="../assets/pages/headerbar.jsp"%>
 			<div class="pageheader">
 				<h2>
-					<i class="fa fa-user"></i> 用户管理 <span>编辑用户</span>
+					<i class="glyphicon glyphicon-briefcase"></i> 客人管理 <span>编辑客人</span>
 				</h2>
 				<div class="breadcrumb-wrapper">
 					<span class="label">你在这里:</span>
 					<ol class="breadcrumb">
 						<li><a href="＃">CRM</a></li>
-						<li><a href="${rootPath }user/list.html">用户管理</a></li>
-						<li class="active">编辑用户</li>
+						<li><a href="${rootPath }customer/list.html">客人管理</a></li>
+						<li class="active">编辑客人</li>
 					</ol>
 				</div>
 			</div>
 
 			<div class="contentpanel">
 				<!-- content goes here... -->
-		
-		<!-- 客人信息 -->
+
 		<div class="panel panel-default">
-	        <div class="panel-heading">
-	          <div class="panel-btns">
-	            <a href="" class="panel-close">&times;</a>
-	            <a href="" class="minimize">&minus;</a>
-	          </div>
-	          <h4 class="panel-title">用户基本信息</h4>
-	          <p>填写下表，完成用户信息修改。</p>
-	        </div>
-	        <form class="form-horizontal form-bordered" id="form">
-		        <div class="panel-body panel-body-nopadding">
+        <div class="panel-heading">
+          <div class="panel-btns">
+            <a href="" class="panel-close">&times;</a>
+            <a href="" class="minimize">&minus;</a>
+          </div>
+          <h4 class="panel-title">客人基本信息</h4>
+          <p>填写下表，完成客人信息修改。</p>
+        </div>
+        <form class="form-horizontal form-bordered" id="form">
+        <div class="panel-body panel-body-nopadding">
+          
 					<div class="section-block">
 		        		<h5 class="section-title">客人基本信息</h5>
 			            <div class="form-group col-sm-4">
@@ -134,21 +134,21 @@
 			               	 	<input type="text" name="promote" placeholder="推广渠道" class="promote-select fullwidth" value="${customer.promote}"/>
 			                </div>
 			            </div>
-			        </div>    
-		        </div><!-- panel-body -->
-		        
-		        <div class="panel-footer">
-					 <div class="row">
-						<div class="col-sm-6 col-sm-offset-3">
-						    <button class="btn btn-primary">提交</button>&nbsp;
-						    <button class="btn btn-default" id="btn-back">取消</button>
-						    <input type="hidden" name="customerid" value="${customer.customerid }" />
-						</div>
-					 </div>
-				</div><!-- panel-footer -->
-		    </form>   
-	    </div><!-- panel 编辑客人信息 -->
+			        </div>  
+         
+        </div><!-- panel-body -->
         
+        <div class="panel-footer">
+			 <div class="row">
+				<div class="col-sm-6 col-sm-offset-3">
+				  <button class="btn btn-primary">提交</button>&nbsp;
+				  <button class="btn btn-default" id="btn-back">取消</button>
+				  <input type="hidden" name="customerid" value="${customer.customerid }" />
+				</div>
+			 </div>
+		  </div><!-- panel-footer -->
+     </form>   
+      </div><!-- panel -->
 		<!-- panel 询单  -->
 		<div class="panel panel-default">
 			<div class="panel-heading">
@@ -187,10 +187,9 @@
 				</div>
 		    </div>
 		</div><!-- end of panel 注释 -->
-	</div>
 
-		
 
+			</div>
 
 		</div>
 		<!-- mainpanel -->
@@ -244,40 +243,34 @@
 	else{
 		$('#female').attr('checked','true');
 	}
-		jQuery(document).ready(function() {
-			
-			// Date Picker
-			jQuery("#birthday").datepicker();
-			
-			jQuery("#form").validate({
-				
-				rules: {
-					name: "required"
-				},
-				messages: {
-					name: "请输入姓名"
-				},
-				
-			    highlight: function(element) {
-			      jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
-			    },
-			    success: function(element) {
-			      jQuery(element).closest('.form-group').removeClass('has-error');
-			    },
-			    invalidHandler : function(){
-			      return false;
-			    },
-			    submitHandler : function(){
-			      form_submit();
-			      return false;
-			    }
-			  });
-			
-			$("#btn-back").click( function () {
-				history.go(-1);
-		    } ); 
-			
-		});
+	jQuery(document).ready(function() {
+		jQuery("#form").validate({
+			rules: {
+				name: "required",
+			},
+			messages: {
+				name: "请输入客人名",
+			},
+		    highlight: function(element) {
+		      jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+		    },
+		    success: function(element) {
+		      jQuery(element).closest('.form-group').removeClass('has-error');
+		    },
+		    invalidHandler : function(){
+		      return false;
+		    },
+		    submitHandler : function(){
+		      form_submit();
+		      return false;
+		    }
+		  });
+		
+		$("#btn-back").click( function () {
+			history.go(-1);
+	    } ); 
+		
+	});
 //			      
 		function form_submit() {
 			var f = $("#form").serialize();

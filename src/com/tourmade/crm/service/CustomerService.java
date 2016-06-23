@@ -128,11 +128,23 @@ public class CustomerService extends BaseService {
 	public boolean updateCustomer(DemoCustomer customer) {
 
 		boolean r = false;
-		System.out.println(customer);
 		try {
 			DemoCustomer u = customerMapper.getCustomerById(customer.getCustomerid());
 			if (u != null) {
 				u.setZname(customer.getZname());
+				u.setEname(customer.getEname());
+				u.setLevel(customer.getLevel());
+				u.setLocation(customer.getLocation());
+				u.setPromote(customer.getPromote());
+				u.setAgegroup(customer.getAgegroup());
+				u.setGender(customer.getGender());
+				u.setTelephone(customer.getTelephone());
+				u.setMobilephone(customer.getMobilephone());
+				u.setWechat(customer.getWechat());
+				u.setQq(customer.getQq());
+				u.setEmail(customer.getEmail());
+				u.setBirthday(customer.getBirthday());
+				u.setUpdate_time(customer.getUpdate_time());
 				customerMapper.updateCustomer(u);
 				r = true;
 			} else {
