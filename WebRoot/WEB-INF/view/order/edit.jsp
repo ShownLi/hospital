@@ -78,9 +78,10 @@
                     </div>
                 </div> 
                 <div class="panel-footer align-center">
-          				  <button class="btn btn-primary">提交</button>&nbsp;
-          				  <button class="btn btn-default" id="btn-back">取消</button>
-                    <button class="btn btn-default">删除</button>
+                    <button id="btn-chengxing" class="btn btn-primary">成行</button>&nbsp;
+                    <button id="btn-weichengxing" class="btn btn-primary">未成行</button>&nbsp;
+                    <button class="btn btn-primary">保存</button>&nbsp;
+                    <button class="btn btn-default">取消</button>
         		    </div><!-- panel-footer -->
             </div>
          </form>   
@@ -94,8 +95,6 @@
                   <a href="" class="panel-close">&times;</a>
                   <a href="" class="minimize">&minus;</a>
               </div>
-              <button id="btn-chengxing" class="btn btn-primary">成行</button>&nbsp;
-              <button id="btn-weichengxing" class="btn btn-primary">未成行</button>
           </div>
           <div class="panel-body panel-body-nopadding">
               
@@ -286,9 +285,11 @@
 			
 			$("#btn-chengxing").click(function(){
           $(".cModal").modal('show');
+          return false;
       });
       $("#btn-weichengxing").click(function(){
           $(".bModal").modal('show');
+          return false;
       });
 
 			jQuery("#form").validate({
