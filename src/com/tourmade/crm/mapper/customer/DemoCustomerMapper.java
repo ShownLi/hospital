@@ -17,9 +17,9 @@ public interface DemoCustomerMapper extends BaseMapper {
 
 	public void updateCustomer(DemoCustomer customer);
 
-	public void deleteCustomerById(int customer_id);
+	public void deleteCustomerById(int customerid);
 	
-	public DemoCustomer getCustomerById(int customer_id);
+	public DemoCustomer getCustomerById(int customerid);
 	
 	public List<DemoList> getParameterInfo(String domain);
 }

@@ -29,7 +29,7 @@ public class DemoCustomer extends BaseBean<DemoCustomer> {
 	
 	private String promote;
 	
-	private String ageproup;
+	private String agegroup;
 	
 	private String gender;
 	
@@ -97,12 +97,13 @@ public class DemoCustomer extends BaseBean<DemoCustomer> {
 		this.promote = promote;
 	}
 
-	public String getAgeproup() {
-		return ageproup;
+
+	public String getAgegroup() {
+		return agegroup;
 	}
 
-	public void setAgeproup(String ageproup) {
-		this.ageproup = ageproup;
+	public void setAgegroup(String agegroup) {
+		this.agegroup = agegroup;
 	}
 
 	public String getGender() {
@@ -184,7 +185,7 @@ public class DemoCustomer extends BaseBean<DemoCustomer> {
 	@Override
 	public String toString() {
 		return "DemoCustomer [customerid=" + customerid + ", zname=" + zname + ", ename=" + ename + ", level=" + level
-				+ ", location=" + location + ", promote=" + promote + ", ageproup=" + ageproup + ", gender=" + gender
+				+ ", location=" + location + ", promote=" + promote + ", agegroup=" + agegroup + ", gender=" + gender
 				+ ", telephone=" + telephone + ", mobilephone=" + mobilephone + ", wechat=" + wechat + ", qq=" + qq
 				+ ", email=" + email + ", birthday=" + birthday + ", creat_time=" + creat_time + ", update_time="
 				+ update_time + "]";

@@ -25,7 +25,7 @@ public class CustomerService extends BaseService {
 	private DemoCustomerMapper customerMapper;
 
 	/**
-	 * 查询地接社数据，分页展示
+	 * 查询客人数据，分页展示
 	 * 
 	 * @param customer
 	 * @param ph
@@ -67,7 +67,7 @@ public class CustomerService extends BaseService {
 	}
 
 	/**
-	 * 新增地接社
+	 * 新增客人
 	 * 
 	 * @param customer
 	 * @return
@@ -86,7 +86,7 @@ public class CustomerService extends BaseService {
 	}
 
 	/**
-	 * 根据主键获取地接社信息
+	 * 根据主键获取客人信息
 	 * 
 	 * @param id
 	 * @return
@@ -120,7 +120,7 @@ public class CustomerService extends BaseService {
 	}
 	
 	/**
-	 * 更新地接社信息(不修改密码)
+	 * 更新客人信息(不修改密码)
 	 * 
 	 * @param customer
 	 * @return
@@ -128,7 +128,7 @@ public class CustomerService extends BaseService {
 	public boolean updateCustomer(DemoCustomer customer) {
 
 		boolean r = false;
-
+		System.out.println(customer);
 		try {
 			DemoCustomer u = customerMapper.getCustomerById(customer.getCustomerid());
 			if (u != null) {
@@ -147,7 +147,7 @@ public class CustomerService extends BaseService {
 	}
 
 	/**
-	 * 删除地接社（假删除）
+	 * 删除客人（假删除）
 	 * 
 	 * @param customer_id
 	 * @return

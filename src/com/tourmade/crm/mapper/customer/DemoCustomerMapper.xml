@@ -72,7 +72,7 @@
 		#{level,jdbcType=VARCHAR},
 		#{location,jdbcType=VARCHAR},
 		#{promote,jdbcType=VARCHAR},
-		#{age_group,jdbcType=VARCHAR},
+		#{agegroup,jdbcType=VARCHAR},
 		#{gender,jdbcType=VARCHAR},
 		#{telephone,jdbcType=VARCHAR},
 		#{mobilephone,jdbcType=VARCHAR},

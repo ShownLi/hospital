@@ -45,13 +45,13 @@
 			            <div class="form-group col-sm-4">
 							<label class="col-sm-3 control-label">中文名<span class="asterisk">*</span></label>
 							<div class="col-sm-9">
-							    <input type="text" name="zname" placeholder="中文名" class="form-control" />
+							    <input type="text" name="zname" placeholder="中文名" class="form-control" value="${customer.zname}"/>
 							</div>
 			            </div>
 			            <div class="form-group col-sm-4">
 							<label class="col-sm-3 control-label">英文名</label>
 							<div class="col-sm-9">
-							    <input type="text" name="ename" placeholder="英文名" class="form-control" />
+							    <input type="text" name="ename" placeholder="英文名" class="form-control" value="${customer.ename}"/>
 							</div>
 			            </div> 
 			            <div class="form-group col-sm-4">
@@ -70,20 +70,20 @@
 			            <div class="form-group col-sm-4">
 			            	<label class="col-sm-3 control-label">生日</label>
 			            	<div class="col-sm-9 input-group input-datepicker">
-				                <input type="text" class="form-control" placeholder="mm/dd/yyyy" id="birthday">
+				                <input type="text" class="form-control" placeholder="mm/dd/yyyy" id="birthday" value="${customer.birthday}">
 				                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
 			                </div>
 			            </div> 
 			            <div class="form-group col-sm-4">
 							<label class="col-sm-3 control-label" >年龄段</label>
 							<div class="col-sm-9">
-							    <input type="text" name="agegroup" placeholder="年龄段" class="agegroup-select form-control" />
+							    <input type="text" name="agegroup" placeholder="年龄段" class="agegroup-select fullwidth" value="${customer.agegroup}"/>
 							</div>
 			            </div>
 			            <div class="form-group col-sm-4">
 							<label class="col-sm-3 control-label">客人级别</label>
 							<div class="col-sm-9">
-							    <input type="text" name="level" placeholder="客人级别" class="form-control" disabled />
+							    <input type="text" name="level" placeholder="客人级别" class="level-select fullwidth" value="${customer.level}" disabled />
 							</div>
 			            </div> 
 			        </div>
@@ -92,37 +92,37 @@
 			            <div class="form-group col-sm-4">
 			                <label class="col-sm-3 control-label">固定电话</label>
 			                <div class="col-sm-9">
-			                    <input type="text" name="telephone" placeholder="固定电话" class="form-control" />
+			                    <input type="text" name="telephone" placeholder="固定电话" class="form-control" value="${customer.telephone}"/>
 			                </div>
 			            </div>
 			            <div class="form-group col-sm-4">
 			                <label class="col-sm-3 control-label">手机</label>
 			                <div class="col-sm-9">
-			                	<input type="text" name="mobilephone" placeholder="手机" class="form-control" />
+			                	<input type="text" name="mobilephone" placeholder="手机" class="form-control" value="${customer.mobilephone}"/>
 			                </div>
 			            </div>    
 			            <div class="form-group col-sm-4">
 			                <label class="col-sm-3 control-label">微信</label>
 			                <div class="col-sm-9">
-			                	<input type="text" name="wechat" placeholder="微信" class="form-control" />
+			                	<input type="text" name="wechat" placeholder="微信" class="form-control" value="${customer.wechat}"/>
 			                </div>
 			            </div>       
 			            <div class="form-group col-sm-4">
 			                <label class="col-sm-3 control-label">QQ</label>
 			                <div class="col-sm-9">
-			                	<input type="text" name="qq" placeholder="QQ" class="form-control" />
+			                	<input type="text" name="qq" placeholder="QQ" class="form-control" value="${customer.qq}"/>
 			                </div>
 			            </div>            
 			            <div class="form-group col-sm-4">
 			                <label class="col-sm-3 control-label">邮箱</label>
 			                <div class="col-sm-9">
-			                	<input type="text" name="email" placeholder="邮箱" class="form-control"  />
+			                	<input type="text" name="email" placeholder="邮箱" class="form-control"  value="${customer.email}"/>
 			                </div>
 			            </div>  
 			            <div class="form-group col-sm-4">
 			                <label class="col-sm-3 control-label">所在地</label>
 			                <div class="col-sm-9">
-			                	<input type="text" name="location" placeholder="所在地" class="form-control" />
+			                	<input type="text" name="location" placeholder="所在地" class="form-control" value="${customer.location}"/>
 			                </div>
 			            </div> 
 			        </div>
@@ -131,7 +131,7 @@
 			            <div class="form-group col-sm-4">
 			                <label class="col-sm-3 control-label" >推广渠道 </label>
 			                <div class="col-sm-9">
-			               	 	<input type="text" name="promote" placeholder="推广渠道" class="promote-select form-control" />
+			               	 	<input type="text" name="promote" placeholder="推广渠道" class="promote-select fullwidth" value="${customer.promote}"/>
 			                </div>
 			            </div>
 			        </div>    
@@ -142,7 +142,7 @@
 						<div class="col-sm-6 col-sm-offset-3">
 						    <button class="btn btn-primary">提交</button>&nbsp;
 						    <button class="btn btn-default" id="btn-back">取消</button>
-						    <input type="hidden" name="userid" value="${user.userid }" />
+						    <input type="hidden" name="customerid" value="${customer.customerid }" />
 						</div>
 					 </div>
 				</div><!-- panel-footer -->
@@ -219,20 +219,31 @@
 
 
 	<%@ include file="../assets/pages/foot.jsp"%>
+	<script src="${rootPath}assets/js/select2.min.js"></script>
 	<script src="${rootPath}assets/js/jquery.validate.min.js"></script>
 	
 	<script type="text/javascript">
-	//var p = ${promote};
-	//var a = ${agegroup};
-	//$(".promote-select").select2({
-		//placeholder: '选择一个推广渠道',
-	  	//data: p
-	//});
-	//$(".agegroup-select").select2({
-		//placeholder: '选择一个推广渠道',
-	  	//data: a
-	//});
+	var l = ${level};
+	var p = ${promote};
+	var a = ${agegroup};
+	$(".promote-select").select2({
+		placeholder: '选择一个推广渠道',
+	  	data: p
+	});
+	$(".agegroup-select").select2({
+		placeholder: '选择一个年龄段',
+	  	data: a
+	});
+	$(".level-select").select2({
+	  	data: l
+	});	
 	
+	if("${customer.gender}"=='male'){
+		$('#male').attr('checked','true');
+	}
+	else{
+		$('#female').attr('checked','true');
+	}
 		jQuery(document).ready(function() {
 			
 			// Date Picker
@@ -270,10 +281,10 @@
 //			      
 		function form_submit() {
 			var f = $("#form").serialize();
-			$.post('${rootPath}user/edit.do', f, function(result) {
+			$.post('${rootPath}customer/edit.do', f, function(result) {
 				var rmsg = result.msg;
 				if (result.success) {
-					window.parent.location = "${rootPath}user/list.html";
+					window.parent.location = "${rootPath}customer/list.html";
 				} else {
 					$("#msgModal").modal('show');
 				}

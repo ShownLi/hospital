@@ -76,13 +76,13 @@
 	            <div class="form-group col-sm-4">
 	              <label class="col-sm-3 control-label" >年龄段</label>
 	              <div class="col-sm-9">
-	                <input type="text" name="agegroup" placeholder="年龄段" class="agegroup-select form-control" />
+	                <input type="text" name="agegroup" placeholder="请选择一个年龄段" class="agegroup-select fullwidth" />
 	              </div>
 	            </div>
 	            <div class="form-group col-sm-4">
 	              <label class="col-sm-3 control-label">客人级别</label>
 	              <div class="col-sm-9">
-	                <input type="text" name="level" placeholder="客人级别" class="form-control" disabled />
+	                <input type="text" name="level" placeholder="客人级别" class="level-select fullwidth" value="1" disabled/>
 	              </div>
 	            </div> 
 	        </div>
@@ -130,7 +130,7 @@
 	            <div class="form-group col-sm-4">
 	              <label class="col-sm-3 control-label" >推广渠道 </label>
 	              <div class="col-sm-9">
-	                <input type="text" name="promote" placeholder="推广渠道" class="promote-select form-control" />
+	                <input type="text" name="promote" placeholder="推广渠道" class="promote-select fullwidth" />
 	              </div>
 	            </div>
 	        </div>   
@@ -190,21 +190,25 @@
 
 
 	<%@ include file="../assets/pages/foot.jsp"%>
+	<script src="${rootPath}assets/js/select2.min.js"></script>
 	<script src="${rootPath}assets/js/jquery-ui-1.10.3.min.js"></script>
 	<script src="${rootPath}assets/js/jquery.validate.min.js"></script>
 	
 	<script type="text/javascript">
-		//var p = ${promote};
-		//var a = ${agegroup};
-		//$(".promote-select").select2({
-			//placeholder: '选择一个推广渠道',
-		  	//data: p
-		//});
-		//$(".agegroup-select").select2({
-			//placeholder: '选择一个推广渠道',
-		  	//data: a
-		//});
-	
+		var l = ${level};
+		var p = ${promote};
+		var a = ${agegroup};
+		$(".promote-select").select2({
+			placeholder: '选择一个推广渠道',
+		  	data: p
+		});
+		$(".agegroup-select").select2({
+			placeholder: '选择一个年龄段',
+		  	data: a
+		});
+		$(".level-select").select2({
+		  	data: l
+		});	
 		
 		jQuery(document).ready(function() {
 			

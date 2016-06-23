@@ -109,7 +109,6 @@ public class CustomerController extends BaseSimpleFormController {
 	public Json doEdit(HttpServletRequest request, HttpSession session, Model model, DemoCustomer customer) {
 
 		Json j = new Json();
-		
 		try {
 			service.updateCustomer(customer);
 			j.setSuccess(true);
