@@ -7,26 +7,19 @@
 		SELECT *
 		FROM (
 		select
-		u.case_id as case_id,
-		u.case_name as name,
-		u.country as cname,
-		u.language as vlanguage,
-		u.creat_time as creat_time,
-		v.chinese as country,
-		x.chinese as language,
+		u.case_id as caseid,
+		u.customer_name as customername,
+		u.budget as budget,
+		u.sales_name as salesname,
+		u.destination as destination,
+		u.status as status,
 		u.isdel as isdel
 		from tm_case u  
-		left join tm_parameter v on u.country = v.para_value
-		left join tm_parameter x on u.language = x.para_value
 		where u.isdel = 0 and v.isdel = 0 and x.isdel = 0
 		<if test="pojo.seachValue!=null and pojo.seachValue!=''">
 			and
 			(
-			u.case_name like '%${pojo.seachValue}%'
-			or
-			v.chinese like '%${pojo.seachValue}%'
-			or
-			x.chinese like '%${pojo.seachValue}%'
+			u.case_status like '%${pojo.seachValue}%'
 			)
 		</if>
 		order by u.creat_time
@@ -41,11 +34,7 @@
 		<if test="seachValue!=null and seachValue!=''">
 			and
 			(
-			u.case_name like '%${seachValue}%'
-			or
-			u.country like '%${seachValue}%'
-			or
-			u.language like '%${seachValue}%'
+			u.case_status like '%${seachValue}%'
 			)
 		</if>
 
@@ -53,15 +42,57 @@
 	
 	<insert id="saveCase" parameterType="DemoCase" flushCache="true" useGeneratedKeys="true" keyProperty="case_id" keyColumn="GENERATED_KEY">
 		insert into tm_case(
-		case_name,
-		country,
-		language,
+		prefer_language,
+		with_who,
+		adult,
+		children,
+		start_time,
+		start_month,
+		during,
+		start_date,
+		end_date,
+		hotel,
+		meals,
+		requirement,
+		guide,
+		budget,
+		customer_name,
+		contact_type,
+		sales_code,
+		sales_name,
+		destination,
+		route,
+		submit_type,
+		submit_id,
+		source,
+		status,
 		creat_time,
 		isdel
 		)values(
-		#{name,jdbcType=VARCHAR},
-		#{country,jdbcType=VARCHAR},
-		#{language,jdbcType=VARCHAR},
+		#{preferlanguage,jdbcType=VARCHAR},
+		#{withwho,jdbcType=VARCHAR},
+		#{adult,jdbcType=VARCHAR},
+		#{children,jdbcType=VARCHAR},
+		#{starttime,jdbcType=VARCHAR},
+		#{startmonth,jdbcType=VARCHAR},
+		#{during,jdbcType=VARCHAR},
+		#{startdate,jdbcType=VARCHAR},
+		#{enddate,jdbcType=VARCHAR},
+		#{hotel,jdbcType=VARCHAR},
+		#{meals,jdbcType=VARCHAR},
+		#{requirement,jdbcType=VARCHAR},
+		#{guide,jdbcType=VARCHAR},
+		#{budget,jdbcType=VARCHAR},
+		#{customername,jdbcType=VARCHAR},
+		#{contacttype,jdbcType=VARCHAR},
+		#{salescode,jdbcType=VARCHAR},
+		#{salesname,jdbcType=VARCHAR},
+		#{destination,jdbcType=VARCHAR},
+		#{route,jdbcType=VARCHAR},
+		#{submittype,jdbcType=VARCHAR},
+		#{submitid,jdbcType=VARCHAR},
+		#{source,jdbcType=VARCHAR},
+		#{status,jdbcType=VARCHAR},
 		NOW(),
 		0
 		)
@@ -70,22 +101,40 @@
 	<update id="updateCase" parameterType="DemoCase" flushCache="true">
 		update tm_case
 		set
-		case_name=#{name},
-		country=#{country},
-		language=#{language},
+		prefer_language=#{preferlanguage},
+		with_who=#{withwho},
+		adult=#{adult},
+		children=#{children},
+		start_time=#{starttime},
+		start_month=#{startmonth},
+		during=#{during},
+		start_date=#{startdate},
+		end_date=#{enddate},
+		hotel=#{hotel},
+		meals=#{meals},
+		requirement=#{requirement},
+		guide=#{guide},
+		budget=#{budget},
+		customer_name=#{customername},
+		contact_type=#{contacttype},
+		sales_code=#{salescode},
+		sales_name=#{salesname},
+		destination=#{destination},
+		route=#{route},
+		submit_type=#{submittype},
+		submit_id=#{submitid},
+		source=#{source},
+		status=#{status},
 		update_time=NOW()
 		where
-		case_id=#{case_id}
+		case_id=#{caseid}
 	</update>
 	
 	<select id="getCaseById" parameterType="int" resultType="DemoCase">
 		select
-		u.case_id as case_id,
-		u.case_name as name,
-		u.country as country,
-		u.language as language,
-		u.isdel as isdel
-		from tm_case u where u.case_id = #{case_id}
+		u.case_id as caseid,
+		u.isdel
+		from tm_case u where u.isdel = 0 andu.case_id = #{caseid}
 	</select>
 	
 	<select id="getParameterInfo" parameterType="String" resultType="DemoList">
@@ -104,6 +153,6 @@
 		set
 		isdel=1
 		where
-		case_id = #{case_id}
+		case_id = #{caseid}
 	</update>
 </mapper>

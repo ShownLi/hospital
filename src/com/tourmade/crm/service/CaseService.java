@@ -82,7 +82,7 @@ public class CaseService extends BaseService {
 			e.printStackTrace();
 			return 0;
 		}
-		return crmcase.getCase_id();
+		return crmcase.getCaseid();
 	}
 
 	/**
@@ -130,9 +130,9 @@ public class CaseService extends BaseService {
 		boolean r = false;
 
 		try {
-			DemoCase u = caseMapper.getCaseById(crmcase.getCase_id());
+			DemoCase u = caseMapper.getCaseById(crmcase.getCaseid());
 			if (u != null) {
-				u.setName(crmcase.getName());
+				u.setStatus(crmcase.getStatus());
 				caseMapper.updateCase(u);
 				r = true;
 			} else {

@@ -82,7 +82,7 @@ public class OrderService extends BaseService {
 			e.printStackTrace();
 			return 0;
 		}
-		return order.getOrder_id();
+		return order.getOrderid();
 	}
 
 	/**
@@ -130,9 +130,8 @@ public class OrderService extends BaseService {
 		boolean r = false;
 
 		try {
-			DemoOrder u = orderMapper.getOrderById(order.getOrder_id());
+			DemoOrder u = orderMapper.getOrderById(order.getOrderid());
 			if (u != null) {
-				u.setName(order.getName());
 				orderMapper.updateOrder(u);
 				r = true;
 			} else {
