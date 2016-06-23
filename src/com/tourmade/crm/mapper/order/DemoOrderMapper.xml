@@ -7,26 +7,34 @@
 		SELECT *
 		FROM (
 		select
-		u.order_id as order_id,
-		u.order_name as name,
-		u.country as cname,
-		u.language as vlanguage,
+		u.order_id as orderid,
+		u.customer_id as customerid,
+		u.customer_name as customername,
+		u.agency_id as agencyid,
+		u.agency_name as agencyname,
+		u.sales_id as salesid,
+		u.sales_name as salesname,
+		u.destination as destination,
+		u.budget as budget,
+		u.status as status,
+		u.reason as reason,
+		u.group_time as grouptime,
+		u.group_number as groupnumber,
+		u.start_date as startdate,
+		u.end_date as enddate,
+		u.group_price as groupprice,
+		u.currency as currency,
+		u.exchange_rate as exchangerage,
+		u.rmb_rate as rmbrate,
+		u.last_response as lastresponse,	
 		u.creat_time as creat_time,
-		v.chinese as country,
-		x.chinese as language,
-		u.isdel as isdel
+		u.isdel
 		from tm_order u  
-		left join tm_parameter v on u.country = v.para_value
-		left join tm_parameter x on u.language = x.para_value
-		where u.isdel = 0 and v.isdel = 0 and x.isdel = 0
+		where u.isdel = 0 
 		<if test="pojo.seachValue!=null and pojo.seachValue!=''">
 			and
 			(
-			u.order_name like '%${pojo.seachValue}%'
-			or
-			v.chinese like '%${pojo.seachValue}%'
-			or
-			x.chinese like '%${pojo.seachValue}%'
+			u.customer_name like '%${pojo.seachValue}%'
 			)
 		</if>
 		order by u.creat_time
@@ -41,11 +49,7 @@
 		<if test="seachValue!=null and seachValue!=''">
 			and
 			(
-			u.order_name like '%${seachValue}%'
-			or
-			u.country like '%${seachValue}%'
-			or
-			u.language like '%${seachValue}%'
+			u.customer_name like '%${seachValue}%'
 			)
 		</if>
 
@@ -53,15 +57,45 @@
 	
 	<insert id="saveOrder" parameterType="DemoOrder" flushCache="true" useGeneratedKeys="true" keyProperty="order_id" keyColumn="GENERATED_KEY">
 		insert into tm_order(
-		order_name,
-		country,
-		language,
+		customer_name,
+		agency_id,
+		agency_name,
+		sales_id,
+		sales_name,
+		destination,
+		budget,
+		status,
+		reason,
+		group_time,
+		group_number,
+		start_date,
+		end_date,
+		group_price,
+		currency,
+		exchange_rate,
+		rmb_rate,
+		last_response,
 		creat_time,
 		isdel
 		)values(
-		#{name,jdbcType=VARCHAR},
-		#{country,jdbcType=VARCHAR},
-		#{language,jdbcType=VARCHAR},
+		#{customername,jdbcType=VARCHAR},
+		#{agencyid,jdbcType=VARCHAR},
+		#{agencyname,jdbcType=VARCHAR},
+		#{salesid,jdbcType=VARCHAR},
+		#{salesname,jdbcType=VARCHAR},
+		#{destination,jdbcType=VARCHAR},
+		#{budget,jdbcType=VARCHAR},
+		#{status,jdbcType=VARCHAR},
+		#{reason,jdbcType=VARCHAR},
+		#{grouptime,jdbcType=VARCHAR},
+		#{groupnumber,jdbcType=VARCHAR},
+		#{startdate,jdbcType=VARCHAR},
+		#{enddate,jdbcType=VARCHAR},
+		#{groupprice,jdbcType=VARCHAR},
+		#{currency,jdbcType=VARCHAR},
+		#{exchangerage,jdbcType=VARCHAR},
+		#{rmbrate,jdbcType=VARCHAR},
+		#{lastresponse,jdbcType=VARCHAR},
 		NOW(),
 		0
 		)
@@ -70,22 +104,34 @@
 	<update id="updateOrder" parameterType="DemoOrder" flushCache="true">
 		update tm_order
 		set
-		order_name=#{name},
-		country=#{country},
-		language=#{language},
+		customer_name=#{customername},
+		agency_id=#{agencyid},
+		agency_name=#{agencyname},
+		sales_id=#{salesid},
+		sales_name=#{salesname},
+		destination=#{destination},
+		budget=#{budget},
+		status=#{status},
+		reason=#{reason},
+		group_time=#{grouptime},
+		group_number=#{groupnumber},
+		start_date=#{startdate},
+		end_date=#{enddate},
+		group_price=#{groupprice},
+		currency=#{currency},
+		exchange_rate=#{exchangerate},
+		rmb_rate=#{rmbrate},
+		last_response=#{lastresponse},
 		update_time=NOW()
 		where
-		order_id=#{order_id}
+		order_id=#{orderid}
 	</update>
 	
 	<select id="getOrderById" parameterType="int" resultType="DemoOrder">
 		select
-		u.order_id as order_id,
-		u.order_name as name,
-		u.country as country,
-		u.language as language,
+		u.order_id as orderid,
 		u.isdel as isdel
-		from tm_order u where u.order_id = #{order_id}
+		from tm_order u where u.order_id = #{orderid}
 	</select>
 	
 	<select id="getParameterInfo" parameterType="String" resultType="DemoList">
@@ -104,6 +150,6 @@
 		set
 		isdel=1
 		where
-		order_id = #{order_id}
+		order_id = #{orderid}
 	</update>
 </mapper>
