@@ -46,13 +46,11 @@
 									<tr>
 										<th>#</th>
 										<th>中文名</th>
-										<th>性别</th>
 										<th>手机</th>
 										<th>邮箱</th>
 										<th>所在地</th>
 										<th>客人级别</th>
 										<th>编辑</th>
-										<th>删除</th>
 									</tr>
 								</thead>
 								
@@ -121,29 +119,19 @@
 						//defaultContent: '<a class="btn btn-success btn-xs"><span class="fa fa-edit"></span> 编辑</a>&nbsp;<a class="btn btn-danger btn-xs"><span class="fa fa-minus-circle"></span> 删除</a>',
 						orderable: false,
 						render: function ( data, type, full, meta ) {
-						return '<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a>';
+						return '<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a> &nbsp; <a class="btn btn-danger btn-xs" id="'+data+'"><span class="fa fa-minus-circle"></span> 删除</a>';
 						},
-						targets: 7
-					},	
-					{
-						data: "customerid",
-						//defaultContent: '<a class="btn btn-success btn-xs"><span class="fa fa-edit"></span> 编辑</a>&nbsp;<a class="btn btn-danger btn-xs"><span class="fa fa-minus-circle"></span> 删除</a>',
-						orderable: false,
-						render: function ( data, type, full, meta ) {
-						return '<a class="btn btn-danger btn-xs" id="'+data+'"><span class="fa fa-minus-circle"></span> 删除</a>';
-						},
-						targets: 8
+						targets: 6
 					},				             
 				    {
 					  orderable: false,
 					  searchable: false,
-				      targets: [0,1,2,3,4,5,6]
+				      targets: [0,1,2,3,4,5]
 				    },
 				],
 				columns: [
 		            { data: "customerid" },
 		            { data: "zname" },
-		            { data: "gender" },
 		            { data: "mobilephone" },
 		            { data: "email" },
 		            { data: "location" },
