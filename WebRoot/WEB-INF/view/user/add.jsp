@@ -37,56 +37,55 @@
           <h4 class="panel-title">用户基本信息</h4>
           <p>填写下表，完成用户创建。</p>
         </div>
-        <form class="form-horizontal form-bordered" id="form">
+        <form class="form-horizontal" id="form">
         <div class="panel-body panel-body-nopadding">
           
-          
-            <div class="form-group">
-              <label class="col-sm-3 control-label">登录名</label>
-              <div class="col-sm-6">
-                <input type="text" name="loginname" placeholder="登录名" class="form-control" />
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="col-sm-3 control-label">姓名</label>
-              <div class="col-sm-6">
-                <input type="text" name="name" placeholder="姓名" class="form-control" />
-              </div>
-            </div> 
-            <div class="form-group">
-              <label class="col-sm-3 control-label">密码</label>
-              <div class="col-sm-6">
-                <input type="text" name="pwd" placeholder="登录名" class="form-control" />
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="col-sm-3 control-label">重复密码</label>
-              <div class="col-sm-6">
-                <input type="text" name="repwd" placeholder="姓名" class="form-control" />
-              </div>
-            </div>             
-            <div class="form-group">
-              <label class="col-sm-3 control-label">手机</label>
-              <div class="col-sm-6">
-                <input type="text" name="mobilephone" placeholder="手机" class="form-control" />
-              </div>
-            </div>            
-            <div class="form-group">
-              <label class="col-sm-3 control-label">邮箱</label>
-              <div class="col-sm-6">
-                <input type="text" name="email" placeholder="邮箱" class="form-control"  />
-              </div>
-            </div>      
+          	<div class="section-block">
+	            <div class="form-group col-sm-4">
+	              <label class="col-sm-4 control-label">用户名</label>
+	              <div class="col-sm-8">
+	                <input type="text" name="loginname" placeholder="用户名" class="form-control" />
+	              </div>
+	            </div>
+	            <div class="form-group col-sm-4">
+	              <label class="col-sm-4 control-label">密码</label>
+	              <div class="col-sm-8">
+	                <input type="text" name="pwd" placeholder="登录名" class="form-control" />
+	              </div>
+	            </div>
+	            <div class="form-group col-sm-4">
+	              <label class="col-sm-4 control-label">重复密码</label>
+	              <div class="col-sm-8">
+	                <input type="text" name="repwd" placeholder="姓名" class="form-control" />
+	              </div>
+	            </div>  
+	        </div>
+	        <div class="section-block">
+	            <div class="form-group col-sm-4">
+	              <label class="col-sm-4 control-label">姓名</label>
+	              <div class="col-sm-8">
+	                <input type="text" name="name" placeholder="姓名" class="form-control" />
+	              </div>
+	            </div> 
+	            <div class="form-group col-sm-4">
+	              <label class="col-sm-4 control-label">手机</label>
+	              <div class="col-sm-8">
+	                <input type="text" name="mobilephone" placeholder="手机" class="form-control" />
+	              </div>
+	            </div>            
+	            <div class="form-group col-sm-4">
+	              <label class="col-sm-4 control-label">邮箱</label>
+	              <div class="col-sm-8">
+	                <input type="text" name="email" placeholder="邮箱" class="form-control"  />
+	              </div>
+	            </div>      
+	        </div>
         </div><!-- panel-body -->
         
-        <div class="panel-footer">
-			 <div class="row">
-				<div class="col-sm-6 col-sm-offset-3">
-				  <button class="btn btn-primary">提交</button>&nbsp;
-				  <button class="btn btn-default" id="btn-back">取消</button>
-				</div>
-			 </div>
-		  </div><!-- panel-footer -->
+        <div class="panel-footer align-center">
+			<button class="btn btn-primary">提交</button>&nbsp;
+			<button class="btn btn-default" id="btn-back">取消</button>
+		</div><!-- panel-footer -->
      </form>   
       </div><!-- panel -->
 

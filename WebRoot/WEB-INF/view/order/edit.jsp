@@ -183,8 +183,11 @@
           </div>
           <h4 class="panel-title">沟通列表 </h4>
           </div>
-          <div class="panel-body panel-body-nopadding">
-            <div>这里是沟通列表</div>
+          <div class="panel-body">
+              <div class="conversation-list">
+                  <div class="conversation-title"><span class="sender-name">Lucy</span> <span class="send-time">2016-06-24 11:08</span><a class="attachment" href="javascript:void(0)"></a></div>
+                  <div class="content">请问埃及几月份最好玩？</div>
+              </div>
           </div>
       </div><!-- end of panel 沟通列表 -->
 
@@ -197,19 +200,24 @@
           </div>
           <h4 class="panel-title">注释列表 </h4>
           </div>
-          <div class="panel-body panel-body-nopadding">
-            <div>这里是注释列表</div>
-            
+          <div class="panel-body">
+              <div class="conversation-list">
+                  <div class="conversation-title"><span class="sender-name">Lucy</span> <span class="send-time">2016-06-20 11:08</span><a class="attachment" href="javascript:void(0)"></a></div>
+                  <div class="content">继续跟进中</div>
+              </div>
+              <div class="conversation-list">
+                  <div class="conversation-title"><span class="sender-name">Lucy</span> <span class="send-time">2016-06-24 11:08</span><a class="attachment" href="javascript:void(0)"></a></div>
+                  <div class="content">已经成单</div>
+              </div>
             <!-- 添加注释 -->
             <div class="form-group col-sm-6 col-sm-offset-3">
                   <textarea class="form-control" rows="5"></textarea>
             </div>
             <div class="form-group col-sm-12 align-center">
               <a class="btn btn-primary" href="#">添加注释</a>
-          </div>
+            </div>
           </div>
       </div><!-- end of panel 注释 -->
-
 
 
 

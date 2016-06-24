@@ -137,7 +137,7 @@
         </div><!-- panel-body -->
         
         <div class="panel-footer align-center">
-			<button class="btn btn-primary">提交</button>&nbsp;
+			<button class="btn btn-primary">保存</button>&nbsp;
 			<button class="btn btn-default" id="btn-back">取消</button>
 		</div><!-- panel-footer -->
      </form>   

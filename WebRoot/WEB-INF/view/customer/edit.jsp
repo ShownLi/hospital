@@ -139,7 +139,7 @@
         </div><!-- panel-body -->
         
         <div class="panel-footer align-center">
-			<button class="btn btn-primary">提交</button>&nbsp;
+			<button class="btn btn-primary">保存</button>&nbsp;
 			<button class="btn btn-default" id="btn-back">取消</button>
 			<input type="hidden" name="customerid" value="${customer.customerid }" />
 		</div><!-- panel-footer -->
@@ -215,28 +215,32 @@
 		</div><!-- end of panel 询单  -->
 		
 		<!-- panel 注释 -->
-		<div class="panel panel-default">
-		    <div class="panel-heading">
-				<div class="panel-btns">
-				    <a href="" class="panel-close">&times;</a>
-				    <a href="" class="minimize">&minus;</a>
-				</div>
-				<h4 class="panel-title">注释列表 </h4>
-		    </div>
-		    <div class="panel-body panel-body-nopadding">
-		    	<div class="note-list">这里是注释列表</div>
-		    	<div class="note-list">这里是注释列表</div>
-		    	<div class="note-list">这里是注释列表</div>
-		    	
-		    	<!-- 添加注释 -->
-			    <div class="form-group col-sm-6 col-sm-offset-3">
-			       		<textarea class="form-control" rows="5"></textarea>
-			    </div>
-			    <div class="form-group col-sm-12 align-center">
-						<a class="btn btn-primary" href="#">添加注释</a>
-				</div>
-		    </div>
-		</div><!-- end of panel 注释 -->
+	    <div class="panel panel-default">
+	        <div class="panel-heading">
+	        <div class="panel-btns">
+	            <a href="" class="panel-close">&times;</a>
+	            <a href="" class="minimize">&minus;</a>
+	        </div>
+	        <h4 class="panel-title">注释列表 </h4>
+	        </div>
+	        <div class="panel-body">
+	            <div class="conversation-list">
+	                <div class="conversation-title"><span class="sender-name">Lucy</span> <span class="send-time">2016-06-20 11:08</span><a class="attachment" href="javascript:void(0)"></a></div>
+	                <div class="content">继续跟进中</div>
+	            </div>
+	            <div class="conversation-list">
+	                <div class="conversation-title"><span class="sender-name">Lucy</span> <span class="send-time">2016-06-24 11:08</span><a class="attachment" href="javascript:void(0)"></a></div>
+	                <div class="content">已经成单</div>
+	            </div>
+	          <!-- 添加注释 -->
+	          <div class="form-group col-sm-6 col-sm-offset-3">
+	                <textarea class="form-control" rows="5"></textarea>
+	          </div>
+	          <div class="form-group col-sm-12 align-center">
+	            <a class="btn btn-primary" href="#">添加注释</a>
+	          </div>
+	        </div>
+	    </div><!-- end of panel 注释 -->
 
 
 			</div>

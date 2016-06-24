@@ -45,3 +45,37 @@
 .note-list{
 	padding: 5px 15px;
 }
+.send-time{
+	margin-left: 30px;
+}
+.conversation-list {
+	border-bottom: 1px solid #dedede;
+	padding: 6px 0;
+	margin: 6px 0;
+}
+.conversation-list:last-child{
+	border-bottom: none;
+}
+.conversation-list .content{
+	color: #333;
+}
+.conversation-title {
+	margin-bottom: 6px;
+}
+.conversation-title span{
+	line-height: 20px;
+	display: inline-block;
+	vertical-align: middle;
+}
+.attachment{
+	width: 20px;
+	height: 20px;
+	background: url(../images/tourmade/i-attachment.png) no-repeat;
+	background-size: 100%;
+	margin-left: 30px;
+}
+.sorting,
+.sorting_asc,
+.sorting_desc{
+	background: none !important;
+}

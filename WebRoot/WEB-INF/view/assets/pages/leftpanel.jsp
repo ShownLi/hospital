@@ -49,7 +49,7 @@
                 <ul class="children">
                     <li><a href="${rootPath }agency/list.html"><i class="fa fa-caret-right"></i> 地接社列表</a></li>
                     <li><a href="${rootPath }agency/add.html"><i class="fa fa-caret-right"></i> 新增地接社</a></li>
-                    <li><a href="${rootPath }agency/add.html"><i class="fa fa-caret-right"></i> 新增销售</a></li>
+                    <li><a href="${rootPath }sale/add.html"><i class="fa fa-caret-right"></i> 新增销售</a></li>
                 </ul>
             </li>
             <li class="nav-parent"><a href=""><i class="fa fa-user"></i> <span>用户管理</span></a>

@@ -37,41 +37,81 @@
           <h4 class="panel-title">地接社基本信息</h4>
           <p>填写下表，完成地接社信息修改。</p>
         </div>
-        <form class="form-horizontal form-bordered" id="form">
+        <form class="form-horizontal" id="form">
         <div class="panel-body panel-body-nopadding">
-          
-            <div class="form-group">
-              <label class="col-sm-3 control-label">地接社名 <span class="asterisk">*</span></label>
-              <div class="col-sm-5">
-                <input type="text" name="name" placeholder="地接社名" class="form-control" value="${agency.name }" />
-              </div>
-            </div>         
-            <div class="form-group">
-              <label class="col-sm-3 control-label">语言 <span class="asterisk">*</span></label>
-
-                <input type="text" id="language" name="language" class="language-select col-sm-5" value="${agency.language }"/>
-
-            </div>              
-            <div class="form-group">
-              <label class="col-sm-3 control-label">国家 <span class="asterisk">*</span></label>
-              <input type="text" id="country" name="country" class="country-select col-sm-5" value="${agency.country }"/>
-
-            </div>            
+          	<div class="section-block">
+	            <div class="form-group col-sm-4">
+	              <label class="col-sm-4 control-label">地接社名 <span class="asterisk">*</span></label>
+	              <div class="col-sm-8">
+	                <input type="text" name="name" placeholder="地接社名" class="form-control" value="${agency.name }" />
+	              </div>
+	            </div>         
+	            <div class="form-group col-sm-4">
+	              <label class="col-sm-4 control-label">语言 <span class="asterisk">*</span></label>
+	                <input type="text" id="language" name="language" class="language-select col-sm-8" value="${agency.language }"/>
+	            </div>              
+	            <div class="form-group col-sm-4">
+	              <label class="col-sm-4 control-label">国家 <span class="asterisk">*</span></label>
+	              <input type="text" id="country" name="country" class="country-select col-sm-8" value="${agency.country }"/>
+	            </div>            
+	        </div>
         </div><!-- panel-body -->
         
-        <div class="panel-footer">
-			 <div class="row">
-				<div class="col-sm-6 col-sm-offset-3">
-				  <button class="btn btn-primary">提交</button>&nbsp;
-				  <button class="btn btn-default" id="btn-back">取消</button>
-				  <input type="hidden" name="agency_id" value="${agency.agency_id }" />
-				</div>
-			 </div>
+        <div class="panel-footer align-center">
+			<button class="btn btn-primary">保存</button>&nbsp;
+			<button class="btn btn-default" id="btn-back">取消</button>&nbsp;
+			<button class="btn btn-default">删除</button>
+			<input type="hidden" name="agency_id" value="${agency.agency_id }" />
 		  </div><!-- panel-footer -->
      </form>   
       </div><!-- panel -->
 
-
+ <!-- panel 沟通列表 -->
+      <div class="panel panel-default">
+          <div class="panel-heading">
+          <div class="panel-btns">
+              <a href="" class="panel-close">&times;</a>
+              <a href="" class="minimize">&minus;</a>
+          </div>
+          <h4 class="panel-title">销售列表 </h4>
+          </div>
+          <div class="panel-body">
+              <table class="table">
+					<thead>
+						<tr>
+							<th>序号</th>
+							<th>姓名</th>
+							<th>地接社</th>
+							<th>销售编号</th>
+							<th>邮箱</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>1</td>
+							<td>张三</td>
+							<td>龙润国际</td>
+							<td>001</td>
+							<td>balbala@tourmade.com</td>
+						</tr>
+						<tr>
+							<td>2</td>
+							<td>张三</td>
+							<td>龙润国际</td>
+							<td>001</td>
+							<td>balbala@tourmade.com</td>
+						</tr>
+						<tr>
+							<td>3</td>
+							<td>张三</td>
+							<td>龙润国际</td>
+							<td>001</td>
+							<td>balbala@tourmade.com</td>
+						</tr>
+					</tbody>
+				</table>
+          </div>
+      </div><!-- end of panel 沟通列表 -->
 
 			</div>
 

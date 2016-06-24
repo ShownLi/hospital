@@ -43,41 +43,35 @@
           
             
             <div class="form-group">
-              <label class="col-sm-3 control-label">销售名称 <span class="asterisk">*</span></label>
-              <div class="col-sm-6">
+              <label class="col-sm-4 control-label">销售名称 <span class="asterisk">*</span></label>
+              <div class="col-sm-4">
                 <input type="text" name="name" placeholder="销售名称" class="form-control" />
               </div>
             </div>
             <div class="form-group">
-              <label  class="col-sm-3 control-label">所属地接社 <span class="asterisk">*</span></label>
-
-                <input type="text" name="agency" class="agency-select col-sm-6"/>
-
+              <label  class="col-sm-4 control-label">所属地接社 <span class="asterisk">*</span></label>
+              <input type="text" name="agency" class="agency-select col-sm-4"/>
             </div>       
             <div class="form-group">
-              <label class="col-sm-3 control-label">销售编码 <span class="asterisk">*</span></label>
-              <div class="col-sm-6">
+              <label class="col-sm-4 control-label">销售编码 <span class="asterisk">*</span></label>
+              <div class="col-sm-4">
                 <input type="text" name="code" placeholder="销售编码" class="form-control" />
               </div>
             </div> 	            			
             <div class="form-group">
-              <label class="col-sm-3 control-label">邮件地址 <span class="asterisk">*</span></label>
-              <div class="col-sm-6">
+              <label class="col-sm-4 control-label">邮件地址 <span class="asterisk">*</span></label>
+              <div class="col-sm-4">
                 <input type="text" name="email" placeholder="邮件地址" class="form-control" />
               </div>
             </div> 	          
         </div><!-- panel-body -->
         
-        <div class="panel-footer">
-			 <div class="row">
-				<div class="col-sm-6 col-sm-offset-3">
-				  <button class="btn btn-primary">提交</button>&nbsp;
-				  <button class="btn btn-default" id="btn-back">取消</button>
-				</div>
-			 </div>
-		  </div><!-- panel-footer -->
-     </form>   
-      </div><!-- panel -->
+        <div class="panel-footer align-center">
+			<button class="btn btn-primary">提交</button>&nbsp;
+			<button class="btn btn-default" id="btn-back">取消</button>
+		</div><!-- panel-footer -->
+    </form>   
+    </div><!-- panel -->
 
 
 

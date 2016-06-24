@@ -38,71 +38,68 @@
           <h4 class="panel-title">系统参数基本信息</h4>
           <p>填写下表，完成系统参数创建。</p>
         </div>
-        <form class="form-horizontal form-bordered" id="form">
+        <form class="form-horizontal" id="form">
         <div class="panel-body panel-body-nopadding">
           
           
-            
-            <div class="form-group">
-              <label class="col-sm-3 control-label">作用域 <span class="asterisk">*</span></label>
-              <div class="col-sm-6">
-                <input type="text" name="domain" placeholder="系统参数名" class="form-control" />
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="col-sm-3 control-label">值 <span class="asterisk">*</span></label>
-              <div class="col-sm-6">
-                <input type="text" name="value" placeholder="值" class="form-control" />
-              </div>
-            </div> 			
-            <div class="form-group">
-              <label class="col-sm-3 control-label">描述 <span class="asterisk">&nbsp;</span></label>
-              <div class="col-sm-6">
-                <input type="text" name="depict" placeholder="描述" class="form-control" />
-              </div>
-            </div> 	
-            <div class="form-group">
-              <label class="col-sm-3 control-label">中文 <span class="asterisk">*</span></label>
-              <div class="col-sm-6">
-                <input type="text" name="chinese" placeholder="中文" class="form-control" />
-              </div>
-            </div>    
-            <div class="form-group">
-              <label class="col-sm-3 control-label">英文 <span class="asterisk">&nbsp;</span></label>
-              <div class="col-sm-6">
-                <input type="text" name="english" placeholder="描述" class="form-control" />
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="col-sm-3 control-label">排序标记 <span class="asterisk">*</span></label>
-              <div class="col-sm-6">
-                <input type="text" name="sort" placeholder="排序标记" class="form-control" />
-              </div>
-            </div>
-                <div class="form-group">
-                  <label class="col-sm-3 control-label">是否显示 <span class="asterisk">&nbsp;</span></label>
-                  <div class="col-sm-9">
-                    <div class="rdio rdio-primary">
-                      <input type="radio" id="yes" value="1" name="isdisplay" checked="true" />
-                      <label for="yes">是</label>
-                    </div><!-- rdio -->
-                    <div class="rdio rdio-primary">
-                      <input type="radio" id="no" value="0" name="isdisplay">
-                      <label for="no">否</label>
-                    </div><!-- rdio -->
-                    <label class="error" for="language"></label>
-                  </div>
-                </div><!-- form-group -->                                             
+	        <div class="section-block">    
+	            <div class="form-group col-sm-4">
+	              <label class="col-sm-4 control-label">作用域 <span class="asterisk">*</span></label>
+	              <div class="col-sm-8">
+	                <input type="text" name="domain" placeholder="系统参数名" class="form-control" />
+	              </div>
+	            </div>
+	            <div class="form-group col-sm-4">
+	              <label class="col-sm-4 control-label">值 <span class="asterisk">*</span></label>
+	              <div class="col-sm-8">
+	                <input type="text" name="value" placeholder="值" class="form-control" />
+	              </div>
+	            </div> 			
+	            <div class="form-group col-sm-4">
+	              <label class="col-sm-4 control-label">描述 <span class="asterisk">&nbsp;</span></label>
+	              <div class="col-sm-8">
+	                <input type="text" name="depict" placeholder="描述" class="form-control" />
+	              </div>
+	            </div> 	
+	            <div class="form-group col-sm-4">
+	              <label class="col-sm-4 control-label">中文 <span class="asterisk">*</span></label>
+	              <div class="col-sm-8">
+	                <input type="text" name="chinese" placeholder="中文" class="form-control" />
+	              </div>
+	            </div>    
+	            <div class="form-group col-sm-4">
+	              <label class="col-sm-4 control-label">英文 <span class="asterisk">&nbsp;</span></label>
+	              <div class="col-sm-8">
+	                <input type="text" name="english" placeholder="描述" class="form-control" />
+	              </div>
+	            </div>
+	            <div class="form-group col-sm-4">
+	              <label class="col-sm-4 control-label">排序标记 <span class="asterisk">*</span></label>
+	              <div class="col-sm-8">
+	                <input type="text" name="sort" placeholder="排序标记" class="form-control" />
+	              </div>
+	            </div>
+	            <div class="form-group col-sm-4">
+	              <label class="col-sm-4 control-label">是否显示 <span class="asterisk">&nbsp;</span></label>
+	              <div class="col-sm-8">
+	                <div class="rdio rdio-primary rdio-inline">
+	                  <input type="radio" id="yes" value="1" name="isdisplay" checked="true" />
+	                  <label for="yes">是</label>
+	                </div><!-- rdio -->
+	                <div class="rdio rdio-primary rdio-inline">
+	                  <input type="radio" id="no" value="0" name="isdisplay">
+	                  <label for="no">否</label>
+	                </div><!-- rdio -->
+	                <label class="error" for="language"></label>
+	              </div>
+	            </div><!-- form-group -->   
+	        </div>                                          
         </div><!-- panel-body -->
         
-        <div class="panel-footer">
-			 <div class="row">
-				<div class="col-sm-6 col-sm-offset-3">
-				  <button class="btn btn-primary">提交</button>&nbsp;
-				  <button class="btn btn-default" id="btn-back">取消</button>
-				</div>
-			 </div>
-		  </div><!-- panel-footer -->
+        <div class="panel-footer align-center">
+			<button class="btn btn-primary">提交</button>&nbsp;
+			<button class="btn btn-default" id="btn-back">取消</button>
+		</div><!-- panel-footer -->
      </form>   
       </div><!-- panel -->
 

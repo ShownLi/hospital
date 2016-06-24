@@ -37,33 +37,30 @@
           <h4 class="panel-title">地接社基本信息</h4>
           <p>填写下表，完成地接社创建。</p>
         </div>
-        <form class="form-horizontal form-bordered" id="form">
+        <form class="form-horizontal" id="form">
         <div class="panel-body panel-body-nopadding">
           
           
-            
-            <div class="form-group">
-              <label class="col-sm-3 control-label">地接社名 <span class="asterisk">*</span></label>
-              <div class="col-sm-5">
-                <input type="text" name="name" placeholder="地接社名" class="form-control" />
-              </div>
-            </div>			   
-            <div class="form-group">
-              <label  class="col-sm-3 control-label">语言 <span class="asterisk">*</span></label>
-                <input type="text" name="language" class="language-select col-sm-5"/>
-            </div>                                 
-            <div class="form-group">
-              <label  class="col-sm-3 control-label">所在国家 <span class="asterisk">*</span></label>
-                <input type="text" name="country" class="country-select col-sm-5"/>
-            </div>
+            <div class="section-block">
+	            <div class="form-group col-sm-4">
+	              <label class="col-sm-4 control-label">地接社名 <span class="asterisk">*</span></label>
+	              <div class="col-sm-8">
+	                <input type="text" name="name" placeholder="地接社名" class="form-control" />
+	              </div>
+	            </div>			   
+	            <div class="form-group col-sm-4">
+	              <label  class="col-sm-4 control-label">语言 <span class="asterisk">*</span></label>
+	                <input type="text" name="language" class="language-select col-sm-8"/>
+	            </div>                                 
+	            <div class="form-group col-sm-4">
+	              <label  class="col-sm-4 control-label">所在国家 <span class="asterisk">*</span></label>
+	                <input type="text" name="country" class="country-select col-sm-8"/>
+	            </div>
+	        </div>
         </div><!-- panel-body -->
-        <div class="panel-footer">
-			 <div class="row">
-				<div class="col-sm-6 col-sm-offset-3">
-				  <button class="btn btn-primary">提交</button>&nbsp;
-				  <button class="btn btn-default" id="btn-back">取消</button>
-				</div>
-			 </div>
+        <div class="panel-footer align-center">
+			<button class="btn btn-primary">提交</button>&nbsp;
+			<button class="btn btn-default" id="btn-back">取消</button>
 		  </div><!-- panel-footer -->
      </form>   
       </div><!-- panel -->
@@ -79,6 +76,20 @@
 		<%@ include file="../assets/pages/rightpanel.jsp"%>
 	</section>
 
+<div class="nextModal modal fade" id="nextModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <div class="nextModal-title">您可以继续添销售，或返回到地接社列表页面</div>
+      </div>
+      <div class="modal-body align-center">
+        	<a class="btn btn-primary" href="${rootPath}sale/add.html">添加销售</a>
+        	<a class="btn btn-primary" href="${rootPath}agency/list.html">返回列表</a>
+      </div>
+    </div><!-- modal-content -->
+  </div><!-- modal-dialog -->
+</div><!-- modal -->
 
 <!-- Modal -->
 <div class="modal fade" id="msgModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -155,7 +166,8 @@
 			$.post('${rootPath}agency/add.do',f, function(result) {
 				var rmsg = result.msg;
 				if (result.success) {
-					window.parent.location = "${rootPath}agency/list.html";
+					//window.parent.location = "${rootPath}agency/list.html";
+					$("#nextModal").modal('show');
 				} else {
 					$("#msgModal").modal('show');
 				}
