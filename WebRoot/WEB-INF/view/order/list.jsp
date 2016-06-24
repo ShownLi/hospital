@@ -67,7 +67,7 @@
 										<td>成交</td>
 										<td>6人</td>
 										<td>45,000</td>
-										<td><a href="edit.html" class="btn btn-success btn-xs"><span class="fa fa-edit"></span> 编辑 删除</a>
+										<td><a href="edit.html" class="btn btn-success btn-xs"><span class="fa fa-edit"></span> 编辑</a> <a class="btn btn-danger btn-xs"><span class="fa fa-minus-circle"></span> 删除</a></td>
 									</tr>
 									<tr>
 										<td>2</td>
@@ -79,7 +79,7 @@
 										<td>成交</td>
 										<td>6人</td>
 										<td>45,000</td>
-										<td><a href="edit.html" class="btn btn-success btn-xs"><span class="fa fa-edit"></span> 编辑  删除</a>
+										<td><a href="edit.html" class="btn btn-success btn-xs"><span class="fa fa-edit"></span> 编辑</a> <a class="btn btn-danger btn-xs"><span class="fa fa-minus-circle"></span> 删除</a></td>
 									</tr>
 									<tr>
 										<td>3</td>
@@ -91,7 +91,7 @@
 										<td>成交</td>
 										<td>6人</td>
 										<td>45,000</td>
-										<td><a href="edit.html" class="btn btn-success btn-xs"><span class="fa fa-edit"></span> 编辑  删除</a>
+										<td><a href="edit.html" class="btn btn-success btn-xs"><span class="fa fa-edit"></span> 编辑</a> <a class="btn btn-danger btn-xs"><span class="fa fa-minus-circle"></span> 删除</a></td>
 									</tr>
 								</tbody>
 							</table>

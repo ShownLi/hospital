@@ -52,7 +52,6 @@
 										<th>状态</th>
 										<th>邮箱</th>
 										<th>编辑</th>
-										<th>删除</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -64,8 +63,8 @@
 										<td>官网表单</td>
 										<td>成交</td>
 										<td>balbala@tourmade.com</td>
-										<td><a href="edit.html" class="btn btn-success btn-xs"><span class="fa fa-edit"></span> 编辑</a>
-										<td><a class="btn btn-danger btn-xs"><span class="fa fa-minus-circle"></span> 删除</a></td>
+										<td><a href="edit.html" class="btn btn-success btn-xs"><span class="fa fa-edit"></span> 编辑</a> <a class="btn btn-danger btn-xs"><span class="fa fa-minus-circle"></span> 删除</a>
+										</td>
 									</tr>
 									<tr>
 										<td>2</td>
@@ -75,8 +74,8 @@
 										<td>在线客服</td>
 										<td>下单</td>
 										<td>balbala@tourmade.com</td>
-										<td><a href="edit.html" class="btn btn-success btn-xs"><span class="fa fa-edit"></span> 编辑</a>
-										<td><a class="btn btn-danger btn-xs"><span class="fa fa-minus-circle"></span> 删除</a></td>
+										<td><a href="edit.html" class="btn btn-success btn-xs"><span class="fa fa-edit"></span> 编辑</a> <a class="btn btn-danger btn-xs"><span class="fa fa-minus-circle"></span> 删除</a>
+										</td>
 									</tr>
 									<tr>
 										<td>3</td>
@@ -86,8 +85,7 @@
 										<td>微信咨询</td>
 										<td>待处理</td>
 										<td>balbala@tourmade.com</td>
-										<td><a href="edit.html" class="btn btn-success btn-xs"><span class="fa fa-edit"></span> 编辑</a>
-										<td><a class="btn btn-danger btn-xs"><span class="fa fa-minus-circle"></span> 删除</a></td>
+										<td><a href="edit.html" class="btn btn-success btn-xs"><span class="fa fa-edit"></span> 编辑</a> <a class="btn btn-danger btn-xs"><span class="fa fa-minus-circle"></span> 删除</a></td>
 									</tr>
 								</tbody>
 							</table>
