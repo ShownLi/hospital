@@ -69,7 +69,7 @@
 	            <div class="form-group col-sm-4">
 	            	<label class="col-sm-3 control-label">生日</label>
 	            	<div class="col-sm-9 input-group input-datepicker">
-		                <input type="text" class="form-control" placeholder="mm/dd/yyyy" id="birthday">
+		                <input type="text" class="datepicker form-control" placeholder="mm/dd/yyyy" id="birthday">
 		                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
 	                </div>
 	            </div> 
@@ -213,7 +213,7 @@
 		jQuery(document).ready(function() {
 			
 			 // Date Picker
-			  jQuery("#birthday").datepicker();
+			  jQuery(".datepicker").datepicker();
 			 
 			jQuery("#form").validate({
 				

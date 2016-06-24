@@ -70,7 +70,7 @@
 			            <div class="form-group col-sm-4">
 			            	<label class="col-sm-3 control-label">生日</label>
 			            	<div class="col-sm-9 input-group input-datepicker">
-				                <input type="text" class="form-control" placeholder="mm/dd/yyyy" id="birthday" value="${customer.birthday}">
+				                <input type="text" class="form-control datepicker" placeholder="mm/dd/yyyy" id="birthday" value="${customer.birthday}">
 				                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
 			                </div>
 			            </div> 
@@ -273,6 +273,7 @@
 
 	<%@ include file="../assets/pages/foot.jsp"%>
 	<script src="${rootPath}assets/js/select2.min.js"></script>
+	<script src="${rootPath}assets/js/jquery-ui-1.10.3.min.js"></script>
 	<script src="${rootPath}assets/js/jquery.validate.min.js"></script>
 	
 	<script type="text/javascript">
@@ -298,6 +299,10 @@
 		$('#female').attr('checked','true');
 	}
 	jQuery(document).ready(function() {
+
+		 // Date Picker
+			  jQuery(".datepicker").datepicker();
+
 		jQuery("#form").validate({
 			rules: {
 				name: "required",
