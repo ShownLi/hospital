@@ -26,14 +26,8 @@
             </ul>
         </div>
 
-        <h5 class="sidebartitle">导航栏</h5>
-        <ul class="nav nav-pills nav-stacked nav-bracket">
-        	<li class="nav-parent"><a href=""><i class="fa fa-user"></i> <span>客人管理</span></a>
-                <ul class="children">
-                    <li><a href="${rootPath }customer/list.html"><i class="fa fa-caret-right"></i> 客人列表</a></li>
-                    <li><a href="${rootPath }customer/add.html"><i class="fa fa-caret-right"></i> 新增客人</a></li>
-                </ul>
-            </li>    
+        <h5 class="sidebartitle"></h5>
+        <ul class="nav nav-pills nav-stacked nav-bracket">  
             <li class="nav-parent"><a href=""><i class="fa fa-user"></i> <span>询单管理</span></a>
                 <ul class="children">
                     <li><a href="${rootPath }case/list.html"><i class="fa fa-caret-right"></i> 询单列表</a></li>
@@ -52,6 +46,12 @@
                     <li><a href="${rootPath }sale/add.html"><i class="fa fa-caret-right"></i> 新增销售</a></li>
                 </ul>
             </li>
+            <li class="nav-parent"><a href=""><i class="fa fa-user"></i> <span>客人管理</span></a>
+                <ul class="children">
+                    <li><a href="${rootPath }customer/list.html"><i class="fa fa-caret-right"></i> 客人列表</a></li>
+                    <li><a href="${rootPath }customer/add.html"><i class="fa fa-caret-right"></i> 新增客人</a></li>
+                </ul>
+            </li>  
             <li class="nav-parent"><a href=""><i class="fa fa-user"></i> <span>用户管理</span></a>
                 <ul class="children">
                     <li><a href="${rootPath }user/list.html"><i class="fa fa-caret-right"></i> 用户列表</a></li>

@@ -15,14 +15,14 @@
 				<h2>
 					<i class="glyphicon glyphicon-cog"></i> 系统参数管理 <span>编辑系统参数</span>
 				</h2>
-				<div class="breadcrumb-wrapper">
+				<!-- <div class="breadcrumb-wrapper">
 					<span class="label">你在这里:</span>
 					<ol class="breadcrumb">
 						<li><a href="＃">CRM</a></li>
 						<li><a href="${rootPath }parameter/list.html">系统参数管理</a></li>
 						<li class="active">编辑系统参数</li>
 					</ol>
-				</div>
+				</div> -->
 			</div>
 
 			<div class="contentpanel">

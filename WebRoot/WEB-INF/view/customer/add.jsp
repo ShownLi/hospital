@@ -15,14 +15,14 @@
 				<h2>
 					<i class="fa fa-user"></i> 客人管理 <span>新增客人</span>
 				</h2>
-				<div class="breadcrumb-wrapper">
+				<!-- <div class="breadcrumb-wrapper">
 					<span class="label">你在这里:</span>
 					<ol class="breadcrumb">
 						<li><a href="＃">CRM</a></li>
 						<li><a href="${rootPath }user/list.html">客人管理</a></li>
 						<li class="active">新增客人</li>
 					</ol>
-				</div>
+				</div> -->
 			</div>
 
 			<div class="contentpanel">
@@ -69,7 +69,7 @@
 	            <div class="form-group col-sm-4">
 	            	<label class="col-sm-3 control-label">生日</label>
 	            	<div class="col-sm-9 input-group input-datepicker">
-		                <input type="text" class="form-control" placeholder="mm/dd/yyyy" id="birthday">
+		                <input type="text" class="datepicker form-control" placeholder="mm/dd/yyyy" id="birthday">
 		                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
 	                </div>
 	            </div> 
@@ -213,7 +213,7 @@
 		jQuery(document).ready(function() {
 			
 			 // Date Picker
-			  jQuery("#birthday").datepicker();
+			  jQuery(".datepicker").datepicker();
 			 
 			jQuery("#form").validate({
 				
