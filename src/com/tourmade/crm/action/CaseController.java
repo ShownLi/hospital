@@ -48,14 +48,42 @@ public class CaseController extends BaseSimpleFormController {
 	@RequestMapping(value = "/add.html", method = { RequestMethod.POST, RequestMethod.GET })
 	public String add(Model model) {
 		
-		String country = "crmcase.country";
-		String language = "crmcase.language";
-		List<DemoList> u = service.getParameterInfo(country);
-		List<DemoList> v = service.getParameterInfo(language);
-		JSONArray countryresult = JSONArray.fromObject(u);
-		JSONArray  languageresult = JSONArray.fromObject(v);
+		String country = "country";
+		String language = "case.language";
+		String contacttype = "case.contacttype";
+		String withwho = "case.withwho";
+		String hotel = "case.hotel";
+		String meals = "case.meals";
+		String guide = "case.guide";
+		String destination = "destination";
+		String source = "case.source";
+		List<DemoList> v1 = service.getParameterInfo(country);
+		List<DemoList> v2 = service.getParameterInfo(language);
+		List<DemoList> v3 = service.getParameterInfo(contacttype);
+		List<DemoList> v4 = service.getParameterInfo(withwho);
+		List<DemoList> v5 = service.getParameterInfo(hotel);
+		List<DemoList> v6 = service.getParameterInfo(meals);
+		List<DemoList> v7 = service.getParameterInfo(guide);
+		List<DemoList> v8 = service.getParameterInfo(destination);
+		List<DemoList> v9 = service.getParameterInfo(source);
+		JSONArray countryresult = JSONArray.fromObject(v1);
+		JSONArray languageresult = JSONArray.fromObject(v2);
+		JSONArray contactresult = JSONArray.fromObject(v3);
+		JSONArray withresult = JSONArray.fromObject(v4);
+		JSONArray hotelresult = JSONArray.fromObject(v5);
+		JSONArray mealsresult = JSONArray.fromObject(v6);
+		JSONArray guideresult = JSONArray.fromObject(v7);
+		JSONArray destinationresult = JSONArray.fromObject(v8);
+		JSONArray sourceresult = JSONArray.fromObject(v9);
 		model.addAttribute("country",countryresult);
 		model.addAttribute("language",languageresult);
+		model.addAttribute("contacttype",contactresult);
+		model.addAttribute("withwho",withresult);
+		model.addAttribute("hotel",hotelresult);
+		model.addAttribute("meals",mealsresult);
+		model.addAttribute("guide",guideresult);
+		model.addAttribute("destination",destinationresult);
+		model.addAttribute("source",sourceresult);
 		
 		return "/case/add";
 	}
