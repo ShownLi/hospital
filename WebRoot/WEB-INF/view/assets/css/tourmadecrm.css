@@ -49,9 +49,22 @@
 	margin-left: 30px;
 }
 .conversation-list {
-	border-bottom: 1px solid #dedede;
+	border-bottom: 1px dotted #dedede;
 	padding: 6px 0;
 	margin: 6px 0;
+	padding-left: 18px;
+	position: relative;
+}
+.conversation-list::before{
+	content: "";
+	display: inline-block;
+	width: 5px;
+	height: 5px;
+	border-radius: 5px;
+	background-color: #999;
+	position: absolute;
+	top: 15px;
+	left: 0;
 }
 .conversation-list:last-child{
 	border-bottom: none;
