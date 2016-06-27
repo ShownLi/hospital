@@ -141,14 +141,14 @@
 				],
 				columns: [
 		            { data: "customerid" },
-		            { data: "cname" },
+		            { data: "zname" },
 		            { data: "ename" },
 		            { data: "location" },
 		            { data: "level" },
 		            { data: "agegroup" },
 		            { data: "gender" },
 		            { data: "mobilephone" },
-		            { data: "emial" }
+		            { data: "email" }
 		        ]
 			});
 			
