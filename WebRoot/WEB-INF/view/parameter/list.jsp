@@ -16,13 +16,13 @@
 				<h2>
 					<i class="glyphicon glyphicon-cog"></i> 系统参数管理 <span>系统参数列表</span>
 				</h2>
-				<div class="breadcrumb-wrapper">
+				<!-- <div class="breadcrumb-wrapper">
 					<span class="label">你在这里:</span>
 					<ol class="breadcrumb">
 						<li><a href="#">CRM</a></li>
 						<li class="active">系统参数管理</li>
 					</ol>
-				</div>
+				</div> -->
 			</div>
 
 			<div class="contentpanel">

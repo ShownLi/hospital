@@ -16,13 +16,13 @@
 				<h2>
 					<i class="fa fa-user"></i> 订单管理 <span>订单列表</span>
 				</h2>
-				<div class="breadcrumb-wrapper">
+				<!-- <div class="breadcrumb-wrapper">
 					<span class="label">你在这里:</span>
 					<ol class="breadcrumb">
 						<li><a href="#">CRM</a></li>
 						<li class="active">订单管理</li>
 					</ol>
-				</div>
+				</div> -->
 			</div>
 
 			<div class="contentpanel">
