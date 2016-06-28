@@ -16,13 +16,13 @@
 				<h2>
 					<i class="glyphicon glyphicon-briefcase"></i> 地接社管理 <span>地接社列表</span>
 				</h2>
-				<div class="breadcrumb-wrapper">
+				<!-- <div class="breadcrumb-wrapper">
 					<span class="label">你在这里:</span>
 					<ol class="breadcrumb">
 						<li><a href="#">CRM</a></li>
 						<li class="active">地接社管理</li>
 					</ol>
-				</div>
+				</div> -->
 			</div>
 
 			<div class="contentpanel">
