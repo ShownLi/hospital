@@ -45,6 +45,9 @@
 									<tr>
 										<th>#</th>
 										<th>中文名</th>
+										<th>英文名</th>
+										<th>年龄段</th>
+										<th>性别</th>
 										<th>手机</th>
 										<th>邮箱</th>
 										<th>所在地</th>
@@ -123,7 +126,7 @@
 						render: function ( data, type, full, meta ) {
 						return '<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a> &nbsp; <a class="btn btn-danger btn-xs" id="'+data+'"><span class="fa fa-minus-circle"></span> 删除</a>';
 						},
-						targets: 6
+						targets: 9
 					},				             
 				    {
 					  orderable: false,
@@ -134,6 +137,9 @@
 				columns: [
 		            { data: "customerid" },
 		            { data: "zname" },
+		            { data: "ename" },
+		            { data: "agegroup" },
+		            { data: "gender" },
 		            { data: "mobilephone" },
 		            { data: "email" },
 		            { data: "location" },

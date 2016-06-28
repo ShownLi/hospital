@@ -11,6 +11,11 @@ import com.tourmade.crm.common.action.BaseSimpleFormController;
 @RequestMapping("/")
 public class MainController extends BaseSimpleFormController {
 
+	@RequestMapping(value = "/", method = { RequestMethod.POST, RequestMethod.GET })
+	public String In(Model model) {
+		return "/";
+	}
+	
 	@RequestMapping(value = "/blank.html", method = { RequestMethod.POST, RequestMethod.GET })
 	public String list(Model model) {
 		return "/blank";

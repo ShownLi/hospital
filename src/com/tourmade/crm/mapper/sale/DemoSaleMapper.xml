@@ -15,7 +15,7 @@
 		u.creat_time as creat_time,
 		v.agency_name as agency,
 		u.isdel as isdel
-		from tm_sale u join tm_agency v on u.agency_id = v.agency_id where u.isdel = 0
+		from tm_sale u join tm_agency v on u.agency_id = #{agency_id} where u.isdel = 0
 		<if test="pojo.seachValue!=null and pojo.seachValue!=''">
 			and
 			(
@@ -84,6 +84,7 @@
 		select
 		u.sale_id as saleid,
 		u.sale_name as name,
+		u.country as country,
 		u.agency_id as agency,
 		u.sale_code as code,
 		u.sale_email as email,

@@ -48,7 +48,7 @@ public class AgencyController extends BaseSimpleFormController {
 	@RequestMapping(value = "/add.html", method = { RequestMethod.POST, RequestMethod.GET })
 	public String add(Model model) {
 		
-		String country = "agency.country";
+		String country = "country";
 		String language = "agency.language";
 		List<DemoList> u = service.getParameterInfo(country);
 		List<DemoList> v = service.getParameterInfo(language);
