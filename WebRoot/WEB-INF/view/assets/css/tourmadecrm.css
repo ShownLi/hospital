@@ -92,6 +92,14 @@
 .sorting_desc{
 	background: none !important;
 }
-.nav-active .children{
-	/*display: block !important;*/
+#dataTable_filter{
+	display: none;
+}
+#dataTable_wrapper{
+	position: relative;
+}
+#dataTable_length{
+	position: absolute;
+	bottom: -15px;
+	left: 265px;
 }

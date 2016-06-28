@@ -31,8 +31,7 @@
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						<div class="panel-btns">
-							<a href="" class="panel-close">&times;</a> <a href=""
-								class="minimize">&minus;</a>
+							<a href="" class="minimize">&minus;</a>
 						</div>
 						<!-- panel-btns -->
 						<h3 class="panel-title">数据列表</h3>
@@ -103,6 +102,9 @@
 	<script type="text/javascript">
 	
 		jQuery(document).ready(function() {
+
+			$(".nav-parent").eq(3).addClass("nav-active");
+      		$(".nav-parent").eq(3).find(".children").show();	
 			
 			var t = jQuery('#dataTable').DataTable({
 				pageLength: 10,

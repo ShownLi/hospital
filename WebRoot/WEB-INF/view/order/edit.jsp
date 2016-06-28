@@ -31,7 +31,6 @@
 		<div class="panel panel-default">
         <div class="panel-heading">
           <div class="panel-btns">
-            <a href="" class="panel-close">&times;</a>
             <a href="" class="minimize">&minus;</a>
           </div>
           <h4 class="panel-title">订单基本信息</h4>
@@ -93,7 +92,6 @@
           <div class="panel-heading">
 
               <div class="panel-btns">
-                  <a href="" class="panel-close">&times;</a>
                   <a href="" class="minimize">&minus;</a>
               </div>
               <h4 class="panel-title">成行信息</h4>
@@ -157,15 +155,9 @@
               <form class="form-horizontal form4">
                   <div class="section-block">
                       <div class="form-group col-sm-6">
-                        <label class="col-sm-4 control-label">最后回复时间</label>
-                        <div class="col-sm-8">
-                          <input type="text" name="last_response" placeholder="最后回复时间" class="form-control" readonly value="" />
-                        </div>
-                      </div>
-                      <div class="form-group col-sm-6">
                         <label class="col-sm-4 control-label">若未成行，原因是</label>
                         <div class="col-sm-8">
-                          <textarea class="form-control" placeholder="若未成行，原因是" rows="3"></textarea>
+                          <input class="form-control reason-select" placeholder="若未成行，原因是" />
                         </div>
                       </div>
                   </div><!-- panel-body -->
@@ -178,7 +170,6 @@
       <div class="panel panel-default">
           <div class="panel-heading">
           <div class="panel-btns">
-              <a href="" class="panel-close">&times;</a>
               <a href="" class="minimize">&minus;</a>
           </div>
           <h4 class="panel-title">沟通列表 </h4>
@@ -195,7 +186,6 @@
       <div class="panel panel-default">
           <div class="panel-heading">
           <div class="panel-btns">
-              <a href="" class="panel-close">&times;</a>
               <a href="" class="minimize">&minus;</a>
           </div>
           <h4 class="panel-title">注释列表 </h4>
@@ -218,10 +208,6 @@
             </div>
           </div>
       </div><!-- end of panel 注释 -->
-
-
-
-
 			</div>
 
 		</div>
@@ -316,15 +302,9 @@
           <form class="form-horizontal form2">
               <div class="section-block noline">
                   <div class="form-group col-sm-12">
-                    <label class="col-sm-4 control-label">最后回复时间</label>
-                    <div class="col-sm-8">
-                      <input type="text" name="last_response" placeholder="最后回复时间" class="form-control" readonly value="" />
-                    </div>
-                  </div>
-                  <div class="form-group col-sm-12">
                     <label class="col-sm-4 control-label">若未成行，原因是</label>
                     <div class="col-sm-8">
-                      <textarea class="form-control" placeholder="若未成行，原因是" rows="3"></textarea>
+                      <input class="form-control reason-select" placeholder="若未成行，原因是" />
                     </div>
                   </div>
               </div><!-- panel-body -->
@@ -364,10 +344,20 @@
 	
 	<script type="text/javascript">
 		jQuery(document).ready(function() {
+
+      // var p = ${reason};
+  
+      // $(".reason-select").select2({
+      //     data: p
+      // })
 			
+      $(".nav-parent").eq(1).addClass("nav-active");
+      $(".nav-parent").eq(1).find(".children").show();
+
 			// Date Picker
 			jQuery(".datepicker").datepicker();
 			
+
 			$("#btn-chengxing").click(function(){
           $(".cModal").modal('show');
           return false;

@@ -31,7 +31,6 @@
 		<div class="panel panel-default">
         <div class="panel-heading">
           <div class="panel-btns">
-            <a href="" class="panel-close">&times;</a>
             <a href="" class="minimize">&minus;</a>
           </div>
           <h4 class="panel-title">地接社基本信息</h4>
@@ -62,7 +61,7 @@
 			<button class="btn btn-default" id="btn-back">取消</button>&nbsp;
 			<button class="btn btn-default">删除</button>
 			<input type="hidden" name="agency_id" value="${agency.agency_id }" />
-		  </div><!-- panel-footer -->
+		</div><!-- panel-footer -->
      </form>   
       </div><!-- panel -->
 
@@ -70,7 +69,6 @@
       <div class="panel panel-default">
           <div class="panel-heading">
           <div class="panel-btns">
-              <a href="" class="panel-close">&times;</a>
               <a href="" class="minimize">&minus;</a>
           </div>
           <h4 class="panel-title">销售列表 </h4>
@@ -84,6 +82,7 @@
 							<th>地接社</th>
 							<th>销售编号</th>
 							<th>邮箱</th>
+							<tr>编辑</tr>
 						</tr>
 					</thead>
 					<tbody>
@@ -93,6 +92,7 @@
 							<td>龙润国际</td>
 							<td>001</td>
 							<td>balbala@tourmade.com</td>
+							<td><a href="edit.html" class="btn btn-success btn-xs"><span class="fa fa-edit"></span> 编辑</a> <a class="btn btn-danger btn-xs"><span class="fa fa-minus-circle"></span> 删除</a></td>
 						</tr>
 						<tr>
 							<td>2</td>
@@ -100,6 +100,7 @@
 							<td>龙润国际</td>
 							<td>001</td>
 							<td>balbala@tourmade.com</td>
+							<td><a href="edit.html" class="btn btn-success btn-xs"><span class="fa fa-edit"></span> 编辑</a> <a class="btn btn-danger btn-xs"><span class="fa fa-minus-circle"></span> 删除</a></td>
 						</tr>
 						<tr>
 							<td>3</td>
@@ -107,10 +108,13 @@
 							<td>龙润国际</td>
 							<td>001</td>
 							<td>balbala@tourmade.com</td>
+							<td><a href="edit.html" class="btn btn-success btn-xs"><span class="fa fa-edit"></span> 编辑</a> <a class="btn btn-danger btn-xs"><span class="fa fa-minus-circle"></span> 删除</a></td>
 						</tr>
 					</tbody>
 				</table>
           </div>
+          <div class="panel-footer align-center">
+			<a class="btn btn-primary" href="${rootPath}sale/add.html">新增销售</a>
       </div><!-- end of panel 沟通列表 -->
 
 			</div>
@@ -156,6 +160,10 @@
 	})
 
 	jQuery(document).ready(function() {
+
+		$(".nav-parent").eq(3).addClass("nav-active");
+      	$(".nav-parent").eq(3).find(".children").show();
+      	
 		jQuery("#form").validate({
 			rules: {
 				name: "required",

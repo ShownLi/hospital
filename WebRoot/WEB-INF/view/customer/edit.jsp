@@ -31,7 +31,6 @@
 		<div class="panel panel-default">
         <div class="panel-heading">
           <div class="panel-btns">
-            <a href="" class="panel-close">&times;</a>
             <a href="" class="minimize">&minus;</a>
           </div>
           <h4 class="panel-title">客人基本信息</h4>
@@ -149,7 +148,6 @@
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<div class="panel-btns">
-				  <a href="" class="panel-close">&times;</a>
 				  <a href="" class="minimize">&minus;</a>
 				</div>
 				<h4 class="panel-title">询单列表</h4>
@@ -218,7 +216,6 @@
 	    <div class="panel panel-default">
 	        <div class="panel-heading">
 	        <div class="panel-btns">
-	            <a href="" class="panel-close">&times;</a>
 	            <a href="" class="minimize">&minus;</a>
 	        </div>
 	        <h4 class="panel-title">注释列表 </h4>
@@ -299,6 +296,9 @@
 		$('#female').attr('checked','true');
 	}
 	jQuery(document).ready(function() {
+
+		$(".nav-parent").eq(2).addClass("nav-active");
+      		$(".nav-parent").eq(2).find(".children").show();
 
 		 // Date Picker
 			  jQuery(".datepicker").datepicker();

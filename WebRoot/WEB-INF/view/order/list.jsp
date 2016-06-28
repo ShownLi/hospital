@@ -31,8 +31,7 @@
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						<div class="panel-btns">
-							<a href="" class="panel-close">&times;</a> <a href=""
-								class="minimize">&minus;</a>
+							<a href="" class="minimize">&minus;</a>
 						</div>
 						<!-- panel-btns -->
 						<h3 class="panel-title">订单列表</h3>
@@ -67,7 +66,7 @@
 										<td>成交</td>
 										<td>6人</td>
 										<td>45,000</td>
-										<td><a href="edit.html" class="btn btn-success btn-xs"><span class="fa fa-edit"></span> 编辑</a> <a class="btn btn-danger btn-xs"><span class="fa fa-minus-circle"></span> 删除</a></td>
+										<td><a href="edit.html" class="btn btn-success btn-xs"><span class="fa fa-edit"></span> 编辑</a></td>
 									</tr>
 									<tr>
 										<td>2</td>
@@ -79,7 +78,7 @@
 										<td>成交</td>
 										<td>6人</td>
 										<td>45,000</td>
-										<td><a href="edit.html" class="btn btn-success btn-xs"><span class="fa fa-edit"></span> 编辑</a> <a class="btn btn-danger btn-xs"><span class="fa fa-minus-circle"></span> 删除</a></td>
+										<td><a href="edit.html" class="btn btn-success btn-xs"><span class="fa fa-edit"></span> 编辑</a></td>
 									</tr>
 									<tr>
 										<td>3</td>
@@ -91,26 +90,17 @@
 										<td>成交</td>
 										<td>6人</td>
 										<td>45,000</td>
-										<td><a href="edit.html" class="btn btn-success btn-xs"><span class="fa fa-edit"></span> 编辑</a> <a class="btn btn-danger btn-xs"><span class="fa fa-minus-circle"></span> 删除</a></td>
+										<td><a href="edit.html" class="btn btn-success btn-xs"><span class="fa fa-edit"></span> 编辑</a></td>
 									</tr>
 								</tbody>
 							</table>
 						</div>
 						<!-- table-responsive -->
-
-
-
 					</div>
 					<!-- panel-body -->
 				</div>
 				<!-- panel -->
-
-
-
-
-
 			</div>
-
 		</div>
 		<!-- mainpanel -->
 		<%@ include file="../assets/pages/rightpanel.jsp"%>
@@ -144,6 +134,9 @@
 	<script type="text/javascript">
 	
 		jQuery(document).ready(function() {
+
+			$(".nav-parent").eq(1).addClass("nav-active");
+      		$(".nav-parent").eq(1).find(".children").show();
 			
 			// var t = jQuery('#dataTable').DataTable({
 			// 	pageLength: 10,

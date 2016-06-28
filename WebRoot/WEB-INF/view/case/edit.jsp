@@ -31,7 +31,6 @@
 		<div class="panel panel-default">
         <div class="panel-heading">
           <div class="panel-btns">
-            <a href="" class="panel-close">&times;</a>
             <a href="" class="minimize">&minus;</a>
           </div>
           <h4 class="panel-title">询单基本信息</h4>
@@ -197,7 +196,6 @@
     <div class="panel panel-default">
       <div class="panel-heading">
         <div class="panel-btns">
-          <a href="" class="panel-close">&times;</a>
           <a href="" class="minimize">&minus;</a>
         </div>
         <h4 class="panel-title">订单列表</h4>
@@ -218,7 +216,6 @@
                     <th>成团人数</th>
                     <th>成团价格</th>
                     <th>编辑</th>
-                    <th>删除</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -232,8 +229,7 @@
                     <td>成交</td>
                     <td>6人</td>
                     <td>45,000</td>
-                    <td><a href="edit.html" class="btn btn-success btn-xs"><span class="fa fa-edit"></span> 编辑</a>
-                    <td><a class="btn btn-danger btn-xs"><span class="fa fa-minus-circle"></span> 删除</a></td>
+                    <td><a href="edit.html" class="btn btn-success btn-xs"><span class="fa fa-edit"></span> 编辑</a></td>
                   </tr>
                   <tr>
                     <td>2</td>
@@ -245,8 +241,7 @@
                     <td>成交</td>
                     <td>6人</td>
                     <td>45,000</td>
-                    <td><a href="edit.html" class="btn btn-success btn-xs"><span class="fa fa-edit"></span> 编辑</a>
-                    <td><a class="btn btn-danger btn-xs"><span class="fa fa-minus-circle"></span> 删除</a></td>
+                    <td><a href="edit.html" class="btn btn-success btn-xs"><span class="fa fa-edit"></span> 编辑</a></td>
                   </tr>
                   <tr>
                     <td>3</td>
@@ -258,8 +253,7 @@
                     <td>成交</td>
                     <td>6人</td>
                     <td>45,000</td>
-                    <td><a href="edit.html" class="btn btn-success btn-xs"><span class="fa fa-edit"></span> 编辑</a>
-                    <td><a class="btn btn-danger btn-xs"><span class="fa fa-minus-circle"></span> 删除</a></td>
+                    <td><a href="edit.html" class="btn btn-success btn-xs"><span class="fa fa-edit"></span> 编辑</a></td>
                   </tr>
                 </tbody>
               </table>
@@ -272,7 +266,6 @@
     <div class="panel panel-default">
       <div class="panel-heading">
         <div class="panel-btns">
-          <a href="" class="panel-close">&times;</a>
           <a href="" class="minimize">&minus;</a>
         </div>
         <h4 class="panel-title">沟通列表</h4>
@@ -305,7 +298,6 @@
     <div class="panel panel-default">
         <div class="panel-heading">
         <div class="panel-btns">
-            <a href="" class="panel-close">&times;</a>
             <a href="" class="minimize">&minus;</a>
         </div>
         <h4 class="panel-title">注释列表 </h4>
@@ -399,6 +391,9 @@
 
 		
 		jQuery(document).ready(function() {
+
+      $(".nav-parent").eq(0).addClass("nav-active");
+      $(".nav-parent").eq(0).find(".children").show();
 			
 			 // Date Picker
 			  jQuery(".datepicker").datepicker();

@@ -31,7 +31,6 @@
 		<div class="panel panel-default">
         <div class="panel-heading">
           <div class="panel-btns">
-            <a href="" class="panel-close">&times;</a>
             <a href="" class="minimize">&minus;</a>
           </div>
           <h4 class="panel-title">询单基本信息</h4>
@@ -309,6 +308,8 @@
      //       })
 		jQuery(document).ready(function() {
 			
+      $(".nav-parent").eq(0).addClass("nav-active");
+      $(".nav-parent").eq(0).find(".children").show();
 			 // Date Picker
 			  jQuery(".datepicker").datepicker();
 			 

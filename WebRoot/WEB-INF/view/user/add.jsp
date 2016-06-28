@@ -31,7 +31,6 @@
 		<div class="panel panel-default">
         <div class="panel-heading">
           <div class="panel-btns">
-            <a href="" class="panel-close">&times;</a>
             <a href="" class="minimize">&minus;</a>
           </div>
           <h4 class="panel-title">用户基本信息</h4>
@@ -50,13 +49,13 @@
 	            <div class="form-group col-sm-4">
 	              <label class="col-sm-4 control-label">密码</label>
 	              <div class="col-sm-8">
-	                <input type="text" name="pwd" placeholder="登录名" class="form-control" />
+	                <input type="password" name="pwd" placeholder="密码" class="form-control" />
 	              </div>
 	            </div>
 	            <div class="form-group col-sm-4">
 	              <label class="col-sm-4 control-label">重复密码</label>
 	              <div class="col-sm-8">
-	                <input type="text" name="repwd" placeholder="姓名" class="form-control" />
+	                <input type="password" name="repwd" placeholder="重复密码" class="form-control" />
 	              </div>
 	            </div>  
 	        </div>
@@ -126,6 +125,10 @@
 	
 	<script type="text/javascript">
 		jQuery(document).ready(function() {
+
+			$(".nav-parent").eq(4).addClass("nav-active");
+      		$(".nav-parent").eq(4).find(".children").show();
+
 			jQuery("#form").validate({
 				
 				rules: {

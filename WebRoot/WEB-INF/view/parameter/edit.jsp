@@ -31,7 +31,6 @@
 		<div class="panel panel-default">
         <div class="panel-heading">
           <div class="panel-btns">
-            <a href="" class="panel-close">&times;</a>
             <a href="" class="minimize">&minus;</a>
           </div>
           <h4 class="panel-title">系统参数基本信息</h4>
@@ -149,6 +148,9 @@
 	}
 	
 	jQuery(document).ready(function() {
+
+		$(".nav-parent").eq(5).addClass("nav-active");
+      	$(".nav-parent").eq(5).find(".children").show();
 
 		jQuery("#form").validate({
 			

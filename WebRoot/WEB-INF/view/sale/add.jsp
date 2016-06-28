@@ -31,7 +31,6 @@
 		<div class="panel panel-default">
         <div class="panel-heading">
           <div class="panel-btns">
-            <a href="" class="panel-close">&times;</a>
             <a href="" class="minimize">&minus;</a>
           </div>
           <h4 class="panel-title">销售基本信息</h4>
@@ -118,6 +117,10 @@
 	})
 
 	jQuery(document).ready(function() {		  
+
+		$(".nav-parent").eq(3).addClass("nav-active");
+      	$(".nav-parent").eq(3).find(".children").show();
+      	
 		jQuery("#form").validate({
 			rules: {
 				name: "required",

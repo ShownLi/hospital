@@ -31,8 +31,7 @@
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						<div class="panel-btns">
-							<a href="" class="panel-close">&times;</a> <a href=""
-								class="minimize">&minus;</a>
+							<a href="" class="minimize">&minus;</a>
 						</div>
 						<!-- panel-btns -->
 						<h3 class="panel-title">询单列表</h3>
@@ -63,7 +62,7 @@
 										<td>官网表单</td>
 										<td>成交</td>
 										<td>balbala@tourmade.com</td>
-										<td><a href="edit.html" class="btn btn-success btn-xs"><span class="fa fa-edit"></span> 编辑</a> <a class="btn btn-danger btn-xs"><span class="fa fa-minus-circle"></span> 删除</a>
+										<td><a href="edit.html" class="btn btn-success btn-xs"><span class="fa fa-edit"></span> 编辑</a> <a class="btn btn-danger btn-xs"><span class="fa fa-minus-circle"></span> 无效</a>
 										</td>
 									</tr>
 									<tr>
@@ -74,7 +73,7 @@
 										<td>在线客服</td>
 										<td>下单</td>
 										<td>balbala@tourmade.com</td>
-										<td><a href="edit.html" class="btn btn-success btn-xs"><span class="fa fa-edit"></span> 编辑</a> <a class="btn btn-danger btn-xs"><span class="fa fa-minus-circle"></span> 删除</a>
+										<td><a href="edit.html" class="btn btn-success btn-xs"><span class="fa fa-edit"></span> 编辑</a> <a class="btn btn-danger btn-xs"><span class="fa fa-minus-circle"></span> 无效</a>
 										</td>
 									</tr>
 									<tr>
@@ -85,7 +84,7 @@
 										<td>微信咨询</td>
 										<td>待处理</td>
 										<td>balbala@tourmade.com</td>
-										<td><a href="edit.html" class="btn btn-success btn-xs"><span class="fa fa-edit"></span> 编辑</a> <a class="btn btn-danger btn-xs"><span class="fa fa-minus-circle"></span> 删除</a></td>
+										<td><a href="edit.html" class="btn btn-success btn-xs"><span class="fa fa-edit"></span> 编辑</a> <a class="btn btn-danger btn-xs"><span class="fa fa-minus-circle"></span> 无效</a></td>
 									</tr>
 								</tbody>
 							</table>
@@ -123,12 +122,12 @@
         <h4 class="modal-title" id="myModalLabel"><span class="fa fa-warning"></span> 提示</h4>
       </div>
       <div class="modal-body">
-        确定删除么？
+        确定无效么？
       </div>
       <div class="modal-footer">
       	<input type="hidden" class="hiddenId" value="" />
         <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-        <button type="button" class="btn btn-danger">删除</button>
+        <button type="button" class="btn btn-danger">无效</button>
       </div>
     </div><!-- modal-content -->
   </div><!-- modal-dialog -->
@@ -140,6 +139,7 @@
 		jQuery(document).ready(function() {
 
 			$(".nav-parent").eq(0).addClass("nav-active");
+			$(".nav-parent").eq(0).find(".children").show();
 			
 			// var t = jQuery('#dataTable').DataTable({
 			// 	pageLength: 10,
@@ -159,7 +159,7 @@
 			// 	columnDefs: [
 			//       {
 			//           data: "userid",
-			//           //defaultContent: '<a class="btn btn-success btn-xs"><span class="fa fa-edit"></span> 编辑</a>&nbsp;<a class="btn btn-danger btn-xs"><span class="fa fa-minus-circle"></span> 删除</a>',
+			//           //defaultContent: '<a class="btn btn-success btn-xs"><span class="fa fa-edit"></span> 编辑</a>&nbsp;<a class="btn btn-danger btn-xs"><span class="fa fa-minus-circle"></span> 无效</a>',
 			// 	      orderable: false,
 			// 	      render: function ( data, type, full, meta ) {
 		 //              return '<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a>&nbsp;';
