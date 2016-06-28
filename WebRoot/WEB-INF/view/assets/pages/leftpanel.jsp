@@ -28,15 +28,21 @@
 
         <h5 class="sidebartitle"></h5>
         <ul class="nav nav-pills nav-stacked nav-bracket">  
-            <li class="nav-parent"><a href=""><i class="fa fa-user"></i> <span>询单管理</span></a>
+            <li class="nav-parent"><a href="javascript:void(0);"><i class="fa fa-user"></i> <span>询单管理</span></a>
                 <ul class="children">
                     <li><a href="${rootPath }case/list.html"><i class="fa fa-caret-right"></i> 询单列表</a></li>
                     <li><a href="${rootPath }case/add.html"><i class="fa fa-caret-right"></i> 新增询单</a></li>
                 </ul>
             </li> 
-            <li class="nav-parent"><a href=""><i class="fa fa-user"></i> <span>订单管理</span></a>
+            <li class="nav-parent"><a href="javascript:void(0);"><i class="fa fa-user"></i> <span>订单管理</span></a>
                 <ul class="children">
                     <li><a href="${rootPath }order/list.html"><i class="fa fa-caret-right"></i> 订单列表</a></li>
+                </ul>
+            </li> 
+            <li class="nav-parent"><a href="javascript:void(0);"><i class="fa fa-user"></i> <span>客人管理</span></a>
+                <ul class="children">
+                    <li><a href="${rootPath }customer/list.html"><i class="fa fa-caret-right"></i> 客人列表</a></li>
+                    <li><a href="${rootPath }customer/add.html"><i class="fa fa-caret-right"></i> 新增客人</a></li>
                 </ul>
             </li> 
             <li class="nav-parent"><a href=""><i class="glyphicon glyphicon-briefcase"></i> <span>地接社管理</span></a>
@@ -45,27 +51,21 @@
                     <li><a href="${rootPath }agency/add.html"><i class="fa fa-caret-right"></i> 新增地接社</a></li>
                     <li><a href="${rootPath }sale/add.html"><i class="fa fa-caret-right"></i> 新增销售</a></li>
                 </ul>
-            </li>
-            <li class="nav-parent"><a href=""><i class="fa fa-user"></i> <span>客人管理</span></a>
-                <ul class="children">
-                    <li><a href="${rootPath }customer/list.html"><i class="fa fa-caret-right"></i> 客人列表</a></li>
-                    <li><a href="${rootPath }customer/add.html"><i class="fa fa-caret-right"></i> 新增客人</a></li>
-                </ul>
-            </li>  
-            <li class="nav-parent"><a href=""><i class="fa fa-user"></i> <span>用户管理</span></a>
+            </li> 
+            <li class="nav-parent"><a href="javascript:void(0);"><i class="fa fa-user"></i> <span>用户管理</span></a>
                 <ul class="children">
                     <li><a href="${rootPath }user/list.html"><i class="fa fa-caret-right"></i> 用户列表</a></li>
                     <li><a href="${rootPath }user/add.html"><i class="fa fa-caret-right"></i> 新增用户</a></li>
                     
                 </ul>
             </li>  
-            <li class="nav-parent"><a href=""><i class="glyphicon glyphicon-cog"></i> <span>系统参数管理</span></a>
+            <li class="nav-parent"><a href="javascript:void(0);"><i class="glyphicon glyphicon-cog"></i> <span>系统参数管理</span></a>
                 <ul class="children">
                     <li><a href="${rootPath }parameter/list.html"><i class="fa fa-caret-right"></i> 系统参数列表</a></li>
                     <li><a href="${rootPath }parameter/add.html"><i class="fa fa-caret-right"></i> 新增系统参数</a></li>                   
                 </ul>
             </li> 
-            <li class="nav-parent"><a href=""><i class="fa fa-user"></i> <span>邮件管理</span></a>
+            <li class="nav-parent"><a href="javascript:void(0);"><i class="fa fa-user"></i> <span>邮件管理</span></a>
                 <ul class="children">
                     <li><a href="${rootPath }email/list.html"><i class="fa fa-caret-right"></i> 邮件队列</a></li>
                 </ul>

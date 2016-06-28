@@ -138,6 +138,8 @@
 	<script type="text/javascript">
 	
 		jQuery(document).ready(function() {
+
+			$(".nav-parent").eq(0).addClass("nav-active");
 			
 			// var t = jQuery('#dataTable').DataTable({
 			// 	pageLength: 10,
