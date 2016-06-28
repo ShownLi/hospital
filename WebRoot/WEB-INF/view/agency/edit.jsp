@@ -3,6 +3,7 @@
 <html lang="en">
 <head>
 <%@ include file="../assets/pages/head.jsp"%>
+<link href="${rootPath }assets/css/jquery.datatables.css" rel="stylesheet">
 </head>
 
 <body>
@@ -76,7 +77,7 @@
           <h4 class="panel-title">销售列表 </h4>
           </div>
           <div class="panel-body">
-              <table class="table">
+              <table id="dataTable" class="table">
 					<thead>
 						<tr>
 							<th>序号</th>
@@ -84,31 +85,9 @@
 							<th>地接社</th>
 							<th>销售编号</th>
 							<th>邮箱</th>
+							<th>编辑</th>
 						</tr>
 					</thead>
-					<tbody>
-						<tr>
-							<td>1</td>
-							<td>张三</td>
-							<td>龙润国际</td>
-							<td>001</td>
-							<td>balbala@tourmade.com</td>
-						</tr>
-						<tr>
-							<td>2</td>
-							<td>张三</td>
-							<td>龙润国际</td>
-							<td>001</td>
-							<td>balbala@tourmade.com</td>
-						</tr>
-						<tr>
-							<td>3</td>
-							<td>张三</td>
-							<td>龙润国际</td>
-							<td>001</td>
-							<td>balbala@tourmade.com</td>
-						</tr>
-					</tbody>
 				</table>
           </div>
       </div><!-- end of panel 沟通列表 -->
@@ -142,6 +121,7 @@
 
 
 	<%@ include file="../assets/pages/foot.jsp"%>
+	<script src="${rootPath}assets/js/jquery.datatables.min.js"></script>
 	<script src="${rootPath}assets/js/select2.min.js"></script>
 	<script src="${rootPath}assets/js/jquery.validate.min.js"></script>
 	
@@ -195,6 +175,89 @@
 				}
 			}, "JSON");
 		}
+		alert(document.getElementById('agency_id'));
+		var t = jQuery('#dataTable').DataTable({
+			pageLength: 10,
+			processing: true,
+			language: datatable_local_language, // my.js
+			serverSide: true,
+			ajax: {
+				url: '${rootPath}sale/list.do',
+				dataFilter: function(data){
+		            var json = jQuery.parseJSON( data );
+		            json.recordsTotal = json.countTotal;
+		            json.recordsFiltered = json.countFiltered;
+		            json.data = json.data;
+		            return JSON.stringify( json );
+		        }
+			},
+			columnDefs: [
+			  {
+                  data: "saleid",
+                  //defaultContent: '<a class="btn btn-success btn-xs"><span class="fa fa-edit"></span> 编辑</a>&nbsp;<a class="btn btn-danger btn-xs"><span class="fa fa-minus-circle"></span> 删除</a>',
+                  orderable: false,
+                  render: function ( data, type, full, meta ) {
+                      return '<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a>&nbsp;<a class="btn btn-danger btn-xs" id="'+data+'"><span class="fa fa-minus-circle"></span> 删除</a>';
+                  },
+                  targets: 5
+			  },
+			],
+			columns: [
+	            { data: "saleid" },
+	            { data: "name" },
+	            { data: "agency"},
+	            { data: "code" },
+	            { data: "email" }
+	        ]
+		});
+		$('#dataTable tbody').on( 'click', 'a.btn-success', function () {
+	        var data = t.row($(this).parents('tr')).data();
+	        //alert($(this).attr('id'));
+	        edit($(this).attr('id'));
+	    } );
+
+		$('#dataTable tbody').on( 'click', 'a.btn-danger', function () {
+	        var data = t.row($(this).parents('tr')).data();
+	        //alert($(this).attr('id'));
+	        del($(this).attr('id'));
+	    } );
+		
+		$('#confirmDelModal').on( 'click', 'button.btn-danger', function () {
+	        var id = $("#confirmDelModal .hiddenId").val();
+	        doDel(id);
+	    } ); 
+	    
+		// Select2
+	    jQuery('select').select2({
+	        minimumResultsForSearch: -1
+	    });
+	    
+	    jQuery('select').removeClass('form-control');
+		
+	
+	function edit(id) {
+		window.parent.location = "${rootPath}sale/edit.html?id="+id;
+	}
+	
+	function del(id) {
+		$("#confirmDelModal .hiddenId").val("");
+		$("#confirmDelModal .hiddenId").val(id);
+		$("#confirmDelModal").modal('show');
+	}
+	
+	function doDel(id){
+		$.ajax({
+			url: "${rootPath}sale/del.do?id=" + id, 
+			async: true,
+			success: function(o) {
+				window.location.reload();
+			},
+			error: function(o) {
+				alert(2);
+			}
+		});
+		
+	}
 	</script>
 
 

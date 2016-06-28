@@ -37,8 +37,9 @@ public class SaleController extends BaseSimpleFormController {
 	
 	@RequestMapping(value = "/list.do",produces="application/json;charset=utf-8")
 	@ResponseBody
-	public String queryData(HttpServletRequest request, HttpSession session, Model model, DemoSale sale, PageHelper page) {
-
+	public String queryData(HttpServletRequest request, HttpSession session, Model model, DemoSale sale, PageHelper page,int agencyid) {
+		
+		System.out.println(agencyid);
 		QueryResult<DemoSale> r = service.querySale(sale, page, request);
 		String result = JSONUtilS.object2json(r);
 

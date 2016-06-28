@@ -19,6 +19,8 @@ public class DemoSale extends BaseBean<DemoSale> {
 
 	private int saleid;
 	
+	private int agencyid;
+	
 	private String agency;
 	
 	private String code;
@@ -28,6 +30,14 @@ public class DemoSale extends BaseBean<DemoSale> {
 	private String email;
 	
 	private Date update_time;
+
+	public int getAgencyid() {
+		return agencyid;
+	}
+
+	public void setAgencyid(int agencyid) {
+		this.agencyid = agencyid;
+	}
 
 	public int getSaleid() {
 		return saleid;
@@ -83,8 +93,9 @@ public class DemoSale extends BaseBean<DemoSale> {
 
 	@Override
 	public String toString() {
-		return "DemoSale [saleid=" + saleid + ", agency=" + agency + ", code=" + code + ", name=" + name + ", email="
-				+ email + ", update_time=" + update_time + "]";
+		return "DemoSale [saleid=" + saleid + ", agencyid=" + agencyid + ", agency=" + agency + ", code=" + code
+				+ ", name=" + name + ", email=" + email + ", update_time=" + update_time + "]";
 	}
+
 
 }

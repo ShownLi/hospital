@@ -7,7 +7,7 @@
 		SELECT *
 		FROM (
 		select
-		u.comment_id as comment_id,
+		u.comment_id as commentid,
 		u.comment_name as name,
 		u.country as cname,
 		u.language as vlanguage,
