@@ -100,6 +100,9 @@ public class CustomerController extends BaseSimpleFormController {
 			model.addAttribute("promote",promoteresult);
 			model.addAttribute("agegroup",agegroupresult);
 			model.addAttribute("customer",customer);
+			
+			String json = JSONUtilS.object2json(customer);
+			System.out.println(json);
 		}
 		return "/customer/edit";
 	}

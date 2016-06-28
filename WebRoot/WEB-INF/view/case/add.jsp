@@ -198,12 +198,7 @@
 		</div><!-- panel-footer -->
      </form>   
       </div><!-- panel -->
-
-
-
-
-
-			</div>
+		</div>
 
 		</div>
 		<!-- mainpanel -->
