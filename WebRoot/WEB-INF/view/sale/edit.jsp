@@ -49,7 +49,7 @@
             </div>
             <div class="form-group">
               <label class="col-sm-4 control-label">所属地接社 <span class="asterisk">*</span></label>
-              <input type="text" id="agency" name="agency" class="js-example-data-array col-sm-4" value="${sale.agency }"/>
+              <input type="text" name="agency" class="agency-select col-sm-4" value="${sale.agency }" readonly/>
             </div>            
             <div class="form-group">
               <label class="col-sm-4 control-label">销售编码 <span class="asterisk">*</span></label>
@@ -69,8 +69,7 @@
         
         <div class="panel-footer align-center">
 			<button class="btn btn-primary">保存</button>&nbsp;
-			<button class="btn btn-default" id="btn-back">取消</button>&nbsp;
-			<button class="btn btn-default">删除</button>
+			<button class="btn btn-default" id="btn-back">返回</button>&nbsp;
 			<input type="hidden" name="saleid" value="${sale.saleid }" />
 		</div><!-- panel-footer -->
      </form>   
@@ -115,7 +114,7 @@
 	<script type="text/javascript">
 	var p = ${agency};
 	
-	$(".js-example-data-array").select2({
+	$(".agency-select").select2({
 	  	data: p
 	})
 	jQuery(document).ready(function() {
@@ -163,12 +162,12 @@
 			$.post('${rootPath}sale/edit.do', f, function(result) {
 				var rmsg = result.msg;
 				if (result.success) {
-					window.parent.location = "${rootPath}sale/list.html";
+					window.parent.location = "${rootPath}agency/edit.html?id=${sale.agency}";
 				} else {
 					$("#msgModal").modal('show');
 				}
 			}, "JSON");
-		}
+		}	
 	</script>
 
 

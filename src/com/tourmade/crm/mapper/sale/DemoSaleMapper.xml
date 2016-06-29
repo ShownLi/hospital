@@ -8,47 +8,20 @@
 		FROM (
 		select
 		u.sale_id as saleid,
+		u.agency_id as agency,
 		u.sale_name as name,
-		u.agency_id,
-		u.sale_code as code,
 		u.sale_email as email,
-		u.creat_time as creat_time,
-		v.agency_name as agency,
-		u.isdel as isdel
-		from tm_sale u join tm_agency v on u.agency_id = #{agency_id} where u.isdel = 0
-		<if test="pojo.seachValue!=null and pojo.seachValue!=''">
-			and
-			(
-			u.sale_name like '%${pojo.seachValue}%'
-			or
-			v.agency_name like '%${pojo.seachValue}%'
-			or
-			u.sale_code like '%${pojo.seachValue}%'
-			or
-			u.sale_email like '%${pojo.seachValue}%'
-			)
-		</if>
+		u.sale_code as  code,
+		u.isdel
+		from tm_sale u where u.agency_id = #{agencyid} and u.isdel = 0
 		order by u.creat_time
 		) table_alias
 		limit #{b},#{e}
 	</select>
 
 	<select id="countSale" parameterType="DemoSale" resultType="long">
-		select count(u.sale_id) from tm_sale u
-		where
-		u.isdel = 0
-		<if test="seachValue!=null and seachValue!=''">
-			and
-			(
-			u.sale_name like '%${seachValue}%'
-			or
-			u.agency_id like '%${seachValue}%'
-			or
-			u.sale_code like '%${seachValue}%'
-			or
-			u.sale_email like '%${seachValue}%'
-			)
-		</if>
+		select count(u.sale_id),u.agency_id from tm_sale u
+		where u.agency_id = #{agencyid} and u.isdel = 0
 	</select>
 	
 	<insert id="saveSale" parameterType="DemoSale" flushCache="true" useGeneratedKeys="true" keyProperty="Sale_id" keyColumn="GENERATED_KEY">
@@ -73,7 +46,7 @@
 		update tm_sale
 		set
 		sale_name=#{name},
-		agency_id=#{agency},
+		sale_code=#{code},
 		sale_email=#{email},
 		update_time=NOW()
 		where
@@ -84,7 +57,6 @@
 		select
 		u.sale_id as saleid,
 		u.sale_name as name,
-		u.country as country,
 		u.agency_id as agency,
 		u.sale_code as code,
 		u.sale_email as email,

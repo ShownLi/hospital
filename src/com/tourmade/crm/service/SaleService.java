@@ -32,14 +32,14 @@ public class SaleService extends BaseService {
 	 * @param request
 	 * @return
 	 */
-	public QueryResult<DemoSale> querySale(DemoSale sale, PageHelper ph, HttpServletRequest request) {
+	public QueryResult<DemoSale> querySale(DemoSale sale, PageHelper ph, int agencyid,HttpServletRequest request) {
 
 		QueryResult<DemoSale> r = new QueryResult<DemoSale>();
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		System.out.println(ph);
 		
-		String seachValue = ph.getSearch().get("value");
+/*		String seachValue = ph.getSearch().get("value");
 		
 		if (null != seachValue && !"".equals(seachValue)) {
 			if (null == sale) {
@@ -47,10 +47,11 @@ public class SaleService extends BaseService {
 			}
 			sale.setSeachValue(seachValue);
 		}
-			
+*/			
 		
 		
-		map.put("pojo", sale);
+//		map.put("pojo", sale);
+		map.put("agencyid", agencyid);
 		map.put("b", ph.getStart());
 		map.put("e", ph.getLength());
 //		map.put("s", ph.getSort());
@@ -73,8 +74,7 @@ public class SaleService extends BaseService {
 	 * @return
 	 */
 	public int saveSale(DemoSale sale) {
-		// sale.setPwd("123456");
-		// sale.setPwd(MD5.MD5Encode("123456"));
+		
 		try {
 			saleMapper.saveSale(sale);
 		} catch (Exception e) {
