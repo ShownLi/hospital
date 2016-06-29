@@ -90,5 +90,11 @@
 		from tm_user u where
 		u.loginname = #{loginname} and u.password = #{pwd} and u.isdel = 0
 	</select>
-
+	
+	<select id="validate" resultType="String">
+		select  ${field} from ${table} u
+		where u.${field} = #{name} and
+		u.isdel = 0
+	</select>
+	
 </mapper>

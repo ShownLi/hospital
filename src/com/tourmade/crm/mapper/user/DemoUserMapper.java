@@ -3,6 +3,8 @@ package com.tourmade.crm.mapper.user;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.tourmade.crm.common.framework.BaseMapper;
 import com.tourmade.crm.model.DemoUser;
 
@@ -21,5 +23,7 @@ public interface DemoUserMapper extends BaseMapper {
 	public DemoUser getUserById(int userid);
 	
 	public DemoUser signin(DemoUser user);
+	
+	public String validate(@Param("table")String table, @Param("field")String field, @Param("name")String name);
 
 }
