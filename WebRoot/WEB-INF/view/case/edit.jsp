@@ -271,26 +271,39 @@
         <h4 class="panel-title">沟通列表</h4>
       </div>
       <div class="panel-body">
-        <div class="form-group col-sm-4">
-          <label class="col-sm-4 control-label">按订单筛选</label>
-          <div class="col-sm-8">
-            <input type="text" name="submit_type" class="order-select form-control" value="" />
+          <div class="table-responsive">
+              <table id="dataTable-communicate" class="table table-communicate">
+                <thead>
+                  <tr>
+                    <th>序号</th>
+                    <th>姓名</th>
+                    <th>沟通内容</th>
+                    <th>时间</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1</td>
+                    <td>张三</td>
+                    <td>埃及几月份最好玩</td>
+                    <td>2016-06-24 11:00</td>
+                  </tr>
+                  <tr>
+                    <td>2</td>
+                    <td>张三</td>
+                    <td>埃及几月份最好玩</td>
+                    <td>2016-06-24 11:00</td>
+                  </tr>
+                  <tr>
+                    <td>3</td>
+                    <td>张三</td>
+                    <td>埃及几月份最好玩</td>
+                    <td>2016-06-24 11:00</td>
+                  </tr>
+                </tbody>
+              </table>
           </div>
-        </div>
-        <div class="col-sm-12">
-             <div class="conversation-list">
-                  <div class="conversation-title"><span class="sender-name">Lucy</span> <span class="send-time">2016-06-24 11:08</span><a class="attachment" href="javascript:void(0)"></a></div>
-                  <div class="content">请问埃及几月份最好玩？</div>
-              </div>
-              <div class="conversation-list">
-                  <div class="conversation-title"><span class="sender-name">Gavin</span> <span class="send-time">2016-05-12 22:08</span><a class="attachment" href="javascript:void(0)"></a></div>
-                  <div class="content">请问埃及几月份最好玩？</div>
-              </div>
-              <div class="conversation-list">
-                  <div class="conversation-title"><span class="sender-name">李念儿</span> <span class="send-time">2016-03-24 9:08</span><a class="attachment" href="javascript:void(0)"></a></div>
-                  <div class="content">请问埃及几月份最好玩？</div>
-              </div>
-        </div>
+          <!-- table-responsive -->
       </div>
     </div><!-- end of panel 询单  -->
 
@@ -303,14 +316,39 @@
         <h4 class="panel-title">注释列表 </h4>
         </div>
         <div class="panel-body">
-            <div class="conversation-list">
-                <div class="conversation-title"><span class="sender-name">Lucy</span> <span class="send-time">2016-06-20 11:08</span><a class="attachment" href="javascript:void(0)"></a></div>
-                <div class="content">继续跟进中</div>
+            <div class="table-responsive">
+              <table id="dataTable-note" class="table table-note">
+                <thead>
+                  <tr>
+                    <th>序号</th>
+                    <th>姓名</th>
+                    <th>注释内容</th>
+                    <th>时间</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1</td>
+                    <td>张三</td>
+                    <td>埃及几月份最好玩</td>
+                    <td>2016-06-24 11:00</td>
+                  </tr>
+                  <tr>
+                    <td>2</td>
+                    <td>张三</td>
+                    <td>埃及几月份最好玩</td>
+                    <td>2016-06-24 11:00</td>
+                  </tr>
+                  <tr>
+                    <td>3</td>
+                    <td>张三</td>
+                    <td>埃及几月份最好玩</td>
+                    <td>2016-06-24 11:00</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
-            <div class="conversation-list">
-                <div class="conversation-title"><span class="sender-name">Lucy</span> <span class="send-time">2016-06-24 11:08</span><a class="attachment" href="javascript:void(0)"></a></div>
-                <div class="content">已经成单</div>
-            </div>
+            <!-- table-responsive -->
           <!-- 添加注释 -->
           <div class="form-group col-sm-6 col-sm-offset-3">
                 <textarea class="form-control" rows="5"></textarea>
