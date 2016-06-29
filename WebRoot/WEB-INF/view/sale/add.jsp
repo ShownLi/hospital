@@ -49,7 +49,7 @@
             </div>
             <div class="form-group">
               <label  class="col-sm-4 control-label">所属地接社 <span class="asterisk">*</span></label>
-              <input type="text" name="agency" class="agency-select col-sm-4"/>
+              <input type="text" name="agency" class="agency-select col-sm-4" value="${agencyid}" readonly/>
             </div>       
             <div class="form-group">
               <label class="col-sm-4 control-label">销售编码 <span class="asterisk">*</span></label>
@@ -159,7 +159,7 @@
 			$.post('${rootPath}sale/add.do', f, function(result) {
 				var rmsg = result.msg;
 				if (result.success) {
-					window.parent.location = "${rootPath}sale/list.html";
+					window.parent.location = "${rootPath}agency/edit.html?id=${agencyid}";
 				} else {
 					$("#msgModal").modal('show');
 				}

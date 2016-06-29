@@ -59,8 +59,7 @@
         
         <div class="panel-footer align-center">
 			<button class="btn btn-primary">保存</button>&nbsp;
-			<button class="btn btn-default" id="btn-back">取消</button>&nbsp;
-			<button class="btn btn-default">删除</button>
+			<button class="btn btn-default" id="btn-back">返回</button>&nbsp;
 			<input type="hidden" name="agency_id" value="${agency.agency_id }" />
 		</div><!-- panel-footer -->
      </form>   
@@ -83,39 +82,13 @@
 							<th>地接社</th>
 							<th>销售编号</th>
 							<th>邮箱</th>
-							<tr>编辑</tr>
+							<th>编辑</th>
 						</tr>
 					</thead>
-					<tbody>
-						<tr>
-							<td>1</td>
-							<td>张三</td>
-							<td>龙润国际</td>
-							<td>001</td>
-							<td>balbala@tourmade.com</td>
-							<td><a href="edit.html" class="btn btn-success btn-xs"><span class="fa fa-edit"></span> 编辑</a> <a class="btn btn-danger btn-xs"><span class="fa fa-minus-circle"></span> 删除</a></td>
-						</tr>
-						<tr>
-							<td>2</td>
-							<td>张三</td>
-							<td>龙润国际</td>
-							<td>001</td>
-							<td>balbala@tourmade.com</td>
-							<td><a href="edit.html" class="btn btn-success btn-xs"><span class="fa fa-edit"></span> 编辑</a> <a class="btn btn-danger btn-xs"><span class="fa fa-minus-circle"></span> 删除</a></td>
-						</tr>
-						<tr>
-							<td>3</td>
-							<td>张三</td>
-							<td>龙润国际</td>
-							<td>001</td>
-							<td>balbala@tourmade.com</td>
-							<td><a href="edit.html" class="btn btn-success btn-xs"><span class="fa fa-edit"></span> 编辑</a> <a class="btn btn-danger btn-xs"><span class="fa fa-minus-circle"></span> 删除</a></td>
-						</tr>
-					</tbody>
 				</table>
           </div>
           <div class="panel-footer align-center">
-			<a class="btn btn-primary" href="${rootPath}sale/add.html">新增销售</a>
+			<a class="btn btn-primary" href="${rootPath}sale/add.html?agencyid=${agency.agency_id}">新增销售</a>
       </div><!-- end of panel 沟通列表 -->
 
 			</div>
@@ -144,7 +117,25 @@
   </div><!-- modal-dialog -->
 </div><!-- modal -->
 
-
+<!-- Modal -->
+<div class="modal fade" id="confirmDelModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel"><span class="fa fa-warning"></span> 提示</h4>
+      </div>
+      <div class="modal-body">
+        确定删除么？
+      </div>
+      <div class="modal-footer">
+      	<input type="hidden" class="hiddenId" value="" />
+        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        <button type="button" class="btn btn-danger">删除</button>
+      </div>
+    </div><!-- modal-content -->
+  </div><!-- modal-dialog -->
+</div><!-- modal -->
 
 	<%@ include file="../assets/pages/foot.jsp"%>
 	<script src="${rootPath}assets/js/jquery.datatables.min.js"></script>
@@ -152,10 +143,10 @@
 	<script src="${rootPath}assets/js/jquery.validate.min.js"></script>
 	
 	<script type="text/javascript">
-	var p = ${country};
+	var c = ${country};
 	var l = ${language};
 	$(".country-select").select2({
-	  	data: p
+	  	data: c
 	})
 	$(".language-select").select2({
 	  	data: l
@@ -205,14 +196,13 @@
 				}
 			}, "JSON");
 		}
-		alert(document.getElementById('agency_id'));
 		var t = jQuery('#dataTable').DataTable({
 			pageLength: 10,
 			processing: true,
 			language: datatable_local_language, // my.js
 			serverSide: true,
 			ajax: {
-				url: '${rootPath}sale/list.do',
+				url: '${rootPath}sale/list.do?agencyid=${agency.agency_id}',
 				dataFilter: function(data){
 		            var json = jQuery.parseJSON( data );
 		            json.recordsTotal = json.countTotal;

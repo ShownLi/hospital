@@ -83,7 +83,7 @@ public class AgencyController extends BaseSimpleFormController {
 		if (null != id && !"".equals(id)) {
 			int i = Integer.parseInt(id);
 			DemoAgency u = service.getAgencyById(i);
-			String country = "agency.country";
+			String country = "country";
 			String language = "agency.language";
 			List<DemoList> v = service.getParameterInfo(country);
 			List<DemoList> w = service.getParameterInfo(language);

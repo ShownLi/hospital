@@ -39,19 +39,19 @@ public class SaleController extends BaseSimpleFormController {
 	@ResponseBody
 	public String queryData(HttpServletRequest request, HttpSession session, Model model, DemoSale sale, PageHelper page,int agencyid) {
 		
-		System.out.println(agencyid);
-		QueryResult<DemoSale> r = service.querySale(sale, page, request);
+		QueryResult<DemoSale> r = service.querySale(sale, page, agencyid,request);
 		String result = JSONUtilS.object2json(r);
 
 		return result;
 	}
 	
 	@RequestMapping(value = "/add.html", method = { RequestMethod.POST, RequestMethod.GET })
-	public String add(Model model) {
+	public String add(Model model,int agencyid) {
 		
 		List<DemoList> u = service.getAgency();
 		JSONArray result = JSONArray.fromObject(u);
 		model.addAttribute("agency",result);
+		model.addAttribute("agencyid",agencyid);
 		return "/sale/add";
 	}
 
