@@ -347,8 +347,8 @@
                   </tr>
                 </tbody>
               </table>
-            </div>
-            <!-- table-responsive -->
+          </div>
+          <!-- table-responsive -->
           <!-- 添加注释 -->
           <div class="form-group col-sm-6 col-sm-offset-3">
                 <textarea class="form-control" rows="5"></textarea>

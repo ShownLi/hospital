@@ -221,14 +221,39 @@
 	        <h4 class="panel-title">注释列表 </h4>
 	        </div>
 	        <div class="panel-body">
-	            <div class="conversation-list">
-	                <div class="conversation-title"><span class="sender-name">Lucy</span> <span class="send-time">2016-06-20 11:08</span><a class="attachment" href="javascript:void(0)"></a></div>
-	                <div class="content">继续跟进中</div>
-	            </div>
-	            <div class="conversation-list">
-	                <div class="conversation-title"><span class="sender-name">Lucy</span> <span class="send-time">2016-06-24 11:08</span><a class="attachment" href="javascript:void(0)"></a></div>
-	                <div class="content">已经成单</div>
-	            </div>
+	            <div class="table-responsive">
+	              <table id="dataTable-note" class="table table-note">
+	                <thead>
+	                  <tr>
+	                    <th>序号</th>
+	                    <th>姓名</th>
+	                    <th>注释内容</th>
+	                    <th>时间</th>
+	                  </tr>
+	                </thead>
+	                <tbody>
+	                  <tr>
+	                    <td>1</td>
+	                    <td>张三</td>
+	                    <td>埃及几月份最好玩</td>
+	                    <td>2016-06-24 11:00</td>
+	                  </tr>
+	                  <tr>
+	                    <td>2</td>
+	                    <td>张三</td>
+	                    <td>埃及几月份最好玩</td>
+	                    <td>2016-06-24 11:00</td>
+	                  </tr>
+	                  <tr>
+	                    <td>3</td>
+	                    <td>张三</td>
+	                    <td>埃及几月份最好玩</td>
+	                    <td>2016-06-24 11:00</td>
+	                  </tr>
+	                </tbody>
+	              </table>
+	          </div>
+	          <!-- table-responsive -->
 	          <!-- 添加注释 -->
 	          <div class="form-group col-sm-6 col-sm-offset-3">
 	                <textarea class="form-control" rows="5"></textarea>
