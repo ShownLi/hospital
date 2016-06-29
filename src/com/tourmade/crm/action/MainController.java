@@ -1,14 +1,16 @@
 package com.tourmade.crm.action;
 
+import java.io.IOException;
+
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.alibaba.fastjson.JSON;
 import com.tourmade.crm.common.action.BaseSimpleFormController;
-import com.tourmade.crm.common.model.base.value.baseconfig.Json;
 import com.tourmade.crm.service.UserService;
 
 @Controller
@@ -24,19 +26,18 @@ public class MainController extends BaseSimpleFormController {
 	}
 	
 	@RequestMapping(value = "/validate", method = { RequestMethod.POST, RequestMethod.GET })
-	public  Json Validate(String table, String field) {
+	public void Validate(String table, String field, String name,HttpServletResponse response) {
 
-		Json j = new Json();	
-		try {
-			String name = request.getParameter("loginname");
-			//String result = service.Validate(table, field, name);
-			System.out.print(name);
-			j.setSuccess(true);
-		} catch (Exception e) {
-			
+		try{
+			String result = service.Validate(table, field, name);
+			if(name.equals(result)){
+				response.getWriter().print(false);
+			}
+			else
+				response.getWriter().print(true);
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
-		System.out.println(j);
-		return j;
 	}
 	
 	@RequestMapping(value = "/blank.html", method = { RequestMethod.POST, RequestMethod.GET })
