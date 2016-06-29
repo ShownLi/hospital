@@ -6,7 +6,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.alibaba.fastjson.JSON;
 import com.tourmade.crm.common.action.BaseSimpleFormController;
+import com.tourmade.crm.common.model.base.value.baseconfig.Json;
 import com.tourmade.crm.service.UserService;
 
 @Controller
@@ -22,10 +24,19 @@ public class MainController extends BaseSimpleFormController {
 	}
 	
 	@RequestMapping(value = "/validate", method = { RequestMethod.POST, RequestMethod.GET })
-	public String Validate(String table, String field, String name) {
-		String result = service.Validate(table, field, name);
-		System.out.println(result);
-		return "yes";
+	public  Json Validate(String table, String field) {
+
+		Json j = new Json();	
+		try {
+			String name = request.getParameter("loginname");
+			//String result = service.Validate(table, field, name);
+			System.out.print(name);
+			j.setSuccess(true);
+		} catch (Exception e) {
+			
+		}
+		System.out.println(j);
+		return j;
 	}
 	
 	@RequestMapping(value = "/blank.html", method = { RequestMethod.POST, RequestMethod.GET })

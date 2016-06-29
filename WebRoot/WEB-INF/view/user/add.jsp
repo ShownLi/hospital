@@ -134,19 +134,11 @@
 				rules: {
 		             loginname:{  
 			         	required:true,  
-			            remote:{                         //自带远程验证存在的方法  
-			            	url:"${rootPath}/validate?table=tm_user&field=loginname&name=lianzheng",  
-			                type:"post", 
-			            	data:{  
-			            		loginname:function(){return $("#loginname").val();}  
-			                	},
-			               	dataFilter: function(data, type) {  
-				            	if (data == "yes")  
-				                	return true;  
-				                else  
-				                	return false;  
-			            	}  
-			            }  
+			            remote:{                           
+			            	url:"${rootPath}/validate?table=tm_user&field=loginname",
+			            	dataType: "json", 
+			            	type:"post"
+			            }
 			        },
 					name: "required",
 					pwd: {
@@ -158,7 +150,9 @@
 					}
 				},
 				messages: {
-					loginname: {required:"请输入登录名!",remote:jQuery.format("用户名已经被注册")},
+					loginname: {
+						required:"请输入登录名!"
+						},
 					name: "请输入姓名",
 					pwd: {
 						required: "请输入密码"

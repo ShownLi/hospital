@@ -181,8 +181,6 @@ public class UserService extends BaseService {
 	public String Validate(String table, String field, String name) {
 		
 		String result = userMapper.validate(table, field, name);
-		System.out.println(table);
-		System.out.println(field);
 		return result ;
 	}
 }
