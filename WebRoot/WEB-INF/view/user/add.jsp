@@ -41,9 +41,9 @@
           
           	<div class="section-block">
 	            <div class="form-group col-sm-4">
-	              <label class="col-sm-4 control-label">用户名</label>
+	              <label class="col-sm-4 control-label">登录名</label>
 	              <div class="col-sm-8">
-	                <input type="text" name="loginname" placeholder="用户名" class="form-control" />
+	                <input type="text" name="loginname" placeholder="登录名" class="form-control" />
 	              </div>
 	            </div>
 	            <div class="form-group col-sm-4">

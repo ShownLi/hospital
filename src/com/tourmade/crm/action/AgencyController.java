@@ -32,6 +32,14 @@ public class AgencyController extends BaseSimpleFormController {
 
 	@RequestMapping(value = "/list.html", method = { RequestMethod.POST, RequestMethod.GET })
 	public String list(Model model) {
+		String country = "country";
+		String language = "agency.language";
+		List<DemoList> v = service.getParameterInfo(country);
+		List<DemoList> w = service.getParameterInfo(language);
+		JSONArray countryresult = JSONArray.fromObject(v);
+		JSONArray languageresult = JSONArray.fromObject(w);
+		model.addAttribute("countryname",countryresult);
+		model.addAttribute("language",languageresult);
 		return "/agency/list";
 	}
 	
@@ -41,7 +49,6 @@ public class AgencyController extends BaseSimpleFormController {
 
 		QueryResult<DemoAgency> r = service.queryAgency(agency, page, request);
 		String result = JSONUtilS.object2json(r);
-
 		return result;
 	}
 

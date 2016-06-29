@@ -41,10 +41,12 @@
 		       	 	
 		       			<div class="panel-body panel-body-nopadding">
 		          			<div class="section-block">
-			            		<div class="form-group col-sm-4">
-			              			<label class="col-sm-4 control-label">地接社名 <span class="asterisk">*</span></label>
-			              			<input type="text" name="name" placeholder="地接社名" class="form-control col-sm-8" value="${agency.name }" />
-			              		</div>         
+			             		<div class="form-group col-sm-4">
+	              				<label class="col-sm-4 control-label">地接社名 <span class="asterisk">*</span></label>
+	              					<div class="col-sm-8">
+	                				<input type="text" name="name" placeholder="地接社名" class="form-control" value="${agency.name }"/>
+			            			</div>
+			            		</div>            
 			            		<div class="form-group col-sm-4">
 			              			<label class="col-sm-4 control-label">语言 <span class="asterisk">*</span></label>
 			               			<input type="text" id="language" name="language" class="language-select col-sm-8" value="${agency.language }"/>
@@ -78,7 +80,6 @@
 							<tr>
 								<th>序号</th>
 								<th>姓名</th>
-								<th>地接社</th>
 								<th>销售编号</th>
 								<th>邮箱</th>
 								<th>编辑</th>
@@ -220,13 +221,12 @@
 	            render: function ( data, type, full, meta ) {
 	            	return '<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a>&nbsp;<a class="btn btn-danger btn-xs" id="'+data+'"><span class="fa fa-minus-circle"></span> 删除</a>';
 	            	},
-	            targets: 5
+	            targets: 4
 			},
 			],
 		columns: [
 		    { data: "saleid" },
 		    { data: "name" },
-		    { data: "agency"},
 		    { data: "code" },
 		    { data: "email" }
 	    ]
