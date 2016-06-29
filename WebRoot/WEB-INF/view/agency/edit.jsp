@@ -28,121 +28,120 @@
 
 			<div class="contentpanel">
 				<!-- content goes here... -->
+				<div class="panel panel-default">
+        			<div class="panel-heading">
+          				<div class="panel-btns">
+            				<a href="" class="minimize">&minus;</a>
+          				</div>
+          				<h4 class="panel-title">地接社基本信息</h4>
+          				<p>填写下表，完成地接社信息修改。</p>
+        			</div>
+       		
+		       	 	<form class="form-horizontal" id="form">
+		       	 	
+		       			<div class="panel-body panel-body-nopadding">
+		          			<div class="section-block">
+			            		<div class="form-group col-sm-4">
+			              			<label class="col-sm-4 control-label">地接社名 <span class="asterisk">*</span></label>
+			              			<input type="text" name="name" placeholder="地接社名" class="form-control col-sm-8" value="${agency.name }" />
+			              		</div>         
+			            		<div class="form-group col-sm-4">
+			              			<label class="col-sm-4 control-label">语言 <span class="asterisk">*</span></label>
+			               			<input type="text" id="language" name="language" class="language-select col-sm-8" value="${agency.language }"/>
+			            		</div>              
+			            		<div class="form-group col-sm-4">
+			              			<label class="col-sm-4 control-label">国家 <span class="asterisk">*</span></label>
+			              			<input type="text" id="country" name="country" class="country-select col-sm-8" value="${agency.country }"/>
+			            		</div>            
+			        		</div>
+		        		</div><!-- panel-body -->
+		        
+		        		<div class="panel-footer align-center">
+							<button class="btn btn-primary">保存</button>&nbsp;
+							<button class="btn btn-default" id="btn-back">返回</button>&nbsp;
+							<input type="hidden" name="agency_id" value="${agency.agency_id }" />
+						</div><!-- panel-footer -->
+		     		</form>   
+      			</div><!-- panel -->
 
-		<div class="panel panel-default">
-        <div class="panel-heading">
-          <div class="panel-btns">
-            <a href="" class="minimize">&minus;</a>
-          </div>
-          <h4 class="panel-title">地接社基本信息</h4>
-          <p>填写下表，完成地接社信息修改。</p>
-        </div>
-        <form class="form-horizontal" id="form">
-        <div class="panel-body panel-body-nopadding">
-          	<div class="section-block">
-	            <div class="form-group col-sm-4">
-	              <label class="col-sm-4 control-label">地接社名 <span class="asterisk">*</span></label>
-	              <div class="col-sm-8">
-	                <input type="text" name="name" placeholder="地接社名" class="form-control" value="${agency.name }" />
-	              </div>
-	            </div>         
-	            <div class="form-group col-sm-4">
-	              <label class="col-sm-4 control-label">语言 <span class="asterisk">*</span></label>
-	                <input type="text" id="language" name="language" class="language-select col-sm-8" value="${agency.language }"/>
-	            </div>              
-	            <div class="form-group col-sm-4">
-	              <label class="col-sm-4 control-label">国家 <span class="asterisk">*</span></label>
-	              <input type="text" id="country" name="country" class="country-select col-sm-8" value="${agency.country }"/>
-	            </div>            
-	        </div>
-        </div><!-- panel-body -->
-        
-        <div class="panel-footer align-center">
-			<button class="btn btn-primary">保存</button>&nbsp;
-			<button class="btn btn-default" id="btn-back">返回</button>&nbsp;
-			<input type="hidden" name="agency_id" value="${agency.agency_id }" />
-		</div><!-- panel-footer -->
-     </form>   
-      </div><!-- panel -->
-
- <!-- panel 沟通列表 -->
-      <div class="panel panel-default">
-          <div class="panel-heading">
-          <div class="panel-btns">
-              <a href="" class="minimize">&minus;</a>
-          </div>
-          <h4 class="panel-title">销售列表 </h4>
-          </div>
-          <div class="panel-body">
-              <table id="dataTable" class="table">
-					<thead>
-						<tr>
-							<th>序号</th>
-							<th>姓名</th>
-							<th>地接社</th>
-							<th>销售编号</th>
-							<th>邮箱</th>
-							<th>编辑</th>
-						</tr>
-					</thead>
-				</table>
-          </div>
-          <div class="panel-footer align-center">
-			<a class="btn btn-primary" href="${rootPath}sale/add.html?agencyid=${agency.agency_id}">新增销售</a>
-      </div><!-- end of panel 沟通列表 -->
-
+ 		<!-- panel 沟通列表 -->
+      			<div class="panel panel-default">
+          		<div class="panel-heading">
+          		<div class="panel-btns">
+              		<a href="" class="minimize">&minus;</a>
+          		</div>
+          			<h4 class="panel-title">销售列表 </h4>
+          		</div>
+          		<div class="panel-body">
+	              	<table id="dataTable" class="table">
+						<thead>
+							<tr>
+								<th>序号</th>
+								<th>姓名</th>
+								<th>地接社</th>
+								<th>销售编号</th>
+								<th>邮箱</th>
+								<th>编辑</th>
+							</tr>
+						</thead>
+					</table>
+          		</div>
+          		<div class="panel-footer align-center">
+					<a class="btn btn-primary" href="${rootPath}sale/add.html?agencyid=${agency.agency_id}">新增销售</a>
+      			</div><!-- end of panel 沟通列表 -->
+				</div>
 			</div>
-
 		</div>
 		<!-- mainpanel -->
 		<%@ include file="../assets/pages/rightpanel.jsp"%>
 	</section>
 
 
-<!-- Modal -->
-<div class="modal fade" id="msgModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="myModalLabel">信息</h4>
-      </div>
-      <div class="modal-body">
-        保存数据时出错了
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-      </div>
-    </div><!-- modal-content -->
-  </div><!-- modal-dialog -->
-</div><!-- modal -->
+		<!-- Modal 保存数据出错-->
+		<div class="modal fade" id="msgModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		        <h4 class="modal-title" id="myModalLabel">信息</h4>
+		      </div>
+		      <div class="modal-body">
+		        保存数据时出错了
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+		      </div>
+		    </div><!-- modal-content -->
+		  </div><!-- modal-dialog -->
+		</div><!-- modal -->
 
-<!-- Modal -->
-<div class="modal fade" id="confirmDelModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
-  <div class="modal-dialog modal-sm">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="myModalLabel"><span class="fa fa-warning"></span> 提示</h4>
-      </div>
-      <div class="modal-body">
-        确定删除么？
-      </div>
-      <div class="modal-footer">
-      	<input type="hidden" class="hiddenId" value="" />
-        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-        <button type="button" class="btn btn-danger">删除</button>
-      </div>
-    </div><!-- modal-content -->
-  </div><!-- modal-dialog -->
-</div><!-- modal -->
+		<!-- Modal 删除确认-->
+		<div class="modal fade" id="confirmDelModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
+		  <div class="modal-dialog modal-sm">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		        <h4 class="modal-title" id="myModalLabel"><span class="fa fa-warning"></span> 提示</h4>
+		      </div>
+		      <div class="modal-body">
+		        确定删除么？
+		      </div>
+		      <div class="modal-footer">
+		      	<input type="hidden" class="hiddenId" value="" />
+		        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+		        <button type="button" class="btn btn-danger">删除</button>
+		      </div>
+		    </div><!-- modal-content -->
+		  </div><!-- modal-dialog -->
+		</div><!-- modal -->
 
 	<%@ include file="../assets/pages/foot.jsp"%>
 	<script src="${rootPath}assets/js/jquery.datatables.min.js"></script>
 	<script src="${rootPath}assets/js/select2.min.js"></script>
 	<script src="${rootPath}assets/js/jquery.validate.min.js"></script>
 	
-	<script type="text/javascript">
+
+<script type="text/javascript">
 	var c = ${country};
 	var l = ${language};
 	$(".country-select").select2({
@@ -153,7 +152,7 @@
 	})
 
 	jQuery(document).ready(function() {
-
+		
 		$(".nav-parent").eq(3).addClass("nav-active");
       	$(".nav-parent").eq(3).find(".children").show();
       	
@@ -185,74 +184,76 @@
 		
 	});
 //			      
-		function form_submit() {
-			var f = $("#form").serialize();
-			$.post('${rootPath}agency/edit.do', f, function(result) {
-				var rmsg = result.msg;
-				if (result.success) {
-					window.parent.location = "${rootPath}agency/list.html";
-				} else {
-					$("#msgModal").modal('show');
+	function form_submit() {
+		var f = $("#form").serialize();
+		$.post('${rootPath}agency/edit.do', f, function(result) {
+			var rmsg = result.msg;
+			if (result.success) {
+				window.parent.location = "${rootPath}agency/list.html";
+				} 
+			else {
+				$("#msgModal").modal('show');
 				}
 			}, "JSON");
 		}
-		var t = jQuery('#dataTable').DataTable({
-			pageLength: 10,
-			processing: true,
-			language: datatable_local_language, // my.js
-			serverSide: true,
-			ajax: {
-				url: '${rootPath}sale/list.do?agencyid=${agency.agency_id}',
-				dataFilter: function(data){
-		            var json = jQuery.parseJSON( data );
-		            json.recordsTotal = json.countTotal;
-		            json.recordsFiltered = json.countFiltered;
-		            json.data = json.data;
-		            return JSON.stringify( json );
-		        }
-			},
-			columnDefs: [
-			  {
-                  data: "saleid",
-                  //defaultContent: '<a class="btn btn-success btn-xs"><span class="fa fa-edit"></span> 编辑</a>&nbsp;<a class="btn btn-danger btn-xs"><span class="fa fa-minus-circle"></span> 删除</a>',
-                  orderable: false,
-                  render: function ( data, type, full, meta ) {
-                      return '<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a>&nbsp;<a class="btn btn-danger btn-xs" id="'+data+'"><span class="fa fa-minus-circle"></span> 删除</a>';
-                  },
-                  targets: 5
-			  },
-			],
-			columns: [
-	            { data: "saleid" },
-	            { data: "name" },
-	            { data: "agency"},
-	            { data: "code" },
-	            { data: "email" }
-	        ]
-		});
-		$('#dataTable tbody').on( 'click', 'a.btn-success', function () {
-	        var data = t.row($(this).parents('tr')).data();
-	        //alert($(this).attr('id'));
-	        edit($(this).attr('id'));
-	    } );
-
-		$('#dataTable tbody').on( 'click', 'a.btn-danger', function () {
-	        var data = t.row($(this).parents('tr')).data();
-	        //alert($(this).attr('id'));
-	        del($(this).attr('id'));
-	    } );
 		
-		$('#confirmDelModal').on( 'click', 'button.btn-danger', function () {
-	        var id = $("#confirmDelModal .hiddenId").val();
-	        doDel(id);
-	    } ); 
+	var t = jQuery('#dataTable').DataTable({
+		pageLength: 10,
+		processing: true,
+		language: datatable_local_language, // my.js
+		serverSide: true,
+		ajax: {
+			url: '${rootPath}sale/list.do?agencyid=${agency.agency_id}',
+			dataFilter: function(data){
+			    var json = jQuery.parseJSON( data );
+			    json.recordsTotal = json.countTotal;
+			    json.recordsFiltered = json.countFiltered;
+			    json.data = json.data;
+			    return JSON.stringify( json );
+		    	}
+			},
+		columnDefs: [
+			{
+	            data: "saleid",
+	            //defaultContent: '<a class="btn btn-success btn-xs"><span class="fa fa-edit"></span> 编辑</a>&nbsp;<a class="btn btn-danger btn-xs"><span class="fa fa-minus-circle"></span> 删除</a>',
+	            orderable: false,
+	            render: function ( data, type, full, meta ) {
+	            	return '<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a>&nbsp;<a class="btn btn-danger btn-xs" id="'+data+'"><span class="fa fa-minus-circle"></span> 删除</a>';
+	            	},
+	            targets: 5
+			},
+			],
+		columns: [
+		    { data: "saleid" },
+		    { data: "name" },
+		    { data: "agency"},
+		    { data: "code" },
+		    { data: "email" }
+	    ]
+		});
+	$('#dataTable tbody').on( 'click', 'a.btn-success', function () {
+		var data = t.row($(this).parents('tr')).data();
+	    //alert($(this).attr('id'));
+	    edit($(this).attr('id'));
+	    });
+
+	$('#dataTable tbody').on( 'click', 'a.btn-danger', function () {
+	    var data = t.row($(this).parents('tr')).data();
+	    //alert($(this).attr('id'));
+	    del($(this).attr('id'));
+	    });
+		
+	$('#confirmDelModal').on( 'click', 'button.btn-danger', function () {
+	    var id = $("#confirmDelModal .hiddenId").val();
+	    doDel(id);
+	    }); 
 	    
 		// Select2
-	    jQuery('select').select2({
-	        minimumResultsForSearch: -1
-	    });
+	jQuery('select').select2({
+		minimumResultsForSearch: -1
+		});
 	    
-	    jQuery('select').removeClass('form-control');
+	jQuery('select').removeClass('form-control');
 		
 	
 	function edit(id) {
@@ -278,8 +279,7 @@
 		});
 		
 	}
-	</script>
-
+</script>
 
 </body>
 </html>
