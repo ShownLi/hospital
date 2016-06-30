@@ -37,165 +37,165 @@
           <p>填写下表，完成询单创建。</p>
         </div>
         <form class="form-horizontal" id="form">
-        <div class="panel-body panel-body-nopadding">
-            <div class="section-block">
-                <div class="form-group col-sm-4">
-                  <label class="col-sm-4 control-label">称呼</label>
-                  <div class="col-sm-8">
-                    <input type="text" name="customername" placeholder="称呼" class="form-control" value="" />
-                  </div>
+            <div class="panel-body panel-body-nopadding">
+                <div class="section-block">
+                    <div class="form-group col-sm-4">
+                      <label class="col-sm-4 control-label">称呼</label>
+                      <div class="col-sm-8">
+                        <input type="text" name="customername" placeholder="称呼" class="form-control" value="" />
+                      </div>
+                    </div>
+                    <div class="form-group col-sm-4">
+                      <label class="col-sm-4 control-label">沟通语言</label>
+                      <div class="col-sm-8">
+                        <input type="text" name="preferlanguage" class="language-select fullwidth" value=""/>
+                      </div>
+                    </div>
+                    <div class="form-group col-sm-4">
+                      <label class="col-sm-4 control-label">希望联系方式</label>
+                      <div class="col-sm-8">
+                        <input type="text" name="contacttype" class="contact-select fullwidth" value="" />
+                      </div>
+                    </div>                
                 </div>
-                <div class="form-group col-sm-4">
-                  <label class="col-sm-4 control-label">沟通语言</label>
-                  <div class="col-sm-8">
-                    <input type="text" name="preferlanguage" class="language-select fullwidth" value=""/>
-                  </div>
+                <div class="section-block">
+                    <div class="form-group col-sm-4">
+                      <label class="col-sm-4 control-label">与谁同行</label>
+                      <div class="col-sm-8">
+                        <input type="text" name="withwho" class="withwho-select fullwidth" value="" />
+                      </div>
+                    </div>
+                    <div class="form-group col-sm-4">
+                      <label class="col-sm-4 control-label">成人</label>
+                      <div class="col-sm-8">
+                        <input type="text" name="adult" placeholder="成人" class="form-control" value="" />
+                      </div>
+                    </div>
+                    <div class="form-group col-sm-4">
+                      <label class="col-sm-6 control-label">儿童（12岁以下）</label>
+                      <div class="col-sm-6">
+                        <input type="text" name="children" placeholder="儿童（12岁以下）" class="form-control" value="" />
+                      </div>
+                    </div>
                 </div>
-                <div class="form-group col-sm-4">
-                  <label class="col-sm-4 control-label">希望联系方式</label>
-                  <div class="col-sm-8">
-                    <input type="text" name="contacttype" class="contact-select fullwidth" value="" />
-                  </div>
-                </div>                
-            </div>
-            <div class="section-block">
-                <div class="form-group col-sm-4">
-                  <label class="col-sm-4 control-label">与谁同行</label>
-                  <div class="col-sm-8">
-                    <input type="text" name="withwho" class="withwho-select fullwidth" value="" />
-                  </div>
+                <div class="section-block">
+                   	<div class="form-group col-sm-4">
+    	              <label class="col-sm-4 control-label">出发时间 <span class="asterisk">&nbsp;</span></label>
+    	              <div class="col-sm-8">
+    	                <div class="rdio rdio-primary rdio-inline">
+    	                  <input type="radio" id="yes" value="1" name="isdisplay"/>
+    	                  <label for="yes">已确定</label>
+    	                </div><!-- rdio -->
+    	                <div class="rdio rdio-primary rdio-inline">
+    	                  <input type="radio" id="no" value="0" name="isdisplay"/>
+    	                  <label for="no">未确定</label>
+    	                </div><!-- rdio -->
+    	                <label class="error" for="starttime"></label>
+    	              </div>
+    	            </div><!-- form-group -->  
+                    <div class="form-group col-sm-4">
+                      <label class="col-sm-4 control-label">大约时间</label>
+                      <div class="col-sm-8 input-group input-datepicker">
+                        <input type="text" name="startmonth" class="form-control datepicker" placeholder="mm/dd/yyyy">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                      </div>
+                    </div>
+                    <div class="form-group col-sm-4">
+                      <label class="col-sm-4 control-label">大约天数</label>
+                      <div class="col-sm-8">
+                        <input type="text" name="during" placeholder="大约天数" class="form-control" value="" />
+                      </div>
+                    </div>
+                    <div class="form-group col-sm-4">
+                      <label class="col-sm-4 control-label">出发日期</label>
+                      <div class="col-sm-8 input-group input-datepicker">
+                        <input type="text" name="startdate" class="form-control datepicker" placeholder="mm/dd/yyyy">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                      </div>
+                    </div>
+                    <div class="form-group col-sm-4">
+                      <label class="col-sm-4 control-label">返回日期</label>
+                      <div class="col-sm-8 input-group input-datepicker">
+                        <input type="text" name="enddate" class="form-control datepicker" placeholder="mm/dd/yyyy">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                      </div>
+                    </div>
+                     <div class="form-group col-sm-4">
+                      <label class="col-sm-4 control-label">客人的要求</label>
+                      <div class="col-sm-8">
+                        <textarea name="requirement" class="form-control" placeholder="客人的要求" rows="4"></textarea>
+                      </div>
+                    </div>
+                    <div class="form-group col-sm-4">
+                      <label class="col-sm-4 control-label">关于住宿</label>
+                      <div class="col-sm-8">
+                        <input type="text" name="hotel" class="hotel-select fullwidth" value="" />
+                      </div>
+                    </div>
+                    <div class="form-group col-sm-4">
+                      <label class="col-sm-4 control-label">关于用餐</label>
+                      <div class="col-sm-8">
+                        <input type="text" name="meals" class="meals-select fullwidth" value="" />
+                      </div>
+                    </div>
+                    <div class="form-group col-sm-4">
+                      <label class="col-sm-5 control-label">关于司机和导游</label>
+                      <div class="col-sm-7">
+                        <input type="text" name="guide" class="guide-select fullwidth" value="" />
+                      </div>
+                    </div>
+                    <div class="form-group col-sm-4">
+                      <label class="col-sm-4 control-label">客人的预算</label>
+                      <div class="col-sm-8">
+                        <input type="text" name="budget" placeholder="客人的预算" class="form-control" value="" />
+                      </div>
+                    </div>
                 </div>
-                <div class="form-group col-sm-4">
-                  <label class="col-sm-4 control-label">成人</label>
-                  <div class="col-sm-8">
-                    <input type="text" name="adult" placeholder="成人" class="form-control" value="" />
-                  </div>
+                <div class="section-block">
+                    <div class="form-group col-sm-4">
+                      <label class="col-sm-4 control-label">销售姓名</label>
+                      <div class="col-sm-8">
+                        <input type="text" name="salesname" placeholder="销售姓名" class="form-control" value="" />
+                      </div>
+                    </div>
+                    <div class="form-group col-sm-4">
+                      <label class="col-sm-4 control-label">目的地</label>
+                      <div class="col-sm-8">
+                        <input type="text" name="destination" class="destination-select fullwidth" value="" />
+                      </div>
+                    </div>
+                    <div class="form-group col-sm-4">
+                      <label class="col-sm-4 control-label">行程</label>
+                      <div class="col-sm-8">
+                        <input type="text" name="budget" placeholder="行程" class="form-control" value="" />
+                      </div>
+                    </div>
+                    <div class="form-group col-sm-4">
+                      <label class="col-sm-4 control-label">表单类型</label>
+                      <div class="col-sm-8">
+                        <input type="text" name="submittype" class="form-control" value="" />
+                      </div>
+                    </div>
+                    <div class="form-group col-sm-4">
+                      <label class="col-sm-4 control-label">询单来源</label>
+                      <div class="col-sm-8">
+                        <input type="text" name="source" class="source-select fullwidth" value="" />
+                      </div>
+                    </div>
+                    <div class="form-group col-sm-4">
+                      <label class="col-sm-4 control-label">状态</label>
+                      <div class="col-sm-8">
+                        <input type="text" name="status" placeholder="状态" class="form-control" value="" />
+                      </div>
+                    </div>
                 </div>
-                <div class="form-group col-sm-4">
-                  <label class="col-sm-6 control-label">儿童（12岁以下）</label>
-                  <div class="col-sm-6">
-                    <input type="text" name="children" placeholder="儿童（12岁以下）" class="form-control" value="" />
-                  </div>
-                </div>
-            </div>
-            <div class="section-block">
-               	<div class="form-group col-sm-4">
-	              <label class="col-sm-4 control-label">出发时间 <span class="asterisk">&nbsp;</span></label>
-	              <div class="col-sm-8">
-	                <div class="rdio rdio-primary rdio-inline">
-	                  <input type="radio" id="yes" value="1" name="isdisplay"/>
-	                  <label for="yes">已确定</label>
-	                </div><!-- rdio -->
-	                <div class="rdio rdio-primary rdio-inline">
-	                  <input type="radio" id="no" value="0" name="isdisplay"/>
-	                  <label for="no">未确定</label>
-	                </div><!-- rdio -->
-	                <label class="error" for="starttime"></label>
-	              </div>
-	            </div><!-- form-group -->  
-                <div class="form-group col-sm-4">
-                  <label class="col-sm-4 control-label">大约时间</label>
-                  <div class="col-sm-8 input-group input-datepicker">
-                    <input type="text" name="startmonth" class="form-control datepicker" placeholder="mm/dd/yyyy">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                  </div>
-                </div>
-                <div class="form-group col-sm-4">
-                  <label class="col-sm-4 control-label">大约天数</label>
-                  <div class="col-sm-8">
-                    <input type="text" name="during" placeholder="大约天数" class="form-control" value="" />
-                  </div>
-                </div>
-                <div class="form-group col-sm-4">
-                  <label class="col-sm-4 control-label">出发日期</label>
-                  <div class="col-sm-8 input-group input-datepicker">
-                    <input type="text" name="startdate" class="form-control datepicker" placeholder="mm/dd/yyyy">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                  </div>
-                </div>
-                <div class="form-group col-sm-4">
-                  <label class="col-sm-4 control-label">返回日期</label>
-                  <div class="col-sm-8 input-group input-datepicker">
-                    <input type="text" name="enddate" class="form-control datepicker" placeholder="mm/dd/yyyy">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                  </div>
-                </div>
-                 <div class="form-group col-sm-4">
-                  <label class="col-sm-4 control-label">客人的要求</label>
-                  <div class="col-sm-8">
-                    <textarea name="requirement" class="form-control" placeholder="客人的要求" rows="4"></textarea>
-                  </div>
-                </div>
-                <div class="form-group col-sm-4">
-                  <label class="col-sm-4 control-label">关于住宿</label>
-                  <div class="col-sm-8">
-                    <input type="text" name="hotel" class="hotel-select fullwidth" value="" />
-                  </div>
-                </div>
-                <div class="form-group col-sm-4">
-                  <label class="col-sm-4 control-label">关于用餐</label>
-                  <div class="col-sm-8">
-                    <input type="text" name="meals" class="meals-select fullwidth" value="" />
-                  </div>
-                </div>
-                <div class="form-group col-sm-4">
-                  <label class="col-sm-5 control-label">关于司机和导游</label>
-                  <div class="col-sm-7">
-                    <input type="text" name="guide" class="guide-select fullwidth" value="" />
-                  </div>
-                </div>
-                <div class="form-group col-sm-4">
-                  <label class="col-sm-4 control-label">客人的预算</label>
-                  <div class="col-sm-8">
-                    <input type="text" name="budget" placeholder="客人的预算" class="form-control" value="" />
-                  </div>
-                </div>
-            </div>
-            <div class="section-block">
-                <div class="form-group col-sm-4">
-                  <label class="col-sm-4 control-label">销售姓名</label>
-                  <div class="col-sm-8">
-                    <input type="text" name="salesname" placeholder="销售姓名" class="form-control" value="" />
-                  </div>
-                </div>
-                <div class="form-group col-sm-4">
-                  <label class="col-sm-4 control-label">目的地</label>
-                  <div class="col-sm-8">
-                    <input type="text" name="destination" class="destination-select fullwidth" value="" />
-                  </div>
-                </div>
-                <div class="form-group col-sm-4">
-                  <label class="col-sm-4 control-label">行程</label>
-                  <div class="col-sm-8">
-                    <input type="text" name="budget" placeholder="行程" class="form-control" value="" />
-                  </div>
-                </div>
-                <div class="form-group col-sm-4">
-                  <label class="col-sm-4 control-label">表单类型</label>
-                  <div class="col-sm-8">
-                    <input type="text" name="submittype" class="form-control" value="" />
-                  </div>
-                </div>
-                <div class="form-group col-sm-4">
-                  <label class="col-sm-4 control-label">询单来源</label>
-                  <div class="col-sm-8">
-                    <input type="text" name="source" class="source-select fullwidth" value="" />
-                  </div>
-                </div>
-                <div class="form-group col-sm-4">
-                  <label class="col-sm-4 control-label">状态</label>
-                  <div class="col-sm-8">
-                    <input type="text" name="status" placeholder="状态" class="form-control" value="" />
-                  </div>
-                </div>
-            </div>
-        </div><!-- panel-body -->
-        
-        <div class="panel-footer align-center">
-            <button class="btn btn-primary">保存</button>&nbsp;
-            <button class="btn btn-default">取消</button>
-		</div><!-- panel-footer -->
-     </form>   
+            </div><!-- panel-body -->
+            
+            <div class="panel-footer align-center">
+                <button class="btn btn-primary">保存</button>&nbsp;
+                <button class="btn btn-default">取消</button>
+    		    </div><!-- panel-footer -->
+        </form>   
       </div><!-- panel -->
 		</div>
 
@@ -307,10 +307,10 @@
              placeholder: '国家',
              data: d1
          });
-	    $(".agency-select").select2({
-            placeholder: '地接社',
-            data: p
-        });
+	    // $(".agency-select").select2({
+     //        placeholder: '地接社',
+     //        data: p
+     //    });
 		jQuery(document).ready(function() {
 			
       $(".nav-parent").eq(0).addClass("nav-active");
@@ -321,26 +321,20 @@
 			jQuery("#form").validate({
 				
   				rules: {
-  					loginname: "required",
-  					name: "required",
-  					pwd: {
-  						required: true,
-  					},
-  					repwd: {
-  						required: true,
-  						equalTo: "[name='pwd']"
-  					}
+  					adult: "digits",
+  					children: "digits",
+            budget: "digits",
+            startdate: "date",
+            enddate: "date",
+            startmonth: "date",
   				},
   				messages: {
-  					loginname: "请输入登录名",
-  					name: "请输入姓名",
-  					pwd: {
-  						required: "请输入密码"
-  					},
-  					repwd: {
-  						required: "请输入密码确认",
-  						equalTo: "两次输入的密码不一致"
-  					}
+  					adult: "请输入一个整数",
+            children: "请输入一个整数",
+            budget: "请输入一个整数",
+            startdate: "请输入正确的日期格式 mm/dd/yyyy",
+            enddate: "请输入正确的日期格式 mm/dd/yyyy",
+            startmonth: "请输入正确的日期格式 mm/dd/yyyy",
   				},
 				
 			    highlight: function(element) {
@@ -356,7 +350,7 @@
 			      form_submit();
 			      return false;
 			    }
-			  });
+			});
 			
 			  $("#btn-back").click( function () {
 				    history.go(-1);

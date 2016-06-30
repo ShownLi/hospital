@@ -97,7 +97,7 @@
               <h4 class="panel-title">成行信息</h4>
           </div>
           <div class="panel-body panel-body-nopadding">
-              <form class="form-horizontal form3">
+              <form id="form3" class="form-horizontal form3">
                   <div class="section-block">
                       <div class="form-group col-sm-4">
                           <label class="col-sm-4 control-label">成团日期</label>
@@ -152,7 +152,7 @@
                       </div>
                   </div>
               </form> 
-              <form class="form-horizontal form4">
+              <form id="form4" class="form-horizontal form4">
                   <div class="section-block">
                       <div class="form-group col-sm-6">
                         <label class="col-sm-4 control-label">若未成行，原因是</label>
@@ -284,7 +284,7 @@
                   <div class="form-group col-sm-6">
                       <label class="col-sm-4 control-label">成团日期</label>
                       <div class="col-sm-8 input-group input-datepicker">
-                        <input type="text" class="form-control datepicker" placeholder="mm/dd/yyyy">
+                        <input type="text" name="group_date" class="form-control datepicker" placeholder="mm/dd/yyyy">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                       </div>
                   </div>
@@ -411,6 +411,40 @@
 			// Date Picker
 			jQuery(".datepicker").datepicker();
 			
+      jQuery("#form3").validate({
+        rules: {
+          group_date: "date",
+          start_date: "date",
+          start_date: "date",
+          group_number: "number",
+          group_price: "number",
+          exchange_rate: "number",
+          rmb_price: "number",
+        },
+        messages: {
+          group_date: "请输入正确的日期格式 mm/dd/yyyy",
+          start_date: "请输入正确的日期格式 mm/dd/yyyy",
+          start_date: "请输入正确的日期格式 mm/dd/yyyy",
+          group_number: "请输入一个数字",
+          group_price: "请输入一个数字",
+          exchange_rate: "请输入一个数字",
+          rmb_price: "请输入一个数字",
+
+        },
+        highlight: function(element) {
+          jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+        },
+        success: function(element) {
+          jQuery(element).closest('.form-group').removeClass('has-error');
+        },
+        invalidHandler : function(){
+          return false;
+        },
+        submitHandler : function(){
+          form_submit();
+          return false;
+        }
+      });
 
 			$("#btn-chengxing").click(function(){
           $(".cModal").modal('show');

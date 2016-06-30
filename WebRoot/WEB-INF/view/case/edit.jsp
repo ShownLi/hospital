@@ -433,18 +433,50 @@
       $(".nav-parent").eq(0).addClass("nav-active");
       $(".nav-parent").eq(0).find(".children").show();
 			
-			 // Date Picker
-			  jQuery(".datepicker").datepicker();
+			// Date Picker
+			jQuery(".datepicker").datepicker();
 			 
-			
+			jQuery("#form").validate({
+        
+          rules: {
+            adult: "digits",
+            children: "digits",
+            budget: "digits",
+            startdate: "date",
+            enddate: "date",
+            startmonth: "date",
+          },
+          messages: {
+            adult: "请输入一个整数",
+            children: "请输入一个整数",
+            budget: "请输入一个整数",
+            startdate: "请输入正确的日期格式 mm/dd/yyyy",
+            enddate: "请输入正确的日期格式 mm/dd/yyyy",
+            startmonth: "请输入正确的日期格式 mm/dd/yyyy",
+          },
+        
+          highlight: function(element) {
+            jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+          },
+          success: function(element) {
+            jQuery(element).closest('.form-group').removeClass('has-error');
+          },
+          invalidHandler : function(){
+            return false;
+          },
+          submitHandler : function(){
+            form_submit();
+            return false;
+          }
+      });
   			$("#btn-back").click( function () {
   				history.go(-1);
   		  }); 
 
-        $("#submit").click(function(){
-          $("#nextModal").modal('show');
-          return false;
-        });
+        // $("#submit").click(function(){
+        //   $("#nextModal").modal('show');
+        //   return false;
+        // });
 
     });
 
@@ -458,7 +490,7 @@
   					//window.parent.location = "${rootPath}customer/list.html";
   					$("#nextModal").modal('show');
   				} else {
-  					$("#msgModal").modal('show');
+  					//$("#msgModal").modal('show');
   				}
   			}, "JSON");
   		}

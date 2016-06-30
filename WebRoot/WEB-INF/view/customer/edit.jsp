@@ -330,10 +330,16 @@
 
 		jQuery("#form").validate({
 			rules: {
-				name: "required",
+				zname: "required",
+				qq: "number",
+				email: "email",
+				birthday: "date"
 			},
 			messages: {
-				name: "请输入客人名",
+				zname: "请输入中文名",
+				qq: "请输入有效的QQ账号",
+				email: "请输入有效的邮箱",
+				birthday: "请输入正确的日期"
 			},
 		    highlight: function(element) {
 		      jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');

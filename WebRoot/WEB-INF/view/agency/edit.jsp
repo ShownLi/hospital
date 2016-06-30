@@ -42,9 +42,9 @@
 		       			<div class="panel-body panel-body-nopadding">
 		          			<div class="section-block">
 			            		<div class="form-group col-sm-4">
-			              			<label class="col-sm-4 control-label">地接社名 <span class="asterisk">*</span></label>
+			              			<label class="col-sm-4 control-label">地接社名称 <span class="asterisk">*</span></label>
 			              			<div class="col-sm-8">
-			              				<input type="text" name="name" placeholder="地接社名" class="form-control" value="${agency.name }" />
+			              				<input type="text" name="name" placeholder="地接社名称" class="form-control" value="${agency.name }" />
 			              			</div>
 			              		</div>         
 			            		<div class="form-group col-sm-4">

@@ -131,7 +131,7 @@
 			jQuery("#form").validate({
 				
 				rules: {
-		             loginname:{  
+		            loginname:{  
 			         	required:true,  
 			            remote:{                           
 			            	url:"${rootPath}validate.do",
@@ -146,25 +146,29 @@
 					name: "required",
 					pwd: {
 						required: true,
+						minlength: 10,
 					},
 					repwd: {
 						required: true,
 						equalTo: "[name='pwd']"
-					}
+					},
+					email: "email",
 				},
 				messages: {
 					loginname: {
-						required:"请输入登录名!",
+						required:"请输入登录名",
 						remote:"登录名已存在，请重新输入"
-						},
+					},
 					name: "请输入姓名",
 					pwd: {
-						required: "请输入密码"
+						required: "请输入密码",
+						minlength: "密码长度至少为6位",
 					},
 					repwd: {
 						required: "请输入密码确认",
 						equalTo: "两次输入的密码不一致"
-					}
+					},
+					email: "请输入有效的邮箱",
 				},
 				
 			    highlight: function(element) {

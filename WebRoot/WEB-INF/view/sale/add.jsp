@@ -124,15 +124,23 @@
 		jQuery("#form").validate({
 			rules: {
 				name: "required",
-				agency: "required",
-				email: "required",
-				code: "required",
+				email: "email",
+				code: {
+					remote:{                           
+		            	url:"${rootPath}validate.do",
+		            	type:"post",
+		            	data: {
+	                        table: function () { return "tm_parameter"},
+	                        field: function () { return "para_value"},
+	                        name: function () { return $("#value").val();},
+	                    }
+		            }
+				}
 			},
 			messages: {
 				name: "请输入销售名称",
-				agency: "请选择所属地接社",
-				email: "请输入邮箱地址",
-				code: "请输入销售编码",
+				code: "销售编号已存在",
+				email: "请输入有效的邮箱地址",
 
 			},
 		    highlight: function(element) {
@@ -148,7 +156,7 @@
 		      form_submit();
 		      return false;
 		    }
-		  });
+		});
 		$("#btn-back").click( function () {
 			history.go(-1);
 	    } ); 
