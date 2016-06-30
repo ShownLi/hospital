@@ -21,7 +21,7 @@ Date.prototype.format = function(fmt) { // author: meizz
 
 var datatable_local_language = {
 		"emptyTable":     "暂无数据",
-	    "info":           "显示第 _START_ 至 _END_ 条数据，共 _TOTAL_ 条数据",
+	    "info":           "当前第 _START_ 至 _END_ 条数据，共 _TOTAL_ 条数据",
 	    "infoEmpty":      "共 0 条数据",
 	    "infoFiltered":   "(filtered from _MAX_ total entries)",
 	    "infoPostFix":    "",

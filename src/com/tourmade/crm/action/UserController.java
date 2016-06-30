@@ -41,11 +41,6 @@ public class UserController extends BaseSimpleFormController {
 	}
 	
 
-	@RequestMapping(value = "/data.html", method = { RequestMethod.POST, RequestMethod.GET })
-	public String getUserData(Model model) {
-		return "/user/userdata";
-	}
-
 	@RequestMapping(value = "/add.html", method = { RequestMethod.POST, RequestMethod.GET })
 	public String add(Model model) {
 		return "/user/add";

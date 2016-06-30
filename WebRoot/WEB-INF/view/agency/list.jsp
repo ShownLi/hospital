@@ -50,8 +50,7 @@
 										<th>语言</th>
 										<th>操作</th>
 									</tr>
-								</thead>
-								
+								</thead>						
 							</table>
 						</div>
 						<!-- table-responsive -->
@@ -99,29 +98,31 @@
 </div><!-- modal -->
 
 
-	<script type="text/javascript">
+<script type="text/javascript">
+	var c = ${countryname};
+	var l = ${language};
 	
-		jQuery(document).ready(function() {
+	jQuery(document).ready(function() {
 
-			$(".nav-parent").eq(3).addClass("nav-active");
-      		$(".nav-parent").eq(3).find(".children").show();
-			
-			var t = jQuery('#dataTable').DataTable({
-				pageLength: 10,
-				processing: true,
-				language: datatable_local_language, // my.js
-				serverSide: true,
-				ajax: {
-					url: '${rootPath}agency/list.do',
-					dataFilter: function(data){
-			            var json = jQuery.parseJSON( data );
-			            json.recordsTotal = json.countTotal;
-			            json.recordsFiltered = json.countFiltered;
-			            json.data = json.data;
-			            return JSON.stringify( json );
-			        }
-				},
-				columnDefs: [
+		$(".nav-parent").eq(3).addClass("nav-active");
+    	$(".nav-parent").eq(3).find(".children").show();
+
+		var t = jQuery('#dataTable').DataTable({
+			pageLength: 10,
+			processing: true,
+			language: datatable_local_language, // my.js
+			serverSide: true,
+			ajax: {
+			url: '${rootPath}agency/list.do',
+			dataFilter: function(data){
+			var json = jQuery.parseJSON( data );
+			json.recordsTotal = json.countTotal;
+			json.recordsFiltered = json.countFiltered;
+			json.data = json.data;
+			return JSON.stringify( json );
+			}
+			},
+			columnDefs: [
 				  {
 	                  data: "agency_id",
 	                  //defaultContent: '<a class="btn btn-success btn-xs"><span class="fa fa-edit"></span> 编辑</a>&nbsp;<a class="btn btn-danger btn-xs"><span class="fa fa-minus-circle"></span> 删除</a>',
@@ -132,9 +133,33 @@
 	                  targets: 4
 				  },
 				  {
+	                data: "country",
+	                orderable: false,
+	                render: function ( data ) {
+	                	for(var i=0;i <  c.length;i++){
+	                		if(data==c[i].id){
+	                			return c[i].text
+	                		}
+	                	}
+	                },
+	                  targets: 2
+				  },
+				  {
+		                data: "language",
+		                orderable: false,
+		                render: function ( data ) {
+		                	for(var i=0;i <  l.length;i++){
+		                		if(data==l[i].id){
+		                			return l[i].text
+		                		}
+		                	}
+		                },
+		                  targets: 3
+					  },
+				  {
 					  orderable: false,
 					  searchable: false,
-				      targets: [0,1,2]
+				      targets: [0]
 				  },
 
 				],

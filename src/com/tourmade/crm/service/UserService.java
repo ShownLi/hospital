@@ -36,7 +36,6 @@ public class UserService extends BaseService {
 		QueryResult<DemoUser> r = new QueryResult<DemoUser>();
 		Map<String, Object> map = new HashMap<String, Object>();
 		
-		System.out.println(ph);
 		
 		String seachValue = ph.getSearch().get("value");
 		
@@ -49,7 +48,7 @@ public class UserService extends BaseService {
 			
 		
 		
-		map.put("pojo", user);
+//		map.put("pojo", user);
 		map.put("b", ph.getStart());
 		map.put("e", ph.getLength());
 //		map.put("s", ph.getSort());
@@ -173,4 +172,15 @@ public class UserService extends BaseService {
 		return u;
 	}
 
+	/**
+	 * 验证字段是否重复
+	 * 
+	 * @param 
+	 * @return
+	 */
+	public String Validate(String table, String field, String name) {
+		
+		String result = userMapper.validate(table, field, name);
+		return result ;
+	}
 }

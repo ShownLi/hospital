@@ -41,9 +41,9 @@
           
           	<div class="section-block">
 	            <div class="form-group col-sm-4">
-	              <label class="col-sm-4 control-label">用户名</label>
+	              <label class="col-sm-4 control-label">登录名</label>
 	              <div class="col-sm-8">
-	                <input type="text" name="loginname" placeholder="用户名" class="form-control" />
+	                <input type="text" id="loginname" name="loginname" placeholder="登录名" class="form-control" />
 	              </div>
 	            </div>
 	            <div class="form-group col-sm-4">
@@ -124,15 +124,25 @@
 	<script src="${rootPath}assets/js/jquery.validate.min.js"></script>
 	
 	<script type="text/javascript">
+	
 		jQuery(document).ready(function() {
-
 			$(".nav-parent").eq(4).addClass("nav-active");
       		$(".nav-parent").eq(4).find(".children").show();
-
 			jQuery("#form").validate({
 				
 				rules: {
-					loginname: "required",
+		             loginname:{  
+			         	required:true,  
+			            remote:{                           
+			            	url:"${rootPath}/validate",
+			            	type:"post",
+			            	data: {
+		                         table: function () { return "tm_user"},
+		                         field: function () { return "loginname"},
+		                         name: function () { return $("#loginname").val();},
+		                         }
+			            }
+			        },
 					name: "required",
 					pwd: {
 						required: true,
@@ -143,7 +153,10 @@
 					}
 				},
 				messages: {
-					loginname: "请输入登录名",
+					loginname: {
+						required:"请输入登录名!",
+						remote:"登录名已存在，请重新输入"
+						},
 					name: "请输入姓名",
 					pwd: {
 						required: "请输入密码"

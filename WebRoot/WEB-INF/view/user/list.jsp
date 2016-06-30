@@ -45,6 +45,7 @@
 									<tr>
 										<th>#</th>
 										<th>登录名</th>
+										<th>姓名</th>
 										<th>邮箱</th>
 										<th>手机</th>
 										<th>编辑</th>
@@ -129,7 +130,7 @@
 				      render: function ( data, type, full, meta ) {
 		              return '<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a>&nbsp;';
 				  },
-				              targets: 4
+				              targets: 5
 							  },				             
 				  {
 					  orderable: false,
@@ -140,6 +141,7 @@
 				columns: [
 		            { data: "userid" },
 		            { data: "loginname" },
+		            { data: "name" },
 		            { data: "email" },
 		            { data: "mobilephone" }
 		        ]

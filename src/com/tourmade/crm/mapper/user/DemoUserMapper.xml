@@ -16,14 +16,6 @@
 		u.creat_time as creattime,
 		u.isdel as isdel
 		from tm_user u where u.isdel = 0
-		<if test="pojo.seachValue!=null and pojo.seachValue!=''">
-			and
-			(
-			u.loginname like '%${pojo.seachValue}%'
-			or
-			u.user_name like '%${pojo.seachValue}%'
-			)
-		</if>
 		order by u.creat_time desc
 		) table_alias
 		limit #{b},#{e}
@@ -34,14 +26,6 @@
 		select count(u.user_id) from tm_user u
 		where
 		u.isdel = 0
-		<if test="seachValue!=null and seachValue!=''">
-			and
-			(
-			u.loginname like '%${seachValue}%'
-			or
-			u.user_name like '%${seachValue}%'
-			)
-		</if>
 	</select>
 
 	<insert id="saveUser" parameterType="DemoUser" flushCache="true" useGeneratedKeys="true" keyProperty="userid" keyColumn="GENERATED_KEY">
@@ -67,9 +51,7 @@
 	<update id="updateUser" parameterType="DemoUser" flushCache="true">
 		update tm_user
 		set
-		loginname=#{loginname},
 		user_name=#{name},
-		password=#{pwd},
 		user_email=#{email},
 		mobilephone=#{mobilephone},
 		update_time=NOW()
@@ -108,5 +90,11 @@
 		from tm_user u where
 		u.loginname = #{loginname} and u.password = #{pwd} and u.isdel = 0
 	</select>
-
+	
+	<select id="validate" resultType="String">
+		select  ${field} from ${table} u
+		where u.${field} = #{name} and
+		u.isdel = 0
+	</select>
+	
 </mapper>
