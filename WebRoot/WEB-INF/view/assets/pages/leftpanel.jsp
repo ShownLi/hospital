@@ -68,7 +68,8 @@
                 <ul class="children">
                     <li><a href="${rootPath }email/list.html"><i class="fa fa-caret-right"></i> 邮件队列</a></li>
                 </ul>
-            </li>                     
+            </li>
+            <li><a href="${rootPath }signout.html"><i class="glyphicon glyphicon-log-out"></i> 退出登录</a></li>                     
         </ul>
 
     </div><!-- leftpanelinner -->

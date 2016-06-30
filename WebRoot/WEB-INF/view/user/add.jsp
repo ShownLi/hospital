@@ -134,7 +134,7 @@
 		             loginname:{  
 			         	required:true,  
 			            remote:{                           
-			            	url:"${rootPath}/validate",
+			            	url:"${rootPath}validate.do",
 			            	type:"post",
 			            	data: {
 		                         table: function () { return "tm_user"},

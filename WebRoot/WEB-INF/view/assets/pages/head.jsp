@@ -7,7 +7,6 @@
 <link rel="shortcut icon" href="${rootPath}assets/images/favicon.png" type="image/png">
 
 <title>特美旅行CRM系统</title>
-
 <link href="${rootPath}assets/css/style.default.css" rel="stylesheet">
 
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->

@@ -1,5 +1,6 @@
 package com.tourmade.crm.service;
 
+import java.security.MessageDigest;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -73,7 +74,21 @@ public class UserService extends BaseService {
 	public int saveUser(DemoUser user) {
 		// user.setPwd("123456");
 		// user.setPwd(MD5.MD5Encode("123456"));
-		try {
+		try {MessageDigest md = MessageDigest.getInstance("MD5");
+
+		byte[] md5 = md.digest(user.getPwd().getBytes());
+		
+		StringBuffer md5StrBuff = new StringBuffer(); 
+		
+        for (int i = 0; i < md5.length; i++) {  
+            if (Integer.toHexString(0xFF & md5[i]).length() == 1){  
+                md5StrBuff.append("0").append(  
+                        Integer.toHexString(0xFF & md5[i]));  
+            }else{  
+                md5StrBuff.append(Integer.toHexString(0xFF & md5[i]));  
+            }  
+        }
+			user.setPwd(md5StrBuff.toString());
 			userMapper.saveUser(user);
 		} catch (Exception e) {
 			logger.error("UserService.saveUser() --> " + user + "-->" + e.getMessage());
@@ -163,6 +178,21 @@ public class UserService extends BaseService {
 		DemoUser u = null;
 
 		try {
+			MessageDigest md = MessageDigest.getInstance("MD5");
+
+			byte[] md5 = md.digest(user.getPwd().getBytes());
+			
+			StringBuffer md5StrBuff = new StringBuffer(); 
+			
+	        for (int i = 0; i < md5.length; i++) {  
+	            if (Integer.toHexString(0xFF & md5[i]).length() == 1){  
+	                md5StrBuff.append("0").append(  
+	                        Integer.toHexString(0xFF & md5[i]));  
+	            }else{  
+	                md5StrBuff.append(Integer.toHexString(0xFF & md5[i]));  
+	            }  
+	        }
+			user.setPwd(md5StrBuff.toString());
 			u = userMapper.signin(user);
 		} catch (Exception e) {
 			logger.error("UserService.sighin() --> " + user + "-->" + e.getMessage());
@@ -178,9 +208,9 @@ public class UserService extends BaseService {
 	 * @param 
 	 * @return
 	 */
-	public String Validate(String table, String field, String name) {
+	public String Validate(String table, String field, String filter_field, String filter_name, String name) {
 		
-		String result = userMapper.validate(table, field, name);
+		String result = userMapper.validate(table, field, filter_field, filter_name, name);
 		return result ;
 	}
 }

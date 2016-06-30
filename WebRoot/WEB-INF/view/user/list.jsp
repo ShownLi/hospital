@@ -43,7 +43,7 @@
 							<table id="dataTable" class="table">
 								<thead>
 									<tr>
-										<th>#</th>
+										<th>序号</th>
 										<th>登录名</th>
 										<th>姓名</th>
 										<th>邮箱</th>

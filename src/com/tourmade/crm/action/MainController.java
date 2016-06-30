@@ -25,11 +25,13 @@ public class MainController extends BaseSimpleFormController {
 		return "/";
 	}
 	
-	@RequestMapping(value = "/validate", method = { RequestMethod.POST, RequestMethod.GET })
-	public void Validate(String table, String field, String name,HttpServletResponse response) {
+	@RequestMapping(value = "/validate.do", method = { RequestMethod.POST, RequestMethod.GET })
+	public void Validate(String table, String field, String filter_field, String filter_name, String name,HttpServletResponse response) {
 
 		try{
-			String result = service.Validate(table, field, name);
+			String result = service.Validate(table, field, filter_field, filter_name, name);
+			//System.out.println("table="+table+"\nfield="+field+"\nfilter_field="+filter_field+"\nfilter_name="+filter_name+"\nname="+name);
+			//System.out.println(result);
 			if(name.equals(result)){
 				response.getWriter().print(false);
 			}
