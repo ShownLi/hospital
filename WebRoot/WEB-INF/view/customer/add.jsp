@@ -219,26 +219,10 @@
 			jQuery("#form").validate({
 				
 				rules: {
-					loginname: "required",
-					name: "required",
-					pwd: {
-						required: true,
-					},
-					repwd: {
-						required: true,
-						equalTo: "[name='pwd']"
-					}
+					zname: "required",
 				},
 				messages: {
-					loginname: "请输入登录名",
-					name: "请输入姓名",
-					pwd: {
-						required: "请输入密码"
-					},
-					repwd: {
-						required: "请输入密码确认",
-						equalTo: "两次输入的密码不一致"
-					}
+					zname: "请输入中文名",
 				},
 				
 			    highlight: function(element) {
