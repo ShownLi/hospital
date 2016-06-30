@@ -32,27 +32,16 @@ public class CommentService extends BaseService {
 	 * @param request
 	 * @return
 	 */
-	public QueryResult<DemoComment> queryComment(DemoComment comment, PageHelper ph, HttpServletRequest request) {
+	public QueryResult<DemoComment> queryComment(DemoComment comment, PageHelper ph, String type, int id, HttpServletRequest request) {
 
 		QueryResult<DemoComment> r = new QueryResult<DemoComment>();
 		Map<String, Object> map = new HashMap<String, Object>();
 		
-		System.out.println(ph);
-		
-		String seachValue = ph.getSearch().get("value");
-		
-		if (null != seachValue && !"".equals(seachValue)) {
-			if (null == comment) {
-				comment = new DemoComment();
-			}
-			comment.setSeachValue(seachValue);
-		}
 			
-		
-		
-		map.put("pojo", comment);
 		map.put("b", ph.getStart());
 		map.put("e", ph.getLength());
+		map.put("type", type);
+		map.put("id", id);
 //		map.put("s", ph.getSort());
 //		map.put("o", ph.getOrder());
 

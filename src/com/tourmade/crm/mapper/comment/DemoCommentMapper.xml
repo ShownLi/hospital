@@ -8,13 +8,17 @@
 		FROM (
 		select
 		u.comment_id as commentid,
-		u.comment_name as name,
-		u.country as cname,
-		u.language as vlanguage,
-		u.creat_time as creat_time,
+		u.comment_type as type,
+		u.object_id,
+		u.user_id as userid,
+		u.user_name as username,
+		u.content as content,
+		u.creat_time as creattime,
 		u.isdel as isdel
 		from tm_comment u  
-		where u.isdel = 0 and v.isdel = 0 and x.isdel = 0
+		where u.isdel = 0
+		and u.comment_type = #{type}
+		and u.object_id = #{id}
 		order by u.creat_time
 		) table_alias
 		limit #{b},#{e}
@@ -24,16 +28,6 @@
 		select count(u.comment_id) from tm_comment u
 		where
 		u.isdel = 0
-		<if test="seachValue!=null and seachValue!=''">
-			and
-			(
-			u.comment_name like '%${seachValue}%'
-			or
-			u.country like '%${seachValue}%'
-			or
-			u.language like '%${seachValue}%'
-			)
-		</if>
 
 	</select>
 	

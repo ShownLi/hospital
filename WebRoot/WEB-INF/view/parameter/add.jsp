@@ -77,7 +77,7 @@
 	            <div class="form-group col-sm-4">
 	              <label class="col-sm-4 control-label">排序标记 <span class="asterisk">*</span></label>
 	              <div class="col-sm-8">
-	                <input type="text" id="sort" name="sort" placeholder="排序标记" class="form-control" />
+	                <input type="text" name="sort" placeholder="排序标记" class="form-control" />
 	              </div>
 	            </div>
 	            <div class="form-group col-sm-4">
@@ -156,6 +156,8 @@
 			            	data: {
 		                         table: function () { return "tm_parameter"},
 		                         field: function () { return "para_value"},
+		                         filter_field: function () { return "para_domain"},
+		                         filter_name: function () { return $("#domain").val();},
 		                         name: function () { return $("#value").val();},
 		                         }
 			            }

@@ -17,39 +17,47 @@ import com.tourmade.crm.common.framework.bean.QueryResult;
 import com.tourmade.crm.common.framework.util.JSONUtilS;
 import com.tourmade.crm.common.model.base.value.baseconfig.Json;
 import com.tourmade.crm.common.model.base.value.baseconfig.PageHelper;
-import com.tourmade.crm.model.DemoOrder;
+import com.tourmade.crm.model.DemoComment;
 import com.tourmade.crm.model.DemoList;
-import com.tourmade.crm.service.OrderService;
+import com.tourmade.crm.service.CommentService;
 
 import net.sf.json.JSONArray;
 
 @Controller
-@RequestMapping("/order")
-public class OrderController extends BaseSimpleFormController {
+@RequestMapping("/comment")
+public class CommentController extends BaseSimpleFormController {
 	
 	@Autowired
-	private OrderService service;
+	private CommentService service;
 
 	@RequestMapping(value = "/list.html", method = { RequestMethod.POST, RequestMethod.GET })
 	public String list(Model model) {
-		return "/order/list";
+		String country = "country";
+		String language = "comment.language";
+		List<DemoList> v = service.getParameterInfo(country);
+		List<DemoList> w = service.getParameterInfo(language);
+		JSONArray countryresult = JSONArray.fromObject(v);
+		JSONArray languageresult = JSONArray.fromObject(w);
+		model.addAttribute("countryname",countryresult);
+		model.addAttribute("language",languageresult);
+		return "/comment/list";
 	}
 	
 	@RequestMapping(value = "/list.do",produces="application/json;charset=utf-8")
 	@ResponseBody
-	public String queryData(HttpServletRequest request, HttpSession session, Model model, DemoOrder order, PageHelper page) {
+	public String queryData(HttpServletRequest request, HttpSession session, Model model, DemoComment comment, String type,int id, PageHelper page) {
 
-		QueryResult<DemoOrder> r = service.queryOrder(order, page, request);
+		QueryResult<DemoComment> r = service.queryComment(comment, page, type ,id ,request);
+		//System.out.println("type = "+type+"\nid = "+id);
 		String result = JSONUtilS.object2json(r);
-
 		return result;
 	}
 
 	@RequestMapping(value = "/add.html", method = { RequestMethod.POST, RequestMethod.GET })
 	public String add(Model model) {
 		
-		String country = "order.country";
-		String language = "order.language";
+		String country = "country";
+		String language = "comment.language";
 		List<DemoList> u = service.getParameterInfo(country);
 		List<DemoList> v = service.getParameterInfo(language);
 		JSONArray countryresult = JSONArray.fromObject(u);
@@ -57,21 +65,21 @@ public class OrderController extends BaseSimpleFormController {
 		model.addAttribute("country",countryresult);
 		model.addAttribute("language",languageresult);
 		
-		return "/order/add";
+		return "/comment/add";
 	}
 
 	@RequestMapping(value = "/add.do")
 	@ResponseBody
-	public Json doAdd(HttpServletRequest request, HttpSession session, Model model, DemoOrder order) {
+	public Json doAdd(HttpServletRequest request, HttpSession session, Model model, DemoComment comment) {
 
 		Json j = new Json();
 		
 		try {
-			service.saveOrder(order);
+			service.saveComment(comment);
 			j.setSuccess(true);
 		} catch (Exception e) {
 			j.setSuccess(false);
-			logger.error("OrderController.doAdd() --> " + order.toString() + "\n" + e.getMessage());
+			logger.error("CommentController.doAdd() --> " + comment.toString() + "\n" + e.getMessage());
 		}
 		
 		return j;
@@ -82,28 +90,32 @@ public class OrderController extends BaseSimpleFormController {
 		
 		if (null != id && !"".equals(id)) {
 			int i = Integer.parseInt(id);
-			DemoOrder u = service.getOrderById(i);
-			String country = "order.status";
+			DemoComment u = service.getCommentById(i);
+			String country = "country";
+			String language = "comment.language";
 			List<DemoList> v = service.getParameterInfo(country);
-			JSONArray statusresult = JSONArray.fromObject(v);
-			model.addAttribute("status",statusresult);
-			model.addAttribute("order",u);
+			List<DemoList> w = service.getParameterInfo(language);
+			JSONArray countryresult = JSONArray.fromObject(v);
+			JSONArray languageresult = JSONArray.fromObject(w);
+			model.addAttribute("country",countryresult);
+			model.addAttribute("language",languageresult);
+			model.addAttribute("comment",u);
 		}
-		return "/order/edit";
+		return "/comment/edit";
 	}
 
 	@RequestMapping(value = "/edit.do")
 	@ResponseBody
-	public Json doEdit(HttpServletRequest request, HttpSession session, Model model, DemoOrder order) {
+	public Json doEdit(HttpServletRequest request, HttpSession session, Model model, DemoComment comment) {
 
 		Json j = new Json();
-		System.out.println(order);
+		
 		try {
-			service.updateOrder(order);
+			service.updateComment(comment);
 			j.setSuccess(true);
 		} catch (Exception e) {
 			j.setSuccess(false);
-			logger.error("OrderController.doEdit() --> " + order.toString() + "\n" + e.getMessage());
+			logger.error("CommentController.doEdit() --> " + comment.toString() + "\n" + e.getMessage());
 		}
 		
 		return j;
@@ -118,14 +130,14 @@ public class OrderController extends BaseSimpleFormController {
 		try {
 			if (null != id && !"".equals(id)) {
 				int i = Integer.parseInt(id);
-				service.deleteOrderById(i);
+				service.deleteCommentById(i);
 				j.setSuccess(true);
 			} else {
 				j.setSuccess(false);
 			}
 		} catch (Exception e) {
 			j.setSuccess(false);
-			logger.error("OrderController.doDel() --> " + id + "\n" + e.getMessage());
+			logger.error("CommentController.doDel() --> " + id + "\n" + e.getMessage());
 		}
 		
 		return j;

@@ -317,7 +317,7 @@
         </div>
         <div class="panel-body">
             <div class="table-responsive">
-              <table id="dataTable-note" class="table table-note">
+              <table id="dataTable-note" class="table">
                 <thead>
                   <tr>
                     <th>序号</th>
@@ -327,24 +327,6 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td>张三</td>
-                    <td>埃及几月份最好玩</td>
-                    <td>2016-06-24 11:00</td>
-                  </tr>
-                  <tr>
-                    <td>2</td>
-                    <td>张三</td>
-                    <td>埃及几月份最好玩</td>
-                    <td>2016-06-24 11:00</td>
-                  </tr>
-                  <tr>
-                    <td>3</td>
-                    <td>张三</td>
-                    <td>埃及几月份最好玩</td>
-                    <td>2016-06-24 11:00</td>
-                  </tr>
                 </tbody>
               </table>
           </div>
@@ -359,7 +341,7 @@
         </div>
     </div><!-- end of panel 注释 -->
 
-			</div>
+	</div>
 
 		</div>
 		<!-- mainpanel -->
@@ -417,25 +399,24 @@
 
 	<%@ include file="../assets/pages/foot.jsp"%>
 	<script src="${rootPath}assets/js/jquery-ui-1.10.3.min.js"></script>
+	<script src="${rootPath}assets/js/jquery.datatables.min.js"></script>
 	<script src="${rootPath}assets/js/jquery.validate.min.js"></script>
 	
-	<script type="text/javascript">
+<script type="text/javascript">
 		// var p = ${promote};
 		// $(".order-select").select2({
 		// 	placeholder: '订单筛选',
 		//   	data: p
 		// });
 
+	jQuery(document).ready(function() {
 
-		
-		jQuery(document).ready(function() {
-
-      $(".nav-parent").eq(0).addClass("nav-active");
-      $(".nav-parent").eq(0).find(".children").show();
+		$(".nav-parent").eq(0).addClass("nav-active");
+		$(".nav-parent").eq(0).find(".children").show();
 			
 			// Date Picker
 			jQuery(".datepicker").datepicker();
-			 
+	 
 			jQuery("#form").validate({
         
           rules: {
@@ -479,9 +460,7 @@
         // });
 
     });
-
-      
-			      
+ 
   		function form_submit() {
   			var f = $("#form").serialize();
   			$.post('${rootPath}case/edit.do', f, function(result) {
@@ -494,6 +473,38 @@
   				}
   			}, "JSON");
   		}
+  		var t = jQuery('#dataTable-note').DataTable({
+  			pageLength: 10,
+  			processing: true,
+  			language: datatable_local_language, // my.js
+  			serverSide: true,
+  			ajax: {
+  				url: '${rootPath}comment/list.do?type=case&id=1',
+  				dataFilter: function(data){
+  				    var json = jQuery.parseJSON( data );
+  				    json.recordsTotal = json.countTotal;
+  				    json.recordsFiltered = json.countFiltered;
+  				    json.data = json.data;
+  				    return JSON.stringify( json );
+  			    	}
+  				},
+				columnDefs: [
+							  {
+								  data: "creatime",
+								  render: function ( data, type, full, meta ) {
+									  var upttime = new Date(data.time);
+				                      return upttime.format("yyyy/MM/dd");
+				                  },
+				                  targets: 3
+							  }
+							],
+  			columns: [
+  			    { data: "commentid" },
+  			    { data: "username" },
+  			    { data: "content" },
+  			    { data: "creattime" }
+  		    ]
+  			});
 	</script>
 
 

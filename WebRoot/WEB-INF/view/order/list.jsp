@@ -50,48 +50,10 @@
 										<th>目的地</th>
 										<th>预算</th>
 										<th>状态</th>
-										<th>成团人数</th>
-										<th>成团价格</th>
 										<th>编辑</th>
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td>1</td>
-										<td>张三</td>
-										<td>龙润国际旅行</td>
-										<td>李四</td>
-										<td>埃及</td>
-										<td>40,000</td>
-										<td>成交</td>
-										<td>6人</td>
-										<td>45,000</td>
-										<td><a href="edit.html" class="btn btn-success btn-xs"><span class="fa fa-edit"></span> 编辑</a></td>
-									</tr>
-									<tr>
-										<td>2</td>
-										<td>张三</td>
-										<td>龙润国际旅行</td>
-										<td>李四</td>
-										<td>埃及</td>
-										<td>40,000</td>
-										<td>成交</td>
-										<td>6人</td>
-										<td>45,000</td>
-										<td><a href="edit.html" class="btn btn-success btn-xs"><span class="fa fa-edit"></span> 编辑</a></td>
-									</tr>
-									<tr>
-										<td>3</td>
-										<td>张三</td>
-										<td>龙润国际旅行</td>
-										<td>李四</td>
-										<td>埃及</td>
-										<td>40,000</td>
-										<td>成交</td>
-										<td>6人</td>
-										<td>45,000</td>
-										<td><a href="edit.html" class="btn btn-success btn-xs"><span class="fa fa-edit"></span> 编辑</a></td>
-									</tr>
 								</tbody>
 							</table>
 						</div>
@@ -138,62 +100,64 @@
 			$(".nav-parent").eq(1).addClass("nav-active");
       		$(".nav-parent").eq(1).find(".children").show();
 			
-			// var t = jQuery('#dataTable').DataTable({
-			// 	pageLength: 10,
-			// 	processing: true,
-			// 	language: datatable_local_language, // my.js
-			// 	serverSide: true,
-			// 	ajax: {
-			// 		url: '${rootPath}user/list.do',
-			// 		dataFilter: function(data){
-			//             var json = jQuery.parseJSON( data );
-			//             json.recordsTotal = json.countTotal;
-			//             json.recordsFiltered = json.countFiltered;
-			//             json.data = json.data;
-			//             return JSON.stringify( json );
-			//         }
-			// 	},
-			// 	columnDefs: [
-			//       {
-			//           data: "userid",
-			//           //defaultContent: '<a class="btn btn-success btn-xs"><span class="fa fa-edit"></span> 编辑</a>&nbsp;<a class="btn btn-danger btn-xs"><span class="fa fa-minus-circle"></span> 删除</a>',
-			// 	      orderable: false,
-			// 	      render: function ( data, type, full, meta ) {
-		 //              return '<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a>&nbsp;';
-			// 	  },
-			// 	              targets: 5
-			// 				  },				             
-			// 	  {
-			// 		  orderable: false,
-			// 		  searchable: false,
-			// 	      targets: [0,1,2]
-			// 	  },
-			// 	],
-			// 	columns: [
-		 //            { data: "userid" },
-		 //            { data: "loginname" },
-		 //            { data: "name" },
-		 //            { data: "mobilephone" },
-		 //            { data: "email" }
-		 //        ]
-			// });
+			 var t = jQuery('#dataTable').DataTable({
+			 	pageLength: 10,
+			 	processing: true,
+			 	language: datatable_local_language, // my.js
+			 	serverSide: true,
+			 	ajax: {
+			 		url: '${rootPath}order/list.do',
+			 		dataFilter: function(data){
+			             var json = jQuery.parseJSON( data );
+			             json.recordsTotal = json.countTotal;
+			             json.recordsFiltered = json.countFiltered;
+			             json.data = json.data;
+			             return JSON.stringify( json );
+			         }
+			 	},
+			 	columnDefs: [
+			       {
+			           data: "orderid",
+			           //defaultContent: '<a class="btn btn-success btn-xs"><span class="fa fa-edit"></span> 编辑</a>&nbsp;<a class="btn btn-danger btn-xs"><span class="fa fa-minus-circle"></span> 删除</a>',
+			 	      orderable: false,
+			 	      render: function ( data, type, full, meta ) {
+		               return '<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a>&nbsp;';
+			 	  },
+			 	              targets: 7
+			 				  },				             
+			 	  {
+			 		  orderable: false,
+			 		  searchable: false,
+			 	      targets: [0,1,2]
+			 	  },
+			 	],
+			 	columns: [
+		             { data: "orderid" },
+		             { data: "customername" },
+		             { data: "agencyname" },
+		             { data: "salesname" },
+		             { data: "destination" },
+		             { data: "budget" },
+		             { data: "status" }
+		         ]
+			 });
 			
-			// $('#dataTable tbody').on( 'click', 'a.btn-success', function () {
-		 //        var data = t.row($(this).parents('tr')).data();
-		 //        //alert($(this).attr('id'));
-		 //        edit($(this).attr('id'));
-		 //    } );
+			 $('#dataTable tbody').on( 'click', 'a.btn-success', function () {
+		         var data = t.row($(this).parents('tr')).data();
+		         //alert($(this).attr('id'));
+		         edit($(this).attr('id'));
+		     } );
 
-			// $('#dataTable tbody').on( 'click', 'a.btn-danger', function () {
-		 //        var data = t.row($(this).parents('tr')).data();
-		 //        //alert($(this).attr('id'));
-		 //        del($(this).attr('id'));
-		 //    } );
+			 $('#dataTable tbody').on( 'click', 'a.btn-danger', function () {
+		         var data = t.row($(this).parents('tr')).data();
+		         //alert($(this).attr('id'));
+		         del($(this).attr('id'));
+		     } );
 			
-			// $('#confirmDelModal').on( 'click', 'button.btn-danger', function () {
-		 //        var id = $("#confirmDelModal .hiddenId").val();
-		 //        doDel(id);
-		 //    } ); 
+			 $('#confirmDelModal').on( 'click', 'button.btn-danger', function () {
+		         var id = $("#confirmDelModal .hiddenId").val();
+		         doDel(id);
+		     } ); 
 		    
 			// Select2
 		    jQuery('select').select2({
