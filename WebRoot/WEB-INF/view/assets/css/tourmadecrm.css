@@ -1,3 +1,9 @@
+.form-horizontal .form-group{
+	padding-bottom: 15px;
+}
+label.error{
+	position: absolute;
+}
 .align-center{
 	text-align:center;
 }

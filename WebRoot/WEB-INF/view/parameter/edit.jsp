@@ -36,7 +36,7 @@
           <h4 class="panel-title">系统参数基本信息</h4>
           <p>填写下表，完成系统参数信息修改。</p>
         </div>
-        <form class="form-horizontal form-bordered" id="form">
+        <form class="form-horizontal" id="form">
         <div class="panel-body panel-body-nopadding">
           
           

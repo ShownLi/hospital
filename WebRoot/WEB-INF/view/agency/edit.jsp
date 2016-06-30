@@ -43,15 +43,21 @@
 		          			<div class="section-block">
 			            		<div class="form-group col-sm-4">
 			              			<label class="col-sm-4 control-label">地接社名 <span class="asterisk">*</span></label>
-			              			<input type="text" name="name" placeholder="地接社名" class="form-control col-sm-8" value="${agency.name }" />
+			              			<div class="col-sm-8">
+			              				<input type="text" name="name" placeholder="地接社名" class="form-control" value="${agency.name }" />
+			              			</div>
 			              		</div>         
 			            		<div class="form-group col-sm-4">
 			              			<label class="col-sm-4 control-label">语言 <span class="asterisk">*</span></label>
-			               			<input type="text" id="language" name="language" class="language-select col-sm-8" value="${agency.language }"/>
+			               			<div class="col-sm-8">
+			               				<input type="text" id="language" name="language" class="language-select fullwidth" value="${agency.language }"/>
+			               			</div>
 			            		</div>              
 			            		<div class="form-group col-sm-4">
 			              			<label class="col-sm-4 control-label">国家 <span class="asterisk">*</span></label>
-			              			<input type="text" id="country" name="country" class="country-select col-sm-8" value="${agency.country }"/>
+			              			<div class="col-sm-8">
+			              				<input type="text" id="country" name="country" class="country-select fullwidth" value="${agency.country }"/>
+			              			</div>
 			            		</div>            
 			        		</div>
 		        		</div><!-- panel-body -->
