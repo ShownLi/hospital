@@ -315,33 +315,33 @@
 			
       $(".nav-parent").eq(0).addClass("nav-active");
       $(".nav-parent").eq(0).find(".children").show();
-			 // Date Picker
-			  jQuery(".datepicker").datepicker();
+			// Date Picker
+			jQuery(".datepicker").datepicker();
 			 
 			jQuery("#form").validate({
 				
-				rules: {
-					loginname: "required",
-					name: "required",
-					pwd: {
-						required: true,
-					},
-					repwd: {
-						required: true,
-						equalTo: "[name='pwd']"
-					}
-				},
-				messages: {
-					loginname: "请输入登录名",
-					name: "请输入姓名",
-					pwd: {
-						required: "请输入密码"
-					},
-					repwd: {
-						required: "请输入密码确认",
-						equalTo: "两次输入的密码不一致"
-					}
-				},
+  				rules: {
+  					loginname: "required",
+  					name: "required",
+  					pwd: {
+  						required: true,
+  					},
+  					repwd: {
+  						required: true,
+  						equalTo: "[name='pwd']"
+  					}
+  				},
+  				messages: {
+  					loginname: "请输入登录名",
+  					name: "请输入姓名",
+  					pwd: {
+  						required: "请输入密码"
+  					},
+  					repwd: {
+  						required: "请输入密码确认",
+  						equalTo: "两次输入的密码不一致"
+  					}
+  				},
 				
 			    highlight: function(element) {
 			      jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
@@ -358,9 +358,9 @@
 			    }
 			  });
 			
-			$("#btn-back").click( function () {
-				history.go(-1);
-		    } ); 
+			  $("#btn-back").click( function () {
+				    history.go(-1);
+		    }); 
 		});
 			      
 		function form_submit() {

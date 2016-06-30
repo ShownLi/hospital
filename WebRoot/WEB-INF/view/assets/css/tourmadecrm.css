@@ -3,6 +3,9 @@
 }
 label.error{
 	position: absolute;
+	left: 10px;
+	bottom: -20px;
+	margin: 0 !important;
 }
 .align-center{
 	text-align:center;
