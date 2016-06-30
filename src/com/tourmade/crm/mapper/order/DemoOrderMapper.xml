@@ -27,16 +27,10 @@
 		u.exchange_rate as exchangerate,
 		u.rmb_rate as rmbrate,
 		u.last_response as lastresponse,	
-		u.creat_time as creat_time,
+		u.creat_time as creattime,
 		u.isdel
 		from tm_order u  
 		where u.isdel = 0 
-		<if test="pojo.seachValue!=null and pojo.seachValue!=''">
-			and
-			(
-			u.customer_name like '%${pojo.seachValue}%'
-			)
-		</if>
 		order by u.creat_time
 		) table_alias
 		limit #{b},#{e}
@@ -46,12 +40,6 @@
 		select count(u.order_id) from tm_order u
 		where
 		u.isdel = 0
-		<if test="seachValue!=null and seachValue!=''">
-			and
-			(
-			u.customer_name like '%${seachValue}%'
-			)
-		</if>
 
 	</select>
 	
@@ -118,9 +106,9 @@
 		start_date=#{startdate},
 		end_date=#{enddate},
 		group_price=#{groupprice},
+		rmb_price=#{rmbprice},
 		currency=#{currency},
 		exchange_rate=#{exchangerate},
-		rmb_rate=#{rmbrate},
 		last_response=#{lastresponse},
 		update_time=NOW()
 		where
@@ -130,6 +118,26 @@
 	<select id="getOrderById" parameterType="int" resultType="DemoOrder">
 		select
 		u.order_id as orderid,
+		u.customer_id as customerid,
+		u.customer_name as customername,
+		u.agency_id as agencyid,
+		u.agency_name as agencyname,
+		u.sales_id as salesid,
+		u.sales_name as salesname,
+		u.destination as destination,
+		u.budget as budget,
+		u.status as status,
+		u.reason as reason,
+		u.group_time as grouptime,
+		u.group_number as groupnumber,
+		u.start_date as startdate,
+		u.end_date as enddate,
+		u.group_price as groupprice,
+		u.currency as currency,
+		u.exchange_rate as exchangerate,
+		u.rmb_rate as rmbrate,
+		u.last_response as lastresponse,	
+		u.creat_time as creattime,
 		u.isdel as isdel
 		from tm_order u where u.order_id = #{orderid}
 	</select>

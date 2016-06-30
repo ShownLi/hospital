@@ -1,5 +1,6 @@
 package com.tourmade.crm.model;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 import com.tourmade.crm.common.framework.BaseBean;
@@ -39,13 +40,19 @@ public class DemoOrder extends BaseBean<DemoOrder> {
 	
 	private String reason;
 	
+	private String currency;
+	
 	private Date grouptime;
 
 	private int groupnumber;
 	
 	private String rmbdate;
 	
-	private String exchangerate;	
+	private String exchangerate;
+	
+	private BigDecimal groupprice;
+	
+	private BigDecimal rmbprice;
 	
 	private Date lastresponse;
 	
@@ -177,6 +184,22 @@ public class DemoOrder extends BaseBean<DemoOrder> {
 		this.exchangerate = exchangerate;
 	}
 
+	public BigDecimal getGroupprice() {
+		return groupprice;
+	}
+
+	public void setGroupprice(BigDecimal groupprice) {
+		this.groupprice = groupprice;
+	}
+
+	public BigDecimal getRmbprice() {
+		return rmbprice;
+	}
+
+	public void setRmbprice(BigDecimal rmbprice) {
+		this.rmbprice = rmbprice;
+	}
+
 	public Date getLastresponse() {
 		return lastresponse;
 	}
@@ -221,24 +244,24 @@ public class DemoOrder extends BaseBean<DemoOrder> {
 		return serialVersionUID;
 	}
 
+	public String getCurrency() {
+		return currency;
+	}
+
+	public void setCurrency(String currecy) {
+		this.currency = currecy;
+	}
+
 	@Override
 	public String toString() {
 		return "DemoOrder [orderid=" + orderid + ", customerid=" + customerid + ", customername=" + customername
 				+ ", agencyid=" + agencyid + ", agencyname=" + agencyname + ", salesid=" + salesid + ", salesname="
 				+ salesname + ", destination=" + destination + ", budget=" + budget + ", status=" + status + ", reason="
-				+ reason + ", grouptime=" + grouptime + ", groupnumber=" + groupnumber + ", rmbdate=" + rmbdate
-				+ ", exchangerate=" + exchangerate + ", lastresponse=" + lastresponse + ", startdate=" + startdate
-				+ ", enddate=" + enddate + ", creattime=" + creattime + ", updatetime=" + updatetime + ", getOrderid()="
-				+ getOrderid() + ", getCustomerid()=" + getCustomerid() + ", getCustomername()=" + getCustomername()
-				+ ", getAgencyid()=" + getAgencyid() + ", getAgencyname()=" + getAgencyname() + ", getSalesid()="
-				+ getSalesid() + ", getSalesname()=" + getSalesname() + ", getDestination()=" + getDestination()
-				+ ", getBudget()=" + getBudget() + ", getStatus()=" + getStatus() + ", getReason()=" + getReason()
-				+ ", getGrouptime()=" + getGrouptime() + ", getGroupnumber()=" + getGroupnumber() + ", getRmbdate()="
-				+ getRmbdate() + ", getExchangerate()=" + getExchangerate() + ", getLastresponse()=" + getLastresponse()
-				+ ", getStartdate()=" + getStartdate() + ", getEnddate()=" + getEnddate() + ", getCreattime()="
-				+ getCreattime() + ", getUpdatetime()=" + getUpdatetime() + ", getMapperNameSpace()="
-				+ getMapperNameSpace() + ", getSeachValue()=" + getSeachValue() + ", getClass()=" + getClass()
-				+ ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
+				+ reason + ", currency=" + currency + ", grouptime=" + grouptime + ", groupnumber=" + groupnumber
+				+ ", rmbdate=" + rmbdate + ", exchangerate=" + exchangerate + ", groupprice=" + groupprice
+				+ ", rmbprice=" + rmbprice + ", lastresponse=" + lastresponse + ", startdate=" + startdate
+				+ ", enddate=" + enddate + ", creattime=" + creattime + ", updatetime=" + updatetime + "]";
 	}
 
+	
 }

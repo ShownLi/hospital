@@ -36,21 +36,7 @@ public class OrderService extends BaseService {
 
 		QueryResult<DemoOrder> r = new QueryResult<DemoOrder>();
 		Map<String, Object> map = new HashMap<String, Object>();
-		
-		System.out.println(ph);
-		
-		String seachValue = ph.getSearch().get("value");
-		
-		if (null != seachValue && !"".equals(seachValue)) {
-			if (null == order) {
-				order = new DemoOrder();
-			}
-			order.setSeachValue(seachValue);
-		}
 			
-		
-		
-		map.put("pojo", order);
 		map.put("b", ph.getStart());
 		map.put("e", ph.getLength());
 //		map.put("s", ph.getSort());
@@ -132,6 +118,8 @@ public class OrderService extends BaseService {
 		try {
 			DemoOrder u = orderMapper.getOrderById(order.getOrderid());
 			if (u != null) {
+				u.setStatus(order.getStatus());
+				System.out.println(u);
 				orderMapper.updateOrder(u);
 				r = true;
 			} else {

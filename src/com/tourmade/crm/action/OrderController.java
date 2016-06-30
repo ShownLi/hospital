@@ -83,14 +83,10 @@ public class OrderController extends BaseSimpleFormController {
 		if (null != id && !"".equals(id)) {
 			int i = Integer.parseInt(id);
 			DemoOrder u = service.getOrderById(i);
-			String country = "order.country";
-			String language = "order.language";
+			String country = "order.status";
 			List<DemoList> v = service.getParameterInfo(country);
-			List<DemoList> w = service.getParameterInfo(language);
-			JSONArray countryresult = JSONArray.fromObject(v);
-			JSONArray languageresult = JSONArray.fromObject(w);
-			model.addAttribute("country",countryresult);
-			model.addAttribute("language",languageresult);
+			JSONArray statusresult = JSONArray.fromObject(v);
+			model.addAttribute("status",statusresult);
 			model.addAttribute("order",u);
 		}
 		return "/order/edit";
@@ -101,7 +97,7 @@ public class OrderController extends BaseSimpleFormController {
 	public Json doEdit(HttpServletRequest request, HttpSession session, Model model, DemoOrder order) {
 
 		Json j = new Json();
-		
+		System.out.println(order);
 		try {
 			service.updateOrder(order);
 			j.setSuccess(true);
