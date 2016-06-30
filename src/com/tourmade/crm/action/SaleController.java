@@ -39,7 +39,7 @@ public class SaleController extends BaseSimpleFormController {
 	@ResponseBody
 	public String queryData(HttpServletRequest request, HttpSession session, Model model, DemoSale sale, PageHelper page,int agencyid) {
 		
-		QueryResult<DemoSale> r = service.querySale(sale, page, agencyid,request);
+		QueryResult<DemoSale> r = service.querySale(sale, page, agencyid, request);
 		String result = JSONUtilS.object2json(r);
 
 		return result;
