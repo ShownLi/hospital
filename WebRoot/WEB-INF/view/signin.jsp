@@ -90,6 +90,10 @@
 	<script type="text/javascript">
 		jQuery(document).ready(function() {
 			jQuery("#form").validate({
+				messages: {
+					loginname: "请输入用户名!",
+					pwd: "请输入密码!"
+				},
 			    highlight: function(element) {
 			      jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
 			    },

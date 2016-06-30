@@ -45,13 +45,13 @@
 	            <div class="form-group col-sm-4">
 	              <label class="col-sm-4 control-label">作用域 <span class="asterisk">*</span></label>
 	              <div class="col-sm-8">
-	                <input type="text" name="domain" placeholder="系统参数名" class="form-control" />
+	                <input type="text" id="domain" name="domain" placeholder="系统参数名" class="form-control" />
 	              </div>
 	            </div>
 	            <div class="form-group col-sm-4">
 	              <label class="col-sm-4 control-label">值 <span class="asterisk">*</span></label>
 	              <div class="col-sm-8">
-	                <input type="text" name="value" placeholder="值" class="form-control" />
+	                <input type="text" id="value" name="value" placeholder="值" class="form-control" />
 	              </div>
 	            </div> 			
 	            <div class="form-group col-sm-4">
@@ -60,6 +60,8 @@
 	                <input type="text" name="depict" placeholder="描述" class="form-control" />
 	              </div>
 	            </div> 	
+	        </div>
+	        <div class="section-block"> 
 	            <div class="form-group col-sm-4">
 	              <label class="col-sm-4 control-label">中文 <span class="asterisk">*</span></label>
 	              <div class="col-sm-8">
@@ -75,14 +77,14 @@
 	            <div class="form-group col-sm-4">
 	              <label class="col-sm-4 control-label">排序标记 <span class="asterisk">*</span></label>
 	              <div class="col-sm-8">
-	                <input type="text" name="sort" placeholder="排序标记" class="form-control" />
+	                <input type="text" id="sort" name="sort" placeholder="排序标记" class="form-control" />
 	              </div>
 	            </div>
 	            <div class="form-group col-sm-4">
 	              <label class="col-sm-4 control-label">是否显示 <span class="asterisk">&nbsp;</span></label>
 	              <div class="col-sm-8">
 	                <div class="rdio rdio-primary rdio-inline">
-	                  <input type="radio" id="yes" value="1" name="isdisplay" checked="true" />
+	                  <input type="radio" id="yes" value="1" name="isdisplay" checked />
 	                  <label for="yes">是</label>
 	                </div><!-- rdio -->
 	                <div class="rdio rdio-primary rdio-inline">
@@ -146,16 +148,29 @@
 		jQuery("#form").validate({
 			rules: {
 				domain: "required",
-				value: "required",
+				value:{  
+			         	required:true,  
+			            remote:{                           
+			            	url:"${rootPath}validate.do",
+			            	type:"post",
+			            	data: {
+		                         table: function () { return "tm_parameter"},
+		                         field: function () { return "para_value"},
+		                         name: function () { return $("#value").val();},
+		                         }
+			            }
+			        },
 				chinese: "required",
-				sort: "required",
+				sort:"required"
 			},
 			messages: {
 				domain: "请输入作用域",
-				value: "请输入值",
+				value: {
+					required:"请输入值",
+					remote:"该值已存在，请重新输入"
+				},
 				chinese: "请输入中文",
-				sort: "请输入排序标识",
-
+				sort: "请输入排序标识"
 			},
 		    highlight: function(element) {
 		      jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');

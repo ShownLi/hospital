@@ -93,8 +93,12 @@
 	
 	<select id="validate" resultType="String">
 		select  ${field} from ${table} u
-		where u.${field} = #{name} and
-		u.isdel = 0
+		where u.${field} = #{name} 
+		<if test="filter_field != null and filter_field != ''">
+			and
+			u.${filter_field} = #{filter_name} 
+		</if>
+		and u.isdel = 0
 	</select>
 	
 </mapper>

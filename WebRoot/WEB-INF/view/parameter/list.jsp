@@ -43,7 +43,7 @@
 							<table id="dataTable" class="table">
 								<thead>
 									<tr>
-										<th>#</th>
+										<th>序号</th>
 										<th>作用域</th>
 										<th>存值</th>
 										<th>中文名称</th>
