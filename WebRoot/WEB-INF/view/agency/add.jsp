@@ -49,11 +49,15 @@
 	            </div>			   
 	            <div class="form-group col-sm-4">
 	              <label  class="col-sm-4 control-label">语言 <span class="asterisk">*</span></label>
-	                <input type="text" name="language" class="language-select col-sm-8"/>
+	              <div class="col-sm-8">
+	              	<input type="text" name="language" class="language-select fullwidth"/>
+	              </div>
 	            </div>                                 
 	            <div class="form-group col-sm-4">
 	              <label  class="col-sm-4 control-label">所在国家 <span class="asterisk">*</span></label>
-	                <input type="text" name="country" class="country-select col-sm-8"/>
+	              <div class="col-sm-8">
+	                <input type="text" name="country" class="country-select fullwidth"/>
+	              </div>
 	            </div>
 	        </div>
         </div><!-- panel-body -->
