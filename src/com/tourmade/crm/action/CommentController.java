@@ -48,7 +48,7 @@ public class CommentController extends BaseSimpleFormController {
 	public String queryData(HttpServletRequest request, HttpSession session, Model model, DemoComment comment, String type,int id, PageHelper page) {
 
 		QueryResult<DemoComment> r = service.queryComment(comment, page, type ,id ,request);
-		System.out.println("type = "+type+"\nid = "+id);
+		//System.out.println("type = "+type+"\nid = "+id);
 		String result = JSONUtilS.object2json(r);
 		return result;
 	}

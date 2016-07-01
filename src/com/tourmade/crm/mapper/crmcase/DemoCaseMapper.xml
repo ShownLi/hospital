@@ -16,12 +16,6 @@
 		u.isdel as isdel
 		from tm_case u  
 		where u.isdel = 0 and v.isdel = 0 and x.isdel = 0
-		<if test="pojo.seachValue!=null and pojo.seachValue!=''">
-			and
-			(
-			u.case_status like '%${pojo.seachValue}%'
-			)
-		</if>
 		order by u.creat_time
 		) table_alias
 		limit #{b},#{e}
@@ -31,12 +25,6 @@
 		select count(u.case_id) from tm_case u
 		where
 		u.isdel = 0
-		<if test="seachValue!=null and seachValue!=''">
-			and
-			(
-			u.case_status like '%${seachValue}%'
-			)
-		</if>
 
 	</select>
 	

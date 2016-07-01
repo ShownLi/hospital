@@ -83,11 +83,11 @@
     	              <label class="col-sm-4 control-label">出发时间 <span class="asterisk">&nbsp;</span></label>
     	              <div class="col-sm-8">
     	                <div class="rdio rdio-primary rdio-inline">
-    	                  <input type="radio" id="yes" value="1" name="isdisplay"/>
+    	                  <input type="radio" id="yes" value="1" name="starttime"/>
     	                  <label for="yes">已确定</label>
     	                </div><!-- rdio -->
     	                <div class="rdio rdio-primary rdio-inline">
-    	                  <input type="radio" id="no" value="0" name="isdisplay"/>
+    	                  <input type="radio" id="no" value="0" name="starttime"/>
     	                  <label for="no">未确定</label>
     	                </div><!-- rdio -->
     	                <label class="error" for="starttime"></label>
@@ -168,12 +168,6 @@
                       <label class="col-sm-4 control-label">行程</label>
                       <div class="col-sm-8">
                         <input type="text" name="budget" placeholder="行程" class="form-control" value="" />
-                      </div>
-                    </div>
-                    <div class="form-group col-sm-4">
-                      <label class="col-sm-4 control-label">表单类型</label>
-                      <div class="col-sm-8">
-                        <input type="text" name="submittype" class="form-control" value="" />
                       </div>
                     </div>
                     <div class="form-group col-sm-4">
@@ -360,6 +354,7 @@
 		function form_submit() {
 			var f = $("#form").serialize();
 			$.post('${rootPath}case/add.do', f, function(result) {
+				alert(f);
 				var rmsg = result.msg;
 				if (result.success) {
 					//window.parent.location = "${rootPath}customer/list.html";
@@ -369,6 +364,7 @@
 				}
 			}, "JSON");
 		}
+		$("#starttime").hidden();
 	</script>
 
 
