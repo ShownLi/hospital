@@ -85,6 +85,7 @@
 		select
 		u.user_id as userid,
 		u.loginname as loginname,
+		u.user_name as name,
 		u.password as pwd,
 		u.isdel as isdel
 		from tm_user u where

@@ -112,3 +112,11 @@ label.error{
 	bottom: -15px;
 	left: 265px;
 }
+.dataTables_filter {
+	display: none;
+}
+.dataTables_length {
+	position: absolute;
+	bottom: -15px;
+	left: 265px;
+}

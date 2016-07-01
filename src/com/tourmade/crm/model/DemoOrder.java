@@ -44,7 +44,7 @@ public class DemoOrder extends BaseBean<DemoOrder> {
 	
 	private Date grouptime;
 
-	private int groupnumber;
+	private String groupnumber;
 	
 	private String rmbdate;
 	
@@ -160,11 +160,11 @@ public class DemoOrder extends BaseBean<DemoOrder> {
 		this.grouptime = grouptime;
 	}
 
-	public int getGroupnumber() {
+	public String getGroupnumber() {
 		return groupnumber;
 	}
 
-	public void setGroupnumber(int groupnumber) {
+	public void setGroupnumber(String groupnumber) {
 		this.groupnumber = groupnumber;
 	}
 

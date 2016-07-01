@@ -25,23 +25,28 @@
 	</select>
 
 	<select id="countComment" parameterType="DemoComment" resultType="long">
-		select count(u.comment_id) from tm_comment u
-		where
-		u.isdel = 0
+		select count(comment_id) from tm_comment 
+		where isdel = 0
+		and comment_type = #{commenttype}
+		and object_id = ${objectid}
 
 	</select>
 	
 	<insert id="saveComment" parameterType="DemoComment" flushCache="true" useGeneratedKeys="true" keyProperty="comment_id" keyColumn="GENERATED_KEY">
 		insert into tm_comment(
-		comment_name,
-		country,
-		language,
+		comment_type,
+		object_id,
+		user_id,
+		user_name,
+		content,
 		creat_time,
 		isdel
 		)values(
-		#{name,jdbcType=VARCHAR},
-		#{country,jdbcType=VARCHAR},
-		#{language,jdbcType=VARCHAR},
+		#{commenttype},
+		#{objectid},
+		#{userid},
+		#{username},
+		#{content,jdbcType=VARCHAR},
 		NOW(),
 		0
 		)

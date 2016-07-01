@@ -70,7 +70,7 @@
 		     		</form>   
       			</div><!-- panel -->
 
- 		<!-- panel 沟通列表 -->
+ 		<!-- panel 销售列表 -->
       			<div class="panel panel-default">
           		<div class="panel-heading">
           		<div class="panel-btns">
@@ -93,8 +93,9 @@
           		</div>
           		<div class="panel-footer align-center">
 					<a class="btn btn-primary" href="${rootPath}sale/add.html?agencyid=${agency.agency_id}">新增销售</a>
-      			</div><!-- end of panel 沟通列表 -->
+      			</div>
 				</div>
+				<!-- end of panel 沟通列表 -->
 			</div>
 		</div>
 		<!-- mainpanel -->

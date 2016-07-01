@@ -17,38 +17,38 @@ import com.tourmade.crm.common.framework.bean.QueryResult;
 import com.tourmade.crm.common.framework.util.JSONUtilS;
 import com.tourmade.crm.common.model.base.value.baseconfig.Json;
 import com.tourmade.crm.common.model.base.value.baseconfig.PageHelper;
-import com.tourmade.crm.model.DemoComment;
+import com.tourmade.crm.model.DemoOrderRecord;
 import com.tourmade.crm.model.DemoList;
-import com.tourmade.crm.service.CommentService;
+import com.tourmade.crm.service.OrderRecordService;
 
 import net.sf.json.JSONArray;
 
 @Controller
-@RequestMapping("/comment")
-public class CommentController extends BaseSimpleFormController {
+@RequestMapping("/record")
+public class OrderrecordController extends BaseSimpleFormController {
 	
 	@Autowired
-	private CommentService service;
+	private OrderRecordService service;
 
 	@RequestMapping(value = "/list.html", method = { RequestMethod.POST, RequestMethod.GET })
 	public String list(Model model) {
 		String country = "country";
-		String language = "comment.language";
+		String language = "record.language";
 		List<DemoList> v = service.getParameterInfo(country);
 		List<DemoList> w = service.getParameterInfo(language);
 		JSONArray countryresult = JSONArray.fromObject(v);
 		JSONArray languageresult = JSONArray.fromObject(w);
 		model.addAttribute("countryname",countryresult);
 		model.addAttribute("language",languageresult);
-		return "/comment/list";
+		return "/record/list";
 	}
 	
 	@RequestMapping(value = "/list.do",produces="application/json;charset=utf-8")
 	@ResponseBody
-	public String queryData(HttpServletRequest request, HttpSession session, Model model, DemoComment comment, String type,int id, PageHelper page) {
+	public String queryData(HttpServletRequest request, HttpSession session, Model model, DemoOrderRecord record, int orderid, PageHelper page) {
 
-		QueryResult<DemoComment> r = service.queryComment(comment, page, type ,id ,request);
-		System.out.println("type = "+type+"\nid = "+id);
+		QueryResult<DemoOrderRecord> r = service.queryOrderRecord(record, page, orderid ,request);
+		//System.out.println("\nid = "+orderid);
 		String result = JSONUtilS.object2json(r);
 		return result;
 	}
@@ -57,7 +57,7 @@ public class CommentController extends BaseSimpleFormController {
 	public String add(Model model) {
 		
 		String country = "country";
-		String language = "comment.language";
+		String language = "record.language";
 		List<DemoList> u = service.getParameterInfo(country);
 		List<DemoList> v = service.getParameterInfo(language);
 		JSONArray countryresult = JSONArray.fromObject(u);
@@ -65,21 +65,21 @@ public class CommentController extends BaseSimpleFormController {
 		model.addAttribute("country",countryresult);
 		model.addAttribute("language",languageresult);
 		
-		return "/comment/add";
+		return "/record/add";
 	}
 
 	@RequestMapping(value = "/add.do")
 	@ResponseBody
-	public Json doAdd(HttpServletRequest request, HttpSession session, Model model, DemoComment comment) {
+	public Json doAdd(HttpServletRequest request, HttpSession session, Model model, DemoOrderRecord record) {
 
 		Json j = new Json();
 		
 		try {
-			service.saveComment(comment);
+			service.saveOrderRecord(record);
 			j.setSuccess(true);
 		} catch (Exception e) {
 			j.setSuccess(false);
-			logger.error("CommentController.doAdd() --> " + comment.toString() + "\n" + e.getMessage());
+			logger.error("OrderRecordController.doAdd() --> " + record.toString() + "\n" + e.getMessage());
 		}
 		
 		return j;
@@ -90,32 +90,32 @@ public class CommentController extends BaseSimpleFormController {
 		
 		if (null != id && !"".equals(id)) {
 			int i = Integer.parseInt(id);
-			DemoComment u = service.getCommentById(i);
+			DemoOrderRecord u = service.getOrderRecordById(i);
 			String country = "country";
-			String language = "comment.language";
+			String language = "record.language";
 			List<DemoList> v = service.getParameterInfo(country);
 			List<DemoList> w = service.getParameterInfo(language);
 			JSONArray countryresult = JSONArray.fromObject(v);
 			JSONArray languageresult = JSONArray.fromObject(w);
 			model.addAttribute("country",countryresult);
 			model.addAttribute("language",languageresult);
-			model.addAttribute("comment",u);
+			model.addAttribute("record",u);
 		}
-		return "/comment/edit";
+		return "/record/edit";
 	}
 
 	@RequestMapping(value = "/edit.do")
 	@ResponseBody
-	public Json doEdit(HttpServletRequest request, HttpSession session, Model model, DemoComment comment) {
+	public Json doEdit(HttpServletRequest request, HttpSession session, Model model, DemoOrderRecord record) {
 
 		Json j = new Json();
 		
 		try {
-			service.updateComment(comment);
+			service.updateOrderRecord(record);
 			j.setSuccess(true);
 		} catch (Exception e) {
 			j.setSuccess(false);
-			logger.error("CommentController.doEdit() --> " + comment.toString() + "\n" + e.getMessage());
+			logger.error("OrderRecordController.doEdit() --> " + record.toString() + "\n" + e.getMessage());
 		}
 		
 		return j;
@@ -130,14 +130,14 @@ public class CommentController extends BaseSimpleFormController {
 		try {
 			if (null != id && !"".equals(id)) {
 				int i = Integer.parseInt(id);
-				service.deleteCommentById(i);
+				service.deleteOrderRecordById(i);
 				j.setSuccess(true);
 			} else {
 				j.setSuccess(false);
 			}
 		} catch (Exception e) {
 			j.setSuccess(false);
-			logger.error("CommentController.doDel() --> " + id + "\n" + e.getMessage());
+			logger.error("OrderRecordController.doDel() --> " + id + "\n" + e.getMessage());
 		}
 		
 		return j;

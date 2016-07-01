@@ -35,19 +35,7 @@ public class SaleService extends BaseService {
 	public QueryResult<DemoSale> querySale(DemoSale sale, PageHelper ph, int agencyid,HttpServletRequest request) {
 
 		QueryResult<DemoSale> r = new QueryResult<DemoSale>();
-		Map<String, Object> map = new HashMap<String, Object>();
-		
-		System.out.println(ph);
-		
-/*		String seachValue = ph.getSearch().get("value");
-		
-		if (null != seachValue && !"".equals(seachValue)) {
-			if (null == sale) {
-				sale = new DemoSale();
-			}
-			sale.setSeachValue(seachValue);
-		}
-*/			
+		Map<String, Object> map = new HashMap<String, Object>();		
 		
 		
 //		map.put("pojo", sale);
