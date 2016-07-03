@@ -19,7 +19,7 @@ public class DemoCase extends BaseBean<DemoCase> {
 
 	private int caseid;
 	
-	private String customerid;
+	private int customerid;
 	
 	private String preferlanguage;
 	
@@ -59,7 +59,7 @@ public class DemoCase extends BaseBean<DemoCase> {
 	
 	private String route;
 	
-	private String submittype;
+	private int submittype;
 	
 	private int submitid;
 	
@@ -81,11 +81,11 @@ public class DemoCase extends BaseBean<DemoCase> {
 		this.caseid = caseid;
 	}
 
-	public String getCustomerid() {
+	public int getCustomerid() {
 		return customerid;
 	}
 
-	public void setCustomerid(String customerid) {
+	public void setCustomerid(int customerid) {
 		this.customerid = customerid;
 	}
 
@@ -241,11 +241,11 @@ public class DemoCase extends BaseBean<DemoCase> {
 		this.route = route;
 	}
 
-	public String getSubmittype() {
+	public int getSubmittype() {
 		return submittype;
 	}
 
-	public void setSubmittype(String submittype) {
+	public void setSubmittype(int submittype) {
 		this.submittype = submittype;
 	}
 
@@ -312,6 +312,6 @@ public class DemoCase extends BaseBean<DemoCase> {
 				+ submittype + ", submitid=" + submitid + ", source=" + source + ", status=" + status + ", startmonth="
 				+ startmonth + ", creat_time=" + creat_time + ", update_time=" + update_time + "]";
 	}
-	
-	
+
+
 }

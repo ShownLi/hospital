@@ -32,27 +32,14 @@ public class OrderRecordService extends BaseService {
 	 * @param request
 	 * @return
 	 */
-	public QueryResult<DemoOrderRecord> queryOrderRecord(DemoOrderRecord orderrecord, PageHelper ph, HttpServletRequest request) {
+	public QueryResult<DemoOrderRecord> queryOrderRecord(DemoOrderRecord orderrecord, PageHelper ph, int orderid, HttpServletRequest request) {
 
 		QueryResult<DemoOrderRecord> r = new QueryResult<DemoOrderRecord>();
 		Map<String, Object> map = new HashMap<String, Object>();
-		
-		System.out.println(ph);
-		
-		String seachValue = ph.getSearch().get("value");
-		
-		if (null != seachValue && !"".equals(seachValue)) {
-			if (null == orderrecord) {
-				orderrecord = new DemoOrderRecord();
-			}
-			orderrecord.setSeachValue(seachValue);
-		}
-			
-		
-		
-		map.put("pojo", orderrecord);
+	
 		map.put("b", ph.getStart());
 		map.put("e", ph.getLength());
+		map.put("id", orderid);
 //		map.put("s", ph.getSort());
 //		map.put("o", ph.getOrder());
 

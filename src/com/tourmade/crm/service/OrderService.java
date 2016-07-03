@@ -118,8 +118,17 @@ public class OrderService extends BaseService {
 		try {
 			DemoOrder u = orderMapper.getOrderById(order.getOrderid());
 			if (u != null) {
-				u.setStatus(order.getStatus());
-				System.out.println(u);
+				if(order.getStatus() != null){
+					u.setStatus(order.getStatus());
+				}
+				if(order.getGroupnumber()!= null){
+					u.setGroupnumber(order.getGroupnumber());
+					u.setStatus("1");
+				}
+				if(order.getReason() != null){
+					u.setReason(order.getReason());
+					u.setStatus("2");
+				}
 				orderMapper.updateOrder(u);
 				r = true;
 			} else {

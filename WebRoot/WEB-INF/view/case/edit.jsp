@@ -3,6 +3,7 @@
 <html lang="en">
 <head>
 <%@ include file="../assets/pages/head.jsp"%>
+<link href="${rootPath }assets/css/jquery.datatables.css" rel="stylesheet">
 </head>
 
 <body>
@@ -492,10 +493,10 @@
   				},
 				columnDefs: [
 							  {
-								  data: "creatime",
+								  data: "creattime",
 								  render: function ( data, type, full, meta ) {
-									  var upttime = new Date(data.time);
-				                      return upttime.format("yyyy/MM/dd");
+									  var creattime = new Date(data.time);
+				                      return creattime.format("yyyy/MM/dd");
 				                  },
 				                  targets: 3
 							  }

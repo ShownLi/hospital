@@ -46,6 +46,8 @@ public class CommentService extends BaseService {
 //		map.put("o", ph.getOrder());
 
 		List<DemoComment> data = commentMapper.queryComment(map);
+		comment.setCommenttype(type);
+		comment.setObjectid(id);
 		long count = commentMapper.countComment(comment);
 			
 		r.setData(data);

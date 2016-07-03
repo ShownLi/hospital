@@ -25,7 +25,6 @@
 		u.group_price as groupprice,
 		u.currency as currency,
 		u.exchange_rate as exchangerate,
-		u.rmb_rate as rmbrate,
 		u.last_response as lastresponse,	
 		u.creat_time as creattime,
 		u.isdel
@@ -135,7 +134,6 @@
 		u.group_price as groupprice,
 		u.currency as currency,
 		u.exchange_rate as exchangerate,
-		u.rmb_rate as rmbrate,
 		u.last_response as lastresponse,	
 		u.creat_time as creattime,
 		u.isdel as isdel

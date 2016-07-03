@@ -54,38 +54,6 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td>1</td>
-										<td>张三</td>
-										<td>30,000</td>
-										<td>瑞士</td>
-										<td>官网表单</td>
-										<td>成交</td>
-										<td>balbala@tourmade.com</td>
-										<td><a href="edit.html" class="btn btn-success btn-xs"><span class="fa fa-edit"></span> 编辑</a> <a class="btn btn-danger btn-xs"><span class="fa fa-minus-circle"></span> 无效</a>
-										</td>
-									</tr>
-									<tr>
-										<td>2</td>
-										<td>李四</td>
-										<td>35,000</td>
-										<td>埃及</td>
-										<td>在线客服</td>
-										<td>下单</td>
-										<td>balbala@tourmade.com</td>
-										<td><a href="edit.html" class="btn btn-success btn-xs"><span class="fa fa-edit"></span> 编辑</a> <a class="btn btn-danger btn-xs"><span class="fa fa-minus-circle"></span> 无效</a>
-										</td>
-									</tr>
-									<tr>
-										<td>3</td>
-										<td>张三</td>
-										<td>2,000</td>
-										<td>澳大利亚</td>
-										<td>微信咨询</td>
-										<td>待处理</td>
-										<td>balbala@tourmade.com</td>
-										<td><a href="edit.html" class="btn btn-success btn-xs"><span class="fa fa-edit"></span> 编辑</a> <a class="btn btn-danger btn-xs"><span class="fa fa-minus-circle"></span> 无效</a></td>
-									</tr>
 								</tbody>
 							</table>
 						</div>
