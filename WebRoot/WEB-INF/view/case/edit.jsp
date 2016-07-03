@@ -186,8 +186,9 @@
         </div><!-- panel-body -->
         
         <div class="panel-footer align-center">
+            <button id="addorder" class="btn btn-primary">添加订单</button>&nbsp;
             <button id="submit" class="btn btn-primary">保存</button>&nbsp;
-            <button class="btn btn-default">无效</button>
+            <button class="btn btn-primary">无效</button>
 		    </div><!-- panel-footer -->
      </form>   
       </div><!-- panel -->
@@ -376,6 +377,7 @@
       </div>
       <div class="modal-body align-center">
         <div class="section-block">
+            <div class="section-title">选择目的地及地接社,继续添加订单</div>
             <div class="form-group col-sm-8 col-sm-offset-2">
                 <label class="col-sm-3 control-label">国家</label>
                 <div class="col-sm-9">
@@ -454,10 +456,10 @@
   				history.go(-1);
   		  }); 
 
-        // $("#submit").click(function(){
-        //   $("#nextModal").modal('show');
-        //   return false;
-        // });
+        $("#addorder").click(function(){
+          $("#nextModal").modal('show');
+          return false;
+        });
 
     });
  

@@ -233,9 +233,9 @@
       </div>
       <div class="modal-body align-center">
         <div class="section-block">
-            <div class="section-title">选择国家及目的地,继续添加订单</div>
+            <div class="section-title">选择目的地及地接社,继续添加订单</div>
             <div class="form-group col-sm-8 col-sm-offset-2">
-                <label class="col-sm-3 control-label">国家</label>
+                <label class="col-sm-3 control-label">目的地</label>
                 <div class="col-sm-9">
                     <input type="text" name="country" placeholder="国家" class="country-select fullwidth" value="" />
                 </div>
