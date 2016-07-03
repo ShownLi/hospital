@@ -80,47 +80,49 @@
                 </div>
                 <div class="section-block">
                    	<div class="form-group col-sm-4">
-    	              <label class="col-sm-4 control-label">出发时间 <span class="asterisk">&nbsp;</span></label>
-    	              <div class="col-sm-8">
-    	                <div class="rdio rdio-primary rdio-inline">
-    	                  <input type="radio" id="yes" value="1" name="starttime"/>
-    	                  <label for="yes">已确定</label>
-    	                </div><!-- rdio -->
-    	                <div class="rdio rdio-primary rdio-inline">
-    	                  <input type="radio" id="no" value="0" name="starttime"/>
-    	                  <label for="no">未确定</label>
-    	                </div><!-- rdio -->
-    	                <label class="error" for="starttime"></label>
-    	              </div>
-    	            </div><!-- form-group -->  
-                    <div class="form-group col-sm-4">
+        	              <label class="col-sm-4 control-label">出发时间 <span class="asterisk">&nbsp;</span></label>
+        	              <div class="col-sm-8">
+        	                <div class="rdio rdio-primary rdio-inline">
+        	                  <input type="radio" id="yes" value="1" name="starttime"/>
+        	                  <label for="yes">已确定</label>
+        	                </div><!-- rdio -->
+        	                <div class="rdio rdio-primary rdio-inline">
+        	                  <input type="radio" id="no" value="0" name="starttime"/>
+        	                  <label for="no">未确定</label>
+        	                </div><!-- rdio -->
+        	                <label class="error" for="starttime"></label>
+        	              </div>
+                    </div>
+                    <div class="form-group col-sm-4 d1">
                       <label class="col-sm-4 control-label">大约时间</label>
                       <div class="col-sm-8 input-group input-datepicker">
                         <input type="text" name="startmonth" class="form-control datepicker" placeholder="mm/dd/yyyy">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                       </div>
                     </div>
-                    <div class="form-group col-sm-4">
+                    <div class="form-group col-sm-4 d1">
                       <label class="col-sm-4 control-label">大约天数</label>
                       <div class="col-sm-8">
                         <input type="text" name="during" placeholder="大约天数" class="form-control" value="" />
                       </div>
                     </div>
-                    <div class="form-group col-sm-4">
+                    <div class="form-group col-sm-4 d2">
                       <label class="col-sm-4 control-label">出发日期</label>
                       <div class="col-sm-8 input-group input-datepicker">
                         <input type="text" name="startdate" class="form-control datepicker" placeholder="mm/dd/yyyy">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                       </div>
                     </div>
-                    <div class="form-group col-sm-4">
+                    <div class="form-group col-sm-4 d2">
                       <label class="col-sm-4 control-label">返回日期</label>
                       <div class="col-sm-8 input-group input-datepicker">
                         <input type="text" name="enddate" class="form-control datepicker" placeholder="mm/dd/yyyy">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                       </div>
                     </div>
-                     <div class="form-group col-sm-4">
+                </div>
+                <div class="section-block">
+                    <div class="form-group col-sm-4">
                       <label class="col-sm-4 control-label">客人的要求</label>
                       <div class="col-sm-8">
                         <textarea name="requirement" class="form-control" placeholder="客人的要求" rows="4"></textarea>
@@ -311,6 +313,17 @@
       $(".nav-parent").eq(0).find(".children").show();
 			// Date Picker
 			jQuery(".datepicker").datepicker();
+
+      $("input[name='starttime']").change(function() {
+          var val = $("input[name='starttime']:checked").val();
+          if (val == 1) {
+              $(".d1").hide();
+              $(".d2").show();
+          }else{
+              $(".d2").hide();
+              $(".d1").show();
+          }
+      }); 
 			 
 			jQuery("#form").validate({
 				

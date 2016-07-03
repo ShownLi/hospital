@@ -86,27 +86,27 @@
                     <input type="text" name="start_time" class="time-select form-control" value="" />
                   </div>
                 </div>
-                <div class="form-group col-sm-4">
+                <div class="form-group col-sm-4 d1">
                   <label class="col-sm-4 control-label">大约时间</label>
                   <div class="col-sm-8 input-group input-datepicker">
                     <input type="text" class="form-control datepicker" placeholder="mm/dd/yyyy">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                   </div>
                 </div>
-                <div class="form-group col-sm-4">
+                <div class="form-group col-sm-4 d1">
                   <label class="col-sm-4 control-label">大约天数</label>
                   <div class="col-sm-8">
                     <input type="text" name="during" placeholder="大约天数" class="form-control" value="" />
                   </div>
                 </div>
-                <div class="form-group col-sm-4">
+                <div class="form-group col-sm-4 d2">
                   <label class="col-sm-4 control-label">出发日期</label>
                   <div class="col-sm-8 input-group input-datepicker">
                     <input type="text" class="form-control datepicker" placeholder="mm/dd/yyyy">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                   </div>
                 </div>
-                <div class="form-group col-sm-4">
+                <div class="form-group col-sm-4 d2">
                   <label class="col-sm-4 control-label">返回日期</label>
                   <div class="col-sm-8 input-group input-datepicker">
                     <input type="text" class="form-control datepicker" placeholder="mm/dd/yyyy">
@@ -115,6 +115,12 @@
                 </div>
             </div>
             <div class="section-block">
+                <div class="form-group col-sm-4">
+                  <label class="col-sm-4 control-label">客人的要求</label>
+                  <div class="col-sm-8">
+                    <textarea class="form-control" placeholder="客人的要求" rows="3"></textarea>
+                  </div>
+                </div>
                 <div class="form-group col-sm-4">
                   <label class="col-sm-4 control-label">关于住宿</label>
                   <div class="col-sm-8">
@@ -131,12 +137,6 @@
                   <label class="col-sm-5 control-label">关于司机和导游</label>
                   <div class="col-sm-7">
                     <input type="text" name="guide" class="guide-select form-control" value="" />
-                  </div>
-                </div>
-                <div class="form-group col-sm-4">
-                  <label class="col-sm-4 control-label">客人的要求</label>
-                  <div class="col-sm-8">
-                    <textarea class="form-control" placeholder="客人的要求" rows="3"></textarea>
                   </div>
                 </div>
                 <div class="form-group col-sm-4">
@@ -419,6 +419,17 @@
 			
 			// Date Picker
 			jQuery(".datepicker").datepicker();
+
+      $("input[name='starttime']").change(function() {
+          var val = $("input[name='starttime']:checked").val();
+          if (val == 1) {
+              $(".d1").hide();
+              $(".d2").show();
+          }else{
+              $(".d2").hide();
+              $(".d1").show();
+          }
+      }); 
 	 
 			jQuery("#form").validate({
         
