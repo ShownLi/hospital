@@ -87,7 +87,7 @@
         	                  <label for="yes">已确定</label>
         	                </div><!-- rdio -->
         	                <div class="rdio rdio-primary rdio-inline">
-        	                  <input type="radio" id="no" value="0" name="starttime"/>
+        	                  <input type="radio" id="no" value="0" name="starttime" checked/>
         	                  <label for="no">未确定</label>
         	                </div><!-- rdio -->
         	                <label class="error" for="starttime"></label>
@@ -125,7 +125,7 @@
                     <div class="form-group col-sm-4">
                       <label class="col-sm-4 control-label">客人的要求</label>
                       <div class="col-sm-8">
-                        <textarea name="requirement" class="form-control" placeholder="客人的要求" rows="4"></textarea>
+                        <textarea name="requirement" class="form-control" placeholder="客人的要求" rows="5"></textarea>
                       </div>
                     </div>
                     <div class="form-group col-sm-4">
