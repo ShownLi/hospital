@@ -43,7 +43,7 @@
                 <div class="form-group col-sm-4">
                   <label class="col-sm-4 control-label">称呼</label>
                   <div class="col-sm-8">
-                    <input type="text" name="customer_name" placeholder="称呼" class="form-control" readonly value="" />
+                    <input type="text" name="customer_name" placeholder="称呼" class="form-control" readonly value="${crmcase.customername}" />
                   </div>
                 </div>
                 <div class="form-group col-sm-4">
@@ -205,58 +205,20 @@
       <div class="panel-body panel-body-nopadding">
           <div class="table-responsive">
 
-              <table id="dataTable" class="table">
+              <table id="dataTable-order" class="table">
                 <thead>
                   <tr>
-                    <th>序号</th>
+                    <th>ID</th>
                     <th>客人姓名</th>
                     <th>地接社</th>
                     <th>销售姓名</th>
                     <th>目的地</th>
                     <th>预算</th>
                     <th>状态</th>
-                    <th>成团人数</th>
-                    <th>成团价格</th>
                     <th>编辑</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td>张三</td>
-                    <td>龙润国际旅行</td>
-                    <td>李四</td>
-                    <td>埃及</td>
-                    <td>40,000</td>
-                    <td>成交</td>
-                    <td>6人</td>
-                    <td>45,000</td>
-                    <td><a href="edit.html" class="btn btn-success btn-xs"><span class="fa fa-edit"></span> 编辑</a></td>
-                  </tr>
-                  <tr>
-                    <td>2</td>
-                    <td>张三</td>
-                    <td>龙润国际旅行</td>
-                    <td>李四</td>
-                    <td>埃及</td>
-                    <td>40,000</td>
-                    <td>成交</td>
-                    <td>6人</td>
-                    <td>45,000</td>
-                    <td><a href="edit.html" class="btn btn-success btn-xs"><span class="fa fa-edit"></span> 编辑</a></td>
-                  </tr>
-                  <tr>
-                    <td>3</td>
-                    <td>张三</td>
-                    <td>龙润国际旅行</td>
-                    <td>李四</td>
-                    <td>埃及</td>
-                    <td>40,000</td>
-                    <td>成交</td>
-                    <td>6人</td>
-                    <td>45,000</td>
-                    <td><a href="edit.html" class="btn btn-success btn-xs"><span class="fa fa-edit"></span> 编辑</a></td>
-                  </tr>
                 </tbody>
               </table>
             </div>
@@ -264,50 +226,32 @@
       </div>
     </div><!-- end of panel 询单  -->
 
-      <!-- panel 沟通列表  -->
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <div class="panel-btns">
-          <a href="" class="minimize">&minus;</a>
-        </div>
-        <h4 class="panel-title">沟通列表</h4>
-      </div>
-      <div class="panel-body">
-          <div class="table-responsive">
-              <table id="dataTable-communicate" class="table table-communicate">
-                <thead>
-                  <tr>
-                    <th>序号</th>
-                    <th>姓名</th>
-                    <th>沟通内容</th>
-                    <th>时间</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td>张三</td>
-                    <td>埃及几月份最好玩</td>
-                    <td>2016-06-24 11:00</td>
-                  </tr>
-                  <tr>
-                    <td>2</td>
-                    <td>张三</td>
-                    <td>埃及几月份最好玩</td>
-                    <td>2016-06-24 11:00</td>
-                  </tr>
-                  <tr>
-                    <td>3</td>
-                    <td>张三</td>
-                    <td>埃及几月份最好玩</td>
-                    <td>2016-06-24 11:00</td>
-                  </tr>
-                </tbody>
-              </table>
+            <!-- panel 沟通列表 -->
+      <div class="panel panel-default">
+          <div class="panel-heading">
+          <div class="panel-btns">
+              <a href="" class="minimize">&minus;</a>
           </div>
-          <!-- table-responsive -->
-      </div>
-    </div><!-- end of panel 询单  -->
+          <h4 class="panel-title">沟通记录 </h4>
+          </div>
+          <div class="panel-body">
+              <div class="table-responsive">
+                  <table id="dataTable-record" class="table table-communicate">
+                    <thead>
+                      <tr>
+                        <th>序号</th>
+                        <th>姓名</th>
+                        <th>沟通内容</th>
+                        <th>时间</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                  </table>
+                </div>
+                <!-- table-responsive -->
+          </div>
+      </div><!-- end of panel 沟通列表 -->
 
     <!-- panel 注释 -->
     <div class="panel panel-default">
@@ -430,7 +374,47 @@
               $(".d1").show();
           }
       }); 
-	 
+		 var t = jQuery('#dataTable-order').DataTable({
+			 	pageLength: 10,
+			 	processing: true,
+			 	language: datatable_local_language, // my.js
+			 	serverSide: true,
+			 	ajax: {
+			 		url: '${rootPath}order/list.do',
+			 		dataFilter: function(data){
+			             var json = jQuery.parseJSON( data );
+			             json.recordsTotal = json.countTotal;
+			             json.recordsFiltered = json.countFiltered;
+			             json.data = json.data;
+			             return JSON.stringify( json );
+			         }
+			 	},
+			 	columnDefs: [
+			       {
+			           data: "orderid",
+			           //defaultContent: '<a class="btn btn-success btn-xs"><span class="fa fa-edit"></span> 编辑</a>&nbsp;<a class="btn btn-danger btn-xs"><span class="fa fa-minus-circle"></span> 删除</a>',
+			 	      orderable: false,
+			 	      render: function ( data, type, full, meta ) {
+		               return '<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a>&nbsp;';
+			 	  },
+			 	              targets: 7
+			 				  },				             
+			 	  {
+			 		  orderable: false,
+			 		  searchable: false,
+			 	      targets: [0,1,2]
+			 	  },
+			 	],
+			 	columns: [
+		             { data: "orderid" },
+		             { data: "customername" },
+		             { data: "agencyname" },
+		             { data: "salesname" },
+		             { data: "destination" },
+		             { data: "budget" },
+		             { data: "status" }
+		         ]
+			 });
 			jQuery("#form").validate({
         
           rules: {
@@ -493,7 +477,7 @@
   			language: datatable_local_language, // my.js
   			serverSide: true,
   			ajax: {
-  				url: '${rootPath}comment/list.do?type=case&id=1',
+  				url: '${rootPath}comment/list.do?type=case&id=${crmcase.caseid}',
   				dataFilter: function(data){
   				    var json = jQuery.parseJSON( data );
   				    json.recordsTotal = json.countTotal;
@@ -517,6 +501,39 @@
   			    { data: "username" },
   			    { data: "content" },
   			    { data: "creattime" }
+  		    ]
+  			});
+  		var r = jQuery('#dataTable-record').DataTable({
+  			pageLength: 10,
+  			processing: true,
+  			language: datatable_local_language, // my.js
+  			serverSide: true,
+  			ajax: {
+  				url: '${rootPath}record/list.case?caseid=${crmcase.caseid}',
+  				dataFilter: function(data){
+  				    var json = jQuery.parseJSON( data );
+  				    json.recordsTotal = json.countTotal;
+  				    json.recordsFiltered = json.countFiltered;
+  				    json.data = json.data;
+  				    return JSON.stringify( json );
+  			    	}
+  				},
+  			columnDefs: [
+  						  {
+  							  data: "creattime",
+  							  render: function ( data, type, full, meta ) {
+  								  var creattime = new Date(data.time);
+  			                    return creattime.format("yyyy-MM-dd");
+  			                },
+  			                targets: 3
+  						  },		 
+
+  				],
+  			columns: [
+  		  			    { data: "orderrecordid" },
+  		  			    { data: "sendername" },
+  		  			    { data: "content" },
+  		  			    { data: "creattime" }
   		    ]
   			});
 	</script>

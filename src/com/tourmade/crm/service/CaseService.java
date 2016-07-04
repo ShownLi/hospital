@@ -25,7 +25,7 @@ public class CaseService extends BaseService {
 	private DemoCaseMapper caseMapper;
 
 	/**
-	 * 查询地接社数据，分页展示
+	 * 查询询单数据，分页展示
 	 * 
 	 * @param case
 	 * @param ph
@@ -67,7 +67,7 @@ public class CaseService extends BaseService {
 	}
 
 	/**
-	 * 新增地接社
+	 * 新增询单
 	 * 
 	 * @param case
 	 * @return
@@ -86,7 +86,7 @@ public class CaseService extends BaseService {
 	}
 
 	/**
-	 * 根据主键获取地接社信息
+	 * 根据主键获取询单信息
 	 * 
 	 * @param id
 	 * @return
@@ -120,7 +120,7 @@ public class CaseService extends BaseService {
 	}
 	
 	/**
-	 * 更新地接社信息(不修改密码)
+	 * 更新询单信息(不修改密码)
 	 * 
 	 * @param case
 	 * @return
@@ -147,7 +147,7 @@ public class CaseService extends BaseService {
 	}
 
 	/**
-	 * 删除地接社（假删除）
+	 * 删除询单（假删除）
 	 * 
 	 * @param case_id
 	 * @return

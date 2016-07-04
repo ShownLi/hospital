@@ -32,6 +32,14 @@ public class CustomerController extends BaseSimpleFormController {
 
 	@RequestMapping(value = "/list.html", method = { RequestMethod.POST, RequestMethod.GET })
 	public String list(Model model) {
+		String agegroup = "customer.agegroup";
+		String level = "customer.level";
+		List<DemoList> v = service.getParameterInfo(agegroup);
+		List<DemoList> w = service.getParameterInfo(level);
+		JSONArray agegroupresult = JSONArray.fromObject(v);
+		JSONArray levelresult = JSONArray.fromObject(w);
+		model.addAttribute("agegroup",agegroupresult);
+		model.addAttribute("level",levelresult);
 		return "/customer/list";
 	}
 	
@@ -100,9 +108,6 @@ public class CustomerController extends BaseSimpleFormController {
 			model.addAttribute("promote",promoteresult);
 			model.addAttribute("agegroup",agegroupresult);
 			model.addAttribute("customer",customer);
-			
-			String json = JSONUtilS.object2json(customer);
-			System.out.println(json);
 		}
 		return "/customer/edit";
 	}

@@ -11,6 +11,8 @@ public interface DemoOrderRecordMapper extends BaseMapper {
 	
 	public List<DemoOrderRecord> queryOrderRecord(Map<String, Object> params);
 	
+	public List<DemoOrderRecord> getOrderRecord(Map<String, Object> params);
+	
 	public long countOrderRecord(DemoOrderRecord orderrecord);
 	
 	public void saveOrderRecord(DemoOrderRecord orderrecord);

@@ -68,7 +68,7 @@
 	            <div class="form-group col-sm-4">
 	            	<label class="col-sm-3 control-label">生日</label>
 	            	<div class="col-sm-9 input-group input-datepicker">
-		                <input type="text" name="birthday" class="datepicker form-control" placeholder="mm/dd/yyyy" id="birthday">
+		                <input type="text" name="birthday" class="datepicker form-control" placeholder="yyyy/mm/dd" id="birthday">
 		                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
 	                </div>
 	            </div> 
@@ -215,7 +215,9 @@
       		$(".nav-parent").eq(2).find(".children").show();
 
 			// Date Picker
-			jQuery(".datepicker").datepicker();
+			jQuery(".datepicker").datepicker({
+				  dateFormat: "yy-mm-dd"}
+				),
 			 
 			jQuery("#form").validate({
 				

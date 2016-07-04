@@ -52,7 +52,7 @@ public class CommentController extends BaseSimpleFormController {
 		String result = JSONUtilS.object2json(r);
 		return result;
 	}
-
+	
 	@RequestMapping(value = "/add.html", method = { RequestMethod.POST, RequestMethod.GET })
 	public String add(Model model) {
 		
@@ -73,7 +73,7 @@ public class CommentController extends BaseSimpleFormController {
 	public Json doAdd(HttpServletRequest request, HttpSession session, Model model, DemoComment comment) {
 
 		Json j = new Json();
-		
+		System.out.println(comment);
 		try {
 			service.saveComment(comment);
 			j.setSuccess(true);

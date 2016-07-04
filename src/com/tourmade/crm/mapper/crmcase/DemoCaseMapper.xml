@@ -13,9 +13,10 @@
 		u.sales_name as salesname,
 		u.destination as destination,
 		u.status as status,
+		u.creat_time as creattime,
 		u.isdel as isdel
 		from tm_case u  
-		where u.isdel = 0 and v.isdel = 0 and x.isdel = 0
+		where u.isdel = 0 
 		order by u.creat_time
 		) table_alias
 		limit #{b},#{e}
@@ -121,8 +122,14 @@
 	<select id="getCaseById" parameterType="int" resultType="DemoCase">
 		select
 		u.case_id as caseid,
+		u.customer_name as customername,
+		u.budget as budget,
+		u.sales_name as salesname,
+		u.destination as destination,
+		u.status as status,
+		u.creat_time as creattime,
 		u.isdel
-		from tm_case u where u.isdel = 0 andu.case_id = #{caseid}
+		from tm_case u where u.isdel = 0 and u.case_id = #{caseid}
 	</select>
 	
 	<select id="getParameterInfo" parameterType="String" resultType="DemoList">

@@ -43,7 +43,7 @@
 							<table id="dataTable" class="table">
 								<thead>
 									<tr>
-										<th>序号</th>
+										<th>ID</th>
 										<th>客人姓名</th>
 										<th>地接社</th>
 										<th>销售姓名</th>

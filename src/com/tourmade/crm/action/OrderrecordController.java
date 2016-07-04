@@ -53,6 +53,16 @@ public class OrderrecordController extends BaseSimpleFormController {
 		return result;
 	}
 
+	@RequestMapping(value = "/list.case",produces="application/json;charset=utf-8")
+	@ResponseBody
+	public String getData(HttpServletRequest request, HttpSession session, Model model, DemoOrderRecord record, int caseid, PageHelper page) {
+
+		QueryResult<DemoOrderRecord> r = service.getOrderRecord(record, page, caseid ,request);
+		//System.out.println("\nid = "+caseid);
+		String result = JSONUtilS.object2json(r);
+		return result;
+	}
+	
 	@RequestMapping(value = "/add.html", method = { RequestMethod.POST, RequestMethod.GET })
 	public String add(Model model) {
 		

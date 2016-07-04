@@ -97,6 +97,8 @@
 
 
 	<script type="text/javascript">
+	var a = ${agegroup};
+	var l = ${level};
 	
 		jQuery(document).ready(function() {
 
@@ -127,7 +129,43 @@
 						return '<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a> &nbsp; <a class="btn btn-danger btn-xs" id="'+data+'"><span class="fa fa-minus-circle"></span> 删除</a>';
 						},
 						targets: 9
-					},				             
+					},
+					  {
+		                data: "agegroup",
+		                orderable: false,
+		                render: function ( data ) {
+		                	for(var i=0;i <  a.length;i++){
+		                		if(data==a[i].id){
+		                			return a[i].text
+		                		}
+		                		if(data==''){return '无';}
+		                	}
+		                },
+		                  targets: 3
+					  },
+					  {
+			                data: "level",
+			                orderable: false,
+			                render: function ( data ) {
+			                	for(var i=0;i <  l.length;i++){
+			                		if(data==l[i].id){
+			                			return l[i].text
+			                		}
+			                		if(data==''){return '无';}
+			                	}
+			                },
+			                  targets: 8
+						  },
+					  {
+		                  data: "gender",
+		                  orderable: false,
+		                  render: function ( data ) {
+		                      if(data=='male'){return '男';};
+		                      if(data=='female'){return '女';}
+		                      else{return '无';}
+		                  },
+		                  targets: 4
+					  },
 				    {
 					  orderable: false,
 					  searchable: false,

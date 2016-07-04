@@ -561,7 +561,8 @@
         $(".bModal").modal("hide");
    	});
 	// Date Picker
-	jQuery(".datepicker").datepicker();
+	jQuery(".datepicker").datepicker({
+		  dateFormat: "yy-mm-dd"});
 		
 	function form1_submit() {
 		var f = $("#form1").serialize();

@@ -68,13 +68,13 @@
                     <div class="form-group col-sm-4">
                       <label class="col-sm-4 control-label">成人</label>
                       <div class="col-sm-8">
-                        <input type="text" name="adult" placeholder="成人" class="form-control" value="" />
+                        <input type="text" name="adult" placeholder="成人" class="form-control" value="0" />
                       </div>
                     </div>
                     <div class="form-group col-sm-4">
                       <label class="col-sm-6 control-label">儿童（12岁以下）</label>
                       <div class="col-sm-6">
-                        <input type="text" name="children" placeholder="儿童（12岁以下）" class="form-control" value="" />
+                        <input type="text" name="children" placeholder="儿童（12岁以下）" class="form-control" value="0" />
                       </div>
                     </div>
                 </div>
@@ -109,14 +109,14 @@
                     <div class="form-group col-sm-4 d2">
                       <label class="col-sm-4 control-label">出发日期</label>
                       <div class="col-sm-8 input-group input-datepicker">
-                        <input type="text" name="startdate" class="form-control datepicker" placeholder="mm/dd/yyyy">
+                        <input type="text" name="startdate" class="form-control datepicker" placeholder="yyyy/mm/dd">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                       </div>
                     </div>
                     <div class="form-group col-sm-4 d2">
                       <label class="col-sm-4 control-label">返回日期</label>
                       <div class="col-sm-8 input-group input-datepicker">
-                        <input type="text" name="enddate" class="form-control datepicker" placeholder="mm/dd/yyyy">
+                        <input type="text" name="enddate" class="form-control datepicker" placeholder="yyyy/mm/dd">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                       </div>
                     </div>
@@ -149,18 +149,31 @@
                     <div class="form-group col-sm-4">
                       <label class="col-sm-4 control-label">客人的预算</label>
                       <div class="col-sm-8">
-                        <input type="text" name="budget" placeholder="客人的预算" class="form-control" value="" />
+                        <input type="text" name="budget" placeholder="客人的预算" class="form-control" value="0" />
                       </div>
                     </div>
                 </div>
                 <div class="section-block">
                     <div class="form-group col-sm-4">
-                      <label class="col-sm-4 control-label">销售姓名</label>
+                      <label class="col-sm-4 control-label">所属客人</label>
                       <div class="col-sm-8">
-                        <input type="text" name="salesname" placeholder="销售姓名" class="form-control" value="" />
+                        <input type="text" name="customerid" placeholder="所属客人" class="form-control" value="" />
                       </div>
                     </div>
                     <div class="form-group col-sm-4">
+                      <label class="col-sm-4 control-label">所属销售</label>
+                      <div class="col-sm-8">
+                        <input type="text" name="salesname" placeholder="所属销售" class="form-control" value="" />
+                      </div>
+                    </div>
+
+                    <div class="form-group col-sm-4">
+                      <label class="col-sm-4 control-label">询单来源</label>
+                      <div class="col-sm-8">
+                        <input type="text" name="source" class="source-select fullwidth" value="" />
+                      </div>
+                    </div>
+                   	<div class="form-group col-sm-4">
                       <label class="col-sm-4 control-label">目的地</label>
                       <div class="col-sm-8">
                         <input type="text" name="destination" class="destination-select fullwidth" value="" />
@@ -170,12 +183,6 @@
                       <label class="col-sm-4 control-label">行程</label>
                       <div class="col-sm-8">
                         <input type="text" name="budget" placeholder="行程" class="form-control" value="" />
-                      </div>
-                    </div>
-                    <div class="form-group col-sm-4">
-                      <label class="col-sm-4 control-label">询单来源</label>
-                      <div class="col-sm-8">
-                        <input type="text" name="source" class="source-select fullwidth" value="" />
                       </div>
                     </div>
                     <div class="form-group col-sm-4">
@@ -312,7 +319,8 @@
       $(".nav-parent").eq(0).addClass("nav-active");
       $(".nav-parent").eq(0).find(".children").show();
 			// Date Picker
-			jQuery(".datepicker").datepicker();
+			jQuery(".datepicker").datepicker(
+					{dateFormat: "yy-mm-dd"});
 
       $("input[name='starttime']").change(function() {
           var val = $("input[name='starttime']:checked").val();
@@ -367,10 +375,9 @@
 		function form_submit() {
 			var f = $("#form").serialize();
 			$.post('${rootPath}case/add.do', f, function(result) {
-				alert(f);
 				var rmsg = result.msg;
 				if (result.success) {
-					//window.parent.location = "${rootPath}customer/list.html";
+					window.parent.location = "${rootPath}case/list.html";
 					$("#nextModal").modal('show');
 				} else {
 					$("#msgModal").modal('show');

@@ -25,7 +25,7 @@ public class OrderService extends BaseService {
 	private DemoOrderMapper orderMapper;
 
 	/**
-	 * 查询地接社数据，分页展示
+	 * 查询订单数据，分页展示
 	 * 
 	 * @param order
 	 * @param ph
@@ -53,7 +53,7 @@ public class OrderService extends BaseService {
 	}
 
 	/**
-	 * 新增地接社
+	 * 新增订单
 	 * 
 	 * @param order
 	 * @return
@@ -72,7 +72,7 @@ public class OrderService extends BaseService {
 	}
 
 	/**
-	 * 根据主键获取地接社信息
+	 * 根据主键获取订单信息
 	 * 
 	 * @param id
 	 * @return
@@ -106,7 +106,7 @@ public class OrderService extends BaseService {
 	}
 	
 	/**
-	 * 更新地接社信息(不修改密码)
+	 * 更新订单信息(不修改密码)
 	 * 
 	 * @param order
 	 * @return
@@ -143,7 +143,7 @@ public class OrderService extends BaseService {
 	}
 
 	/**
-	 * 删除地接社（假删除）
+	 * 删除订单（假删除）
 	 * 
 	 * @param order_id
 	 * @return

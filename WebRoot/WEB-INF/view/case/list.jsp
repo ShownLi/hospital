@@ -43,13 +43,12 @@
 							<table id="dataTable" class="table">
 								<thead>
 									<tr>
-										<th>序号</th>
+										<th>ID</th>
 										<th>称呼</th>
 										<th>预算</th>
 										<th>目的地</th>
 										<th>询单来源</th>
 										<th>状态</th>
-										<th>邮箱</th>
 										<th>编辑</th>
 									</tr>
 								</thead>
@@ -108,68 +107,64 @@
 
 			$(".nav-parent").eq(0).addClass("nav-active");
 			$(".nav-parent").eq(0).find(".children").show();
-			
-			// var t = jQuery('#dataTable').DataTable({
-			// 	pageLength: 10,
-			// 	processing: true,
-			// 	language: datatable_local_language, // my.js
-			// 	serverSide: true,
-			// 	ajax: {
-			// 		url: '${rootPath}user/list.do',
-			// 		dataFilter: function(data){
-			//             var json = jQuery.parseJSON( data );
-			//             json.recordsTotal = json.countTotal;
-			//             json.recordsFiltered = json.countFiltered;
-			//             json.data = json.data;
-			//             return JSON.stringify( json );
-			//         }
-			// 	},
-			// 	columnDefs: [
-			//       {
-			//           data: "userid",
-			//           //defaultContent: '<a class="btn btn-success btn-xs"><span class="fa fa-edit"></span> 编辑</a>&nbsp;<a class="btn btn-danger btn-xs"><span class="fa fa-minus-circle"></span> 无效</a>',
-			// 	      orderable: false,
-			// 	      render: function ( data, type, full, meta ) {
-		 //              return '<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a>&nbsp;';
-			// 	  },
-			// 	              targets: 9
-			// 				  },				             
-			// 	  {
-			// 		  orderable: false,
-			// 		  searchable: false,
-			// 	      targets: [0,1,2]
-			// 	  },
-			// 	],
-			// 	columns: [
-		 //            { data: "userid" },
-		 //            { data: "loginname" },
-		 //            { data: "name" },
-		 //            { data: "mobilephone" },
-		 //            { data: "email" },
-		 //            { data: "userid" },
-		 //            { data: "loginname" },
-		 //            { data: "name" },
-		 //            { data: "mobilephone" },
-		 //            { data: "email" }
-		 //        ]
-			// });
-			
-			// $('#dataTable tbody').on( 'click', 'a.btn-success', function () {
-		 //        var data = t.row($(this).parents('tr')).data();
-		 //        //alert($(this).attr('id'));
-		 //        edit($(this).attr('id'));
-		 //    } );
+			var t = jQuery('#dataTable').DataTable({
+				pageLength: 10,
+				processing: true,
+				language: datatable_local_language, // my.js
+				serverSide: true,
+				ajax: {
+				url: '${rootPath}case/list.do',
+				dataFilter: function(data){
+				var json = jQuery.parseJSON( data );
+				json.recordsTotal = json.countTotal;
+				json.recordsFiltered = json.countFiltered;
+				json.data = json.data;
+				return JSON.stringify( json );
+				}
+				},
+				columnDefs: [
+					  {
+		                  data: "caseid",
+		                  //defaultContent: '<a class="btn btn-success btn-xs"><span class="fa fa-edit"></span> 编辑</a>&nbsp;<a class="btn btn-danger btn-xs"><span class="fa fa-minus-circle"></span> 删除</a>',
+		                  orderable: false,
+		                  render: function ( data, type, full, meta ) {
+		                      return '<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a>&nbsp;<a class="btn btn-danger btn-xs" id="'+data+'"><span class="fa fa-minus-circle"></span> 删除</a>';
+		                  },
+		                  targets: 6
+					  },
+					  {
+						  orderable: false,
+						  searchable: false,
+					      targets: [0]
+					  },
 
-			// $('#dataTable tbody').on( 'click', 'a.btn-danger', function () {
-		 //        var data = t.row($(this).parents('tr')).data();
-		 //        //alert($(this).attr('id'));
-		 //        del($(this).attr('id'));
-		 //    } );
-			
-			// $('#confirmDelModal').on( 'click', 'button.btn-danger', function () {
-		 //        var id = $("#confirmDelModal .hiddenId").val();
-		 //        doDel(id);
-		 //    } ); 
+					],
+					columns: [
+			            { data: "caseid" },
+			            { data: "customername" },
+			            { data: "budget" },
+			            { data: "destination" },
+			            { data: "source" },
+			            { data: "status" }
+			        ]
+				});
+				
+				$('#dataTable tbody').on( 'click', 'a.btn-success', function () {
+			        var data = t.row($(this).parents('tr')).data();
+			        //alert($(this).attr('id'));
+			        edit($(this).attr('id'));
+			    } );
+
+				$('#dataTable tbody').on( 'click', 'a.btn-danger', function () {
+			        var data = t.row($(this).parents('tr')).data();
+			        //alert($(this).attr('id'));
+			        del($(this).attr('id'));
+			    } );
+				
+				$('#confirmDelModal').on( 'click', 'button.btn-danger', function () {
+			        var id = $("#confirmDelModal .hiddenId").val();
+			        doDel(id);
+			    } ); 
 		    
 			// Select2
 		    jQuery('select').select2({
@@ -193,7 +188,7 @@
 		
 		function doDel(id){
 			$.ajax({
-				url: "${rootPath}user/del.do?id=" + id, 
+				url: "${rootPath}case/del.do?id=" + id, 
 				async: true,
 				success: function(o) {
 					window.location.reload();

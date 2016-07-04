@@ -3,6 +3,7 @@
 <html lang="en">
 <head>
 <%@ include file="../assets/pages/head.jsp"%>
+<link href="${rootPath }assets/css/jquery.datatables.css" rel="stylesheet">
 </head>
 
 <body>
@@ -69,7 +70,7 @@
 			            <div class="form-group col-sm-4">
 			            	<label class="col-sm-3 control-label">生日</label>
 			            	<div class="col-sm-9 input-group input-datepicker">
-				                <input type="text" class="form-control datepicker" placeholder="mm/dd/yyyy" id="birthday" value="${customer.birthday}">
+				                <input type="text" class="form-control datepicker" placeholder="yyyy-mm-dd" id="birthday" value="${customer.birthday}">
 				                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
 			                </div>
 			            </div> 
@@ -144,6 +145,8 @@
 		</div><!-- panel-footer -->
      </form>   
       </div><!-- panel -->
+      
+      
 		<!-- panel 询单  -->
 		<div class="panel panel-default">
 			<div class="panel-heading">
@@ -154,7 +157,7 @@
 			</div>
 			<div class="panel-body panel-body-nopadding">
 				<div class="table-responsive">
-					<table id="dataTable" class="table">
+					<table id="dataTable-case" class="table">
 						<thead>
 							<tr>
 								<th>序号</th>
@@ -169,100 +172,51 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td>1</td>
-								<td>张三</td>
-								<td>30,000</td>
-								<td>瑞士</td>
-								<td>官网表单</td>
-								<td>成交</td>
-								<td>balbala@tourmade.com</td>
-								<td><a href="edit.html" class="btn btn-success btn-xs"><span class="fa fa-edit"></span> 编辑</a>
-								<td><a class="btn btn-danger btn-xs"><span class="fa fa-minus-circle"></span> 删除</a></td>
-							</tr>
-							<tr>
-								<td>2</td>
-								<td>李四</td>
-								<td>35,000</td>
-								<td>埃及</td>
-								<td>在线客服</td>
-								<td>下单</td>
-								<td>balbala@tourmade.com</td>
-								<td><a href="edit.html" class="btn btn-success btn-xs"><span class="fa fa-edit"></span> 编辑</a>
-								<td><a class="btn btn-danger btn-xs"><span class="fa fa-minus-circle"></span> 删除</a></td>
-							</tr>
-							<tr>
-								<td>3</td>
-								<td>张三</td>
-								<td>2,000</td>
-								<td>澳大利亚</td>
-								<td>微信咨询</td>
-								<td>待处理</td>
-								<td>balbala@tourmade.com</td>
-								<td><a href="edit.html" class="btn btn-success btn-xs"><span class="fa fa-edit"></span> 编辑</a>
-								<td><a class="btn btn-danger btn-xs"><span class="fa fa-minus-circle"></span> 删除</a></td>
-							</tr>
 						</tbody>
 					</table>
 				</div>
 				<!-- table-responsive -->
 			</div>
 		    <div class="panel-footer align-center">
-			    <a class="btn btn-primary" href="#">添加询单</a>
+			    <a class="btn btn-primary" href="${rootPath}customer/edit.html?id=${customer.customerid}">添加询单</a>
 			</div>
 		</div><!-- end of panel 询单  -->
 		
-		<!-- panel 注释 -->
-	    <div class="panel panel-default">
-	        <div class="panel-heading">
-	        <div class="panel-btns">
-	            <a href="" class="minimize">&minus;</a>
-	        </div>
-	        <h4 class="panel-title">注释列表 </h4>
-	        </div>
-	        <div class="panel-body">
-	            <div class="table-responsive">
-	              <table id="dataTable-note" class="table table-note">
-	                <thead>
-	                  <tr>
-	                    <th>序号</th>
-	                    <th>姓名</th>
-	                    <th>注释内容</th>
-	                    <th>时间</th>
-	                  </tr>
-	                </thead>
-	                <tbody>
-	                  <tr>
-	                    <td>1</td>
-	                    <td>张三</td>
-	                    <td>埃及几月份最好玩</td>
-	                    <td>2016-06-24 11:00</td>
-	                  </tr>
-	                  <tr>
-	                    <td>2</td>
-	                    <td>张三</td>
-	                    <td>埃及几月份最好玩</td>
-	                    <td>2016-06-24 11:00</td>
-	                  </tr>
-	                  <tr>
-	                    <td>3</td>
-	                    <td>张三</td>
-	                    <td>埃及几月份最好玩</td>
-	                    <td>2016-06-24 11:00</td>
-	                  </tr>
-	                </tbody>
-	              </table>
-	          </div>
-	          <!-- table-responsive -->
-	          <!-- 添加注释 -->
-	          <div class="form-group col-sm-6 col-sm-offset-3">
-	                <textarea class="form-control" rows="5"></textarea>
-	          </div>
-	          <div class="form-group col-sm-12 align-center">
-	            <a class="btn btn-primary" href="#">添加注释</a>
-	          </div>
-	        </div>
-	    </div><!-- end of panel 注释 -->
+ 		<!-- panel 注释记录 -->
+      			<div class="panel panel-default">
+          		<div class="panel-heading">
+          		<div class="panel-btns">
+              		<a href="" class="minimize">&minus;</a>
+          		</div>
+          			<h4 class="panel-title">注释记录 </h4>
+          		</div>
+          		<div class="panel-body">
+	              	<table id="dataTable-note" class="table">
+						<thead>
+							<tr>
+                    <th>ID</th>
+                    <th>姓名</th>
+                    <th>注释内容</th>
+                    <th>时间</th>
+							</tr>
+						</thead>
+					</table>
+				          <!-- 添加注释 -->
+			<form id="comment" class="form">
+          <div class="form-group col-sm-6 col-sm-offset-3">
+                <textarea name="content" class="form-control" rows="5"></textarea>
+                <input  type="hidden" name="userid" value="${loginUser.userid}" />
+                <input  type="hidden" name="username" value="${loginUser.name}" />
+                <input  type="hidden" name="objectid" value="${customer.customerid}" />
+                <input  type="hidden" name="commenttype" value="customer" />
+          </div>
+          <div class="form-group col-sm-12 align-center">
+            <button class="btn btn-primary">添加注释</button>
+          </div>
+          </form>
+          		</div>
+				</div>
+				<!-- end of panel 注释列表 -->
 
 
 			</div>
@@ -291,11 +245,31 @@
   </div><!-- modal-dialog -->
 </div><!-- modal -->
 
+<!-- Modal -->
+<div class="modal fade" id="confirmDelModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel"><span class="fa fa-warning"></span> 提示</h4>
+      </div>
+      <div class="modal-body">
+        确定无效么？
+      </div>
+      <div class="modal-footer">
+      	<input type="hidden" class="hiddenId" value="" />
+        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        <button type="button" class="btn btn-danger">无效</button>
+      </div>
+    </div><!-- modal-content -->
+  </div><!-- modal-dialog -->
+</div><!-- modal -->
+
 
 
 	<%@ include file="../assets/pages/foot.jsp"%>
+	<script src="${rootPath}assets/js/jquery.datatables.min.js"></script>
 	<script src="${rootPath}assets/js/select2.min.js"></script>
-	<script src="${rootPath}assets/js/jquery-ui-1.10.3.min.js"></script>
 	<script src="${rootPath}assets/js/jquery.validate.min.js"></script>
 	
 	<script type="text/javascript">
@@ -323,11 +297,95 @@
 	jQuery(document).ready(function() {
 
 		$(".nav-parent").eq(2).addClass("nav-active");
-      		$(".nav-parent").eq(2).find(".children").show();
+      	$(".nav-parent").eq(2).find(".children").show();
+      	
+			var t = jQuery('#dataTable-case').DataTable({
+				pageLength: 10,
+				processing: true,
+				language: datatable_local_language, // my.js
+				serverSide: true,
+				ajax: {
+				url: '${rootPath}case/list.do',
+				dataFilter: function(data){
+				var json = jQuery.parseJSON( data );
+				json.recordsTotal = json.countTotal;
+				json.recordsFiltered = json.countFiltered;
+				json.data = json.data;
+				return JSON.stringify( json );
+				}
+				},
+				columnDefs: [
+					  {
+		                  data: "caseid",
+		                  //defaultContent: '<a class="btn btn-success btn-xs"><span class="fa fa-edit"></span> 编辑</a>&nbsp;<a class="btn btn-danger btn-xs"><span class="fa fa-minus-circle"></span> 删除</a>',
+		                  orderable: false,
+		                  render: function ( data, type, full, meta ) {
+		                      return '<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a>&nbsp;<a class="btn btn-danger btn-xs" id="'+data+'"><span class="fa fa-minus-circle"></span> 删除</a>;<a class="btn btn-danger btn-xs" id="'+data+'"><span class="fa fa-minus-circle"></span> 添加询单</a>';
+		                  },
+		                  targets: 6
+					  },
+					  {
+						  orderable: false,
+						  searchable: false,
+					      targets: [0]
+					  },
 
+					],
+					columns: [
+			            { data: "caseid" },
+			            { data: "customername" },
+			            { data: "budget" },
+			            { data: "destination" },
+			            { data: "source" },
+			            { data: "status" }
+			        ]
+				});
+			
+			$('#dataTable-case tbody').on( 'click', 'a.btn-success', function () {
+		        var data = t.row($(this).parents('tr')).data();
+		        //alert($(this).attr('id'));
+		        edit($(this).attr('id'));
+		    } );
+
+			$('#dataTable-case tbody').on( 'click', 'a.btn-danger', function () {
+		        var data = t.row($(this).parents('tr')).data();
+		        //alert($(this).attr('id'));
+		        del($(this).attr('id'));
+		    } );
+			
+			$('#confirmDelModal').on( 'click', 'button.btn-danger', function () {
+		        var id = $("#confirmDelModal .hiddenId").val();
+		        doDel(id);
+		    } ); 
+			
+			function edit(id) {
+				window.parent.location = "${rootPath}case/edit.html?id="+id;
+			}
+			
+			function del(id) {
+				$("#confirmDelModal .hiddenId").val("");
+				$("#confirmDelModal .hiddenId").val(id);
+				$("#confirmDelModal").modal('show');
+			}
+			
+			function doDel(id){
+				$.ajax({
+					url: "${rootPath}case/del.do?id=" + id, 
+					async: true,
+					success: function(o) {
+						window.location.reload();
+					},
+					error: function(o) {
+						alert(2);
+					}
+				});
+				
+			}
 		 // Date Picker
-			  jQuery(".datepicker").datepicker();
-
+			  jQuery(".datepicker").datepicker(
+					  {dateFormat: "yy-mm-dd"});
+		 
+				
 		jQuery("#form").validate({
 			rules: {
 				zname: "required",
@@ -369,6 +427,74 @@
 				if (result.success) {
 					window.parent.location = "${rootPath}customer/list.html";
 				} else {
+					$("#msgModal").modal('show');
+				}
+			}, "JSON");
+		}
+		
+		var t = jQuery('#dataTable-note').DataTable({
+			pageLength: 10,
+			processing: true,
+			language: datatable_local_language, // my.js
+			serverSide: true,
+			ajax: {
+				url: '${rootPath}comment/list.do?type=customer&id=${customer.customerid}',
+				dataFilter: function(data){
+				    var json = jQuery.parseJSON( data );
+				    json.recordsTotal = json.countTotal;
+				    json.recordsFiltered = json.countFiltered;
+				    json.data = json.data;
+				    return JSON.stringify( json );
+			    	}
+				},
+			columnDefs: [
+						  {
+							  data: "creattime",
+							  render: function ( data, type, full, meta ) {
+								  var creattime = new Date(data.time);
+			                    return creattime.format("yyyy/MM/dd");
+			                },
+			                targets: 3
+						  },		 
+
+				],
+			columns: [
+		  			    { data: "commentid" },
+		  			    { data: "username" },
+		  			    { data: "content" },
+		  			    { data: "creattime" }
+		    ]
+			});
+		jQuery("#comment").validate({
+			rule:{
+				content: "required"
+			},
+			
+			message:{
+				content:"请输入注释内容"
+			},
+			highlight: function(element) {
+				jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+			},
+			success: function(element) {
+				jQuery(element).closest('.form-group').removeClass('has-error');
+			},
+			invalidHandler : function(){
+				return false;
+			},
+			submitHandler : function(){
+				comment_submit();
+			    return false;
+			}
+		});
+		function comment_submit() {
+			var f = $("#comment").serialize();
+			$.post('${rootPath}comment/add.do', f, function(result) {
+				var rmsg = result.msg;
+				if (result.success) {
+					window.parent.location = "${rootPath}customer/edit.html?id=${customer.customerid}";
+				} 
+				else {
 					$("#msgModal").modal('show');
 				}
 			}, "JSON");

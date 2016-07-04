@@ -54,6 +54,35 @@ public class OrderRecordService extends BaseService {
 	}
 
 	/**
+	 * 查询订单记录数据，分页展示
+	 * 
+	 * @param orderrecord
+	 * @param ph
+	 * @param request
+	 * @return
+	 */
+	public QueryResult<DemoOrderRecord> getOrderRecord(DemoOrderRecord orderrecord, PageHelper ph, int caseid, HttpServletRequest request) {
+
+		QueryResult<DemoOrderRecord> r = new QueryResult<DemoOrderRecord>();
+		Map<String, Object> map = new HashMap<String, Object>();
+	
+		map.put("b", ph.getStart());
+		map.put("e", ph.getLength());
+		map.put("id", caseid);
+//		map.put("s", ph.getSort());
+//		map.put("o", ph.getOrder());
+
+		List<DemoOrderRecord> data = orderrecordMapper.getOrderRecord(map);
+		long count = orderrecordMapper.countOrderRecord(orderrecord);
+			
+		r.setData(data);
+		r.setCountTotal(count);
+		r.setCountFiltered(count);
+	
+		return r;
+	}
+	
+	/**
 	 * 新增订单记录
 	 * 
 	 * @param orderrecord
