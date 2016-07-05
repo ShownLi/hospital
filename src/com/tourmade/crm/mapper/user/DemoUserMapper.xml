@@ -69,7 +69,7 @@
 		u.mobilephone as mobilephone,
 		u.creat_time as creattime,
 		u.isdel as isdel
-		from tm_user u where u.user_id = #{userid}
+		from tm_user u where u.isdel = 0 and u.user_id = #{userid}
 	</select>
 
 	<update id="deleteUserById" parameterType="int" flushCache="true"

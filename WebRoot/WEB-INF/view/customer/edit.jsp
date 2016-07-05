@@ -166,9 +166,7 @@
 								<th>目的地</th>
 								<th>询单来源</th>
 								<th>状态</th>
-								<th>邮箱</th>
 								<th>编辑</th>
-								<th>删除</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -320,7 +318,7 @@
 		                  //defaultContent: '<a class="btn btn-success btn-xs"><span class="fa fa-edit"></span> 编辑</a>&nbsp;<a class="btn btn-danger btn-xs"><span class="fa fa-minus-circle"></span> 删除</a>',
 		                  orderable: false,
 		                  render: function ( data, type, full, meta ) {
-		                      return '<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a>&nbsp;<a class="btn btn-danger btn-xs" id="'+data+'"><span class="fa fa-minus-circle"></span> 删除</a>;<a class="btn btn-danger btn-xs" id="'+data+'"><span class="fa fa-minus-circle"></span> 添加询单</a>';
+		                      return '<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a>&nbsp;<a class="btn btn-danger btn-xs" id="'+data+'"><span class="fa fa-minus-circle"></span> 删除</a>&nbsp;&nbsp;&nbsp;<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-minus-circle"></span> 生成订单</a>';
 		                  },
 		                  targets: 6
 					  },
