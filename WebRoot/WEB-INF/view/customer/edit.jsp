@@ -176,7 +176,7 @@
 				<!-- table-responsive -->
 			</div>
 		    <div class="panel-footer align-center">
-			    <a class="btn btn-primary" href="${rootPath}customer/edit.html?id=${customer.customerid}">添加询单</a>
+			    <a class="btn btn-primary" href="${rootPath}case/addfromcustomer.html?customerid=${customer.customerid}">添加询单</a>
 			</div>
 		</div><!-- end of panel 询单  -->
 		
@@ -303,7 +303,7 @@
 				language: datatable_local_language, // my.js
 				serverSide: true,
 				ajax: {
-				url: '${rootPath}case/list.do',
+				url: '${rootPath}case/listfromcustomer.do?customerid=${customer.customerid}',
 				dataFilter: function(data){
 				var json = jQuery.parseJSON( data );
 				json.recordsTotal = json.countTotal;

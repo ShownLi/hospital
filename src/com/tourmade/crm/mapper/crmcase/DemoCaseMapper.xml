@@ -9,6 +9,7 @@
 		select
 		u.case_id as caseid,
 		u.customer_name as customername,
+		u.customer_id,
 		u.budget as budget,
 		u.sales_name as salesname,
 		u.destination as destination,
@@ -16,7 +17,7 @@
 		u.creat_time as creattime,
 		u.isdel as isdel
 		from tm_case u  
-		where u.isdel = 0 
+		where u.isdel = 0 and u.customer_id = #{customerid}
 		order by u.creat_time
 		) table_alias
 		limit #{b},#{e}
@@ -140,6 +141,22 @@
 		u.isdisplay,
 		u.isdel 
 		from tm_parameter u where u.isdisplay = 1 and u.isdel = 0 and u.para_domain = #{domain}
+	</select>
+	
+	<select id="getCustomer" parameterType="String" resultType="DemoList">
+		select
+		u.customer_id as id,
+		u.customer_name_zh as text,
+		u.isdel 
+		from tm_customer u where u.isdel = 0
+	</select>
+
+	<select id="getSales" parameterType="String" resultType="DemoList">
+		select
+		u.sale_id as id,
+		u.sale_name as text,
+		u.isdel 
+		from tm_sale u where u.isdel = 0
 	</select>
 	
 	<update id="deleteCaseById" parameterType="int" flushCache="true"

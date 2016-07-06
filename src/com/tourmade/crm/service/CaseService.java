@@ -36,21 +36,10 @@ public class CaseService extends BaseService {
 
 		QueryResult<DemoCase> r = new QueryResult<DemoCase>();
 		Map<String, Object> map = new HashMap<String, Object>();
+
+
 		
-		System.out.println(ph);
-		
-		String seachValue = ph.getSearch().get("value");
-		
-		if (null != seachValue && !"".equals(seachValue)) {
-			if (null == crmcase) {
-				crmcase = new DemoCase();
-			}
-			crmcase.setSeachValue(seachValue);
-		}
-			
-		
-		
-		map.put("pojo", crmcase);
+//		map.put("customerid", customerid);
 		map.put("b", ph.getStart());
 		map.put("e", ph.getLength());
 //		map.put("s", ph.getSort());
@@ -66,6 +55,37 @@ public class CaseService extends BaseService {
 		return r;
 	}
 
+	/**
+	 * 查询询单数据，分页展示
+	 * 
+	 * @param case
+	 * @param ph
+	 * @param request
+	 * @return
+	 */
+	public QueryResult<DemoCase> queryCaseFromCustomer(DemoCase crmcase, int customerid, PageHelper ph, HttpServletRequest request) {
+
+		QueryResult<DemoCase> r = new QueryResult<DemoCase>();
+		Map<String, Object> map = new HashMap<String, Object>();
+
+
+		
+		map.put("customerid", customerid);
+		map.put("b", ph.getStart());
+		map.put("e", ph.getLength());
+//		map.put("s", ph.getSort());
+//		map.put("o", ph.getOrder());
+
+		List<DemoCase> data = caseMapper.queryCase(map);
+		long count = caseMapper.countCase(crmcase);
+			
+		r.setData(data);
+		r.setCountTotal(count);
+		r.setCountFiltered(count);
+	
+		return r;
+	}
+	
 	/**
 	 * 新增询单
 	 * 
@@ -114,6 +134,40 @@ public class CaseService extends BaseService {
 			r = caseMapper.getParameterInfo(domain);
 		} catch (Exception e) {
 			logger.error("CaseService.getParameterInfo() --> " + domain + "-->" + e.getMessage());
+			r = null;
+		}
+		return r;
+	}
+	
+	/**
+	 * 获得客人信息
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public List<DemoList> getCustomer() {
+		List<DemoList> r = null;
+		try {
+			r = caseMapper.getCustomer();
+		} catch (Exception e) {
+			logger.error("CaseService.getParameterInfo() --> -->" + e.getMessage());
+			r = null;
+		}
+		return r;
+	}
+
+	/**
+	 * 获得销售信息
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public List<DemoList> getSales() {
+		List<DemoList> r = null;
+		try {
+			r = caseMapper.getSales();
+		} catch (Exception e) {
+			logger.error("CaseService.getParameterInfo() --> -->" + e.getMessage());
 			r = null;
 		}
 		return r;

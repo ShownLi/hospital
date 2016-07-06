@@ -35,16 +35,27 @@ public class CaseController extends BaseSimpleFormController {
 		return "/case/list";
 	}
 	
-	@RequestMapping(value = "/list.do",produces="application/json;charset=utf-8")
+	@RequestMapping(value = "/listfromcustomer.do",produces="application/json;charset=utf-8")
 	@ResponseBody
-	public String queryData(HttpServletRequest request, HttpSession session, Model model, DemoCase crmcase, PageHelper page) {
+	public String queryData(HttpServletRequest request, HttpSession session, Model model, int customerid ,DemoCase crmcase, PageHelper page) {
 
-		QueryResult<DemoCase> r = service.queryCase(crmcase, page, request);
+		//System.out.println(customerid);
+		QueryResult<DemoCase> r = service.queryCaseFromCustomer(crmcase, customerid ,page, request);
 		String result = JSONUtilS.object2json(r);
 
 		return result;
 	}
 
+	@RequestMapping(value = "/list.do",produces="application/json;charset=utf-8")
+	@ResponseBody
+	public String queryData(HttpServletRequest request, HttpSession session, Model model, DemoCase crmcase, PageHelper page) {
+
+		//System.out.println(customerid);
+		QueryResult<DemoCase> r = service.queryCase(crmcase, page, request);
+		String result = JSONUtilS.object2json(r);
+
+		return result;
+	}
 	@RequestMapping(value = "/add.html", method = { RequestMethod.POST, RequestMethod.GET })
 	public String add(Model model) {
 		
@@ -66,6 +77,8 @@ public class CaseController extends BaseSimpleFormController {
 		List<DemoList> v7 = service.getParameterInfo(guide);
 		List<DemoList> v8 = service.getParameterInfo(destination);
 		List<DemoList> v9 = service.getParameterInfo(source);
+		List<DemoList> customer = service.getCustomer();
+		List<DemoList> sales = service.getSales();
 		JSONArray countryresult = JSONArray.fromObject(v1);
 		JSONArray languageresult = JSONArray.fromObject(v2);
 		JSONArray contactresult = JSONArray.fromObject(v3);
@@ -75,6 +88,8 @@ public class CaseController extends BaseSimpleFormController {
 		JSONArray guideresult = JSONArray.fromObject(v7);
 		JSONArray destinationresult = JSONArray.fromObject(v8);
 		JSONArray sourceresult = JSONArray.fromObject(v9);
+		JSONArray customerresult = JSONArray.fromObject(customer);
+		JSONArray salesresult = JSONArray.fromObject(sales);
 		model.addAttribute("country",countryresult);
 		model.addAttribute("language",languageresult);
 		model.addAttribute("contacttype",contactresult);
@@ -84,10 +99,17 @@ public class CaseController extends BaseSimpleFormController {
 		model.addAttribute("guide",guideresult);
 		model.addAttribute("destination",destinationresult);
 		model.addAttribute("source",sourceresult);
-		
+		model.addAttribute("customer",customerresult);
+		model.addAttribute("sales",salesresult);
 		return "/case/add";
 	}
 
+	@RequestMapping(value = "/addfromcustomer.html", method = { RequestMethod.POST, RequestMethod.GET })
+	public String addfromcustomer(Model model, int customerid) {
+		model.addAttribute("customerid",customerid);
+		return "/case/add";
+	}
+	
 	@RequestMapping(value = "/add.do")
 	@ResponseBody
 	public Json doAdd(HttpServletRequest request, HttpSession session, Model model, DemoCase crmcase) {

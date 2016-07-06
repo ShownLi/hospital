@@ -157,13 +157,13 @@
                     <div class="form-group col-sm-4">
                       <label class="col-sm-4 control-label">所属客人</label>
                       <div class="col-sm-8">
-                        <input type="text" name="customerid" placeholder="所属客人" class="form-control" value="" />
+                        <input type="text" name="customerid" placeholder="所属客人" class="customer-select fullwidth" value="${customerid}" />
                       </div>
                     </div>
                     <div class="form-group col-sm-4">
                       <label class="col-sm-4 control-label">所属销售</label>
                       <div class="col-sm-8">
-                        <input type="text" name="salesname" placeholder="所属销售" class="form-control" value="" />
+                        <input type="text" name="salesname" placeholder="所属销售" class="sales-select fullwidth" value="" />
                       </div>
                     </div>
 
@@ -274,6 +274,8 @@
 		 var d7 = ${guide};
 		 var d8 = ${destination};
 		 var d9 = ${source};
+		 var customer = ${customer};
+		 var sales = ${sales};
 		 $(".language-select").select2({
 		 	placeholder: '选择一个沟通语言',
 		   	data: d2
@@ -310,6 +312,14 @@
              placeholder: '国家',
              data: d1
          });
+	    $(".customer-select").select2({
+            placeholder: '客人',
+            data: customer
+        });
+	    $(".sales-select").select2({
+            placeholder: '销售',
+            data: sales
+        });
 	    // $(".agency-select").select2({
      //        placeholder: '地接社',
      //        data: p

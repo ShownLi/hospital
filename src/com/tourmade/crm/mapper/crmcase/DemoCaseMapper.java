@@ -22,4 +22,8 @@ public interface DemoCaseMapper extends BaseMapper {
 	public DemoCase getCaseById(int caseid);
 	
 	public List<DemoList> getParameterInfo(String domain);
+	
+	public List<DemoList> getCustomer();
+	
+	public List<DemoList> getSales();
 }
