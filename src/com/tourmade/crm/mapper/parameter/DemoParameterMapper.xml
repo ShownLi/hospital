@@ -18,19 +18,6 @@
 		u.creat_time as creat_time,
 		u.isdel as isdel
 		from tm_parameter u where u.isdel = 0
-		<if test="pojo.seachValue!=null and pojo.seachValue!=''">
-			and
-			(
-			u.para_domain like '%${pojo.seachValue}%'
-			or
-			u.para_value like '%${pojo.seachValue}%'
-			or
-			u.chinese like '%${pojo.seachValue}%'
-			or
-			u.english like '%${pojo.seachValue}%'
-			)
-		</if>
-
 		order by u.creat_time
 		) table_alias
 		limit #{b},#{e}
@@ -40,18 +27,6 @@
 		select count(u.para_id) from tm_parameter u
 		where
 		u.isdel = 0
-		<if test="seachValue!=null and seachValue!=''">
-			and
-			(
-			u.para_domain like '%${seachValue}%'
-			or
-			u.para_value like '%${seachValue}%'
-			or
-			u.chinese like '%${seachValue}%'
-			or
-			u.english like '%${seachValue}%'
-			)
-		</if>
 
 	</select>
 	

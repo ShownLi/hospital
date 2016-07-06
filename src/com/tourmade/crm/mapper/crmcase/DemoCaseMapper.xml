@@ -17,7 +17,11 @@
 		u.creat_time as creattime,
 		u.isdel as isdel
 		from tm_case u  
-		where u.isdel = 0 and u.customer_id = #{customerid}
+		where u.isdel = 0 
+		<if test="customerid != null and customerid != ''">
+			and
+			u.customer_id = #{customerid}
+		</if>
 		order by u.creat_time
 		) table_alias
 		limit #{b},#{e}
