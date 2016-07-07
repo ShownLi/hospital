@@ -19,6 +19,14 @@ public interface DemoOrderMapper extends BaseMapper {
 
 	public void deleteOrderById(int order_id);
 	
+	public int getAgencyId(int salesid);
+	
+	public String getCustomerName(int customerid);
+	
+	public String getAgencyName(int agencyid);
+	
+	public String getSalesName(int salesid);
+	
 	public DemoOrder getOrderById(int order_id);
 	
 	public List<DemoList> getParameterInfo(String domain);

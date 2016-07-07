@@ -127,6 +127,7 @@
 	<select id="getCaseById" parameterType="int" resultType="DemoCase">
 		select
 		u.case_id as caseid,
+		u.customer_id as customerid,
 		u.customer_name as customername,
 		u.prefer_language as preferlanguage,
 		u.contact_type as contacttype,

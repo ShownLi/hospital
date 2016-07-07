@@ -37,7 +37,7 @@
           <h4 class="panel-title">询单基本信息</h4>
           <p>填写下表，完成询单编辑。</p>
         </div>
-        <form class="form-horizontal" id="form">
+        <form class="form-horizontal" id="case">
         <div class="panel-body panel-body-nopadding">
             <div class="section-block">
                 <div class="form-group col-sm-4">
@@ -197,6 +197,7 @@
         <div class="panel-footer align-center">
             <button id="addorder" class="btn btn-primary">添加订单</button>&nbsp;
             <button id="submit" class="btn btn-primary">保存</button>&nbsp;
+            <input type="hidden" name="caseid" value="${crmcase.caseid}" />
             <button class="btn btn-primary">无效</button>
 		    </div><!-- panel-footer -->
      </form>   
@@ -334,6 +335,7 @@
         <div class="nextModal-title">您可以继续添加订单，或 <a style="text-decoration:underline;" href="${rootPath}case/list.html">回到询单列表页面</a></div>
       </div>
       <div class="modal-body align-center">
+       <form class="form-horizontal" id="order">   
         <div class="section-block">
             <div class="section-title">选择目的地及地接社,继续添加订单</div>
             <div class="form-group col-sm-8 col-sm-offset-2">
@@ -345,13 +347,17 @@
             <div class="form-group col-sm-8 col-sm-offset-2">
                 <label class="col-sm-3 control-label">所属销售</label>
                 <div class="col-sm-9">
-                    <input type="text" name="sales" placeholder="选择一个销售" class="sales-select fullwidth" value="" />
+                    <input type="text" name="salesid" placeholder="选择一个销售" class="sales-select fullwidth" value="" />
                 </div>
             </div>
             <div class="col-sm-12">
-             <a class="btn btn-primary" href="#">保存</a>
+            <input type="hidden" name="caseid" value="${crmcase.caseid}" />
+            <input type="hidden" name="customerid" value="${crmcase.customerid}" />
+            <input type="hidden" name="budget" value="${crmcase.budget}" />
+             <a class="submit btn btn-primary">保存</a>
             </div>
         </div>
+        </form>
       </div>
     </div><!-- modal-content -->
   </div><!-- modal-dialog -->
@@ -505,7 +511,8 @@ $(".sales-select").select2({
 		             { data: "status" }
 		         ]
 			 });
-			jQuery("#form").validate({
+		 
+			jQuery("#case").validate({
         
           rules: {
             adult: "digits",
@@ -519,9 +526,9 @@ $(".sales-select").select2({
             adult: "请输入一个整数",
             children: "请输入一个整数",
             budget: "请输入一个整数",
-            startdate: "请输入正确的日期格式 mm/dd/yyyy",
-            enddate: "请输入正确的日期格式 mm/dd/yyyy",
-            startmonth: "请输入正确的日期格式 mm/dd/yyyy",
+            startdate: "请输入正确的日期格式 yyyy/mm/dd",
+            enddate: "请输入正确的日期格式 yyyy/mm/dd",
+            startmonth: "请输入正确的日期格式 yyyy/mm/dd",
           },
         
           highlight: function(element) {
@@ -534,10 +541,35 @@ $(".sales-select").select2({
             return false;
           },
           submitHandler : function(){
-            form_submit();
+        	case_submit();
             return false;
           }
       });
+			jQuery("#order").validate({
+		        
+		          rules: {
+		            destination: "require",
+		            sales: "require"
+		          },
+		          messages: {
+			            destination: "请选择一个目的地",
+			            sales: "请选择一个销售"
+		          },
+		        
+		          highlight: function(element) {
+		            jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+		          },
+		          success: function(element) {
+		            jQuery(element).closest('.form-group').removeClass('has-error');
+		          },
+		          invalidHandler : function(){
+		            return false;
+		          },
+		          submitHandler : function(){
+		        	order_submit();
+		            return false;
+		          }
+		      });
   			$("#btn-back").click( function () {
   				history.go(-1);
   		  }); 
@@ -554,13 +586,28 @@ $(".sales-select").select2({
 	else{
 		$('#no').attr('checked','true');
 	}
-  		function form_submit() {
-  			var f = $("#form").serialize();
+  		function case_submit() {
+  			var f = $("#case").serialize();
   			$.post('${rootPath}case/edit.do', f, function(result) {
   				var rmsg = result.msg;
   				if (result.success) {
-  					//window.parent.location = "${rootPath}customer/list.html";
-  					$("#nextModal").modal('show');
+  					window.parent.location = "${rootPath}case/edit.html?id=${crmcase.caseid}";
+  					//$("#nextModal").modal('show');
+  				} else {
+  					//$("#msgModal").modal('show');
+  				}
+  			}, "JSON");
+  		}
+  	    $(".nextModal .submit").click(function(){
+  	    	order_submit();
+  	      });
+  		function order_submit() {
+  			var f = $("#order").serialize();
+  			$.post('${rootPath}order/add.do', f, function(result) {
+  				var rmsg = result.msg;
+  				if (result.success) {
+  					window.parent.location = "${rootPath}case/edit.html?id=${crmcase.caseid}";
+  					//$("#nextModal").modal('show');
   				} else {
   					//$("#msgModal").modal('show');
   				}

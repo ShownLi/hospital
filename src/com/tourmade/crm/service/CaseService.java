@@ -186,6 +186,22 @@ public class CaseService extends BaseService {
 		try {
 			DemoCase u = caseMapper.getCaseById(crmcase.getCaseid());
 			if (u != null) {
+				u.setPreferlanguage(crmcase.getPreferlanguage());
+				u.setAdult(crmcase.getAdult());
+				u.setChildren(crmcase.getChildren());
+				u.setContacttype(crmcase.getContacttype());
+				u.setStarttime(crmcase.getStarttime());
+				u.setWithwho(crmcase.getWithwho());
+				u.setStartmonth(crmcase.getStartmonth());
+				u.setDuring(crmcase.getDuring());
+				u.setStartdate(crmcase.getStartdate());
+				u.setEnddate(crmcase.getEnddate());
+				u.setRequirement(crmcase.getRequirement());
+				u.setHotel(crmcase.getHotel());
+				u.setGuide(crmcase.getGuide());
+				u.setMeals(crmcase.getMeals());
+				u.setBudget(crmcase.getBudget());
+				u.setSource(crmcase.getSource());
 				u.setStatus(crmcase.getStatus());
 				caseMapper.updateCase(u);
 				r = true;

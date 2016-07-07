@@ -17,6 +17,8 @@ import com.tourmade.crm.mapper.order.DemoOrderMapper;
 import com.tourmade.crm.model.DemoOrder;
 import com.tourmade.crm.model.DemoList;
 
+import com.tourmade.crm.service.EmailService;
+
 @Service
 @Transactional(readOnly = false)
 public class OrderService extends BaseService {
@@ -62,6 +64,14 @@ public class OrderService extends BaseService {
 
 		
 		try {
+			String customername = orderMapper.getCustomerName(order.getCustomerid());
+			order.setAgencyid(orderMapper.getAgencyId(order.getSalesid()));
+			String agencyname = orderMapper.getAgencyName(order.getAgencyid());
+			String salesname = orderMapper.getSalesName(order.getSalesid());
+			order.setAgencyname(agencyname);
+			order.setSalesname(salesname);
+			order.setCustomername(customername);
+			//System.out.println(order);
 			orderMapper.saveOrder(order);
 		} catch (Exception e) {
 			logger.error("OrderService.saveOrder() --> " + order + "-->" + e.getMessage());
@@ -71,6 +81,24 @@ public class OrderService extends BaseService {
 		return order.getOrderid();
 	}
 
+	/**
+	 * 给地接社发送第一封下单邮件
+	 * 
+	 * @param order
+	 * @return
+	 */
+	public void orderEmailToAgency(int orderid) {
+
+		try {
+			System.out.println(orderid);
+			EmailService Eservice = new EmailService();
+			Eservice.creatAlias(orderid);
+			//Eservice.orderEmailToAgency(order.getCaseid(), order.getOrderid());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	/**
 	 * 根据主键获取订单信息
 	 * 
@@ -106,7 +134,7 @@ public class OrderService extends BaseService {
 	}
 	
 	/**
-	 * 更新订单信息(不修改密码)
+	 * 更新订单信息
 	 * 
 	 * @param order
 	 * @return
