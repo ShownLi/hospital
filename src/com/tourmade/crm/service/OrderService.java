@@ -73,12 +73,13 @@ public class OrderService extends BaseService {
 			order.setCustomername(customername);
 			//System.out.println(order);
 			orderMapper.saveOrder(order);
+			System.out.println(order.getOrderid());
 		} catch (Exception e) {
 			logger.error("OrderService.saveOrder() --> " + order + "-->" + e.getMessage());
 			e.printStackTrace();
 			return 0;
 		}
-		return order.getOrderid();
+		return 0;
 	}
 
 	/**

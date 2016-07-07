@@ -18,9 +18,9 @@ public class DemoOrder extends BaseBean<DemoOrder> {
 	 */
 	private static final long serialVersionUID = 1423523863575074623L;
 	
-	private int caseid;
-
 	private int orderid;
+	
+	private int caseid;
 	
 	private int customerid;
 	
@@ -295,16 +295,15 @@ public class DemoOrder extends BaseBean<DemoOrder> {
 
 	@Override
 	public String toString() {
-		return "DemoOrder [caseid=" + caseid + ", orderid=" + orderid + ", customerid=" + customerid + ", customername="
+		return "DemoOrder [orderid=" + orderid + ", caseid=" + caseid + ", customerid=" + customerid + ", customername="
 				+ customername + ", agencyid=" + agencyid + ", agencyname=" + agencyname + ", salesid=" + salesid
 				+ ", salesname=" + salesname + ", destination=" + destination + ", budget=" + budget + ", status="
 				+ status + ", reason=" + reason + ", currency=" + currency + ", grouptime=" + grouptime
-				+ ", groupnumber=" + groupnumber + ", exchangerate=" + exchangerate
-				+ ", groupprice=" + groupprice + ", rmbprice=" + rmbprice + ", customerrealemail=" + customerrealemail
-				+ ", customeremailalias=" + customeremailalias + ", agencyrealemail=" + agencyrealemail
-				+ ", agencyemailalias=" + agencyemailalias + ", lastresponse=" + lastresponse + ", startdate="
-				+ startdate + ", enddate=" + enddate + ", creattime=" + creattime + ", updatetime=" + updatetime + "]";
+				+ ", groupnumber=" + groupnumber + ", exchangerate=" + exchangerate + ", groupprice=" + groupprice
+				+ ", rmbprice=" + rmbprice + ", customerrealemail=" + customerrealemail + ", customeremailalias="
+				+ customeremailalias + ", agencyrealemail=" + agencyrealemail + ", agencyemailalias=" + agencyemailalias
+				+ ", lastresponse=" + lastresponse + ", startdate=" + startdate + ", enddate=" + enddate
+				+ ", creattime=" + creattime + ", updatetime=" + updatetime + "]";
 	}
 
-	
 }

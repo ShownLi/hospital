@@ -67,8 +67,8 @@ public class OrderController extends BaseSimpleFormController {
 		Json j = new Json();
 		
 		try {
-			int orderid = service.saveOrder(order);
-			service.orderEmailToAgency(orderid);
+			service.saveOrder(order);
+			//service.orderEmailToAgency(orderid);
 			j.setSuccess(true);
 		} catch (Exception e) {
 			j.setSuccess(false);

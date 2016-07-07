@@ -42,7 +42,7 @@
 
 	</select>
 	
-	<insert id="saveOrder" parameterType="DemoOrder" flushCache="true" useGeneratedKeys="true" keyProperty="order_id" keyColumn="GENERATED_KEY">
+	<insert id="saveOrder" parameterType="DemoOrder" flushCache="true" useGeneratedKeys="true" keyProperty="orderid" keyColumn="GENERATED_KEY">
 		insert into tm_order(
 		customer_name,
 		customer_id,

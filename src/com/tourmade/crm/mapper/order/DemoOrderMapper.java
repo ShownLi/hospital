@@ -13,7 +13,7 @@ public interface DemoOrderMapper extends BaseMapper {
 	
 	public long countOrder(DemoOrder order);
 	
-	public void saveOrder(DemoOrder order);
+	public int saveOrder(DemoOrder order);
 
 	public void updateOrder(DemoOrder order);
 
