@@ -37,25 +37,25 @@
           <h4 class="panel-title">询单基本信息</h4>
           <p>填写下表，完成询单编辑。</p>
         </div>
-        <form class="form-horizontal" id="form">
+        <form class="form-horizontal" id="case">
         <div class="panel-body panel-body-nopadding">
             <div class="section-block">
                 <div class="form-group col-sm-4">
                   <label class="col-sm-4 control-label">称呼</label>
                   <div class="col-sm-8">
-                    <input type="text" name="customer_name" placeholder="称呼" class="form-control" readonly value="${crmcase.customername}" />
+                    <input type="text" name="customername" placeholder="称呼" class="form-control" readonly value="${crmcase.customername}" />
                   </div>
                 </div>
                 <div class="form-group col-sm-4">
                   <label class="col-sm-4 control-label">沟通语言</label>
                   <div class="col-sm-8">
-                    <input type="text" name="prefer_language" class="language-select form-control" value=""/>
+                    <input type="text" name="preferlanguage" class="language-select fullwidth" value="${crmcase.preferlanguage}"/>
                   </div>
                 </div>
                 <div class="form-group col-sm-4">
                   <label class="col-sm-4 control-label">希望联系方式</label>
                   <div class="col-sm-8">
-                    <input type="text" name="contact_type" class="contact-select form-control" value="" />
+                    <input type="text" name="contacttype" class="contact-select fullwidth" value="${crmcase.contacttype}" />
                   </div>
                 </div>                
             </div>
@@ -63,53 +63,61 @@
                 <div class="form-group col-sm-4">
                   <label class="col-sm-4 control-label">与谁同行</label>
                   <div class="col-sm-8">
-                    <input type="text" name="with_who" class="withwho-select form-control" value="" />
+                    <input type="text" name="withwho" class="withwho-select fullwidth" value="${crmcase.withwho}" />
                   </div>
                 </div>
                 <div class="form-group col-sm-4">
                   <label class="col-sm-4 control-label">成人</label>
                   <div class="col-sm-8">
-                    <input type="text" name="adult" placeholder="成人" class="form-control" value="" />
+                    <input type="text" name="adult" placeholder="成人" class="form-control" value="${crmcase.adult}" />
                   </div>
                 </div>
                 <div class="form-group col-sm-4">
                   <label class="col-sm-6 control-label">儿童（12岁以下）</label>
                   <div class="col-sm-6">
-                    <input type="text" name="children" placeholder="儿童（12岁以下）" class="form-control" value="" />
+                    <input type="text" name="children" placeholder="儿童（12岁以下）" class="form-control" value="${crmcase.children}" />
                   </div>
                 </div>
             </div>
             <div class="section-block">
-                <div class="form-group col-sm-4">
-                  <label class="col-sm-4 control-label">出发时间</label>
-                  <div class="col-sm-8">
-                    <input type="text" name="start_time" class="time-select form-control" value="" />
-                  </div>
-                </div>
+                   	<div class="form-group col-sm-4">
+        	              <label class="col-sm-4 control-label">出发时间 <span class="asterisk">&nbsp;</span></label>
+        	              <div class="col-sm-8">
+        	                <div class="rdio rdio-primary rdio-inline">
+        	                  <input type="radio" id="yes" value="1" name="starttime"/>
+        	                  <label for="yes">已确定</label>
+        	                </div><!-- rdio -->
+        	                <div class="rdio rdio-primary rdio-inline">
+        	                  <input type="radio" id="no" value="0" name="starttime" />
+        	                  <label for="no">未确定</label>
+        	                </div><!-- rdio -->
+        	                <label class="error" for="starttime"></label>
+        	              </div>
+                    </div>
                 <div class="form-group col-sm-4 d1">
                   <label class="col-sm-4 control-label">大约时间</label>
                   <div class="col-sm-8 input-group input-datepicker">
-                    <input type="text" class="form-control datepicker" placeholder="mm/dd/yyyy">
+                    <input type="text" name="startmonth" class="form-control datepicker" placeholder="yyyy/mm/dd" value="${crmcase.startmonth}">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                   </div>
                 </div>
                 <div class="form-group col-sm-4 d1">
                   <label class="col-sm-4 control-label">大约天数</label>
                   <div class="col-sm-8">
-                    <input type="text" name="during" placeholder="大约天数" class="form-control" value="" />
+                    <input type="text" name="during" placeholder="大约天数" class="form-control" value="${crmcase.during}" />
                   </div>
                 </div>
                 <div class="form-group col-sm-4 d2">
                   <label class="col-sm-4 control-label">出发日期</label>
                   <div class="col-sm-8 input-group input-datepicker">
-                    <input type="text" class="form-control datepicker" placeholder="mm/dd/yyyy">
+                    <input type="text" name="startdate" class="form-control datepicker" placeholder="yyyy/mm/dd" value="${crmcase.startdate}">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                   </div>
                 </div>
                 <div class="form-group col-sm-4 d2">
                   <label class="col-sm-4 control-label">返回日期</label>
                   <div class="col-sm-8 input-group input-datepicker">
-                    <input type="text" class="form-control datepicker" placeholder="mm/dd/yyyy">
+                    <input type="text" name="enddate" class="form-control datepicker" placeholder="yyyy/mm/dd" value="${crmcase.enddate}">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                   </div>
                 </div>
@@ -118,31 +126,31 @@
                 <div class="form-group col-sm-4">
                   <label class="col-sm-4 control-label">客人的要求</label>
                   <div class="col-sm-8">
-                    <textarea class="form-control" placeholder="客人的要求" rows="3"></textarea>
+                    <textarea id="requirement" name="requirement" class="form-control" placeholder="客人的要求" rows="5"></textarea>
                   </div>
                 </div>
                 <div class="form-group col-sm-4">
                   <label class="col-sm-4 control-label">关于住宿</label>
                   <div class="col-sm-8">
-                    <input type="text" name="hotel" class="hotel-select form-control" value="" />
+                    <input type="text" name="hotel" class="hotel-select fullwidth" value="${crmcase.hotel}" />
                   </div>
                 </div>
                 <div class="form-group col-sm-4">
                   <label class="col-sm-4 control-label">关于用餐</label>
                   <div class="col-sm-8">
-                    <input type="text" name="meals" class="meals-select form-control" value="" />
+                    <input type="text" name="meals" class="meals-select fullwidth" value="${crmcase.meals}" />
                   </div>
                 </div>
                 <div class="form-group col-sm-4">
                   <label class="col-sm-5 control-label">关于司机和导游</label>
                   <div class="col-sm-7">
-                    <input type="text" name="guide" class="guide-select form-control" value="" />
+                    <input type="text" name="guide" class="guide-select fullwidth" value="${crmcase.guide}" />
                   </div>
                 </div>
                 <div class="form-group col-sm-4">
                   <label class="col-sm-4 control-label">客人的预算</label>
                   <div class="col-sm-8">
-                    <input type="text" name="budget" placeholder="客人的预算" class="form-control" value="" />
+                    <input type="text" name="budget" placeholder="客人的预算" class="form-control" value="${crmcase.budget}" />
                   </div>
                 </div>
             </div>
@@ -150,37 +158,37 @@
                 <div class="form-group col-sm-4">
                   <label class="col-sm-4 control-label">销售姓名</label>
                   <div class="col-sm-8">
-                    <input type="text" name="sales_name" placeholder="销售姓名" class="form-control" readonly value="" />
+                    <input type="text" name="salesname" placeholder="销售姓名" class="form-control" readonly value="${crmcase.salesname}" />
                   </div>
                 </div>
                 <div class="form-group col-sm-4">
                   <label class="col-sm-4 control-label">目的地</label>
                   <div class="col-sm-8">
-                    <input type="text" name="destination" class="destination-select form-control" readonly value="" />
+                    <input type="text" name="destination" class="destination-select fullwidth" readonly value="${crmcase.destination}" />
                   </div>
                 </div>
                 <div class="form-group col-sm-4">
                   <label class="col-sm-4 control-label">行程</label>
                   <div class="col-sm-8">
-                    <input type="text" name="budget" placeholder="行程" class="form-control" readonly value="" />
+                    <input type="text" name="budget" placeholder="行程" class="form-control" readonly value="${crmcase.budget}" />
                   </div>
                 </div>
                 <div class="form-group col-sm-4">
                   <label class="col-sm-4 control-label">表单类型</label>
                   <div class="col-sm-8">
-                    <input type="text" name="submit_type" class="submittype-select form-control" readonly value="" />
+                    <input type="text" name="submit_type" class="form-control" readonly value="${crmcase.submittype}" />
                   </div>
                 </div>
                 <div class="form-group col-sm-4">
                   <label class="col-sm-4 control-label">询单来源</label>
                   <div class="col-sm-8">
-                    <input type="text" name="source" class="source-select form-control" value="" />
+                    <input type="text" name="source" class="source-select fullwidth" value="${crmcase.source}" />
                   </div>
                 </div>
                 <div class="form-group col-sm-4">
                   <label class="col-sm-4 control-label">状态</label>
                   <div class="col-sm-8">
-                    <input type="text" name="status" placeholder="状态" class="form-control" readonly value="" />
+                    <input type="text" name="status" placeholder="状态" class="form-control" readonly value="${crmcase.status}" />
                   </div>
                 </div>
             </div>
@@ -189,6 +197,7 @@
         <div class="panel-footer align-center">
             <button id="addorder" class="btn btn-primary">添加订单</button>&nbsp;
             <button id="submit" class="btn btn-primary">保存</button>&nbsp;
+            <input type="hidden" name="caseid" value="${crmcase.caseid}" />
             <button class="btn btn-primary">无效</button>
 		    </div><!-- panel-footer -->
      </form>   
@@ -276,14 +285,19 @@
                 </tbody>
               </table>
           </div>
-          <!-- table-responsive -->
           <!-- 添加注释 -->
+	<form id="comment" class="form">
           <div class="form-group col-sm-6 col-sm-offset-3">
-                <textarea class="form-control" rows="5"></textarea>
+                <textarea name="content" class="form-control" rows="5"></textarea>
+                <input  type="hidden" name="userid" value="${loginUser.userid}" />
+                <input  type="hidden" name="username" value="${loginUser.name}" />
+                <input  type="hidden" name="objectid" value="${crmcase.caseid}" />
+                <input  type="hidden" name="commenttype" value="case" />
           </div>
           <div class="form-group col-sm-12 align-center">
-            <a class="btn btn-primary" href="#">添加注释</a>
+            <button class="btn btn-primary">添加注释</button>
           </div>
+          </form>
         </div>
     </div><!-- end of panel 注释 -->
 
@@ -321,48 +335,130 @@
         <div class="nextModal-title">您可以继续添加订单，或 <a style="text-decoration:underline;" href="${rootPath}case/list.html">回到询单列表页面</a></div>
       </div>
       <div class="modal-body align-center">
+       <form class="form-horizontal" id="order">   
         <div class="section-block">
             <div class="section-title">选择目的地及地接社,继续添加订单</div>
             <div class="form-group col-sm-8 col-sm-offset-2">
-                <label class="col-sm-3 control-label">国家</label>
+                <label class="col-sm-3 control-label">目的地</label>
                 <div class="col-sm-9">
-                    <input type="text" name="country" placeholder="国家" class="country-select form-control" value="" />
+                    <input type="text" name="destination" placeholder="目的地" class="destination-select fullwidth" value="" />
                 </div>
             </div>
             <div class="form-group col-sm-8 col-sm-offset-2">
-                <label class="col-sm-3 control-label">地接社</label>
+                <label class="col-sm-3 control-label">所属销售</label>
                 <div class="col-sm-9">
-                    <input type="text" name="rmb_price" placeholder="人民币价格" class="form-control" value="" />
+                    <input type="text" name="salesid" placeholder="选择一个销售" class="sales-select fullwidth" value="" />
                 </div>
             </div>
             <div class="col-sm-12">
-             <a class="btn btn-primary" href="#">保存</a>
+            <input type="hidden" name="caseid" value="${crmcase.caseid}" />
+            <input type="hidden" name="customerid" value="${crmcase.customerid}" />
+            <input type="hidden" name="budget" value="${crmcase.budget}" />
+             <a class="submit btn btn-primary">保存</a>
             </div>
         </div>
+        </form>
       </div>
     </div><!-- modal-content -->
   </div><!-- modal-dialog -->
 </div><!-- modal -->
 
 	<%@ include file="../assets/pages/foot.jsp"%>
+	<script src="${rootPath}assets/js/select2.min.js"></script>
 	<script src="${rootPath}assets/js/jquery-ui-1.10.3.min.js"></script>
 	<script src="${rootPath}assets/js/jquery.datatables.min.js"></script>
 	<script src="${rootPath}assets/js/jquery.validate.min.js"></script>
 	
 <script type="text/javascript">
-		// var p = ${promote};
-		// $(".order-select").select2({
-		// 	placeholder: '订单筛选',
-		//   	data: p
-		// });
 
+document.getElementById("requirement").value="${crmcase.requirement}"
+
+var d1 = ${country};
+var d2 = ${language};
+var d3 = ${contacttype};
+var d4 = ${withwho};
+var d5 = ${hotel};
+var d6 = ${meals};
+var d7 = ${guide};
+var d8 = ${destination};
+var d9 = ${source};
+var customer = ${customer};
+var sales = ${sales};
+$(".language-select").select2({
+	placeholder: '选择一个沟通语言',
+  	data: d2
+});
+$(".withwho-select").select2({
+	placeholder: '与谁同行',
+  	data: d4
+});
+$(".hotel-select").select2({
+    placeholder: '选择一个住宿方式',
+    data: d5
+});
+$(".meals-select").select2({
+    placeholder: '选择一个',
+    data: d6
+});
+$(".guide-select").select2({
+    placeholder: '选择一个',
+    data: d7
+});
+$(".contact-select").select2({
+    placeholder: '选择一个希望联系方式',
+    data: d3
+});
+$(".destination-select").select2({
+    placeholder: '选择一个',
+    data: d1
+});
+$(".source-select").select2({
+    placeholder: '选择一个推广渠道',
+    data: d9
+});
+$(".country-select").select2({
+    placeholder: '国家',
+    data: d1
+});
+$(".customer-select").select2({
+   placeholder: '客人',
+   data: customer
+});
+$(".sales-select").select2({
+   placeholder: '销售',
+   data: sales
+});
 	jQuery(document).ready(function() {
+		
+		jQuery("#comment").validate({
+			rule:{
+				content: "required"
+			},
+			
+			message:{
+				content:"请输入注释内容"
+			},
+			highlight: function(element) {
+				jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+			},
+			success: function(element) {
+				jQuery(element).closest('.form-group').removeClass('has-error');
+			},
+			invalidHandler : function(){
+				return false;
+			},
+			submitHandler : function(){
+				comment_submit();
+			    return false;
+			}
+		});
 
 		$(".nav-parent").eq(0).addClass("nav-active");
 		$(".nav-parent").eq(0).find(".children").show();
 			
 			// Date Picker
-			jQuery(".datepicker").datepicker();
+			jQuery(".datepicker").datepicker(
+					{dateFormat: "yy-mm-dd"});
 
       $("input[name='starttime']").change(function() {
           var val = $("input[name='starttime']:checked").val();
@@ -415,7 +511,8 @@
 		             { data: "status" }
 		         ]
 			 });
-			jQuery("#form").validate({
+		 
+			jQuery("#case").validate({
         
           rules: {
             adult: "digits",
@@ -429,9 +526,9 @@
             adult: "请输入一个整数",
             children: "请输入一个整数",
             budget: "请输入一个整数",
-            startdate: "请输入正确的日期格式 mm/dd/yyyy",
-            enddate: "请输入正确的日期格式 mm/dd/yyyy",
-            startmonth: "请输入正确的日期格式 mm/dd/yyyy",
+            startdate: "请输入正确的日期格式 yyyy/mm/dd",
+            enddate: "请输入正确的日期格式 yyyy/mm/dd",
+            startmonth: "请输入正确的日期格式 yyyy/mm/dd",
           },
         
           highlight: function(element) {
@@ -444,10 +541,35 @@
             return false;
           },
           submitHandler : function(){
-            form_submit();
+        	case_submit();
             return false;
           }
       });
+			jQuery("#order").validate({
+		        
+		          rules: {
+		            destination: "require",
+		            sales: "require"
+		          },
+		          messages: {
+			            destination: "请选择一个目的地",
+			            sales: "请选择一个销售"
+		          },
+		        
+		          highlight: function(element) {
+		            jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+		          },
+		          success: function(element) {
+		            jQuery(element).closest('.form-group').removeClass('has-error');
+		          },
+		          invalidHandler : function(){
+		            return false;
+		          },
+		          submitHandler : function(){
+		        	order_submit();
+		            return false;
+		          }
+		      });
   			$("#btn-back").click( function () {
   				history.go(-1);
   		  }); 
@@ -458,14 +580,34 @@
         });
 
     });
- 
-  		function form_submit() {
-  			var f = $("#form").serialize();
+	if("${crmcase.starttime}"==1){
+		$('#yes').attr('checked','true');
+	}
+	else{
+		$('#no').attr('checked','true');
+	}
+  		function case_submit() {
+  			var f = $("#case").serialize();
   			$.post('${rootPath}case/edit.do', f, function(result) {
   				var rmsg = result.msg;
   				if (result.success) {
-  					//window.parent.location = "${rootPath}customer/list.html";
-  					$("#nextModal").modal('show');
+  					window.parent.location = "${rootPath}case/edit.html?id=${crmcase.caseid}";
+  					//$("#nextModal").modal('show');
+  				} else {
+  					//$("#msgModal").modal('show');
+  				}
+  			}, "JSON");
+  		}
+  	    $(".nextModal .submit").click(function(){
+  	    	order_submit();
+  	      });
+  		function order_submit() {
+  			var f = $("#order").serialize();
+  			$.post('${rootPath}order/add.do', f, function(result) {
+  				var rmsg = result.msg;
+  				if (result.success) {
+  					window.parent.location = "${rootPath}case/edit.html?id=${crmcase.caseid}";
+  					//$("#nextModal").modal('show');
   				} else {
   					//$("#msgModal").modal('show');
   				}
@@ -536,6 +678,18 @@
   		  			    { data: "creattime" }
   		    ]
   			});
+  		function comment_submit() {
+  			var f = $("#comment").serialize();
+  			$.post('${rootPath}comment/add.do', f, function(result) {
+  				var rmsg = result.msg;
+  				if (result.success) {
+  					window.parent.location = "${rootPath}case/edit.html?id=${crmcase.caseid}";
+  				} 
+  				else {
+  					$("#msgModal").modal('show');
+  				}
+  			}, "JSON");
+  		}
 	</script>
 
 
