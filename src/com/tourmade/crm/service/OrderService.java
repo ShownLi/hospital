@@ -1,5 +1,6 @@
 package com.tourmade.crm.service;
 
+import java.io.DataOutputStream;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -91,24 +92,36 @@ public class OrderService extends BaseService {
 	public void creatAlias(int orderid) {
 
 		String domain = "tourmade.com.cn";
+		String url = "http://123.56.77.206/axis2/services/AliasAdd/add?";
 		String customer_alias_pre = "customer_"+orderid+"@";
 		String agency_alias_pre = "agency_"+orderid+"@";
-		String customer_url = "http://123.56.77.206/axis2/services/AliasAdd/add?"+"alias="+customer_alias_pre+"&real=customer@"+"&domain="+domain;
-		String agency_url = "http://123.56.77.206/axis2/services/AliasAdd/add?"+"alias="+agency_alias_pre+"&real=agency@"+"&domain"+domain;
 		try {
+			URL BaseUrl = new URL(url);
+			HttpURLConnection conn = (HttpURLConnection) BaseUrl.openConnection(); 
+			conn.setConnectTimeout(1000);
+			conn.setDoOutput(true);
+			conn.connect();
 			
-			URL customer = new URL(customer_url);
-			URL agency = new URL(agency_url);
-			HttpURLConnection connection = (HttpURLConnection) customer.openConnection();  
-			connection.connect();
-			InputStream is =connection.getInputStream();
-			is.close();
-			connection.disconnect();
-			HttpURLConnection connection1 = (HttpURLConnection) agency.openConnection();  
-			connection1.connect();
-			InputStream is1 =connection1.getInputStream();
-			is1.close();
-			connection1.disconnect();
+			
+			DataOutputStream dataout = new DataOutputStream(conn.getOutputStream());
+			DataOutputStream dataout1 = new DataOutputStream(conn.getOutputStream());
+			String parm = "alias="+customer_alias_pre+"&real=customer@"+"&domain="+domain; //URLEncoder.encode()方法  为字符串进行编码
+			dataout.writeBytes(parm);
+			dataout.flush();
+	        dataout.close(); // 重要且易忽略步骤 (关闭流,切记!) 
+			conn.getInputStream();
+			//System.out.println("agency调用成功");
+			conn.disconnect();
+			
+			
+			
+			String parm1 = "alias="+agency_alias_pre+"&real=agency@"+"&domain"+domain; //URLEncoder.encode()方法  为字符串进行编码
+			dataout1.writeBytes(parm1);
+			dataout1.flush();
+	        dataout1.close(); // 重要且易忽略步骤 (关闭流,切记!) 
+			conn.getInputStream();
+			//System.out.println("customer调用成功");
+			conn.disconnect();
 			//System.out.println("订单ID："+orderid+"\n客人别名："+customer_alias_pre+domain+"\n地接社别名："+agency_alias_pre+domain);
 			orderMapper.updateAlias(orderid,customer_alias_pre+domain,agency_alias_pre+domain);
 		} catch (Exception e) {
