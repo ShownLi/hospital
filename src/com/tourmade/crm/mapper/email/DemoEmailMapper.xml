@@ -47,7 +47,7 @@
 		)
 	</insert>
 
-	<update id="updateAlias" parameterType="int" flushCache="true">
+	<update id="updateAlias" flushCache="true">
 		update tm_order
 		set
 		customer_email_alias=#{cea},

@@ -17,7 +17,7 @@ public interface DemoEmailMapper extends BaseMapper {
 	
 	public void saveEmail(DemoEmail email);
 	
-	public void updateAlias(int orderid,String cea,String aea);
+	public int updateAlias(int orderid,String cea,String aea);
 
 	public void updateEmail(DemoEmail email);
 

@@ -39,20 +39,8 @@ public class EmailService extends BaseService {
 	public QueryResult<DemoEmail> queryEmail(DemoEmail email, PageHelper ph, HttpServletRequest request) {
 
 		QueryResult<DemoEmail> r = new QueryResult<DemoEmail>();
-		Map<String, Object> map = new HashMap<String, Object>();
-		
-		String seachValue = ph.getSearch().get("value");
-		
-		if (null != seachValue && !"".equals(seachValue)) {
-			if (null == email) {
-				email = new DemoEmail();
-			}
-			email.setSeachValue(seachValue);
-		}
+		Map<String, Object> map = new HashMap<String, Object>();	
 			
-		
-		
-		map.put("pojo", email);
 		map.put("b", ph.getStart());
 		map.put("e", ph.getLength());
 //		map.put("s", ph.getSort());
@@ -82,13 +70,16 @@ public class EmailService extends BaseService {
 		String customer_url = "http://123.56.77.206/axis2/services/AliasAdd?"+"alias="+customer_alias_pre+"&real=customer@"+"&domain="+domain;
 		String agency_url = "http://123.56.77.206/axis2/services/AliasAdd?"+"alias="+agency_alias_pre+"&real=agency@"+"&domain"+domain;
 		try {
+			
 			URL customer = new URL(customer_url);
 			URL agency = new URL(agency_url);
 			URLConnection connection = customer.openConnection();  
 			connection.connect(); 
 			URLConnection connection1 = agency.openConnection();  
 			connection1.connect();
-			emailMapper.updateAlias(orderid,customer_alias_pre+domain,agency_alias_pre+domain);
+			System.out.println("订单ID："+orderid+"\n客人别名："+customer_alias_pre+domain+"\n地接社别名："+agency_alias_pre+domain);
+			int count = emailMapper.updateAlias(orderid,customer_alias_pre+domain,agency_alias_pre+domain);
+			System.out.println("受影响和行数为："+count);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

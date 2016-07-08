@@ -1,5 +1,8 @@
 package com.tourmade.crm.service;
 
+import java.io.InputStream;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,8 +19,6 @@ import com.tourmade.crm.common.model.base.value.baseconfig.PageHelper;
 import com.tourmade.crm.mapper.order.DemoOrderMapper;
 import com.tourmade.crm.model.DemoOrder;
 import com.tourmade.crm.model.DemoList;
-
-import com.tourmade.crm.service.EmailService;
 
 @Service
 @Transactional(readOnly = false)
@@ -73,15 +74,44 @@ public class OrderService extends BaseService {
 			order.setCustomername(customername);
 			//System.out.println(order);
 			orderMapper.saveOrder(order);
-			System.out.println(order.getOrderid());
 		} catch (Exception e) {
 			logger.error("OrderService.saveOrder() --> " + order + "-->" + e.getMessage());
 			e.printStackTrace();
 			return 0;
 		}
-		return 0;
+		return order.getOrderid();
 	}
+	
+	/**
+	 * 创建订单别名
+	 * 
+	 * @param email
+	 * @return
+	 */
+	public void creatAlias(int orderid) {
 
+		String domain = "tourmade.com.cn";
+		String customer_alias_pre = "customer_"+orderid+"@";
+		String agency_alias_pre = "agency_"+orderid+"@";
+		String customer_url = "http://123.56.77.206/axis2/services/AliasAdd/add?"+"alias="+customer_alias_pre+"&real=customer@"+"&domain="+domain;
+		String agency_url = "http://123.56.77.206/axis2/services/AliasAdd/add?"+"alias="+agency_alias_pre+"&real=agency@"+"&domain"+domain;
+		try {
+			
+			URL customer = new URL(customer_url);
+			URL agency = new URL(agency_url);
+			URLConnection connection = customer.openConnection();  
+			connection.connect();
+			InputStream is =connection.getInputStream();
+			is.close();
+			InputStream is1 =agency.openStream();
+			is1.close();
+			//System.out.println("订单ID："+orderid+"\n客人别名："+customer_alias_pre+domain+"\n地接社别名："+agency_alias_pre+domain);
+			orderMapper.updateAlias(orderid,customer_alias_pre+domain,agency_alias_pre+domain);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	/**
 	 * 给地接社发送第一封下单邮件
 	 * 
@@ -91,9 +121,8 @@ public class OrderService extends BaseService {
 	public void orderEmailToAgency(int orderid) {
 
 		try {
-			System.out.println(orderid);
-			EmailService Eservice = new EmailService();
-			Eservice.creatAlias(orderid);
+			//EmailService Eservice = new EmailService();
+			//Eservice.creatAlias(orderid);
 			//Eservice.orderEmailToAgency(order.getCaseid(), order.getOrderid());
 		} catch (Exception e) {
 			e.printStackTrace();

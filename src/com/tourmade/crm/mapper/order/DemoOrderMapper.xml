@@ -42,7 +42,7 @@
 
 	</select>
 	
-	<insert id="saveOrder" parameterType="DemoOrder" flushCache="true" useGeneratedKeys="true" keyProperty="orderid" keyColumn="GENERATED_KEY">
+	<insert id="saveOrder" parameterType="DemoOrder" useGeneratedKeys="true" keyProperty="orderid" keyColumn="GENERATED_KEY">
 		insert into tm_order(
 		customer_name,
 		customer_id,
@@ -69,7 +69,7 @@
 		#{status},
 		NOW(),
 		0
-		)
+		) 
 	</insert>
 	
 	<update id="updateOrder" parameterType="DemoOrder" flushCache="true">
@@ -98,6 +98,15 @@
 		order_id=#{orderid}
 	</update>
 	
+	<update id="updateAlias" flushCache="true">
+		update tm_order
+		set
+		customer_email_alias=#{customer},
+		agency_email_alias=#{agency}
+		where
+		order_id = ${orderid}
+	</update>
+		
 	<select id="getOrderById" parameterType="int" resultType="DemoOrder">
 		select
 		u.order_id as orderid,
