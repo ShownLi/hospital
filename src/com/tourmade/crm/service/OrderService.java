@@ -1,8 +1,8 @@
 package com.tourmade.crm.service;
 
 import java.io.InputStream;
+import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLConnection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -99,12 +99,16 @@ public class OrderService extends BaseService {
 			
 			URL customer = new URL(customer_url);
 			URL agency = new URL(agency_url);
-			URLConnection connection = customer.openConnection();  
+			HttpURLConnection connection = (HttpURLConnection) customer.openConnection();  
 			connection.connect();
 			InputStream is =connection.getInputStream();
 			is.close();
-			InputStream is1 =agency.openStream();
+			connection.disconnect();
+			HttpURLConnection connection1 = (HttpURLConnection) agency.openConnection();  
+			connection1.connect();
+			InputStream is1 =connection1.getInputStream();
 			is1.close();
+			connection1.disconnect();
 			//System.out.println("订单ID："+orderid+"\n客人别名："+customer_alias_pre+domain+"\n地接社别名："+agency_alias_pre+domain);
 			orderMapper.updateAlias(orderid,customer_alias_pre+domain,agency_alias_pre+domain);
 		} catch (Exception e) {
