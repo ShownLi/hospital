@@ -19,6 +19,7 @@ import com.tourmade.crm.common.model.base.value.baseconfig.Json;
 import com.tourmade.crm.common.model.base.value.baseconfig.PageHelper;
 import com.tourmade.crm.model.DemoOrder;
 import com.tourmade.crm.model.DemoList;
+import com.tourmade.crm.service.EmailService;
 import com.tourmade.crm.service.OrderService;
 
 import net.sf.json.JSONArray;
@@ -29,6 +30,7 @@ public class OrderController extends BaseSimpleFormController {
 	
 	@Autowired
 	private OrderService service;
+	private EmailService emailservice;
 
 	@RequestMapping(value = "/list.html", method = { RequestMethod.POST, RequestMethod.GET })
 	public String list(Model model) {
@@ -67,7 +69,20 @@ public class OrderController extends BaseSimpleFormController {
 		Json j = new Json();
 		
 		try {
+			int salesid = order.getSalesid();
+			DemoOrder order1 = service.getAgencyBySales(salesid);
+			order.setAgencyid(order1.getAgencyid());
+			order.setAgencyname(order1.getAgencyname());
+			order.setSalesname(order1.getSalesname());
 			service.saveOrder(order);
+			
+			String url = "http://123.56.77.206/axis2/services/AliasAdd/add";
+			String param = "alias=customer"+order.getOrderid()+"@&real=customer@&domain=tourmade.com.cn";
+			String param1 = "alias=agency"+order.getOrderid()+"@&real=customer@&domain=tourmade.com.cn";
+			service.creatAlias(url, param);
+			service.creatAlias(url, param1);
+			
+			
 			j.setSuccess(true);
 		} catch (Exception e) {
 			j.setSuccess(false);

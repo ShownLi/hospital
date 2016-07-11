@@ -20,6 +20,8 @@ public class DemoOrder extends BaseBean<DemoOrder> {
 
 	private int orderid;
 	
+	private int caseid;
+	
 	private int customerid;
 	
 	private String customername;
@@ -70,6 +72,14 @@ public class DemoOrder extends BaseBean<DemoOrder> {
 
 	public void setOrderid(int orderid) {
 		this.orderid = orderid;
+	}
+
+	public int getCaseid() {
+		return caseid;
+	}
+
+	public void setCaseid(int caseid) {
+		this.caseid = caseid;
 	}
 
 	public int getCustomerid() {
@@ -254,14 +264,25 @@ public class DemoOrder extends BaseBean<DemoOrder> {
 
 	@Override
 	public String toString() {
-		return "DemoOrder [orderid=" + orderid + ", customerid=" + customerid + ", customername=" + customername
-				+ ", agencyid=" + agencyid + ", agencyname=" + agencyname + ", salesid=" + salesid + ", salesname="
-				+ salesname + ", destination=" + destination + ", budget=" + budget + ", status=" + status + ", reason="
-				+ reason + ", currency=" + currency + ", grouptime=" + grouptime + ", groupnumber=" + groupnumber
-				+ ", rmbdate=" + rmbdate + ", exchangerate=" + exchangerate + ", groupprice=" + groupprice
-				+ ", rmbprice=" + rmbprice + ", lastresponse=" + lastresponse + ", startdate=" + startdate
-				+ ", enddate=" + enddate + ", creattime=" + creattime + ", updatetime=" + updatetime + "]";
+		return "DemoOrder [orderid=" + orderid + ", caseid=" + caseid + ", customerid=" + customerid + ", customername="
+				+ customername + ", agencyid=" + agencyid + ", agencyname=" + agencyname + ", salesid=" + salesid
+				+ ", salesname=" + salesname + ", destination=" + destination + ", budget=" + budget + ", status="
+				+ status + ", reason=" + reason + ", currency=" + currency + ", grouptime=" + grouptime
+				+ ", groupnumber=" + groupnumber + ", rmbdate=" + rmbdate + ", exchangerate=" + exchangerate
+				+ ", groupprice=" + groupprice + ", rmbprice=" + rmbprice + ", lastresponse=" + lastresponse
+				+ ", startdate=" + startdate + ", enddate=" + enddate + ", creattime=" + creattime + ", updatetime="
+				+ updatetime + ", getOrderid()=" + getOrderid() + ", getCaseid()=" + getCaseid() + ", getCustomerid()="
+				+ getCustomerid() + ", getCustomername()=" + getCustomername() + ", getAgencyid()=" + getAgencyid()
+				+ ", getAgencyname()=" + getAgencyname() + ", getSalesid()=" + getSalesid() + ", getSalesname()="
+				+ getSalesname() + ", getDestination()=" + getDestination() + ", getBudget()=" + getBudget()
+				+ ", getStatus()=" + getStatus() + ", getReason()=" + getReason() + ", getGrouptime()=" + getGrouptime()
+				+ ", getGroupnumber()=" + getGroupnumber() + ", getRmbdate()=" + getRmbdate() + ", getExchangerate()="
+				+ getExchangerate() + ", getGroupprice()=" + getGroupprice() + ", getRmbprice()=" + getRmbprice()
+				+ ", getLastresponse()=" + getLastresponse() + ", getStartdate()=" + getStartdate() + ", getEnddate()="
+				+ getEnddate() + ", getCreattime()=" + getCreattime() + ", getUpdatetime()=" + getUpdatetime()
+				+ ", getCurrency()=" + getCurrency() + ", getMapperNameSpace()=" + getMapperNameSpace()
+				+ ", getSeachValue()=" + getSeachValue() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
+				+ ", toString()=" + super.toString() + "]";
 	}
 
-	
 }

@@ -1,5 +1,9 @@
 package com.tourmade.crm.service;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,20 +41,6 @@ public class EmailService extends BaseService {
 		QueryResult<DemoEmail> r = new QueryResult<DemoEmail>();
 		Map<String, Object> map = new HashMap<String, Object>();
 		
-		System.out.println(ph);
-		
-		String seachValue = ph.getSearch().get("value");
-		
-		if (null != seachValue && !"".equals(seachValue)) {
-			if (null == email) {
-				email = new DemoEmail();
-			}
-			email.setSeachValue(seachValue);
-		}
-			
-		
-		
-		map.put("pojo", email);
 		map.put("b", ph.getStart());
 		map.put("e", ph.getLength());
 //		map.put("s", ph.getSort());
@@ -85,6 +75,7 @@ public class EmailService extends BaseService {
 		return email.getEmail_id();
 	}
 
+	
 	/**
 	 * 根据主键获取地接社信息
 	 * 

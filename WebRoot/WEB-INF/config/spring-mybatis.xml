@@ -48,7 +48,7 @@ http://www.springframework.org/schema/aop http://www.springframework.org/schema/
 	
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate" autowire="byName">
 		<constructor-arg index="0" ref="sqlSessionFactory"></constructor-arg>
-		<constructor-arg index="1" value="BATCH"></constructor-arg>
+		<!--<constructor-arg index="1" value="BATCH"></constructor-arg>-->
 	</bean>
 	
 	<bean id="baseDao" class="com.tourmade.crm.common.framework.util.MybatisDaoImpl" autowire="byName">

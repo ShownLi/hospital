@@ -21,5 +21,7 @@ public interface DemoOrderMapper extends BaseMapper {
 	
 	public DemoOrder getOrderById(int order_id);
 	
+	public DemoOrder getAgencyBySales(int salesid);
+	
 	public List<DemoList> getParameterInfo(String domain);
 }
