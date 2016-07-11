@@ -20,7 +20,6 @@ import com.tourmade.crm.common.framework.bean.QueryResult;
 import com.tourmade.crm.common.model.base.value.baseconfig.PageHelper;
 import com.tourmade.crm.mapper.email.DemoEmailMapper;
 import com.tourmade.crm.model.DemoEmail;
-import com.tourmade.crm.model.DemoList;
 import com.tourmade.crm.model.MailTemplate;
 
 @Service
@@ -31,7 +30,7 @@ public class EmailService extends BaseService {
 	private DemoEmailMapper emailMapper;
 
 	/**
-	 * 查询地接社数据，分页展示
+	 * 查询邮件数据，分页展示
 	 * 
 	 * @param email
 	 * @param ph
@@ -161,7 +160,7 @@ public class EmailService extends BaseService {
 		return result;
 	}
 	/**
-	 * 新增地接社
+	 * 新增邮件
 	 * 
 	 * @param email
 	 * @return
@@ -176,92 +175,7 @@ public class EmailService extends BaseService {
 			e.printStackTrace();
 			return 0;
 		}
-		return email.getEmail_id();
-	}
-
-	
-	/**
-	 * 根据主键获取地接社信息
-	 * 
-	 * @param id
-	 * @return
-	 */
-	public DemoEmail getEmailById(int id) {
-		DemoEmail r = null;
-		try {
-			r = emailMapper.getEmailById(id);
-		} catch (Exception e) {
-			logger.error("EmailService.getEmailById() --> " + id + "-->" + e.getMessage());
-			r = null;
-		}
-		return r;
-	}
-	
-	/**
-	 * 根据作用域获得参数
-	 * 
-	 * @param id
-	 * @return
-	 */
-	public List<DemoList> getParameterInfo(String domain) {
-		List<DemoList> r = null;
-		try {
-			r = emailMapper.getParameterInfo(domain);
-		} catch (Exception e) {
-			logger.error("EmailService.getParameterInfo() --> " + domain + "-->" + e.getMessage());
-			r = null;
-		}
-		return r;
-	}
-	
-	/**
-	 * 更新地接社信息(不修改密码)
-	 * 
-	 * @param email
-	 * @return
-	 */
-	public boolean updateEmail(DemoEmail email) {
-
-		boolean r = false;
-
-		try {
-			DemoEmail u = emailMapper.getEmailById(email.getEmail_id());
-			if (u != null) {
-				u.setName(email.getName());
-				u.setCountry(email.getCountry());
-				u.setLanguage(email.getLanguage());
-				emailMapper.updateEmail(u);
-				r = true;
-			} else {
-				r = false;
-			}
-		} catch (Exception e) {
-			logger.error("EmailService.updateEmail() --> " + email + "-->" + e.getMessage());
-			r = false;
-		}
-
-		return r;
-	}
-
-	/**
-	 * 删除地接社（假删除）
-	 * 
-	 * @param email_id
-	 * @return
-	 */
-	public boolean deleteEmailById(int email_id) {
-
-		boolean r = false;
-
-		try {
-			emailMapper.deleteEmailById(email_id);
-			r = true;
-		} catch (Exception e) {
-			logger.error("EmailService.deleteEmailById() --> " + email_id + "-->" + e.getMessage());
-			r = false;
-		}
-
-		return r;
+		return 0;
 	}
 
 }

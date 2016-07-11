@@ -98,7 +98,14 @@ public class OrderController extends BaseSimpleFormController {
 			template.setClientlastname("zheng");
 			String result = emailservice.getMailContent(template);
 			
-			
+			email.setContent(result);
+			email.setAcount("customer");
+			email.setOrderid(order.getOrderid());
+			email.setReciever(order.getAgencyEmailReal());
+			email.setSender(order.getCustomerEmailAlias());
+			email.setSendname(order.getCustomername());
+			email.setSubject(order.getCustomername()+"去"+order.getDestination()+"的需求");
+			emailservice.saveEmail(email);
 			j.setSuccess(true);
 		} catch (Exception e) {
 			j.setSuccess(false);
