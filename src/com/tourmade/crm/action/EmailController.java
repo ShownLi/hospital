@@ -67,7 +67,7 @@ public class EmailController extends BaseSimpleFormController {
 		Json j = new Json();
 		
 		try {
-			service.saveEmail(email);
+			//service.saveEmail(email);
 			j.setSuccess(true);
 		} catch (Exception e) {
 			j.setSuccess(false);

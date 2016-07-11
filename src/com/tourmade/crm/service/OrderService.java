@@ -197,23 +197,19 @@ public class OrderService extends BaseService {
 			DemoOrder u = orderMapper.getOrderById(order.getOrderid());
 				u.setCustomerEmailAlias(order.getCustomerEmailAlias());
 				u.setAgencyEmailAlias(order.getAgencyEmailAlias());
-			if (u != null) {
-				if(order.getStatus() != null){
-					u.setStatus(order.getStatus());
-				}
-				if(order.getGroupnumber()!= null){
-					u.setGroupnumber(order.getGroupnumber());
-					u.setStatus("1");
-				}
-				if(order.getReason() != null){
-					u.setReason(order.getReason());
-					u.setStatus("2");
-				}
-				orderMapper.updateOrder(u);
-				r = true;
-			} else {
-				r = false;
+			if(order.getStatus() != null){
+				u.setStatus(order.getStatus());
 			}
+			if(order.getGroupnumber()!= null){
+				u.setGroupnumber(order.getGroupnumber());
+				u.setStatus("1");
+			}
+			if(order.getReason() != null){
+				u.setReason(order.getReason());
+				u.setStatus("2");
+			}
+			orderMapper.updateOrder(u);
+			r = true;
 		} catch (Exception e) {
 			logger.error("OrderService.updateOrder() --> " + order + "-->" + e.getMessage());
 			r = false;

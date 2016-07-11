@@ -18,6 +18,8 @@ import com.tourmade.crm.common.framework.util.JSONUtilS;
 import com.tourmade.crm.common.model.base.value.baseconfig.Json;
 import com.tourmade.crm.common.model.base.value.baseconfig.PageHelper;
 import com.tourmade.crm.model.DemoOrder;
+import com.tourmade.crm.model.MailTemplate;
+import com.tourmade.crm.model.DemoEmail;
 import com.tourmade.crm.model.DemoList;
 import com.tourmade.crm.service.EmailService;
 import com.tourmade.crm.service.OrderService;
@@ -30,7 +32,7 @@ public class OrderController extends BaseSimpleFormController {
 	
 	@Autowired
 	private OrderService service;
-	private EmailService emailservice;
+	
 
 	@RequestMapping(value = "/list.html", method = { RequestMethod.POST, RequestMethod.GET })
 	public String list(Model model) {
@@ -67,6 +69,9 @@ public class OrderController extends BaseSimpleFormController {
 	public Json doAdd(HttpServletRequest request, HttpSession session, Model model, DemoOrder order) {
 
 		Json j = new Json();
+		EmailService emailservice = new EmailService();
+		MailTemplate template = new MailTemplate();
+		DemoEmail email = new DemoEmail();
 		
 		try {
 			String domain = "tourmade.com.cn";
@@ -87,6 +92,12 @@ public class OrderController extends BaseSimpleFormController {
 			order.setAgencyEmailAlias("agency"+order.getOrderid()+"@"+domain);
 			order.setCustomerEmailAlias("customer"+order.getOrderid()+"@"+domain);
 			service.updateOrder(order);
+			
+			template.setTemplatepath("D:/clientwelcome.html");
+			template.setClientfirstname("lian");
+			template.setClientlastname("zheng");
+			String result = emailservice.getMailContent(template);
+			
 			
 			j.setSuccess(true);
 		} catch (Exception e) {
