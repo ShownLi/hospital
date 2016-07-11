@@ -69,14 +69,6 @@
                     <li><a href="${rootPath }email/list.html"><i class="fa fa-caret-right"></i> 邮件队列</a></li>
                 </ul>
             </li>
-            <!-- 个人中心 by  liming  20160708 start -->
-              <li class="nav-parent"><a href="javascript:void(0);"><i class="fa fa-user"></i> <span>个人中心</span></a>
-                <ul class="children">
-                    <li><a href="${rootPath }user/modifyInfo.html"><i class="fa fa-caret-right"></i>修改基本信息</a></li>
-                    <li><a href="${rootPath }user/modifyPwd.html"><i class="fa fa-caret-right"></i>修改密码</a></li>
-                </ul>
-            </li> 
-             <!-- 个人中心 by  liming  20160708 end -->
             <li><a href="${rootPath }signout.html"><i class="glyphicon glyphicon-log-out"></i> 退出登录</a></li>                     
         </ul>
 

@@ -1,7 +1,5 @@
 package com.tourmade.crm.service;
 
-import java.net.URL;
-import java.net.URLConnection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,10 +14,8 @@ import com.tourmade.crm.common.framework.BaseService;
 import com.tourmade.crm.common.framework.bean.QueryResult;
 import com.tourmade.crm.common.model.base.value.baseconfig.PageHelper;
 import com.tourmade.crm.mapper.email.DemoEmailMapper;
-import com.tourmade.crm.model.DemoCase;
 import com.tourmade.crm.model.DemoEmail;
 import com.tourmade.crm.model.DemoList;
-import com.tourmade.crm.model.DemoOrder;
 
 @Service
 @Transactional(readOnly = false)
@@ -29,7 +25,7 @@ public class EmailService extends BaseService {
 	private DemoEmailMapper emailMapper;
 
 	/**
-	 * 查询邮件数据，分页展示
+	 * 查询地接社数据，分页展示
 	 * 
 	 * @param email
 	 * @param ph
@@ -39,8 +35,22 @@ public class EmailService extends BaseService {
 	public QueryResult<DemoEmail> queryEmail(DemoEmail email, PageHelper ph, HttpServletRequest request) {
 
 		QueryResult<DemoEmail> r = new QueryResult<DemoEmail>();
-		Map<String, Object> map = new HashMap<String, Object>();	
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		System.out.println(ph);
+		
+		String seachValue = ph.getSearch().get("value");
+		
+		if (null != seachValue && !"".equals(seachValue)) {
+			if (null == email) {
+				email = new DemoEmail();
+			}
+			email.setSeachValue(seachValue);
+		}
 			
+		
+		
+		map.put("pojo", email);
 		map.put("b", ph.getStart());
 		map.put("e", ph.getLength());
 //		map.put("s", ph.getSort());
@@ -57,55 +67,26 @@ public class EmailService extends BaseService {
 	}
 
 	/**
-	 * 创建订单别名
+	 * 新增地接社
 	 * 
 	 * @param email
 	 * @return
 	 */
-	public void creatAlias(int orderid) {
-
-		String domain = "tourmade.com.cn";
-		String customer_alias_pre = "customer_"+orderid+"@";
-		String agency_alias_pre = "agency_"+orderid+"@";
-		String customer_url = "http://123.56.77.206/axis2/services/AliasAdd?"+"alias="+customer_alias_pre+"&real=customer@"+"&domain="+domain;
-		String agency_url = "http://123.56.77.206/axis2/services/AliasAdd?"+"alias="+agency_alias_pre+"&real=agency@"+"&domain"+domain;
-		try {
-			
-			URL customer = new URL(customer_url);
-			URL agency = new URL(agency_url);
-			URLConnection connection = customer.openConnection();  
-			connection.connect(); 
-			URLConnection connection1 = agency.openConnection();  
-			connection1.connect();
-			System.out.println("订单ID："+orderid+"\n客人别名："+customer_alias_pre+domain+"\n地接社别名："+agency_alias_pre+domain);
-			int count = emailMapper.updateAlias(orderid,customer_alias_pre+domain,agency_alias_pre+domain);
-			System.out.println("受影响和行数为："+count);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
-	/**
-	 * 给地接社发送第一封下单邮件
-	 * 
-	 * @param email
-	 * @return
-	 */
-	public void orderEmailToAgency(int caseid, int orderid) {
+	public int saveEmail(DemoEmail email) {
 
 		
 		try {
-			DemoCase Case = emailMapper.getCaseById(caseid);
-			System.out.println(Case);
-			DemoOrder Order = emailMapper.getOrderById(orderid);
-			System.out.println(Order);
+			emailMapper.saveEmail(email);
 		} catch (Exception e) {
+			logger.error("EmailService.saveEmail() --> " + email + "-->" + e.getMessage());
 			e.printStackTrace();
+			return 0;
 		}
+		return email.getEmail_id();
 	}
-	
+
 	/**
-	 * 根据主键获取邮件信息
+	 * 根据主键获取地接社信息
 	 * 
 	 * @param id
 	 * @return
@@ -138,4 +119,54 @@ public class EmailService extends BaseService {
 		return r;
 	}
 	
+	/**
+	 * 更新地接社信息(不修改密码)
+	 * 
+	 * @param email
+	 * @return
+	 */
+	public boolean updateEmail(DemoEmail email) {
+
+		boolean r = false;
+
+		try {
+			DemoEmail u = emailMapper.getEmailById(email.getEmail_id());
+			if (u != null) {
+				u.setName(email.getName());
+				u.setCountry(email.getCountry());
+				u.setLanguage(email.getLanguage());
+				emailMapper.updateEmail(u);
+				r = true;
+			} else {
+				r = false;
+			}
+		} catch (Exception e) {
+			logger.error("EmailService.updateEmail() --> " + email + "-->" + e.getMessage());
+			r = false;
+		}
+
+		return r;
+	}
+
+	/**
+	 * 删除地接社（假删除）
+	 * 
+	 * @param email_id
+	 * @return
+	 */
+	public boolean deleteEmailById(int email_id) {
+
+		boolean r = false;
+
+		try {
+			emailMapper.deleteEmailById(email_id);
+			r = true;
+		} catch (Exception e) {
+			logger.error("EmailService.deleteEmailById() --> " + email_id + "-->" + e.getMessage());
+			r = false;
+		}
+
+		return r;
+	}
+
 }

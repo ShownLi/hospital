@@ -42,36 +42,52 @@
 
 	</select>
 	
-	<insert id="saveOrder" parameterType="DemoOrder" useGeneratedKeys="true" keyProperty="orderid" keyColumn="GENERATED_KEY">
+	<insert id="saveOrder" parameterType="DemoOrder" flushCache="true" useGeneratedKeys="true" keyProperty="order_id" keyColumn="GENERATED_KEY">
 		insert into tm_order(
 		customer_name,
-		customer_id,
 		agency_id,
 		agency_name,
 		sales_id,
 		sales_name,
-		case_id,
 		destination,
 		budget,
 		status,
+		reason,
+		group_time,
+		group_number,
+		start_date,
+		end_date,
+		group_price,
+		currency,
+		exchange_rate,
+		rmb_rate,
+		last_response,
 		creat_time,
 		isdel
 		)values(
-		#{customername},
-		#{customerid,jdbcType=VARCHAR},
+		#{customername,jdbcType=VARCHAR},
 		#{agencyid,jdbcType=VARCHAR},
-		#{agencyname},
+		#{agencyname,jdbcType=VARCHAR},
 		#{salesid,jdbcType=VARCHAR},
-		#{salesname},
-		#{caseid,jdbcType=VARCHAR},
+		#{salesname,jdbcType=VARCHAR},
 		#{destination,jdbcType=VARCHAR},
 		#{budget,jdbcType=VARCHAR},
-		#{status},
+		#{status,jdbcType=VARCHAR},
+		#{reason,jdbcType=VARCHAR},
+		#{grouptime,jdbcType=VARCHAR},
+		#{groupnumber,jdbcType=VARCHAR},
+		#{startdate,jdbcType=VARCHAR},
+		#{enddate,jdbcType=VARCHAR},
+		#{groupprice,jdbcType=VARCHAR},
+		#{currency,jdbcType=VARCHAR},
+		#{exchangerate,jdbcType=VARCHAR},
+		#{rmbrate,jdbcType=VARCHAR},
+		#{lastresponse,jdbcType=VARCHAR},
 		NOW(),
 		0
-		) 
+		)
 	</insert>
-	
+
 	<update id="updateOrder" parameterType="DemoOrder" flushCache="true">
 		update tm_order
 		set
@@ -98,15 +114,6 @@
 		order_id=#{orderid}
 	</update>
 	
-	<update id="updateAlias" flushCache="true">
-		update tm_order
-		set
-		customer_email_alias=#{customer},
-		agency_email_alias=#{agency}
-		where
-		order_id = ${orderid}
-	</update>
-		
 	<select id="getOrderById" parameterType="int" resultType="DemoOrder">
 		select
 		u.order_id as orderid,
@@ -131,34 +138,6 @@
 		u.creat_time as creattime,
 		u.isdel as isdel
 		from tm_order u where u.order_id = #{orderid}
-	</select>
-
-	<select id="getAgencyId" parameterType="int" resultType="int">
-		select
-		u.agency_id as agencyid,
-		u.isdel 
-		from tm_sale u where u.isdel = 0 and u.sale_id = #{salesid}
-	</select>
-	
-	<select id="getCustomerName" parameterType="int" resultType="String">
-		select
-		u.customer_name_zh as name,
-		u.isdel 
-		from tm_customer u where u.isdel = 0 and u.customer_id = #{customerid}
-	</select>
-	
-	<select id="getAgencyName" parameterType="int" resultType="String">
-		select
-		u.agency_name as name,
-		u.isdel 
-		from tm_agency u where u.isdel = 0 and u.agency_id = #{agencyid}
-	</select>
-	
-	<select id="getSalesName" parameterType="int" resultType="String">
-		select
-		u.sale_name as name,
-		u.isdel 
-		from tm_sale u where u.isdel = 0 and u.sale_id = #{salesid}
 	</select>
 	
 	<select id="getParameterInfo" parameterType="String" resultType="DemoList">

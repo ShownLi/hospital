@@ -9,20 +9,16 @@
 		select
 		u.user_id as userid,
 		u.user_name as name,
-		u.loginname as
-		loginname,
+		u.loginname as loginname,
 		u.password as pwd,
 		u.user_email as email,
-		u.mobilephone as
-		mobilephone,
+		u.mobilephone as mobilephone,
 		u.creat_time as creattime,
 		u.isdel as isdel
-		from tm_user u
-		where u.isdel = 0
+		from tm_user u where u.isdel = 0
 		order by u.creat_time desc
 		) table_alias
-		limit
-		#{b},#{e}
+		limit #{b},#{e}
 	</select>
 
 
@@ -32,10 +28,8 @@
 		u.isdel = 0
 	</select>
 
-	<insert id="saveUser" parameterType="DemoUser" flushCache="true"
-		useGeneratedKeys="true" keyProperty="userid" keyColumn="GENERATED_KEY">
-		insert into
-		tm_user(
+	<insert id="saveUser" parameterType="DemoUser" flushCache="true" useGeneratedKeys="true" keyProperty="userid" keyColumn="GENERATED_KEY">
+		insert into tm_user(
 		user_name,
 		loginname,
 		password,
@@ -65,14 +59,6 @@
 		user_id=#{userid}
 	</update>
 
-<update id="updatePwd" parameterType="DemoUser" flushCache="true">
-		update tm_user
-		set
-		password=#{pwd},
-		update_time=NOW()
-		where
-		user_id=#{userid}
-	</update> 
 	<select id="getUserById" parameterType="int" resultType="DemoUser">
 		select
 		u.user_id as userid,
@@ -80,12 +66,10 @@
 		u.password as pwd,
 		u.user_name as name,
 		u.user_email as email,
-		u.mobilephone as
-		mobilephone,
+		u.mobilephone as mobilephone,
 		u.creat_time as creattime,
 		u.isdel as isdel
-		from tm_user u
-		where u.isdel = 0 and u.user_id = #{userid}
+		from tm_user u where u.isdel = 0 and u.user_id = #{userid}
 	</select>
 
 	<update id="deleteUserById" parameterType="int" flushCache="true"
@@ -105,19 +89,17 @@
 		u.password as pwd,
 		u.isdel as isdel
 		from tm_user u where
-		u.loginname =
-		#{loginname} and u.password = #{pwd} and u.isdel = 0
+		u.loginname = #{loginname} and u.password = #{pwd} and u.isdel = 0
 	</select>
-
+	
 	<select id="validate" resultType="String">
-		select ${field} from ${table} u
-		where u.${field} = #{name}
+		select  ${field} from ${table} u
+		where u.${field} = #{name} 
 		<if test="filter_field != null and filter_field != ''">
 			and
-			u.${filter_field} = #{filter_name}
+			u.${filter_field} = #{filter_name} 
 		</if>
 		and u.isdel = 0
 	</select>
-
-
+	
 </mapper>
