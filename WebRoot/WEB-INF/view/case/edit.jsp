@@ -97,7 +97,7 @@
                 <div class="form-group col-sm-4 d1">
                   <label class="col-sm-4 control-label">大约时间</label>
                   <div class="col-sm-8 input-group input-datepicker">
-                    <input type="text" name="startmonth" class="form-control datepicker" placeholder="yyyy/mm/dd" value="${crmcase.startmonth}">
+                    <input type="text" name="startmonth" class="form-control datepicker" placeholder="yyyy/mm/dd" value="${crmcase.startmonth}" autocomplete="off">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                   </div>
                 </div>
@@ -110,14 +110,14 @@
                 <div class="form-group col-sm-4 d2">
                   <label class="col-sm-4 control-label">出发日期</label>
                   <div class="col-sm-8 input-group input-datepicker">
-                    <input type="text" name="startdate" class="form-control datepicker" placeholder="yyyy/mm/dd" value="${crmcase.startdate}">
+                    <input type="text" name="startdate" class="form-control datepicker" placeholder="yyyy/mm/dd" value="${crmcase.startdate}" autocomplete="off">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                   </div>
                 </div>
                 <div class="form-group col-sm-4 d2">
                   <label class="col-sm-4 control-label">返回日期</label>
                   <div class="col-sm-8 input-group input-datepicker">
-                    <input type="text" name="enddate" class="form-control datepicker" placeholder="yyyy/mm/dd" value="${crmcase.enddate}">
+                    <input type="text" name="enddate" class="form-control datepicker" placeholder="yyyy/mm/dd" value="${crmcase.enddate}" autocomplete="off">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                   </div>
                 </div>

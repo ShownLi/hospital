@@ -187,10 +187,7 @@
 	
 		
 		jQuery(document).ready(function() {
-			
-			 // Date Picker
-			  jQuery("#birthday").datepicker();
-			 
+					 
 			jQuery("#form").validate({
 				
 				rules: {

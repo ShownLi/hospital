@@ -126,3 +126,13 @@ label.error{
 .select2-container .select2-choice{
 	line-height: 28px;
 }
+.contact-note{
+	font-size: 12px;
+}
+.contact-note.noted{
+	color: red;
+}
+#ui-datepicker-div{
+	z-index: 1051 !important;
+	/** Modal z-index = 1050 **/
+}
