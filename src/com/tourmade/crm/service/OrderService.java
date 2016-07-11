@@ -133,6 +133,23 @@ public class OrderService extends BaseService {
 	}
 	
 	/**
+	 * 根据客人ID获得客人邮箱地址
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public String getCustomerEmailReal(int id) {
+		String r = "";
+		try {
+			r = orderMapper.getCustomerEmailReal(id);
+		} catch (Exception e) {
+			logger.error("OrderService.getOrderById() --> " + id + "-->" + e.getMessage());
+			r = null;
+		}
+		return r;
+	}
+	
+	/**
 	 * 根据主键获取订单信息
 	 * 
 	 * @param id
@@ -178,6 +195,8 @@ public class OrderService extends BaseService {
 
 		try {
 			DemoOrder u = orderMapper.getOrderById(order.getOrderid());
+				u.setCustomerEmailAlias(order.getCustomerEmailAlias());
+				u.setAgencyEmailAlias(order.getAgencyEmailAlias());
 			if (u != null) {
 				if(order.getStatus() != null){
 					u.setStatus(order.getStatus());

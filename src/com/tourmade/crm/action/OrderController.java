@@ -69,19 +69,24 @@ public class OrderController extends BaseSimpleFormController {
 		Json j = new Json();
 		
 		try {
-			int salesid = order.getSalesid();
-			DemoOrder order1 = service.getAgencyBySales(salesid);
+			String domain = "tourmade.com.cn";
+			DemoOrder order1 = service.getAgencyBySales(order.getSalesid());
+			String customerEmailReal = service.getCustomerEmailReal(order.getCustomerid());
 			order.setAgencyid(order1.getAgencyid());
 			order.setAgencyname(order1.getAgencyname());
 			order.setSalesname(order1.getSalesname());
+			order.setAgencyEmailReal(order1.getAgencyEmailReal());
+			order.setCustomerEmailReal(customerEmailReal);
 			service.saveOrder(order);
 			
 			String url = "http://123.56.77.206/axis2/services/AliasAdd/add";
-			String param = "alias=customer"+order.getOrderid()+"@&real=customer@&domain=tourmade.com.cn";
-			String param1 = "alias=agency"+order.getOrderid()+"@&real=customer@&domain=tourmade.com.cn";
+			String param = "alias=customer"+order.getOrderid()+"@&real=customer@&domain="+domain;
+			String param1 = "alias=agency"+order.getOrderid()+"@&real=customer@&domain="+domain;
 			service.creatAlias(url, param);
 			service.creatAlias(url, param1);
-			
+			order.setAgencyEmailAlias("agency"+order.getOrderid()+"@"+domain);
+			order.setCustomerEmailAlias("customer"+order.getOrderid()+"@"+domain);
+			service.updateOrder(order);
 			
 			j.setSuccess(true);
 		} catch (Exception e) {

@@ -51,6 +51,10 @@
 		agency_name,
 		sales_id,
 		sales_name,
+		customer_email_real,
+		customer_email_alias,
+		agency_email_real,
+		agency_email_alias,
 		destination,
 		budget,
 		status,
@@ -73,6 +77,10 @@
 		#{agencyname},
 		#{salesid,jdbcType=VARCHAR},
 		#{salesname,jdbcType=VARCHAR},
+		#{customerEmailReal},
+		#{customerEmailAlias},
+		#{agencyEmailReal},
+		#{agencyEmailAlias},
 		#{destination,jdbcType=VARCHAR},
 		#{budget,jdbcType=VARCHAR},
 		#{status,jdbcType=VARCHAR},
@@ -98,6 +106,8 @@
 		agency_name=#{agencyname},
 		sales_id=#{salesid},
 		sales_name=#{salesname},
+		customer_email_alias=#{customerEmailAlias},
+		agency_email_alias=#{agencyEmailAlias},
 		destination=#{destination},
 		budget=#{budget},
 		status=#{status},
@@ -120,10 +130,18 @@
 		select
 			a.agency_name as agencyname,
 			b.agency_id as agencyid,
+			b.sale_email as agencyEmailReal,
 			b.sale_name as salesname
 			from tm_agency a 
 			left join tm_sale b on b.agency_id = a.agency_id
 			where b.sale_id = #{salesid}
+	</select>
+	
+	<select id="getCustomerEmailReal" parameterType="int" resultType="String">
+		select
+			email as customerEmailReal
+			from tm_customer
+			where customer_id = #{customerid}
 	</select>
 	
 	<select id="getOrderById" parameterType="int" resultType="DemoOrder">
