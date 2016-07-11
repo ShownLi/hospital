@@ -19,16 +19,6 @@
 		left join tm_parameter v on u.country = v.para_value
 		left join tm_parameter x on u.language = x.para_value
 		where u.isdel = 0 and v.isdel = 0 and x.isdel = 0
-		<if test="pojo.seachValue!=null and pojo.seachValue!=''">
-			and
-			(
-			u.email_name like '%${pojo.seachValue}%'
-			or
-			v.chinese like '%${pojo.seachValue}%'
-			or
-			x.chinese like '%${pojo.seachValue}%'
-			)
-		</if>
 		order by u.creat_time
 		) table_alias
 		limit #{b},#{e}
@@ -38,16 +28,6 @@
 		select count(u.email_id) from tm_email u
 		where
 		u.isdel = 0
-		<if test="seachValue!=null and seachValue!=''">
-			and
-			(
-			u.email_name like '%${seachValue}%'
-			or
-			u.country like '%${seachValue}%'
-			or
-			u.language like '%${seachValue}%'
-			)
-		</if>
 
 	</select>
 	
@@ -67,6 +47,37 @@
 		)
 	</insert>
 
+	<update id="updateAlias" flushCache="true">
+		update tm_order
+		set
+		customer_email_alias=#{cea},
+		agency_email_alias=#{aea},
+		where
+		order_id=#{orderid}
+	</update>
+	
+	<select id="getCaseById" parameterType="int" resultType="DemoCase">
+		select
+		u.customer_name as customername,
+		u.prefer_language as preferlanguage,
+		u.contact_type as contacttype,
+		u.with_who as withwho,
+		u.adult as adult,
+		u.children as children,
+		u.start_time as starttime,
+		u.start_month as startmonth,
+		u.during as during,
+		u.start_date as startdate,
+		u.end_date as enddate,
+		u.requirement as requirement,
+		u.hotel as hotel,
+		u.meals as meals,
+		u.guide as guide,
+		u.sales_name as salesname,
+		u.isdel
+		from tm_case u where u.isdel = 0 and u.case_id = #{caseid}
+	</select>
+	
 	<update id="updateEmail" parameterType="DemoEmail" flushCache="true">
 		update tm_email
 		set
@@ -96,6 +107,18 @@
 		u.isdisplay,
 		u.isdel 
 		from tm_parameter u where u.isdisplay = 1 and u.isdel = 0 and u.para_domain = #{domain}
+	</select>
+	
+	<select id="getCustomerEmail" parameterType="String" resultType="DemoList">
+		select
+		u.email as email
+		from tm_customer u where u.isdel = 0 and u.customer_id = #{customerid}
+	</select>
+	
+	<select id="getSalesEmail" parameterType="String" resultType="DemoList">
+		select
+		u.sale_email as email
+		from tm_sale u where u.isdel = 0 and u.sale_id = #{salesid}
 	</select>
 	
 	<update id="deleteEmailById" parameterType="int" flushCache="true"

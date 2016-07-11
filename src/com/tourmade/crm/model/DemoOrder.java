@@ -17,8 +17,10 @@ public class DemoOrder extends BaseBean<DemoOrder> {
 	 * 
 	 */
 	private static final long serialVersionUID = 1423523863575074623L;
-
+	
 	private int orderid;
+	
+	private int caseid;
 	
 	private int customerid;
 	
@@ -46,13 +48,19 @@ public class DemoOrder extends BaseBean<DemoOrder> {
 
 	private String groupnumber;
 	
-	private String rmbdate;
-	
 	private String exchangerate;
 	
 	private BigDecimal groupprice;
 	
 	private BigDecimal rmbprice;
+	
+	private String customerrealemail;
+	
+	private String customeremailalias;
+	
+	private String agencyrealemail;
+	
+	private String agencyemailalias;
 	
 	private Date lastresponse;
 	
@@ -167,15 +175,7 @@ public class DemoOrder extends BaseBean<DemoOrder> {
 	public void setGroupnumber(String groupnumber) {
 		this.groupnumber = groupnumber;
 	}
-
-	public String getRmbdate() {
-		return rmbdate;
-	}
-
-	public void setRmbdate(String rmbdate) {
-		this.rmbdate = rmbdate;
-	}
-
+	
 	public String getExchangerate() {
 		return exchangerate;
 	}
@@ -252,16 +252,58 @@ public class DemoOrder extends BaseBean<DemoOrder> {
 		this.currency = currecy;
 	}
 
-	@Override
-	public String toString() {
-		return "DemoOrder [orderid=" + orderid + ", customerid=" + customerid + ", customername=" + customername
-				+ ", agencyid=" + agencyid + ", agencyname=" + agencyname + ", salesid=" + salesid + ", salesname="
-				+ salesname + ", destination=" + destination + ", budget=" + budget + ", status=" + status + ", reason="
-				+ reason + ", currency=" + currency + ", grouptime=" + grouptime + ", groupnumber=" + groupnumber
-				+ ", rmbdate=" + rmbdate + ", exchangerate=" + exchangerate + ", groupprice=" + groupprice
-				+ ", rmbprice=" + rmbprice + ", lastresponse=" + lastresponse + ", startdate=" + startdate
-				+ ", enddate=" + enddate + ", creattime=" + creattime + ", updatetime=" + updatetime + "]";
+	
+	public int getCaseid() {
+		return caseid;
 	}
 
-	
+	public void setCaseid(int caseid) {
+		this.caseid = caseid;
+	}
+
+	public String getCustomerrealemail() {
+		return customerrealemail;
+	}
+
+	public void setCustomerrealemail(String customerrealemail) {
+		this.customerrealemail = customerrealemail;
+	}
+
+	public String getCustomeremailalias() {
+		return customeremailalias;
+	}
+
+	public void setCustomeremailalias(String customeremailalias) {
+		this.customeremailalias = customeremailalias;
+	}
+
+	public String getAgencyrealemail() {
+		return agencyrealemail;
+	}
+
+	public void setAgencyrealemail(String agencyrealemail) {
+		this.agencyrealemail = agencyrealemail;
+	}
+
+	public String getAgencyemailalias() {
+		return agencyemailalias;
+	}
+
+	public void setAgencyemailalias(String agencyemailalias) {
+		this.agencyemailalias = agencyemailalias;
+	}
+
+	@Override
+	public String toString() {
+		return "DemoOrder [orderid=" + orderid + ", caseid=" + caseid + ", customerid=" + customerid + ", customername="
+				+ customername + ", agencyid=" + agencyid + ", agencyname=" + agencyname + ", salesid=" + salesid
+				+ ", salesname=" + salesname + ", destination=" + destination + ", budget=" + budget + ", status="
+				+ status + ", reason=" + reason + ", currency=" + currency + ", grouptime=" + grouptime
+				+ ", groupnumber=" + groupnumber + ", exchangerate=" + exchangerate + ", groupprice=" + groupprice
+				+ ", rmbprice=" + rmbprice + ", customerrealemail=" + customerrealemail + ", customeremailalias="
+				+ customeremailalias + ", agencyrealemail=" + agencyrealemail + ", agencyemailalias=" + agencyemailalias
+				+ ", lastresponse=" + lastresponse + ", startdate=" + startdate + ", enddate=" + enddate
+				+ ", creattime=" + creattime + ", updatetime=" + updatetime + "]";
+	}
+
 }
