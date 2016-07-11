@@ -103,21 +103,21 @@
                       <div class="form-group col-sm-4">
                           <label class="col-sm-4 control-label">成团日期</label>
                           <div class="col-sm-8 input-group input-datepicker">
-                            <input type="text" name="grouptime" class="form-control datepicker" value="${order.grouptime}" placeholder="mm/dd/yyyy">
+                            <input type="text" name="grouptime" class="form-control datepicker" value="${order.grouptime}" placeholder="mm/dd/yyyy" autocomplete="off" />
                             <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                           </div>
                       </div>
                       <div class="form-group col-sm-4">
                           <label class="col-sm-4 control-label">出发日期</label>
                           <div class="col-sm-8 input-group input-datepicker">
-                            <input type="text" name="startdate" value="${order.startdate}" placeholder="出发日期" class="form-control datepicker" />
+                            <input type="text" name="startdate" value="${order.startdate}" placeholder="出发日期" class="form-control datepicker" autocomplete="off" />
                             <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                           </div>
                       </div>
                       <div class="form-group col-sm-4">
                         <label class="col-sm-4 control-label">返回日期</label>
                         <div class="col-sm-8 input-group input-datepicker">
-                          <input type="text" name="enddate" value="${order.enddate}" placeholder="返回日期" class="form-control datepicker"/>
+                          <input type="text" name="enddate" value="${order.enddate}" placeholder="返回日期" class="form-control datepicker" autocomplete="off"/>
                           <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                         </div>
                       </div>
@@ -263,26 +263,26 @@
       </div>
 
       <div class="modal-body">
-		<form class="form-horizontal" id="form1">
+    		  <form class="form-horizontal" id="form1">
               <div class="section-block noline">
                   <div class="form-group col-sm-6">
                       <label class="col-sm-4 control-label">成团日期</label>
                       <div class="col-sm-8 input-group input-datepicker">
-                        <input type="text" name="grouptime" class="form-control datepicker" value="${order.grouptime}">
+                        <input type="text" name="grouptime" class="form-control datepicker" value="${order.grouptime}" autocomplete="off">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                       </div>
                   </div>
                   <div class="form-group col-sm-6">
                       <label class="col-sm-4 control-label">出发日期</label>
                       <div class="col-sm-8 input-group input-datepicker">
-                        <input type="text" name="startdate" placeholder="出发日期" class="form-control datepicker" value="${order.startdate}" />
+                        <input type="text" name="startdate" placeholder="出发日期" class="form-control datepicker" value="${order.startdate}"  autocomplete="off" />
                         <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                       </div>
                   </div>
                   <div class="form-group col-sm-6">
                     <label class="col-sm-4 control-label">返回日期</label>
                     <div class="col-sm-8 input-group input-datepicker">
-                      <input type="text" name="enddate" placeholder="返回日期" class="form-control datepicker" value="${order.enddate}" />
+                      <input type="text" name="enddate" placeholder="返回日期" class="form-control datepicker" value="${order.enddate}" autocomplete="off" />
                       <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                     </div>
                   </div>
@@ -316,10 +316,10 @@
                         <input type="text" name="rmbprice" placeholder="人民币价格" class="form-control" value="${order.rmbprice}" />
                       </div>
                   </div>
-                  		<input type="hidden" name="orderid" value="${order.orderid}" />	
+                  <input type="hidden" name="orderid" value="${order.orderid}" />	
               </div>  
-                   </form>     
-            </div>
+          </form>     
+      </div>
       <div class="modal-footer align-center">
           <a class="submit btn btn-primary" >保存</a>
           <a class="cancel btn btn-primary" >取消</a>        
@@ -359,6 +359,7 @@
 </div><!-- bmodal -->
 
 	<%@ include file="../assets/pages/foot.jsp"%>
+  <script src="${rootPath}assets/js/jquery-ui-1.10.3.min.js"></script>
 	<script src="${rootPath}assets/js/jquery.datatables.min.js"></script>
 	<script src="${rootPath}assets/js/select2.min.js"></script>
 	<script src="${rootPath}assets/js/jquery.validate.min.js"></script>
@@ -396,8 +397,8 @@
 
 		        }
 		});
-		$(".nav-parent").eq(4).addClass("nav-active");
-      	$(".nav-parent").eq(4).find(".children").show();
+		$(".nav-parent").eq(1).addClass("nav-active");
+    $(".nav-parent").eq(1).find(".children").show();
       		
 		jQuery("#form").validate({
 				
@@ -542,7 +543,7 @@
 	}
 	$("#btn-chengxing").click(function(){
 		$(".cModal").modal('show');
-	    return false;
+	  return false;
 	});
     $(".cModal .submit").click(function(){
     	form1_submit();
@@ -562,7 +563,8 @@
    	});
 	// Date Picker
 	jQuery(".datepicker").datepicker({
-		  dateFormat: "yy-mm-dd"});
+		  dateFormat: "yy-mm-dd"
+  });
 		
 	function form1_submit() {
 		var f = $("#form1").serialize();

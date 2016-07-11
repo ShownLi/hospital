@@ -70,7 +70,7 @@
 			            <div class="form-group col-sm-4">
 			            	<label class="col-sm-3 control-label">生日</label>
 			            	<div class="col-sm-9 input-group input-datepicker">
-				                <input type="text" class="form-control datepicker" placeholder="yyyy-mm-dd" id="birthday" value="${customer.birthday}">
+				                <input type="text" class="form-control datepicker" placeholder="yyyy-mm-dd" id="birthday" value="${customer.birthday}" autocomplete="off" >
 				                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
 			                </div>
 			            </div> 
@@ -95,25 +95,25 @@
 			                    <input type="text" name="telephone" placeholder="固定电话" class="form-control" value="${customer.telephone}"/>
 			                </div>
 			            </div>
-			            <div class="form-group col-sm-4">
+			            <div class="form-group col-sm-4 contact-field">
 			                <label class="col-sm-3 control-label">手机</label>
 			                <div class="col-sm-9">
 			                	<input type="text" name="mobilephone" placeholder="手机" class="form-control" value="${customer.mobilephone}"/>
 			                </div>
 			            </div>    
-			            <div class="form-group col-sm-4">
+			            <div class="form-group col-sm-4 contact-field">
 			                <label class="col-sm-3 control-label">微信</label>
 			                <div class="col-sm-9">
 			                	<input type="text" name="wechat" placeholder="微信" class="form-control" value="${customer.wechat}"/>
 			                </div>
 			            </div>       
-			            <div class="form-group col-sm-4">
+			            <div class="form-group col-sm-4 contact-field">
 			                <label class="col-sm-3 control-label">QQ</label>
 			                <div class="col-sm-9">
 			                	<input type="text" name="qq" placeholder="QQ" class="form-control" value="${customer.qq}"/>
 			                </div>
 			            </div>            
-			            <div class="form-group col-sm-4">
+			            <div class="form-group col-sm-4 contact-field">
 			                <label class="col-sm-3 control-label">邮箱</label>
 			                <div class="col-sm-9">
 			                	<input type="text" name="email" placeholder="邮箱" class="form-control"  value="${customer.email}"/>
@@ -380,9 +380,10 @@
 				});
 				
 			}
-		 // Date Picker
-			  jQuery(".datepicker").datepicker(
-					  {dateFormat: "yy-mm-dd"});
+		// Date Picker
+		jQuery(".datepicker").datepicker({
+			dateFormat: "yy-mm-dd"
+		});
 		 
 				
 		jQuery("#form").validate({
@@ -408,11 +409,33 @@
 		      return false;
 		    },
 		    submitHandler : function(){
-		      form_submit();
-		      return false;
+		        var qq = $("input[name=qq]").val(),
+		    		wechat = $("input[name=wechat]").val(),
+		    		mobilephone = $("input[name=mobilephone]").val(),
+		    		email = $("input[name=email]").val();
+
+		    	// 手机，邮箱，微信，QQ，至少输入一个
+		      	if(qq==""&&wechat==""&&mobilephone==""&&email==""){
+		      		$(".contact-note").addClass("noted");
+		      		$(".contact-field").addClass("has-error");
+		      		
+		      		return false;
+		      	}else{
+		      		$(".contact-note").removeClass("noted");
+		      		$(".contact-field").removeClass("has-error");
+
+			      	form_submit();
+			      	return false;
+			    }
 		    }
-		  });
-		
+		});
+		// 手机，邮箱，微信，QQ，输入一个以后移除错误提示
+		$(".contact-field").find("input").blur(function(){
+			if($(this).val() !== ""){
+				$(".contact-field").removeClass("has-error");
+			}
+		});
+
 		$("#btn-back").click( function () {
 			history.go(-1);
 	    } ); 

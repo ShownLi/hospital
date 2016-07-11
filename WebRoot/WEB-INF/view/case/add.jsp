@@ -96,7 +96,7 @@
                     <div class="form-group col-sm-4 d1">
                       <label class="col-sm-4 control-label">大约时间</label>
                       <div class="col-sm-8 input-group input-datepicker">
-                        <input type="text" name="startmonth" class="form-control datepicker" placeholder="mm/dd/yyyy">
+                        <input type="text" name="startmonth" class="form-control datepicker" placeholder="mm/dd/yyyy" autocomplete="off">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                       </div>
                     </div>
@@ -109,14 +109,14 @@
                     <div class="form-group col-sm-4 d2">
                       <label class="col-sm-4 control-label">出发日期</label>
                       <div class="col-sm-8 input-group input-datepicker">
-                        <input type="text" name="startdate" class="form-control datepicker" placeholder="yyyy/mm/dd">
+                        <input type="text" name="startdate" class="form-control datepicker" placeholder="yyyy/mm/dd" autocomplete="off">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                       </div>
                     </div>
                     <div class="form-group col-sm-4 d2">
                       <label class="col-sm-4 control-label">返回日期</label>
                       <div class="col-sm-8 input-group input-datepicker">
-                        <input type="text" name="enddate" class="form-control datepicker" placeholder="yyyy/mm/dd">
+                        <input type="text" name="enddate" class="form-control datepicker" placeholder="yyyy/mm/dd" autocomplete="off">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                       </div>
                     </div>
@@ -265,117 +265,118 @@
 	<script src="${rootPath}assets/js/jquery.validate.min.js"></script>
 	
 	<script type="text/javascript">
-		 var d1 = ${country};
-		 var d2 = ${language};
-		 var d3 = ${contacttype};
-		 var d4 = ${withwho};
-		 var d5 = ${hotel};
-		 var d6 = ${meals};
-		 var d7 = ${guide};
-		 var d8 = ${destination};
-		 var d9 = ${source};
-		 var customer = ${customer};
-		 var sales = ${sales};
-		 $(".language-select").select2({
-		 	placeholder: '选择一个沟通语言',
-		   	data: d2
-		 });
-		 $(".withwho-select").select2({
-		 	placeholder: '与谁同行',
-		   	data: d4
-		 });
-         $(".hotel-select").select2({
-             placeholder: '选择一个住宿方式',
-             data: d5
-         });
-         $(".meals-select").select2({
-             placeholder: '选择一个',
-             data: d6
-         });
-         $(".guide-select").select2({
-             placeholder: '选择一个',
-             data: d7
-         });
-         $(".contact-select").select2({
-             placeholder: '选择一个希望联系方式',
-             data: d3
-         });
-         $(".destination-select").select2({
-             placeholder: '选择一个',
-             data: d8
-         });
-	     $(".source-select").select2({
-             placeholder: '选择一个推广渠道',
-             data: d9
-         });
-	    $(".country-select").select2({
-             placeholder: '国家',
-             data: d1
-         });
-	    $(".customer-select").select2({
-            placeholder: '客人',
-            data: customer
-        });
-	    $(".sales-select").select2({
-            placeholder: '销售',
-            data: sales
-        });
+    var d1 = ${country};
+    var d2 = ${language};
+    var d3 = ${contacttype};
+    var d4 = ${withwho};
+    var d5 = ${hotel};
+    var d6 = ${meals};
+    var d7 = ${guide};
+    var d8 = ${destination};
+    var d9 = ${source};
+    var customer = ${customer};
+    var sales = ${sales};
+    $(".language-select").select2({
+    	placeholder: '选择一个沟通语言',
+     	data: d2
+    });
+    $(".withwho-select").select2({
+    	placeholder: '与谁同行',
+     	data: d4
+    });
+    $(".hotel-select").select2({
+       placeholder: '选择一个住宿方式',
+       data: d5
+    });
+    $(".meals-select").select2({
+       placeholder: '选择一个',
+       data: d6
+    });
+    $(".guide-select").select2({
+       placeholder: '选择一个',
+       data: d7
+    });
+    $(".contact-select").select2({
+       placeholder: '选择一个希望联系方式',
+       data: d3
+    });
+    $(".destination-select").select2({
+       placeholder: '选择一个',
+       data: d8
+    });
+    $(".source-select").select2({
+      placeholder: '选择一个推广渠道',
+      data: d9
+    });
+    $(".country-select").select2({
+        placeholder: '国家',
+        data: d1
+    });
+    $(".customer-select").select2({
+        placeholder: '客人',
+        data: customer
+    });
+    $(".sales-select").select2({
+        placeholder: '销售',
+        data: sales
+    });
 	    // $(".agency-select").select2({
      //        placeholder: '地接社',
      //        data: p
      //    });
 		jQuery(document).ready(function() {
 			
-      $(".nav-parent").eq(0).addClass("nav-active");
-      $(".nav-parent").eq(0).find(".children").show();
-			// Date Picker
-			jQuery(".datepicker").datepicker(
-					{dateFormat: "yy-mm-dd"});
+        $(".nav-parent").eq(0).addClass("nav-active");
+        $(".nav-parent").eq(0).find(".children").show();
+        // Date Picker
+        jQuery(".datepicker").datepicker({
+          dateFormat: "yy-mm-dd"
+        });
 
-      $("input[name='starttime']").change(function() {
-          var val = $("input[name='starttime']:checked").val();
-          if (val == 1) {
-              $(".d1").hide();
-              $(".d2").show();
-          }else{
-              $(".d2").hide();
-              $(".d1").show();
-          }
-      }); 
+        $("input[name='starttime']").change(function() {
+            var val = $("input[name='starttime']:checked").val();
+            if (val == 1) {
+                $(".d1").hide();
+                $(".d2").show();
+            }else{
+                $(".d2").hide();
+                $(".d1").show();
+            }
+        }); 
 			 
-			jQuery("#form").validate({
-				
-  				rules: {
-  					adult: "digits",
-  					children: "digits",
-            budget: "digits",
-            startdate: "date",
-            enddate: "date",
-            startmonth: "date",
-  				},
-  				messages: {
-  					adult: "请输入一个整数",
-            children: "请输入一个整数",
-            budget: "请输入一个整数",
-            startdate: "请输入正确的日期格式 mm/dd/yyyy",
-            enddate: "请输入正确的日期格式 mm/dd/yyyy",
-            startmonth: "请输入正确的日期格式 mm/dd/yyyy",
-  				},
-				
-			    highlight: function(element) {
-			      jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
-			    },
-			    success: function(element) {
-			      jQuery(element).closest('.form-group').removeClass('has-error');
-			    },
-			    invalidHandler : function(){
-			      return false;
-			    },
-			    submitHandler : function(){
-			      form_submit();
-			      return false;
-			    }
-			});
+  			jQuery("#form").validate({
+  				
+    				rules: {
+    					adult: "digits",
+    					children: "digits",
+              budget: "digits",
+              startdate: "date",
+              enddate: "date",
+              startmonth: "date",
+    				},
+    				messages: {
+    					adult: "请输入一个整数",
+              children: "请输入一个整数",
+              budget: "请输入一个整数",
+              startdate: "请输入正确的日期格式 mm/dd/yyyy",
+              enddate: "请输入正确的日期格式 mm/dd/yyyy",
+              startmonth: "请输入正确的日期格式 mm/dd/yyyy",
+    				},
+  				
+  			    highlight: function(element) {
+  			      jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+  			    },
+  			    success: function(element) {
+  			      jQuery(element).closest('.form-group').removeClass('has-error');
+  			    },
+  			    invalidHandler : function(){
+  			      return false;
+  			    },
+  			    submitHandler : function(){
+  			      form_submit();
+  			      return false;
+  			    }
+  			});
 			
 			  $("#btn-back").click( function () {
 				    history.go(-1);
@@ -394,7 +395,6 @@
 				}
 			}, "JSON");
 		}
-		$("#starttime").hidden();
 	</script>
 
 
