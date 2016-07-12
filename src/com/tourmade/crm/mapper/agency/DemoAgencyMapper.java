@@ -13,7 +13,7 @@ public interface DemoAgencyMapper extends BaseMapper {
 	
 	public long countAgency(DemoAgency agency);
 	
-	public void saveAgency(DemoAgency agency);
+	public int saveAgency(DemoAgency agency);
 
 	public void updateAgency(DemoAgency agency);
 

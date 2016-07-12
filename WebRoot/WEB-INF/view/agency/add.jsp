@@ -88,6 +88,7 @@
       </div>
       <div class="modal-body align-center">
         	<a class="btn btn-primary" href="${rootPath}sale/add.html">添加销售</a>
+        	<input type="text" name="agencyid" value="${agencyid}"/>
         	<a class="btn btn-primary" href="${rootPath}agency/list.html">返回列表</a>
       </div>
     </div><!-- modal-content -->
@@ -162,7 +163,6 @@
 	    } ); 
 	});
 //		
-	      
 		function form_submit() {
 			var f = $("#form").serialize();
 			$.post('${rootPath}agency/add.do',f, function(result) {
