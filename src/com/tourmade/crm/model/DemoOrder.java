@@ -52,13 +52,13 @@ public class DemoOrder extends BaseBean<DemoOrder> {
 	
 	private String exchangerate;
 	
-	private String customerEmailReal;
+	private String customeremailreal;
 	
-	private String customerEmailAlias;
+	private String customeremailalias;
 	
-	private String agencyEmailReal;
+	private String agencyemailreal;
 	
-	private String agencyEmailAlias;
+	private String agencyemailalias;
 	
 	private BigDecimal groupprice;
 	
@@ -270,36 +270,36 @@ public class DemoOrder extends BaseBean<DemoOrder> {
 		this.currency = currecy;
 	}
 
-	public String getCustomerEmailAlias() {
-		return customerEmailAlias;
+	public String getCustomeremailreal() {
+		return customeremailreal;
 	}
 
-	public void setCustomerEmailAlias(String customerEmailAlias) {
-		this.customerEmailAlias = customerEmailAlias;
+	public void setCustomeremailreal(String customeremailreal) {
+		this.customeremailreal = customeremailreal;
 	}
 
-	public String getAgencyEmailAlias() {
-		return agencyEmailAlias;
+	public String getCustomeremailalias() {
+		return customeremailalias;
 	}
 
-	public void setAgencyEmailAlias(String agencyEmailAlias) {
-		this.agencyEmailAlias = agencyEmailAlias;
+	public void setCustomeremailalias(String customeremailalias) {
+		this.customeremailalias = customeremailalias;
 	}
 
-	public String getCustomerEmailReal() {
-		return customerEmailReal;
+	public String getAgencyemailreal() {
+		return agencyemailreal;
 	}
 
-	public void setCustomerEmailReal(String customerEmailReal) {
-		this.customerEmailReal = customerEmailReal;
+	public void setAgencyemailreal(String agencyemailreal) {
+		this.agencyemailreal = agencyemailreal;
 	}
 
-	public String getAgencyEmailReal() {
-		return agencyEmailReal;
+	public String getAgencyemailalias() {
+		return agencyemailalias;
 	}
 
-	public void setAgencyEmailReal(String agencyEmailReal) {
-		this.agencyEmailReal = agencyEmailReal;
+	public void setAgencyemailalias(String agencyemailalias) {
+		this.agencyemailalias = agencyemailalias;
 	}
 
 	@Override
@@ -309,24 +309,10 @@ public class DemoOrder extends BaseBean<DemoOrder> {
 				+ ", salesname=" + salesname + ", destination=" + destination + ", budget=" + budget + ", status="
 				+ status + ", reason=" + reason + ", currency=" + currency + ", grouptime=" + grouptime
 				+ ", groupnumber=" + groupnumber + ", rmbdate=" + rmbdate + ", exchangerate=" + exchangerate
-				+ ", customerEmailReal=" + customerEmailReal + ", customerEmailAlias=" + customerEmailAlias
-				+ ", agencyEmailReal=" + agencyEmailReal + ", agencyEmailAlias=" + agencyEmailAlias + ", groupprice="
+				+ ", customeremailreal=" + customeremailreal + ", customeremailalias=" + customeremailalias
+				+ ", agencyemailreal=" + agencyemailreal + ", agencyemailalias=" + agencyemailalias + ", groupprice="
 				+ groupprice + ", rmbprice=" + rmbprice + ", lastresponse=" + lastresponse + ", startdate=" + startdate
-				+ ", enddate=" + enddate + ", creattime=" + creattime + ", updatetime=" + updatetime + ", getOrderid()="
-				+ getOrderid() + ", getCaseid()=" + getCaseid() + ", getCustomerid()=" + getCustomerid()
-				+ ", getCustomername()=" + getCustomername() + ", getAgencyid()=" + getAgencyid() + ", getAgencyname()="
-				+ getAgencyname() + ", getSalesid()=" + getSalesid() + ", getSalesname()=" + getSalesname()
-				+ ", getDestination()=" + getDestination() + ", getBudget()=" + getBudget() + ", getStatus()="
-				+ getStatus() + ", getReason()=" + getReason() + ", getGrouptime()=" + getGrouptime()
-				+ ", getGroupnumber()=" + getGroupnumber() + ", getRmbdate()=" + getRmbdate() + ", getExchangerate()="
-				+ getExchangerate() + ", getGroupprice()=" + getGroupprice() + ", getRmbprice()=" + getRmbprice()
-				+ ", getLastresponse()=" + getLastresponse() + ", getStartdate()=" + getStartdate() + ", getEnddate()="
-				+ getEnddate() + ", getCreattime()=" + getCreattime() + ", getUpdatetime()=" + getUpdatetime()
-				+ ", getCurrency()=" + getCurrency() + ", getCustomerEmailAlias()=" + getCustomerEmailAlias()
-				+ ", getAgencyEmailAlias()=" + getAgencyEmailAlias() + ", getCustomerEmailReal()="
-				+ getCustomerEmailReal() + ", getAgencyEmailReal()=" + getAgencyEmailReal() + ", getMapperNameSpace()="
-				+ getMapperNameSpace() + ", getSeachValue()=" + getSeachValue() + ", getClass()=" + getClass()
-				+ ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
+				+ ", enddate=" + enddate + ", creattime=" + creattime + ", updatetime=" + updatetime + "]";
 	}
 
 

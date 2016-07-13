@@ -80,8 +80,8 @@ public class OrderController extends BaseSimpleFormController {
 			order.setAgencyid(order1.getAgencyid());
 			order.setAgencyname(order1.getAgencyname());
 			order.setSalesname(order1.getSalesname());
-			order.setAgencyEmailReal(order1.getAgencyEmailReal());
-			order.setCustomerEmailReal(customerEmailReal);
+			order.setAgencyemailreal(order1.getAgencyemailreal());
+			order.setCustomeremailreal(customerEmailReal);
 			service.saveOrder(order);
 			
 			String url = "http://123.56.77.206/axis2/services/AliasAdd/add";
@@ -89,8 +89,8 @@ public class OrderController extends BaseSimpleFormController {
 			String param1 = "alias=agency"+order.getOrderid()+"@&real=customer@&domain="+domain;
 			service.creatAlias(url, param);
 			service.creatAlias(url, param1);
-			order.setAgencyEmailAlias("agency"+order.getOrderid()+"@"+domain);
-			order.setCustomerEmailAlias("customer"+order.getOrderid()+"@"+domain);
+			order.setAgencyemailalias("agency"+order.getOrderid()+"@"+domain);
+			order.setCustomeremailalias("customer"+order.getOrderid()+"@"+domain);
 			service.updateOrder(order);
 			
 			template.setTemplatepath("D:/clientwelcome.html");
@@ -101,8 +101,8 @@ public class OrderController extends BaseSimpleFormController {
 			email.setContent(result);
 			email.setAcount("customer");
 			email.setOrderid(order.getOrderid());
-			email.setReciever(order.getAgencyEmailReal());
-			email.setSender(order.getCustomerEmailAlias());
+			email.setReciever(order.getAgencyemailreal());
+			email.setSender(order.getCustomeremailalias());
 			email.setSendname(order.getCustomername());
 			email.setSubject(order.getCustomername()+"去"+order.getDestination()+"的需求");
 			emailservice.saveEmail(email);

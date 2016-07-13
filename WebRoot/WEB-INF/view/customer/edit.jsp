@@ -70,7 +70,7 @@
 			            <div class="form-group col-sm-4">
 			            	<label class="col-sm-3 control-label">生日</label>
 			            	<div class="col-sm-9 input-group input-datepicker">
-				                <input type="text" class="form-control datepicker" placeholder="yyyy-mm-dd" id="birthday" value="${customer.birthday}" autocomplete="off" >
+				                <input type="text" name="birthday" class="form-control datepicker" placeholder="yyyy-mm-dd" id="birthday" value="${customer.birthday}" autocomplete="off" >
 				                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
 			                </div>
 			            </div> 

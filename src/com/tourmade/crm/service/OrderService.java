@@ -195,8 +195,8 @@ public class OrderService extends BaseService {
 
 		try {
 			DemoOrder u = orderMapper.getOrderById(order.getOrderid());
-				u.setCustomerEmailAlias(order.getCustomerEmailAlias());
-				u.setAgencyEmailAlias(order.getAgencyEmailAlias());
+			u.setCustomeremailalias(order.getCustomeremailalias());
+			u.setAgencyemailalias(order.getAgencyemailalias());
 			if(order.getStatus() != null){
 				u.setStatus(order.getStatus());
 			}
