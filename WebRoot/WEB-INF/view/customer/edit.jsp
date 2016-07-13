@@ -189,29 +189,31 @@
           			<h4 class="panel-title">注释记录 </h4>
           		</div>
           		<div class="panel-body">
-	              	<table id="dataTable-note" class="table">
-						<thead>
-							<tr>
-                    <th>ID</th>
-                    <th>姓名</th>
-                    <th>注释内容</th>
-                    <th>时间</th>
-							</tr>
-						</thead>
-					</table>
-				          <!-- 添加注释 -->
-			<form id="comment" class="form">
-          <div class="form-group col-sm-6 col-sm-offset-3">
-                <textarea name="content" class="form-control" rows="5"></textarea>
-                <input  type="hidden" name="userid" value="${loginUser.userid}" />
-                <input  type="hidden" name="username" value="${loginUser.name}" />
-                <input  type="hidden" name="objectid" value="${customer.customerid}" />
-                <input  type="hidden" name="commenttype" value="customer" />
-          </div>
-          <div class="form-group col-sm-12 align-center">
-            <button class="btn btn-primary">添加注释</button>
-          </div>
-          </form>
+	          		<div class="table-responsive">
+		              	<table id="dataTable-note" class="table">
+							<thead>
+								<tr>
+			                    <th>ID</th>
+			                    <th>姓名</th>
+			                    <th>注释内容</th>
+			                    <th>时间</th>
+								</tr>
+							</thead>
+						</table>
+					</div>
+					<!-- 添加注释 -->
+					<form id="comment" class="form">
+						<div class="form-group col-sm-6 col-sm-offset-3">
+						    <textarea name="content" class="form-control" rows="5"></textarea>
+						    <input  type="hidden" name="userid" value="${loginUser.userid}" />
+						    <input  type="hidden" name="username" value="${loginUser.name}" />
+						    <input  type="hidden" name="objectid" value="${customer.customerid}" />
+						    <input  type="hidden" name="commenttype" value="customer" />
+						</div>
+						<div class="form-group col-sm-12 align-center">
+						<button class="btn btn-primary">添加注释</button>
+						</div>
+		            </form>
           		</div>
 				</div>
 				<!-- end of panel 注释列表 -->
@@ -347,7 +349,7 @@
 		    });
 		    
 		    jQuery('select').removeClass('form-control');
-		    
+
 			$('#dataTable-case tbody').on( 'click', 'a.btn-success', function () {
 		        var data = t.row($(this).parents('tr')).data();
 		        //alert($(this).attr('id'));
