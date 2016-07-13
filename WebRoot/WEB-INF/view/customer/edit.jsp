@@ -398,7 +398,12 @@
 			maxDate: 0
 		});
 		 
-				
+		//生日格式转换
+		var date = $("#birthday").val();	
+		var dateformat = new Date(date).toISOString("yyyy-MM-dd hh:mm:ss.S").substring(0,10);
+		//console.log(dateformat);
+		$("#birthday").val(dateformat)
+
 		jQuery("#form").validate({
 			rules: {
 				zname: "required",
