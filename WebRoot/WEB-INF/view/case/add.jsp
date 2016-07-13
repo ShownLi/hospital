@@ -94,13 +94,7 @@
                       <div class="col-sm-8">
                         <input type="text" name="status" class="status-select fullwidth" value="1" readonly/>
                       </div>
-                    </div>  
-                    <div class="form-group col-sm-4">
-                      <label class="col-sm-4 control-label">表单类型</label>
-                      <div class="col-sm-8">
-                        <input type="text" name="submit_type" class="submittype-select fullwidth" value="" />
-                      </div>
-                    </div>              
+                    </div>             
                 </div>
                 <div class="section-block">
                     <div class="form-group col-sm-4">
