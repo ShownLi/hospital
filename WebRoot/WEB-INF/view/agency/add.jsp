@@ -87,8 +87,9 @@
         <div class="nextModal-title">您可以继续添销售，或返回到地接社列表页面</div>
       </div>
       <div class="modal-body align-center">
-        	<a class="btn btn-primary" href="${rootPath}sale/add.html">添加销售</a>
+        	<a class="btn btn-primary" href="${rootPath}sale/add.html?id=">添加销售</a>
         	<a class="btn btn-primary" href="${rootPath}agency/list.html">返回列表</a>
+        	<input type="hidden" name="agencyid" id="agencyid" value="${agencyid}"/>
       </div>
     </div><!-- modal-content -->
   </div><!-- modal-dialog -->
@@ -162,10 +163,11 @@
 	    } ); 
 	});
 //		
-	      
 		function form_submit() {
 			var f = $("#form").serialize();
 			$.post('${rootPath}agency/add.do',f, function(result) {
+				var agencyid = result.obj.agency_id;
+				document.getElementById("agencyid").value=agencyid;
 				var rmsg = result.msg;
 				if (result.success) {
 					//window.parent.location = "${rootPath}agency/list.html";

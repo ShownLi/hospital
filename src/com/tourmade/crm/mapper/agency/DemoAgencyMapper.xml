@@ -24,16 +24,6 @@
 		select count(u.agency_id) from tm_agency u
 		where
 		u.isdel = 0
-		<if test="seachValue!=null and seachValue!=''">
-			and
-			(
-			u.agency_name like '%${seachValue}%'
-			or
-			u.country like '%${seachValue}%'
-			or
-			u.language like '%${seachValue}%'
-			)
-		</if>
 
 	</select>
 	

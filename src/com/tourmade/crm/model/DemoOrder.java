@@ -20,6 +20,8 @@ public class DemoOrder extends BaseBean<DemoOrder> {
 
 	private int orderid;
 	
+	private int caseid;
+	
 	private int customerid;
 	
 	private String customername;
@@ -50,6 +52,14 @@ public class DemoOrder extends BaseBean<DemoOrder> {
 	
 	private String exchangerate;
 	
+	private String customerEmailReal;
+	
+	private String customerEmailAlias;
+	
+	private String agencyEmailReal;
+	
+	private String agencyEmailAlias;
+	
 	private BigDecimal groupprice;
 	
 	private BigDecimal rmbprice;
@@ -70,6 +80,14 @@ public class DemoOrder extends BaseBean<DemoOrder> {
 
 	public void setOrderid(int orderid) {
 		this.orderid = orderid;
+	}
+
+	public int getCaseid() {
+		return caseid;
+	}
+
+	public void setCaseid(int caseid) {
+		this.caseid = caseid;
 	}
 
 	public int getCustomerid() {
@@ -252,16 +270,64 @@ public class DemoOrder extends BaseBean<DemoOrder> {
 		this.currency = currecy;
 	}
 
-	@Override
-	public String toString() {
-		return "DemoOrder [orderid=" + orderid + ", customerid=" + customerid + ", customername=" + customername
-				+ ", agencyid=" + agencyid + ", agencyname=" + agencyname + ", salesid=" + salesid + ", salesname="
-				+ salesname + ", destination=" + destination + ", budget=" + budget + ", status=" + status + ", reason="
-				+ reason + ", currency=" + currency + ", grouptime=" + grouptime + ", groupnumber=" + groupnumber
-				+ ", rmbdate=" + rmbdate + ", exchangerate=" + exchangerate + ", groupprice=" + groupprice
-				+ ", rmbprice=" + rmbprice + ", lastresponse=" + lastresponse + ", startdate=" + startdate
-				+ ", enddate=" + enddate + ", creattime=" + creattime + ", updatetime=" + updatetime + "]";
+	public String getCustomerEmailAlias() {
+		return customerEmailAlias;
 	}
 
-	
+	public void setCustomerEmailAlias(String customerEmailAlias) {
+		this.customerEmailAlias = customerEmailAlias;
+	}
+
+	public String getAgencyEmailAlias() {
+		return agencyEmailAlias;
+	}
+
+	public void setAgencyEmailAlias(String agencyEmailAlias) {
+		this.agencyEmailAlias = agencyEmailAlias;
+	}
+
+	public String getCustomerEmailReal() {
+		return customerEmailReal;
+	}
+
+	public void setCustomerEmailReal(String customerEmailReal) {
+		this.customerEmailReal = customerEmailReal;
+	}
+
+	public String getAgencyEmailReal() {
+		return agencyEmailReal;
+	}
+
+	public void setAgencyEmailReal(String agencyEmailReal) {
+		this.agencyEmailReal = agencyEmailReal;
+	}
+
+	@Override
+	public String toString() {
+		return "DemoOrder [orderid=" + orderid + ", caseid=" + caseid + ", customerid=" + customerid + ", customername="
+				+ customername + ", agencyid=" + agencyid + ", agencyname=" + agencyname + ", salesid=" + salesid
+				+ ", salesname=" + salesname + ", destination=" + destination + ", budget=" + budget + ", status="
+				+ status + ", reason=" + reason + ", currency=" + currency + ", grouptime=" + grouptime
+				+ ", groupnumber=" + groupnumber + ", rmbdate=" + rmbdate + ", exchangerate=" + exchangerate
+				+ ", customerEmailReal=" + customerEmailReal + ", customerEmailAlias=" + customerEmailAlias
+				+ ", agencyEmailReal=" + agencyEmailReal + ", agencyEmailAlias=" + agencyEmailAlias + ", groupprice="
+				+ groupprice + ", rmbprice=" + rmbprice + ", lastresponse=" + lastresponse + ", startdate=" + startdate
+				+ ", enddate=" + enddate + ", creattime=" + creattime + ", updatetime=" + updatetime + ", getOrderid()="
+				+ getOrderid() + ", getCaseid()=" + getCaseid() + ", getCustomerid()=" + getCustomerid()
+				+ ", getCustomername()=" + getCustomername() + ", getAgencyid()=" + getAgencyid() + ", getAgencyname()="
+				+ getAgencyname() + ", getSalesid()=" + getSalesid() + ", getSalesname()=" + getSalesname()
+				+ ", getDestination()=" + getDestination() + ", getBudget()=" + getBudget() + ", getStatus()="
+				+ getStatus() + ", getReason()=" + getReason() + ", getGrouptime()=" + getGrouptime()
+				+ ", getGroupnumber()=" + getGroupnumber() + ", getRmbdate()=" + getRmbdate() + ", getExchangerate()="
+				+ getExchangerate() + ", getGroupprice()=" + getGroupprice() + ", getRmbprice()=" + getRmbprice()
+				+ ", getLastresponse()=" + getLastresponse() + ", getStartdate()=" + getStartdate() + ", getEnddate()="
+				+ getEnddate() + ", getCreattime()=" + getCreattime() + ", getUpdatetime()=" + getUpdatetime()
+				+ ", getCurrency()=" + getCurrency() + ", getCustomerEmailAlias()=" + getCustomerEmailAlias()
+				+ ", getAgencyEmailAlias()=" + getAgencyEmailAlias() + ", getCustomerEmailReal()="
+				+ getCustomerEmailReal() + ", getAgencyEmailReal()=" + getAgencyEmailReal() + ", getMapperNameSpace()="
+				+ getMapperNameSpace() + ", getSeachValue()=" + getSeachValue() + ", getClass()=" + getClass()
+				+ ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
+	}
+
+
 }

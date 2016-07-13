@@ -19,6 +19,8 @@ public class DemoCustomer extends BaseBean<DemoCustomer> {
 
 	private int customerid;
 	
+	private int portalid;
+	
 	private String zname;
 	
 	private String ename;
@@ -48,6 +50,15 @@ public class DemoCustomer extends BaseBean<DemoCustomer> {
 	private Date creat_time;
 	
 	private Date update_time;
+
+	
+	public int getPortalid() {
+		return portalid;
+	}
+
+	public void setPortalid(int portalid) {
+		this.portalid = portalid;
+	}
 
 	public int getCustomerid() {
 		return customerid;
@@ -184,11 +195,11 @@ public class DemoCustomer extends BaseBean<DemoCustomer> {
 
 	@Override
 	public String toString() {
-		return "DemoCustomer [customerid=" + customerid + ", zname=" + zname + ", ename=" + ename + ", level=" + level
-				+ ", location=" + location + ", promote=" + promote + ", agegroup=" + agegroup + ", gender=" + gender
-				+ ", telephone=" + telephone + ", mobilephone=" + mobilephone + ", wechat=" + wechat + ", qq=" + qq
-				+ ", email=" + email + ", birthday=" + birthday + ", creat_time=" + creat_time + ", update_time="
-				+ update_time + "]";
+		return "DemoCustomer [customerid=" + customerid + ", portalid=" + portalid + ", zname=" + zname + ", ename="
+				+ ename + ", level=" + level + ", location=" + location + ", promote=" + promote + ", agegroup="
+				+ agegroup + ", gender=" + gender + ", telephone=" + telephone + ", mobilephone=" + mobilephone
+				+ ", wechat=" + wechat + ", qq=" + qq + ", email=" + email + ", birthday=" + birthday + ", creat_time="
+				+ creat_time + ", update_time=" + update_time + "]";
 	}
 
 }

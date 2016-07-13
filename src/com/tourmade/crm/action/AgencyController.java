@@ -75,6 +75,8 @@ public class AgencyController extends BaseSimpleFormController {
 		
 		try {
 			service.saveAgency(agency);
+			//System.out.println(agency);
+			j.setObj(agency);
 			j.setSuccess(true);
 		} catch (Exception e) {
 			j.setSuccess(false);

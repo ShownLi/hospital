@@ -19,16 +19,6 @@
 		left join tm_parameter v on u.country = v.para_value
 		left join tm_parameter x on u.language = x.para_value
 		where u.isdel = 0 and v.isdel = 0 and x.isdel = 0
-		<if test="pojo.seachValue!=null and pojo.seachValue!=''">
-			and
-			(
-			u.email_name like '%${pojo.seachValue}%'
-			or
-			v.chinese like '%${pojo.seachValue}%'
-			or
-			x.chinese like '%${pojo.seachValue}%'
-			)
-		</if>
 		order by u.creat_time
 		) table_alias
 		limit #{b},#{e}
@@ -38,32 +28,33 @@
 		select count(u.email_id) from tm_email u
 		where
 		u.isdel = 0
-		<if test="seachValue!=null and seachValue!=''">
-			and
-			(
-			u.email_name like '%${seachValue}%'
-			or
-			u.country like '%${seachValue}%'
-			or
-			u.language like '%${seachValue}%'
-			)
-		</if>
 
 	</select>
 	
 	<insert id="saveEmail" parameterType="DemoEmail" flushCache="true" useGeneratedKeys="true" keyProperty="email_id" keyColumn="GENERATED_KEY">
-		insert into tm_email(
-		email_name,
-		country,
-		language,
-		creat_time,
-		isdel
+		insert into tm_mailqueue(
+		order_id,
+		mail_type,
+		acount,
+		sendname,
+		sender,
+		reciever,
+		subject,
+		content,
+		file_url,
+		mail_status,
+		creat_time
 		)values(
-		#{name,jdbcType=VARCHAR},
-		#{country,jdbcType=VARCHAR},
-		#{language,jdbcType=VARCHAR},
-		NOW(),
-		0
+		#{orderid},
+		#{mailtype},
+		#{acount},
+		#{sendname},
+		#{sender},
+		#{reciever},
+		#{subject},
+		#{file_url},
+		#{mail_status},
+		NOW()
 		)
 	</insert>
 

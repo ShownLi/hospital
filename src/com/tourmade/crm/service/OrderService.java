@@ -1,5 +1,9 @@
 package com.tourmade.crm.service;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -72,6 +76,80 @@ public class OrderService extends BaseService {
 	}
 
 	/**
+	 * 新建别名
+	 * 
+	 * @param email
+	 * @return
+	 */
+	public void creatAlias(String url, String param) {
+
+		        BufferedReader in = null;
+		        try {
+		            String urlNameString = url + "?" + param;
+		            URL realUrl = new URL(urlNameString);
+		            // 打开和URL之间的连接
+		            URLConnection connection = realUrl.openConnection();
+		            // 设置通用的请求属性
+		            connection.setRequestProperty("accept", "*/*");
+		            connection.setRequestProperty("connection", "Keep-Alive");
+		            connection.setRequestProperty("user-agent",
+		                    "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");
+		            // 建立实际的连接
+		            connection.connect();
+		            // 定义 BufferedReader输入流来读取URL的响应
+		            in = new BufferedReader(new InputStreamReader(
+		                    connection.getInputStream()));
+		        } catch (Exception e) {
+		            System.out.println("发送GET请求出现异常！" + e);
+		            e.printStackTrace();
+		        }
+		        // 使用finally块来关闭输入流
+		        finally {
+		            try {
+		                if (in != null) {
+		                    in.close();
+		                }
+		            } catch (Exception e2) {
+		                e2.printStackTrace();
+		            }
+		        }
+	}
+	
+	/**
+	 * 根据销售获取地接社信息
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public DemoOrder getAgencyBySales(int id) {
+		DemoOrder r = null;
+		try {
+			r = orderMapper.getAgencyBySales(id);
+		} catch (Exception e) {
+			logger.error("OrderService.getOrderById() --> " + id + "-->" + e.getMessage());
+			r = null;
+		}
+		return r;
+	}
+	
+	/**
+	 * 根据客人ID获得客人邮箱地址
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public String getCustomerEmailReal(int id) {
+		String r = "";
+		try {
+			r = orderMapper.getCustomerEmailReal(id);
+		} catch (Exception e) {
+			logger.error("OrderService.getOrderById() --> " + id + "-->" + e.getMessage());
+			r = null;
+		}
+		return r;
+	}
+	
+	/**
 	 * 根据主键获取订单信息
 	 * 
 	 * @param id
@@ -117,23 +195,21 @@ public class OrderService extends BaseService {
 
 		try {
 			DemoOrder u = orderMapper.getOrderById(order.getOrderid());
-			if (u != null) {
-				if(order.getStatus() != null){
-					u.setStatus(order.getStatus());
-				}
-				if(order.getGroupnumber()!= null){
-					u.setGroupnumber(order.getGroupnumber());
-					u.setStatus("1");
-				}
-				if(order.getReason() != null){
-					u.setReason(order.getReason());
-					u.setStatus("2");
-				}
-				orderMapper.updateOrder(u);
-				r = true;
-			} else {
-				r = false;
+				u.setCustomerEmailAlias(order.getCustomerEmailAlias());
+				u.setAgencyEmailAlias(order.getAgencyEmailAlias());
+			if(order.getStatus() != null){
+				u.setStatus(order.getStatus());
 			}
+			if(order.getGroupnumber()!= null){
+				u.setGroupnumber(order.getGroupnumber());
+				u.setStatus("1");
+			}
+			if(order.getReason() != null){
+				u.setReason(order.getReason());
+				u.setStatus("2");
+			}
+			orderMapper.updateOrder(u);
+			r = true;
 		} catch (Exception e) {
 			logger.error("OrderService.updateOrder() --> " + order + "-->" + e.getMessage());
 			r = false;

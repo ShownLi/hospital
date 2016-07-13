@@ -18,7 +18,10 @@ import com.tourmade.crm.common.framework.util.JSONUtilS;
 import com.tourmade.crm.common.model.base.value.baseconfig.Json;
 import com.tourmade.crm.common.model.base.value.baseconfig.PageHelper;
 import com.tourmade.crm.model.DemoOrder;
+import com.tourmade.crm.model.MailTemplate;
+import com.tourmade.crm.model.DemoEmail;
 import com.tourmade.crm.model.DemoList;
+import com.tourmade.crm.service.EmailService;
 import com.tourmade.crm.service.OrderService;
 
 import net.sf.json.JSONArray;
@@ -29,6 +32,7 @@ public class OrderController extends BaseSimpleFormController {
 	
 	@Autowired
 	private OrderService service;
+	
 
 	@RequestMapping(value = "/list.html", method = { RequestMethod.POST, RequestMethod.GET })
 	public String list(Model model) {
@@ -65,9 +69,43 @@ public class OrderController extends BaseSimpleFormController {
 	public Json doAdd(HttpServletRequest request, HttpSession session, Model model, DemoOrder order) {
 
 		Json j = new Json();
+		EmailService emailservice = new EmailService();
+		MailTemplate template = new MailTemplate();
+		DemoEmail email = new DemoEmail();
 		
 		try {
+			String domain = "tourmade.com.cn";
+			DemoOrder order1 = service.getAgencyBySales(order.getSalesid());
+			String customerEmailReal = service.getCustomerEmailReal(order.getCustomerid());
+			order.setAgencyid(order1.getAgencyid());
+			order.setAgencyname(order1.getAgencyname());
+			order.setSalesname(order1.getSalesname());
+			order.setAgencyEmailReal(order1.getAgencyEmailReal());
+			order.setCustomerEmailReal(customerEmailReal);
 			service.saveOrder(order);
+			
+			String url = "http://123.56.77.206/axis2/services/AliasAdd/add";
+			String param = "alias=customer"+order.getOrderid()+"@&real=customer@&domain="+domain;
+			String param1 = "alias=agency"+order.getOrderid()+"@&real=customer@&domain="+domain;
+			service.creatAlias(url, param);
+			service.creatAlias(url, param1);
+			order.setAgencyEmailAlias("agency"+order.getOrderid()+"@"+domain);
+			order.setCustomerEmailAlias("customer"+order.getOrderid()+"@"+domain);
+			service.updateOrder(order);
+			
+			template.setTemplatepath("D:/clientwelcome.html");
+			template.setClientfirstname("lian");
+			template.setClientlastname("zheng");
+			String result = emailservice.getMailContent(template);
+			
+			email.setContent(result);
+			email.setAcount("customer");
+			email.setOrderid(order.getOrderid());
+			email.setReciever(order.getAgencyEmailReal());
+			email.setSender(order.getCustomerEmailAlias());
+			email.setSendname(order.getCustomername());
+			email.setSubject(order.getCustomername()+"去"+order.getDestination()+"的需求");
+			emailservice.saveEmail(email);
 			j.setSuccess(true);
 		} catch (Exception e) {
 			j.setSuccess(false);

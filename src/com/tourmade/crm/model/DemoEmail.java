@@ -1,7 +1,5 @@
 package com.tourmade.crm.model;
 
-import java.util.Date;
-
 import com.tourmade.crm.common.framework.BaseBean;
 
 /**
@@ -17,73 +15,115 @@ public class DemoEmail extends BaseBean<DemoEmail> {
 	 */
 	private static final long serialVersionUID = 1423523863575074623L;
 
-	private int email_id;
+	private int orderid;
 	
-	private String name;
+	private String mailtype;
 	
-	private String country;
+	private String acount;
 	
-	private String language;
+	private String sendname;
 	
-	private Date creat_time;
+	private String sender;
+
+	private String reciever;
 	
-	private Date update_time;
+	private String subject;
 	
+	private String content;
+	
+	private String fileurl;
+	
+	private String mailstatus;
 
-	public int getEmail_id() {
-		return email_id;
+	public int getOrderid() {
+		return orderid;
 	}
 
-
-	public void setEmail_id(int email_id) {
-		this.email_id = email_id;
+	public void setOrderid(int orderid) {
+		this.orderid = orderid;
 	}
 
-
-	public String getName() {
-		return name;
+	public String getMailtype() {
+		return mailtype;
 	}
 
-
-	public void setName(String name) {
-		this.name = name;
+	public void setMailtype(String mailtype) {
+		this.mailtype = mailtype;
 	}
 
-
-	public String getCountry() {
-		return country;
+	public String getAcount() {
+		return acount;
 	}
 
-
-	public void setCountry(String country) {
-		this.country = country;
+	public void setAcount(String acount) {
+		this.acount = acount;
 	}
 
-
-	public String getLanguage() {
-		return language;
+	public String getSendname() {
+		return sendname;
 	}
 
-
-	public void setLanguage(String language) {
-		this.language = language;
+	public void setSendname(String sendname) {
+		this.sendname = sendname;
 	}
 
-
-	public Date getCreat_time() {
-		return creat_time;
+	public String getSender() {
+		return sender;
 	}
 
-
-	public void setCreat_time(Date creat_time) {
-		this.creat_time = creat_time;
+	public void setSender(String sender) {
+		this.sender = sender;
 	}
 
+	public String getReciever() {
+		return reciever;
+	}
+
+	public void setReciever(String reciever) {
+		this.reciever = reciever;
+	}
+
+	public String getSubject() {
+		return subject;
+	}
+
+	public void setSubject(String subject) {
+		this.subject = subject;
+	}
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+	public String getFileurl() {
+		return fileurl;
+	}
+
+	public void setFileurl(String fileurl) {
+		this.fileurl = fileurl;
+	}
+
+	public String getMailstatus() {
+		return mailstatus;
+	}
+
+	public void setMailstatus(String mailstatus) {
+		this.mailstatus = mailstatus;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 
 	@Override
 	public String toString() {
-		return "DemoEmail [email_id=" + email_id + ", name=" + name + ", country=" + country + ", language="
-				+ language + ", creat_time=" + creat_time + ", update_time=" + update_time + "]";
+		return "DemoEmail [orderid=" + orderid + ", mailtype=" + mailtype + ", acount=" + acount + ", sendname="
+				+ sendname + ", sender=" + sender + ", reciever=" + reciever + ", subject=" + subject + ", content="
+				+ content + ", fileurl=" + fileurl + ", mailstatus=" + mailstatus + "]";
 	}
-
+	
 }
