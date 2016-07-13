@@ -134,7 +134,7 @@
                 <div class="form-group col-sm-4 d1">
                   <label class="col-sm-4 control-label">大约时间</label>
                   <div class="col-sm-8 input-group input-datepicker">
-                    <input type="text" name="startmonth" class="form-control datepicker" placeholder="yyyy/mm/dd" value="${crmcase.startmonth}" autocomplete="off">
+                    <input type="text" id="startmonth" name="startmonth" class="form-control datepicker" placeholder="yyyy/mm/dd" value="${crmcase.startmonth}" autocomplete="off">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                   </div>
                 </div>
@@ -147,14 +147,14 @@
                 <div class="form-group col-sm-4 d2">
                   <label class="col-sm-4 control-label">出发日期</label>
                   <div class="col-sm-8 input-group input-datepicker">
-                    <input type="text" name="startdate" class="form-control datepicker" placeholder="yyyy/mm/dd" value="${crmcase.startdate}" autocomplete="off">
+                    <input type="text" id="startdate" name="startdate" class="form-control datepicker" placeholder="yyyy/mm/dd" value="${crmcase.startdate}" autocomplete="off">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                   </div>
                 </div>
                 <div class="form-group col-sm-4 d2">
                   <label class="col-sm-4 control-label">返回日期</label>
                   <div class="col-sm-8 input-group input-datepicker">
-                    <input type="text" name="enddate" class="form-control datepicker" placeholder="yyyy/mm/dd" value="${crmcase.enddate}" autocomplete="off">
+                    <input type="text" id="enddate" name="enddate" class="form-control datepicker" placeholder="yyyy/mm/dd" value="${crmcase.enddate}" autocomplete="off">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                   </div>
                 </div>
@@ -363,9 +363,10 @@
 </div><!-- modal -->
 
 	<%@ include file="../assets/pages/foot.jsp"%>
-	<script src="${rootPath}assets/js/select2.min.js"></script>
 	<script src="${rootPath}assets/js/jquery-ui-1.10.3.min.js"></script>
+	<script src="${rootPath}assets/js/datepicker-zh-CN.js"></script>
 	<script src="${rootPath}assets/js/jquery.datatables.min.js"></script>
+	<script src="${rootPath}assets/js/select2.min.js"></script>
 	<script src="${rootPath}assets/js/jquery.validate.min.js"></script>
 	
 <script type="text/javascript">
@@ -455,9 +456,13 @@ $(".sales-select").select2({
 		$(".nav-parent").eq(0).addClass("nav-active");
 		$(".nav-parent").eq(0).find(".children").show();
 			
-			// Date Picker
-			jQuery(".datepicker").datepicker(
-					{dateFormat: "yy-mm-dd"});
+		// Date Picker
+		jQuery(".datepicker").datepicker({
+			dateFormat: "yy-mm-dd",
+			changeYear: true,
+			changeMonth: true,
+			maxDate: 0
+		});
 
       $("input[name='starttime']").change(function() {
           var val = $("input[name='starttime']:checked").val();
@@ -551,7 +556,21 @@ $(".sales-select").select2({
           $("#nextModal").modal('show');
           return false;
         });
-
+        
+		//大约时间格式转换
+		var date = $("#startmonth").val();	
+		var dateformat = new Date(date).toISOString("yyyy-MM-dd hh:mm:ss.S").substring(0,10);
+		$("#startmonth").val(dateformat)
+		
+		//大约时间格式转换
+		var date = $("#startdate").val();	
+		var dateformat = new Date(date).toISOString("yyyy-MM-dd hh:mm:ss.S").substring(0,10);
+		$("#startdate").val(dateformat)
+		
+		//大约时间格式转换
+		var date = $("#enddate").val();	
+		var dateformat = new Date(date).toISOString("yyyy-MM-dd hh:mm:ss.S").substring(0,10);
+		$("#enddate").val(dateformat)
     });
     $(".nextModal .submit").click(function(){
     	order_submit();

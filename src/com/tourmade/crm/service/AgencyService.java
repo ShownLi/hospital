@@ -37,20 +37,6 @@ public class AgencyService extends BaseService {
 		QueryResult<DemoAgency> r = new QueryResult<DemoAgency>();
 		Map<String, Object> map = new HashMap<String, Object>();
 		
-		System.out.println(ph);
-		
-		String seachValue = ph.getSearch().get("value");
-		
-		if (null != seachValue && !"".equals(seachValue)) {
-			if (null == agency) {
-				agency = new DemoAgency();
-			}
-			agency.setSeachValue(seachValue);
-		}
-			
-		
-		
-		map.put("pojo", agency);
 		map.put("b", ph.getStart());
 		map.put("e", ph.getLength());
 //		map.put("s", ph.getSort());

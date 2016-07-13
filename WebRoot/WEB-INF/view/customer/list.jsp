@@ -224,7 +224,7 @@
 		
 		function doDel(id){
 			$.ajax({
-				url: "${rootPath}user/del.do?id=" + id, 
+				url: "${rootPath}customer/del.do?id=" + id, 
 				async: true,
 				success: function(o) {
 					window.location.reload();

@@ -8,16 +8,17 @@
 		FROM (
 		select
 		u.case_id as caseid,
-		u.customer_name as customername,
-		u.customer_id,
+		u.customer_id as customerid,
 		u.budget as budget,
-		u.sales_name as salesname,
+		u.source as source,
 		u.destination as destination,
-		u.status as status,
-		u.creat_time as creattime,
-		u.isdel as isdel
+		u.status as status
 		from tm_case u  
 		where u.isdel = 0 
+		<if test="customerid != null and customerid != ''">
+			and
+			 u.customer_id = #{customerid}
+		</if>
 		order by u.creat_time
 		) table_alias
 		limit #{b},#{e}
@@ -27,7 +28,6 @@
 		select count(u.case_id) from tm_case u
 		where
 		u.isdel = 0
-
 	</select>
 	
 	<insert id="saveCase" parameterType="DemoCase" flushCache="true" useGeneratedKeys="true" keyProperty="case_id" keyColumn="GENERATED_KEY">

@@ -32,6 +32,17 @@ public class CaseController extends BaseSimpleFormController {
 
 	@RequestMapping(value = "/list.html", method = { RequestMethod.POST, RequestMethod.GET })
 	public String list(Model model) {
+		String source = "case.source";
+		String status = "case.status";
+		List<DemoList> customer = service.getCustomer();
+		List<DemoList> v = service.getParameterInfo(source);
+		List<DemoList> w = service.getParameterInfo(status);
+		JSONArray sourceresult = JSONArray.fromObject(v);
+		JSONArray statusresult = JSONArray.fromObject(w);
+		JSONArray cusresult = JSONArray.fromObject(customer);
+		model.addAttribute("source",sourceresult);
+		model.addAttribute("status",statusresult);
+		model.addAttribute("customer",cusresult);
 		return "/case/list";
 	}
 	

@@ -44,7 +44,7 @@
 								<thead>
 									<tr>
 										<th>ID</th>
-										<th>称呼</th>
+										<th>客人</th>
 										<th>预算</th>
 										<th>目的地</th>
 										<th>询单来源</th>
@@ -102,7 +102,9 @@
 
 
 	<script type="text/javascript">
-	
+	var source = ${source};
+	var status = ${status};
+	var customer = ${customer};
 		jQuery(document).ready(function() {
 
 			$(".nav-parent").eq(0).addClass("nav-active");
@@ -133,6 +135,42 @@
 		                  targets: 6
 					  },
 					  {
+			                data: "customer",
+			                orderable: false,
+			                render: function ( data ) {
+			                	for(var i=0;i <  customer.length;i++){
+			                		if(data==customer[i].id){
+			                			return customer[i].text
+			                		}
+			                	}
+			                },
+			                  targets: 1
+						},
+					  {
+			                data: "source",
+			                orderable: false,
+			                render: function ( data ) {
+			                	for(var i=0;i <  source.length;i++){
+			                		if(data==source[i].id){
+			                			return source[i].text
+			                		}
+			                	}
+			                },
+			                  targets: 4
+						},
+						{
+			                data: "status",
+			                orderable: false,
+			                render: function ( data ) {
+			                	for(var i=0;i <  status.length;i++){
+			                		if(data==status[i].id){
+			                			return status[i].text
+			                		}
+			                	}
+			                },
+			                  targets: 5
+						},
+					  {
 						  orderable: false,
 						  searchable: false,
 					      targets: [0]
@@ -141,7 +179,7 @@
 					],
 					columns: [
 			            { data: "caseid" },
-			            { data: "customername" },
+			            { data: "customerid" },
 			            { data: "budget" },
 			            { data: "destination" },
 			            { data: "source" },
