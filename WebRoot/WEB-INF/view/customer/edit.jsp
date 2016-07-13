@@ -292,10 +292,10 @@
 	
 	if("${customer.gender}"=='male'){
 		$('#male').attr('checked','true');
-	}
-	else{
+	};
+	if("${customer.gender}"=='female'){
 		$('#female').attr('checked','true');
-	}
+	};
 	jQuery(document).ready(function() {
 
 		$(".nav-parent").eq(2).addClass("nav-active");
@@ -397,12 +397,6 @@
 			changeMonth: true,
 			maxDate: 0
 		});
-		 
-		//生日格式转换
-		var date = $("#birthday").val();	
-		var dateformat = new Date(date).toISOString("yyyy-MM-dd hh:mm:ss.S").substring(0,10);
-		//console.log(dateformat);
-		$("#birthday").val(dateformat)
 
 		jQuery("#form").validate({
 			rules: {
@@ -446,17 +440,25 @@
 			      	return false;
 			    }
 		    }
+			 
 		});
+		
+		$("#btn-back").click( function () {
+			history.go(-1);
+	    } ); 
+		
+		//生日格式转换
+		var date = $("#birthday").val();	
+		var dateformat = new Date(date).toISOString("yyyy-MM-dd hh:mm:ss.S").substring(0,10);
+		//console.log(dateformat);
+		$("#birthday").val(dateformat)
+		
 		// 手机，邮箱，微信，QQ，输入一个以后移除错误提示
 		$(".contact-field").find("input").blur(function(){
 			if($(this).val() !== ""){
 				$(".contact-field").removeClass("has-error");
 			}
 		});
-
-		$("#btn-back").click( function () {
-			history.go(-1);
-	    } ); 
 		
 	});
 //			      

@@ -17,7 +17,7 @@
 		u.creat_time as creattime,
 		u.isdel as isdel
 		from tm_case u  
-		where u.isdel = 0 
+		where u.isdel = 0 and u.customer_id = #{customerid}
 		order by u.creat_time
 		) table_alias
 		limit #{b},#{e}
