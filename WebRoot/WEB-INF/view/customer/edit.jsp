@@ -347,7 +347,6 @@
 		    jQuery('select').select2({
 		        minimumResultsForSearch: -1
 		    });
-		    
 		    jQuery('select').removeClass('form-control');
 
 			$('#dataTable-case tbody').on( 'click', 'a.btn-success', function () {
