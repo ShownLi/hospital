@@ -192,6 +192,7 @@
 	<%@ include file="../assets/pages/foot.jsp"%>
 	<script src="${rootPath}assets/js/select2.min.js"></script>
 	<script src="${rootPath}assets/js/jquery-ui-1.10.3.min.js"></script>
+	<script src="${rootPath}assets/js/datepicker-zh-CN.js"></script>
 	<script src="${rootPath}assets/js/jquery.validate.min.js"></script>
 	
 	<script type="text/javascript">
@@ -218,8 +219,11 @@
 
 			// Date Picker
 			jQuery(".datepicker").datepicker({
-				dateFormat: "yy-mm-dd"}
-			),
+				dateFormat: "yy-mm-dd",
+				changeYear: true,
+				changeMonth: true,
+				maxDate: 0,
+			});
 			
 			jQuery("#form").validate({
 				

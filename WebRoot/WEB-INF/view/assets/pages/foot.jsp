@@ -13,3 +13,4 @@
 <script src="${rootPath}assets/js/custom.js"></script>
 
 <script src="${rootPath}assets/js/my.js"></script>
+<script src="${rootPath}assets/js/tourmadecrm.js"></script>
