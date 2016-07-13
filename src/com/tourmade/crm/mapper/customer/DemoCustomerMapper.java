@@ -13,7 +13,7 @@ public interface DemoCustomerMapper extends BaseMapper {
 	
 	public long countCustomer(DemoCustomer customer);
 	
-	public void saveCustomer(DemoCustomer customer);
+	public int saveCustomer(DemoCustomer customer);
 
 	public void updateCustomer(DemoCustomer customer);
 

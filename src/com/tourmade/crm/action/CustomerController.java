@@ -80,6 +80,7 @@ public class CustomerController extends BaseSimpleFormController {
 		
 		try {
 			service.saveCustomer(customer);
+			j.setObj(customer);
 			j.setSuccess(true);
 		} catch (Exception e) {
 			j.setSuccess(false);

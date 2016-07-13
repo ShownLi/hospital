@@ -73,10 +73,14 @@ public class CommentController extends BaseSimpleFormController {
 	public Json doAdd(HttpServletRequest request, HttpSession session, Model model, DemoComment comment) {
 
 		Json j = new Json();
-		System.out.println(comment);
 		try {
-			service.saveComment(comment);
-			j.setSuccess(true);
+			if(comment.getContent() != ""){
+				service.saveComment(comment);
+				j.setSuccess(true);
+			}
+			else{
+				j.setSuccess(false);
+			}
 		} catch (Exception e) {
 			j.setSuccess(false);
 			logger.error("CommentController.doAdd() --> " + comment.toString() + "\n" + e.getMessage());

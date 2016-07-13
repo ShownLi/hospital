@@ -25,12 +25,6 @@
 		u.isdel as isdel
 		from tm_customer u  
 		where u.isdel = 0 
-		<if test="pojo.seachValue!=null and pojo.seachValue!=''">
-			and
-			(
-			u.customer_name_zh like '%${pojo.seachValue}%'
-			)
-		</if>
 		order by u.creat_time
 		) table_alias
 		limit #{b},#{e}
@@ -40,12 +34,6 @@
 		select count(u.customer_id) from tm_customer u
 		where
 		u.isdel = 0
-		<if test="seachValue!=null and seachValue!=''">
-			and
-			(
-			u.customer_name_zh like '%${seachValue}%'
-			)
-		</if>
 
 	</select>
 	
