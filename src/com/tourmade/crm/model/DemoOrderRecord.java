@@ -23,7 +23,7 @@ public class DemoOrderRecord extends BaseBean<DemoOrderRecord> {
 	
 	private int senderid;
 	
-	private String sender;
+	private String senderemail;
 	
 	private String sendername;
 	
@@ -63,12 +63,12 @@ public class DemoOrderRecord extends BaseBean<DemoOrderRecord> {
 		this.senderid = senderid;
 	}
 
-	public String getSender() {
-		return sender;
+	public String getSenderemail() {
+		return senderemail;
 	}
 
-	public void setSender(String sender) {
-		this.sender = sender;
+	public void setSenderemail(String senderemail) {
+		this.senderemail = senderemail;
 	}
 
 	public String getSendername() {
@@ -134,9 +134,9 @@ public class DemoOrderRecord extends BaseBean<DemoOrderRecord> {
 	@Override
 	public String toString() {
 		return "DemoOrderRecord [orderrecordid=" + orderrecordid + ", orderid=" + orderid + ", senderid=" + senderid
-				+ ", sender=" + sender + ", sendername=" + sendername + ", content=" + content + ", fileurl=" + fileurl
-				+ ", reqtime=" + reqtime + ", creattime=" + creattime + ", updatetime=" + updatetime + ", isdel="
-				+ isdel + "]";
+				+ ", senderemail=" + senderemail + ", sendername=" + sendername + ", content=" + content + ", fileurl="
+				+ fileurl + ", reqtime=" + reqtime + ", creattime=" + creattime + ", updatetime=" + updatetime
+				+ ", isdel=" + isdel + "]";
 	}
-	
+
 }
