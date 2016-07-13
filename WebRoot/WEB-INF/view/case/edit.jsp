@@ -284,17 +284,17 @@
               </table>
           </div>
           <!-- 添加注释 -->
-	<form id="comment" class="form">
-          <div class="form-group col-sm-6 col-sm-offset-3">
-                <textarea name="content" class="form-control" rows="5"></textarea>
-                <input  type="hidden" name="userid" value="${loginUser.userid}" />
-                <input  type="hidden" name="username" value="${loginUser.name}" />
-                <input  type="hidden" name="objectid" value="${crmcase.caseid}" />
-                <input  type="hidden" name="commenttype" value="case" />
-          </div>
-          <div class="form-group col-sm-12 align-center">
-            <button class="btn btn-primary">添加注释</button>
-          </div>
+    	    <form id="comment" class="form">
+              <div class="form-group col-sm-6 col-sm-offset-3">
+                    <textarea name="content" class="form-control" rows="5"></textarea>
+                    <input  type="hidden" name="userid" value="${loginUser.userid}" />
+                    <input  type="hidden" name="username" value="${loginUser.name}" />
+                    <input  type="hidden" name="objectid" value="${crmcase.caseid}" />
+                    <input  type="hidden" name="commenttype" value="case" />
+              </div>
+              <div class="form-group col-sm-12 align-center">
+                <button class="btn btn-primary">添加注释</button>
+              </div>
           </form>
         </div>
     </div><!-- end of panel 注释 -->
