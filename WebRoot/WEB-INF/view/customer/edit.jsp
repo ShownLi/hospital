@@ -395,7 +395,7 @@
 			dateFormat: "yy-mm-dd",
 			changeYear: true,
 			changeMonth: true,
-			maxDate: 0,
+			maxDate: 0
 		});
 		 
 				
