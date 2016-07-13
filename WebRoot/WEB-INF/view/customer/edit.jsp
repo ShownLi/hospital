@@ -202,7 +202,7 @@
 						</table>
 					</div>
 					<!-- 添加注释 -->
-					<form id="comment" class="form clearfix">
+					<form id="comment" class="form">
 						<div class="form-group col-sm-6 col-sm-offset-3">
 						    <textarea name="content" class="form-control" rows="5"></textarea>
 						    <input  type="hidden" name="userid" value="${loginUser.userid}" />

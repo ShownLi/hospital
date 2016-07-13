@@ -69,6 +69,12 @@
                         <input type="text" name="source" class="source-select fullwidth" value="" />
                       </div>
                     </div>
+                    <div class="form-group col-sm-4">
+                      <label class="col-sm-4 control-label">IP地址</label>
+                      <div class="col-sm-8">
+                        <input type="text" name="ip_address" class="form-control" value="" />
+                      </div>
+                    </div>
                     </div>
                     <div class="section-block">
                    	<div class="form-group col-sm-4">
@@ -88,7 +94,13 @@
                       <div class="col-sm-8">
                         <input type="text" name="status" class="status-select fullwidth" value="1" readonly/>
                       </div>
-                    </div>               
+                    </div>  
+                    <div class="form-group col-sm-4">
+                      <label class="col-sm-4 control-label">表单类型</label>
+                      <div class="col-sm-8">
+                        <input type="text" name="submit_type" class="submittype-select fullwidth" value="" />
+                      </div>
+                    </div>              
                 </div>
                 <div class="section-block">
                     <div class="form-group col-sm-4">
@@ -97,7 +109,7 @@
                         <input type="text" name="withwho" class="withwho-select fullwidth" value="" />
                       </div>
                     </div>
-                    <div class="form-group col-sm-4">
+                    <div class="form-group col-sm-4" style="clear: both;">
                       <label class="col-sm-4 control-label">成人</label>
                       <div class="col-sm-8">
                         <input type="text" name="adult" placeholder="成人" class="form-control" value="0" />
@@ -107,6 +119,12 @@
                       <label class="col-sm-6 control-label">儿童（12岁以下）</label>
                       <div class="col-sm-6">
                         <input type="text" name="children" placeholder="儿童（12岁以下）" class="form-control" value="0" />
+                      </div>
+                    </div>
+                    <div class="form-group col-sm-4">
+                      <label class="col-sm-6 control-label">婴儿（0-2岁）</label>
+                      <div class="col-sm-6">
+                        <input type="text" name="baby" placeholder="婴儿（0-2岁）" class="form-control" value="0" />
                       </div>
                     </div>
                 </div>
@@ -128,7 +146,7 @@
                     <div class="form-group col-sm-4 d1">
                       <label class="col-sm-4 control-label">大约时间</label>
                       <div class="col-sm-8 input-group input-datepicker">
-                        <input type="text" name="startmonth" class="form-control datepicker" placeholder="mm/dd/yyyy" autocomplete="off">
+                        <input id="startmonth" type="text" name="startmonth" class="form-control datepicker" placeholder="mm/dd/yyyy" autocomplete="off">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                       </div>
                     </div>
@@ -141,24 +159,24 @@
                     <div class="form-group col-sm-4 d2">
                       <label class="col-sm-4 control-label">出发日期</label>
                       <div class="col-sm-8 input-group input-datepicker">
-                        <input type="text" name="startdate" class="form-control datepicker" placeholder="yyyy/mm/dd" autocomplete="off">
+                        <input id="startdate" type="text" name="startdate" class="form-control datepicker" placeholder="yyyy/mm/dd" autocomplete="off">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                       </div>
                     </div>
                     <div class="form-group col-sm-4 d2">
                       <label class="col-sm-4 control-label">返回日期</label>
                       <div class="col-sm-8 input-group input-datepicker">
-                        <input type="text" name="enddate" class="form-control datepicker" placeholder="yyyy/mm/dd" autocomplete="off">
+                        <input id="enddate" type="text" name="enddate" class="form-control datepicker" placeholder="yyyy/mm/dd" autocomplete="off">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                       </div>
                     </div>
                 </div>
                 <div class="section-block">
                     <div class="form-group col-sm-4">
-                      <label class="col-sm-4 control-label">客人的要求</label>
-                      <div class="col-sm-8">
-                        <textarea name="requirement" class="form-control" placeholder="客人的要求" rows="5"></textarea>
-                      </div>
+                        <label class="col-sm-5 control-label">定制偏好</label>
+                        <div class="col-sm-7">
+                          <input type="text" name="tailormade" placeholder="定制偏好" class="tailormade-select fullwidth" value="0" />
+                        </div>
                     </div>
                     <div class="form-group col-sm-4">
                       <label class="col-sm-4 control-label">关于住宿</label>
@@ -183,6 +201,32 @@
                       <div class="col-sm-8">
                         <input type="text" name="budget" placeholder="客人的预算" class="form-control" value="0" />
                       </div>
+                    </div>
+                    <div class="form-group col-sm-4">
+                      <label class="col-sm-4 control-label">客人的要求</label>
+                      <div class="col-sm-8">
+                        <textarea name="requirement" class="form-control" placeholder="客人的要求" rows="5"></textarea>
+                      </div>
+                    </div>
+                </div>
+                <div class="section-block">
+                    <div class="form-group col-sm-4">
+                        <label class="col-sm-4 control-label">护照</label>
+                        <div class="col-sm-8">
+                          <input type="text" name="passport" placeholder="护照" class="passport-select fullwidth" value="0" />
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-4">
+                        <label class="col-sm-4 control-label">签证</label>
+                        <div class="col-sm-8">
+                          <input type="text" name="visa" placeholder="签证" class="visae-select fullwidth" value="0" />
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-4">
+                        <label class="col-sm-4 control-label">国际航班</label>
+                        <div class="col-sm-8">
+                          <input type="text" name="flight" placeholder="国际航班" class="flight-select fullwidth" value="0" />
+                        </div>
                     </div>
                 </div>
             </div><!-- panel-body -->
@@ -320,9 +364,25 @@
 			
         $(".nav-parent").eq(0).addClass("nav-active");
         $(".nav-parent").eq(0).find(".children").show();
+
         // Date Picker
-        jQuery(".datepicker").datepicker({
-          dateFormat: "yy-mm-dd"
+        jQuery("#startmonth").datepicker({
+          dateFormat: "yy-mm-dd",
+          changeYear: true,
+          changeMonth: true,
+          minDate: 0
+        });
+        $("#startdate").datepicker({
+          dateFormat: "yy-mm-dd",
+          changeYear: true,
+          changeMonth: true,
+          minDate: 0
+        });
+        $("#enddate").datepicker({
+          dateFormat: "yy-mm-dd",
+          changeYear: true,
+          changeMonth: true,
+          minDate: 0
         });
 
         $("input[name='starttime']").change(function() {
@@ -341,6 +401,7 @@
     				rules: {
     					adult: "digits",
     					children: "digits",
+              baby: "digits",
               budget: "digits",
               startdate: "date",
               enddate: "date",
@@ -350,6 +411,7 @@
     				messages: {
     					adult: "请输入一个整数",
               children: "请输入一个整数",
+              baby: "请输入一个整数",
               budget: "请输入一个整数",
               startdate: "请输入正确的日期格式 mm/dd/yyyy",
               enddate: "请输入正确的日期格式 mm/dd/yyyy",

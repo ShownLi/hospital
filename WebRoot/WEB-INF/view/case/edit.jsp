@@ -40,24 +40,44 @@
         <form class="form-horizontal" id="form">
         <div class="panel-body panel-body-nopadding">
             <div class="section-block">
-            	<div class="form-group col-sm-4">
-            	<label class="col-sm-4 control-label">所属客人</label>
-                	<div class="col-sm-8">
-                    	<input type="text" name="customerid" placeholder="所属客人" class="customer-select fullwidth" value="${crmcase.customerid}" />
+              	<div class="form-group col-sm-4">
+              	   <label class="col-sm-4 control-label">所属客人</label>
+                  	<div class="col-sm-8">
+                      	<input type="text" name="customerid" placeholder="所属客人" class="customer-select fullwidth" value="${crmcase.customerid}" />
                     </div>
-            	</div>
+              	</div>
                 <div class="form-group col-sm-4">
-                  <label class="col-sm-4 control-label">销售姓名</label>
-                  <div class="col-sm-8">
-                    <input type="text" name="salesname" placeholder="销售姓名" class="sales-select fullwidth" readonly value="${crmcase.salesname}" />
-                  </div>
+                    <label class="col-sm-4 control-label">沟通语言</label>
+                    <div class="col-sm-8">
+                      <input type="text" name="preferlanguage" class="language-select fullwidth" value="${crmcase.preferlanguage}"/>
+                    </div>
                 </div>
-               	<div class="form-group col-sm-4">
-                  <label class="col-sm-4 control-label">状态</label>
-                  <div class="col-sm-8">
-                    <input type="text" name="status" placeholder="状态" class="status-select fullwidth" readonly value="${crmcase.status}" />
-                  </div>
+                <div class="form-group col-sm-4">
+                    <label class="col-sm-4 control-label">希望联系方式</label>
+                    <div class="col-sm-8">
+                      <input type="text" name="contacttype" class="contact-select fullwidth" value="${crmcase.contacttype}" />
+                    </div>
+                </div>   
+                <div class="form-group col-sm-4">
+                    <label class="col-sm-4 control-label">所属销售</label>
+                    <div class="col-sm-8">
+                      <input type="text" name="salesname" placeholder="所属销售" class="sales-select fullwidth" value="" />
+                    </div>
                 </div>
+                <div class="form-group col-sm-4">
+                    <label class="col-sm-4 control-label">询单来源</label>
+                    <div class="col-sm-8">
+                      <input type="text" name="source" class="source-select fullwidth" value="${crmcase.source}" />
+                    </div>
+                </div>
+                <div class="form-group col-sm-4">
+                    <label class="col-sm-4 control-label">IP地址</label>
+                    <div class="col-sm-8">
+                      <input type="text" name="ip_address" class="form-control" readonly value="" />
+                    </div>
+                </div>
+            </div>
+            <div class="section-block">
                 <div class="form-group col-sm-4">
                   <label class="col-sm-4 control-label">目的地</label>
                   <div class="col-sm-8">
@@ -71,30 +91,17 @@
                   </div>
                 </div>
                 <div class="form-group col-sm-4">
+                  <label class="col-sm-4 control-label">状态</label>
+                  <div class="col-sm-8">
+                    <input type="text" name="status" placeholder="状态" class="status-select fullwidth" readonly value="${crmcase.status}" />
+                  </div>
+                </div>
+                <div class="form-group col-sm-4">
                   <label class="col-sm-4 control-label">表单类型</label>
                   <div class="col-sm-8">
                     <input type="text" name="submit_type" class="form-control" readonly value="${crmcase.submittype}" />
                   </div>
-                </div>
-                <div class="form-group col-sm-4">
-                  <label class="col-sm-4 control-label">询单来源</label>
-                  <div class="col-sm-8">
-                    <input type="text" name="source" class="source-select fullwidth" value="${crmcase.source}" />
-                  </div>
-                </div>
-
-                <div class="form-group col-sm-4">
-                  <label class="col-sm-4 control-label">沟通语言</label>
-                  <div class="col-sm-8">
-                    <input type="text" name="preferlanguage" class="language-select fullwidth" value="${crmcase.preferlanguage}"/>
-                  </div>
-                </div>
-                <div class="form-group col-sm-4">
-                  <label class="col-sm-4 control-label">希望联系方式</label>
-                  <div class="col-sm-8">
-                    <input type="text" name="contacttype" class="contact-select fullwidth" value="${crmcase.contacttype}" />
-                  </div>
-                </div>                
+                </div>            
             </div>
             <div class="section-block">
                 <div class="form-group col-sm-4">
@@ -103,7 +110,7 @@
                     <input type="text" name="withwho" class="withwho-select fullwidth" value="${crmcase.withwho}" />
                   </div>
                 </div>
-                <div class="form-group col-sm-4">
+                <div class="form-group col-sm-4" style="clear: both;">
                   <label class="col-sm-4 control-label">成人</label>
                   <div class="col-sm-8">
                     <input type="text" name="adult" placeholder="成人" class="form-control" value="${crmcase.adult}" />
@@ -113,6 +120,12 @@
                   <label class="col-sm-6 control-label">儿童（12岁以下）</label>
                   <div class="col-sm-6">
                     <input type="text" name="children" placeholder="儿童（12岁以下）" class="form-control" value="${crmcase.children}" />
+                  </div>
+                </div>
+                <div class="form-group col-sm-4">
+                  <label class="col-sm-6 control-label">婴儿（0-2岁）</label>
+                  <div class="col-sm-6">
+                    <input type="text" name="baby" placeholder="婴儿（0-2岁）" class="form-control" value="0" />
                   </div>
                 </div>
             </div>
@@ -161,10 +174,10 @@
             </div>
             <div class="section-block">
                 <div class="form-group col-sm-4">
-                  <label class="col-sm-4 control-label">客人的要求</label>
-                  <div class="col-sm-8">
-                    <textarea id="requirement" name="requirement" class="form-control" placeholder="客人的要求" rows="5"></textarea>
-                  </div>
+                    <label class="col-sm-5 control-label">定制偏好</label>
+                    <div class="col-sm-7">
+                      <input type="text" name="tailormade" placeholder="定制偏好" class="tailormade-select fullwidth" value="0" />
+                    </div>
                 </div>
                 <div class="form-group col-sm-4">
                   <label class="col-sm-4 control-label">关于住宿</label>
@@ -190,7 +203,33 @@
                     <input type="text" name="budget" placeholder="客人的预算" class="form-control" value="${crmcase.budget}" />
                   </div>
                 </div>
+                <div class="form-group col-sm-4">
+                  <label class="col-sm-4 control-label">客人的要求</label>
+                  <div class="col-sm-8">
+                    <textarea id="requirement" name="requirement" class="form-control" placeholder="客人的要求" rows="5"></textarea>
+                  </div>
+                </div>
             </div>
+            <div class="section-block">
+                    <div class="form-group col-sm-4">
+                        <label class="col-sm-4 control-label">护照</label>
+                        <div class="col-sm-8">
+                          <input type="text" name="passport" placeholder="护照" class="passport-select fullwidth" value="0" />
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-4">
+                        <label class="col-sm-4 control-label">签证</label>
+                        <div class="col-sm-8">
+                          <input type="text" name="visa" placeholder="签证" class="visae-select fullwidth" value="0" />
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-4">
+                        <label class="col-sm-4 control-label">国际航班</label>
+                        <div class="col-sm-8">
+                          <input type="text" name="flight" placeholder="国际航班" class="flight-select fullwidth" value="0" />
+                        </div>
+                    </div>
+                </div>
         </div><!-- panel-body -->
         
         <div class="panel-footer align-center">
@@ -209,7 +248,7 @@
         </div>
         <h4 class="panel-title">订单列表</h4>
       </div>
-      <div class="panel-body panel-body-nopadding">
+      <div class="panel-body">
           <div class="table-responsive">
 
               <table id="dataTable-order" class="table">
@@ -428,110 +467,74 @@ $(".sales-select").select2({
    placeholder: '销售',
    data: sales
 });
-	jQuery(document).ready(function() {
-		
-		jQuery("#comment").validate({
-			rule:{
-				content: "required"
-			},
-			
-			message:{
-				content:"请输入注释内容"
-			},
-			highlight: function(element) {
-				jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
-			},
-			success: function(element) {
-				jQuery(element).closest('.form-group').removeClass('has-error');
-			},
-			invalidHandler : function(){
-				return false;
-			},
-			submitHandler : function(){
-				comment_submit();
-			    return false;
-			}
-		});
+$(".destination-select").select2({
+    placeholder: '国家',
+    data: d1
+});
 
-		$(".nav-parent").eq(0).addClass("nav-active");
-		$(".nav-parent").eq(0).find(".children").show();
-			
-		// Date Picker
-		jQuery(".datepicker").datepicker({
-			dateFormat: "yy-mm-dd",
-			changeYear: true,
-			changeMonth: true,
-			maxDate: 0
-		});
 
-      $("input[name='starttime']").change(function() {
-          var val = $("input[name='starttime']:checked").val();
-          if (val == 1) {
-              $(".d1").hide();
-              $(".d2").show();
-          }else{
-              $(".d2").hide();
-              $(".d1").show();
-          }
-      }); 
-		 var t = jQuery('#dataTable-order').DataTable({
-			 	pageLength: 10,
-			 	processing: true,
-			 	language: datatable_local_language, // my.js
-			 	serverSide: true,
-			 	ajax: {
-			 		url: '${rootPath}order/list.do',
-			 		dataFilter: function(data){
-			             var json = jQuery.parseJSON( data );
-			             json.recordsTotal = json.countTotal;
-			             json.recordsFiltered = json.countFiltered;
-			             json.data = json.data;
-			             return JSON.stringify( json );
-			         }
-			 	},
-			 	columnDefs: [
-			       {
-			           data: "orderid",
-			           //defaultContent: '<a class="btn btn-success btn-xs"><span class="fa fa-edit"></span> 编辑</a>&nbsp;<a class="btn btn-danger btn-xs"><span class="fa fa-minus-circle"></span> 删除</a>',
-			 	      orderable: false,
-			 	      render: function ( data, type, full, meta ) {
-		               return '<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a>&nbsp;';
-			 	  },
-			 	              targets: 7
-			 				  },				             
-			 	  {
-			 		  orderable: false,
-			 		  searchable: false,
-			 	      targets: [0,1,2]
-			 	  },
-			 	],
-			 	columns: [
-		             { data: "orderid" },
-		             { data: "customername" },
-		             { data: "agencyname" },
-		             { data: "salesname" },
-		             { data: "destination" },
-		             { data: "budget" },
-		             { data: "status" }
-		         ]
-			 });
+		  var t = jQuery('#dataTable-order').DataTable({
+  			 	pageLength: 10,
+  			 	processing: true,
+  			 	language: datatable_local_language, // my.js
+  			 	serverSide: true,
+  			 	ajax: {
+    			 		url: '${rootPath}order/list.do',
+    			 		dataFilter: function(data){
+    			             var json = jQuery.parseJSON( data );
+    			             json.recordsTotal = json.countTotal;
+    			             json.recordsFiltered = json.countFiltered;
+    			             json.data = json.data;
+    			             return JSON.stringify( json );
+    			         }
+  			 	},
+  			 	columnDefs: [
+  			       {
+  			           data: "orderid",
+  			           //defaultContent: '<a class="btn btn-success btn-xs"><span class="fa fa-edit"></span> 编辑</a>&nbsp;<a class="btn btn-danger btn-xs"><span class="fa fa-minus-circle"></span> 删除</a>',
+    			 	      orderable: false,
+    			 	      render: function ( data, type, full, meta ) {
+    		               return '<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a>&nbsp;';
+  			 	    },
+  			 	              targets: 7
+  			 				  },				             
+  			 	    {
+    			 		    orderable: false,
+    			 		    searchable: false,
+    			 	      targets: [0,1,2]
+  			 	    },
+  			 	],
+  			 	columns: [
+  		             { data: "orderid" },
+  		             { data: "customername" },
+  		             { data: "agencyname" },
+  		             { data: "salesname" },
+  		             { data: "destination" },
+  		             { data: "budget" },
+  		             { data: "status" }
+  		    ]
+			});
 			jQuery("#form").validate({
         
           rules: {
             adult: "digits",
             children: "digits",
+            baby: "digits",
             budget: "digits",
             startdate: "date",
             enddate: "date",
             startmonth: "date",
+            during: "digits",
           },
           messages: {
             adult: "请输入一个整数",
             children: "请输入一个整数",
+            baby: "请输入一个整数",
             budget: "请输入一个整数",
             startdate: "请输入正确的日期格式 mm/dd/yyyy",
             enddate: "请输入正确的日期格式 mm/dd/yyyy",
             startmonth: "请输入正确的日期格式 mm/dd/yyyy",
+            during: "请输入一个整数",
           },
         
           highlight: function(element) {
@@ -548,140 +551,219 @@ $(".sales-select").select2({
             return false;
           }
       });
-  			$("#btn-back").click( function () {
+  		$("#btn-back").click( function () {
   				history.go(-1);
-  		  }); 
+  		}); 
 
-        $("#addorder").click(function(){
+      $("#addorder").click(function(){
           $("#nextModal").modal('show');
           return false;
-        });
-        
-		//大约时间格式转换
-		var date = $("#startmonth").val();	
-		var dateformat = new Date(date).toISOString("yyyy-MM-dd hh:mm:ss.S").substring(0,10);
-		$("#startmonth").val(dateformat)
-		
-		//大约时间格式转换
-		var date = $("#startdate").val();	
-		var dateformat = new Date(date).toISOString("yyyy-MM-dd hh:mm:ss.S").substring(0,10);
-		$("#startdate").val(dateformat)
-		
-		//大约时间格式转换
-		var date = $("#enddate").val();	
-		var dateformat = new Date(date).toISOString("yyyy-MM-dd hh:mm:ss.S").substring(0,10);
-		$("#enddate").val(dateformat)
-    });
-    $(".nextModal .submit").click(function(){
-    	order_submit();
       });
-		function order_submit() {
-  			var f = $("#order").serialize();
-  			$.post('${rootPath}order/add.do', f, function(result) {
-  				var rmsg = result.msg;
-  				if (result.success) {
-  					window.parent.location = "${rootPath}case/edit.html?id=${crmcase.caseid}";
-  					//$("#nextModal").modal('show');
-  				} else {
-  					//$("#msgModal").modal('show');
-  				}
-  			}, "JSON");
-  		}
-	if("${crmcase.starttime}"==1){
-		$('#yes').attr('checked','true');
-	}
-	else{
-		$('#no').attr('checked','true');
-	}
+        
+  		
+
+
+      $(".nextModal .submit").click(function(){
+      	order_submit();
+      });
+  		function order_submit() {
+    			var f = $("#order").serialize();
+    			$.post('${rootPath}order/add.do', f, function(result) {
+    				var rmsg = result.msg;
+    				if (result.success) {
+    					window.parent.location = "${rootPath}case/edit.html?id=${crmcase.caseid}";
+    					//$("#nextModal").modal('show');
+    				} else {
+    					//$("#msgModal").modal('show');
+    				}
+    			}, "JSON");
+    	}
+    	if("${crmcase.starttime}"==1){
+    		$('#yes').attr('checked','true');
+    	}
+    	else{
+    		$('#no').attr('checked','true');
+    	}
   		function form_submit() {
-  			var f = $("#form").serialize();
-  			$.post('${rootPath}case/edit.do', f, function(result) {
-  				var rmsg = result.msg;
-  				if (result.success) {
-  					//window.parent.location = "${rootPath}customer/list.html";
-  					$("#nextModal").modal('show');
-  				} else {
-  					//$("#msgModal").modal('show');
-  				}
-  			}, "JSON");
+    			var f = $("#form").serialize();
+    			$.post('${rootPath}case/edit.do', f, function(result) {
+    				var rmsg = result.msg;
+    				if (result.success) {
+    					//window.parent.location = "${rootPath}customer/list.html";
+    					$("#nextModal").modal('show');
+    				} else {
+    					//$("#msgModal").modal('show');
+    				}
+    			}, "JSON");
   		}
   		var t = jQuery('#dataTable-note').DataTable({
-  			pageLength: 10,
-  			processing: true,
-  			language: datatable_local_language, // my.js
-  			serverSide: true,
-  			ajax: {
-  				url: '${rootPath}comment/list.do?type=case&id=${crmcase.caseid}',
-  				dataFilter: function(data){
-  				    var json = jQuery.parseJSON( data );
-  				    json.recordsTotal = json.countTotal;
-  				    json.recordsFiltered = json.countFiltered;
-  				    json.data = json.data;
-  				    return JSON.stringify( json );
-  			    	}
-  				},
-				columnDefs: [
-							  {
-								  data: "creattime",
-								  render: function ( data, type, full, meta ) {
-									  var creattime = new Date(data.time);
-				                      return creattime.format("yyyy/MM/dd");
-				                  },
-				                  targets: 3
-							  }
-							],
-  			columns: [
-  			    { data: "commentid" },
-  			    { data: "username" },
-  			    { data: "content" },
-  			    { data: "creattime" }
-  		    ]
-  			});
+    			pageLength: 10,
+    			processing: true,
+    			language: datatable_local_language, // my.js
+    			serverSide: true,
+    			ajax: {
+      				url: '${rootPath}comment/list.do?type=case&id=${crmcase.caseid}',
+      				dataFilter: function(data){
+      				    var json = jQuery.parseJSON( data );
+      				    json.recordsTotal = json.countTotal;
+      				    json.recordsFiltered = json.countFiltered;
+      				    json.data = json.data;
+      				    return JSON.stringify( json );
+      			  }
+      		},
+    			columnDefs: [
+    							  {
+    								  data: "creattime",
+    								  render: function ( data, type, full, meta ) {
+    									  var creattime = new Date(data.time);
+    				                      return creattime.format("yyyy/MM/dd");
+    				                  },
+    				                  targets: 3
+    							  }
+    							],
+      	  columns: [
+      			    { data: "commentid" },
+      			    { data: "username" },
+      			    { data: "content" },
+      			    { data: "creattime" }
+      		]
+  		});
   		var r = jQuery('#dataTable-record').DataTable({
-  			pageLength: 10,
-  			processing: true,
-  			language: datatable_local_language, // my.js
-  			serverSide: true,
-  			ajax: {
-  				url: '${rootPath}record/list.case?caseid=${crmcase.caseid}',
-  				dataFilter: function(data){
-  				    var json = jQuery.parseJSON( data );
-  				    json.recordsTotal = json.countTotal;
-  				    json.recordsFiltered = json.countFiltered;
-  				    json.data = json.data;
-  				    return JSON.stringify( json );
-  			    	}
-  				},
-  			columnDefs: [
-  						  {
-  							  data: "creattime",
-  							  render: function ( data, type, full, meta ) {
-  								  var creattime = new Date(data.time);
-  			                    return creattime.format("yyyy-MM-dd");
-  			                },
-  			                targets: 3
-  						  },		 
+    			pageLength: 10,
+    			processing: true,
+    			language: datatable_local_language, // my.js
+    			serverSide: true,
+    			ajax: {
+      				url: '${rootPath}record/list.case?caseid=${crmcase.caseid}',
+      				dataFilter: function(data){
+      				    var json = jQuery.parseJSON( data );
+      				    json.recordsTotal = json.countTotal;
+      				    json.recordsFiltered = json.countFiltered;
+      				    json.data = json.data;
+      				    return JSON.stringify( json );
+      			  }
+      	  },
+    			columnDefs: [
+    						  {
+    							  data: "creattime",
+    							  render: function ( data, type, full, meta ) {
+    								  var creattime = new Date(data.time);
+    			                    return creattime.format("yyyy-MM-dd");
+    			                },
+    			                targets: 3
+    						  },		 
 
-  				],
-  			columns: [
-  		  			    { data: "orderrecordid" },
-  		  			    { data: "sendername" },
-  		  			    { data: "content" },
-  		  			    { data: "creattime" }
-  		    ]
-  			});
+    			],
+    			columns: [
+    		  			    { data: "orderrecordid" },
+    		  			    { data: "sendername" },
+    		  			    { data: "content" },
+    		  			    { data: "creattime" }
+    		  ]
+  		});
+
+      jQuery("#comment").validate({
+          rules: {
+              content: "required"
+          },
+          messages:{
+              content:"请输入注释内容"
+          },
+          highlight: function(element) {
+              jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+          },
+          success: function(element) {
+              jQuery(element).closest('.form-group').removeClass('has-error');
+          },
+          invalidHandler : function(){
+              return false;
+          },
+          submitHandler : function(){
+              comment_submit();
+              return false;
+          }
+      });
+
   		function comment_submit() {
-  			var f = $("#comment").serialize();
-  			$.post('${rootPath}comment/add.do', f, function(result) {
-  				var rmsg = result.msg;
-  				if (result.success) {
-  					window.parent.location = "${rootPath}case/edit.html?id=${crmcase.caseid}";
-  				} 
-  				else {
-  					$("#msgModal").modal('show');
-  				}
-  			}, "JSON");
+    			var f = $("#comment").serialize();
+    			$.post('${rootPath}comment/add.do', f, function(result) {
+      				var rmsg = result.msg;
+      				if (result.success) {
+      					window.parent.location = "${rootPath}case/edit.html?id=${crmcase.caseid}";
+      				} 
+      				else {
+      					$("#msgModal").modal('show');
+      				}
+    			}, "JSON");
   		}
+
+
+  jQuery(document).ready(function() {
+      // Select2
+      jQuery('select').select2({
+          minimumResultsForSearch: -1
+      });
+      jQuery('select').removeClass('form-control');
+
+
+      
+
+      $(".nav-parent").eq(0).addClass("nav-active");
+      $(".nav-parent").eq(0).find(".children").show();
+        
+      // Date Picker
+      jQuery("#startmonth").datepicker({
+        dateFormat: "yy-mm-dd",
+        changeYear: true,
+        changeMonth: true,
+        minDate: 0
+      });
+      $("#startdate").datepicker({
+        dateFormat: "yy-mm-dd",
+        changeYear: true,
+        changeMonth: true,
+        minDate: 0
+      });
+      $("#enddate").datepicker({
+        dateFormat: "yy-mm-dd",
+        changeYear: true,
+        changeMonth: true,
+        minDate: 0
+      });
+
+      //大约时间格式转换
+      var date = $("#startmonth").val();  
+      if(date !== ""){
+        var dateformat = new Date(date).toISOString("yyyy-MM-dd hh:mm:ss.S").substring(0,10);
+        $("#startmonth").val(dateformat);
+      }
+      
+      //大约时间格式转换
+      var date = $("#startdate").val(); 
+      if(date !== ""){
+        var dateformat = new Date(date).toISOString("yyyy-MM-dd hh:mm:ss.S").substring(0,10);
+        $("#startdate").val(dateformat);
+      }
+      
+      //大约时间格式转换
+      var date = $("#enddate").val(); 
+      if(date !== ""){
+        var dateformat = new Date(date).toISOString("yyyy-MM-dd hh:mm:ss.S").substring(0,10);
+        $("#enddate").val(dateformat);
+      }
+  
+      $("input[name='starttime']").change(function() {
+          var val = $("input[name='starttime']:checked").val();
+          if (val == 1) {
+              $(".d1").hide();
+              $(".d2").show();
+          }else{
+              $(".d2").hide();
+              $(".d1").show();
+          }
+      }); 
+  });
+
 	</script>
 
 

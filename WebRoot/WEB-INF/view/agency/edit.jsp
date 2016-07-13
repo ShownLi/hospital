@@ -48,13 +48,13 @@
 			              			</div>
 			              		</div>         
 			            		<div class="form-group col-sm-4">
-			              			<label class="col-sm-4 control-label">语言 <span class="asterisk">*</span></label>
+			              			<label class="col-sm-4 control-label">语言</label>
 			               			<div class="col-sm-8">
 			               				<input type="text" id="language" name="language" class="language-select fullwidth" value="${agency.language }"/>
 			               			</div>
 			            		</div>              
 			            		<div class="form-group col-sm-4">
-			              			<label class="col-sm-4 control-label">国家 <span class="asterisk">*</span></label>
+			              			<label class="col-sm-4 control-label">国家</label>
 			              			<div class="col-sm-8">
 			              				<input type="text" id="country" name="country" class="country-select fullwidth" value="${agency.country }"/>
 			              			</div>

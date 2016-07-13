@@ -109,6 +109,7 @@
 
 			$(".nav-parent").eq(0).addClass("nav-active");
 			$(".nav-parent").eq(0).find(".children").show();
+			
 			var t = jQuery('#dataTable').DataTable({
 				pageLength: 10,
 				processing: true,

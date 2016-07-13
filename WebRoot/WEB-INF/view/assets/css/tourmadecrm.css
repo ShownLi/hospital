@@ -13,6 +13,9 @@ label.error{
 .fullwidth{
 	width: 100%;
 }
+.select2-container{
+	margin-bottom: 1px;
+}
 .rdio-inline{
 	display:inline-block;
 	margin:10px 15px 0 0;
