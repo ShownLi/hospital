@@ -40,12 +40,49 @@
         <form class="form-horizontal" id="form">
         <div class="panel-body panel-body-nopadding">
             <div class="section-block">
+            	<div class="form-group col-sm-4">
+            	<label class="col-sm-4 control-label">所属客人</label>
+                	<div class="col-sm-8">
+                    	<input type="text" name="customerid" placeholder="所属客人" class="customer-select fullwidth" value="${crmcase.customerid}" />
+                    </div>
+            	</div>
                 <div class="form-group col-sm-4">
-                  <label class="col-sm-4 control-label">称呼</label>
+                  <label class="col-sm-4 control-label">销售姓名</label>
                   <div class="col-sm-8">
-                    <input type="text" name="customername" placeholder="称呼" class="form-control" readonly value="${crmcase.customername}" />
+                    <input type="text" name="salesname" placeholder="销售姓名" class="sales-select fullwidth" readonly value="${crmcase.salesname}" />
                   </div>
                 </div>
+               	<div class="form-group col-sm-4">
+                  <label class="col-sm-4 control-label">状态</label>
+                  <div class="col-sm-8">
+                    <input type="text" name="status" placeholder="状态" class="status-select fullwidth" readonly value="${crmcase.status}" />
+                  </div>
+                </div>
+                <div class="form-group col-sm-4">
+                  <label class="col-sm-4 control-label">目的地</label>
+                  <div class="col-sm-8">
+                    <input type="text" name="destination" class="form-control" readonly value="${crmcase.destination}" />
+                  </div>
+                </div>
+                <div class="form-group col-sm-4">
+                  <label class="col-sm-4 control-label">行程</label>
+                  <div class="col-sm-8">
+                    <input type="text" name="route" placeholder="行程" class="form-control" readonly value="${crmcase.route}" />
+                  </div>
+                </div>
+                <div class="form-group col-sm-4">
+                  <label class="col-sm-4 control-label">表单类型</label>
+                  <div class="col-sm-8">
+                    <input type="text" name="submit_type" class="form-control" readonly value="${crmcase.submittype}" />
+                  </div>
+                </div>
+                <div class="form-group col-sm-4">
+                  <label class="col-sm-4 control-label">询单来源</label>
+                  <div class="col-sm-8">
+                    <input type="text" name="source" class="source-select fullwidth" value="${crmcase.source}" />
+                  </div>
+                </div>
+
                 <div class="form-group col-sm-4">
                   <label class="col-sm-4 control-label">沟通语言</label>
                   <div class="col-sm-8">
@@ -151,44 +188,6 @@
                   <label class="col-sm-4 control-label">客人的预算</label>
                   <div class="col-sm-8">
                     <input type="text" name="budget" placeholder="客人的预算" class="form-control" value="${crmcase.budget}" />
-                  </div>
-                </div>
-            </div>
-            <div class="section-block">
-                <div class="form-group col-sm-4">
-                  <label class="col-sm-4 control-label">销售姓名</label>
-                  <div class="col-sm-8">
-                    <input type="text" name="salesname" placeholder="销售姓名" class="sales-select fullwidth" readonly value="${crmcase.salesname}" />
-                  </div>
-                </div>
-                <div class="form-group col-sm-4">
-                  <label class="col-sm-4 control-label">目的地</label>
-                  <div class="col-sm-8">
-                    <input type="text" name="destination" class="form-control" readonly value="${crmcase.destination}" />
-                  </div>
-                </div>
-                <div class="form-group col-sm-4">
-                  <label class="col-sm-4 control-label">行程</label>
-                  <div class="col-sm-8">
-                    <input type="text" name="budget" placeholder="行程" class="form-control" readonly value="${crmcase.budget}" />
-                  </div>
-                </div>
-                <div class="form-group col-sm-4">
-                  <label class="col-sm-4 control-label">表单类型</label>
-                  <div class="col-sm-8">
-                    <input type="text" name="submit_type" class="form-control" readonly value="${crmcase.submittype}" />
-                  </div>
-                </div>
-                <div class="form-group col-sm-4">
-                  <label class="col-sm-4 control-label">询单来源</label>
-                  <div class="col-sm-8">
-                    <input type="text" name="source" class="source-select fullwidth" value="${crmcase.source}" />
-                  </div>
-                </div>
-                <div class="form-group col-sm-4">
-                  <label class="col-sm-4 control-label">状态</label>
-                  <div class="col-sm-8">
-                    <input type="text" name="status" placeholder="状态" class="status-select fullwidth" readonly value="${crmcase.status}" />
                   </div>
                 </div>
             </div>

@@ -18,10 +18,6 @@
 		u.isdel as isdel
 		from tm_case u  
 		where u.isdel = 0 
-		<if test="customerid != null and customerid != ''">
-			and
-			u.customer_id = #{customerid}
-		</if>
 		order by u.creat_time
 		) table_alias
 		limit #{b},#{e}
@@ -140,6 +136,7 @@
 		u.start_date as startdate,
 		u.end_date as enddate,
 		u.requirement as requirement,
+		u.route as route,
 		u.hotel as hotel,
 		u.meals as meals,
 		u.guide as guide,
