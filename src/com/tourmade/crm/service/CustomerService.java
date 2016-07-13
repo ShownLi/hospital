@@ -37,20 +37,7 @@ public class CustomerService extends BaseService {
 		QueryResult<DemoCustomer> r = new QueryResult<DemoCustomer>();
 		Map<String, Object> map = new HashMap<String, Object>();
 		
-		System.out.println(ph);
-		
-		String seachValue = ph.getSearch().get("value");
-		
-		if (null != seachValue && !"".equals(seachValue)) {
-			if (null == customer) {
-				customer = new DemoCustomer();
-			}
-			customer.setSeachValue(seachValue);
-		}
-			
-		
-		
-		map.put("pojo", customer);
+
 		map.put("b", ph.getStart());
 		map.put("e", ph.getLength());
 //		map.put("s", ph.getSort());
