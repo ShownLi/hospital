@@ -155,7 +155,7 @@
 				</div>
 				<h4 class="panel-title">询单列表</h4>
 			</div>
-			<div class="panel-body panel-body-nopadding">
+			<div class="panel-body">
 				<div class="table-responsive">
 					<table id="dataTable-case" class="table">
 						<thead>
@@ -189,29 +189,31 @@
           			<h4 class="panel-title">注释记录 </h4>
           		</div>
           		<div class="panel-body">
-	              	<table id="dataTable-note" class="table">
-						<thead>
-							<tr>
-                    <th>ID</th>
-                    <th>姓名</th>
-                    <th>注释内容</th>
-                    <th>时间</th>
-							</tr>
-						</thead>
-					</table>
-				          <!-- 添加注释 -->
-			<form id="comment" class="form">
-          <div class="form-group col-sm-6 col-sm-offset-3">
-                <textarea name="content" class="form-control" rows="5"></textarea>
-                <input  type="hidden" name="userid" value="${loginUser.userid}" />
-                <input  type="hidden" name="username" value="${loginUser.name}" />
-                <input  type="hidden" name="objectid" value="${customer.customerid}" />
-                <input  type="hidden" name="commenttype" value="customer" />
-          </div>
-          <div class="form-group col-sm-12 align-center">
-            <button class="btn btn-primary">添加注释</button>
-          </div>
-          </form>
+	          		<div class="table-responsive">
+		              	<table id="dataTable-note" class="table">
+							<thead>
+								<tr>
+			                    <th>ID</th>
+			                    <th>姓名</th>
+			                    <th>注释内容</th>
+			                    <th>时间</th>
+								</tr>
+							</thead>
+						</table>
+					</div>
+					<!-- 添加注释 -->
+					<form id="comment" class="form">
+						<div class="form-group col-sm-6 col-sm-offset-3">
+						    <textarea name="content" class="form-control" rows="5"></textarea>
+						    <input  type="hidden" name="userid" value="${loginUser.userid}" />
+						    <input  type="hidden" name="username" value="${loginUser.name}" />
+						    <input  type="hidden" name="objectid" value="${customer.customerid}" />
+						    <input  type="hidden" name="commenttype" value="customer" />
+						</div>
+						<div class="form-group col-sm-12 align-center">
+						<button class="btn btn-primary">添加注释</button>
+						</div>
+		            </form>
           		</div>
 				</div>
 				<!-- end of panel 注释列表 -->
@@ -267,6 +269,7 @@
 
 	<%@ include file="../assets/pages/foot.jsp"%>
 	<script src="${rootPath}assets/js/jquery-ui-1.10.3.min.js"></script>
+	<script src="${rootPath}assets/js/datepicker-zh-CN.js"></script>
 	<script src="${rootPath}assets/js/jquery.datatables.min.js"></script>
 	<script src="${rootPath}assets/js/select2.min.js"></script>
 	<script src="${rootPath}assets/js/jquery.validate.min.js"></script>
@@ -304,58 +307,65 @@
 				language: datatable_local_language, // my.js
 				serverSide: true,
 				ajax: {
-				url: '${rootPath}case/listfromcustomer.do?customerid=${customer.customerid}',
-				dataFilter: function(data){
-				var json = jQuery.parseJSON( data );
-				json.recordsTotal = json.countTotal;
-				json.recordsFiltered = json.countFiltered;
-				json.data = json.data;
-				return JSON.stringify( json );
-				}
+					url: '${rootPath}case/listfromcustomer.do?customerid=${customer.customerid}',
+					dataFilter: function(data){
+						var json = jQuery.parseJSON( data );
+						json.recordsTotal = json.countTotal;
+						json.recordsFiltered = json.countFiltered;
+						json.data = json.data;
+						return JSON.stringify( json );
+					}
 				},
 				columnDefs: [
-					  {
-		                  data: "caseid",
-		                  //defaultContent: '<a class="btn btn-success btn-xs"><span class="fa fa-edit"></span> 编辑</a>&nbsp;<a class="btn btn-danger btn-xs"><span class="fa fa-minus-circle"></span> 删除</a>',
-		                  orderable: false,
-		                  render: function ( data, type, full, meta ) {
-		                      return '<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a>&nbsp;<a class="btn btn-danger btn-xs" id="'+data+'"><span class="fa fa-minus-circle"></span> 删除</a>&nbsp;&nbsp;&nbsp;<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-minus-circle"></span> 生成订单</a>';
-		                  },
-		                  targets: 6
-					  },
-					  {
+					{
+						data: "caseid",
+						//defaultContent: '<a class="btn btn-success btn-xs"><span class="fa fa-edit"></span> 编辑</a>&nbsp;<a class="btn btn-danger btn-xs"><span class="fa fa-minus-circle"></span> 删除</a>',
+						orderable: false,
+						render: function ( data, type, full, meta ) {
+						  return '<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a>&nbsp;<a class="btn btn-danger btn-xs" id="'+data+'"><span class="fa fa-minus-circle"></span> 删除</a>&nbsp;&nbsp;&nbsp;<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-minus-circle"></span> 生成订单</a>';
+						},
+						targets: 6
+					},
+					{
 						  orderable: false,
 						  searchable: false,
 					      targets: [0]
-					  },
+					},
 
-					],
-					columns: [
-			            { data: "caseid" },
-			            { data: "customername" },
-			            { data: "budget" },
-			            { data: "destination" },
-			            { data: "source" },
-			            { data: "status" }
-			        ]
-				});
+				],
+				columns: [
+		            { data: "caseid" },
+		            { data: "customername" },
+		            { data: "budget" },
+		            { data: "destination" },
+		            { data: "source" },
+		            { data: "status" }
+		        ]
+			});
 			
+			// Select2
+		    jQuery('select').select2({
+		        minimumResultsForSearch: -1
+		    });
+		    
+		    jQuery('select').removeClass('form-control');
+
 			$('#dataTable-case tbody').on( 'click', 'a.btn-success', function () {
 		        var data = t.row($(this).parents('tr')).data();
 		        //alert($(this).attr('id'));
 		        edit($(this).attr('id'));
-		    } );
+		    });
 
 			$('#dataTable-case tbody').on( 'click', 'a.btn-danger', function () {
 		        var data = t.row($(this).parents('tr')).data();
 		        //alert($(this).attr('id'));
 		        del($(this).attr('id'));
-		    } );
+		    });
 			
 			$('#confirmDelModal').on( 'click', 'button.btn-danger', function () {
 		        var id = $("#confirmDelModal .hiddenId").val();
 		        doDel(id);
-		    } ); 
+		    }); 
 			
 			function edit(id) {
 				window.parent.location = "${rootPath}case/edit.html?id="+id;
@@ -491,7 +501,13 @@
 		    ]
 			});
 		jQuery("#comment").validate({
-			
+
+			rules: {
+				content: "required"
+			},
+			messages: {
+				content: "请输入注释内容"
+			},
 			highlight: function(element) {
 				jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
 			},
