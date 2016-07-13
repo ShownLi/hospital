@@ -353,6 +353,7 @@
               startdate: "date",
               enddate: "date",
               startmonth: "date",
+              during: "digits",
     				},
     				messages: {
     					adult: "请输入一个整数",
@@ -361,6 +362,7 @@
               startdate: "请输入正确的日期格式 mm/dd/yyyy",
               enddate: "请输入正确的日期格式 mm/dd/yyyy",
               startmonth: "请输入正确的日期格式 mm/dd/yyyy",
+              during: "请输入一个整数",
     				},
   				
   			    highlight: function(element) {
