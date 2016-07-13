@@ -66,7 +66,7 @@ public class CaseController extends BaseSimpleFormController {
 		String hotel = "case.hotel";
 		String meals = "case.meals";
 		String guide = "case.guide";
-		String destination = "destination";
+		String status = "case.status";
 		String source = "case.source";
 		List<DemoList> v1 = service.getParameterInfo(country);
 		List<DemoList> v2 = service.getParameterInfo(language);
@@ -75,7 +75,7 @@ public class CaseController extends BaseSimpleFormController {
 		List<DemoList> v5 = service.getParameterInfo(hotel);
 		List<DemoList> v6 = service.getParameterInfo(meals);
 		List<DemoList> v7 = service.getParameterInfo(guide);
-		List<DemoList> v8 = service.getParameterInfo(destination);
+		List<DemoList> v8 = service.getParameterInfo(status);
 		List<DemoList> v9 = service.getParameterInfo(source);
 		List<DemoList> customer = service.getCustomer();
 		List<DemoList> sales = service.getSales();
@@ -86,7 +86,7 @@ public class CaseController extends BaseSimpleFormController {
 		JSONArray hotelresult = JSONArray.fromObject(v5);
 		JSONArray mealsresult = JSONArray.fromObject(v6);
 		JSONArray guideresult = JSONArray.fromObject(v7);
-		JSONArray destinationresult = JSONArray.fromObject(v8);
+		JSONArray statusresult = JSONArray.fromObject(v8);
 		JSONArray sourceresult = JSONArray.fromObject(v9);
 		JSONArray customerresult = JSONArray.fromObject(customer);
 		JSONArray salesresult = JSONArray.fromObject(sales);
@@ -97,7 +97,7 @@ public class CaseController extends BaseSimpleFormController {
 		model.addAttribute("hotel",hotelresult);
 		model.addAttribute("meals",mealsresult);
 		model.addAttribute("guide",guideresult);
-		model.addAttribute("destination",destinationresult);
+		model.addAttribute("status",statusresult);
 		model.addAttribute("source",sourceresult);
 		model.addAttribute("customer",customerresult);
 		model.addAttribute("sales",salesresult);
@@ -113,7 +113,7 @@ public class CaseController extends BaseSimpleFormController {
 		String hotel = "case.hotel";
 		String meals = "case.meals";
 		String guide = "case.guide";
-		String destination = "destination";
+		String status = "case.status";
 		String source = "case.source";
 		List<DemoList> v1 = service.getParameterInfo(country);
 		List<DemoList> v2 = service.getParameterInfo(language);
@@ -122,7 +122,7 @@ public class CaseController extends BaseSimpleFormController {
 		List<DemoList> v5 = service.getParameterInfo(hotel);
 		List<DemoList> v6 = service.getParameterInfo(meals);
 		List<DemoList> v7 = service.getParameterInfo(guide);
-		List<DemoList> v8 = service.getParameterInfo(destination);
+		List<DemoList> v8 = service.getParameterInfo(status);
 		List<DemoList> v9 = service.getParameterInfo(source);
 		List<DemoList> customer = service.getCustomer();
 		List<DemoList> sales = service.getSales();
@@ -133,7 +133,7 @@ public class CaseController extends BaseSimpleFormController {
 		JSONArray hotelresult = JSONArray.fromObject(v5);
 		JSONArray mealsresult = JSONArray.fromObject(v6);
 		JSONArray guideresult = JSONArray.fromObject(v7);
-		JSONArray destinationresult = JSONArray.fromObject(v8);
+		JSONArray statusresult = JSONArray.fromObject(v8);
 		JSONArray sourceresult = JSONArray.fromObject(v9);
 		JSONArray customerresult = JSONArray.fromObject(customer);
 		JSONArray salesresult = JSONArray.fromObject(sales);
@@ -144,7 +144,7 @@ public class CaseController extends BaseSimpleFormController {
 		model.addAttribute("hotel",hotelresult);
 		model.addAttribute("meals",mealsresult);
 		model.addAttribute("guide",guideresult);
-		model.addAttribute("destination",destinationresult);
+		model.addAttribute("status",statusresult);
 		model.addAttribute("source",sourceresult);
 		model.addAttribute("customer",customerresult);
 		model.addAttribute("sales",salesresult);
@@ -183,7 +183,7 @@ public class CaseController extends BaseSimpleFormController {
 			String hotel = "case.hotel";
 			String meals = "case.meals";
 			String guide = "case.guide";
-			String destination = "destination";
+			String status = "case.status";
 			String source = "case.source";
 			List<DemoList> v1 = service.getParameterInfo(country);
 			List<DemoList> v2 = service.getParameterInfo(language);
@@ -192,7 +192,7 @@ public class CaseController extends BaseSimpleFormController {
 			List<DemoList> v5 = service.getParameterInfo(hotel);
 			List<DemoList> v6 = service.getParameterInfo(meals);
 			List<DemoList> v7 = service.getParameterInfo(guide);
-			List<DemoList> v8 = service.getParameterInfo(destination);
+			List<DemoList> v8 = service.getParameterInfo(status);
 			List<DemoList> v9 = service.getParameterInfo(source);
 			List<DemoList> customer = service.getCustomer();
 			List<DemoList> sales = service.getSales();
@@ -203,7 +203,7 @@ public class CaseController extends BaseSimpleFormController {
 			JSONArray hotelresult = JSONArray.fromObject(v5);
 			JSONArray mealsresult = JSONArray.fromObject(v6);
 			JSONArray guideresult = JSONArray.fromObject(v7);
-			JSONArray destinationresult = JSONArray.fromObject(v8);
+			JSONArray statusresult = JSONArray.fromObject(v8);
 			JSONArray sourceresult = JSONArray.fromObject(v9);
 			JSONArray customerresult = JSONArray.fromObject(customer);
 			JSONArray salesresult = JSONArray.fromObject(sales);
@@ -214,7 +214,7 @@ public class CaseController extends BaseSimpleFormController {
 			model.addAttribute("hotel",hotelresult);
 			model.addAttribute("meals",mealsresult);
 			model.addAttribute("guide",guideresult);
-			model.addAttribute("destination",destinationresult);
+			model.addAttribute("status",statusresult);
 			model.addAttribute("source",sourceresult);
 			model.addAttribute("customer",customerresult);
 			model.addAttribute("sales",salesresult);

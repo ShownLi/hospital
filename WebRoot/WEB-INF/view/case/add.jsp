@@ -176,19 +176,19 @@
                    	<div class="form-group col-sm-4">
                       <label class="col-sm-4 control-label">目的地</label>
                       <div class="col-sm-8">
-                        <input type="text" name="destination" class="destination-select fullwidth" value="" />
+                        <input type="text" name="destination" class="form-control" value="" />
                       </div>
                     </div>
                     <div class="form-group col-sm-4">
                       <label class="col-sm-4 control-label">行程</label>
                       <div class="col-sm-8">
-                        <input type="text" name="budget" placeholder="行程" class="form-control" value="" />
+                        <input type="text" name="route" placeholder="行程" class="form-control" value="" />
                       </div>
                     </div>
                     <div class="form-group col-sm-4">
                       <label class="col-sm-4 control-label">状态</label>
                       <div class="col-sm-8">
-                        <input type="text" name="status" placeholder="状态" class="form-control" value="" />
+                        <input type="text" name="status" class="status-select fullwidth" value="1" readonly/>
                       </div>
                     </div>
                 </div>
@@ -272,7 +272,7 @@
     var d5 = ${hotel};
     var d6 = ${meals};
     var d7 = ${guide};
-    var d8 = ${destination};
+    var d8 = ${status};
     var d9 = ${source};
     var customer = ${customer};
     var sales = ${sales};
@@ -296,13 +296,12 @@
        placeholder: '选择一个',
        data: d7
     });
+    $(".status-select").select2({
+        data: d8
+     });
     $(".contact-select").select2({
        placeholder: '选择一个希望联系方式',
        data: d3
-    });
-    $(".destination-select").select2({
-       placeholder: '选择一个',
-       data: d8
     });
     $(".source-select").select2({
       placeholder: '选择一个推广渠道',

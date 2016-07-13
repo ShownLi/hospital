@@ -158,13 +158,13 @@
                 <div class="form-group col-sm-4">
                   <label class="col-sm-4 control-label">销售姓名</label>
                   <div class="col-sm-8">
-                    <input type="text" name="salesname" placeholder="销售姓名" class="form-control" readonly value="${crmcase.salesname}" />
+                    <input type="text" name="salesname" placeholder="销售姓名" class="sales-select fullwidth" readonly value="${crmcase.salesname}" />
                   </div>
                 </div>
                 <div class="form-group col-sm-4">
                   <label class="col-sm-4 control-label">目的地</label>
                   <div class="col-sm-8">
-                    <input type="text" name="destination" class="destination-select fullwidth" readonly value="${crmcase.destination}" />
+                    <input type="text" name="destination" class="form-control" readonly value="${crmcase.destination}" />
                   </div>
                 </div>
                 <div class="form-group col-sm-4">
@@ -188,7 +188,7 @@
                 <div class="form-group col-sm-4">
                   <label class="col-sm-4 control-label">状态</label>
                   <div class="col-sm-8">
-                    <input type="text" name="status" placeholder="状态" class="form-control" readonly value="${crmcase.status}" />
+                    <input type="text" name="status" placeholder="状态" class="status-select fullwidth" readonly value="${crmcase.status}" />
                   </div>
                 </div>
             </div>
@@ -380,7 +380,7 @@ var d4 = ${withwho};
 var d5 = ${hotel};
 var d6 = ${meals};
 var d7 = ${guide};
-var d8 = ${destination};
+var d8 = ${status};
 var d9 = ${source};
 var customer = ${customer};
 var sales = ${sales};
@@ -408,9 +408,9 @@ $(".contact-select").select2({
     placeholder: '选择一个希望联系方式',
     data: d3
 });
-$(".destination-select").select2({
+$(".status-select").select2({
     placeholder: '选择一个',
-    data: d1
+    data: d8
 });
 $(".source-select").select2({
     placeholder: '选择一个推广渠道',
