@@ -488,13 +488,7 @@
 		    ]
 			});
 		jQuery("#comment").validate({
-			rule:{
-				content: "required"
-			},
 			
-			message:{
-				content:"请输入注释内容"
-			},
 			highlight: function(element) {
 				jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
 			},
