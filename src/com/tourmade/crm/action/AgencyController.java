@@ -78,7 +78,6 @@ public class AgencyController extends BaseSimpleFormController {
 			//System.out.println(agency);
 			j.setObj(agency);
 			j.setSuccess(true);
-			System.out.println(j);
 		} catch (Exception e) {
 			j.setSuccess(false);
 			logger.error("AgencyController.doAdd() --> " + agency.toString() + "\n" + e.getMessage());
