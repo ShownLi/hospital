@@ -15,10 +15,6 @@
 		u.status as status
 		from tm_case u  
 		where u.isdel = 0 
-		<if test="customerid != null and customerid != ''">
-			and
-			 u.customer_id = #{customerid}
-		</if>
 		order by u.creat_time
 		) table_alias
 		limit #{b},#{e}
@@ -36,6 +32,7 @@
 		with_who,
 		adult,
 		children,
+		baby,
 		start_time,
 		start_month,
 		during,
@@ -46,16 +43,21 @@
 		requirement,
 		guide,
 		budget,
-		customer_name,
 		contact_type,
-		sales_code,
+		sales_id,
 		sales_name,
 		destination,
+		destination_code,
 		route,
+		route_id,
 		submit_type,
-		submit_id,
 		source,
 		status,
+		tailormade,
+		passport,
+		visa,
+		flight,
+		ip_address,
 		creat_time,
 		isdel
 		)values(
@@ -63,6 +65,7 @@
 		#{withwho,jdbcType=VARCHAR},
 		#{adult,jdbcType=VARCHAR},
 		#{children,jdbcType=VARCHAR},
+		#{baby,jdbcType=VARCHAR},
 		#{starttime,jdbcType=VARCHAR},
 		#{startmonth,jdbcType=VARCHAR},
 		#{during,jdbcType=VARCHAR},
@@ -73,16 +76,21 @@
 		#{requirement,jdbcType=VARCHAR},
 		#{guide,jdbcType=VARCHAR},
 		#{budget,jdbcType=VARCHAR},
-		#{customername,jdbcType=VARCHAR},
 		#{contacttype,jdbcType=VARCHAR},
-		#{salescode,jdbcType=VARCHAR},
+		#{salesid,jdbcType=VARCHAR},
 		#{salesname,jdbcType=VARCHAR},
 		#{destination,jdbcType=VARCHAR},
+		#{destinationcode,jdbcType=VARCHAR},
 		#{route,jdbcType=VARCHAR},
+		#{routeid,jdbcType=VARCHAR},
 		#{submittype,jdbcType=VARCHAR},
-		#{submitid,jdbcType=VARCHAR},
 		#{source,jdbcType=VARCHAR},
 		#{status,jdbcType=VARCHAR},
+		#{tailormade,jdbcType=VARCHAR},
+		#{passport,jdbcType=VARCHAR},
+		#{visa,jdbcType=VARCHAR},
+		#{flight,jdbcType=VARCHAR},
+		#{ipaddress,jdbcType=VARCHAR},
 		NOW(),
 		0
 		)
@@ -95,6 +103,7 @@
 		with_who=#{withwho},
 		adult=#{adult},
 		children=#{children},
+		baby=#{baby},
 		start_time=#{starttime},
 		start_month=#{startmonth},
 		during=#{during},
@@ -105,16 +114,19 @@
 		requirement=#{requirement},
 		guide=#{guide},
 		budget=#{budget},
-		customer_name=#{customername},
 		contact_type=#{contacttype},
-		sales_code=#{salescode},
+		sales_id=#{salesid},
 		sales_name=#{salesname},
 		destination=#{destination},
+		destination_code=#{destinationcode},
 		route=#{route},
 		submit_type=#{submittype},
-		submit_id=#{submitid},
 		source=#{source},
 		status=#{status},
+		tailormade=#{tailormade},
+		passport=#{passport},
+		visa=#{visa},
+		flight=#{flight},
 		update_time=NOW()
 		where
 		case_id=#{caseid}
@@ -124,12 +136,12 @@
 		select
 		u.case_id as caseid,
 		u.customer_id as customerid, 
-		u.customer_name as customername,
 		u.prefer_language as preferlanguage,
 		u.contact_type as contacttype,
 		u.with_who as withwho,
 		u.adult as adult,
 		u.children as children,
+		u.baby as baby,
 		u.start_time as starttime,
 		u.start_month as startmonth,
 		u.during as during,
@@ -141,10 +153,15 @@
 		u.meals as meals,
 		u.guide as guide,
 		u.budget as budget,
-		u.sales_name as salesname,
+		u.sales_id as salesid,
 		u.destination as destination,
 		u.source as source,
 		u.status as status,
+		u.tailormade as tailormade,
+		u.passport as passport,
+		u.visa as visa,
+		u.flight as flight,
+		u.ip_address as ipaddress,
 		u.creat_time as creattime,
 		u.isdel
 		from tm_case u where u.isdel = 0 and u.case_id = #{caseid}

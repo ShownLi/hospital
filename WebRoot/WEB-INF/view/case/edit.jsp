@@ -220,7 +220,7 @@
                     <div class="form-group col-sm-4">
                         <label class="col-sm-4 control-label">签证</label>
                         <div class="col-sm-8">
-                          <input type="text" name="visa" placeholder="签证" class="visae-select fullwidth" value="0" />
+                          <input type="text" name="visa" placeholder="签证" class="visa-select fullwidth" value="0" />
                         </div>
                     </div>
                     <div class="form-group col-sm-4">
@@ -235,6 +235,7 @@
         <div class="panel-footer align-center">
             <button id="addorder" class="btn btn-primary">添加订单</button>&nbsp;
             <button id="submit" class="btn btn-primary">保存</button>&nbsp;
+            	<input  type="hidden" name="caseid" value="${crmcase.caseid}" />
             <button class="btn btn-primary">无效</button>
 		    </div><!-- panel-footer -->
      </form>   
@@ -378,13 +379,13 @@
             <div class="form-group col-sm-8 col-sm-offset-2">
                 <label class="col-sm-3 control-label">目的地</label>
                 <div class="col-sm-9">
-                    <input type="text" name="destination" placeholder="目的地" class="destination-select fullwidth" value="" />
+                    <input type="text" id="destination" name="destination" placeholder="目的地" class="destination-select fullwidth" value="" />
                 </div>
             </div>
             <div class="form-group col-sm-8 col-sm-offset-2">
                 <label class="col-sm-3 control-label">所属销售</label>
                 <div class="col-sm-9">
-                    <input type="text" name="salesid" placeholder="选择一个销售" class="sales-select fullwidth" value="" />
+                    <input type="text" id="salesid" name="salesid" placeholder="选择一个销售" class="sales-select fullwidth" value="" />
                 </div>
             </div>
             <div class="col-sm-12">
@@ -392,7 +393,6 @@
              <input  type="hidden" name="caseid" value="${crmcase.caseid}" />
              <input  type="hidden" name="budget" value="${crmcase.budget}" />
              <input  type="hidden" name="customerid" value="${crmcase.customerid}" />
-             <input  type="hidden" name="customername" value="${crmcase.customername}" />
             </div>
             </form>
         </div>
@@ -410,68 +410,88 @@
 	
 <script type="text/javascript">
 
-document.getElementById("requirement").value="${crmcase.requirement}"
+	document.getElementById("requirement")
+		.value="${crmcase.requirement}"
 
-var d1 = ${country};
-var d2 = ${language};
-var d3 = ${contacttype};
-var d4 = ${withwho};
-var d5 = ${hotel};
-var d6 = ${meals};
-var d7 = ${guide};
-var d8 = ${status};
-var d9 = ${source};
-var customer = ${customer};
-var sales = ${sales};
-$(".language-select").select2({
-	placeholder: '选择一个沟通语言',
-  	data: d2
-});
-$(".withwho-select").select2({
-	placeholder: '与谁同行',
-  	data: d4
-});
-$(".hotel-select").select2({
-    placeholder: '选择一个住宿方式',
-    data: d5
-});
-$(".meals-select").select2({
-    placeholder: '选择一个',
-    data: d6
-});
-$(".guide-select").select2({
-    placeholder: '选择一个',
-    data: d7
-});
-$(".contact-select").select2({
-    placeholder: '选择一个希望联系方式',
-    data: d3
-});
-$(".status-select").select2({
-    placeholder: '选择一个',
-    data: d8
-});
-$(".source-select").select2({
-    placeholder: '选择一个推广渠道',
-    data: d9
-});
-$(".country-select").select2({
-    placeholder: '国家',
-    data: d1
-});
-$(".customer-select").select2({
-   placeholder: '客人',
-   data: customer
-});
-$(".sales-select").select2({
-   placeholder: '销售',
-   data: sales
-});
-$(".destination-select").select2({
-    placeholder: '国家',
-    data: d1
-});
-
+    var d1 = ${country};
+    var d2 = ${language};
+    var d3 = ${contacttype};
+    var d4 = ${withwho};
+    var d5 = ${hotel};
+    var d6 = ${meals};
+    var d7 = ${guide};
+    var d8 = ${status};
+    var d9 = ${source};
+    var d10 = ${tailormade};
+    var d11 = ${passport};
+    var d12 = ${visa};
+    var d13 = ${flight};
+    var customer = ${customer};
+    var sales = ${sales};
+    
+    $(".country-select").select2({
+        placeholder: '国家',
+        data: d1
+    });
+    $(".destination-select").select2({
+        placeholder: '国家',
+        data: d1
+    });
+    $(".language-select").select2({
+    	placeholder: '选择一个沟通语言',
+     	data: d2
+    });
+    $(".contact-select").select2({
+        placeholder: '选择一个希望联系方式',
+        data: d3
+     });
+    $(".withwho-select").select2({
+    	placeholder: '与谁同行',
+     	data: d4
+    });
+    $(".hotel-select").select2({
+       placeholder: '选择一个住宿方式',
+       data: d5
+    });
+    $(".meals-select").select2({
+       placeholder: '选择一个',
+       data: d6
+    });
+    $(".guide-select").select2({
+       placeholder: '选择一个',
+       data: d7
+    });
+    $(".status-select").select2({
+        data: d8
+     });
+    $(".source-select").select2({
+      placeholder: '选择一个推广渠道',
+      data: d9
+    });
+    $(".tailormade-select").select2({
+        placeholder: '选择一个',
+        data: d10
+      });
+    $(".passport-select").select2({
+        placeholder: '选择一个',
+        data: d11
+      });
+    $(".visa-select").select2({
+        placeholder: '选择一个',
+        data: d12
+      });
+    $(".flight-select").select2({
+        placeholder: '选择一个',
+        data: d13
+      });
+    $(".customer-select").select2({
+        placeholder: '客人',
+        data: customer
+    });
+    $(".sales-select").select2({
+        placeholder: '销售',
+        data: sales
+    });
 
 		  var t = jQuery('#dataTable-order').DataTable({
   			 	pageLength: 10,
@@ -506,7 +526,7 @@ $(".destination-select").select2({
   			 	],
   			 	columns: [
   		             { data: "orderid" },
-  		             { data: "customername" },
+  		             { data: "customerid" },
   		             { data: "agencyname" },
   		             { data: "salesname" },
   		             { data: "destination" },
@@ -514,7 +534,7 @@ $(".destination-select").select2({
   		             { data: "status" }
   		    ]
 			});
-			jQuery("#form").validate({
+	jQuery("#form").validate({
         
           rules: {
             adult: "digits",
@@ -556,7 +576,8 @@ $(".destination-select").select2({
   		}); 
 
       $("#addorder").click(function(){
-          $("#nextModal").modal('show');
+    	  form_submit();
+          //$("#nextModal").modal('show');
           return false;
       });
         
@@ -588,11 +609,12 @@ $(".destination-select").select2({
     			var f = $("#form").serialize();
     			$.post('${rootPath}case/edit.do', f, function(result) {
     				var rmsg = result.msg;
+    				alert(f);
     				if (result.success) {
-    					//window.parent.location = "${rootPath}customer/list.html";
+    					window.parent.location = "${rootPath}case/list.html";
     					$("#nextModal").modal('show');
     				} else {
-    					//$("#msgModal").modal('show');
+    					$("#msgModal").modal('show');
     				}
     			}, "JSON");
   		}
@@ -761,8 +783,17 @@ $(".destination-select").select2({
               $(".d2").hide();
               $(".d1").show();
           }
-      }); 
-  });
+      });
+      var start = $("input[name='starttime']").val();
+      if (start == 1) {
+          $(".d1").hide();
+          $(".d2").show();
+      }else{
+          $(".d2").hide();
+          $(".d1").show();
+      }
+  })
+  
 
 	</script>
 

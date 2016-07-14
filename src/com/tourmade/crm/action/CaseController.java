@@ -79,6 +79,10 @@ public class CaseController extends BaseSimpleFormController {
 		String guide = "case.guide";
 		String status = "case.status";
 		String source = "case.source";
+		String tailormade = "case.tailormade";
+		String passport = "case.passport";
+		String visa = "case.visa";
+		String flight = "case.flight";
 		List<DemoList> v1 = service.getParameterInfo(country);
 		List<DemoList> v2 = service.getParameterInfo(language);
 		List<DemoList> v3 = service.getParameterInfo(contacttype);
@@ -88,6 +92,10 @@ public class CaseController extends BaseSimpleFormController {
 		List<DemoList> v7 = service.getParameterInfo(guide);
 		List<DemoList> v8 = service.getParameterInfo(status);
 		List<DemoList> v9 = service.getParameterInfo(source);
+		List<DemoList> v10 = service.getParameterInfo(tailormade);
+		List<DemoList> v11 = service.getParameterInfo(passport);
+		List<DemoList> v12 = service.getParameterInfo(visa);
+		List<DemoList> v13 = service.getParameterInfo(flight);
 		List<DemoList> customer = service.getCustomer();
 		List<DemoList> sales = service.getSales();
 		JSONArray countryresult = JSONArray.fromObject(v1);
@@ -99,6 +107,10 @@ public class CaseController extends BaseSimpleFormController {
 		JSONArray guideresult = JSONArray.fromObject(v7);
 		JSONArray statusresult = JSONArray.fromObject(v8);
 		JSONArray sourceresult = JSONArray.fromObject(v9);
+		JSONArray tailormaderesult = JSONArray.fromObject(v10);
+		JSONArray passportresult = JSONArray.fromObject(v11);
+		JSONArray visaresult = JSONArray.fromObject(v12);
+		JSONArray flightresult = JSONArray.fromObject(v13);
 		JSONArray customerresult = JSONArray.fromObject(customer);
 		JSONArray salesresult = JSONArray.fromObject(sales);
 		model.addAttribute("country",countryresult);
@@ -112,11 +124,16 @@ public class CaseController extends BaseSimpleFormController {
 		model.addAttribute("source",sourceresult);
 		model.addAttribute("customer",customerresult);
 		model.addAttribute("sales",salesresult);
+		model.addAttribute("tailormade",tailormaderesult);
+		model.addAttribute("passport",passportresult);
+		model.addAttribute("visa",visaresult);
+		model.addAttribute("flight",flightresult);
 		return "/case/add";
 	}
 
 	@RequestMapping(value = "/addfromcustomer.html", method = { RequestMethod.POST, RequestMethod.GET })
 	public String addfromcustomer(Model model, int customerid) {
+		
 		String country = "country";
 		String language = "case.language";
 		String contacttype = "case.contacttype";
@@ -126,6 +143,10 @@ public class CaseController extends BaseSimpleFormController {
 		String guide = "case.guide";
 		String status = "case.status";
 		String source = "case.source";
+		String tailormade = "case.tailormade";
+		String passport = "case.passport";
+		String visa = "case.visa";
+		String flight = "case.flight";
 		List<DemoList> v1 = service.getParameterInfo(country);
 		List<DemoList> v2 = service.getParameterInfo(language);
 		List<DemoList> v3 = service.getParameterInfo(contacttype);
@@ -135,6 +156,10 @@ public class CaseController extends BaseSimpleFormController {
 		List<DemoList> v7 = service.getParameterInfo(guide);
 		List<DemoList> v8 = service.getParameterInfo(status);
 		List<DemoList> v9 = service.getParameterInfo(source);
+		List<DemoList> v10 = service.getParameterInfo(tailormade);
+		List<DemoList> v11 = service.getParameterInfo(passport);
+		List<DemoList> v12 = service.getParameterInfo(visa);
+		List<DemoList> v13 = service.getParameterInfo(flight);
 		List<DemoList> customer = service.getCustomer();
 		List<DemoList> sales = service.getSales();
 		JSONArray countryresult = JSONArray.fromObject(v1);
@@ -146,6 +171,10 @@ public class CaseController extends BaseSimpleFormController {
 		JSONArray guideresult = JSONArray.fromObject(v7);
 		JSONArray statusresult = JSONArray.fromObject(v8);
 		JSONArray sourceresult = JSONArray.fromObject(v9);
+		JSONArray tailormaderesult = JSONArray.fromObject(v10);
+		JSONArray passportresult = JSONArray.fromObject(v11);
+		JSONArray visaresult = JSONArray.fromObject(v12);
+		JSONArray flightresult = JSONArray.fromObject(v13);
 		JSONArray customerresult = JSONArray.fromObject(customer);
 		JSONArray salesresult = JSONArray.fromObject(sales);
 		model.addAttribute("country",countryresult);
@@ -159,6 +188,10 @@ public class CaseController extends BaseSimpleFormController {
 		model.addAttribute("source",sourceresult);
 		model.addAttribute("customer",customerresult);
 		model.addAttribute("sales",salesresult);
+		model.addAttribute("tailormade",tailormaderesult);
+		model.addAttribute("passport",passportresult);
+		model.addAttribute("visa",visaresult);
+		model.addAttribute("flight",flightresult);
 		model.addAttribute("customerid",customerid);
 		return "/case/add";
 	}
@@ -196,6 +229,10 @@ public class CaseController extends BaseSimpleFormController {
 			String guide = "case.guide";
 			String status = "case.status";
 			String source = "case.source";
+			String tailormade = "case.tailormade";
+			String passport = "case.passport";
+			String visa = "case.visa";
+			String flight = "case.flight";
 			List<DemoList> v1 = service.getParameterInfo(country);
 			List<DemoList> v2 = service.getParameterInfo(language);
 			List<DemoList> v3 = service.getParameterInfo(contacttype);
@@ -205,6 +242,10 @@ public class CaseController extends BaseSimpleFormController {
 			List<DemoList> v7 = service.getParameterInfo(guide);
 			List<DemoList> v8 = service.getParameterInfo(status);
 			List<DemoList> v9 = service.getParameterInfo(source);
+			List<DemoList> v10 = service.getParameterInfo(tailormade);
+			List<DemoList> v11 = service.getParameterInfo(passport);
+			List<DemoList> v12 = service.getParameterInfo(visa);
+			List<DemoList> v13 = service.getParameterInfo(flight);
 			List<DemoList> customer = service.getCustomer();
 			List<DemoList> sales = service.getSales();
 			JSONArray countryresult = JSONArray.fromObject(v1);
@@ -216,6 +257,10 @@ public class CaseController extends BaseSimpleFormController {
 			JSONArray guideresult = JSONArray.fromObject(v7);
 			JSONArray statusresult = JSONArray.fromObject(v8);
 			JSONArray sourceresult = JSONArray.fromObject(v9);
+			JSONArray tailormaderesult = JSONArray.fromObject(v10);
+			JSONArray passportresult = JSONArray.fromObject(v11);
+			JSONArray visaresult = JSONArray.fromObject(v12);
+			JSONArray flightresult = JSONArray.fromObject(v13);
 			JSONArray customerresult = JSONArray.fromObject(customer);
 			JSONArray salesresult = JSONArray.fromObject(sales);
 			model.addAttribute("country",countryresult);
@@ -229,6 +274,10 @@ public class CaseController extends BaseSimpleFormController {
 			model.addAttribute("source",sourceresult);
 			model.addAttribute("customer",customerresult);
 			model.addAttribute("sales",salesresult);
+			model.addAttribute("tailormade",tailormaderesult);
+			model.addAttribute("passport",passportresult);
+			model.addAttribute("visa",visaresult);
+			model.addAttribute("flight",flightresult);
 			model.addAttribute("crmcase",u);
 		}
 		return "/case/edit";

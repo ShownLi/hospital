@@ -186,7 +186,38 @@ public class CaseService extends BaseService {
 		try {
 			DemoCase u = caseMapper.getCaseById(crmcase.getCaseid());
 			if (u != null) {
+				u.setAdult(crmcase.getAdult());
+				u.setBaby(crmcase.getBaby());
+				u.setBudget(crmcase.getBudget());
+				u.setChildren(crmcase.getChildren());
+				u.setContacttype(crmcase.getContacttype());
+				u.setDestination(crmcase.getDestination());
+				u.setDuring(crmcase.getDuring());
+				u.setFlight(crmcase.getFlight());
+				u.setGuide(crmcase.getGuide());
+				u.setHotel(crmcase.getHotel());
+				u.setIpaddress(crmcase.getIpaddress());
+				u.setMeals(crmcase.getMeals());
+				u.setPassport(crmcase.getPassport());
+				u.setPreferlanguage(crmcase.getPreferlanguage());
+				u.setRequirement(crmcase.getRequirement());
+				u.setRoute(crmcase.getRoute());
+				u.setSalesid(crmcase.getSalesid());
+				u.setSource(crmcase.getSource());				
+				u.setSubmittype(crmcase.getSubmittype());
+				u.setTailormade(crmcase.getTailormade());
 				u.setStatus(crmcase.getStatus());
+				u.setVisa(crmcase.getVisa());
+				u.setWithwho(crmcase.getWithwho());
+				u.setStarttime(crmcase.getStarttime());
+				if(crmcase.getStarttime().equals("1")){
+					u.setStartdate(crmcase.getStartdate());
+					u.setEnddate(crmcase.getEnddate());
+				}
+				if(crmcase.getStarttime().equals("0")){
+					u.setStartmonth(crmcase.getStartmonth());
+					u.setDuring(crmcase.getDuring());
+				}
 				caseMapper.updateCase(u);
 				r = true;
 			} else {

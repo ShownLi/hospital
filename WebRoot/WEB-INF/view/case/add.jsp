@@ -60,7 +60,7 @@
                     <div class="form-group col-sm-4">
                       <label class="col-sm-4 control-label">所属销售</label>
                       <div class="col-sm-8">
-                        <input type="text" name="salesname" placeholder="所属销售" class="sales-select fullwidth" value="" />
+                        <input type="text" name="salesid" placeholder="所属销售" class="sales-select fullwidth" value="" />
                       </div>
                     </div>
                     <div class="form-group col-sm-4">
@@ -213,7 +213,7 @@
                     <div class="form-group col-sm-4">
                         <label class="col-sm-4 control-label">签证</label>
                         <div class="col-sm-8">
-                          <input type="text" name="visa" placeholder="签证" class="visae-select fullwidth" value="0" />
+                          <input type="text" name="visa" placeholder="签证" class="visa-select fullwidth" value="0" />
                         </div>
                     </div>
                     <div class="form-group col-sm-4">
@@ -305,12 +305,25 @@
     var d7 = ${guide};
     var d8 = ${status};
     var d9 = ${source};
+    var d10 = ${tailormade};
+    var d11 = ${passport};
+    var d12 = ${visa};
+    var d13 = ${flight};
     var customer = ${customer};
     var sales = ${sales};
+    
+    $(".country-select").select2({
+        placeholder: '国家',
+        data: d1
+    });
     $(".language-select").select2({
     	placeholder: '选择一个沟通语言',
      	data: d2
     });
+    $(".contact-select").select2({
+        placeholder: '选择一个希望联系方式',
+        data: d3
+     });
     $(".withwho-select").select2({
     	placeholder: '与谁同行',
      	data: d4
@@ -330,18 +343,26 @@
     $(".status-select").select2({
         data: d8
      });
-    $(".contact-select").select2({
-       placeholder: '选择一个希望联系方式',
-       data: d3
-    });
     $(".source-select").select2({
       placeholder: '选择一个推广渠道',
       data: d9
     });
-    $(".country-select").select2({
-        placeholder: '国家',
-        data: d1
-    });
+    $(".tailormade-select").select2({
+        placeholder: '选择一个',
+        data: d10
+      });
+    $(".passport-select").select2({
+        placeholder: '选择一个',
+        data: d11
+      });
+    $(".visa-select").select2({
+        placeholder: '选择一个',
+        data: d12
+      });
+    $(".flight-select").select2({
+        placeholder: '选择一个',
+        data: d13
+      });
     $(".customer-select").select2({
         placeholder: '客人',
         data: customer
@@ -350,10 +371,6 @@
         placeholder: '销售',
         data: sales
     });
-	    // $(".agency-select").select2({
-     //        placeholder: '地接社',
-     //        data: p
-     //    });
 		jQuery(document).ready(function() {
 			
         $(".nav-parent").eq(0).addClass("nav-active");
@@ -378,17 +395,6 @@
           changeMonth: true,
           minDate: 0
         });
-
-        $("input[name='starttime']").change(function() {
-            var val = $("input[name='starttime']:checked").val();
-            if (val == 1) {
-                $(".d1").hide();
-                $(".d2").show();
-            }else{
-                $(".d2").hide();
-                $(".d1").show();
-            }
-        }); 
 			 
   			jQuery("#form").validate({
   				
@@ -445,6 +451,18 @@
 				}
 			}, "JSON");
 		}
+        $(".d2").hide();
+        $(".d1").show();
+        $("input[name='starttime']").change(function() {
+            var val = $("input[name='starttime']:checked").val();
+            if (val == 1) {
+                $(".d1").hide();
+                $(".d2").show();
+            }else{
+                $(".d2").hide();
+                $(".d1").show();
+            }
+        }); 
 	</script>
 
 

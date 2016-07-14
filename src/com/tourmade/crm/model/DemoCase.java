@@ -29,6 +29,8 @@ public class DemoCase extends BaseBean<DemoCase> {
 	
 	private int children;
 	
+	private int baby;
+	
 	private String starttime;
 	
 	private String during;
@@ -47,21 +49,31 @@ public class DemoCase extends BaseBean<DemoCase> {
 	
 	private int budget;
 	
-	private String customername;
-	
 	private String contacttype;
 	
-	private String salescode;
+	private int salesid;
 	
 	private String salesname;
 	
 	private String destination;
 	
+	private String destinationcode;
+	
 	private String route;
+	
+	private String routeid;
+	
+	private String tailormade;
+	
+	private String passport;
+	
+	private String visa;
+	
+	private String flight;
 	
 	private int submittype;
 	
-	private int submitid;
+	private String ipaddress;
 	
 	private String source;
 	
@@ -119,6 +131,14 @@ public class DemoCase extends BaseBean<DemoCase> {
 
 	public void setChildren(int children) {
 		this.children = children;
+	}
+
+	public int getBaby() {
+		return baby;
+	}
+
+	public void setBaby(int baby) {
+		this.baby = baby;
 	}
 
 	public String getStarttime() {
@@ -193,14 +213,6 @@ public class DemoCase extends BaseBean<DemoCase> {
 		this.budget = budget;
 	}
 
-	public String getCustomername() {
-		return customername;
-	}
-
-	public void setCustomername(String customername) {
-		this.customername = customername;
-	}
-
 	public String getContacttype() {
 		return contacttype;
 	}
@@ -209,12 +221,12 @@ public class DemoCase extends BaseBean<DemoCase> {
 		this.contacttype = contacttype;
 	}
 
-	public String getSalescode() {
-		return salescode;
+	public int getSalesid() {
+		return salesid;
 	}
 
-	public void setSalescode(String salescode) {
-		this.salescode = salescode;
+	public void setSalesid(int salesid) {
+		this.salesid = salesid;
 	}
 
 	public String getSalesname() {
@@ -233,12 +245,60 @@ public class DemoCase extends BaseBean<DemoCase> {
 		this.destination = destination;
 	}
 
+	public String getDestinationcode() {
+		return destinationcode;
+	}
+
+	public void setDestinationcode(String destinationcode) {
+		this.destinationcode = destinationcode;
+	}
+
 	public String getRoute() {
 		return route;
 	}
 
 	public void setRoute(String route) {
 		this.route = route;
+	}
+
+	public String getRouteid() {
+		return routeid;
+	}
+
+	public void setRouteid(String routeid) {
+		this.routeid = routeid;
+	}
+
+	public String getTailormade() {
+		return tailormade;
+	}
+
+	public void setTailormade(String tailormade) {
+		this.tailormade = tailormade;
+	}
+
+	public String getPassport() {
+		return passport;
+	}
+
+	public void setPassport(String passport) {
+		this.passport = passport;
+	}
+
+	public String getVisa() {
+		return visa;
+	}
+
+	public void setVisa(String visa) {
+		this.visa = visa;
+	}
+
+	public String getFlight() {
+		return flight;
+	}
+
+	public void setFlight(String flight) {
+		this.flight = flight;
 	}
 
 	public int getSubmittype() {
@@ -249,12 +309,12 @@ public class DemoCase extends BaseBean<DemoCase> {
 		this.submittype = submittype;
 	}
 
-	public int getSubmitid() {
-		return submitid;
+	public String getIpaddress() {
+		return ipaddress;
 	}
 
-	public void setSubmitid(int submitid) {
-		this.submitid = submitid;
+	public void setIpaddress(String ipaddress) {
+		this.ipaddress = ipaddress;
 	}
 
 	public String getSource() {
@@ -304,14 +364,14 @@ public class DemoCase extends BaseBean<DemoCase> {
 	@Override
 	public String toString() {
 		return "DemoCase [caseid=" + caseid + ", customerid=" + customerid + ", preferlanguage=" + preferlanguage
-				+ ", withwho=" + withwho + ", adult=" + adult + ", children=" + children + ", starttime=" + starttime
-				+ ", during=" + during + ", startdate=" + startdate + ", enddate=" + enddate + ", hotel=" + hotel
-				+ ", meals=" + meals + ", requirement=" + requirement + ", guide=" + guide + ", budget=" + budget
-				+ ", customername=" + customername + ", contacttype=" + contacttype + ", salescode=" + salescode
-				+ ", salesname=" + salesname + ", destination=" + destination + ", route=" + route + ", submittype="
-				+ submittype + ", submitid=" + submitid + ", source=" + source + ", status=" + status + ", startmonth="
-				+ startmonth + ", creat_time=" + creat_time + ", update_time=" + update_time + "]";
+				+ ", withwho=" + withwho + ", adult=" + adult + ", children=" + children + ", baby=" + baby
+				+ ", starttime=" + starttime + ", during=" + during + ", startdate=" + startdate + ", enddate="
+				+ enddate + ", hotel=" + hotel + ", meals=" + meals + ", requirement=" + requirement + ", guide="
+				+ guide + ", budget=" + budget + ", contacttype=" + contacttype + ", salesid=" + salesid
+				+ ", salesname=" + salesname + ", destination=" + destination + ", destinationcode=" + destinationcode
+				+ ", route=" + route + ", routeid=" + routeid + ", tailormade=" + tailormade + ", passport=" + passport
+				+ ", visa=" + visa + ", flight=" + flight + ", submittype=" + submittype + ", ipaddress=" + ipaddress
+				+ ", source=" + source + ", status=" + status + ", startmonth=" + startmonth + ", creat_time="
+				+ creat_time + ", update_time=" + update_time + "]";
 	}
-
-
 }
