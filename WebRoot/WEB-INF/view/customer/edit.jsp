@@ -140,7 +140,7 @@
         
         <div class="panel-footer align-center">
 			<button class="btn btn-primary">保存</button>&nbsp;
-			<button class="btn btn-default" id="btn-back">取消</button>
+			<button class="btn btn-default" id="btn-back">返回</button>
 			<input type="hidden" name="customerid" value="${customer.customerid }" />
 		</div><!-- panel-footer -->
      </form>   

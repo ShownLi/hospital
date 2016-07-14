@@ -197,7 +197,7 @@
 		statementType="PREPARED">
 		update tm_case
 		set
-		isdel=1
+		status = 4 
 		where
 		case_id = #{caseid}
 	</update>

@@ -21,6 +21,7 @@ import com.tourmade.crm.model.DemoOrder;
 import com.tourmade.crm.model.MailTemplate;
 import com.tourmade.crm.model.DemoEmail;
 import com.tourmade.crm.model.DemoList;
+import com.tourmade.crm.service.CaseService;
 import com.tourmade.crm.service.EmailService;
 import com.tourmade.crm.service.OrderService;
 
@@ -32,7 +33,10 @@ public class OrderController extends BaseSimpleFormController {
 	
 	@Autowired
 	private OrderService service;
-	
+	@Autowired
+	EmailService emailservice = new EmailService();
+	@Autowired
+	CaseService caseservice;
 
 	@RequestMapping(value = "/list.html", method = { RequestMethod.POST, RequestMethod.GET })
 	public String list(Model model) {
@@ -69,20 +73,21 @@ public class OrderController extends BaseSimpleFormController {
 	public Json doAdd(HttpServletRequest request, HttpSession session, Model model, DemoOrder order) {
 
 		Json j = new Json();
-		EmailService emailservice = new EmailService();
 		MailTemplate template = new MailTemplate();
 		DemoEmail email = new DemoEmail();
 		
 		try {
 			String domain = "tourmade.com.cn";
-			DemoOrder order1 = service.getAgencyBySales(order.getSalesid());
-			String customerEmailReal = service.getCustomerEmailReal(order.getCustomerid());
+			DemoOrder order1 = service.getInfo(order);
 			order.setAgencyid(order1.getAgencyid());
 			order.setAgencyname(order1.getAgencyname());
 			order.setSalesname(order1.getSalesname());
 			order.setAgencyemailreal(order1.getAgencyemailreal());
-			order.setCustomeremailreal(customerEmailReal);
+			order.setCustomername(order1.getCustomername());
+			order.setCustomeremailreal(order1.getCustomeremailreal());
+			caseservice.case2order(order.getCaseid());
 			service.saveOrder(order);
+			
 			
 			String url = "http://123.56.77.206/axis2/services/AliasAdd/add";
 			String param = "alias=customer"+order.getOrderid()+"@&real=customer@&domain="+domain;
@@ -135,7 +140,6 @@ public class OrderController extends BaseSimpleFormController {
 	public Json doEdit(HttpServletRequest request, HttpSession session, Model model, DemoOrder order) {
 
 		Json j = new Json();
-		System.out.println(order);
 		try {
 			service.updateOrder(order);
 			j.setSuccess(true);

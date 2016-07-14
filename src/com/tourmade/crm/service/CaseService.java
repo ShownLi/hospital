@@ -232,20 +232,47 @@ public class CaseService extends BaseService {
 	}
 
 	/**
-	 * 删除询单（假删除）
+	 * 更新询单信息(不修改密码)
 	 * 
-	 * @param case_id
+	 * @param case
 	 * @return
 	 */
-	public boolean deleteCaseById(int case_id) {
+	public boolean case2order(int id) {
 
 		boolean r = false;
 
 		try {
-			caseMapper.deleteCaseById(case_id);
+			DemoCase u = caseMapper.getCaseById(id);
+			if (u != null) {
+				u.setStatus("2");
+				caseMapper.updateCase(u);
+				r = true;
+			} else {
+				r = false;
+			}
+		} catch (Exception e) {
+			logger.error("CaseService.updateCase() --> " + id + "-->" + e.getMessage());
+			r = false;
+		}
+
+		return r;
+	}
+	
+	/**
+	 * 询单失效
+	 * 
+	 * @param case_id
+	 * @return
+	 */
+	public boolean deleteCaseById(int caseid) {
+
+		boolean r = false;
+
+		try {
+			caseMapper.deleteCaseById(caseid);
 			r = true;
 		} catch (Exception e) {
-			logger.error("CaseService.deleteCaseById() --> " + case_id + "-->" + e.getMessage());
+			logger.error("CaseService.deleteCaseById() --> " + caseid + "-->" + e.getMessage());
 			r = false;
 		}
 

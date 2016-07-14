@@ -96,8 +96,7 @@
         
         <div class="panel-footer align-center">
 			<button class="btn btn-primary">保存</button>&nbsp;
-			<button class="btn btn-default" id="btn-back">取消</button>&nbsp;
-			<button class="btn btn-default">删除</button>
+			<button class="btn btn-default" id="btn-back">返回</button>&nbsp;
 			<input type="hidden" name="parameterid" value="${parameter.parameterid }" />
 		</div><!-- panel-footer -->
      </form>   

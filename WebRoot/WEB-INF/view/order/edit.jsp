@@ -73,15 +73,14 @@
                     <div class="form-group col-sm-4">
                       <label class="col-sm-4 control-label">状态</label>
                       <div class="col-sm-8">
-                        <input type="text" name="status" placeholder="状态" class="status-select fullwidth" value="${order.status}" />
+                        <input type="text" name="status" placeholder="状态" class="status-select fullwidth" readonly value="${order.status}" />
                       </div>
                     </div>
                 </div> 
                 <div class="panel-footer align-center">
                     <button id="btn-chengxing" class="btn btn-primary">成行</button>&nbsp;
                     <button id="btn-weichengxing" class="btn btn-primary">未成行</button>&nbsp;
-                    <button class="btn btn-primary">保存</button>&nbsp;
-                    <button class="btn btn-default">取消</button>
+                    <button class="btn btn-back">返回</button>
 					<input type="hidden" name="orderid" value="${order.orderid}" />	
         		    </div><!-- panel-footer -->
             </div>
@@ -103,21 +102,21 @@
                       <div class="form-group col-sm-4">
                           <label class="col-sm-4 control-label">成团日期</label>
                           <div class="col-sm-8 input-group input-datepicker">
-                            <input type="text" name="grouptime" class="form-control datepicker" value="${order.grouptime}" placeholder="mm/dd/yyyy" autocomplete="off" />
+                            <input type="text" id="grouptime" name="grouptime" class="form-control datepicker" value="${order.grouptime}" placeholder="mm/dd/yyyy" autocomplete="off" />
                             <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                           </div>
                       </div>
                       <div class="form-group col-sm-4">
                           <label class="col-sm-4 control-label">出发日期</label>
                           <div class="col-sm-8 input-group input-datepicker">
-                            <input type="text" name="startdate" value="${order.startdate}" placeholder="出发日期" class="form-control datepicker" autocomplete="off" />
+                            <input type="text" id="startdate" name="startdate" value="${order.startdate}" placeholder="出发日期" class="form-control datepicker" autocomplete="off" />
                             <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                           </div>
                       </div>
                       <div class="form-group col-sm-4">
                         <label class="col-sm-4 control-label">返回日期</label>
                         <div class="col-sm-8 input-group input-datepicker">
-                          <input type="text" name="enddate" value="${order.enddate}" placeholder="返回日期" class="form-control datepicker" autocomplete="off"/>
+                          <input type="text" id="enddate" name="enddate" value="${order.enddate}" placeholder="返回日期" class="form-control datepicker" autocomplete="off"/>
                           <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                         </div>
                       </div>
@@ -602,6 +601,20 @@
 			}
 		}, "JSON");
 	}
+	//成团日期格式转换
+	var date = $("#grouptime").val();	
+	var dateformat = new Date(date).toISOString("yyyy-MM-dd hh:mm:ss.S").substring(0,10);
+	$("#grouptime").val(dateformat)
+	
+	//出发日期格式转换
+	var date = $("#startdate").val();	
+	var dateformat = new Date(date).toISOString("yyyy-MM-dd hh:mm:ss.S").substring(0,10);
+	$("#startdate").val(dateformat)
+	
+	//返回日期格式转换
+	var date = $("#enddate").val();	
+	var dateformat = new Date(date).toISOString("yyyy-MM-dd hh:mm:ss.S").substring(0,10);
+	$("#enddate").val(dateformat)
 </script>
 
 </body>

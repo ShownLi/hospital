@@ -116,17 +116,17 @@ public class OrderService extends BaseService {
 	}
 	
 	/**
-	 * 根据销售获取地接社信息
+	 * 根据订单获取完整订单信息
 	 * 
 	 * @param id
 	 * @return
 	 */
-	public DemoOrder getAgencyBySales(int id) {
+	public DemoOrder getInfo(DemoOrder order) {
 		DemoOrder r = null;
 		try {
-			r = orderMapper.getAgencyBySales(id);
+			r = orderMapper.getInfo(order);
 		} catch (Exception e) {
-			logger.error("OrderService.getOrderById() --> " + id + "-->" + e.getMessage());
+			logger.error("OrderService.getInfo() --> " + order + "-->" + e.getMessage());
 			r = null;
 		}
 		return r;
@@ -201,7 +201,14 @@ public class OrderService extends BaseService {
 				u.setStatus(order.getStatus());
 			}
 			if(order.getGroupnumber()!= null){
+				u.setGrouptime(order.getGrouptime());
+				u.setStartdate(order.getStartdate());
+				u.setEnddate(order.getEnddate());
 				u.setGroupnumber(order.getGroupnumber());
+				u.setGroupprice(order.getGroupprice());
+				u.setCurrency(order.getCurrency());
+				u.setExchangerate(order.getExchangerate());
+				u.setRmbprice(order.getRmbprice());
 				u.setStatus("1");
 			}
 			if(order.getReason() != null){

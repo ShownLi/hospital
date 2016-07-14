@@ -165,17 +165,14 @@ public class EmailService extends BaseService {
 	 * @param email
 	 * @return
 	 */
-	public int saveEmail(DemoEmail email) {
-
-		
+	public void saveEmail(DemoEmail email) {
+		DemoEmail obj = email;
 		try {
-			emailMapper.saveEmail(email);
+			emailMapper.saveEmail(obj);
 		} catch (Exception e) {
-			logger.error("EmailService.saveEmail() --> " + email + "-->" + e.getMessage());
+			logger.error("EmailService.saveEmail() --> " + obj + "-->" + e.getMessage());
 			e.printStackTrace();
-			return 0;
 		}
-		return 0;
 	}
 
 }

@@ -48,8 +48,6 @@ public class DemoOrder extends BaseBean<DemoOrder> {
 
 	private String groupnumber;
 	
-	private String rmbdate;
-	
 	private String exchangerate;
 	
 	private String customeremailreal;
@@ -186,14 +184,6 @@ public class DemoOrder extends BaseBean<DemoOrder> {
 		this.groupnumber = groupnumber;
 	}
 
-	public String getRmbdate() {
-		return rmbdate;
-	}
-
-	public void setRmbdate(String rmbdate) {
-		this.rmbdate = rmbdate;
-	}
-
 	public String getExchangerate() {
 		return exchangerate;
 	}
@@ -308,12 +298,11 @@ public class DemoOrder extends BaseBean<DemoOrder> {
 				+ customername + ", agencyid=" + agencyid + ", agencyname=" + agencyname + ", salesid=" + salesid
 				+ ", salesname=" + salesname + ", destination=" + destination + ", budget=" + budget + ", status="
 				+ status + ", reason=" + reason + ", currency=" + currency + ", grouptime=" + grouptime
-				+ ", groupnumber=" + groupnumber + ", rmbdate=" + rmbdate + ", exchangerate=" + exchangerate
-				+ ", customeremailreal=" + customeremailreal + ", customeremailalias=" + customeremailalias
-				+ ", agencyemailreal=" + agencyemailreal + ", agencyemailalias=" + agencyemailalias + ", groupprice="
-				+ groupprice + ", rmbprice=" + rmbprice + ", lastresponse=" + lastresponse + ", startdate=" + startdate
+				+ ", groupnumber=" + groupnumber + ", exchangerate=" + exchangerate + ", customeremailreal="
+				+ customeremailreal + ", customeremailalias=" + customeremailalias + ", agencyemailreal="
+				+ agencyemailreal + ", agencyemailalias=" + agencyemailalias + ", groupprice=" + groupprice
+				+ ", rmbprice=" + rmbprice + ", lastresponse=" + lastresponse + ", startdate=" + startdate
 				+ ", enddate=" + enddate + ", creattime=" + creattime + ", updatetime=" + updatetime + "]";
 	}
-
 
 }

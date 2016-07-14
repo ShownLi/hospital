@@ -70,8 +70,7 @@
         
         <div class="panel-footer align-center">
 			<button class="btn btn-primary">保存</button>&nbsp;
-			<button class="btn btn-default" id="btn-back">取消</button>&nbsp;
-			<button class="btn btn-default">删除</button>
+			<button class="btn btn-default" id="btn-back">返回</button>
 			<input type="hidden" name="userid" value="${user.userid }" />
 		</div><!-- panel-footer -->
      </form>   

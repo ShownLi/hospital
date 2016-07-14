@@ -31,7 +31,7 @@
 
 	</select>
 	
-	<insert id="saveEmail" parameterType="DemoEmail" flushCache="true" useGeneratedKeys="true" keyProperty="email_id" keyColumn="GENERATED_KEY">
+	<insert id="saveEmail" parameterType="DemoEmail" flushCache="true" useGeneratedKeys="true" keyProperty="mailqueue_id" keyColumn="GENERATED_KEY">
 		insert into tm_mailqueue(
 		order_id,
 		mail_type,
@@ -52,8 +52,9 @@
 		#{sender},
 		#{reciever},
 		#{subject},
-		#{file_url},
-		#{mail_status},
+		#{content},
+		#{fileurl},
+		#{mailstatus},
 		NOW()
 		)
 	</insert>

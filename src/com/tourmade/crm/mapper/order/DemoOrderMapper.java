@@ -17,9 +17,11 @@ public interface DemoOrderMapper extends BaseMapper {
 
 	public void updateOrder(DemoOrder order);
 
-	public void deleteOrderById(int order_id);
+	public void deleteOrderById(int orderid);
 	
-	public DemoOrder getOrderById(int order_id);
+	public DemoOrder getInfo(DemoOrder order);
+	
+	public DemoOrder getOrderById(int orderid);
 	
 	public DemoOrder getAgencyBySales(int salesid);
 	

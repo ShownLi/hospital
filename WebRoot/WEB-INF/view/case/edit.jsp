@@ -236,7 +236,7 @@
             <button id="addorder" class="btn btn-primary">添加订单</button>&nbsp;
             <button id="submit" class="btn btn-primary">保存</button>&nbsp;
             	<input  type="hidden" name="caseid" value="${crmcase.caseid}" />
-            <button class="btn btn-primary">无效</button>
+            <button id="btn-back" class="btn btn-default">返回</button>
 		    </div><!-- panel-footer -->
      </form>   
       </div><!-- panel -->
@@ -571,13 +571,13 @@
             return false;
           }
       });
+	
   		$("#btn-back").click( function () {
   				history.go(-1);
   		}); 
 
       $("#addorder").click(function(){
-    	  form_submit();
-          //$("#nextModal").modal('show');
+          $("#nextModal").modal('show');
           return false;
       });
         
@@ -609,10 +609,8 @@
     			var f = $("#form").serialize();
     			$.post('${rootPath}case/edit.do', f, function(result) {
     				var rmsg = result.msg;
-    				alert(f);
     				if (result.success) {
-    					window.parent.location = "${rootPath}case/list.html";
-    					$("#nextModal").modal('show');
+    					window.parent.location = "${rootPath}case/edit.html?id=${crmcase.caseid}";
     				} else {
     					$("#msgModal").modal('show');
     				}
@@ -792,8 +790,7 @@
           $(".d2").hide();
           $(".d1").show();
       }
-  })
-  
+  });
 
 	</script>
 
