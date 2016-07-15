@@ -64,11 +64,13 @@
                     <li><a href="${rootPath }parameter/add.html"><i class="fa fa-caret-right"></i> 新增系统参数</a></li>                   
                 </ul>
             </li> 
+            <!--
             <li class="nav-parent"><a href="javascript:void(0);"><i class="fa fa-user"></i> <span>邮件管理</span></a>
                 <ul class="children">
                     <li><a href="${rootPath }email/list.html"><i class="fa fa-caret-right"></i> 邮件队列</a></li>
                 </ul>
             </li>
+            -->
             <li><a href="${rootPath }signout.html"><i class="glyphicon glyphicon-log-out"></i> 退出登录</a></li>                     
         </ul>
 

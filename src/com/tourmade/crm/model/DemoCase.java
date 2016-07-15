@@ -77,6 +77,8 @@ public class DemoCase extends BaseBean<DemoCase> {
 	
 	private String source;
 	
+	private String promotecode;
+	
 	private String status;
 	
 	private Date startmonth;
@@ -361,6 +363,14 @@ public class DemoCase extends BaseBean<DemoCase> {
 		return serialVersionUID;
 	}
 
+	public String getPromotecode() {
+		return promotecode;
+	}
+
+	public void setPromotecode(String promotecode) {
+		this.promotecode = promotecode;
+	}
+
 	@Override
 	public String toString() {
 		return "DemoCase [caseid=" + caseid + ", customerid=" + customerid + ", preferlanguage=" + preferlanguage
@@ -371,7 +381,8 @@ public class DemoCase extends BaseBean<DemoCase> {
 				+ ", salesname=" + salesname + ", destination=" + destination + ", destinationcode=" + destinationcode
 				+ ", route=" + route + ", routeid=" + routeid + ", tailormade=" + tailormade + ", passport=" + passport
 				+ ", visa=" + visa + ", flight=" + flight + ", submittype=" + submittype + ", ipaddress=" + ipaddress
-				+ ", source=" + source + ", status=" + status + ", startmonth=" + startmonth + ", creat_time="
-				+ creat_time + ", update_time=" + update_time + "]";
+				+ ", source=" + source + ", promotecode=" + promotecode + ", status=" + status + ", startmonth="
+				+ startmonth + ", creat_time=" + creat_time + ", update_time=" + update_time + "]";
 	}
+
 }
