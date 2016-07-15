@@ -71,11 +71,11 @@
                     </div>
                 </div>
                 <div class="form-group col-sm-4">
-                    <label class="col-sm-4 control-label">IP地址</label>
-                    <div class="col-sm-8">
-                      <input type="text" name="ip_address" class="form-control" readonly value="" />
-                    </div>
-                </div>
+                  <label class="col-sm-4 control-label">状态</label>
+                  <div class="col-sm-8">
+                    <input type="text" name="status" placeholder="状态" class="status-select fullwidth" readonly value="${crmcase.status}" />
+                  </div>
+                </div> 
             </div>
             <div class="section-block">
                 <div class="form-group col-sm-4">
@@ -91,17 +91,23 @@
                   </div>
                 </div>
                 <div class="form-group col-sm-4">
-                  <label class="col-sm-4 control-label">状态</label>
+                  <label class="col-sm-4 control-label">推广码</label>
                   <div class="col-sm-8">
-                    <input type="text" name="status" placeholder="状态" class="status-select fullwidth" readonly value="${crmcase.status}" />
+                    <input type="text" name="submit_type" class="form-control" readonly value="${crmcase.promotecode}" />
                   </div>
-                </div>
-                <div class="form-group col-sm-4">
+                </div> 
+               	<div class="form-group col-sm-4">
                   <label class="col-sm-4 control-label">表单类型</label>
                   <div class="col-sm-8">
                     <input type="text" name="submit_type" class="form-control" readonly value="${crmcase.submittype}" />
                   </div>
-                </div>            
+                </div>
+                <div class="form-group col-sm-4">
+                    <label class="col-sm-4 control-label">IP地址</label>
+                    <div class="col-sm-8">
+                      <input type="text" name="ip_address" class="form-control" readonly value="" />
+                    </div>
+                </div>           
             </div>
             <div class="section-block">
                 <div class="form-group col-sm-4">

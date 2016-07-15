@@ -156,6 +156,7 @@
 		u.sales_id as salesid,
 		u.destination as destination,
 		u.source as source,
+		u.promote_code as promotecode,
 		u.status as status,
 		u.tailormade as tailormade,
 		u.passport as passport,

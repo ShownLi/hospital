@@ -49,7 +49,7 @@ public class MainController extends BaseSimpleFormController {
 
 	@RequestMapping(value = "/main.html", method = { RequestMethod.POST, RequestMethod.GET })
 	public String main(Model model) {
-		return "redirect:/agency/list.html";
+		return "redirect:/case/list.html";
 	}
 	
 }
