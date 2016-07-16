@@ -180,9 +180,8 @@
         <div class="nextModal-title">您可以继续添加询单，或返回到客人列表页面</div>
       </div>
       <div class="modal-body align-center">
-        	<a class="btn btn-primary" href="${rootPath}case/add.html">添加询单</a>
+        	<a id="addcase" class="btn btn-primary" href="${rootPath}case/add1.html?customerid=">添加询单</a>
         	<a class="btn btn-primary" href="${rootPath}customer/list.html">返回列表</a>
-        	<input type="hidden" name="customerid" id="customerid" value="${customerid}"/>
       </div>
     </div><!-- modal-content -->
   </div><!-- modal-dialog -->
@@ -286,12 +285,14 @@
 		function form_submit() {
 			var f = $("#form").serialize();
 			$.post('${rootPath}customer/add.do', f, function(result) {
-				var customerid = result.obj.customer_id;
-				document.getElementById("customerid").value=customerid;
+				var customerid = result.obj.customerid;
 				var rmsg = result.msg;
 				if (result.success) {
 					//window.parent.location = "${rootPath}customer/list.html";
 					$("#nextModal").modal('show');
+					//添加询单的url需要该客人的id
+			      	var href = $("#addcase").attr("href");
+			      	$("#addcase").attr("href",href+customerid);
 				} else {
 					$("#msgModal").modal('show');
 				}

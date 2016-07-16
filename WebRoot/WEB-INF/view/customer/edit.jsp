@@ -175,7 +175,7 @@
 				<!-- table-responsive -->
 			</div>
 		    <div class="panel-footer align-center">
-			    <a class="btn btn-primary" href="${rootPath}case/addfromcustomer.html?customerid=${customer.customerid}">添加询单</a>
+			    <a class="btn btn-primary" href="${rootPath}case/add1.html?customerid=${customer.customerid}">添加询单</a>
 			</div>
 		</div><!-- end of panel 询单  -->
 		

@@ -188,10 +188,10 @@
 
 	<select id="getSales" parameterType="String" resultType="DemoList">
 		select
-		u.sale_id as id,
-		u.sale_name as text,
+		u.sales_id as id,
+		u.sales_name as text,
 		u.isdel 
-		from tm_sale u where u.isdel = 0
+		from tm_sales u where u.isdel = 0
 	</select>
 	
 	<update id="deleteCaseById" parameterType="int" flushCache="true"

@@ -69,12 +69,6 @@
                         <input type="text" name="source" class="source-select fullwidth" value="" />
                       </div>
                     </div>
-                    <div class="form-group col-sm-4">
-                      <label class="col-sm-4 control-label">IP地址</label>
-                      <div class="col-sm-8">
-                        <input type="text" name="ip_address" class="form-control" value="" />
-                      </div>
-                    </div>
                     </div>
                     <div class="section-block">
                    	<div class="form-group col-sm-4">

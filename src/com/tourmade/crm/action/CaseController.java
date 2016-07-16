@@ -131,7 +131,7 @@ public class CaseController extends BaseSimpleFormController {
 		return "/case/add";
 	}
 
-	@RequestMapping(value = "/addfromcustomer.html", method = { RequestMethod.POST, RequestMethod.GET })
+	@RequestMapping(value = "/add1.html", method = { RequestMethod.POST, RequestMethod.GET })
 	public String addfromcustomer(Model model, int customerid) {
 		
 		String country = "country";

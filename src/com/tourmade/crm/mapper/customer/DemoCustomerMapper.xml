@@ -37,7 +37,7 @@
 
 	</select>
 	
-	<insert id="saveCustomer" parameterType="DemoCustomer" flushCache="true" useGeneratedKeys="true" keyProperty="customer_id" keyColumn="GENERATED_KEY">
+	<insert id="saveCustomer" parameterType="DemoCustomer" flushCache="true" useGeneratedKeys="true" keyProperty="customerid" keyColumn="GENERATED_KEY">
 		insert into tm_customer(
 		customer_name_zh,
 		customer_name_en,
