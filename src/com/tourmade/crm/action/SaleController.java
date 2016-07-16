@@ -81,7 +81,7 @@ public class SaleController extends BaseSimpleFormController {
 			List<DemoList> v = service.getAgency();
 			JSONArray result = JSONArray.fromObject(v);
 			model.addAttribute("agency",result);
-			model.addAttribute("sale",u);
+			model.addAttribute("sales",u);
 		}
 		
 		

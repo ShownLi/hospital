@@ -7,61 +7,57 @@
 		SELECT *
 		FROM (
 		select
-		u.sale_id as saleid,
-		u.agency_id as agency,
-		u.sale_name as name,
-		u.sale_email as email,
-		u.sale_code as  code,
+		u.sales_id as salesid,
+		u.sales_name as salesname,
+		u.sales_email as salesemail,
 		u.isdel
-		from tm_sale u where u.agency_id = #{agencyid} and u.isdel = 0
+		from tm_sales u where u.agency_id = #{agencyid} and u.isdel = 0
 		order by u.creat_time
 		) table_alias
 		limit #{b},#{e}
 	</select>
 
 	<select id="countSale" parameterType="DemoSale" resultType="long">
-		select count(u.sale_id),u.agency_id from tm_sale u
+		select count(u.sales_id),u.agency_id from tm_sales u
 		where u.agency_id = #{agencyid} and u.isdel = 0
 	</select>
 	
-	<insert id="saveSale" parameterType="DemoSale" flushCache="true" useGeneratedKeys="true" keyProperty="Sale_id" keyColumn="GENERATED_KEY">
-		insert into tm_sale(
-		sale_name,
+	<insert id="saveSale" parameterType="DemoSale" flushCache="true" useGeneratedKeys="true" keyProperty="sales_id" keyColumn="GENERATED_KEY">
+		insert into tm_sales(
+		sales_name,
 		agency_id,
-		sale_code,
-		sale_email,
+		sales_email,
 		creat_time,
 		isdel
 		)values(
-		#{name,jdbcType=VARCHAR},
-		#{agency,jdbcType=VARCHAR},
-		#{code,jdbcType=VARCHAR},
-		#{email,jdbcType=VARCHAR},
+		#{salesname,jdbcType=VARCHAR},
+		#{agencyid,jdbcType=VARCHAR},
+		#{salesemail,jdbcType=VARCHAR},
 		NOW(),
 		0
 		)
 	</insert>
 
 	<update id="updateSale" parameterType="DemoSale" flushCache="true">
-		update tm_sale
+		update tm_sales
 		set
-		sale_name=#{name},
-		sale_code=#{code},
-		sale_email=#{email},
+		sales_name=#{name},
+		sales_code=#{code},
+		sales_email=#{email},
 		update_time=NOW()
 		where
-		sale_id=#{saleid}
+		sales_id=#{salesid}
 	</update>
 	
 	<select id="getSaleById" parameterType="int" resultType="DemoSale">
 		select
-		u.sale_id as saleid,
-		u.sale_name as name,
+		u.sales_id as salesid,
+		u.sales_name as name,
 		u.agency_id as agency,
-		u.sale_code as code,
-		u.sale_email as email,
+		u.sales_code as code,
+		u.sales_email as email,
 		u.isdel as isdel
-		from tm_sale u where u.sale_id = #{saleid}
+		from tm_sales u where u.sales_id = #{salesid}
 	</select>
 	
 	<select id="getAgency" resultType="DemoList">
@@ -75,10 +71,10 @@
 
 	<update id="deleteSaleById" parameterType="int" flushCache="true"
 		statementType="PREPARED">
-		update tm_sale
+		update tm_sales
 		set
 		isdel=1
 		where
-		sale_id = #{saleid}
+		sales_id = #{salesid}
 	</update>
 </mapper>

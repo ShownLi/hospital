@@ -44,23 +44,17 @@
             <div class="form-group">
               <label class="col-sm-4 control-label">销售名称 <span class="asterisk">*</span></label>
               <div class="col-sm-4">
-                <input type="text" name="name" placeholder="销售名称" class="form-control" />
+                <input type="text" name="salesname" placeholder="销售名称" class="form-control" />
               </div>
             </div>
             <div class="form-group">
               <label  class="col-sm-4 control-label">所属地接社 <span class="asterisk">*</span></label>
-              <input type="text" name="agency" class="agency-select col-sm-4" value="${agencyid}" readonly/>
-            </div>       
-            <div class="form-group">
-              <label class="col-sm-4 control-label">销售编码 <span class="asterisk">*</span></label>
-              <div class="col-sm-4">
-                <input type="text" name="code" placeholder="销售编码" class="form-control" />
-              </div>
-            </div> 	            			
+              <input type="text" name="agencyid" class="agency-select col-sm-4" value="${agencyid}" readonly/>
+            </div>                   			
             <div class="form-group">
               <label class="col-sm-4 control-label">邮件地址 <span class="asterisk">*</span></label>
               <div class="col-sm-4">
-                <input type="text" name="email" placeholder="邮件地址" class="form-control" />
+                <input type="text" name="salesemail" placeholder="邮件地址" class="form-control" />
               </div>
             </div> 	          
         </div><!-- panel-body -->

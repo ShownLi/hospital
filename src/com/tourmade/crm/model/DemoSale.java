@@ -17,19 +17,27 @@ public class DemoSale extends BaseBean<DemoSale> {
 	 */
 	private static final long serialVersionUID = 1423523863575074623L;
 
-	private int saleid;
+	private int salesid;
 	
 	private int agencyid;
 	
-	private String agency;
+	private String salesportalid;
 	
-	private String code;
+	private String wxunionid;
 	
-	private String name;
+	private String wxopenid;
 	
-	private String email;
+	private String salesname;
 	
-	private Date update_time;
+	private String salesemail;
+
+	public int getSalesid() {
+		return salesid;
+	}
+
+	public void setSalesid(int salesid) {
+		this.salesid = salesid;
+	}
 
 	public int getAgencyid() {
 		return agencyid;
@@ -39,52 +47,44 @@ public class DemoSale extends BaseBean<DemoSale> {
 		this.agencyid = agencyid;
 	}
 
-	public int getSaleid() {
-		return saleid;
+	public String getSalesportalid() {
+		return salesportalid;
 	}
 
-	public void setSaleid(int saleid) {
-		this.saleid = saleid;
+	public void setSalesportalid(String salesportalid) {
+		this.salesportalid = salesportalid;
 	}
 
-	public String getAgency() {
-		return agency;
+	public String getWxunionid() {
+		return wxunionid;
 	}
 
-	public void setAgency(String agency) {
-		this.agency = agency;
+	public void setWxunionid(String wxunionid) {
+		this.wxunionid = wxunionid;
 	}
 
-	public String getCode() {
-		return code;
+	public String getWxopenid() {
+		return wxopenid;
 	}
 
-	public void setCode(String code) {
-		this.code = code;
+	public void setWxopenid(String wxopenid) {
+		this.wxopenid = wxopenid;
 	}
 
-	public String getName() {
-		return name;
+	public String getSalesname() {
+		return salesname;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setSalesname(String salesname) {
+		this.salesname = salesname;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getSalesemail() {
+		return salesemail;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public Date getUpdate_time() {
-		return update_time;
-	}
-
-	public void setUpdate_time(Date update_time) {
-		this.update_time = update_time;
+	public void setSalesemail(String salesemail) {
+		this.salesemail = salesemail;
 	}
 
 	public static long getSerialversionuid() {
@@ -93,9 +93,9 @@ public class DemoSale extends BaseBean<DemoSale> {
 
 	@Override
 	public String toString() {
-		return "DemoSale [saleid=" + saleid + ", agencyid=" + agencyid + ", agency=" + agency + ", code=" + code
-				+ ", name=" + name + ", email=" + email + ", update_time=" + update_time + "]";
+		return "DemoSale [salesid=" + salesid + ", agencyid=" + agencyid + ", salesportalid=" + salesportalid
+				+ ", wxunionid=" + wxunionid + ", wxopenid=" + wxopenid + ", salesname=" + salesname + ", salesemail="
+				+ salesemail + "]";
 	}
-
 
 }

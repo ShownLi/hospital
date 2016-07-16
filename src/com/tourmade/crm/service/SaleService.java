@@ -70,7 +70,7 @@ public class SaleService extends BaseService {
 			e.printStackTrace();
 			return 0;
 		}
-		return sale.getSaleid();
+		return sale.getSalesid();
 	}
 
 	/**
@@ -118,12 +118,10 @@ public class SaleService extends BaseService {
 		boolean r = false;
 
 		try {
-			DemoSale u = saleMapper.getSaleById(sale.getSaleid());
+			DemoSale u = saleMapper.getSaleById(sale.getSalesid());
 			if (u != null) {
-				u.setName(sale.getName());
-				u.setAgency(sale.getAgency());
-				u.setCode(sale.getCode());
-				u.setEmail(sale.getEmail());
+				u.setSalesname(sale.getSalesname());
+				u.setSalesemail(sale.getSalesemail());
 				// u.setPwd(sale.getPwd());
 				saleMapper.updateSale(u);
 				r = true;
