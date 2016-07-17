@@ -597,12 +597,10 @@
           $("#nextModal").modal('show');
           return false;
       });
-        
-  		
 
 
       $(".nextModal .submit").click(function(){
-      	order_submit();
+      	  order_submit();
       });
   		function order_submit() {
     			var f = $("#order").serialize();
@@ -807,6 +805,23 @@
           $(".d2").hide();
           $(".d1").show();
       }
+
+      //添加订单弹出框，目的地与销售联动
+      $("#destination").change(function(){
+          var destination = $(this).val();
+          $.ajax({
+              type: "post",
+              url: "",
+              data: destination,
+              success: function(sales){
+                  $("#salesid").select2({
+                      placeholder: '销售',
+                      data: sales
+                  });
+              }   
+          }); 
+      });
+
   });
 
 	</script>
