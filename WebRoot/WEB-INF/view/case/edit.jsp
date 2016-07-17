@@ -788,7 +788,7 @@
               $(".d1").show();
           }
       });
-      var start = $("input[name='starttime']").val();
+      var start = ${crmcase.starttime};
       if (start == 1) {
           $(".d1").hide();
           $(".d2").show();

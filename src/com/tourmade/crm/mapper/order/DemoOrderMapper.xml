@@ -48,13 +48,13 @@
 		a.agency_name as agencyname,
 		b.customer_name_zh as customername,
 		b.email as customeremailreal,
-		c.sale_email as agencyemailreal,
-		c.sale_name as salesname
-		from tm_sale c 
+		c.sales_email as agencyemailreal,
+		c.sales_name as salesname
+		from tm_sales c 
 		left join tm_customer b on b.customer_id = #{customerid}
 		left join tm_agency a on a.agency_id = c.agency_id
 		where
-		a.isdel = 0 and b.isdel = 0 and c.isdel = 0 and c.sale_id = #{salesid}
+		a.isdel = 0 and b.isdel = 0 and c.isdel = 0 and c.sales_id = #{salesid}
 	</select>
 	
 	<insert id="saveOrder" parameterType="DemoOrder" flushCache="true" useGeneratedKeys="true" keyProperty="orderid" keyColumn="GENERATED_KEY">

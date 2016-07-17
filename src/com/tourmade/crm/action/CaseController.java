@@ -62,9 +62,9 @@ public class CaseController extends BaseSimpleFormController {
 	public String queryData(HttpServletRequest request, HttpSession session, Model model, DemoCase crmcase, PageHelper page) {
 	
 		QueryResult<DemoCase> r = service.queryCase(crmcase, page, request);
-		//System.out.println(crmcase);
+		
 		String result = JSONUtilS.object2json(r);
-
+		//System.out.println(result);
 		return result;
 	}
 	@RequestMapping(value = "/add.html", method = { RequestMethod.POST, RequestMethod.GET })
