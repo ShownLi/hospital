@@ -12,7 +12,8 @@
 		u.budget as budget,
 		u.source as source,
 		u.destination as destination,
-		u.status as status
+		u.status as status,
+		u.operator as operator
 		from tm_case u  
 		where u.isdel = 0 
 		order by u.creat_time
@@ -186,6 +187,14 @@
 		from tm_customer u where u.isdel = 0
 	</select>
 
+	<select id="getUser" parameterType="String" resultType="DemoList">
+		select
+		u.user_id as id,
+		u.user_name as text,
+		u.isdel 
+		from tm_user u where u.isdel = 0
+	</select>
+	
 	<select id="getSales" parameterType="String" resultType="DemoList">
 		select
 		u.sales_id as id,

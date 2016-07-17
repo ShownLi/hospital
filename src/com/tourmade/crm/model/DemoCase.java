@@ -21,6 +21,8 @@ public class DemoCase extends BaseBean<DemoCase> {
 	
 	private int customerid;
 	
+	private int operator;
+	
 	private String preferlanguage;
 	
 	private String withwho;
@@ -101,6 +103,14 @@ public class DemoCase extends BaseBean<DemoCase> {
 
 	public void setCustomerid(int customerid) {
 		this.customerid = customerid;
+	}
+
+	public int getOperator() {
+		return operator;
+	}
+
+	public void setOperator(int operator) {
+		this.operator = operator;
 	}
 
 	public String getPreferlanguage() {

@@ -107,7 +107,13 @@
                     <div class="col-sm-8">
                       <input type="text" name="ip_address" class="form-control" readonly value="" />
                     </div>
-                </div>           
+                </div>      
+                <div class="form-group col-sm-4">
+                    <label class="col-sm-4 control-label">跟单员</label>
+                    <div class="col-sm-8">
+                      <input type="text" name="operator" class="user-select fullwidth" value="" />
+                    </div>
+                </div>      
             </div>
             <div class="section-block">
                 <div class="form-group col-sm-4">
@@ -433,6 +439,7 @@
     var d12 = ${visa};
     var d13 = ${flight};
     var customer = ${customer};
+    var user = ${user};
     var sales = ${sales};
     
     $(".country-select").select2({
@@ -493,6 +500,10 @@
     $(".customer-select").select2({
         placeholder: '客人',
         data: customer
+    });
+    $(".user-select").select2({
+        placeholder: '跟单员',
+        data: user
     });
     $(".sales-select").select2({
         placeholder: '销售',

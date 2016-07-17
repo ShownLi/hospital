@@ -25,5 +25,7 @@ public interface DemoCaseMapper extends BaseMapper {
 	
 	public List<DemoList> getCustomer();
 	
+	public List<DemoList> getUser();
+	
 	public List<DemoList> getSales();
 }

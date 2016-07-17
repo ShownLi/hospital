@@ -159,14 +159,16 @@
 				<div class="table-responsive">
 					<table id="dataTable-case" class="table">
 						<thead>
-							<tr>
-								<th>序号</th>
-								<th>预算</th>
-								<th>目的地</th>
-								<th>询单来源</th>
-								<th>状态</th>
-								<th>编辑</th>
-							</tr>
+									<tr>
+										<th>ID</th>
+										<th>客人</th>
+										<th>预算</th>
+										<th>目的地</th>
+										<th>询单来源</th>
+										<th>跟单员</th>
+										<th>状态</th>
+										<th>编辑</th>
+									</tr>
 						</thead>
 						<tbody>
 						</tbody>
@@ -277,6 +279,10 @@
 	var l = ${level};
 	var p = ${promote};
 	var a = ${agegroup};
+	var source = ${source};
+	var status = ${status};
+	var c = ${c};
+	var user = ${user};
 	$(".promote-select").select2({
 		placeholder: '选择一个推广渠道',
 	  	data: p
@@ -323,7 +329,55 @@
 						render: function ( data, type, full, meta ) {
 						  return '<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a>&nbsp;<a class="btn btn-danger btn-xs" id="'+data+'"><span class="fa fa-minus-circle"></span> 删除</a>&nbsp;&nbsp;&nbsp;<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-minus-circle"></span> 生成订单</a>';
 						},
-						targets: 5
+						targets: 7
+					},
+					  {
+		                data: "c",
+		                orderable: false,
+		                render: function ( data ) {
+		                	for(var i=0;i <  c.length;i++){
+		                		if(data==c[i].id){
+		                			return c[i].text
+		                		}
+		                	}
+		                },
+		                  targets: 1
+					},
+				  {
+		                data: "source",
+		                orderable: false,
+		                render: function ( data ) {
+		                	for(var i=0;i <  source.length;i++){
+		                		if(data==source[i].id){
+		                			return source[i].text
+		                		}
+		                	}
+		                },
+		                  targets: 4
+					},
+					{
+						data: "operator",
+		                orderable: false,
+		                render: function ( data ) {
+		                	for(var i=0;i <  user.length;i++){
+		                		if(data==user[i].id){
+		                			return user[i].text
+		                		}
+		                	}
+		                },
+		                  targets: 5
+					},
+					{
+		                data: "status",
+		                orderable: false,
+		                render: function ( data ) {
+		                	for(var i=0;i <  status.length;i++){
+		                		if(data==status[i].id){
+		                			return status[i].text
+		                		}
+		                	}
+		                },
+		                  targets: 6
 					},
 					{
 						  orderable: false,
@@ -333,11 +387,13 @@
 
 				],
 				columns: [
-		            { data: "caseid" },
-		            { data: "budget" },
-		            { data: "destination" },
-		            { data: "source" },
-		            { data: "status" }
+				            { data: "caseid" },
+				            { data: "customerid" },
+				            { data: "budget" },
+				            { data: "destination" },
+				            { data: "source" },
+				            { data: "operator" },
+				            { data: "status" }
 		        ]
 			});
 			

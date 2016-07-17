@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.itextpdf.text.log.SysoLogger;
 import com.tourmade.crm.common.action.BaseSimpleFormController;
 import com.tourmade.crm.common.framework.bean.QueryResult;
 import com.tourmade.crm.common.framework.util.JSONUtilS;
@@ -20,6 +19,7 @@ import com.tourmade.crm.common.model.base.value.baseconfig.Json;
 import com.tourmade.crm.common.model.base.value.baseconfig.PageHelper;
 import com.tourmade.crm.model.DemoCustomer;
 import com.tourmade.crm.model.DemoList;
+import com.tourmade.crm.service.CaseService;
 import com.tourmade.crm.service.CustomerService;
 
 import net.sf.json.JSONArray;
@@ -30,6 +30,8 @@ public class CustomerController extends BaseSimpleFormController {
 	
 	@Autowired
 	private CustomerService service;
+	@Autowired
+	private CaseService caseservice;
 
 	@RequestMapping(value = "/list.html", method = { RequestMethod.POST, RequestMethod.GET })
 	public String list(Model model) {
@@ -110,6 +112,21 @@ public class CustomerController extends BaseSimpleFormController {
 			model.addAttribute("promote",promoteresult);
 			model.addAttribute("agegroup",agegroupresult);
 			model.addAttribute("customer",customer);
+			
+			String source = "case.source";
+			String status = "case.status";
+			List<DemoList> user = caseservice.getUser();
+			List<DemoList> c = caseservice.getCustomer();
+			List<DemoList> s = caseservice.getParameterInfo(source);
+			List<DemoList> s1 = caseservice.getParameterInfo(status);
+			JSONArray sourceresult = JSONArray.fromObject(s);
+			JSONArray statusresult = JSONArray.fromObject(s1);
+			JSONArray cusresult = JSONArray.fromObject(c);
+			JSONArray userresult = JSONArray.fromObject(user);
+			model.addAttribute("source",sourceresult);
+			model.addAttribute("status",statusresult);
+			model.addAttribute("c",cusresult);
+			model.addAttribute("user",userresult);
 		}
 		return "/customer/edit";
 	}

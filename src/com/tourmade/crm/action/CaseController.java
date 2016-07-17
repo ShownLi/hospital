@@ -34,15 +34,18 @@ public class CaseController extends BaseSimpleFormController {
 	public String list(Model model) {
 		String source = "case.source";
 		String status = "case.status";
+		List<DemoList> user = service.getUser();
 		List<DemoList> customer = service.getCustomer();
 		List<DemoList> v = service.getParameterInfo(source);
 		List<DemoList> w = service.getParameterInfo(status);
 		JSONArray sourceresult = JSONArray.fromObject(v);
 		JSONArray statusresult = JSONArray.fromObject(w);
 		JSONArray cusresult = JSONArray.fromObject(customer);
+		JSONArray userresult = JSONArray.fromObject(user);
 		model.addAttribute("source",sourceresult);
 		model.addAttribute("status",statusresult);
 		model.addAttribute("customer",cusresult);
+		model.addAttribute("user",userresult);
 		return "/case/list";
 	}
 	
@@ -97,6 +100,7 @@ public class CaseController extends BaseSimpleFormController {
 		List<DemoList> v12 = service.getParameterInfo(visa);
 		List<DemoList> v13 = service.getParameterInfo(flight);
 		List<DemoList> customer = service.getCustomer();
+		List<DemoList> user = service.getUser();
 		List<DemoList> sales = service.getSales();
 		JSONArray countryresult = JSONArray.fromObject(v1);
 		JSONArray languageresult = JSONArray.fromObject(v2);
@@ -112,6 +116,7 @@ public class CaseController extends BaseSimpleFormController {
 		JSONArray visaresult = JSONArray.fromObject(v12);
 		JSONArray flightresult = JSONArray.fromObject(v13);
 		JSONArray customerresult = JSONArray.fromObject(customer);
+		JSONArray userresult = JSONArray.fromObject(user);
 		JSONArray salesresult = JSONArray.fromObject(sales);
 		model.addAttribute("country",countryresult);
 		model.addAttribute("language",languageresult);
@@ -128,6 +133,7 @@ public class CaseController extends BaseSimpleFormController {
 		model.addAttribute("passport",passportresult);
 		model.addAttribute("visa",visaresult);
 		model.addAttribute("flight",flightresult);
+		model.addAttribute("user",userresult);
 		return "/case/add";
 	}
 
@@ -161,6 +167,7 @@ public class CaseController extends BaseSimpleFormController {
 		List<DemoList> v12 = service.getParameterInfo(visa);
 		List<DemoList> v13 = service.getParameterInfo(flight);
 		List<DemoList> customer = service.getCustomer();
+		List<DemoList> user = service.getUser();
 		List<DemoList> sales = service.getSales();
 		JSONArray countryresult = JSONArray.fromObject(v1);
 		JSONArray languageresult = JSONArray.fromObject(v2);
@@ -176,6 +183,7 @@ public class CaseController extends BaseSimpleFormController {
 		JSONArray visaresult = JSONArray.fromObject(v12);
 		JSONArray flightresult = JSONArray.fromObject(v13);
 		JSONArray customerresult = JSONArray.fromObject(customer);
+		JSONArray userresult = JSONArray.fromObject(user);
 		JSONArray salesresult = JSONArray.fromObject(sales);
 		model.addAttribute("country",countryresult);
 		model.addAttribute("language",languageresult);
@@ -193,6 +201,7 @@ public class CaseController extends BaseSimpleFormController {
 		model.addAttribute("visa",visaresult);
 		model.addAttribute("flight",flightresult);
 		model.addAttribute("customerid",customerid);
+		model.addAttribute("user",userresult);
 		return "/case/add";
 	}
 	
@@ -247,6 +256,7 @@ public class CaseController extends BaseSimpleFormController {
 			List<DemoList> v12 = service.getParameterInfo(visa);
 			List<DemoList> v13 = service.getParameterInfo(flight);
 			List<DemoList> customer = service.getCustomer();
+			List<DemoList> user = service.getUser();
 			List<DemoList> sales = service.getSales();
 			JSONArray countryresult = JSONArray.fromObject(v1);
 			JSONArray languageresult = JSONArray.fromObject(v2);
@@ -262,6 +272,7 @@ public class CaseController extends BaseSimpleFormController {
 			JSONArray visaresult = JSONArray.fromObject(v12);
 			JSONArray flightresult = JSONArray.fromObject(v13);
 			JSONArray customerresult = JSONArray.fromObject(customer);
+			JSONArray userresult = JSONArray.fromObject(user);
 			JSONArray salesresult = JSONArray.fromObject(sales);
 			model.addAttribute("country",countryresult);
 			model.addAttribute("language",languageresult);
@@ -278,6 +289,7 @@ public class CaseController extends BaseSimpleFormController {
 			model.addAttribute("passport",passportresult);
 			model.addAttribute("visa",visaresult);
 			model.addAttribute("flight",flightresult);
+			model.addAttribute("user",userresult);
 			model.addAttribute("crmcase",u);
 		}
 		return "/case/edit";
