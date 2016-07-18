@@ -302,6 +302,7 @@ public class CaseController extends BaseSimpleFormController {
 		Json j = new Json();
 		
 		try {
+			System.out.println(crmcase);
 			service.updateCase(crmcase);
 			j.setSuccess(true);
 		} catch (Exception e) {

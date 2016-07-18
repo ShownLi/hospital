@@ -55,13 +55,16 @@
                 <div class="form-group col-sm-4">
                     <label class="col-sm-4 control-label">希望联系方式</label>
                     <div class="col-sm-8">
-                      <input type="text" name="contacttype" class="contact-select fullwidth" value="${crmcase.contacttype}" />
+                      <select name="contacttype" class="contact-select fullwidth" multiple="multiple">
+					  <option value="wechat">微信</option>
+					  <option value="mobilephone">手机</option>
+					</select>
                     </div>
                 </div>   
                 <div class="form-group col-sm-4">
                     <label class="col-sm-4 control-label">所属销售</label>
                     <div class="col-sm-8">
-                      <input type="text" name="salesname" placeholder="所属销售" class="sales-select fullwidth" value="" />
+                      <input type="text" name="salesid" placeholder="所属销售" class="sales-select fullwidth" value="${crmcase.salesid}" />
                     </div>
                 </div>
                 <div class="form-group col-sm-4">
@@ -424,7 +427,6 @@
 
 	document.getElementById("requirement")
 		.value="${crmcase.requirement}"
-
     var d1 = ${country};
     var d2 = ${language};
     var d3 = ${contacttype};
@@ -441,6 +443,7 @@
     var customer = ${customer};
     var user = ${user};
     var sales = ${sales};
+    
     $(".country-select").select2({
         placeholder: '国家',
         data: d1
@@ -454,8 +457,8 @@
      	data: d2
     });
     $(".contact-select").select2({
-        placeholder: '选择一个希望联系方式',
-        data: d3
+    	placeholder: '可多选',
+    	minimumResultsForSearch: Infinity
      });
     $(".withwho-select").select2({
     	placeholder: '与谁同行',
