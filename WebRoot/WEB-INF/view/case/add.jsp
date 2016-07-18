@@ -54,7 +54,10 @@
                     <div class="form-group col-sm-4">
                       <label class="col-sm-4 control-label">希望联系方式</label>
                       <div class="col-sm-8">
-                        <input type="text" name="contacttype" class="contact-select fullwidth" value="" />
+	                      <select name="contacttype" class="contact-select fullwidth" multiple="multiple">
+							  <option value="wechat">微信</option>
+							  <option value="mobilephone">手机</option>
+					</select>
                       </div>
                     </div> 
                     <div class="form-group col-sm-4">
@@ -298,7 +301,6 @@
 	<script type="text/javascript">
     var d1 = ${country};
     var d2 = ${language};
-    var d3 = ${contacttype};
     var d4 = ${withwho};
     var d5 = ${hotel};
     var d6 = ${meals};
@@ -322,8 +324,7 @@
      	data: d2
     });
     $(".contact-select").select2({
-        placeholder: '选择一个希望联系方式',
-        data: d3
+        placeholder: '选择希望联系方式',
      });
     $(".withwho-select").select2({
     	placeholder: '与谁同行',

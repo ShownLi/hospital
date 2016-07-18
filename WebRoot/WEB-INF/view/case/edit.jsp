@@ -429,7 +429,6 @@
 		.value="${crmcase.requirement}"
     var d1 = ${country};
     var d2 = ${language};
-    var d3 = ${contacttype};
     var d4 = ${withwho};
     var d5 = ${hotel};
     var d6 = ${meals};
