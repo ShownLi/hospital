@@ -443,7 +443,6 @@
     var customer = ${customer};
     var user = ${user};
     var sales = ${sales};
-    
     $(".country-select").select2({
         placeholder: '国家',
         data: d1
@@ -458,8 +457,10 @@
     });
     $(".contact-select").select2({
     	placeholder: '可多选',
-    	minimumResultsForSearch: Infinity
+    	minimumResultsForSearch: Infinity,
      });
+    //alert("${crmcase.contacttype}".split(","));
+    $(".contact-select").select2("val", "${crmcase.contacttype}".split(","));
     $(".withwho-select").select2({
     	placeholder: '与谁同行',
      	data: d4
@@ -826,7 +827,6 @@
       });
 
   });
-
 	</script>
 
 
