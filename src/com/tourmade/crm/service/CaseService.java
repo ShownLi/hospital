@@ -150,7 +150,7 @@ public class CaseService extends BaseService {
 		try {
 			r = caseMapper.getCustomer();
 		} catch (Exception e) {
-			logger.error("CaseService.getParameterInfo() --> -->" + e.getMessage());
+			logger.error("CaseService.getCustomer() --> -->" + e.getMessage());
 			r = null;
 		}
 		return r;
@@ -184,14 +184,31 @@ public class CaseService extends BaseService {
 		try {
 			r = caseMapper.getSales();
 		} catch (Exception e) {
-			logger.error("CaseService.getParameterInfo() --> -->" + e.getMessage());
+			logger.error("CaseService.getSales() --> -->" + e.getMessage());
 			r = null;
 		}
 		return r;
 	}
 	
 	/**
-	 * 更新询单信息(不修改密码)
+	 * 获得销售信息
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public List<DemoList> getSalesByAgency(String destination) {
+		List<DemoList> r = null;
+		try {
+			r = caseMapper.getSalesByAgency(destination);
+		} catch (Exception e) {
+			logger.error("CaseService.getSalesByAgency() --> -->" + e.getMessage());
+			r = null;
+		}
+		return r;
+	}
+	
+	/**
+	 * 更新询单信息
 	 * 
 	 * @param case
 	 * @return

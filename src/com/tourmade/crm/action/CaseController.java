@@ -312,6 +312,14 @@ public class CaseController extends BaseSimpleFormController {
 		return j;
 	}
 	
+	@RequestMapping(value = "/getsales.do")
+	@ResponseBody
+	public List<DemoList> getSales(Model model, String destination) {
+		
+		List<DemoList> sales = service.getSalesByAgency(destination);
+		return sales;
+	}
+	
 	@RequestMapping(value = "/del.do")
 	@ResponseBody
 	public Json doDel(HttpServletRequest request, HttpSession session, Model model, String id) {

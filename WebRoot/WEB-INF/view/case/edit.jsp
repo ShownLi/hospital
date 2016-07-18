@@ -111,7 +111,7 @@
                 <div class="form-group col-sm-4">
                     <label class="col-sm-4 control-label">跟单员</label>
                     <div class="col-sm-8">
-                      <input type="text" name="operator" class="user-select fullwidth" value="" />
+                      <input type="text" name="operator" class="user-select fullwidth" value="${crmcase.operator}" />
                     </div>
                 </div>      
             </div>
@@ -441,7 +441,6 @@
     var customer = ${customer};
     var user = ${user};
     var sales = ${sales};
-    
     $(".country-select").select2({
         placeholder: '国家',
         data: d1
@@ -811,12 +810,13 @@
           var destination = $(this).val();
           $.ajax({
               type: "post",
-              url: "",
+              url: "${rootPath}case/getsales.do?destination="+destination,
               data: destination,
               success: function(sales){
+            	  var json = jQuery.parseJSON( sales );
                   $("#salesid").select2({
                       placeholder: '销售',
-                      data: sales
+                      data: json
                   });
               }   
           }); 

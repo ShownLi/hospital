@@ -28,4 +28,6 @@ public interface DemoCaseMapper extends BaseMapper {
 	public List<DemoList> getUser();
 	
 	public List<DemoList> getSales();
+	
+	public List<DemoList> getSalesByAgency(String destination);
 }

@@ -137,6 +137,7 @@
 		select
 		u.case_id as caseid,
 		u.customer_id as customerid, 
+		u.operator as operator,
 		u.prefer_language as preferlanguage,
 		u.contact_type as contacttype,
 		u.with_who as withwho,
@@ -201,6 +202,17 @@
 		u.sales_name as text,
 		u.isdel 
 		from tm_sales u where u.isdel = 0
+	</select>
+	
+	<select id="getSalesByAgency" parameterType="String" resultType="DemoList">
+		select
+		u.sales_id as id,
+		u.sales_name as text,
+		u.isdel 
+		from tm_sales u 
+		left join tm_agency v on u.agency_id = v.agency_id 
+		where u.isdel = 0
+		and v.country = #{destination}
 	</select>
 	
 	<update id="deleteCaseById" parameterType="int" flushCache="true"
