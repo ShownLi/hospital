@@ -103,8 +103,8 @@
 
 
 	<script type="text/javascript">
-	var source = ${source};
-	var status = ${status};
+	var s = ${source};
+	var cs = ${casestatus};
 	var customer = ${customer};
 	var user = ${user};
 		jQuery(document).ready(function() {
@@ -153,11 +153,14 @@
 			                data: "source",
 			                orderable: false,
 			                render: function ( data ) {
-			                	for(var i=0;i <  source.length;i++){
-			                		if(data==source[i].id){
-			                			return source[i].text
+			                	if(data){
+			                	for(var i=0;i <  s.length;i++){
+			                		if(data==s[i].id){
+			                			return s[i].text
 			                		}
 			                	}
+			                	}
+			                	else{return ""}
 			                },
 			                  targets: 4
 						},
@@ -165,11 +168,14 @@
 							data: "operator",
 			                orderable: false,
 			                render: function ( data ) {
-			                	for(var i=0;i <  user.length;i++){
-			                		if(data==user[i].id){
-			                			return user[i].text
-			                		}
+			                	if(data){
+				                	for(var i=0;i <  user.length;i++){
+				                		if(data==user[i].id){
+				                			return user[i].text
+				                		}
+				                	}
 			                	}
+			                	else{return ""}
 			                },
 			                  targets: 5
 						},
@@ -177,11 +183,14 @@
 			                data: "status",
 			                orderable: false,
 			                render: function ( data ) {
-			                	for(var i=0;i <  status.length;i++){
-			                		if(data==status[i].id){
-			                			return status[i].text
-			                		}
+			                	if(data){
+				                	for(var i=0;i <  cs.length;i++){
+				                		if(data==cs[i].id){
+				                			return cs[i].text
+				                		}
+				                	}
 			                	}
+			                	else{return ""}
 			                },
 			                  targets: 6
 						},

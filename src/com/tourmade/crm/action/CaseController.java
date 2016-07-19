@@ -43,7 +43,7 @@ public class CaseController extends BaseSimpleFormController {
 		JSONArray cusresult = JSONArray.fromObject(customer);
 		JSONArray userresult = JSONArray.fromObject(user);
 		model.addAttribute("source",sourceresult);
-		model.addAttribute("status",statusresult);
+		model.addAttribute("casestatus",statusresult);
 		model.addAttribute("customer",cusresult);
 		model.addAttribute("user",userresult);
 		return "/case/list";
