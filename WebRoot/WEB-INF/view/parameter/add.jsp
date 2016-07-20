@@ -77,7 +77,7 @@
 	            <div class="form-group col-sm-4">
 	              <label class="col-sm-4 control-label">排序标记 <span class="asterisk">*</span></label>
 	              <div class="col-sm-8">
-	                <input type="text" name="sort" placeholder="排序标记" class="form-control" />
+	                <input type="text" name="sort" placeholder="排序标记" class="form-control" value="0"/>
 	              </div>
 	            </div>
 	            <div class="form-group col-sm-4">
@@ -163,7 +163,7 @@
 			            }
 			        },
 				chinese: "required",
-				sort:"required"
+				sort:"digits"
 			},
 			messages: {
 				domain: "请输入作用域",
@@ -172,7 +172,7 @@
 					remote:"该值已存在，请重新输入"
 				},
 				chinese: "请输入中文",
-				sort: "请输入排序标识"
+				sort: "排序标记必须是整数"
 			},
 		    highlight: function(element) {
 		      jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');

@@ -44,17 +44,17 @@
             <div class="form-group">
               <label class="col-sm-4 control-label">销售名 <span class="asterisk">*</span></label>
               <div class="col-sm-4">
-                <input type="text" name="salesname" placeholder="销售名" class="form-control" value="${sale.name }" />
+                <input type="text" name="salesname" placeholder="销售名" class="form-control" value="${sales.salesname }" />
               </div>
             </div>
             <div class="form-group">
               <label class="col-sm-4 control-label">所属地接社 <span class="asterisk">*</span></label>
-              <input type="text" name="agencyid" class="agency-select col-sm-4" value="${sale.agency }" readonly/>
+              <input type="text" name="agencyid" class="agency-select col-sm-4" value="${sales.agencyid }" readonly/>
             </div>               
             <div class="form-group">
               <label class="col-sm-4 control-label">邮件地址 <span class="asterisk">*</span></label>
               <div class="col-sm-4">
-                <input type="text" name="salesemail" placeholder="邮件地址" class="form-control" value="${sale.email }" />
+                <input type="text" name="salesemail" placeholder="邮件地址" class="form-control" value="${sales.salesemail }" />
               </div>
             </div>      
           
@@ -64,7 +64,7 @@
         <div class="panel-footer align-center">
 			<button class="btn btn-primary">保存</button>&nbsp;
 			<button class="btn btn-default" id="btn-back">返回</button>&nbsp;
-			<input type="hidden" name="saleid" value="${sale.saleid }" />
+			<input type="hidden" name="salesid" value="${sales.salesid }" />
 		</div><!-- panel-footer -->
      </form>   
       </div><!-- panel -->
@@ -161,10 +161,11 @@
 //			      
 		function form_submit() {
 			var f = $("#form").serialize();
+			alert(f);
 			$.post('${rootPath}sale/edit.do', f, function(result) {
 				var rmsg = result.msg;
 				if (result.success) {
-					window.parent.location = "${rootPath}agency/edit.html?id=${sale.agency}";
+					window.parent.location = "${rootPath}agency/edit.html?id=${sales.agencyid}";
 				} else {
 					$("#msgModal").modal('show');
 				}

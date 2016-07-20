@@ -8,6 +8,7 @@
 		FROM (
 		select
 		u.sales_id as salesid,
+		u.sales_portal_id as salesportalid,
 		u.sales_name as salesname,
 		u.sales_email as salesemail,
 		u.isdel
@@ -41,9 +42,8 @@
 	<update id="updateSale" parameterType="DemoSale" flushCache="true">
 		update tm_sales
 		set
-		sales_name=#{name},
-		sales_code=#{code},
-		sales_email=#{email},
+		sales_name=#{salesname},
+		sales_email=#{salesemail},
 		update_time=NOW()
 		where
 		sales_id=#{salesid}
@@ -52,10 +52,10 @@
 	<select id="getSaleById" parameterType="int" resultType="DemoSale">
 		select
 		u.sales_id as salesid,
-		u.sales_name as name,
-		u.agency_id as agency,
-		u.sales_code as code,
-		u.sales_email as email,
+		u.sales_portal_id as salesportalid,
+		u.sales_name as salesname,
+		u.agency_id as agencyid,
+		u.sales_email as salesemail,
 		u.isdel as isdel
 		from tm_sales u where u.sales_id = #{salesid}
 	</select>

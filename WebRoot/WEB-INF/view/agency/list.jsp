@@ -44,7 +44,6 @@
 							<table id="dataTable" class="table">
 								<thead>
 									<tr>
-										<th>#</th>
 										<th>地接社名</th>
 										<th>国家</th>
 										<th>语言</th>
@@ -130,7 +129,7 @@
 	                  render: function ( data, type, full, meta ) {
 	                      return '<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a>&nbsp;<a class="btn btn-danger btn-xs" id="'+data+'"><span class="fa fa-minus-circle"></span> 删除</a>';
 	                  },
-	                  targets: 4
+	                  targets: 3
 				  },
 				  {
 	                data: "country",
@@ -142,7 +141,7 @@
 	                		}
 	                	}
 	                },
-	                  targets: 2
+	                  targets: 1
 				  },
 				  {
 		                data: "language",
@@ -154,7 +153,7 @@
 		                		}
 		                	}
 		                },
-		                  targets: 3
+		                  targets: 2
 					  },
 				  {
 					  orderable: false,
@@ -164,7 +163,6 @@
 
 				],
 				columns: [
-		            { data: "agency_id" },
 		            { data: "name" },
 		            { data: "country" },
 					{ data: "language" }

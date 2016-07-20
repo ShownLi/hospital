@@ -35,21 +35,7 @@ public class ParameterService extends BaseService {
 
 		QueryResult<DemoParameter> r = new QueryResult<DemoParameter>();
 		Map<String, Object> map = new HashMap<String, Object>();
-		
-		System.out.println(ph);
-		
-		String seachValue = ph.getSearch().get("value");
-		
-		if (null != seachValue && !"".equals(seachValue)) {
-			if (null == parameter) {
-				parameter = new DemoParameter();
-			}
-			parameter.setSeachValue(seachValue);
-		}
-			
-		
-		
-		map.put("pojo", parameter);
+
 		map.put("b", ph.getStart());
 		map.put("e", ph.getLength());
 //		map.put("s", ph.getSort());

@@ -43,12 +43,11 @@
 							<table id="dataTable" class="table">
 								<thead>
 									<tr>
-										<th>序号</th>
 										<th>作用域</th>
 										<th>存值</th>
-										<th>中文名称</th>
-										<th>英文名称</th>
-										<th>排序</th>
+										<th>中文</th>
+										<th>英文</th>
+										<th>排序标记</th>
 										<th>是否显示</th>
 										<th>操作</th>
 									</tr>
@@ -131,7 +130,7 @@
 	                  render: function ( data ) {
 	                      return '<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a>&nbsp;<a class="btn btn-danger btn-xs" id="'+data+'"><span class="fa fa-minus-circle"></span> 删除</a>';
 	                  },
-	                  targets: 7
+	                  targets: 6
 				  },
 				  {
 	                  data: "isdisplay",
@@ -140,17 +139,16 @@
 	                      if(data==1){return '是';}
 	                      else{return '否';}
 	                  },
-	                  targets: 6
+	                  targets: 5
 				  },
 				  {
 					  orderable: false,
 					  searchable: false,
-				      targets: [0,1,2]
+				      targets: [0,1,2,3,4,5,6]
 				  },
 
 				],
 				columns: [
-		            { data: "parameterid" },
 		            { data: "domain" },
 		            { data: "value" },
 		            { data: "chinese" },

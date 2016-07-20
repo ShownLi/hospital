@@ -82,7 +82,7 @@
 	              	<table id="dataTable" class="table">
 						<thead>
 							<tr>
-								<th>序号</th>
+								<th>Portal  ID</th>
 								<th>姓名</th>
 								<th>邮箱</th>
 								<th>编辑</th>
@@ -229,7 +229,7 @@
 			},
 			],
 		columns: [
-		    { data: "salesid" },
+		    { data: "salesportalid" },
 		    { data: "salesname" },
 		    { data: "salesemail" }
 	    ]

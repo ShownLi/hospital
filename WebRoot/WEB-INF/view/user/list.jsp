@@ -43,9 +43,7 @@
 							<table id="dataTable" class="table">
 								<thead>
 									<tr>
-										<th>序号</th>
-										<th>登录名</th>
-										<th>姓名</th>
+										<th>用户名</th>
 										<th>邮箱</th>
 										<th>手机</th>
 										<th>编辑</th>
@@ -130,7 +128,7 @@
 				      render: function ( data, type, full, meta ) {
 		              return '<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a>&nbsp;';
 				  },
-				              targets: 5
+				              targets: 3
 							  },				             
 				  {
 					  orderable: false,
@@ -139,9 +137,7 @@
 				  },
 				],
 				columns: [
-		            { data: "userid" },
 		            { data: "loginname" },
-		            { data: "name" },
 		            { data: "email" },
 		            { data: "mobilephone" }
 		        ]

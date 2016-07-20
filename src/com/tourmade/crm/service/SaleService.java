@@ -122,7 +122,6 @@ public class SaleService extends BaseService {
 			if (u != null) {
 				u.setSalesname(sale.getSalesname());
 				u.setSalesemail(sale.getSalesemail());
-				// u.setPwd(sale.getPwd());
 				saleMapper.updateSale(u);
 				r = true;
 			} else {

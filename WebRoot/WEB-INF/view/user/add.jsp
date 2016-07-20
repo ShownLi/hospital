@@ -146,7 +146,7 @@
 					name: "required",
 					pwd: {
 						required: true,
-						minlength: 10,
+						minlength: 6,
 					},
 					repwd: {
 						required: true,
