@@ -19,6 +19,8 @@ import com.tourmade.crm.common.framework.bean.QueryResult;
 import com.tourmade.crm.common.model.base.value.baseconfig.PageHelper;
 import com.tourmade.crm.mapper.order.DemoOrderMapper;
 import com.tourmade.crm.model.DemoOrder;
+import com.tourmade.crm.model.DemoCase;
+import com.tourmade.crm.model.DemoCustomer;
 import com.tourmade.crm.model.DemoList;
 
 @Service
@@ -56,6 +58,35 @@ public class OrderService extends BaseService {
 		return r;
 	}
 
+	/**
+	 * 查询订单数据，分页展示
+	 * 
+	 * @param order
+	 * @param ph
+	 * @param request
+	 * @return
+	 */
+	public QueryResult<DemoOrder> queryOrderByCaseid(int caseid, PageHelper ph, HttpServletRequest request) {
+
+		QueryResult<DemoOrder> r = new QueryResult<DemoOrder>();
+		Map<String, Object> map = new HashMap<String, Object>();
+			
+		map.put("id", caseid);
+		map.put("b", ph.getStart());
+		map.put("e", ph.getLength());
+//		map.put("s", ph.getSort());
+//		map.put("o", ph.getOrder());
+
+		List<DemoOrder> data = orderMapper.queryOrderByCaseid(map);
+		long count = orderMapper.countOrderByCaseid(caseid);
+			
+		r.setData(data);
+		r.setCountTotal(count);
+		r.setCountFiltered(count);
+	
+		return r;
+	}
+	
 	/**
 	 * 新增订单
 	 * 
@@ -159,6 +190,40 @@ public class OrderService extends BaseService {
 		DemoOrder r = null;
 		try {
 			r = orderMapper.getOrderById(id);
+		} catch (Exception e) {
+			logger.error("OrderService.getOrderById() --> " + id + "-->" + e.getMessage());
+			r = null;
+		}
+		return r;
+	}
+	
+	/**
+	 * 根据主键获取客人信息
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public DemoCustomer getCustomerById(int id) {
+		DemoCustomer r = null;
+		try {
+			r = orderMapper.getCustomerById(id);
+		} catch (Exception e) {
+			logger.error("OrderService.getOrderById() --> " + id + "-->" + e.getMessage());
+			r = null;
+		}
+		return r;
+	}
+	
+	/**
+	 * 根据主键获取询单信息
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public DemoCase getCaseById(int id) {
+		DemoCase r = null;
+		try {
+			r = orderMapper.getCaseById(id);
 		} catch (Exception e) {
 			logger.error("OrderService.getOrderById() --> " + id + "-->" + e.getMessage());
 			r = null;

@@ -35,11 +35,37 @@
 		limit #{b},#{e}
 	</select>
 
+	<select id="queryOrderByCaseid" parameterType="Map" resultType="DemoOrder">
+		SELECT *
+		FROM (
+		select
+		u.order_id as orderid,
+		u.customer_id as customerid,
+		u.customer_name as customername,
+		u.agency_id as agencyid,
+		u.agency_name as agencyname,
+		u.sales_id as salesid,
+		u.sales_name as salesname,
+		u.destination as destination,
+		u.budget as budget,
+		u.status as status
+		from tm_order u  
+		where u.isdel = 0 and u.case_id = #{id}
+		order by u.creat_time 
+		) table_alias
+		limit #{b},#{e}
+	</select>
+	
 	<select id="countOrder" parameterType="DemoOrder" resultType="long">
 		select count(u.order_id) from tm_order u
 		where
 		u.isdel = 0
-
+	</select>
+	
+	<select id="countOrderByCaseid" parameterType="DemoOrder" resultType="long">
+		select count(u.order_id) from tm_order u
+		where
+		u.isdel = 0 and u.case_id = #{id}
 	</select>
 	
 	<select id="getInfo" parameterType="DemoOrder" resultType="DemoOrder">
@@ -159,6 +185,50 @@
 			where customer_id = #{customerid}
 	</select>
 	
+	<select id="getCustomerById" parameterType="int" resultType="DemoCustomer">
+		select
+		u.customer_name_zh as zname,
+		u.customer_name_en as ename
+		from tm_customer u where u.customer_id = #{id}
+	</select>	
+
+	<select id="getCaseById" parameterType="int" resultType="DemoCase">
+		select
+		u.case_id as caseid,
+		u.customer_id as customerid, 
+		u.operator as operator,
+		u.prefer_language as preferlanguage,
+		u.contact_type as contacttype,
+		u.with_who as withwho,
+		u.adult as adult,
+		u.children as children,
+		u.baby as baby,
+		u.start_time as starttime,
+		u.start_month as startmonth,
+		u.during as during,
+		u.start_date as startdate,
+		u.end_date as enddate,
+		u.requirement as requirement,
+		u.route as route,
+		u.hotel as hotel,
+		u.meals as meals,
+		u.guide as guide,
+		u.budget as budget,
+		u.sales_id as salesid,
+		u.destination as destination,
+		u.source as source,
+		u.promote_code as promotecode,
+		u.status as status,
+		u.tailormade as tailormade,
+		u.passport as passport,
+		u.visa as visa,
+		u.flight as flight,
+		u.ip_address as ipaddress,
+		u.creat_time as creattime,
+		u.isdel
+		from tm_case u where u.isdel = 0 and u.case_id = #{id}
+	</select>
+		
 	<select id="getOrderById" parameterType="int" resultType="DemoOrder">
 		select
 		u.order_id as orderid,

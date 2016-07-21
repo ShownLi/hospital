@@ -41,6 +41,7 @@
 		insert into tm_customer(
 		customer_name_zh,
 		customer_name_en,
+		customer_level,
 		location,
 		promote,
 		age_group,
@@ -56,6 +57,7 @@
 		)values(
 		#{zname,jdbcType=VARCHAR},
 		#{ename,jdbcType=VARCHAR},
+		#{level,jdbcType=VARCHAR},
 		#{location,jdbcType=VARCHAR},
 		#{promote,jdbcType=VARCHAR},
 		#{agegroup,jdbcType=VARCHAR},

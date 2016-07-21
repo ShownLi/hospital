@@ -523,7 +523,7 @@
   			 	language: datatable_local_language, // my.js
   			 	serverSide: true,
   			 	ajax: {
-    			 		url: '${rootPath}order/list.do',
+    			 		url: '${rootPath}order/list1.do?caseid=${crmcase.caseid}',
     			 		dataFilter: function(data){
     			             var json = jQuery.parseJSON( data );
     			             json.recordsTotal = json.countTotal;

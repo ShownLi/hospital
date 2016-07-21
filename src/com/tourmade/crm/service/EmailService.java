@@ -84,32 +84,32 @@ public class EmailService extends BaseService {
 				result = str.toString();
 				
 				if (null != template) {
-					if (null != template.getUsername()) {
-						result = result.replace("${username}",
-								template.getUsername());
+					if (null != template.getSalesname()) {
+						result = result.replace("${salesname}",
+								template.getSalesname());
 					}
-					if (null != template.getClientfirstname()) {
-						result = result.replace("${clientfirstname}",
-								template.getClientfirstname());
+					if (null != template.getClientname_zh()) {
+						result = result.replace("${clientname_zh}",
+								template.getClientname_zh());
 					}
-					if (null != template.getClientlastname()) {
-						result = result.replace("${clientlastname}",
-								template.getClientlastname());
+					if (null != template.getClientname_en()) {
+						result = result.replace("${clientname_en}",
+								template.getClientname_en());
 					}
-					if (null != template.getClienttitle()) {
-						result = result.replace("${clienttitle}",
-								template.getClienttitle());
+					if (null != template.getStart_date()) {
+						result = result.replace("${start_date}",
+								template.getStart_date().toString());
 					}
 					if (null != template.getNow()) {
 						result = result.replace("${now}", template.getNow());
 					}
-					if (null != template.getArrivetime()) {
-						result = result.replace("${arrivetime}",
-								template.getArrivetime());
+					if (null != template.getBudget()) {
+						result = result.replace("${budget}",
+								template.getBudget());
 					}
-					if (null != template.getGroupcode()) {
-						result = result.replace("${groupcode}",
-								template.getGroupcode());
+					if (null != template.getRequirement()) {
+						result = result.replace("${requirement}",
+								template.getRequirement());
 					}
 					if (null != template.getPlanvalue()) {
 						result = result.replace("${planvalue}",

@@ -19,6 +19,8 @@ import com.tourmade.crm.common.model.base.value.baseconfig.Json;
 import com.tourmade.crm.common.model.base.value.baseconfig.PageHelper;
 import com.tourmade.crm.model.DemoOrder;
 import com.tourmade.crm.model.MailTemplate;
+import com.tourmade.crm.model.DemoCase;
+import com.tourmade.crm.model.DemoCustomer;
 import com.tourmade.crm.model.DemoEmail;
 import com.tourmade.crm.model.DemoList;
 import com.tourmade.crm.service.CaseService;
@@ -53,6 +55,16 @@ public class OrderController extends BaseSimpleFormController {
 		return result;
 	}
 
+	@RequestMapping(value = "/list1.do",produces="application/json;charset=utf-8")
+	@ResponseBody
+	public String queryData(HttpServletRequest request, HttpSession session, Model model, int caseid, PageHelper page) {
+
+		QueryResult<DemoOrder> r = service.queryOrderByCaseid(caseid, page, request);
+		String result = JSONUtilS.object2json(r);
+
+		return result;
+	}
+	
 	@RequestMapping(value = "/add.html", method = { RequestMethod.POST, RequestMethod.GET })
 	public String add(Model model) {
 		
@@ -98,9 +110,19 @@ public class OrderController extends BaseSimpleFormController {
 			order.setCustomeremailalias("customer"+order.getOrderid()+"@"+domain);
 			service.updateOrder(order);
 			
-			template.setTemplatepath("D:/clientwelcome.html");
-			template.setClientfirstname("lian");
-			template.setClientlastname("zheng");
+			DemoCustomer customer = service.getCustomerById(order.getCustomerid());
+			DemoCase crmcase = service.getCaseById(order.getCaseid());
+			template.setTemplatepath("D:/CRMEDM.html");
+			template.setSalesname(order.getSalesname());
+			template.setClientname_zh(customer.getZname());
+			template.setClientname_en(customer.getEname());
+			template.setAdult(""+crmcase.getAdult());
+			template.setChildren(""+crmcase.getChildren());
+			template.setBaby(""+crmcase.getBaby());
+			template.setBudget(order.getBudget());
+			template.setStart_date(crmcase.getStartdate());
+			template.setDuring(crmcase.getDuring());
+			template.setRequirement(crmcase.getRequirement());
 			String result = emailservice.getMailContent(template);
 			
 			email.setContent(result);

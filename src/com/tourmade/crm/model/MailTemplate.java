@@ -1,5 +1,6 @@
 package com.tourmade.crm.model;
 
+import java.util.Date;
 import java.util.List;
 import com.tourmade.crm.common.framework.BaseBean;
 
@@ -11,6 +12,23 @@ public class MailTemplate extends BaseBean<MailTemplate> {
 
 	private String templatepath;
 
+	private String clientname_zh;
+	private String clientname_en;
+	private String salesname;
+	private String adult;
+	private String children;
+	private String baby;
+	private Date start_date;
+	private String during;
+	private String hotel_zh;
+	private String hotel_en;
+	private String guide_zh;
+	private String guide_en;
+	private String budget;
+	private String destination_zh;
+	private String destination_en;
+	private String requirement;
+	
 	private String clientfirstname;
 	private String clientlastname;
 	private String clienttitle;
@@ -129,6 +147,138 @@ public class MailTemplate extends BaseBean<MailTemplate> {
 
 	public void setGroupid(String groupid) {
 		this.groupid = groupid;
+	}
+
+	public String getClientname_zh() {
+		return clientname_zh;
+	}
+
+	public void setClientname_zh(String clientname_zh) {
+		this.clientname_zh = clientname_zh;
+	}
+
+	public String getClientname_en() {
+		return clientname_en;
+	}
+
+	public void setClientname_en(String clientname_en) {
+		this.clientname_en = clientname_en;
+	}
+
+	public String getAdult() {
+		return adult;
+	}
+
+	public void setAdult(String adult) {
+		this.adult = adult;
+	}
+
+	public String getChildren() {
+		return children;
+	}
+
+	public void setChildren(String children) {
+		this.children = children;
+	}
+
+	public String getBaby() {
+		return baby;
+	}
+
+	public void setBaby(String baby) {
+		this.baby = baby;
+	}
+
+	public Date getStart_date() {
+		return start_date;
+	}
+
+	public void setStart_date(Date start_date) {
+		this.start_date = start_date;
+	}
+
+	public String getDuring() {
+		return during;
+	}
+
+	public void setDuring(String during) {
+		this.during = during;
+	}
+
+	public String getHotel_zh() {
+		return hotel_zh;
+	}
+
+	public void setHotel_zh(String hotel_zh) {
+		this.hotel_zh = hotel_zh;
+	}
+
+	public String getHotel_en() {
+		return hotel_en;
+	}
+
+	public void setHotel_en(String hotel_en) {
+		this.hotel_en = hotel_en;
+	}
+
+	public String getGuide_zh() {
+		return guide_zh;
+	}
+
+	public void setGuide_zh(String guide_zh) {
+		this.guide_zh = guide_zh;
+	}
+
+	public String getGuide_en() {
+		return guide_en;
+	}
+
+	public void setGuide_en(String guide_en) {
+		this.guide_en = guide_en;
+	}
+
+	public String getBudget() {
+		return budget;
+	}
+
+	public void setBudget(String budget) {
+		this.budget = budget;
+	}
+
+	public String getDestination_zh() {
+		return destination_zh;
+	}
+
+	public void setDestination_zh(String destination_zh) {
+		this.destination_zh = destination_zh;
+	}
+
+	public String getDestination_en() {
+		return destination_en;
+	}
+
+	public void setDestination_en(String destination_en) {
+		this.destination_en = destination_en;
+	}
+
+	public String getRequirement() {
+		return requirement;
+	}
+
+	public void setRequirement(String requirement) {
+		this.requirement = requirement;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	public String getSalesname() {
+		return salesname;
+	}
+
+	public void setSalesname(String salesname) {
+		this.salesname = salesname;
 	}
 
 }

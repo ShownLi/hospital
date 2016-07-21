@@ -270,6 +270,7 @@
       </div>
       <div class="modal-body align-center">
         <div class="section-block">
+         <form id="order">
             <div class="section-title">选择目的地及地接社,继续添加订单</div>
             <div class="form-group col-sm-8 col-sm-offset-2">
                 <label class="col-sm-3 control-label">目的地</label>
@@ -290,8 +291,11 @@
                 </div>
             </div>
             <div class="col-sm-12">
-        	   <a class="btn btn-primary" href="#">保存</a>
+        	   <a class="submit btn btn-primary">保存</a>
+        	 <input  type="hidden" name="caseid" value="${crmcase.caseid}" />
+             <input  type="hidden" name="customerid" value="${crmcase.customerid}" />
             </div>
+          </form>
         </div>
       </div>
     </div><!-- modal-content -->
@@ -480,6 +484,23 @@
 				}
 			}, "JSON");
 		}
+		
+	      $(".nextModal .submit").click(function(){
+	      	  order_submit();
+	      });
+	  		function order_submit() {
+	    			var f = $("#order").serialize();
+	    			$.post('${rootPath}order/add.do', f, function(result) {
+	    				var rmsg = result.msg;
+	    				if (result.success) {
+	    					window.parent.location = "${rootPath}case/edit.html?id=${crmcase.caseid}";
+	    					//$("#nextModal").modal('show');
+	    				} else {
+	    					//$("#msgModal").modal('show');
+	    				}
+	    			}, "JSON");
+	    	}
+	  		
         $(".d2").hide();
         $(".d1").show();
         $("input[name='starttime']").change(function() {
