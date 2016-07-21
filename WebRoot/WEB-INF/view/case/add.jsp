@@ -83,7 +83,7 @@
                    	<div class="form-group col-sm-4">
                       <label class="col-sm-4 control-label">目的地</label>
                       <div class="col-sm-8">
-                        <input type="text" name="destination" class="form-control" value="" />
+                        <input type="text" name="destination" class="country-select fullwidth" value="" />
                       </div>
                     </div>
                     <div class="form-group col-sm-4">
@@ -281,6 +281,12 @@
                 <label class="col-sm-3 control-label">销售</label>
                 <div class="col-sm-9">
                     <input type="text" name="salesid" id="salesid" placeholder="选择一个销售" class="sales-select fullwidth" value="" />
+                </div>
+            </div>
+            <div class="form-group col-sm-8 col-sm-offset-2">
+                <label class="col-sm-3 control-label">预算</label>
+                <div class="col-sm-9">
+                    <input type="text" name="budget" id="budget"  class="form-control" value="" />
                 </div>
             </div>
             <div class="col-sm-12">

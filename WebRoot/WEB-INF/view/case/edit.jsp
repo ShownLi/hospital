@@ -403,10 +403,15 @@
                     <input type="text" id="salesid" name="salesid" placeholder="选择一个销售" class="sales-select fullwidth" value="" />
                 </div>
             </div>
+              <div class="form-group col-sm-8 col-sm-offset-2">
+                  <label class="col-sm-3 control-label">客人的预算</label>
+                  <div class="col-sm-9">
+                    <input type="text" name="budget" placeholder="客人的预算" class="form-control" value="${crmcase.budget}" />
+                  </div>
+                </div>
             <div class="col-sm-12">
              <a class="submit btn btn-primary">保存</a>
              <input  type="hidden" name="caseid" value="${crmcase.caseid}" />
-             <input  type="hidden" name="budget" value="${crmcase.budget}" />
              <input  type="hidden" name="customerid" value="${crmcase.customerid}" />
             </div>
             </form>
@@ -552,7 +557,16 @@
   		             { data: "budget" },
   		             { data: "status" }
   		    ]
-			});
+  			 	
+		});
+			$('#dataTable-order tbody').on( 'click', 'a.btn-success', function () {
+		        var data = t.row($(this).parents('tr')).data();
+		        //alert($(this).attr('id'));
+		        edit($(this).attr('id'));
+		    } );	
+			function edit(id) {
+				window.parent.location = "${rootPath}order/edit.html?id="+id;
+			}
 	jQuery("#form").validate({
         
           rules: {
