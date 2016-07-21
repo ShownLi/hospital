@@ -112,7 +112,7 @@ public class OrderController extends BaseSimpleFormController {
 			
 			DemoCustomer customer = service.getCustomerById(order.getCustomerid());
 			DemoCase crmcase = service.getCaseById(order.getCaseid());
-			template.setTemplatepath("D:/CRMEDM.html");
+			template.setTemplatepath("http://tourmade-files.oss-cn-beijing.aliyuncs.com/order1.html");
 			template.setSalesname(order.getSalesname());
 			template.setClientname_zh(customer.getZname());
 			template.setClientname_en(customer.getEname());

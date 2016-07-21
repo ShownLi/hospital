@@ -15,7 +15,7 @@ public interface DemoCaseMapper extends BaseMapper {
 	
 	public long countCase(DemoCase crmcase);
 	
-	public void saveCase(DemoCase crmcase);
+	public int saveCase(DemoCase crmcase);
 
 	public void updateCase(DemoCase crmcase);
 

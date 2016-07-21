@@ -45,7 +45,7 @@
 		u.isdel = 0
 	</select>
 	
-	<insert id="saveCase" parameterType="DemoCase" flushCache="true" useGeneratedKeys="true" keyProperty="case_id" keyColumn="GENERATED_KEY">
+	<insert id="saveCase" parameterType="DemoCase" flushCache="true" useGeneratedKeys="true" keyProperty="caseid" keyColumn="GENERATED_KEY">
 		insert into tm_case(
 		customer_id,
 		prefer_language,

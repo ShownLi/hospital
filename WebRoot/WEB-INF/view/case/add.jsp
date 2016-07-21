@@ -292,8 +292,8 @@
             </div>
             <div class="col-sm-12">
         	   <a class="submit btn btn-primary">保存</a>
-        	 <input  type="hidden" name="caseid" value="${crmcase.caseid}" />
-             <input  type="hidden" name="customerid" value="${crmcase.customerid}" />
+        	 <input type="hidden"  name="caseid" id="caseid" value="" />
+             <input type="hidden"  name="customerid" id="customerid" value="" />
             </div>
           </form>
         </div>
@@ -474,11 +474,15 @@
 			      
 		function form_submit() {
 			var f = $("#form").serialize();
+			
 			$.post('${rootPath}case/add.do', f, function(result) {
+				var caseid = result.obj.caseid;
+				document.getElementById("caseid").value=caseid;
 				var rmsg = result.msg;
 				if (result.success) {
 					//window.parent.location = "${rootPath}case/list.html";
 					$("#nextModal").modal('show');
+					
 				} else {
 					$("#msgModal").modal('show');
 				}
@@ -493,7 +497,7 @@
 	    			$.post('${rootPath}order/add.do', f, function(result) {
 	    				var rmsg = result.msg;
 	    				if (result.success) {
-	    					window.parent.location = "${rootPath}case/edit.html?id=${crmcase.caseid}";
+	    					window.parent.location = "${rootPath}order/list.html";
 	    					//$("#nextModal").modal('show');
 	    				} else {
 	    					//$("#msgModal").modal('show');
@@ -513,7 +517,10 @@
                 $(".d1").show();
             }
         }); 
-        
+        $(".customer-select").change(function() {
+            var val = $(".customer-select").select2("val");
+        	document.getElementById("customerid").value=val;
+        });
 	</script>
 
 
