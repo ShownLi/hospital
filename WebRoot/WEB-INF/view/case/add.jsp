@@ -63,7 +63,7 @@
                     <div class="form-group col-sm-4">
                       <label class="col-sm-4 control-label">所属销售</label>
                       <div class="col-sm-8">
-                        <input type="text" name="salesid" placeholder="所属销售" class="sales-select fullwidth" value="" />
+                        <input type="text" name="salesid" placeholder="所属销售" class="sales-select fullwidth" value="0" />
                       </div>
                     </div>
                     <div class="form-group col-sm-4">
@@ -75,7 +75,7 @@
 	                <div class="form-group col-sm-4">
 	                    <label class="col-sm-4 control-label">跟单员</label>
 	                    <div class="col-sm-8">
-	                      <input type="text" name="operator" class="user-select fullwidth" value="" />
+	                      <input type="text" name="operator" class="user-select fullwidth" value="0" />
 	                    </div>
 	                </div>                        
                 </div>
@@ -95,7 +95,7 @@
                     <div class="form-group col-sm-4">
                       <label class="col-sm-4 control-label">状态</label>
                       <div class="col-sm-8">
-                        <input type="text" name="status" class="status-select fullwidth" value="1" readonly/>
+                        <input type="text" name="status" class="status-select fullwidth" value="0" readonly/>
                       </div>
                     </div>             
                 </div>
@@ -274,13 +274,13 @@
             <div class="form-group col-sm-8 col-sm-offset-2">
                 <label class="col-sm-3 control-label">目的地</label>
                 <div class="col-sm-9">
-                    <input type="text" name="country" placeholder="国家" class="country-select fullwidth" value="" />
+                    <input type="text" id="destination" placeholder="国家" class="country-select fullwidth" value="" />
                 </div>
             </div>
             <div class="form-group col-sm-8 col-sm-offset-2">
-                <label class="col-sm-3 control-label">地接社</label>
+                <label class="col-sm-3 control-label">销售</label>
                 <div class="col-sm-9">
-                    <input type="text" placeholder="选择一个地接社" class="agency-select fullwidth" value="" />
+                    <input type="text" name="salesid" id="salesid" placeholder="选择一个销售" class="sales-select fullwidth" value="" />
                 </div>
             </div>
             <div class="col-sm-12">
@@ -443,6 +443,23 @@
 			  $("#btn-back").click( function () {
 				    history.go(-1);
 		    }); 
+			  
+		      //添加订单弹出框，目的地与销售联动
+		      $("#destination").change(function(){
+		          var destination = $(this).val();
+		          $.ajax({
+		              type: "post",
+		              url: "${rootPath}case/getsales.do?destination="+destination,
+		              data: destination,
+		              success: function(sales){
+		            	  var json = jQuery.parseJSON( sales );
+		                  $("#salesid").select2({
+		                      placeholder: '销售',
+		                      data: json
+		                  });
+		              }   
+		          }); 
+		      });
 		});
 			      
 		function form_submit() {
@@ -450,7 +467,7 @@
 			$.post('${rootPath}case/add.do', f, function(result) {
 				var rmsg = result.msg;
 				if (result.success) {
-					window.parent.location = "${rootPath}case/list.html";
+					//window.parent.location = "${rootPath}case/list.html";
 					$("#nextModal").modal('show');
 				} else {
 					$("#msgModal").modal('show');
@@ -469,6 +486,7 @@
                 $(".d1").show();
             }
         }); 
+        
 	</script>
 
 

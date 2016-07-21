@@ -11,6 +11,8 @@ public interface DemoCaseMapper extends BaseMapper {
 	
 	public List<DemoCase> queryCase(Map<String, Object> params);
 	
+	public List<DemoCase> queryCaseFC(Map<String, Object> params);
+	
 	public long countCase(DemoCase crmcase);
 	
 	public void saveCase(DemoCase crmcase);

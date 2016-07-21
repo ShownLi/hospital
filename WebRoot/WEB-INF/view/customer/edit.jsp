@@ -129,9 +129,9 @@
 			        <div class="section-block"> 
 			        	<h5 class="section-title">其他</h5>   
 			            <div class="form-group col-sm-4">
-			                <label class="col-sm-3 control-label" >推广渠道 </label>
+			                <label class="col-sm-3 control-label" >客人来源 </label>
 			                <div class="col-sm-9">
-			               	 	<input type="text" name="promote" placeholder="推广渠道" class="promote-select fullwidth" value="${customer.promote}"/>
+			               	 	<input type="text" name="promote" class="promote-select fullwidth" value="${customer.promote}"/>
 			                </div>
 			            </div>
 			        </div>  
@@ -284,7 +284,7 @@
 	var c = ${c};
 	var user = ${user};
 	$(".promote-select").select2({
-		placeholder: '选择一个推广渠道',
+		placeholder: '选择一个客人来源',
 	  	data: p
 	});
 	$(".agegroup-select").select2({
@@ -347,11 +347,14 @@
 		                data: "source",
 		                orderable: false,
 		                render: function ( data ) {
-		                	for(var i=0;i <  source.length;i++){
-		                		if(data==source[i].id){
-		                			return source[i].text
-		                		}
+		                	if(data){
+			                	for(var i=0;i <  source.length;i++){
+			                		if(data==source[i].id){
+			                			return source[i].text
+			                		}
+			                	}
 		                	}
+		                	else{return ""}
 		                },
 		                  targets: 4
 					},
@@ -359,11 +362,14 @@
 						data: "operator",
 		                orderable: false,
 		                render: function ( data ) {
-		                	for(var i=0;i <  user.length;i++){
-		                		if(data==user[i].id){
-		                			return user[i].text
-		                		}
+		                	if(data){
+			                	for(var i=0;i <  user.length;i++){
+			                		if(data==user[i].id){
+			                			return user[i].text
+			                		}
+			                	}
 		                	}
+		                	else{return ""}
 		                },
 		                  targets: 5
 					},
@@ -371,11 +377,14 @@
 		                data: "status",
 		                orderable: false,
 		                render: function ( data ) {
-		                	for(var i=0;i <  status.length;i++){
-		                		if(data==status[i].id){
-		                			return status[i].text
-		                		}
+		                	if(data){
+			                	for(var i=0;i <  status.length;i++){
+			                		if(data==status[i].id){
+			                			return status[i].text
+			                		}
+			                	}
 		                	}
+		                	else{return ""}
 		                },
 		                  targets: 6
 					},
@@ -456,13 +465,15 @@
 				zname: "required",
 				qq: "number",
 				email: "email",
-				birthday: "date"
+				birthday: "date",
+				promote: "required"
 			},
 			messages: {
 				zname: "请输入中文名",
 				qq: "请输入有效的QQ账号",
 				email: "请输入有效的邮箱",
-				birthday: "请输入正确的日期"
+				birthday: "请输入正确的日期",
+				promote: "请选择一个客人来源"
 			},
 		    highlight: function(element) {
 		      jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');

@@ -138,7 +138,7 @@
 		                  targets: 7
 					  },
 					  {
-			                data: "customer",
+			                data: "customerid",
 			                orderable: false,
 			                render: function ( data ) {
 			                	for(var i=0;i <  customer.length;i++){
@@ -252,11 +252,10 @@
 		function doDel(id){
 			$.ajax({
 				url: "${rootPath}case/del.do?id=" + id, 
-				async: true,
-				success: function(o) {
+				success: function() {
 					window.location.reload();
 				},
-				error: function(o) {
+				error: function() {
 					alert(2);
 				}
 			});

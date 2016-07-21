@@ -21,6 +21,24 @@
 		limit #{b},#{e}
 	</select>
 
+	<select id="queryCaseFC" parameterType="Map" resultType="DemoCase">
+		SELECT *
+		FROM (
+		select
+		u.case_id as caseid,
+		u.customer_id as customerid,
+		u.budget as budget,
+		u.source as source,
+		u.destination as destination,
+		u.status as status,
+		u.operator as operator
+		from tm_case u  
+		where u.isdel = 0 and u.customer_id = #{customerid}
+		order by u.creat_time
+		) table_alias
+		limit #{b},#{e}
+	</select>
+	
 	<select id="countCase" parameterType="DemoCase" resultType="long">
 		select count(u.case_id) from tm_case u
 		where
@@ -29,6 +47,7 @@
 	
 	<insert id="saveCase" parameterType="DemoCase" flushCache="true" useGeneratedKeys="true" keyProperty="case_id" keyColumn="GENERATED_KEY">
 		insert into tm_case(
+		customer_id,
 		prefer_language,
 		with_who,
 		adult,
@@ -62,6 +81,7 @@
 		creat_time,
 		isdel
 		)values(
+		#{customerid,jdbcType=VARCHAR},
 		#{preferlanguage,jdbcType=VARCHAR},
 		#{withwho,jdbcType=VARCHAR},
 		#{adult,jdbcType=VARCHAR},
@@ -219,7 +239,7 @@
 		statementType="PREPARED">
 		update tm_case
 		set
-		status = 4 
+		status = 5 
 		where
 		case_id = #{caseid}
 	</update>

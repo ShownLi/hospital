@@ -127,9 +127,9 @@
 	        <div class="section-block"> 
 	        	<h5 class="section-title">其他</h5>   
 	            <div class="form-group col-sm-4">
-	              <label class="col-sm-3 control-label" >推广渠道 </label>
+	              <label class="col-sm-3 control-label" >客人来源 </label>
 	              <div class="col-sm-9">
-	                <input type="text" name="promote" placeholder="推广渠道" class="promote-select fullwidth" />
+	                <input type="text" name="promote" class="promote-select fullwidth" />
 	              </div>
 	            </div>
 	        </div>   
@@ -230,13 +230,16 @@
 					zname: "required",
 					qq: "number",
 					email: "email",
-					birthday: "date"
+					birthday: "date",
+					promote: "required"
+					
 				},
 				messages: {
 					zname: "请输入中文名",
 					qq: "请输入有效的QQ账号",
 					email: "请输入有效的邮箱",
-					birthday: "请输入正确的日期"
+					birthday: "请输入正确的日期",
+					promote: "请选择一个客人来源"
 				},
 				
 			    highlight: function(element) {

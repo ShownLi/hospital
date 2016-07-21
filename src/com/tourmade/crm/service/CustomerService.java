@@ -120,7 +120,6 @@ public class CustomerService extends BaseService {
 			if (u != null) {
 				u.setZname(customer.getZname());
 				u.setEname(customer.getEname());
-				u.setLevel(customer.getLevel());
 				u.setLocation(customer.getLocation());
 				u.setPromote(customer.getPromote());
 				u.setAgegroup(customer.getAgegroup());
@@ -131,7 +130,6 @@ public class CustomerService extends BaseService {
 				u.setQq(customer.getQq());
 				u.setEmail(customer.getEmail());
 				u.setBirthday(customer.getBirthday());
-				u.setUpdate_time(customer.getUpdate_time());
 				customerMapper.updateCustomer(u);
 				r = true;
 			} else {

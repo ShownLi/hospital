@@ -43,7 +43,7 @@
               	<div class="form-group col-sm-4">
               	   <label class="col-sm-4 control-label">所属客人</label>
                   	<div class="col-sm-8">
-                      	<input type="text" name="customerid" placeholder="所属客人" class="customer-select fullwidth" value="${crmcase.customerid}" />
+                      	<input type="text" name="customerid" placeholder="所属客人" readonly class="customer-select fullwidth" value="${crmcase.customerid}" />
                     </div>
               	</div>
                 <div class="form-group col-sm-4">

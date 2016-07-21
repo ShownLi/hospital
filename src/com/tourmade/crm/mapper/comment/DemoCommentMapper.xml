@@ -19,7 +19,7 @@
 		where u.isdel = 0
 		and u.comment_type = #{type}
 		and u.object_id = #{id}
-		order by u.creat_time
+		order by u.creat_time desc
 		) table_alias
 		limit #{b},#{e}
 	</select>
