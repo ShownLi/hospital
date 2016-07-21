@@ -76,7 +76,7 @@ public class CaseService extends BaseService {
 //		map.put("s", ph.getSort());
 //		map.put("o", ph.getOrder());
 
-		List<DemoCase> data = caseMapper.queryCase(map);
+		List<DemoCase> data = caseMapper.queryCaseFC(map);
 		long count = caseMapper.countCase(crmcase);
 			
 		r.setData(data);
