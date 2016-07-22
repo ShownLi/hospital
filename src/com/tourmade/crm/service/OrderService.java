@@ -93,19 +93,65 @@ public class OrderService extends BaseService {
 	 * @param order
 	 * @return
 	 */
-	public int saveOrder(DemoOrder order) {
+	public boolean validate(int id) {
+		String e = orderMapper.validate(id);
+		if(null == e || "".equals(e)){
+			return false;
+		}
+		else{
+			return true;
+		}
+	}
+	
+	/**
+	 * 新增订单
+	 * 
+	 * @param order
+	 * @return
+	 */
+	public DemoOrder saveOrder(DemoOrder order) {
 
 		
 		try {
+			DemoOrder order1 = getInfo(order);
+			order.setAgencyid(order1.getAgencyid());
+			order.setAgencyname(order1.getAgencyname());
+			order.setSalesname(order1.getSalesname());
+			order.setAgencyemailreal(order1.getAgencyemailreal());
+			order.setCustomername(order1.getCustomername());
+			order.setCustomeremailreal(order1.getCustomeremailreal());
+			order.setStatus("1");
 			orderMapper.saveOrder(order);
 		} catch (Exception e) {
 			logger.error("OrderService.saveOrder() --> " + order + "-->" + e.getMessage());
 			e.printStackTrace();
-			return 0;
+			return null;
 		}
-		return order.getOrderid();
+		return order;
 	}
 
+	/**
+	 * 新建别名
+	 * 
+	 * @param email
+	 * @return
+	 */
+	public void MailAlias(int orderid) {
+		String domain = "tourmade.com.cn";
+		String url = "http://123.56.77.206/axis2/services/AliasAdd/add";
+		String param = "alias=customer"+orderid+"@&real=customer@&domain="+domain;
+		String param1 = "alias=agency"+orderid+"@&real=customer@&domain="+domain;
+		creatAlias(url, param);
+		creatAlias(url, param1);
+		
+		//将别名存入order表中
+		DemoOrder order = new DemoOrder();
+		order.setOrderid(orderid);
+		order.setAgencyemailalias("agency"+orderid+"@"+domain);
+		order.setCustomeremailalias("customer"+orderid+"@"+domain);
+		updateOrder(order);
+	}
+	
 	/**
 	 * 新建别名
 	 * 
@@ -274,11 +320,11 @@ public class OrderService extends BaseService {
 				u.setCurrency(order.getCurrency());
 				u.setExchangerate(order.getExchangerate());
 				u.setRmbprice(order.getRmbprice());
-				u.setStatus("1");
+				u.setStatus("2");
 			}
 			if(order.getReason() != null){
 				u.setReason(order.getReason());
-				u.setStatus("2");
+				u.setStatus("3");
 			}
 			orderMapper.updateOrder(u);
 			r = true;

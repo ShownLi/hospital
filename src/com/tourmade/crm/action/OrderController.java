@@ -18,10 +18,7 @@ import com.tourmade.crm.common.framework.util.JSONUtilS;
 import com.tourmade.crm.common.model.base.value.baseconfig.Json;
 import com.tourmade.crm.common.model.base.value.baseconfig.PageHelper;
 import com.tourmade.crm.model.DemoOrder;
-import com.tourmade.crm.model.MailTemplate;
 import com.tourmade.crm.model.DemoCase;
-import com.tourmade.crm.model.DemoCustomer;
-import com.tourmade.crm.model.DemoEmail;
 import com.tourmade.crm.model.DemoList;
 import com.tourmade.crm.service.CaseService;
 import com.tourmade.crm.service.EmailService;
@@ -85,55 +82,36 @@ public class OrderController extends BaseSimpleFormController {
 	public Json doAdd(HttpServletRequest request, HttpSession session, Model model, DemoOrder order) {
 
 		Json j = new Json();
-		MailTemplate template = new MailTemplate();
-		DemoEmail email = new DemoEmail();
 		
 		try {
-			String domain = "tourmade.com.cn";
-			DemoOrder order1 = service.getInfo(order);
-			order.setAgencyid(order1.getAgencyid());
-			order.setAgencyname(order1.getAgencyname());
-			order.setSalesname(order1.getSalesname());
-			order.setAgencyemailreal(order1.getAgencyemailreal());
-			order.setCustomername(order1.getCustomername());
-			order.setCustomeremailreal(order1.getCustomeremailreal());
-			caseservice.case2order(order.getCaseid());
-			service.saveOrder(order);
 			
-			
-			String url = "http://123.56.77.206/axis2/services/AliasAdd/add";
-			String param = "alias=customer"+order.getOrderid()+"@&real=customer@&domain="+domain;
-			String param1 = "alias=agency"+order.getOrderid()+"@&real=customer@&domain="+domain;
-			service.creatAlias(url, param);
-			service.creatAlias(url, param1);
-			order.setAgencyemailalias("agency"+order.getOrderid()+"@"+domain);
-			order.setCustomeremailalias("customer"+order.getOrderid()+"@"+domain);
-			service.updateOrder(order);
-			
-			DemoCustomer customer = service.getCustomerById(order.getCustomerid());
-			DemoCase crmcase = service.getCaseById(order.getCaseid());
-			template.setTemplatepath("http://tourmade-files.oss-cn-beijing.aliyuncs.com/order1.html");
-			template.setSalesname(order.getSalesname());
-			template.setClientname_zh(customer.getZname());
-			template.setClientname_en(customer.getEname());
-			template.setAdult(""+crmcase.getAdult());
-			template.setChildren(""+crmcase.getChildren());
-			template.setBaby(""+crmcase.getBaby());
-			template.setBudget(order.getBudget());
-			template.setStart_date(crmcase.getStartdate());
-			template.setDuring(crmcase.getDuring());
-			template.setRequirement(crmcase.getRequirement());
-			String result = emailservice.getMailContent(template);
-			
-			email.setContent(result);
-			email.setAcount("customer");
-			email.setOrderid(order.getOrderid());
-			email.setReciever(order.getAgencyemailreal());
-			email.setSender(order.getCustomeremailalias());
-			email.setSendname(order.getCustomername());
-			email.setSubject(order.getCustomername()+"去"+order.getDestination()+"的需求");
-			emailservice.saveEmail(email);
-			j.setSuccess(true);
+			//验证客人有邮箱
+			if(service.validate(order.getCustomerid()))
+			{
+				
+				//询单状态设置为下单
+				caseservice.case2order(order.getCaseid());
+				
+				//补充order信息并存储该order
+				order = service.saveOrder(order);
+				
+				//邮件别名操作（创建邮件别名并将其写入order表）
+				service.MailAlias(order.getOrderid());
+				
+				//生成给地接社的第一封邮件
+				//DemoCustomer customer = service.getCustomerById(order.getCustomerid());
+				DemoCase crmcase = service.getCaseById(order.getCaseid());
+				String result = emailservice.creatTemplate(crmcase, order);
+				
+				//生成待发送邮件
+				order = service.getOrderById(order.getOrderid());
+				emailservice.saveEmail(order,result);
+				
+				j.setSuccess(true);
+			}
+			else{
+				j.setSuccess(false);
+			}
 		} catch (Exception e) {
 			j.setSuccess(false);
 			logger.error("OrderController.doAdd() --> " + order.toString() + "\n" + e.getMessage());
@@ -162,7 +140,20 @@ public class OrderController extends BaseSimpleFormController {
 	public Json doEdit(HttpServletRequest request, HttpSession session, Model model, DemoOrder order) {
 
 		Json j = new Json();
+		DemoCase crmcase = caseservice.getCaseById(order.getCaseid());
+		
 		try {
+			if(order.getGroupnumber()!= null){				
+				crmcase.setStatus("3");
+				caseservice.updateCase(crmcase);
+			}
+			if(order.getReason() != null){
+				int i = caseservice.casestatus(order.getCaseid());
+				if(i>0){
+					crmcase.setStatus("4");
+					caseservice.updateCase(crmcase);
+				}
+			}
 			service.updateOrder(order);
 			j.setSuccess(true);
 		} catch (Exception e) {

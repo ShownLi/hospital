@@ -19,6 +19,8 @@ public interface DemoCaseMapper extends BaseMapper {
 
 	public void updateCase(DemoCase crmcase);
 
+	public int caseStatus(int id);
+	
 	public void deleteCaseById(int caseid);
 	
 	public DemoCase getCaseById(int caseid);

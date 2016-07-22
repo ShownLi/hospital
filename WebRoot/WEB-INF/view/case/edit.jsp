@@ -380,6 +380,24 @@
   </div><!-- modal-dialog -->
 </div><!-- modal -->
 
+<!-- Modal -->
+<div class="modal fade" id="NoEmail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">信息</h4>
+      </div>
+      <div class="modal-body">
+      		该客人没有邮箱，请添加邮箱后再进行操作
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+      </div>
+    </div><!-- modal-content -->
+  </div><!-- modal-dialog -->
+</div><!-- modal -->
+
 <div class="nextModal modal fade" id="nextModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -626,7 +644,7 @@
     					window.parent.location = "${rootPath}case/edit.html?id=${crmcase.caseid}";
     					//$("#nextModal").modal('show');
     				} else {
-    					//$("#msgModal").modal('show');
+    					$("#NoEmail").modal('show');
     				}
     			}, "JSON");
     	}

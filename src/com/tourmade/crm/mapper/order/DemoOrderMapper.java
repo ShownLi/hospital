@@ -19,7 +19,9 @@ public interface DemoOrderMapper extends BaseMapper {
 	
 	public long countOrderByCaseid(int id);
 	
-	public void saveOrder(DemoOrder order);
+	public String validate(int id);
+	
+	public int saveOrder(DemoOrder order);
 
 	public void updateOrder(DemoOrder order);
 

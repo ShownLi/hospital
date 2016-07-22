@@ -191,7 +191,7 @@ public class CaseService extends BaseService {
 	}
 	
 	/**
-	 * 获得销售信息
+	 * 获得地接社信息
 	 * 
 	 * @param id
 	 * @return
@@ -266,7 +266,7 @@ public class CaseService extends BaseService {
 	}
 
 	/**
-	 * 更新询单信息(不修改密码)
+	 * 询单生成订单时更改询单状态
 	 * 
 	 * @param case
 	 * @return
@@ -292,6 +292,16 @@ public class CaseService extends BaseService {
 		return r;
 	}
 	
+	/**
+	 * 新增询单
+	 * 
+	 * @param case
+	 * @return
+	 */
+	public int casestatus(int id) {
+		int i = caseMapper.caseStatus(id);
+		return i;
+	}
 	/**
 	 * 询单失效
 	 * 

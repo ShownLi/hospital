@@ -62,6 +62,12 @@
 		u.isdel = 0
 	</select>
 	
+	<select id="validate" parameterType="int" resultType="String">
+		select email from tm_customer 
+		where customer_id = #{id}
+		and isdel = 0
+	</select>
+	
 	<select id="countOrderByCaseid" parameterType="DemoOrder" resultType="long">
 		select count(u.order_id) from tm_order u
 		where
@@ -239,6 +245,10 @@
 		u.sales_id as salesid,
 		u.sales_name as salesname,
 		u.destination as destination,
+		u.customer_email_real as customeremailreal,
+		u.customer_email_alias as customeremailalias,
+		u.agency_email_real as agencyemailreal,
+		u.agency_email_alias as agencyemailalias,
 		u.budget as budget,
 		u.status as status,
 		u.reason as reason,

@@ -235,6 +235,13 @@
 		and v.country = #{destination}
 	</select>
 	
+	<select id="caseStatus" parameterType="DemoCase" resultType="long">
+		select count(u.status) from tm_order u
+		where	u.status != 3 
+		and u.case_id = #{id}
+		and u.isdel = 0
+	</select>
+	
 	<update id="deleteCaseById" parameterType="int" flushCache="true"
 		statementType="PREPARED">
 		update tm_case
