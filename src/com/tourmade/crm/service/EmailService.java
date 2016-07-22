@@ -83,8 +83,74 @@ public class EmailService extends BaseService {
 		template.setRequirement(crmcase.getRequirement());
 		template.setReplyto("mailto:"+order.getCustomeremailalias());
 		template.setRoute_url("route_URL链接"+crmcase.getRouteid());
-		boat.setId(""+order.getCustomerid());
-		
+		if(order.getCustomerid() != 0){
+			boat.setId(""+order.getCustomerid());
+			boat = emailMapper.getCusZE(boat);
+			template.setCustomername_zh(boat.getChinese());
+			template.setCustomername_en(boat.getEnglish());
+		}
+		if(order.getSalesid() != 0){
+			boat.setId(""+order.getSalesid());
+			boat = emailMapper.getSalesZE(boat);
+			template.setSalesname_zh(boat.getChinese());
+			template.setSalesname_en(boat.getEnglish());
+		}
+		if(crmcase.getHotel() != null || !"".equals(crmcase.getHotel())){
+			boat.setDomain("case.hotel");
+			boat.setValue(crmcase.getHotel());
+			boat = emailMapper.getZhEn(boat);
+			template.setHotel_zh(boat.getChinese());
+			template.setHotel_en(boat.getEnglish());
+		}
+		if(crmcase.getGuide() != null || !"".equals(crmcase.getGuide())){
+			boat.setDomain("case.guide");
+			boat.setValue(crmcase.getGuide());
+			boat = emailMapper.getZhEn(boat);
+			template.setGuide_zh(boat.getChinese());
+			template.setGuide_en(boat.getEnglish());
+		}
+		if(crmcase.getMeals() != null || !"".equals(crmcase.getMeals())){
+			boat.setDomain("case.meals");
+			boat.setValue(crmcase.getMeals());
+			boat = emailMapper.getZhEn(boat);
+			template.setMeals_zh(boat.getChinese());
+			template.setMeals_en(boat.getEnglish());
+		}
+		if(order.getDestination() != null || !"".equals(order.getDestination())){
+			boat.setDomain("country");
+			boat.setValue(order.getDestination());
+			boat = emailMapper.getZhEn(boat);
+			template.setDestination_zh(boat.getChinese());
+			template.setDestination_en(boat.getEnglish());
+		}
+		if(crmcase.getPassport() != null || !"".equals(crmcase.getPassport())){
+			boat.setDomain("case.passport");
+			boat.setValue(crmcase.getPassport());
+			boat = emailMapper.getZhEn(boat);
+			template.setPassport_zh(boat.getChinese());
+			template.setPassport_en(boat.getEnglish());
+		}
+		if(crmcase.getFlight() != null || !"".equals(crmcase.getFlight())){
+			boat.setDomain("case.flight");
+			boat.setValue(crmcase.getFlight());
+			boat = emailMapper.getZhEn(boat);
+			template.setFlight_zh(boat.getChinese());
+			template.setFlight_en(boat.getEnglish());
+		}
+		if(crmcase.getVisa() != null || !"".equals(crmcase.getVisa())){
+			boat.setDomain("case.visa");
+			boat.setValue(crmcase.getVisa());
+			boat = emailMapper.getZhEn(boat);
+			template.setVisa_zh(boat.getChinese());
+			template.setVisa_en(boat.getEnglish());
+		}
+		if(crmcase.getTailormade() != null || !"".equals(crmcase.getTailormade())){
+			boat.setDomain("case.tailormade");
+			boat.setValue(crmcase.getTailormade());
+			boat = emailMapper.getZhEn(boat);
+			template.setTailormade_zh(boat.getChinese());
+			template.setTailormade_en(boat.getEnglish());
+		}
 		try{
 			result = getMailContent(template);
 		}

@@ -26,4 +26,8 @@ public interface DemoEmailMapper extends BaseMapper {
 	
 	public MailTepBoat getZhEn(MailTepBoat boat);
 	
+	public MailTepBoat getCusZE(MailTepBoat boat);
+	
+	public MailTepBoat getSalesZE(MailTepBoat boat);
+	
 }
