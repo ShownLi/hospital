@@ -98,4 +98,33 @@
 		where
 		email_id = #{email_id}
 	</update>
+	
+	<select id="getZhEn" parameterType="MailTepBoat" resultType="MailTepBoat">
+		select
+		u.chinese as chinese,
+		u.english as english
+		from tm_parameter u 
+		where u.isdisplay = 1 
+		and u.isdel = 0 
+		and u.para_domain = #{domain}
+		and u.value = #{value}
+	</select>
+	
+	<select id="getCusZE" parameterType="MailTepBoat" resultType="MailTepBoat">
+		select
+		u.customer_name_zh as chinese,
+		u.customer_name_en as english
+		from tm_parameter u 
+		where u.isdel = 0 
+		and u.customer_id = #{id}
+	</select>
+	
+	<select id="getSalesZE" parameterType="MailTepBoat" resultType="MailTepBoat">
+		select
+		u.sales_name_zh as chinese,
+		u.sales_name_en as english
+		from tm_parameter u 
+		where u.isdel = 0 
+		and u.customer_id = #{id}
+	</select>
 </mapper>

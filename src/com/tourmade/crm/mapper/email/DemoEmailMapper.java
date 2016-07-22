@@ -6,6 +6,7 @@ import java.util.Map;
 import com.tourmade.crm.common.framework.BaseMapper;
 import com.tourmade.crm.model.DemoEmail;
 import com.tourmade.crm.model.DemoList;
+import com.tourmade.crm.model.MailTepBoat;
 
 public interface DemoEmailMapper extends BaseMapper {
 	
@@ -22,4 +23,7 @@ public interface DemoEmailMapper extends BaseMapper {
 	public DemoEmail getEmailById(int email_id);
 	
 	public List<DemoList> getParameterInfo(String domain);
+	
+	public MailTepBoat getZhEn(MailTepBoat boat);
+	
 }

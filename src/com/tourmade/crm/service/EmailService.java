@@ -22,6 +22,7 @@ import com.tourmade.crm.model.DemoCase;
 import com.tourmade.crm.model.DemoEmail;
 import com.tourmade.crm.model.DemoOrder;
 import com.tourmade.crm.model.MailTemplate;
+import com.tourmade.crm.model.MailTepBoat;
 
 @Service
 @Transactional(readOnly = false)
@@ -59,7 +60,7 @@ public class EmailService extends BaseService {
 	}
 	
 	/**
-	 * 新增邮件
+	 * 生成模板
 	 * 
 	 * @param email
 	 * @return
@@ -67,15 +68,23 @@ public class EmailService extends BaseService {
 	public String creatTemplate(DemoCase crmcase, DemoOrder order) {
 		
 		MailTemplate template = new MailTemplate();
+		MailTepBoat boat = new MailTepBoat();
 		String result = null;
 		
 		template.setAdult(""+crmcase.getAdult());
 		template.setChildren(""+crmcase.getChildren());
 		template.setBaby(""+crmcase.getBaby());
-		template.setBudget(order.getBudget());
-		template.setStart_date(crmcase.getStartdate());
+		template.setStart_time(crmcase.getStarttime());
+		template.setStart_month(crmcase.getStartmonth());
 		template.setDuring(crmcase.getDuring());
+		template.setStart_date(crmcase.getStartdate());
+		template.setEnd_date(crmcase.getEnddate());
+		template.setBudget(order.getBudget());
 		template.setRequirement(crmcase.getRequirement());
+		template.setReplyto("mailto:"+order.getCustomeremailalias());
+		template.setRoute_url("route_URL链接"+crmcase.getRouteid());
+		boat.setId(""+order.getCustomerid());
+		
 		try{
 			result = getMailContent(template);
 		}
@@ -84,6 +93,7 @@ public class EmailService extends BaseService {
 		}
 		return result;
 	}
+	
 	/**
 	 * 根据模板生成邮件正文
 	 * 
@@ -334,6 +344,7 @@ public class EmailService extends BaseService {
 		}
 		return result;
 	}
+	
 	/**
 	 * 新增邮件
 	 * 
@@ -357,4 +368,14 @@ public class EmailService extends BaseService {
 		}
 	}
 
+	/**
+	 * 新增邮件
+	 * 
+	 * @param email
+	 * @return
+	 */
+	public MailTepBoat getZhEn(MailTepBoat boat) {
+		boat = emailMapper.getZhEn(boat);
+		return boat;
+	}
 }
