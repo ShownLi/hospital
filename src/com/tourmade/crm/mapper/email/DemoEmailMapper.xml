@@ -121,7 +121,7 @@
 	
 	<select id="getSalesZE" parameterType="MailTepBoat" resultType="MailTepBoat">
 		select
-		u.sales_name_zh as chinese,
+		u.sales_name as chinese,
 		u.sales_name_en as english
 		from tm_parameter u 
 		where u.isdel = 0 

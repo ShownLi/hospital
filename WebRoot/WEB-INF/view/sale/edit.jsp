@@ -42,11 +42,17 @@
           
             
             <div class="form-group">
-              <label class="col-sm-4 control-label">销售名 <span class="asterisk">*</span></label>
+              <label class="col-sm-4 control-label">销售名称 <span class="asterisk">*</span></label>
               <div class="col-sm-4">
                 <input type="text" name="salesname" placeholder="销售名" class="form-control" value="${sales.salesname }" />
               </div>
             </div>
+            <div class="form-group">
+              <label class="col-sm-4 control-label">英文名称 <span class="asterisk">*</span></label>
+              <div class="col-sm-4">
+                <input type="text" name="salesnameen" placeholder="销售名" class="form-control" value="${sales.salesnameen }" />
+              </div>
+            </div>       
             <div class="form-group">
               <label class="col-sm-4 control-label">所属地接社 <span class="asterisk">*</span></label>
               <input type="text" name="agencyid" class="agency-select col-sm-4" value="${sales.agencyid }" readonly/>

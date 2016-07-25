@@ -26,12 +26,14 @@
 	<insert id="saveSale" parameterType="DemoSale" flushCache="true" useGeneratedKeys="true" keyProperty="sales_id" keyColumn="GENERATED_KEY">
 		insert into tm_sales(
 		sales_name,
+		sales_name_en,
 		agency_id,
 		sales_email,
 		creat_time,
 		isdel
 		)values(
 		#{salesname,jdbcType=VARCHAR},
+		#{salesnameen,jdbcType=VARCHAR},
 		#{agencyid,jdbcType=VARCHAR},
 		#{salesemail,jdbcType=VARCHAR},
 		NOW(),
@@ -43,6 +45,7 @@
 		update tm_sales
 		set
 		sales_name=#{salesname},
+		sales_name_en=#{salesnameen},
 		sales_email=#{salesemail},
 		update_time=NOW()
 		where
@@ -54,6 +57,7 @@
 		u.sales_id as salesid,
 		u.sales_portal_id as salesportalid,
 		u.sales_name as salesname,
+		u.sales_name_en as salesnameen,
 		u.agency_id as agencyid,
 		u.sales_email as salesemail,
 		u.isdel as isdel

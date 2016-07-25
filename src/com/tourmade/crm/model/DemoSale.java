@@ -29,6 +29,8 @@ public class DemoSale extends BaseBean<DemoSale> {
 	
 	private String salesname;
 	
+	private String salesnameen;
+	
 	private String salesemail;
 
 	public int getSalesid() {
@@ -77,6 +79,14 @@ public class DemoSale extends BaseBean<DemoSale> {
 
 	public void setSalesname(String salesname) {
 		this.salesname = salesname;
+	}
+
+	public String getSalesnameen() {
+		return salesnameen;
+	}
+
+	public void setSalesnameen(String salesnameen) {
+		this.salesnameen = salesnameen;
 	}
 
 	public String getSalesemail() {
