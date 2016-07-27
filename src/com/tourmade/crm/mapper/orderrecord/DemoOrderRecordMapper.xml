@@ -19,8 +19,8 @@
 		from tm_order_record u  
 		where u.isdel = 0
 		and u.order_id = #{id}
-		order by u.creat_time
-		) table_alias
+		order by u.creat_time desc
+		) table_alias 
 		limit #{b},#{e}
 	</select>
 
@@ -43,7 +43,7 @@
 		left join tm_order v on v.case_id = #{id}
 		where u.isdel = 0
 		and u.order_id = v.order_id
-		order by u.creat_time
+		order by u.creat_time desc
 		) table_alias
 		limit #{b},#{e}
 	</select>
@@ -52,6 +52,7 @@
 		select count(u.order_record_id) from tm_order_record u
 		where
 		u.isdel = 0
+		and u.order_id = #{id}
 	</select>
 	
 	<insert id="saveOrderRecord" parameterType="DemoOrderRecord" flushCache="true" useGeneratedKeys="true" keyProperty="orderrecord_id" keyColumn="GENERATED_KEY">

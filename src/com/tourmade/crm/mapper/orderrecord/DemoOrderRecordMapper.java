@@ -15,6 +15,8 @@ public interface DemoOrderRecordMapper extends BaseMapper {
 	
 	public long countOrderRecord(DemoOrderRecord orderrecord);
 	
+	public long countOrderRecord(int id);
+	
 	public void saveOrderRecord(DemoOrderRecord orderrecord);
 
 	public void updateOrderRecord(DemoOrderRecord orderrecord);

@@ -44,7 +44,7 @@ public class OrderRecordService extends BaseService {
 //		map.put("o", ph.getOrder());
 
 		List<DemoOrderRecord> data = orderrecordMapper.queryOrderRecord(map);
-		long count = orderrecordMapper.countOrderRecord(orderrecord);
+		long count = orderrecordMapper.countOrderRecord(orderid);
 			
 		r.setData(data);
 		r.setCountTotal(count);

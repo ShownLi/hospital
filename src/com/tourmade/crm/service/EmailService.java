@@ -218,7 +218,6 @@ public class EmailService extends BaseService {
 				result = str.toString();
 			if(ossObject.getObjectContent() != null){	
 				if (null != template) {
-					System.out.println(template.toString());
 					DateFormat format=new SimpleDateFormat("yyyy-MM-dd");
 					if (null != template.getSalesname_zh() && !"".equals(template.getSalesname_zh())) {
 						result = result.replace("${salesname_zh}",
