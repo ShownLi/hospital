@@ -2,6 +2,8 @@ package com.tourmade.crm.service;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -70,7 +72,6 @@ public class EmailService extends BaseService {
 		MailTemplate template = new MailTemplate();
 		MailTepBoat boat = new MailTepBoat();
 		String result = null;
-		
 		template.setAdult(""+crmcase.getAdult());
 		template.setChildren(""+crmcase.getChildren());
 		template.setBaby(""+crmcase.getBaby());
@@ -95,56 +96,70 @@ public class EmailService extends BaseService {
 			template.setSalesname_zh(boat.getChinese());
 			template.setSalesname_en(boat.getEnglish());
 		}
-		if(crmcase.getHotel() != null || !"".equals(crmcase.getHotel())){
+		if(crmcase.getPreferlanguage() != null && !"".equals(crmcase.getPreferlanguage())){
+			boat.setDomain("case.preferlanguage");
+			boat.setValue(crmcase.getPreferlanguage());
+			boat = emailMapper.getZhEn(boat);
+			template.setPreferlanguage_zh(boat.getChinese());
+			template.setPreferlanguage_en(boat.getEnglish());
+		}
+		if(crmcase.getWithwho() != null && !"".equals(crmcase.getWithwho())){
+			boat.setDomain("case.withwho");
+			boat.setValue(crmcase.getWithwho());
+			boat = emailMapper.getZhEn(boat);
+			template.setWithwho_zh(boat.getChinese());
+			template.setWithwho_en(boat.getEnglish());
+		}
+		if(crmcase.getHotel() != null && !"".equals(crmcase.getHotel())){
 			boat.setDomain("case.hotel");
 			boat.setValue(crmcase.getHotel());
 			boat = emailMapper.getZhEn(boat);
 			template.setHotel_zh(boat.getChinese());
 			template.setHotel_en(boat.getEnglish());
 		}
-		if(crmcase.getGuide() != null || !"".equals(crmcase.getGuide())){
+		if(crmcase.getGuide() != null && !"".equals(crmcase.getGuide())){
 			boat.setDomain("case.guide");
 			boat.setValue(crmcase.getGuide());
 			boat = emailMapper.getZhEn(boat);
 			template.setGuide_zh(boat.getChinese());
 			template.setGuide_en(boat.getEnglish());
 		}
-		if(crmcase.getMeals() != null || !"".equals(crmcase.getMeals())){
+		if(crmcase.getMeals() != null && !"".equals(crmcase.getMeals())){
 			boat.setDomain("case.meals");
 			boat.setValue(crmcase.getMeals());
 			boat = emailMapper.getZhEn(boat);
 			template.setMeals_zh(boat.getChinese());
 			template.setMeals_en(boat.getEnglish());
 		}
-		if(order.getDestination() != null || !"".equals(order.getDestination())){
+		if(order.getDestination() != null && !"".equals(order.getDestination())){
 			boat.setDomain("country");
 			boat.setValue(order.getDestination());
 			boat = emailMapper.getZhEn(boat);
 			template.setDestination_zh(boat.getChinese());
 			template.setDestination_en(boat.getEnglish());
 		}
-		if(crmcase.getPassport() != null || !"".equals(crmcase.getPassport())){
+		if(crmcase.getPassport() != null && !"".equals(crmcase.getPassport())){
 			boat.setDomain("case.passport");
 			boat.setValue(crmcase.getPassport());
 			boat = emailMapper.getZhEn(boat);
 			template.setPassport_zh(boat.getChinese());
 			template.setPassport_en(boat.getEnglish());
 		}
-		if(crmcase.getFlight() != null || !"".equals(crmcase.getFlight())){
+		if(crmcase.getFlight() != null && !"".equals(crmcase.getFlight())){
 			boat.setDomain("case.flight");
 			boat.setValue(crmcase.getFlight());
 			boat = emailMapper.getZhEn(boat);
 			template.setFlight_zh(boat.getChinese());
 			template.setFlight_en(boat.getEnglish());
 		}
-		if(crmcase.getVisa() != null || !"".equals(crmcase.getVisa())){
+		if(crmcase.getVisa() != null && !"".equals(crmcase.getVisa())){
 			boat.setDomain("case.visa");
 			boat.setValue(crmcase.getVisa());
 			boat = emailMapper.getZhEn(boat);
 			template.setVisa_zh(boat.getChinese());
 			template.setVisa_en(boat.getEnglish());
 		}
-		if(crmcase.getTailormade() != null || !"".equals(crmcase.getTailormade())){
+		if(crmcase.getTailormade() != null && !"".equals(crmcase.getTailormade())){
 			boat.setDomain("case.tailormade");
 			boat.setValue(crmcase.getTailormade());
 			boat = emailMapper.getZhEn(boat);
@@ -203,198 +218,228 @@ public class EmailService extends BaseService {
 				result = str.toString();
 			if(ossObject.getObjectContent() != null){	
 				if (null != template) {
-					if (null != template.getSalesname_zh()) {
+					System.out.println(template.toString());
+					DateFormat format=new SimpleDateFormat("yyyy-MM-dd");
+					if (null != template.getSalesname_zh() && !"".equals(template.getSalesname_zh())) {
 						result = result.replace("${salesname_zh}",
 								template.getSalesname_zh());
 					}
 					else{result = result.replace("${salesname_zh}","");}
 					
-					if (null != template.getSalesname_en()) {
+					if (null != template.getSalesname_en() && !"".equals(template.getSalesname_en())) {
 						result = result.replace("${salesname_en}",
 								template.getSalesname_en());
 					}
 					else{result = result.replace("${salesname_en}","");}
 					
-					if (null != template.getCustomername_zh()) {
+					if (null != template.getCustomername_zh() && !"".equals(template.getCustomername_zh())) {
 						result = result.replace("${customername_zh}",
 								template.getCustomername_zh());
 					}
 					else{result = result.replace("${customername_zh}","");}
 					
-					if (null != template.getCustomername_en()) {
+					if (null != template.getCustomername_en() && !"".equals(template.getCustomername_en())) {
 						result = result.replace("${customername_en}",
 								template.getCustomername_en());
 					}
 					else{result = result.replace("${customername_en}","");}
+
+					if (null != template.getPreferlanguage_zh() && !"".equals(template.getPreferlanguage_zh())) {
+						result = result.replace("${preferlanguage_zh}",
+								template.getPreferlanguage_zh());
+					}
+					else{result = result.replace("${preferlanguage_zh}","");}
 					
-					if (null != template.getAdult()) {
+					if (null != template.getPreferlanguage_en() && !"".equals(template.getPreferlanguage_en())) {
+						result = result.replace("${preferlanguage_en}",
+								template.getPreferlanguage_en());
+					}
+					else{result = result.replace("${preferlanguage_en}","");}
+					
+					if (null != template.getWithwho_zh() && !"".equals(template.getWithwho_zh())) {
+						result = result.replace("${withwho_zh}",
+								template.getWithwho_zh());
+					}
+					else{result = result.replace("${withwho_zh}","");}
+					
+					if (null != template.getWithwho_en() && !"".equals(template.getWithwho_en())) {
+						result = result.replace("${withwho_en}",
+								template.getWithwho_en());
+					}
+					else{result = result.replace("${withwho_en}","");}
+					
+					if (null != template.getAdult() && !"".equals(template.getAdult())) {
 						result = result.replace("${adult}",
 								template.getAdult());
 					}
 					else{result = result.replace("${adult}","");}
 					
-					if (null != template.getChildren()) {
+					if (null != template.getChildren() && !"".equals(template.getChildren())) {
 						result = result.replace("${children}",
 								template.getChildren());
 					}
 					else{result = result.replace("${children}","");}
 
-					if (null != template.getBaby()) {
+					if (null != template.getBaby() && !"".equals(template.getBaby())) {
 						result = result.replace("${baby}",
 								template.getBaby());
 					}
 					else{result = result.replace("${baby}","");}
 
-					if (null != template.getStart_time()) {
-						if(template.getStart_time() == "1"){
+					if (null != template.getStart_time() && !"".equals(template.getStart_time())) {
+						if(template.getStart_time().equals("1")){
 							result = result.replace("${start_time_zh}","已确定");
 							result = result.replace("${start_time_en}","Decided");
 						}
-						if(template.getStart_time() == "0"){
+						if(template.getStart_time().equals("0")){
 							result = result.replace("${start_time_zh}","未确定");
 							result = result.replace("${start_time_en}","Undecided");
 						}
 					}
-
-					if (null != template.getStart_month()) {
+					else{
+						result = result.replace("${start_time_zh}","");
+						result = result.replace("${start_time_en}","");
+						}
+					
+					if (null != template.getStart_month() && !"".equals(template.getStart_month())) {
 						result = result.replace("${start_month}",
-								template.getStart_month().toString());
+								format.format(template.getStart_month()));
 					}
 					else{result = result.replace("${start_month}","");}
 
-					if (null != template.getDuring()) {
+					if (null != template.getDuring() && !"".equals(template.getDuring())) {
 						result = result.replace("${during}",
 								template.getDuring());
 					}
 					else{result = result.replace("${during}","");}
 					
-					if (null != template.getStart_date()) {
+					if (null != template.getStart_date() && !"".equals(template.getStart_date())) {
 						result = result.replace("${start_date}",
-								template.getStart_date().toString());
+								format.format(template.getStart_date()));
 					}
 					else{result = result.replace("${start_date}","");}
 					
-					if (null != template.getEnd_date()) {
+					if (null != template.getEnd_date() && !"".equals(template.getEnd_date())) {
 						result = result.replace("${end_date}",
-								template.getEnd_date().toString());
+								format.format(template.getEnd_date()));
 					}
 					else{result = result.replace("${end_date}","");}
 					
-					if (null != template.getHotel_zh()) {
+					if (null != template.getHotel_zh() && !"".equals(template.getHotel_zh())) {
 						result = result.replace("${hotel_zh}",
 								template.getHotel_zh());
 					}
 					else{result = result.replace("${hotel_zh}","");}
 					
-					if (null != template.getHotel_en()) {
+					if (null != template.getHotel_en() && !"".equals(template.getHotel_en())) {
 						result = result.replace("${hotel_en}",
 								template.getHotel_en());
 					}
 					else{result = result.replace("${hotel_en}","");}
 					
-					if (null != template.getMeals_zh()) {
+					if (null != template.getMeals_zh() && !"".equals(template.getMeals_zh())) {
 						result = result.replace("${meals_zh}",
 								template.getMeals_zh());
 					}
 					else{result = result.replace("${meals_zh}","");}
 					
-					if (null != template.getMeals_en()) {
+					if (null != template.getMeals_en() && !"".equals(template.getMeals_en())) {
 						result = result.replace("${meals_en}",
 								template.getMeals_en());
 					}
 					else{result = result.replace("${meals_en}","");}
 
-					if (null != template.getGuide_zh()) {
+					if (null != template.getGuide_zh() && !"".equals(template.getGuide_zh())) {
 						result = result.replace("${guide_zh}",
 								template.getGuide_zh());
 					}
 					else{result = result.replace("${guide_zh}","");}
 
-					if (null != template.getGuide_en()) {
+					if (null != template.getGuide_en() && !"".equals(template.getGuide_en())) {
 						result = result.replace("${guide_en}",
 								template.getGuide_en());
 					}
 					else{result = result.replace("${guide_en}","");}
 
-					if (null != template.getBudget()) {
+					if (null != template.getBudget() && !"".equals(template.getBudget())) {
 						result = result.replace("${budget}",
 								template.getBudget());
 					}
 					else{result = result.replace("${budget}","");}
 
-					if (null != template.getDestination_zh()) {
+					if (null != template.getDestination_zh() && !"".equals(template.getDestination_zh())) {
 						result = result.replace("${destination_zh}",
 								template.getDestination_zh());
 					}
 					else{result = result.replace("${destination_zh}","");}
 
-					if (null != template.getDestination_en()) {
+					if (null != template.getDestination_en() && !"".equals(template.getDestination_en())) {
 						result = result.replace("${destination_en}",
 								template.getDestination_en());
 					}
 					else{result = result.replace("${destination_en}","");}
 
-					if (null != template.getPassport_zh()) {
+					if (null != template.getPassport_zh() && !"".equals(template.getPassport_zh())) {
 						result = result.replace("${passport_zh}",
 								template.getPassport_zh());
 					}
 					else{result = result.replace("${passport_zh}","");}
 
-					if (null != template.getPassport_en()) {
+					if (null != template.getPassport_en() && !"".equals(template.getPassport_en())) {
 						result = result.replace("${passport_en}",
 								template.getPassport_en());
 					}
 					else{result = result.replace("${passport_en}","");}
 
-					if (null != template.getVisa_zh()) {
+					if (null != template.getVisa_zh() && !"".equals(template.getVisa_zh())) {
 						result = result.replace("${visa_zh}",
 								template.getVisa_zh());
 					}
 					else{result = result.replace("${visa_zh}","");}
 
-					if (null != template.getVisa_en()) {
+					if (null != template.getVisa_en() && !"".equals(template.getVisa_en())) {
 						result = result.replace("${visa_en}",
 								template.getVisa_en());
 					}
 					else{result = result.replace("${visa_en}","");}
 
-					if (null != template.getFlight_zh()) {
+					if (null != template.getFlight_zh() && !"".equals(template.getFlight_zh())) {
 						result = result.replace("${flight_zh}",
 								template.getFlight_zh());
 					}
 					else{result = result.replace("${flight_zh}","");}
 
-					if (null != template.getFlight_en()) {
+					if (null != template.getFlight_en() && !"".equals(template.getFlight_en())) {
 						result = result.replace("${flight_en}",
 								template.getFlight_en());
 					}
 					else{result = result.replace("${flight_en}","");}
 
-					if (null != template.getTailormade_zh()) {
+					if (null != template.getTailormade_zh() && !"".equals(template.getTailormade_zh())) {
 						result = result.replace("${tailormade_zh}",
 								template.getTailormade_zh());
 					}
 					else{result = result.replace("${tailormade_zh}","");}
 
-					if (null != template.getTailormade_en()) {
+					if (null != template.getTailormade_en() && !"".equals(template.getTailormade_en())) {
 						result = result.replace("${tailormade_en}",
 								template.getTailormade_en());
 					}
 					else{result = result.replace("${tailormade_en}","");}
 
-					if (null != template.getRequirement()) {
+					if (null != template.getRequirement() && !"".equals(template.getRequirement())) {
 						result = result.replace("${requirement}",
 								template.getRequirement());
 					}
 					else{result = result.replace("${requirement}","");}
 
-					if (null != template.getReplyto()) {
+					if (null != template.getReplyto() && !"".equals(template.getReplyto())) {
 						result = result.replace("${replyto}",
 								template.getReplyto());
 					}
 					else{result = result.replace("${replyto}","");}
 
-					if (null != template.getRoute_url()) {
+					if (null != template.getRoute_url() && !"".equals(template.getRoute_url())) {
 						result = result.replace("${route_url}",
 								template.getRoute_url());
 					}

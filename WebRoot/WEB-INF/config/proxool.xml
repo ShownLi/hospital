@@ -7,11 +7,11 @@
 		<alias>dbpool</alias>
 		
 		<!-- 开发库 start	-->	 
-		<driver-url>jdbc:mysql://123.56.77.206:3306/test?characterEncoding=utf8</driver-url>
+		<driver-url>jdbc:mysql://rm-2ze8jw92bsr517984o.mysql.rds.aliyuncs.com/tmcrm_test?characterEncoding=utf8</driver-url>
 		<driver-class>com.mysql.jdbc.Driver</driver-class>
 		<driver-properties>
-		 <property name="user" value="root" />
-		 <property name="password" value="Tmcrm2016" />
+		 <property name="user" value="tmcrm_test" />
+		 <property name="password" value="apJFwMls*(dxAjxC" />
 		</driver-properties>
 		<!-- 开发库 end -->
 

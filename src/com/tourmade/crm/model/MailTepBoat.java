@@ -51,6 +51,11 @@ public class MailTepBoat {
 	public void setId(String id) {
 		this.id = id;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "MailTepBoat [chinese=" + chinese + ", english=" + english + ", domain=" + domain + ", value=" + value
+				+ ", id=" + id + "]";
+	}
 	
 }

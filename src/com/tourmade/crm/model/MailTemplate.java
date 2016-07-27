@@ -19,6 +19,10 @@ public class MailTemplate extends BaseBean<MailTemplate> {
 	private String during;
 	private Date start_date;
 	private Date end_date;
+	private String preferlanguage_zh;
+	private String preferlanguage_en;	
+	private String withwho_zh;
+	private String withwho_en;
 	private String hotel_zh;
 	private String hotel_en;
 	private String meals_zh;
@@ -111,6 +115,30 @@ public class MailTemplate extends BaseBean<MailTemplate> {
 	}
 	public void setEnd_date(Date end_date) {
 		this.end_date = end_date;
+	}
+	public String getPreferlanguage_zh() {
+		return preferlanguage_zh;
+	}
+	public void setPreferlanguage_zh(String preferlanguage_zh) {
+		this.preferlanguage_zh = preferlanguage_zh;
+	}
+	public String getPreferlanguage_en() {
+		return preferlanguage_en;
+	}
+	public void setPreferlanguage_en(String preferlanguage_en) {
+		this.preferlanguage_en = preferlanguage_en;
+	}
+	public String getWithwho_zh() {
+		return withwho_zh;
+	}
+	public void setWithwho_zh(String withwho_zh) {
+		this.withwho_zh = withwho_zh;
+	}
+	public String getWithwho_en() {
+		return withwho_en;
+	}
+	public void setWithwho_en(String withwho_en) {
+		this.withwho_en = withwho_en;
 	}
 	public String getHotel_zh() {
 		return hotel_zh;
@@ -234,6 +262,21 @@ public class MailTemplate extends BaseBean<MailTemplate> {
 	}
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+	@Override
+	public String toString() {
+		return "MailTemplate [customername_zh=" + customername_zh + ", customername_en=" + customername_en
+				+ ", salesname_zh=" + salesname_zh + ", salesname_en=" + salesname_en + ", adult=" + adult
+				+ ", children=" + children + ", baby=" + baby + ", start_time=" + start_time + ", start_month="
+				+ start_month + ", during=" + during + ", start_date=" + start_date + ", end_date=" + end_date
+				+ ", preferlanguage_zh=" + preferlanguage_zh + ", preferlanguage_en=" + preferlanguage_en
+				+ ", withwho_zh=" + withwho_zh + ", withwho_en=" + withwho_en + ", hotel_zh=" + hotel_zh + ", hotel_en="
+				+ hotel_en + ", meals_zh=" + meals_zh + ", meals_en=" + meals_en + ", guide_zh=" + guide_zh
+				+ ", guide_en=" + guide_en + ", budget=" + budget + ", destination_zh=" + destination_zh
+				+ ", destination_en=" + destination_en + ", passport_zh=" + passport_zh + ", passport_en=" + passport_en
+				+ ", visa_zh=" + visa_zh + ", visa_en=" + visa_en + ", flight_zh=" + flight_zh + ", flight_en="
+				+ flight_en + ", tailormade_zh=" + tailormade_zh + ", tailormade_en=" + tailormade_en + ", requirement="
+				+ requirement + ", replyto=" + replyto + ", route_url=" + route_url + "]";
 	}
 
 }

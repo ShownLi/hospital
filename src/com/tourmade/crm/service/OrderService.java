@@ -95,7 +95,7 @@ public class OrderService extends BaseService {
 	 */
 	public boolean validate(int id) {
 		String e = orderMapper.validate(id);
-		if(null == e || "".equals(e)){
+		if(null == e | "".equals(e)){
 			return false;
 		}
 		else{
@@ -177,8 +177,7 @@ public class OrderService extends BaseService {
 		            in = new BufferedReader(new InputStreamReader(
 		                    connection.getInputStream()));
 		        } catch (Exception e) {
-		            System.out.println("发送GET请求出现异常！" + e);
-		            e.printStackTrace();
+		        	creatAlias(url, param);
 		        }
 		        // 使用finally块来关闭输入流
 		        finally {

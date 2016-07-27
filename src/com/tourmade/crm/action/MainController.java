@@ -51,5 +51,5 @@ public class MainController extends BaseSimpleFormController {
 	public String main(Model model) {
 		return "redirect:/case/list.html";
 	}
-	
+
 }

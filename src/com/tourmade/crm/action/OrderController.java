@@ -84,9 +84,9 @@ public class OrderController extends BaseSimpleFormController {
 		Json j = new Json();
 		
 		try {
-			
+			boolean is = service.validate(order.getCustomerid());
 			//验证客人有邮箱
-			if(service.validate(order.getCustomerid()))
+			if(is)
 			{
 				
 				//询单状态设置为下单
@@ -114,6 +114,7 @@ public class OrderController extends BaseSimpleFormController {
 			}
 		} catch (Exception e) {
 			j.setSuccess(false);
+			e.printStackTrace();
 			logger.error("OrderController.doAdd() --> " + order.toString() + "\n" + e.getMessage());
 		}
 		

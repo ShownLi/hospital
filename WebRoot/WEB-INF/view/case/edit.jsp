@@ -140,7 +140,7 @@
                 <div class="form-group col-sm-4">
                   <label class="col-sm-6 control-label">婴儿（0-2岁）</label>
                   <div class="col-sm-6">
-                    <input type="text" name="baby" placeholder="婴儿（0-2岁）" class="form-control" value="0" />
+                    <input type="text" name="baby" placeholder="婴儿（0-2岁）" class="form-control" value="${crmcase.baby}" />
                   </div>
                 </div>
             </div>

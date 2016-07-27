@@ -81,7 +81,7 @@
 	            <div class="form-group col-sm-4">
 	              <label class="col-sm-3 control-label">客人级别</label>
 	              <div class="col-sm-9">
-	                <input type="text" name="level" placeholder="客人级别" class="level-select fullwidth" value="1" />
+	                <input type="text" name="level" placeholder="客人级别" class="level-select fullwidth" value="0" />
 	              </div>
 	            </div> 
 	        </div>

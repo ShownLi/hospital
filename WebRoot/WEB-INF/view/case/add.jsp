@@ -63,7 +63,7 @@
                     <div class="form-group col-sm-4">
                       <label class="col-sm-4 control-label">所属销售</label>
                       <div class="col-sm-8">
-                        <input type="text" name="salesid" placeholder="所属销售" class="sales-select fullwidth" value="0" />
+                        <input type="text" name="salesid" placeholder="所属销售" class="sales-select fullwidth" value="0"/>
                       </div>
                     </div>
                     <div class="form-group col-sm-4">
@@ -172,7 +172,7 @@
                     <div class="form-group col-sm-4">
                         <label class="col-sm-5 control-label">定制偏好</label>
                         <div class="col-sm-7">
-                          <input type="text" name="tailormade" placeholder="定制偏好" class="tailormade-select fullwidth" value="0" />
+                          <input type="text" name="tailormade" placeholder="定制偏好" class="tailormade-select fullwidth" />
                         </div>
                     </div>
                     <div class="form-group col-sm-4">
@@ -210,19 +210,19 @@
                     <div class="form-group col-sm-4">
                         <label class="col-sm-4 control-label">护照</label>
                         <div class="col-sm-8">
-                          <input type="text" name="passport" placeholder="护照" class="passport-select fullwidth" value="0" />
+                          <input type="text" name="passport" placeholder="护照" class="passport-select fullwidth" />
                         </div>
                     </div>
                     <div class="form-group col-sm-4">
                         <label class="col-sm-4 control-label">签证</label>
                         <div class="col-sm-8">
-                          <input type="text" name="visa" placeholder="签证" class="visa-select fullwidth" value="0" />
+                          <input type="text" name="visa" placeholder="签证" class="visa-select fullwidth" />
                         </div>
                     </div>
                     <div class="form-group col-sm-4">
                         <label class="col-sm-4 control-label">国际航班</label>
                         <div class="col-sm-8">
-                          <input type="text" name="flight" placeholder="国际航班" class="flight-select fullwidth" value="0" />
+                          <input type="text" name="flight" placeholder="国际航班" class="flight-select fullwidth" />
                         </div>
                     </div>
                 </div>
@@ -275,7 +275,7 @@
             <div class="form-group col-sm-8 col-sm-offset-2">
                 <label class="col-sm-3 control-label">目的地</label>
                 <div class="col-sm-9">
-                    <input type="text" id="destination" placeholder="国家" class="country-select fullwidth" value="" />
+                    <input type="text" name="destination" id="destination" placeholder="国家" class="country-select fullwidth" value="" />
                 </div>
             </div>
             <div class="form-group col-sm-8 col-sm-offset-2">
@@ -293,7 +293,7 @@
             <div class="col-sm-12">
         	   <a class="submit btn btn-primary">保存</a>
         	 <input type="hidden"  name="caseid" id="caseid" value="" />
-             <input type="hidden"  name="customerid" id="customerid" value="" />
+             <input type="hidden"  name="customerid" id="customerid" value="${customerid}" />
             </div>
           </form>
         </div>

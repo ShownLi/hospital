@@ -74,7 +74,7 @@ public class CaseController extends BaseSimpleFormController {
 	public String add(Model model) {
 		
 		String country = "country";
-		String language = "case.language";
+		String language = "case.preferlanguage";
 		String withwho = "case.withwho";
 		String hotel = "case.hotel";
 		String meals = "case.meals";
@@ -137,7 +137,7 @@ public class CaseController extends BaseSimpleFormController {
 	public String addfromcustomer(Model model, int customerid) {
 		
 		String country = "country";
-		String language = "case.language";
+		String language = "case.preferlanguage";
 		String withwho = "case.withwho";
 		String hotel = "case.hotel";
 		String meals = "case.meals";
@@ -222,7 +222,7 @@ public class CaseController extends BaseSimpleFormController {
 			int i = Integer.parseInt(id);
 			DemoCase u = service.getCaseById(i);
 			String country = "country";
-			String language = "case.language";
+			String language = "case.preferlanguage";
 			String withwho = "case.withwho";
 			String hotel = "case.hotel";
 			String meals = "case.meals";

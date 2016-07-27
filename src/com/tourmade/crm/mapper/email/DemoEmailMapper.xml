@@ -107,14 +107,14 @@
 		where u.isdisplay = 1 
 		and u.isdel = 0 
 		and u.para_domain = #{domain}
-		and u.value = #{value}
+		and u.para_value = #{value}
 	</select>
 	
 	<select id="getCusZE" parameterType="MailTepBoat" resultType="MailTepBoat">
 		select
 		u.customer_name_zh as chinese,
 		u.customer_name_en as english
-		from tm_parameter u 
+		from tm_customer u 
 		where u.isdel = 0 
 		and u.customer_id = #{id}
 	</select>
@@ -123,8 +123,8 @@
 		select
 		u.sales_name as chinese,
 		u.sales_name_en as english
-		from tm_parameter u 
+		from tm_sales u 
 		where u.isdel = 0 
-		and u.customer_id = #{id}
+		and u.sales_id = #{id}
 	</select>
 </mapper>
