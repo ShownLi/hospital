@@ -73,7 +73,7 @@ public class DemoCase extends BaseBean<DemoCase> {
 	
 	private String flight;
 	
-	private int submittype;
+	private String submittype;
 	
 	private String ipaddress;
 	
@@ -313,11 +313,11 @@ public class DemoCase extends BaseBean<DemoCase> {
 		this.flight = flight;
 	}
 
-	public int getSubmittype() {
+	public String getSubmittype() {
 		return submittype;
 	}
 
-	public void setSubmittype(int submittype) {
+	public void setSubmittype(String submittype) {
 		this.submittype = submittype;
 	}
 
