@@ -3,6 +3,8 @@ package com.tourmade.crm.service;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.text.DateFormat;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
@@ -80,7 +82,8 @@ public class EmailService extends BaseService {
 		template.setDuring(crmcase.getDuring());
 		template.setStart_date(crmcase.getStartdate());
 		template.setEnd_date(crmcase.getEnddate());
-		template.setBudget(order.getBudget());
+		String budget = DecimalFormat.getNumberInstance().format(Integer.parseInt(order.getBudget()));
+		template.setBudget(budget);
 		template.setRequirement(crmcase.getRequirement());
 		template.setReplyto("mailto:"+order.getCustomeremailalias());
 		if(crmcase.getRouteid() != null && !"".equals(crmcase.getRouteid())){
@@ -233,7 +236,7 @@ public class EmailService extends BaseService {
 						result = result.replace("${salesname_en}",
 								template.getSalesname_en());
 					}
-					else{result = result.replace("${salesname_en}",template.getSalesname_zh());}
+					else{result = result.replace("${salesname_en}","");}
 					
 					if (null != template.getCustomername_zh() && !"".equals(template.getCustomername_zh())) {
 						result = result.replace("${customername_zh}",
@@ -245,7 +248,7 @@ public class EmailService extends BaseService {
 						result = result.replace("${customername_en}",
 								template.getCustomername_en());
 					}
-					else{result = result.replace("${customername_en}","");}
+					else{result = result.replace("${customername_en}",template.getCustomername_zh());}
 
 					if (null != template.getPreferlanguage_zh() && !"".equals(template.getPreferlanguage_zh())) {
 						result = result.replace("${preferlanguage_zh}",
