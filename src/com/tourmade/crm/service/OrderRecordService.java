@@ -44,7 +44,7 @@ public class OrderRecordService extends BaseService {
 //		map.put("o", ph.getOrder());
 
 		List<DemoOrderRecord> data = orderrecordMapper.queryOrderRecord(map);
-		long count = orderrecordMapper.countOrderRecord(orderid);
+		long count = orderrecordMapper.countOrderRecordByOrderid(orderid);
 			
 		r.setData(data);
 		r.setCountTotal(count);
@@ -73,7 +73,7 @@ public class OrderRecordService extends BaseService {
 //		map.put("o", ph.getOrder());
 
 		List<DemoOrderRecord> data = orderrecordMapper.getOrderRecord(map);
-		long count = orderrecordMapper.countOrderRecord(orderrecord);
+		long count = orderrecordMapper.countOrderRecordByCaseid(caseid);
 			
 		r.setData(data);
 		r.setCountTotal(count);

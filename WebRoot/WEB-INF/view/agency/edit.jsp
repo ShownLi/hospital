@@ -82,6 +82,7 @@
 	              	<table id="dataTable" class="table">
 						<thead>
 							<tr>
+								<th>ID</th>
 								<th>Portal  ID</th>
 								<th>姓名</th>
 								<th>邮箱</th>
@@ -225,10 +226,11 @@
 	            render: function ( data, type, full, meta ) {
 	            	return '<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a>&nbsp;<a class="btn btn-danger btn-xs" id="'+data+'"><span class="fa fa-minus-circle"></span> 删除</a>';
 	            	},
-	            targets: 3
+	            targets: 4
 			},
 			],
 		columns: [
+			{ data: "salesid" },
 		    { data: "salesportalid" },
 		    { data: "salesname" },
 		    { data: "salesemail" }

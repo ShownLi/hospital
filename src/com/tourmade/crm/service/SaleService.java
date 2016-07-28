@@ -122,6 +122,7 @@ public class SaleService extends BaseService {
 			if (u != null) {
 				u.setSalesname(sale.getSalesname());
 				u.setSalesnameen(sale.getSalesnameen());
+				u.setSalesportalid(sale.getSalesportalid());
 				u.setSalesemail(sale.getSalesemail());
 				saleMapper.updateSale(u);
 				r = true;

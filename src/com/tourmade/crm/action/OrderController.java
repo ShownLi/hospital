@@ -39,6 +39,14 @@ public class OrderController extends BaseSimpleFormController {
 
 	@RequestMapping(value = "/list.html", method = { RequestMethod.POST, RequestMethod.GET })
 	public String list(Model model) {
+		String country = "country";
+		String status = "order.status";
+		List<DemoList> w = service.getParameterInfo(status);
+		List<DemoList> v = service.getParameterInfo(country);
+		JSONArray countryresult = JSONArray.fromObject(v);
+		JSONArray statusresult = JSONArray.fromObject(w);
+		model.addAttribute("orderstatus",statusresult);
+		model.addAttribute("destination",countryresult);
 		return "/order/list";
 	}
 	

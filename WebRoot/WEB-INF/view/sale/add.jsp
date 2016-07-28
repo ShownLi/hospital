@@ -54,6 +54,12 @@
               </div>
             </div>
             <div class="form-group">
+              <label class="col-sm-4 control-label">PortalID <span class="asterisk">*</span></label>
+              <div class="col-sm-4">
+                <input type="text" name="salesportalid" placeholder="官网ID" class="form-control" />
+              </div>
+            </div>
+            <div class="form-group">
               <label  class="col-sm-4 control-label">所属地接社 <span class="asterisk">*</span></label>
               <input type="text" name="agencyid" class="agency-select col-sm-4" value="${agencyid}" readonly/>
             </div>                   			

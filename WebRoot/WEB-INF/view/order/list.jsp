@@ -94,7 +94,8 @@
 
 
 	<script type="text/javascript">
-	
+	var os = ${orderstatus};
+	var d = ${destination};
 		jQuery(document).ready(function() {
 
 			$(".nav-parent").eq(1).addClass("nav-active");
@@ -121,10 +122,40 @@
 			           //defaultContent: '<a class="btn btn-success btn-xs"><span class="fa fa-edit"></span> 编辑</a>&nbsp;<a class="btn btn-danger btn-xs"><span class="fa fa-minus-circle"></span> 删除</a>',
 			 	      orderable: false,
 			 	      render: function ( data, type, full, meta ) {
-		               return '<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a>&nbsp;';
-			 	  },
-			 	              targets: 7
-			 				  },				             
+		              	return '<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a>&nbsp;';
+			 	  	  },
+			 	    	targets: 7
+			 		},
+					{
+		                data: "status",
+		                orderable: false,
+		                render: function ( data ) {
+		                	if(data){
+			                	for(var i=0;i <  os.length;i++){
+			                		if(data==os[i].id){
+			                			return os[i].text
+			                		}
+			                	}
+		                	}
+		                	else{return ""}
+		                },
+		                  targets: 6
+					},
+					{
+		                data: "destination",
+		                orderable: false,
+		                render: function ( data ) {
+		                	if(data){
+			                	for(var i=0;i <  d.length;i++){
+			                		if(data==d[i].id){
+			                			return d[i].text
+			                		}
+			                	}
+		                	}
+		                	else{return ""}
+		                },
+		                  targets: 4
+					},					
 			 	  {
 			 		  orderable: false,
 			 		  searchable: false,

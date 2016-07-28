@@ -108,7 +108,7 @@
                 <div class="form-group col-sm-4">
                     <label class="col-sm-4 control-label">IP地址</label>
                     <div class="col-sm-8">
-                      <input type="text" name="ip_address" class="form-control" readonly value="" />
+                      <input type="text" name="ip_address" class="form-control" readonly value="${crmcase.ipaddress}" />
                     </div>
                 </div>      
                 <div class="form-group col-sm-4">
@@ -191,7 +191,7 @@
                 <div class="form-group col-sm-4">
                     <label class="col-sm-5 control-label">定制偏好</label>
                     <div class="col-sm-7">
-                      <input type="text" name="tailormade" placeholder="定制偏好" class="tailormade-select fullwidth" value="0" />
+                      <input type="text" name="tailormade" placeholder="定制偏好" class="tailormade-select fullwidth" value="${crmcase.tailormade}" />
                     </div>
                 </div>
                 <div class="form-group col-sm-4">
@@ -229,19 +229,19 @@
                     <div class="form-group col-sm-4">
                         <label class="col-sm-4 control-label">护照</label>
                         <div class="col-sm-8">
-                          <input type="text" name="passport" placeholder="护照" class="passport-select fullwidth" value="0" />
+                          <input type="text" name="passport" placeholder="护照" class="passport-select fullwidth" value="${crmcase.passport}" />
                         </div>
                     </div>
                     <div class="form-group col-sm-4">
                         <label class="col-sm-4 control-label">签证</label>
                         <div class="col-sm-8">
-                          <input type="text" name="visa" placeholder="签证" class="visa-select fullwidth" value="0" />
+                          <input type="text" name="visa" placeholder="签证" class="visa-select fullwidth" value="${crmcase.visa}" />
                         </div>
                     </div>
                     <div class="form-group col-sm-4">
                         <label class="col-sm-4 control-label">国际航班</label>
                         <div class="col-sm-8">
-                          <input type="text" name="flight" placeholder="国际航班" class="flight-select fullwidth" value="0" />
+                          <input type="text" name="flight" placeholder="国际航班" class="flight-select fullwidth" value="${crmcase.flight}" />
                         </div>
                     </div>
                 </div>
@@ -465,6 +465,7 @@
     var customer = ${customer};
     var user = ${user};
     var sales = ${sales};
+	var os = ${orderstatus};
     $(".country-select").select2({
         placeholder: '国家',
         data: d1
@@ -559,7 +560,37 @@
     		               return '<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a>&nbsp;';
   			 	    },
   			 	              targets: 7
-  			 				  },				             
+  			 		},
+  			 		{
+		                data: "status",
+		                orderable: false,
+		                render: function ( data ) {
+		                	if(data){
+			                	for(var i=0;i <  os.length;i++){
+			                		if(data==os[i].id){
+			                			return os[i].text
+			                		}
+			                	}
+		                	}
+		                	else{return ""}
+		                },
+		                  targets: 6
+					},
+					{
+		                data: "destination",
+		                orderable: false,
+		                render: function ( data ) {
+		                	if(data){
+			                	for(var i=0;i <  d1.length;i++){
+			                		if(data==d1[i].id){
+			                			return d1[i].text
+			                		}
+			                	}
+		                	}
+		                	else{return ""}
+		                },
+		                  targets: 4
+					},		  
   			 	    {
     			 		    orderable: false,
     			 		    searchable: false,

@@ -48,6 +48,7 @@
 	<insert id="saveCase" parameterType="DemoCase" flushCache="true" useGeneratedKeys="true" keyProperty="caseid" keyColumn="GENERATED_KEY">
 		insert into tm_case(
 		customer_id,
+		operator,
 		prefer_language,
 		with_who,
 		adult,
@@ -82,6 +83,7 @@
 		isdel
 		)values(
 		#{customerid,jdbcType=VARCHAR},
+		#{operator,jdbcType=VARCHAR},
 		#{preferlanguage,jdbcType=VARCHAR},
 		#{withwho,jdbcType=VARCHAR},
 		#{adult,jdbcType=VARCHAR},
@@ -121,6 +123,7 @@
 		update tm_case
 		set
 		prefer_language=#{preferlanguage},
+		operator=#{operator},
 		with_who=#{withwho},
 		adult=#{adult},
 		children=#{children},
@@ -213,7 +216,7 @@
 		u.user_id as id,
 		u.user_name as text,
 		u.isdel 
-		from tm_user u where u.isdel = 0
+		from tm_user u where u.isdel = 0 and u.role_id = 1
 	</select>
 	
 	<select id="getSales" parameterType="String" resultType="DemoList">

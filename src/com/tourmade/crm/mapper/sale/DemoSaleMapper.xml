@@ -27,6 +27,7 @@
 		insert into tm_sales(
 		sales_name,
 		sales_name_en,
+		sales_portal_id,
 		agency_id,
 		sales_email,
 		creat_time,
@@ -34,6 +35,7 @@
 		)values(
 		#{salesname,jdbcType=VARCHAR},
 		#{salesnameen,jdbcType=VARCHAR},
+		#{salesportalid,jdbcType=VARCHAR},
 		#{agencyid,jdbcType=VARCHAR},
 		#{salesemail,jdbcType=VARCHAR},
 		NOW(),
@@ -46,6 +48,7 @@
 		set
 		sales_name=#{salesname},
 		sales_name_en=#{salesnameen},
+		sales_portal_id=#{salesportalid},
 		sales_email=#{salesemail},
 		update_time=NOW()
 		where

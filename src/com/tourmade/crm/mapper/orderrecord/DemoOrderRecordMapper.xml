@@ -28,16 +28,12 @@
 		SELECT *
 		FROM (
 		select
-		u.order_record_id as recordid,
-		u.order_id as orderid,
-		u.sender_id as senderid,
+		u.order_record_id as orderrecordid,
 		u.sender_name as sendername,
 		u.content as content,
 		u.file_url as fileurl,
 		u.req_time as reqtime,
 		u.creat_time as creattime,
-		v.case_id,
-		v.order_id,
 		u.isdel as isdel
 		from tm_order_record u  
 		left join tm_order v on v.case_id = #{id}
@@ -49,6 +45,19 @@
 	</select>
 	
 	<select id="countOrderRecord" parameterType="DemoOrderRecord" resultType="long">
+		select count(u.order_record_id) from tm_order_record u
+		where
+		u.isdel = 0
+	</select>
+	
+	<select id="countOrderRecordByCaseid" parameterType="int" resultType="long">
+		select count(u.order_record_id) from tm_order_record u
+		left join tm_order v on v.case_id = #{id}
+		where
+		u.isdel = 0
+	</select>
+	
+	<select id="countOrderRecordByOrderid" parameterType="int" resultType="long">
 		select count(u.order_record_id) from tm_order_record u
 		where
 		u.isdel = 0

@@ -157,7 +157,7 @@ public class CaseService extends BaseService {
 	}
 
 	/**
-	 * 获得用户信息
+	 * 获得客服用户信息
 	 * 
 	 * @param id
 	 * @return
@@ -220,6 +220,7 @@ public class CaseService extends BaseService {
 		try {
 			DemoCase u = caseMapper.getCaseById(crmcase.getCaseid());
 			if (u != null) {
+				u.setOperator(crmcase.getOperator());
 				u.setAdult(crmcase.getAdult());
 				u.setBaby(crmcase.getBaby());
 				u.setBudget(crmcase.getBudget());

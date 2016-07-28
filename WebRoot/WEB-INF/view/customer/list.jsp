@@ -43,7 +43,7 @@
 							<table id="dataTable" class="table">
 								<thead>
 									<tr>
-										<th>#</th>
+										<th>ID</th>
 										<th>中文名</th>
 										<th>英文名</th>
 										<th>年龄段</th>

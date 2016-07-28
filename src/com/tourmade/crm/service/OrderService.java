@@ -138,7 +138,7 @@ public class OrderService extends BaseService {
 	 */
 	public void MailAlias(int orderid) {
 		String domain = "tourmade.com.cn";
-		String url = "http://123.56.77.206/axis2/services/AliasAdd/add";
+		String url = "http://127.0.0.1:8080/axis2/services/AliasAdd/add";
 		String param = "alias=customer"+orderid+"@&real=customer@&domain="+domain;
 		String param1 = "alias=agency"+orderid+"@&real=customer@&domain="+domain;
 		creatAlias(url, param);

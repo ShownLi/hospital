@@ -105,6 +105,7 @@
 	<script type="text/javascript">
 	var s = ${source};
 	var cs = ${casestatus};
+	var d = ${destination};
 	var customer = ${customer};
 	var user = ${user};
 		jQuery(document).ready(function() {
@@ -148,7 +149,22 @@
 			                	}
 			                },
 			                  targets: 1
-						},
+					  },
+					  {
+			                data: "destination",
+			                orderable: false,
+			                render: function ( data ) {
+			                	if(data){
+				                	for(var i=0;i <  d.length;i++){
+				                		if(data==d[i].id){
+				                			return d[i].text
+				                		}
+				                	}
+			                	}
+			                	else{return ""}
+			                },
+			                  targets: 3
+						},	
 					  {
 			                data: "source",
 			                orderable: false,

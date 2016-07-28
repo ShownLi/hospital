@@ -52,6 +52,12 @@
               <div class="col-sm-4">
                 <input type="text" name="salesnameen" placeholder="销售名" class="form-control" value="${sales.salesnameen }" />
               </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-4 control-label">PortalID <span class="asterisk">*</span></label>
+              <div class="col-sm-4">
+                <input type="text" name="salesportalid" placeholder="官网ID" class="form-control" value="${sales.salesportalid }"/>
+              </div>
             </div>       
             <div class="form-group">
               <label class="col-sm-4 control-label">所属地接社 <span class="asterisk">*</span></label>
@@ -167,7 +173,6 @@
 //			      
 		function form_submit() {
 			var f = $("#form").serialize();
-			alert(f);
 			$.post('${rootPath}sale/edit.do', f, function(result) {
 				var rmsg = result.msg;
 				if (result.success) {
