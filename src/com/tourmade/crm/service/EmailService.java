@@ -233,7 +233,7 @@ public class EmailService extends BaseService {
 						result = result.replace("${salesname_en}",
 								template.getSalesname_en());
 					}
-					else{result = result.replace("${salesname_en}","");}
+					else{result = result.replace("${salesname_en}",template.getSalesname_zh());}
 					
 					if (null != template.getCustomername_zh() && !"".equals(template.getCustomername_zh())) {
 						result = result.replace("${customername_zh}",
