@@ -90,6 +90,12 @@
 		from tm_parameter u where u.isdisplay = 1 and u.isdel = 0 and u.para_domain = #{domain}
 	</select>
 	
+	<select id="getRrouteUrl" resultType="String">
+		select
+		para_value
+		from tm_parameter where para_domain = 'route_url'
+	</select>
+	
 	<update id="deleteEmailById" parameterType="int" flushCache="true"
 		statementType="PREPARED">
 		update tm_email

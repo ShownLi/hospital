@@ -24,6 +24,8 @@ public interface DemoEmailMapper extends BaseMapper {
 	
 	public List<DemoList> getParameterInfo(String domain);
 	
+	public String getRouteUrl();
+	
 	public MailTepBoat getZhEn(MailTepBoat boat);
 	
 	public MailTepBoat getCusZE(MailTepBoat boat);

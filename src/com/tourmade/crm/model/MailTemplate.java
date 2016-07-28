@@ -43,6 +43,7 @@ public class MailTemplate extends BaseBean<MailTemplate> {
 	private String requirement;
 	private String replyto;
 	private String route_url;
+	private String route_name;
 	
 	public String getCustomername_zh() {
 		return customername_zh;
@@ -263,6 +264,12 @@ public class MailTemplate extends BaseBean<MailTemplate> {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+	public String getRoute_name() {
+		return route_name;
+	}
+	public void setRoute_name(String route_name) {
+		this.route_name = route_name;
+	}
 	@Override
 	public String toString() {
 		return "MailTemplate [customername_zh=" + customername_zh + ", customername_en=" + customername_en
@@ -276,7 +283,8 @@ public class MailTemplate extends BaseBean<MailTemplate> {
 				+ ", destination_en=" + destination_en + ", passport_zh=" + passport_zh + ", passport_en=" + passport_en
 				+ ", visa_zh=" + visa_zh + ", visa_en=" + visa_en + ", flight_zh=" + flight_zh + ", flight_en="
 				+ flight_en + ", tailormade_zh=" + tailormade_zh + ", tailormade_en=" + tailormade_en + ", requirement="
-				+ requirement + ", replyto=" + replyto + ", route_url=" + route_url + "]";
+				+ requirement + ", replyto=" + replyto + ", route_url=" + route_url + ", route_name=" + route_name
+				+ "]";
 	}
 
 }

@@ -83,7 +83,11 @@ public class EmailService extends BaseService {
 		template.setBudget(order.getBudget());
 		template.setRequirement(crmcase.getRequirement());
 		template.setReplyto("mailto:"+order.getCustomeremailalias());
-		template.setRoute_url("route_URL链接"+crmcase.getRouteid());
+		if(crmcase.getRouteid() != null && !"".equals(crmcase.getRouteid())){
+			String url = emailMapper.getRouteUrl();
+			template.setRoute_url(url+crmcase.getRouteid());			
+		}
+		template.setRoute_name(crmcase.getRoute());
 		if(order.getCustomerid() != 0){
 			boat.setId(""+order.getCustomerid());
 			boat = emailMapper.getCusZE(boat);
@@ -441,8 +445,11 @@ public class EmailService extends BaseService {
 					if (null != template.getRoute_url() && !"".equals(template.getRoute_url())) {
 						result = result.replace("${route_url}",
 								template.getRoute_url());
+						result = result.replace("${route_name}", 
+								template.getRoute_name());
 					}
-					else{result = result.replace("${route_url}","");}
+					else{result = result.replace("${route_url}","");
+						 result = result.replace("${route_name}","");}
 				}
 			}
 		} catch (Exception e) {
