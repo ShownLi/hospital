@@ -51,8 +51,10 @@
 	<update id="updateUser" parameterType="DemoUser" flushCache="true">
 		update tm_user
 		set
+		loginname=#{loginname},
 		user_name=#{name},
 		user_email=#{email},
+		password=#{pwd},
 		mobilephone=#{mobilephone},
 		update_time=NOW()
 		where

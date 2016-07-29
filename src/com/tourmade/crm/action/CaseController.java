@@ -35,7 +35,7 @@ public class CaseController extends BaseSimpleFormController {
 		String source = "case.source";
 		String status = "case.status";
 		String country = "country";
-		List<DemoList> user = service.getUser();
+		List<DemoList> user = service.getAllUser();
 		List<DemoList> customer = service.getCustomer();
 		List<DemoList> v = service.getParameterInfo(source);
 		List<DemoList> w = service.getParameterInfo(status);

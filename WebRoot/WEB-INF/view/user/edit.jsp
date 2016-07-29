@@ -43,7 +43,7 @@
 	            <div class="form-group col-sm-6">
 	              <label class="col-sm-3 control-label">登录名</label>
 	              <div class="col-sm-6">
-	                <input type="text" name="loginname" placeholder="登录名" class="form-control" disabled value="${user.loginname }" />
+	                <input type="text" id="loginname" name="loginname" placeholder="登录名" class="form-control" value="${user.loginname }" />
 	              </div>
 	            </div>
 	            <div class="form-group col-sm-6">
@@ -51,7 +51,19 @@
 	              <div class="col-sm-6">
 	                <input type="text" name="name" placeholder="姓名" class="form-control" value="${user.name }" />
 	              </div>
-	            </div>              
+	            </div> 
+	            <div class="form-group col-sm-6">
+	              <label class="col-sm-3 control-label">密码</label>
+	              <div class="col-sm-6">
+	                <input type="password" name="pwd" placeholder="密码" class="form-control" />
+	              </div>
+	            </div>
+	            <div class="form-group col-sm-6">
+	              <label class="col-sm-3 control-label">重复密码</label>
+	              <div class="col-sm-6">
+	                <input type="password" name="repwd" placeholder="重复密码" class="form-control" />
+	              </div>
+	            </div>               
 	            <div class="form-group col-sm-6">
 	              <label class="col-sm-3 control-label">手机</label>
 	              <div class="col-sm-6">
@@ -120,10 +132,40 @@
 			jQuery("#form").validate({
 				
 				rules: {
-					name: "required"
+					name: "required",
+					pwd: {
+						minlength: 6,
+					},
+					repwd: {
+						equalTo: "[name='pwd']"
+					},
+					loginname:{  
+			         	required:true,  
+			            remote:{                           
+			            	url:"${rootPath}validate.do",
+			            	type:"post",
+			            	data: {
+		                         table: function () { return "tm_user"},
+		                         field: function () { return "loginname"},
+		                         name: function () { return $("#loginname").val();},
+		                         }
+			            }
+			        },
 				},
 				messages: {
-					name: "请输入姓名"
+					name: "请输入姓名",
+					loginname: {
+						required:"请输入值",
+						remote:"该用户名已存在，请重新输入"
+					},
+					pwd: {
+						required: "请输入密码",
+						minlength: "密码长度至少为6位",
+					},
+					repwd: {
+						required: "请输入密码确认",
+						equalTo: "两次输入的密码不一致"
+					}
 				},
 				
 			    highlight: function(element) {

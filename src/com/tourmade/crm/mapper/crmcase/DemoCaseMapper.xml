@@ -219,6 +219,14 @@
 		from tm_user u where u.isdel = 0 and u.role_id = 1
 	</select>
 	
+	<select id="getAllUser" parameterType="String" resultType="DemoList">
+		select
+		u.user_id as id,
+		u.user_name as text,
+		u.isdel 
+		from tm_user u where u.role_id = 1
+	</select>
+	
 	<select id="getSales" parameterType="String" resultType="DemoList">
 		select
 		u.sales_id as id,

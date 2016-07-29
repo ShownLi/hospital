@@ -74,21 +74,8 @@ public class UserService extends BaseService {
 	public int saveUser(DemoUser user) {
 		// user.setPwd("123456");
 		// user.setPwd(MD5.MD5Encode("123456"));
-		try {MessageDigest md = MessageDigest.getInstance("MD5");
-
-		byte[] md5 = md.digest(user.getPwd().getBytes());
-		
-		StringBuffer md5StrBuff = new StringBuffer(); 
-		
-        for (int i = 0; i < md5.length; i++) {  
-            if (Integer.toHexString(0xFF & md5[i]).length() == 1){  
-                md5StrBuff.append("0").append(  
-                        Integer.toHexString(0xFF & md5[i]));  
-            }else{  
-                md5StrBuff.append(Integer.toHexString(0xFF & md5[i]));  
-            }  
-        }
-			user.setPwd(md5StrBuff.toString());
+		try {
+			user.setPwd(MD5(user.getPwd()));
 			userMapper.saveUser(user);
 		} catch (Exception e) {
 			logger.error("UserService.saveUser() --> " + user + "-->" + e.getMessage());
@@ -132,7 +119,9 @@ public class UserService extends BaseService {
 				u.setLoginname(user.getLoginname());
 				u.setEmail(user.getEmail());
 				u.setMobilephone(user.getMobilephone());
-				// u.setPwd(user.getPwd());
+				if(null !=user.getPwd() && !"".equals(user.getPwd())){
+					u.setPwd(MD5(user.getPwd()));
+				}
 				userMapper.updateUser(u);
 				r = true;
 			} else {
@@ -212,5 +201,31 @@ public class UserService extends BaseService {
 		
 		String result = userMapper.validate(table, field, filter_field, filter_name, name);
 		return result ;
+	}
+	
+	public String MD5(String pwd) {
+		
+		StringBuffer md5StrBuff = new StringBuffer(); 
+		
+		try{
+			MessageDigest md = MessageDigest.getInstance("MD5");
+	
+			byte[] md5 = md.digest(pwd.getBytes());
+	
+	        for (int i = 0; i < md5.length; i++) {  
+	            if (Integer.toHexString(0xFF & md5[i]).length() == 1){  
+	                md5StrBuff.append("0").append(  
+	                        Integer.toHexString(0xFF & md5[i]));  
+	            }else{  
+	                md5StrBuff.append(Integer.toHexString(0xFF & md5[i]));  
+	            }  
+	        }
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		return md5StrBuff.toString();
+		
 	}
 }

@@ -174,6 +174,23 @@ public class CaseService extends BaseService {
 	}
 	
 	/**
+	 * 获得客服用户信息
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public List<DemoList> getAllUser() {
+		List<DemoList> r = null;
+		try {
+			r = caseMapper.getAllUser();
+		} catch (Exception e) {
+			logger.error("CaseService.getUser() --> -->" + e.getMessage());
+			r = null;
+		}
+		return r;
+	}
+	
+	/**
 	 * 获得销售信息
 	 * 
 	 * @param id

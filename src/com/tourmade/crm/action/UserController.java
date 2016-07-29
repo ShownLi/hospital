@@ -98,7 +98,6 @@ public class UserController extends BaseSimpleFormController {
 	public Json doDel(HttpServletRequest request, HttpSession session, Model model, String id) {
 
 		Json j = new Json();
-		System.out.println("------>>>" + id);
 		try {
 			if (null != id && !"".equals(id)) {
 				int i = Integer.parseInt(id);
