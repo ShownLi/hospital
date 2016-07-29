@@ -9,7 +9,7 @@
 		select
 		u.order_record_id as recordid,
 		u.order_id as orderid,
-		u.sender_id as senderid,
+		u.sender as sender,
 		u.sender_name as sendername,
 		u.content as content,
 		u.file_url as fileurl,
