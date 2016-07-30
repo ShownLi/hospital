@@ -87,7 +87,7 @@
 	        </div>
 	        <div class="section-block">
 	        	<h5 class="section-title">客人联系方式  <span class="contact-note">(手机、微信、QQ、邮箱至少填写一个)</span></h5>
-	            <div class="form-group col-sm-4">
+	            <div class="form-group col-sm-4 contact-field">
 	              <label class="col-sm-3 control-label">固定电话</label>
 	              <div class="col-sm-9">
 	                <input type="text" name="telephone" placeholder="固定电话" class="form-control" />
@@ -231,8 +231,10 @@
 					qq: "number",
 					email: "email",
 					birthday: "date",
-					promote: "required"
-					
+					promote: "required",
+					mobilephone:{
+						isMobile:true,
+					}					
 				},
 				messages: {
 					zname: "请输入中文名",
@@ -249,30 +251,50 @@
 			      jQuery(element).closest('.form-group').removeClass('has-error');
 			    },
 			    invalidHandler : function(){
+			        var qq = $("input[name=qq]").val(),
+			    		wechat = $("input[name=wechat]").val(),
+			    		mobilephone = $("input[name=mobilephone]").val(),
+			    		email = $("input[name=email]").val(),
+			    		telephone = $("input[name=telephone]").val();
+
+			    	// 手机，邮箱，微信，QQ，至少输入一个
+			      	if(qq==""&&wechat==""&&mobilephone==""&&email==""&&telephone==""){
+			      		$(".contact-note").addClass("noted");
+			      		$(".contact-field").addClass("has-error");
+			      	}else{
+			      		$(".contact-note").removeClass("noted");
+			      		$(".contact-field").removeClass("has-error");
+				    }
 			      return false;
 			    },
 			    submitHandler : function(){
 			    	var qq = $("input[name=qq]").val(),
 			    		wechat = $("input[name=wechat]").val(),
 			    		mobilephone = $("input[name=mobilephone]").val(),
-			    		email = $("input[name=email]").val();
+			    		email = $("input[name=email]").val(),
+			    		telephone = $("input[name=telephone]").val();
 
 			    	// 手机，邮箱，微信，QQ，至少输入一个
-			      	if(qq==""&&wechat==""&&mobilephone==""&&email==""){
+			      	if(qq==""&&wechat==""&&mobilephone==""&&email==""&&telephone==""){
 			      		$(".contact-note").addClass("noted");
 			      		$(".contact-field").addClass("has-error");
-
 			      		return false;
 			      	}else{
 			      		$(".contact-note").removeClass("noted");
 			      		$(".contact-field").removeClass("has-error");
-
 				      	form_submit();
 				      	return false;
 				    }
 				}
 			});
 			
+			//验证手机号码
+			jQuery.validator.addMethod("isMobile", function(value, element) {  
+    			var length = value.length;  
+    			var regPhone = /^1([3578]\d|4[57])\d{8}$/;  
+    			return this.optional(element) || ( length == 11 && regPhone.test( value ) );    
+			}, "请正确填写您的手机号码");
+
 			// 手机，邮箱，微信，QQ，输入一个以后移除错误提示
 			$(".contact-field").find("input").blur(function(){
 				if($(this).val() !== ""){

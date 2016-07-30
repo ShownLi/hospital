@@ -417,11 +417,10 @@
 		});
 		
 		jQuery("#comment").validate({
-			rule:{
+			rules:{
 				content: "required"
 			},
-			
-			message:{
+			messages:{
 				content:"请输入注释内容"
 			},
 			highlight: function(element) {
@@ -435,7 +434,7 @@
 			},
 			submitHandler : function(){
 				comment_submit();
-			    return false;
+			  return false;
 			}
 		});
 			
@@ -602,19 +601,26 @@
 		}, "JSON");
 	}
 	//成团日期格式转换
-	var date = $("#grouptime").val();	
-	var dateformat = new Date(date).toISOString("yyyy-MM-dd hh:mm:ss.S").substring(0,10);
-	$("#grouptime").val(dateformat)
-	
+	var grouptime = $("#grouptime").val();	
+  if(grouptime !== ""){
+      var dateformat = new Date(grouptime).toISOString("yyyy-MM-dd hh:mm:ss.S").substring(0,10);
+      $("#grouptime").val(dateformat)
+  }
+
 	//出发日期格式转换
-	var date = $("#startdate").val();	
-	var dateformat = new Date(date).toISOString("yyyy-MM-dd hh:mm:ss.S").substring(0,10);
-	$("#startdate").val(dateformat)
+	var startdate = $("#startdate").val();	
+  if(startdate !== ""){
+    	var dateformat = new Date(startdate).toISOString("yyyy-MM-dd hh:mm:ss.S").substring(0,10);
+    	$("#startdate").val(dateformat)
+  }
 	
 	//返回日期格式转换
-	var date = $("#enddate").val();	
-	var dateformat = new Date(date).toISOString("yyyy-MM-dd hh:mm:ss.S").substring(0,10);
-	$("#enddate").val(dateformat)
+	var enddate = $("#enddate").val();	
+  if(enddate !== ""){
+      var dateformat = new Date(enddate).toISOString("yyyy-MM-dd hh:mm:ss.S").substring(0,10);
+      $("#enddate").val(dateformat)
+  }
+	
 </script>
 
 </body>

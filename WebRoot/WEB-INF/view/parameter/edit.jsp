@@ -42,19 +42,25 @@
           
             <div class="section-block">
 	            <div class="form-group col-sm-4">
-	              <label class="col-sm-4 control-label">作用域</label>
+	              <label class="col-sm-4 control-label">作用域<span class="asterisk">*</span></label>
 	              <div class="col-sm-8">
 	                <input type="text" name="domain" placeholder="作用域" class="form-control" value="${parameter.domain }" />
 	              </div>
 	            </div>
 	            <div class="form-group col-sm-4">
-	              <label class="col-sm-4 control-label">值</label>
+	              <label class="col-sm-4 control-label">值<span class="asterisk">*</span></label>
 	              <div class="col-sm-8">
 	                <input type="text" name="value" placeholder="值" class="form-control" value="${parameter.value }" />
 	              </div>
-	            </div>              
+	            </div>
 	            <div class="form-group col-sm-4">
-	              <label class="col-sm-4 control-label">中文</label>
+	              <label class="col-sm-4 control-label">描述</label>
+	              <div class="col-sm-8">
+	                <input type="text" name="depict" placeholder="描述" class="form-control" value="${parameter.depict }" />
+	              </div>
+	            </div>               
+	            <div class="form-group col-sm-4">
+	              <label class="col-sm-4 control-label">中文<span class="asterisk">*</span></label>
 	              <div class="col-sm-8">
 	                <input type="text" name="chinese" placeholder="中文" class="form-control" value="${parameter.chinese }" />
 	              </div>
@@ -64,13 +70,7 @@
 	              <div class="col-sm-8">
 	                <input type="text" name="english" placeholder="英文" class="form-control" value="${parameter.english }" />
 	              </div>
-	            </div>
-	            <div class="form-group col-sm-4">
-	              <label class="col-sm-4 control-label">描述</label>
-	              <div class="col-sm-8">
-	                <input type="text" name="depict" placeholder="描述" class="form-control" value="${parameter.depict }" />
-	              </div>
-	            </div>       
+	            </div>      
 	            <div class="form-group col-sm-4">
 	              <label class="col-sm-4 control-label">排序标记</label>
 	              <div class="col-sm-8">

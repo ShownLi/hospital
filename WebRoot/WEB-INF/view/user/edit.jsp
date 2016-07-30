@@ -41,13 +41,13 @@
           
 	        <div class="section-block"> 
 	            <div class="form-group col-sm-6">
-	              <label class="col-sm-3 control-label">登录名</label>
+	              <label class="col-sm-3 control-label">登录名<span class="asterisk">*</span></label>
 	              <div class="col-sm-6">
 	                <input type="text" id="loginname" name="loginname" placeholder="登录名" class="form-control" value="${user.loginname }" />
 	              </div>
 	            </div>
 	            <div class="form-group col-sm-6">
-	              <label class="col-sm-3 control-label">姓名</label>
+	              <label class="col-sm-3 control-label">姓名<span class="asterisk">*</span></label>
 	              <div class="col-sm-6">
 	                <input type="text" name="name" placeholder="姓名" class="form-control" value="${user.name }" />
 	              </div>
@@ -129,15 +129,26 @@
 			$(".nav-parent").eq(4).addClass("nav-active");
       		$(".nav-parent").eq(4).find(".children").show();
       		
+      		$.validator.addMethod("passrule",function(value,element,params){
+      			var re = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,12}$/
+      			if(!re.test(value)){
+      				return false;
+      			}
+			});
+
 			jQuery("#form").validate({
 				
 				rules: {
 					name: "required",
 					pwd: {
-						minlength: 6,
+						isPassword:true,
 					},
 					repwd: {
 						equalTo: "[name='pwd']"
+					},
+					email:"required",
+					mobilephone:{
+						isMobile:true,
 					},
 					loginname:{  
 			         	required:true,  
@@ -148,7 +159,7 @@
 		                         table: function () { return "tm_user"},
 		                         field: function () { return "loginname"},
 		                         name: function () { return $("#loginname").val();},
-		                         }
+		                    }
 			            }
 			        },
 				},
@@ -160,7 +171,6 @@
 					},
 					pwd: {
 						required: "请输入密码",
-						minlength: "密码长度至少为6位",
 					},
 					repwd: {
 						required: "请输入密码确认",
@@ -178,11 +188,23 @@
 			      return false;
 			    },
 			    submitHandler : function(){
-			      form_submit();
+			      //form_submit();
 			      return false;
 			    }
-			  });
+			});
 			
+			//验证手机号码
+			jQuery.validator.addMethod("isMobile", function(value, element) {  
+    			var length = value.length;  
+    			var regPhone = /^1([3578]\d|4[57])\d{8}$/;  
+    			return this.optional(element) || ( length == 11 && regPhone.test( value ) );    
+			}, "请正确填写您的手机号码");
+			//验证密码，6-12位字母和数字的组合  
+			jQuery.validator.addMethod("isPassword", function(value, element) {    
+			    var tel = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,12}$/;  
+			    return this.optional(element) || (tel.test(value));  
+			}, "请输入6-12位字母和数字的组合");  
+
 			$("#btn-back").click( function () {
 				history.go(-1);
 		    } ); 
