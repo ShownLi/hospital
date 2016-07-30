@@ -158,7 +158,12 @@
 			            	data: {
 		                         table: function () { return "tm_user"},
 		                         field: function () { return "loginname"},
-		                         name: function () { return $("#loginname").val();},
+		                         name: function () { 
+		                        	 if($("#loginname").val()=="${user.loginname}"){
+		                        	 	return "";
+		                        	 }
+		                        	 else{return $("#loginname").val();}
+		                         },
 		                    }
 			            }
 			        },
