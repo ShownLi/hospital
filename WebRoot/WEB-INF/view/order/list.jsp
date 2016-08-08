@@ -69,6 +69,8 @@
 	</section>
 
 	<%@ include file="../assets/pages/foot.jsp"%>
+
+    <script src="${rootPath}assets/js/jquery-ui-1.10.3.min.js"></script>
 	<script src="${rootPath}assets/js/jquery.datatables.min.js"></script>
 	<script src="${rootPath}assets/js/select2.min.js"></script>
 
@@ -336,7 +338,7 @@
 	      });
 		function form1_submit() {
 			var f = $("#form1").serialize();
-			alert(f);
+			//alert(f);
 			$.post('${rootPath}order/edit1.do', f, function(result) {
 				var rmsg = result.msg;
 				if (result.success) {
