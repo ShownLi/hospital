@@ -92,10 +92,14 @@ public class OrderController extends BaseSimpleFormController {
 		Json j = new Json();
 		
 		try {
-			boolean is = service.validate(order.getCustomerid());
+			boolean is = service.validatemail(order.getCustomerid());
 			//验证客人有邮箱
 			if(is)
 			{
+				boolean portalid = service.validateportalid(order.getCustomerid());
+				if(!portalid){
+					service.creatPortal(order.getCustomerid());
+				}
 				//客人状态设置为下单客人
 				service.customerstatus(order.getCustomerid(),"2");
 				

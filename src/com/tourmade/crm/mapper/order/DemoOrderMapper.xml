@@ -69,8 +69,14 @@
 		customer_id = #{id}
 	</select>
 	
-	<select id="validate" parameterType="int" resultType="String">
+	<select id="validatemail" parameterType="int" resultType="String">
 		select email from tm_customer 
+		where customer_id = #{id}
+		and isdel = 0
+	</select>
+	
+	<select id="validateportalid" parameterType="int" resultType="String">
+		select customer_portal_id from tm_customer 
 		where customer_id = #{id}
 		and isdel = 0
 	</select>
@@ -180,6 +186,15 @@
 		order_id=#{orderid}
 	</update>
 	
+	<update id="updateCustomer" parameterType="DemoCustomer" flushCache="true">
+		update tm_customer
+		set
+		customer_portal_id = #{portalid},
+		update_time=NOW()
+		where
+		customer_id=#{customerid}
+	</update>
+	
 	<select id="getAgencyBySales" parameterType="int" resultType="DemoOrder">
 		select
 			a.agency_name as agencyname,
@@ -200,8 +215,13 @@
 	
 	<select id="getCustomerById" parameterType="int" resultType="DemoCustomer">
 		select
+		u.customer_id as customerid,
 		u.customer_name_zh as zname,
-		u.customer_name_en as ename
+		u.customer_name_en as ename,
+		u.email,
+		u.mobilephone,
+		u.wechat,
+		u.qq
 		from tm_customer u where u.customer_id = #{id}
 	</select>	
 

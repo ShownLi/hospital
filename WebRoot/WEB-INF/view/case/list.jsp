@@ -100,7 +100,58 @@
     </div><!-- modal-content -->
   </div><!-- modal-dialog -->
 </div><!-- modal -->
+<!-- Modal -->
+<div class="modal fade" id="NoEmail" tabindex="-2" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">信息</h4>
+      </div>
+      <div class="modal-body">
+      		该客人没有邮箱，请添加邮箱后再进行操作
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+      </div>
+    </div><!-- modal-content -->
+  </div><!-- modal-dialog -->
+</div><!-- modal -->
 
+<div class="nextModal modal fade" id="nextModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body align-center">
+        <div class="section-block">
+        <form id="order">
+            <div class="section-title">选择目的地及地接社,添加订单</div>
+            <div class="form-group col-sm-8 col-sm-offset-2">
+                <label class="col-sm-3 control-label">目的地</label>
+                <div class="col-sm-9">
+                    <input type="text" id="destination" name="destination" placeholder="目的地" class="destination-select fullwidth" value="" />
+                </div>
+            </div>
+            <div class="form-group col-sm-8 col-sm-offset-2">
+                <label class="col-sm-3 control-label">所属销售</label>
+                <div class="col-sm-9">
+                    <input type="text" id="salesid" name="salesid" placeholder="选择一个销售" class="sales-select fullwidth" value="" />
+                </div>
+            </div>
+              <div class="form-group col-sm-8 col-sm-offset-2">
+                  <label class="col-sm-3 control-label">客人的预算</label>
+                  <div class="col-sm-9">
+                    <input type="text" name="budget" placeholder="客人的预算" class="form-control" value="" />
+                  </div>
+                </div>
+            <div class="col-sm-12">
+             <a class="submit btn btn-primary">保存</a>
+            </div>
+            </form>
+        </div>
+      </div>
+    </div><!-- modal-content -->
+  </div><!-- modal-dialog -->
+</div><!-- modal -->
 
 	<script type="text/javascript">
 	var s = ${source};
@@ -108,6 +159,15 @@
 	var d = ${destination};
 	var customer = ${customer};
 	var user = ${user};
+    var sales = ${sales};
+	$(".destination-select").select2({
+        placeholder: '国家',
+        data: d
+    });
+    $(".sales-select").select2({
+        placeholder: '销售',
+        data: sales
+    })
 		jQuery(document).ready(function() {
 
 			$(".nav-parent").eq(0).addClass("nav-active");
@@ -134,7 +194,7 @@
 		                  //defaultContent: '<a class="btn btn-success btn-xs"><span class="fa fa-edit"></span> 编辑</a>&nbsp;<a class="btn btn-danger btn-xs"><span class="fa fa-minus-circle"></span> 删除</a>',
 		                  orderable: false,
 		                  render: function ( data, type, full, meta ) {
-		                      return '<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a>&nbsp;<a class="btn btn-danger btn-xs" id="'+data+'"><span class="fa fa-minus-circle"></span> 无效</a>';
+		                      return '<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a>&nbsp;<a class="btn btn-danger btn-xs" id="'+data+'"><span class="fa fa-minus-circle"></span> 无效</a>&nbsp<a class="btn btn-primary btn-xs" id="'+data+'"></span> 增加订单</a>&nbsp';
 		                  },
 		                  targets: 7
 					  },
@@ -240,6 +300,12 @@
 			        del($(this).attr('id'));
 			    } );
 				
+				$('#dataTable tbody').on( 'click', 'a.btn-primary', function () {
+			        var data = t.row($(this).parents('tr')).data();
+			        //alert($(this).attr('id'));
+			        addorder($(this).attr('id'));
+			    } );
+				
 				$('#confirmDelModal').on( 'click', 'button.btn-danger', function () {
 			        var id = $("#confirmDelModal .hiddenId").val();
 			        doDel(id);
@@ -254,9 +320,15 @@
 			
 			
 		});
-		
+	    $(".nextModal .submit").click(function(){
+	    	  order_submit();
+	    });
 		function edit(id) {
 			window.parent.location = "${rootPath}case/edit.html?id="+id;
+		}
+		
+		function addorder(id) {
+			$("#nextModal").modal('show');
 		}
 		
 		function del(id) {
@@ -277,7 +349,35 @@
 			});
 			
 		}
-		
+  		function order_submit() {
+			var f = $("#order").serialize();
+			console.log(f);
+			$.post('${rootPath}order/add.do', f, function(result) {
+				var rmsg = result.msg;
+				if (result.success) {
+					window.parent.location = "${rootPath}case/edit.html?id=";
+					//$("#nextModal").modal('show');
+				} else {
+					$("#NoEmail").modal('show');
+				}
+			}, "JSON");
+	}
+	      //添加订单弹出框，目的地与销售联动
+	      $("#destination").change(function(){
+	          var destination = $(this).val();
+	          $.ajax({
+	              type: "post",
+	              url: "${rootPath}case/getsales.do?destination="+destination,
+	              data: destination,
+	              success: function(sales){
+	            	  var json = jQuery.parseJSON( sales );
+	                  $("#salesid").select2({
+	                      placeholder: '销售',
+	                      data: json
+	                  });
+	              }   
+	          }); 
+	      });
 	</script>
 
 </body>
