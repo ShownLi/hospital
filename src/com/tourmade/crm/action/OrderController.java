@@ -178,12 +178,44 @@ public class OrderController extends BaseSimpleFormController {
 		return j;
 	}
 	
+	@RequestMapping(value = "/edit1.do")
+	@ResponseBody
+	public Json doEdit(String orderid) {
+
+		Json j = new Json();
+		DemoOrder order = service.getOrderById(Integer.parseInt(orderid));
+		DemoCase crmcase = caseservice.getCaseById(order.getCaseid());
+		
+		try {
+
+			service.updateOrder(order);
+			
+			if(order.getGroupnumber()!= null){				
+				crmcase.setStatus("3");
+				service.customerstatus(order.getCustomerid(), "3");
+				caseservice.updateCase(crmcase);
+			}
+			if(order.getReason() != null){
+				int i = caseservice.casestatus(order.getCaseid());
+				if(i==0){
+					crmcase.setStatus("4");
+					caseservice.updateCase(crmcase);
+				}
+			}
+			j.setSuccess(true);
+		} catch (Exception e) {
+			j.setSuccess(false);
+			logger.error("OrderController.doEdit() --> " + order.toString() + "\n" + e.getMessage());
+		}
+		
+		return j;
+	}
+	
 	@RequestMapping(value = "/del.do")
 	@ResponseBody
 	public Json doDel(HttpServletRequest request, HttpSession session, Model model, String id) {
 
 		Json j = new Json();
-		System.out.println("------>>>" + id);
 		try {
 			if (null != id && !"".equals(id)) {
 				int i = Integer.parseInt(id);

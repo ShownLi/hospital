@@ -64,7 +64,7 @@
                 <div class="form-group col-sm-4">
                     <label class="col-sm-4 control-label">所属销售</label>
                     <div class="col-sm-8">
-                      <input type="text" name="salesid" placeholder="所属销售" class="sales-select fullwidth" value="${crmcase.salesid}" />
+                      <input type="text" name="salesid" placeholder="所属销售" class="sales-select fullwidth" readonly value="${crmcase.salesid}" />
                     </div>
                 </div>
                 <div class="form-group col-sm-4">
