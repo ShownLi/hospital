@@ -96,6 +96,8 @@ public class OrderController extends BaseSimpleFormController {
 			//验证客人有邮箱
 			if(is)
 			{
+				//客人状态设置为下单客人
+				service.customerstatus(order.getCustomerid(),"2");
 				
 				//询单状态设置为下单
 				caseservice.case2order(order.getCaseid());
@@ -154,6 +156,7 @@ public class OrderController extends BaseSimpleFormController {
 		try {
 			if(order.getGroupnumber()!= null){				
 				crmcase.setStatus("3");
+				service.customerstatus(order.getCustomerid(), "3");
 				caseservice.updateCase(crmcase);
 			}
 			if(order.getReason() != null){

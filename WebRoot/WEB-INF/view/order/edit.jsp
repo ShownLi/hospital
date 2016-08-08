@@ -267,55 +267,57 @@
                   <div class="form-group col-sm-6">
                       <label class="col-sm-4 control-label">成团日期</label>
                       <div class="col-sm-8 input-group input-datepicker">
-                        <input type="text" name="grouptime" class="form-control datepicker" value="${order.grouptime}" autocomplete="off">
+                        <input type="text" name="grouptime" class="form-control datepicker" autocomplete="off">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                       </div>
                   </div>
                   <div class="form-group col-sm-6">
                       <label class="col-sm-4 control-label">出发日期</label>
                       <div class="col-sm-8 input-group input-datepicker">
-                        <input type="text" name="startdate" placeholder="出发日期" class="form-control datepicker" value="${order.startdate}"  autocomplete="off" />
+                        <input type="text" name="startdate" placeholder="出发日期" class="form-control datepicker" autocomplete="off" />
                         <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                       </div>
                   </div>
                   <div class="form-group col-sm-6">
                     <label class="col-sm-4 control-label">返回日期</label>
                     <div class="col-sm-8 input-group input-datepicker">
-                      <input type="text" name="enddate" placeholder="返回日期" class="form-control datepicker" value="${order.enddate}" autocomplete="off" />
+                      <input type="text" name="enddate" placeholder="返回日期" class="form-control datepicker" autocomplete="off" />
                       <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                     </div>
                   </div>
                   <div class="form-group col-sm-6">
                       <label class="col-sm-4 control-label">成团人数</label>
                       <div class="col-sm-8">
-                        <input type="text" name="groupnumber" placeholder="成团人数" class="form-control" value="${order.groupnumber}" />
+                        <input type="text" name="groupnumber" placeholder="成团人数" class="form-control"/>
                       </div>
                   </div>
                   <div class="form-group col-sm-6">
                       <label class="col-sm-4 control-label">成团价格</label>
                       <div class="col-sm-8">
-                        <input type="text" name="groupprice" placeholder="成团价格" class="form-control" value="${order.groupprice}" />
+                        <input type="text" name="groupprice" placeholder="成团价格" class="form-control" />
                       </div>
                   </div>
                   <div class="form-group col-sm-6">
                       <label class="col-sm-4 control-label">货币种类</label>
                       <div class="col-sm-8">
-                        <input type="text" name="currency" placeholder="货币种类" class="form-control" value="${order.currency}" />
+                        <input type="text" name="currency" placeholder="货币种类" class="form-control"/>
                       </div>
                   </div>
                   <div class="form-group col-sm-6">
                       <label class="col-sm-4 control-label">汇率</label>
                       <div class="col-sm-8">
-                        <input type="text" name="exchangerate" placeholder="出发日期" class="form-control" value="${order.exchangerate}" />
+                        <input type="text" name="exchangerate" placeholder="汇率" class="form-control" value="0" />
                       </div>
                   </div>
                   <div class="form-group col-sm-6">
                       <label class="col-sm-4 control-label">人民币价格</label>
                       <div class="col-sm-8">
-                        <input type="text" name="rmbprice" placeholder="人民币价格" class="form-control" value="${order.rmbprice}" />
+                        <input type="text" name="rmbprice" placeholder="人民币价格" class="form-control"/>
                       </div>
                   </div>
-                  <input type="hidden" name="orderid" value="${order.orderid}" />	
+                  <input type="hidden" name="orderid" value="${order.orderid}" />
+                  <input type="hidden" name="caseid" value="${order.caseid}" />	
+                  <input type="hidden" name="customerid" value="${order.customerid}" />	
               </div>  
           </form>     
       </div>
@@ -371,8 +373,8 @@
 		data: s
 	})
 
-	if("${order.status}"==1){$(".form3").show();}
-	if("${order.status}"==2){$(".form4").show();}		      
+	if("${order.status}"==2){$(".form3").show();}
+	if("${order.status}"==3){$(".form4").show();}		      
 	
 	jQuery(document).ready(function() {
 		jQuery("#form1").validate({

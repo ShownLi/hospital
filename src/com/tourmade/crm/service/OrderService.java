@@ -88,7 +88,7 @@ public class OrderService extends BaseService {
 	}
 	
 	/**
-	 * 新增订单
+	 * 验证
 	 * 
 	 * @param order
 	 * @return
@@ -101,6 +101,16 @@ public class OrderService extends BaseService {
 		else{
 			return true;
 		}
+	}
+
+	/**
+	 * 更改客人级别
+	 * 
+	 * @param order
+	 * @return
+	 */
+	public void customerstatus(int id,String status) {
+		orderMapper.customerstatus(id, status);
 	}
 	
 	/**

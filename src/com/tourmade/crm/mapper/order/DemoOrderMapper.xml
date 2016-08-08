@@ -62,6 +62,13 @@
 		u.isdel = 0
 	</select>
 	
+	<select id="customerstatus">
+		update tm_customer set
+		customer_level = #{status}
+		where
+		customer_id = #{id}
+	</select>
+	
 	<select id="validate" parameterType="int" resultType="String">
 		select email from tm_customer 
 		where customer_id = #{id}
@@ -238,6 +245,7 @@
 	<select id="getOrderById" parameterType="int" resultType="DemoOrder">
 		select
 		u.order_id as orderid,
+		u.case_id as caseid,
 		u.customer_id as customerid,
 		u.customer_name as customername,
 		u.agency_id as agencyid,

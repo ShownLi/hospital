@@ -3,6 +3,8 @@ package com.tourmade.crm.mapper.order;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.tourmade.crm.common.framework.BaseMapper;
 import com.tourmade.crm.model.DemoOrder;
 import com.tourmade.crm.model.DemoCase;
@@ -20,6 +22,8 @@ public interface DemoOrderMapper extends BaseMapper {
 	public long countOrderByCaseid(int id);
 	
 	public String validate(int id);
+	
+	public void customerstatus(@Param("id")int id, @Param("status")String status);
 	
 	public int saveOrder(DemoOrder order);
 
