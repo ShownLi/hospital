@@ -76,7 +76,7 @@
                 <div class="form-group col-sm-4">
                   <label class="col-sm-4 control-label">状态</label>
                   <div class="col-sm-8">
-                    <input type="text" name="status" placeholder="状态" class="status-select fullwidth" readonly value="${crmcase.status}" />
+                    <input type="text" name="status" placeholder="状态" class="status-select fullwidth" value="${crmcase.status}" />
                   </div>
                 </div> 
             </div>

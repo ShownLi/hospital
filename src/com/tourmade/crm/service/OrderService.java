@@ -187,6 +187,7 @@ public class OrderService extends BaseService {
 		            in = new BufferedReader(new InputStreamReader(
 		                    connection.getInputStream()));
 		        } catch (Exception e) {
+		        	
 		        	creatAlias(url, param);
 		        }
 		        // 使用finally块来关闭输入流

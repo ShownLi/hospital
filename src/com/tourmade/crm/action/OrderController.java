@@ -154,6 +154,9 @@ public class OrderController extends BaseSimpleFormController {
 		DemoCase crmcase = caseservice.getCaseById(order.getCaseid());
 		
 		try {
+
+			service.updateOrder(order);
+			
 			if(order.getGroupnumber()!= null){				
 				crmcase.setStatus("3");
 				service.customerstatus(order.getCustomerid(), "3");
@@ -161,12 +164,11 @@ public class OrderController extends BaseSimpleFormController {
 			}
 			if(order.getReason() != null){
 				int i = caseservice.casestatus(order.getCaseid());
-				if(i>0){
+				if(i==0){
 					crmcase.setStatus("4");
 					caseservice.updateCase(crmcase);
 				}
 			}
-			service.updateOrder(order);
 			j.setSuccess(true);
 		} catch (Exception e) {
 			j.setSuccess(false);

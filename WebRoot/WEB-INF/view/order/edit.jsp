@@ -346,6 +346,7 @@
                     <div class="col-sm-8">
                       <input class="form-control reason-select" name="reason" placeholder="若未成行，原因是" />
                       <input type="hidden" name="orderid" value="${order.orderid}" />	
+                      <input type="hidden" name="caseid" value="${order.caseid}" />
                     </div>
                   </div>
               </div><!-- bModal-body -->
