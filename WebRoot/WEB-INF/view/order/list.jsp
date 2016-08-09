@@ -157,9 +157,9 @@
                         <input type="text" name="rmbprice" placeholder="人民币价格" class="form-control"/>
                       </div>
                   </div>
-                  <input type="hidden" name="orderid" value="${order.orderid}" />
-                  <input type="hidden" name="caseid" value="${order.caseid}" />	
-                  <input type="hidden" name="customerid" value="${order.customerid}" />	
+                  <input type="hidden" id="orderid" name="orderid"/>
+                      <input  type="hidden" name="caseid" value="0"/>
+                      <input  type="hidden" name="customerid" value="0"/>
               </div>  
           </form>     
       </div>
@@ -187,8 +187,9 @@
                     <label class="col-sm-4 control-label">若未成行，原因是</label>
                     <div class="col-sm-8">
                       <input class="form-control reason-select" name="reason" placeholder="若未成行，原因是" />
-                      <input type="hidden" name="orderid" value="${order.orderid}" />	
-                      <input type="hidden" name="caseid" value="${order.caseid}" />
+                      <input  type="hidden" id="orderid1" name="orderid" />
+                      <input  type="hidden" name="caseid" value="0"/>
+                      <input  type="hidden" name="customerid" value="0"/>
                     </div>
                   </div>
               </div><!-- bModal-body -->
@@ -294,12 +295,14 @@
 		         var data = t.row($(this).parents('tr')).data();
 		         //alert($(this).attr('id'));
 		         group($(this).attr('id'));
+		         document.getElementById("orderid").value = $(this).attr('id');
 		     } );
 
 			 $('#dataTable tbody').on( 'click', 'a.btn-default', function () {
 		         var data = t.row($(this).parents('tr')).data();
 		         //alert($(this).attr('id'));
 		         nogroup($(this).attr('id'));
+		         document.getElementById("orderid1").value = $(this).attr('id');
 		     } );
 			 
 			 $('#confirmDelModal').on( 'click', 'button.btn-danger', function () {
@@ -338,11 +341,10 @@
 	      });
 		function form1_submit() {
 			var f = $("#form1").serialize();
-			//alert(f);
-			$.post('${rootPath}order/edit1.do', f, function(result) {
+			$.post('${rootPath}order/edit.do', f, function(result) {
 				var rmsg = result.msg;
 				if (result.success) {
-					window.parent.location = "${rootPath}order/edit.html?orderid=";
+					window.parent.location = "${rootPath}order/list.html";
 				} 
 				else {
 					$("#msgModal").modal('show');
@@ -351,10 +353,10 @@
 		}
 		function form2_submit() {
 			var f = $("#form2").serialize();
-			$.post('${rootPath}order/edit1.do', f, function(result) {
+			$.post('${rootPath}order/edit.do', f, function(result) {
 				var rmsg = result.msg;
 				if (result.success) {
-					window.parent.location = "${rootPath}order/edit.html?orderid=";
+					window.parent.location = "${rootPath}order/list.html";
 				} 
 				else {
 					$("#msgModal").modal('show');

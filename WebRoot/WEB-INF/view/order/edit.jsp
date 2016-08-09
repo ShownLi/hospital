@@ -150,17 +150,27 @@
                             <input type="text" name="rmbprice" value="${order.rmbprice}" placeholder="人民币价格" class="form-control"/>
                           </div>
                       </div>
+                      <div class="form-group col-sm-4">
+                      <div class="col-sm-6"></div>
+                      		&nbsp;<button id="btn-chengxing1" class="btn btn-primary">更改</button>&nbsp;
+                      	</div>
                   </div>
+                  <input type="hidden" name="orderid" value="${order.orderid}" />
+                  <input type="hidden" name="caseid" value="${order.caseid}" />	
+                  <input type="hidden" name="customerid" value="${order.customerid}" />	
               </form> 
               <form id="form4" class="form-horizontal form4">
                   <div class="section-block">
                       <div class="form-group col-sm-6">
                         <label class="col-sm-4 control-label">若未成行，原因是</label>
-                        <div class="col-sm-8">
-                          <input class="form-control reason-select" value="${order.reason}" placeholder="若未成行，原因是" />
+                        <div class="col-sm-6">
+                          <input class="form-control reason-select" name="reason" value="${order.reason}" placeholder="若未成行，原因是" />
                         </div>
+                    	<button id="btn-weichengxing1" class="btn btn-primary">更改</button>&nbsp;
                       </div>
                   </div><!-- panel-body -->
+                      <input type="hidden" name="orderid" value="${order.orderid}" />	
+                      <input type="hidden" name="caseid" value="${order.caseid}" />
               </form> 
           </div>
       </div><!-- end of panel 是否成行 -->
@@ -546,6 +556,9 @@
 		$(".cModal").modal('show');
 	  return false;
 	});
+	$("#btn-chengxing1").click(function(){
+		form3_submit();
+	});
     $(".cModal .submit").click(function(){
     	form1_submit();
       });
@@ -555,6 +568,9 @@
     $("#btn-weichengxing").click(function(){
         $(".bModal").modal('show');
         return false;
+    });
+    $("#btn-weichengxing1").click(function(){
+    	form4_submit();
     });
     $(".cModal .cancel").click(function(){
     	$(".cModal").modal("hide");
@@ -582,6 +598,30 @@
 	function form2_submit() {
 		var f = $("#form2").serialize();
 		$.post('${rootPath}order/edit.do', f, function(result) {
+			var rmsg = result.msg;
+			if (result.success) {
+				window.parent.location = "${rootPath}order/edit.html?id=${order.orderid}";
+			} 
+			else {
+				$("#msgModal").modal('show');
+			}
+		}, "JSON");
+	}
+	function form3_submit() {
+		var f = $("#form3").serialize();
+		$.post('${rootPath}order/edit1.do', f, function(result) {
+			var rmsg = result.msg;
+			if (result.success) {
+				window.parent.location = "${rootPath}order/edit.html?id=${order.orderid}";
+			} 
+			else {
+				$("#msgModal").modal('show');
+			}
+		}, "JSON");
+	}
+	function form4_submit() {
+		var f = $("#form4").serialize();
+		$.post('${rootPath}order/edit1.do', f, function(result) {
 			var rmsg = result.msg;
 			if (result.success) {
 				window.parent.location = "${rootPath}order/edit.html?id=${order.orderid}";

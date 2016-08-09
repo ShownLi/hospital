@@ -19,6 +19,9 @@ import com.tourmade.crm.common.framework.bean.QueryResult;
 import com.tourmade.crm.common.model.base.value.baseconfig.PageHelper;
 import com.tourmade.crm.mapper.order.DemoOrderMapper;
 import com.tourmade.crm.model.DemoOrder;
+
+import net.sf.json.JSONObject;
+
 import com.tourmade.crm.model.DemoCase;
 import com.tourmade.crm.model.DemoCustomer;
 import com.tourmade.crm.model.DemoList;
@@ -88,13 +91,13 @@ public class OrderService extends BaseService {
 	}
 	
 	/**
-	 * 验证
+	 * 验证客人是否有邮箱
 	 * 
 	 * @param order
 	 * @return
 	 */
-	public boolean validate(int id) {
-		String e = orderMapper.validate(id);
+	public boolean validatemail(int id) {
+		String e = orderMapper.validatemail(id);
 		if(null == e | "".equals(e)){
 			return false;
 		}
@@ -103,6 +106,22 @@ public class OrderService extends BaseService {
 		}
 	}
 
+	/**
+	 * 验证客人是否在官网注册
+	 * 
+	 * @param order
+	 * @return
+	 */
+	public boolean validateportalid(int id) {
+		String s = orderMapper.validateportalid(id);
+		if(null == s || "".equals(s) || "null".equals(s)){
+			return false;
+		}
+		else{
+			return true;
+		}
+	}
+	
 	/**
 	 * 更改客人级别
 	 * 
@@ -176,11 +195,6 @@ public class OrderService extends BaseService {
 		            URL realUrl = new URL(urlNameString);
 		            // 打开和URL之间的连接
 		            URLConnection connection = realUrl.openConnection();
-		            // 设置通用的请求属性
-		            connection.setRequestProperty("accept", "*/*");
-		            connection.setRequestProperty("connection", "Keep-Alive");
-		            connection.setRequestProperty("user-agent",
-		                    "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");
 		            // 建立实际的连接
 		            connection.connect();
 		            // 定义 BufferedReader输入流来读取URL的响应
@@ -188,7 +202,6 @@ public class OrderService extends BaseService {
 		                    connection.getInputStream()));
 		        } catch (Exception e) {
 		        	
-		        	creatAlias(url, param);
 		        }
 		        // 使用finally块来关闭输入流
 		        finally {
@@ -200,6 +213,55 @@ public class OrderService extends BaseService {
 		                e2.printStackTrace();
 		            }
 		        }
+	}
+	
+	/**
+	 * 注册官网用户
+	 * 
+	 * @param email
+	 * @return
+	 */
+	public void creatPortal(int id) {
+		DemoCustomer customer = orderMapper.getCustomerById(id);
+		String url = "http://test.tourmade.com:82/user/api";
+		String param="customer_id="+customer.getCustomerid()
+						+"&customer_name_zh="+customer.getZname()
+						+"&customer_name_en="+customer.getEname()
+						+"&email="+customer.getEmail()
+						+"&mobilephone="+customer.getMobilephone()
+						+"&wechat="+customer.getWechat()
+						+"&qq"+customer.getQq();
+		BufferedReader in = null;
+		try {
+			String urlNameString = url + "?" + param;
+			URL realUrl = new URL(urlNameString);
+			// 打开和URL之间的连接
+			URLConnection connection = realUrl.openConnection();
+			// 建立实际的连接
+			connection.connect();
+			// 定义 BufferedReader输入流来读取URL的响应
+			in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+			String str = null;    
+			StringBuffer sb = new StringBuffer(); 
+            while((str = in.readLine()) != null) {    
+             sb.append( str ); 
+            }
+            JSONObject result = JSONObject.fromObject(sb.toString());
+            customer.setPortalid(result.getInt("portal_id"));
+            orderMapper.updateCustomer(customer);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		// 使用finally块来关闭输入流
+		finally {
+			try {
+				if (in != null) {
+					in.close();
+				}
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
 	}
 	
 	/**

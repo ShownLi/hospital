@@ -92,10 +92,14 @@ public class OrderController extends BaseSimpleFormController {
 		Json j = new Json();
 		
 		try {
-			boolean is = service.validate(order.getCustomerid());
+			boolean is = service.validatemail(order.getCustomerid());
 			//验证客人有邮箱
 			if(is)
 			{
+				boolean portalid = service.validateportalid(order.getCustomerid());
+				if(!portalid){
+					service.creatPortal(order.getCustomerid());
+				}
 				//客人状态设置为下单客人
 				service.customerstatus(order.getCustomerid(),"2");
 				
@@ -151,7 +155,8 @@ public class OrderController extends BaseSimpleFormController {
 	public Json doEdit(HttpServletRequest request, HttpSession session, Model model, DemoOrder order) {
 
 		Json j = new Json();
-		DemoCase crmcase = caseservice.getCaseById(order.getCaseid());
+		DemoOrder order1 = service.getOrderById(order.getOrderid());
+		DemoCase crmcase = caseservice.getCaseById(order1.getCaseid());
 		
 		try {
 
@@ -159,11 +164,11 @@ public class OrderController extends BaseSimpleFormController {
 			
 			if(order.getGroupnumber()!= null){				
 				crmcase.setStatus("3");
-				service.customerstatus(order.getCustomerid(), "3");
+				service.customerstatus(order1.getCustomerid(), "3");
 				caseservice.updateCase(crmcase);
 			}
-			if(order.getReason() != null){
-				int i = caseservice.casestatus(order.getCaseid());
+			if(order1.getReason() != null){
+				int i = caseservice.casestatus(order1.getCaseid());
 				if(i==0){
 					crmcase.setStatus("4");
 					caseservice.updateCase(crmcase);
@@ -180,32 +185,18 @@ public class OrderController extends BaseSimpleFormController {
 	
 	@RequestMapping(value = "/edit1.do")
 	@ResponseBody
-	public Json doEdit(String orderid) {
+	public Json doEdit1(DemoOrder order) {
 
 		Json j = new Json();
-		DemoOrder order = service.getOrderById(Integer.parseInt(orderid));
-		DemoCase crmcase = caseservice.getCaseById(order.getCaseid());
 		
 		try {
 
 			service.updateOrder(order);
 			
-			if(order.getGroupnumber()!= null){				
-				crmcase.setStatus("3");
-				service.customerstatus(order.getCustomerid(), "3");
-				caseservice.updateCase(crmcase);
-			}
-			if(order.getReason() != null){
-				int i = caseservice.casestatus(order.getCaseid());
-				if(i==0){
-					crmcase.setStatus("4");
-					caseservice.updateCase(crmcase);
-				}
-			}
 			j.setSuccess(true);
 		} catch (Exception e) {
 			j.setSuccess(false);
-			logger.error("OrderController.doEdit() --> " + order.toString() + "\n" + e.getMessage());
+			logger.error("OrderController.doEdit1() --> " + order.toString() + "\n" + e.getMessage());
 		}
 		
 		return j;

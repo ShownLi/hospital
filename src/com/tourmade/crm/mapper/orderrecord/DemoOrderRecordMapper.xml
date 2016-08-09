@@ -19,6 +19,10 @@
 		from tm_order_record u  
 		where u.isdel = 0
 		and u.order_id = #{id}
+		and u.order_record_id !=
+		(select order_record_id from tm_order_record
+		where order_id = #{id}
+		limit 1)
 		order by u.creat_time desc
 		) table_alias 
 		limit #{b},#{e}
@@ -39,6 +43,10 @@
 		left join tm_order v on v.case_id = #{id}
 		where u.isdel = 0
 		and u.order_id = v.order_id
+		and u.order_record_id !=
+		(select order_record_id from tm_order_record
+		where order_id = u.order_id
+		limit 1)
 		order by u.creat_time desc
 		) table_alias
 		limit #{b},#{e}

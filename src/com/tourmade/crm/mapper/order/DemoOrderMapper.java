@@ -21,7 +21,9 @@ public interface DemoOrderMapper extends BaseMapper {
 	
 	public long countOrderByCaseid(int id);
 	
-	public String validate(int id);
+	public String validatemail(int id);
+	
+	public String validateportalid(int id);
 	
 	public void customerstatus(@Param("id")int id, @Param("status")String status);
 	
@@ -29,6 +31,8 @@ public interface DemoOrderMapper extends BaseMapper {
 
 	public void updateOrder(DemoOrder order);
 
+	public void updateCustomer(DemoCustomer customer);
+	
 	public void deleteOrderById(int orderid);
 	
 	public DemoOrder getInfo(DemoOrder order);

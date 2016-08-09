@@ -37,6 +37,7 @@ public class CaseController extends BaseSimpleFormController {
 		String country = "country";
 		List<DemoList> user = service.getAllUser();
 		List<DemoList> customer = service.getCustomer();
+		List<DemoList> sales = service.getSales();
 		List<DemoList> v = service.getParameterInfo(source);
 		List<DemoList> w = service.getParameterInfo(status);
 		List<DemoList> c = service.getParameterInfo(country);
@@ -45,11 +46,13 @@ public class CaseController extends BaseSimpleFormController {
 		JSONArray statusresult = JSONArray.fromObject(w);
 		JSONArray cusresult = JSONArray.fromObject(customer);
 		JSONArray userresult = JSONArray.fromObject(user);
+		JSONArray salesresult = JSONArray.fromObject(sales);
 		model.addAttribute("destination",countryresult);
 		model.addAttribute("source",sourceresult);
 		model.addAttribute("casestatus",statusresult);
 		model.addAttribute("customer",cusresult);
 		model.addAttribute("user",userresult);
+		model.addAttribute("sales",salesresult);
 		return "/case/list";
 	}
 	
