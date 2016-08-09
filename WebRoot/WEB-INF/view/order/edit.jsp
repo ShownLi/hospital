@@ -611,7 +611,6 @@
 		var f = $("#form3").serialize();
 		$.post('${rootPath}order/edit1.do', f, function(result) {
 			var rmsg = result.msg;
-			alert(result.success);
 			if (result.success) {
 				window.parent.location = "${rootPath}order/edit.html?id=${order.orderid}";
 			} 
