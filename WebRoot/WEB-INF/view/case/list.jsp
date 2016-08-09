@@ -355,7 +355,7 @@
 			$.post('${rootPath}order/add.do', f, function(result) {
 				var rmsg = result.msg;
 				if (result.success) {
-					window.parent.location = "${rootPath}case/edit.html?id=";
+					window.parent.location = "${rootPath}case/list.html";
 					//$("#nextModal").modal('show');
 				} else {
 					$("#NoEmail").modal('show');

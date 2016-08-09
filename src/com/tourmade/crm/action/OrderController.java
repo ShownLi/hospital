@@ -184,7 +184,7 @@ public class OrderController extends BaseSimpleFormController {
 	
 	@RequestMapping(value = "/edit1.do")
 	@ResponseBody
-	public Json doEdit(String orderid) {
+	public Json doEdit1(String orderid) {
 
 		Json j = new Json();
 		DemoOrder order = service.getOrderById(Integer.parseInt(orderid));

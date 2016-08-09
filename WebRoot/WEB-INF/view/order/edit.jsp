@@ -150,15 +150,20 @@
                             <input type="text" name="rmbprice" value="${order.rmbprice}" placeholder="人民币价格" class="form-control"/>
                           </div>
                       </div>
+                      <div class="form-group col-sm-4">
+                      <div class="col-sm-6"></div>
+                      		&nbsp;<button id="btn-chengxing1" class="btn btn-primary">更改</button>&nbsp;
+                      	</div>
                   </div>
               </form> 
               <form id="form4" class="form-horizontal form4">
                   <div class="section-block">
                       <div class="form-group col-sm-6">
                         <label class="col-sm-4 control-label">若未成行，原因是</label>
-                        <div class="col-sm-8">
+                        <div class="col-sm-6">
                           <input class="form-control reason-select" value="${order.reason}" placeholder="若未成行，原因是" />
                         </div>
+                    	<button id="btn-weichengxing1" class="btn btn-primary">更改</button>&nbsp;
                       </div>
                   </div><!-- panel-body -->
               </form> 
@@ -546,6 +551,10 @@
 		$(".cModal").modal('show');
 	  return false;
 	});
+	$("#btn-chengxing1").click(function(){
+		$(".cModal").modal('show');
+	  return false;
+	});
     $(".cModal .submit").click(function(){
     	form1_submit();
       });
@@ -553,6 +562,10 @@
     	form2_submit();
       });
     $("#btn-weichengxing").click(function(){
+        $(".bModal").modal('show');
+        return false;
+    });
+    $("#btn-weichengxing1").click(function(){
         $(".bModal").modal('show');
         return false;
     });
