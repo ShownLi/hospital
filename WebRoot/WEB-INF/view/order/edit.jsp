@@ -65,7 +65,7 @@
                       </div>
                     </div>
                     <div class="form-group col-sm-4">
-                      <label class="col-sm-4 control-label">预算</label>
+                      <label class="col-sm-4 control-label">预算(元/人)</label>
                       <div class="col-sm-8">
                         <input type="text" name="budget" placeholder="预算" class="form-control" readonly value="${order.budget}" />
                       </div>
@@ -141,7 +141,7 @@
                       <div class="form-group col-sm-4">
                           <label class="col-sm-4 control-label">汇率</label>
                           <div class="col-sm-8">
-                            <input type="text" name="exchangerate" value="${order.exchangerate}" placeholder="出发日期" class="form-control" />
+                            <input type="text" name="exchangerate" value="${order.exchangerate}" placeholder="汇率" class="form-control" />
                           </div>
                       </div>
                       <div class="form-group col-sm-4">
