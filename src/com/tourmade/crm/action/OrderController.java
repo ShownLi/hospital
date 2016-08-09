@@ -155,7 +155,8 @@ public class OrderController extends BaseSimpleFormController {
 	public Json doEdit(HttpServletRequest request, HttpSession session, Model model, DemoOrder order) {
 
 		Json j = new Json();
-		DemoCase crmcase = caseservice.getCaseById(order.getCaseid());
+		DemoOrder order1 = service.getOrderById(order.getOrderid());
+		DemoCase crmcase = caseservice.getCaseById(order1.getCaseid());
 		
 		try {
 
@@ -163,11 +164,11 @@ public class OrderController extends BaseSimpleFormController {
 			
 			if(order.getGroupnumber()!= null){				
 				crmcase.setStatus("3");
-				service.customerstatus(order.getCustomerid(), "3");
+				service.customerstatus(order1.getCustomerid(), "3");
 				caseservice.updateCase(crmcase);
 			}
-			if(order.getReason() != null){
-				int i = caseservice.casestatus(order.getCaseid());
+			if(order1.getReason() != null){
+				int i = caseservice.casestatus(order1.getCaseid());
 				if(i==0){
 					crmcase.setStatus("4");
 					caseservice.updateCase(crmcase);
