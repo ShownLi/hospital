@@ -271,56 +271,56 @@
         <div class="nextModal-title">请填写以下订单信息</div>
       </div>
 
+          <form class="form-horizontal" id="form1">
       <div class="modal-body">
-    		  <form class="form-horizontal" id="form1">
               <div class="section-block noline">
                   <div class="form-group col-sm-6">
-                      <label class="col-sm-4 control-label">成团日期</label>
+                      <label class="col-sm-4 control-label">成团日期<span class="asterisk">*</span></label>
                       <div class="col-sm-8 input-group input-datepicker">
-                        <input type="text" name="grouptime" class="form-control datepicker" autocomplete="off">
+                        <input type="text" name="grouptime" class="form-control datepicker" autocomplete="off" placeholder="成团日期">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                       </div>
                   </div>
                   <div class="form-group col-sm-6">
-                      <label class="col-sm-4 control-label">出发日期</label>
+                      <label class="col-sm-4 control-label">出发日期<span class="asterisk">*</span></label>
                       <div class="col-sm-8 input-group input-datepicker">
                         <input type="text" name="startdate" placeholder="出发日期" class="form-control datepicker" autocomplete="off" />
                         <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                       </div>
                   </div>
                   <div class="form-group col-sm-6">
-                    <label class="col-sm-4 control-label">返回日期</label>
+                    <label class="col-sm-4 control-label">返回日期<span class="asterisk">*</span></label>
                     <div class="col-sm-8 input-group input-datepicker">
                       <input type="text" name="enddate" placeholder="返回日期" class="form-control datepicker" autocomplete="off" />
                       <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                     </div>
                   </div>
                   <div class="form-group col-sm-6">
-                      <label class="col-sm-4 control-label">成团人数</label>
+                      <label class="col-sm-4 control-label">成团人数<span class="asterisk">*</span></label>
                       <div class="col-sm-8">
                         <input type="text" name="groupnumber" placeholder="成团人数" class="form-control"/>
                       </div>
                   </div>
                   <div class="form-group col-sm-6">
-                      <label class="col-sm-4 control-label">成团价格</label>
+                      <label class="col-sm-4 control-label">成团价格<span class="asterisk">*</span></label>
                       <div class="col-sm-8">
                         <input type="text" name="groupprice" placeholder="成团价格" class="form-control" />
                       </div>
                   </div>
                   <div class="form-group col-sm-6">
-                      <label class="col-sm-4 control-label">货币种类</label>
+                      <label class="col-sm-4 control-label">货币种类<span class="asterisk">*</span></label>
                       <div class="col-sm-8">
                         <input type="text" name="currency" placeholder="货币种类" class="form-control"/>
                       </div>
                   </div>
                   <div class="form-group col-sm-6">
-                      <label class="col-sm-4 control-label">汇率</label>
+                      <label class="col-sm-4 control-label">汇率<span class="asterisk">*</span></label>
                       <div class="col-sm-8">
-                        <input type="text" name="exchangerate" placeholder="汇率" class="form-control" value="0" />
+                        <input type="text" name="exchangerate" placeholder="汇率" class="form-control" value="" />
                       </div>
                   </div>
                   <div class="form-group col-sm-6">
-                      <label class="col-sm-4 control-label">人民币价格</label>
+                      <label class="col-sm-4 control-label">人民币价格<span class="asterisk">*</span></label>
                       <div class="col-sm-8">
                         <input type="text" name="rmbprice" placeholder="人民币价格" class="form-control"/>
                       </div>
@@ -329,12 +329,13 @@
                   <input type="hidden" name="caseid" value="${order.caseid}" />	
                   <input type="hidden" name="customerid" value="${order.customerid}" />	
               </div>  
-          </form>     
+          
       </div>
       <div class="modal-footer align-center">
-          <a class="submit btn btn-primary" >保存</a>
+          <button class="btn btn-primary">保存</button>
           <a class="cancel btn btn-primary" >取消</a>        
       </div>
+      </form>     
 
     </div><!-- modal-content --> 
   </div><!-- modal-dialog -->
@@ -348,8 +349,8 @@
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <div class="nextModal-title">请填写以下订单信息</div>
       </div>
-      <div class="modal-body">
-          <form class="form-horizontal" id="form2">
+      <form class="form-horizontal" id="form2">
+          <div class="modal-body">     
               <div class="section-block noline">
                   <div class="form-group col-sm-12">
                     <label class="col-sm-4 control-label">若未成行，原因是</label>
@@ -360,12 +361,12 @@
                     </div>
                   </div>
               </div><!-- bModal-body -->
-          </form>
-      </div>
-      <div class="modal-footer align-center">
-          <a class="submit btn btn-primary" >保存</a>
-          <a class="cancel btn btn-primary" >取消</a>
-      </div>
+          </div>
+          <div class="modal-footer align-center">
+              <button class="btn btn-primary">保存</button>
+              <a class="cancel btn btn-primary" >取消</a>
+          </div>
+      </form>
     </div><!-- modal-content -->
   </div><!-- modal-dialog -->
 </div><!-- bmodal -->
@@ -384,30 +385,88 @@
 		data: s
 	})
 
-	if("${order.status}"==2){$(".form3").show();}
-	if("${order.status}"==3){$(".form4").show();}		      
+	if("${order.status}"==2){
+      $(".form3").show();
+      // $("#btn-chengxing").attr("disabled",true);
+      // $("#btn-weichengxing").attr("disabled",true);
+  }
+	if("${order.status}"==3){
+      $(".form4").show();
+      $("#btn-chengxing").attr("disabled",true);
+      $("#btn-weichengxing").attr("disabled",true);
+  }		
+
 	
 	jQuery(document).ready(function() {
 		jQuery("#form1").validate({
 	        rules: {
-		          grouptime: "date",
-		          startdate: "date",
-		          enddate: "date",
-		          groupnumber: "number",
-		          groupprice: "number",
-		          exchangerate: "number",
-		          rmbprice: "number",
-		        },
-		        messages: {
-		          grouptime: "请输入正确的日期格式 mm/dd/yyyy",
-		          startdate: "请输入正确的日期格式 mm/dd/yyyy",
-		          enddate: "请输入正确的日期格式 mm/dd/yyyy",
+		          grouptime: {
+                required: true,
+                date: true
+              },
+		          startdate: {
+                required: true,
+                date: true
+              },
+		          enddate: {
+                required: true,
+                date: true
+              },
+		          groupnumber: {
+                required: true,
+                number: true
+              },
+		          groupprice: {
+                required: true,
+                number: true
+              },
+              currency: {
+                required: true,
+                number: true
+              },
+		          exchangerate: {
+                required: true,
+                number: true
+              },
+		          rmbprice: {
+                required: true,
+                number: true
+              },
+		      },
+		      messages: {
+		          grouptime: {
+                required: "请输入成团日期",
+                date: "日期格式 mm/dd/yyyy"
+              },
+		          startdate: {
+                required: "请输入出发日期",
+                date: "日期格式 mm/dd/yyyy"
+              },
+		          enddate: {
+                required: "请输入返回日期",
+                date: "日期格式 mm/dd/yyyy"
+              },
 		          groupnumber: "请输入一个数字",
 		          groupprice: "请输入一个数字",
+              currency: "请输入一个数字",
 		          exchangerate: "请输入一个数字",
 		          rmbprice: "请输入一个数字",
 
-		        }
+		      },
+          highlight: function(element) {
+            jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+          },
+          success: function(element) {
+            jQuery(element).closest('.form-group').removeClass('has-error');
+          },
+          invalidHandler : function(){
+            return false;
+          },
+          submitHandler : function(){
+              form1_submit();
+              return false;
+          }
+
 		});
 		$(".nav-parent").eq(1).addClass("nav-active");
     $(".nav-parent").eq(1).find(".children").show();
@@ -559,12 +618,12 @@
 	$("#btn-chengxing1").click(function(){
 		form3_submit();
 	});
-    $(".cModal .submit").click(function(){
-    	form1_submit();
-      });
-    $(".bModal .submit").click(function(){
-    	form2_submit();
-      });
+    // $(".cModal .submit").click(function(){
+    // 	form1_submit();
+    //   });
+    // $(".bModal .submit").click(function(){
+    // 	form2_submit();
+    //   });
     $("#btn-weichengxing").click(function(){
         $(".bModal").modal('show');
         return false;
