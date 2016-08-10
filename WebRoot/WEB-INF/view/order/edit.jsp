@@ -387,8 +387,8 @@
 
 	if("${order.status}"==2){
       $(".form3").show();
-      // $("#btn-chengxing").attr("disabled",true);
-      // $("#btn-weichengxing").attr("disabled",true);
+      $("#btn-chengxing").attr("disabled",true);
+      $("#btn-weichengxing").attr("disabled",true);
   }
 	if("${order.status}"==3){
       $(".form4").show();
