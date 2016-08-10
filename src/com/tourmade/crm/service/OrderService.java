@@ -166,10 +166,11 @@ public class OrderService extends BaseService {
 	 * @return
 	 */
 	public void MailAlias(int orderid) {
-		String domain = "tourmade.com.cn";
-		String url = "http://123.56.77.206/axis2/services/AliasAdd/add";
-		String param = "alias=customer"+orderid+"@&real=customer@&domain="+domain;
-		String param1 = "alias=agency"+orderid+"@&real=customer@&domain="+domain;
+		String domain = orderMapper.geturl("mail.domain");
+		String url = orderMapper.geturl("creatAlias.url");
+		String real = orderMapper.geturl("mail.real");
+		String param = "alias=customer"+orderid+"@&real="+real+"@&domain="+domain;
+		String param1 = "alias=agency"+orderid+"@&real="+real+"@&domain="+domain;
 		creatAlias(url, param);
 		creatAlias(url, param1);
 		
@@ -223,7 +224,7 @@ public class OrderService extends BaseService {
 	 */
 	public void creatPortal(int id) {
 		DemoCustomer customer = orderMapper.getCustomerById(id);
-		String url = "http://test.tourmade.com:82/user/api";
+		String url = orderMapper.geturl("creatPortal.url");
 		String param="customer_id="+customer.getCustomerid()
 						+"&customer_name_zh="+customer.getZname()
 						+"&customer_name_en="+customer.getEname()

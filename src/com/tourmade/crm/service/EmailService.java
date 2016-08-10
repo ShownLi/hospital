@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
-import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
@@ -192,16 +191,16 @@ public class EmailService extends BaseService {
 	@SuppressWarnings("unused")
 	public String getMailContent(MailTemplate template) throws Exception {
 		//外网域名
-		String endpoint = "oss-cn-beijing.aliyuncs.com";
+		String endpoint = emailMapper.geturl("alioss.endpoint");
 		
 		//内网域名
 		//private String endpoint = "tourmade.oss-cn-beijing-internal.aliyuncs.com";
 		
 		// AccessKey and AccessKeySecret
-		String accessKeyId = "R0ZPaQkN0Abjk9Pj";
-		String accessKeySecret = "9LZt0R2sSVi9JsxOCN6yzVO2wuPM6S";
-		String bucket = "bk-test-1";
-		String key = "发给地接社的第一封邮件的模板";
+		String accessKeyId = emailMapper.geturl("alioss.accessKeyId");
+		String accessKeySecret = emailMapper.geturl("alioss.accessKeySecret");
+		String bucket = emailMapper.geturl("alioss.bucket");
+		String key = emailMapper.geturl("alioss.key");
 		
 		BufferedReader reader = null;
 		String result = null;

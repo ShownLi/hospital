@@ -69,6 +69,12 @@
 		customer_id = #{id}
 	</select>
 	
+	<select id="geturl" parameterType="String" resultType="String">
+		select para_value from tm_parameter 
+		where para_domain = #{domain}
+		and isdel = 0
+	</select>
+	
 	<select id="validatemail" parameterType="int" resultType="String">
 		select email from tm_customer 
 		where customer_id = #{id}

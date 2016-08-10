@@ -23,6 +23,8 @@ public interface DemoOrderMapper extends BaseMapper {
 	
 	public String validatemail(int id);
 	
+	public String geturl(String domain);
+	
 	public String validateportalid(int id);
 	
 	public void customerstatus(@Param("id")int id, @Param("status")String status);
