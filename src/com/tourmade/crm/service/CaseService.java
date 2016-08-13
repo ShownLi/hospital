@@ -63,7 +63,7 @@ public class CaseService extends BaseService {
 	 * @param request
 	 * @return
 	 */
-	public QueryResult<DemoCase> queryCaseFromCustomer(DemoCase crmcase, int customerid, PageHelper ph, HttpServletRequest request) {
+	public QueryResult<DemoCase> queryCaseFromCustomer(int customerid, PageHelper ph, HttpServletRequest request) {
 
 		QueryResult<DemoCase> r = new QueryResult<DemoCase>();
 		Map<String, Object> map = new HashMap<String, Object>();

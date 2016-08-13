@@ -672,7 +672,7 @@
     					//$("#nextModal").modal('show');
     				} else {
     					$("#NoEmail").modal('show');
-              $("#nextModal").modal('hide');
+              			$("#nextModal").modal('hide');
     				}
     			}, "JSON");
     	}

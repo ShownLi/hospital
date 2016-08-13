@@ -58,12 +58,10 @@ public class CaseController extends BaseSimpleFormController {
 	
 	@RequestMapping(value = "/listfromcustomer.do",produces="application/json;charset=utf-8")
 	@ResponseBody
-	public String queryData(HttpServletRequest request, HttpSession session, Model model, int customerid ,DemoCase crmcase, PageHelper page) {
+	public String queryData(HttpServletRequest request, HttpSession session, Model model, int customerid , PageHelper page) {
 
-		//System.out.println(customerid);
-		QueryResult<DemoCase> r = service.queryCaseFromCustomer(crmcase, customerid ,page, request);
+		QueryResult<DemoCase> r = service.queryCaseFromCustomer(customerid ,page, request);
 		String result = JSONUtilS.object2json(r);
-		System.out.println(r);
 
 		return result;
 	}

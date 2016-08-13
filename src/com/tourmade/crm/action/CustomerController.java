@@ -124,7 +124,7 @@ public class CustomerController extends BaseSimpleFormController {
 			JSONArray cusresult = JSONArray.fromObject(c);
 			JSONArray userresult = JSONArray.fromObject(user);
 			model.addAttribute("source",sourceresult);
-			model.addAttribute("status",statusresult);
+			model.addAttribute("casestatus",statusresult);
 			model.addAttribute("c",cusresult);
 			model.addAttribute("user",userresult);
 		}

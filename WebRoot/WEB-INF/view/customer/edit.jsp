@@ -280,7 +280,7 @@
 	var p = ${promote};
 	var a = ${agegroup};
 	var source = ${source};
-	var status = ${status};
+	var cs = ${casestatus};
 	var c = ${c};
 	var user = ${user};
 	$(".promote-select").select2({
@@ -332,7 +332,7 @@
 						targets: 7
 					},
 					  {
-		                data: "c",
+		                data: "customernamde",
 		                orderable: false,
 		                render: function ( data ) {
 		                	for(var i=0;i <  c.length;i++){
@@ -378,9 +378,9 @@
 		                orderable: false,
 		                render: function ( data ) {
 		                	if(data){
-			                	for(var i=0;i <  status.length;i++){
-			                		if(data==status[i].id){
-			                			return status[i].text
+			                	for(var i=0;i <  cs.length;i++){
+			                		if(data==cs[i].id){
+			                			return cs[i].text
 			                		}
 			                	}
 		                	}
