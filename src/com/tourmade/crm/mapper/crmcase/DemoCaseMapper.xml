@@ -45,6 +45,12 @@
 		u.isdel = 0
 	</select>
 	
+	<select id="countCaseFC" parameterType="DemoCase" resultType="long">
+		select count(u.case_id) from tm_case u
+		where
+		u.isdel = 0 and u.customer_id = #{customerid}
+	</select>
+	
 	<insert id="saveCase" parameterType="DemoCase" flushCache="true" useGeneratedKeys="true" keyProperty="caseid" keyColumn="GENERATED_KEY">
 		insert into tm_case(
 		customer_id,

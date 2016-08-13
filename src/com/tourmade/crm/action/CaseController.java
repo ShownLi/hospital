@@ -63,6 +63,7 @@ public class CaseController extends BaseSimpleFormController {
 		//System.out.println(customerid);
 		QueryResult<DemoCase> r = service.queryCaseFromCustomer(crmcase, customerid ,page, request);
 		String result = JSONUtilS.object2json(r);
+		System.out.println(r);
 
 		return result;
 	}
