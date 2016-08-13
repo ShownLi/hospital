@@ -80,6 +80,12 @@
 		from tm_email u where u.email_id = #{email_id}
 	</select>
 	
+	<select id="geturl" parameterType="String" resultType="String">
+		select para_value from tm_parameter 
+		where para_domain = #{domain}
+		and isdel = 0
+	</select>	
+	
 	<select id="getParameterInfo" parameterType="String" resultType="DemoList">
 		select
 		u.para_domain,

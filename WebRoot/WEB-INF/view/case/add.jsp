@@ -500,7 +500,7 @@
 	    					window.parent.location = "${rootPath}order/list.html";
 	    					//$("#nextModal").modal('show');
 	    				} else {
-	    					//$("#msgModal").modal('show');
+	    					$("#msgModal").modal('show');
 	    				}
 	    			}, "JSON");
 	    	}

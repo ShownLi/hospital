@@ -32,4 +32,6 @@ public interface DemoEmailMapper extends BaseMapper {
 	
 	public MailTepBoat getSalesZE(MailTepBoat boat);
 	
+	public String geturl(String domain);
+	
 }
