@@ -389,7 +389,7 @@
         <h4 class="modal-title" id="myModalLabel">信息</h4>
       </div>
       <div class="modal-body">
-      		该客人没有邮箱，请添加邮箱后再进行操作
+      		该客人没有邮箱，请<a href="../customer/edit.html">添加邮箱</a>后再进行操作
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
@@ -672,6 +672,7 @@
     					//$("#nextModal").modal('show');
     				} else {
     					$("#NoEmail").modal('show');
+              $("#nextModal").modal('hide');
     				}
     			}, "JSON");
     	}
