@@ -16,7 +16,7 @@
 		u.operator as operator
 		from tm_case u  
 		where u.isdel = 0 
-		order by u.creat_time
+		order by u.creat_time desc
 		) table_alias
 		limit #{b},#{e}
 	</select>

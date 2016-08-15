@@ -21,7 +21,7 @@
 		and u.order_id = #{id}
 		and u.order_record_id !=
 		(select order_record_id from tm_order_record
-		where order_id = #{id}
+		where order_id = u.order_id
 		limit 1)
 		order by u.creat_time desc
 		) table_alias 
@@ -60,15 +60,23 @@
 	
 	<select id="countOrderRecordByCaseid" parameterType="int" resultType="long">
 		select count(u.order_record_id) from tm_order_record u
-		left join tm_order v on v.case_id = #{id}
+		right join tm_order v on v.order_id = u.order_id and v.case_id = #{id}
 		where
 		u.isdel = 0
+		and u.order_record_id !=
+		(select order_record_id from tm_order_record
+		where order_id = u.order_id
+		limit 1)
 	</select>
 	
 	<select id="countOrderRecordByOrderid" parameterType="int" resultType="long">
 		select count(u.order_record_id) from tm_order_record u
 		where
 		u.isdel = 0
+		and u.order_record_id !=
+		(select order_record_id from tm_order_record
+		where order_id = u.order_id
+		limit 1)
 		and u.order_id = #{id}
 	</select>
 	
