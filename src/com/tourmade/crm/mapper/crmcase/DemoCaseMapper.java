@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.tourmade.crm.common.framework.BaseMapper;
 import com.tourmade.crm.model.DemoCase;
+import com.tourmade.crm.model.DemoCustomer;
 import com.tourmade.crm.model.DemoList;
 
 public interface DemoCaseMapper extends BaseMapper {
@@ -31,6 +32,10 @@ public interface DemoCaseMapper extends BaseMapper {
 	
 	public List<DemoList> getCustomer();
 	
+	public List<DemoList> getCustomerById(int customerId);
+	
+	public DemoCustomer getCustomerInfoById(int customerId);
+	
 	public List<DemoList> getUser();
 	
 	public List<DemoList> getAllUser();
@@ -38,4 +43,5 @@ public interface DemoCaseMapper extends BaseMapper {
 	public List<DemoList> getSales();
 	
 	public List<DemoList> getSalesByAgency(String destination);
+
 }

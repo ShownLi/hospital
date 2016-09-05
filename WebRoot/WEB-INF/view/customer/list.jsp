@@ -53,6 +53,7 @@
 										<th>所在地</th>
 										<th>客人级别</th>
 										<th>编辑</th>
+										<th>增加询单</th>
 									</tr>
 								</thead>
 								
@@ -130,6 +131,15 @@
 						},
 						targets: 9
 					},
+					{
+						data: "customerid",
+						//defaultContent: '<a class="btn btn-success btn-xs"><span class="fa fa-edit"></span> 编辑</a>&nbsp;<a class="btn btn-danger btn-xs"><span class="fa fa-minus-circle"></span> 删除</a>',
+						orderable: false,
+						render: function ( data, type, full, meta ) {
+						return '<a class="btn btn-addCase btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 增加询单</a> &nbsp; ';
+						},
+						targets: 10
+					},
 					  {
 		                data: "agegroup",
 		                orderable: false,
@@ -190,6 +200,12 @@
 		        //alert($(this).attr('id'));
 		        edit($(this).attr('id'));
 		    } );
+			
+			$('#dataTable tbody').on( 'click', 'a.btn-addCase', function () {
+		        var data = t.row($(this).parents('tr')).data();
+		        //alert($(this).attr('id'));
+		        addCase($(this).attr('id'));
+		    } );
 
 			$('#dataTable tbody').on( 'click', 'a.btn-danger', function () {
 		        var data = t.row($(this).parents('tr')).data();
@@ -214,6 +230,10 @@
 		
 		function edit(id) {
 			window.parent.location = "${rootPath}customer/edit.html?id="+id;
+		}
+		
+		function addCase(id){
+			window.parent.location = "${rootPath}case/add.html?id="+id;
 		}
 		
 		function del(id) {

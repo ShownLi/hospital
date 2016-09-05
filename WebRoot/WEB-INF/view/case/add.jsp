@@ -57,15 +57,18 @@
 	                      <select name="contacttype" class="contact-select fullwidth" multiple="multiple">
 							  <option value="wechat">微信</option>
 							  <option value="mobilephone">手机</option>
+							  
+							  <option value="qq">qq</option>
+					  		  <option value="邮箱">邮箱</option>
 					</select>
                       </div>
                     </div> 
-                    <div class="form-group col-sm-4">
+              <!--       <div class="form-group col-sm-4">
                       <label class="col-sm-4 control-label">所属销售</label>
                       <div class="col-sm-8">
                         <input type="text" name="salesid" placeholder="所属销售" class="sales-select fullwidth" value="0"/>
                       </div>
-                    </div>
+                    </div> -->
                     <div class="form-group col-sm-4">
                       <label class="col-sm-4 control-label">询单来源</label>
                       <div class="col-sm-8">
@@ -86,18 +89,18 @@
                         <input type="text" name="destination" class="country-select fullwidth" value="" />
                       </div>
                     </div>
-                    <div class="form-group col-sm-4">
+                    <!-- <div class="form-group col-sm-4">
                       <label class="col-sm-4 control-label">行程</label>
                       <div class="col-sm-8">
                         <input type="text" name="route" placeholder="行程" class="form-control" value="" />
                       </div>
-                    </div>
-                    <div class="form-group col-sm-4">
+                    </div> -->
+                    <!-- <div class="form-group col-sm-4">
                       <label class="col-sm-4 control-label">状态</label>
                       <div class="col-sm-8">
                         <input type="text" name="status" class="status-select fullwidth" value="0" readonly/>
                       </div>
-                    </div>             
+                    </div>       -->       
                 </div>
                 <div class="section-block">
                     <div class="form-group col-sm-4">
@@ -311,7 +314,7 @@
             <div class="col-sm-12">
         	   <a class="submit btn btn-primary">保存</a>
         	 <input type="hidden"  name="caseid" id="caseid" value="" />
-             <input type="hidden"  name="customerid" id="customerid" value="${customerid}" />
+             <input type="hidden"  name="customerid" id="customerid" value="${customer}" />
             </div>
           </form>
         </div>
@@ -396,7 +399,10 @@
     $(".customer-select").select2({
         placeholder: '客人',
         data: customer
-    });
+    }); 
+
+   /*  $(".customer-select").select2("data", {"deptId": "$id", "deptName": "name"});
+     */
     $(".user-select").select2({
         placeholder: '客人',
         data: user

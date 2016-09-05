@@ -358,6 +358,7 @@
 					window.parent.location = "${rootPath}case/list.html";
 					//$("#nextModal").modal('show');
 				} else {
+					$("#nextModal").modal('hide');
 					$("#NoEmail").modal('show');
 				}
 			}, "JSON");

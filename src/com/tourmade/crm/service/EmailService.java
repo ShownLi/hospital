@@ -84,7 +84,9 @@ public class EmailService extends BaseService {
 		String budget = DecimalFormat.getNumberInstance().format(Integer.parseInt(order.getBudget()));
 		template.setBudget(budget);
 		template.setRequirement(crmcase.getRequirement());
+		
 		template.setReplyto("mailto:"+order.getCustomeremailalias());
+		
 		if(crmcase.getRouteid() != null && !"".equals(crmcase.getRouteid())){
 			String url = emailMapper.getRouteUrl();
 			template.setRoute_url(url+crmcase.getRouteid());			

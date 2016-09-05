@@ -127,7 +127,6 @@ public class OrderController extends BaseSimpleFormController {
 				j.setSuccess(false);
 			}
 		} catch (Exception e) {
-			j.setSuccess(false);
 			e.printStackTrace();
 			logger.error("OrderController.doAdd() --> " + order.toString() + "\n" + e.getMessage());
 		}

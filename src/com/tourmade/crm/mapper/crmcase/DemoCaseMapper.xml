@@ -216,7 +216,27 @@
 		u.isdel 
 		from tm_customer u where u.isdel = 0
 	</select>
+	
+	<select id="getCustomerById" parameterType="int" resultType="DemoList">
+		select
+		u.customer_id as id,
+		u.customer_name_zh as text,
+		u.isdel 
+		from tm_customer u where u.isdel = 0 and u.customer_id = #{customerId}
+	</select>
 
+	<select id="getCustomerInfoById" parameterType="int" resultType="DemoCustomer">
+		select 
+		u.customer_name_en as ename,
+		u.gender as gender,
+		u.birthday as birthday,
+		u.age_group as agegroup,
+		u.customer_level as level,
+		u.isdel as isdel
+		from tm_customer u  
+		where u.isdel = 0 and u.customer_id = #{customerId}
+	</select>
+	
 	<select id="getUser" parameterType="String" resultType="DemoList">
 		select
 		u.user_id as id,

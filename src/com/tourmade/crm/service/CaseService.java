@@ -15,6 +15,7 @@ import com.tourmade.crm.common.framework.bean.QueryResult;
 import com.tourmade.crm.common.model.base.value.baseconfig.PageHelper;
 import com.tourmade.crm.mapper.crmcase.DemoCaseMapper;
 import com.tourmade.crm.model.DemoCase;
+import com.tourmade.crm.model.DemoCustomer;
 import com.tourmade.crm.model.DemoList;
 
 @Service
@@ -155,7 +156,39 @@ public class CaseService extends BaseService {
 		}
 		return r;
 	}
+	
+	/**
+	 * 根据id获得客人信息
+	 * @return
+	 */
+	public List<DemoList> getCustomerById(int customerId) {
+		List<DemoList> r = null;
+		try {
+			r = caseMapper.getCustomerById(customerId);
+		} catch (Exception e) {
+			logger.error("CaseService.getCustomer() --> -->" + e.getMessage());
+			r = null;
+		}
+		return r;
+	}
+	
+	/**
+	 * 根据id获得客人基本信息
+	 * @param i
+	 * @return
+	 */
+	public DemoCustomer getCustomerInfoById(int customerId) {
+		DemoCustomer cus = null;
+		try{
+			cus=caseMapper.getCustomerInfoById(customerId);
+		} catch(Exception e) {
+			logger.error("CaseService.getCustomerInfo() --> -->"+e.getMessage());
+			cus = null;
+		}
+		return cus;
+	}
 
+	
 	/**
 	 * 获得客服用户信息
 	 * 
@@ -340,5 +373,6 @@ public class CaseService extends BaseService {
 
 		return r;
 	}
+
 
 }

@@ -18,6 +18,7 @@ import com.tourmade.crm.common.framework.util.JSONUtilS;
 import com.tourmade.crm.common.model.base.value.baseconfig.Json;
 import com.tourmade.crm.common.model.base.value.baseconfig.PageHelper;
 import com.tourmade.crm.model.DemoCase;
+import com.tourmade.crm.model.DemoCustomer;
 import com.tourmade.crm.model.DemoList;
 import com.tourmade.crm.service.CaseService;
 
@@ -77,7 +78,16 @@ public class CaseController extends BaseSimpleFormController {
 		return result;
 	}
 	@RequestMapping(value = "/add.html", method = { RequestMethod.POST, RequestMethod.GET })
-	public String add(Model model) {
+	public String add(Model model,String id) {
+		/*List<DemoList> customer = null;
+		JSONArray customerresult = null;
+		
+		if (null != id && !"".equals(id)) {
+			int i = Integer.parseInt(id);
+			customer = service.getCustomerById(i);
+			customerresult = JSONArray.fromObject(customer);
+			model.addAttribute("customer",customerresult);
+			}*/
 		
 		String country = "country";
 		String language = "case.preferlanguage";
@@ -136,6 +146,16 @@ public class CaseController extends BaseSimpleFormController {
 		model.addAttribute("visa",visaresult);
 		model.addAttribute("flight",flightresult);
 		model.addAttribute("user",userresult);
+		
+		
+		if (null != id && !"".equals(id)) {
+			int i = Integer.parseInt(id);
+			customer = service.getCustomerById(i);
+			customerresult = JSONArray.fromObject(customer);
+			model.addAttribute("customer",customerresult);
+			model.addAttribute("customerid",i);
+			}
+		
 		return "/case/add";
 	}
 
@@ -227,6 +247,8 @@ public class CaseController extends BaseSimpleFormController {
 		if (null != id && !"".equals(id)) {
 			int i = Integer.parseInt(id);
 			DemoCase u = service.getCaseById(i);
+			
+			DemoCustomer cus=service.getCustomerInfoById(u.getCustomerid());
 			String country = "country";
 			String language = "case.preferlanguage";
 			String withwho = "case.withwho";
@@ -239,6 +261,11 @@ public class CaseController extends BaseSimpleFormController {
 			String passport = "case.passport";
 			String visa = "case.visa";
 			String flight = "case.flight";
+			
+			String level = "customer.level";
+			String agegroup = "customer.agegroup";
+			
+			
 			List<DemoList> v1 = service.getParameterInfo(country);
 			List<DemoList> v2 = service.getParameterInfo(language);
 			List<DemoList> v4 = service.getParameterInfo(withwho);
@@ -254,6 +281,11 @@ public class CaseController extends BaseSimpleFormController {
 			List<DemoList> customer = service.getCustomer();
 			List<DemoList> user = service.getUser();
 			List<DemoList> sales = service.getSales();
+			
+			List<DemoList> lLevel = service.getParameterInfo(level);
+			List<DemoList> lAgegroup = service.getParameterInfo(agegroup);
+
+			
 			JSONArray countryresult = JSONArray.fromObject(v1);
 			JSONArray languageresult = JSONArray.fromObject(v2);
 			JSONArray withresult = JSONArray.fromObject(v4);
@@ -269,6 +301,10 @@ public class CaseController extends BaseSimpleFormController {
 			JSONArray customerresult = JSONArray.fromObject(customer);
 			JSONArray userresult = JSONArray.fromObject(user);
 			JSONArray salesresult = JSONArray.fromObject(sales);
+			
+			JSONArray levelresult = JSONArray.fromObject(lLevel);
+			JSONArray  agegroupresult = JSONArray.fromObject(lAgegroup);
+			
 			model.addAttribute("country",countryresult);
 			model.addAttribute("language",languageresult);
 			model.addAttribute("withwho",withresult);
@@ -285,6 +321,10 @@ public class CaseController extends BaseSimpleFormController {
 			model.addAttribute("flight",flightresult);
 			model.addAttribute("user",userresult);
 			model.addAttribute("crmcase",u);
+			model.addAttribute("customerInfo",cus);
+			
+			model.addAttribute("level",levelresult);
+			model.addAttribute("agegroup",agegroupresult);
 			
 			String orderstatus = "order.status";
 			List<DemoList> w = service.getParameterInfo(orderstatus);

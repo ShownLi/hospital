@@ -58,28 +58,69 @@
                       <select name="contacttype" class="contact-select fullwidth" multiple="multiple">
 					  <option value="wechat">微信</option>
 					  <option value="mobilephone">手机</option>
+					  
+					  <option value="qq">qq</option>
+					  <option value="mail">邮箱</option>
 					</select>
                     </div>
                 </div>   
-                <div class="form-group col-sm-4">
+                <%-- <div class="form-group col-sm-4">
                     <label class="col-sm-4 control-label">所属销售</label>
                     <div class="col-sm-8">
                       <input type="text" name="salesid" placeholder="所属销售" class="sales-select fullwidth" readonly value="${crmcase.salesid}" />
                     </div>
-                </div>
+                </div> --%>
                 <div class="form-group col-sm-4">
                     <label class="col-sm-4 control-label">询单来源</label>
                     <div class="col-sm-8">
                       <input type="text" name="source" class="source-select fullwidth" value="${crmcase.source}" />
                     </div>
                 </div>
-                <div class="form-group col-sm-4">
+                <%-- <div class="form-group col-sm-4">
                   <label class="col-sm-4 control-label">状态</label>
                   <div class="col-sm-8">
                     <input type="text" name="status" placeholder="状态" class="status-select fullwidth" value="${crmcase.status}" />
                   </div>
-                </div> 
+                </div>  --%>
             </div>
+            
+           <div class="section-block">
+            	<div class="form-group col-sm-4">
+            	<label class="col-sm-4 control-label">英文名</label>
+            	<div class="col-sm-8">
+                    <input type="text" name="ename" id="ename" class="form-control" readonly value="${customerInfo.ename}" />
+                  </div>
+            	</div>
+            	
+            	<div class="form-group col-sm-4">
+            	<label class="col-sm-4 control-label">性别</label>
+            	<div class="col-sm-8">
+                    <input type="text" name="gender" id="gender" class="gender-select fullwidth" readonly value="${customerInfo.gender}" />
+                  </div>
+            	</div>
+            	
+            	<div class="form-group col-sm-4">
+            	<label class="col-sm-4 control-label">生日</label>
+            	<div class="col-sm-8">
+                    <input type="text" name="birthday" id="birthday" class="form-control" readonly value="${customerInfo.birthday}" />
+                  </div>
+            	</div>
+            	
+            	<div class="form-group col-sm-4" style="clear: both;">
+            	<label class="col-sm-4 control-label">年龄段</label>
+            	<div class="col-sm-8">
+                    <input type="text" name="agegroup" id="agegroup" class="form-control" readonly value="${customerInfo.agegroup}" />
+                  </div>
+            	</div>
+            	
+            	<div class="form-group col-sm-4">
+            	<label class="col-sm-4 control-label">客人级别</label>
+            	<div class="col-sm-8">
+                    <input type="text" name="level" id="level" class="level-select fullwidth" readonly  value="${customerInfo.level}" />
+                  </div>
+            	</div>           	
+            </div> 
+            
             <div class="section-block">
                 <div class="form-group col-sm-4">
                   <label class="col-sm-4 control-label">目的地</label>
@@ -87,12 +128,12 @@
                     <input type="text" name="destination" class="form-control" readonly value="${crmcase.destination}" />
                   </div>
                 </div>
-                <div class="form-group col-sm-4">
+                <%--  <div class="form-group col-sm-4">
                   <label class="col-sm-4 control-label">行程</label>
                   <div class="col-sm-8">
                     <input type="text" name="route" placeholder="行程" class="form-control" readonly value="${crmcase.route}" />
-                  </div>
-                </div>
+                  </div> 
+                </div> --%>
                 <div class="form-group col-sm-4">
                   <label class="col-sm-4 control-label">推广码</label>
                   <div class="col-sm-8">
@@ -389,7 +430,7 @@
         <h4 class="modal-title" id="myModalLabel">信息</h4>
       </div>
       <div class="modal-body">
-      		该客人没有邮箱，请<a href="../customer/edit.html">添加邮箱</a>后再进行操作
+      		该客人没有邮箱，请<a href="#" id="addEmail">添加邮箱</a>后再进行操作
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
@@ -462,6 +503,39 @@
     var user = ${user};
     var sales = ${sales};
 	var os = ${orderstatus};
+	
+	var level = ${level};
+	var agegroup = ${agegroup}; 
+	
+	 var genderData = [{ id: 'male', text: '男' }, { id:'female' , text: '女' }];
+	
+/*  	//生日格式转换
+	var date = $("#birthday").val();	
+	var dateformat = new Date(date).toISOString("yyyy-MM-dd hh:mm:ss.S").substring(0,10);
+	//console.log(dateformat);
+	$("#birthday").val(dateformat) */
+	 
+	$("#birthday").val(getBirthday())
+	
+	function getBirthday(){
+		
+		var date = $("#birthday").val();	
+		var dateformat = null;
+		if(!date.length==0){
+			dateformat = new Date(date).toISOString("yyyy-MM-dd hh:mm:ss.S").substring(0,10);
+			//console.log(dateformat);
+		}
+		return dateformat;
+	}
+	
+ 	$("#level").select2({
+        data: level
+    });
+	
+	$("#gender").select2({
+        data: genderData
+    });  
+	
     $(".country-select").select2({
         placeholder: '国家',
         data: d1
@@ -886,6 +960,10 @@
       });
 
   });
+  
+  var newHref = "../customer/edit.html?id="+${crmcase.customerid};
+  $('#addEmail').attr("href",newHref)
+  
 	</script>
 
 
