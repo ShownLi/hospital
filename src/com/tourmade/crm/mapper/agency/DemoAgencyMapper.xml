@@ -33,11 +33,13 @@
 		country,
 		language,
 		creat_time,
+		update_time,
 		isdel
 		)values(
 		#{name,jdbcType=VARCHAR},
 		#{country,jdbcType=VARCHAR},
 		#{language,jdbcType=VARCHAR},
+		NOW(),
 		NOW(),
 		0
 		)

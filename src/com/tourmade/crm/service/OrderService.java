@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -165,21 +166,52 @@ public class OrderService extends BaseService {
 	 * @param email
 	 * @return
 	 */
-	public void MailAlias(int orderid) {
+	public void MailAlias(DemoOrder order) {
+		int orderid = order.getOrderid();
+		
 		String domain = orderMapper.geturl("mail.domain");
 		String url = orderMapper.geturl("creatAlias.url");
 		String real = orderMapper.geturl("mail.real");
-		String param = "alias=customer"+orderid+"@&real="+real+"@&domain="+domain;
-		String param1 = "alias=agency"+orderid+"@&real="+real+"@&domain="+domain;
-		creatAlias(url, param);
+		
+		String cusReal = order.getCustomeremailreal();
+		//cusReal = cusReal.replace("@tourmade.com", "");
+		String agReal = order.getAgencyemailreal();
+		//agReal = agReal.replace("@tourmade.com", "");
+		
+		String pattern="0000000";
+		java.text.DecimalFormat df = new java.text.DecimalFormat(pattern);
+		String formatedOrderid = df.format(orderid);
+		
+		String cusReParam = "alias=cr"+formatedOrderid+"@&real="+real+"@&domain="+domain;
+		String cusSeParam = "alias=cs"+formatedOrderid+"@&real="+cusReal+"&domain="+domain;
+		String agReParam = "alias=ar"+formatedOrderid+"@&real="+real+"@&domain="+domain;
+		String agSeParam = "alias=as"+formatedOrderid+"@&real="+agReal+"&domain="+domain;
+		
+		creatAlias(url, cusReParam);
+		creatAlias(url, cusReParam);
+		creatAlias(url, cusSeParam);
+		creatAlias(url, agReParam);
+		creatAlias(url, agSeParam);
+		
+/*		String param = "alias=customer"+orderid+"@&real="+real+"@&domain="+domain;
+		String param1 = "alias=agency"+orderid+"@&real="+real+"@&domain="+domain;*/
+		//creatAlias(url, param);
+		//creatAlias(url, param1);
+		
+		/*creatAlias(url, param1);
 		creatAlias(url, param1);
+		creatAlias(url, param);*/
+		
 		
 		//将别名存入order表中
-		DemoOrder order = new DemoOrder();
-		order.setOrderid(orderid);
-		order.setAgencyemailalias("agency"+orderid+"@"+domain);
-		order.setCustomeremailalias("customer"+orderid+"@"+domain);
-		updateOrder(order);
+		DemoOrder upOrder = new DemoOrder();
+		upOrder.setOrderid(orderid);
+		upOrder.setAgencyReEmailAlias("ar"+formatedOrderid+"@"+domain);
+		upOrder.setAgencySeEmailAlias("as"+formatedOrderid+"@"+domain);
+		upOrder.setCustomerReEmailAlias("cr"+formatedOrderid+"@"+domain);
+		upOrder.setCustomerSeEmailAlias("cs"+formatedOrderid+"@"+domain);
+	
+		updateOrder(upOrder);
 	}
 	
 	/**
@@ -225,17 +257,32 @@ public class OrderService extends BaseService {
 	public void creatPortal(int id) {
 		DemoCustomer customer = orderMapper.getCustomerById(id);
 		String url = orderMapper.geturl("creatPortal.url");
-		String param="customer_id="+customer.getCustomerid()
+		/*String param="customer_id="+customer.getCustomerid()
 						+"&customer_name_zh="+customer.getZname()
 						+"&customer_name_en="+customer.getEname()
 						+"&email="+customer.getEmail()
 						+"&mobilephone="+customer.getMobilephone()
 						+"&wechat="+customer.getWechat()
-						+"&qq"+customer.getQq();
+						+"&qq"+customer.getQq(); */
 		BufferedReader in = null;
+		
+		
 		try {
+			String param="customer_id="+customer.getCustomerid()
+			+"&customer_name_zh="+URLEncoder.encode(customer.getZname(),"UTF-8")
+			+"&customer_name_en="+customer.getEname()
+			+"&email="+customer.getEmail()
+			+"&mobilephone="+customer.getMobilephone()
+			+"&wechat="+customer.getWechat()
+			+"&qq"+customer.getQq();
+			
+			
+			
+			//String urlNameString = url + "?" + param;
+			//URL realUrl = new URL(urlNameString);
 			String urlNameString = url + "?" + param;
 			URL realUrl = new URL(urlNameString);
+			
 			// 打开和URL之间的连接
 			URLConnection connection = realUrl.openConnection();
 			// 建立实际的连接
@@ -379,8 +426,10 @@ public class OrderService extends BaseService {
 
 		try {
 			DemoOrder u = orderMapper.getOrderById(order.getOrderid());
-			u.setCustomeremailalias(order.getCustomeremailalias());
-			u.setAgencyemailalias(order.getAgencyemailalias());
+			u.setAgencyReEmailAlias(order.getAgencyReEmailAlias());
+			u.setAgencySeEmailAlias(order.getAgencySeEmailAlias());
+			u.setCustomerReEmailAlias(order.getCustomerReEmailAlias());
+			u.setCustomerSeEmailAlias(order.getCustomerSeEmailAlias());
 			if(order.getStatus() != null){
 				u.setStatus(order.getStatus());
 			}
@@ -429,5 +478,6 @@ public class OrderService extends BaseService {
 
 		return r;
 	}
+	
 
 }

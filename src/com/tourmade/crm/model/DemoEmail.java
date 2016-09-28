@@ -23,6 +23,8 @@ public class DemoEmail extends BaseBean<DemoEmail> {
 	
 	private String sendname;
 	
+	private String recievename;
+	
 	private String sender;
 
 	private String reciever;
@@ -34,6 +36,14 @@ public class DemoEmail extends BaseBean<DemoEmail> {
 	private String fileurl;
 	
 	private String mailstatus;
+
+	public String getRecievename() {
+		return recievename;
+	}
+
+	public void setRecievename(String recievename) {
+		this.recievename = recievename;
+	}
 
 	public int getOrderid() {
 		return orderid;

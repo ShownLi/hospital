@@ -31,6 +31,7 @@
 		agency_id,
 		sales_email,
 		creat_time,
+		update_time,
 		isdel
 		)values(
 		#{salesname,jdbcType=VARCHAR},
@@ -38,6 +39,7 @@
 		#{salesportalid,jdbcType=VARCHAR},
 		#{agencyid,jdbcType=VARCHAR},
 		#{salesemail,jdbcType=VARCHAR},
+		NOW(),
 		NOW(),
 		0
 		)

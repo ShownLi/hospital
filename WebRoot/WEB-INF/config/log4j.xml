@@ -14,7 +14,7 @@
 		</filter> 
     </appender>
     <appender name="File" class="org.apache.log4j.RollingFileAppender">     
-        <param name="File" value="logs/error.log" />
+        <param name="File" value="/usr/local/tomcat7/logs/error.log" />
         <!-- 设置是否在重新启动服务时，在原有日志的基础添加新日志 -->  
         <param name="Append" value="true" />
         <param name="MaxFileSize" value="5MB" />  

@@ -1,6 +1,7 @@
 package com.tourmade.crm.service;
 
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
@@ -85,7 +86,11 @@ public class EmailService extends BaseService {
 		template.setBudget(budget);
 		template.setRequirement(crmcase.getRequirement());
 		
-		template.setReplyto("mailto:"+order.getCustomeremailalias());
+		template.setReplyto(order.getCustomerReEmailAlias());
+		
+		if(order.getOrderid() != 0){
+			template.setOrderid(order.getOrderid());
+		}
 		
 		if(crmcase.getRouteid() != null && !"".equals(crmcase.getRouteid())){
 			String url = emailMapper.getRouteUrl();
@@ -214,7 +219,9 @@ public class EmailService extends BaseService {
 			OSSObject ossObject = ossClient.getObject(bucket, key);
 			
 				//InputStreamReader isr = new InputStreamReader(new FileInputStream(f), "UTF-8");
-				reader = new BufferedReader(new InputStreamReader(ossObject.getObjectContent()));
+				reader = new BufferedReader(new InputStreamReader(ossObject.getObjectContent(),"UTF-8"));
+			//reader = new BufferedReader(new InputStreamReader(new FileInputStream("C:/Users/TM/Desktop/order_demo-0926.html"),"UTF-8"));
+				
 				String tempString = null;
 				StringBuffer str = new StringBuffer();
 				int line = 1;
@@ -228,16 +235,16 @@ public class EmailService extends BaseService {
 				if (null != template) {
 					DateFormat format=new SimpleDateFormat("yyyy-MM-dd");
 					if (null != template.getSalesname_zh() && !"".equals(template.getSalesname_zh())) {
-						result = result.replace("${salesname_zh}",
+						result = result.replace("${salesname}",
 								template.getSalesname_zh());
 					}
-					else{result = result.replace("${salesname_zh}","");}
+					else{result = result.replace("${salesname}","");}
 					
-					if (null != template.getSalesname_en() && !"".equals(template.getSalesname_en())) {
+					/*if (null != template.getSalesname_en() && !"".equals(template.getSalesname_en())) {
 						result = result.replace("${salesname_en}",
 								template.getSalesname_en());
 					}
-					else{result = result.replace("${salesname_en}","");}
+					else{result = result.replace("${salesname_en}","");}*/
 					
 					if (null != template.getCustomername_zh() && !"".equals(template.getCustomername_zh())) {
 						result = result.replace("${customername_zh}",
@@ -293,7 +300,7 @@ public class EmailService extends BaseService {
 					}
 					else{result = result.replace("${baby}","");}
 
-					if (null != template.getStart_time() && !"".equals(template.getStart_time())) {
+					/*if (null != template.getStart_time() && !"".equals(template.getStart_time())) {
 						if(template.getStart_time().equals("1")){
 							result = result.replace("${start_time_zh}","已确定");
 							result = result.replace("${start_time_en}","Decided");
@@ -306,7 +313,27 @@ public class EmailService extends BaseService {
 					else{
 						result = result.replace("${start_time_zh}","");
 						result = result.replace("${start_time_en}","");
+						}*/
+					
+					if (null != template.getStart_time() && !"".equals(template.getStart_time())) {
+						if(template.getStart_time().equals("1")){
+							result = result.replace("${uncerDis}","none");
 						}
+						if(template.getStart_time().equals("0")){
+							result = result.replace("${cerDis}","none");
+						}
+					}
+
+					
+					if(template.getOrderid() != 0){
+						String pattern="0000000";
+						  java.text.DecimalFormat df = new java.text.DecimalFormat(pattern);
+						  result = result.replace("${orderid}", ""+df.format(template.getOrderid()));
+					}
+					else{
+						result = result.replace("{orderid", "");
+					}
+					
 					
 					if (null != template.getStart_month() && !"".equals(template.getStart_month())) {
 						result = result.replace("${start_month}",
@@ -445,6 +472,7 @@ public class EmailService extends BaseService {
 								template.getReplyto());
 					}
 					else{result = result.replace("${replyto}","");}
+				
 
 					if (null != template.getRoute_url() && !"".equals(template.getRoute_url())) {
 						result = result.replace("${route_url}",
@@ -478,9 +506,10 @@ public class EmailService extends BaseService {
 			email.setContent(result);
 			email.setAcount("customer");
 			email.setOrderid(order.getOrderid());
-			email.setReciever(order.getAgencyemailreal());
-			email.setSender(order.getCustomeremailalias());
+			email.setReciever(order.getAgencySeEmailAlias());
+			email.setSender(order.getCustomerReEmailAlias());
 			email.setSendname(order.getCustomername());
+			email.setRecievename(order.getSalesname());
 			email.setSubject(order.getCustomername()+"去"+order.getDestination()+"的需求");
 			emailMapper.saveEmail(email);
 		} catch (Exception e) {

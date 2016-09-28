@@ -233,7 +233,7 @@
 		}
 		
 		function addCase(id){
-			window.parent.location = "${rootPath}case/add.html?id="+id;
+			window.parent.location = "${rootPath}case/add1.html?customerid="+id;
 		}
 		
 		function del(id) {

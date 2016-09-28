@@ -251,11 +251,11 @@
 			      jQuery(element).closest('.form-group').removeClass('has-error');
 			    },
 			    invalidHandler : function(){
-			        var qq = $("input[name=qq]").val(),
-			    		wechat = $("input[name=wechat]").val(),
-			    		mobilephone = $("input[name=mobilephone]").val(),
-			    		email = $("input[name=email]").val(),
-			    		telephone = $("input[name=telephone]").val();
+			        var qq = $.trim($("input[name=qq]").val()),
+			    		wechat = $.trim($("input[name=wechat]").val()),
+			    		mobilephone = $.trim($("input[name=mobilephone]").val()),
+			    		email = $.trim($("input[name=email]").val()),
+			    		telephone = $.trim($("input[name=telephone]").val());
 
 			    	// 手机，邮箱，微信，QQ，至少输入一个
 			      	if(qq==""&&wechat==""&&mobilephone==""&&email==""&&telephone==""){
@@ -268,11 +268,11 @@
 			      return false;
 			    },
 			    submitHandler : function(){
-			    	var qq = $("input[name=qq]").val(),
-			    		wechat = $("input[name=wechat]").val(),
-			    		mobilephone = $("input[name=mobilephone]").val(),
-			    		email = $("input[name=email]").val(),
-			    		telephone = $("input[name=telephone]").val();
+			    	var qq = $.trim($("input[name=qq]").val()),
+		    			wechat = $.trim($("input[name=wechat]").val()),
+		    			mobilephone = $.trim($("input[name=mobilephone]").val()),
+		    			email = $.trim($("input[name=email]").val()),
+		    			telephone = $.trim($("input[name=telephone]").val());
 
 			    	// 手机，邮箱，微信，QQ，至少输入一个
 			      	if(qq==""&&wechat==""&&mobilephone==""&&email==""&&telephone==""){
@@ -297,7 +297,7 @@
 
 			// 手机，邮箱，微信，QQ，输入一个以后移除错误提示
 			$(".contact-field").find("input").blur(function(){
-				if($(this).val() !== ""){
+				if($.trim($(this).val()) !== ""){
 					$(".contact-field").removeClass("has-error");
 				}
 			});

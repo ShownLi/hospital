@@ -40,6 +40,7 @@
 		para_sort,
 		isdisplay,
 		creat_time,
+		update_time,
 		isdel
 		)values(
 		#{domain,jdbcType=VARCHAR},
@@ -49,6 +50,7 @@
 		#{depict,jdbcType=VARCHAR},
 		#{sort,jdbcType=VARCHAR},
 		#{isdisplay,jdbcType=VARCHAR},
+		NOW(),
 		NOW(),
 		0
 		)

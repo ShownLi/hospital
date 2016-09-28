@@ -273,7 +273,7 @@
         <h4 class="modal-title" id="myModalLabel">信息</h4>
       </div>
       <div class="modal-body">
-      		该客人没有邮箱，请<a href="../customer/edit.html">添加邮箱</a>后再进行操作
+      		该客人没有邮箱，请<a href="#" id="aAddEmail">添加邮箱</a>后再进行操作
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
@@ -314,7 +314,7 @@
             <div class="col-sm-12">
         	   <a class="submit btn btn-primary">保存</a>
         	 <input type="hidden"  name="caseid" id="caseid" value="" />
-             <input type="hidden"  name="customerid" id="customerid" value="${customer}" />
+             <input type="hidden"  name="customerid" id="customerid" value="${customerid}" />
             </div>
           </form>
         </div>
@@ -345,6 +345,7 @@
     var customer = ${customer};
     var user = ${user};
     var sales = ${sales};
+    //var customerid = ${customerid};
     
     $(".country-select").select2({
         placeholder: '国家',
@@ -439,6 +440,7 @@
   			jQuery("#form").validate({
   				
     				rules: {
+    					customerid: "required",
     					adult: "digits",
     					children: "digits",
               baby: "digits",
@@ -449,6 +451,7 @@
               during: "digits",
     				},
     				messages: {
+    					customerid: "必须选择所属客人",
     					adult: "请输入一个整数",
               children: "请输入一个整数",
               baby: "请输入一个整数",
@@ -525,6 +528,7 @@
 	    					window.parent.location = "${rootPath}order/list.html";
 	    					//$("#nextModal").modal('show');
 	    				} else {
+	    					$("#nextModal").modal('hide');
 	    					$("#NoEmail").modal('show');
 	    				}
 	    			}, "JSON");
@@ -543,9 +547,12 @@
             }
         }); 
         $(".customer-select").change(function() {
-            var val = $(".customer-select").select2("val");
+             var val= $(".customer-select").select2("val");
         	document.getElementById("customerid").value=val;
         });
+        
+	var newHref = "../customer/edit.html?id="+document.getElementById("customerid").getAttribute('value');
+        $('#aAddEmail').attr("href",newHref)
 	</script>
 
 

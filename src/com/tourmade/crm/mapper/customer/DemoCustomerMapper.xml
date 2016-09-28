@@ -4,8 +4,6 @@
 <mapper namespace="com.tourmade.crm.mapper.customer.DemoCustomerMapper">
 
 	<select id="queryCustomer" parameterType="Map" resultType="DemoCustomer">
-		SELECT *
-		FROM (
 		select
 		u.customer_id as customerid,
 		u.customer_name_zh as zname,
@@ -26,7 +24,6 @@
 		from tm_customer u  
 		where u.isdel = 0 
 		order by u.creat_time desc
-		) table_alias
 		limit #{b},#{e}
 	</select>
 
@@ -53,6 +50,7 @@
 		email,
 		birthday,
 		creat_time,
+		update_time,
 		isdel
 		)values(
 		#{zname,jdbcType=VARCHAR},
@@ -68,6 +66,7 @@
 		#{qq,jdbcType=VARCHAR},
 		#{email,jdbcType=VARCHAR},
 		#{birthday,jdbcType=VARCHAR},
+		NOW(),
 		NOW(),
 		0
 		)
