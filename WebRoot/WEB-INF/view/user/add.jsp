@@ -183,7 +183,7 @@
 			      return false;
 			    },
 			    submitHandler : function(){
-			      //form_submit();
+			      form_submit();
 			      return false;
 			    }
 			  });

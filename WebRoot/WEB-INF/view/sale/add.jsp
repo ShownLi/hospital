@@ -56,7 +56,7 @@
             <div class="form-group">
               <label class="col-sm-4 control-label">PortalID <span class="asterisk">*</span></label>
               <div class="col-sm-4">
-                <input type="text" name="salesportalid" placeholder="官网ID" class="form-control" />
+                <input type="text" id="salesportalid" name="salesportalid" placeholder="官网ID" class="form-control" />
               </div>
             </div>
             <div class="form-group">
@@ -129,24 +129,26 @@
       	
 		jQuery("#form").validate({
 			rules: {
-				name: "required",
-				email: "email",
-				code: {
+				salesname: "required",
+				salesemail: "email",
+				salesportalid: {
 					remote:{                           
 		            	url:"${rootPath}validate.do",
 		            	type:"post",
 		            	data: {
-	                        table: function () { return "tm_parameter"},
-	                        field: function () { return "para_value"},
-	                        name: function () { return $("#value").val();},
+	                        table: function () { return "tm_sales"},
+	                        field: function () { return "sales_portal_id"},
+	                        name: function () { return $("#salesportalid").val();},
 	                    }
 		            }
 				}
 			},
 			messages: {
-				name: "请输入销售名称",
-				code: "销售编号已存在",
-				email: "请输入有效的邮箱地址",
+				salesname: "请输入销售名称",
+				salesportalid: {
+					remote:"销售编号已存在"
+				},
+				salesemail: "请输入有效的邮箱地址",
 
 			},
 		    highlight: function(element) {

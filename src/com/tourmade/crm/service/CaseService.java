@@ -373,6 +373,13 @@ public class CaseService extends BaseService {
 
 		return r;
 	}
-
+	
+	public DemoCase validateStartTime(DemoCase u){
+		String startTime = u.getStarttime();
+		if(startTime==null||startTime.isEmpty()||Integer.parseInt(startTime)!=1){
+			u.setStarttime("0");
+		}
+		return u;
+	}
 
 }

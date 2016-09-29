@@ -44,7 +44,14 @@ public class MailTemplate extends BaseBean<MailTemplate> {
 	private String replyto;
 	private String route_url;
 	private String route_name;
+	private int orderid;
 	
+	public int getOrderid() {
+		return orderid;
+	}
+	public void setOrderid(int orderid) {
+		this.orderid = orderid;
+	}
 	public String getCustomername_zh() {
 		return customername_zh;
 	}

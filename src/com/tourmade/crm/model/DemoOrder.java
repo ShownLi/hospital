@@ -71,6 +71,47 @@ public class DemoOrder extends BaseBean<DemoOrder> {
 	private Date creattime;
 	
 	private Date updatetime;
+	
+	private String agencyReEmailAlias;
+	
+	private String agencySeEmailAlias;
+	
+	private String customerReEmailAlias;
+	
+	private String customerSeEmailAlias;
+
+	
+	public String getAgencyReEmailAlias() {
+		return agencyReEmailAlias;
+	}
+
+	public void setAgencyReEmailAlias(String agencyReEmailAlias) {
+		this.agencyReEmailAlias = agencyReEmailAlias;
+	}
+
+	public String getAgencySeEmailAlias() {
+		return agencySeEmailAlias;
+	}
+
+	public void setAgencySeEmailAlias(String agencySeEmailAlias) {
+		this.agencySeEmailAlias = agencySeEmailAlias;
+	}
+
+	public String getCustomerReEmailAlias() {
+		return customerReEmailAlias;
+	}
+
+	public void setCustomerReEmailAlias(String customerReEmailAlias) {
+		this.customerReEmailAlias = customerReEmailAlias;
+	}
+
+	public String getCustomerSeEmailAlias() {
+		return customerSeEmailAlias;
+	}
+
+	public void setCustomerSeEmailAlias(String customerSeEmailAlias) {
+		this.customerSeEmailAlias = customerSeEmailAlias;
+	}
 
 	public int getOrderid() {
 		return orderid;

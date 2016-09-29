@@ -139,6 +139,7 @@
 	                		if(data==c[i].id){
 	                			return c[i].text
 	                		}
+	                		else{return ""}
 	                	}
 	                },
 	                  targets: 1
@@ -151,6 +152,7 @@
 		                		if(data==l[i].id){
 		                			return l[i].text
 		                		}
+		                		else{return ""}
 		                	}
 		                },
 		                  targets: 2

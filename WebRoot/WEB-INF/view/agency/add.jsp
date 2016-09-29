@@ -44,7 +44,7 @@
 	            <div class="form-group col-sm-4">
 	              <label class="col-sm-4 control-label">地接社名称 <span class="asterisk">*</span></label>
 	              <div class="col-sm-8">
-	                <input type="text" name="name" placeholder="地接社名称" class="form-control" />
+	                <input type="text" id="agencyname" name="name" placeholder="地接社名称" class="form-control" />
 	              </div>
 	            </div>			   
 	            <div class="form-group col-sm-4">
@@ -138,10 +138,24 @@
 
 		jQuery("#form").validate({
 			rules: {
-				name: "required",
+				name: {  
+		         	required:true,  
+		            remote:{                           
+		            	url:"${rootPath}validate.do",
+		            	type:"post",
+		            	data: {
+	                         table: function () { return "tm_agency"},
+	                         field: function () { return "agency_name"},
+	                         name: function () { return $("#agencyname").val();},
+	                         }
+		            }
+		        }
 			},
 			messages: {
-				name: "请输入地接社名",
+				name: {
+					required:"请输入地接社名",
+					remote:"地接社已存在，请重新输入"
+				}
 			},
 		    highlight: function(element) {
 		      jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');

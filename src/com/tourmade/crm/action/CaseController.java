@@ -78,7 +78,7 @@ public class CaseController extends BaseSimpleFormController {
 		return result;
 	}
 	@RequestMapping(value = "/add.html", method = { RequestMethod.POST, RequestMethod.GET })
-	public String add(Model model,String id) {
+	public String add(Model model) {
 		/*List<DemoList> customer = null;
 		JSONArray customerresult = null;
 		
@@ -88,6 +88,7 @@ public class CaseController extends BaseSimpleFormController {
 			customerresult = JSONArray.fromObject(customer);
 			model.addAttribute("customer",customerresult);
 			}*/
+		//String customerid = "";
 		
 		String country = "country";
 		String language = "case.preferlanguage";
@@ -147,14 +148,15 @@ public class CaseController extends BaseSimpleFormController {
 		model.addAttribute("flight",flightresult);
 		model.addAttribute("user",userresult);
 		
+		//model.addAttribute("customerid", customerid);
 		
-		if (null != id && !"".equals(id)) {
+		/*if (null != id && !"".equals(id)) {
 			int i = Integer.parseInt(id);
 			customer = service.getCustomerById(i);
 			customerresult = JSONArray.fromObject(customer);
 			model.addAttribute("customer",customerresult);
 			model.addAttribute("customerid",i);
-			}
+			}*/
 		
 		return "/case/add";
 	}
@@ -247,7 +249,7 @@ public class CaseController extends BaseSimpleFormController {
 		if (null != id && !"".equals(id)) {
 			int i = Integer.parseInt(id);
 			DemoCase u = service.getCaseById(i);
-			
+			u=service.validateStartTime(u);
 			DemoCustomer cus=service.getCustomerInfoById(u.getCustomerid());
 			String country = "country";
 			String language = "case.preferlanguage";
