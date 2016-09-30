@@ -118,9 +118,9 @@
 		sales_id,
 		sales_name,
 		customer_email_real,
-		customer_email_alias,
+
 		agency_email_real,
-		agency_email_alias,
+
 		destination,
 		budget,
 		status,
@@ -144,9 +144,9 @@
 		#{salesid,jdbcType=VARCHAR},
 		#{salesname,jdbcType=VARCHAR},
 		#{customeremailreal},
-		#{customeremailalias},
+
 		#{agencyemailreal},
-		#{agencyemailalias},
+
 		#{destination,jdbcType=VARCHAR},
 		#{budget,jdbcType=VARCHAR},
 		#{status,jdbcType=VARCHAR},

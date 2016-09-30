@@ -47,12 +47,12 @@
                 <input type="text" name="salesname" placeholder="销售名" class="form-control" value="${sales.salesname }" />
               </div>
             </div>
-            <div class="form-group">
+            <%-- <div class="form-group">
               <label class="col-sm-4 control-label">英文名称 <span class="asterisk">*</span></label>
               <div class="col-sm-4">
                 <input type="text" name="salesnameen" placeholder="销售名" class="form-control" value="${sales.salesnameen }" />
               </div>
-            </div>
+            </div> --%>
             <div class="form-group">
               <label class="col-sm-4 control-label">PortalID <span class="asterisk">*</span></label>
               <div class="col-sm-4">
