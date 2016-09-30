@@ -441,6 +441,7 @@
   				
     				rules: {
     					customerid: "required",
+    					source: "required",
     					adult: "digits",
     					children: "digits",
               baby: "digits",
@@ -452,6 +453,7 @@
     				},
     				messages: {
     					customerid: "必须选择所属客人",
+    					source:"请选择询单来源",
     					adult: "请输入一个整数",
               children: "请输入一个整数",
               baby: "请输入一个整数",

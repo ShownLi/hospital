@@ -201,7 +201,7 @@
 		        edit($(this).attr('id'));
 		    } );
 			
-			$('#dataTable tbody').on( 'click', 'a.btn-addCase', function () {
+			$('#dataTable tbody').on( 'click', 'a.btn-primary', function () {
 		        var data = t.row($(this).parents('tr')).data();
 		        //alert($(this).attr('id'));
 		        addCase($(this).attr('id'));

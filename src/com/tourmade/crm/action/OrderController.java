@@ -141,11 +141,15 @@ public class OrderController extends BaseSimpleFormController {
 		if (null != id && !"".equals(id)) {
 			int i = Integer.parseInt(id);
 			DemoOrder u = service.getOrderById(i);
-			String country = "order.status";
-			List<DemoList> v = service.getParameterInfo(country);
-			JSONArray statusresult = JSONArray.fromObject(v);
+			String status = "order.status";
+			String country = "country";
+			List<DemoList> v1 = service.getParameterInfo(status);
+			List<DemoList> v2 = service.getParameterInfo(country);
+			JSONArray statusresult = JSONArray.fromObject(v1);
+			JSONArray countryresult = JSONArray.fromObject(v2);
 			model.addAttribute("status",statusresult);
 			model.addAttribute("order",u);
+			model.addAttribute("country",countryresult);
 		}
 		return "/order/edit";
 	}

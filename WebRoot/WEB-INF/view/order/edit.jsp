@@ -61,7 +61,7 @@
                     <div class="form-group col-sm-4">
                       <label class="col-sm-4 control-label">目的地</label>
                       <div class="col-sm-8">
-                        <input type="text" name="destination" placeholder="目的地" class="form-control" readonly value="${order.destination}" />
+                        <input type="text" name="destination" placeholder="目的地" class="destination-select fullwidth" readonly value="${order.destination}" />
                       </div>
                     </div>
                     <div class="form-group col-sm-4">
@@ -380,11 +380,17 @@
 
 <script type="text/javascript">
 	var s = ${status};
+	var d1 = ${country};
 	
 	$(".status-select").select2({
 		data: s
 	})
 
+	$(".destination-select").select2({
+        placeholder: '国家',
+        data: d1
+    });
+	
 	if("${order.status}"==2){
       $(".form3").show();
       $("#btn-chengxing").attr("disabled",true);

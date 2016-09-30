@@ -125,7 +125,7 @@
                 <div class="form-group col-sm-4">
                   <label class="col-sm-4 control-label">目的地</label>
                   <div class="col-sm-8">
-                    <input type="text" name="destination" class="form-control" readonly value="${crmcase.destination}" />
+                    <input type="text" name="destination" class="destination-select fullwidth" readonly value="${crmcase.destination}" />
                   </div>
                 </div>
                 <%--  <div class="form-group col-sm-4">
