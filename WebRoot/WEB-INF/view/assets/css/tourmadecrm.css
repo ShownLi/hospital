@@ -104,9 +104,9 @@ label.error{
 .sorting_desc{
 	background: none !important;
 }
-#dataTable_filter{
+/*#dataTable_filter{
 	display: none;
-}
+}*/
 #dataTable_wrapper{
 	position: relative;
 }
@@ -115,9 +115,9 @@ label.error{
 	bottom: -15px;
 	left: 265px;
 }
-.dataTables_filter {
+/*.dataTables_filter {
 	display: none;
-}
+}*/
 .dataTables_length {
 	position: absolute;
 	bottom: -15px;
