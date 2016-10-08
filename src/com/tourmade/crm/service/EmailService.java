@@ -219,8 +219,8 @@ public class EmailService extends BaseService {
 			OSSObject ossObject = ossClient.getObject(bucket, key);
 			
 				//InputStreamReader isr = new InputStreamReader(new FileInputStream(f), "UTF-8");
-				reader = new BufferedReader(new InputStreamReader(ossObject.getObjectContent(),"UTF-8"));
-			//reader = new BufferedReader(new InputStreamReader(new FileInputStream("C:/Users/TM/Desktop/order_demo-0926.html"),"UTF-8"));
+				//reader = new BufferedReader(new InputStreamReader(ossObject.getObjectContent(),"UTF-8"));
+			reader = new BufferedReader(new InputStreamReader(new FileInputStream("C:/Users/TM/Desktop/order.html"),"UTF-8"));
 				
 				String tempString = null;
 				StringBuffer str = new StringBuffer();

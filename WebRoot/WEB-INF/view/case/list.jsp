@@ -251,8 +251,9 @@
 				                		if(data==user[i].id){
 				                			return user[i].text
 				                		}
-				                		else{return ""}
+				                		
 				                	}
+				                	
 			                	}
 			                	else{return ""}
 			                },
