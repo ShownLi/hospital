@@ -630,12 +630,12 @@
 	$("#btn-chengxing1").click(function(){
 		form3_submit();
 	});
-    // $(".cModal .submit").click(function(){
-    // 	form1_submit();
-    //   });
-    // $(".bModal .submit").click(function(){
-    // 	form2_submit();
-    //   });
+     $(".cModal .submit").click(function(){
+     	form1_submit();
+       });
+     $(".bModal .submit").click(function(){
+     	form2_submit();
+       }); 
     $("#btn-weichengxing").click(function(){
         $(".bModal").modal('show');
         return false;
@@ -658,7 +658,7 @@
 		
 	function form1_submit() {
 		var f = $("#form1").serialize();
-		$.post('${rootPath}order/edit.do', f, function(result) {
+		$.post('${rootPath}order/edit_3.do', f, function(result) {
 			var rmsg = result.msg;
 			if (result.success) {
 				window.parent.location = "${rootPath}order/edit.html?id=${order.orderid}";
@@ -670,7 +670,7 @@
 	}
 	function form2_submit() {
 		var f = $("#form2").serialize();
-		$.post('${rootPath}order/edit.do', f, function(result) {
+		$.post('${rootPath}order/edit_4.do', f, function(result) {
 			var rmsg = result.msg;
 			if (result.success) {
 				window.parent.location = "${rootPath}order/edit.html?id=${order.orderid}";

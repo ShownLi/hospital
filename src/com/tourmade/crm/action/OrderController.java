@@ -19,6 +19,7 @@ import com.tourmade.crm.common.model.base.value.baseconfig.Json;
 import com.tourmade.crm.common.model.base.value.baseconfig.PageHelper;
 import com.tourmade.crm.model.DemoOrder;
 import com.tourmade.crm.model.DemoCase;
+import com.tourmade.crm.model.DemoCustomer;
 import com.tourmade.crm.model.DemoList;
 import com.tourmade.crm.service.CaseService;
 import com.tourmade.crm.service.EmailService;
@@ -95,9 +96,15 @@ public class OrderController extends BaseSimpleFormController {
 
 		Json j = new Json();
 		
+		if(order.getCaseid()!=0){
+		   DemoCustomer customer = service.getCustomerByCaseId(order.getCaseid());
+		   order.setCustomerid(customer.getCustomerid());
+		}
+		
 		try {
 			boolean is = service.validatemail(order.getCustomerid());
 			//验证客人有邮箱
+			
 			if(is)
 			{
 				boolean portalid = service.validateportalid(order.getCustomerid());

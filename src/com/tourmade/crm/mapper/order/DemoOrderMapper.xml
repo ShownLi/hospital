@@ -232,6 +232,21 @@
 		u.qq
 		from tm_customer u where u.customer_id = #{id}
 	</select>	
+	
+	<select id="getCustomerByCaseId" parameterType="int" resultType="DemoCustomer">
+		select
+		u.customer_id as customerid,
+		u.customer_name_zh as zname,
+		u.customer_name_en as ename,
+		u.email,
+		u.mobilephone,
+		u.wechat,
+		u.qq
+		from tm_customer u
+		left join tm_case v
+		on v.customer_id = u.customer_id
+		where v.case_id = #{caseid}
+	</select>	
 
 	<select id="getCaseById" parameterType="int" resultType="DemoCase">
 		select

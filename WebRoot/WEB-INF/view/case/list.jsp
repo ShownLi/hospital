@@ -145,6 +145,7 @@
                 </div>
             <div class="col-sm-12">
              <a class="submit btn btn-primary">保存</a>
+              <input  type="hidden" id="caseid" name="caseid" value="#" />
             </div>
             </form>
         </div>
@@ -334,6 +335,7 @@
 		
 		function addorder(id) {
 			$("#nextModal").modal('show');
+			$('#caseid').attr("value",id );
 		}
 		
 		function del(id) {

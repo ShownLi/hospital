@@ -478,6 +478,17 @@ public class OrderService extends BaseService {
 
 		return r;
 	}
+
+	public DemoCustomer getCustomerByCaseId(int caseid) {
+		DemoCustomer r = null;
+		try {
+			r = orderMapper.getCustomerByCaseId(caseid);
+		} catch (Exception e) {
+			logger.error("OrderService.getOrderById() --> " + caseid + "-->" + e.getMessage());
+			r = null;
+		}
+		return r;
+	}
 	
 
 }

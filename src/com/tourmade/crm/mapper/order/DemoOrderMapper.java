@@ -50,4 +50,6 @@ public interface DemoOrderMapper extends BaseMapper {
 	public String getCustomerEmailReal(int customerid);
 	
 	public List<DemoList> getParameterInfo(String domain);
+
+	public DemoCustomer getCustomerByCaseId(int caseid);
 }
