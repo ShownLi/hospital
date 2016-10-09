@@ -158,7 +158,7 @@
 		#{groupprice,jdbcType=VARCHAR},
 		#{currency,jdbcType=VARCHAR},
 		#{exchangerate,jdbcType=VARCHAR},
-		#{lastresponse,jdbcType=VARCHAR},
+		NOW(),
 		NOW(),
 		0
 		)

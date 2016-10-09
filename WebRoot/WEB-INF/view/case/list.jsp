@@ -268,7 +268,7 @@
 				                		if(data==cs[i].id){
 				                			return cs[i].text
 				                		}
-				                		else{return ""}
+				                		
 				                	}
 			                	}
 			                	else{return ""}

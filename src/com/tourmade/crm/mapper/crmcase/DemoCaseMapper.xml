@@ -199,6 +199,46 @@
 		from tm_case u where u.isdel = 0 and u.case_id = #{caseid}
 	</select>
 	
+	<select id="getCaseByOrderId" parameterType="int" resultType="DemoCase">
+		select
+		u.case_id as caseid,
+		u.customer_id as customerid, 
+		u.operator as operator,
+		u.prefer_language as preferlanguage,
+		u.contact_type as contacttype,
+		u.with_who as withwho,
+		u.adult as adult,
+		u.children as children,
+		u.baby as baby,
+		u.start_time as starttime,
+		u.start_month as startmonth,
+		u.during as during,
+		u.start_date as startdate,
+		u.end_date as enddate,
+		u.requirement as requirement,
+		u.route as route,
+		u.hotel as hotel,
+		u.meals as meals,
+		u.guide as guide,
+		u.budget as budget,
+		u.sales_id as salesid,
+		u.destination as destination,
+		u.source as source,
+		u.promote_code as promotecode,
+		u.status as status,
+		u.tailormade as tailormade,
+		u.passport as passport,
+		u.visa as visa,
+		u.flight as flight,
+		u.ip_address as ipaddress,
+		u.creat_time as creattime,
+		u.isdel
+		from tm_case u 
+		left join tm_order v
+		on u.case_id = v.case_id
+		where u.isdel = 0 and v.order_id = #{orderid};
+	</select>
+	
 	<select id="getParameterInfo" parameterType="String" resultType="DemoList">
 		select
 		u.para_domain,
@@ -274,10 +314,12 @@
 	
 	<select id="caseStatus" parameterType="int" resultType="int">
 		select count(u.status) from tm_order u
-		where	u.status != 3 
+		where	u.status != 4 
 		and u.case_id = #{id}
 		and u.isdel = 0
 	</select>
+	
+	
 	
 	<update id="deleteCaseById" parameterType="int" flushCache="true"
 		statementType="PREPARED">

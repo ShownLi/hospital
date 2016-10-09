@@ -41,12 +41,16 @@ public class OrderController extends BaseSimpleFormController {
 	public String list(Model model) {
 		String country = "country";
 		String status = "order.status";
+		String reason = "order.reason";
 		List<DemoList> w = service.getParameterInfo(status);
 		List<DemoList> v = service.getParameterInfo(country);
+		List<DemoList> r = service.getParameterInfo(reason);
 		JSONArray countryresult = JSONArray.fromObject(v);
 		JSONArray statusresult = JSONArray.fromObject(w);
+		JSONArray reasonresult = JSONArray.fromObject(r);
 		model.addAttribute("orderstatus",statusresult);
 		model.addAttribute("destination",countryresult);
+		model.addAttribute("reason",reasonresult);
 		return "/order/list";
 	}
 	
@@ -143,20 +147,24 @@ public class OrderController extends BaseSimpleFormController {
 			DemoOrder u = service.getOrderById(i);
 			String status = "order.status";
 			String country = "country";
+			String reason = "order.reason";
 			List<DemoList> v1 = service.getParameterInfo(status);
 			List<DemoList> v2 = service.getParameterInfo(country);
+			List<DemoList> v3 = service.getParameterInfo(reason);
 			JSONArray statusresult = JSONArray.fromObject(v1);
 			JSONArray countryresult = JSONArray.fromObject(v2);
+			JSONArray reasonresult = JSONArray.fromObject(v3);
 			model.addAttribute("status",statusresult);
 			model.addAttribute("order",u);
 			model.addAttribute("country",countryresult);
+			model.addAttribute("reason",reasonresult);
 		}
 		return "/order/edit";
 	}
 
-	@RequestMapping(value = "/edit.do")
+	@RequestMapping(value = "/edit_3.do")
 	@ResponseBody
-	public Json doEdit(HttpServletRequest request, HttpSession session, Model model, DemoOrder order) {
+	public Json doEdit_3(HttpServletRequest request, HttpSession session, Model model, DemoOrder order) {
 
 		Json j = new Json();
 		DemoOrder order1 = service.getOrderById(order.getOrderid());
@@ -165,19 +173,42 @@ public class OrderController extends BaseSimpleFormController {
 		try {
 
 			service.updateOrder(order);
-			
-			if(order.getGroupnumber()!= null){				
+				
 				crmcase.setStatus("3");
 				service.customerstatus(order1.getCustomerid(), "3");
 				caseservice.updateCase(crmcase);
-			}
-			if(order1.getReason() != null){
-				int i = caseservice.casestatus(order1.getCaseid());
+		
+			j.setSuccess(true);
+		} catch (Exception e) {
+			j.setSuccess(false);
+			logger.error("OrderController.doEdit() --> " + order.toString() + "\n" + e.getMessage());
+		}
+		
+		return j;
+	}
+	
+	
+	@RequestMapping(value = "/edit_4.do")
+	@ResponseBody
+	public Json doEdit_4(HttpServletRequest request, HttpSession session, Model model, DemoOrder order) {
+
+		Json j = new Json();
+		DemoOrder order1 = service.getOrderById(order.getOrderid());
+		//DemoCase crmcase = caseservice.getCaseById(order1.getCaseid());
+		
+		DemoCase crmcase = caseservice.getCaseByOrderId(order.getOrderid());
+		try {
+
+			service.updateOrder(order);
+			
+	
+
+				int i = caseservice.casestatus(order.getCaseid());
 				if(i==0){
 					crmcase.setStatus("4");
 					caseservice.updateCase(crmcase);
 				}
-			}
+			
 			j.setSuccess(true);
 		} catch (Exception e) {
 			j.setSuccess(false);

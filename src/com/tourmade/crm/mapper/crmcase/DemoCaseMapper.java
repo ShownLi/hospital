@@ -44,4 +44,6 @@ public interface DemoCaseMapper extends BaseMapper {
 	
 	public List<DemoList> getSalesByAgency(String destination);
 
+	public DemoCase getCaseByOrderId(int orderid);
+
 }

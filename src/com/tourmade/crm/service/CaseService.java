@@ -382,4 +382,15 @@ public class CaseService extends BaseService {
 		return u;
 	}
 
+	public DemoCase getCaseByOrderId(int orderid) {
+		DemoCase r = null;
+		try {
+			r = caseMapper.getCaseByOrderId(orderid);
+		} catch (Exception e) {
+			logger.error("CaseService.getCaseByOrderId() --> " + orderid + "-->" + e.getMessage());
+			r = null;
+		}
+		return r;
+	}
+
 }

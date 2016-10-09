@@ -164,7 +164,7 @@
                       <div class="form-group col-sm-6">
                         <label class="col-sm-4 control-label">若未成行，原因是</label>
                         <div class="col-sm-6">
-                          <input class="form-control reason-select" name="reason" value="${order.reason}" placeholder="若未成行，原因是" />
+                          <input class="reason-select fullwidth" name="reason" value="${order.reason}" placeholder="若未成行，原因是" />
                         </div>
                     	<button id="btn-weichengxing1" class="btn btn-primary">更改</button>&nbsp;
                       </div>
@@ -355,7 +355,7 @@
                   <div class="form-group col-sm-12">
                     <label class="col-sm-4 control-label">若未成行，原因是</label>
                     <div class="col-sm-8">
-                      <input class="form-control reason-select" name="reason" placeholder="若未成行，原因是" />
+                      <input class="reason-select fullwidth" name="reason" placeholder="若未成行，原因是" />
                       <input type="hidden" name="orderid" value="${order.orderid}" />	
                       <input type="hidden" name="caseid" value="${order.caseid}" />
                     </div>
@@ -381,6 +381,7 @@
 <script type="text/javascript">
 	var s = ${status};
 	var d1 = ${country};
+	var r = ${reason};
 	
 	$(".status-select").select2({
 		data: s
@@ -390,7 +391,12 @@
         placeholder: '国家',
         data: d1
     });
-	
+    
+    $(".reason-select").select2({
+    	placeholder:"未成行原因",
+    	data:r
+    })
+    
 	if("${order.status}"==2){
       $(".form3").show();
       $("#btn-chengxing").attr("disabled",true);
@@ -643,6 +649,8 @@
     $(".bModal .cancel").click(function(){
         $(".bModal").modal("hide");
    	});
+
+    
 	// Date Picker
 	jQuery(".datepicker").datepicker({
 		  dateFormat: "yy-mm-dd"

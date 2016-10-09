@@ -186,7 +186,7 @@
                   <div class="form-group col-sm-12">
                     <label class="col-sm-4 control-label">若未成行，原因是</label>
                     <div class="col-sm-8">
-                      <input class="form-control reason-select" name="reason" placeholder="若未成行，原因是" />
+                      <input class="reason-select fullwidth" name="reason" placeholder="若未成行，原因是" />
                       <input  type="hidden" id="orderid1" name="orderid" />
                       <input  type="hidden" name="caseid" value="0"/>
                       <input  type="hidden" name="customerid" value="0"/>
@@ -207,6 +207,7 @@
 	<script type="text/javascript">
 	var os = ${orderstatus};
 	var d = ${destination};
+	var r = ${reason};
 	
 		jQuery(document).ready(function() {
 
@@ -290,7 +291,7 @@
 		         //alert($(this).attr('id'));
 		         edit($(this).attr('id'));
 		     } );
-
+			
 			 $('#dataTable tbody').on( 'click', 'a.btn-primary', function () {
 		         var data = t.row($(this).parents('tr')).data();
 		         //alert($(this).attr('id'));
@@ -339,9 +340,21 @@
 	    $(".bModal .submit").click(function(){
 	    	form2_submit();
 	      });
+	    
+	    $(".cModal .cancel").click(function(){
+	    	$(".cModal").modal('hide');
+	    });
+	    $(".bModal .cancel").click(function(){
+	    	$(".bModal").modal('hide');
+	    })
+	    
+	    $(".reason-select").select2({
+	    	placeholder:"未成行原因",
+	    	data:r
+	    })    
 		function form1_submit() {
 			var f = $("#form1").serialize();
-			$.post('${rootPath}order/edit.do', f, function(result) {
+			$.post('${rootPath}order/edit_3.do', f, function(result) {
 				var rmsg = result.msg;
 				if (result.success) {
 					window.parent.location = "${rootPath}order/list.html";
@@ -353,7 +366,7 @@
 		}
 		function form2_submit() {
 			var f = $("#form2").serialize();
-			$.post('${rootPath}order/edit.do', f, function(result) {
+			$.post('${rootPath}order/edit_4.do', f, function(result) {
 				var rmsg = result.msg;
 				if (result.success) {
 					window.parent.location = "${rootPath}order/list.html";
