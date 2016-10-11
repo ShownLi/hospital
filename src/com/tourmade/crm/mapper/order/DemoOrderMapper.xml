@@ -4,34 +4,31 @@
 <mapper namespace="com.tourmade.crm.mapper.order.DemoOrderMapper">
 
 	<select id="queryOrder" parameterType="Map" resultType="DemoOrder">
-		SELECT *
-		FROM (
 		select
-		u.order_id as orderid,
-		u.customer_id as customerid,
-		u.customer_name as customername,
-		u.agency_id as agencyid,
-		u.agency_name as agencyname,
-		u.sales_id as salesid,
-		u.sales_name as salesname,
-		u.destination as destination,
-		u.budget as budget,
-		u.status as status,
-		u.reason as reason,
-		u.group_time as grouptime,
-		u.group_number as groupnumber,
-		u.start_date as startdate,
-		u.end_date as enddate,
-		u.group_price as groupprice,
-		u.currency as currency,
-		u.exchange_rate as exchangerate,
-		u.last_response as lastresponse,	
-		u.creat_time as creattime,
-		u.isdel
+			u.order_id as orderid,
+			u.customer_id as customerid,
+			u.customer_name as customername,
+			u.agency_id as agencyid,
+			u.agency_name as agencyname,
+			u.sales_id as salesid,
+			u.sales_name as salesname,
+			u.destination as destination,
+			u.budget as budget,
+			u.status as status,
+			u.reason as reason,
+			u.group_time as grouptime,
+			u.group_number as groupnumber,
+			u.start_date as startdate,
+			u.end_date as enddate,
+			u.group_price as groupprice,
+			u.currency as currency,
+			u.exchange_rate as exchangerate,
+			u.last_response as lastresponse,	
+			u.creat_time as creattime,
+			u.isdel as isdel
 		from tm_order u  
 		where u.isdel = 0 
 		order by u.creat_time desc
-		) table_alias
 		limit #{b},#{e}
 	</select>
 

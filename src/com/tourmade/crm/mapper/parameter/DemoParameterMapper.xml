@@ -4,22 +4,19 @@
 <mapper namespace="com.tourmade.crm.mapper.parameter.DemoParameterMapper">
 
 	<select id="queryParameter" parameterType="Map" resultType="DemoParameter">
-		SELECT *
-		FROM (
 		select
-		u.para_id as parameterid,
-		u.para_domain as domain,
-		u.para_value as value,
-		u.chinese as chinese,
-		u.english as english,
-		u.para_sort as sort,
-		u.para_desc as depict,
-		u.isdisplay as isdisplay,
-		u.creat_time as creat_time,
-		u.isdel as isdel
+			u.para_id as parameterid,
+			u.para_domain as domain,
+			u.para_value as value,
+			u.chinese as chinese,
+			u.english as english,
+			u.para_sort as sort,
+			u.para_desc as depict,
+			u.isdisplay as isdisplay,
+			u.creat_time as creat_time,
+			u.isdel as isdel
 		from tm_parameter u where u.isdel = 0
 		order by u.creat_time
-		) table_alias
 		limit #{b},#{e}
 	</select>
 

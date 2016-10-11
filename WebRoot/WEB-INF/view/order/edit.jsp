@@ -82,7 +82,7 @@
                     <button id="btn-weichengxing" class="btn btn-primary">未成行</button>&nbsp;
                     <button class="btn btn-back">返回</button>
 					<input type="hidden" name="orderid" value="${order.orderid}" />	
-        		    </div><!-- panel-footer -->
+        		</div><!-- panel-footer -->
             </div>
          </form>   
       			</div><!-- panel -->
@@ -358,12 +358,13 @@
                       <input class="reason-select fullwidth" name="reason" placeholder="若未成行，原因是" />
                       <input type="hidden" name="orderid" value="${order.orderid}" />	
                       <input type="hidden" name="caseid" value="${order.caseid}" />
+                      <input type="hidden" name="status" value="3" />
                     </div>
                   </div>
               </div><!-- bModal-body -->
           </div>
           <div class="modal-footer align-center">
-              <button class="btn btn-primary">保存</button>
+              <button class="btn btn-primary" onclick="form2_submit()">保存</button>
               <a class="cancel btn btn-primary" >取消</a>
           </div>
       </form>

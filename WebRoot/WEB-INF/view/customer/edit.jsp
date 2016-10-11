@@ -37,7 +37,7 @@
           <h4 class="panel-title">客人基本信息</h4>
           <p>填写下表，完成客人信息修改。</p>
         </div>
-        <form class="form-horizontal form-bordered" id="form">
+        <form class="form-horizontal form-bordered" id="form-base">
         <div class="panel-body panel-body-nopadding">
           
 					<div class="section-block">
@@ -203,7 +203,7 @@
 						</table>
 					</div>
 					<!-- 添加注释 -->
-					<form id="comment" class="form">
+					<form id="form-comment" class="form">
 						<div class="form-group col-sm-6 col-sm-offset-3">
 						    <textarea name="content" class="form-control" rows="5"></textarea>
 						    <input  type="hidden" name="userid" value="${loginUser.userid}" />
@@ -276,23 +276,23 @@
 	<script src="${rootPath}assets/js/jquery.validate.min.js"></script>
 	
 	<script type="text/javascript">
-	var l = ${level};
-	var p = ${promote};
-	var a = ${agegroup};
+	var leval = ${level};
+	var promote = ${promote};
+	var agegroup = ${agegroup};
 	var source = ${source};
 	var cs = ${casestatus};
 	var c = ${c};
 	var user = ${user};
 	$(".promote-select").select2({
 		placeholder: '选择一个客人来源',
-	  	data: p
+	  	data: promote
 	});
 	$(".agegroup-select").select2({
 		placeholder: '选择一个年龄段',
-	  	data: a
+	  	data: agegroup
 	});
 	$(".level-select").select2({
-	  	data: l
+	  	data: leval
 	});	
 	
 	if("${customer.gender}"=='male'){
@@ -463,7 +463,7 @@
 			maxDate: 0
 		});
 
-		jQuery("#form").validate({
+		jQuery("#form-base").validate({
 			rules: {
 				zname: "required",
 				qq: "number",
@@ -503,7 +503,7 @@
 		      		$(".contact-note").removeClass("noted");
 		      		$(".contact-field").removeClass("has-error");
 
-			      	form_submit();
+			      	formBase_submit();
 			      	return false;
 			    }
 		    }
@@ -528,9 +528,9 @@
 		});
 		
 	});
-//			      
-		function form_submit() {
-			var f = $("#form").serialize();
+	      
+		function formBase_submit() {
+			var f = $("#form-base").serialize();
 			$.post('${rootPath}customer/edit.do', f, function(result) {
 				var rmsg = result.msg;
 				if (result.success) {
@@ -574,7 +574,7 @@
 		  			    { data: "creattime" }
 		    ]
 			});
-		jQuery("#comment").validate({
+		jQuery("#form-comment").validate({
 
 			rules: {
 				content: "required"
@@ -592,12 +592,12 @@
 				return false;
 			},
 			submitHandler : function(){
-				comment_submit();
+				formComment_submit();
 			    return false;
 			}
 		});
-		function comment_submit() {
-			var f = $("#comment").serialize();
+		function formComment_submit() {
+			var f = $("#form-comment").serialize();
 			$.post('${rootPath}comment/add.do', f, function(result) {
 				var rmsg = result.msg;
 				if (result.success) {

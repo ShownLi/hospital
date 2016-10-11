@@ -98,11 +98,10 @@
 
 
 	<script type="text/javascript">
-	var a = ${agegroup};
-	var l = ${level};
+	var agegroup = ${agegroup};
+	var leval = ${level};
 	
 		jQuery(document).ready(function() {
-
 			$(".nav-parent").eq(2).addClass("nav-active");
       		$(".nav-parent").eq(2).find(".children").show();
 			
@@ -144,9 +143,9 @@
 		                data: "agegroup",
 		                orderable: false,
 		                render: function ( data ) {
-		                	for(var i=0;i <  a.length;i++){
-		                		if(data==a[i].id){
-		                			return a[i].text
+		                	for(var i=0;i <  agegroup.length;i++){
+		                		if(data==agegroup[i].id){
+		                			return agegroup[i].text
 		                		}
 		                		if(data==''){return '无';}
 		                	}
@@ -157,9 +156,9 @@
 			                data: "level",
 			                orderable: false,
 			                render: function ( data ) {
-			                	for(var i=0;i <  l.length;i++){
-			                		if(data==l[i].id){
-			                			return l[i].text
+			                	for(var i=0;i <  leval.length;i++){
+			                		if(data==leval[i].id){
+			                			return leval[i].text
 			                		}
 			                		if(data==''){return '无';}
 			                	}
@@ -197,19 +196,16 @@
 			
 			$('#dataTable tbody').on( 'click', 'a.btn-success', function () {
 		        var data = t.row($(this).parents('tr')).data();
-		        //alert($(this).attr('id'));
 		        edit($(this).attr('id'));
 		    } );
 			
 			$('#dataTable tbody').on( 'click', 'a.btn-primary', function () {
 		        var data = t.row($(this).parents('tr')).data();
-		        //alert($(this).attr('id'));
 		        addCase($(this).attr('id'));
 		    } );
 
 			$('#dataTable tbody').on( 'click', 'a.btn-danger', function () {
 		        var data = t.row($(this).parents('tr')).data();
-		        //alert($(this).attr('id'));
 		        del($(this).attr('id'));
 		    } );
 			
@@ -252,8 +248,7 @@
 				error: function(o) {
 					alert(2);
 				}
-			});
-			
+			});			
 		}
 		
 	</script>

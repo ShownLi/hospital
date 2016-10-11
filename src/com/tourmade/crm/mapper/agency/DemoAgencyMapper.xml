@@ -5,18 +5,15 @@
 
 	<select id="queryAgency" parameterType="Map" resultType="DemoAgency">
 		SELECT *
-		FROM (
-		select
-		u.agency_id as agency_id,
-		u.agency_name as name,
-		u.country as country,
-		u.language as language,
-		u.creat_time as creat_time,
-		u.isdel as isdel
+			u.agency_id as agency_id,
+			u.agency_name as name,
+			u.country as country,
+			u.language as language,
+			u.creat_time as creat_time,
+			u.isdel as isdel
 		from tm_agency u  
 		where u.isdel = 0 
 		order by u.creat_time
-		) table_alias
 		limit #{b},#{e}
 	</select>
 

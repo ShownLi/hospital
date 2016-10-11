@@ -292,10 +292,32 @@
             <button id="addorder" class="btn btn-primary">添加订单</button>&nbsp;
             <button id="submit" class="btn btn-primary">保存</button>&nbsp;
             	<input  type="hidden" name="caseid" value="${crmcase.caseid}" />
+            <button id="canel-submit"  class="btn btn-danger" >无效</button>&nbsp;
             <button id="btn-back" class="btn btn-default">返回</button>
 		    </div><!-- panel-footer -->
      </form>   
       </div><!-- panel -->
+      
+      
+      <!-- Modal -->
+<div class="modal fade" id="reconfirmDelModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel"><span class="fa fa-warning"></span> 提示</h4>
+      </div>
+      <div class="modal-body">
+        确定无效么？
+      </div>
+      <div class="modal-footer">
+      	<input type="hidden" class="hiddenId" value="" />
+        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        <button type="button" class="btn btn-danger">无效</button>
+      </div>
+    </div><!-- modal-content -->
+  </div><!-- modal-dialog -->
+</div><!-- modal -->
 
       <!-- panel 订单列表  -->
     <div class="panel panel-default">
@@ -737,6 +759,25 @@
       $(".nextModal .submit").click(function(){
       	  order_submit();
       });
+      
+      $("#canel-submit").click(function(){
+      	 $("#reconfirmDelModal").modal('show');
+		 alert($("#reconfirmDelModal").attr("aria-hidden"));
+      });
+      
+      function doDel(id){
+			$.ajax({
+				url: "${rootPath}case/del.do?id=" + id, 
+				success: function() {
+					window.location.reload();
+				},
+				error: function() {
+					alert(2);
+				}
+			});
+			
+		}
+		
   		function order_submit() {
     			var f = $("#order").serialize();
     			$.post('${rootPath}order/add.do', f, function(result) {

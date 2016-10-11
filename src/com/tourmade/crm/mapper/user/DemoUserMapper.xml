@@ -4,20 +4,17 @@
 <mapper namespace="com.tourmade.crm.mapper.user.DemoUserMapper">
 
 	<select id="queryUser" parameterType="Map" resultType="DemoUser">
-		SELECT *
-		FROM (
 		select
-		u.user_id as userid,
-		u.user_name as name,
-		u.loginname as loginname,
-		u.password as pwd,
-		u.user_email as email,
-		u.mobilephone as mobilephone,
-		u.creat_time as creattime,
-		u.isdel as isdel
+			u.user_id as userid,
+			u.user_name as name,
+			u.loginname as loginname,
+			u.password as pwd,
+			u.user_email as email,
+			u.mobilephone as mobilephone,
+			u.creat_time as creattime,
+			u.isdel as isdel
 		from tm_user u where u.isdel = 0
 		order by u.creat_time desc
-		) table_alias
 		limit #{b},#{e}
 	</select>
 

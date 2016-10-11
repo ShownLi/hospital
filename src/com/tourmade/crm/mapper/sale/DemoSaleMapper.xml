@@ -4,17 +4,14 @@
 <mapper namespace="com.tourmade.crm.mapper.sale.DemoSaleMapper">
 
 	<select id="querySale" parameterType="Map" resultType="DemoSale">
-		SELECT *
-		FROM (
 		select
-		u.sales_id as salesid,
-		u.sales_portal_id as salesportalid,
-		u.sales_name as salesname,
-		u.sales_email as salesemail,
-		u.isdel
+			u.sales_id as salesid,
+			u.sales_portal_id as salesportalid,
+			u.sales_name as salesname,
+			u.sales_email as salesemail,
+			u.isdel
 		from tm_sales u where u.agency_id = #{agencyid} and u.isdel = 0
 		order by u.creat_time
-		) table_alias
 		limit #{b},#{e}
 	</select>
 

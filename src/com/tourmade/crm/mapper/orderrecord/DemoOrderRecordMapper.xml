@@ -4,23 +4,19 @@
 <mapper namespace="com.tourmade.crm.mapper.orderrecord.DemoOrderRecordMapper">
 
 	<select id="queryOrderRecord" parameterType="Map" resultType="DemoOrderRecord">
-		SELECT *
-		FROM (
 		select
-		u.order_record_id as recordid,
-		u.order_id as orderid,
-		u.sender as sender,
-		u.sender_name as sendername,
-		u.content as content,
-		u.file_url as fileurl,
-		u.req_time as reqtime,
-		u.creat_time as creattime,
-		u.isdel as isdel
+			u.order_record_id as recordid,
+			u.order_id as orderid,
+			u.sender as sender,
+			u.sender_name as sendername,
+			u.content as content,
+			u.file_url as fileurl,
+			u.req_time as reqtime,
+			u.creat_time as creattime,
+			u.isdel as isdel
 		from tm_order_record u  
-		where u.isdel = 0
-		and u.order_id = #{id}
+		where u.isdel = 0 and u.order_id = #{id}
 		order by u.creat_time desc
-		) table_alias 
 		limit #{b},#{e}
 	</select>
 

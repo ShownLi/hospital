@@ -4,20 +4,17 @@
 <mapper namespace="com.tourmade.crm.mapper.crmcase.DemoCaseMapper">
 
 	<select id="queryCase" parameterType="Map" resultType="DemoCase">
-		SELECT *
-		FROM (
 		select
-		u.case_id as caseid,
-		u.customer_id as customerid,
-		u.budget as budget,
-		u.source as source,
-		u.destination as destination,
-		u.status as status,
-		u.operator as operator
+			u.case_id as caseid,
+			u.customer_id as customerid,
+			u.budget as budget,
+			u.source as source,
+			u.destination as destination,
+			u.status as status,
+			u.operator as operator
 		from tm_case u  
 		where u.isdel = 0 
 		order by u.creat_time desc
-		) table_alias
 		limit #{b},#{e}
 	</select>
 

@@ -207,8 +207,6 @@ public class OrderController extends BaseSimpleFormController {
 		try {
 
 			service.updateOrder(order);
-			
-	
 
 				int i = caseservice.casestatus(order.getCaseid());
 				if(i==0){

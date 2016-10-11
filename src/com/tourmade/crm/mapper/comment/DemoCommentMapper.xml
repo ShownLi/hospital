@@ -4,23 +4,18 @@
 <mapper namespace="com.tourmade.crm.mapper.comment.DemoCommentMapper">
 
 	<select id="queryComment" parameterType="Map" resultType="DemoComment">
-		SELECT *
-		FROM (
 		select
-		u.comment_id as commentid,
-		u.comment_type as type,
-		u.object_id,
-		u.user_id as userid,
-		u.user_name as username,
-		u.content as content,
-		u.creat_time as creattime,
-		u.isdel as isdel
+			u.comment_id as commentid,
+			u.comment_type as type,
+			u.object_id,
+			u.user_id as userid,
+			u.user_name as username,
+			u.content as content,
+			u.creat_time as creattime,
+			u.isdel as isdel
 		from tm_comment u  
-		where u.isdel = 0
-		and u.comment_type = #{type}
-		and u.object_id = #{id}
+		where u.isdel = 0 and u.comment_type = #{type} and u.object_id = #{id}
 		order by u.creat_time desc
-		) table_alias
 		limit #{b},#{e}
 	</select>
 
