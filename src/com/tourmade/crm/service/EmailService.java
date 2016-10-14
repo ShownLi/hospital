@@ -21,19 +21,19 @@ import com.aliyun.oss.model.OSSObject;
 import com.tourmade.crm.common.framework.BaseService;
 import com.tourmade.crm.common.framework.bean.QueryResult;
 import com.tourmade.crm.common.model.base.value.baseconfig.PageHelper;
-import com.tourmade.crm.mapper.email.DemoEmailMapper;
-import com.tourmade.crm.model.DemoCase;
-import com.tourmade.crm.model.DemoEmail;
-import com.tourmade.crm.model.DemoOrder;
-import com.tourmade.crm.model.MailTemplate;
-import com.tourmade.crm.model.MailTepBoat;
+import com.tourmade.crm.entity.Case;
+import com.tourmade.crm.entity.EmailQueue;
+import com.tourmade.crm.entity.Order;
+import com.tourmade.crm.entity.MailTemplate;
+import com.tourmade.crm.entity.MailTepBoat;
+import com.tourmade.crm.mapper.emailQueue.EmailDao;
 
 @Service
 @Transactional(readOnly = false)
 public class EmailService extends BaseService {
 	
 	@Autowired
-	private DemoEmailMapper emailMapper;
+	private EmailDao emailMapper;
 
 	/**
 	 * 查询邮件数据，分页展示
@@ -43,9 +43,9 @@ public class EmailService extends BaseService {
 	 * @param request
 	 * @return
 	 */
-	public QueryResult<DemoEmail> queryEmail(DemoEmail email, PageHelper ph, HttpServletRequest request) {
+	public QueryResult<EmailQueue> queryEmail(EmailQueue email, PageHelper ph, HttpServletRequest request) {
 
-		QueryResult<DemoEmail> r = new QueryResult<DemoEmail>();
+		QueryResult<EmailQueue> r = new QueryResult<EmailQueue>();
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		map.put("b", ph.getStart());
@@ -53,7 +53,7 @@ public class EmailService extends BaseService {
 //		map.put("s", ph.getSort());
 //		map.put("o", ph.getOrder());
 
-		List<DemoEmail> data = emailMapper.queryEmail(map);
+		List<EmailQueue> data = emailMapper.queryEmail(map);
 		long count = emailMapper.countEmail(email);
 			
 		r.setData(data);
@@ -69,7 +69,7 @@ public class EmailService extends BaseService {
 	 * @param email
 	 * @return
 	 */
-	public String creatTemplate(DemoCase crmcase, DemoOrder order) {
+	public String creatTemplate(Case crmcase, Order order) {
 		
 		MailTemplate template = new MailTemplate();
 		MailTepBoat boat = new MailTepBoat();
@@ -77,107 +77,107 @@ public class EmailService extends BaseService {
 		template.setAdult(""+crmcase.getAdult());
 		template.setChildren(""+crmcase.getChildren());
 		template.setBaby(""+crmcase.getBaby());
-		template.setStart_time(crmcase.getStarttime());
-		template.setStart_month(crmcase.getStartmonth());
+		template.setStartTime(crmcase.getStartTime());
+		template.setStartMonth(crmcase.getStartMonth());
 		template.setDuring(crmcase.getDuring());
-		template.setStart_date(crmcase.getStartdate());
-		template.setEnd_date(crmcase.getEnddate());
+		template.setStartDate(crmcase.getStartDate());
+		template.setEndDate(crmcase.getEndDate());
 		String budget = DecimalFormat.getNumberInstance().format(Integer.parseInt(order.getBudget()));
 		template.setBudget(budget);
 		template.setRequirement(crmcase.getRequirement());
 		
 		template.setReplyto(order.getCustomerReEmailAlias());
 		
-		if(order.getOrderid() != 0){
-			template.setOrderid(order.getOrderid());
+		if(order.getOrderId() != 0){
+			template.setOrderId(order.getOrderId());
 		}
 		
-		if(crmcase.getRouteid() != null && !"".equals(crmcase.getRouteid())){
+		if(crmcase.getRouteId() != null && !"".equals(crmcase.getRouteId())){
 			String url = emailMapper.getRouteUrl();
-			template.setRoute_url(url+crmcase.getRouteid());			
+			template.setRouteUrl(url+crmcase.getRouteId());			
 		}
-		template.setRoute_name(crmcase.getRoute());
-		if(order.getCustomerid() != 0){
-			boat.setId(""+order.getCustomerid());
+		template.setRouteName(crmcase.getRoute());
+		if(order.getCustomerId() != 0){
+			boat.setId(""+order.getCustomerId());
 			boat = emailMapper.getCusZE(boat);
-			template.setCustomername_zh(boat.getChinese());
-			template.setCustomername_en(boat.getEnglish());
+			template.setCustomerChineseName(boat.getChinese());
+			template.setCustomerEnglishName(boat.getEnglish());
 		}
-		if(order.getSalesid() != 0){
-			boat.setId(""+order.getSalesid());
+		if(order.getSalesId() != 0){
+			boat.setId(""+order.getSalesId());
 			boat = emailMapper.getSalesZE(boat);
-			template.setSalesname_zh(boat.getChinese());
-			template.setSalesname_en(boat.getEnglish());
+			template.setSalesChineseName(boat.getChinese());
+			template.setSalesEnglishName(boat.getEnglish());
 		}
-		if(crmcase.getPreferlanguage() != null && !"".equals(crmcase.getPreferlanguage())){
+		if(crmcase.getPreferLanguage() != null && !"".equals(crmcase.getPreferLanguage())){
 			boat.setDomain("case.preferlanguage");
-			boat.setValue(crmcase.getPreferlanguage());
+			boat.setValue(crmcase.getPreferLanguage());
 			boat = emailMapper.getZhEn(boat);
-			template.setPreferlanguage_zh(boat.getChinese());
-			template.setPreferlanguage_en(boat.getEnglish());
+			template.setPreferChineseLanguage(boat.getChinese());
+			template.setPreferEnglishLanguage(boat.getEnglish());
 		}
 		if(crmcase.getWithwho() != null && !"".equals(crmcase.getWithwho())){
 			boat.setDomain("case.withwho");
 			boat.setValue(crmcase.getWithwho());
 			boat = emailMapper.getZhEn(boat);
-			template.setWithwho_zh(boat.getChinese());
-			template.setWithwho_en(boat.getEnglish());
+			template.setWithwhoChinese(boat.getChinese());
+			template.setWithwhoEnglish(boat.getEnglish());
 		}
 		if(crmcase.getHotel() != null && !"".equals(crmcase.getHotel())){
 			boat.setDomain("case.hotel");
 			boat.setValue(crmcase.getHotel());
 			boat = emailMapper.getZhEn(boat);
-			template.setHotel_zh(boat.getChinese());
-			template.setHotel_en(boat.getEnglish());
+			template.setHotelChinese(boat.getChinese());
+			template.setHotelEnglish(boat.getEnglish());
 		}
 		if(crmcase.getGuide() != null && !"".equals(crmcase.getGuide())){
 			boat.setDomain("case.guide");
 			boat.setValue(crmcase.getGuide());
 			boat = emailMapper.getZhEn(boat);
-			template.setGuide_zh(boat.getChinese());
-			template.setGuide_en(boat.getEnglish());
+			template.setGuideChinese(boat.getChinese());
+			template.setGuideEnglish(boat.getEnglish());
 		}
 		if(crmcase.getMeals() != null && !"".equals(crmcase.getMeals())){
 			boat.setDomain("case.meals");
 			boat.setValue(crmcase.getMeals());
 			boat = emailMapper.getZhEn(boat);
-			template.setMeals_zh(boat.getChinese());
-			template.setMeals_en(boat.getEnglish());
+			template.setMealsChinese(boat.getChinese());
+			template.setMealsEnglish(boat.getEnglish());
 		}
 		if(order.getDestination() != null && !"".equals(order.getDestination())){
 			boat.setDomain("country");
 			boat.setValue(order.getDestination());
 			boat = emailMapper.getZhEn(boat);
-			template.setDestination_zh(boat.getChinese());
-			template.setDestination_en(boat.getEnglish());
+			template.setDestinationChinese(boat.getChinese());
+			template.setDestinationEnglish(boat.getEnglish());
 		}
 		if(crmcase.getPassport() != null && !"".equals(crmcase.getPassport())){
 			boat.setDomain("case.passport");
 			boat.setValue(crmcase.getPassport());
 			boat = emailMapper.getZhEn(boat);
-			template.setPassport_zh(boat.getChinese());
-			template.setPassport_en(boat.getEnglish());
+			template.setPassportChinese(boat.getChinese());
+			template.setPassportEnglish(boat.getEnglish());
 		}
 		if(crmcase.getFlight() != null && !"".equals(crmcase.getFlight())){
 			boat.setDomain("case.flight");
 			boat.setValue(crmcase.getFlight());
 			boat = emailMapper.getZhEn(boat);
-			template.setFlight_zh(boat.getChinese());
-			template.setFlight_en(boat.getEnglish());
+			template.setFlightChinese(boat.getChinese());
+			template.setFlightEnglish(boat.getEnglish());
 		}
 		if(crmcase.getVisa() != null && !"".equals(crmcase.getVisa())){
 			boat.setDomain("case.visa");
 			boat.setValue(crmcase.getVisa());
 			boat = emailMapper.getZhEn(boat);
-			template.setVisa_zh(boat.getChinese());
-			template.setVisa_en(boat.getEnglish());
+			template.setVisaChinese(boat.getChinese());
+			template.setVisaEnglish(boat.getEnglish());
 		}
 		if(crmcase.getTailormade() != null && !"".equals(crmcase.getTailormade())){
 			boat.setDomain("case.tailormade");
 			boat.setValue(crmcase.getTailormade());
 			boat = emailMapper.getZhEn(boat);
-			template.setTailormade_zh(boat.getChinese());
-			template.setTailormade_en(boat.getEnglish());
+			template.setTailormadeChinese(boat.getChinese());
+			template.setTailormadeEnglish(boat.getEnglish());
 		}
 		try{
 			result = getMailContent(template);
@@ -198,16 +198,16 @@ public class EmailService extends BaseService {
 	@SuppressWarnings("unused")
 	public String getMailContent(MailTemplate template) throws Exception {
 		//外网域名
-		String endpoint = emailMapper.geturl("alioss.endpoint");
+		String endpoint = emailMapper.getUrl("alioss.endpoint");
 		
 		//内网域名
 		//private String endpoint = "tourmade.oss-cn-beijing-internal.aliyuncs.com";
 		
 		// AccessKey and AccessKeySecret
-		String accessKeyId = emailMapper.geturl("alioss.accessKeyId");
-		String accessKeySecret = emailMapper.geturl("alioss.accessKeySecret");
-		String bucket = emailMapper.geturl("alioss.bucket");
-		String key = emailMapper.geturl("alioss.key");
+		String accessKeyId = emailMapper.getUrl("alioss.accessKeyId");
+		String accessKeySecret = emailMapper.getUrl("alioss.accessKeySecret");
+		String bucket = emailMapper.getUrl("alioss.bucket");
+		String key = emailMapper.getUrl("alioss.key");
 		
 		BufferedReader reader = null;
 		String result = null;
@@ -234,9 +234,9 @@ public class EmailService extends BaseService {
 			if(ossObject.getObjectContent() != null){	
 				if (null != template) {
 					DateFormat format=new SimpleDateFormat("yyyy-MM-dd");
-					if (null != template.getSalesname_zh() && !"".equals(template.getSalesname_zh())) {
+					if (null != template.getSalesChineseName() && !"".equals(template.getSalesChineseName())) {
 						result = result.replace("${salesname}",
-								template.getSalesname_zh());
+								template.getSalesEnglishName());
 					}
 					else{result = result.replace("${salesname}","");}
 					
@@ -246,39 +246,39 @@ public class EmailService extends BaseService {
 					}
 					else{result = result.replace("${salesname_en}","");}*/
 					
-					if (null != template.getCustomername_zh() && !"".equals(template.getCustomername_zh())) {
+					if (null != template.getCustomerChineseName() && !"".equals(template.getCustomerChineseName())) {
 						result = result.replace("${customername_zh}",
-								template.getCustomername_zh());
+								template.getCustomerChineseName());
 					}
 					else{result = result.replace("${customername_zh}","");}
 					
-					if (null != template.getCustomername_en() && !"".equals(template.getCustomername_en())) {
+					if (null != template.getCustomerEnglishName() && !"".equals(template.getCustomerEnglishName())) {
 						result = result.replace("${customername_en}",
-								template.getCustomername_en());
+								template.getCustomerEnglishName());
 					}
-					else{result = result.replace("${customername_en}",template.getCustomername_zh());}
+					else{result = result.replace("${customername_en}",template.getCustomerChineseName());}
 
-					if (null != template.getPreferlanguage_zh() && !"".equals(template.getPreferlanguage_zh())) {
+					if (null != template.getPreferChineseLanguage() && !"".equals(template.getPreferChineseLanguage())) {
 						result = result.replace("${preferlanguage_zh}",
-								template.getPreferlanguage_zh());
+								template.getPreferChineseLanguage());
 					}
 					else{result = result.replace("${preferlanguage_zh}","");}
 					
-					if (null != template.getPreferlanguage_en() && !"".equals(template.getPreferlanguage_en())) {
+					if (null != template.getPreferEnglishLanguage() && !"".equals(template.getPreferEnglishLanguage())) {
 						result = result.replace("${preferlanguage_en}",
-								template.getPreferlanguage_en());
+								template.getPreferEnglishLanguage());
 					}
 					else{result = result.replace("${preferlanguage_en}","");}
 					
-					if (null != template.getWithwho_zh() && !"".equals(template.getWithwho_zh())) {
+					if (null != template.getWithwhoChinese() && !"".equals(template.getWithwhoChinese())) {
 						result = result.replace("${withwho_zh}",
-								template.getWithwho_zh());
+								template.getWithwhoChinese());
 					}
 					else{result = result.replace("${withwho_zh}","");}
 					
-					if (null != template.getWithwho_en() && !"".equals(template.getWithwho_en())) {
+					if (null != template.getWithwhoEnglish() && !"".equals(template.getWithwhoEnglish())) {
 						result = result.replace("${withwho_en}",
-								template.getWithwho_en());
+								template.getWithwhoEnglish());
 					}
 					else{result = result.replace("${withwho_en}","");}
 					
@@ -315,29 +315,29 @@ public class EmailService extends BaseService {
 						result = result.replace("${start_time_en}","");
 						}*/
 					
-					if (null != template.getStart_time() && !"".equals(template.getStart_time())) {
-						if(template.getStart_time().equals("1")){
+					if (null != template.getStartTime() && !"".equals(template.getStartTime())) {
+						if(template.getStartTime().equals("1")){
 							result = result.replace("${uncerDis}","none");
 						}
-						if(template.getStart_time().equals("0")){
+						if(template.getStartTime().equals("0")){
 							result = result.replace("${cerDis}","none");
 						}
 					}
 
 					
-					if(template.getOrderid() != 0){
+					if(template.getOrderId() != 0){
 						String pattern="0000000";
 						  java.text.DecimalFormat df = new java.text.DecimalFormat(pattern);
-						  result = result.replace("${orderid}", ""+df.format(template.getOrderid()));
+						  result = result.replace("${orderid}", ""+df.format(template.getOrderId()));
 					}
 					else{
 						result = result.replace("{orderid", "");
 					}
 					
 					
-					if (null != template.getStart_month() && !"".equals(template.getStart_month())) {
+					if (null != template.getStartMonth() && !"".equals(template.getStartMonth())) {
 						result = result.replace("${start_month}",
-								format.format(template.getStart_month()));
+								format.format(template.getStartMonth()));
 					}
 					else{result = result.replace("${start_month}","");}
 
@@ -347,51 +347,51 @@ public class EmailService extends BaseService {
 					}
 					else{result = result.replace("${during}","");}
 					
-					if (null != template.getStart_date() && !"".equals(template.getStart_date())) {
+					if (null != template.getStartDate() && !"".equals(template.getStartDate())) {
 						result = result.replace("${start_date}",
-								format.format(template.getStart_date()));
+								format.format(template.getStartDate()));
 					}
 					else{result = result.replace("${start_date}","");}
 					
-					if (null != template.getEnd_date() && !"".equals(template.getEnd_date())) {
+					if (null != template.getEndDate() && !"".equals(template.getEndDate())) {
 						result = result.replace("${end_date}",
-								format.format(template.getEnd_date()));
+								format.format(template.getEndDate()));
 					}
 					else{result = result.replace("${end_date}","");}
 					
-					if (null != template.getHotel_zh() && !"".equals(template.getHotel_zh())) {
+					if (null != template.getHotelChinese() && !"".equals(template.getHotelChinese())) {
 						result = result.replace("${hotel_zh}",
-								template.getHotel_zh());
+								template.getHotelChinese());
 					}
 					else{result = result.replace("${hotel_zh}","");}
 					
-					if (null != template.getHotel_en() && !"".equals(template.getHotel_en())) {
+					if (null != template.getHotelEnglish() && !"".equals(template.getHotelEnglish())) {
 						result = result.replace("${hotel_en}",
-								template.getHotel_en());
+								template.getHotelEnglish());
 					}
 					else{result = result.replace("${hotel_en}","");}
 					
-					if (null != template.getMeals_zh() && !"".equals(template.getMeals_zh())) {
+					if (null != template.getMealsChinese() && !"".equals(template.getMealsChinese())) {
 						result = result.replace("${meals_zh}",
-								template.getMeals_zh());
+								template.getMealsChinese());
 					}
 					else{result = result.replace("${meals_zh}","");}
 					
-					if (null != template.getMeals_en() && !"".equals(template.getMeals_en())) {
+					if (null != template.getMealsEnglish() && !"".equals(template.getMealsEnglish())) {
 						result = result.replace("${meals_en}",
-								template.getMeals_en());
+								template.getMealsEnglish());
 					}
 					else{result = result.replace("${meals_en}","");}
 
-					if (null != template.getGuide_zh() && !"".equals(template.getGuide_zh())) {
+					if (null != template.getGuideChinese() && !"".equals(template.getGuideChinese())) {
 						result = result.replace("${guide_zh}",
-								template.getGuide_zh());
+								template.getGuideChinese());
 					}
 					else{result = result.replace("${guide_zh}","");}
 
-					if (null != template.getGuide_en() && !"".equals(template.getGuide_en())) {
+					if (null != template.getGuideEnglish() && !"".equals(template.getGuideEnglish())) {
 						result = result.replace("${guide_en}",
-								template.getGuide_en());
+								template.getGuideEnglish());
 					}
 					else{result = result.replace("${guide_en}","");}
 
@@ -401,63 +401,63 @@ public class EmailService extends BaseService {
 					}
 					else{result = result.replace("${budget}","");}
 
-					if (null != template.getDestination_zh() && !"".equals(template.getDestination_zh())) {
+					if (null != template.getDestinationChinese() && !"".equals(template.getDestinationChinese())) {
 						result = result.replace("${destination_zh}",
-								template.getDestination_zh());
+								template.getDestinationChinese());
 					}
 					else{result = result.replace("${destination_zh}","");}
 
-					if (null != template.getDestination_en() && !"".equals(template.getDestination_en())) {
+					if (null != template.getDestinationEnglish() && !"".equals(template.getDestinationEnglish())) {
 						result = result.replace("${destination_en}",
-								template.getDestination_en());
+								template.getDestinationEnglish());
 					}
 					else{result = result.replace("${destination_en}","");}
 
-					if (null != template.getPassport_zh() && !"".equals(template.getPassport_zh())) {
+					if (null != template.getPassportChinese() && !"".equals(template.getPassportChinese())) {
 						result = result.replace("${passport_zh}",
-								template.getPassport_zh());
+								template.getPassportChinese());
 					}
 					else{result = result.replace("${passport_zh}","");}
 
-					if (null != template.getPassport_en() && !"".equals(template.getPassport_en())) {
+					if (null != template.getPassportEnglish() && !"".equals(template.getPassportEnglish())) {
 						result = result.replace("${passport_en}",
-								template.getPassport_en());
+								template.getPassportEnglish());
 					}
 					else{result = result.replace("${passport_en}","");}
 
-					if (null != template.getVisa_zh() && !"".equals(template.getVisa_zh())) {
+					if (null != template.getVisaChinese() && !"".equals(template.getVisaChinese())) {
 						result = result.replace("${visa_zh}",
-								template.getVisa_zh());
+								template.getVisaChinese());
 					}
 					else{result = result.replace("${visa_zh}","");}
 
-					if (null != template.getVisa_en() && !"".equals(template.getVisa_en())) {
+					if (null != template.getVisaEnglish() && !"".equals(template.getVisaEnglish())) {
 						result = result.replace("${visa_en}",
-								template.getVisa_en());
+								template.getVisaEnglish());
 					}
 					else{result = result.replace("${visa_en}","");}
 
-					if (null != template.getFlight_zh() && !"".equals(template.getFlight_zh())) {
+					if (null != template.getFlightChinese() && !"".equals(template.getFlightChinese())) {
 						result = result.replace("${flight_zh}",
-								template.getFlight_zh());
+								template.getFlightChinese());
 					}
 					else{result = result.replace("${flight_zh}","");}
 
-					if (null != template.getFlight_en() && !"".equals(template.getFlight_en())) {
+					if (null != template.getFlightEnglish() && !"".equals(template.getFlightEnglish())) {
 						result = result.replace("${flight_en}",
-								template.getFlight_en());
+								template.getFlightEnglish());
 					}
 					else{result = result.replace("${flight_en}","");}
 
-					if (null != template.getTailormade_zh() && !"".equals(template.getTailormade_zh())) {
+					if (null != template.getTailormadeChinese() && !"".equals(template.getTailormadeChinese())) {
 						result = result.replace("${tailormade_zh}",
-								template.getTailormade_zh());
+								template.getTailormadeChinese());
 					}
 					else{result = result.replace("${tailormade_zh}","");}
 
-					if (null != template.getTailormade_en() && !"".equals(template.getTailormade_en())) {
+					if (null != template.getTailormadeEnglish() && !"".equals(template.getTailormadeEnglish())) {
 						result = result.replace("${tailormade_en}",
-								template.getTailormade_en());
+								template.getTailormadeEnglish());
 					}
 					else{result = result.replace("${tailormade_en}","");}
 
@@ -474,11 +474,11 @@ public class EmailService extends BaseService {
 					else{result = result.replace("${replyto}","");}
 				
 
-					if (null != template.getRoute_url() && !"".equals(template.getRoute_url())) {
+					if (null != template.getRouteUrl() && !"".equals(template.getRouteUrl())) {
 						result = result.replace("${route_url}",
-								template.getRoute_url());
+								template.getRouteUrl());
 						result = result.replace("${route_name}", 
-								template.getRoute_name());
+								template.getRouteName());
 					}
 					else{result = result.replace("${route_url}","");
 						 result = result.replace("${route_name}","");}
@@ -500,17 +500,17 @@ public class EmailService extends BaseService {
 	 * @param email
 	 * @return
 	 */
-	public void saveEmail(DemoOrder order, String result) {
-		DemoEmail email = new DemoEmail();
+	public void saveEmail(Order order, String result) {
+		EmailQueue email = new EmailQueue();
 		try {
 			email.setContent(result);
 			email.setAcount("customer");
-			email.setOrderid(order.getOrderid());
+			email.setOrderId(order.getOrderId());
 			email.setReciever(order.getAgencySeEmailAlias());
 			email.setSender(order.getCustomerReEmailAlias());
-			email.setSendname(order.getCustomername());
-			email.setRecievename(order.getSalesname());
-			email.setSubject(order.getCustomername()+"去"+order.getDestination()+"的需求");
+			email.setSendName(order.getCustomerName());
+			email.setRecieveName(order.getSalesName());
+			email.setSubject(order.getCustomerName()+"去"+order.getDestination()+"的需求");
 			emailMapper.saveEmail(email);
 		} catch (Exception e) {
 			logger.error("EmailService.saveEmail() --> " + email + "-->" + e.getMessage());

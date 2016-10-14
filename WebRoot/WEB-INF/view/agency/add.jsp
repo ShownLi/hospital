@@ -15,14 +15,7 @@
 				<h2>
 					<i class="glyphicon glyphicon-briefcase"></i> 地接社管理 <span>新增地接社</span>
 				</h2>
-				<!-- <div class="breadcrumb-wrapper">
-					<span class="label">你在这里:</span>
-					<ol class="breadcrumb">
-						<li><a href="＃">CRM</a></li>
-						<li><a href="${rootPath }agency/list.html">地接社管理</a></li>
-						<li class="active">新增地接社</li>
-					</ol>
-				</div> -->
+
 			</div>
 
 			<div class="contentpanel">
@@ -44,7 +37,7 @@
 	            <div class="form-group col-sm-4">
 	              <label class="col-sm-4 control-label">地接社名称 <span class="asterisk">*</span></label>
 	              <div class="col-sm-8">
-	                <input type="text" id="agencyname" name="name" placeholder="地接社名称" class="form-control" />
+	                <input type="text" id="agencyName" name="name" placeholder="地接社名称" class="form-control" />
 	              </div>
 	            </div>			   
 	            <div class="form-group col-sm-4">
@@ -68,13 +61,6 @@
      </form>   
       </div><!-- panel -->
 
-
-
-
-
-			</div>
-
-		</div>
 		<!-- mainpanel -->
 		<%@ include file="../assets/pages/rightpanel.jsp"%>
 	</section>
@@ -146,7 +132,7 @@
 		            	data: {
 	                         table: function () { return "tm_agency"},
 	                         field: function () { return "agency_name"},
-	                         name: function () { return $("#agencyname").val();},
+	                         name: function () { return $("#agencyName").val();},
 	                         }
 		            }
 		        }
@@ -176,11 +162,11 @@
 			history.go(-1);
 	    } ); 
 	});
-//		
+		
 		function form_submit() {
 			var f = $("#form").serialize();
 			$.post('${rootPath}agency/add.do',f, function(result) {
-				var agencyid = result.obj.agency_id;
+				var agencyId = result.obj.agency_id;
 				var rmsg = result.msg;
 				if (result.success) {
 					//window.parent.location = "${rootPath}agency/list.html";

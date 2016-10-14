@@ -43,7 +43,7 @@
 	            <div class="form-group col-sm-6">
 	              <label class="col-sm-3 control-label">登录名<span class="asterisk">*</span></label>
 	              <div class="col-sm-6">
-	                <input type="text" id="loginname" name="loginname" placeholder="登录名" class="form-control" value="${user.loginname }" />
+	                <input type="text" id="loginName" name="loginName" placeholder="登录名" class="form-control" value="${user.loginName }" />
 	              </div>
 	            </div>
 	            <div class="form-group col-sm-6">
@@ -83,15 +83,10 @@
         <div class="panel-footer align-center">
 			<button class="btn btn-primary">保存</button>&nbsp;
 			<button class="btn btn-default" id="btn-back">返回</button>
-			<input type="hidden" name="userid" value="${user.userid }" />
+			<input type="hidden" name="userId" value="${user.userId }" />
 		</div><!-- panel-footer -->
      </form>   
       </div><!-- panel -->
-
-
-
-
-
 			</div>
 
 		</div>
@@ -150,19 +145,19 @@
 					mobilephone:{
 						isMobile:true,
 					},
-					loginname:{  
+					loginName:{  
 			         	required:true,  
 			            remote:{                           
 			            	url:"${rootPath}validate.do",
 			            	type:"post",
 			            	data: {
 		                         table: function () { return "tm_user"},
-		                         field: function () { return "loginname"},
+		                         field: function () { return "loginName"},
 		                         name: function () { 
-		                        	 if($("#loginname").val()=="${user.loginname}"){
+		                        	 if($("#loginName").val()=="${user.loginName}"){
 		                        	 	return "";
 		                        	 }
-		                        	 else{return $("#loginname").val();}
+		                        	 else{return $("#loginName").val();}
 		                         },
 		                    }
 			            }
@@ -170,7 +165,7 @@
 				},
 				messages: {
 					name: "请输入姓名",
-					loginname: {
+					loginName: {
 						required:"请输入值",
 						remote:"该用户名已存在，请重新输入"
 					},

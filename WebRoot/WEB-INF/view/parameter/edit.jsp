@@ -15,14 +15,6 @@
 				<h2>
 					<i class="glyphicon glyphicon-cog"></i> 系统参数管理 <span>编辑系统参数</span>
 				</h2>
-				<!-- <div class="breadcrumb-wrapper">
-					<span class="label">你在这里:</span>
-					<ol class="breadcrumb">
-						<li><a href="＃">CRM</a></li>
-						<li><a href="${rootPath }parameter/list.html">系统参数管理</a></li>
-						<li class="active">编辑系统参数</li>
-					</ol>
-				</div> -->
 			</div>
 
 			<div class="contentpanel">
@@ -97,14 +89,10 @@
         <div class="panel-footer align-center">
 			<button class="btn btn-primary">保存</button>&nbsp;
 			<button class="btn btn-default" id="btn-back">返回</button>&nbsp;
-			<input type="hidden" name="parameterid" value="${parameter.parameterid }" />
+			<input type="hidden" name="parameterId" value="${parameter.parameterId }" />
 		</div><!-- panel-footer -->
      </form>   
       </div><!-- panel -->
-
-
-
-
 
 			</div>
 

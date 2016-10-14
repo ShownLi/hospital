@@ -13,15 +13,15 @@ import org.springframework.transaction.annotation.Transactional;
 import com.tourmade.crm.common.framework.BaseService;
 import com.tourmade.crm.common.framework.bean.QueryResult;
 import com.tourmade.crm.common.model.base.value.baseconfig.PageHelper;
-import com.tourmade.crm.mapper.parameter.DemoParameterMapper;
-import com.tourmade.crm.model.DemoParameter;
+import com.tourmade.crm.entity.Parameter;
+import com.tourmade.crm.mapper.parameter.ParameterMapper;
 
 @Service
 @Transactional(readOnly = false)
 public class ParameterService extends BaseService {
 
 	@Autowired
-	private DemoParameterMapper parameterMapper;
+	private ParameterMapper parameterMapper;
 
 	/**
 	 * 查询系统参数数据，分页展示
@@ -31,9 +31,9 @@ public class ParameterService extends BaseService {
 	 * @param request
 	 * @return
 	 */
-	public QueryResult<DemoParameter> queryParameter(DemoParameter parameter, PageHelper ph, HttpServletRequest request) {
+	public QueryResult<Parameter> queryParameter(Parameter parameter, PageHelper ph, HttpServletRequest request) {
 
-		QueryResult<DemoParameter> r = new QueryResult<DemoParameter>();
+		QueryResult<Parameter> r = new QueryResult<Parameter>();
 		Map<String, Object> map = new HashMap<String, Object>();
 
 		map.put("b", ph.getStart());
@@ -41,7 +41,7 @@ public class ParameterService extends BaseService {
 //		map.put("s", ph.getSort());
 //		map.put("o", ph.getOrder());
 
-		List<DemoParameter> data = parameterMapper.queryParameter(map);
+		List<Parameter> data = parameterMapper.queryParameter(map);
 		long count = parameterMapper.countParameter(parameter);
 		
 		r.setData(data);
@@ -57,7 +57,7 @@ public class ParameterService extends BaseService {
 	 * @param parameter
 	 * @return
 	 */
-	public int saveParameter(DemoParameter parameter) {
+	public int saveParameter(Parameter parameter) {
 		// parameter.setPwd("123456");
 		// parameter.setPwd(MD5.MD5Encode("123456"));
 		try {
@@ -67,7 +67,7 @@ public class ParameterService extends BaseService {
 			e.printStackTrace();
 			return 0;
 		}
-		return parameter.getParameterid();
+		return parameter.getParameterId();
 	}
 
 	/**
@@ -76,8 +76,8 @@ public class ParameterService extends BaseService {
 	 * @param id
 	 * @return
 	 */
-	public DemoParameter getParameterById(int id) {
-		DemoParameter r = null;
+	public Parameter getParameterById(int id) {
+		Parameter r = null;
 		try {
 			r = parameterMapper.getParameterById(id);
 		} catch (Exception e) {
@@ -93,12 +93,12 @@ public class ParameterService extends BaseService {
 	 * @param parameter
 	 * @return
 	 */
-	public boolean updateParameter(DemoParameter parameter) {
+	public boolean updateParameter(Parameter parameter) {
 
 		boolean r = false;
 
 		try {
-			DemoParameter u = parameterMapper.getParameterById(parameter.getParameterid());
+			Parameter u = parameterMapper.getParameterById(parameter.getParameterId());
 			if (u != null) {
 				u.setDomain(parameter.getDomain());
 				u.setValue(parameter.getValue());

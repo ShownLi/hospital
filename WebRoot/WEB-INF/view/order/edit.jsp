@@ -37,25 +37,25 @@
           				<p>填写下表，完成订单信息修改。</p>
         			</div>
        		
-         <form class="form-horizontal" id="form">
+         <form class="form-horizontal" id="baseForm">
             <div class="panel-body panel-body-nopadding">
                 <div class="section-block">
                     <div class="form-group col-sm-4">
                       <label class="col-sm-4 control-label">客人姓名</label>
                       <div class="col-sm-8">
-                        <input type="text" name="customer_name" placeholder="客人姓名" class="form-control" readonly value="${order.customername}" />
+                        <input type="text" name="customerName" placeholder="客人姓名" class="form-control" readonly value="${order.customerName}" />
                       </div>
                     </div>
                     <div class="form-group col-sm-4">
                       <label class="col-sm-4 control-label">地接社名称</label>
                       <div class="col-sm-8">
-                        <input type="text" name="agency_name" placeholder="地接社名称" class="form-control" readonly value="${order.agencyname}" />
+                        <input type="text" name="agencyName" placeholder="地接社名称" class="form-control" readonly value="${order.agencyName}" />
                       </div>
                     </div>              
                     <div class="form-group col-sm-4">
                       <label class="col-sm-4 control-label">销售姓名</label>
                       <div class="col-sm-8">
-                        <input type="text" name="sales_name" placeholder="销售姓名" class="form-control" readonly value="${order.salesname}" />
+                        <input type="text" name="salesName" placeholder="销售姓名" class="form-control" readonly value="${order.salesName}" />
                       </div>
                     </div>            
                     <div class="form-group col-sm-4">
@@ -78,10 +78,10 @@
                     </div>
                 </div> 
                 <div class="panel-footer align-center">
-                    <button id="btn-chengxing" class="btn btn-primary">成行</button>&nbsp;
-                    <button id="btn-weichengxing" class="btn btn-primary">未成行</button>&nbsp;
+                    <button id="btn-baseDeal" class="btn btn-primary">成行</button>&nbsp;
+                    <button id="btn-baseNoDeal" class="btn btn-primary">未成行</button>&nbsp;
                     <button class="btn btn-back">返回</button>
-					<input type="hidden" name="orderid" value="${order.orderid}" />	
+					<input type="hidden" name="orderId" value="${order.orderId}" />	
         		</div><!-- panel-footer -->
             </div>
          </form>   
@@ -97,39 +97,39 @@
               <h4 class="panel-title">成行信息</h4>
           </div>
           <div class="panel-body panel-body-nopadding">
-              <form id="form3" class="form-horizontal form3">
+              <form id="form-updateDeal" class="form-horizontal form-updateDeal" style="display:none">
                   <div class="section-block">
                       <div class="form-group col-sm-4">
                           <label class="col-sm-4 control-label">成团日期</label>
                           <div class="col-sm-8 input-group input-datepicker">
-                            <input type="text" id="grouptime" name="grouptime" class="form-control datepicker" value="${order.grouptime}" placeholder="mm/dd/yyyy" autocomplete="off" />
+                            <input type="text" id="groupTime" name="groupTime" class="form-control datepicker" value="${order.groupTime}" placeholder="mm/dd/yyyy" autocomplete="off" />
                             <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                           </div>
                       </div>
                       <div class="form-group col-sm-4">
                           <label class="col-sm-4 control-label">出发日期</label>
                           <div class="col-sm-8 input-group input-datepicker">
-                            <input type="text" id="startdate" name="startdate" value="${order.startdate}" placeholder="出发日期" class="form-control datepicker" autocomplete="off" />
+                            <input type="text" id="startDate" name="startDate" value="${order.startDate}" placeholder="出发日期" class="form-control datepicker" autocomplete="off" />
                             <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                           </div>
                       </div>
                       <div class="form-group col-sm-4">
                         <label class="col-sm-4 control-label">返回日期</label>
                         <div class="col-sm-8 input-group input-datepicker">
-                          <input type="text" id="enddate" name="enddate" value="${order.enddate}" placeholder="返回日期" class="form-control datepicker" autocomplete="off"/>
+                          <input type="text" id="endDate" name="endDate" value="${order.endDate}" placeholder="返回日期" class="form-control datepicker" autocomplete="off"/>
                           <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                         </div>
                       </div>
                       <div class="form-group col-sm-4">
                           <label class="col-sm-4 control-label">成团人数</label>
                           <div class="col-sm-8">
-                            <input type="text" name="groupnumber" value="${order.groupnumber}" placeholder="成团人数" class="form-control" />
+                            <input type="text" name="groupNumber" value="${order.groupNumber}" placeholder="成团人数" class="form-control" />
                           </div>
                       </div>
                       <div class="form-group col-sm-4">
                           <label class="col-sm-4 control-label">成团价格</label>
                           <div class="col-sm-8">
-                            <input type="text" name="groupprice" value="${order.groupprice}" placeholder="成团价格" class="form-control"/>
+                            <input type="text" name="groupPrice" value="${order.groupPrice}" placeholder="成团价格" class="form-control"/>
                           </div>
                       </div>
                       <div class="form-group col-sm-4">
@@ -141,36 +141,36 @@
                       <div class="form-group col-sm-4">
                           <label class="col-sm-4 control-label">汇率</label>
                           <div class="col-sm-8">
-                            <input type="text" name="exchangerate" value="${order.exchangerate}" placeholder="汇率" class="form-control" />
+                            <input type="text" name="exchangeRate" value="${order.exchangeRate}" placeholder="汇率" class="form-control" />
                           </div>
                       </div>
                       <div class="form-group col-sm-4">
                           <label class="col-sm-4 control-label">人民币价格</label>
                           <div class="col-sm-8">
-                            <input type="text" name="rmbprice" value="${order.rmbprice}" placeholder="人民币价格" class="form-control"/>
+                            <input type="text" name="rmbPrice" value="${order.rmbPrice}" placeholder="人民币价格" class="form-control"/>
                           </div>
                       </div>
                       <div class="form-group col-sm-4">
                       <div class="col-sm-6"></div>
-                      		&nbsp;<button id="btn-chengxing1" class="btn btn-primary">更改</button>&nbsp;
+                      		&nbsp;<button id="btn-updateDealModify" class="btn btn-primary">更改</button>&nbsp;
                       	</div>
                   </div>
-                  <input type="hidden" name="orderid" value="${order.orderid}" />
-                  <input type="hidden" name="caseid" value="${order.caseid}" />	
-                  <input type="hidden" name="customerid" value="${order.customerid}" />	
+                  <input type="hidden" name="orderId" value="${order.orderId}" />
+                  <input type="hidden" name="caseId" value="${order.caseId}" />	
+                  <input type="hidden" name="customerId" value="${order.customerId}" />	
               </form> 
-              <form id="form4" class="form-horizontal form4">
+              <form id="form-updateNoDeal" class="form-horizontal" style="display:none">
                   <div class="section-block">
                       <div class="form-group col-sm-6">
                         <label class="col-sm-4 control-label">若未成行，原因是</label>
                         <div class="col-sm-6">
                           <input class="reason-select fullwidth" name="reason" value="${order.reason}" placeholder="若未成行，原因是" />
                         </div>
-                    	<button id="btn-weichengxing1" class="btn btn-primary">更改</button>&nbsp;
+                    	<button id="btn-updateNoDealModify" class="btn btn-primary">更改</button>&nbsp;
                       </div>
                   </div><!-- panel-body -->
-                      <input type="hidden" name="orderid" value="${order.orderid}" />	
-                      <input type="hidden" name="caseid" value="${order.caseid}" />
+                      <input type="hidden" name="orderId" value="${order.orderId}" />	
+                      <input type="hidden" name="caseId" value="${order.caseId}" />
               </form> 
           </div>
       </div><!-- end of panel 是否成行 -->
@@ -222,13 +222,13 @@
 						</thead>
 					</table>
 				          <!-- 添加注释 -->
-	<form id="comment" class="form">
+	<form id="form-comment" class="form">
           <div class="form-group col-sm-6 col-sm-offset-3">
                 <textarea name="content" class="form-control" rows="5"></textarea>
-                <input  type="hidden" name="userid" value="${loginUser.userid}" />
-                <input  type="hidden" name="username" value="${loginUser.name}" />
-                <input  type="hidden" name="objectid" value="${order.orderid}" />
-                <input  type="hidden" name="commenttype" value="order" />
+                <input  type="hidden" name="userId" value="${loginUser.userId}" />
+                <input  type="hidden" name="userName" value="${loginUser.name}" />
+                <input  type="hidden" name="objectId" value="${order.orderId}" />
+                <input  type="hidden" name="commentType" value="order" />
           </div>
           <div class="form-group col-sm-12 align-center">
             <button class="btn btn-primary">添加注释</button>
@@ -262,8 +262,8 @@
 		  </div><!-- modal-dialog -->
 		</div><!-- modal -->
 
-<!-- cModal -->
-<div class="cModal modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<!-- dealModal -->
+<div class="dealModal modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">         
       <div class="modal-header">
@@ -271,40 +271,40 @@
         <div class="nextModal-title">请填写以下订单信息</div>
       </div>
 
-          <form class="form-horizontal" id="form1">
+          <form class="form-horizontal" id="form-deal">
       <div class="modal-body">
               <div class="section-block noline">
                   <div class="form-group col-sm-6">
                       <label class="col-sm-4 control-label">成团日期<span class="asterisk">*</span></label>
                       <div class="col-sm-8 input-group input-datepicker">
-                        <input type="text" name="grouptime" class="form-control datepicker" autocomplete="off" placeholder="成团日期">
+                        <input type="text" name="groupTime" class="form-control datepicker" autocomplete="off" placeholder="成团日期">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                       </div>
                   </div>
                   <div class="form-group col-sm-6">
                       <label class="col-sm-4 control-label">出发日期<span class="asterisk">*</span></label>
                       <div class="col-sm-8 input-group input-datepicker">
-                        <input type="text" name="startdate" placeholder="出发日期" class="form-control datepicker" autocomplete="off" />
+                        <input type="text" name="startDate" placeholder="出发日期" class="form-control datepicker" autocomplete="off" />
                         <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                       </div>
                   </div>
                   <div class="form-group col-sm-6">
                     <label class="col-sm-4 control-label">返回日期<span class="asterisk">*</span></label>
                     <div class="col-sm-8 input-group input-datepicker">
-                      <input type="text" name="enddate" placeholder="返回日期" class="form-control datepicker" autocomplete="off" />
+                      <input type="text" name="endDate" placeholder="返回日期" class="form-control datepicker" autocomplete="off" />
                       <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                     </div>
                   </div>
                   <div class="form-group col-sm-6">
                       <label class="col-sm-4 control-label">成团人数<span class="asterisk">*</span></label>
                       <div class="col-sm-8">
-                        <input type="text" name="groupnumber" placeholder="成团人数" class="form-control"/>
+                        <input type="text" name="groupNumber" placeholder="成团人数" class="form-control"/>
                       </div>
                   </div>
                   <div class="form-group col-sm-6">
                       <label class="col-sm-4 control-label">成团价格<span class="asterisk">*</span></label>
                       <div class="col-sm-8">
-                        <input type="text" name="groupprice" placeholder="成团价格" class="form-control" />
+                        <input type="text" name="groupPrice" placeholder="成团价格" class="form-control" />
                       </div>
                   </div>
                   <div class="form-group col-sm-6">
@@ -316,54 +316,57 @@
                   <div class="form-group col-sm-6">
                       <label class="col-sm-4 control-label">汇率<span class="asterisk">*</span></label>
                       <div class="col-sm-8">
-                        <input type="text" name="exchangerate" placeholder="汇率" class="form-control" value="" />
+                        <input type="text" name="exchangeRate" placeholder="汇率" class="form-control" value="" />
                       </div>
                   </div>
                   <div class="form-group col-sm-6">
                       <label class="col-sm-4 control-label">人民币价格<span class="asterisk">*</span></label>
                       <div class="col-sm-8">
-                        <input type="text" name="rmbprice" placeholder="人民币价格" class="form-control"/>
+                        <input type="text" name="rmbPrice" placeholder="人民币价格" class="form-control"/>
                       </div>
                   </div>
-                  <input type="hidden" name="orderid" value="${order.orderid}" />
-                  <input type="hidden" name="caseid" value="${order.caseid}" />	
-                  <input type="hidden" name="customerid" value="${order.customerid}" />	
+                  <input type="hidden" name="orderId" value="${order.orderId}" />
+                  <input type="hidden" name="caseId" value="${order.caseId}" />	
+                  <input type="hidden" name="customerId" value="${order.customerId}" />	
               </div>  
           
       </div>
       <div class="modal-footer align-center">
-          <button class="btn btn-primary">保存</button>
+          <button class="submit btn btn-primary">保存</button>
           <a class="cancel btn btn-primary" >取消</a>        
       </div>
       </form>     
 
     </div><!-- modal-content --> 
   </div><!-- modal-dialog -->
-</div><!-- cModal -->
+</div><!-- dealModal -->
 
-<!-- bModal -->
-<div class="bModal modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<!-- noDealModal -->
+<div class="noDealModal modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <div class="nextModal-title">请填写以下订单信息</div>
       </div>
-      <form class="form-horizontal" id="form2">
+      <form class="form-horizontal" id="form-noDeal">
           <div class="modal-body">     
               <div class="section-block noline">
                   <div class="form-group col-sm-12">
                     <label class="col-sm-4 control-label">若未成行，原因是</label>
                     <div class="col-sm-8">
                       <input class="reason-select fullwidth" name="reason" placeholder="若未成行，原因是" />
-                      <input type="hidden" name="orderid" value="${order.orderid}" />	
-                      <input type="hidden" name="caseid" value="${order.caseid}" />
+                      <input type="hidden" name="orderId" value="${order.orderId}" />	
+                      <input type="hidden" name="caseId" value="${order.caseId}" />		                     
+                       <input type="hidden" name="status" value="3" />
+                      <input type="hidden" name="caseId" value="${order.caseId}" />
                       <input type="hidden" name="status" value="3" />
                     </div>
                   </div>
-              </div><!-- bModal-body -->
+              </div><!-- noDealModal-body -->
           </div>
           <div class="modal-footer align-center">
+              <button class="submit btn btn-primary">保存</button>
               <button class="btn btn-primary" onclick="form2_submit()">保存</button>
               <a class="cancel btn btn-primary" >取消</a>
           </div>
@@ -380,56 +383,59 @@
 	
 
 <script type="text/javascript">
-	var s = ${status};
-	var d1 = ${country};
-	var r = ${reason};
+	var status = ${status};
+	var country = ${country};
+	var reason = ${reason};
 	
 	$(".status-select").select2({
-		data: s
+		data: status
 	})
 
 	$(".destination-select").select2({
         placeholder: '国家',
-        data: d1
+        data: country
     });
     
     $(".reason-select").select2({
     	placeholder:"未成行原因",
-    	data:r
+    	data:reason
     })
     
 	if("${order.status}"==2){
-      $(".form3").show();
-      $("#btn-chengxing").attr("disabled",true);
-      $("#btn-weichengxing").attr("disabled",true);
-  }
+ 	  $("#form-updateDeal").show();
+ 
+      $("#btn-baseDeal").attr("disabled",true);
+      $("#btn-baseNoDeal").attr("disabled",true);
+ 	 }
+    
 	if("${order.status}"==3){
-      $(".form4").show();
-      $("#btn-chengxing").attr("disabled",true);
-      $("#btn-weichengxing").attr("disabled",true);
-  }		
+      $("#form-updateNoDeal").show();
+      
+      $("#btn-baseDeal").attr("disabled",true);
+      $("#btn-baseNoDeal").attr("disabled",true);
+  	}		
 
 	
 	jQuery(document).ready(function() {
-		jQuery("#form1").validate({
+		jQuery("#form-deal").validate({
 	        rules: {
-		          grouptime: {
+		        groupTime: {
                 required: true,
                 date: true
               },
-		          startdate: {
+		          startDate: {
                 required: true,
                 date: true
               },
-		          enddate: {
+		          endDate: {
                 required: true,
                 date: true
               },
-		          groupnumber: {
+		          groupNumber: {
                 required: true,
                 number: true
               },
-		          groupprice: {
+		          groupPrice: {
                 required: true,
                 number: true
               },
@@ -437,33 +443,33 @@
                 required: true,
                 number: true
               },
-		          exchangerate: {
+		          exchangeRate: {
                 required: true,
                 number: true
               },
-		          rmbprice: {
+		          rmbPrice: {
                 required: true,
                 number: true
               },
 		      },
 		      messages: {
-		          grouptime: {
+		        groupTime: {
                 required: "请输入成团日期",
                 date: "日期格式 mm/dd/yyyy"
               },
-		          startdate: {
+		          startDate: {
                 required: "请输入出发日期",
                 date: "日期格式 mm/dd/yyyy"
               },
-		          enddate: {
+		          endDate: {
                 required: "请输入返回日期",
                 date: "日期格式 mm/dd/yyyy"
               },
-		          groupnumber: "请输入一个数字",
-		          groupprice: "请输入一个数字",
+		          groupNumber: "请输入一个数字",
+		          groupPrice: "请输入一个数字",
               currency: "请输入一个数字",
-		          exchangerate: "请输入一个数字",
-		          rmbprice: "请输入一个数字",
+		          exchangeRate: "请输入一个数字",
+		          rmbPrice: "请输入一个数字",
 
 		      },
           highlight: function(element) {
@@ -476,7 +482,7 @@
             return false;
           },
           submitHandler : function(){
-              form1_submit();
+              deal_submit();
               return false;
           }
 
@@ -484,7 +490,7 @@
 		$(".nav-parent").eq(1).addClass("nav-active");
     $(".nav-parent").eq(1).find(".children").show();
       		
-		jQuery("#form").validate({
+		/* jQuery("#baseForm").validate({
 				
 			highlight: function(element) {
 				jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
@@ -496,12 +502,12 @@
 				return false;
 			},
 			submitHandler : function(){
-				form_submit();
+				baseForm_submit();
 			    return false;
 			}
-		});
+		}); */
 		
-		jQuery("#comment").validate({
+		jQuery("#form-comment").validate({
 			rules:{
 				content: "required"
 			},
@@ -531,7 +537,7 @@
 		language: datatable_local_language, // my.js
 		serverSide: true,
 		ajax: {
-			url: '${rootPath}comment/list.do?type=order&id=${order.orderid}',
+			url: '${rootPath}comment/list.do?type=order&id=${order.orderId}',
 			dataFilter: function(data){
 			    var json = jQuery.parseJSON( data );
 			    json.recordsTotal = json.countTotal;
@@ -553,7 +559,7 @@
 			],
 		columns: [
 	  			    { data: "commentid" },
-	  			    { data: "username" },
+	  			    { data: "userName" },
 	  			    { data: "content" },
 	  			    { data: "creattime" }
 	    ]
@@ -565,7 +571,7 @@
 		language: datatable_local_language, // my.js
 		serverSide: true,
 		ajax: {
-			url: '${rootPath}record/list.do?orderid=${order.orderid}',
+			url: '${rootPath}record/list.do?orderId=${order.orderId}',
 			dataFilter: function(data){
 			    var json = jQuery.parseJSON( data );
 			    json.recordsTotal = json.countTotal;
@@ -612,8 +618,8 @@
 			}
 		});	
 	}
-	function form_submit() {
-		var f = $("#form").serialize();
+	/* function baseForm_submit() {
+		var f = $("#baseForm").serialize();
 		$.post('${rootPath}order/edit.do', f, function(result) {
 			var rmsg = result.msg;
 			if (result.success) {
@@ -623,32 +629,33 @@
 				$("#msgModal").modal('show');
 			}
 		}, "JSON");
-	}
-	$("#btn-chengxing").click(function(){
-		$(".cModal").modal('show');
+	} */
+	$("#btn-baseDeal").click(function(){
+		$(".dealModal").modal('show');
 	  return false;
 	});
-	$("#btn-chengxing1").click(function(){
-		form3_submit();
+	$("#btn-updateDealModify").click(function(){
+		updateDeal_submit();
 	});
-     $(".cModal .submit").click(function(){
-     	form1_submit();
+     $(".dealModal .submit").click(function(){
+     		deal_submit();
        });
-     $(".bModal .submit").click(function(){
-     	form2_submit();
+     $(".noDealModal .submit").click(function(){
+    	
+    		noDeal_submit();
        }); 
-    $("#btn-weichengxing").click(function(){
-        $(".bModal").modal('show');
+    $("#btn-baseNoDeal").click(function(){
+        $(".noDealModal").modal('show');
         return false;
     });
-    $("#btn-weichengxing1").click(function(){
-    	form4_submit();
+    $("#btn-updateNoDealModify").click(function(){
+    	updateNoDeal_submit();
     });
-    $(".cModal .cancel").click(function(){
-    	$(".cModal").modal("hide");
+    $(".dealModal .cancel").click(function(){
+    	$(".dealModal").modal("hide");
 	});
-    $(".bModal .cancel").click(function(){
-        $(".bModal").modal("hide");
+    $(".noDealModal .cancel").click(function(){
+        $(".noDealModal").modal("hide");
    	});
 
     
@@ -657,60 +664,66 @@
 		  dateFormat: "yy-mm-dd"
   });
 		
-	function form1_submit() {
-		var f = $("#form1").serialize();
-		$.post('${rootPath}order/edit_3.do', f, function(result) {
+	function deal_submit() {
+		var f = $("#form-deal").serialize();
+		$.post('${rootPath}order/orderDeal.do', f, function(result) {
 			var rmsg = result.msg;
 			if (result.success) {
-				window.parent.location = "${rootPath}order/edit.html?id=${order.orderid}";
+				window.parent.location = "${rootPath}order/edit.html?id=${order.orderId}";
 			} 
 			else {
 				$("#msgModal").modal('show');
 			}
 		}, "JSON");
 	}
-	function form2_submit() {
-		var f = $("#form2").serialize();
-		$.post('${rootPath}order/edit_4.do', f, function(result) {
+	function noDeal_submit() {
+		var f = $("#form-noDeal").serialize();
+		
+		$.post('${rootPath}order/orderNoDeal.do', f, function(result) {
 			var rmsg = result.msg;
+			
 			if (result.success) {
-				window.parent.location = "${rootPath}order/edit.html?id=${order.orderid}";
+				window.parent.location = "${rootPath}order/edit.html?id=${order.orderId}";
+
 			} 
 			else {
 				$("#msgModal").modal('show');
 			}
 		}, "JSON");
+		 alert("jump ok");
 	}
-	function form3_submit() {
-		var f = $("#form3").serialize();
+	function updateDeal_submit() {
+		var f = $("#form-updateDeal").serialize();
+		$.post('${rootPath}order/updateDeal.do', f, function(result) {
+			var rmsg = result.msg;
+			if (result.success) {
+				window.parent.location = "${rootPath}order/edit.html?id=${order.orderId}";
+			} 
+			else {
+				$("#msgModal").modal('show');
+			}
+		}, "JSON");
+		 alert("jump ok");
+	}
+	function updateNoDeal_submit() {
+		var f = $("#form-updateNoDeal").serialize();
 		$.post('${rootPath}order/edit1.do', f, function(result) {
 			var rmsg = result.msg;
 			if (result.success) {
-				window.parent.location = "${rootPath}order/edit.html?id=${order.orderid}";
+				window.parent.location = "${rootPath}order/edit.html?id=${order.orderId}";
 			} 
 			else {
 				$("#msgModal").modal('show');
 			}
 		}, "JSON");
-	}
-	function form4_submit() {
-		var f = $("#form4").serialize();
-		$.post('${rootPath}order/edit1.do', f, function(result) {
-			var rmsg = result.msg;
-			if (result.success) {
-				window.parent.location = "${rootPath}order/edit.html?id=${order.orderid}";
-			} 
-			else {
-				$("#msgModal").modal('show');
-			}
-		}, "JSON");
+		 alert("jump ok");
 	}
 	function comment_submit() {
 		var f = $("#comment").serialize();
 		$.post('${rootPath}comment/add.do', f, function(result) {
 			var rmsg = result.msg;
 			if (result.success) {
-				window.parent.location = "${rootPath}order/edit.html?id=${order.orderid}";
+				window.parent.location = "${rootPath}order/edit.html?id=${order.orderId}";
 			} 
 			else {
 				$("#msgModal").modal('show');
@@ -718,24 +731,24 @@
 		}, "JSON");
 	}
 	//成团日期格式转换
-	var grouptime = $("#grouptime").val();	
-  if(grouptime !== ""){
-      var dateformat = new Date(grouptime).toISOString("yyyy-MM-dd hh:mm:ss.S").substring(0,10);
-      $("#grouptime").val(dateformat)
+	var groupTime = $("#groupTime").val();	
+  if(groupTime !== ""){
+      var dateformat = new Date(groupTime).toISOString("yyyy-MM-dd hh:mm:ss.S").substring(0,10);
+      $("#groupTime").val(dateformat)
   }
 
 	//出发日期格式转换
-	var startdate = $("#startdate").val();	
-  if(startdate !== ""){
-    	var dateformat = new Date(startdate).toISOString("yyyy-MM-dd hh:mm:ss.S").substring(0,10);
-    	$("#startdate").val(dateformat)
+	var startdate = $("#startDate").val();	
+  if(startDate !== ""){
+    	var dateformat = new Date(startDate).toISOString("yyyy-MM-dd hh:mm:ss.S").substring(0,10);
+    	$("#startDate").val(dateformat)
   }
 	
 	//返回日期格式转换
-	var enddate = $("#enddate").val();	
-  if(enddate !== ""){
-      var dateformat = new Date(enddate).toISOString("yyyy-MM-dd hh:mm:ss.S").substring(0,10);
-      $("#enddate").val(dateformat)
+	var endDate = $("#endDate").val();	
+  if(endDate !== ""){
+      var dateformat = new Date(endDate).toISOString("yyyy-MM-dd hh:mm:ss.S").substring(0,10);
+      $("#endDate").val(dateformat)
   }
 	
 </script>

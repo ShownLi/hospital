@@ -15,14 +15,6 @@
 				<h2>
 					<i class="fa fa-user"></i> 用户管理 <span>新增用户</span>
 				</h2>
-				<!-- <div class="breadcrumb-wrapper">
-					<span class="label">你在这里:</span>
-					<ol class="breadcrumb">
-						<li><a href="＃">CRM</a></li>
-						<li><a href="${rootPath }user/list.html">用户管理</a></li>
-						<li class="active">新增用户</li>
-					</ol>
-				</div> -->
 			</div>
 
 			<div class="contentpanel">
@@ -43,7 +35,7 @@
 	            <div class="form-group col-sm-4">
 	              <label class="col-sm-4 control-label">登录名<span class="asterisk">*</span></label>
 	              <div class="col-sm-8">
-	                <input type="text" id="loginname" name="loginname" placeholder="登录名" class="form-control" />
+	                <input type="text" id="loginName" name="loginName" placeholder="登录名" class="form-control" />
 	              </div>
 	            </div>
 	            <div class="form-group col-sm-4">
@@ -132,15 +124,15 @@
 			jQuery("#form").validate({
 				
 				rules: {
-		            loginname:{  
+		            loginName:{  
 			         	required:true,  
 			            remote:{                           
 			            	url:"${rootPath}validate.do",
 			            	type:"post",
 			            	data: {
 		                         table: function () { return "tm_user"},
-		                         field: function () { return "loginname"},
-		                         name: function () { return $("#loginname").val();},
+		                         field: function () { return "loginName"},
+		                         name: function () { return $("#loginName").val();},
 		                         }
 			            }
 			        },
@@ -158,7 +150,7 @@
 					}
 				},
 				messages: {
-					loginname: {
+					loginName: {
 						required:"请输入登录名",
 						remote:"登录名已存在，请重新输入"
 					},

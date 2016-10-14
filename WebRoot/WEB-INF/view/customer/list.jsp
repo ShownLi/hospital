@@ -16,15 +16,7 @@
 				<h2>
 					<i class="fa fa-user"></i> 客人管理 <span>客人列表</span>
 				</h2>
-				<!-- <div class="breadcrumb-wrapper">
-					<span class="label">你在这里:</span>
-					<ol class="breadcrumb">
-						<li><a href="#">CRM</a></li>
-						<li class="active">客人管理</li>
-					</ol>
-				</div> -->
 			</div>
-
 			<div class="contentpanel">
 				<!-- content goes here... -->
 
@@ -39,7 +31,6 @@
 					<div class="panel-body">
 						<br />
 						<div class="table-responsive">
-
 							<table id="dataTable" class="table">
 								<thead>
 									<tr>
@@ -55,8 +46,7 @@
 										<th>编辑</th>
 										<th>增加询单</th>
 									</tr>
-								</thead>
-								
+								</thead>								
 							</table>
 						</div>
 						<!-- table-responsive -->
@@ -98,7 +88,7 @@
 
 
 	<script type="text/javascript">
-	var agegroup = ${agegroup};
+	var ageGroup = ${ageGroup};
 	var leval = ${level};
 	
 		jQuery(document).ready(function() {
@@ -122,30 +112,28 @@
 				},
 				columnDefs: [
 			        {
-						data: "customerid",
-						//defaultContent: '<a class="btn btn-success btn-xs"><span class="fa fa-edit"></span> 编辑</a>&nbsp;<a class="btn btn-danger btn-xs"><span class="fa fa-minus-circle"></span> 删除</a>',
+						data: "customerId",
 						orderable: false,
 						render: function ( data, type, full, meta ) {
-						return '<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a> &nbsp; ';
+							return '<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a> &nbsp; ';
 						},
 						targets: 9
 					},
 					{
-						data: "customerid",
-						//defaultContent: '<a class="btn btn-success btn-xs"><span class="fa fa-edit"></span> 编辑</a>&nbsp;<a class="btn btn-danger btn-xs"><span class="fa fa-minus-circle"></span> 删除</a>',
+						data: "customerId",
 						orderable: false,
 						render: function ( data, type, full, meta ) {
-						return '<a class="btn btn-primary btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 增加询单</a> &nbsp; ';
+							return '<a class="btn btn-primary btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 增加询单</a> &nbsp; ';
 						},
 						targets: 10
 					},
 					  {
-		                data: "agegroup",
+		                data: "ageGroup",
 		                orderable: false,
 		                render: function ( data ) {
-		                	for(var i=0;i <  agegroup.length;i++){
-		                		if(data==agegroup[i].id){
-		                			return agegroup[i].text
+		                	for(var i=0;i <  ageGroup.length;i++){
+		                		if(data==ageGroup[i].id){
+		                			return ageGroup[i].text
 		                		}
 		                		if(data==''){return '无';}
 		                	}
@@ -182,10 +170,10 @@
 				    },
 				],
 				columns: [
-		            { data: "customerid" },
+		            { data: "customerId" },
 		            { data: "zname" },
 		            { data: "ename" },
-		            { data: "agegroup" },
+		            { data: "ageGroup" },
 		            { data: "gender" },
 		            { data: "mobilephone" },
 		            { data: "email" },
@@ -218,10 +206,8 @@
 		    jQuery('select').select2({
 		        minimumResultsForSearch: -1
 		    });
-		    
-		    jQuery('select').removeClass('form-control');
-			
-			
+		    	    
+		    jQuery('select').removeClass('form-control');		
 		});
 		
 		function edit(id) {
@@ -229,7 +215,7 @@
 		}
 		
 		function addCase(id){
-			window.parent.location = "${rootPath}case/add1.html?customerid="+id;
+			window.parent.location = "${rootPath}case/add1.html?customerId="+id;
 		}
 		
 		function del(id) {

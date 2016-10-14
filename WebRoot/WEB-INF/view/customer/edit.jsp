@@ -16,16 +16,7 @@
 				<h2>
 					<i class="glyphicon glyphicon-briefcase"></i> 客人管理 <span>编辑客人</span>
 				</h2>
-				<!-- <div class="breadcrumb-wrapper">
-					<span class="label">你在这里:</span>
-					<ol class="breadcrumb">
-						<li><a href="＃">CRM</a></li>
-						<li><a href="${rootPath }customer/list.html">客人管理</a></li>
-						<li class="active">编辑客人</li>
-					</ol>
-				</div> -->
 			</div>
-
 			<div class="contentpanel">
 				<!-- content goes here... -->
 
@@ -38,20 +29,19 @@
           <p>填写下表，完成客人信息修改。</p>
         </div>
         <form class="form-horizontal form-bordered" id="form-base">
-        <div class="panel-body panel-body-nopadding">
-          
+        <div class="panel-body panel-body-nopadding">        
 					<div class="section-block">
 		        		<h5 class="section-title">客人基本信息</h5>
 			            <div class="form-group col-sm-4">
 							<label class="col-sm-3 control-label">中文名<span class="asterisk">*</span></label>
 							<div class="col-sm-9">
-							    <input type="text" name="zname" placeholder="中文名" class="form-control" value="${customer.zname}"/>
+							    <input type="text" name="chineseName" placeholder="中文名" class="form-control" value="${customer.chineseName}"/>
 							</div>
 			            </div>
 			            <div class="form-group col-sm-4">
 							<label class="col-sm-3 control-label">英文名</label>
 							<div class="col-sm-9">
-							    <input type="text" name="ename" placeholder="英文名" class="form-control" value="${customer.ename}"/>
+							    <input type="text" name="englishName" placeholder="英文名" class="form-control" value="${customer.englishName}"/>
 							</div>
 			            </div> 
 			            <div class="form-group col-sm-4">
@@ -77,7 +67,7 @@
 			            <div class="form-group col-sm-4">
 							<label class="col-sm-3 control-label" >年龄段</label>
 							<div class="col-sm-9">
-							    <input type="text" name="agegroup" placeholder="年龄段" class="agegroup-select fullwidth" value="${customer.agegroup}"/>
+							    <input type="text" name="ageGroup" placeholder="年龄段" class="agegroup-select fullwidth" value="${customer.ageGroup}"/>
 							</div>
 			            </div>
 			            <div class="form-group col-sm-4">
@@ -131,7 +121,7 @@
 			            <div class="form-group col-sm-4">
 			                <label class="col-sm-3 control-label" >客人来源 </label>
 			                <div class="col-sm-9">
-			               	 	<input type="text" name="promote" class="promote-select fullwidth" value="${customer.promote}"/>
+			               	 	<input type="text" name="source" class="promote-select fullwidth" value="${customer.source}"/>
 			                </div>
 			            </div>
 			        </div>  
@@ -141,7 +131,7 @@
         <div class="panel-footer align-center">
 			<button class="btn btn-primary">保存</button>&nbsp;
 			<button class="btn btn-default" id="btn-back">返回</button>
-			<input type="hidden" name="customerid" value="${customer.customerid }" />
+			<input type="hidden" name="customerId" value="${customer.customerId }" />
 		</div><!-- panel-footer -->
      </form>   
       </div><!-- panel -->
@@ -159,16 +149,16 @@
 				<div class="table-responsive">
 					<table id="dataTable-case" class="table">
 						<thead>
-									<tr>
-										<th>ID</th>
-										<th>客人</th>
-										<th>预算</th>
-										<th>目的地</th>
-										<th>询单来源</th>
-										<th>跟单员</th>
-										<th>状态</th>
-										<th>编辑</th>
-									</tr>
+							<tr>
+								<th>ID</th>
+								<th>客人</th>
+								<th>预算</th>
+								<th>目的地</th>
+								<th>询单来源</th>
+								<th>跟单员</th>
+								<th>状态</th>
+								<th>编辑</th>
+							</tr>
 						</thead>
 						<tbody>
 						</tbody>
@@ -177,7 +167,7 @@
 				<!-- table-responsive -->
 			</div>
 		    <div class="panel-footer align-center">
-			    <a class="btn btn-primary" href="${rootPath}case/add1.html?customerid=${customer.customerid}">添加询单</a>
+			    <a class="btn btn-primary" href="${rootPath}case/add1.html?customerId=${customer.customerId}">添加询单</a>
 			</div>
 		</div><!-- end of panel 询单  -->
 		
@@ -191,7 +181,7 @@
           		</div>
           		<div class="panel-body">
 	          		<div class="table-responsive">
-		              	<table id="dataTable-note" class="table">
+		              	<table id="dataTable-comment" class="table">
 							<thead>
 								<tr>
 			                    <th>ID</th>
@@ -206,10 +196,10 @@
 					<form id="form-comment" class="form">
 						<div class="form-group col-sm-6 col-sm-offset-3">
 						    <textarea name="content" class="form-control" rows="5"></textarea>
-						    <input  type="hidden" name="userid" value="${loginUser.userid}" />
-						    <input  type="hidden" name="username" value="${loginUser.name}" />
-						    <input  type="hidden" name="objectid" value="${customer.customerid}" />
-						    <input  type="hidden" name="commenttype" value="customer" />
+						    <input  type="hidden" name="userId" value="${loginUser.userId}" />
+						    <input  type="hidden" name="userName" value="${loginUser.name}" />
+						    <input  type="hidden" name="objectId" value="${customer.customerId}" />
+						    <input  type="hidden" name="commentType" value="customer" />
 						</div>
 						<div class="form-group col-sm-12 align-center">
 							<button class="btn btn-primary">添加注释</button>
@@ -277,19 +267,20 @@
 	
 	<script type="text/javascript">
 	var leval = ${level};
-	var promote = ${promote};
-	var agegroup = ${agegroup};
 	var source = ${source};
-	var cs = ${casestatus};
-	var c = ${c};
+	var ageGroup = ${ageGroup};
+	var source = ${source};
+	var caseStatus = ${status};
+	var customerList = ${customerList};
 	var user = ${user};
+	
 	$(".promote-select").select2({
 		placeholder: '选择一个客人来源',
 	  	data: promote
 	});
 	$(".agegroup-select").select2({
 		placeholder: '选择一个年龄段',
-	  	data: agegroup
+	  	data: ageGroup
 	});
 	$(".level-select").select2({
 	  	data: leval
@@ -306,13 +297,13 @@
 		$(".nav-parent").eq(2).addClass("nav-active");
       	$(".nav-parent").eq(2).find(".children").show();
       	
-			var t = jQuery('#dataTable-case').DataTable({
+			var caseTable= jQuery('#dataTable-case').DataTable({
 				pageLength: 10,
 				processing: true,
 				language: datatable_local_language, // my.js
 				serverSide: true,
 				ajax: {
-					url: '${rootPath}case/listfromcustomer.do?customerid=${customer.customerid}',
+					url: '${rootPath}case/listfromcustomer.do?customerId=${customer.customerId}',
 					dataFilter: function(data){
 						var json = jQuery.parseJSON( data );
 						json.recordsTotal = json.countTotal;
@@ -324,7 +315,6 @@
 				columnDefs: [
 					{
 						data: "caseid",
-						//defaultContent: '<a class="btn btn-success btn-xs"><span class="fa fa-edit"></span> 编辑</a>&nbsp;<a class="btn btn-danger btn-xs"><span class="fa fa-minus-circle"></span> 删除</a>',
 						orderable: false,
 						render: function ( data, type, full, meta ) {
 						  return '<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a>&nbsp;<a class="btn btn-danger btn-xs" id="'+data+'"><span class="fa fa-minus-circle"></span> 无效</a>&nbsp;&nbsp;&nbsp;';
@@ -335,9 +325,9 @@
 		                data: "customernamde",
 		                orderable: false,
 		                render: function ( data ) {
-		                	for(var i=0;i <  c.length;i++){
-		                		if(data==c[i].id){
-		                			return c[i].text
+		                	for(var i=0;i <  customerList.length;i++){
+		                		if(data==customerList[i].id){
+		                			return customerList[i].text
 		                		}
 		                	}
 		                },
@@ -380,9 +370,9 @@
 		                orderable: false,
 		                render: function ( data ) {
 		                	if(data){
-			                	for(var i=0;i <  cs.length;i++){
-			                		if(data==cs[i].id){
-			                			return cs[i].text
+			                	for(var i=0;i <caseStatus.length;i++){
+			                		if(data==caseStatus[i].id){
+			                			return caseStatus[i].text
 			                		}
 			                		else{return ""}
 			                	}
@@ -399,8 +389,8 @@
 
 				],
 				columns: [
-				            { data: "caseid" },
-				            { data: "customerid" },
+				            { data: "caseId" },
+				            { data: "customerId" },
 				            { data: "budget" },
 				            { data: "destination" },
 				            { data: "source" },
@@ -416,14 +406,12 @@
 		    jQuery('select').removeClass('form-control');
 
 			$('#dataTable-case tbody').on( 'click', 'a.btn-success', function () {
-		        var data = t.row($(this).parents('tr')).data();
-		        //alert($(this).attr('id'));
+		        var data = caseTable.row($(this).parents('tr')).data();
 		        edit($(this).attr('id'));
 		    });
 
 			$('#dataTable-case tbody').on( 'click', 'a.btn-danger', function () {
-		        var data = t.row($(this).parents('tr')).data();
-		        //alert($(this).attr('id'));
+		        var data = caseTable.row($(this).parents('tr')).data();
 		        del($(this).attr('id'));
 		    });
 			
@@ -465,18 +453,18 @@
 
 		jQuery("#form-base").validate({
 			rules: {
-				zname: "required",
+				chineseName: "required",
 				qq: "number",
 				email: "email",
 				birthday: "date",
-				promote: "required"
+				source: "required"
 			},
 			messages: {
-				zname: "请输入中文名",
+				chineseName: "请输入中文名",
 				qq: "请输入有效的QQ账号",
 				email: "请输入有效的邮箱",
 				birthday: "请输入正确的日期",
-				promote: "请选择一个客人来源"
+				source: "请选择一个客人来源"
 			},
 		    highlight: function(element) {
 		      jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
@@ -503,7 +491,7 @@
 		      		$(".contact-note").removeClass("noted");
 		      		$(".contact-field").removeClass("has-error");
 
-			      	formBase_submit();
+			      	base_submit();
 			      	return false;
 			    }
 		    }
@@ -529,9 +517,9 @@
 		
 	});
 	      
-		function formBase_submit() {
-			var f = $("#form-base").serialize();
-			$.post('${rootPath}customer/edit.do', f, function(result) {
+		function base_submit() {
+			var customerInfo = $("#form-base").serialize();
+			$.post('${rootPath}customer/edit.do', customerInfo, function(result) {
 				var rmsg = result.msg;
 				if (result.success) {
 					window.parent.location = "${rootPath}customer/list.html";
@@ -541,13 +529,13 @@
 			}, "JSON");
 		}
 		
-		var t = jQuery('#dataTable-note').DataTable({
+		var commentTable = jQuery('#dataTable-comment').DataTable({
 			pageLength: 10,
 			processing: true,
 			language: datatable_local_language, // my.js
 			serverSide: true,
 			ajax: {
-				url: '${rootPath}comment/list.do?type=customer&id=${customer.customerid}',
+				url: '${rootPath}comment/list.do?type=customer&id=${customer.customerId}',
 				dataFilter: function(data){
 				    var json = jQuery.parseJSON( data );
 				    json.recordsTotal = json.countTotal;
@@ -569,13 +557,13 @@
 				],
 			columns: [
 		  			    { data: "commentid" },
-		  			    { data: "username" },
+		  			    { data: "userName" },
 		  			    { data: "content" },
 		  			    { data: "creattime" }
 		    ]
 			});
+			
 		jQuery("#form-comment").validate({
-
 			rules: {
 				content: "required"
 			},
@@ -592,16 +580,16 @@
 				return false;
 			},
 			submitHandler : function(){
-				formComment_submit();
+				comment_submit();
 			    return false;
 			}
 		});
-		function formComment_submit() {
-			var f = $("#form-comment").serialize();
-			$.post('${rootPath}comment/add.do', f, function(result) {
+		function comment_submit() {
+			var commentInfo= $("#form-comment").serialize();
+			$.post('${rootPath}comment/add.do', commentInfo, function(result) {
 				var rmsg = result.msg;
 				if (result.success) {
-					window.parent.location = "${rootPath}customer/edit.html?id=${customer.customerid}";
+					window.parent.location = "${rootPath}customer/edit.html?id=${customer.customerId}";
 				} 
 				else {
 					$("#msgModal").modal('show');
@@ -609,7 +597,5 @@
 			}, "JSON");
 		}
 	</script>
-
-
 </body>
 </html>

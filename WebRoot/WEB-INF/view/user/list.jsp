@@ -16,13 +16,6 @@
 				<h2>
 					<i class="fa fa-user"></i> 用户管理 <span>用户列表</span>
 				</h2>
-				<!-- <div class="breadcrumb-wrapper">
-					<span class="label">你在这里:</span>
-					<ol class="breadcrumb">
-						<li><a href="#">CRM</a></li>
-						<li class="active">用户管理</li>
-					</ol>
-				</div> -->
 			</div>
 
 			<div class="contentpanel">
@@ -53,20 +46,11 @@
 							</table>
 						</div>
 						<!-- table-responsive -->
-
-
-
 					</div>
 					<!-- panel-body -->
 				</div>
 				<!-- panel -->
-
-
-
-
-
 			</div>
-
 		</div>
 		<!-- mainpanel -->
 		<%@ include file="../assets/pages/rightpanel.jsp"%>
@@ -103,8 +87,7 @@
 
 			$(".nav-parent").eq(4).addClass("nav-active");
       		$(".nav-parent").eq(4).find(".children").show();
-      		
-			
+      				
 			var t = jQuery('#dataTable').DataTable({
 				pageLength: 10,
 				processing: true,
@@ -122,8 +105,7 @@
 				},
 				columnDefs: [
 			      {
-			          data: "userid",
-			          //defaultContent: '<a class="btn btn-success btn-xs"><span class="fa fa-edit"></span> 编辑</a>&nbsp;<a class="btn btn-danger btn-xs"><span class="fa fa-minus-circle"></span> 删除</a>',
+			          data: "userId",
 				      orderable: false,
 				      render: function ( data, type, full, meta ) {
 		              return '<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a>&nbsp; <a class="btn btn-danger btn-xs" id="'+data+'"><span class="fa fa-minus-circle"></span> 删除</a>';
@@ -137,7 +119,7 @@
 				  },
 				],
 				columns: [
-		            { data: "loginname" },
+		            { data: "loginName" },
 		            { data: "email" },
 		            { data: "mobilephone" }
 		        ]
@@ -145,13 +127,11 @@
 			
 			$('#dataTable tbody').on( 'click', 'a.btn-success', function () {
 		        var data = t.row($(this).parents('tr')).data();
-		        //alert($(this).attr('id'));
 		        edit($(this).attr('id'));
 		    } );
 
 			$('#dataTable tbody').on( 'click', 'a.btn-danger', function () {
 		        var data = t.row($(this).parents('tr')).data();
-		        //alert($(this).attr('id'));
 		        del($(this).attr('id'));
 		    } );
 			

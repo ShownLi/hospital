@@ -3,7 +3,7 @@ package com.tourmade.crm.common.framework;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PageList<T extends BaseBean> {
+public class PageList<T> extends BaseBean {
 	private int curPage;
 	private int pageSize;
 	private List<T> listData = new ArrayList<T>();

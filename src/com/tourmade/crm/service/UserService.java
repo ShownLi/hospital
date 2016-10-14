@@ -14,15 +14,15 @@ import org.springframework.transaction.annotation.Transactional;
 import com.tourmade.crm.common.framework.BaseService;
 import com.tourmade.crm.common.framework.bean.QueryResult;
 import com.tourmade.crm.common.model.base.value.baseconfig.PageHelper;
-import com.tourmade.crm.mapper.user.DemoUserMapper;
-import com.tourmade.crm.model.DemoUser;
+import com.tourmade.crm.entity.User;
+import com.tourmade.crm.mapper.user.UserMapper;
 
 @Service
 @Transactional(readOnly = false)
 public class UserService extends BaseService {
 
 	@Autowired
-	private DemoUserMapper userMapper;
+	private UserMapper userMapper;
 
 	/**
 	 * 查询用户数据，分页展示
@@ -32,9 +32,9 @@ public class UserService extends BaseService {
 	 * @param request
 	 * @return
 	 */
-	public QueryResult<DemoUser> queryUser(DemoUser user, PageHelper ph, HttpServletRequest request) {
+	public QueryResult<User> queryUser(User user, PageHelper ph, HttpServletRequest request) {
 
-		QueryResult<DemoUser> r = new QueryResult<DemoUser>();
+		QueryResult<User> r = new QueryResult<User>();
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		
@@ -42,7 +42,7 @@ public class UserService extends BaseService {
 		
 		if (null != seachValue && !"".equals(seachValue)) {
 			if (null == user) {
-				user = new DemoUser();
+				user = new User();
 			}
 			user.setSeachValue(seachValue);
 		}
@@ -55,7 +55,7 @@ public class UserService extends BaseService {
 //		map.put("s", ph.getSort());
 //		map.put("o", ph.getOrder());
 
-		List<DemoUser> data = userMapper.queryUser(map);
+		List<User> data = userMapper.queryUser(map);
 		long count = userMapper.countUser(user);
 		
 		r.setData(data);
@@ -71,7 +71,7 @@ public class UserService extends BaseService {
 	 * @param user
 	 * @return
 	 */
-	public int saveUser(DemoUser user) {
+	public int saveUser(User user) {
 		// user.setPwd("123456");
 		// user.setPwd(MD5.MD5Encode("123456"));
 		try {
@@ -82,7 +82,7 @@ public class UserService extends BaseService {
 			e.printStackTrace();
 			return 0;
 		}
-		return user.getUserid();
+		return user.getUserId();
 	}
 
 	/**
@@ -91,8 +91,8 @@ public class UserService extends BaseService {
 	 * @param id
 	 * @return
 	 */
-	public DemoUser getUserById(int id) {
-		DemoUser r = null;
+	public User getUserById(int id) {
+		User r = null;
 		try {
 			r = userMapper.getUserById(id);
 		} catch (Exception e) {
@@ -108,15 +108,15 @@ public class UserService extends BaseService {
 	 * @param user
 	 * @return
 	 */
-	public boolean updateUser(DemoUser user) {
+	public boolean updateUser(User user) {
 
 		boolean r = false;
 
 		try {
-			DemoUser u = userMapper.getUserById(user.getUserid());
+			User u = userMapper.getUserById(user.getUserId());
 			if (u != null) {
 				u.setName(user.getName());
-				u.setLoginname(user.getLoginname());
+				u.setLoginName(user.getLoginName());
 				u.setEmail(user.getEmail());
 				u.setMobilephone(user.getMobilephone());
 				if(null !=user.getPwd() && !"".equals(user.getPwd())){
@@ -162,9 +162,9 @@ public class UserService extends BaseService {
 	 * @param user
 	 * @return
 	 */
-	public DemoUser signin(DemoUser user) {
+	public User signin(User user) {
 
-		DemoUser u = null;
+		User u = null;
 
 		try {
 			MessageDigest md = MessageDigest.getInstance("MD5");

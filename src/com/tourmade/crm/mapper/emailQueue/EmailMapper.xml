@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tourmade.crm.mapper.email.EmailDao">
+
+	<select id="queryEmail" parameterType="Map" resultType="Email">
+		select
+			u.email_id as emailId,
+			u.email_name as name,
+			u.country as cname,
+			u.language as vlanguage,
+			u.creat_time as creat_time,
+			v.chinese as country,
+			x.chinese as language,
+			u.isdel as isdel
+		from tm_email u  
+			left join tm_parameter v on u.country = v.para_value
+			left join tm_parameter x on u.language = x.para_value
+		where u.isdel = 0 and v.isdel = 0 and x.isdel = 0
+		order by u.creat_time
+		limit #{b},#{e}
+	</select>
+
+	<select id="countEmail" parameterType="Email" resultType="long">
+		select count(u.email_id) from tm_email u
+		where
+		u.isdel = 0
+
+	</select>
+	
+	<insert id="saveEmail" parameterType="Email" flushCache="true" useGeneratedKeys="true" keyProperty="mailqueue_id" keyColumn="GENERATED_KEY">
+		insert into tm_mailqueue(
+		order_id,
+		mail_type,
+		acount,
+		sendname,
+		recievename,
+		sender,
+		reciever,
+		subject,
+		content,
+		file_url,
+		mail_status,
+		creat_time
+		)values(
+		#{orderid},
+		#{mailtype},
+		#{acount},
+		#{sendname},
+		#{recievename},
+		#{sender},
+		#{reciever},
+		#{subject},
+		#{content},
+		#{fileurl},
+		#{mailstatus},
+		NOW()
+		)
+	</insert>
+
+	<update id="updateEmail" parameterType="Email" flushCache="true">
+		update tm_email
+		set
+		email_name=#{name},
+		country=#{country},
+		language=#{language},
+		update_time=NOW()
+		where
+		email_id=#{email_id}
+	</update>
+	
+	<select id="getEmailById" parameterType="int" resultType="Email">
+		select
+		u.email_id as email_id,
+		u.email_name as name,
+		u.country as country,
+		u.language as language,
+		u.isdel as isdel
+		from tm_email u where u.email_id = #{email_id}
+	</select>
+	
+	<select id="geturl" parameterType="String" resultType="String">
+		select para_value from tm_parameter 
+		where para_domain = #{domain}
+		and isdel = 0
+	</select>	
+	
+	<select id="getParameterInfo" parameterType="String" resultType="DemoList">
+		select
+		u.para_domain,
+		u.para_value as id,
+		u.chinese as text,
+		u.isdisplay,
+		u.isdel 
+		from tm_parameter u 
+		where u.isdisplay = 1 and u.isdel = 0 and u.para_domain = #{domain}
+	</select>
+	
+	<select id="getRrouteUrl" resultType="String">
+		select
+		para_value
+		from tm_parameter where para_domain = 'route_url'
+	</select>
+	
+	<update id="deleteEmailById" parameterType="int" flushCache="true"
+		statementType="PREPARED">
+		update tm_email
+		set
+		isdel=1
+		where
+		email_id = #{email_id}
+	</update>
+	
+	<select id="getZhEn" parameterType="MailTepBoat" resultType="MailTepBoat">
+		select
+		u.chinese as chinese,
+		u.english as english
+		from tm_parameter u 
+		where u.isdisplay = 1 
+		and u.isdel = 0 
+		and u.para_domain = #{domain}
+		and u.para_value = #{value}
+	</select>
+	
+	<select id="getCusZE" parameterType="MailTepBoat" resultType="MailTepBoat">
+		select
+		u.customer_name_zh as chinese,
+		u.customer_name_en as english
+		from tm_customer u 
+		where u.isdel = 0 
+		and u.customer_id = #{id}
+	</select>
+	
+	<select id="getSalesZE" parameterType="MailTepBoat" resultType="MailTepBoat">
+		select
+		u.sales_name as chinese,
+		u.sales_name_en as english
+		from tm_sales u 
+		where u.isdel = 0 
+		and u.sales_id = #{id}
+	</select>
+</mapper>

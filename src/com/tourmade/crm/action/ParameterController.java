@@ -15,7 +15,7 @@ import com.tourmade.crm.common.framework.bean.QueryResult;
 import com.tourmade.crm.common.framework.util.JSONUtilS;
 import com.tourmade.crm.common.model.base.value.baseconfig.Json;
 import com.tourmade.crm.common.model.base.value.baseconfig.PageHelper;
-import com.tourmade.crm.model.DemoParameter;
+import com.tourmade.crm.entity.Parameter;
 import com.tourmade.crm.service.ParameterService;
 
 @Controller
@@ -32,9 +32,9 @@ public class ParameterController extends BaseSimpleFormController {
 	
 	@RequestMapping(value = "/list.do",produces="application/json;charset=utf-8")
 	@ResponseBody
-	public String queryData(HttpServletRequest request, HttpSession session, Model model, DemoParameter parameter, PageHelper page) {
+	public String queryData(HttpServletRequest request, HttpSession session, Model model, Parameter parameter, PageHelper page) {
 
-		QueryResult<DemoParameter> r = service.queryParameter(parameter, page, request);
+		QueryResult<Parameter> r = service.queryParameter(parameter, page, request);
 		String result = JSONUtilS.object2json(r);
 
 		return result;
@@ -47,7 +47,7 @@ public class ParameterController extends BaseSimpleFormController {
 
 	@RequestMapping(value = "/add.do")
 	@ResponseBody
-	public Json doAdd(HttpServletRequest request, HttpSession session, Model model, DemoParameter parameter) {
+	public Json doAdd(HttpServletRequest request, HttpSession session, Model model, Parameter parameter) {
 
 		Json j = new Json();
 		
@@ -67,7 +67,7 @@ public class ParameterController extends BaseSimpleFormController {
 		
 		if (null != id && !"".equals(id)) {
 			int i = Integer.parseInt(id);
-			DemoParameter u = service.getParameterById(i);
+			Parameter u = service.getParameterById(i);
 			model.addAttribute("parameter",u);
 		}
 		
@@ -77,7 +77,7 @@ public class ParameterController extends BaseSimpleFormController {
 
 	@RequestMapping(value = "/edit.do")
 	@ResponseBody
-	public Json doEdit(HttpServletRequest request, HttpSession session, Model model, DemoParameter parameter) {
+	public Json doEdit(HttpServletRequest request, HttpSession session, Model model, Parameter parameter) {
 
 		Json j = new Json();
 		

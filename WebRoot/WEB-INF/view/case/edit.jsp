@@ -16,14 +16,6 @@
 				<h2>
 					<i class="fa fa-user"></i> 询单管理 <span>编辑询单</span>
 				</h2>
-				<!-- <div class="breadcrumb-wrapper">
-					<span class="label">你在这里:</span>
-					<ol class="breadcrumb">
-						<li><a href="＃">CRM</a></li>
-						<li><a href="${rootPath }user/list.html">询单管理</a></li>
-						<li class="active">编辑询单</li>
-					</ol>
-				</div> -->
 			</div>
 
 			<div class="contentpanel">
@@ -37,25 +29,25 @@
           <h4 class="panel-title">询单基本信息</h4>
           <p>填写下表，完成询单编辑。</p>
         </div>
-        <form class="form-horizontal" id="form">
+        <form class="form-horizontal" id="form-case">
         <div class="panel-body panel-body-nopadding">
             <div class="section-block">
               	<div class="form-group col-sm-4">
               	   <label class="col-sm-4 control-label">所属客人</label>
                   	<div class="col-sm-8">
-                      	<input type="text" name="customerid" placeholder="所属客人" readonly class="customer-select fullwidth" value="${crmcase.customerid}" />
+                      	<input type="text" name="customerId" placeholder="所属客人" readonly class="customer-select fullwidth" value="${crmcase.customerId}" />
                     </div>
               	</div>
                 <div class="form-group col-sm-4">
                     <label class="col-sm-4 control-label">沟通语言</label>
                     <div class="col-sm-8">
-                      <input type="text" name="preferlanguage" class="language-select fullwidth" value="${crmcase.preferlanguage}"/>
+                      <input type="text" name="preferLanguage" class="language-select fullwidth" value="${crmcase.preferLanguage}"/>
                     </div>
                 </div>
                 <div class="form-group col-sm-4">
                     <label class="col-sm-4 control-label">希望联系方式</label>
                     <div class="col-sm-8">
-                      <select name="contacttype" class="contact-select fullwidth" multiple="multiple">
+                      <select name="contactType" class="contact-select fullwidth" multiple="multiple">
 					  <option value="wechat">微信</option>
 					  <option value="mobilephone">手机</option>
 					  
@@ -64,31 +56,19 @@
 					</select>
                     </div>
                 </div>   
-                <%-- <div class="form-group col-sm-4">
-                    <label class="col-sm-4 control-label">所属销售</label>
-                    <div class="col-sm-8">
-                      <input type="text" name="salesid" placeholder="所属销售" class="sales-select fullwidth" readonly value="${crmcase.salesid}" />
-                    </div>
-                </div> --%>
                 <div class="form-group col-sm-4">
                     <label class="col-sm-4 control-label">询单来源</label>
                     <div class="col-sm-8">
                       <input type="text" name="source" class="source-select fullwidth" value="${crmcase.source}" />
                     </div>
                 </div>
-                <%-- <div class="form-group col-sm-4">
-                  <label class="col-sm-4 control-label">状态</label>
-                  <div class="col-sm-8">
-                    <input type="text" name="status" placeholder="状态" class="status-select fullwidth" value="${crmcase.status}" />
-                  </div>
-                </div>  --%>
             </div>
             
            <div class="section-block">
             	<div class="form-group col-sm-4">
             	<label class="col-sm-4 control-label">英文名</label>
             	<div class="col-sm-8">
-                    <input type="text" name="ename" id="ename" class="form-control" readonly value="${customerInfo.ename}" />
+                    <input type="text" name="englishName" id="englishName" class="form-control" readonly value="${customerInfo.englishName}" />
                   </div>
             	</div>
             	
@@ -109,7 +89,7 @@
             	<div class="form-group col-sm-4" style="clear: both;">
             	<label class="col-sm-4 control-label">年龄段</label>
             	<div class="col-sm-8">
-                    <input type="text" name="agegroup" id="agegroup" class="form-control" readonly value="${customerInfo.agegroup}" />
+                    <input type="text" name="ageGroup" id="ageGroup" class="form-control" readonly value="${customerInfo.ageGroup}" />
                   </div>
             	</div>
             	
@@ -128,28 +108,22 @@
                     <input type="text" name="destination" class="destination-select fullwidth" readonly value="${crmcase.destination}" />
                   </div>
                 </div>
-                <%--  <div class="form-group col-sm-4">
-                  <label class="col-sm-4 control-label">行程</label>
-                  <div class="col-sm-8">
-                    <input type="text" name="route" placeholder="行程" class="form-control" readonly value="${crmcase.route}" />
-                  </div> 
-                </div> --%>
                 <div class="form-group col-sm-4">
                   <label class="col-sm-4 control-label">推广码</label>
                   <div class="col-sm-8">
-                    <input type="text" name="submit_type" class="form-control" readonly value="${crmcase.promotecode}" />
+                    <input type="text" name="promoteCode" class="form-control" readonly value="${crmcase.promoteCode}" />
                   </div>
                 </div> 
                	<div class="form-group col-sm-4">
                   <label class="col-sm-4 control-label">表单类型</label>
                   <div class="col-sm-8">
-                    <input type="text" name="submit_type" class="form-control" readonly value="${crmcase.submittype}" />
+                    <input type="text" name="submitType" class="form-control" readonly value="${crmcase.submitType}" />
                   </div>
                 </div>
                 <div class="form-group col-sm-4">
                     <label class="col-sm-4 control-label">IP地址</label>
                     <div class="col-sm-8">
-                      <input type="text" name="ip_address" class="form-control" readonly value="${crmcase.ipaddress}" />
+                      <input type="text" name="ipAddress" class="form-control" readonly value="${crmcase.ipAddress}" />
                     </div>
                 </div>      
                 <div class="form-group col-sm-4">
@@ -190,40 +164,40 @@
         	              <label class="col-sm-4 control-label">出发时间 <span class="asterisk">&nbsp;</span></label>
         	              <div class="col-sm-8">
         	                <div class="rdio rdio-primary rdio-inline">
-        	                  <input type="radio" id="yes" value="1" name="starttime"/>
+        	                  <input type="radio" id="yes" value="1" name="startTime"/>
         	                  <label for="yes">已确定</label>
         	                </div><!-- rdio -->
         	                <div class="rdio rdio-primary rdio-inline">
-        	                  <input type="radio" id="no" value="0" name="starttime" />
+        	                  <input type="radio" id="no" value="0" name="startTime" />
         	                  <label for="no">未确定</label>
         	                </div><!-- rdio -->
-        	                <label class="error" for="starttime"></label>
+        	                <label class="error" for="startTime"></label>
         	              </div>
                     </div>
-               <div class="form-group col-sm-4 d1">
+               <div class="form-group col-sm-4 start-time">
                   <label class="col-sm-4 control-label">大约时间</label>
                   <div class="col-sm-8 input-group input-datepicker">
-                    <input type="text" id="startmonth" name="startmonth" class="form-control datepicker" placeholder="yyyy/mm/dd" value="${crmcase.startmonth}" autocomplete="off">
+                    <input type="text" id="startMonth" name="startMonth" class="form-control datepicker" placeholder="yyyy/mm/dd" value="${crmcase.startMonth}" autocomplete="off">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                   </div>
                 </div> 
-                <div class="form-group col-sm-4 d1">
+                <div class="form-group col-sm-4 start-time">
                   <label class="col-sm-4 control-label">大约天数</label>
                   <div class="col-sm-8">
                     <input type="text" name="during" placeholder="大约天数" class="form-control" value="${crmcase.during}" />
                   </div>
                 </div> 
-                <div class="form-group col-sm-4 d2">
+                <div class="form-group col-sm-4 start-date">
                   <label class="col-sm-4 control-label">出发日期</label>
                   <div class="col-sm-8 input-group input-datepicker">
-                    <input type="text" id="startdate" name="startdate" class="form-control datepicker" placeholder="yyyy/mm/dd" value="${crmcase.startdate}" autocomplete="off">
+                    <input type="text" id="startDate" name="startDate" class="form-control datepicker" placeholder="yyyy/mm/dd" value="${crmcase.startDate}" autocomplete="off">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                   </div>
                 </div> 
-                <div class="form-group col-sm-4 d2">
+                <div class="form-group col-sm-4 start-date">
                   <label class="col-sm-4 control-label">返回日期</label>
                   <div class="col-sm-8 input-group input-datepicker">
-                    <input type="text" id="enddate" name="enddate" class="form-control datepicker" placeholder="yyyy/mm/dd" value="${crmcase.enddate}" autocomplete="off">
+                    <input type="text" id="endDate" name="endDate" class="form-control datepicker" placeholder="yyyy/mm/dd" value="${crmcase.endDate}" autocomplete="off">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                   </div>
                 </div>
@@ -289,17 +263,17 @@
         </div><!-- panel-body -->
         
         <div class="panel-footer align-center">
-            <button id="addorder" class="btn btn-primary">添加订单</button>&nbsp;
-            <button id="submit" class="btn btn-primary">保存</button>&nbsp;
-            	<input  type="hidden" name="caseid" value="${crmcase.caseid}" />
-            <button id="canel-submit"  class="btn btn-danger" >无效</button>&nbsp;
+            <button id="btn-addorder" class="btn btn-primary">添加订单</button>&nbsp;
+            <button class="btn btn-primary">保存</button>&nbsp;
+            	<input  type="hidden" name="caseId" value="${crmcase.caseId}" />
+            <button id="btn-invalid"  class="btn btn-danger" >无效</button>&nbsp;
             <button id="btn-back" class="btn btn-default">返回</button>
 		    </div><!-- panel-footer -->
      </form>   
       </div><!-- panel -->
       
       
-      <!-- Modal -->
+      <!-- Modal  -->
 <div class="modal fade" id="reconfirmDelModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
@@ -388,7 +362,7 @@
         </div>
         <div class="panel-body">
             <div class="table-responsive">
-              <table id="dataTable-note" class="table">
+              <table id="dataTable-comment" class="table">
                 <thead>
                   <tr>
                     <th>序号</th>
@@ -402,13 +376,13 @@
               </table>
           </div>
           <!-- 添加注释 -->
-    	    <form id="comment" class="form">
+    	    <form id="form-comment" class="form">
               <div class="form-group col-sm-6 col-sm-offset-3">
                     <textarea name="content" class="form-control" rows="5"></textarea>
-                    <input  type="hidden" name="userid" value="${loginUser.userid}" />
-                    <input  type="hidden" name="username" value="${loginUser.name}" />
-                    <input  type="hidden" name="objectid" value="${crmcase.caseid}" />
-                    <input  type="hidden" name="commenttype" value="case" />
+                    <input  type="hidden" name="userId" value="${loginUser.userId}" />
+                    <input  type="hidden" name="userName" value="${loginUser.name}" />
+                    <input  type="hidden" name="objectId" value="${crmcase.caseId}" />
+                    <input  type="hidden" name="commentType" value="case" />
               </div>
               <div class="form-group col-sm-12 align-center">
                 <button class="btn btn-primary">添加注释</button>
@@ -488,8 +462,8 @@
                 </div>
             <div class="col-sm-12">
              <a class="submit btn btn-primary">保存</a>
-             <input  type="hidden" name="caseid" value="${crmcase.caseid}" />
-             <input  type="hidden" name="customerid" value="${crmcase.customerid}" />
+             <input  type="hidden" name="caseId" value="${crmcase.caseId}" />
+             <input  type="hidden" name="customerId" value="${crmcase.customerId}" />
             </div>
             </form>
         </div>
@@ -506,46 +480,34 @@
 	<script src="${rootPath}assets/js/jquery.validate.min.js"></script>
 	
 <script type="text/javascript">
-
-	document.getElementById("requirement")
-		.value="${crmcase.requirement}"
-    var d1 = ${country};
-    var d2 = ${language};
-    var d4 = ${withwho};
-    var d5 = ${hotel};
-    var d6 = ${meals};
-    var d7 = ${guide};
-    var d8 = ${status};
-    var d9 = ${source};
-    var d10 = ${tailormade};
-    var d11 = ${passport};
-    var d12 = ${visa};
-    var d13 = ${flight};
+	var country = ${country};
+    var language = ${language};
+    var withwho = ${withwho};
+    var hotel = ${hotel};
+    var meals = ${meals};
+    var guide = ${guide};
+    var status = ${status};
+    var source = ${source};
+    var tailormade = ${tailormade};
+    var passport = ${passport};
+    var visa = ${visa};
+    var flight = ${flight};
     var customer = ${customer};
     var user = ${user};
     var sales = ${sales};
-	var os = ${orderstatus};
-	
+	var orderStatus = ${orderstatus};
 	var level = ${level};
 	var agegroup = ${agegroup}; 
+	var genderData = [{ id: 'male', text: '男' }, { id:'female' , text: '女' }];
 	
-	 var genderData = [{ id: 'male', text: '男' }, { id:'female' , text: '女' }];
-	
-/*  	//生日格式转换
-	var date = $("#birthday").val();	
-	var dateformat = new Date(date).toISOString("yyyy-MM-dd hh:mm:ss.S").substring(0,10);
-	//console.log(dateformat);
-	$("#birthday").val(dateformat) */
-	 
+	$("#requirement").val("${crmcase.requirement}"); 
 	$("#birthday").val(getBirthday())
-	
+	$(".contact-select").select2("val", "${crmcase.contactType}".split(","));
 	function getBirthday(){
-		
 		var date = $("#birthday").val();	
 		var dateformat = null;
 		if(!date.length==0){
 			dateformat = new Date(date).toISOString("yyyy-MM-dd hh:mm:ss.S").substring(0,10);
-			//console.log(dateformat);
 		}
 		return dateformat;
 	}
@@ -557,63 +519,62 @@
 	$("#gender").select2({
         data: genderData
     });  
-	
     $(".country-select").select2({
         placeholder: '国家',
-        data: d1
+        data: country
     });
     $(".destination-select").select2({
         placeholder: '国家',
-        data: d1
+        data: country
     });
+	
     $(".language-select").select2({
     	placeholder: '选择一个沟通语言',
-     	data: d2
+     	data: language
     });
     $(".contact-select").select2({
     	placeholder: '可多选',
     	minimumResultsForSearch: Infinity,
      });
-    //alert("${crmcase.contacttype}".split(","));
-    $(".contact-select").select2("val", "${crmcase.contacttype}".split(","));
+    
     $(".withwho-select").select2({
     	placeholder: '与谁同行',
-     	data: d4
+     	data: withwho
     });
     $(".hotel-select").select2({
        placeholder: '选择一个住宿方式',
-       data: d5
+       data: hotel
     });
     $(".meals-select").select2({
        placeholder: '选择一个',
-       data: d6
+       data: meals
     });
     $(".guide-select").select2({
        placeholder: '选择一个',
-       data: d7
+       data: guide
     });
     $(".status-select").select2({
-        data: d8
+        data: status
      });
     $(".source-select").select2({
       placeholder: '选择一个推广渠道',
-      data: d9
+      data: source
     });
     $(".tailormade-select").select2({
         placeholder: '选择一个',
-        data: d10
+        data: tailormade
       });
     $(".passport-select").select2({
         placeholder: '选择一个',
-        data: d11
+        data: passport
       });
     $(".visa-select").select2({
         placeholder: '选择一个',
-        data: d12
+        data: visa
       });
     $(".flight-select").select2({
         placeholder: '选择一个',
-        data: d13
+        data: flight
       });
     $(".customer-select").select2({
         placeholder: '客人',
@@ -628,96 +589,90 @@
         data: sales
     });
 
-		  var t = jQuery('#dataTable-order').DataTable({
-  			 	pageLength: 10,
-  			 	processing: true,
-  			 	language: datatable_local_language, // my.js
-  			 	serverSide: true,
-  			 	ajax: {
-    			 		url: '${rootPath}order/list1.do?caseid=${crmcase.caseid}',
-    			 		dataFilter: function(data){
-    			             var json = jQuery.parseJSON( data );
-    			             json.recordsTotal = json.countTotal;
-    			             json.recordsFiltered = json.countFiltered;
-    			             json.data = json.data;
-    			             return JSON.stringify( json );
-    			         }
-  			 	},
-  			 	columnDefs: [
-  			       {
-  			           data: "orderid",
-  			           //defaultContent: '<a class="btn btn-success btn-xs"><span class="fa fa-edit"></span> 编辑</a>&nbsp;<a class="btn btn-danger btn-xs"><span class="fa fa-minus-circle"></span> 删除</a>',
-    			 	      orderable: false,
-    			 	      render: function ( data, type, full, meta ) {
-    		               return '<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a>&nbsp;';
-  			 	    },
-  			 	              targets: 7
-  			 		},
-  			 		{
-		                data: "status",
-		                orderable: false,
-		                render: function ( data ) {
-		                	if(data){
-			                	for(var i=0;i <  os.length;i++){
-			                		if(data==os[i].id){
-			                			return os[i].text
-			                		}
-			                	}
-		                	}
-		                	else{return ""}
-		                },
-		                  targets: 6
-					},
-					{
-		                data: "destination",
-		                orderable: false,
-		                render: function ( data ) {
-		                	if(data){
-			                	for(var i=0;i <  d1.length;i++){
-			                		if(data==d1[i].id){
-			                			return d1[i].text
-			                		}
-			                	}
-		                	}
-		                	else{return ""}
-		                },
-		                  targets: 4
-					},		  
-  			 	    {
-    			 		    orderable: false,
-    			 		    searchable: false,
-    			 	      targets: [0,1,2]
-  			 	    },
-  			 	],
-  			 	columns: [
-  		             { data: "orderid" },
-  		             { data: "customerid" },
-  		             { data: "agencyname" },
-  		             { data: "salesname" },
-  		             { data: "destination" },
-  		             { data: "budget" },
-  		             { data: "status" }
-  		    ]
-  			 	
-		});
-			$('#dataTable-order tbody').on( 'click', 'a.btn-success', function () {
-		        var data = t.row($(this).parents('tr')).data();
-		        //alert($(this).attr('id'));
-		        edit($(this).attr('id'));
-		    } );	
-			function edit(id) {
-				window.parent.location = "${rootPath}order/edit.html?id="+id;
-			}
-	jQuery("#form").validate({
-        
+  	var orderTable = jQuery('#dataTable-order').DataTable({
+	 	pageLength: 10,
+	 	processing: true,
+	 	language: datatable_local_language, // my.js
+	 	serverSide: true,
+	 	ajax: {
+	 		url: '${rootPath}order/list.do?caseId=${crmcase.caseId}',
+	 		dataFilter: function(data){
+	             var json = jQuery.parseJSON( data );
+	             json.recordsTotal = json.countTotal;
+	             json.recordsFiltered = json.countFiltered;
+	             json.data = json.data;
+	             return JSON.stringify( json );
+	         }
+	 	},
+	 	columnDefs: [
+	       {
+	           data: "orderId",
+	 	       orderable: false,
+	 	       render: function ( data, type, full, meta ) {
+               		return '<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a>&nbsp;';
+	 	       },
+	 	       targets: 7
+	 		},
+	 		{
+               data: "status",
+               orderable: false,
+               render: function ( data ) {
+		           if(data){
+			           for(var i=0;i <  orderStatus.length;i++){
+			               if(data==orderStatus[i].id){
+			             		return orderStatus[i].text
+			               }
+			           }
+			        }
+              	    else{return ""}
+              	},
+                targets: 6
+			},
+			{
+              data: "destination",
+              orderable: false,
+              render: function ( data ) {
+	              if(data){
+	               	 for(var i=0;i <country.length;i++){
+	               		if(data==country[i].id){
+	               			return country[i].text
+	               		}
+	               	 }
+	              }
+	              else{return ""}
+              },
+                targets: 4
+			},		  
+	 	    {
+			    orderable: false,
+			    searchable: false,
+			 	targets: [0,1,2]
+	 	    },
+	 	],
+	 	columns: [
+             { data: "orderId" },
+             { data: "customerId" },
+             { data: "agencyName" },
+             { data: "salesName" },
+             { data: "destination" },
+             { data: "budget" },
+             { data: "status" }
+       ]		 	
+	});
+    
+	function edit(id) {
+		window.parent.location = "${rootPath}order/edit.html?id="+id;
+	}
+	
+	jQuery("#form-case").validate({      
           rules: {
             adult: "digits",
             children: "digits",
             baby: "digits",
             budget: "digits",
-            startdate: "date",
-            enddate: "date",
-            startmonth: "date",
+            startDate: "date",
+            endDate: "date",
+            startMonth: "date",
             during: "digits",
           },
           messages: {
@@ -725,9 +680,9 @@
             children: "请输入一个整数",
             baby: "请输入一个整数",
             budget: "请输入一个整数",
-            startdate: "请输入正确的日期格式 mm/dd/yyyy",
-            enddate: "请输入正确的日期格式 mm/dd/yyyy",
-            startmonth: "请输入正确的日期格式 mm/dd/yyyy",
+            startDate: "请输入正确的日期格式 mm/dd/yyyy",
+            endDate: "请输入正确的日期格式 mm/dd/yyyy",
+            startMonth: "请输入正确的日期格式 mm/dd/yyyy",
             during: "请输入一个整数",
           },
         
@@ -741,7 +696,7 @@
             return false;
           },
           submitHandler : function(){
-            form_submit();
+            case_submit();
             return false;
           }
       });
@@ -750,20 +705,24 @@
   				history.go(-1);
   		}); 
 
-      $("#addorder").click(function(){
+      $("#btn-addorder").click(function(){
           $("#nextModal").modal('show');
           return false;
       });
-
 
       $(".nextModal .submit").click(function(){
       	  order_submit();
       });
       
-      $("#canel-submit").click(function(){
+      $("#btn-invalid").click(function(){
       	 $("#reconfirmDelModal").modal('show');
 		 alert($("#reconfirmDelModal").attr("aria-hidden"));
       });
+      
+      $('#dataTable-order tbody').on( 'click', 'a.btn-success', function () {
+         var data = orderTable.row($(this).parents('tr')).data();
+         edit($(this).attr('id'));
+      });	
       
       function doDel(id){
 			$.ajax({
@@ -783,56 +742,51 @@
     			$.post('${rootPath}order/add.do', f, function(result) {
     				var rmsg = result.msg;
     				if (result.success) {
-    					window.parent.location = "${rootPath}case/edit.html?id=${crmcase.caseid}";
-    					//$("#nextModal").modal('show');
+    					window.parent.location = "${rootPath}case/edit.html?id=${crmcase.caseId}";
     				} else {
     					$("#NoEmail").modal('show');
               			$("#nextModal").modal('hide');
     				}
     			}, "JSON");
     	}
-    	if("${crmcase.starttime}"==1){
-    		$('#yes').attr('checked','true');
-    	}
-    	else{
-    		$('#no').attr('checked','true');
-    	}
-  		function form_submit() {
-    			var f = $("#form").serialize();
+
+  		function case_submit(){
+    			var f = $("#form-case").serialize();
     			$.post('${rootPath}case/edit.do', f, function(result) {
     				var rmsg = result.msg;
     				if (result.success) {
-    					window.parent.location = "${rootPath}case/edit.html?id=${crmcase.caseid}";
+    					window.parent.location = "${rootPath}case/edit.html?id=${crmcase.caseId}";
     				} else {
     					$("#msgModal").modal('show');
     				}
     			}, "JSON");
   		}
-  		var t = jQuery('#dataTable-note').DataTable({
+  		
+  		var commentTable= jQuery('#dataTable-comment').DataTable({
     			pageLength: 10,
     			processing: true,
     			language: datatable_local_language, // my.js
     			serverSide: true,
     			ajax: {
-      				url: '${rootPath}comment/list.do?type=case&id=${crmcase.caseid}',
+      				url: '${rootPath}comment/list.do?type=case&id=${crmcase.caseId}',
       				dataFilter: function(data){
       				    var json = jQuery.parseJSON( data );
       				    json.recordsTotal = json.countTotal;
       				    json.recordsFiltered = json.countFiltered;
       				    json.data = json.data;
       				    return JSON.stringify( json );
-      			  }
-      		},
+      			    }
+      			},
     			columnDefs: [
-    							  {
-    								  data: "creattime",
-    								  render: function ( data, type, full, meta ) {
-    									  var creattime = new Date(data.time);
-    				                      return creattime.format("yyyy/MM/dd");
-    				                  },
-    				                  targets: 3
-    							  }
-    							],
+	   							  {
+	   								  data: "creattime",
+	   								  render: function ( data, type, full, meta ) {
+	   									  var creattime = new Date(data.time);
+	   				                      return creattime.format("yyyy/MM/dd");
+	   				                  },
+	   				                  targets: 3
+	   							  }
+    						],
       	  columns: [
       			    { data: "commentid" },
       			    { data: "username" },
@@ -840,41 +794,41 @@
       			    { data: "creattime" }
       		]
   		});
-  		var r = jQuery('#dataTable-record').DataTable({
+  		
+  		var recordTable = jQuery('#dataTable-record').DataTable({
     			pageLength: 10,
     			processing: true,
     			language: datatable_local_language, // my.js
     			serverSide: true,
     			ajax: {
-      				url: '${rootPath}record/list.case?caseid=${crmcase.caseid}',
+      				url: '${rootPath}record/list.case?caseId=${crmcase.caseId}',
       				dataFilter: function(data){
       				    var json = jQuery.parseJSON( data );
       				    json.recordsTotal = json.countTotal;
       				    json.recordsFiltered = json.countFiltered;
       				    json.data = json.data;
       				    return JSON.stringify( json );
-      			  }
-      	  },
+      			  	}
+      	  		},
     			columnDefs: [
     						  {
     							  data: "creattime",
     							  render: function ( data, type, full, meta ) {
     								  var creattime = new Date(data.time);
-    			                    return creattime.format("yyyy-MM-dd");
-    			                },
+    			                      return creattime.format("yyyy-MM-dd");
+    			                  },
     			                targets: 3
     						  },		 
-
     			],
     			columns: [
-    		  			    { data: "orderrecordid" },
-    		  			    { data: "sendername" },
-    		  			    { data: "content" },
-    		  			    { data: "creattime" }
-    		  ]
+   		  			    { data: "orderrecordid" },
+   		  			    { data: "sendername" },
+   		  			    { data: "content" },
+   		  			    { data: "creattime" }
+    		    ]
   		});
 
-      jQuery("#comment").validate({
+      jQuery("#form-comment").validate({
           rules: {
               content: "required"
           },
@@ -897,16 +851,16 @@
       });
 
   		function comment_submit() {
-    			var f = $("#comment").serialize();
-    			$.post('${rootPath}comment/add.do', f, function(result) {
-      				var rmsg = result.msg;
-      				if (result.success) {
-      					window.parent.location = "${rootPath}case/edit.html?id=${crmcase.caseid}";
-      				} 
-      				else {
-      					$("#msgModal").modal('show');
-      				}
-    			}, "JSON");
+   			var fcomment= $("#form-comment").serialize();
+   			$.post('${rootPath}comment/add.do', fcomment, function(result) {
+     				var rmsg = result.msg;
+     				if (result.success) {
+     					window.parent.location = "${rootPath}case/edit.html?id=${crmcase.caseId}";
+     				} 
+     				else {
+     					$("#msgModal").modal('show');
+     				}
+   			}, "JSON");
   		}
 
 
@@ -917,26 +871,23 @@
       });
       jQuery('select').removeClass('form-control');
 
-
-      
-
       $(".nav-parent").eq(0).addClass("nav-active");
       $(".nav-parent").eq(0).find(".children").show();
         
       // Date Picker
-      jQuery("#startmonth").datepicker({
+      jQuery("#startMonth").datepicker({
         dateFormat: "yy-mm-dd",
         changeYear: true,
         changeMonth: true,
         minDate: 0
       });
-      $("#startdate").datepicker({
+      $("#startDate").datepicker({
         dateFormat: "yy-mm-dd",
         changeYear: true,
         changeMonth: true,
         minDate: 0
       });
-      $("#enddate").datepicker({
+      $("#endDate").datepicker({
         dateFormat: "yy-mm-dd",
         changeYear: true,
         changeMonth: true,
@@ -944,43 +895,52 @@
       });
 
       //大约时间格式转换
-      var date = $("#startmonth").val();  
+      var date = $("#startMonth").val();  
       if(date !== ""){
         var dateformat = new Date(date).toISOString("yyyy-MM-dd hh:mm:ss.S").substring(0,10);
-        $("#startmonth").val(dateformat);
+        $("#startMonth").val(dateformat);
       }
       
       //大约时间格式转换
-      var date = $("#startdate").val(); 
+      var date = $("#startDate").val(); 
       if(date !== ""){
         var dateformat = new Date(date).toISOString("yyyy-MM-dd hh:mm:ss.S").substring(0,10);
-        $("#startdate").val(dateformat);
+        $("#startDate").val(dateformat);
       }
       
       //大约时间格式转换
-      var date = $("#enddate").val(); 
+      var date = $("#endDate").val(); 
       if(date !== ""){
         var dateformat = new Date(date).toISOString("yyyy-MM-dd hh:mm:ss.S").substring(0,10);
-        $("#enddate").val(dateformat);
+        $("#endDate").val(dateformat);
       }
-  
-      $("input[name='starttime']").change(function() {
-          var val = $("input[name='starttime']:checked").val();
+  	  
+  	  alert('&&&')
+  	  alert("${crmcase.startTime}")
+  	  if("${crmcase.startTime}"==1){
+    	   $('#yes').attr('checked','true');
+      }
+      else{
+    		$('#no').attr('checked','true');
+      }
+  	  
+      $("input[name='startTime']").change(function() {
+          var val = $("input[name='startTime']:checked").val();
           if (val == 1) {
-              $(".d1").hide();
-              $(".d2").show();
+              $(".start-time").hide();
+              $(".start-date").show();
           }else{
-              $(".d2").hide();
-              $(".d1").show();
+              $(".start-date").hide();
+              $(".start-time").show();
           }
       });
-      var start = ${crmcase.starttime};
+      var start = ${crmcase.startTime};
       if (start == 1) {
-          $(".d1").hide();
-          $(".d2").show();
+          $(".start-time").hide();
+          $(".start-date").show();
       }else{
-          $(".d2").hide();
-          $(".d1").show();
+          $(".start-date").hide();
+          $(".start-time").show();
       }
 
       //添加订单弹出框，目的地与销售联动
@@ -1002,7 +962,7 @@
 
   });
   
-  var newHref = "../customer/edit.html?id="+${crmcase.customerid};
+  var newHref = "../customer/edit.html?id="+${crmcase.customerId};
   $('#addEmail').attr("href",newHref)
   
 	</script>

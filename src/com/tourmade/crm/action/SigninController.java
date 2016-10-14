@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.tourmade.crm.common.Constants;
 import com.tourmade.crm.common.action.BaseSimpleFormController;
 import com.tourmade.crm.common.model.base.value.baseconfig.Json;
-import com.tourmade.crm.model.DemoUser;
+import com.tourmade.crm.entity.User;
 import com.tourmade.crm.service.UserService;
 
 @Controller
@@ -64,13 +64,13 @@ public class SigninController extends BaseSimpleFormController {
 	 */
 	@RequestMapping(value = "/signin.do")
 	@ResponseBody
-	public Json dosignin(HttpServletRequest request, HttpSession session, Model model, DemoUser user) {
+	public Json dosignin(HttpServletRequest request, HttpSession session, Model model, User user) {
 		Json j = new Json();
-		if (user.getLoginname() == null || user.getPwd() == null || user.getLoginname().trim().length() < 1
+		if (user.getLoginName() == null || user.getPwd() == null || user.getLoginName().trim().length() < 1
 				|| user.getPwd().trim().length() < 1) {
 			j.setMsg("用户名或密码为空");
 		} else {
-			DemoUser u = service.signin(user);
+			User u = service.signin(user);
 			if (null != u) {
 				j.setSuccess(true);
 				j.setMsg("登录成功");

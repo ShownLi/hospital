@@ -13,16 +13,16 @@ import org.springframework.transaction.annotation.Transactional;
 import com.tourmade.crm.common.framework.BaseService;
 import com.tourmade.crm.common.framework.bean.QueryResult;
 import com.tourmade.crm.common.model.base.value.baseconfig.PageHelper;
-import com.tourmade.crm.mapper.sale.DemoSaleMapper;
-import com.tourmade.crm.model.DemoList;
-import com.tourmade.crm.model.DemoSale;
+import com.tourmade.crm.entity.EntityList;
+import com.tourmade.crm.entity.Sale;
+import com.tourmade.crm.mapper.sale.SaleMapper;
 
 @Service
 @Transactional(readOnly = false)
 public class SaleService extends BaseService {
 
 	@Autowired
-	private DemoSaleMapper saleMapper;
+	private SaleMapper saleMapper;
 
 	/**
 	 * 查询销售数据，分页展示
@@ -32,9 +32,9 @@ public class SaleService extends BaseService {
 	 * @param request
 	 * @return
 	 */
-	public QueryResult<DemoSale> querySale(DemoSale sale, PageHelper ph, int agencyid,HttpServletRequest request) {
+	public QueryResult<Sale> querySale(Sale sale, PageHelper ph, int agencyid,HttpServletRequest request) {
 
-		QueryResult<DemoSale> r = new QueryResult<DemoSale>();
+		QueryResult<Sale> r = new QueryResult<Sale>();
 		Map<String, Object> map = new HashMap<String, Object>();		
 		
 		
@@ -45,7 +45,7 @@ public class SaleService extends BaseService {
 //		map.put("s", ph.getSort());
 //		map.put("o", ph.getOrder());
 
-		List<DemoSale> data = saleMapper.querySale(map);
+		List<Sale> data = saleMapper.querySale(map);
 		long count = saleMapper.countSale(sale);
 		
 		r.setData(data);
@@ -61,7 +61,7 @@ public class SaleService extends BaseService {
 	 * @param sale
 	 * @return
 	 */
-	public int saveSale(DemoSale sale) {
+	public int saveSale(Sale sale) {
 		
 		try {
 			saleMapper.saveSale(sale);
@@ -70,7 +70,7 @@ public class SaleService extends BaseService {
 			e.printStackTrace();
 			return 0;
 		}
-		return sale.getSalesid();
+		return sale.getSalesId();
 	}
 
 	/**
@@ -79,8 +79,8 @@ public class SaleService extends BaseService {
 	 * @param id
 	 * @return
 	 */
-	public DemoSale getSaleById(int id) {
-		DemoSale r = null;
+	public Sale getSaleById(int id) {
+		Sale r = null;
 		try {
 			r = saleMapper.getSaleById(id);
 		} catch (Exception e) {
@@ -96,8 +96,8 @@ public class SaleService extends BaseService {
 	 * @param id
 	 * @return
 	 */
-	public List<DemoList> getAgency() {
-		List<DemoList> r = null;
+	public List<EntityList> getAgency() {
+		List<EntityList> r = null;
 		try {
 			r = saleMapper.getAgency();
 		} catch (Exception e) {
@@ -113,17 +113,17 @@ public class SaleService extends BaseService {
 	 * @param sale
 	 * @return
 	 */
-	public boolean updateSale(DemoSale sale) {
+	public boolean updateSale(Sale sale) {
 
 		boolean r = false;
 
 		try {
-			DemoSale u = saleMapper.getSaleById(sale.getSalesid());
+			Sale u = saleMapper.getSaleById(sale.getSalesId());
 			if (u != null) {
-				u.setSalesname(sale.getSalesname());
-				u.setSalesnameen(sale.getSalesnameen());
-				u.setSalesportalid(sale.getSalesportalid());
-				u.setSalesemail(sale.getSalesemail());
+				u.setSalesName(sale.getSalesName());
+				u.setSalesName(sale.getSalesName());
+				u.setSalesPortalId(sale.getSalesPortalId());
+				u.setSalesEmail(sale.getSalesEmail());
 				saleMapper.updateSale(u);
 				r = true;
 			} else {

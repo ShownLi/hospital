@@ -18,21 +18,21 @@ import org.springframework.transaction.annotation.Transactional;
 import com.tourmade.crm.common.framework.BaseService;
 import com.tourmade.crm.common.framework.bean.QueryResult;
 import com.tourmade.crm.common.model.base.value.baseconfig.PageHelper;
-import com.tourmade.crm.mapper.order.DemoOrderMapper;
-import com.tourmade.crm.model.DemoOrder;
+import com.tourmade.crm.entity.Case;
+import com.tourmade.crm.entity.Customer;
+import com.tourmade.crm.entity.EntityList;
+import com.tourmade.crm.entity.Order;
+import com.tourmade.crm.mapper.order.OrderMapper;
 
 import net.sf.json.JSONObject;
 
-import com.tourmade.crm.model.DemoCase;
-import com.tourmade.crm.model.DemoCustomer;
-import com.tourmade.crm.model.DemoList;
 
 @Service
 @Transactional(readOnly = false)
 public class OrderService extends BaseService {
 	
 	@Autowired
-	private DemoOrderMapper orderMapper;
+	private OrderMapper orderMapper;
 
 	/**
 	 * 查询订单数据，分页展示
@@ -42,9 +42,9 @@ public class OrderService extends BaseService {
 	 * @param request
 	 * @return
 	 */
-	public QueryResult<DemoOrder> queryOrder(DemoOrder order, PageHelper ph, HttpServletRequest request) {
+	public QueryResult<Order> queryOrder(Order order, PageHelper ph, HttpServletRequest request) {
 
-		QueryResult<DemoOrder> r = new QueryResult<DemoOrder>();
+		QueryResult<Order> r = new QueryResult<Order>();
 		Map<String, Object> map = new HashMap<String, Object>();
 			
 		map.put("b", ph.getStart());
@@ -52,7 +52,7 @@ public class OrderService extends BaseService {
 //		map.put("s", ph.getSort());
 //		map.put("o", ph.getOrder());
 
-		List<DemoOrder> data = orderMapper.queryOrder(map);
+		List<Order> data = orderMapper.queryOrder(map);
 		long count = orderMapper.countOrder(order);
 			
 		r.setData(data);
@@ -70,9 +70,9 @@ public class OrderService extends BaseService {
 	 * @param request
 	 * @return
 	 */
-	public QueryResult<DemoOrder> queryOrderByCaseid(int caseid, PageHelper ph, HttpServletRequest request) {
+	public QueryResult<Order> queryOrderByCaseid(int caseid, PageHelper ph, HttpServletRequest request) {
 
-		QueryResult<DemoOrder> r = new QueryResult<DemoOrder>();
+		QueryResult<Order> r = new QueryResult<Order>();
 		Map<String, Object> map = new HashMap<String, Object>();
 			
 		map.put("id", caseid);
@@ -81,7 +81,7 @@ public class OrderService extends BaseService {
 //		map.put("s", ph.getSort());
 //		map.put("o", ph.getOrder());
 
-		List<DemoOrder> data = orderMapper.queryOrderByCaseid(map);
+		List<Order> data = orderMapper.queryOrder(map);
 		long count = orderMapper.countOrderByCaseid(caseid);
 			
 		r.setData(data);
@@ -139,17 +139,17 @@ public class OrderService extends BaseService {
 	 * @param order
 	 * @return
 	 */
-	public DemoOrder saveOrder(DemoOrder order) {
+	public Order saveOrder(Order order) {
 
 		
 		try {
-			DemoOrder order1 = getInfo(order);
-			order.setAgencyid(order1.getAgencyid());
-			order.setAgencyname(order1.getAgencyname());
-			order.setSalesname(order1.getSalesname());
-			order.setAgencyemailreal(order1.getAgencyemailreal());
-			order.setCustomername(order1.getCustomername());
-			order.setCustomeremailreal(order1.getCustomeremailreal());
+			Order order1 = getInfo(order);
+			order.setAgencyId(order1.getAgencyId());
+			order.setAgencyName(order1.getAgencyName());
+			order.setSalesName(order1.getSalesName());
+			order.setAgencyEmailReal(order1.getAgencyEmailReal());
+			order.setCustomerName(order1.getCustomerName());
+			order.setCustomerEmailReal(order1.getCustomerEmailReal());
 			order.setStatus("1");
 			orderMapper.saveOrder(order);
 		} catch (Exception e) {
@@ -166,16 +166,16 @@ public class OrderService extends BaseService {
 	 * @param email
 	 * @return
 	 */
-	public void MailAlias(DemoOrder order) {
-		int orderid = order.getOrderid();
+	public void MailAlias(Order order) {
+		int orderid = order.getOrderId();
 		
 		String domain = orderMapper.geturl("mail.domain");
 		String url = orderMapper.geturl("creatAlias.url");
 		String real = orderMapper.geturl("mail.real");
 		
-		String cusReal = order.getCustomeremailreal();
+		String cusReal = order.getCustomerEmailReal();
 		//cusReal = cusReal.replace("@tourmade.com", "");
-		String agReal = order.getAgencyemailreal();
+		String agReal = order.getAgencyEmailReal();
 		//agReal = agReal.replace("@tourmade.com", "");
 		
 		String pattern="0000000";
@@ -204,8 +204,8 @@ public class OrderService extends BaseService {
 		
 		
 		//将别名存入order表中
-		DemoOrder upOrder = new DemoOrder();
-		upOrder.setOrderid(orderid);
+		Order upOrder = new Order();
+		upOrder.setOrderId(orderid);
 		upOrder.setAgencyReEmailAlias("ar"+formatedOrderid+"@"+domain);
 		upOrder.setAgencySeEmailAlias("as"+formatedOrderid+"@"+domain);
 		upOrder.setCustomerReEmailAlias("cr"+formatedOrderid+"@"+domain);
@@ -255,7 +255,7 @@ public class OrderService extends BaseService {
 	 * @return
 	 */
 	public void creatPortal(int id) {
-		DemoCustomer customer = orderMapper.getCustomerById(id);
+		Customer customer = orderMapper.getCustomerById(id);
 		String url = orderMapper.geturl("creatPortal.url");
 		/*String param="customer_id="+customer.getCustomerid()
 						+"&customer_name_zh="+customer.getZname()
@@ -268,9 +268,9 @@ public class OrderService extends BaseService {
 		
 		
 		try {
-			String param="customer_id="+customer.getCustomerid()
-			+"&customer_name_zh="+URLEncoder.encode(customer.getZname(),"UTF-8")
-			+"&customer_name_en="+customer.getEname()
+			String param="customer_id="+customer.getCustomerId()
+			+"&customer_name_zh="+URLEncoder.encode(customer.getChineseName(),"UTF-8")
+			+"&customer_name_en="+customer.getEnglishName()
 			+"&email="+customer.getEmail()
 			+"&mobilephone="+customer.getMobilephone()
 			+"&wechat="+customer.getWechat()
@@ -295,7 +295,7 @@ public class OrderService extends BaseService {
              sb.append( str ); 
             }
             JSONObject result = JSONObject.fromObject(sb.toString());
-            customer.setPortalid(result.getInt("portal_id"));
+            customer.setPortalId(result.getInt("portal_id"));
             orderMapper.updateCustomer(customer);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -318,8 +318,8 @@ public class OrderService extends BaseService {
 	 * @param id
 	 * @return
 	 */
-	public DemoOrder getInfo(DemoOrder order) {
-		DemoOrder r = null;
+	public Order getInfo(Order order) {
+		Order r = null;
 		try {
 			r = orderMapper.getInfo(order);
 		} catch (Exception e) {
@@ -352,8 +352,8 @@ public class OrderService extends BaseService {
 	 * @param id
 	 * @return
 	 */
-	public DemoOrder getOrderById(int id) {
-		DemoOrder r = null;
+	public Order getOrderById(int id) {
+		Order r = null;
 		try {
 			r = orderMapper.getOrderById(id);
 		} catch (Exception e) {
@@ -369,8 +369,8 @@ public class OrderService extends BaseService {
 	 * @param id
 	 * @return
 	 */
-	public DemoCustomer getCustomerById(int id) {
-		DemoCustomer r = null;
+	public Customer getCustomerById(int id) {
+		Customer r = null;
 		try {
 			r = orderMapper.getCustomerById(id);
 		} catch (Exception e) {
@@ -386,8 +386,8 @@ public class OrderService extends BaseService {
 	 * @param id
 	 * @return
 	 */
-	public DemoCase getCaseById(int id) {
-		DemoCase r = null;
+	public Case getCaseById(int id) {
+		Case r = null;
 		try {
 			r = orderMapper.getCaseById(id);
 		} catch (Exception e) {
@@ -403,8 +403,8 @@ public class OrderService extends BaseService {
 	 * @param id
 	 * @return
 	 */
-	public List<DemoList> getParameterInfo(String domain) {
-		List<DemoList> r = null;
+	public List<EntityList> getParameterInfo(String domain) {
+		List<EntityList> r = null;
 		try {
 			r = orderMapper.getParameterInfo(domain);
 		} catch (Exception e) {
@@ -420,12 +420,12 @@ public class OrderService extends BaseService {
 	 * @param order
 	 * @return
 	 */
-	public boolean updateOrder(DemoOrder order) {
+	public boolean updateOrder(Order order) {
 
 		boolean r = false;
 
 		try {
-			DemoOrder u = orderMapper.getOrderById(order.getOrderid());
+			Order u = orderMapper.getOrderById(order.getOrderId());
 			u.setAgencyReEmailAlias(order.getAgencyReEmailAlias());
 			u.setAgencySeEmailAlias(order.getAgencySeEmailAlias());
 			u.setCustomerReEmailAlias(order.getCustomerReEmailAlias());
@@ -433,15 +433,15 @@ public class OrderService extends BaseService {
 			if(order.getStatus() != null){
 				u.setStatus(order.getStatus());
 			}
-			if(order.getGroupnumber()!= null){
-				u.setGrouptime(order.getGrouptime());
-				u.setStartdate(order.getStartdate());
-				u.setEnddate(order.getEnddate());
-				u.setGroupnumber(order.getGroupnumber());
-				u.setGroupprice(order.getGroupprice());
+			if(order.getGroupNumber()!= null){
+				u.setGroupTime(order.getGroupTime());
+				u.setStartDate(order.getStartDate());
+				u.setEndDate(order.getEndDate());
+				u.setGroupNumber(order.getGroupNumber());
+				u.setGroupPrice(order.getGroupPrice());
 				u.setCurrency(order.getCurrency());
-				u.setExchangerate(order.getExchangerate());
-				u.setRmbprice(order.getRmbprice());
+				u.setExchangeRate(order.getExchangeRate());
+				u.setRmbPrice(order.getRmbPrice());
 				u.setStatus("2");
 			}
 			if(order.getReason() != null){
@@ -479,8 +479,8 @@ public class OrderService extends BaseService {
 		return r;
 	}
 
-	public DemoCustomer getCustomerByCaseId(int caseid) {
-		DemoCustomer r = null;
+	public Customer getCustomerByCaseId(int caseid) {
+		Customer r = null;
 		try {
 			r = orderMapper.getCustomerByCaseId(caseid);
 		} catch (Exception e) {

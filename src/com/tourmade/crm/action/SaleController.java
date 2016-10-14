@@ -17,8 +17,8 @@ import com.tourmade.crm.common.framework.bean.QueryResult;
 import com.tourmade.crm.common.framework.util.JSONUtilS;
 import com.tourmade.crm.common.model.base.value.baseconfig.Json;
 import com.tourmade.crm.common.model.base.value.baseconfig.PageHelper;
-import com.tourmade.crm.model.DemoList;
-import com.tourmade.crm.model.DemoSale;
+import com.tourmade.crm.entity.EntityList;
+import com.tourmade.crm.entity.Sale;
 import com.tourmade.crm.service.SaleService;
 
 import net.sf.json.JSONArray;
@@ -37,9 +37,9 @@ public class SaleController extends BaseSimpleFormController {
 	
 	@RequestMapping(value = "/list.do",produces="application/json;charset=utf-8")
 	@ResponseBody
-	public String queryData(HttpServletRequest request, HttpSession session, Model model, DemoSale sale, PageHelper page,int agencyid) {
+	public String queryData(HttpServletRequest request, HttpSession session, Model model, Sale sale, PageHelper page,int agencyid) {
 		
-		QueryResult<DemoSale> r = service.querySale(sale, page, agencyid, request);
+		QueryResult<Sale> r = service.querySale(sale, page, agencyid, request);
 		String result = JSONUtilS.object2json(r);
 
 		return result;
@@ -48,7 +48,7 @@ public class SaleController extends BaseSimpleFormController {
 	@RequestMapping(value = "/add.html", method = { RequestMethod.POST, RequestMethod.GET })
 	public String add(Model model,int agencyid) {
 		
-		List<DemoList> u = service.getAgency();
+		List<EntityList> u = service.getAgency();
 		JSONArray result = JSONArray.fromObject(u);
 		model.addAttribute("agency",result);
 		model.addAttribute("agencyid",agencyid);
@@ -57,7 +57,7 @@ public class SaleController extends BaseSimpleFormController {
 
 	@RequestMapping(value = "/add.do")
 	@ResponseBody
-	public Json doAdd(HttpServletRequest request, HttpSession session, Model model, DemoSale sale) {
+	public Json doAdd(HttpServletRequest request, HttpSession session, Model model, Sale sale) {
 
 		Json j = new Json();
 		
@@ -77,8 +77,8 @@ public class SaleController extends BaseSimpleFormController {
 		
 		if (null != id && !"".equals(id)) {
 			int i = Integer.parseInt(id);
-			DemoSale u = service.getSaleById(i);
-			List<DemoList> v = service.getAgency();
+			Sale u = service.getSaleById(i);
+			List<EntityList> v = service.getAgency();
 			JSONArray result = JSONArray.fromObject(v);
 			model.addAttribute("agency",result);
 			model.addAttribute("sales",u);
@@ -90,7 +90,7 @@ public class SaleController extends BaseSimpleFormController {
 
 	@RequestMapping(value = "/edit.do")
 	@ResponseBody
-	public Json doEdit(HttpServletRequest request, HttpSession session, Model model, DemoSale sale) {
+	public Json doEdit(HttpServletRequest request, HttpSession session, Model model, Sale sale) {
 
 		Json j = new Json();
 		

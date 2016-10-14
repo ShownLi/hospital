@@ -31,17 +31,7 @@
 						<h5>
 							<strong>欢  迎</strong>
 						</h5>
-						<ul><!-- 
-							<li><i class="fa fa-arrow-circle-o-right mr5"></i> Fully
-								Responsive Layout</li>
-							<li><i class="fa fa-arrow-circle-o-right mr5"></i>
-								HTML5/CSS3 Valid</li>
-							<li><i class="fa fa-arrow-circle-o-right mr5"></i> Retina
-								Ready</li>
-							<li><i class="fa fa-arrow-circle-o-right mr5"></i> WYSIWYG
-								CKEditor</li>
-							<li><i class="fa fa-arrow-circle-o-right mr5"></i> and much
-								more...</li> -->
+						<ul>
 						</ul>
 						<div class="mb20"></div>
 					</div>
@@ -59,11 +49,10 @@
 							<label class="error"></label>
 						</div>
 						<input type="text" class="form-control uname"
-							placeholder="账号" name="loginname" required /> <input
+							placeholder="账号" name="loginName" required /> <input
 							type="password" class="form-control pword" placeholder="密码"
 							name="pwd" required /> <br><a href="#"><small></small></a>
 						<button class="btn btn-success btn-block">确  定</button>
-
 					</form>
 				</div>
 				<!-- col-sm-5 -->
@@ -71,12 +60,7 @@
 			</div>
 			<!-- row -->
 
-			<div class="signup-footer"><!-- 
-				<div class="pull-left">&copy; 2014. All Rights Reserved.
-					Bracket Bootstrap 3 Admin Template</div>
-				<div class="pull-right">
-					Created By: <a href="http://themepixels.com/" target="_blank">ThemePixels</a>
-				</div> -->
+			<div class="signup-footer">
 			</div>
 
 		</div>
@@ -91,7 +75,7 @@
 		jQuery(document).ready(function() {
 			jQuery("#form").validate({
 				messages: {
-					loginname: "请输入用户名!",
+					loginName: "请输入用户名!",
 					pwd: "请输入密码!"
 				},
 			    highlight: function(element) {
@@ -126,11 +110,6 @@
 					jQuery("#form div.error label.error").text("");
 					window.parent.location = "${rootPath}/main.html";
 				} else {
-					//submitCount = '';
-					/* $("#errorLable").show();
-					$("#errorLable").text(result.msg); */
-					//alert(result.msg);
-					//$("#loginButt").attr('disabled', "true");
 					$("#form div.error").show();
 					$("#form div.error label.error").show();
 					jQuery("#form div.error label.error").text(rmsg);

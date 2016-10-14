@@ -16,13 +16,6 @@
 				<h2>
 					<i class="glyphicon glyphicon-cog"></i> 系统参数管理 <span>系统参数列表</span>
 				</h2>
-				<!-- <div class="breadcrumb-wrapper">
-					<span class="label">你在这里:</span>
-					<ol class="breadcrumb">
-						<li><a href="#">CRM</a></li>
-						<li class="active">系统参数管理</li>
-					</ol>
-				</div> -->
 			</div>
 
 			<div class="contentpanel">
@@ -124,8 +117,7 @@
 				},
 				columnDefs: [
 				  {
-	                  data: "parameterid",
-	                  //defaultContent: '<a class="btn btn-success btn-xs"><span class="fa fa-edit"></span> 编辑</a>&nbsp;<a class="btn btn-danger btn-xs"><span class="fa fa-minus-circle"></span> 删除</a>',
+	                  data: "parameterId",
 	                  orderable: false,
 	                  render: function ( data ) {
 	                      return '<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a>&nbsp;<a class="btn btn-danger btn-xs" id="'+data+'"><span class="fa fa-minus-circle"></span> 删除</a>';
@@ -160,13 +152,11 @@
 			
 			$('#dataTable tbody').on( 'click', 'a.btn-success', function () {
 		        var data = t.row($(this).parents('tr')).data();
-		        //alert($(this).attr('id'));
 		        edit($(this).attr('id'));
 		    } );
 
 			$('#dataTable tbody').on( 'click', 'a.btn-danger', function () {
 		        var data = t.row($(this).parents('tr')).data();
-		        //alert($(this).attr('id'));
 		        del($(this).attr('id'));
 		    } );
 			

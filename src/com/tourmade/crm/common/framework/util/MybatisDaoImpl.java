@@ -183,7 +183,7 @@ public class MybatisDaoImpl<T extends BaseBean<T>> implements BaseDao<T> {
 		return (T) this.sqlSession.selectOne(method, id);
 	}
 
-	@Override
+	
 	public long count(T t) throws TransactionException {
 		// TODO Auto-generated method stub
 		return 0;

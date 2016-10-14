@@ -15,14 +15,6 @@
 				<h2>
 					<i class="fa fa-user"></i> 询单管理 <span>新增询单</span>
 				</h2>
-				<!-- <div class="breadcrumb-wrapper">
-					<span class="label">你在这里:</span>
-					<ol class="breadcrumb">
-						<li><a href="＃">CRM</a></li>
-						<li><a href="${rootPath }user/list.html">询单管理</a></li>
-						<li class="active">新增询单</li>
-					</ol>
-				</div> -->
 			</div>
 
 			<div class="contentpanel">
@@ -36,25 +28,25 @@
           <h4 class="panel-title">询单基本信息</h4>
           <p>填写下表，完成询单创建。</p>
         </div>
-        <form class="form-horizontal" id="form">
+        <form class="form-horizontal" id="form-case">
             <div class="panel-body panel-body-nopadding">
                 <div class="section-block">
                     <div class="form-group col-sm-4">
                       <label class="col-sm-4 control-label">所属客人</label>
                       <div class="col-sm-8">
-                        <input type="text" name="customerid" placeholder="所属客人" class="customer-select fullwidth" value="${customerid}" />
+                        <input type="text" name="customerId" placeholder="所属客人" class="customer-select fullwidth" value="${customerId}" />
                       </div>
                     </div>
                     <div class="form-group col-sm-4">
                       <label class="col-sm-4 control-label">沟通语言</label>
                       <div class="col-sm-8">
-                        <input type="text" name="preferlanguage" class="language-select fullwidth" value=""/>
+                        <input type="text" name="preferLanguage" class="language-select fullwidth" value=""/>
                       </div>
                     </div>
                     <div class="form-group col-sm-4">
                       <label class="col-sm-4 control-label">希望联系方式</label>
                       <div class="col-sm-8">
-	                      <select name="contacttype" class="contact-select fullwidth" multiple="multiple">
+	                      <select name="contactType" class="contact-select fullwidth" multiple="multiple">
 							  <option value="wechat">微信</option>
 							  <option value="mobilephone">手机</option>
 							  
@@ -63,12 +55,6 @@
 					</select>
                       </div>
                     </div> 
-              <!--       <div class="form-group col-sm-4">
-                      <label class="col-sm-4 control-label">所属销售</label>
-                      <div class="col-sm-8">
-                        <input type="text" name="salesid" placeholder="所属销售" class="sales-select fullwidth" value="0"/>
-                      </div>
-                    </div> -->
                     <div class="form-group col-sm-4">
                       <label class="col-sm-4 control-label">询单来源</label>
                       <div class="col-sm-8">
@@ -88,19 +74,7 @@
                       <div class="col-sm-8">
                         <input type="text" name="destination" class="country-select fullwidth" value="" />
                       </div>
-                    </div>
-                    <!-- <div class="form-group col-sm-4">
-                      <label class="col-sm-4 control-label">行程</label>
-                      <div class="col-sm-8">
-                        <input type="text" name="route" placeholder="行程" class="form-control" value="" />
-                      </div>
-                    </div> -->
-                    <!-- <div class="form-group col-sm-4">
-                      <label class="col-sm-4 control-label">状态</label>
-                      <div class="col-sm-8">
-                        <input type="text" name="status" class="status-select fullwidth" value="0" readonly/>
-                      </div>
-                    </div>       -->       
+                    </div>    
                 </div>
                 <div class="section-block">
                     <div class="form-group col-sm-4">
@@ -133,40 +107,40 @@
         	              <label class="col-sm-4 control-label">出发时间 <span class="asterisk">&nbsp;</span></label>
         	              <div class="col-sm-8">
         	                <div class="rdio rdio-primary rdio-inline">
-        	                  <input type="radio" id="yes" value="1" name="starttime"/>
+        	                  <input type="radio" id="yes" value="1" name="startTime"/>
         	                  <label for="yes">已确定</label>
         	                </div><!-- rdio -->
         	                <div class="rdio rdio-primary rdio-inline">
-        	                  <input type="radio" id="no" value="0" name="starttime" checked/>
+        	                  <input type="radio" id="no" value="0" name="startTime" checked/>
         	                  <label for="no">未确定</label>
         	                </div><!-- rdio -->
-        	                <label class="error" for="starttime"></label>
+        	                <label class="error" for="startTime"></label>
         	              </div>
                     </div>
-                    <div class="form-group col-sm-4 d1">
+                    <div class="form-group col-sm-4 start-time">
                       <label class="col-sm-4 control-label">大约时间</label>
                       <div class="col-sm-8 input-group input-datepicker">
-                        <input id="startmonth" type="text" name="startmonth" class="form-control datepicker" placeholder="mm/dd/yyyy" autocomplete="off">
+                        <input id="startmonth" type="text" name="startMonth" class="form-control datepicker" placeholder="mm/dd/yyyy" autocomplete="off">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                       </div>
                     </div>
-                    <div class="form-group col-sm-4 d1">
+                    <div class="form-group col-sm-4 start-time">
                       <label class="col-sm-4 control-label">大约天数</label>
                       <div class="col-sm-8">
                         <input type="text" name="during" placeholder="大约天数" class="form-control" value="" />
                       </div>
                     </div>
-                    <div class="form-group col-sm-4 d2">
+                    <div class="form-group col-sm-4 start-date">
                       <label class="col-sm-4 control-label">出发日期</label>
                       <div class="col-sm-8 input-group input-datepicker">
-                        <input id="startdate" type="text" name="startdate" class="form-control datepicker" placeholder="yyyy/mm/dd" autocomplete="off">
+                        <input id="startdate" type="text" name="startDate" class="form-control datepicker" placeholder="yyyy/mm/dd" autocomplete="off">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                       </div>
                     </div>
-                    <div class="form-group col-sm-4 d2">
+                    <div class="form-group col-sm-4 start-date">
                       <label class="col-sm-4 control-label">返回日期</label>
                       <div class="col-sm-8 input-group input-datepicker">
-                        <input id="enddate" type="text" name="enddate" class="form-control datepicker" placeholder="yyyy/mm/dd" autocomplete="off">
+                        <input id="enddate" type="text" name="endDate" class="form-control datepicker" placeholder="yyyy/mm/dd" autocomplete="off">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                       </div>
                     </div>
@@ -273,7 +247,7 @@
         <h4 class="modal-title" id="myModalLabel">信息</h4>
       </div>
       <div class="modal-body">
-      		该客人没有邮箱，请<a href="#" id="aAddEmail">添加邮箱</a>后再进行操作
+      		该客人没有邮箱，请<a href="#" id="addEmail">添加邮箱</a>后再进行操作
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
@@ -291,7 +265,7 @@
       </div>
       <div class="modal-body align-center">
         <div class="section-block">
-         <form id="order">
+         <form id="form-order">
             <div class="section-title">选择目的地及地接社,继续添加订单</div>
             <div class="form-group col-sm-8 col-sm-offset-2">
                 <label class="col-sm-3 control-label">目的地</label>
@@ -313,8 +287,8 @@
             </div>
             <div class="col-sm-12">
         	   <a class="submit btn btn-primary">保存</a>
-        	 <input type="hidden"  name="caseid" id="caseid" value="" />
-             <input type="hidden"  name="customerid" id="customerid" value="${customerid}" />
+        	 <input type="hidden"  name="caseId" id="caseId" value="" />
+             <input type="hidden"  name="customerId" id="customerId" value="${customerId}" />
             </div>
           </form>
         </div>
@@ -330,80 +304,77 @@
 	<script src="${rootPath}assets/js/jquery.validate.min.js"></script>
 	
 	<script type="text/javascript">
-    var d1 = ${country};
-    var d2 = ${language};
-    var d4 = ${withwho};
-    var d5 = ${hotel};
-    var d6 = ${meals};
-    var d7 = ${guide};
-    var d8 = ${status};
-    var d9 = ${source};
-    var d10 = ${tailormade};
-    var d11 = ${passport};
-    var d12 = ${visa};
-    var d13 = ${flight};
+    var country = ${country};
+    var language = ${language};
+    var withwho = ${withwho};
+    var hotel = ${hotel};
+    var meals = ${meals};
+    var guide = ${guide};
+    var status = ${status};
+    var source = ${source};
+    var tailormade = ${tailormade};
+    var passport = ${passport};
+    var visa = ${visa};
+    var flight = ${flight};
     var customer = ${customer};
     var user = ${user};
     var sales = ${sales};
-    //var customerid = ${customerid};
-    
+
     $(".country-select").select2({
         placeholder: '国家',
-        data: d1
+        data: country
     });
     $(".language-select").select2({
     	placeholder: '选择一个沟通语言',
-     	data: d2
+     	data: language
     });
     $(".contact-select").select2({
         placeholder: '选择希望联系方式',
      });
     $(".withwho-select").select2({
     	placeholder: '与谁同行',
-     	data: d4
+     	data: withwho
     });
     $(".hotel-select").select2({
        placeholder: '选择一个住宿方式',
-       data: d5
+       data: hotel
     });
     $(".meals-select").select2({
        placeholder: '选择一个',
-       data: d6
+       data: meals
     });
     $(".guide-select").select2({
        placeholder: '选择一个',
-       data: d7
+       data: guide
     });
     $(".status-select").select2({
-        data: d8
+        data: status
      });
     $(".source-select").select2({
       placeholder: '选择一个推广渠道',
-      data: d9
+      data: source
     });
     $(".tailormade-select").select2({
         placeholder: '选择一个',
-        data: d10
+        data: tailormade
       });
     $(".passport-select").select2({
         placeholder: '选择一个',
-        data: d11
+        data: passport
       });
     $(".visa-select").select2({
         placeholder: '选择一个',
-        data: d12
+        data: visa
       });
     $(".flight-select").select2({
         placeholder: '选择一个',
-        data: d13
+        data: flight
       });
     $(".customer-select").select2({
         placeholder: '客人',
         data: customer
     }); 
 
-   /*  $(".customer-select").select2("data", {"deptId": "$id", "deptName": "name"});
-     */
     $(".user-select").select2({
         placeholder: '客人',
         data: user
@@ -412,6 +383,7 @@
         placeholder: '销售',
         data: sales
     });
+    
 		jQuery(document).ready(function() {
 			
         $(".nav-parent").eq(0).addClass("nav-active");
@@ -437,30 +409,30 @@
           minDate: 0
         });
 			 
-  			jQuery("#form").validate({
+  			jQuery("#form-case").validate({
   				
-    				rules: {
-    					customerid: "required",
-    					source: "required",
-    					adult: "digits",
-    					children: "digits",
+    		rules: {
+ 		      customerId: "required",
+ 			  source: "required",
+ 			  adult: "digits",
+ 			  children: "digits",
               baby: "digits",
               budget: "digits",
-              startdate: "date",
-              enddate: "date",
-              startmonth: "date",
+              startDate: "date",
+              endDate: "date",
+              startMonth: "date",
               during: "digits",
     				},
     				messages: {
-    					customerid: "必须选择所属客人",
+    					customerId: "必须选择所属客人",
     					source:"请选择询单来源",
     					adult: "请输入一个整数",
               children: "请输入一个整数",
               baby: "请输入一个整数",
               budget: "请输入一个整数",
-              startdate: "请输入正确的日期格式 mm/dd/yyyy",
-              enddate: "请输入正确的日期格式 mm/dd/yyyy",
-              startmonth: "请输入正确的日期格式 mm/dd/yyyy",
+              startDate: "请输入正确的日期格式 mm/dd/yyyy",
+              endDate: "请输入正确的日期格式 mm/dd/yyyy",
+              startMonth: "请输入正确的日期格式 mm/dd/yyyy",
               during: "请输入一个整数",
     				},
   				
@@ -474,7 +446,7 @@
   			      return false;
   			    },
   			    submitHandler : function(){
-  			      form_submit();
+  			      case_submit();
   			      return false;
   			    }
   			});
@@ -488,7 +460,7 @@
 		          var destination = $(this).val();
 		          $.ajax({
 		              type: "post",
-		              url: "${rootPath}case/getsales.do?destination="+destination,
+		              url: "${rootPath}case/getSales.do?destination="+destination,
 		              data: destination,
 		              success: function(sales){
 		            	  var json = jQuery.parseJSON( sales );
@@ -501,12 +473,12 @@
 		      });
 		});
 			      
-		function form_submit() {
-			var f = $("#form").serialize();
+		function case_submit() {
+			var f = $("#form-case").serialize();
 			
 			$.post('${rootPath}case/add.do', f, function(result) {
-				var caseid = result.obj.caseid;
-				document.getElementById("caseid").value=caseid;
+				var caseId = result.obj.caseId;
+				$("#caseId").val(caseId);
 				var rmsg = result.msg;
 				if (result.success) {
 					//window.parent.location = "${rootPath}case/list.html";
@@ -523,7 +495,7 @@
 	      	  order_submit();
 	      });
 	  		function order_submit() {
-	    			var f = $("#order").serialize();
+	    			var f = $("#form-order").serialize();
 	    			$.post('${rootPath}order/add.do', f, function(result) {
 	    				var rmsg = result.msg;
 	    				if (result.success) {
@@ -536,24 +508,24 @@
 	    			}, "JSON");
 	    	}
 	  		
-        $(".d2").hide();
-        $(".d1").show();
-        $("input[name='starttime']").change(function() {
-            var val = $("input[name='starttime']:checked").val();
+        $(".start-date").hide();
+        $(".start-time").show();
+        $("input[name='startTime']").change(function() {
+            var val = $("input[name='startTime']:checked").val();
             if (val == 1) {
-                $(".d1").hide();
-                $(".d2").show();
+                $(".start-time").hide();
+                $(".start-date").show();
             }else{
-                $(".d2").hide();
-                $(".d1").show();
+                $(".start-date").hide();
+                $(".start-time").show();
             }
         }); 
         $(".customer-select").change(function() {
              var val= $(".customer-select").select2("val");
-        	document.getElementById("customerid").value=val;
+        	document.getElementById("customerId").value=val;
         });
         
-	var newHref = "../customer/edit.html?id="+document.getElementById("customerid").getAttribute('value');
+	var newHref = "../customer/edit.html?id="+$("#customerId").val();
         $('#aAddEmail').attr("href",newHref)
 	</script>
 

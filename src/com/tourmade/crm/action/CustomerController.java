@@ -17,8 +17,8 @@ import com.tourmade.crm.common.framework.bean.QueryResult;
 import com.tourmade.crm.common.framework.util.JSONUtilS;
 import com.tourmade.crm.common.model.base.value.baseconfig.Json;
 import com.tourmade.crm.common.model.base.value.baseconfig.PageHelper;
-import com.tourmade.crm.model.DemoCustomer;
-import com.tourmade.crm.model.DemoList;
+import com.tourmade.crm.entity.Customer;
+import com.tourmade.crm.entity.EntityList;
 import com.tourmade.crm.service.CaseService;
 import com.tourmade.crm.service.CustomerService;
 
@@ -37,20 +37,20 @@ public class CustomerController extends BaseSimpleFormController {
 	public String list(Model model) {
 		String agegroup = "customer.agegroup";
 		String level = "customer.level";
-		List<DemoList> v = service.getParameterInfo(agegroup);
-		List<DemoList> w = service.getParameterInfo(level);
+		List<EntityList> v = service.getParameterInfo(agegroup);
+		List<EntityList> w = service.getParameterInfo(level);
 		JSONArray agegroupresult = JSONArray.fromObject(v);
 		JSONArray levelresult = JSONArray.fromObject(w);
-		model.addAttribute("agegroup",agegroupresult);
+		model.addAttribute("ageGroup",agegroupresult);
 		model.addAttribute("level",levelresult);
 		return "/customer/list";
 	}
 	
 	@RequestMapping(value = "/list.do",produces="application/json;charset=utf-8")
 	@ResponseBody
-	public String queryData(HttpServletRequest request, HttpSession session, Model model, DemoCustomer customer, PageHelper page) {
-
-		QueryResult<DemoCustomer> r = service.queryCustomer(customer, page, request);
+	public String queryData(HttpServletRequest request, HttpSession session, Model model, Customer customer, PageHelper page) {
+		System.out.println("********");
+		QueryResult<Customer> r = service.queryCustomer(customer, page, request);
 		String result = JSONUtilS.object2json(r);
 
 		return result;
@@ -62,9 +62,9 @@ public class CustomerController extends BaseSimpleFormController {
 		String level = "customer.level";
 		String promote = "customer.promote";
 		String agegroup = "customer.agegroup";
-		List<DemoList> u = service.getParameterInfo(level);
-		List<DemoList> v = service.getParameterInfo(promote);
-		List<DemoList> w = service.getParameterInfo(agegroup);
+		List<EntityList> u = service.getParameterInfo(level);
+		List<EntityList> v = service.getParameterInfo(promote);
+		List<EntityList> w = service.getParameterInfo(agegroup);
 		JSONArray levelresult = JSONArray.fromObject(u);
 		JSONArray  promoteresult = JSONArray.fromObject(v);
 		JSONArray  agegroupresult = JSONArray.fromObject(w);
@@ -77,7 +77,7 @@ public class CustomerController extends BaseSimpleFormController {
 
 	@RequestMapping(value = "/add.do")
 	@ResponseBody
-	public Json doAdd(HttpServletRequest request, HttpSession session, Model model, DemoCustomer customer) {
+	public Json doAdd(HttpServletRequest request, HttpSession session, Model model, Customer customer) {
 
 		Json j = new Json();
 		
@@ -98,13 +98,13 @@ public class CustomerController extends BaseSimpleFormController {
 		
 		if (null != id && !"".equals(id)) {
 			int i = Integer.parseInt(id);
-			DemoCustomer customer = service.getCustomerById(i);
+			Customer customer = service.getCustomerById(i);
 			String level = "customer.level";
 			String promote = "customer.promote";
 			String agegroup = "customer.agegroup";
-			List<DemoList> u = service.getParameterInfo(level);
-			List<DemoList> v = service.getParameterInfo(promote);
-			List<DemoList> w = service.getParameterInfo(agegroup);
+			List<EntityList> u = service.getParameterInfo(level);
+			List<EntityList> v = service.getParameterInfo(promote);
+			List<EntityList> w = service.getParameterInfo(agegroup);
 			JSONArray levelresult = JSONArray.fromObject(u);
 			JSONArray  promoteresult = JSONArray.fromObject(v);
 			JSONArray  agegroupresult = JSONArray.fromObject(w);
@@ -115,25 +115,25 @@ public class CustomerController extends BaseSimpleFormController {
 			
 			String source = "case.source";
 			String status = "case.status";
-			List<DemoList> user = caseservice.getUser();
-			List<DemoList> c = caseservice.getCustomer();
-			List<DemoList> s = caseservice.getParameterInfo(source);
-			List<DemoList> s1 = caseservice.getParameterInfo(status);
-			JSONArray sourceresult = JSONArray.fromObject(s);
-			JSONArray statusresult = JSONArray.fromObject(s1);
-			JSONArray cusresult = JSONArray.fromObject(c);
-			JSONArray userresult = JSONArray.fromObject(user);
-			model.addAttribute("source",sourceresult);
-			model.addAttribute("casestatus",statusresult);
-			model.addAttribute("c",cusresult);
-			model.addAttribute("user",userresult);
+			List<EntityList> userList = caseservice.getUser();
+			List<EntityList> customerList = caseservice.getCustomer();
+			List<EntityList> sourceList = caseservice.getParameterInfo(source);
+			List<EntityList> statusList = caseservice.getParameterInfo(status);
+			JSONArray userResult = JSONArray.fromObject(userList);
+			JSONArray customerResult = JSONArray.fromObject(customerList);
+			JSONArray sourceResult = JSONArray.fromObject(sourceList);
+			JSONArray statusResult = JSONArray.fromObject(statusList);
+			model.addAttribute("user",userResult);
+			model.addAttribute("customerList",customerResult);
+			model.addAttribute("source",sourceResult);
+			model.addAttribute("status",statusResult);
 		}
 		return "/customer/edit";
 	}
 
 	@RequestMapping(value = "/edit.do")
 	@ResponseBody
-	public Json doEdit(HttpServletRequest request, HttpSession session, Model model, DemoCustomer customer) {
+	public Json doEdit(HttpServletRequest request, HttpSession session, Model model, Customer customer) {
 
 		Json j = new Json();
 		try {

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tourmade.crm.mapper.agency.AgencyMapper">
+
+	<select id="queryAgency" parameterType="Map" resultType="Agency">
+		SELECT 
+			u.agency_id as agencyId,
+			u.agency_name as name,
+			u.country as country,
+			u.language as language,
+			u.creat_time as creatTime,
+			u.isdel as isdel
+		from tm_agency u  
+		where u.isdel = 0 
+		order by u.creat_time
+		limit #{b},#{e}
+	</select>
+
+	<select id="countAgency" parameterType="Agency" resultType="long">
+		select count(u.agency_id) from tm_agency u
+		where
+		u.isdel = 0
+
+	</select>
+	
+	<insert id="saveAgency" parameterType="Agency" flushCache="true" useGeneratedKeys="true" keyProperty="agencyId" keyColumn="GENERATED_KEY">
+		insert into tm_agency(
+		agency_name,
+		country,
+		language,
+		creat_time,
+		update_time,
+		isdel
+		)values(
+		#{name,jdbcType=VARCHAR},
+		#{country,jdbcType=VARCHAR},
+		#{language,jdbcType=VARCHAR},
+		NOW(),
+		NOW(),
+		0
+		)
+	</insert>
+
+	<update id="updateAgency" parameterType="Agency" flushCache="true">
+		update tm_agency
+		set
+		agency_name=#{name},
+		country=#{country},
+		language=#{language},
+		update_time=NOW()
+		where
+		agency_id=#{agencyId}
+	</update>
+	
+	<select id="getAgencyById" parameterType="int" resultType="Agency">
+		select
+		u.agency_id as agencyId,
+		u.agency_name as name,
+		u.country as country,
+		u.language as language,
+		u.isdel as isdel
+		from tm_agency u where u.agency_id = #{agencyId}
+	</select>
+	
+	<select id="getParameterInfo" parameterType="String" resultType="EntityList">
+		select
+		u.para_domain,
+		u.para_value as id,
+		u.chinese as text,
+		u.isdisplay,
+		u.isdel 
+		from tm_parameter u where u.isdisplay = 1 and u.isdel = 0 and u.para_domain = #{domain}
+	</select>
+	
+	<update id="deleteAgencyById" parameterType="int" flushCache="true"
+		statementType="PREPARED">
+		update tm_agency
+		set
+		isdel=1
+		where
+		agency_id = #{agencyId}
+	</update>
+</mapper>

@@ -16,14 +16,6 @@
 				<h2>
 					<i class="glyphicon glyphicon-briefcase"></i> 地接社管理 <span>编辑地接社</span>
 				</h2>
-				<!-- <div class="breadcrumb-wrapper">
-					<span class="label">你在这里:</span>
-					<ol class="breadcrumb">
-						<li><a href="＃">CRM</a></li>
-						<li><a href="${rootPath }agency/list.html">地接社管理</a></li>
-						<li class="active">编辑地接社</li>
-					</ol>
-				</div> -->
 			</div>
 
 			<div class="contentpanel">
@@ -37,14 +29,14 @@
           				<p>填写下表，完成地接社信息修改。</p>
         			</div>
        		
-		       	 	<form class="form-horizontal" id="form">
+		       	 	<form class="form-horizontal" id="form-agency">
 		       	 	
 		       			<div class="panel-body panel-body-nopadding">
 		          			<div class="section-block">
 			            		<div class="form-group col-sm-4">
 			              			<label class="col-sm-4 control-label">地接社名称 <span class="asterisk">*</span></label>
 			              			<div class="col-sm-8">
-			              				<input type="text" id="agencyname" name="name" placeholder="地接社名称" class="form-control" value="${agency.name }" />
+			              				<input type="text" id="agencyName" name="name" placeholder="地接社名称" class="form-control" value="${agency.name }" />
 			              			</div>
 			              		</div>         
 			            		<div class="form-group col-sm-4">
@@ -65,7 +57,7 @@
 		        		<div class="panel-footer align-center">
 							<button class="btn btn-primary">保存</button>&nbsp;
 							<button class="btn btn-default" id="btn-back">返回</button>&nbsp;
-							<input type="hidden" name="agency_id" value="${agency.agency_id }" />
+							<input type="hidden" name="agencyId" value="${agency.agencyId}" />
 						</div><!-- panel-footer -->
 		     		</form>   
       			</div><!-- panel -->
@@ -92,7 +84,7 @@
 					</table>
           		</div>
           		<div class="panel-footer align-center">
-					<a class="btn btn-primary" href="${rootPath}sale/add.html?agencyid=${agency.agency_id}">新增销售</a>
+					<a class="btn btn-primary" href="${rootPath}sale/add.html?agencyid=${agency.agencyId}">新增销售</a>
       			</div>
 				</div>
 				<!-- end of panel 沟通列表 -->
@@ -148,13 +140,13 @@
 	
 
 <script type="text/javascript">
-	var c = ${country};
-	var l = ${language};
+	var country = ${country};
+	var language= ${language};
 	$(".country-select").select2({
-	  	data: c
+	  	data: country
 	})
 	$(".language-select").select2({
-	  	data: l
+	  	data: language
 	})
 
 	jQuery(document).ready(function() {
@@ -162,7 +154,7 @@
 		$(".nav-parent").eq(3).addClass("nav-active");
       	$(".nav-parent").eq(3).find(".children").show();
       	
-		jQuery("#form").validate({
+		jQuery("#form-agency").validate({
 			rules: {
 				name: {  
 		         	required:true,  
@@ -174,10 +166,10 @@
 	                         field: function () { return "agency_name"},
 	                         name: function () {
 	                        	 
-	                        	  if($("#agencyname").val()=="${agency.name}"){
+	                        	  if($("#agencyName").val()=="${agency.name}"){
 		                        	 	return "";
 		                        	 }
-		                        	 else{return $("#agencyname").val();} 
+		                        	 else{return $("#agencyName").val();} 
 	                        	
 	                         	}
 		            		}
@@ -213,8 +205,8 @@
 	});
 //			      
 	function form_submit() {
-		var f = $("#form").serialize();
-		$.post('${rootPath}agency/edit.do', f, function(result) {
+		var agencyInfo= $("#form-agency").serialize();
+		$.post('${rootPath}agency/edit.do', agencyInfo, function(result) {
 			var rmsg = result.msg;
 			if (result.success) {
 				window.parent.location = "${rootPath}agency/list.html";
@@ -231,7 +223,7 @@
 		language: datatable_local_language, // my.js
 		serverSide: true,
 		ajax: {
-			url: '${rootPath}sale/list.do?agencyid=${agency.agency_id}',
+			url: '${rootPath}sale/list.do?agencyId=${agency.agencyId}',
 			dataFilter: function(data){
 			    var json = jQuery.parseJSON( data );
 			    json.recordsTotal = json.countTotal;
@@ -242,8 +234,7 @@
 			},
 		columnDefs: [
 			{
-	            data: "salesid",
-	            //defaultContent: '<a class="btn btn-success btn-xs"><span class="fa fa-edit"></span> 编辑</a>&nbsp;<a class="btn btn-danger btn-xs"><span class="fa fa-minus-circle"></span> 删除</a>',
+	            data: "salesId",
 	            orderable: false,
 	            render: function ( data, type, full, meta ) {
 	            	return '<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a>&nbsp;<a class="btn btn-danger btn-xs" id="'+data+'"><span class="fa fa-minus-circle"></span> 删除</a>';
@@ -252,21 +243,20 @@
 			},
 			],
 		columns: [
-			{ data: "salesid" },
-		    { data: "salesportalid" },
-		    { data: "salesname" },
-		    { data: "salesemail" }
+			{ data: "salesId" },
+		    { data: "salesPortalId" },
+		    { data: "salesName" },
+		    { data: "salesEmail" }
 	    ]
 		});
 	$('#dataTable tbody').on( 'click', 'a.btn-success', function () {
 		var data = t.row($(this).parents('tr')).data();
-	    //alert($(this).attr('id'));
+		alert(data)
 	    edit($(this).attr('id'));
 	    });
 
 	$('#dataTable tbody').on( 'click', 'a.btn-danger', function () {
 	    var data = t.row($(this).parents('tr')).data();
-	    //alert($(this).attr('id'));
 	    del($(this).attr('id'));
 	    });
 		

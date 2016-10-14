@@ -13,16 +13,16 @@ import org.springframework.transaction.annotation.Transactional;
 import com.tourmade.crm.common.framework.BaseService;
 import com.tourmade.crm.common.framework.bean.QueryResult;
 import com.tourmade.crm.common.model.base.value.baseconfig.PageHelper;
-import com.tourmade.crm.mapper.comment.DemoCommentMapper;
-import com.tourmade.crm.model.DemoComment;
-import com.tourmade.crm.model.DemoList;
+import com.tourmade.crm.entity.Comment;
+import com.tourmade.crm.entity.EntityList;
+import com.tourmade.crm.mapper.comment.CommentMapper;
 
 @Service
 @Transactional(readOnly = false)
 public class CommentService extends BaseService {
 	
 	@Autowired
-	private DemoCommentMapper commentMapper;
+	private CommentMapper commentMapper;
 
 	/**
 	 * 查询注释数据，分页展示
@@ -32,9 +32,9 @@ public class CommentService extends BaseService {
 	 * @param request
 	 * @return
 	 */
-	public QueryResult<DemoComment> queryComment(DemoComment comment, PageHelper ph, String type, int id, HttpServletRequest request) {
+	public QueryResult<Comment> queryComment(Comment comment, PageHelper ph, String type, int id, HttpServletRequest request) {
 
-		QueryResult<DemoComment> r = new QueryResult<DemoComment>();
+		QueryResult<Comment> r = new QueryResult<Comment>();
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 			
@@ -45,9 +45,9 @@ public class CommentService extends BaseService {
 //		map.put("s", ph.getSort());
 //		map.put("o", ph.getOrder());
 
-		List<DemoComment> data = commentMapper.queryComment(map);
-		comment.setCommenttype(type);
-		comment.setObjectid(id);
+		List<Comment> data = commentMapper.queryComment(map);
+		comment.setCommentType(type);
+		comment.setObjectId(id);
 		long count = commentMapper.countComment(comment);
 			
 		r.setData(data);
@@ -63,7 +63,7 @@ public class CommentService extends BaseService {
 	 * @param comment
 	 * @return
 	 */
-	public int saveComment(DemoComment comment) {
+	public int saveComment(Comment comment) {
 
 		
 		try {
@@ -73,7 +73,7 @@ public class CommentService extends BaseService {
 			e.printStackTrace();
 			return 0;
 		}
-		return comment.getCommentid();
+		return comment.getCommentId();
 	}
 
 	/**
@@ -82,8 +82,8 @@ public class CommentService extends BaseService {
 	 * @param id
 	 * @return
 	 */
-	public DemoComment getCommentById(int id) {
-		DemoComment r = null;
+	public Comment getCommentById(int id) {
+		Comment r = null;
 		try {
 			r = commentMapper.getCommentById(id);
 		} catch (Exception e) {
@@ -99,8 +99,8 @@ public class CommentService extends BaseService {
 	 * @param id
 	 * @return
 	 */
-	public List<DemoList> getParameterInfo(String domain) {
-		List<DemoList> r = null;
+	public List<EntityList> getParameterInfo(String domain) {
+		List<EntityList> r = null;
 		try {
 			r = commentMapper.getParameterInfo(domain);
 		} catch (Exception e) {
@@ -116,12 +116,12 @@ public class CommentService extends BaseService {
 	 * @param comment
 	 * @return
 	 */
-	public boolean updateComment(DemoComment comment) {
+	public boolean updateComment(Comment comment) {
 
 		boolean r = false;
 
 		try {
-			DemoComment u = commentMapper.getCommentById(comment.getCommentid());
+			Comment u = commentMapper.getCommentById(comment.getCommentId());
 			if (u != null) {
 				//u.setName(comment.getName());
 				commentMapper.updateComment(u);

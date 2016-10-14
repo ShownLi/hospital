@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tourmade.crm.mapper.crmcase.CaseMapper">
+
+	<select id="queryCase" parameterType="Map" resultType="Case">
+		select
+			u.case_id as caseId,
+			u.customer_id as customerId,
+			u.budget as budget,
+			u.source as source,
+			u.destination as destination,
+			u.status as status,
+			u.operator as operator
+		from tm_case u  
+		where u.isdel = 0 
+		order by u.creat_time desc
+		limit #{b},#{e}
+	</select>
+
+	<select id="queryCaseFC" parameterType="Map" resultType="Case">
+		select
+			u.case_id as caseId,
+			u.customer_id as customerId,
+			u.budget as budget,
+			u.source as source,
+			u.destination as destination,
+			u.status as status,
+			u.operator as operator
+		from tm_case u  
+		where u.isdel = 0 and u.customer_id = #{customerId}
+		order by u.creat_time
+		limit #{b},#{e}
+	</select>
+	
+	<select id="countCase" parameterType="Case" resultType="long">
+		select count(u.case_id) from tm_case u
+		where
+		u.isdel = 0
+	</select>
+	
+	<select id="countCaseFC" parameterType="Case" resultType="long">
+		select count(u.case_id) from tm_case u
+		where
+		u.isdel = 0 and u.customer_id = #{customerId}
+	</select>
+	
+	<insert id="saveCase" parameterType="Case" flushCache="true" useGeneratedKeys="true" keyProperty="caseId" keyColumn="GENERATED_KEY">
+		insert into tm_case(
+			customer_id,
+			operator,
+			prefer_language,
+			with_who,
+			adult,
+			children,
+			baby,
+			start_time,
+			start_month,
+			during,
+			start_date,
+			end_date,
+			hotel,
+			meals,
+			requirement,
+			guide,
+			budget,
+			contact_type,
+			sales_id,
+			sales_name,
+			destination,
+			destination_code,
+			route,
+			route_id,
+			submit_type,
+			source,
+			status,
+			tailormade,
+			passport,
+			visa,
+			flight,
+			ip_address,
+			creat_time,
+			isdel
+		)values(
+			#{customerId,jdbcType=VARCHAR},
+			#{operator,jdbcType=VARCHAR},
+			#{preferLanguage,jdbcType=VARCHAR},
+			#{withwho,jdbcType=VARCHAR},
+			#{adult,jdbcType=VARCHAR},
+			#{children,jdbcType=VARCHAR},
+			#{baby,jdbcType=VARCHAR},
+			#{startTime,jdbcType=VARCHAR},
+			#{startMonth,jdbcType=VARCHAR},
+			#{during,jdbcType=VARCHAR},
+			#{startDate,jdbcType=VARCHAR},
+			#{endDate,jdbcType=VARCHAR},
+			#{hotel,jdbcType=VARCHAR},
+			#{meals,jdbcType=VARCHAR},
+			#{requirement,jdbcType=VARCHAR},
+			#{guide,jdbcType=VARCHAR},
+			#{budget,jdbcType=VARCHAR},
+			#{contactType,jdbcType=VARCHAR},
+			#{salesId,jdbcType=VARCHAR},
+			#{salesName,jdbcType=VARCHAR},
+			#{destination,jdbcType=VARCHAR},
+			#{destinationCode,jdbcType=VARCHAR},
+			#{route,jdbcType=VARCHAR},
+			#{routeId,jdbcType=VARCHAR},
+			#{submitType,jdbcType=VARCHAR},
+			#{source,jdbcType=VARCHAR},
+			#{status,jdbcType=VARCHAR},
+			#{tailormade,jdbcType=VARCHAR},
+			#{passport,jdbcType=VARCHAR},
+			#{visa,jdbcType=VARCHAR},
+			#{flight,jdbcType=VARCHAR},
+			#{ipAddress,jdbcType=VARCHAR},
+			NOW(),
+			0
+		)
+	</insert>
+
+	<update id="updateCase" parameterType="Case" flushCache="true">
+		update tm_case
+		set
+		prefer_language=#{preferLanguage},
+		operator=#{operator},
+		with_who=#{withwho},
+		adult=#{adult},
+		children=#{children},
+		baby=#{baby},
+		start_time=#{startTime},
+		start_month=#{startMonth},
+		during=#{during},
+		start_date=#{startDate},
+		end_date=#{endDate},
+		hotel=#{hotel},
+		meals=#{meals},
+		requirement=#{requirement},
+		guide=#{guide},
+		budget=#{budget},
+		contact_type=#{contactType},
+		sales_id=#{salesId},
+		sales_name=#{salesName},
+		destination=#{destination},
+		destination_code=#{destinationCode},
+		route=#{route},
+		submit_type=#{submitType},
+		source=#{source},
+		status=#{status},
+		tailormade=#{tailormade},
+		passport=#{passport},
+		visa=#{visa},
+		flight=#{flight},
+		update_time=NOW()
+		where
+		case_id=#{caseId}
+	</update>
+	
+	<select id="getCaseById" parameterType="int" resultType="Case">
+		select
+		u.case_id as caseId,
+		u.customer_id as customerId, 
+		u.operator as operator,
+		u.prefer_language as preferLanguage,
+		u.contact_type as contactType,
+		u.with_who as withwho,
+		u.adult as adult,
+		u.children as children,
+		u.baby as baby,
+		u.start_time as startTime,
+		u.start_month as startMonth,
+		u.during as during,
+		u.start_date as startDate,
+		u.end_date as endDate,
+		u.requirement as requirement,
+		u.route as route,
+		u.hotel as hotel,
+		u.meals as meals,
+		u.guide as guide,
+		u.budget as budget,
+		u.sales_id as salesId,
+		u.destination as destination,
+		u.source as source,
+		u.promote_code as promoteCode,
+		u.status as status,
+		u.tailormade as tailormade,
+		u.passport as passport,
+		u.visa as visa,
+		u.flight as flight,
+		u.ip_address as ipAddress,
+		u.creat_time as creatTime,
+		u.isdel
+		from tm_case u where u.isdel = 0 and u.case_id = #{caseId}
+	</select>
+	
+	<select id="getCaseByOrderId" parameterType="int" resultType="Case">
+		select
+		u.case_id as caseId,
+		u.customer_id as customerId, 
+		u.operator as operator,
+		u.prefer_language as preferLanguage,
+		u.contact_type as contactType,
+		u.with_who as withwho,
+		u.adult as adult,
+		u.children as children,
+		u.baby as baby,
+		u.start_time as startTime,
+		u.start_month as startMonth,
+		u.during as during,
+		u.start_date as startDate,
+		u.end_date as endDate,
+		u.requirement as requirement,
+		u.route as route,
+		u.hotel as hotel,
+		u.meals as meals,
+		u.guide as guide,
+		u.budget as budget,
+		u.sales_id as salesId,
+		u.destination as destination,
+		u.source as source,
+		u.promote_code as promoteCode,
+		u.status as status,
+		u.tailormade as tailormade,
+		u.passport as passport,
+		u.visa as visa,
+		u.flight as flight,
+		u.ip_address as ipAddress,
+		u.creat_time as creatTime,
+		u.isdel
+		from tm_case u 
+		left join tm_order v
+		on u.case_id = v.case_id
+		where u.isdel = 0 and v.order_id = #{orderId};
+	</select>
+	
+	<select id="getParameterInfo" parameterType="String" resultType="EntityList">
+		select
+		u.para_domain,
+		u.para_value as id,
+		u.chinese as text,
+		u.isdisplay,
+		u.isdel 
+		from tm_parameter u where u.isdisplay = 1 and u.isdel = 0 and u.para_domain = #{domain}
+	</select>
+	
+	<select id="getCustomer" parameterType="String" resultType="EntityList">
+		select
+		u.customer_id as id,
+		u.customer_name_zh as text,
+		u.isdel 
+		from tm_customer u where u.isdel = 0
+	</select>
+	
+	<select id="getCustomerById" parameterType="int" resultType="EntityList">
+		select
+		u.customer_id as id,
+		u.customer_name_zh as text,
+		u.isdel 
+		from tm_customer u where u.isdel = 0 and u.customer_id = #{customerId}
+	</select>
+
+	<select id="getCustomerInfoById" parameterType="int" resultType="Customer">
+		select 
+		u.customer_name_en as englishName,
+		u.gender as gender,
+		u.birthday as birthday,
+		u.age_group as ageGroup,
+		u.customer_level as level,
+		u.isdel as isdel
+		from tm_customer u  
+		where u.isdel = 0 and u.customer_id = #{customerId}
+	</select>
+	
+	<select id="getUser" parameterType="String" resultType="EntityList">
+		select
+		u.user_id as id,
+		u.user_name as text,
+		u.isdel 
+		from tm_user u where u.isdel = 0 and u.role_id = 1
+	</select>
+	
+	<select id="getAllUser" parameterType="String" resultType="EntityList">
+		select
+		u.user_id as id,
+		u.user_name as text,
+		u.isdel 
+		from tm_user u where u.role_id = 1
+	</select>
+	
+	<select id="getSales" parameterType="String" resultType="EntityList">
+		select
+		u.sales_id as id,
+		u.sales_name as text,
+		u.isdel 
+		from tm_sales u where u.isdel = 0
+	</select>
+	
+	<select id="getSalesByAgency" parameterType="String" resultType="EntityList">
+		select
+		u.sales_id as id,
+		u.sales_name as text,
+		u.isdel 
+		from tm_sales u 
+		left join tm_agency v on u.agency_id = v.agency_id 
+		where u.isdel = 0
+		and v.country = #{destination}
+	</select>
+	
+	<select id="caseStatus" parameterType="int" resultType="int">
+		select count(u.status) from tm_order u
+		where	u.status != 4 
+		and u.case_id = #{id}
+		and u.isdel = 0
+	</select>
+	
+	
+	
+	<update id="deleteCaseById" parameterType="int" flushCache="true" statementType="PREPARED">
+		update tm_case
+		set
+		status = 5 
+		where
+		case_id = #{caseId}
+	</update>
+</mapper>

@@ -13,16 +13,16 @@ import org.springframework.transaction.annotation.Transactional;
 import com.tourmade.crm.common.framework.BaseService;
 import com.tourmade.crm.common.framework.bean.QueryResult;
 import com.tourmade.crm.common.model.base.value.baseconfig.PageHelper;
-import com.tourmade.crm.mapper.orderrecord.DemoOrderRecordMapper;
-import com.tourmade.crm.model.DemoOrderRecord;
-import com.tourmade.crm.model.DemoList;
+import com.tourmade.crm.entity.EntityList;
+import com.tourmade.crm.entity.OrderRecord;
+import com.tourmade.crm.mapper.orderrecord.OrderRecordMapper;
 
 @Service
 @Transactional(readOnly = false)
 public class OrderRecordService extends BaseService {
 	
 	@Autowired
-	private DemoOrderRecordMapper orderrecordMapper;
+	private OrderRecordMapper orderrecordMapper;
 
 	/**
 	 * 查询订单记录数据，分页展示
@@ -32,9 +32,9 @@ public class OrderRecordService extends BaseService {
 	 * @param request
 	 * @return
 	 */
-	public QueryResult<DemoOrderRecord> queryOrderRecord(DemoOrderRecord orderrecord, PageHelper ph, int orderid, HttpServletRequest request) {
+	public QueryResult<OrderRecord> queryOrderRecord(OrderRecord orderrecord, PageHelper ph, int orderid, HttpServletRequest request) {
 
-		QueryResult<DemoOrderRecord> r = new QueryResult<DemoOrderRecord>();
+		QueryResult<OrderRecord> r = new QueryResult<OrderRecord>();
 		Map<String, Object> map = new HashMap<String, Object>();
 	
 		map.put("b", ph.getStart());
@@ -43,7 +43,7 @@ public class OrderRecordService extends BaseService {
 //		map.put("s", ph.getSort());
 //		map.put("o", ph.getOrder());
 
-		List<DemoOrderRecord> data = orderrecordMapper.queryOrderRecord(map);
+		List<OrderRecord> data = orderrecordMapper.queryOrderRecord(map);
 		long count = orderrecordMapper.countOrderRecordByOrderid(orderid);
 			
 		r.setData(data);
@@ -61,9 +61,9 @@ public class OrderRecordService extends BaseService {
 	 * @param request
 	 * @return
 	 */
-	public QueryResult<DemoOrderRecord> getOrderRecord(DemoOrderRecord orderrecord, PageHelper ph, int caseid, HttpServletRequest request) {
+	public QueryResult<OrderRecord> getOrderRecord(OrderRecord orderrecord, PageHelper ph, int caseid, HttpServletRequest request) {
 
-		QueryResult<DemoOrderRecord> r = new QueryResult<DemoOrderRecord>();
+		QueryResult<OrderRecord> r = new QueryResult<OrderRecord>();
 		Map<String, Object> map = new HashMap<String, Object>();
 	
 		map.put("b", ph.getStart());
@@ -72,7 +72,7 @@ public class OrderRecordService extends BaseService {
 //		map.put("s", ph.getSort());
 //		map.put("o", ph.getOrder());
 
-		List<DemoOrderRecord> data = orderrecordMapper.getOrderRecord(map);
+		List<OrderRecord> data = orderrecordMapper.getOrderRecord(map);
 		long count = orderrecordMapper.countOrderRecordByCaseid(caseid);
 			
 		r.setData(data);
@@ -88,7 +88,7 @@ public class OrderRecordService extends BaseService {
 	 * @param orderrecord
 	 * @return
 	 */
-	public int saveOrderRecord(DemoOrderRecord orderrecord) {
+	public int saveOrderRecord(OrderRecord orderrecord) {
 
 		
 		try {
@@ -98,7 +98,7 @@ public class OrderRecordService extends BaseService {
 			e.printStackTrace();
 			return 0;
 		}
-		return orderrecord.getOrderrecordid();
+		return orderrecord.getOrderRecordId();
 	}
 
 	/**
@@ -107,8 +107,8 @@ public class OrderRecordService extends BaseService {
 	 * @param id
 	 * @return
 	 */
-	public DemoOrderRecord getOrderRecordById(int id) {
-		DemoOrderRecord r = null;
+	public OrderRecord getOrderRecordById(int id) {
+		OrderRecord r = null;
 		try {
 			r = orderrecordMapper.getOrderRecordById(id);
 		} catch (Exception e) {
@@ -124,8 +124,8 @@ public class OrderRecordService extends BaseService {
 	 * @param id
 	 * @return
 	 */
-	public List<DemoList> getParameterInfo(String domain) {
-		List<DemoList> r = null;
+	public List<EntityList> getParameterInfo(String domain) {
+		List<EntityList> r = null;
 		try {
 			r = orderrecordMapper.getParameterInfo(domain);
 		} catch (Exception e) {
@@ -141,12 +141,12 @@ public class OrderRecordService extends BaseService {
 	 * @param orderrecord
 	 * @return
 	 */
-	public boolean updateOrderRecord(DemoOrderRecord orderrecord) {
+	public boolean updateOrderRecord(OrderRecord orderrecord) {
 
 		boolean r = false;
 
 		try {
-			DemoOrderRecord u = orderrecordMapper.getOrderRecordById(orderrecord.getOrderrecordid());
+			OrderRecord u = orderrecordMapper.getOrderRecordById(orderrecord.getOrderRecordId());
 			if (u != null) {
 				//u.setName(orderrecord.getName());
 				orderrecordMapper.updateOrderRecord(u);

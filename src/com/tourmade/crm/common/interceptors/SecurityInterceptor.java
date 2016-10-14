@@ -11,7 +11,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.tourmade.crm.common.Constants;
-import com.tourmade.crm.model.DemoUser;
+import com.tourmade.crm.entity.User;
 
 /**
  * 权限拦截器
@@ -70,7 +70,7 @@ public class SecurityInterceptor implements HandlerInterceptor {
 			return true;
 		}
 
-		DemoUser userInfo = (DemoUser) request.getSession().getAttribute(Constants.LOGIN_KEY);
+		User userInfo = (User) request.getSession().getAttribute(Constants.LOGIN_KEY);
 
 		if (userInfo == null) {
 			response.sendRedirect(contextPath + "/signin.html");

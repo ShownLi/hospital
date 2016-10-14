@@ -98,15 +98,15 @@
 
 
 <script type="text/javascript">
-	var c = ${countryname};
-	var l = ${language};
+	var countryName = ${countryName};
+	var language = ${language};
 	
 	jQuery(document).ready(function() {
 
 		$(".nav-parent").eq(3).addClass("nav-active");
     	$(".nav-parent").eq(3).find(".children").show();
 
-		var t = jQuery('#dataTable').DataTable({
+		var agencyTable= jQuery('#dataTable').DataTable({
 			pageLength: 10,
 			processing: true,
 			language: datatable_local_language, // my.js
@@ -123,8 +123,7 @@
 			},
 			columnDefs: [
 				  {
-	                  data: "agency_id",
-	                  //defaultContent: '<a class="btn btn-success btn-xs"><span class="fa fa-edit"></span> 编辑</a>&nbsp;<a class="btn btn-danger btn-xs"><span class="fa fa-minus-circle"></span> 删除</a>',
+	                  data: "agencyId",
 	                  orderable: false,
 	                  render: function ( data, type, full, meta ) {
 	                      return '<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a>&nbsp;<a class="btn btn-danger btn-xs" id="'+data+'"><span class="fa fa-minus-circle"></span> 删除</a>';
@@ -135,9 +134,9 @@
 	                data: "country",
 	                orderable: false,
 	                render: function ( data ) {
-	                	for(var i=0;i <  c.length;i++){
-	                		if(data==c[i].id){
-	                			return c[i].text
+	                	for(var i=0;i <  countryName.length;i++){
+	                		if(data==countryName[i].id){
+	                			return countryName[i].text
 	                		}
 	                		else{return ""}
 	                	}
@@ -148,9 +147,9 @@
 		                data: "language",
 		                orderable: false,
 		                render: function ( data ) {
-		                	for(var i=0;i <  l.length;i++){
-		                		if(data==l[i].id){
-		                			return l[i].text
+		                	for(var i=0;i <  language.length;i++){
+		                		if(data==language[i].id){
+		                			return language[i].text
 		                		}
 		                		else{return ""}
 		                	}
@@ -172,14 +171,12 @@
 			});
 			
 			$('#dataTable tbody').on( 'click', 'a.btn-success', function () {
-		        var data = t.row($(this).parents('tr')).data();
-		        //alert($(this).attr('id'));
+		        var data = agencyTable.row($(this).parents('tr')).data();
 		        edit($(this).attr('id'));
 		    } );
 
 			$('#dataTable tbody').on( 'click', 'a.btn-danger', function () {
-		        var data = t.row($(this).parents('tr')).data();
-		        //alert($(this).attr('id'));
+		        var data = agencyTable.row($(this).parents('tr')).data();
 		        del($(this).attr('id'));
 		    } );
 			

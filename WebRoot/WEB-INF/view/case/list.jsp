@@ -16,13 +16,6 @@
 				<h2>
 					<i class="fa fa-user"></i> 询单管理 <span>询单列表</span>
 				</h2>
-				<!-- <div class="breadcrumb-wrapper">
-					<span class="label">你在这里:</span>
-					<ol class="breadcrumb">
-						<li><a href="#">CRM</a></li>
-						<li class="active">询单管理</li>
-					</ol>
-				</div> -->
 			</div>
 
 			<div class="contentpanel">
@@ -100,6 +93,7 @@
     </div><!-- modal-content -->
   </div><!-- modal-dialog -->
 </div><!-- modal -->
+
 <!-- Modal -->
 <div class="modal fade" id="NoEmail" tabindex="-2" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -123,7 +117,7 @@
     <div class="modal-content">
       <div class="modal-body align-center">
         <div class="section-block">
-        <form id="order">
+        <form id="form-order">
             <div class="section-title">选择目的地及地接社,添加订单</div>
             <div class="form-group col-sm-8 col-sm-offset-2">
                 <label class="col-sm-3 control-label">目的地</label>
@@ -145,7 +139,7 @@
                 </div>
             <div class="col-sm-12">
              <a class="submit btn btn-primary">保存</a>
-              <input  type="hidden" id="caseid" name="caseid" value="#" />
+              <input  type="hidden" id="caseId" name="caseId" value="" />
             </div>
             </form>
         </div>
@@ -155,15 +149,15 @@
 </div><!-- modal -->
 
 	<script type="text/javascript">
-	var s = ${source};
-	var cs = ${casestatus};
-	var d = ${destination};
+	var source = ${source};
+	var caseStatus = ${casestatus};
+	var destination = ${destination};
 	var customer = ${customer};
 	var user = ${user};
     var sales = ${sales};
 	$(".destination-select").select2({
         placeholder: '国家',
-        data: d
+        data: destination
     });
     $(".sales-select").select2({
         placeholder: '销售',
@@ -180,19 +174,18 @@
 				language: datatable_local_language, // my.js
 				serverSide: true,
 				ajax: {
-				url: '${rootPath}case/list.do',
-				dataFilter: function(data){
-				var json = jQuery.parseJSON( data );
-				json.recordsTotal = json.countTotal;
-				json.recordsFiltered = json.countFiltered;
-				json.data = json.data;
-				return JSON.stringify( json );
-				}
+					url: '${rootPath}case/list.do',
+					dataFilter: function(data){
+						var json = jQuery.parseJSON( data );
+						json.recordsTotal = json.countTotal;
+						json.recordsFiltered = json.countFiltered;
+						json.data = json.data;
+						return JSON.stringify( json );
+					}
 				},
 				columnDefs: [
 					  {
-		                  data: "caseid",
-		                  //defaultContent: '<a class="btn btn-success btn-xs"><span class="fa fa-edit"></span> 编辑</a>&nbsp;<a class="btn btn-danger btn-xs"><span class="fa fa-minus-circle"></span> 删除</a>',
+		                  data: "caseId",
 		                  orderable: false,
 		                  render: function ( data, type, full, meta ) {
 		                      return '<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a>&nbsp;<a class="btn btn-danger btn-xs" id="'+data+'"><span class="fa fa-minus-circle"></span> 无效</a>&nbsp<a class="btn btn-primary btn-xs" id="'+data+'"></span> 增加订单</a>&nbsp';
@@ -200,7 +193,7 @@
 		                  targets: 7
 					  },
 					  {
-			                data: "customerid",
+			                data: "customerId",
 			                orderable: false,
 			                render: function ( data ) {
 			                	for(var i=0;i <  customer.length;i++){
@@ -216,9 +209,9 @@
 			                orderable: false,
 			                render: function ( data ) {
 			                	if(data){
-				                	for(var i=0;i <  d.length;i++){
-				                		if(data==d[i].id){
-				                			return d[i].text
+				                	for(var i=0;i <  destination.length;i++){
+				                		if(data==destination[i].id){
+				                			return destination[i].text
 				                		}
 				                		else{return ""}
 				                	}
@@ -232,9 +225,9 @@
 			                orderable: false,
 			                render: function ( data ) {
 			                	if(data){
-			                	for(var i=0;i <  s.length;i++){
-			                		if(data==s[i].id){
-			                			return s[i].text
+			                	for(var i=0;i < source.length;i++){
+			                		if(data==source[i].id){
+			                			return source[i].text
 			                		}
 			                		else{return ""}
 			                	}
@@ -265,9 +258,9 @@
 			                orderable: false,
 			                render: function ( data ) {
 			                	if(data){
-				                	for(var i=0;i <  cs.length;i++){
-				                		if(data==cs[i].id){
-				                			return cs[i].text
+				                	for(var i=0;i <  caseStatus.length;i++){
+				                		if(data==caseStatus[i].id){
+				                			return caseStatus[i].text
 				                		}
 				                		
 				                	}
@@ -284,8 +277,8 @@
 
 					],
 					columns: [
-			            { data: "caseid" },
-			            { data: "customerid" },
+			            { data: "caseId" },
+			            { data: "customerId" },
 			            { data: "budget" },
 			            { data: "destination" },
 			            { data: "source" },
@@ -296,20 +289,17 @@
 				
 				$('#dataTable tbody').on( 'click', 'a.btn-success', function () {
 			        var data = t.row($(this).parents('tr')).data();
-			        //alert($(this).attr('id'));
 			        edit($(this).attr('id'));
 			    } );
 
 				$('#dataTable tbody').on( 'click', 'a.btn-danger', function () {
 			        var data = t.row($(this).parents('tr')).data();
-			        //alert($(this).attr('id'));
 			        del($(this).attr('id'));
 			    } );
 				
 				$('#dataTable tbody').on( 'click', 'a.btn-primary', function () {
 			        var data = t.row($(this).parents('tr')).data();
-			        //alert($(this).attr('id'));
-			        addorder($(this).attr('id'));
+			        addOrder($(this).attr('id'));
 			    } );
 				
 				$('#confirmDelModal').on( 'click', 'button.btn-danger', function () {
@@ -333,9 +323,9 @@
 			window.parent.location = "${rootPath}case/edit.html?id="+id;
 		}
 		
-		function addorder(id) {
+		function addOrder(id) {
 			$("#nextModal").modal('show');
-			$('#caseid').attr("value",id );
+			$('#caseId').attr("value",id );
 		}
 		
 		function del(id) {
@@ -357,13 +347,11 @@
 			
 		}
   		function order_submit() {
-			var f = $("#order").serialize();
-			console.log(f);
-			$.post('${rootPath}order/add.do', f, function(result) {
+			var order= $("#form-order").serialize();
+			$.post('${rootPath}order/add.do', order, function(result) {
 				var rmsg = result.msg;
 				if (result.success) {
 					window.parent.location = "${rootPath}case/list.html";
-					//$("#nextModal").modal('show');
 				} else {
 					$("#nextModal").modal('hide');
 					$("#NoEmail").modal('show');
@@ -375,7 +363,7 @@
 	          var destination = $(this).val();
 	          $.ajax({
 	              type: "post",
-	              url: "${rootPath}case/getsales.do?destination="+destination,
+	              url: "${rootPath}case/getSales.do?destination="+destination,
 	              data: destination,
 	              success: function(sales){
 	            	  var json = jQuery.parseJSON( sales );

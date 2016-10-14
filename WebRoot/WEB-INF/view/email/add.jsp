@@ -123,13 +123,6 @@
      </form>   
       </div><!-- panel -->
 
-
-
-
-
-			</div>
-
-		</div>
 		<!-- mainpanel -->
 		<%@ include file="../assets/pages/rightpanel.jsp"%>
 	</section>

@@ -17,9 +17,9 @@ import com.tourmade.crm.common.framework.bean.QueryResult;
 import com.tourmade.crm.common.framework.util.JSONUtilS;
 import com.tourmade.crm.common.model.base.value.baseconfig.Json;
 import com.tourmade.crm.common.model.base.value.baseconfig.PageHelper;
-import com.tourmade.crm.model.DemoCase;
-import com.tourmade.crm.model.DemoCustomer;
-import com.tourmade.crm.model.DemoList;
+import com.tourmade.crm.entity.Case;
+import com.tourmade.crm.entity.Customer;
+import com.tourmade.crm.entity.EntityList;
 import com.tourmade.crm.service.CaseService;
 
 import net.sf.json.JSONArray;
@@ -36,24 +36,24 @@ public class CaseController extends BaseSimpleFormController {
 		String source = "case.source";
 		String status = "case.status";
 		String country = "country";
-		List<DemoList> user = service.getAllUser();
-		List<DemoList> customer = service.getCustomer();
-		List<DemoList> sales = service.getSales();
-		List<DemoList> v = service.getParameterInfo(source);
-		List<DemoList> w = service.getParameterInfo(status);
-		List<DemoList> c = service.getParameterInfo(country);
-		JSONArray countryresult = JSONArray.fromObject(c);
-		JSONArray sourceresult = JSONArray.fromObject(v);
-		JSONArray statusresult = JSONArray.fromObject(w);
-		JSONArray cusresult = JSONArray.fromObject(customer);
-		JSONArray userresult = JSONArray.fromObject(user);
-		JSONArray salesresult = JSONArray.fromObject(sales);
-		model.addAttribute("destination",countryresult);
-		model.addAttribute("source",sourceresult);
-		model.addAttribute("casestatus",statusresult);
-		model.addAttribute("customer",cusresult);
-		model.addAttribute("user",userresult);
-		model.addAttribute("sales",salesresult);
+		List<EntityList> user = service.getAllUser();
+		List<EntityList> customer = service.getCustomer();
+		List<EntityList> sales = service.getSales();
+		List<EntityList> sourceList = service.getParameterInfo(source);
+		List<EntityList> statusList = service.getParameterInfo(status);
+		List<EntityList> countryList = service.getParameterInfo(country);
+		JSONArray countryResult = JSONArray.fromObject(countryList);
+		JSONArray sourceResult = JSONArray.fromObject(sourceList);
+		JSONArray statusResult = JSONArray.fromObject(statusList);
+		JSONArray customerResult = JSONArray.fromObject(customer);
+		JSONArray userResult = JSONArray.fromObject(user);
+		JSONArray salesResult = JSONArray.fromObject(sales);
+		model.addAttribute("destination",countryResult);
+		model.addAttribute("source",sourceResult);
+		model.addAttribute("casestatus",statusResult);
+		model.addAttribute("customer",customerResult);
+		model.addAttribute("user",userResult);
+		model.addAttribute("sales",salesResult);
 		return "/case/list";
 	}
 	
@@ -61,34 +61,23 @@ public class CaseController extends BaseSimpleFormController {
 	@ResponseBody
 	public String queryData(HttpServletRequest request, HttpSession session, Model model, int customerid , PageHelper page) {
 
-		QueryResult<DemoCase> r = service.queryCaseFromCustomer(customerid ,page, request);
-		String result = JSONUtilS.object2json(r);
+		QueryResult<Case> caseResult = service.queryCaseFromCustomer(customerid ,page, request);
+		String result = JSONUtilS.object2json(caseResult);
 
 		return result;
 	}
 
 	@RequestMapping(value = "/list.do",produces="application/json;charset=utf-8")
 	@ResponseBody
-	public String queryData(HttpServletRequest request, HttpSession session, Model model, DemoCase crmcase, PageHelper page) {
+	public String queryData(HttpServletRequest request, HttpSession session, Model model, Case crmcase, PageHelper page) {
 	
-		QueryResult<DemoCase> r = service.queryCase(crmcase, page, request);
+		QueryResult<Case> casePage = service.queryCase(crmcase, page, request);
 		
-		String result = JSONUtilS.object2json(r);
-		//System.out.println(result);
+		String result = JSONUtilS.object2json(casePage);
 		return result;
 	}
 	@RequestMapping(value = "/add.html", method = { RequestMethod.POST, RequestMethod.GET })
 	public String add(Model model) {
-		/*List<DemoList> customer = null;
-		JSONArray customerresult = null;
-		
-		if (null != id && !"".equals(id)) {
-			int i = Integer.parseInt(id);
-			customer = service.getCustomerById(i);
-			customerresult = JSONArray.fromObject(customer);
-			model.addAttribute("customer",customerresult);
-			}*/
-		//String customerid = "";
 		
 		String country = "country";
 		String language = "case.preferlanguage";
@@ -102,66 +91,59 @@ public class CaseController extends BaseSimpleFormController {
 		String passport = "case.passport";
 		String visa = "case.visa";
 		String flight = "case.flight";
-		List<DemoList> v1 = service.getParameterInfo(country);
-		List<DemoList> v2 = service.getParameterInfo(language);
-		List<DemoList> v4 = service.getParameterInfo(withwho);
-		List<DemoList> v5 = service.getParameterInfo(hotel);
-		List<DemoList> v6 = service.getParameterInfo(meals);
-		List<DemoList> v7 = service.getParameterInfo(guide);
-		List<DemoList> v8 = service.getParameterInfo(status);
-		List<DemoList> v9 = service.getParameterInfo(source);
-		List<DemoList> v10 = service.getParameterInfo(tailormade);
-		List<DemoList> v11 = service.getParameterInfo(passport);
-		List<DemoList> v12 = service.getParameterInfo(visa);
-		List<DemoList> v13 = service.getParameterInfo(flight);
-		List<DemoList> customer = service.getCustomer();
-		List<DemoList> user = service.getUser();
-		List<DemoList> sales = service.getSales();
-		JSONArray countryresult = JSONArray.fromObject(v1);
-		JSONArray languageresult = JSONArray.fromObject(v2);
-		JSONArray withresult = JSONArray.fromObject(v4);
-		JSONArray hotelresult = JSONArray.fromObject(v5);
-		JSONArray mealsresult = JSONArray.fromObject(v6);
-		JSONArray guideresult = JSONArray.fromObject(v7);
-		JSONArray statusresult = JSONArray.fromObject(v8);
-		JSONArray sourceresult = JSONArray.fromObject(v9);
-		JSONArray tailormaderesult = JSONArray.fromObject(v10);
-		JSONArray passportresult = JSONArray.fromObject(v11);
-		JSONArray visaresult = JSONArray.fromObject(v12);
-		JSONArray flightresult = JSONArray.fromObject(v13);
-		JSONArray customerresult = JSONArray.fromObject(customer);
-		JSONArray userresult = JSONArray.fromObject(user);
-		JSONArray salesresult = JSONArray.fromObject(sales);
-		model.addAttribute("country",countryresult);
-		model.addAttribute("language",languageresult);
-		model.addAttribute("withwho",withresult);
-		model.addAttribute("hotel",hotelresult);
-		model.addAttribute("meals",mealsresult);
-		model.addAttribute("guide",guideresult);
-		model.addAttribute("status",statusresult);
-		model.addAttribute("source",sourceresult);
-		model.addAttribute("customer",customerresult);
-		model.addAttribute("sales",salesresult);
-		model.addAttribute("tailormade",tailormaderesult);
-		model.addAttribute("passport",passportresult);
-		model.addAttribute("visa",visaresult);
-		model.addAttribute("flight",flightresult);
-		model.addAttribute("user",userresult);
-		
-		//model.addAttribute("customerid", customerid);
-		
-		/*if (null != id && !"".equals(id)) {
-			int i = Integer.parseInt(id);
-			customer = service.getCustomerById(i);
-			customerresult = JSONArray.fromObject(customer);
-			model.addAttribute("customer",customerresult);
-			model.addAttribute("customerid",i);
-			}*/
+		List<EntityList> v1 = service.getParameterInfo(country);
+		List<EntityList> v2 = service.getParameterInfo(language);
+		List<EntityList> v4 = service.getParameterInfo(withwho);
+		List<EntityList> v5 = service.getParameterInfo(hotel);
+		List<EntityList> v6 = service.getParameterInfo(meals);
+		List<EntityList> v7 = service.getParameterInfo(guide);
+		List<EntityList> v8 = service.getParameterInfo(status);
+		List<EntityList> v9 = service.getParameterInfo(source);
+		List<EntityList> v10 = service.getParameterInfo(tailormade);
+		List<EntityList> v11 = service.getParameterInfo(passport);
+		List<EntityList> v12 = service.getParameterInfo(visa);
+		List<EntityList> v13 = service.getParameterInfo(flight);
+		List<EntityList> customer = service.getCustomer();
+		List<EntityList> user = service.getUser();
+		List<EntityList> sales = service.getSales();
+		JSONArray countryResult = JSONArray.fromObject(v1);
+		JSONArray languageResult = JSONArray.fromObject(v2);
+		JSONArray withResult = JSONArray.fromObject(v4);
+		JSONArray hotelResult = JSONArray.fromObject(v5);
+		JSONArray mealsResult = JSONArray.fromObject(v6);
+		JSONArray guideResult = JSONArray.fromObject(v7);
+		JSONArray statusResult = JSONArray.fromObject(v8);
+		JSONArray sourceResult = JSONArray.fromObject(v9);
+		JSONArray tailormadeResult = JSONArray.fromObject(v10);
+		JSONArray passportResult = JSONArray.fromObject(v11);
+		JSONArray visaResult = JSONArray.fromObject(v12);
+		JSONArray flightResult = JSONArray.fromObject(v13);
+		JSONArray customerResult = JSONArray.fromObject(customer);
+		JSONArray userResult = JSONArray.fromObject(user);
+		JSONArray salesResult = JSONArray.fromObject(sales);
+		model.addAttribute("country",countryResult);
+		model.addAttribute("language",languageResult);
+		model.addAttribute("withwho",withResult);
+		model.addAttribute("hotel",hotelResult);
+		model.addAttribute("meals",mealsResult);
+		model.addAttribute("guide",guideResult);
+		model.addAttribute("status",statusResult);
+		model.addAttribute("source",sourceResult);
+		model.addAttribute("customer",customerResult);
+		model.addAttribute("sales",salesResult);
+		model.addAttribute("tailormade",tailormadeResult);
+		model.addAttribute("passport",passportResult);
+		model.addAttribute("visa",visaResult);
+		model.addAttribute("flight",flightResult);
+		model.addAttribute("user",userResult);
 		
 		return "/case/add";
 	}
-
-	@RequestMapping(value = "/add1.html", method = { RequestMethod.POST, RequestMethod.GET })
+	
+	/*
+	 * 在客人编辑页面给客人添加询单
+	 */
+	@RequestMapping(value = "/addCase.html", method = { RequestMethod.POST, RequestMethod.GET })
 	public String addfromcustomer(Model model, int customerid) {
 		
 		String country = "country";
@@ -176,36 +158,36 @@ public class CaseController extends BaseSimpleFormController {
 		String passport = "case.passport";
 		String visa = "case.visa";
 		String flight = "case.flight";
-		List<DemoList> v1 = service.getParameterInfo(country);
-		List<DemoList> v2 = service.getParameterInfo(language);
-		List<DemoList> v4 = service.getParameterInfo(withwho);
-		List<DemoList> v5 = service.getParameterInfo(hotel);
-		List<DemoList> v6 = service.getParameterInfo(meals);
-		List<DemoList> v7 = service.getParameterInfo(guide);
-		List<DemoList> v8 = service.getParameterInfo(status);
-		List<DemoList> v9 = service.getParameterInfo(source);
-		List<DemoList> v10 = service.getParameterInfo(tailormade);
-		List<DemoList> v11 = service.getParameterInfo(passport);
-		List<DemoList> v12 = service.getParameterInfo(visa);
-		List<DemoList> v13 = service.getParameterInfo(flight);
-		List<DemoList> customer = service.getCustomer();
-		List<DemoList> user = service.getUser();
-		List<DemoList> sales = service.getSales();
-		JSONArray countryresult = JSONArray.fromObject(v1);
-		JSONArray languageresult = JSONArray.fromObject(v2);
-		JSONArray withresult = JSONArray.fromObject(v4);
-		JSONArray hotelresult = JSONArray.fromObject(v5);
-		JSONArray mealsresult = JSONArray.fromObject(v6);
-		JSONArray guideresult = JSONArray.fromObject(v7);
-		JSONArray statusresult = JSONArray.fromObject(v8);
-		JSONArray sourceresult = JSONArray.fromObject(v9);
-		JSONArray tailormaderesult = JSONArray.fromObject(v10);
-		JSONArray passportresult = JSONArray.fromObject(v11);
-		JSONArray visaresult = JSONArray.fromObject(v12);
-		JSONArray flightresult = JSONArray.fromObject(v13);
-		JSONArray customerresult = JSONArray.fromObject(customer);
-		JSONArray userresult = JSONArray.fromObject(user);
-		JSONArray salesresult = JSONArray.fromObject(sales);
+		List<EntityList> countryList = service.getParameterInfo(country);
+		List<EntityList> languageList = service.getParameterInfo(language);
+		List<EntityList> withwhoList = service.getParameterInfo(withwho);
+		List<EntityList> hotelList = service.getParameterInfo(hotel);
+		List<EntityList> mealsList = service.getParameterInfo(meals);
+		List<EntityList> guideList = service.getParameterInfo(guide);
+		List<EntityList> statusList = service.getParameterInfo(status);
+		List<EntityList> sourceList = service.getParameterInfo(source);
+		List<EntityList> tailormadeList = service.getParameterInfo(tailormade);
+		List<EntityList> passportList = service.getParameterInfo(passport);
+		List<EntityList> visaList = service.getParameterInfo(visa);
+		List<EntityList> flightList = service.getParameterInfo(flight);
+		List<EntityList> customerList = service.getCustomer();
+		List<EntityList> userList = service.getUser();
+		List<EntityList> salesList = service.getSales();
+		JSONArray countryresult = JSONArray.fromObject(countryList);
+		JSONArray languageresult = JSONArray.fromObject(languageList);
+		JSONArray withresult = JSONArray.fromObject(withwhoList);
+		JSONArray hotelresult = JSONArray.fromObject(hotelList);
+		JSONArray mealsresult = JSONArray.fromObject(mealsList);
+		JSONArray guideresult = JSONArray.fromObject(guideList);
+		JSONArray statusresult = JSONArray.fromObject(statusList);
+		JSONArray sourceresult = JSONArray.fromObject(sourceList);
+		JSONArray tailormaderesult = JSONArray.fromObject(tailormadeList);
+		JSONArray passportresult = JSONArray.fromObject(passportList);
+		JSONArray visaresult = JSONArray.fromObject(visaList);
+		JSONArray flightresult = JSONArray.fromObject(flightList);
+		JSONArray customerresult = JSONArray.fromObject(customerList);
+		JSONArray userresult = JSONArray.fromObject(userList);
+		JSONArray salesresult = JSONArray.fromObject(salesList);
 		model.addAttribute("country",countryresult);
 		model.addAttribute("language",languageresult);
 		model.addAttribute("withwho",withresult);
@@ -222,12 +204,13 @@ public class CaseController extends BaseSimpleFormController {
 		model.addAttribute("flight",flightresult);
 		model.addAttribute("customerid",customerid);
 		model.addAttribute("user",userresult);
+		
 		return "/case/add";
 	}
 	
 	@RequestMapping(value = "/add.do")
 	@ResponseBody
-	public Json doAdd(HttpServletRequest request, HttpSession session, Model model, DemoCase crmcase) {
+	public Json doAdd(HttpServletRequest request, HttpSession session, Model model, Case crmcase) {
 
 		Json j = new Json();
 		
@@ -245,12 +228,11 @@ public class CaseController extends BaseSimpleFormController {
 	
 	@RequestMapping(value = "/edit.html", method = { RequestMethod.POST, RequestMethod.GET })
 	public String edit(Model model, String id) {
-		
 		if (null != id && !"".equals(id)) {
 			int i = Integer.parseInt(id);
-			DemoCase u = service.getCaseById(i);
+			Case u = service.getCaseById(i);
 			u=service.validateStartTime(u);
-			DemoCustomer cus=service.getCustomerInfoById(u.getCustomerid());
+			Customer cus=service.getCustomerInfoById(u.getCustomerId());
 			String country = "country";
 			String language = "case.preferlanguage";
 			String withwho = "case.withwho";
@@ -268,24 +250,24 @@ public class CaseController extends BaseSimpleFormController {
 			String agegroup = "customer.agegroup";
 			
 			
-			List<DemoList> v1 = service.getParameterInfo(country);
-			List<DemoList> v2 = service.getParameterInfo(language);
-			List<DemoList> v4 = service.getParameterInfo(withwho);
-			List<DemoList> v5 = service.getParameterInfo(hotel);
-			List<DemoList> v6 = service.getParameterInfo(meals);
-			List<DemoList> v7 = service.getParameterInfo(guide);
-			List<DemoList> v8 = service.getParameterInfo(status);
-			List<DemoList> v9 = service.getParameterInfo(source);
-			List<DemoList> v10 = service.getParameterInfo(tailormade);
-			List<DemoList> v11 = service.getParameterInfo(passport);
-			List<DemoList> v12 = service.getParameterInfo(visa);
-			List<DemoList> v13 = service.getParameterInfo(flight);
-			List<DemoList> customer = service.getCustomer();
-			List<DemoList> user = service.getUser();
-			List<DemoList> sales = service.getSales();
+			List<EntityList> v1 = service.getParameterInfo(country);
+			List<EntityList> v2 = service.getParameterInfo(language);
+			List<EntityList> v4 = service.getParameterInfo(withwho);
+			List<EntityList> v5 = service.getParameterInfo(hotel);
+			List<EntityList> v6 = service.getParameterInfo(meals);
+			List<EntityList> v7 = service.getParameterInfo(guide);
+			List<EntityList> v8 = service.getParameterInfo(status);
+			List<EntityList> v9 = service.getParameterInfo(source);
+			List<EntityList> v10 = service.getParameterInfo(tailormade);
+			List<EntityList> v11 = service.getParameterInfo(passport);
+			List<EntityList> v12 = service.getParameterInfo(visa);
+			List<EntityList> v13 = service.getParameterInfo(flight);
+			List<EntityList> customer = service.getCustomer();
+			List<EntityList> user = service.getUser();
+			List<EntityList> sales = service.getSales();
 			
-			List<DemoList> lLevel = service.getParameterInfo(level);
-			List<DemoList> lAgegroup = service.getParameterInfo(agegroup);
+			List<EntityList> lLevel = service.getParameterInfo(level);
+			List<EntityList> lAgegroup = service.getParameterInfo(agegroup);
 
 			
 			JSONArray countryresult = JSONArray.fromObject(v1);
@@ -329,7 +311,7 @@ public class CaseController extends BaseSimpleFormController {
 			model.addAttribute("agegroup",agegroupresult);
 			
 			String orderstatus = "order.status";
-			List<DemoList> w = service.getParameterInfo(orderstatus);
+			List<EntityList> w = service.getParameterInfo(orderstatus);
 			JSONArray orderstatusresult = JSONArray.fromObject(w);
 			model.addAttribute("orderstatus",orderstatusresult);
 		}
@@ -338,7 +320,7 @@ public class CaseController extends BaseSimpleFormController {
 
 	@RequestMapping(value = "/edit.do")
 	@ResponseBody
-	public Json doEdit(HttpServletRequest request, HttpSession session, Model model, DemoCase crmcase) {
+	public Json doEdit(HttpServletRequest request, HttpSession session, Model model, Case crmcase) {
 
 		Json j = new Json();
 		
@@ -353,11 +335,11 @@ public class CaseController extends BaseSimpleFormController {
 		return j;
 	}
 	
-	@RequestMapping(value = "/getsales.do")
+	@RequestMapping(value = "/getSales.do")
 	@ResponseBody
-	public List<DemoList> getSales(Model model, String destination) {
+	public List<EntityList> getSales(Model model, String destination) {
 		
-		List<DemoList> sales = service.getSalesByAgency(destination);
+		List<EntityList> sales = service.getSalesByAgency(destination);
 		return sales;
 	}
 	

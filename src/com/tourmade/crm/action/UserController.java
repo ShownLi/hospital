@@ -15,7 +15,7 @@ import com.tourmade.crm.common.framework.bean.QueryResult;
 import com.tourmade.crm.common.framework.util.JSONUtilS;
 import com.tourmade.crm.common.model.base.value.baseconfig.Json;
 import com.tourmade.crm.common.model.base.value.baseconfig.PageHelper;
-import com.tourmade.crm.model.DemoUser;
+import com.tourmade.crm.entity.User;
 import com.tourmade.crm.service.UserService;
 
 @Controller
@@ -32,9 +32,9 @@ public class UserController extends BaseSimpleFormController {
 	
 	@RequestMapping(value = "/list.do",produces="application/json;charset=utf-8")
 	@ResponseBody
-	public String queryData(HttpServletRequest request, HttpSession session, Model model, DemoUser user, PageHelper page) {
+	public String queryData(HttpServletRequest request, HttpSession session, Model model, User user, PageHelper page) {
 
-		QueryResult<DemoUser> r = service.queryUser(user, page, request);
+		QueryResult<User> r = service.queryUser(user, page, request);
 		String result = JSONUtilS.object2json(r);
 
 		return result;
@@ -48,7 +48,7 @@ public class UserController extends BaseSimpleFormController {
 
 	@RequestMapping(value = "/add.do")
 	@ResponseBody
-	public Json doAdd(HttpServletRequest request, HttpSession session, Model model, DemoUser user) {
+	public Json doAdd(HttpServletRequest request, HttpSession session, Model model, User user) {
 
 		Json j = new Json();
 		
@@ -68,7 +68,7 @@ public class UserController extends BaseSimpleFormController {
 		
 		if (null != id && !"".equals(id)) {
 			int i = Integer.parseInt(id);
-			DemoUser u = service.getUserById(i);
+			User u = service.getUserById(i);
 			model.addAttribute("user",u);
 		}
 		
@@ -78,7 +78,7 @@ public class UserController extends BaseSimpleFormController {
 
 	@RequestMapping(value = "/edit.do")
 	@ResponseBody
-	public Json doEdit(HttpServletRequest request, HttpSession session, Model model, DemoUser user) {
+	public Json doEdit(HttpServletRequest request, HttpSession session, Model model, User user) {
 
 		Json j = new Json();
 		

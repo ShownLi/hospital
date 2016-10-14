@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tourmade.crm.mapper.comment.CommentMapper">
+
+	<select id="queryComment" parameterType="Map" resultType="Comment">
+		select
+			u.comment_id as commentId,
+			u.comment_type as commentType,
+			u.object_id,
+			u.user_id as userId,
+			u.user_name as userName,
+			u.content as content,
+			u.creat_time as creatTime,
+			u.isdel as isdel
+		from tm_comment u  
+		where u.isdel = 0 and u.comment_type = #{commentType} and u.object_id = #{objectId}
+		order by u.creat_time desc
+		limit #{b},#{e}
+	</select>
+
+	<select id="countComment" parameterType="Comment" resultType="long">
+		select count(comment_id) from tm_comment 
+		where isdel = 0
+		and comment_type = #{commentType}
+		and object_id = ${objectId}
+
+	</select>
+	
+	<insert id="saveComment" parameterType="Comment" flushCache="true" useGeneratedKeys="true" keyProperty="comment_id" keyColumn="GENERATED_KEY">
+		insert into tm_comment(
+		comment_type,
+		object_id,
+		user_id,
+		user_name,
+		content,
+		creat_time,
+		isdel
+		)values(
+		#{commentType},
+		#{objectId},
+		#{userId},
+		#{userName},
+		#{content,jdbcType=VARCHAR},
+		NOW(),
+		0
+		)
+	</insert>
+
+	<update id="updateComment" parameterType="Comment" flushCache="true">
+		update tm_comment
+		set
+		user_name=#{userName}
+		content=#{content},
+		country=#{country},
+		language=#{language},
+		update_time=NOW()
+		where
+		comment_id=#{commentId}
+	</update>
+	
+	<select id="getCommentById" parameterType="int" resultType="Comment">
+		select
+		u.comment_id as commentId,
+		u.user_name as userName,
+		u.country as country,
+		u.language as language,
+		u.isdel as isdel
+		from tm_comment u where u.comment_id = #{commentId}
+	</select>
+	
+	<select id="getParameterInfo" parameterType="String" resultType="EntityList">
+		select
+		u.para_domain,
+		u.para_value as id,
+		u.chinese as text,
+		u.isdisplay,
+		u.isdel 
+		from tm_parameter u where u.isdisplay = 1 and u.isdel = 0 and u.para_domain = #{domain}
+	</select>
+	
+	<update id="deleteCommentById" parameterType="int" flushCache="true"
+		statementType="PREPARED">
+		update tm_comment
+		set
+		isdel=1
+		where
+		comment_id = #{commentId}
+	</update>
+</mapper>

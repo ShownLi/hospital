@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tourmade.crm.mapper.order.OrderMapper">
+
+	<select id="queryOrder" parameterType="Map" resultType="Order">
+		select
+			u.order_id as orderId,
+			u.customer_id as customerId,
+			u.customer_name as customerName,
+			u.agency_id as agencyId,
+			u.agency_name as agencyName,
+			u.sales_id as salesId,
+			u.sales_name as salesName,
+			u.destination as destination,
+			u.budget as budget,
+			u.status as status,
+			u.reason as reason,
+			u.group_time as groupTime,
+			u.group_number as groupNumber,
+			u.start_date as startDate,
+			u.end_date as endDate,
+			u.group_price as groupPrice,
+			u.currency as currency,
+			u.exchange_rate as exchangeRate,
+			u.last_response as lastResponse,	
+			u.creat_time as creatTime,
+			u.isdel as isdel
+		from tm_order u  
+		where u.isdel = 0 
+		order by u.creat_time desc
+		limit #{b},#{e}
+	</select>
+
+	<select id="queryOrderByCaseId" parameterType="Map" resultType="Order">
+		select
+			u.order_id as orderId,
+			u.customer_id as customerId,
+			u.customer_name as customerName,
+			u.agency_id as agencyId,
+			u.agency_name as agencyName,
+			u.sales_id as salesId,
+			u.sales_name as salesName,
+			u.destination as destination,
+			u.budget as budget,
+			u.status as status
+		from tm_order u  
+		where u.isdel = 0 and u.case_id = #{id}
+		order by u.creat_time 
+		limit #{b},#{e}
+	</select>
+	
+	<select id="countOrder" parameterType="Order" resultType="long">
+		select count(u.order_id) from tm_order u
+		where
+		u.isdel = 0
+	</select>
+	
+	<select id="customerstatus">
+		update tm_customer set
+		customer_level = #{status}
+		where
+		customer_id = #{id}
+	</select>
+	
+	<select id="geturl" parameterType="String" resultType="String">
+		select para_value from tm_parameter 
+		where para_domain = #{domain}
+		and isdel = 0
+	</select>
+	
+	<select id="validatemail" parameterType="int" resultType="String">
+		select email from tm_customer 
+		where customer_id = #{id}
+		and isdel = 0
+	</select>
+	
+	<select id="validatePortalId" parameterType="int" resultType="String">
+		select customer_portal_id from tm_customer 
+		where customer_id = #{id}
+		and isdel = 0
+	</select>
+	
+	<select id="countOrderByCaseId" parameterType="Order" resultType="long">
+		select count(u.order_id) from tm_order u
+		where
+		u.isdel = 0 and u.case_id = #{id}
+	</select>
+	
+	<select id="getInfo" parameterType="Order" resultType="Order">
+		select
+		a.agency_id as agencyId, 
+		a.agency_name as agencyName,
+		b.customer_name_zh as customerName,
+		b.email as customeRemailReal,
+		c.sales_email as agencyEmailReal,
+		c.sales_name as salesName
+		from tm_sales c 
+		left join tm_customer b on b.customer_id = #{customerId}
+		left join tm_agency a on a.agency_id = c.agency_id
+		where
+		a.isdel = 0 and b.isdel = 0 and c.isdel = 0 and c.sales_id = #{salesId}
+	</select>
+	
+	<insert id="saveOrder" parameterType="Order" flushCache="true" useGeneratedKeys="true" keyProperty="orderId" keyColumn="GENERATED_KEY">
+		insert into tm_order(
+		case_id,
+		customer_id,
+		customer_name,
+		agency_id,
+		agency_name,
+		sales_id,
+		sales_name,
+		customer_email_real,
+
+		agency_email_real,
+
+		destination,
+		budget,
+		status,
+		reason,
+		group_time,
+		group_number,
+		start_date,
+		end_date,
+		group_price,
+		currency,
+		exchange_rate,
+		last_response,
+		creat_time,
+		isdel
+		)values(
+		#{caseId,jdbcType=VARCHAR},
+		#{customerId,jdbcType=VARCHAR},
+		#{customerName,jdbcType=VARCHAR},
+		#{agencyId},
+		#{agencyName},
+		#{salesId,jdbcType=VARCHAR},
+		#{salesName,jdbcType=VARCHAR},
+		#{customerEmailReal},
+
+		#{agencyEmailReal},
+
+		#{destination,jdbcType=VARCHAR},
+		#{budget,jdbcType=VARCHAR},
+		#{status,jdbcType=VARCHAR},
+		#{reason,jdbcType=VARCHAR},
+		#{groupTime,jdbcType=VARCHAR},
+		#{groupNumber,jdbcType=VARCHAR},
+		#{startDate,jdbcType=VARCHAR},
+		#{endDate,jdbcType=VARCHAR},
+		#{groupPrice,jdbcType=VARCHAR},
+		#{currency,jdbcType=VARCHAR},
+		#{groupPrice,jdbcType=VARCHAR},
+		NOW(),
+		NOW(),
+		0
+		)
+	</insert>
+
+	<update id="updateOrder" parameterType="Order" flushCache="true">
+		update tm_order
+		set
+		customer_name=#{customerName},
+		agency_id=#{agencyId},
+		agency_name=#{agencyName},
+		sales_id=#{salesId},
+		sales_name=#{salesName},
+		customer_re_email_alias = #{customerReEmailAlias},
+		customer_se_email_alias = #{customerSeEmailAlias},
+		agency_re_email_alias = #{agencyReEmailAlias},
+		agency_se_email_alias = #{agencySeEmailAlias},
+		destination=#{destination},
+		budget=#{budget},
+		status=#{status},
+		reason=#{reason},
+		group_time=#{groupTime},
+		group_number=#{groupNumber},
+		start_date=#{startDate},
+		end_date=#{endDate},
+		group_price=#{groupPrice},
+		rmb_price=#{rmbPrice},
+		currency=#{currency},
+		exchange_rate=#{exchangeRate},
+		last_response=#{lastResponse},
+		update_time=NOW()
+		where
+		order_id=#{orderId}
+	</update>
+	
+	<update id="updateCustomer" parameterType="Customer" flushCache="true">
+		update tm_customer
+		set
+		customer_portal_id = #{portalId},
+		update_time=NOW()
+		where
+		customer_id=#{customerId}
+	</update>
+	
+	<select id="getAgencyBySales" parameterType="int" resultType="Order">
+		select
+			a.agency_name as agencyName,
+			b.agency_id as agencyId,
+			b.sale_email as agencyemailreal,
+			b.sale_name as salesName
+			from tm_agency a 
+			left join tm_sale b on b.agency_id = a.agency_id
+			where b.sale_id = #{salesId}
+	</select>
+	
+	<select id="getCustomerEmailReal" parameterType="int" resultType="String">
+		select
+			email as customerEmailReal
+			from tm_customer
+			where customer_id = #{customerId}
+	</select>
+	
+	<select id="getCustomerById" parameterType="int" resultType="Customer">
+		select
+		u.customer_id as customerId,
+		u.customer_name_zh as zname,
+		u.customer_name_en as ename,
+		u.email,
+		u.mobilephone,
+		u.wechat,
+		u.qq
+		from tm_customer u where u.customer_id = #{id}
+	</select>	
+	
+	<select id="getCustomerByCaseId" parameterType="int" resultType="Customer">
+		select
+		u.customer_id as customerId,
+		u.customer_name_zh as chineseName,
+		u.customer_name_en as englishName,
+		u.email,
+		u.mobilephone,
+		u.wechat,
+		u.qq
+		from tm_customer u
+		left join tm_case v
+		on v.customer_id = u.customer_id
+		where v.case_id = #{caseId}
+	</select>	
+
+	<select id="getCaseById" parameterType="int" resultType="Case">
+		select
+		u.case_id as caseid,
+		u.customer_id as customerId, 
+		u.operator as operator,
+		u.prefer_language as preferLanguage,
+		u.contact_type as contactType,
+		u.with_who as withwho,
+		u.adult as adult,
+		u.children as children,
+		u.baby as baby,
+		u.start_time as startTime,
+		u.start_month as startMonth,
+		u.during as during,
+		u.start_date as startDate,
+		u.end_date as endDate,
+		u.requirement as requirement,
+		u.route as route,
+		u.hotel as hotel,
+		u.meals as meals,
+		u.guide as guide,
+		u.budget as budget,
+		u.sales_id as salesId,
+		u.destination as destination,
+		u.source as source,
+		u.promote_code as promoteCode,
+		u.status as status,
+		u.tailormade as tailormade,
+		u.passport as passport,
+		u.visa as visa,
+		u.flight as flight,
+		u.ip_address as ipAddress,
+		u.creat_time as creatTime,
+		u.isdel
+		from tm_case u where u.isdel = 0 and u.case_id = #{id}
+	</select>
+		
+	<select id="getOrderById" parameterType="int" resultType="Order">
+		select
+		u.order_id as orderId,
+		u.case_id as caseId,
+		u.customer_id as customerId,
+		u.customer_name as customerName,
+		u.agency_id as agencyId,
+		u.agency_name as agencyName,
+		u.sales_id as salesId,
+		u.sales_name as salesName,
+		u.destination as destination,
+		
+		u.customer_email_real as customerEmailReal,
+		u.agency_email_real as agencyEmailReal,
+				
+		u.customer_re_email_alias as customerReEmailAlias,
+		u.customer_se_email_alias as customerSeEmailAlias,
+		u.agency_re_email_alias as agencyReEmailAlias,
+		u.agency_se_email_alias as agencySeEmailAlias,
+		
+		u.budget as budget,
+		u.status as status,
+		u.reason as reason,
+		u.group_time as groupTime,
+		u.group_number as groupNumber,
+		u.start_date as startDate,
+		u.end_date as endDate,
+		u.group_price as groupPrice,
+		u.currency as currency,
+		u.exchange_rate as exchangeRate,
+		u.rmb_price as rmbPrice,
+		u.last_response as lastResponse,	
+		u.creat_time as creatTime,
+		u.isdel as isdel
+		from tm_order u where u.order_id = #{orderId}
+	</select>
+	
+	<select id="getParameterInfo" parameterType="String" resultType="EntityList">
+		select
+		u.para_domain,
+		u.para_value as id,
+		u.chinese as text,
+		u.isdisplay,
+		u.isdel 
+		from tm_parameter u where u.isdisplay = 1 and u.isdel = 0 and u.para_domain = #{domain}
+	</select>
+	
+	<update id="deleteOrderById" parameterType="int" flushCache="true"
+		statementType="PREPARED">
+		update tm_order
+		set
+		isdel=1
+		where
+		order_id = #{orderId}
+	</update>
+</mapper>

@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,16 +12,16 @@ import org.springframework.transaction.annotation.Transactional;
 import com.tourmade.crm.common.framework.BaseService;
 import com.tourmade.crm.common.framework.bean.QueryResult;
 import com.tourmade.crm.common.model.base.value.baseconfig.PageHelper;
-import com.tourmade.crm.mapper.customer.DemoCustomerMapper;
-import com.tourmade.crm.model.DemoCustomer;
-import com.tourmade.crm.model.DemoList;
+import com.tourmade.crm.entity.Customer;
+import com.tourmade.crm.entity.EntityList;
+import com.tourmade.crm.mapper.customer.CustomerMapper;
 
 @Service
 @Transactional(readOnly = false)
 public class CustomerService extends BaseService {
 	
 	@Autowired
-	private DemoCustomerMapper customerMapper;
+	private CustomerMapper customerMapper;
 
 	/**
 	 * 查询客人数据，分页展示
@@ -32,9 +31,9 @@ public class CustomerService extends BaseService {
 	 * @param request
 	 * @return
 	 */
-	public QueryResult<DemoCustomer> queryCustomer(DemoCustomer customer, PageHelper ph, HttpServletRequest request) {
+	public QueryResult<Customer> queryCustomer(Customer customer, PageHelper ph, HttpServletRequest request) {
 
-		QueryResult<DemoCustomer> r = new QueryResult<DemoCustomer>();
+		QueryResult<Customer> r = new QueryResult<Customer>();
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 
@@ -43,7 +42,7 @@ public class CustomerService extends BaseService {
 //		map.put("s", ph.getSort());
 //		map.put("o", ph.getOrder());
 
-		List<DemoCustomer> data = customerMapper.queryCustomer(map);
+		List<Customer> data = customerMapper.queryCustomer(map);
 		long count = customerMapper.countCustomer(customer);
 			
 		r.setData(data);
@@ -59,7 +58,7 @@ public class CustomerService extends BaseService {
 	 * @param customer
 	 * @return
 	 */
-	public int saveCustomer(DemoCustomer customer) {
+	public int saveCustomer(Customer customer) {
 
 		
 		try {
@@ -69,7 +68,7 @@ public class CustomerService extends BaseService {
 			e.printStackTrace();
 			return 0;
 		}
-		return customer.getCustomerid();
+		return customer.getCustomerId();
 	}
 
 	/**
@@ -78,8 +77,8 @@ public class CustomerService extends BaseService {
 	 * @param id
 	 * @return
 	 */
-	public DemoCustomer getCustomerById(int id) {
-		DemoCustomer r = null;
+	public Customer getCustomerById(int id) {
+		Customer r = null;
 		try {
 			r = customerMapper.getCustomerById(id);
 		} catch (Exception e) {
@@ -95,8 +94,8 @@ public class CustomerService extends BaseService {
 	 * @param id
 	 * @return
 	 */
-	public List<DemoList> getParameterInfo(String domain) {
-		List<DemoList> r = null;
+	public List<EntityList> getParameterInfo(String domain) {
+		List<EntityList> r = null;
 		try {
 			r = customerMapper.getParameterInfo(domain);
 		} catch (Exception e) {
@@ -112,17 +111,17 @@ public class CustomerService extends BaseService {
 	 * @param customer
 	 * @return
 	 */
-	public boolean updateCustomer(DemoCustomer customer) {
+	public boolean updateCustomer(Customer customer) {
 
 		boolean r = false;
 		try {
-			DemoCustomer u = customerMapper.getCustomerById(customer.getCustomerid());
+			Customer u = customerMapper.getCustomerById(customer.getCustomerId());
 			if (u != null) {
-				u.setZname(customer.getZname());
-				u.setEname(customer.getEname());
+				u.setChineseName(customer.getChineseName());
+				u.setEnglishName(customer.getEnglishName());
 				u.setLocation(customer.getLocation());
-				u.setPromote(customer.getPromote());
-				u.setAgegroup(customer.getAgegroup());
+				u.setSource(customer.getSource());
+				u.setAgeGroup(customer.getAgeGroup());
 				u.setGender(customer.getGender());
 				u.setTelephone(customer.getTelephone());
 				u.setMobilephone(customer.getMobilephone());

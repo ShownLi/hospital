@@ -15,14 +15,6 @@
 				<h2>
 					<i class="fa fa-user"></i> 客人管理 <span>新增客人</span>
 				</h2>
-				<!-- <div class="breadcrumb-wrapper">
-					<span class="label">你在这里:</span>
-					<ol class="breadcrumb">
-						<li><a href="＃">CRM</a></li>
-						<li><a href="${rootPath }user/list.html">客人管理</a></li>
-						<li class="active">新增客人</li>
-					</ol>
-				</div> -->
 			</div>
 
 			<div class="contentpanel">
@@ -142,13 +134,6 @@
      </form>   
       </div><!-- panel -->
 
-
-
-
-
-			</div>
-
-		</div>
 		<!-- mainpanel -->
 		<%@ include file="../assets/pages/rightpanel.jsp"%>
 	</section>
@@ -180,7 +165,7 @@
         <div class="nextModal-title">您可以继续添加询单，或返回到客人列表页面</div>
       </div>
       <div class="modal-body align-center">
-        	<a id="addcase" class="btn btn-primary" href="${rootPath}case/add1.html?customerid=">添加询单</a>
+        	<a id="addcase" class="btn btn-primary" href="${rootPath}case/addCase.html?customerid=">添加询单</a>
         	<a class="btn btn-primary" href="${rootPath}customer/list.html">返回列表</a>
       </div>
     </div><!-- modal-content -->
@@ -195,23 +180,22 @@
 	<script src="${rootPath}assets/js/jquery.validate.min.js"></script>
 	
 	<script type="text/javascript">
-		var l = ${level};
-		var p = ${promote};
-		var a = ${agegroup};
+		var level = ${level};
+		var promote = ${promote};
+		var agegroup = ${agegroup};
 		$(".promote-select").select2({
 			placeholder: '选择一个推广渠道',
-		  	data: p
+		  	data: promote
 		});
 		$(".agegroup-select").select2({
 			placeholder: '选择一个年龄段',
-		  	data: a
+		  	data: agegroup
 		});
 		$(".level-select").select2({
-		  	data: l
+		  	data: level
 		});	
 		
-		jQuery(document).ready(function() {
-			
+		jQuery(document).ready(function() {		
 			// left menu expose  
 			$(".nav-parent").eq(2).addClass("nav-active");
       		$(".nav-parent").eq(2).find(".children").show();
@@ -225,7 +209,6 @@
 			});
 			
 			jQuery("#form").validate({
-				
 				rules: {
 					zname: "required",
 					qq: "number",

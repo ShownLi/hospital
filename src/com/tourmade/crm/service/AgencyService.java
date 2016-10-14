@@ -13,16 +13,16 @@ import org.springframework.transaction.annotation.Transactional;
 import com.tourmade.crm.common.framework.BaseService;
 import com.tourmade.crm.common.framework.bean.QueryResult;
 import com.tourmade.crm.common.model.base.value.baseconfig.PageHelper;
-import com.tourmade.crm.mapper.agency.DemoAgencyMapper;
-import com.tourmade.crm.model.DemoAgency;
-import com.tourmade.crm.model.DemoList;
+import com.tourmade.crm.entity.Agency;
+import com.tourmade.crm.entity.EntityList;
+import com.tourmade.crm.mapper.agency.AgencyMapper;
 
 @Service
 @Transactional(readOnly = false)
 public class AgencyService extends BaseService {
 	
 	@Autowired
-	private DemoAgencyMapper agencyMapper;
+	private AgencyMapper agencyMapper;
 
 	/**
 	 * 查询地接社数据，分页展示
@@ -32,9 +32,9 @@ public class AgencyService extends BaseService {
 	 * @param request
 	 * @return
 	 */
-	public QueryResult<DemoAgency> queryAgency(DemoAgency agency, PageHelper ph, HttpServletRequest request) {
+	public QueryResult<Agency> queryAgency(Agency agency, PageHelper ph, HttpServletRequest request) {
 
-		QueryResult<DemoAgency> r = new QueryResult<DemoAgency>();
+		QueryResult<Agency> r = new QueryResult<Agency>();
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		map.put("b", ph.getStart());
@@ -42,7 +42,7 @@ public class AgencyService extends BaseService {
 //		map.put("s", ph.getSort());
 //		map.put("o", ph.getOrder());
 
-		List<DemoAgency> data = agencyMapper.queryAgency(map);
+		List<Agency> data = agencyMapper.queryAgency(map);
 		long count = agencyMapper.countAgency(agency);
 			
 		r.setData(data);
@@ -58,7 +58,7 @@ public class AgencyService extends BaseService {
 	 * @param agency
 	 * @return
 	 */
-	public int saveAgency(DemoAgency agency) {
+	public int saveAgency(Agency agency) {
 
 		
 		try {
@@ -68,7 +68,7 @@ public class AgencyService extends BaseService {
 			e.printStackTrace();
 			return 0;
 		}
-		return agency.getAgency_id();
+		return agency.getAgencyId();
 	}
 
 	/**
@@ -77,8 +77,8 @@ public class AgencyService extends BaseService {
 	 * @param id
 	 * @return
 	 */
-	public DemoAgency getAgencyById(int id) {
-		DemoAgency r = null;
+	public Agency getAgencyById(int id) {
+		Agency r = null;
 		try {
 			r = agencyMapper.getAgencyById(id);
 		} catch (Exception e) {
@@ -94,8 +94,8 @@ public class AgencyService extends BaseService {
 	 * @param id
 	 * @return
 	 */
-	public List<DemoList> getParameterInfo(String domain) {
-		List<DemoList> r = null;
+	public List<EntityList> getParameterInfo(String domain) {
+		List<EntityList> r = null;
 		try {
 			r = agencyMapper.getParameterInfo(domain);
 		} catch (Exception e) {
@@ -111,12 +111,12 @@ public class AgencyService extends BaseService {
 	 * @param agency
 	 * @return
 	 */
-	public boolean updateAgency(DemoAgency agency) {
+	public boolean updateAgency(Agency agency) {
 
 		boolean r = false;
 
 		try {
-			DemoAgency u = agencyMapper.getAgencyById(agency.getAgency_id());
+			Agency u = agencyMapper.getAgencyById(agency.getAgencyId());
 			if (u != null) {
 				u.setName(agency.getName());
 				u.setCountry(agency.getCountry());

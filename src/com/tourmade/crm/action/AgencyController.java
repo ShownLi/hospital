@@ -17,8 +17,8 @@ import com.tourmade.crm.common.framework.bean.QueryResult;
 import com.tourmade.crm.common.framework.util.JSONUtilS;
 import com.tourmade.crm.common.model.base.value.baseconfig.Json;
 import com.tourmade.crm.common.model.base.value.baseconfig.PageHelper;
-import com.tourmade.crm.model.DemoAgency;
-import com.tourmade.crm.model.DemoList;
+import com.tourmade.crm.entity.Agency;
+import com.tourmade.crm.entity.EntityList;
 import com.tourmade.crm.service.AgencyService;
 
 import net.sf.json.JSONArray;
@@ -34,21 +34,21 @@ public class AgencyController extends BaseSimpleFormController {
 	public String list(Model model) {
 		String country = "country";
 		String language = "agency.language";
-		List<DemoList> v = service.getParameterInfo(country);
-		List<DemoList> w = service.getParameterInfo(language);
-		JSONArray countryresult = JSONArray.fromObject(v);
-		JSONArray languageresult = JSONArray.fromObject(w);
-		model.addAttribute("countryname",countryresult);
-		model.addAttribute("language",languageresult);
+		List<EntityList> countryList = service.getParameterInfo(country);
+		List<EntityList> languageList = service.getParameterInfo(language);
+		JSONArray countryResult = JSONArray.fromObject(countryList);
+		JSONArray languageResult = JSONArray.fromObject(languageList);
+		model.addAttribute("countryName",countryResult);
+		model.addAttribute("language",languageResult);
 		return "/agency/list";
 	}
 	
 	@RequestMapping(value = "/list.do",produces="application/json;charset=utf-8")
 	@ResponseBody
-	public String queryData(HttpServletRequest request, HttpSession session, Model model, DemoAgency agency, PageHelper page) {
-
-		QueryResult<DemoAgency> r = service.queryAgency(agency, page, request);
-		String result = JSONUtilS.object2json(r);
+	public String queryData(HttpServletRequest request, HttpSession session, Model model, Agency agency, PageHelper page) {
+		
+		QueryResult<Agency> agencyPage = service.queryAgency(agency, page, request);
+		String result = JSONUtilS.object2json(agencyPage);
 		return result;
 	}
 
@@ -57,25 +57,25 @@ public class AgencyController extends BaseSimpleFormController {
 		
 		String country = "country";
 		String language = "agency.language";
-		List<DemoList> u = service.getParameterInfo(country);
-		List<DemoList> v = service.getParameterInfo(language);
-		JSONArray countryresult = JSONArray.fromObject(u);
-		JSONArray  languageresult = JSONArray.fromObject(v);
-		model.addAttribute("country",countryresult);
-		model.addAttribute("language",languageresult);
+		List<EntityList> countryList = service.getParameterInfo(country);
+		List<EntityList> languageList = service.getParameterInfo(language);
+		JSONArray countryResult = JSONArray.fromObject(countryList);
+		JSONArray  languageResult = JSONArray.fromObject(languageList);
+		model.addAttribute("country",countryResult);
+		model.addAttribute("language",languageResult);
 		
 		return "/agency/add";
 	}
 
 	@RequestMapping(value = "/add.do")
 	@ResponseBody
-	public Json doAdd(HttpServletRequest request, HttpSession session, Model model, DemoAgency agency) {
-
+	public Json doAdd(HttpServletRequest request, HttpSession session, Model model, Agency agency) {
+		System.out.println(agency.getCountry()+"^^^"+agency.getLanguage());
+		
 		Json j = new Json();
 		
 		try {
 			service.saveAgency(agency);
-			//System.out.println(agency);
 			j.setObj(agency);
 			j.setSuccess(true);
 		} catch (Exception e) {
@@ -90,24 +90,24 @@ public class AgencyController extends BaseSimpleFormController {
 	public String edit(Model model, String id) {
 		
 		if (null != id && !"".equals(id)) {
-			int i = Integer.parseInt(id);
-			DemoAgency u = service.getAgencyById(i);
+			Integer i = Integer.valueOf( id);
+			Agency agency = service.getAgencyById(i);
 			String country = "country";
 			String language = "agency.language";
-			List<DemoList> v = service.getParameterInfo(country);
-			List<DemoList> w = service.getParameterInfo(language);
-			JSONArray countryresult = JSONArray.fromObject(v);
-			JSONArray languageresult = JSONArray.fromObject(w);
-			model.addAttribute("country",countryresult);
-			model.addAttribute("language",languageresult);
-			model.addAttribute("agency",u);
+			List<EntityList> countryList = service.getParameterInfo(country);
+			List<EntityList> languageList= service.getParameterInfo(language);
+			JSONArray countryResult = JSONArray.fromObject(countryList);
+			JSONArray languageResult = JSONArray.fromObject(languageList);
+			model.addAttribute("country",countryResult);
+			model.addAttribute("language",languageResult);
+			model.addAttribute("agency",agency);
 		}
 		return "/agency/edit";
 	}
 
 	@RequestMapping(value = "/edit.do")
 	@ResponseBody
-	public Json doEdit(HttpServletRequest request, HttpSession session, Model model, DemoAgency agency) {
+	public Json doEdit(HttpServletRequest request, HttpSession session, Model model, Agency agency) {
 
 		Json j = new Json();
 		
@@ -138,8 +138,7 @@ public class AgencyController extends BaseSimpleFormController {
 		} catch (Exception e) {
 			j.setSuccess(false);
 			logger.error("AgencyController.doDel() --> " + id + "\n" + e.getMessage());
-		}
-		
+		}		
 		return j;
 	}
 

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="GBK" ?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tourmade.crm.mapper.user.UserMapper">
+
+	<select id="queryUser" parameterType="Map" resultType="User">
+		select
+			u.user_id as userId,
+			u.user_name as name,
+			u.loginname as loginName,
+			u.password as pwd,
+			u.user_email as email,
+			u.mobilephone as mobilephone,
+			u.creat_time as creatTime,
+			u.isdel as isdel
+		from tm_user u where u.isdel = 0
+		order by u.creat_time desc
+		limit #{b},#{e}
+	</select>
+
+
+	<select id="countUser" parameterType="User" resultType="long">
+		select count(u.user_id) from tm_user u
+		where
+		u.isdel = 0
+	</select>
+
+	<insert id="saveUser" parameterType="User" flushCache="true" useGeneratedKeys="true" keyProperty="userId" keyColumn="GENERATED_KEY">
+		insert into tm_user(
+		user_name,
+		loginname,
+		password,
+		user_email,
+		mobilephone,
+		creat_time,
+		update_time,
+		isdel
+		)values(
+		#{name,jdbcType=VARCHAR},
+		#{loginName,jdbcType=VARCHAR},
+		#{pwd,jdbcType=VARCHAR},
+		#{email,jdbcType=VARCHAR},
+		#{mobilephone,jdbcType=VARCHAR},
+		NOW(),
+		NOW(),
+		0
+		)
+	</insert>
+
+	<update id="updateUser" parameterType="User" flushCache="true">
+		update tm_user
+		set
+		loginname=#{loginName},
+		user_name=#{name},
+		user_email=#{email},
+		password=#{pwd},
+		mobilephone=#{mobilephone},
+		update_time=NOW()
+		where
+		user_id=#{userId}
+	</update>
+
+	<select id="getUserById" parameterType="int" resultType="User">
+		select
+		u.user_id as userId,
+		u.loginname as loginName,
+		u.password as pwd,
+		u.user_name as name,
+		u.user_email as email,
+		u.mobilephone as mobilephone,
+		u.creat_time as creatTime,
+		u.isdel as isdel
+		from tm_user u where u.isdel = 0 and u.user_id = #{userId}
+	</select>
+
+	<update id="deleteUserById" parameterType="int" flushCache="true"
+		statementType="PREPARED">
+		update tm_user
+		set
+		isdel=1
+		where
+		user_id = #{userId}
+	</update>
+
+	<select id="signin" parameterType="User" resultType="User">
+		select
+		u.user_id as userId,
+		u.loginname as loginName,
+		u.user_name as name,
+		u.password as pwd,
+		u.isdel as isdel
+		from tm_user u where
+		u.loginname = #{loginName} and u.password = #{pwd} and u.isdel = 0
+	</select>
+	
+	<select id="validate" resultType="String">
+		select  ${field} from ${table} u
+		where u.${field} = #{name} 
+		<if test="filter_field != null and filter_field != ''">
+			and
+			u.${filter_field} = #{filter_name} 
+		</if>
+		and u.isdel = 0
+		limit 1
+	</select>
+	
+</mapper>
