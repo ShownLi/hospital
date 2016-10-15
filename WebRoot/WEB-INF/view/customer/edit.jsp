@@ -167,7 +167,7 @@
 				<!-- table-responsive -->
 			</div>
 		    <div class="panel-footer align-center">
-			    <a class="btn btn-primary" href="${rootPath}case/add1.html?customerId=${customer.customerId}">添加询单</a>
+			    <a class="btn btn-primary" href="${rootPath}case/addCase.html?customerId=${customer.customerId}">添加询单</a>
 			</div>
 		</div><!-- end of panel 询单  -->
 		
@@ -267,7 +267,7 @@
 	
 	<script type="text/javascript">
 	var leval = ${level};
-	var source = ${source};
+//	var source = ${source};
 	var ageGroup = ${ageGroup};
 	var source = ${source};
 	var caseStatus = ${status};
@@ -276,7 +276,7 @@
 	
 	$(".promote-select").select2({
 		placeholder: '选择一个客人来源',
-	  	data: promote
+	  	data: source
 	});
 	$(".agegroup-select").select2({
 		placeholder: '选择一个年龄段',
@@ -503,9 +503,8 @@
 	    } ); 
 		
 		//生日格式转换
-		var date = $("#birthday").val();	
+		var date = $("#birthday").val();
 		var dateformat = new Date(date).toISOString("yyyy-MM-dd hh:mm:ss.S").substring(0,10);
-		//console.log(dateformat);
 		$("#birthday").val(dateformat)
 		
 		// 手机，邮箱，微信，QQ，输入一个以后移除错误提示

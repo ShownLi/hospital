@@ -43,6 +43,9 @@ public class AgencyService extends BaseService {
 //		map.put("o", ph.getOrder());
 
 		List<Agency> data = agencyMapper.queryAgency(map);
+		for(Agency a:data){
+			System.out.println(a.getCountry()+"*****"+a.getLanguage());
+		}
 		long count = agencyMapper.countAgency(agency);
 			
 		r.setData(data);

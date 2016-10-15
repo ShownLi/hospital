@@ -58,8 +58,7 @@ public class ParameterService extends BaseService {
 	 * @return
 	 */
 	public int saveParameter(Parameter parameter) {
-		// parameter.setPwd("123456");
-		// parameter.setPwd(MD5.MD5Encode("123456"));
+
 		try {
 			parameterMapper.saveParameter(parameter);
 		} catch (Exception e) {

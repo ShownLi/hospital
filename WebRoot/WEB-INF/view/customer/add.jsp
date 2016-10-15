@@ -35,7 +35,7 @@
 	            <div class="form-group col-sm-4">
 	              <label class="col-sm-3 control-label">中文名<span class="asterisk">*</span></label>
 	              <div class="col-sm-9">
-	                <input type="text" name="zname" placeholder="中文名" class="form-control" />
+	                <input type="text" name="chineseName" placeholder="中文名" class="form-control" />
 	              </div>
 	            </div>
 	            <div class="form-group col-sm-4">
@@ -67,7 +67,7 @@
 	            <div class="form-group col-sm-4">
 	              <label class="col-sm-3 control-label" >年龄段</label>
 	              <div class="col-sm-9">
-	                <input type="text" name="agegroup" placeholder="请选择一个年龄段" class="agegroup-select fullwidth" />
+	                <input type="text" name="ageGroup" placeholder="请选择一个年龄段" class="agegroup-select fullwidth" />
 	              </div>
 	            </div>
 	            <div class="form-group col-sm-4">
@@ -121,7 +121,7 @@
 	            <div class="form-group col-sm-4">
 	              <label class="col-sm-3 control-label" >客人来源 </label>
 	              <div class="col-sm-9">
-	                <input type="text" name="promote" class="promote-select fullwidth" />
+	                <input type="text" name="source" class="promote-select fullwidth" />
 	              </div>
 	            </div>
 	        </div>   
@@ -165,7 +165,7 @@
         <div class="nextModal-title">您可以继续添加询单，或返回到客人列表页面</div>
       </div>
       <div class="modal-body align-center">
-        	<a id="addcase" class="btn btn-primary" href="${rootPath}case/addCase.html?customerid=">添加询单</a>
+        	<a id="addCase" class="btn btn-primary" href="${rootPath}case/addCase.html?customerId=">添加询单</a>
         	<a class="btn btn-primary" href="${rootPath}customer/list.html">返回列表</a>
       </div>
     </div><!-- modal-content -->
@@ -181,15 +181,15 @@
 	
 	<script type="text/javascript">
 		var level = ${level};
-		var promote = ${promote};
-		var agegroup = ${agegroup};
+		var source = ${source};
+		var ageGroup = ${ageGroup};
 		$(".promote-select").select2({
 			placeholder: '选择一个推广渠道',
-		  	data: promote
+		  	data: source
 		});
 		$(".agegroup-select").select2({
 			placeholder: '选择一个年龄段',
-		  	data: agegroup
+		  	data: ageGroup
 		});
 		$(".level-select").select2({
 		  	data: level
@@ -210,21 +210,21 @@
 			
 			jQuery("#form").validate({
 				rules: {
-					zname: "required",
+					chineseName: "required",
 					qq: "number",
 					email: "email",
 					birthday: "date",
-					promote: "required",
+					source: "required",
 					mobilephone:{
 						isMobile:true,
 					}					
 				},
 				messages: {
-					zname: "请输入中文名",
+					chineseName: "请输入中文名",
 					qq: "请输入有效的QQ账号",
 					email: "请输入有效的邮箱",
 					birthday: "请输入正确的日期",
-					promote: "请选择一个客人来源"
+					source: "请选择一个客人来源"
 				},
 				
 			    highlight: function(element) {
@@ -293,14 +293,13 @@
 		function form_submit() {
 			var f = $("#form").serialize();
 			$.post('${rootPath}customer/add.do', f, function(result) {
-				var customerid = result.obj.customerid;
+				var customerId = result.obj.customerId;
 				var rmsg = result.msg;
 				if (result.success) {
-					//window.parent.location = "${rootPath}customer/list.html";
 					$("#nextModal").modal('show');
 					//添加询单的url需要该客人的id
-			      	var href = $("#addcase").attr("href");
-			      	$("#addcase").attr("href",href+customerid);
+			      	var href = $("#addCase").attr("href");
+			      	$("#addCase").attr("href",href+customerId);
 				} else {
 					$("#msgModal").modal('show');
 				}

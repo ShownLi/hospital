@@ -48,7 +48,7 @@ public class ParameterController extends BaseSimpleFormController {
 	@RequestMapping(value = "/add.do")
 	@ResponseBody
 	public Json doAdd(HttpServletRequest request, HttpSession session, Model model, Parameter parameter) {
-
+		
 		Json j = new Json();
 		
 		try {

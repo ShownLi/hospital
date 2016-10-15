@@ -495,9 +495,9 @@
     var customer = ${customer};
     var user = ${user};
     var sales = ${sales};
-	var orderStatus = ${orderstatus};
+	var orderStatus = ${orderStatus};
 	var level = ${level};
-	var agegroup = ${agegroup}; 
+	var agegroup = ${ageGroup}; 
 	var genderData = [{ id: 'male', text: '男' }, { id:'female' , text: '女' }];
 	
 	$("#requirement").val("${crmcase.requirement}"); 

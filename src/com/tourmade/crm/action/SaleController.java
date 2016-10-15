@@ -46,12 +46,12 @@ public class SaleController extends BaseSimpleFormController {
 	}
 	
 	@RequestMapping(value = "/add.html", method = { RequestMethod.POST, RequestMethod.GET })
-	public String add(Model model,int agencyid) {
+	public String add(Model model,int agencyId) {
 		
 		List<EntityList> u = service.getAgency();
 		JSONArray result = JSONArray.fromObject(u);
 		model.addAttribute("agency",result);
-		model.addAttribute("agencyid",agencyid);
+		model.addAttribute("agencyId",agencyId);
 		return "/sale/add";
 	}
 

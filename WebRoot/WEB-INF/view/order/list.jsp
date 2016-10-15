@@ -244,12 +244,12 @@
 			                	for(var i=0;i < orderStatus.length;i++){
 			                		if(data==orderStatus[i].id){
 			                			return orderStatus[i].text
-			                		}
+			                		}else {return ""}
 			                	}
 		                	}
 		                	else{return ""}
 		                },
-		                  targets: 6
+		                  targets: 4
 					},
 					{
 		                data: "destination",
@@ -259,12 +259,12 @@
 			                	for(var i=0;i <destination.length;i++){
 			                		if(data==destination[i].id){
 			                			return destination[i].text
-			                		}
+			                		}else{return ""}
 			                	}
 		                	}
 		                	else{return ""}
 		                },
-		                  targets: 4
+		                  targets: 6
 					},					
 			 	  {
 			 		  orderable: false,

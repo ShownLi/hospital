@@ -27,7 +27,7 @@
 
 	</select>
 	
-	<insert id="saveParameter" parameterType="Parameter" flushCache="true" useGeneratedKeys="true" keyProperty="Parameter_id" keyColumn="GENERATED_KEY">
+	<insert id="saveParameter" parameterType="Parameter" flushCache="true" useGeneratedKeys="true" keyProperty="parameterId" keyColumn="GENERATED_KEY">
 		insert into tm_parameter(
 		para_domain,
 		para_value,

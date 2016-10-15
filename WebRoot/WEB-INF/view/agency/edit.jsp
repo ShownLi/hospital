@@ -84,7 +84,7 @@
 					</table>
           		</div>
           		<div class="panel-footer align-center">
-					<a class="btn btn-primary" href="${rootPath}sale/add.html?agencyid=${agency.agencyId}">新增销售</a>
+					<a class="btn btn-primary" href="${rootPath}sale/add.html?agencyId=${agency.agencyId}">新增销售</a>
       			</div>
 				</div>
 				<!-- end of panel 沟通列表 -->

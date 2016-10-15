@@ -171,8 +171,8 @@
 				],
 				columns: [
 		            { data: "customerId" },
-		            { data: "zname" },
-		            { data: "ename" },
+		            { data: "chineseName" },
+		            { data: "englishName" },
 		            { data: "ageGroup" },
 		            { data: "gender" },
 		            { data: "mobilephone" },
@@ -215,7 +215,7 @@
 		}
 		
 		function addCase(id){
-			window.parent.location = "${rootPath}case/add1.html?customerId="+id;
+			window.parent.location = "${rootPath}case/addCase.html?customerId="+id;
 		}
 		
 		function del(id) {

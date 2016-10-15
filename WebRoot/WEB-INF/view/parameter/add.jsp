@@ -16,14 +16,6 @@
 				<h2>
 					<i class="glyphicon glyphicon-cog"></i> 系统参数管理 <span>新增系统参数</span>
 				</h2>
-				<!-- <div class="breadcrumb-wrapper">
-					<span class="label">你在这里:</span>
-					<ol class="breadcrumb">
-						<li><a href="＃">Demo</a></li>
-						<li><a href="${rootPath }parameter/list.html">系统参数管理</a></li>
-						<li class="active">新增系统参数</li>
-					</ol>
-				</div> -->
 			</div>
 
 			<div class="contentpanel">
@@ -104,10 +96,6 @@
      </form>   
       </div><!-- panel -->
 
-
-
-
-
 			</div>
 
 		</div>
@@ -133,7 +121,6 @@
     </div><!-- modal-content -->
   </div><!-- modal-dialog -->
 </div><!-- modal -->
-
 
 
 	<%@ include file="../assets/pages/foot.jsp"%>
@@ -192,7 +179,7 @@
 			history.go(-1);
 	    } ); 
 	});
-//			      
+			      
 		function form_submit() {
 			var f = $("#form").serialize();
 			$.post('${rootPath}parameter/add.do', f, function(result) {

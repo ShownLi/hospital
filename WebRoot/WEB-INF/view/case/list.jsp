@@ -150,7 +150,7 @@
 
 	<script type="text/javascript">
 	var source = ${source};
-	var caseStatus = ${casestatus};
+	var caseStatus = ${caseStatus};
 	var destination = ${destination};
 	var customer = ${customer};
 	var user = ${user};
@@ -196,9 +196,11 @@
 			                data: "customerId",
 			                orderable: false,
 			                render: function ( data ) {
-			                	for(var i=0;i <  customer.length;i++){
+			                	for(var i=0;i <customer.length;i++){
 			                		if(data==customer[i].id){
 			                			return customer[i].text
+			                		}else{
+			                			return "";
 			                		}
 			                	}
 			                },

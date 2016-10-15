@@ -20,7 +20,7 @@
 		where u.agency_id = #{agencyId} and u.isdel = 0
 	</select>
 	
-	<insert id="saveSale" parameterType="Sale" flushCache="true" useGeneratedKeys="true" keyProperty="sales_id" keyColumn="GENERATED_KEY">
+	<insert id="saveSale" parameterType="Sale" flushCache="true" useGeneratedKeys="true" keyProperty="salesId" keyColumn="GENERATED_KEY">
 		insert into tm_sales(
 		sales_name,
 		sales_name_en,
