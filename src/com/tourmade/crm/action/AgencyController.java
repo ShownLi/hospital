@@ -70,7 +70,6 @@ public class AgencyController extends BaseSimpleFormController {
 	@RequestMapping(value = "/add.do")
 	@ResponseBody
 	public Json doAdd(HttpServletRequest request, HttpSession session, Model model, Agency agency) {
-		System.out.println(agency.getCountry()+"^^^"+agency.getLanguage());
 		
 		Json j = new Json();
 		
@@ -88,10 +87,10 @@ public class AgencyController extends BaseSimpleFormController {
 	
 	@RequestMapping(value = "/edit.html", method = { RequestMethod.POST, RequestMethod.GET })
 	public String edit(Model model, String id) {
-		
+		System.out.println(id+"^^^");
 		if (null != id && !"".equals(id)) {
-			Integer i = Integer.valueOf(id);
-			Agency agency = service.getAgencyById(i);
+			int agencyId = Integer.parseInt(id);
+			Agency agency = service.getAgencyById(agencyId);
 			String country = "country";
 			String language = "agency.language";
 			List<EntityList> countryList = service.getParameterInfo(country);
@@ -109,8 +108,7 @@ public class AgencyController extends BaseSimpleFormController {
 	@ResponseBody
 	public Json doEdit(HttpServletRequest request, HttpSession session, Model model, Agency agency) {
 
-		Json j = new Json();
-		
+		Json j = new Json();		
 		try {
 			service.updateAgency(agency);
 			j.setSuccess(true);
@@ -129,8 +127,8 @@ public class AgencyController extends BaseSimpleFormController {
 		Json j = new Json();
 		try {
 			if (null != id && !"".equals(id)) {
-				int i = Integer.parseInt(id);
-				service.deleteAgencyById(i);
+				int agencyId = Integer.parseInt(id);
+				service.deleteAgencyById(agencyId);
 				j.setSuccess(true);
 			} else {
 				j.setSuccess(false);

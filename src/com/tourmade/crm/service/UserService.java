@@ -83,12 +83,12 @@ public class UserService extends BaseService {
 	 * @param id
 	 * @return
 	 */
-	public User getUserById(int id) {
+	public User getUserById(int userId) {
 		User user = null;
 		try {
-			user = userMapper.getUserById(id);
+			user = userMapper.getUserById(userId);
 		} catch (Exception e) {
-			logger.error("UserService.getUserById() --> " + id + "-->" + e.getMessage());
+			logger.error("UserService.getUserById() --> " + userId + "-->" + e.getMessage());
 			user = null;
 		}
 		return user;
@@ -103,8 +103,8 @@ public class UserService extends BaseService {
 	public void updateUser(User user) {
 
 		try {
-			User u = userMapper.getUserById(user.getUserId());
-			if (u != null) {
+			User oldUser = userMapper.getUserById(user.getUserId());
+			if (oldUser != null) {
 				if(null !=user.getPwd() && !"".equals(user.getPwd())){
 					user.setPwd(MD5(user.getPwd()));
 				}
@@ -122,11 +122,11 @@ public class UserService extends BaseService {
 	 * @param userid
 	 * @return
 	 */
-	public void deleteUserById(int userid) {
+	public void deleteUserById(int userId) {
 		try {
-			userMapper.deleteUserById(userid);
+			userMapper.deleteUserById(userId);
 		} catch (Exception e) {
-			logger.error("UserService.deleteUserById() --> " + userid + "-->" + e.getMessage());
+			logger.error("UserService.deleteUserById() --> " + userId + "-->" + e.getMessage());
 		}
 	}
 
@@ -177,15 +177,12 @@ public class UserService extends BaseService {
 		return result ;
 	}
 	
+	
 	public String MD5(String pwd) {
-		
 		StringBuffer md5StrBuff = new StringBuffer(); 
-		
 		try{
 			MessageDigest md = MessageDigest.getInstance("MD5");
-	
 			byte[] md5 = md.digest(pwd.getBytes());
-	
 	        for (int i = 0; i < md5.length; i++) {  
 	            if (Integer.toHexString(0xFF & md5[i]).length() == 1){  
 	                md5StrBuff.append("0").append(  

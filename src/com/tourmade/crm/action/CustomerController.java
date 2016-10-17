@@ -51,10 +51,8 @@ public class CustomerController extends BaseSimpleFormController {
 	@ResponseBody
 	public String queryData(HttpServletRequest request, HttpSession session, Model model, Customer customer, PageHelper page) {
 
-
 		QueryResult<Customer> pageCustomer = customerService.queryCustomer(customer, page, request);
 		String result = JSONUtilS.object2json(pageCustomer);
-
 
 		return result;
 	}
@@ -99,7 +97,7 @@ public class CustomerController extends BaseSimpleFormController {
 	public String edit(Model model, String id) {
 		
 		if (null != id && !"".equals(id)) {
-			Integer customerId = Integer.parseInt(id);
+			int customerId = Integer.parseInt(id);
 			Customer customer = customerService.getCustomerById(customerId);
 			String level = "customer.level";
 			String promote = "customer.promote";
@@ -156,8 +154,8 @@ public class CustomerController extends BaseSimpleFormController {
 		Json j = new Json();
 		try {
 			if (null != id && !"".equals(id)) {
-				int i = Integer.parseInt(id);
-				customerService.deleteCustomerById(i);
+				int customerId = Integer.parseInt(id);
+				customerService.deleteCustomerById(customerId);
 				j.setSuccess(true);
 			} else {
 				j.setSuccess(false);

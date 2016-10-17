@@ -37,10 +37,10 @@ public class SaleController extends BaseSimpleFormController {
 	
 	@RequestMapping(value = "/list.do",produces="application/json;charset=utf-8")
 	@ResponseBody
-	public String queryData(HttpServletRequest request, HttpSession session, Model model, Sale sale, PageHelper page,int agencyid) {
+	public String queryData(HttpServletRequest request, HttpSession session, Model model, Sale sale, PageHelper page,int agencyId) {
 		
-		QueryResult<Sale> r = service.querySale(sale, page, agencyid, request);
-		String result = JSONUtilS.object2json(r);
+		QueryResult<Sale> salePage = service.querySale(sale, page, agencyId, request);
+		String result = JSONUtilS.object2json(salePage);
 
 		return result;
 	}
@@ -48,8 +48,8 @@ public class SaleController extends BaseSimpleFormController {
 	@RequestMapping(value = "/add.html", method = { RequestMethod.POST, RequestMethod.GET })
 	public String add(Model model,int agencyId) {
 		
-		List<EntityList> u = service.getAgency();
-		JSONArray result = JSONArray.fromObject(u);
+		List<EntityList> agencyList = service.getAgency();
+		JSONArray result = JSONArray.fromObject(agencyList);
 		model.addAttribute("agency",result);
 		model.addAttribute("agencyId",agencyId);
 		return "/sale/add";
@@ -58,18 +58,17 @@ public class SaleController extends BaseSimpleFormController {
 	@RequestMapping(value = "/add.do")
 	@ResponseBody
 	public Json doAdd(HttpServletRequest request, HttpSession session, Model model, Sale sale) {
-
-		Json j = new Json();
+		Json json = new Json();
 		
 		try {
 			service.saveSale(sale);
-			j.setSuccess(true);
+			json.setSuccess(true);
 		} catch (Exception e) {
-			j.setSuccess(false);
+			json.setSuccess(false);
 			logger.error("SaleController.doAdd() --> " + sale.toString() + "\n" + e.getMessage());
 		}
 		
-		return j;
+		return json;
 	}
 
 	@RequestMapping(value = "/edit.html", method = { RequestMethod.POST, RequestMethod.GET })
@@ -92,38 +91,38 @@ public class SaleController extends BaseSimpleFormController {
 	@ResponseBody
 	public Json doEdit(HttpServletRequest request, HttpSession session, Model model, Sale sale) {
 
-		Json j = new Json();
+		Json json = new Json();
 		
 		try {
 			service.updateSale(sale);
-			j.setSuccess(true);
+			json.setSuccess(true);
 		} catch (Exception e) {
-			j.setSuccess(false);
+			json.setSuccess(false);
 			logger.error("SaleController.doEdit() --> " + sale.toString() + "\n" + e.getMessage());
 		}
 		
-		return j;
+		return json;
 	}
 	
 	@RequestMapping(value = "/del.do")
 	@ResponseBody
 	public Json doDel(HttpServletRequest request, HttpSession session, Model model, String id) {
 
-		Json j = new Json();
+		Json json = new Json();
 		try {
 			if (null != id && !"".equals(id)) {
-				int i = Integer.parseInt(id);
-				service.deleteSaleById(i);
-				j.setSuccess(true);
+				int saleId= Integer.parseInt(id);
+				service.deleteSaleById(saleId);
+				json.setSuccess(true);
 			} else {
-				j.setSuccess(false);
+				json.setSuccess(false);
 			}
 		} catch (Exception e) {
-			j.setSuccess(false);
+			json.setSuccess(false);
 			logger.error("SaleController.doDel() --> " + id + "\n" + e.getMessage());
 		}
 		
-		return j;
+		return json;
 	}
 	
 }

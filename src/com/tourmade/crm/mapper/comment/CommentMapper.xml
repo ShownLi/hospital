@@ -16,7 +16,7 @@
 		from tm_comment u  
 		where u.isdel = 0 and u.comment_type = #{commentType} and u.object_id = #{objectId}
 		order by u.creat_time desc
-		limit #{b},#{e}
+		limit #{start},#{length}
 	</select>
 
 	<select id="countComment" parameterType="Comment" resultType="long">

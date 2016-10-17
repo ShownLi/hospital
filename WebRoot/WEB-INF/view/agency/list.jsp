@@ -81,7 +81,6 @@
 
 <script type="text/javascript">
 	var country= ${country};
-//	console.log(country)
 	var language = ${language};
 	
 	jQuery(document).ready(function() {

@@ -681,7 +681,6 @@
 		async:false
 	}); */
 	function noDeal_submit() {
-<<<<<<< HEAD
 		var f1 = $("#form-noDeal").serialize();
 		try{
  			$.post('${rootPath}order/orderNoDeal.do?rand='+Math.random(), f1, function(result) {
@@ -702,25 +701,8 @@
 			alert(e);
 		};
 		alert("页面正在加载，请稍后...");
-		
-=======
-		var f = $("#form-noDeal").serialize();
-		
-		$.post('${rootPath}order/orderNoDeal.do', f, function(result) {
-//			console.log(result)
-			var rmsg = result.msg;			
-			if (result.success) {
-	//			alert("^^^^^^")
-				setTimeout('',1000);
-				window.parent.location = "${rootPath}order/edit.html?id=${order.orderId}"
-			} 
-			else {
-				$("#msgModal").modal('show');
-			}
-		}, "JSON");
-		setTimeout('',1000);
->>>>>>> refs/remotes/origin/master
 	}
+	
 	function updateDeal_submit() {
 		var f = $("#form-updateDeal").serialize();
 		$.post('${rootPath}order/updateDeal.do', f, function(result) {

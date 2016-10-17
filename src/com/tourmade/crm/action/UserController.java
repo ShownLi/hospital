@@ -50,8 +50,7 @@ public class UserController extends BaseSimpleFormController {
 	@ResponseBody
 	public Json doAdd(HttpServletRequest request, HttpSession session, Model model, User user) {
 
-		Json json = new Json();
-		
+		Json json = new Json();		
 		try {
 			service.saveUser(user);
 			json.setSuccess(true);

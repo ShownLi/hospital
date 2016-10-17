@@ -34,8 +34,8 @@ public class ParameterController extends BaseSimpleFormController {
 	@ResponseBody
 	public String queryData(HttpServletRequest request, HttpSession session, Model model, Parameter parameter, PageHelper page) {
 
-		QueryResult<Parameter> r = service.queryParameter(parameter, page, request);
-		String result = JSONUtilS.object2json(r);
+		QueryResult<Parameter> pageResult = service.queryParameter(parameter, page, request);
+		String result = JSONUtilS.object2json(pageResult);
 
 		return result;
 	}
@@ -66,9 +66,9 @@ public class ParameterController extends BaseSimpleFormController {
 	public String edit(Model model, String id) {
 		
 		if (null != id && !"".equals(id)) {
-			int i = Integer.parseInt(id);
-			Parameter u = service.getParameterById(i);
-			model.addAttribute("parameter",u);
+			int parameterId = Integer.parseInt(id);
+			Parameter parameter = service.getParameterById(parameterId);
+			model.addAttribute("parameter",parameter);
 		}
 		
 		

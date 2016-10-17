@@ -57,7 +57,6 @@ public class AgencyService extends BaseService {
 	 */
 	public int saveAgency(Agency agency) {
 
-		
 		try {
 			agencyMapper.saveAgency(agency);
 		} catch (Exception e) {
@@ -74,12 +73,12 @@ public class AgencyService extends BaseService {
 	 * @param id
 	 * @return
 	 */
-	public Agency getAgencyById(int id) {
+	public Agency getAgencyById(int agencyId) {
 		Agency agency = null;
 		try {
-			agency = agencyMapper.getAgencyById(id);
+			agency = agencyMapper.getAgencyById(agencyId);
 		} catch (Exception e) {
-			logger.error("AgencyService.getAgencyById() --> " + id + "-->" + e.getMessage());
+			logger.error("AgencyService.getAgencyById() --> " + agencyId + "-->" + e.getMessage());
 			agency = null;
 		}
 		return agency;
@@ -110,25 +109,25 @@ public class AgencyService extends BaseService {
 	 */
 	public boolean updateAgency(Agency agency) {
 
-		boolean r = false;
+		boolean judge = false;
 
 		try {
-			Agency u = agencyMapper.getAgencyById(agency.getAgencyId());
-			if (u != null) {
-				u.setName(agency.getName());
-				u.setCountry(agency.getCountry());
-				u.setLanguage(agency.getLanguage());
-				agencyMapper.updateAgency(u);
-				r = true;
+			Agency oldAgency = agencyMapper.getAgencyById(agency.getAgencyId());
+			if (oldAgency != null) {
+				oldAgency.setName(agency.getName());
+				oldAgency.setCountry(agency.getCountry());
+				oldAgency.setLanguage(agency.getLanguage());
+				agencyMapper.updateAgency(oldAgency);
+				judge = true;
 			} else {
-				r = false;
+				judge = false;
 			}
 		} catch (Exception e) {
 			logger.error("AgencyService.updateAgency() --> " + agency + "-->" + e.getMessage());
-			r = false;
+			judge = false;
 		}
 
-		return r;
+		return judge;
 	}
 
 	/**
@@ -137,19 +136,19 @@ public class AgencyService extends BaseService {
 	 * @param agency_id
 	 * @return
 	 */
-	public boolean deleteAgencyById(int agency_id) {
+	public boolean deleteAgencyById(int agencyId) {
 
-		boolean r = false;
+		boolean judge = false;
 
 		try {
-			agencyMapper.deleteAgencyById(agency_id);
-			r = true;
+			agencyMapper.deleteAgencyById(agencyId);
+			judge = true;
 		} catch (Exception e) {
-			logger.error("AgencyService.deleteAgencyById() --> " + agency_id + "-->" + e.getMessage());
-			r = false;
+			logger.error("AgencyService.deleteAgencyById() --> " + agencyId + "-->" + e.getMessage());
+			judge = false;
 		}
 
-		return r;
+		return judge;
 	}
 
 }

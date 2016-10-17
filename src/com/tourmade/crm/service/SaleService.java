@@ -32,14 +32,14 @@ public class SaleService extends BaseService {
 	 * @param request
 	 * @return
 	 */
-	public QueryResult<Sale> querySale(Sale sale, PageHelper ph, int agencyId,HttpServletRequest request) {
+	public QueryResult<Sale> querySale(Sale sale, PageHelper pageHelper, int agencyId,HttpServletRequest request) {
 
 		QueryResult<Sale> pageResult = new QueryResult<Sale>();
 		Map<String, Object> map = new HashMap<String, Object>();		
 		
 		map.put("agencyId", agencyId);
-		map.put("start", ph.getStart());
-		map.put("length", ph.getLength());
+		map.put("start", pageHelper.getStart());
+		map.put("length", pageHelper.getLength());
 
 		List<Sale> data = saleMapper.querySale(map);
 		long count = saleMapper.countSale(sale);
@@ -69,12 +69,12 @@ public class SaleService extends BaseService {
 	/**
 	 * 根据主键获取销售信息
 	 */
-	public Sale getSaleById(int id) {
+	public Sale getSaleById(int saleId) {
 		Sale sale = null;
 		try {
-			sale = saleMapper.getSaleById(id);
+			sale = saleMapper.getSaleById(saleId);
 		} catch (Exception e) {
-			logger.error("SaleService.getSaleById() --> " + id + "-->" + e.getMessage());
+			logger.error("SaleService.getSaleById() --> " + saleId + "-->" + e.getMessage());
 			sale = null;
 		}
 		return sale;
@@ -84,14 +84,14 @@ public class SaleService extends BaseService {
 	 * 获取地接社列表
 	 */
 	public List<EntityList> getAgency() {
-		List<EntityList> r = null;
+		List<EntityList> agencyList = null;
 		try {
-			r = saleMapper.getAgency();
+			agencyList = saleMapper.getAgency();
 		} catch (Exception e) {
 			logger.error("SaleService.getAgency() -->" + e.getMessage());
-			r = null;
+			agencyList = null;
 		}
-		return r;
+		return agencyList;
 	}
 	
 	/**
@@ -100,13 +100,13 @@ public class SaleService extends BaseService {
 	public void updateSale(Sale sale) {
 
 		try {
-			Sale s = saleMapper.getSaleById(sale.getSalesId());
-			if (s != null) {
-/*				u.setSalesName(sale.getSalesName());
-				u.setSalesName(sale.getSalesName());
-				u.setSalesPortalId(sale.getSalesPortalId());
-				u.setSalesEmail(sale.getSalesEmail());*/
-				saleMapper.updateSale(sale);
+			Sale oldSale = saleMapper.getSaleById(sale.getSalesId());
+			if (oldSale != null) {
+				oldSale.setSalesName(sale.getSalesName());
+				oldSale.setSalesName(sale.getSalesName());
+				oldSale.setSalesPortalId(sale.getSalesPortalId());
+				oldSale.setSalesEmail(sale.getSalesEmail());
+				saleMapper.updateSale(oldSale);
 			}
 		} catch (Exception e) {
 			logger.error("SaleService.updateSale() --> " + sale + "-->" + e.getMessage());

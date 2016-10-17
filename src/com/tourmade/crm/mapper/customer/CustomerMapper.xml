@@ -24,7 +24,7 @@
 		from tm_customer u  
 		where u.isdel = 0 
 		order by u.creat_time desc
-		limit #{b},#{e}
+		limit #{start},#{length}
 	</select>
 
 	<select id="countCustomer" parameterType="Customer" resultType="long">
