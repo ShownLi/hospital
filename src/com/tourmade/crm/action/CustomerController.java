@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.itextpdf.text.log.SysoLogger;
 import com.tourmade.crm.common.action.BaseSimpleFormController;
 import com.tourmade.crm.common.framework.bean.QueryResult;
 import com.tourmade.crm.common.framework.util.JSONUtilS;
@@ -29,28 +30,31 @@ import net.sf.json.JSONArray;
 public class CustomerController extends BaseSimpleFormController {
 	
 	@Autowired
-	private CustomerService service;
+	private CustomerService customerService;
 	@Autowired
-	private CaseService caseservice;
+	private CaseService caseService;
 
 	@RequestMapping(value = "/list.html", method = { RequestMethod.POST, RequestMethod.GET })
 	public String list(Model model) {
-		String agegroup = "customer.agegroup";
+		String ageGroup = "customer.agegroup";
 		String level = "customer.level";
-		List<EntityList> v = service.getParameterInfo(agegroup);
-		List<EntityList> w = service.getParameterInfo(level);
-		JSONArray agegroupresult = JSONArray.fromObject(v);
-		JSONArray levelresult = JSONArray.fromObject(w);
-		model.addAttribute("ageGroup",agegroupresult);
-		model.addAttribute("level",levelresult);
+		List<EntityList> ageGroupList = customerService.getParameterInfo(ageGroup);
+		List<EntityList> levelList = customerService.getParameterInfo(level);
+		JSONArray ageGroupResult = JSONArray.fromObject(ageGroupList);
+		JSONArray levelResult = JSONArray.fromObject(levelList);
+		model.addAttribute("ageGroup",ageGroupResult);
+		model.addAttribute("level",levelResult);
 		return "/customer/list";
 	}
 	
 	@RequestMapping(value = "/list.do",produces="application/json;charset=utf-8")
 	@ResponseBody
 	public String queryData(HttpServletRequest request, HttpSession session, Model model, Customer customer, PageHelper page) {
-		QueryResult<Customer> r = service.queryCustomer(customer, page, request);
-		String result = JSONUtilS.object2json(r);
+
+
+		QueryResult<Customer> pageCustomer = customerService.queryCustomer(customer, page, request);
+		String result = JSONUtilS.object2json(pageCustomer);
+
 
 		return result;
 	}
@@ -59,17 +63,17 @@ public class CustomerController extends BaseSimpleFormController {
 	public String add(Model model) {
 		
 		String level = "customer.level";
-		String promote = "customer.promote";
-		String agegroup = "customer.agegroup";
-		List<EntityList> u = service.getParameterInfo(level);
-		List<EntityList> v = service.getParameterInfo(promote);
-		List<EntityList> w = service.getParameterInfo(agegroup);
-		JSONArray levelresult = JSONArray.fromObject(u);
-		JSONArray  promoteresult = JSONArray.fromObject(v);
-		JSONArray  agegroupresult = JSONArray.fromObject(w);
-		model.addAttribute("level",levelresult);
-		model.addAttribute("promote",promoteresult);
-		model.addAttribute("agegroup",agegroupresult);
+		String source = "customer.promote";
+		String ageGroup = "customer.agegroup";
+		List<EntityList> levelList = customerService.getParameterInfo(level);
+		List<EntityList> sourceList = customerService.getParameterInfo(source);
+		List<EntityList> ageGroupList = customerService.getParameterInfo(ageGroup);
+		JSONArray levelResult = JSONArray.fromObject(levelList);
+		JSONArray  sourceResult = JSONArray.fromObject(sourceList);
+		JSONArray  ageGroupResult = JSONArray.fromObject(ageGroupList);
+		model.addAttribute("level",levelResult);
+		model.addAttribute("source",sourceResult);
+		model.addAttribute("ageGroup",ageGroupResult);
 		
 		return "/customer/add";
 	}
@@ -79,9 +83,8 @@ public class CustomerController extends BaseSimpleFormController {
 	public Json doAdd(HttpServletRequest request, HttpSession session, Model model, Customer customer) {
 
 		Json j = new Json();
-		
 		try {
-			service.saveCustomer(customer);
+			customerService.saveCustomer(customer);
 			j.setObj(customer);
 			j.setSuccess(true);
 		} catch (Exception e) {
@@ -96,28 +99,28 @@ public class CustomerController extends BaseSimpleFormController {
 	public String edit(Model model, String id) {
 		
 		if (null != id && !"".equals(id)) {
-			int i = Integer.parseInt(id);
-			Customer customer = service.getCustomerById(i);
+			Integer customerId = Integer.parseInt(id);
+			Customer customer = customerService.getCustomerById(customerId);
 			String level = "customer.level";
 			String promote = "customer.promote";
-			String agegroup = "customer.agegroup";
-			List<EntityList> u = service.getParameterInfo(level);
-			List<EntityList> v = service.getParameterInfo(promote);
-			List<EntityList> w = service.getParameterInfo(agegroup);
-			JSONArray levelresult = JSONArray.fromObject(u);
-			JSONArray  promoteresult = JSONArray.fromObject(v);
-			JSONArray  agegroupresult = JSONArray.fromObject(w);
-			model.addAttribute("level",levelresult);
-			model.addAttribute("promote",promoteresult);
-			model.addAttribute("agegroup",agegroupresult);
+			String ageGroup = "customer.agegroup";
+			List<EntityList> levelList = customerService.getParameterInfo(level);
+			List<EntityList> promoteList = customerService.getParameterInfo(promote);
+			List<EntityList> ageGroupList = customerService.getParameterInfo(ageGroup);
+			JSONArray levelResult = JSONArray.fromObject(levelList);
+			JSONArray  promoteResult = JSONArray.fromObject(promoteList);
+			JSONArray  ageGroupResult = JSONArray.fromObject(ageGroupList);
+			model.addAttribute("level",levelResult);
+			model.addAttribute("promote",promoteResult);
+			model.addAttribute("ageGroup",ageGroupResult);
 			model.addAttribute("customer",customer);
 			
 			String source = "case.source";
 			String status = "case.status";
-			List<EntityList> userList = caseservice.getUser();
-			List<EntityList> customerList = caseservice.getCustomer();
-			List<EntityList> sourceList = caseservice.getParameterInfo(source);
-			List<EntityList> statusList = caseservice.getParameterInfo(status);
+			List<EntityList> userList = caseService.getUser();
+			List<EntityList> customerList = caseService.getCustomer();
+			List<EntityList> sourceList = caseService.getParameterInfo(source);
+			List<EntityList> statusList = caseService.getParameterInfo(status);
 			JSONArray userResult = JSONArray.fromObject(userList);
 			JSONArray customerResult = JSONArray.fromObject(customerList);
 			JSONArray sourceResult = JSONArray.fromObject(sourceList);
@@ -136,7 +139,7 @@ public class CustomerController extends BaseSimpleFormController {
 
 		Json j = new Json();
 		try {
-			service.updateCustomer(customer);
+			customerService.updateCustomer(customer);
 			j.setSuccess(true);
 		} catch (Exception e) {
 			j.setSuccess(false);
@@ -154,7 +157,7 @@ public class CustomerController extends BaseSimpleFormController {
 		try {
 			if (null != id && !"".equals(id)) {
 				int i = Integer.parseInt(id);
-				service.deleteCustomerById(i);
+				customerService.deleteCustomerById(i);
 				j.setSuccess(true);
 			} else {
 				j.setSuccess(false);

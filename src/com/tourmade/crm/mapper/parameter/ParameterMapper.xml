@@ -17,7 +17,7 @@
 			u.isdel as isdel
 		from tm_parameter u where u.isdel = 0
 		order by u.creat_time
-		limit #{b},#{e}
+		limit #{start},#{length}
 	</select>
 
 	<select id="countParameter" parameterType="Parameter" resultType="long">
@@ -27,7 +27,7 @@
 
 	</select>
 	
-	<insert id="saveParameter" parameterType="Parameter" flushCache="true" useGeneratedKeys="true" keyProperty="Parameter_id" keyColumn="GENERATED_KEY">
+	<insert id="saveParameter" parameterType="Parameter" flushCache="true" useGeneratedKeys="true" keyProperty="parameterId" keyColumn="GENERATED_KEY">
 		insert into tm_parameter(
 		para_domain,
 		para_value,

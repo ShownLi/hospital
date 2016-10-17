@@ -12,7 +12,7 @@
 			u.isdel
 		from tm_sales u where u.agency_id = #{agencyId} and u.isdel = 0
 		order by u.creat_time
-		limit #{b},#{e}
+		limit #{start},#{length}
 	</select>
 
 	<select id="countSale" parameterType="Sale" resultType="long">
@@ -20,49 +20,47 @@
 		where u.agency_id = #{agencyId} and u.isdel = 0
 	</select>
 	
-	<insert id="saveSale" parameterType="Sale" flushCache="true" useGeneratedKeys="true" keyProperty="sales_id" keyColumn="GENERATED_KEY">
+	<insert id="saveSale" parameterType="Sale" flushCache="true" useGeneratedKeys="true" keyProperty="salesId" keyColumn="GENERATED_KEY">
 		insert into tm_sales(
-		sales_name,
-		sales_name_en,
-		sales_portal_id,
-		agency_id,
-		sales_email,
-		creat_time,
-		update_time,
-		isdel
+			sales_name,
+			sales_name_en,
+			sales_portal_id,
+			agency_id,
+			sales_email,
+			creat_time,
+			update_time,
+			isdel
 		)values(
-		#{salesName,jdbcType=VARCHAR},
-		#{salesEnglishName,jdbcType=VARCHAR},
-		#{salesPortalId,jdbcType=VARCHAR},
-		#{agencyId,jdbcType=VARCHAR},
-		#{salesEmail,jdbcType=VARCHAR},
-		NOW(),
-		NOW(),
-		0
+			#{salesName,jdbcType=VARCHAR},
+			#{salesEnglishName,jdbcType=VARCHAR},
+			#{salesPortalId,jdbcType=VARCHAR},
+			#{agencyId,jdbcType=VARCHAR},
+			#{salesEmail,jdbcType=VARCHAR},
+			NOW(),
+			NOW(),
+			0
 		)
 	</insert>
 
 	<update id="updateSale" parameterType="Sale" flushCache="true">
-		update tm_sales
-		set
-		sales_name=#{salesName},
-		sales_name_en=#{salesEnglishName},
-		sales_portal_id=#{salesPortalId},
-		sales_email=#{salesEmail},
-		update_time=NOW()
-		where
-		sales_id=#{salesId}
+		update tm_sales set
+			sales_name=#{salesName},
+			sales_name_en=#{salesEnglishName},
+			sales_portal_id=#{salesPortalId},
+			sales_email=#{salesEmail},
+			update_time=NOW()
+		where sales_id=#{salesId}
 	</update>
 	
 	<select id="getSaleById" parameterType="int" resultType="Sale">
 		select
-		u.sales_id as salesId,
-		u.sales_portal_id as salesPortalId,
-		u.sales_name as salesName,
-		u.sales_name_en as salesEnglishName,
-		u.agency_id as agencyId,
-		u.sales_email as salesEmail,
-		u.isdel as isdel
+			u.sales_id as salesId,
+			u.sales_portal_id as salesPortalId,
+			u.sales_name as salesName,
+			u.sales_name_en as salesEnglishName,
+			u.agency_id as agencyId,
+			u.sales_email as salesEmail,
+			u.isdel as isdel
 		from tm_sales u where u.sales_id = #{salesId}
 	</select>
 	

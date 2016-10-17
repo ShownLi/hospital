@@ -48,18 +48,18 @@ public class ParameterController extends BaseSimpleFormController {
 	@RequestMapping(value = "/add.do")
 	@ResponseBody
 	public Json doAdd(HttpServletRequest request, HttpSession session, Model model, Parameter parameter) {
-
-		Json j = new Json();
+		
+		Json json = new Json();
 		
 		try {
 			service.saveParameter(parameter);
-			j.setSuccess(true);
+			json.setSuccess(true);
 		} catch (Exception e) {
-			j.setSuccess(false);
+			json.setSuccess(false);
 			logger.error("ParameterController.doAdd() --> " + parameter.toString() + "\n" + e.getMessage());
 		}
 		
-		return j;
+		return json;
 	}
 
 	@RequestMapping(value = "/edit.html", method = { RequestMethod.POST, RequestMethod.GET })
@@ -79,39 +79,38 @@ public class ParameterController extends BaseSimpleFormController {
 	@ResponseBody
 	public Json doEdit(HttpServletRequest request, HttpSession session, Model model, Parameter parameter) {
 
-		Json j = new Json();
+		Json json = new Json();
 		
 		try {
 			service.updateParameter(parameter);
-			j.setSuccess(true);
+			json.setSuccess(true);
 		} catch (Exception e) {
-			j.setSuccess(false);
+			json.setSuccess(false);
 			logger.error("ParameterController.doEdit() --> " + parameter.toString() + "\n" + e.getMessage());
 		}
 		
-		return j;
+		return json;
 	}
 	
 	@RequestMapping(value = "/del.do")
 	@ResponseBody
 	public Json doDel(HttpServletRequest request, HttpSession session, Model model, String id) {
 
-		Json j = new Json();
-		System.out.println("------>>>" + id);
+		Json json = new Json();
 		try {
 			if (null != id && !"".equals(id)) {
-				int i = Integer.parseInt(id);
-				service.deleteParameterById(i);
-				j.setSuccess(true);
+				int parameterId= Integer.parseInt(id);
+				service.deleteParameterById(parameterId);
+				json.setSuccess(true);
 			} else {
-				j.setSuccess(false);
+				json.setSuccess(false);
 			}
 		} catch (Exception e) {
-			j.setSuccess(false);
+			json.setSuccess(false);
 			logger.error("ParameterController.doDel() --> " + id + "\n" + e.getMessage());
 		}
 		
-		return j;
+		return json;
 	}
 	
 }

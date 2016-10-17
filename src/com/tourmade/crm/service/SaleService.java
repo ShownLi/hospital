@@ -32,34 +32,27 @@ public class SaleService extends BaseService {
 	 * @param request
 	 * @return
 	 */
-	public QueryResult<Sale> querySale(Sale sale, PageHelper ph, int agencyid,HttpServletRequest request) {
+	public QueryResult<Sale> querySale(Sale sale, PageHelper ph, int agencyId,HttpServletRequest request) {
 
-		QueryResult<Sale> r = new QueryResult<Sale>();
+		QueryResult<Sale> pageResult = new QueryResult<Sale>();
 		Map<String, Object> map = new HashMap<String, Object>();		
 		
-		
-//		map.put("pojo", sale);
-		map.put("agencyid", agencyid);
-		map.put("b", ph.getStart());
-		map.put("e", ph.getLength());
-//		map.put("s", ph.getSort());
-//		map.put("o", ph.getOrder());
+		map.put("agencyId", agencyId);
+		map.put("start", ph.getStart());
+		map.put("length", ph.getLength());
 
 		List<Sale> data = saleMapper.querySale(map);
 		long count = saleMapper.countSale(sale);
 		
-		r.setData(data);
-		r.setCountTotal(count);
-		r.setCountFiltered(count);
+		pageResult.setData(data);
+		pageResult.setCountTotal(count);
+		pageResult.setCountFiltered(count);
 
-		return r;
+		return pageResult;
 	}
 
 	/**
 	 * 新增销售
-	 * 
-	 * @param sale
-	 * @return
 	 */
 	public int saveSale(Sale sale) {
 		
@@ -75,26 +68,20 @@ public class SaleService extends BaseService {
 
 	/**
 	 * 根据主键获取销售信息
-	 * 
-	 * @param id
-	 * @return
 	 */
 	public Sale getSaleById(int id) {
-		Sale r = null;
+		Sale sale = null;
 		try {
-			r = saleMapper.getSaleById(id);
+			sale = saleMapper.getSaleById(id);
 		} catch (Exception e) {
 			logger.error("SaleService.getSaleById() --> " + id + "-->" + e.getMessage());
-			r = null;
+			sale = null;
 		}
-		return r;
+		return sale;
 	}
 	
 	/**
 	 * 获取地接社列表
-	 * 
-	 * @param id
-	 * @return
 	 */
 	public List<EntityList> getAgency() {
 		List<EntityList> r = null;
@@ -109,52 +96,32 @@ public class SaleService extends BaseService {
 	
 	/**
 	 * 更新销售信息(不修改密码)
-	 * 
-	 * @param sale
-	 * @return
 	 */
-	public boolean updateSale(Sale sale) {
-
-		boolean r = false;
+	public void updateSale(Sale sale) {
 
 		try {
-			Sale u = saleMapper.getSaleById(sale.getSalesId());
-			if (u != null) {
-				u.setSalesName(sale.getSalesName());
+			Sale s = saleMapper.getSaleById(sale.getSalesId());
+			if (s != null) {
+/*				u.setSalesName(sale.getSalesName());
 				u.setSalesName(sale.getSalesName());
 				u.setSalesPortalId(sale.getSalesPortalId());
-				u.setSalesEmail(sale.getSalesEmail());
-				saleMapper.updateSale(u);
-				r = true;
-			} else {
-				r = false;
+				u.setSalesEmail(sale.getSalesEmail());*/
+				saleMapper.updateSale(sale);
 			}
 		} catch (Exception e) {
 			logger.error("SaleService.updateSale() --> " + sale + "-->" + e.getMessage());
-			r = false;
 		}
-
-		return r;
 	}
 
 	/**
 	 * 删除销售（假删除）
-	 * 
-	 * @param saleid
-	 * @return
 	 */
-	public boolean deleteSaleById(int saleid) {
-
-		boolean r = false;
+	public void deleteSaleById(int saleId) {
 
 		try {
-			saleMapper.deleteSaleById(saleid);
-			r = true;
+			saleMapper.deleteSaleById(saleId);
 		} catch (Exception e) {
-			logger.error("SaleService.deleteSaleById() --> " + saleid + "-->" + e.getMessage());
-			r = false;
+			logger.error("SaleService.deleteSaleById() --> " + saleId + "-->" + e.getMessage());
 		}
-
-		return r;
 	}
 }

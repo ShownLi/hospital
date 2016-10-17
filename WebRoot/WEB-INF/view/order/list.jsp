@@ -236,57 +236,52 @@
 			         }
 			 	},
 			 	columnDefs: [
-			       {
-			           data: "orderId",
-			           //defaultContent: '<a class="btn btn-success btn-xs"><span class="fa fa-edit"></span> 编辑</a>&nbsp;<a class="btn btn-danger btn-xs"><span class="fa fa-minus-circle"></span> 删除</a>',
-			 	      orderable: false,
-			 	      render: function ( data, type, full, meta ) {
-		              	return '<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a>&nbsp<a class="btn btn-primary btn-xs" id="'+data+'"></span> 成行</a>&nbsp<a class="btn btn-default btn-xs" id="'+data+'"></span> 未成行</a>&nbsp;';
-			 	  	  },
-			 	    	targets: 7
-			 		},
-			 		{
-			 			 data: "s",
-		                orderable: false,
-		                render: function ( data ) {
-	        				var r = "未知";
-	                		if(data!=null && typeof(data) != undefined){
-			                	for(var i=0;i <destination.length;i++){
-			                		//alert(destination[i].id+destination[i].text);
-			                		if(data==destination[i].id){
-			                			r = destination[i].text
-			                		}
-			                	}
-		                	}
-		              		return r;
-		                	
-		                },
-		                  targets: 6
-					},	
-					{
-						 data: "status",
-		                orderable: false,
-		                render: function ( data ) {
-		                	var r = "未知";
-		                	if(data!=null && typeof(data) != undefined){
-			                	for(var i=0;i < orderStatus.length;i++){
-			                		//alert(orderStatus[i].id+orderStatus[i].text);
-			                		if(data==orderStatus[i].id){
-			                			r = orderStatus[i].text
-			                		}
-			                	}
-		                	}
-		                	return r;
-		                },
-		                  targets: 4
-					},
-									
-			 	  {
-			 		  orderable: false,
-			 		  searchable: false,
-			 	      targets: [0,1,2]
-			 	  },
-			 	],
+						       {
+						           data: "orderId",
+						           //defaultContent: '<a class="btn btn-success btn-xs"><span class="fa fa-edit"></span> 编辑</a>&nbsp;<a class="btn btn-danger btn-xs"><span class="fa fa-minus-circle"></span> 删除</a>',
+						 	      orderable: false,
+						 	      render: function ( data, type, full, meta ) {
+					              	return '<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a>&nbsp<a class="btn btn-primary btn-xs" id="'+data+'"></span> 成行</a>&nbsp<a class="btn btn-default btn-xs" id="'+data+'"></span> 未成行</a>&nbsp;';
+						 	  	  },
+						 	    	targets: 7
+						 		},
+								{
+					                data: "status",
+					                orderable: false,
+					                render: function ( data ) {
+					                	if(data!=null && typeof(data) != undefined){
+						                	for(var i=0;i < orderStatus.length;i++){
+						                		if(data==orderStatus[i].id){
+						                			return orderStatus[i].text
+						                		}
+						                	}
+					                	}
+					                	else{return ""}
+					                },
+					                  targets: 4
+								},
+								{
+					                data: "destination",
+					                orderable: false,
+					                render: function ( data ) {
+					                	if(data!=null && typeof(data) != undefined){
+
+						                	for(var i=0;i <destination.length;i++){
+						                		if(data==destination[i].id){
+						                			return destination[i].text
+						                		}
+						                	}
+					                	}
+					                	else{return ""}
+					                },
+					                  targets: 6
+								},					
+						 	  {
+						 		  orderable: false,
+						 		  searchable: false,
+						 	      targets: [0,1,2]
+						 	  },
+						 	],
 			 	columns: [
 		             { data: "orderId" },
 		             { data: "customerName" },

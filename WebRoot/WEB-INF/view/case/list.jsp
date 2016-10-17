@@ -58,11 +58,6 @@
 					<!-- panel-body -->
 				</div>
 				<!-- panel -->
-
-
-
-
-
 			</div>
 
 		</div>
@@ -150,7 +145,7 @@
 
 	<script type="text/javascript">
 	var source = ${source};
-	var caseStatus = ${casestatus};
+	var caseStatus = ${caseStatus};
 	var destination = ${destination};
 	var customer = ${customer};
 	var user = ${user};
@@ -196,9 +191,11 @@
 			                data: "customerId",
 			                orderable: false,
 			                render: function ( data ) {
-			                	for(var i=0;i <  customer.length;i++){
+			                	for(var i=0;i <customer.length;i++){
 			                		if(data==customer[i].id){
 			                			return customer[i].text
+			                		}else{
+			                			return "";
 			                		}
 			                	}
 			                },
@@ -209,7 +206,7 @@
 			                orderable: false,
 			                render: function ( data ) {
 			                	if(data){
-				                	for(var i=0;i <  destination.length;i++){
+				                	for(var i=0;i <destination.length;i++){
 				                		if(data==destination[i].id){
 				                			return destination[i].text
 				                		}
@@ -225,13 +222,14 @@
 			                orderable: false,
 			                render: function ( data ) {
 			                	if(data){
-			                		console.log(data);
+
 			                	for(var i=0;i < source.length;i++){
 			                		if(data==source[i].id){
 			                			return source[i].text
 			                		}
 			                	
 			                	}
+
 			                	}
 			                	else{return ""}
 			                },
@@ -245,10 +243,8 @@
 				                	for(var i=0;i <  user.length;i++){
 				                		if(data==user[i].id){
 				                			return user[i].text
-				                		}
-				                		
-				                	}
-				                	
+				                		}				                		
+				                	}				                	
 			                	}
 			                	else{return ""}
 			                },
@@ -263,7 +259,6 @@
 				                		if(data==caseStatus[i].id){
 				                			return caseStatus[i].text
 				                		}
-				                		
 				                	}
 			                	}
 			                	else{return ""}

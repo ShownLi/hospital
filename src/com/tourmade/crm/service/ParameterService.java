@@ -33,22 +33,20 @@ public class ParameterService extends BaseService {
 	 */
 	public QueryResult<Parameter> queryParameter(Parameter parameter, PageHelper ph, HttpServletRequest request) {
 
-		QueryResult<Parameter> r = new QueryResult<Parameter>();
+		QueryResult<Parameter> pageResult = new QueryResult<Parameter>();
 		Map<String, Object> map = new HashMap<String, Object>();
 
-		map.put("b", ph.getStart());
-		map.put("e", ph.getLength());
-//		map.put("s", ph.getSort());
-//		map.put("o", ph.getOrder());
+		map.put("start", ph.getStart());
+		map.put("length", ph.getLength());
 
 		List<Parameter> data = parameterMapper.queryParameter(map);
 		long count = parameterMapper.countParameter(parameter);
 		
-		r.setData(data);
-		r.setCountTotal(count);
-		r.setCountFiltered(count);
+		pageResult.setData(data);
+		pageResult.setCountTotal(count);
+		pageResult.setCountFiltered(count);
 
-		return r;
+		return pageResult;
 	}
 
 	/**
@@ -58,8 +56,7 @@ public class ParameterService extends BaseService {
 	 * @return
 	 */
 	public int saveParameter(Parameter parameter) {
-		// parameter.setPwd("123456");
-		// parameter.setPwd(MD5.MD5Encode("123456"));
+
 		try {
 			parameterMapper.saveParameter(parameter);
 		} catch (Exception e) {
@@ -77,14 +74,14 @@ public class ParameterService extends BaseService {
 	 * @return
 	 */
 	public Parameter getParameterById(int id) {
-		Parameter r = null;
+		Parameter parameter = null;
 		try {
-			r = parameterMapper.getParameterById(id);
+			parameter = parameterMapper.getParameterById(id);
 		} catch (Exception e) {
 			logger.error("ParameterService.getParameterById() --> " + id + "-->" + e.getMessage());
-			r = null;
+			parameter = null;
 		}
-		return r;
+		return parameter;
 	}
 
 	/**
@@ -93,52 +90,37 @@ public class ParameterService extends BaseService {
 	 * @param parameter
 	 * @return
 	 */
-	public boolean updateParameter(Parameter parameter) {
-
-		boolean r = false;
+	public void updateParameter(Parameter parameter) {
 
 		try {
 			Parameter u = parameterMapper.getParameterById(parameter.getParameterId());
 			if (u != null) {
-				u.setDomain(parameter.getDomain());
+/*				u.setDomain(parameter.getDomain());
 				u.setValue(parameter.getValue());
 				u.setChinese(parameter.getChinese());
 				u.setEnglish(parameter.getEnglish());
 				u.setDepict(parameter.getDepict());
 				u.setSort(parameter.getSort());
-				u.setIsdisplay(parameter.getIsdisplay());
-				// u.setPwd(parameter.getPwd());
-				parameterMapper.updateParameter(u);
-				r = true;
-			} else {
-				r = false;
+				u.setIsdisplay(parameter.getIsdisplay());*/
+				parameterMapper.updateParameter(parameter);
 			}
 		} catch (Exception e) {
 			logger.error("ParameterService.updateParameter() --> " + parameter + "-->" + e.getMessage());
-			r = false;
 		}
-
-		return r;
 	}
 
 	/**
 	 * 删除系统参数（假删除）
 	 * 
-	 * @param parameterid
+	 * @param parameterId
 	 * @return
 	 */
-	public boolean deleteParameterById(int parameterid) {
-
-		boolean r = false;
+	public void deleteParameterById(int parameterId) {
 
 		try {
-			parameterMapper.deleteParameterById(parameterid);
-			r = true;
+			parameterMapper.deleteParameterById(parameterId);
 		} catch (Exception e) {
-			logger.error("ParameterService.deleteParameterById() --> " + parameterid + "-->" + e.getMessage());
-			r = false;
+			logger.error("ParameterService.deleteParameterById() --> " + parameterId + "-->" + e.getMessage());
 		}
-
-		return r;
 	}
 }

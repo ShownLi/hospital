@@ -38,7 +38,7 @@ public class AgencyController extends BaseSimpleFormController {
 		List<EntityList> languageList = service.getParameterInfo(language);
 		JSONArray countryResult = JSONArray.fromObject(countryList);
 		JSONArray languageResult = JSONArray.fromObject(languageList);
-		model.addAttribute("countryName",countryResult);
+		model.addAttribute("country",countryResult);
 		model.addAttribute("language",languageResult);
 		return "/agency/list";
 	}
@@ -90,7 +90,7 @@ public class AgencyController extends BaseSimpleFormController {
 	public String edit(Model model, String id) {
 		
 		if (null != id && !"".equals(id)) {
-			Integer i = Integer.valueOf( id);
+			Integer i = Integer.valueOf(id);
 			Agency agency = service.getAgencyById(i);
 			String country = "country";
 			String language = "agency.language";

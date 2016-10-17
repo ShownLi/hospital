@@ -30,13 +30,11 @@ public class UserService extends BaseService {
 	 * @param user
 	 * @param ph
 	 * @param request
-	 * @return
 	 */
 	public QueryResult<User> queryUser(User user, PageHelper ph, HttpServletRequest request) {
 
-		QueryResult<User> r = new QueryResult<User>();
+		QueryResult<User> result = new QueryResult<User>();
 		Map<String, Object> map = new HashMap<String, Object>();
-		
 		
 		String seachValue = ph.getSearch().get("value");
 		
@@ -47,22 +45,17 @@ public class UserService extends BaseService {
 			user.setSeachValue(seachValue);
 		}
 			
-		
-		
-//		map.put("pojo", user);
-		map.put("b", ph.getStart());
-		map.put("e", ph.getLength());
-//		map.put("s", ph.getSort());
-//		map.put("o", ph.getOrder());
+		map.put("start", ph.getStart());
+		map.put("length", ph.getLength());
 
 		List<User> data = userMapper.queryUser(map);
 		long count = userMapper.countUser(user);
 		
-		r.setData(data);
-		r.setCountTotal(count);
-		r.setCountFiltered(count);
+		result.setData(data);
+		result.setCountTotal(count);
+		result.setCountFiltered(count);
 
-		return r;
+		return result;
 	}
 
 	/**
@@ -72,8 +65,7 @@ public class UserService extends BaseService {
 	 * @return
 	 */
 	public int saveUser(User user) {
-		// user.setPwd("123456");
-		// user.setPwd(MD5.MD5Encode("123456"));
+
 		try {
 			user.setPwd(MD5(user.getPwd()));
 			userMapper.saveUser(user);
@@ -92,14 +84,14 @@ public class UserService extends BaseService {
 	 * @return
 	 */
 	public User getUserById(int id) {
-		User r = null;
+		User user = null;
 		try {
-			r = userMapper.getUserById(id);
+			user = userMapper.getUserById(id);
 		} catch (Exception e) {
 			logger.error("UserService.getUserById() --> " + id + "-->" + e.getMessage());
-			r = null;
+			user = null;
 		}
-		return r;
+		return user;
 	}
 
 	/**
@@ -108,31 +100,20 @@ public class UserService extends BaseService {
 	 * @param user
 	 * @return
 	 */
-	public boolean updateUser(User user) {
-
-		boolean r = false;
+	public void updateUser(User user) {
 
 		try {
 			User u = userMapper.getUserById(user.getUserId());
 			if (u != null) {
-				u.setName(user.getName());
-				u.setLoginName(user.getLoginName());
-				u.setEmail(user.getEmail());
-				u.setMobilephone(user.getMobilephone());
 				if(null !=user.getPwd() && !"".equals(user.getPwd())){
-					u.setPwd(MD5(user.getPwd()));
+					user.setPwd(MD5(user.getPwd()));
 				}
-				userMapper.updateUser(u);
-				r = true;
-			} else {
-				r = false;
+				userMapper.updateUser(user);
 			}
 		} catch (Exception e) {
 			logger.error("UserService.updateUser() --> " + user + "-->" + e.getMessage());
-			r = false;
 		}
 
-		return r;
 	}
 
 	/**
@@ -141,19 +122,12 @@ public class UserService extends BaseService {
 	 * @param userid
 	 * @return
 	 */
-	public boolean deleteUserById(int userid) {
-
-		boolean r = false;
-
+	public void deleteUserById(int userid) {
 		try {
 			userMapper.deleteUserById(userid);
-			r = true;
 		} catch (Exception e) {
 			logger.error("UserService.deleteUserById() --> " + userid + "-->" + e.getMessage());
-			r = false;
 		}
-
-		return r;
 	}
 
 	/**
@@ -225,7 +199,6 @@ public class UserService extends BaseService {
 			e.printStackTrace();
 		}
 		
-		return md5StrBuff.toString();
-		
+		return md5StrBuff.toString();		
 	}
 }

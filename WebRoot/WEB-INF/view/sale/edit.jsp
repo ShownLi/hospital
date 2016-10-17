@@ -15,14 +15,6 @@
 				<h2>
 					<i class="fa fa-group"></i> 销售管理 <span>编辑销售</span>
 				</h2>
-				<!-- <div class="breadcrumb-wrapper">
-					<span class="label">你在这里:</span>
-					<ol class="breadcrumb">
-						<li><a href="＃">CRM</a></li>
-						<li><a href="${rootPath }sale/list.html">销售管理</a></li>
-						<li class="active">编辑销售</li>
-					</ol>
-				</div> -->
 			</div>
 
 			<div class="contentpanel">
@@ -44,29 +36,23 @@
             <div class="form-group">
               <label class="col-sm-4 control-label">销售名称 <span class="asterisk">*</span></label>
               <div class="col-sm-4">
-                <input type="text" name="salesname" placeholder="销售名" class="form-control" value="${sales.salesname }" />
+                <input type="text" name="salesName" placeholder="销售名" class="form-control" value="${sales.salesName }" />
               </div>
             </div>
-            <%-- <div class="form-group">
-              <label class="col-sm-4 control-label">英文名称 <span class="asterisk">*</span></label>
-              <div class="col-sm-4">
-                <input type="text" name="salesnameen" placeholder="销售名" class="form-control" value="${sales.salesnameen }" />
-              </div>
-            </div> --%>
             <div class="form-group">
               <label class="col-sm-4 control-label">PortalID <span class="asterisk">*</span></label>
               <div class="col-sm-4">
-                <input type="text" id="salesportalid" name="salesportalid" placeholder="官网ID" class="form-control" value="${sales.salesportalid }"/>
+                <input type="text" id="salesPortalId" name="salesPortalId" placeholder="官网ID" class="form-control" value="${sales.salesPortalId }"/>
               </div>
             </div>       
             <div class="form-group">
               <label class="col-sm-4 control-label">所属地接社 <span class="asterisk">*</span></label>
-              <input type="text" name="agencyid" class="agency-select col-sm-4" value="${sales.agencyid }" readonly/>
+              <input type="text" name="agencyId" class="agency-select col-sm-4" value="${sales.agencyId }" readonly/>
             </div>               
             <div class="form-group">
               <label class="col-sm-4 control-label">邮件地址 <span class="asterisk">*</span></label>
               <div class="col-sm-4">
-                <input type="text" name="salesemail" placeholder="邮件地址" class="form-control" value="${sales.salesemail }" />
+                <input type="text" name="salesEmail" placeholder="邮件地址" class="form-control" value="${sales.salesEmail }" />
               </div>
             </div>      
           
@@ -130,9 +116,9 @@
       	
 		jQuery("#form").validate({
 			rules: {
-				salesname: "required",
-				salesemail: "email",
-				salesportalid: {
+				salesName: "required",
+				salesEmail: "email",
+				salesPortalId: {
 					remote:{                           
 		            	url:"${rootPath}validate.do",
 		            	type:"post",
@@ -140,21 +126,21 @@
 	                        table: function () { return "tm_sales"},
 	                        field: function () { return "sales_portal_id"},
 	                        name: function () { 
-	                        	 if($("#salesportalid").val()=="${sales.salesportalid}"){
+	                        	 if($("#salesPortalId").val()=="${sales.salesPortalId}"){
 		                        	 	return "";
 		                        	 }
-		                        	 else{return $("#salesportalid").val();}
+		                        	 else{return $("#salesPortalId").val();}
 	                        	 },
 	                    }
 		            }
 				}
 			},
 			messages: {
-				salesname: "请输入销售名称",
-				salesportalid: {
+				salesName: "请输入销售名称",
+				salesPortalId: {
 					remote:"销售编号已存在"
 				},
-				salesemail: "请输入有效的邮箱地址",
+				salesEmail: "请输入有效的邮箱地址",
 
 			},
 		    highlight: function(element) {
@@ -183,7 +169,7 @@
 			$.post('${rootPath}sale/edit.do', f, function(result) {
 				var rmsg = result.msg;
 				if (result.success) {
-					window.parent.location = "${rootPath}agency/edit.html?id=${sales.agencyid}";
+					window.parent.location = "${rootPath}agency/edit.html?id=${sales.agencyId}";
 				} else {
 					$("#msgModal").modal('show');
 				}

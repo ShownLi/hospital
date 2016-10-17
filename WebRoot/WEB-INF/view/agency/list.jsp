@@ -16,18 +16,9 @@
 				<h2>
 					<i class="glyphicon glyphicon-briefcase"></i> 地接社管理 <span>地接社列表</span>
 				</h2>
-				<!-- <div class="breadcrumb-wrapper">
-					<span class="label">你在这里:</span>
-					<ol class="breadcrumb">
-						<li><a href="#">CRM</a></li>
-						<li class="active">地接社管理</li>
-					</ol>
-				</div> -->
 			</div>
-
 			<div class="contentpanel">
 				<!-- content goes here... -->
-
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						<div class="panel-btns">
@@ -35,7 +26,6 @@
 						</div>
 						<!-- panel-btns -->
 						<h3 class="panel-title">地接社列表</h3>
-
 					</div>
 					<div class="panel-body">
 						<br />
@@ -53,18 +43,10 @@
 							</table>
 						</div>
 						<!-- table-responsive -->
-
-
-
 					</div>
 					<!-- panel-body -->
 				</div>
 				<!-- panel -->
-
-
-
-
-
 			</div>
 
 		</div>
@@ -98,7 +80,8 @@
 
 
 <script type="text/javascript">
-	var countryName = ${countryName};
+	var country= ${country};
+//	console.log(country)
 	var language = ${language};
 	
 	jQuery(document).ready(function() {
@@ -113,13 +96,13 @@
 			serverSide: true,
 			ajax: {
 			url: '${rootPath}agency/list.do',
-			dataFilter: function(data){
-			var json = jQuery.parseJSON( data );
-			json.recordsTotal = json.countTotal;
-			json.recordsFiltered = json.countFiltered;
-			json.data = json.data;
-			return JSON.stringify( json );
-			}
+				dataFilter: function(data){					
+					var json = jQuery.parseJSON( data );
+					json.recordsTotal = json.countTotal;
+					json.recordsFiltered = json.countFiltered;
+					json.data = json.data;
+					return JSON.stringify( json );
+				}
 			},
 			columnDefs: [
 				  {
@@ -134,12 +117,13 @@
 	                data: "country",
 	                orderable: false,
 	                render: function ( data ) {
-	                	for(var i=0;i <  countryName.length;i++){
-	                		if(data==countryName[i].id){
-	                			return countryName[i].text
-	                		}
-	                		else{return ""}
-	                	}
+	                	if(data){
+		                	for(var i=0;i <country.length;i++){
+		                		if(data==country[i].id){
+		                			return country[i].text	                			
+		                		}
+		                	}
+		                }else{return ""}
 	                },
 	                  targets: 1
 				  },
@@ -147,12 +131,13 @@
 		                data: "language",
 		                orderable: false,
 		                render: function ( data ) {
-		                	for(var i=0;i <  language.length;i++){
-		                		if(data==language[i].id){
-		                			return language[i].text
-		                		}
-		                		else{return ""}
-		                	}
+		                	if(data){
+			                	for(var i=0;i <language.length;i++){		                	
+			                		if(data==language[i].id){
+			                			return language[i].text
+			                		}
+			                	}
+			                 }else{return ""}
 		                },
 		                  targets: 2
 					  },
@@ -215,11 +200,8 @@
 				error: function(o) {
 					alert(2);
 				}
-			});
-			
-		}
-		
+			});		
+		}		
 	</script>
-
 </body>
 </html>

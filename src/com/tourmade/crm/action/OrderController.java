@@ -209,19 +209,30 @@ public class OrderController extends BaseSimpleFormController {
 	@RequestMapping(value = "/orderNoDeal.do")
 	@ResponseBody
 	public Json orderNoDeal(HttpServletRequest request, HttpSession session, Model model, Order order) {
+
 		Json j = new Json();
-		Order order1 = service.getOrderById(order.getOrderId());
+//		Order order1 = service.getOrderById(order.getOrderId());
 		//DemoCase crmcase = caseservice.getCaseById(order1.getCaseid());
 		
 		Case crmcase = caseservice.getCaseByOrderId(order.getOrderId());
 		try {
 			service.updateOrder(order);
+
 			int i = caseservice.casestatus(order.getCaseId());
 			if(i==0){
 				crmcase.setStatus("4");
 				caseservice.updateCase(crmcase);
 			}
 			
+
+/*				int i = caseservice.casestatus(order.getCaseId());
+				if(i==0){
+					crmcase.setStatus("4");
+					caseservice.updateCase(crmcase);
+					System.out.println("Yiui");
+				}*/
+
+
 			j.setSuccess(true);
 		} catch (Exception e) {
 			j.setSuccess(false);

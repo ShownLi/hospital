@@ -44,29 +44,23 @@
             <div class="form-group">
               <label class="col-sm-4 control-label">销售名称 <span class="asterisk">*</span></label>
               <div class="col-sm-4">
-                <input type="text" name="salesname" placeholder="销售名称" class="form-control" />
+                <input type="text" name="salesName" placeholder="销售名称" class="form-control" />
               </div>
             </div>
-            <!-- <div class="form-group">
-              <label class="col-sm-4 control-label">英文名称 <span class="asterisk">*</span></label>
-              <div class="col-sm-4">
-                <input type="text" name="salesnameen" placeholder="销售名称" class="form-control" />
-              </div>
-            </div> -->
             <div class="form-group">
               <label class="col-sm-4 control-label">PortalID <span class="asterisk">*</span></label>
               <div class="col-sm-4">
-                <input type="text" id="salesportalid" name="salesportalid" placeholder="官网ID" class="form-control" />
+                <input type="text" id="salesPortalId" name="salesPortalId" placeholder="官网ID" class="form-control" />
               </div>
             </div>
             <div class="form-group">
               <label  class="col-sm-4 control-label">所属地接社 <span class="asterisk">*</span></label>
-              <input type="text" name="agencyid" class="agency-select col-sm-4" value="${agencyid}" readonly/>
+              <input type="text" name="agencyId" class="agency-select col-sm-4" value="${agencyId}" readonly/>
             </div>                   			
             <div class="form-group">
               <label class="col-sm-4 control-label">邮件地址 <span class="asterisk">*</span></label>
               <div class="col-sm-4">
-                <input type="text" name="salesemail" placeholder="邮件地址" class="form-control" />
+                <input type="text" name="salesEmail" placeholder="邮件地址" class="form-control" />
               </div>
             </div> 	          
         </div><!-- panel-body -->
@@ -129,26 +123,26 @@
       	
 		jQuery("#form").validate({
 			rules: {
-				salesname: "required",
-				salesemail: "email",
-				salesportalid: {
+				salesName: "required",
+				salesEmail: "email",
+				salesPortalId: {
 					remote:{                           
 		            	url:"${rootPath}validate.do",
 		            	type:"post",
 		            	data: {
 	                        table: function () { return "tm_sales"},
 	                        field: function () { return "sales_portal_id"},
-	                        name: function () { return $("#salesportalid").val();},
+	                        name: function () { return $("#salesPortalId").val();},
 	                    }
 		            }
 				}
 			},
 			messages: {
-				salesname: "请输入销售名称",
-				salesportalid: {
+				salesName: "请输入销售名称",
+				salesPortalId: {
 					remote:"销售编号已存在"
 				},
-				salesemail: "请输入有效的邮箱地址",
+				salesEmail: "请输入有效的邮箱地址",
 
 			},
 		    highlight: function(element) {
@@ -175,7 +169,7 @@
 			$.post('${rootPath}sale/add.do', f, function(result) {
 				var rmsg = result.msg;
 				if (result.success) {
-					window.parent.location = "${rootPath}agency/edit.html?id=${agencyid}";
+					window.parent.location = "${rootPath}agency/edit.html?id=${agencyId}";
 				} else {
 					$("#msgModal").modal('show');
 				}
