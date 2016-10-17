@@ -17,10 +17,9 @@
 					<i class="fa fa-user"></i> 用户管理 <span>用户列表</span>
 				</h2>
 			</div>
-
+			
 			<div class="contentpanel">
 				<!-- content goes here... -->
-
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						<div class="panel-btns">
@@ -32,7 +31,6 @@
 					<div class="panel-body">
 						<br />
 						<div class="table-responsive">
-
 							<table id="dataTable" class="table">
 								<thead>
 									<tr>
@@ -42,7 +40,6 @@
 										<th>编辑</th>
 									</tr>
 								</thead>
-								
 							</table>
 						</div>
 						<!-- table-responsive -->
@@ -147,7 +144,6 @@
 		    
 		    jQuery('select').removeClass('form-control');
 			
-			
 		});
 		
 		function edit(id) {
@@ -170,10 +166,8 @@
 				error: function(o) {
 					alert(2);
 				}
-			});
-			
-		}
-		
+			});		
+		}		
 	</script>
 
 </body>

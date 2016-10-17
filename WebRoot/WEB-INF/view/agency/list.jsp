@@ -81,6 +81,7 @@
 
 <script type="text/javascript">
 	var country= ${country};
+//	console.log(country)
 	var language = ${language};
 	
 	jQuery(document).ready(function() {
@@ -95,10 +96,8 @@
 			serverSide: true,
 			ajax: {
 			url: '${rootPath}agency/list.do',
-				dataFilter: function(data){
-					
+				dataFilter: function(data){					
 					var json = jQuery.parseJSON( data );
-					console.log(json);
 					json.recordsTotal = json.countTotal;
 					json.recordsFiltered = json.countFiltered;
 					json.data = json.data;
@@ -118,12 +117,13 @@
 	                data: "country",
 	                orderable: false,
 	                render: function ( data ) {
-	                	for(var i=0;i <country.length;i++){
-	                		if(data==country[i].id){
-	                			return country[i].text
-	                		}
-	                		else{return ""}
-	                	}
+	                	if(data){
+		                	for(var i=0;i <country.length;i++){
+		                		if(data==country[i].id){
+		                			return country[i].text	                			
+		                		}
+		                	}
+		                }else{return ""}
 	                },
 	                  targets: 1
 				  },
@@ -131,12 +131,13 @@
 		                data: "language",
 		                orderable: false,
 		                render: function ( data ) {
-		                	for(var i=0;i <  language.length;i++){
-		                		if(data==language[i].id){
-		                			return language[i].text
-		                		}
-		                		else{return ""}
-		                	}
+		                	if(data){
+			                	for(var i=0;i <language.length;i++){		                	
+			                		if(data==language[i].id){
+			                			return language[i].text
+			                		}
+			                	}
+			                 }else{return ""}
 		                },
 		                  targets: 2
 					  },

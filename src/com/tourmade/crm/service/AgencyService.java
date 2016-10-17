@@ -30,29 +30,23 @@ public class AgencyService extends BaseService {
 	 * @param agency
 	 * @param ph
 	 * @param request
-	 * @return
 	 */
-	public QueryResult<Agency> queryAgency(Agency agency, PageHelper ph, HttpServletRequest request) {
+	public QueryResult<Agency> queryAgency(Agency agency, PageHelper pageHelper, HttpServletRequest request) {
 
-		QueryResult<Agency> r = new QueryResult<Agency>();
+		QueryResult<Agency> result = new QueryResult<Agency>();
 		Map<String, Object> map = new HashMap<String, Object>();
 		
-		map.put("b", ph.getStart());
-		map.put("e", ph.getLength());
-//		map.put("s", ph.getSort());
-//		map.put("o", ph.getOrder());
+		map.put("start", pageHelper.getStart());
+		map.put("length", pageHelper.getLength());
 
 		List<Agency> data = agencyMapper.queryAgency(map);
-		for(Agency a:data){
-			System.out.println(a.getCountry()+"*****"+a.getLanguage());
-		}
 		long count = agencyMapper.countAgency(agency);
 			
-		r.setData(data);
-		r.setCountTotal(count);
-		r.setCountFiltered(count);
+		result.setData(data);
+		result.setCountTotal(count);
+		result.setCountFiltered(count);
 	
-		return r;
+		return result;
 	}
 
 	/**
@@ -81,14 +75,14 @@ public class AgencyService extends BaseService {
 	 * @return
 	 */
 	public Agency getAgencyById(int id) {
-		Agency r = null;
+		Agency agency = null;
 		try {
-			r = agencyMapper.getAgencyById(id);
+			agency = agencyMapper.getAgencyById(id);
 		} catch (Exception e) {
 			logger.error("AgencyService.getAgencyById() --> " + id + "-->" + e.getMessage());
-			r = null;
+			agency = null;
 		}
-		return r;
+		return agency;
 	}
 	
 	/**

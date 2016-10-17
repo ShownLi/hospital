@@ -359,15 +359,13 @@
                       <input type="hidden" name="orderId" value="${order.orderId}" />	
                       <input type="hidden" name="caseId" value="${order.caseId}" />		                     
                        <input type="hidden" name="status" value="3" />
-                      <input type="hidden" name="caseId" value="${order.caseId}" />
-                      <input type="hidden" name="status" value="3" />
                     </div>
                   </div>
               </div><!-- noDealModal-body -->
           </div>
           <div class="modal-footer align-center">
               <button class="submit btn btn-primary">保存</button>
-              <button class="btn btn-primary" onclick="form2_submit()">保存</button>
+            <!--   <button class="btn btn-primary" onclick="form2_submit()">保存</button> -->
               <a class="cancel btn btn-primary" >取消</a>
           </div>
       </form>
@@ -680,17 +678,18 @@
 		var f = $("#form-noDeal").serialize();
 		
 		$.post('${rootPath}order/orderNoDeal.do', f, function(result) {
-			var rmsg = result.msg;
-			
+//			console.log(result)
+			var rmsg = result.msg;			
 			if (result.success) {
-				window.parent.location = "${rootPath}order/edit.html?id=${order.orderId}";
-
+	//			alert("^^^^^^")
+				setTimeout('',1000);
+				window.parent.location = "${rootPath}order/edit.html?id=${order.orderId}"
 			} 
 			else {
 				$("#msgModal").modal('show');
 			}
 		}, "JSON");
-		 alert("jump ok");
+		setTimeout('',1000);
 	}
 	function updateDeal_submit() {
 		var f = $("#form-updateDeal").serialize();

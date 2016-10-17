@@ -14,7 +14,7 @@
 		from tm_agency u  
 		where u.isdel = 0 
 		order by u.creat_time
-		limit #{b},#{e}
+		limit #{start},#{length}
 	</select>
 
 	<select id="countAgency" parameterType="Agency" resultType="long">

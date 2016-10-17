@@ -915,8 +915,6 @@
         $("#endDate").val(dateformat);
       }
   	  
-  	  alert('&&&')
-  	  alert("${crmcase.startTime}")
   	  if("${crmcase.startTime}"==1){
     	   $('#yes').attr('checked','true');
       }

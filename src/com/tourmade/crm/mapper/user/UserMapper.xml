@@ -15,7 +15,7 @@
 			u.isdel as isdel
 		from tm_user u where u.isdel = 0
 		order by u.creat_time desc
-		limit #{b},#{e}
+		limit #{start},#{length}
 	</select>
 
 

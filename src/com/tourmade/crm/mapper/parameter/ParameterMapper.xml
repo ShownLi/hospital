@@ -17,7 +17,7 @@
 			u.isdel as isdel
 		from tm_parameter u where u.isdel = 0
 		order by u.creat_time
-		limit #{b},#{e}
+		limit #{start},#{length}
 	</select>
 
 	<select id="countParameter" parameterType="Parameter" resultType="long">

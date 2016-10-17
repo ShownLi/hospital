@@ -34,8 +34,8 @@ public class UserController extends BaseSimpleFormController {
 	@ResponseBody
 	public String queryData(HttpServletRequest request, HttpSession session, Model model, User user, PageHelper page) {
 
-		QueryResult<User> r = service.queryUser(user, page, request);
-		String result = JSONUtilS.object2json(r);
+		QueryResult<User> pageResult = service.queryUser(user, page, request);
+		String result = JSONUtilS.object2json(pageResult);
 
 		return result;
 	}
@@ -50,29 +50,27 @@ public class UserController extends BaseSimpleFormController {
 	@ResponseBody
 	public Json doAdd(HttpServletRequest request, HttpSession session, Model model, User user) {
 
-		Json j = new Json();
+		Json json = new Json();
 		
 		try {
 			service.saveUser(user);
-			j.setSuccess(true);
+			json.setSuccess(true);
 		} catch (Exception e) {
-			j.setSuccess(false);
+			json.setSuccess(false);
 			logger.error("UserController.doAdd() --> " + user.toString() + "\n" + e.getMessage());
 		}
 		
-		return j;
+		return json;
 	}
 
 	@RequestMapping(value = "/edit.html", method = { RequestMethod.POST, RequestMethod.GET })
 	public String edit(Model model, String id) {
 		
 		if (null != id && !"".equals(id)) {
-			int i = Integer.parseInt(id);
-			User u = service.getUserById(i);
-			model.addAttribute("user",u);
-		}
-		
-		
+			int userId = Integer.parseInt(id);
+			User user = service.getUserById(userId);
+			model.addAttribute("user",user);
+		}	
 		return "/user/edit";
 	}
 
@@ -80,38 +78,38 @@ public class UserController extends BaseSimpleFormController {
 	@ResponseBody
 	public Json doEdit(HttpServletRequest request, HttpSession session, Model model, User user) {
 
-		Json j = new Json();
+		Json json = new Json();
 		
 		try {
 			service.updateUser(user);
-			j.setSuccess(true);
+			json.setSuccess(true);
 		} catch (Exception e) {
-			j.setSuccess(false);
+			json.setSuccess(false);
 			logger.error("UserController.doEdit() --> " + user.toString() + "\n" + e.getMessage());
 		}
 		
-		return j;
+		return json;
 	}
 	
 	@RequestMapping(value = "/del.do")
 	@ResponseBody
 	public Json doDel(HttpServletRequest request, HttpSession session, Model model, String id) {
 
-		Json j = new Json();
+		Json json = new Json();
 		try {
 			if (null != id && !"".equals(id)) {
-				int i = Integer.parseInt(id);
-				service.deleteUserById(i);
-				j.setSuccess(true);
+				int userId = Integer.parseInt(id);
+				service.deleteUserById(userId);
+				json.setSuccess(true);
 			} else {
-				j.setSuccess(false);
+				json.setSuccess(false);
 			}
 		} catch (Exception e) {
-			j.setSuccess(false);
+			json.setSuccess(false);
 			logger.error("UserController.doDel() --> " + id + "\n" + e.getMessage());
 		}
 		
-		return j;
+		return json;
 	}
 	
 }

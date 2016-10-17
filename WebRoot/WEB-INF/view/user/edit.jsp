@@ -15,16 +15,7 @@
 				<h2>
 					<i class="fa fa-user"></i> 用户管理 <span>编辑用户</span>
 				</h2>
-				<!-- <div class="breadcrumb-wrapper">
-					<span class="label">你在这里:</span>
-					<ol class="breadcrumb">
-						<li><a href="＃">CRM</a></li>
-						<li><a href="${rootPath }user/list.html">用户管理</a></li>
-						<li class="active">编辑用户</li>
-					</ol>
-				</div> -->
 			</div>
-
 			<div class="contentpanel">
 				<!-- content goes here... -->
 
@@ -86,10 +77,7 @@
 			<input type="hidden" name="userId" value="${user.userId }" />
 		</div><!-- panel-footer -->
      </form>   
-      </div><!-- panel -->
-			</div>
-
-		</div>
+     
 		<!-- mainpanel -->
 		<%@ include file="../assets/pages/rightpanel.jsp"%>
 	</section>
@@ -210,7 +198,7 @@
 		    } ); 
 			
 		});
-//			      
+			      
 		function form_submit() {
 			var f = $("#form").serialize();
 			$.post('${rootPath}user/edit.do', f, function(result) {
