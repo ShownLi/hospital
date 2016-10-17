@@ -217,8 +217,8 @@
 	<select id="getCustomerById" parameterType="int" resultType="Customer">
 		select
 		u.customer_id as customerId,
-		u.customer_name_zh as zname,
-		u.customer_name_en as ename,
+		u.customer_name_zh as chineseName,
+		u.customer_name_en as englishName,
 		u.email,
 		u.mobilephone,
 		u.wechat,

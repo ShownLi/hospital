@@ -64,21 +64,21 @@ public class CaseService extends BaseService {
 	 * @param request
 	 * @return
 	 */
-	public QueryResult<Case> queryCaseFromCustomer(int customerid, PageHelper ph, HttpServletRequest request) {
+	public QueryResult<Case> queryCaseFromCustomer(int customerId, PageHelper ph, HttpServletRequest request) {
 
 		QueryResult<Case> r = new QueryResult<Case>();
 		Map<String, Object> map = new HashMap<String, Object>();
 
 
 		
-		map.put("customerid", customerid);
+		map.put("customerId", customerId);
 		map.put("b", ph.getStart());
 		map.put("e", ph.getLength());
 //		map.put("s", ph.getSort());
 //		map.put("o", ph.getOrder());
 
 		List<Case> data = caseMapper.queryCaseFC(map);
-		long count = caseMapper.countCaseFC(customerid);
+		long count = caseMapper.countCaseFC(customerId);
 			
 		r.setData(data);
 		r.setCountTotal(count);

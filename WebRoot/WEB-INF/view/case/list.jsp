@@ -187,17 +187,18 @@
 		                  },
 		                  targets: 7
 					  },
-					  {
+					  {		
 			                data: "customerId",
 			                orderable: false,
 			                render: function ( data ) {
-			                	for(var i=0;i <customer.length;i++){
-			                		if(data==customer[i].id){
-			                			return customer[i].text
-			                		}else{
-			                			return "";
-			                		}
+			                	if(data){
+			                		for(var i=0;i <customer.length;i++){
+				                		if(data==customer[i].id){
+				                			return customer[i].text
+				                		}
+				                	}
 			                	}
+			                	else{return ""}
 			                },
 			                  targets: 1
 					  },
@@ -210,7 +211,7 @@
 				                		if(data==destination[i].id){
 				                			return destination[i].text
 				                		}
-				                		else{return ""}
+				                	
 				                	}
 			                	}
 			                	else{return ""}

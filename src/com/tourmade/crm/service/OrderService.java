@@ -144,7 +144,7 @@ public class OrderService extends BaseService {
 		
 		try {
 			Order orderInfo = getInfo(order);
-				order.setAgencyId(orderInfo.getAgencyId());
+			order.setAgencyId(orderInfo.getAgencyId());
 			order.setAgencyName(orderInfo.getAgencyName());
 			order.setSalesName(orderInfo.getSalesName());
 			order.setAgencyEmailReal(orderInfo.getAgencyEmailReal());

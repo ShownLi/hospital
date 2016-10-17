@@ -43,7 +43,7 @@ public class EntityList extends BaseBean<EntityList> {
 
 	@Override
 	public String toString() {
-		return "DemoList [id=" + id + ", text=" + text + "]";
+		return "EntityList [id=" + id + ", text=" + text + "]";
 	}
 
 }
