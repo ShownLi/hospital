@@ -163,6 +163,7 @@
 		                  },
 		                  targets: 4
 					  },
+					
 				    {
 					  orderable: false,
 					  searchable: false,
@@ -171,8 +172,8 @@
 				],
 				columns: [
 		            { data: "customerId" },
-		            { data: "zname" },
-		            { data: "ename" },
+		            { data: "chineseName" },
+		            { data: "englishName" },
 		            { data: "ageGroup" },
 		            { data: "gender" },
 		            { data: "mobilephone" },

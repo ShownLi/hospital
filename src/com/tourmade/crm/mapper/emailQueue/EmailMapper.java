@@ -4,23 +4,23 @@ import java.util.List;
 import java.util.Map;
 
 import com.tourmade.crm.common.framework.BaseMapper;
-import com.tourmade.crm.entity.EmailQueue;
+import com.tourmade.crm.entity.Email;
 import com.tourmade.crm.entity.EntityList;
 import com.tourmade.crm.entity.MailTepBoat;
 
-public interface EmailDao extends BaseMapper {
+public interface EmailMapper extends BaseMapper {
 	
-	public List<EmailQueue> queryEmail(Map<String, Object> params);
+	public List<Email> queryEmail(Map<String, Object> params);
 	
-	public long countEmail(EmailQueue email);
+	public long countEmail(Email email);
 	
-	public void saveEmail(EmailQueue email);
+	public void saveEmail(Email email);
 
-	public void updateEmail(EmailQueue email);
+	public void updateEmail(Email email);
 
 	public void deleteEmailById(int emailId);
 	
-	public EmailQueue getEmailById(int emailId);
+	public Email getEmailById(int emailId);
 	
 	public List<EntityList> getParameterInfo(String domain);
 	

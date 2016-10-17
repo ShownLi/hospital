@@ -70,19 +70,19 @@ public class OrderService extends BaseService {
 	 * @param request
 	 * @return
 	 */
-	public QueryResult<Order> queryOrderByCaseid(int caseid, PageHelper ph, HttpServletRequest request) {
+	public QueryResult<Order> queryOrderByCaseId(int caseId, PageHelper ph, HttpServletRequest request) {
 
 		QueryResult<Order> r = new QueryResult<Order>();
 		Map<String, Object> map = new HashMap<String, Object>();
 			
-		map.put("id", caseid);
+		map.put("id", caseId);
 		map.put("b", ph.getStart());
 		map.put("e", ph.getLength());
 //		map.put("s", ph.getSort());
 //		map.put("o", ph.getOrder());
 
-		List<Order> data = orderMapper.queryOrder(map);
-		long count = orderMapper.countOrderByCaseid(caseid);
+		List<Order> data = orderMapper.queryOrderByCaseId(map);
+		long count = orderMapper.countOrderByCaseId(caseId);
 			
 		r.setData(data);
 		r.setCountTotal(count);
@@ -113,8 +113,8 @@ public class OrderService extends BaseService {
 	 * @param order
 	 * @return
 	 */
-	public boolean validateportalid(int id) {
-		String s = orderMapper.validateportalid(id);
+	public boolean validatePortalId(int id) {
+		String s = orderMapper.validatePortalId(id);
 		if(null == s || "".equals(s) || "null".equals(s)){
 			return false;
 		}
@@ -143,13 +143,13 @@ public class OrderService extends BaseService {
 
 		
 		try {
-			Order order1 = getInfo(order);
-			order.setAgencyId(order1.getAgencyId());
-			order.setAgencyName(order1.getAgencyName());
-			order.setSalesName(order1.getSalesName());
-			order.setAgencyEmailReal(order1.getAgencyEmailReal());
-			order.setCustomerName(order1.getCustomerName());
-			order.setCustomerEmailReal(order1.getCustomerEmailReal());
+			Order orderInfo = getInfo(order);
+				order.setAgencyId(orderInfo.getAgencyId());
+			order.setAgencyName(orderInfo.getAgencyName());
+			order.setSalesName(orderInfo.getSalesName());
+			order.setAgencyEmailReal(orderInfo.getAgencyEmailReal());
+			order.setCustomerName(orderInfo.getCustomerName());
+			order.setCustomerEmailReal(orderInfo.getCustomerEmailReal());
 			order.setStatus("1");
 			orderMapper.saveOrder(order);
 		} catch (Exception e) {

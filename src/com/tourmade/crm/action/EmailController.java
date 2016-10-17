@@ -14,7 +14,7 @@ import com.tourmade.crm.common.action.BaseSimpleFormController;
 import com.tourmade.crm.common.framework.bean.QueryResult;
 import com.tourmade.crm.common.framework.util.JSONUtilS;
 import com.tourmade.crm.common.model.base.value.baseconfig.PageHelper;
-import com.tourmade.crm.entity.EmailQueue;
+import com.tourmade.crm.entity.Email;
 import com.tourmade.crm.service.EmailService;
 
 
@@ -32,9 +32,9 @@ public class EmailController extends BaseSimpleFormController {
 	
 	@RequestMapping(value = "/list.do",produces="application/json;charset=utf-8")
 	@ResponseBody
-	public String queryData(HttpServletRequest request, HttpSession session, Model model, EmailQueue email, PageHelper page) {
+	public String queryData(HttpServletRequest request, HttpSession session, Model model, Email email, PageHelper page) {
 
-		QueryResult<EmailQueue> r = service.queryEmail(email, page, request);
+		QueryResult<Email> r = service.queryEmail(email, page, request);
 		String result = JSONUtilS.object2json(r);
 
 		return result;

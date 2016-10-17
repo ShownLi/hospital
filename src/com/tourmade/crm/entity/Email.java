@@ -8,7 +8,7 @@ import com.tourmade.crm.common.framework.BaseBean;
  * @author lianzheng
  *
  */
-public class EmailQueue extends BaseBean<EmailQueue> {
+public class Email extends BaseBean<Email> {
 
 	/**
 	 * 

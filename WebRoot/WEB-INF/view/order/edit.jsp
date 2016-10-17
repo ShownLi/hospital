@@ -359,15 +359,14 @@
                       <input type="hidden" name="orderId" value="${order.orderId}" />	
                       <input type="hidden" name="caseId" value="${order.caseId}" />		                     
                        <input type="hidden" name="status" value="3" />
-                      <input type="hidden" name="caseId" value="${order.caseId}" />
-                      <input type="hidden" name="status" value="3" />
+                     
                     </div>
                   </div>
               </div><!-- noDealModal-body -->
           </div>
           <div class="modal-footer align-center">
-              <button class="submit btn btn-primary">保存</button>
-              <button class="btn btn-primary" onclick="form2_submit()">保存</button>
+               <!-- <button class="submit btn btn-primary">保存</button>-->
+            <button class="btn btn-primary" onclick="noDeal_submit()">保存</button> 
               <a class="cancel btn btn-primary" >取消</a>
           </div>
       </form>
@@ -592,10 +591,10 @@
 
 			],
 		columns: [
-	  			    { data: "orderrecordid" },
-	  			    { data: "sendername" },
+	  			    { data: "orderRecordId" },
+	  			    { data: "senderName" },
 	  			    { data: "content" },
-	  			    { data: "creattime" }
+	  			    { data: "creatTime" }
 	    ]
 		});
 	
@@ -676,21 +675,31 @@
 			}
 		}, "JSON");
 	}
+/* 	$.ajaxSetup({
+		async:false
+	}); */
 	function noDeal_submit() {
-		var f = $("#form-noDeal").serialize();
-		
-		$.post('${rootPath}order/orderNoDeal.do', f, function(result) {
-			var rmsg = result.msg;
-			
-			if (result.success) {
-				window.parent.location = "${rootPath}order/edit.html?id=${order.orderId}";
+		var f1 = $("#form-noDeal").serialize();
+		try{
+ 			$.post('${rootPath}order/orderNoDeal.do?rand='+Math.random(), f1, function(result) {
+				var rmsg = result.msg;
+				if (result.success) {
+					//alert("${rootPath}order/edit.html?id=${order.orderId}");
+					window.location.href = "${rootPath}order/edit.html?id=${order.orderId}";
+					
+					//window.location.assign("${rootPath}order/edit.html?id=${order.orderId}");
+				} 
+				else {
+					$("#msgModal").modal('show');
+				}
+			}, "JSON"); 
 
-			} 
-			else {
-				$("#msgModal").modal('show');
-			}
-		}, "JSON");
-		 alert("jump ok");
+			
+		} catch(e){
+			alert(e);
+		};
+		alert("页面正在加载，请稍后...");
+		
 	}
 	function updateDeal_submit() {
 		var f = $("#form-updateDeal").serialize();
@@ -703,11 +712,10 @@
 				$("#msgModal").modal('show');
 			}
 		}, "JSON");
-		 alert("jump ok");
 	}
 	function updateNoDeal_submit() {
 		var f = $("#form-updateNoDeal").serialize();
-		$.post('${rootPath}order/edit1.do', f, function(result) {
+		$.post('${rootPath}order/updateDeal.do', f, function(result) {
 			var rmsg = result.msg;
 			if (result.success) {
 				window.parent.location = "${rootPath}order/edit.html?id=${order.orderId}";

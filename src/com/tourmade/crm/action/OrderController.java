@@ -58,18 +58,29 @@ public class OrderController extends BaseSimpleFormController {
 	@RequestMapping(value = "/list.do",produces="application/json;charset=utf-8")
 	@ResponseBody
 	public String queryData(HttpServletRequest request, HttpSession session, Model model, Order order, PageHelper page) {
-
+		
+		System.out.println(order);
+		
 		QueryResult<Order> queryResult = service.queryOrder(order, page, request);
 		String result = JSONUtilS.object2json(queryResult);
 
 		return result;
 	}
 
-	@RequestMapping(value = "/list1.do",produces="application/json;charset=utf-8")
+	/**
+	 * 根据caseid获取相应订单
+	 * @param request
+	 * @param session
+	 * @param model
+	 * @param caseId
+	 * @param page
+	 * @return
+	 */
+	@RequestMapping(value = "/listByCaseId.do",produces="application/json;charset=utf-8")
 	@ResponseBody
-	public String queryData(HttpServletRequest request, HttpSession session, Model model, int caseid, PageHelper page) {
+	public String queryData(HttpServletRequest request, HttpSession session, Model model, int caseId, PageHelper page) {
 
-		QueryResult<Order> r = service.queryOrderByCaseid(caseid, page, request);
+		QueryResult<Order> r = service.queryOrderByCaseId(caseId, page, request);
 		String result = JSONUtilS.object2json(r);
 
 		return result;
@@ -99,6 +110,7 @@ public class OrderController extends BaseSimpleFormController {
 		if(order.getCaseId()!=0){
 		   Customer customer = service.getCustomerByCaseId(order.getCaseId());
 		   order.setCustomerId(customer.getCustomerId());
+		   
 		}
 		
 		try {
@@ -106,7 +118,7 @@ public class OrderController extends BaseSimpleFormController {
 			//验证客人有邮箱
 			if(is)
 			{
-				boolean portalid = service.validateportalid(order.getCustomerId());
+				boolean portalid = service.validatePortalId(order.getCustomerId());
 				if(!portalid){
 					service.creatPortal(order.getCustomerId());
 				}
@@ -116,13 +128,18 @@ public class OrderController extends BaseSimpleFormController {
 				caseservice.case2order(order.getCaseId());
 				//补充order信息并存储该order
 				order = service.saveOrder(order);
+
 				//邮件别名操作（创建邮件别名并将其写入order表）
 				service.MailAlias(order);	
+				
 				//生成给地接社的第一封邮件
 				//DemoCustomer customer = service.getCustomerById(order.getCustomerid());
 				Case crmcase = service.getCaseById(order.getCaseId());
+				
 				order = service.getOrderById(order.getOrderId());
+				
 				String result = emailservice.creatTemplate(crmcase, order);
+				
 				
 				//生成待发送邮件
 				order = service.getOrderById(order.getOrderId());
@@ -192,7 +209,6 @@ public class OrderController extends BaseSimpleFormController {
 	@RequestMapping(value = "/orderNoDeal.do")
 	@ResponseBody
 	public Json orderNoDeal(HttpServletRequest request, HttpSession session, Model model, Order order) {
-
 		Json j = new Json();
 		Order order1 = service.getOrderById(order.getOrderId());
 		//DemoCase crmcase = caseservice.getCaseById(order1.getCaseid());
@@ -200,18 +216,17 @@ public class OrderController extends BaseSimpleFormController {
 		Case crmcase = caseservice.getCaseByOrderId(order.getOrderId());
 		try {
 			service.updateOrder(order);
-				int i = caseservice.casestatus(order.getCaseId());
-				if(i==0){
-					crmcase.setStatus("4");
-					caseservice.updateCase(crmcase);
-				}
+			int i = caseservice.casestatus(order.getCaseId());
+			if(i==0){
+				crmcase.setStatus("4");
+				caseservice.updateCase(crmcase);
+			}
 			
 			j.setSuccess(true);
 		} catch (Exception e) {
 			j.setSuccess(false);
 			logger.error("OrderController.doEdit() --> " + order.toString() + "\n" + e.getMessage());
 		}
-		
 		return j;
 	}
 	

@@ -22,18 +22,18 @@ import com.tourmade.crm.common.framework.BaseService;
 import com.tourmade.crm.common.framework.bean.QueryResult;
 import com.tourmade.crm.common.model.base.value.baseconfig.PageHelper;
 import com.tourmade.crm.entity.Case;
-import com.tourmade.crm.entity.EmailQueue;
+import com.tourmade.crm.entity.Email;
 import com.tourmade.crm.entity.Order;
 import com.tourmade.crm.entity.MailTemplate;
 import com.tourmade.crm.entity.MailTepBoat;
-import com.tourmade.crm.mapper.emailQueue.EmailDao;
+import com.tourmade.crm.mapper.emailQueue.EmailMapper;
 
 @Service
 @Transactional(readOnly = false)
 public class EmailService extends BaseService {
 	
 	@Autowired
-	private EmailDao emailMapper;
+	private EmailMapper emailMapper;
 
 	/**
 	 * 查询邮件数据，分页展示
@@ -43,9 +43,9 @@ public class EmailService extends BaseService {
 	 * @param request
 	 * @return
 	 */
-	public QueryResult<EmailQueue> queryEmail(EmailQueue email, PageHelper ph, HttpServletRequest request) {
+	public QueryResult<Email> queryEmail(Email email, PageHelper ph, HttpServletRequest request) {
 
-		QueryResult<EmailQueue> r = new QueryResult<EmailQueue>();
+		QueryResult<Email> r = new QueryResult<Email>();
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		map.put("b", ph.getStart());
@@ -53,7 +53,7 @@ public class EmailService extends BaseService {
 //		map.put("s", ph.getSort());
 //		map.put("o", ph.getOrder());
 
-		List<EmailQueue> data = emailMapper.queryEmail(map);
+		List<Email> data = emailMapper.queryEmail(map);
 		long count = emailMapper.countEmail(email);
 			
 		r.setData(data);
@@ -501,7 +501,7 @@ public class EmailService extends BaseService {
 	 * @return
 	 */
 	public void saveEmail(Order order, String result) {
-		EmailQueue email = new EmailQueue();
+		Email email = new Email();
 		try {
 			email.setContent(result);
 			email.setAcount("customer");

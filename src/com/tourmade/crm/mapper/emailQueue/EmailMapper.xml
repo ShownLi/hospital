@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?> 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.tourmade.crm.mapper.email.EmailDao">
+<mapper namespace="com.tourmade.crm.mapper.emailQueue.EmailMapper">
 
 	<select id="queryEmail" parameterType="Map" resultType="Email">
 		select
@@ -43,16 +43,16 @@
 		mail_status,
 		creat_time
 		)values(
-		#{orderid},
-		#{mailtype},
+		#{orderId},
+		#{mailType},
 		#{acount},
-		#{sendname},
-		#{recievename},
+		#{sendName},
+		#{recieveName},
 		#{sender},
 		#{reciever},
 		#{subject},
 		#{content},
-		#{fileurl},
+		#{fileUrl},
 		#{mailstatus},
 		NOW()
 		)
@@ -79,13 +79,13 @@
 		from tm_email u where u.email_id = #{email_id}
 	</select>
 	
-	<select id="geturl" parameterType="String" resultType="String">
+	<select id="getUrl" parameterType="String" resultType="String">
 		select para_value from tm_parameter 
 		where para_domain = #{domain}
 		and isdel = 0
 	</select>	
 	
-	<select id="getParameterInfo" parameterType="String" resultType="DemoList">
+	<select id="getParameterInfo" parameterType="String" resultType="EntityList">
 		select
 		u.para_domain,
 		u.para_value as id,

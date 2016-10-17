@@ -451,7 +451,7 @@
             <div class="form-group col-sm-8 col-sm-offset-2">
                 <label class="col-sm-3 control-label">所属销售</label>
                 <div class="col-sm-9">
-                    <input type="text" id="salesid" name="salesid" placeholder="选择一个销售" class="sales-select fullwidth" value="" />
+                    <input type="text" id="salesId" name="salesId" placeholder="选择一个销售" class="sales-select fullwidth" value="" />
                 </div>
             </div>
               <div class="form-group col-sm-8 col-sm-offset-2">
@@ -595,7 +595,7 @@
 	 	language: datatable_local_language, // my.js
 	 	serverSide: true,
 	 	ajax: {
-	 		url: '${rootPath}order/list.do?caseId=${crmcase.caseId}',
+	 		url: '${rootPath}order/listByCaseId.do?caseId=${crmcase.caseId}',
 	 		dataFilter: function(data){
 	             var json = jQuery.parseJSON( data );
 	             json.recordsTotal = json.countTotal;
@@ -821,10 +821,10 @@
     						  },		 
     			],
     			columns: [
-   		  			    { data: "orderrecordid" },
-   		  			    { data: "sendername" },
+   		  			    { data: "orderRecordId" },
+   		  			    { data: "senderName" },
    		  			    { data: "content" },
-   		  			    { data: "creattime" }
+   		  			    { data: "creatTime" }
     		    ]
   		});
 
@@ -915,8 +915,8 @@
         $("#endDate").val(dateformat);
       }
   	  
-  	  alert('&&&')
-  	  alert("${crmcase.startTime}")
+  	 
+  	
   	  if("${crmcase.startTime}"==1){
     	   $('#yes').attr('checked','true');
       }
@@ -948,11 +948,11 @@
           var destination = $(this).val();
           $.ajax({
               type: "post",
-              url: "${rootPath}case/getsales.do?destination="+destination,
+              url: "${rootPath}case/getSales.do?destination="+destination,
               data: destination,
               success: function(sales){
             	  var json = jQuery.parseJSON( sales );
-                  $("#salesid").select2({
+                  $("#salesId").select2({	
                       placeholder: '销售',
                       data: json
                   });

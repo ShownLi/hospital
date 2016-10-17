@@ -28,6 +28,8 @@
 						</div>
 						<!-- panel-btns -->
 						<h3 class="panel-title">订单列表</h3>
+						<input type="text" id="customerName" value="" />
+						<input type="button" id="searchBtn" value="搜索"/>						
 					</div>
 					<div class="panel-body">
 						<br />
@@ -207,6 +209,9 @@
 	var reason = ${reason};
 	
 		jQuery(document).ready(function() {
+			 
+		  
+	    
 
 			$(".nav-parent").eq(1).addClass("nav-active");
       		$(".nav-parent").eq(1).find(".children").show();
@@ -218,6 +223,10 @@
 			 	serverSide: true,
 			 	ajax: {
 			 		url: '${rootPath}order/list.do',
+			 		data:function ( order ) {
+					    order.customerName = $('#customerName').val();
+					},
+
 			 		dataFilter: function(data){
 			             var json = jQuery.parseJSON( data );
 			             json.recordsTotal = json.countTotal;
@@ -236,36 +245,42 @@
 			 	  	  },
 			 	    	targets: 7
 			 		},
-					{
-		                data: "status",
+			 		{
+			 			 data: "s",
 		                orderable: false,
 		                render: function ( data ) {
-		                	if(data){
-			                	for(var i=0;i < orderStatus.length;i++){
-			                		if(data==orderStatus[i].id){
-			                			return orderStatus[i].text
+	        				var r = "未知";
+	                		if(data!=null && typeof(data) != undefined){
+			                	for(var i=0;i <destination.length;i++){
+			                		//alert(destination[i].id+destination[i].text);
+			                		if(data==destination[i].id){
+			                			r = destination[i].text
 			                		}
 			                	}
 		                	}
-		                	else{return ""}
+		              		return r;
+		                	
 		                },
 		                  targets: 6
-					},
+					},	
 					{
-		                data: "destination",
+						 data: "status",
 		                orderable: false,
 		                render: function ( data ) {
-		                	if(data){
-			                	for(var i=0;i <destination.length;i++){
-			                		if(data==destination[i].id){
-			                			return destination[i].text
+		                	var r = "未知";
+		                	if(data!=null && typeof(data) != undefined){
+			                	for(var i=0;i < orderStatus.length;i++){
+			                		//alert(orderStatus[i].id+orderStatus[i].text);
+			                		if(data==orderStatus[i].id){
+			                			r = orderStatus[i].text
 			                		}
 			                	}
 		                	}
-		                	else{return ""}
+		                	return r;
 		                },
 		                  targets: 4
-					},					
+					},
+									
 			 	  {
 			 		  orderable: false,
 			 		  searchable: false,
@@ -283,6 +298,13 @@
 		         ]
 			 });
 			
+			  $('#searchBtn').on( 'click', function () {
+			    	alert($('#customerName').attr("value"));
+			        t.draw();
+			    } );
+		    
+		    
+			    
 			 $('#dataTable tbody').on( 'click', 'a.btn-success', function () {
 		         var data = t.row($(this).parents('tr')).data();
 		         edit($(this).attr('id'));
@@ -346,6 +368,10 @@
 	    	placeholder:"未成行原因",
 	    	data:reason
 	    })    
+	    
+	    
+
+	    
 		function deal_submit() {
 			var f = $("#form-deal").serialize();
 			$.post('${rootPath}order/orderDeal.do', f, function(result) {
