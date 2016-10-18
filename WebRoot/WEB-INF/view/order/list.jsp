@@ -28,8 +28,8 @@
 						</div>
 						<!-- panel-btns -->
 						<h3 class="panel-title">订单列表</h3>
-						<input type="text" id="customerName" value="" />
-						<input type="button" id="searchBtn" value="搜索"/>						
+						<!-- <input type="text" id="customerName" value="" />
+						<input type="button" id="searchBtn" value="搜索"/>		 -->				
 					</div>
 					<div class="panel-body">
 						<br />
