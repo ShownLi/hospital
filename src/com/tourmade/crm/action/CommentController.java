@@ -70,7 +70,6 @@ public class CommentController extends BaseSimpleFormController {
 	@RequestMapping(value = "/add.do")
 	@ResponseBody
 	public Json doAdd(HttpServletRequest request, HttpSession session, Model model, Comment comment) {
-
 		Json json = new Json();
 		try {
 			if(comment.getContent() != ""){

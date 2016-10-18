@@ -379,6 +379,7 @@
 				}
 			}, "JSON");
 		}
+		
 		function noDeal_submit() {
 			var f = $("#form-noDeal").serialize();
 			$.post('${rootPath}order/orderNoDeal.do', f, function(result) {

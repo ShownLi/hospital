@@ -27,7 +27,7 @@
 
 	</select>
 	
-	<insert id="saveComment" parameterType="Comment" flushCache="true" useGeneratedKeys="true" keyProperty="comment_id" keyColumn="GENERATED_KEY">
+	<insert id="saveComment" parameterType="Comment" flushCache="true" useGeneratedKeys="true" keyProperty="commentId" keyColumn="GENERATED_KEY">
 		insert into tm_comment(
 		comment_type,
 		object_id,

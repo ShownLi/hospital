@@ -80,12 +80,12 @@ public class CommentService extends BaseService {
 	 * @param id
 	 * @return
 	 */
-	public Comment getCommentById(int id) {
+	public Comment getCommentById(int commentId) {
 		Comment comment = null;
 		try {
-			comment = commentMapper.getCommentById(id);
+			comment = commentMapper.getCommentById(commentId);
 		} catch (Exception e) {
-			logger.error("CommentService.getCommentById() --> " + id + "-->" + e.getMessage());
+			logger.error("CommentService.getCommentById() --> " + commentId + "-->" + e.getMessage());
 			comment = null;
 		}
 		return comment;

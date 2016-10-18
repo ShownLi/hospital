@@ -26,10 +26,6 @@ public class AgencyService extends BaseService {
 
 	/**
 	 * 查询地接社数据，分页展示
-	 * 
-	 * @param agency
-	 * @param ph
-	 * @param request
 	 */
 	public QueryResult<Agency> queryAgency(Agency agency, PageHelper pageHelper, HttpServletRequest request) {
 
@@ -51,9 +47,6 @@ public class AgencyService extends BaseService {
 
 	/**
 	 * 新增地接社
-	 * 
-	 * @param agency
-	 * @return
 	 */
 	public int saveAgency(Agency agency) {
 
@@ -91,14 +84,14 @@ public class AgencyService extends BaseService {
 	 * @return
 	 */
 	public List<EntityList> getParameterInfo(String domain) {
-		List<EntityList> r = null;
+		List<EntityList> result = null;
 		try {
-			r = agencyMapper.getParameterInfo(domain);
+			result = agencyMapper.getParameterInfo(domain);
 		} catch (Exception e) {
 			logger.error("AgencyService.getParameterInfo() --> " + domain + "-->" + e.getMessage());
-			r = null;
+			result = null;
 		}
-		return r;
+		return result;
 	}
 	
 	/**
