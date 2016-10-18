@@ -34,12 +34,12 @@ public class CommentController extends BaseSimpleFormController {
 	public String list(Model model) {
 		String country = "country";
 		String language = "comment.language";
-		List<EntityList> v = service.getParameterInfo(country);
-		List<EntityList> w = service.getParameterInfo(language);
-		JSONArray countryresult = JSONArray.fromObject(v);
-		JSONArray languageresult = JSONArray.fromObject(w);
-		model.addAttribute("countryname",countryresult);
-		model.addAttribute("language",languageresult);
+		List<EntityList> countryList = service.getParameterInfo(country);
+		List<EntityList> languageList = service.getParameterInfo(language);
+		JSONArray countryResult = JSONArray.fromObject(countryList);
+		JSONArray languageResult = JSONArray.fromObject(languageList);
+		model.addAttribute("countryname",countryResult);
+		model.addAttribute("language",languageResult);
 		return "/comment/list";
 	}
 	
@@ -47,9 +47,8 @@ public class CommentController extends BaseSimpleFormController {
 	@ResponseBody
 	public String queryData(HttpServletRequest request, HttpSession session, Model model, Comment comment, String type,int id, PageHelper page) {
 
-		QueryResult<Comment> r = service.queryComment(comment, page, type ,id ,request);
-		//System.out.println("type = "+type+"\nid = "+id);
-		String result = JSONUtilS.object2json(r);
+		QueryResult<Comment> pageResult = service.queryComment(comment, page, type ,id ,request);
+		String result = JSONUtilS.object2json(pageResult);
 		return result;
 	}
 	
@@ -58,12 +57,12 @@ public class CommentController extends BaseSimpleFormController {
 		
 		String country = "country";
 		String language = "comment.language";
-		List<EntityList> u = service.getParameterInfo(country);
-		List<EntityList> v = service.getParameterInfo(language);
-		JSONArray countryresult = JSONArray.fromObject(u);
-		JSONArray  languageresult = JSONArray.fromObject(v);
-		model.addAttribute("country",countryresult);
-		model.addAttribute("language",languageresult);
+		List<EntityList> countryList = service.getParameterInfo(country);
+		List<EntityList> languageList = service.getParameterInfo(language);
+		JSONArray countryResult = JSONArray.fromObject(countryList);
+		JSONArray  languageResult = JSONArray.fromObject(languageList);
+		model.addAttribute("country",countryResult);
+		model.addAttribute("language",languageResult);
 		
 		return "/comment/add";
 	}
@@ -71,39 +70,38 @@ public class CommentController extends BaseSimpleFormController {
 	@RequestMapping(value = "/add.do")
 	@ResponseBody
 	public Json doAdd(HttpServletRequest request, HttpSession session, Model model, Comment comment) {
-
-		Json j = new Json();
+		Json json = new Json();
 		try {
 			if(comment.getContent() != ""){
 				service.saveComment(comment);
-				j.setSuccess(true);
+				json.setSuccess(true);
 			}
 			else{
-				j.setSuccess(false);
+				json.setSuccess(false);
 			}
 		} catch (Exception e) {
-			j.setSuccess(false);
+			json.setSuccess(false);
 			logger.error("CommentController.doAdd() --> " + comment.toString() + "\n" + e.getMessage());
 		}
 		
-		return j;
+		return json;
 	}
 	
 	@RequestMapping(value = "/edit.html", method = { RequestMethod.POST, RequestMethod.GET })
 	public String edit(Model model, String id) {
 		
 		if (null != id && !"".equals(id)) {
-			int i = Integer.parseInt(id);
-			Comment u = service.getCommentById(i);
+			int commentId = Integer.parseInt(id);
+			Comment comment = service.getCommentById(commentId);
 			String country = "country";
 			String language = "comment.language";
-			List<EntityList> v = service.getParameterInfo(country);
-			List<EntityList> w = service.getParameterInfo(language);
-			JSONArray countryresult = JSONArray.fromObject(v);
-			JSONArray languageresult = JSONArray.fromObject(w);
-			model.addAttribute("country",countryresult);
-			model.addAttribute("language",languageresult);
-			model.addAttribute("comment",u);
+			List<EntityList> countryList = service.getParameterInfo(country);
+			List<EntityList> languageList = service.getParameterInfo(language);
+			JSONArray countryResult = JSONArray.fromObject(countryList);
+			JSONArray languageResult = JSONArray.fromObject(languageList);
+			model.addAttribute("country",countryResult);
+			model.addAttribute("language",languageResult);
+			model.addAttribute("comment",comment);
 		}
 		return "/comment/edit";
 	}
@@ -112,39 +110,38 @@ public class CommentController extends BaseSimpleFormController {
 	@ResponseBody
 	public Json doEdit(HttpServletRequest request, HttpSession session, Model model, Comment comment) {
 
-		Json j = new Json();
+		Json json = new Json();
 		
 		try {
 			service.updateComment(comment);
-			j.setSuccess(true);
+			json.setSuccess(true);
 		} catch (Exception e) {
-			j.setSuccess(false);
+			json.setSuccess(false);
 			logger.error("CommentController.doEdit() --> " + comment.toString() + "\n" + e.getMessage());
 		}
 		
-		return j;
+		return json;
 	}
 	
 	@RequestMapping(value = "/del.do")
 	@ResponseBody
 	public Json doDel(HttpServletRequest request, HttpSession session, Model model, String id) {
 
-		Json j = new Json();
-		System.out.println("------>>>" + id);
+		Json json = new Json();
 		try {
 			if (null != id && !"".equals(id)) {
-				int i = Integer.parseInt(id);
-				service.deleteCommentById(i);
-				j.setSuccess(true);
+				int commentId = Integer.parseInt(id);
+				service.deleteCommentById(commentId);
+				json.setSuccess(true);
 			} else {
-				j.setSuccess(false);
+				json.setSuccess(false);
 			}
 		} catch (Exception e) {
-			j.setSuccess(false);
+			json.setSuccess(false);
 			logger.error("CommentController.doDel() --> " + id + "\n" + e.getMessage());
 		}
 		
-		return j;
+		return json;
 	}
 
 }

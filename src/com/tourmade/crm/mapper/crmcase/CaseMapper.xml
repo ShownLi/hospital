@@ -15,10 +15,10 @@
 		from tm_case u  
 		where u.isdel = 0 
 		order by u.creat_time desc
-		limit #{b},#{e}
+		limit #{start},#{length}
 	</select>
 
-	<select id="queryCaseFC" parameterType="Map" resultType="Case">
+	<select id="queryCasesByCustomerId" parameterType="Map" resultType="Case">
 		select
 			u.case_id as caseId,
 			u.customer_id as customerId,
@@ -30,7 +30,7 @@
 		from tm_case u  
 		where u.isdel = 0 and u.customer_id = #{customerId}
 		order by u.creat_time
-		limit #{b},#{e}
+		limit #{start},#{length}
 	</select>
 	
 	<select id="countCase" parameterType="Case" resultType="long">
@@ -308,8 +308,8 @@
 	
 	<select id="caseStatus" parameterType="int" resultType="int">
 		select count(u.status) from tm_order u
-		where	u.status != 4 
-		and u.case_id = #{id}
+		where u.status != 4 
+		and u.case_id = #{caseId}
 		and u.isdel = 0
 	</select>
 	

@@ -15,9 +15,9 @@
 			u.creat_time as creatTime,
 			u.isdel as isdel
 		from tm_order_record u  
-		where u.isdel = 0 and u.order_id = #{id}
+		where u.isdel = 0 and u.order_id = #{orderId}
 		order by u.creat_time desc
-		limit #{b},#{e}
+		limit #{start},#{length}
 	</select>
 
 	<select id="getOrderRecord" parameterType="Map" resultType="OrderRecord">
@@ -31,9 +31,9 @@
 			u.isdel as isdel
 		from tm_order_record u  
 		left join tm_order v on u.order_id = v.order_id
-		where u.isdel = 0 and v.case_id = #{id}
+		where u.isdel = 0 and v.case_id = #{orderId}
 		order by u.creat_time desc
-		limit #{b},#{e}
+		limit #{start},#{length}
 	</select>
 	
 	<select id="countOrderRecord" parameterType="OrderRecord" resultType="long">

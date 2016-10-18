@@ -35,25 +35,20 @@ public class CaseService extends BaseService {
 	 */
 	public QueryResult<Case> queryCase(Case crmcase, PageHelper ph, HttpServletRequest request) {
 
-		QueryResult<Case> r = new QueryResult<Case>();
+		QueryResult<Case> result = new QueryResult<Case>();
 		Map<String, Object> map = new HashMap<String, Object>();
 
-
-		
-//		map.put("customerid", customerid);
-		map.put("b", ph.getStart());
-		map.put("e", ph.getLength());
-//		map.put("s", ph.getSort());
-//		map.put("o", ph.getOrder());
+		map.put("start", ph.getStart());
+		map.put("length", ph.getLength());;
 
 		List<Case> data = caseMapper.queryCase(map);
 		long count = caseMapper.countCase(crmcase);
 			
-		r.setData(data);
-		r.setCountTotal(count);
-		r.setCountFiltered(count);
+		result.setData(data);
+		result.setCountTotal(count);
+		result.setCountFiltered(count);
 	
-		return r;
+		return result;
 	}
 
 	/**
@@ -66,25 +61,23 @@ public class CaseService extends BaseService {
 	 */
 	public QueryResult<Case> queryCaseFromCustomer(int customerId, PageHelper ph, HttpServletRequest request) {
 
-		QueryResult<Case> r = new QueryResult<Case>();
+		QueryResult<Case> result = new QueryResult<Case>();
 		Map<String, Object> map = new HashMap<String, Object>();
 
 
 		
 		map.put("customerId", customerId);
-		map.put("b", ph.getStart());
-		map.put("e", ph.getLength());
-//		map.put("s", ph.getSort());
-//		map.put("o", ph.getOrder());
+		map.put("start", ph.getStart());
+		map.put("length", ph.getLength());
 
-		List<Case> data = caseMapper.queryCaseFC(map);
+		List<Case> data = caseMapper.queryCasesByCustomerId(map);
 		long count = caseMapper.countCaseFC(customerId);
 			
-		r.setData(data);
-		r.setCountTotal(count);
-		r.setCountFiltered(count);
+		result.setData(data);
+		result.setCountTotal(count);
+		result.setCountFiltered(count);
 	
-		return r;
+		return result;
 	}
 	
 	/**
@@ -113,14 +106,14 @@ public class CaseService extends BaseService {
 	 * @return
 	 */
 	public Case getCaseById(int id) {
-		Case r = null;
+		Case crmcase = null;
 		try {
-			r = caseMapper.getCaseById(id);
+			crmcase = caseMapper.getCaseById(id);
 		} catch (Exception e) {
 			logger.error("CaseService.getCaseById() --> " + id + "-->" + e.getMessage());
-			r = null;
+			crmcase = null;
 		}
-		return r;
+		return crmcase;
 	}
 	
 	/**
@@ -130,14 +123,14 @@ public class CaseService extends BaseService {
 	 * @return
 	 */
 	public List<EntityList> getParameterInfo(String domain) {
-		List<EntityList> r = null;
+		List<EntityList> crmcase = null;
 		try {
-			r = caseMapper.getParameterInfo(domain);
+			crmcase = caseMapper.getParameterInfo(domain);
 		} catch (Exception e) {
 			logger.error("CaseService.getParameterInfo() --> " + domain + "-->" + e.getMessage());
-			r = null;
+			crmcase = null;
 		}
-		return r;
+		return crmcase;
 	}
 	
 	/**
@@ -147,29 +140,29 @@ public class CaseService extends BaseService {
 	 * @return
 	 */
 	public List<EntityList> getCustomer() {
-		List<EntityList> r = null;
+		List<EntityList> customerList = null;
 		try {
-			r = caseMapper.getCustomer();
+			customerList = caseMapper.getCustomer();
 		} catch (Exception e) {
 			logger.error("CaseService.getCustomer() --> -->" + e.getMessage());
-			r = null;
+			customerList = null;
 		}
-		return r;
+		return customerList;
 	}
 	
 	/**
-	 * 根据id获得客人信息
+	 * 根据id获得客人简单信息
 	 * @return
 	 */
 	public List<EntityList> getCustomerById(int customerId) {
-		List<EntityList> r = null;
+		List<EntityList> customer = null;
 		try {
-			r = caseMapper.getCustomerById(customerId);
+			customer = caseMapper.getCustomerById(customerId);
 		} catch (Exception e) {
 			logger.error("CaseService.getCustomer() --> -->" + e.getMessage());
-			r = null;
+			customer = null;
 		}
-		return r;
+		return customer;
 	}
 	
 	/**
@@ -178,14 +171,14 @@ public class CaseService extends BaseService {
 	 * @return
 	 */
 	public Customer getCustomerInfoById(int customerId) {
-		Customer cus = null;
+		Customer customer = null;
 		try{
-			cus=caseMapper.getCustomerInfoById(customerId);
+			customer=caseMapper.getCustomerInfoById(customerId);
 		} catch(Exception e) {
 			logger.error("CaseService.getCustomerInfo() --> -->"+e.getMessage());
-			cus = null;
+			customer = null;
 		}
-		return cus;
+		return customer;
 	}
 
 	
@@ -196,14 +189,14 @@ public class CaseService extends BaseService {
 	 * @return
 	 */
 	public List<EntityList> getUser() {
-		List<EntityList> r = null;
+		List<EntityList> userList = null;
 		try {
-			r = caseMapper.getUser();
+			userList = caseMapper.getUser();
 		} catch (Exception e) {
 			logger.error("CaseService.getUser() --> -->" + e.getMessage());
-			r = null;
+			userList = null;
 		}
-		return r;
+		return userList;
 	}
 	
 	/**
@@ -213,14 +206,14 @@ public class CaseService extends BaseService {
 	 * @return
 	 */
 	public List<EntityList> getAllUser() {
-		List<EntityList> r = null;
+		List<EntityList> users = null;
 		try {
-			r = caseMapper.getAllUser();
+			users = caseMapper.getAllUser();
 		} catch (Exception e) {
 			logger.error("CaseService.getUser() --> -->" + e.getMessage());
-			r = null;
+			users = null;
 		}
-		return r;
+		return users;
 	}
 	
 	/**
@@ -230,14 +223,14 @@ public class CaseService extends BaseService {
 	 * @return
 	 */
 	public List<EntityList> getSales() {
-		List<EntityList> r = null;
+		List<EntityList> sales = null;
 		try {
-			r = caseMapper.getSales();
+			sales = caseMapper.getSales();
 		} catch (Exception e) {
 			logger.error("CaseService.getSales() --> -->" + e.getMessage());
-			r = null;
+			sales = null;
 		}
-		return r;
+		return sales;
 	}
 	
 	/**
@@ -247,14 +240,14 @@ public class CaseService extends BaseService {
 	 * @return
 	 */
 	public List<EntityList> getSalesByAgency(String destination) {
-		List<EntityList> r = null;
+		List<EntityList> agencys = null;
 		try {
-			r = caseMapper.getSalesByAgency(destination);
+			agencys = caseMapper.getSalesByAgency(destination);
 		} catch (Exception e) {
 			logger.error("CaseService.getSalesByAgency() --> -->" + e.getMessage());
-			r = null;
+			agencys = null;
 		}
-		return r;
+		return agencys;
 	}
 	
 	/**
@@ -265,55 +258,55 @@ public class CaseService extends BaseService {
 	 */
 	public boolean updateCase(Case crmcase) {
 
-		boolean r = false;
+		boolean judge = false;
 
 		try {
-			Case u = caseMapper.getCaseById(crmcase.getCaseId());
-			if (u != null) {
-				u.setOperator(crmcase.getOperator());
-				u.setAdult(crmcase.getAdult());
-				u.setBaby(crmcase.getBaby());
-				u.setBudget(crmcase.getBudget());
-				u.setChildren(crmcase.getChildren());
-				u.setContactType(crmcase.getContactType());
-				u.setDestination(crmcase.getDestination());
-				u.setDuring(crmcase.getDuring());
-				u.setFlight(crmcase.getFlight());
-				u.setGuide(crmcase.getGuide());
-				u.setHotel(crmcase.getHotel());
-				u.setIpAddress(crmcase.getIpAddress());
-				u.setMeals(crmcase.getMeals());
-				u.setPassport(crmcase.getPassport());
-				u.setPreferLanguage(crmcase.getPreferLanguage());
-				u.setRequirement(crmcase.getRequirement());
-				u.setRoute(crmcase.getRoute());
-				u.setSalesId(crmcase.getSalesId());
-				u.setSource(crmcase.getSource());				
-				u.setSubmitType(crmcase.getSubmitType());
-				u.setTailormade(crmcase.getTailormade());
-				u.setStatus(crmcase.getStatus());
-				u.setVisa(crmcase.getVisa());
-				u.setWithwho(crmcase.getWithwho());
-				u.setStartTime(crmcase.getStartTime());
+			Case olderCase = caseMapper.getCaseById(crmcase.getCaseId());
+			if (olderCase != null) {
+				olderCase.setOperator(crmcase.getOperator());
+				olderCase.setAdult(crmcase.getAdult());
+				olderCase.setBaby(crmcase.getBaby());
+				olderCase.setBudget(crmcase.getBudget());
+				olderCase.setChildren(crmcase.getChildren());
+				olderCase.setContactType(crmcase.getContactType());
+				olderCase.setDestination(crmcase.getDestination());
+				olderCase.setDuring(crmcase.getDuring());
+				olderCase.setFlight(crmcase.getFlight());
+				olderCase.setGuide(crmcase.getGuide());
+				olderCase.setHotel(crmcase.getHotel());
+				olderCase.setIpAddress(crmcase.getIpAddress());
+				olderCase.setMeals(crmcase.getMeals());
+				olderCase.setPassport(crmcase.getPassport());
+				olderCase.setPreferLanguage(crmcase.getPreferLanguage());
+				olderCase.setRequirement(crmcase.getRequirement());
+				olderCase.setRoute(crmcase.getRoute());
+				olderCase.setSalesId(crmcase.getSalesId());
+				olderCase.setSource(crmcase.getSource());				
+				olderCase.setSubmitType(crmcase.getSubmitType());
+				olderCase.setTailormade(crmcase.getTailormade());
+				olderCase.setStatus(crmcase.getStatus());
+				olderCase.setVisa(crmcase.getVisa());
+				olderCase.setWithwho(crmcase.getWithwho());
+				olderCase.setStartTime(crmcase.getStartTime());
 				if(crmcase.getStartTime().equals("1")){
-					u.setStartDate(crmcase.getStartDate());
-					u.setEndDate(crmcase.getEndDate());
+					olderCase.setStartDate(crmcase.getStartDate());
+					olderCase.setEndDate(crmcase.getEndDate());
 				}
 				if(crmcase.getStartTime().equals("0")){
-					u.setStartMonth(crmcase.getStartMonth());
-					u.setDuring(crmcase.getDuring());
+					olderCase.setStartMonth(crmcase.getStartMonth());
+					olderCase.setDuring(crmcase.getDuring());
 				}
-				caseMapper.updateCase(u);
-				r = true;
+				caseMapper.updateCase(olderCase);
+				judge = true;
 			} else {
-				r = false;
+				judge = false;
 			}
 		} catch (Exception e) {
 			logger.error("CaseService.updateCase() --> " + crmcase + "-->" + e.getMessage());
-			r = false;
+			judge = false;
 		}
 
-		return r;
+		return judge;
 	}
 
 	/**
@@ -324,34 +317,34 @@ public class CaseService extends BaseService {
 	 */
 	public boolean case2order(int id) {
 
-		boolean r = false;
+		boolean judge = false;
 
 		try {
-			Case u = caseMapper.getCaseById(id);
-			if (u != null) {
-				u.setStatus("2");
-				caseMapper.updateCase(u);
-				r = true;
+			Case  crmcase= caseMapper.getCaseById(id);
+			if (crmcase != null) {
+				crmcase.setStatus("2");
+				caseMapper.updateCase(crmcase);
+				judge = true;
 			} else {
-				r = false;
+				judge = false;
 			}
 		} catch (Exception e) {
 			logger.error("CaseService.updateCase() --> " + id + "-->" + e.getMessage());
-			r = false;
+			judge = false;
 		}
 
-		return r;
+		return judge;
 	}
 	
 	/**
-	 * 新增询单
+	 * 根据询单id查询order表中同一caseId下的order.status!=4的数量
 	 * 
 	 * @param case
 	 * @return
 	 */
-	public int casestatus(int id) {
-		int i = caseMapper.caseStatus(id);
-		return i;
+	public int caseStatus(int caseId) {
+		int sum = caseMapper.caseStatus(caseId);
+		return sum;
 	}
 	/**
 	 * 询单失效
@@ -359,38 +352,38 @@ public class CaseService extends BaseService {
 	 * @param case_id
 	 * @return
 	 */
-	public boolean deleteCaseById(int caseid) {
+	public boolean deleteCaseById(int caseId) {
 
-		boolean r = false;
+		boolean judge = false;
 
 		try {
-			caseMapper.deleteCaseById(caseid);
-			r = true;
+			caseMapper.deleteCaseById(caseId);
+			judge = true;
 		} catch (Exception e) {
-			logger.error("CaseService.deleteCaseById() --> " + caseid + "-->" + e.getMessage());
-			r = false;
+			logger.error("CaseService.deleteCaseById() --> " + caseId + "-->" + e.getMessage());
+			judge = false;
 		}
 
-		return r;
+		return judge;
 	}
 	
-	public Case validateStartTime(Case u){
-		String startTime = u.getStartTime();
+	public Case validateStartTime(Case crmcase){
+		String startTime = crmcase.getStartTime();
 		if(startTime==null||startTime.isEmpty()||Integer.parseInt(startTime)!=1){
-			u.setStartTime("0");
+			crmcase.setStartTime("0");
 		}
-		return u;
+		return crmcase;
 	}
 
-	public Case getCaseByOrderId(int orderid) {
-		Case r = null;
+	public Case getCaseByOrderId(int orderId) {
+		Case crmcase = null;
 		try {
-			r = caseMapper.getCaseByOrderId(orderid);
+			crmcase = caseMapper.getCaseByOrderId(orderId);
 		} catch (Exception e) {
-			logger.error("CaseService.getCaseByOrderId() --> " + orderid + "-->" + e.getMessage());
-			r = null;
+			logger.error("CaseService.getCaseByOrderId() --> " + orderId + "-->" + e.getMessage());
+			crmcase = null;
 		}
-		return r;
+		return crmcase;
 	}
 
 }

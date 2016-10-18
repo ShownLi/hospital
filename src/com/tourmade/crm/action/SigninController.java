@@ -65,22 +65,22 @@ public class SigninController extends BaseSimpleFormController {
 	@RequestMapping(value = "/signin.do")
 	@ResponseBody
 	public Json dosignin(HttpServletRequest request, HttpSession session, Model model, User user) {
-		Json j = new Json();
+		Json json = new Json();
 		if (user.getLoginName() == null || user.getPwd() == null || user.getLoginName().trim().length() < 1
 				|| user.getPwd().trim().length() < 1) {
-			j.setMsg("用户名或密码为空");
+			json.setMsg("用户名或密码为空");
 		} else {
-			User u = service.signin(user);
-			if (null != u) {
-				j.setSuccess(true);
-				j.setMsg("登录成功");
-				request.getSession().setAttribute(Constants.LOGIN_KEY, u);
+			User realUser = service.signin(user);
+			if (null != realUser) {
+				json.setSuccess(true);
+				json.setMsg("登录成功");
+				request.getSession().setAttribute(Constants.LOGIN_KEY, realUser);
 			} else {
-				j.setMsg("用户名或密码错误");
+				json.setMsg("用户名或密码错误");
 			}
 		}
 
-		return j;
+		return json;
 	}
 
 }

@@ -91,33 +91,33 @@ public class CaseController extends BaseSimpleFormController {
 		String passport = "case.passport";
 		String visa = "case.visa";
 		String flight = "case.flight";
-		List<EntityList> v1 = service.getParameterInfo(country);
-		List<EntityList> v2 = service.getParameterInfo(language);
-		List<EntityList> v4 = service.getParameterInfo(withwho);
-		List<EntityList> v5 = service.getParameterInfo(hotel);
-		List<EntityList> v6 = service.getParameterInfo(meals);
-		List<EntityList> v7 = service.getParameterInfo(guide);
-		List<EntityList> v8 = service.getParameterInfo(status);
-		List<EntityList> v9 = service.getParameterInfo(source);
-		List<EntityList> v10 = service.getParameterInfo(tailormade);
-		List<EntityList> v11 = service.getParameterInfo(passport);
-		List<EntityList> v12 = service.getParameterInfo(visa);
-		List<EntityList> v13 = service.getParameterInfo(flight);
+		List<EntityList> countryList = service.getParameterInfo(country);
+		List<EntityList> languageList = service.getParameterInfo(language);
+		List<EntityList> withList = service.getParameterInfo(withwho);
+		List<EntityList> hotelList = service.getParameterInfo(hotel);
+		List<EntityList> mealList = service.getParameterInfo(meals);
+		List<EntityList> guideList = service.getParameterInfo(guide);
+		List<EntityList> statusList = service.getParameterInfo(status);
+		List<EntityList> sourceList = service.getParameterInfo(source);
+		List<EntityList> tailList = service.getParameterInfo(tailormade);
+		List<EntityList> passList = service.getParameterInfo(passport);
+		List<EntityList> visaList = service.getParameterInfo(visa);
+		List<EntityList> flightList = service.getParameterInfo(flight);
 		List<EntityList> customer = service.getCustomer();
 		List<EntityList> user = service.getUser();
 		List<EntityList> sales = service.getSales();
-		JSONArray countryResult = JSONArray.fromObject(v1);
-		JSONArray languageResult = JSONArray.fromObject(v2);
-		JSONArray withResult = JSONArray.fromObject(v4);
-		JSONArray hotelResult = JSONArray.fromObject(v5);
-		JSONArray mealsResult = JSONArray.fromObject(v6);
-		JSONArray guideResult = JSONArray.fromObject(v7);
-		JSONArray statusResult = JSONArray.fromObject(v8);
-		JSONArray sourceResult = JSONArray.fromObject(v9);
-		JSONArray tailormadeResult = JSONArray.fromObject(v10);
-		JSONArray passportResult = JSONArray.fromObject(v11);
-		JSONArray visaResult = JSONArray.fromObject(v12);
-		JSONArray flightResult = JSONArray.fromObject(v13);
+		JSONArray countryResult = JSONArray.fromObject(countryList);
+		JSONArray languageResult = JSONArray.fromObject(languageList);
+		JSONArray withResult = JSONArray.fromObject(withList);
+		JSONArray hotelResult = JSONArray.fromObject(hotelList);
+		JSONArray mealsResult = JSONArray.fromObject(mealList);
+		JSONArray guideResult = JSONArray.fromObject(guideList);
+		JSONArray statusResult = JSONArray.fromObject(statusList);
+		JSONArray sourceResult = JSONArray.fromObject(sourceList);
+		JSONArray tailormadeResult = JSONArray.fromObject(tailList);
+		JSONArray passportResult = JSONArray.fromObject(passList);
+		JSONArray visaResult = JSONArray.fromObject(visaList);
+		JSONArray flightResult = JSONArray.fromObject(flightList);
 		JSONArray customerResult = JSONArray.fromObject(customer);
 		JSONArray userResult = JSONArray.fromObject(user);
 		JSONArray salesResult = JSONArray.fromObject(sales);
@@ -212,18 +212,18 @@ public class CaseController extends BaseSimpleFormController {
 	@ResponseBody
 	public Json doAdd(HttpServletRequest request, HttpSession session, Model model, Case crmcase) {
 
-		Json j = new Json();
+		Json json = new Json();
 		
 		try {
 			service.saveCase(crmcase);
-			j.setObj(crmcase);
-			j.setSuccess(true);
+			json.setObj(crmcase);
+			json.setSuccess(true);
 		} catch (Exception e) {
-			j.setSuccess(false);
+			json.setSuccess(false);
 			logger.error("CaseController.doAdd() --> " + crmcase.toString() + "\n" + e.getMessage());
 		}
 		
-		return j;
+		return json;
 	}
 	
 	@RequestMapping(value = "/edit.html", method = { RequestMethod.POST, RequestMethod.GET })
@@ -249,18 +249,18 @@ public class CaseController extends BaseSimpleFormController {
 			String ageGroup = "customer.agegroup";
 			
 			
-			List<EntityList> v1 = service.getParameterInfo(country);
-			List<EntityList> v2 = service.getParameterInfo(language);
-			List<EntityList> v4 = service.getParameterInfo(withwho);
-			List<EntityList> v5 = service.getParameterInfo(hotel);
-			List<EntityList> v6 = service.getParameterInfo(meals);
-			List<EntityList> v7 = service.getParameterInfo(guide);
-			List<EntityList> v8 = service.getParameterInfo(status);
-			List<EntityList> v9 = service.getParameterInfo(source);
-			List<EntityList> v10 = service.getParameterInfo(tailormade);
-			List<EntityList> v11 = service.getParameterInfo(passport);
-			List<EntityList> v12 = service.getParameterInfo(visa);
-			List<EntityList> v13 = service.getParameterInfo(flight);
+			List<EntityList> countryList = service.getParameterInfo(country);
+			List<EntityList> languageList = service.getParameterInfo(language);
+			List<EntityList> withwhoList = service.getParameterInfo(withwho);
+			List<EntityList> hotelList = service.getParameterInfo(hotel);
+			List<EntityList> mealsList = service.getParameterInfo(meals);
+			List<EntityList> guideList = service.getParameterInfo(guide);
+			List<EntityList> statusList = service.getParameterInfo(status);
+			List<EntityList> sourceList = service.getParameterInfo(source);
+			List<EntityList> tailList = service.getParameterInfo(tailormade);
+			List<EntityList> passList = service.getParameterInfo(passport);
+			List<EntityList> visaList = service.getParameterInfo(visa);
+			List<EntityList> flightList = service.getParameterInfo(flight);
 			List<EntityList> customer = service.getCustomer();
 			List<EntityList> user = service.getUser();
 			List<EntityList> sales = service.getSales();
@@ -268,18 +268,18 @@ public class CaseController extends BaseSimpleFormController {
 			List<EntityList> ageGroupList = service.getParameterInfo(ageGroup);
 
 			
-			JSONArray countryResult = JSONArray.fromObject(v1);
-			JSONArray languageResult = JSONArray.fromObject(v2);
-			JSONArray withResult = JSONArray.fromObject(v4);
-			JSONArray hotelResult = JSONArray.fromObject(v5);
-			JSONArray mealsResult = JSONArray.fromObject(v6);
-			JSONArray guideResult = JSONArray.fromObject(v7);
-			JSONArray statusResult = JSONArray.fromObject(v8);
-			JSONArray sourceResult = JSONArray.fromObject(v9);
-			JSONArray tailormadeResult = JSONArray.fromObject(v10);
-			JSONArray passportResult = JSONArray.fromObject(v11);
-			JSONArray visaResult = JSONArray.fromObject(v12);
-			JSONArray flightResult = JSONArray.fromObject(v13);
+			JSONArray countryResult = JSONArray.fromObject(countryList);
+			JSONArray languageResult = JSONArray.fromObject(languageList);
+			JSONArray withResult = JSONArray.fromObject(withwhoList);
+			JSONArray hotelResult = JSONArray.fromObject(hotelList);
+			JSONArray mealsResult = JSONArray.fromObject(mealsList);
+			JSONArray guideResult = JSONArray.fromObject(guideList);
+			JSONArray statusResult = JSONArray.fromObject(statusList);
+			JSONArray sourceResult = JSONArray.fromObject(sourceList);
+			JSONArray tailormadeResult = JSONArray.fromObject(tailList);
+			JSONArray passportResult = JSONArray.fromObject(passList);
+			JSONArray visaResult = JSONArray.fromObject(visaList);
+			JSONArray flightResult = JSONArray.fromObject(flightList);
 			JSONArray customerResult = JSONArray.fromObject(customer);
 			JSONArray userResult = JSONArray.fromObject(user);
 			JSONArray salesResult = JSONArray.fromObject(sales);
@@ -308,8 +308,8 @@ public class CaseController extends BaseSimpleFormController {
 			model.addAttribute("ageGroup",ageGroupResult);
 			
 			String orderStatus = "order.status";
-			List<EntityList> w = service.getParameterInfo(orderStatus);
-			JSONArray orderStatusResult = JSONArray.fromObject(w);
+			List<EntityList> orderStatusList = service.getParameterInfo(orderStatus);
+			JSONArray orderStatusResult = JSONArray.fromObject(orderStatusList);
 			model.addAttribute("orderStatus",orderStatusResult);
 		}
 		return "/case/edit";
@@ -319,16 +319,16 @@ public class CaseController extends BaseSimpleFormController {
 	@ResponseBody
 	public Json doEdit(HttpServletRequest request, HttpSession session, Model model, Case crmcase) {
 
-		Json j = new Json();		
+		Json json = new Json();		
 		try {
 			service.updateCase(crmcase);
-			j.setSuccess(true);
+			json.setSuccess(true);
 		} catch (Exception e) {
-			j.setSuccess(false);
+			json.setSuccess(false);
 			logger.error("CaseController.doEdit() --> " + crmcase.toString() + "\n" + e.getMessage());
 		}
 		
-		return j;
+		return json;
 	}
 	
 	//添加询单时 ，选择目的地及地接社，  目的地与销售联动
@@ -337,6 +337,7 @@ public class CaseController extends BaseSimpleFormController {
 	public List<EntityList> getSales(Model model, String destination) {
 		
 		List<EntityList> sales = service.getSalesByAgency(destination);
+		
 		return sales;
 	}
 	
@@ -344,21 +345,21 @@ public class CaseController extends BaseSimpleFormController {
 	@ResponseBody
 	public Json doDel(HttpServletRequest request, HttpSession session, Model model, String id) {
 
-		Json j = new Json();
+		Json json = new Json();
 		try {
 			if (null != id && !"".equals(id)) {
 				int caseId = Integer.parseInt(id);
 				service.deleteCaseById(caseId);
-				j.setSuccess(true);
+				json.setSuccess(true);
 			} else {
-				j.setSuccess(false);
+				json.setSuccess(false);
 			}
 		} catch (Exception e) {
-			j.setSuccess(false);
+			json.setSuccess(false);
 			logger.error("CaseController.doDel() --> " + id + "\n" + e.getMessage());
 		}
 		
-		return j;
+		return json;
 	}
 
 }

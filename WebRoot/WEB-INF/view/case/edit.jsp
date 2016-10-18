@@ -788,10 +788,10 @@
 	   							  }
     						],
       	  columns: [
-      			    { data: "commentid" },
-      			    { data: "username" },
+      			    { data: "commentId" },
+      			    { data: "userName" },
       			    { data: "content" },
-      			    { data: "creattime" }
+      			    { data: "creatTime" }
       		]
   		});
   		

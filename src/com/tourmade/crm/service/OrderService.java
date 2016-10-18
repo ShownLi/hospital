@@ -44,22 +44,20 @@ public class OrderService extends BaseService {
 	 */
 	public QueryResult<Order> queryOrder(Order order, PageHelper ph, HttpServletRequest request) {
 
-		QueryResult<Order> r = new QueryResult<Order>();
+		QueryResult<Order> length = new QueryResult<Order>();
 		Map<String, Object> map = new HashMap<String, Object>();
 			
-		map.put("b", ph.getStart());
-		map.put("e", ph.getLength());
-//		map.put("s", ph.getSort());
-//		map.put("o", ph.getOrder());
+		map.put("start", ph.getStart());
+		map.put("length", ph.getLength());
 
 		List<Order> data = orderMapper.queryOrder(map);
 		long count = orderMapper.countOrder(order);
 			
-		r.setData(data);
-		r.setCountTotal(count);
-		r.setCountFiltered(count);
+		length.setData(data);
+		length.setCountTotal(count);
+		length.setCountFiltered(count);
 	
-		return r;
+		return length;
 	}
 
 	/**
@@ -72,23 +70,21 @@ public class OrderService extends BaseService {
 	 */
 	public QueryResult<Order> queryOrderByCaseId(int caseId, PageHelper ph, HttpServletRequest request) {
 
-		QueryResult<Order> r = new QueryResult<Order>();
+		QueryResult<Order> result = new QueryResult<Order>();
 		Map<String, Object> map = new HashMap<String, Object>();
 			
-		map.put("id", caseId);
-		map.put("b", ph.getStart());
-		map.put("e", ph.getLength());
-//		map.put("s", ph.getSort());
-//		map.put("o", ph.getOrder());
+		map.put("caseId", caseId);
+		map.put("start", ph.getStart());
+		map.put("length", ph.getLength());
 
 		List<Order> data = orderMapper.queryOrderByCaseId(map);
 		long count = orderMapper.countOrderByCaseId(caseId);
 			
-		r.setData(data);
-		r.setCountTotal(count);
-		r.setCountFiltered(count);
+		result.setData(data);
+		result.setCountTotal(count);
+		result.setCountFiltered(count);
 	
-		return r;
+		return result;
 	}
 	
 	/**
@@ -97,8 +93,8 @@ public class OrderService extends BaseService {
 	 * @param order
 	 * @return
 	 */
-	public boolean validatemail(int id) {
-		String e = orderMapper.validatemail(id);
+	public boolean validatemail(int customerId) {
+		String e = orderMapper.validatemail(customerId);
 		if(null == e | "".equals(e)){
 			return false;
 		}
@@ -113,8 +109,8 @@ public class OrderService extends BaseService {
 	 * @param order
 	 * @return
 	 */
-	public boolean validatePortalId(int id) {
-		String s = orderMapper.validatePortalId(id);
+	public boolean validatePortalId(int customerId) {
+		String s = orderMapper.validatePortalId(customerId);
 		if(null == s || "".equals(s) || "null".equals(s)){
 			return false;
 		}
@@ -319,14 +315,14 @@ public class OrderService extends BaseService {
 	 * @return
 	 */
 	public Order getInfo(Order order) {
-		Order r = null;
+		Order oldOrder = null;
 		try {
-			r = orderMapper.getInfo(order);
+			oldOrder = orderMapper.getInfo(order);
 		} catch (Exception e) {
 			logger.error("OrderService.getInfo() --> " + order + "-->" + e.getMessage());
-			r = null;
+			oldOrder = null;
 		}
-		return r;
+		return oldOrder;
 	}
 	
 	/**
@@ -352,15 +348,15 @@ public class OrderService extends BaseService {
 	 * @param id
 	 * @return
 	 */
-	public Order getOrderById(int id) {
-		Order r = null;
+	public Order getOrderById(int orderId) {
+		Order oldOrder = null;
 		try {
-			r = orderMapper.getOrderById(id);
+			oldOrder = orderMapper.getOrderById(orderId);
 		} catch (Exception e) {
-			logger.error("OrderService.getOrderById() --> " + id + "-->" + e.getMessage());
-			r = null;
+			logger.error("OrderService.getOrderById() --> " + orderId + "-->" + e.getMessage());
+			oldOrder = null;
 		}
-		return r;
+		return oldOrder;
 	}
 	
 	/**
@@ -369,15 +365,15 @@ public class OrderService extends BaseService {
 	 * @param id
 	 * @return
 	 */
-	public Customer getCustomerById(int id) {
-		Customer r = null;
+	public Customer getCustomerById(int customerId) {
+		Customer customer = null;
 		try {
-			r = orderMapper.getCustomerById(id);
+			customer = orderMapper.getCustomerById(customerId);
 		} catch (Exception e) {
-			logger.error("OrderService.getOrderById() --> " + id + "-->" + e.getMessage());
-			r = null;
+			logger.error("OrderService.getOrderById() --> " + customerId + "-->" + e.getMessage());
+			customer = null;
 		}
-		return r;
+		return customer;
 	}
 	
 	/**
@@ -386,15 +382,15 @@ public class OrderService extends BaseService {
 	 * @param id
 	 * @return
 	 */
-	public Case getCaseById(int id) {
-		Case r = null;
+	public Case getCaseById(int caseId) {
+		Case crmcase = null;
 		try {
-			r = orderMapper.getCaseById(id);
+			crmcase = orderMapper.getCaseById(caseId);
 		} catch (Exception e) {
-			logger.error("OrderService.getOrderById() --> " + id + "-->" + e.getMessage());
-			r = null;
+			logger.error("OrderService.getOrderById() --> " + caseId+ "-->" + e.getMessage());
+			crmcase = null;
 		}
-		return r;
+		return crmcase;
 	}
 	
 	/**
@@ -404,14 +400,14 @@ public class OrderService extends BaseService {
 	 * @return
 	 */
 	public List<EntityList> getParameterInfo(String domain) {
-		List<EntityList> r = null;
+		List<EntityList> parameters = null;
 		try {
-			r = orderMapper.getParameterInfo(domain);
+			parameters = orderMapper.getParameterInfo(domain);
 		} catch (Exception e) {
 			logger.error("OrderService.getParameterInfo() --> " + domain + "-->" + e.getMessage());
-			r = null;
+			parameters = null;
 		}
-		return r;
+		return parameters;
 	}
 	
 	/**
@@ -464,30 +460,30 @@ public class OrderService extends BaseService {
 	 * @param order_id
 	 * @return
 	 */
-	public boolean deleteOrderById(int order_id) {
+	public boolean deleteOrderById(int orderId) {
 
-		boolean r = false;
+		boolean judge = false;
 
 		try {
-			orderMapper.deleteOrderById(order_id);
-			r = true;
+			orderMapper.deleteOrderById(orderId);
+			judge = true;
 		} catch (Exception e) {
-			logger.error("OrderService.deleteOrderById() --> " + order_id + "-->" + e.getMessage());
-			r = false;
+			logger.error("OrderService.deleteOrderById() --> " + orderId + "-->" + e.getMessage());
+			judge = false;
 		}
 
-		return r;
+		return judge;
 	}
 
-	public Customer getCustomerByCaseId(int caseid) {
-		Customer r = null;
+	public Customer getCustomerByCaseId(int caseId) {
+		Customer customer = null;
 		try {
-			r = orderMapper.getCustomerByCaseId(caseid);
+			customer = orderMapper.getCustomerByCaseId(caseId);
 		} catch (Exception e) {
-			logger.error("OrderService.getOrderById() --> " + caseid + "-->" + e.getMessage());
-			r = null;
+			logger.error("OrderService.getOrderById() --> " + caseId + "-->" + e.getMessage());
+			customer = null;
 		}
-		return r;
+		return customer;
 	}
 	
 

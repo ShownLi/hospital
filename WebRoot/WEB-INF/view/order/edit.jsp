@@ -549,20 +549,20 @@
 			},
 		columnDefs: [
 					  {
-						  data: "creattime",
+						  data: "creatTime",
 						  render: function ( data, type, full, meta ) {
-							  var creattime = new Date(data.time);
-		                    return creattime.format("yyyy/MM/dd");
+							 var creatTime = new Date(data.time);
+		                    return creatTime.format("yyyy/MM/dd");
 		                },
 		                targets: 3
 					  },		 
 
 			],
 		columns: [
-	  			    { data: "commentid" },
+	  			    { data: "commentId" },
 	  			    { data: "userName" },
 	  			    { data: "content" },
-	  			    { data: "creattime" }
+	  			    { data: "creatTime" }
 	    ]
 		});
 	    
@@ -583,10 +583,10 @@
 			},
 		columnDefs: [
 					  {
-						  data: "creattime",
+						  data: "creatTime",
 						  render: function ( data, type, full, meta ) {
-							  var creattime = new Date(data.time);
-		                    return creattime.format("yyyy/MM/dd");
+							var creatTime = new Date(data.time);
+		                    return creatTime.format("yyyy/MM/dd");
 		                },
 		                targets: 3
 					  },		 
@@ -681,7 +681,6 @@
 		async:false
 	}); */
 	function noDeal_submit() {
-<<<<<<< HEAD
 		var f1 = $("#form-noDeal").serialize();
 		try{
  			$.post('${rootPath}order/orderNoDeal.do?rand='+Math.random(), f1, function(result) {
@@ -702,52 +701,36 @@
 			alert(e);
 		};
 		alert("页面正在加载，请稍后...");
-		
-=======
-		var f = $("#form-noDeal").serialize();
-		
-		$.post('${rootPath}order/orderNoDeal.do', f, function(result) {
-//			console.log(result)
-			var rmsg = result.msg;			
-			if (result.success) {
-	//			alert("^^^^^^")
-				setTimeout('',1000);
-				window.parent.location = "${rootPath}order/edit.html?id=${order.orderId}"
-			} 
-			else {
-				$("#msgModal").modal('show');
-			}
-		}, "JSON");
-		setTimeout('',1000);
->>>>>>> refs/remotes/origin/master
 	}
+	
 	function updateDeal_submit() {
 		var f = $("#form-updateDeal").serialize();
 		$.post('${rootPath}order/updateDeal.do', f, function(result) {
-			var rmsg = result.msg;
+	//		var rmsg = result.msg;
 			if (result.success) {
-				window.parent.location = "${rootPath}order/edit.html?id=${order.orderId}";
+				window.location.href = "${rootPath}order/edit.html?id=${order.orderId}";
 			} 
 			else {
 				$("#msgModal").modal('show');
 			}
 		}, "JSON");
+		alert("");
 	}
 	function updateNoDeal_submit() {
 		var f = $("#form-updateNoDeal").serialize();
-		$.post('${rootPath}order/updateDeal.do', f, function(result) {
-			var rmsg = result.msg;
+		$.post('${rootPath}order/orderNoDeal.do', f, function(result) {
 			if (result.success) {
-				window.parent.location = "${rootPath}order/edit.html?id=${order.orderId}";
+				window.location.href = "${rootPath}order/edit.html?id=${order.orderId}";
 			} 
 			else {
 				$("#msgModal").modal('show');
 			}
 		}, "JSON");
-		 alert("jump ok");
+		
+		 alert("");
 	}
 	function comment_submit() {
-		var f = $("#comment").serialize();
+		var f = $("#form-comment").serialize();
 		$.post('${rootPath}comment/add.do', f, function(result) {
 			var rmsg = result.msg;
 			if (result.success) {
@@ -757,16 +740,18 @@
 				$("#msgModal").modal('show');
 			}
 		}, "JSON");
+		alert("")
 	}
 	//成团日期格式转换
 	var groupTime = $("#groupTime").val();	
+	//alert(groupTime)
   if(groupTime !== ""){
       var dateformat = new Date(groupTime).toISOString("yyyy-MM-dd hh:mm:ss.S").substring(0,10);
       $("#groupTime").val(dateformat)
   }
 
 	//出发日期格式转换
-	var startdate = $("#startDate").val();	
+	var startDate = $("#startDate").val();	
   if(startDate !== ""){
     	var dateformat = new Date(startDate).toISOString("yyyy-MM-dd hh:mm:ss.S").substring(0,10);
     	$("#startDate").val(dateformat)

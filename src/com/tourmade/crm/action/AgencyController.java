@@ -70,28 +70,27 @@ public class AgencyController extends BaseSimpleFormController {
 	@RequestMapping(value = "/add.do")
 	@ResponseBody
 	public Json doAdd(HttpServletRequest request, HttpSession session, Model model, Agency agency) {
-		System.out.println(agency.getCountry()+"^^^"+agency.getLanguage());
 		
-		Json j = new Json();
+		Json json = new Json();
 		
 		try {
 			service.saveAgency(agency);
-			j.setObj(agency);
-			j.setSuccess(true);
+			json.setObj(agency);
+			json.setSuccess(true);
 		} catch (Exception e) {
-			j.setSuccess(false);
+			json.setSuccess(false);
 			logger.error("AgencyController.doAdd() --> " + agency.toString() + "\n" + e.getMessage());
 		}
 		
-		return j;
+		return json;
 	}
 	
 	@RequestMapping(value = "/edit.html", method = { RequestMethod.POST, RequestMethod.GET })
 	public String edit(Model model, String id) {
-		
+		System.out.println(id+"^^^");
 		if (null != id && !"".equals(id)) {
-			Integer i = Integer.valueOf(id);
-			Agency agency = service.getAgencyById(i);
+			int agencyId = Integer.parseInt(id);
+			Agency agency = service.getAgencyById(agencyId);
 			String country = "country";
 			String language = "agency.language";
 			List<EntityList> countryList = service.getParameterInfo(country);
@@ -109,37 +108,36 @@ public class AgencyController extends BaseSimpleFormController {
 	@ResponseBody
 	public Json doEdit(HttpServletRequest request, HttpSession session, Model model, Agency agency) {
 
-		Json j = new Json();
-		
+		Json json = new Json();		
 		try {
 			service.updateAgency(agency);
-			j.setSuccess(true);
+			json.setSuccess(true);
 		} catch (Exception e) {
-			j.setSuccess(false);
+			json.setSuccess(false);
 			logger.error("AgencyController.doEdit() --> " + agency.toString() + "\n" + e.getMessage());
 		}
 		
-		return j;
+		return json;
 	}
 	
 	@RequestMapping(value = "/del.do")
 	@ResponseBody
 	public Json doDel(HttpServletRequest request, HttpSession session, Model model, String id) {
 
-		Json j = new Json();
+		Json json = new Json();
 		try {
 			if (null != id && !"".equals(id)) {
-				int i = Integer.parseInt(id);
-				service.deleteAgencyById(i);
-				j.setSuccess(true);
+				int agencyId = Integer.parseInt(id);
+				service.deleteAgencyById(agencyId);
+				json.setSuccess(true);
 			} else {
-				j.setSuccess(false);
+				json.setSuccess(false);
 			}
 		} catch (Exception e) {
-			j.setSuccess(false);
+			json.setSuccess(false);
 			logger.error("AgencyController.doDel() --> " + id + "\n" + e.getMessage());
 		}		
-		return j;
+		return json;
 	}
 
 }

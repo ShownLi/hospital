@@ -12,7 +12,7 @@ public interface CaseMapper extends BaseMapper {
 	
 	public List<Case> queryCase(Map<String, Object> params);
 	
-	public List<Case> queryCaseFC(Map<String, Object> params);
+	public List<Case> queryCasesByCustomerId(Map<String, Object> params);
 	
 	public long countCase(Case crmcase);
 	
@@ -22,11 +22,11 @@ public interface CaseMapper extends BaseMapper {
 
 	public void updateCase(Case crmcase);
 
-	public int caseStatus(int id);
+	public int caseStatus(int caseId);
 	
-	public void deleteCaseById(int caseid);
+	public void deleteCaseById(int caseId);
 	
-	public Case getCaseById(int caseid);
+	public Case getCaseById(int caseId);
 	
 	public List<EntityList> getParameterInfo(String domain);
 	

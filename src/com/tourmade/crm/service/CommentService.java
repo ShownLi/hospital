@@ -34,27 +34,25 @@ public class CommentService extends BaseService {
 	 */
 	public QueryResult<Comment> queryComment(Comment comment, PageHelper ph, String type, int id, HttpServletRequest request) {
 
-		QueryResult<Comment> r = new QueryResult<Comment>();
+		QueryResult<Comment> result = new QueryResult<Comment>();
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 			
-		map.put("b", ph.getStart());
-		map.put("e", ph.getLength());
-		map.put("type", type);
-		map.put("id", id);
-//		map.put("s", ph.getSort());
-//		map.put("o", ph.getOrder());
+		map.put("start", ph.getStart());
+		map.put("length", ph.getLength());
+		map.put("commentType", type);
+		map.put("objectId", id);
 
 		List<Comment> data = commentMapper.queryComment(map);
 		comment.setCommentType(type);
 		comment.setObjectId(id);
 		long count = commentMapper.countComment(comment);
 			
-		r.setData(data);
-		r.setCountTotal(count);
-		r.setCountFiltered(count);
+		result.setData(data);
+		result.setCountTotal(count);
+		result.setCountFiltered(count);
 	
-		return r;
+		return result;
 	}
 
 	/**
@@ -82,15 +80,15 @@ public class CommentService extends BaseService {
 	 * @param id
 	 * @return
 	 */
-	public Comment getCommentById(int id) {
-		Comment r = null;
+	public Comment getCommentById(int commentId) {
+		Comment comment = null;
 		try {
-			r = commentMapper.getCommentById(id);
+			comment = commentMapper.getCommentById(commentId);
 		} catch (Exception e) {
-			logger.error("CommentService.getCommentById() --> " + id + "-->" + e.getMessage());
-			r = null;
+			logger.error("CommentService.getCommentById() --> " + commentId + "-->" + e.getMessage());
+			comment = null;
 		}
-		return r;
+		return comment;
 	}
 	
 	/**
@@ -100,14 +98,14 @@ public class CommentService extends BaseService {
 	 * @return
 	 */
 	public List<EntityList> getParameterInfo(String domain) {
-		List<EntityList> r = null;
+		List<EntityList> parameterList = null;
 		try {
-			r = commentMapper.getParameterInfo(domain);
+			parameterList = commentMapper.getParameterInfo(domain);
 		} catch (Exception e) {
 			logger.error("CommentService.getParameterInfo() --> " + domain + "-->" + e.getMessage());
-			r = null;
+			parameterList = null;
 		}
-		return r;
+		return parameterList;
 	}
 	
 	/**
@@ -118,44 +116,43 @@ public class CommentService extends BaseService {
 	 */
 	public boolean updateComment(Comment comment) {
 
-		boolean r = false;
+		boolean judge = false;
 
 		try {
-			Comment u = commentMapper.getCommentById(comment.getCommentId());
-			if (u != null) {
-				//u.setName(comment.getName());
-				commentMapper.updateComment(u);
-				r = true;
+			Comment oldComment = commentMapper.getCommentById(comment.getCommentId());
+			if (oldComment!= null) {
+				commentMapper.updateComment(oldComment);
+				judge = true;
 			} else {
-				r = false;
+				judge = false;
 			}
 		} catch (Exception e) {
 			logger.error("CommentService.updateComment() --> " + comment + "-->" + e.getMessage());
-			r = false;
+			judge = false;
 		}
 
-		return r;
+		return judge;
 	}
 
 	/**
 	 * 删除注释（假删除）
 	 * 
-	 * @param comment_id
+	 * @param commentId
 	 * @return
 	 */
-	public boolean deleteCommentById(int comment_id) {
+	public boolean deleteCommentById(int commentId) {
 
-		boolean r = false;
+		boolean judge = false;
 
 		try {
-			commentMapper.deleteCommentById(comment_id);
-			r = true;
+			commentMapper.deleteCommentById(commentId);
+			judge = true;
 		} catch (Exception e) {
-			logger.error("CommentService.deleteCommentById() --> " + comment_id + "-->" + e.getMessage());
-			r = false;
+			logger.error("CommentService.deleteCommentById() --> " + commentId + "-->" + e.getMessage());
+			judge = false;
 		}
 
-		return r;
+		return judge;
 	}
 
 }

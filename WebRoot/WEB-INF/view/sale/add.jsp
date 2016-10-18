@@ -15,14 +15,6 @@
 				<h2>
 					<i class="fa fa-group"></i> 销售管理 <span>新增销售</span>
 				</h2>
-				<!-- <div class="breadcrumb-wrapper">
-					<span class="label">你在这里:</span>
-					<ol class="breadcrumb">
-						<li><a href="＃">CRM</a></li>
-						<li><a href="${rootPath }sale/list.html">销售管理</a></li>
-						<li class="active">新增销售</li>
-					</ol>
-				</div> -->
 			</div>
 
 			<div class="contentpanel">
@@ -71,11 +63,6 @@
 		</div><!-- panel-footer -->
     </form>   
     </div><!-- panel -->
-
-
-
-
-
 			</div>
 
 		</div>

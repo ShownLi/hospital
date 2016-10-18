@@ -28,7 +28,7 @@
 		from tm_order u  
 		where u.isdel = 0 
 		order by u.creat_time desc
-		limit #{b},#{e}
+		limit #{start},#{length}
 	</select>
 
 	<select id="queryOrderByCaseId" parameterType="Map" resultType="Order">
@@ -44,9 +44,9 @@
 			u.budget as budget,
 			u.status as status
 		from tm_order u  
-		where u.isdel = 0 and u.case_id = #{id}
+		where u.isdel = 0 and u.case_id = #{caseId}
 		order by u.creat_time 
-		limit #{b},#{e}
+		limit #{start},#{length}
 	</select>
 	
 	<select id="countOrder" parameterType="Order" resultType="long">
@@ -70,13 +70,13 @@
 	
 	<select id="validatemail" parameterType="int" resultType="String">
 		select email from tm_customer 
-		where customer_id = #{id}
+		where customer_id = #{customerId}
 		and isdel = 0
 	</select>
 	
 	<select id="validatePortalId" parameterType="int" resultType="String">
 		select customer_portal_id from tm_customer 
-		where customer_id = #{id}
+		where customer_id = #{customerId}
 		and isdel = 0
 	</select>
 	

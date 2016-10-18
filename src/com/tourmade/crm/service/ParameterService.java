@@ -31,13 +31,13 @@ public class ParameterService extends BaseService {
 	 * @param request
 	 * @return
 	 */
-	public QueryResult<Parameter> queryParameter(Parameter parameter, PageHelper ph, HttpServletRequest request) {
+	public QueryResult<Parameter> queryParameter(Parameter parameter, PageHelper pageHelper, HttpServletRequest request) {
 
 		QueryResult<Parameter> pageResult = new QueryResult<Parameter>();
 		Map<String, Object> map = new HashMap<String, Object>();
 
-		map.put("start", ph.getStart());
-		map.put("length", ph.getLength());
+		map.put("start", pageHelper.getStart());
+		map.put("length", pageHelper.getLength());
 
 		List<Parameter> data = parameterMapper.queryParameter(map);
 		long count = parameterMapper.countParameter(parameter);
@@ -73,12 +73,12 @@ public class ParameterService extends BaseService {
 	 * @param id
 	 * @return
 	 */
-	public Parameter getParameterById(int id) {
+	public Parameter getParameterById(int parameterId) {
 		Parameter parameter = null;
 		try {
-			parameter = parameterMapper.getParameterById(id);
+			parameter = parameterMapper.getParameterById(parameterId);
 		} catch (Exception e) {
-			logger.error("ParameterService.getParameterById() --> " + id + "-->" + e.getMessage());
+			logger.error("ParameterService.getParameterById() --> " + parameterId + "-->" + e.getMessage());
 			parameter = null;
 		}
 		return parameter;
@@ -93,15 +93,15 @@ public class ParameterService extends BaseService {
 	public void updateParameter(Parameter parameter) {
 
 		try {
-			Parameter u = parameterMapper.getParameterById(parameter.getParameterId());
-			if (u != null) {
-/*				u.setDomain(parameter.getDomain());
-				u.setValue(parameter.getValue());
-				u.setChinese(parameter.getChinese());
-				u.setEnglish(parameter.getEnglish());
-				u.setDepict(parameter.getDepict());
-				u.setSort(parameter.getSort());
-				u.setIsdisplay(parameter.getIsdisplay());*/
+			Parameter oldParameter = parameterMapper.getParameterById(parameter.getParameterId());
+			if (oldParameter != null) {
+				oldParameter.setDomain(parameter.getDomain());
+				oldParameter.setValue(parameter.getValue());
+				oldParameter.setChinese(parameter.getChinese());
+				oldParameter.setEnglish(parameter.getEnglish());
+				oldParameter.setDepict(parameter.getDepict());
+				oldParameter.setSort(parameter.getSort());
+				oldParameter.setIsdisplay(parameter.getIsdisplay());
 				parameterMapper.updateParameter(parameter);
 			}
 		} catch (Exception e) {

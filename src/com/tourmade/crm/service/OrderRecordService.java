@@ -37,11 +37,9 @@ public class OrderRecordService extends BaseService {
 		QueryResult<OrderRecord> r = new QueryResult<OrderRecord>();
 		Map<String, Object> map = new HashMap<String, Object>();
 	
-		map.put("b", ph.getStart());
-		map.put("e", ph.getLength());
-		map.put("id", orderid);
-//		map.put("s", ph.getSort());
-//		map.put("o", ph.getOrder());
+		map.put("start", ph.getStart());
+		map.put("length", ph.getLength());
+		map.put("orderId", orderid);
 
 		List<OrderRecord> data = orderrecordMapper.queryOrderRecord(map);
 		long count = orderrecordMapper.countOrderRecordByOrderid(orderid);
@@ -61,19 +59,17 @@ public class OrderRecordService extends BaseService {
 	 * @param request
 	 * @return
 	 */
-	public QueryResult<OrderRecord> getOrderRecord(OrderRecord orderrecord, PageHelper ph, int caseid, HttpServletRequest request) {
+	public QueryResult<OrderRecord> getOrderRecord(OrderRecord orderrecord, PageHelper ph, int caseId, HttpServletRequest request) {
 
 		QueryResult<OrderRecord> r = new QueryResult<OrderRecord>();
 		Map<String, Object> map = new HashMap<String, Object>();
 	
-		map.put("b", ph.getStart());
-		map.put("e", ph.getLength());
-		map.put("id", caseid);
-//		map.put("s", ph.getSort());
-//		map.put("o", ph.getOrder());
+		map.put("start", ph.getStart());
+		map.put("length", ph.getLength());
+		map.put("caseId", caseId);
 
 		List<OrderRecord> data = orderrecordMapper.getOrderRecord(map);
-		long count = orderrecordMapper.countOrderRecordByCaseid(caseid);
+		long count = orderrecordMapper.countOrderRecordByCaseid(caseId);
 			
 		r.setData(data);
 		r.setCountTotal(count);
