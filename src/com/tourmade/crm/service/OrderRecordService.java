@@ -34,7 +34,7 @@ public class OrderRecordService extends BaseService {
 	 */
 	public QueryResult<OrderRecord> queryOrderRecord(OrderRecord orderrecord, PageHelper ph, int orderid, HttpServletRequest request) {
 
-		QueryResult<OrderRecord> r = new QueryResult<OrderRecord>();
+		QueryResult<OrderRecord> result = new QueryResult<OrderRecord>();
 		Map<String, Object> map = new HashMap<String, Object>();
 	
 		map.put("start", ph.getStart());
@@ -44,11 +44,11 @@ public class OrderRecordService extends BaseService {
 		List<OrderRecord> data = orderrecordMapper.queryOrderRecord(map);
 		long count = orderrecordMapper.countOrderRecordByOrderid(orderid);
 			
-		r.setData(data);
-		r.setCountTotal(count);
-		r.setCountFiltered(count);
+		result.setData(data);
+		result.setCountTotal(count);
+		result.setCountFiltered(count);
 	
-		return r;
+		return result;
 	}
 
 	/**
@@ -59,9 +59,9 @@ public class OrderRecordService extends BaseService {
 	 * @param request
 	 * @return
 	 */
-	public QueryResult<OrderRecord> getOrderRecord(OrderRecord orderrecord, PageHelper ph, int caseId, HttpServletRequest request) {
+	public QueryResult<OrderRecord> getOrderRecord(OrderRecord orderRecord, PageHelper ph, int caseId, HttpServletRequest request) {
 
-		QueryResult<OrderRecord> r = new QueryResult<OrderRecord>();
+		QueryResult<OrderRecord> result = new QueryResult<OrderRecord>();
 		Map<String, Object> map = new HashMap<String, Object>();
 	
 		map.put("start", ph.getStart());
@@ -71,11 +71,11 @@ public class OrderRecordService extends BaseService {
 		List<OrderRecord> data = orderrecordMapper.getOrderRecord(map);
 		long count = orderrecordMapper.countOrderRecordByCaseid(caseId);
 			
-		r.setData(data);
-		r.setCountTotal(count);
-		r.setCountFiltered(count);
+		result.setData(data);
+		result.setCountTotal(count);
+		result.setCountFiltered(count);
 	
-		return r;
+		return result;
 	}
 	
 	/**
@@ -104,14 +104,14 @@ public class OrderRecordService extends BaseService {
 	 * @return
 	 */
 	public OrderRecord getOrderRecordById(int id) {
-		OrderRecord r = null;
+		OrderRecord orderRecord = null;
 		try {
-			r = orderrecordMapper.getOrderRecordById(id);
+			orderRecord = orderrecordMapper.getOrderRecordById(id);
 		} catch (Exception e) {
 			logger.error("OrderRecordService.getOrderRecordById() --> " + id + "-->" + e.getMessage());
-			r = null;
+			orderRecord = null;
 		}
-		return r;
+		return orderRecord;
 	}
 	
 	/**
@@ -121,41 +121,29 @@ public class OrderRecordService extends BaseService {
 	 * @return
 	 */
 	public List<EntityList> getParameterInfo(String domain) {
-		List<EntityList> r = null;
+		List<EntityList> parameters = null;
 		try {
-			r = orderrecordMapper.getParameterInfo(domain);
+			parameters = orderrecordMapper.getParameterInfo(domain);
 		} catch (Exception e) {
 			logger.error("OrderRecordService.getParameterInfo() --> " + domain + "-->" + e.getMessage());
-			r = null;
+			parameters = null;
 		}
-		return r;
+		return parameters;
 	}
 	
 	/**
 	 * 更新订单记录信息(不修改密码)
 	 * 
 	 * @param orderrecord
-	 * @return
+	 * @return 10-19
 	 */
-	public boolean updateOrderRecord(OrderRecord orderrecord) {
-
-		boolean r = false;
+	public void updateOrderRecord(OrderRecord orderRecord) {
 
 		try {
-			OrderRecord u = orderrecordMapper.getOrderRecordById(orderrecord.getOrderRecordId());
-			if (u != null) {
-				//u.setName(orderrecord.getName());
-				orderrecordMapper.updateOrderRecord(u);
-				r = true;
-			} else {
-				r = false;
-			}
+			orderrecordMapper.updateOrderRecord(orderRecord);
 		} catch (Exception e) {
-			logger.error("OrderRecordService.updateOrderRecord() --> " + orderrecord + "-->" + e.getMessage());
-			r = false;
+			logger.error("OrderRecordService.updateOrderRecord() --> " + orderRecord + "-->" + e.getMessage());
 		}
-
-		return r;
 	}
 
 	/**
@@ -164,19 +152,12 @@ public class OrderRecordService extends BaseService {
 	 * @param orderrecord_id
 	 * @return
 	 */
-	public boolean deleteOrderRecordById(int orderrecordid) {
-
-		boolean r = false;
-
+	public void deleteOrderRecordById(int orderRecordId) {
 		try {
-			orderrecordMapper.deleteOrderRecordById(orderrecordid);
-			r = true;
+			orderrecordMapper.deleteOrderRecordById(orderRecordId);
 		} catch (Exception e) {
-			logger.error("OrderRecordService.deleteOrderRecordById() --> " + orderrecordid + "-->" + e.getMessage());
-			r = false;
+			logger.error("OrderRecordService.deleteOrderRecordById() --> " + orderRecordId + "-->" + e.getMessage());
 		}
-
-		return r;
 	}
 
 }

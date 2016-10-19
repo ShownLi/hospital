@@ -91,19 +91,8 @@ public class ParameterService extends BaseService {
 	 * @return
 	 */
 	public void updateParameter(Parameter parameter) {
-
 		try {
-			Parameter oldParameter = parameterMapper.getParameterById(parameter.getParameterId());
-			if (oldParameter != null) {
-				oldParameter.setDomain(parameter.getDomain());
-				oldParameter.setValue(parameter.getValue());
-				oldParameter.setChinese(parameter.getChinese());
-				oldParameter.setEnglish(parameter.getEnglish());
-				oldParameter.setDepict(parameter.getDepict());
-				oldParameter.setSort(parameter.getSort());
-				oldParameter.setIsdisplay(parameter.getIsdisplay());
-				parameterMapper.updateParameter(parameter);
-			}
+			parameterMapper.updateParameter(parameter);
 		} catch (Exception e) {
 			logger.error("ParameterService.updateParameter() --> " + parameter + "-->" + e.getMessage());
 		}
@@ -116,7 +105,6 @@ public class ParameterService extends BaseService {
 	 * @return
 	 */
 	public void deleteParameterById(int parameterId) {
-
 		try {
 			parameterMapper.deleteParameterById(parameterId);
 		} catch (Exception e) {

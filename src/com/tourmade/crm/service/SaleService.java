@@ -100,14 +100,7 @@ public class SaleService extends BaseService {
 	public void updateSale(Sale sale) {
 
 		try {
-			Sale oldSale = saleMapper.getSaleById(sale.getSalesId());
-			if (oldSale != null) {
-				oldSale.setSalesName(sale.getSalesName());
-				oldSale.setSalesName(sale.getSalesName());
-				oldSale.setSalesPortalId(sale.getSalesPortalId());
-				oldSale.setSalesEmail(sale.getSalesEmail());
-				saleMapper.updateSale(oldSale);
-			}
+			saleMapper.updateSale(sale);
 		} catch (Exception e) {
 			logger.error("SaleService.updateSale() --> " + sale + "-->" + e.getMessage());
 		}
