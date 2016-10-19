@@ -102,12 +102,16 @@ public class CustomerController extends BaseSimpleFormController {
 			String level = "customer.level";
 			String promote = "customer.promote";
 			String ageGroup = "customer.agegroup";
+			String country = "country";
 			List<EntityList> levelList = customerService.getParameterInfo(level);
 			List<EntityList> promoteList = customerService.getParameterInfo(promote);
 			List<EntityList> ageGroupList = customerService.getParameterInfo(ageGroup);
+			List<EntityList> countryList = customerService.getParameterInfo(country);
+			JSONArray countryResult = JSONArray.fromObject(countryList);
 			JSONArray levelResult = JSONArray.fromObject(levelList);
 			JSONArray  promoteResult = JSONArray.fromObject(promoteList);
 			JSONArray  ageGroupResult = JSONArray.fromObject(ageGroupList);
+			model.addAttribute("destination",countryResult);
 			model.addAttribute("level",levelResult);
 			model.addAttribute("promote",promoteResult);
 			model.addAttribute("ageGroup",ageGroupResult);

@@ -123,7 +123,7 @@
             <div class="form-group col-sm-8 col-sm-offset-2">
                 <label class="col-sm-3 control-label">所属销售</label>
                 <div class="col-sm-9">
-                    <input type="text" id="salesid" name="salesid" placeholder="选择一个销售" class="sales-select fullwidth" value="" />
+                    <input type="text" id="salesId" name="salesId" placeholder="选择一个销售" class="sales-select fullwidth" value="" />
                 </div>
             </div>
               <div class="form-group col-sm-8 col-sm-offset-2">
@@ -222,15 +222,14 @@
 			                data: "source",
 			                orderable: false,
 			                render: function ( data ) {
-			                	if(data){
 
-			                	for(var i=0;i < source.length;i++){
-			                		if(data==source[i].id){
-			                			return source[i].text
-			                		}
-			                	
-			                	}
-
+			                	if(data!=null && typeof(data) != undefined){
+			                		for(var i=0;i < source.length;i++){
+				                		if(data==source[i].id){
+				                			return source[i].text
+				                		}
+				                	
+				                	}
 			                	}
 			                	else{return ""}
 			                },
@@ -364,7 +363,7 @@
 	              data: destination,
 	              success: function(sales){
 	            	  var json = jQuery.parseJSON( sales );
-	                  $("#salesid").select2({
+	                  $("#salesId").select2({
 	                      placeholder: '销售',
 	                      data: json
 	                  });

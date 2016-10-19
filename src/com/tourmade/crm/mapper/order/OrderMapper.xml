@@ -55,7 +55,7 @@
 		u.isdel = 0
 	</select>
 	
-	<select id="customerstatus">
+	<select id="customerStatus">
 		update tm_customer set
 		customer_level = #{status}
 		where
@@ -68,7 +68,7 @@
 		and isdel = 0
 	</select>
 	
-	<select id="validatemail" parameterType="int" resultType="String">
+	<select id="validateEmail" parameterType="int" resultType="String">
 		select email from tm_customer 
 		where customer_id = #{customerId}
 		and isdel = 0

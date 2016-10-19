@@ -276,7 +276,7 @@
             <div class="form-group col-sm-8 col-sm-offset-2">
                 <label class="col-sm-3 control-label">销售</label>
                 <div class="col-sm-9">
-                    <input type="text" name="salesid" id="salesid" placeholder="选择一个销售" class="sales-select fullwidth" value="" />
+                    <input type="text" name="salesId" id="salesId" placeholder="选择一个销售" class="sales-select fullwidth" value="" />
                 </div>
             </div>
             <div class="form-group col-sm-8 col-sm-offset-2">
@@ -464,7 +464,7 @@
 		              data: destination,
 		              success: function(sales){
 		            	  var json = jQuery.parseJSON( sales );
-		                  $("#salesid").select2({
+		                  $("#salesId").select2({
 		                      placeholder: '销售',
 		                      data: json
 		                  });

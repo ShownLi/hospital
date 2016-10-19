@@ -31,7 +31,7 @@
 			u.isdel as isdel
 		from tm_order_record u  
 		left join tm_order v on u.order_id = v.order_id
-		where u.isdel = 0 and v.case_id = #{orderId}
+		where u.isdel = 0 and v.case_id = #{caseId}
 		order by u.creat_time desc
 		limit #{start},#{length}
 	</select>

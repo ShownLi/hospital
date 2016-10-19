@@ -273,6 +273,7 @@
 	var caseStatus = ${status};
 	var customerList = ${customerList};
 	var user = ${user};
+	var destination = ${destination};
 	
 	$(".promote-select").select2({
 		placeholder: '选择一个客人来源',
@@ -303,7 +304,7 @@
 				language: datatable_local_language, // my.js
 				serverSide: true,
 				ajax: {
-					url: '${rootPath}case/listfromcustomer.do?customerId=${customer.customerId}',
+					url: '${rootPath}case/listByCustomerId.do?customerId=${customer.customerId}',
 					dataFilter: function(data){
 						var json = jQuery.parseJSON( data );
 						json.recordsTotal = json.countTotal;
@@ -317,13 +318,12 @@
 						data: "caseId",
 						orderable: false,
 						render: function ( data, type, full, meta ) {
-							alert(data);
 						  return '<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a>&nbsp;<a class="btn btn-danger btn-xs" id="'+data+'"><span class="fa fa-minus-circle"></span> 无效</a>&nbsp;&nbsp;&nbsp;';
 						},
 						targets: 7
 					},
 					  {
-		                data: "customernamde",
+		                data: "customerId",
 		                orderable: false,
 		                render: function ( data ) {
 		                	for(var i=0;i <  customerList.length;i++){
@@ -334,6 +334,22 @@
 		                },
 		                  targets: 1
 					},
+					  {
+		                data: "destination",
+		                orderable: false,
+		                render: function ( data ) {
+		                	if(data){
+			                	for(var i=0;i <destination.length;i++){
+			                		if(data==destination[i].id){
+			                			return destination[i].text
+			                		}
+			                	
+			                	}
+		                	}
+		                	else{return ""}
+		                },
+		                  targets: 3
+					},	
 				  {
 		                data: "source",
 		                orderable: false,
@@ -343,7 +359,6 @@
 			                		if(data==source[i].id){
 			                			return source[i].text
 			                		}
-			                		else{return ""}
 			                	}
 		                	}
 		                	else{return ""}
@@ -359,7 +374,6 @@
 			                		if(data==user[i].id){
 			                			return user[i].text
 			                		}
-			                		else{return ""}
 			                	}
 		                	}
 		                	else{return ""}
@@ -375,7 +389,6 @@
 			                		if(data==caseStatus[i].id){
 			                			return caseStatus[i].text
 			                		}
-			                		else{return ""}
 			                	}
 		                	}
 		                	else{return ""}
@@ -546,20 +559,20 @@
 				},
 			columnDefs: [
 						  {
-							  data: "creattime",
+							  data: "creatTime",
 							  render: function ( data, type, full, meta ) {
-								  var creattime = new Date(data.time);
-			                    return creattime.format("yyyy/MM/dd");
+								  var creatTime = new Date(data.time);
+			                    return creatTime.format("yyyy/MM/dd");
 			                },
 			                targets: 3
 						  },		 
 
 				],
 			columns: [
-		  			    { data: "commentid" },
+		  			    { data: "commentId" },
 		  			    { data: "userName" },
 		  			    { data: "content" },
-		  			    { data: "creattime" }
+		  			    { data: "creatTime" }
 		    ]
 			});
 			

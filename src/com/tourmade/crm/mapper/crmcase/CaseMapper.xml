@@ -308,7 +308,7 @@
 	
 	<select id="caseStatus" parameterType="int" resultType="int">
 		select count(u.status) from tm_order u
-		where u.status != 4 
+		where u.status != 3 
 		and u.case_id = #{caseId}
 		and u.isdel = 0
 	</select>

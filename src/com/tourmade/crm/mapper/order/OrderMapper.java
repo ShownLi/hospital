@@ -21,13 +21,13 @@ public interface OrderMapper extends BaseMapper {
 	
 	public long countOrderByCaseId(int id);
 	
-	public String validatemail(int customerId);
+	public String validateEmail(int customerId);
 	
 	public String geturl(String domain);
 	
 	public String validatePortalId(int customerId);
 	
-	public void customerstatus(@Param("id")int id, @Param("status")String status);
+	public void customerStatus(@Param("id")int id, @Param("status")String status);
 	
 	public int saveOrder(Order order);
 

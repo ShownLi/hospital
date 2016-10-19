@@ -87,7 +87,6 @@ public class AgencyController extends BaseSimpleFormController {
 	
 	@RequestMapping(value = "/edit.html", method = { RequestMethod.POST, RequestMethod.GET })
 	public String edit(Model model, String id) {
-		System.out.println(id+"^^^");
 		if (null != id && !"".equals(id)) {
 			int agencyId = Integer.parseInt(id);
 			Agency agency = service.getAgencyById(agencyId);

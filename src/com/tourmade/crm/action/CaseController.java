@@ -57,7 +57,7 @@ public class CaseController extends BaseSimpleFormController {
 		return "/case/list";
 	}
 	
-	@RequestMapping(value = "/listfromcustomer.do",produces="application/json;charset=utf-8")
+	@RequestMapping(value = "/listByCustomerId.do",produces="application/json;charset=utf-8")
 	@ResponseBody
 	public String queryData(HttpServletRequest request, HttpSession session, Model model, int customerId , PageHelper page) {
 
@@ -173,37 +173,37 @@ public class CaseController extends BaseSimpleFormController {
 		List<EntityList> customerList = service.getCustomer();
 		List<EntityList> userList = service.getUser();
 		List<EntityList> salesList = service.getSales();
-		JSONArray countryresult = JSONArray.fromObject(countryList);
-		JSONArray languageresult = JSONArray.fromObject(languageList);
-		JSONArray withresult = JSONArray.fromObject(withwhoList);
-		JSONArray hotelresult = JSONArray.fromObject(hotelList);
-		JSONArray mealsresult = JSONArray.fromObject(mealsList);
-		JSONArray guideresult = JSONArray.fromObject(guideList);
-		JSONArray statusresult = JSONArray.fromObject(statusList);
-		JSONArray sourceresult = JSONArray.fromObject(sourceList);
-		JSONArray tailormaderesult = JSONArray.fromObject(tailormadeList);
-		JSONArray passportresult = JSONArray.fromObject(passportList);
-		JSONArray visaresult = JSONArray.fromObject(visaList);
-		JSONArray flightresult = JSONArray.fromObject(flightList);
-		JSONArray customerresult = JSONArray.fromObject(customerList);
-		JSONArray userresult = JSONArray.fromObject(userList);
-		JSONArray salesresult = JSONArray.fromObject(salesList);
-		model.addAttribute("country",countryresult);
-		model.addAttribute("language",languageresult);
-		model.addAttribute("withwho",withresult);
-		model.addAttribute("hotel",hotelresult);
-		model.addAttribute("meals",mealsresult);
-		model.addAttribute("guide",guideresult);
-		model.addAttribute("status",statusresult);
-		model.addAttribute("source",sourceresult);
-		model.addAttribute("customer",customerresult);
-		model.addAttribute("sales",salesresult);
-		model.addAttribute("tailormade",tailormaderesult);
-		model.addAttribute("passport",passportresult);
-		model.addAttribute("visa",visaresult);
-		model.addAttribute("flight",flightresult);
+		JSONArray countryResult = JSONArray.fromObject(countryList);
+		JSONArray languageResult = JSONArray.fromObject(languageList);
+		JSONArray withResult = JSONArray.fromObject(withwhoList);
+		JSONArray hotelResult = JSONArray.fromObject(hotelList);
+		JSONArray mealsResult = JSONArray.fromObject(mealsList);
+		JSONArray guideResult = JSONArray.fromObject(guideList);
+		JSONArray statusResult = JSONArray.fromObject(statusList);
+		JSONArray sourceResult = JSONArray.fromObject(sourceList);
+		JSONArray tailormadeResult = JSONArray.fromObject(tailormadeList);
+		JSONArray passportResult = JSONArray.fromObject(passportList);
+		JSONArray visaResult = JSONArray.fromObject(visaList);
+		JSONArray flightResult = JSONArray.fromObject(flightList);
+		JSONArray customerResult = JSONArray.fromObject(customerList);
+		JSONArray userResult = JSONArray.fromObject(userList);
+		JSONArray salesResult = JSONArray.fromObject(salesList);
+		model.addAttribute("country",countryResult);
+		model.addAttribute("language",languageResult);
+		model.addAttribute("withwho",withResult);
+		model.addAttribute("hotel",hotelResult);
+		model.addAttribute("meals",mealsResult);
+		model.addAttribute("guide",guideResult);
+		model.addAttribute("status",statusResult);
+		model.addAttribute("source",sourceResult);
+		model.addAttribute("customer",customerResult);
+		model.addAttribute("sales",salesResult);
+		model.addAttribute("tailormade",tailormadeResult);
+		model.addAttribute("passport",passportResult);
+		model.addAttribute("visa",visaResult);
+		model.addAttribute("flight",flightResult);
 		model.addAttribute("customerId",customerId);
-		model.addAttribute("user",userresult);
+		model.addAttribute("user",userResult);
 		
 		return "/case/add";
 	}

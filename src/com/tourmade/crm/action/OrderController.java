@@ -78,8 +78,8 @@ public class OrderController extends BaseSimpleFormController {
 	@ResponseBody
 	public String queryData(HttpServletRequest request, HttpSession session, Model model, int caseId, PageHelper page) {
 
-		QueryResult<Order> r = service.queryOrderByCaseId(caseId, page, request);
-		String result = JSONUtilS.object2json(r);
+		QueryResult<Order> order = service.queryOrderByCaseId(caseId, page, request);
+		String result = JSONUtilS.object2json(order);
 
 		return result;
 	}
@@ -112,16 +112,16 @@ public class OrderController extends BaseSimpleFormController {
 		}
 		
 		try {
-			boolean is = service.validatemail(order.getCustomerId());
+			boolean is = service.validateEmail(order.getCustomerId());
 			//验证客人有邮箱
 			if(is)
 			{
-				boolean portalid = service.validatePortalId(order.getCustomerId());
-				if(!portalid){
+				boolean portalId = service.validatePortalId(order.getCustomerId());
+				if(!portalId){
 					service.creatPortal(order.getCustomerId());
 				}
 				//客人状态设置为下单客人
-				service.customerstatus(order.getCustomerId(),"2");
+				service.customerStatus(order.getCustomerId(),"2");
 				//询单状态设置为下单
 				caseService.case2order(order.getCaseId());
 				//补充order信息并存储该order
@@ -189,7 +189,7 @@ public class OrderController extends BaseSimpleFormController {
 		try {
 			service.updateOrder(order);			
 				crmcase.setStatus("3");
-				service.customerstatus(oldOrder.getCustomerId(), "3");
+				service.customerStatus(oldOrder.getCustomerId(), "3");
 				caseService.updateCase(crmcase);
 		
 			json.setSuccess(true);

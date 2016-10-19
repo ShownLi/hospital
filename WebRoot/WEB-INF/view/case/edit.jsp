@@ -501,8 +501,8 @@
 	var genderData = [{ id: 'male', text: '男' }, { id:'female' , text: '女' }];
 	
 	$("#requirement").val("${crmcase.requirement}"); 
-	$("#birthday").val(getBirthday())
-	$(".contact-select").select2("val", "${crmcase.contactType}".split(","));
+	$("#birthday").val(getBirthday());
+	
 	function getBirthday(){
 		var date = $("#birthday").val();	
 		var dateformat = null;
@@ -536,6 +536,7 @@
     	placeholder: '可多选',
     	minimumResultsForSearch: Infinity,
      });
+    $(".contact-select").select2("val", '${crmcase.contactType}'.split(","));
     
     $(".withwho-select").select2({
     	placeholder: '与谁同行',

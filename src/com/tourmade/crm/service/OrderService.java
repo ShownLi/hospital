@@ -93,8 +93,8 @@ public class OrderService extends BaseService {
 	 * @param order
 	 * @return
 	 */
-	public boolean validatemail(int customerId) {
-		String e = orderMapper.validatemail(customerId);
+	public boolean validateEmail(int customerId) {
+		String e = orderMapper.validateEmail(customerId);
 		if(null == e | "".equals(e)){
 			return false;
 		}
@@ -125,8 +125,8 @@ public class OrderService extends BaseService {
 	 * @param order
 	 * @return
 	 */
-	public void customerstatus(int id,String status) {
-		orderMapper.customerstatus(id, status);
+	public void customerStatus(int id,String status) {
+		orderMapper.customerStatus(id, status);
 	}
 	
 	/**
