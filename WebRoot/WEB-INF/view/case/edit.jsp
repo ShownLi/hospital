@@ -105,7 +105,7 @@
                 <div class="form-group col-sm-4">
                   <label class="col-sm-4 control-label">目的地</label>
                   <div class="col-sm-8">
-                    <input type="text" name="destination" class="destination-select fullwidth" readonly value="${crmcase.destination}" />
+                    <input type="text" name="destination" class="form-control" readonly value="${crmcase.destination}" />
                   </div>
                 </div>
                 <div class="form-group col-sm-4">
@@ -480,7 +480,7 @@
 	<script src="${rootPath}assets/js/jquery.validate.min.js"></script>
 	
 <script type="text/javascript">
-	var country = ${country};
+//	var country = ${country};
     var language = ${language};
     var withwho = ${withwho};
     var hotel = ${hotel};
@@ -519,14 +519,14 @@
 	$("#gender").select2({
         data: genderData
     });  
-    $(".country-select").select2({
+/*      $(".country-select").select2({
         placeholder: '国家',
         data: country
-    });
-    $(".destination-select").select2({
+    });  */
+/*     $(".destination-select").select2({
         placeholder: '国家',
         data: country
-    });
+    }); */
 	
     $(".language-select").select2({
     	placeholder: '选择一个沟通语言',
@@ -629,7 +629,7 @@
               	},
                 targets: 6
 			},
-			{
+/* 			{
               data: "destination",
               orderable: false,
               render: function ( data ) {
@@ -643,7 +643,7 @@
 	              else{return ""}
               },
                 targets: 4
-			},		  
+			}, */		  
 	 	    {
 			    orderable: false,
 			    searchable: false,
