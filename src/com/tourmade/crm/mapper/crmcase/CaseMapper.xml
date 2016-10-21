@@ -243,6 +243,13 @@
 		from tm_parameter u where u.isdisplay = 1 and u.isdel = 0 and u.para_domain = #{domain}
 	</select>
 	
+	<select id="getParameterByCountryChinese" parameterType="String" resultType="Parameter">
+		select 
+		u.para_value as value,
+		u.chinese as chinese
+		from tm_parameter u where u.para_value=#{value}
+	</select>
+	
 	<select id="getCustomer" parameterType="String" resultType="EntityList">
 		select
 		u.customer_id as id,

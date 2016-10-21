@@ -114,45 +114,29 @@ public class CommentService extends BaseService {
 	 * @param comment
 	 * @return
 	 */
-	public boolean updateComment(Comment comment) {
-
-		boolean judge = false;
-
+	public void updateComment(Comment comment) {
 		try {
-			Comment oldComment = commentMapper.getCommentById(comment.getCommentId());
-			if (oldComment!= null) {
-				commentMapper.updateComment(oldComment);
-				judge = true;
-			} else {
-				judge = false;
-			}
+			commentMapper.updateComment(comment);
+
 		} catch (Exception e) {
 			logger.error("CommentService.updateComment() --> " + comment + "-->" + e.getMessage());
-			judge = false;
-		}
 
-		return judge;
+		}
 	}
 
 	/**
 	 * 删除注释（假删除）
 	 * 
 	 * @param commentId
-	 * @return
+	 * @return 10-19
 	 */
-	public boolean deleteCommentById(int commentId) {
-
-		boolean judge = false;
+	public void deleteCommentById(int commentId) {
 
 		try {
 			commentMapper.deleteCommentById(commentId);
-			judge = true;
 		} catch (Exception e) {
 			logger.error("CommentService.deleteCommentById() --> " + commentId + "-->" + e.getMessage());
-			judge = false;
 		}
-
-		return judge;
 	}
 
 }
