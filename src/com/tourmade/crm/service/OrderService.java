@@ -49,6 +49,7 @@ public class OrderService extends BaseService {
 			
 		map.put("start", ph.getStart());
 		map.put("length", ph.getLength());
+		map.put("customerName",order.getCustomerName());
 
 		List<Order> data = orderMapper.queryOrder(map);
 		long count = orderMapper.countOrder(order);

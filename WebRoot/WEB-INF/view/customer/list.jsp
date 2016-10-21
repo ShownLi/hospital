@@ -135,7 +135,7 @@
 		                		if(data==ageGroup[i].id){
 		                			return ageGroup[i].text
 		                		}
-		                		if(data==''){return '无';}
+		                		else{return '无';}
 		                	}
 		                },
 		                  targets: 3

@@ -27,6 +27,9 @@
 			u.isdel as isdel
 		from tm_order u  
 		where u.isdel = 0 
+		 <if test="customerName != null and customerName != ''">
+                and   customer_name like '%${customerName}%' 
+         </if>
 		order by u.creat_time desc
 		limit #{start},#{length}
 	</select>
@@ -53,6 +56,9 @@
 		select count(u.order_id) from tm_order u
 		where
 		u.isdel = 0
+		 <if test="customerName != null and customerName != ''">
+             and   customer_name like '%${customerName}%' 
+         </if>
 	</select>
 	
 	<select id="customerStatus">

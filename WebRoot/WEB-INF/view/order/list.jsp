@@ -28,8 +28,8 @@
 						</div>
 						<!-- panel-btns -->
 						<h3 class="panel-title">订单列表</h3>
-						<!-- <input type="text" id="customerName" value="" />
-						<input type="button" id="searchBtn" value="搜索"/>		 -->				
+				<!-- 		 <input type="text" id="customerName" value="" />
+						<input type="button" id="searchBtn" value="搜索"/> -->		 				
 					</div>
 					<div class="panel-body">
 						<br />
@@ -249,12 +249,13 @@
 					                data: "status",
 					                orderable: false,
 					                render: function ( data ) {
-					                	if(data!=null && typeof(data) != undefined){
+					                	if(data){
 						                	for(var i=0;i < orderStatus.length;i++){
 						                		if(data==orderStatus[i].id){
 						                			return orderStatus[i].text
 						                		}
 						                	}
+						                	return "";
 					                	}
 					                	else{return ""}
 					                },
@@ -264,13 +265,14 @@
 					                data: "destination",
 					                orderable: false,
 					                render: function ( data ) {
-					                	if(data!=null && typeof(data) != undefined){
+					                	if(data){
 
 						                	for(var i=0;i <destination.length;i++){
 						                		if(data==destination[i].id){
 						                			return destination[i].text
 						                		}
 						                	}
+						                	return "";
 					                	}
 					                	else{return ""}
 					                },
@@ -294,7 +296,7 @@
 			 });
 			
 			  $('#searchBtn').on( 'click', function () {
-			    	alert($('#customerName').attr("value"));
+			    	//alert($('#customerName').attr("value"));
 			        t.draw();
 			    } );
 		    

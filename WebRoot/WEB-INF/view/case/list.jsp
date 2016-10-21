@@ -197,6 +197,7 @@
 				                			return customer[i].text
 				                		}
 				                	}
+			                		return "";
 			                	}
 			                	else{return ""}
 			                },
@@ -210,9 +211,9 @@
 				                	for(var i=0;i <destination.length;i++){
 				                		if(data==destination[i].id){
 				                			return destination[i].text
-				                		}
-				                	
+				                		}				                	
 				                	}
+				                	return "";
 			                	}
 			                	else{return ""}
 			                },
@@ -223,13 +224,15 @@
 			                orderable: false,
 			                render: function ( data ) {
 
-			                	if(data!=null && typeof(data) != undefined){
+			                	if(data){
 			                		for(var i=0;i < source.length;i++){
 				                		if(data==source[i].id){
 				                			return source[i].text
 				                		}
 				                	
 				                	}
+			                		return "";
+			                		
 			                	}
 			                	else{return ""}
 			                },
@@ -244,7 +247,8 @@
 				                		if(data==user[i].id){
 				                			return user[i].text
 				                		}				                		
-				                	}				                	
+				                	}
+				                	return "";
 			                	}
 			                	else{return ""}
 			                },
@@ -260,6 +264,7 @@
 				                			return caseStatus[i].text
 				                		}
 				                	}
+			                		return "";
 			                	}
 			                	else{return ""}
 			                },

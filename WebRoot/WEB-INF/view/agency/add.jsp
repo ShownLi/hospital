@@ -73,7 +73,7 @@
         <div class="nextModal-title">您可以继续添销售，或返回到地接社列表页面</div>
       </div>
       <div class="modal-body align-center">
-        	<a id="addsale" class="btn btn-primary" href="${rootPath}sale/add.html?agencyid=">添加销售</a>
+        	<a id="addsale" class="btn btn-primary" href="${rootPath}sale/add.html?agencyId=">添加销售</a>
         	<a class="btn btn-primary" href="${rootPath}agency/list.html">返回列表</a>
       </div>
     </div><!-- modal-content -->
@@ -166,7 +166,7 @@
 		function form_submit() {
 			var f = $("#form").serialize();
 			$.post('${rootPath}agency/add.do',f, function(result) {
-				var agencyId = result.obj.agency_id;
+				var agencyId = result.obj.agencyId;
 				var rmsg = result.msg;
 				if (result.success) {
 					//window.parent.location = "${rootPath}agency/list.html";
@@ -174,7 +174,7 @@
 
 					// 添加销售的url需要该地接社的id
 			      	var href = $("#addsale").attr("href");
-			      	$("#addsale").attr("href",href+agencyid);
+			      	$("#addsale").attr("href",href+agencyId);
 				} else {
 					$("#msgModal").modal('show');
 				}
