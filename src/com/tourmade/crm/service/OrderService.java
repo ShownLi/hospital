@@ -420,32 +420,30 @@ public class OrderService extends BaseService {
 	public void updateOrder(Order order) {
 
 		try {
-//			Order u = orderMapper.getOrderById(order.getOrderId());
-//			u.setAgencyReEmailAlias(order.getAgencyReEmailAlias());
-//			u.setAgencySeEmailAlias(order.getAgencySeEmailAlias());
-//			u.setCustomerReEmailAlias(order.getCustomerReEmailAlias());
-//			u.setCustomerSeEmailAlias(order.getCustomerSeEmailAlias());
-//			if(order.getStatus() != null){
-//				u.setStatus(order.getStatus());
-//			}
+			Order u = orderMapper.getOrderById(order.getOrderId());
+			u.setAgencyReEmailAlias(order.getAgencyReEmailAlias());
+			u.setAgencySeEmailAlias(order.getAgencySeEmailAlias());
+			u.setCustomerReEmailAlias(order.getCustomerReEmailAlias());
+			u.setCustomerSeEmailAlias(order.getCustomerSeEmailAlias());
+			if(order.getStatus() != null){
+				u.setStatus(order.getStatus());
+			}
 			if(order.getGroupNumber()!= null){
-/*				u.setGroupTime(order.getGroupTime());
+				u.setGroupTime(order.getGroupTime());
 				u.setStartDate(order.getStartDate());
 				u.setEndDate(order.getEndDate());
 				u.setGroupNumber(order.getGroupNumber());
 				u.setGroupPrice(order.getGroupPrice());
 				u.setCurrency(order.getCurrency());
 				u.setExchangeRate(order.getExchangeRate());
-				u.setRmbPrice(order.getRmbPrice());*/
-//				u.setStatus("2");
-				order.setStatus("2");
+				u.setRmbPrice(order.getRmbPrice());
+				u.setStatus("2");	
 			}
 			if(order.getReason() != null){
-//				u.setReason(order.getReason());
-//				u.setStatus("3");
-				order.setStatus("3");
+				u.setReason(order.getReason());
+				u.setStatus("3");
 			}
-			orderMapper.updateOrder(order);
+			orderMapper.updateOrder(u);
 		} catch (Exception e) {
 			logger.error("OrderService.updateOrder() --> " + order + "-->" + e.getMessage());
 		}

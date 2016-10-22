@@ -146,7 +146,7 @@
 	<script type="text/javascript">
 	var source = ${source};
 	var caseStatus = ${caseStatus};
-//	var destination = ${destination};
+	var destination = ${destination};
 	var customer = ${customer};
 	var user = ${user};
     var sales = ${sales};
@@ -203,7 +203,7 @@
 			                },
 			                  targets: 1
 					  },
-/* 					  {
+ 					  {
 			                data: "destination",
 			                orderable: false,
 			                render: function ( data ) {
@@ -218,7 +218,7 @@
 			                	else{return ""}
 			                },
 			                  targets: 3
-						},	 */
+						},	 
 					  {
 			                data: "source",
 			                orderable: false,

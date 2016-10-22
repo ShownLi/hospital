@@ -236,7 +236,7 @@ public class EmailService extends BaseService {
 					DateFormat format=new SimpleDateFormat("yyyy-MM-dd");
 					if (null != template.getSalesChineseName() && !"".equals(template.getSalesChineseName())) {
 						result = result.replace("${salesname}",
-								template.getSalesChineseName());
+								template.getSalesEnglishName());
 					}
 					else{result = result.replace("${salesname}","");}
 					
@@ -504,7 +504,7 @@ public class EmailService extends BaseService {
 		Email email = new Email();
 		try {
 			email.setContent(result);
-			email.setAcount("order");
+			email.setAcount("customer");
 			email.setOrderId(order.getOrderId());
 			email.setReciever(order.getAgencySeEmailAlias());
 			email.setSender(order.getCustomerReEmailAlias());

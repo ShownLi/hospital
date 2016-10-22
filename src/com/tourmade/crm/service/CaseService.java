@@ -91,9 +91,9 @@ public class CaseService extends BaseService {
 
 		
 		try {
-			Parameter parameter = caseMapper.getParameterByCountryChinese(crmcase.getDestination());
-			crmcase.setDestination(parameter.getChinese());
-			crmcase.setDestinationCode(parameter.getValue());
+//			Parameter parameter = caseMapper.getParameterByCountryChinese(crmcase.getDestination());
+//			crmcase.setDestination(parameter.getChinese());
+//			crmcase.setDestinationCode(parameter.getValue());
 			caseMapper.saveCase(crmcase);
 		} catch (Exception e) {
 			logger.error("CaseService.saveCase() --> " + crmcase + "-->" + e.getMessage());
