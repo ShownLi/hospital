@@ -80,6 +80,7 @@
 			flight,
 			ip_address,
 			creat_time,
+			update_time,
 			isdel
 		)values(
 			#{customerId,jdbcType=VARCHAR},
@@ -114,6 +115,7 @@
 			#{visa,jdbcType=VARCHAR},
 			#{flight,jdbcType=VARCHAR},
 			#{ipAddress,jdbcType=VARCHAR},
+			NOW(),
 			NOW(),
 			0
 		)
@@ -185,6 +187,7 @@
 		u.status as status,
 		u.tailormade as tailormade,
 		u.passport as passport,
+		u.submit_type as submitType,
 		u.visa as visa,
 		u.flight as flight,
 		u.ip_address as ipAddress,

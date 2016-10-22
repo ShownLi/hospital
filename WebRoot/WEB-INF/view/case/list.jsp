@@ -51,9 +51,6 @@
 							</table>
 						</div>
 						<!-- table-responsive -->
-
-
-
 					</div>
 					<!-- panel-body -->
 				</div>
@@ -344,8 +341,7 @@
 				error: function() {
 					alert(2);
 				}
-			});
-			
+			});			
 		}
   		function order_submit() {
 			var order= $("#form-order").serialize();

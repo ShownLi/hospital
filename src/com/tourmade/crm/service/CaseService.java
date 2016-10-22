@@ -94,6 +94,7 @@ public class CaseService extends BaseService {
 //			Parameter parameter = caseMapper.getParameterByCountryChinese(crmcase.getDestination());
 //			crmcase.setDestination(parameter.getChinese());
 //			crmcase.setDestinationCode(parameter.getValue());
+			crmcase.setStatus("0");
 			caseMapper.saveCase(crmcase);
 		} catch (Exception e) {
 			logger.error("CaseService.saveCase() --> " + crmcase + "-->" + e.getMessage());
@@ -328,6 +329,9 @@ public class CaseService extends BaseService {
 		return judge;
 	}
 	
+	/*
+	 * 出发时间0,1（未确定，已确定）
+	 */
 	public Case validateStartTime(Case crmcase){
 		String startTime = crmcase.getStartTime();
 		if(startTime==null||startTime.isEmpty()||Integer.parseInt(startTime)!=1){
