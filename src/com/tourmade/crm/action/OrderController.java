@@ -133,12 +133,9 @@ public class OrderController extends BaseSimpleFormController {
 				//生成给地接社的第一封邮件
 				//DemoCustomer customer = service.getCustomerById(order.getCustomerid());
 				Case crmcase = service.getCaseById(order.getCaseId());
-				
 				order = service.getOrderById(order.getOrderId());
-				
 				String result = emailService.creatTemplate(crmcase, order);
-				
-				
+							
 				//生成待发送邮件
 				order = service.getOrderById(order.getOrderId());
 				emailService.saveEmail(order,result);
