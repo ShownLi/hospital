@@ -122,6 +122,7 @@
 		                			return country[i].text	                			
 		                		}
 		                	}
+		                	return "";
 		                }else{return ""}
 	                },
 	                  targets: 1
@@ -136,6 +137,7 @@
 			                			return language[i].text
 			                		}
 			                	}
+			                	return "";
 			                 }else{return ""}
 		                },
 		                  targets: 2

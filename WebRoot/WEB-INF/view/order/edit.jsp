@@ -738,7 +738,7 @@
 				$("#msgModal").modal('show');
 			}
 		}, "JSON");
-		alert("")
+//		alert("")
 	}
 	//成团日期格式转换
 	var groupTime = $("#groupTime").val();	

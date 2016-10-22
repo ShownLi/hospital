@@ -58,7 +58,7 @@ public class OrderController extends BaseSimpleFormController {
 	@RequestMapping(value = "/list.do",produces="application/json;charset=utf-8")
 	@ResponseBody
 	public String queryData(HttpServletRequest request, HttpSession session, Model model, Order order, PageHelper page) {
-		
+
 		QueryResult<Order> queryResult = service.queryOrder(order, page, request);
 		String result = JSONUtilS.object2json(queryResult);
 
@@ -178,7 +178,8 @@ public class OrderController extends BaseSimpleFormController {
 	@RequestMapping(value = "/orderDeal.do")
 	@ResponseBody
 	public Json orderDeal(HttpServletRequest request, HttpSession session, Model model, Order order) {
-
+		System.out.println("****1"+order);
+		
 		Json json = new Json();
 		Order oldOrder = service.getOrderById(order.getOrderId());
 		Case crmcase = caseService.getCaseById(oldOrder.getCaseId());
@@ -202,7 +203,7 @@ public class OrderController extends BaseSimpleFormController {
 	@RequestMapping(value = "/orderNoDeal.do")
 	@ResponseBody
 	public Json orderNoDeal(HttpServletRequest request, HttpSession session, Model model, Order order) {
-
+		System.out.println("&&&2"+order);
 		Json json = new Json();
 		
 		Case crmcase = caseService.getCaseByOrderId(order.getOrderId());
@@ -224,6 +225,7 @@ public class OrderController extends BaseSimpleFormController {
 	@RequestMapping(value = "/updateDeal.do")
 	@ResponseBody
 	public Json doEdit1(Order order) {
+		System.out.println("^^^^3"+order);
 		Json json = new Json();	
 		try {
 			service.updateOrder(order);	

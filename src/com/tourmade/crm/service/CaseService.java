@@ -16,6 +16,7 @@ import com.tourmade.crm.common.model.base.value.baseconfig.PageHelper;
 import com.tourmade.crm.entity.Case;
 import com.tourmade.crm.entity.Customer;
 import com.tourmade.crm.entity.EntityList;
+import com.tourmade.crm.entity.Parameter;
 import com.tourmade.crm.mapper.crmcase.CaseMapper;
 
 @Service
@@ -90,6 +91,9 @@ public class CaseService extends BaseService {
 
 		
 		try {
+			Parameter parameter = caseMapper.getParameterByCountryChinese(crmcase.getDestination());
+			crmcase.setDestination(parameter.getChinese());
+			crmcase.setDestinationCode(parameter.getValue());
 			caseMapper.saveCase(crmcase);
 		} catch (Exception e) {
 			logger.error("CaseService.saveCase() --> " + crmcase + "-->" + e.getMessage());
@@ -254,59 +258,16 @@ public class CaseService extends BaseService {
 	 * 更新询单信息
 	 * 
 	 * @param case
-	 * @return
+	 * @return zyy 10-19
 	 */
-	public boolean updateCase(Case crmcase) {
-
-		boolean judge = false;
+	public void updateCase(Case crmcase) {
 
 		try {
-			Case olderCase = caseMapper.getCaseById(crmcase.getCaseId());
-			if (olderCase != null) {
-				olderCase.setOperator(crmcase.getOperator());
-				olderCase.setAdult(crmcase.getAdult());
-				olderCase.setBaby(crmcase.getBaby());
-				olderCase.setBudget(crmcase.getBudget());
-				olderCase.setChildren(crmcase.getChildren());
-				olderCase.setContactType(crmcase.getContactType());
-				olderCase.setDestination(crmcase.getDestination());
-				olderCase.setDuring(crmcase.getDuring());
-				olderCase.setFlight(crmcase.getFlight());
-				olderCase.setGuide(crmcase.getGuide());
-				olderCase.setHotel(crmcase.getHotel());
-				olderCase.setIpAddress(crmcase.getIpAddress());
-				olderCase.setMeals(crmcase.getMeals());
-				olderCase.setPassport(crmcase.getPassport());
-				olderCase.setPreferLanguage(crmcase.getPreferLanguage());
-				olderCase.setRequirement(crmcase.getRequirement());
-				olderCase.setRoute(crmcase.getRoute());
-				olderCase.setSalesId(crmcase.getSalesId());
-				olderCase.setSource(crmcase.getSource());				
-				olderCase.setSubmitType(crmcase.getSubmitType());
-				olderCase.setTailormade(crmcase.getTailormade());
-				olderCase.setStatus(crmcase.getStatus());
-				olderCase.setVisa(crmcase.getVisa());
-				olderCase.setWithwho(crmcase.getWithwho());
-				olderCase.setStartTime(crmcase.getStartTime());
-				if(crmcase.getStartTime().equals("1")){
-					olderCase.setStartDate(crmcase.getStartDate());
-					olderCase.setEndDate(crmcase.getEndDate());
-				}
-				if(crmcase.getStartTime().equals("0")){
-					olderCase.setStartMonth(crmcase.getStartMonth());
-					olderCase.setDuring(crmcase.getDuring());
-				}
-				caseMapper.updateCase(olderCase);
-				judge = true;
-			} else {
-				judge = false;
-			}
+			caseMapper.updateCase(crmcase);
 		} catch (Exception e) {
 			logger.error("CaseService.updateCase() --> " + crmcase + "-->" + e.getMessage());
-			judge = false;
 		}
 
-		return judge;
 	}
 
 	/**

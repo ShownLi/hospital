@@ -30,6 +30,8 @@ public class User extends BaseBean<User> {
 	private String mobilephone;
 	
 	private Date creatTime;
+	
+	private Date updateTime;
 
 	public Integer getUserId() {
 		return userId;
@@ -91,13 +93,20 @@ public class User extends BaseBean<User> {
 		return serialVersionUID;
 	}
 
+	public Date getUpdateTime() {
+		return updateTime;
+	}
+
+	public void setUpdateTime(Date updateTime) {
+		this.updateTime = updateTime;
+	}
+
 	@Override
 	public String toString() {
 		return "User [userId=" + userId + ", name=" + name + ", loginName="
 				+ loginName + ", pwd=" + pwd + ", email=" + email
 				+ ", mobilephone=" + mobilephone + ", creatTime=" + creatTime
-				+ "]";
+				+ ", updateTime=" + updateTime + "]";
 	}
-
 	
 }

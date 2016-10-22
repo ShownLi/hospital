@@ -145,7 +145,7 @@ public class CaseController extends BaseSimpleFormController {
 	 */
 	@RequestMapping(value = "/addCase.html", method = { RequestMethod.POST, RequestMethod.GET })
 	public String addfromcustomer(Model model, int customerId) {
-		
+
 		String country = "country";
 		String language = "case.preferlanguage";
 		String withwho = "case.withwho";
@@ -211,7 +211,7 @@ public class CaseController extends BaseSimpleFormController {
 	@RequestMapping(value = "/add.do")
 	@ResponseBody
 	public Json doAdd(HttpServletRequest request, HttpSession session, Model model, Case crmcase) {
-
+		
 		Json json = new Json();
 		
 		try {
@@ -233,7 +233,7 @@ public class CaseController extends BaseSimpleFormController {
 			Case crmcase = service.getCaseById(caseId);
 			crmcase=service.validateStartTime(crmcase);
 			Customer cus=service.getCustomerInfoById(crmcase.getCustomerId());
-			String country = "country";
+//			String country = "country";
 			String language = "case.preferlanguage";
 			String withwho = "case.withwho";
 			String hotel = "case.hotel";
@@ -249,7 +249,7 @@ public class CaseController extends BaseSimpleFormController {
 			String ageGroup = "customer.agegroup";
 			
 			
-			List<EntityList> countryList = service.getParameterInfo(country);
+//			List<EntityList> countryList = service.getParameterInfo(country);
 			List<EntityList> languageList = service.getParameterInfo(language);
 			List<EntityList> withwhoList = service.getParameterInfo(withwho);
 			List<EntityList> hotelList = service.getParameterInfo(hotel);
@@ -268,7 +268,7 @@ public class CaseController extends BaseSimpleFormController {
 			List<EntityList> ageGroupList = service.getParameterInfo(ageGroup);
 
 			
-			JSONArray countryResult = JSONArray.fromObject(countryList);
+//			JSONArray countryResult = JSONArray.fromObject(countryList);
 			JSONArray languageResult = JSONArray.fromObject(languageList);
 			JSONArray withResult = JSONArray.fromObject(withwhoList);
 			JSONArray hotelResult = JSONArray.fromObject(hotelList);
@@ -286,7 +286,7 @@ public class CaseController extends BaseSimpleFormController {
 			JSONArray levelResult = JSONArray.fromObject(levelList);
 			JSONArray  ageGroupResult = JSONArray.fromObject(ageGroupList);
 			
-			model.addAttribute("country",countryResult);
+//			model.addAttribute("country",countryResult);
 			model.addAttribute("language",languageResult);
 			model.addAttribute("withwho",withResult);
 			model.addAttribute("hotel",hotelResult);

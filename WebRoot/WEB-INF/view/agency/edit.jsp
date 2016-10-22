@@ -251,7 +251,6 @@
 		});
 	$('#dataTable tbody').on( 'click', 'a.btn-success', function () {
 		var data = t.row($(this).parents('tr')).data();
-		alert(data)
 	    edit($(this).attr('id'));
 	    });
 
