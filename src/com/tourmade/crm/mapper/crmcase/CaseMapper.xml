@@ -14,6 +14,27 @@
 			u.operator as operator
 		from tm_case u  
 		where u.isdel = 0 
+		<if test="customerId != null and customerId != ''">
+			and customer_id = #{customerId}
+		</if> 
+		<if test="caseId != null and caseId != ''">
+			and case_id = #{caseId}
+		</if>
+		<if test="budget != null and budget != ''">
+			and budget = #{budget}
+		</if>
+		<if test="destination != null and destination != ''">
+			and destination = #{destination}
+		</if>
+		<if test="source != null and source != ''">
+			and source = #{source}
+		</if>
+		<if test="operator != null and operator != ''">
+			and operator = #{operator}
+		</if>
+		<if test="status != null and status != ''">
+			and status = #{status}
+		</if>
 		order by u.creat_time desc
 		limit #{start},#{length}
 	</select>
@@ -37,6 +58,27 @@
 		select count(u.case_id) from tm_case u
 		where
 		u.isdel = 0
+		<if test="customerId != null and customerId != ''">
+			and customer_id = #{customerId}
+		</if> 
+		<if test="caseId != null and caseId != ''">
+			and case_id = #{caseId}
+		</if>
+		<if test="budget != null and budget != ''">
+			and budget = #{budget}
+		</if>
+		<if test="destination != null and destination != ''">
+			and destination = #{destination}
+		</if>
+		<if test="source != null and source != ''">
+			and source = #{source}
+		</if>
+		<if test="operator != null and operator != ''">
+			and operator = #{operator}
+		</if>
+		<if test="status != null and status != ''">
+			and status = #{status}
+		</if>
 	</select>
 	
 	<select id="countCaseFC" parameterType="Case" resultType="long">

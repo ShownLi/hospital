@@ -72,7 +72,6 @@ public class CaseController extends BaseSimpleFormController {
 	public String queryData(HttpServletRequest request, HttpSession session, Model model, Case crmcase, PageHelper page) {
 	
 		QueryResult<Case> casePage = service.queryCase(crmcase, page, request);
-		
 		String result = JSONUtilS.object2json(casePage);
 		return result;
 	}
@@ -136,7 +135,7 @@ public class CaseController extends BaseSimpleFormController {
 		model.addAttribute("visa",visaResult);
 		model.addAttribute("flight",flightResult);
 		model.addAttribute("user",userResult);
-		
+
 		return "/case/add";
 	}
 	

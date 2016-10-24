@@ -13,6 +13,12 @@
 			u.isdel as isdel
 		from tm_agency u  
 		where u.isdel = 0 
+		<if test="name != null and name != ''">
+                and   agency_name like '%${name}%' 
+        </if>
+        <if test="country != null and country != ''">
+                and   country = #{country}
+        </if>
 		order by u.creat_time
 		limit #{start},#{length}
 	</select>
@@ -21,6 +27,12 @@
 		select count(u.agency_id) from tm_agency u
 		where
 		u.isdel = 0
+		<if test="name != null and name != ''">
+             	and   agency_name like '%${name}%' 
+        </if>
+        <if test="country != null and country != ''">
+                and   country = #{country}
+        </if>
 
 	</select>
 	

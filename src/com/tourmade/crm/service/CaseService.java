@@ -40,7 +40,29 @@ public class CaseService extends BaseService {
 
 		map.put("start", ph.getStart());
 		map.put("length", ph.getLength());;
-
+		
+		if(crmcase!=null){
+			map.put("customerId", crmcase.getCustomerId());
+		}
+		if(crmcase.getCaseId()!=null){
+			map.put("caseId", crmcase.getCaseId());
+		}
+		if(crmcase.getBudget()!=null){
+			map.put("budget", crmcase.getBudget());
+		}
+		if(crmcase.getDestination()!=null){
+			map.put("destination", crmcase.getDestination());
+		}
+		if(crmcase.getSource()!=null){
+			map.put("source", crmcase.getSource());
+		}
+		if(crmcase.getOperator()!=null){
+			map.put("operator", crmcase.getOperator());
+		}
+		if(crmcase.getStatus()!=null){
+			map.put("status", crmcase.getStatus());
+		}
+		
 		List<Case> data = caseMapper.queryCase(map);
 		long count = caseMapper.countCase(crmcase);
 			

@@ -26,6 +26,12 @@
 						</div>
 						<!-- panel-btns -->
 						<h3 class="panel-title">地接社列表</h3>
+						<input type="text" id="searchText" value="" />
+						 <select  id="searchMenu">
+						 <option value="agencyName">地接社名</option>
+						 <!-- <option value="country">国家</option> -->
+						 </select>
+						 <input type="button" id="searchBtn" value="搜索"/> 	
 					</div>
 					<div class="panel-body">
 						<br />
@@ -88,13 +94,29 @@
 		$(".nav-parent").eq(3).addClass("nav-active");
     	$(".nav-parent").eq(3).find(".children").show();
 
-		var agencyTable= jQuery('#dataTable').DataTable({
+		var agencyTable = jQuery('#dataTable').DataTable({
 			pageLength: 10,
 			processing: true,
 			language: datatable_local_language, // my.js
 			serverSide: true,
 			ajax: {
 			url: '${rootPath}agency/list.do',
+			data:function ( data ) {
+	 			var menu=$('#searchMenu').val();
+	 			var text=$('#searchText').val();
+	 			if(text !=null && text !="" ){
+	 				
+	 			if(menu=="agencyName"){
+	 				data.name = text;
+	 				alert(data.name);
+	 			}
+	 			
+	 			if(menu=="country"){
+	 				data.country = text;
+	 			}
+	 			
+	 			}
+			},
 				dataFilter: function(data){					
 					var json = jQuery.parseJSON( data );
 					json.recordsTotal = json.countTotal;
@@ -122,6 +144,7 @@
 		                			return country[i].text	                			
 		                		}
 		                	}
+		                	return "";
 		                }else{return ""}
 	                },
 	                  targets: 1
@@ -136,6 +159,7 @@
 			                			return language[i].text
 			                		}
 			                	}
+			                	return "";
 			                 }else{return ""}
 		                },
 		                  targets: 2
@@ -154,6 +178,10 @@
 		        ]
 			});
 			
+			$('#searchBtn').on( 'click', function () {
+				agencyTable.draw();
+		    } );
+		
 			$('#dataTable tbody').on( 'click', 'a.btn-success', function () {
 		        var data = agencyTable.row($(this).parents('tr')).data();
 		        edit($(this).attr('id'));
@@ -178,6 +206,8 @@
 			
 			
 		});
+		
+	
 		
 		function edit(id) {
 			window.parent.location = "${rootPath}agency/edit.html?id="+id;

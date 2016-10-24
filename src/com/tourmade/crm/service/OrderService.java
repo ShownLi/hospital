@@ -49,7 +49,34 @@ public class OrderService extends BaseService {
 			
 		map.put("start", ph.getStart());
 		map.put("length", ph.getLength());
+		if(order.getCustomerName()!=null){
+		map.put("customerName",order.getCustomerName());
+		}
+		
+		if(order.getOrderId()!=null){
+		map.put("orderId", order.getOrderId());
+		}
+		
+		if(order.getAgencyName()!=null){
+			map.put("agencyName", order.getAgencyName());
+		}
+		
+		if(order.getSalesName()!=null){
+			map.put("salesName", order.getSalesName());
+		}
+		
+		if(order.getDestination()!=null){
+			map.put("destination", order.getDestination());
+		}
+		
+		if(order.getBudget()!=null){
+			map.put("budget", order.getBudget());
+		}
 
+		if(order.getStatus()!=null){
+			map.put("status", order.getStatus());
+		}
+		
 		List<Order> data = orderMapper.queryOrder(map);
 		long count = orderMapper.countOrder(order);
 			

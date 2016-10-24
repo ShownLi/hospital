@@ -59,6 +59,7 @@ public class OrderController extends BaseSimpleFormController {
 	@ResponseBody
 	public String queryData(HttpServletRequest request, HttpSession session, Model model, Order order, PageHelper page) {
 		
+		//System.out.println(order);
 		QueryResult<Order> queryResult = service.queryOrder(order, page, request);
 		String result = JSONUtilS.object2json(queryResult);
 
@@ -133,7 +134,6 @@ public class OrderController extends BaseSimpleFormController {
 				//生成给地接社的第一封邮件
 				//DemoCustomer customer = service.getCustomerById(order.getCustomerid());
 				Case crmcase = service.getCaseById(order.getCaseId());
-				
 				order = service.getOrderById(order.getOrderId());
 				
 				String result = emailService.creatTemplate(crmcase, order);

@@ -28,6 +28,14 @@
 						</div>
 						<!-- panel-btns -->
 						<h3 class="panel-title">系统参数列表</h3>
+						<input type="text" id="searchText" value="" />
+						 <select  id="searchMenu">
+						 <option value="domain">作用域</option>
+						 <option value="value">存值</option>
+						 <option value="chinese">中文</option>						 
+						 <option value="english">英文</option>			
+						 </select>
+						 <input type="button" id="searchBtn" value="搜索"/> 	
 					</div>
 					<div class="panel-body">
 						<br />
@@ -107,6 +115,29 @@
 				serverSide: true,
 				ajax: {
 					url: '${rootPath}parameter/list.do',
+					data:function ( data ) {
+			 			var menu=$('#searchMenu').val();
+			 			var text=$('#searchText').val();
+			 			if(text !=null && text !="" ){	
+			 				
+			 			if(menu=="domain"){
+			 				data.domain = text;	
+			 			}
+			 			
+			 			if(menu=="value"){
+			 				data.value = text;
+			 			}
+			 			
+			 			if(menu=="chinese"){
+			 				data.chinese = text;
+			 			}
+			 			
+			 			if(menu=="english"){
+			 				data.english = text;
+			 			}
+			 			
+			 			}
+					},
 					dataFilter: function(data){
 			            var json = jQuery.parseJSON( data );
 			            json.recordsTotal = json.countTotal;
@@ -149,6 +180,11 @@
 		            { data: "isdisplay" }
 		        ]
 			});
+			
+			$('#searchBtn').on( 'click', function () {
+		    	//alert($('#customerName').attr("value"));
+		        t.draw();
+		    } );
 			
 			$('#dataTable tbody').on( 'click', 'a.btn-success', function () {
 		        var data = t.row($(this).parents('tr')).data();

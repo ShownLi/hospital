@@ -38,7 +38,21 @@ public class ParameterService extends BaseService {
 
 		map.put("start", pageHelper.getStart());
 		map.put("length", pageHelper.getLength());
-
+		if(parameter.getDomain()!=null){
+			map.put("domain", parameter.getDomain());
+		}
+		
+		if(parameter.getValue()!=null){
+			map.put("value", parameter.getValue());
+		}
+		
+		if(parameter.getChinese()!=null){
+			map.put("chinese", parameter.getChinese());
+		}
+		
+		if(parameter.getEnglish()!=null){
+			map.put("english", parameter.getEnglish());
+		}
 		List<Parameter> data = parameterMapper.queryParameter(map);
 		long count = parameterMapper.countParameter(parameter);
 		

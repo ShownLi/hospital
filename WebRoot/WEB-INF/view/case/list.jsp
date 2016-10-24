@@ -15,7 +15,7 @@
 			<div class="pageheader">
 				<h2>
 					<i class="fa fa-user"></i> 询单管理 <span>询单列表</span>
-				</h2>
+				</h2>				 
 			</div>
 
 			<div class="contentpanel">
@@ -28,6 +28,26 @@
 						</div>
 						<!-- panel-btns -->
 						<h3 class="panel-title">询单列表</h3>
+						<div class="form-group col-sm-4">
+						<input type="text" id="searchCustomerId" class="customer-select fullwidth" value="" />
+						<input type="text" id="searchCaseId" class="form-control" placeholder="询单id"  value="" />
+						<!-- <input type="text" id="searchBudget" class="form-control" placeholder="预算" value="" /> -->
+						<input type="text" id="searchDestination" class="destination-select fullwidth" value="" />
+						<input type="text" id="searchSource" class="source-select fullwidth" value="" />
+						<input type="text" id="searchOperator" class="operator-select fullwidth" value="" />
+						<input type="text" id="searchStatus" class="status-select fullwidth" value="" />
+						</div>						 		                		               		
+							<!-- <input type="text" id="searchText" value="" />
+							 <select  id="searchMenu">
+							 <option value="customerName">客人姓名</option>
+							 <option value="caseId">询单id</option>
+							 <option value="budget">预算</option>
+							 <option value="destination">目的地</option>
+							 <option value="source">询单来源</option>						 
+							 <option value="operator">跟单员</option>						 					
+							 <option value="status">状态</option>
+							 </select> -->
+							<input type="button" id="searchBtn" value="搜索"/> 	
 					</div>
 					<div class="panel-body">
 						<br />
@@ -154,11 +174,32 @@
         placeholder: '国家',
         data: destination
     });
+	
+   	$(".customer-select").select2({
+        placeholder: '客人',
+        data: customer
+    }); 
+   	
+	$(".source-select").select2({
+        placeholder: '来源',
+        data: source
+    });
+	
+	$(".operator-select").select2({
+        placeholder: '跟单员',
+        data: user
+    });
+	
+	$(".status-select").select2({
+        placeholder: '状态',
+        data: caseStatus
+    });
+	
     $(".sales-select").select2({
         placeholder: '销售',
         data: sales
     })
-		jQuery(document).ready(function() {
+		 jQuery(document).ready(function() {
 
 			$(".nav-parent").eq(0).addClass("nav-active");
 			$(".nav-parent").eq(0).find(".children").show();
@@ -170,6 +211,38 @@
 				serverSide: true,
 				ajax: {
 					url: '${rootPath}case/list.do',
+					data: function( data){
+			 			var searchCustomerId=$('#searchCustomerId').val();
+			 			var searchCaseId=$('#searchCaseId').val();
+			 			var searchBudget=$('#searchBudget').val();
+			 			var searchDestination=$('#searchDestination').val();
+			 			var searchSource=$('#searchSource').val();
+			 			var searchOperator=$('#searchOperator').val();
+			 			var searchStatus=$('#searchStatus').val();
+			 			
+			 			if(searchCustomerId !=null && searchCustomerId !="" ){
+							data.customerId = searchCustomerId;
+			 			}
+			 			if(searchCaseId !=null && searchCaseId !="" ){
+							data.caseId = searchCaseId;
+			 			}
+			 			if(searchBudget !=null && searchBudget !="" ){
+							data.budget = searchBudget;
+			 			}
+			 			if(searchDestination !=null && searchDestination !="" ){
+							data.destination = searchDestination;
+			 			}
+			 			if(searchSource !=null && searchSource !="" ){
+							data.source = searchSource;
+			 			}
+			 			if(searchOperator !=null && searchOperator !="" ){
+							data.operator = searchOperator;
+			 			}
+			 			if(searchStatus !=null && searchStatus !="" ){
+							data.status = searchStatus;
+			 			}
+					},
+					
 					dataFilter: function(data){
 						var json = jQuery.parseJSON( data );
 						json.recordsTotal = json.countTotal;
@@ -197,6 +270,7 @@
 				                			return customer[i].text
 				                		}
 				                	}
+			                		return "";
 			                	}
 			                	else{return ""}
 			                },
@@ -210,9 +284,9 @@
 				                	for(var i=0;i <destination.length;i++){
 				                		if(data==destination[i].id){
 				                			return destination[i].text
-				                		}
-				                	
+				                		}				                	
 				                	}
+				                	return "";
 			                	}
 			                	else{return ""}
 			                },
@@ -223,13 +297,15 @@
 			                orderable: false,
 			                render: function ( data ) {
 
-			                	if(data!=null && typeof(data) != undefined){
+			                	if(data){
 			                		for(var i=0;i < source.length;i++){
 				                		if(data==source[i].id){
 				                			return source[i].text
 				                		}
 				                	
 				                	}
+			                		return "";
+			                		
 			                	}
 			                	else{return ""}
 			                },
@@ -244,7 +320,8 @@
 				                		if(data==user[i].id){
 				                			return user[i].text
 				                		}				                		
-				                	}				                	
+				                	}
+				                	return "";
 			                	}
 			                	else{return ""}
 			                },
@@ -260,6 +337,7 @@
 				                			return caseStatus[i].text
 				                		}
 				                	}
+			                		return "";
 			                	}
 			                	else{return ""}
 			                },
@@ -283,6 +361,12 @@
 			        ]
 				});
 				
+			
+				$('#searchBtn').on( 'click', function () {
+			    	//alert($('#searchText').attr("value"));
+			        t.draw();
+			    } );
+			
 				$('#dataTable tbody').on( 'click', 'a.btn-success', function () {
 			        var data = t.row($(this).parents('tr')).data();
 			        edit($(this).attr('id'));

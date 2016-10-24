@@ -51,7 +51,7 @@
 							  <option value="mobilephone">手机</option>
 							  
 							  <option value="qq">qq</option>
-					  		  <option value="邮箱">邮箱</option>
+					  		  <option value="mail">邮箱</option>
 					</select>
                       </div>
                     </div> 
