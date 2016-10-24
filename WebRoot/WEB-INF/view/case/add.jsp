@@ -409,8 +409,7 @@
           minDate: 0
         });
 			 
-  			jQuery("#form-case").validate({
-  				
+  			jQuery("#form-case").validate({				
     		rules: {
  		      customerId: "required",
  			  source: "required",
@@ -422,19 +421,19 @@
               endDate: "date",
               startMonth: "date",
               during: "digits",
-    				},
-    				messages: {
-    					customerId: "必须选择所属客人",
-    					source:"请选择询单来源",
-    					adult: "请输入一个整数",
-              children: "请输入一个整数",
-              baby: "请输入一个整数",
-              budget: "请输入一个整数",
-              startDate: "请输入正确的日期格式 mm/dd/yyyy",
-              endDate: "请输入正确的日期格式 mm/dd/yyyy",
-              startMonth: "请输入正确的日期格式 mm/dd/yyyy",
-              during: "请输入一个整数",
-    				},
+    		},
+    		messages: {
+   				customerId: "必须选择所属客人",
+   				source:"请选择询单来源",
+   				adult: "请输入一个整数",
+             	children: "请输入一个整数",
+             	baby: "请输入一个整数",
+            	budget: "请输入一个整数",
+            	startDate: "请输入正确的日期格式 mm/dd/yyyy",
+            	endDate: "请输入正确的日期格式 mm/dd/yyyy",
+             	startMonth: "请输入正确的日期格式 mm/dd/yyyy",
+            	during: "请输入一个整数",
+   			},
   				
   			    highlight: function(element) {
   			      jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');

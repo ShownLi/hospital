@@ -62,6 +62,13 @@
                       <input type="text" name="source" class="source-select fullwidth" value="${crmcase.source}" />
                     </div>
                 </div>
+                
+                <div class="form-group col-sm-4">
+                <label class="col-sm-4 control-label">状态</label>
+                <div class="col-sm-8">
+                   <input type="text" name="status" class="status-select fullwidth" value="${crmcase.status}" />
+                </div>
+                </div>
             </div>
             
            <div class="section-block">
@@ -121,14 +128,7 @@
                 <div class="col-sm-8">
                    <input type="text" name="submitType" class="form-control" readonly value="${crmcase.submitType}" />
                 </div>
-                </div>
-                
-                <div class="form-group col-sm-4">
-                <label class="col-sm-4 control-label">状态</label>
-                <div class="col-sm-8">
-                   <input type="text" name="status" class="status-select fullwidth" value="${crmcase.status}" />
-                </div>
-                </div>
+                </div>       
                 
                 <div class="form-group col-sm-4">
                   <label class="col-sm-4 control-label">目的地</label>

@@ -40,15 +40,19 @@ public class OrderController extends BaseSimpleFormController {
 
 	@RequestMapping(value = "/list.html", method = { RequestMethod.POST, RequestMethod.GET })
 	public String list(Model model) {
+		String currency="order.currency";		
 		String country = "country";
 		String status = "order.status";
 		String reason = "order.reason";
+		List<EntityList> currencyList = service.getParameterInfo(currency);
 		List<EntityList> statusList = service.getParameterInfo(status);
 		List<EntityList> countryList = service.getParameterInfo(country);
 		List<EntityList> reasonLiat = service.getParameterInfo(reason);
+		JSONArray currencyResult = JSONArray.fromObject(currencyList);
 		JSONArray countryResult = JSONArray.fromObject(statusList);
 		JSONArray statusResult = JSONArray.fromObject(countryList);
 		JSONArray reasonResult = JSONArray.fromObject(reasonLiat);
+		model.addAttribute("currency",currencyResult);
 		model.addAttribute("orderStatus",statusResult);
 		model.addAttribute("destination",countryResult);
 		model.addAttribute("reason",reasonResult);
@@ -158,16 +162,20 @@ public class OrderController extends BaseSimpleFormController {
 		if (null != id && !"".equals(id)) {
 			int orderId = Integer.parseInt(id);
 			Order order = service.getOrderById(orderId);
+			String currency="order.currency";
 			String status = "order.status";
 			String country = "country";
 			String reason = "order.reason";
+			List<EntityList> currencyList = service.getParameterInfo(currency);
 			List<EntityList> statusList = service.getParameterInfo(status);
 			List<EntityList> countryList = service.getParameterInfo(country);
 			List<EntityList> reasonList = service.getParameterInfo(reason);
+			JSONArray currencyResult = JSONArray.fromObject(currencyList);
 			JSONArray statusResult = JSONArray.fromObject(statusList);
 			JSONArray countryResult = JSONArray.fromObject(countryList);
 			JSONArray reasonResult = JSONArray.fromObject(reasonList);
-			model.addAttribute("status",statusResult);
+			model.addAttribute("currency",currencyResult);
+			model.addAttribute("orderStatus",statusResult);
 			model.addAttribute("order",order);
 			model.addAttribute("country",countryResult);
 			model.addAttribute("reason",reasonResult);
@@ -178,7 +186,6 @@ public class OrderController extends BaseSimpleFormController {
 	@RequestMapping(value = "/orderDeal.do")
 	@ResponseBody
 	public Json orderDeal(HttpServletRequest request, HttpSession session, Model model, Order order) {
-		System.out.println("****1"+order);
 		
 		Json json = new Json();
 		Order oldOrder = service.getOrderById(order.getOrderId());

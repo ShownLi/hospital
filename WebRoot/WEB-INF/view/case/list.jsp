@@ -147,6 +147,7 @@
 	var customer = ${customer};
 	var user = ${user};
     var sales = ${sales};
+
 	$(".destination-select").select2({
         placeholder: '国家',
         data: destination
