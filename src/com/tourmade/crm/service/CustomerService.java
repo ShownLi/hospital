@@ -39,7 +39,35 @@ public class CustomerService extends BaseService {
 
 		map.put("start", pageHelper.getStart());
 		map.put("length", pageHelper.getLength());
-
+		
+		if(customer.getChineseName()!=null){
+		map.put("chineseName",customer.getChineseName());
+		}
+		
+		if(customer.getCustomerId()!=null){
+			map.put("customerId",customer.getCustomerId());
+		}
+		
+		if(customer.getEnglishName()!=null){
+			map.put("englishName",customer.getEnglishName());
+		}
+		
+		if(customer.getMobilephone()!=null){
+			map.put("mobilephone",customer.getMobilephone());
+		}
+		
+		if(customer.getEmail()!=null){
+			map.put("email",customer.getEmail());
+		}
+		
+		if(customer.getLocation()!=null){
+			map.put("location",customer.getLocation());
+		}
+		
+		if(customer.getLevel()!=null){
+			map.put("level",customer.getLevel());
+		}
+		
 		List<Customer> data = customerMapper.queryCustomer(map);
 		long count = customerMapper.countCustomer(customer);
 			

@@ -96,7 +96,7 @@
 		where u.isdisplay = 1 and u.isdel = 0 and u.para_domain = #{domain}
 	</select>
 	
-	<select id="getRrouteUrl" resultType="String">
+	<select id="getRouteUrl" resultType="String">
 		select
 		para_value
 		from tm_parameter where para_domain = 'route_url'

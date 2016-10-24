@@ -27,6 +27,27 @@
 			u.isdel as isdel
 		from tm_order u  
 		where u.isdel = 0 
+		 <if test="customerName != null and customerName != ''">
+                and   customer_name like '%${customerName}%' 
+         </if>
+         <if test="orderId != null and orderId != ''">
+         		and   order_id = #{orderId}
+         </if>
+          <if test="agencyName != null and agencyName != ''">
+         		and   agency_name like '%${agencyName}%'
+         </if>
+          <if test="salesName != null and salesName != ''">
+         		and   sales_name like '%${salesName}%'
+         </if>
+          <if test="destination != null and destination != ''">
+         		and   destination = #{destination}
+         </if>
+          <if test="budget != null and budget != ''">
+         		and   budget = #{budget}
+         </if>
+       	  <if test="status != null and staus != ''">
+         		and   status = #{status}
+         </if>
 		order by u.creat_time desc
 		limit #{start},#{length}
 	</select>
@@ -53,6 +74,27 @@
 		select count(u.order_id) from tm_order u
 		where
 		u.isdel = 0
+		 <if test="customerName != null and customerName != ''">
+                and   customer_name like '%${customerName}%' 
+         </if>
+         <if test="orderId != null and orderId != ''">
+         		and   order_id = #{orderId}
+         </if>
+          <if test="agencyName != null and agencyName != ''">
+         		and   agency_name like '%${agencyName}%'
+         </if>
+          <if test="salesName != null and salesName != ''">
+         		and   sales_name like '%${salesName}%'
+         </if>
+          <if test="destination != null and destination != ''">
+         		and   destination = #{destination}
+         </if>
+          <if test="budget != null and budget != ''">
+         		and   budget = #{budget}
+         </if>
+       	  <if test="status != null and staus != ''">
+         		and   status = #{status}
+         </if>
 	</select>
 	
 	<select id="customerStatus">
@@ -259,6 +301,7 @@
 		u.end_date as endDate,
 		u.requirement as requirement,
 		u.route as route,
+		u.route_id as routeId,
 		u.hotel as hotel,
 		u.meals as meals,
 		u.guide as guide,

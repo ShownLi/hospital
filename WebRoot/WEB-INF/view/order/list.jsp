@@ -29,8 +29,17 @@
 						<!-- panel-btns -->
 						<h3 class="panel-title">订单列表</h3>
 
-				<!-- 		 <input type="text" id="customerName" value="" />
-						<input type="button" id="searchBtn" value="搜索"/> -->		 				
+						<input type="text" id="searchText" value="" />
+						 <select  id="searchMenu">
+						 <option value="customerName">客人姓名</option>
+						 <option value="orderId">订单id</option>
+						 <option value="agencyName">地接社</option>						 
+						 <option value="salesName">销售姓名</option>						 
+						 <option value="destination">目的地</option>						 
+						 <option value="budget">预算</option>
+						 <option value="status">状态</option>
+						 </select>
+						<input type="button" id="searchBtn" value="搜索"/> 			 				
 
 					</div>
 					<div class="panel-body">
@@ -296,7 +305,40 @@
 			 	ajax: {
 			 		url: '${rootPath}order/list.do',
 			 		data:function ( order ) {
-					    order.customerName = $('#customerName').val();
+			 			var menu=$('#searchMenu').val();
+			 			var text=$('#searchText').val();
+			 			if(text !=null && text !="" ){
+			 			if(menu=="customerName"){
+			 				order.customerName = text;	
+			 			}
+			 			
+			 			if(menu=="orderId"){
+			 				order.orderId = text;
+			 			}
+			 			
+			 			if(menu=="agencyName"){
+			 				order.agencyName = text;
+			 			}
+			 			
+			 			if(menu=="salesName"){
+			 				order.salesName = text;
+			 			}
+			 			
+			 			
+			 			if(menu=="destination"){
+			 				order.destination = text;
+			 			}
+			 			
+			 			if(menu=="budget"){
+			 				order.budget = text;
+			 			}
+			 		
+
+			 			if(menu=="status"){
+			 				order.status = text;
+			 			}
+
+			 			}
 					},
 
 			 		dataFilter: function(data){

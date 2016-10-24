@@ -23,6 +23,27 @@
 			u.isdel as isdel
 		from tm_customer u  
 		where u.isdel = 0 
+		<if test="chineseName != null and chineseName != ''">
+                and   customer_name_zh like '%${chineseName}%' 
+        </if>
+        <if test="customerId != null and customerId != ''">
+                and   customer_id = #{customerId}
+        </if>
+        <if test="englishName != null and englishName != ''">
+                and   customer_name_en like '%${englishName}%' 
+        </if>
+        <if test="mobilephone != null and mobilephone != ''">
+                and   mobilephone like '%${mobilephone}%' 
+        </if>
+        <if test="email != null and email != ''">
+                and   email like '%${email}%' 
+        </if>
+        <if test="location != null and location != ''">
+                and   location like '%${location}%' 
+        </if>
+        <if test="level != null and level != ''">
+                and   level = #{level}
+        </if>
 		order by u.creat_time desc
 		limit #{start},#{length}
 	</select>
@@ -31,6 +52,27 @@
 		select count(u.customer_id) from tm_customer u
 		where
 		u.isdel = 0
+		<if test="chineseName != null and chineseName != ''">
+                and   customer_name_zh like '%${chineseName}%' 
+        </if>
+        <if test="customerId != null and customerId != ''">
+                and   customer_id = #{customerId}
+        </if>
+        <if test="englishName != null and englishName != ''">
+                and   customer_name_en like '%${englishName}%' 
+        </if>
+        <if test="mobilephone != null and mobilephone != ''">
+                and   mobilephone like '%${mobilephone}%' 
+        </if>
+        <if test="email != null and email != ''">
+                and   email like '%${email}%' 
+        </if>
+        <if test="location != null and location != ''">
+                and   location like '%${location}%' 
+        </if>
+        <if test="level != null and level != ''">
+                and   level = #{level}
+        </if>
 
 	</select>
 	

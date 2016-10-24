@@ -939,7 +939,7 @@
   	  if("${crmcase.startTime}"==1){
     	   $('#yes').attr('checked','true');
       }
-      else{
+      if("${crmcase.startTime}"==0){
     		$('#no').attr('checked','true');
       }
   	  

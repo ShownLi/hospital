@@ -27,6 +27,17 @@
 						</div>
 						<!-- panel-btns -->
 						<h3 class="panel-title">客人列表</h3>
+						<input type="text" id="searchText" value="" />
+						 <select  id="searchMenu">
+						 <option value="chineseName">客人姓名</option>
+						 <option value="customerId">客人id</option>
+						 <option value="englishName">英文名</option>						 
+						 <option value="mobilephone">手机</option>						 
+						 <option value="email">邮箱</option>						 
+						 <option value="location">所在地</option>
+						 <!-- <option value="level">客人级别</option> -->
+						 </select>
+						 <input type="button" id="searchBtn" value="搜索"/> 	
 					</div>
 					<div class="panel-body">
 						<br />
@@ -44,7 +55,6 @@
 										<th>所在地</th>
 										<th>客人级别</th>
 										<th>编辑</th>
-										<th>增加询单</th>
 									</tr>
 								</thead>								
 							</table>
@@ -102,6 +112,43 @@
 				serverSide: true,
 				ajax: {
 					url: '${rootPath}customer/list.do',
+					data:function ( data ) {
+			 			var menu=$('#searchMenu').val();
+			 			var text=$('#searchText').val();
+			 			if(text !=null && text !="" ){
+			 				
+			 			if(menu=="chineseName"){
+			 				data.chineseName = text;	
+			 			}
+			 			
+			 			if(menu=="customerId"){
+			 				data.customerId = text;
+			 			}
+			 			
+			 			if(menu=="englishName"){
+			 				data.englishName = text;
+			 			}
+			 			
+			 			if(menu=="mobilephone"){
+			 				data.mobilephone = text;
+			 			}
+			 			
+			 			
+			 			if(menu=="email"){
+			 				data.email = text;
+			 			}
+			 			
+			 			if(menu=="location"){
+			 				data.location = text;
+			 			}
+			 		
+
+			 			if(menu=="level"){
+			 				data.level = text;
+			 			}
+
+			 			}
+					},
 					dataFilter: function(data){
 			            var json = jQuery.parseJSON( data );
 			            json.recordsTotal = json.countTotal;
@@ -115,18 +162,11 @@
 						data: "customerId",
 						orderable: false,
 						render: function ( data, type, full, meta ) {
-							return '<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a> &nbsp; ';
+							return '<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a> &nbsp; <a class="btn btn-primary btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 增加询单</a> &nbsp;';
 						},
 						targets: 9
 					},
-					{
-						data: "customerId",
-						orderable: false,
-						render: function ( data, type, full, meta ) {
-							return '<a class="btn btn-primary btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 增加询单</a> &nbsp; ';
-						},
-						targets: 10
-					},
+
 					  {
 		                data: "ageGroup",
 		                orderable: false,
@@ -183,6 +223,11 @@
 		        ]
 			});
 			
+		  	$('#searchBtn').on( 'click', function () {
+		    	//alert($('#customerName').attr("value"));
+		        t.draw();
+		    } );
+		  
 			$('#dataTable tbody').on( 'click', 'a.btn-success', function () {
 		        var data = t.row($(this).parents('tr')).data();
 		        edit($(this).attr('id'));
