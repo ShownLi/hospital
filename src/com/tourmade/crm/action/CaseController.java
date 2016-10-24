@@ -144,7 +144,7 @@ public class CaseController extends BaseSimpleFormController {
 	 */
 	@RequestMapping(value = "/addCase.html", method = { RequestMethod.POST, RequestMethod.GET })
 	public String addfromcustomer(Model model, int customerId) {
-		
+
 		String country = "country";
 		String language = "case.preferlanguage";
 		String withwho = "case.withwho";
@@ -210,7 +210,7 @@ public class CaseController extends BaseSimpleFormController {
 	@RequestMapping(value = "/add.do")
 	@ResponseBody
 	public Json doAdd(HttpServletRequest request, HttpSession session, Model model, Case crmcase) {
-
+		
 		Json json = new Json();
 		
 		try {

@@ -69,70 +69,82 @@
             	<label class="col-sm-4 control-label">英文名</label>
             	<div class="col-sm-8">
                     <input type="text" name="englishName" id="englishName" class="form-control" readonly value="${customerInfo.englishName}" />
-                  </div>
+                </div>
             	</div>
             	
             	<div class="form-group col-sm-4">
             	<label class="col-sm-4 control-label">性别</label>
             	<div class="col-sm-8">
                     <input type="text" name="gender" id="gender" class="gender-select fullwidth" readonly value="${customerInfo.gender}" />
-                  </div>
+                </div>
             	</div>
             	
             	<div class="form-group col-sm-4">
             	<label class="col-sm-4 control-label">生日</label>
             	<div class="col-sm-8">
                     <input type="text" name="birthday" id="birthday" class="form-control" readonly value="${customerInfo.birthday}" />
-                  </div>
+                </div>
             	</div>
             	
             	<div class="form-group col-sm-4" style="clear: both;">
             	<label class="col-sm-4 control-label">年龄段</label>
             	<div class="col-sm-8">
                     <input type="text" name="ageGroup" id="ageGroup" class="form-control" readonly value="${customerInfo.ageGroup}" />
-                  </div>
+                </div>
             	</div>
             	
             	<div class="form-group col-sm-4">
             	<label class="col-sm-4 control-label">客人级别</label>
             	<div class="col-sm-8">
                     <input type="text" name="level" id="level" class="level-select fullwidth" readonly  value="${customerInfo.level}" />
-                  </div>
+                </div>
             	</div>           	
             </div> 
             
-            <div class="section-block">
-                <div class="form-group col-sm-4">
-                  <label class="col-sm-4 control-label">目的地</label>
-                  <div class="col-sm-8">
-                    <input type="text" name="destination" class="destination-select fullwidth" readonly value="${crmcase.destination}" />
-                  </div>
+            <div class="section-block">           
+            	<div class="form-group col-sm-4">
+                <label class="col-sm-4 control-label">IP地址</label>
+                 <div class="col-sm-8">
+                     <input type="text" name="ipAddress" class="form-control" readonly value="${crmcase.ipAddress}" />
                 </div>
+                </div>               
+                
                 <div class="form-group col-sm-4">
-                  <label class="col-sm-4 control-label">推广码</label>
-                  <div class="col-sm-8">
-                    <input type="text" name="promoteCode" class="form-control" readonly value="${crmcase.promoteCode}" />
-                  </div>
+                <label class="col-sm-4 control-label">推广码</label>
+                <div class="col-sm-8">
+                   <input type="text" name="promoteCode" class="form-control" readonly value="${crmcase.promoteCode}" />
+                </div>
                 </div> 
+                
                	<div class="form-group col-sm-4">
                   <label class="col-sm-4 control-label">表单类型</label>
-                  <div class="col-sm-8">
-                    <input type="text" name="submitType" class="form-control" readonly value="${crmcase.submitType}" />
-                  </div>
+                <div class="col-sm-8">
+                   <input type="text" name="submitType" class="form-control" readonly value="${crmcase.submitType}" />
                 </div>
+                </div>
+                
                 <div class="form-group col-sm-4">
-                    <label class="col-sm-4 control-label">IP地址</label>
-                    <div class="col-sm-8">
-                      <input type="text" name="ipAddress" class="form-control" readonly value="${crmcase.ipAddress}" />
-                    </div>
-                </div>      
+                <label class="col-sm-4 control-label">状态</label>
+                <div class="col-sm-8">
+                   <input type="text" name="status" class="status-select fullwidth" value="${crmcase.status}" />
+                </div>
+                </div>
+                
                 <div class="form-group col-sm-4">
-                    <label class="col-sm-4 control-label">跟单员</label>
-                    <div class="col-sm-8">
-                      <input type="text" name="operator" class="user-select fullwidth" value="${crmcase.operator}" />
-                    </div>
+                  <label class="col-sm-4 control-label">目的地</label>
+                <div class="col-sm-8">
+                    <input type="text" name="destination" class="destination-select fullwidth" value="${crmcase.destination}" />
+                </div>
+                </div>
+                     
+                <div class="form-group col-sm-4">
+                <label class="col-sm-4 control-label">跟单员</label>
+                <div class="col-sm-8">
+                     <input type="text" name="operator" class="user-select fullwidth" value="${crmcase.operator}" />
+                </div>
                 </div>      
             </div>
+            
             <div class="section-block">
                 <div class="form-group col-sm-4">
                   <label class="col-sm-4 control-label">与谁同行</label>
@@ -285,9 +297,8 @@
         确定无效么？
       </div>
       <div class="modal-footer">
-      	<input type="hidden" class="hiddenId" value="" />
         <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-        <button type="button" class="btn btn-danger">无效</button>
+        <button id="confirm-invalid" type="button" class="btn btn-danger">无效</button>
       </div>
     </div><!-- modal-content -->
   </div><!-- modal-dialog -->
@@ -486,7 +497,8 @@
     var hotel = ${hotel};
     var meals = ${meals};
     var guide = ${guide};
-    var status = ${status};
+    var caseStatus = ${status};
+    
     var source = ${source};
     var tailormade = ${tailormade};
     var passport = ${passport};
@@ -519,15 +531,14 @@
 	$("#gender").select2({
         data: genderData
     });  
-    $(".country-select").select2({
+      $(".country-select").select2({
         placeholder: '国家',
         data: country
-    });
-    $(".destination-select").select2({
+    });  
+     $(".destination-select").select2({
         placeholder: '国家',
         data: country
-    });
-	
+    }); 	
     $(".language-select").select2({
     	placeholder: '选择一个沟通语言',
      	data: language
@@ -555,7 +566,7 @@
        data: guide
     });
     $(".status-select").select2({
-        data: status
+        data: caseStatus
      });
     $(".source-select").select2({
       placeholder: '选择一个推广渠道',
@@ -589,7 +600,8 @@
         placeholder: '销售',
         data: sales
     });
-
+	
+	//订单回显数据
   	var orderTable = jQuery('#dataTable-order').DataTable({
 	 	pageLength: 10,
 	 	processing: true,
@@ -629,7 +641,7 @@
               	},
                 targets: 6
 			},
-			{
+ 			{
               data: "destination",
               orderable: false,
               render: function ( data ) {
@@ -643,7 +655,7 @@
 	              else{return ""}
               },
                 targets: 4
-			},		  
+			}, 		  
 	 	    {
 			    orderable: false,
 			    searchable: false,
@@ -660,11 +672,8 @@
              { data: "status" }
        ]		 	
 	});
-    
-	function edit(id) {
-		window.parent.location = "${rootPath}order/edit.html?id="+id;
-	}
 	
+	//询单效验数据，修改
 	jQuery("#form-case").validate({      
           rules: {
             adult: "digits",
@@ -701,101 +710,77 @@
             return false;
           }
       });
-	
-  		$("#btn-back").click( function () {
-  				history.go(-1);
-  		}); 
-
+      
+  	  function case_submit(){
+   			var f = $("#form-case").serialize();
+   			$.post('${rootPath}case/edit.do', f, function(result) {
+   				var rmsg = result.msg;
+   				if (result.success) {
+   					window.parent.location = "${rootPath}case/edit.html?id=${crmcase.caseId}";
+   				} else {
+   					$("#msgModal").modal('show');
+   				}
+   			}, "JSON");
+  		}
+	  
+	   //询单返回
+  	  $("#btn-back").click( function () {
+  		  history.go(-1);
+  	  }); 
+  	  
+	  
+      
+      //询单无效
+      $("#btn-invalid").click(function(){
+      	 $("#reconfirmDelModal").modal('show');
+		 return false;
+      });
+      $("#confirm-invalid").click(function(){
+      	doDel()
+      })
+      function doDel(){
+		$.ajax({
+			url: "${rootPath}case/del.do?id=${crmcase.caseId}", 
+			success: function() {
+				window.location.reload();
+			},
+			error: function() {
+				alert(2);
+			}
+		});			
+	  }
+	  
+	   //添加订单
       $("#btn-addorder").click(function(){
           $("#nextModal").modal('show');
           return false;
       });
-
       $(".nextModal .submit").click(function(){
       	  order_submit();
-      });
+      });     
+      function order_submit() {
+			var f = $("#order").serialize();
+			$.post('${rootPath}order/add.do', f, function(result) {
+				var rmsg = result.msg;
+				if (result.success) {
+					window.parent.location = "${rootPath}case/edit.html?id=${crmcase.caseId}";
+				} else {
+					$("#NoEmail").modal('show');
+          			$("#nextModal").modal('hide');
+				}
+			}, "JSON");
+    	}
       
-      $("#btn-invalid").click(function(){
-      	 $("#reconfirmDelModal").modal('show');
-		 alert($("#reconfirmDelModal").attr("aria-hidden"));
-      });
-      
+      //进入订单编辑页面
       $('#dataTable-order tbody').on( 'click', 'a.btn-success', function () {
          var data = orderTable.row($(this).parents('tr')).data();
          edit($(this).attr('id'));
-      });	
-      
-      function doDel(id){
-			$.ajax({
-				url: "${rootPath}case/del.do?id=" + id, 
-				success: function() {
-					window.location.reload();
-				},
-				error: function() {
-					alert(2);
-				}
-			});
-			
-		}
-		
-  		function order_submit() {
-    			var f = $("#order").serialize();
-    			$.post('${rootPath}order/add.do', f, function(result) {
-    				var rmsg = result.msg;
-    				if (result.success) {
-    					window.parent.location = "${rootPath}case/edit.html?id=${crmcase.caseId}";
-    				} else {
-    					$("#NoEmail").modal('show');
-              			$("#nextModal").modal('hide');
-    				}
-    			}, "JSON");
-    	}
-
-  		function case_submit(){
-    			var f = $("#form-case").serialize();
-    			$.post('${rootPath}case/edit.do', f, function(result) {
-    				var rmsg = result.msg;
-    				if (result.success) {
-    					window.parent.location = "${rootPath}case/edit.html?id=${crmcase.caseId}";
-    				} else {
-    					$("#msgModal").modal('show');
-    				}
-    			}, "JSON");
-  		}
+      });     
+     function edit(id) {
+		window.parent.location = "${rootPath}order/edit.html?id="+id;
+	 }	
   		
-  		var commentTable= jQuery('#dataTable-comment').DataTable({
-    			pageLength: 10,
-    			processing: true,
-    			language: datatable_local_language, // my.js
-    			serverSide: true,
-    			ajax: {
-      				url: '${rootPath}comment/list.do?type=case&id=${crmcase.caseId}',
-      				dataFilter: function(data){
-      				    var json = jQuery.parseJSON( data );
-      				    json.recordsTotal = json.countTotal;
-      				    json.recordsFiltered = json.countFiltered;
-      				    json.data = json.data;
-      				    return JSON.stringify( json );
-      			    }
-      			},
-    			columnDefs: [
-	   							  {
-	   								  data: "creattime",
-	   								  render: function ( data, type, full, meta ) {
-	   									  var creattime = new Date(data.time);
-	   				                      return creattime.format("yyyy/MM/dd");
-	   				                  },
-	   				                  targets: 3
-	   							  }
-    						],
-      	  columns: [
-      			    { data: "commentId" },
-      			    { data: "userName" },
-      			    { data: "content" },
-      			    { data: "creatTime" }
-      		]
-  		});
-  		
+		//沟通记录   回显
   		var recordTable = jQuery('#dataTable-record').DataTable({
     			pageLength: 10,
     			processing: true,
@@ -828,7 +813,41 @@
    		  			    { data: "creatTime" }
     		    ]
   		});
-
+		
+	   //注释 ~ 回显，效验，添加
+   		var commentTable= jQuery('#dataTable-comment').DataTable({
+			pageLength: 10,
+			processing: true,
+			language: datatable_local_language, // my.js
+			serverSide: true,
+			ajax: {
+  				url: '${rootPath}comment/list.do?type=case&id=${crmcase.caseId}',
+  				dataFilter: function(data){
+  				    var json = jQuery.parseJSON( data );
+  				    json.recordsTotal = json.countTotal;
+  				    json.recordsFiltered = json.countFiltered;
+  				    json.data = json.data;
+  				    return JSON.stringify( json );
+  			    }
+  			},
+ 			columnDefs: [
+ 							  {
+ 								  data: "creattime",
+ 								  render: function ( data, type, full, meta ) {
+ 									  var creattime = new Date(data.time);
+ 				                      return creattime.format("yyyy/MM/dd");
+ 				                  },
+ 				                  targets: 3
+ 							  }
+ 						],
+     	  columns: [
+     			    { data: "commentId" },
+     			    { data: "userName" },
+     			    { data: "content" },
+     			    { data: "creatTime" }
+     			]
+ 		});
+  		
       jQuery("#form-comment").validate({
           rules: {
               content: "required"

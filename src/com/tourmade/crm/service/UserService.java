@@ -1,6 +1,7 @@
 package com.tourmade.crm.service;
 
 import java.security.MessageDigest;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -98,18 +99,18 @@ public class UserService extends BaseService {
 	 * 更新用户信息(不修改密码)
 	 * 
 	 * @param user
-	 * @return
+	 * @return  把userMapper改成了动态SQL  zyy 10-19
 	 */
 	public void updateUser(User user) {
-
 		try {
-			User oldUser = userMapper.getUserById(user.getUserId());
-			if (oldUser != null) {
-				if(null !=user.getPwd() && !"".equals(user.getPwd())){
-					user.setPwd(MD5(user.getPwd()));
-				}
+//			User oldUser = userMapper.getUserById(user.getUserId());
+			if(null !=user.getPwd() && !"".equals(user.getPwd())){
+				user.setPwd(MD5(user.getPwd()));
+				userMapper.updateUser(user);
+			}else{
 				userMapper.updateUser(user);
 			}
+
 		} catch (Exception e) {
 			logger.error("UserService.updateUser() --> " + user + "-->" + e.getMessage());
 		}

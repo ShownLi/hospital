@@ -49,6 +49,7 @@ public class OrderService extends BaseService {
 			
 		map.put("start", ph.getStart());
 		map.put("length", ph.getLength());
+
 		if(order.getCustomerName()!=null){
 		map.put("customerName",order.getCustomerName());
 		}
@@ -72,6 +73,7 @@ public class OrderService extends BaseService {
 		if(order.getBudget()!=null){
 			map.put("budget", order.getBudget());
 		}
+
 
 		if(order.getStatus()!=null){
 			map.put("status", order.getStatus());
@@ -441,11 +443,9 @@ public class OrderService extends BaseService {
 	 * 更新订单信息(不修改密码)
 	 * 
 	 * @param order
-	 * @return
+	 * @return 10-19
 	 */
-	public boolean updateOrder(Order order) {
-
-		boolean r = false;
+	public void updateOrder(Order order) {
 
 		try {
 			Order u = orderMapper.getOrderById(order.getOrderId());
@@ -465,20 +465,16 @@ public class OrderService extends BaseService {
 				u.setCurrency(order.getCurrency());
 				u.setExchangeRate(order.getExchangeRate());
 				u.setRmbPrice(order.getRmbPrice());
-				u.setStatus("2");
+				u.setStatus("2");	
 			}
 			if(order.getReason() != null){
 				u.setReason(order.getReason());
 				u.setStatus("3");
 			}
 			orderMapper.updateOrder(u);
-			r = true;
 		} catch (Exception e) {
 			logger.error("OrderService.updateOrder() --> " + order + "-->" + e.getMessage());
-			r = false;
 		}
-
-		return r;
 	}
 
 	/**

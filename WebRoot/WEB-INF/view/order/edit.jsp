@@ -705,8 +705,7 @@
 	
 	function updateDeal_submit() {
 		var f = $("#form-updateDeal").serialize();
-		$.post('${rootPath}order/updateDeal.do', f, function(result) {
-	//		var rmsg = result.msg;
+		$.post('${rootPath}order/updateDeal.do', f, function(result) {;
 			if (result.success) {
 				window.location.href = "${rootPath}order/edit.html?id=${order.orderId}";
 			} 
@@ -725,8 +724,7 @@
 			else {
 				$("#msgModal").modal('show');
 			}
-		}, "JSON");
-		
+		}, "JSON");		
 		 alert("");
 	}
 	function comment_submit() {
@@ -740,7 +738,7 @@
 				$("#msgModal").modal('show');
 			}
 		}, "JSON");
-		alert("")
+//		alert("")
 	}
 	//成团日期格式转换
 	var groupTime = $("#groupTime").val();	

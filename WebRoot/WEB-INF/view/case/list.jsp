@@ -71,9 +71,6 @@
 							</table>
 						</div>
 						<!-- table-responsive -->
-
-
-
 					</div>
 					<!-- panel-body -->
 				</div>
@@ -276,7 +273,7 @@
 			                },
 			                  targets: 1
 					  },
-					  {
+ 					  {
 			                data: "destination",
 			                orderable: false,
 			                render: function ( data ) {
@@ -291,7 +288,7 @@
 			                	else{return ""}
 			                },
 			                  targets: 3
-						},	
+						},	 
 					  {
 			                data: "source",
 			                orderable: false,
@@ -423,8 +420,7 @@
 				error: function() {
 					alert(2);
 				}
-			});
-			
+			});			
 		}
   		function order_submit() {
 			var order= $("#form-order").serialize();

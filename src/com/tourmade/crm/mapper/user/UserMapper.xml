@@ -49,13 +49,14 @@
 
 	<update id="updateUser" parameterType="User" flushCache="true">
 		update tm_user
-		set
-		loginname=#{loginName},
-		user_name=#{name},
-		user_email=#{email},
-		password=#{pwd},
-		mobilephone=#{mobilephone},
-		update_time=NOW()
+		<set>
+			<if test="loginName != null">loginname=#{loginName},</if>
+			<if test="name != null">user_name=#{name},</if>
+			<if test="email != null">user_email=#{email},	</if>
+			<if test="pwd != null and pwd !=''">password=#{pwd},</if>
+			<if test="mobilephone != null">mobilephone=#{mobilephone},</if>
+			update_time=NOW(),
+		</set>
 		where
 		user_id=#{userId}
 	</update>

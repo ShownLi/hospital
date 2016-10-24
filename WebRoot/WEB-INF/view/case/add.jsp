@@ -72,7 +72,7 @@
                    	<div class="form-group col-sm-4">
                       <label class="col-sm-4 control-label">目的地</label>
                       <div class="col-sm-8">
-                        <input type="text" name="destination" class="country-select fullwidth" value="" />
+                        <input type="text" name="destination" class="country-select fullwidth" value="" />              
                       </div>
                     </div>    
                 </div>
@@ -322,7 +322,7 @@
 
     $(".country-select").select2({
         placeholder: '国家',
-        data: country
+        data: country,
     });
     $(".language-select").select2({
     	placeholder: '选择一个沟通语言',

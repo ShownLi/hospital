@@ -133,37 +133,14 @@ public class CustomerService extends BaseService {
 	 * 更新客人信息(不修改密码)
 	 * 
 	 * @param customer
-	 * @return
+	 * @return 10-19
 	 */
-	public boolean updateCustomer(Customer customer) {
-
-		boolean judge = false;
+	public void updateCustomer(Customer customer) {
 		try {
-			Customer oldCustomer = customerMapper.getCustomerById(customer.getCustomerId());
-			if (oldCustomer != null) {
-				oldCustomer.setChineseName(customer.getChineseName());
-				oldCustomer.setEnglishName(customer.getEnglishName());
-				oldCustomer.setLocation(customer.getLocation());
-				oldCustomer.setSource(customer.getSource());
-				oldCustomer.setAgeGroup(customer.getAgeGroup());
-				oldCustomer.setGender(customer.getGender());
-				oldCustomer.setTelephone(customer.getTelephone());
-				oldCustomer.setMobilephone(customer.getMobilephone());
-				oldCustomer.setWechat(customer.getWechat());
-				oldCustomer.setQq(customer.getQq());
-				oldCustomer.setEmail(customer.getEmail());
-				oldCustomer.setBirthday(customer.getBirthday());
-				customerMapper.updateCustomer(oldCustomer);
-				judge = true;
-			} else {
-				judge = false;
-			}
+			customerMapper.updateCustomer(customer);
 		} catch (Exception e) {
 			logger.error("CustomerService.updateCustomer() --> " + customer + "-->" + e.getMessage());
-			judge = false;
 		}
-
-		return judge;
 	}
 
 	/**
@@ -172,19 +149,12 @@ public class CustomerService extends BaseService {
 	 * @param customerId
 	 * @return
 	 */
-	public boolean deleteCustomerById(int customerId) {
-
-		boolean judge = false;
-
+	public void deleteCustomerById(int customerId) {
 		try {
 			customerMapper.deleteCustomerById(customerId);
-			judge = true;
 		} catch (Exception e) {
 			logger.error("CustomerService.deleteCustomerById() --> " + customerId + "-->" + e.getMessage());
-			judge = false;
 		}
-
-		return judge;
 	}
 
 }

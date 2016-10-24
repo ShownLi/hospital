@@ -7,6 +7,7 @@ import com.tourmade.crm.common.framework.BaseMapper;
 import com.tourmade.crm.entity.Case;
 import com.tourmade.crm.entity.Customer;
 import com.tourmade.crm.entity.EntityList;
+import com.tourmade.crm.entity.Parameter;
 
 public interface CaseMapper extends BaseMapper {
 	
@@ -29,6 +30,8 @@ public interface CaseMapper extends BaseMapper {
 	public Case getCaseById(int caseId);
 	
 	public List<EntityList> getParameterInfo(String domain);
+	
+	public Parameter getParameterByCountryChinese(String value);
 	
 	public List<EntityList> getCustomer();
 	

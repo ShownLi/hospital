@@ -28,6 +28,7 @@
 						</div>
 						<!-- panel-btns -->
 						<h3 class="panel-title">订单列表</h3>
+
 						<input type="text" id="searchText" value="" />
 						 <select  id="searchMenu">
 						 <option value="customerName">客人姓名</option>
@@ -39,6 +40,7 @@
 						 <option value="status">状态</option>
 						 </select>
 						<input type="button" id="searchBtn" value="搜索"/> 			 				
+
 					</div>
 					<div class="panel-body">
 						<br />

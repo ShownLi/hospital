@@ -107,50 +107,29 @@ public class AgencyService extends BaseService {
 	 * 更新地接社信息(不修改密码)
 	 * 
 	 * @param agency
-	 * @return
+	 * @return zyy 10-19
 	 */
-	public boolean updateAgency(Agency agency) {
-
-		boolean judge = false;
+	public void updateAgency(Agency agency) {
 
 		try {
-			Agency oldAgency = agencyMapper.getAgencyById(agency.getAgencyId());
-			if (oldAgency != null) {
-				oldAgency.setName(agency.getName());
-				oldAgency.setCountry(agency.getCountry());
-				oldAgency.setLanguage(agency.getLanguage());
-				agencyMapper.updateAgency(oldAgency);
-				judge = true;
-			} else {
-				judge = false;
-			}
+			agencyMapper.updateAgency(agency);
 		} catch (Exception e) {
 			logger.error("AgencyService.updateAgency() --> " + agency + "-->" + e.getMessage());
-			judge = false;
 		}
-
-		return judge;
 	}
 
 	/**
 	 * 删除地接社（假删除）
 	 * 
 	 * @param agency_id
-	 * @return
+	 * @return zyy 10-19
 	 */
-	public boolean deleteAgencyById(int agencyId) {
-
-		boolean judge = false;
-
+	public void deleteAgencyById(int agencyId) {
 		try {
 			agencyMapper.deleteAgencyById(agencyId);
-			judge = true;
 		} catch (Exception e) {
 			logger.error("AgencyService.deleteAgencyById() --> " + agencyId + "-->" + e.getMessage());
-			judge = false;
 		}
-
-		return judge;
 	}
 
 }
