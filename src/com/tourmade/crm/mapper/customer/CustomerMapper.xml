@@ -42,7 +42,7 @@
                 and   location like '%${location}%' 
         </if>
         <if test="level != null and level != ''">
-                and   level = #{level}
+                and   customer_level = #{level}
         </if>
 		order by u.creat_time desc
 		limit #{start},#{length}
@@ -71,7 +71,7 @@
                 and   location like '%${location}%' 
         </if>
         <if test="level != null and level != ''">
-                and   level = #{level}
+                and   customer_level = #{level}
         </if>
 
 	</select>

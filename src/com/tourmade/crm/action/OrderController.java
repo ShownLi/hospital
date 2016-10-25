@@ -49,8 +49,8 @@ public class OrderController extends BaseSimpleFormController {
 		List<EntityList> countryList = service.getParameterInfo(country);
 		List<EntityList> reasonLiat = service.getParameterInfo(reason);
 		JSONArray currencyResult = JSONArray.fromObject(currencyList);
-		JSONArray countryResult = JSONArray.fromObject(statusList);
-		JSONArray statusResult = JSONArray.fromObject(countryList);
+		JSONArray countryResult = JSONArray.fromObject(countryList);
+		JSONArray statusResult = JSONArray.fromObject(statusList);
 		JSONArray reasonResult = JSONArray.fromObject(reasonLiat);
 		model.addAttribute("currency",currencyResult);
 		model.addAttribute("orderStatus",statusResult);

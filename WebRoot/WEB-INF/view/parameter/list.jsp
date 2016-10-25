@@ -20,43 +20,33 @@
 
 			<div class="contentpanel">
 				<!-- content goes here... -->
-				
-			<div class="section-block">    
-	            <div class="form-group col-sm-4">
-	              <label class="col-sm-4 control-label"><span class="asterisk">*</span></label>
-	              <div class="col-sm-8">
-	                <input type="text" id="domain" name="domain" placeholder="作用域" class="form-control" />
-	              </div>
-	            </div>
-	            <div class="form-group col-sm-4">
-	              <label class="col-sm-4 control-label">值 <span class="asterisk">*</span></label>
-	              <div class="col-sm-8">
-	                <input type="text" id="value" name="value" placeholder="值" class="form-control" />
-	              </div>
-	            </div> 			
-	            <div class="form-group col-sm-4">
-	              <label class="col-sm-4 control-label">描述 <span class="asterisk">&nbsp;</span></label>
-	              <div class="col-sm-8">
-	                <input type="text" name="depict" placeholder="描述" class="form-control" />
-	              </div>
-	            </div> 	
-	        </div>
-
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						<div class="panel-btns">
 							<a href="" class="minimize">&minus;</a>
 						</div>
 						<!-- panel-btns -->
-	<!-- 					<h3 class="panel-title">系统参数列表</h3>
-						 <input type="text" id="searchText" value="" /> 
-						 <select  id="searchMenu">
-						 <option value="domain">作用域</option>
-						 <option value="value">存值</option>
-						 <option value="chinese">中文</option>						 
-						 <option value="english">英文</option>			
-					 </select>
-						 <input type="button" id="searchBtn" value="搜索"/> 	  -->
+					<h3 class="panel-title">系统参数列表</h3>
+			 			<div class="row" style="margin-top: 20px">
+							<div class="form-group col-sm-10">
+								<div class="col-sm-2">
+									<input type="text" id="searchDomain" class="form-control" placeholder="作用域"  value="" />
+								</div>
+								<div class="col-sm-2">
+									<input type="text" id="searchValue" class="form-control" placeholder="存值"  value="" />
+								</div>
+								<div class="col-sm-2">
+									<input type="text" id="searchChinese" class="form-control" placeholder="中文"  value="" />
+								</div>
+								<div class="col-sm-2">
+									<input type="text" id="searchEnglish" class="form-control" placeholder="英文"  value="" />
+								</div>
+							</div>	
+							<div class="col-sm-2">					 		                        		
+								<input class="btn btn-primary" type="button" id="searchBtn" value="搜索"/>
+							</div> 	
+						</div>
+			
 					</div>
 					<div class="panel-body">
 						<br />
@@ -132,7 +122,7 @@
 				ajax: {
 					url: '${rootPath}parameter/list.do',
 					data:function ( data ) {
-						/* var searchDomain=$('#searchDomain').val();
+						var searchDomain=$('#searchDomain').val();
 			 			var searchValue=$('#searchValue').val();
 			 			var searchChinese=$('#searchChinese').val();
 			 			var searchEnglish=$('#searchEnglish').val();
@@ -148,29 +138,9 @@
 			 			}
 			 			if(searchEnglish !=null && searchEnglish !="" ){
 							data.english = searchEnglish;
-			 			} */
+			 			} 
 			 			
-			 			var menu=$('#searchMenu').val();
-			 			var text=$('#searchText').val();
-			 			if(text !=null && text !="" ){	
-			 				
-			 			if(menu=="domain"){
-			 				data.domain = text;	
-			 			}
 			 			
-			 			if(menu=="value"){
-			 				data.value = text;
-			 			}
-			 			
-			 			if(menu=="chinese"){
-			 				data.chinese = text;
-			 			}
-			 			
-			 			if(menu=="english"){
-			 				data.english = text;
-			 			}
-			 			
-			 			}
 					},
 					dataFilter: function(data){
 			            var json = jQuery.parseJSON( data );
@@ -215,10 +185,9 @@
 		        ]
 			});
 			
-/* 			$('#searchBtn').on( 'click', function () {
-		    	alert($('#customerName').attr("value"));
+ 			$('#searchBtn').on( 'click', function () {
 		        t.draw();
-		    } ); */
+		    } ); 
 			
 			$('#dataTable tbody').on( 'click', 'a.btn-success', function () {
 		        var data = t.row($(this).parents('tr')).data();

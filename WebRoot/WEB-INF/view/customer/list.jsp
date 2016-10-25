@@ -27,17 +27,35 @@
 						</div>
 						<!-- panel-btns -->
 						<h3 class="panel-title">客人列表</h3>
-						<input type="text" id="searchText" value="" />
-						 <select  id="searchMenu">
-						 <option value="chineseName">客人姓名</option>
-						 <option value="customerId">客人id</option>
-						 <option value="englishName">英文名</option>						 
-						 <option value="mobilephone">手机</option>						 
-						 <option value="email">邮箱</option>						 
-						 <option value="location">所在地</option>
-						 <!-- <option value="level">客人级别</option> -->
-						 </select>
-						 <input type="button" id="searchBtn" value="搜索"/> 	
+						<div class="row" style="margin-top: 20px">
+							<div class="form-group col-sm-10">
+								<div class="col-sm-2">
+									<input type="text" id="searchChineseName" class="form-control" placeholder="客人姓名" value="" />
+								</div>
+								<div class="col-sm-2">
+									<input type="text" id="searchCustomerId" class="form-control" placeholder="客人id"  value="" />
+								</div>
+								<div class="col-sm-2">
+									<input type="text" id="searchEnglishName" class="form-control" placeholder="英文名" value="" />
+								</div>
+								<div class="col-sm-2">
+									<input type="text" id="searchMobilephone" class="form-control" placeholder="手机" value="" />
+								</div>
+								<div class="col-sm-2">
+									<input type="text" id="searchEmail" class="form-control" placeholder="邮箱" value="" />
+								</div>
+								<div class="col-sm-2">
+									<input type="text" id="searchLocation" class="form-control" placeholder="所在地" value="" />
+								</div>
+								<div class="col-sm-2">
+									<input type="text" id="searchLevel" class="level-select fullwidth" value="" />
+								</div>
+							</div>	
+							<div class="col-sm-2">					 		                        		
+								<input class="btn btn-primary" type="button" id="searchBtn" value="搜索"/>
+							</div> 	
+						</div>
+						
 					</div>
 					<div class="panel-body">
 						<br />
@@ -101,6 +119,11 @@
 	var ageGroup = ${ageGroup};
 	var leval = ${level};
 	
+	$(".level-select").select2({
+        placeholder: '客人级别',
+        data: leval
+    });
+	
 		jQuery(document).ready(function() {
 			$(".nav-parent").eq(2).addClass("nav-active");
       		$(".nav-parent").eq(2).find(".children").show();
@@ -113,7 +136,7 @@
 				ajax: {
 					url: '${rootPath}customer/list.do',
 					data:function ( data ) {
-						/* var searchChineseName=$('#searchChineseName').val();
+						var searchChineseName=$('#searchChineseName').val();
 			 			var searchCustomerId=$('#searchCustomerId').val();
 			 			var searchEnglishName=$('#searchEnglishName').val();
 			 			var searchMobilephone=$('#searchMobilephone').val();
@@ -141,43 +164,9 @@
 			 			}
 			 			if(searchLevel !=null && searchLevel !="" ){
 							data.level = searchLevel;
-			 			}  */
-			 			
-			 			var menu=$('#searchMenu').val();
-			 			var text=$('#searchText').val();
-			 			if(text !=null && text !="" ){
-			 				
-			 			if(menu=="chineseName"){
-			 				data.chineseName = text;	
-			 			}
-			 			
-			 			if(menu=="customerId"){
-			 				data.customerId = text;
-			 			}
-			 			
-			 			if(menu=="englishName"){
-			 				data.englishName = text;
-			 			}
-			 			
-			 			if(menu=="mobilephone"){
-			 				data.mobilephone = text;
-			 			}
+			 			}  
 			 			
 			 			
-			 			if(menu=="email"){
-			 				data.email = text;
-			 			}
-			 			
-			 			if(menu=="location"){
-			 				data.location = text;
-			 			}
-			 		
-
-			 			if(menu=="level"){
-			 				data.level = text;
-			 			}
-
-			 			}
 					},
 					dataFilter: function(data){
 			            var json = jQuery.parseJSON( data );

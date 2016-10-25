@@ -45,7 +45,7 @@
           <if test="budget != null and budget != ''">
          		and   budget = #{budget}
          </if>
-       	  <if test="status != null and staus != ''">
+       	  <if test="status != null and status != ''">
          		and   status = #{status}
          </if>
 		order by u.creat_time desc
@@ -92,7 +92,7 @@
           <if test="budget != null and budget != ''">
          		and   budget = #{budget}
          </if>
-       	  <if test="status != null and staus != ''">
+       	  <if test="status != null and status != ''">
          		and   status = #{status}
          </if>
 	</select>

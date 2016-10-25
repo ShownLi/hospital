@@ -26,12 +26,20 @@
 						</div>
 						<!-- panel-btns -->
 						<h3 class="panel-title">地接社列表</h3>
-						<input type="text" id="searchText" value="" />
-						 <select  id="searchMenu">
-						 <option value="agencyName">地接社名</option>
-						 <!-- <option value="country">国家</option> -->
-						 </select>
-						 <input type="button" id="searchBtn" value="搜索"/> 	
+		 					<div class="row" style="margin-top: 20px">
+								<div class="form-group col-sm-10">
+									<div class="col-sm-2">
+										<input type="text" id="searchAgencyName" class="form-control" placeholder="地接社名"  value="" />
+									</div>
+									<div class="col-sm-2">
+										<input type="text" id="searchCountry" class="country-select fullwidth" value="" />
+									</div>
+								</div>	
+								<div class="col-sm-2">					 		                        		
+									<input class="btn btn-primary" type="button" id="searchBtn" value="搜索"/>
+								</div> 	
+							</div>
+						
 					</div>
 					<div class="panel-body">
 						<br />
@@ -89,6 +97,11 @@
 	var country= ${country};
 	var language = ${language};
 	
+	$(".country-select").select2({
+        placeholder: '国家',
+        data: country
+    });
+	
 	jQuery(document).ready(function() {
 
 		$(".nav-parent").eq(3).addClass("nav-active");
@@ -102,31 +115,17 @@
 			ajax: {
 			url: '${rootPath}agency/list.do',
 			data:function ( data ) {
-				/* var searchAgencyName=$('#searchAgencyName').val();
+				var searchAgencyName=$('#searchAgencyName').val();
 	 			var searchCountry=$('#searchCountry').val();
 	 			
 	 			
 	 			if(searchAgencyName !=null && searchAgencyName !="" ){
-					data.agencyName = searchAgencyName;
+					data.name = searchAgencyName;
 	 			}
 	 			if(searchCountry !=null && searchCountry !="" ){
 					data.country = searchCountry;
-	 			} */
+	 			} 
 	 			
-	 			var menu=$('#searchMenu').val();
-	 			var text=$('#searchText').val();
-	 			if(text !=null && text !="" ){
-	 				
-	 			if(menu=="agencyName"){
-	 				data.name = text;
-	 				alert(data.name);
-	 			}
-	 			
-	 			if(menu=="country"){
-	 				data.country = text;
-	 			}
-	 			
-	 			}
 			},
 				dataFilter: function(data){					
 					var json = jQuery.parseJSON( data );

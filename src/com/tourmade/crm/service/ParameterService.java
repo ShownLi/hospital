@@ -59,6 +59,8 @@ public class ParameterService extends BaseService {
 		pageResult.setData(data);
 		pageResult.setCountTotal(count);
 		pageResult.setCountFiltered(count);
+		System.out.println(data);
+		System.out.println(count);
 
 		return pageResult;
 	}
