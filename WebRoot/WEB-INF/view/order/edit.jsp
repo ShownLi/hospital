@@ -420,7 +420,6 @@
       $("#btn-baseDeal").attr("disabled",true);
       $("#btn-baseNoDeal").attr("disabled",true);
   	}		
-
 	
 	jQuery(document).ready(function() {
 		jQuery("#form-deal").validate({
@@ -473,7 +472,7 @@
               },
 		          groupNumber: "请输入一个数字",
 		          groupPrice: "请输入一个数字",
-              currency: "请输入一个数字",
+              	  currency: "请选择货币种类",
 		          exchangeRate: "请输入一个数字",
 		          rmbPrice: "请输入一个数字",
 
