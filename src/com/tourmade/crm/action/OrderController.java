@@ -186,7 +186,6 @@ public class OrderController extends BaseSimpleFormController {
 	@RequestMapping(value = "/orderDeal.do")
 	@ResponseBody
 	public Json orderDeal(HttpServletRequest request, HttpSession session, Model model, Order order) {
-		
 		Json json = new Json();
 		Order oldOrder = service.getOrderById(order.getOrderId());
 		Case crmcase = caseService.getCaseById(oldOrder.getCaseId());
@@ -210,7 +209,7 @@ public class OrderController extends BaseSimpleFormController {
 	@RequestMapping(value = "/orderNoDeal.do")
 	@ResponseBody
 	public Json orderNoDeal(HttpServletRequest request, HttpSession session, Model model, Order order) {
-		System.out.println("&&&2"+order);
+
 		Json json = new Json();
 		
 		Case crmcase = caseService.getCaseByOrderId(order.getOrderId());
@@ -232,7 +231,7 @@ public class OrderController extends BaseSimpleFormController {
 	@RequestMapping(value = "/updateDeal.do")
 	@ResponseBody
 	public Json doEdit1(Order order) {
-		System.out.println("^^^^3"+order);
+
 		Json json = new Json();	
 		try {
 			service.updateOrder(order);	

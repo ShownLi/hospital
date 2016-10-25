@@ -28,26 +28,32 @@
 						</div>
 						<!-- panel-btns -->
 						<h3 class="panel-title">询单列表</h3>
-						<div class="form-group col-sm-4">
-						<input type="text" id="searchCustomerId" class="customer-select fullwidth" value="" />
-						<input type="text" id="searchCaseId" class="form-control" placeholder="询单id"  value="" />
-						<!-- <input type="text" id="searchBudget" class="form-control" placeholder="预算" value="" /> -->
-						<input type="text" id="searchDestination" class="destination-select fullwidth" value="" />
-						<input type="text" id="searchSource" class="source-select fullwidth" value="" />
-						<input type="text" id="searchOperator" class="operator-select fullwidth" value="" />
-						<input type="text" id="searchStatus" class="status-select fullwidth" value="" />
-						</div>						 		                		               		
-							<!-- <input type="text" id="searchText" value="" />
-							 <select  id="searchMenu">
-							 <option value="customerName">客人姓名</option>
-							 <option value="caseId">询单id</option>
-							 <option value="budget">预算</option>
-							 <option value="destination">目的地</option>
-							 <option value="source">询单来源</option>						 
-							 <option value="operator">跟单员</option>						 					
-							 <option value="status">状态</option>
-							 </select> -->
-							<input type="button" id="searchBtn" value="搜索"/> 	
+						<div class="row" style="margin-top: 20px">
+							<div class="form-group col-sm-10">
+								<div class="col-sm-2">
+									<input type="text" id="searchCustomerId" class="customer-select fullwidth" value="" />
+								</div>
+								<div class="col-sm-2">
+									<input type="text" id="searchCaseId" class="form-control" placeholder="询单id"  value="" />
+								</div>
+								<!-- <input type="text" id="searchBudget" class="form-control" placeholder="预算" value="" /> -->
+								<div class="col-sm-2">
+									<input type="text" id="searchDestination" class="destination-select fullwidth" value="" />
+								</div>
+								<div class="col-sm-2">
+									<input type="text" id="searchSource" class="source-select fullwidth" value="" />
+								</div>
+								<div class="col-sm-2">
+									<input type="text" id="searchOperator" class="operator-select fullwidth" value="" />
+								</div>
+								<div class="col-sm-2">
+									<input type="text" id="searchStatus" class="status-select fullwidth" value="" />
+								</div>
+							</div>	
+							<div class="col-sm-2">					 		                        		
+								<input class="btn btn-primary" type="button" id="searchBtn" value="搜索"/>
+							</div> 	
+						</div>
 					</div>
 					<div class="panel-body">
 						<br />

@@ -132,6 +132,24 @@
 				ajax: {
 					url: '${rootPath}parameter/list.do',
 					data:function ( data ) {
+						/* var searchDomain=$('#searchDomain').val();
+			 			var searchValue=$('#searchValue').val();
+			 			var searchChinese=$('#searchChinese').val();
+			 			var searchEnglish=$('#searchEnglish').val();
+			 			
+			 			if(searchDomain !=null && searchDomain !="" ){
+							data.domain = searchDomain;
+			 			}
+			 			if(searchValue !=null && searchValue !="" ){
+							data.value = searchValue;
+			 			}
+			 			if(searchChinese !=null && searchChinese !="" ){
+							data.chinese = searchChinese;
+			 			}
+			 			if(searchEnglish !=null && searchEnglish !="" ){
+							data.english = searchEnglish;
+			 			} */
+			 			
 			 			var menu=$('#searchMenu').val();
 			 			var text=$('#searchText').val();
 			 			if(text !=null && text !="" ){	
