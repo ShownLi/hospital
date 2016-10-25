@@ -133,7 +133,7 @@
                 <div class="form-group col-sm-4">
                   <label class="col-sm-4 control-label">目的地</label>
                 <div class="col-sm-8">
-                    <input type="text" name="destination" class="destination-select fullwidth" value="${crmcase.destination}" />
+                    <input id="destination" type="text" name="destination" class="destination-select fullwidth" value="${crmcase.destination}" />
                 </div>
                 </div>
                      
@@ -322,8 +322,8 @@
                     <th>客人姓名</th>
                     <th>地接社</th>
                     <th>销售姓名</th>
-                    <th>目的地</th>
-                    <th>预算</th>
+<!-- 	            <th>目的地</th>
+                    <th>预算</th> -->
                     <th>状态</th>
                     <th>编辑</th>
                   </tr>
@@ -453,24 +453,24 @@
         <div class="section-block">
         <form id="order">
             <div class="section-title">选择目的地及地接社,添加订单</div>
-            <div class="form-group col-sm-8 col-sm-offset-2">
+<!--             <div class="form-group col-sm-8 col-sm-offset-2">
                 <label class="col-sm-3 control-label">目的地</label>
                 <div class="col-sm-9">
                     <input type="text" id="destination" name="destination" placeholder="目的地" class="destination-select fullwidth" value="" />
                 </div>
-            </div>
+            </div> -->
             <div class="form-group col-sm-8 col-sm-offset-2">
                 <label class="col-sm-3 control-label">所属销售</label>
                 <div class="col-sm-9">
                     <input type="text" id="salesId" name="salesId" placeholder="选择一个销售" class="sales-select fullwidth" value="" />
                 </div>
             </div>
-              <div class="form-group col-sm-8 col-sm-offset-2">
+  <%--             <div class="form-group col-sm-8 col-sm-offset-2">
                   <label class="col-sm-3 control-label">客人的预算</label>
                   <div class="col-sm-9">
                     <input type="text" name="budget" placeholder="客人的预算" class="form-control" value="${crmcase.budget}" />
                   </div>
-                </div>
+                </div> --%>
             <div class="col-sm-12">
              <a class="submit btn btn-primary">保存</a>
              <input  type="hidden" name="caseId" value="${crmcase.caseId}" />
@@ -624,7 +624,7 @@
 	 	       render: function ( data, type, full, meta ) {
                		return '<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a>&nbsp;';
 	 	       },
-	 	       targets: 7
+	 	       targets: 5
 	 		},
 	 		{
                data: "status",
@@ -639,9 +639,9 @@
 			        }
               	    else{return ""}
               	},
-                targets: 6
+                targets: 4
 			},
- 			{
+/*  		{
               data: "destination",
               orderable: false,
               render: function ( data ) {
@@ -655,7 +655,7 @@
 	              else{return ""}
               },
                 targets: 4
-			}, 		  
+			},  */		  
 	 	    {
 			    orderable: false,
 			    searchable: false,
@@ -667,8 +667,8 @@
              { data: "customerId" },
              { data: "agencyName" },
              { data: "salesName" },
-             { data: "destination" },
-             { data: "budget" },
+/*           { data: "destination" },
+             { data: "budget" }, */
              { data: "status" }
        ]		 	
 	});
@@ -752,9 +752,23 @@
 	  
 	   //添加订单
       $("#btn-addorder").click(function(){
-          $("#nextModal").modal('show');
+      	  var destination = $("#destination").val();
+          $.ajax({
+              type: "post",
+              url: "${rootPath}case/getSales.do?destination="+destination,
+              data: destination,
+              success: function(sales){
+            	  var json = jQuery.parseJSON( sales );
+                  $("#salesId").select2({	
+                      placeholder: '销售',
+                      data: json
+                  });
+              }   
+          }); 
+          $("#nextModal").modal('show');        
           return false;
       });
+      
       $(".nextModal .submit").click(function(){
       	  order_submit();
       });     
@@ -963,7 +977,7 @@
       }
 
       //添加订单弹出框，目的地与销售联动
-      $("#destination").change(function(){
+/*       $("#destination").change(function(){
           var destination = $(this).val();
           $.ajax({
               type: "post",
@@ -977,7 +991,7 @@
                   });
               }   
           }); 
-      });
+      }); */
 
   });
   
