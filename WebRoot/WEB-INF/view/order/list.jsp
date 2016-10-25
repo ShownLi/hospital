@@ -28,7 +28,7 @@
 						</div>
 						<!-- panel-btns -->
 						<h3 class="panel-title">订单列表</h3>
-
+						
 						<input type="text" id="searchText" value="" />
 						 <select  id="searchMenu">
 						 <option value="customerName">客人姓名</option>
@@ -234,7 +234,36 @@
 			 	serverSide: true,
 			 	ajax: {
 			 		url: '${rootPath}order/list.do',
-			 		data:function ( order ) {
+			 		data:function ( data ) {
+			 			/* var searchCustomerName=$('#searchCustomerName').val();
+			 			var searchOrderId=$('#searchOrderId').val();
+			 			var searchAgencyName=$('#searchAgencyName').val();
+			 			var searchSalesName=$('#searchSalesName').val();
+			 			var searchDestination=$('#searchDestination').val();
+			 			var searchBudget=$('#searchBudget').val();
+			 			var searchStatus=$('#searchStatus').val();
+			 			
+			 			if(searchCustomerName !=null && searchCustomerName !="" ){
+							data.customerName = searchCustomerName;
+			 			}
+			 			if(searchOrderId !=null && searchOrderId !="" ){
+							data.orderId = searchOrderId;
+			 			}
+			 			if(searchAgencyName !=null && searchAgencyName !="" ){
+							data.agencyName = searchAgencyName;
+			 			}
+			 			if(searchSalesName !=null && searchSalesName !="" ){
+							data.salesName = searchSalesName;
+			 			}
+			 			if(searchDestination !=null && searchDestination !="" ){
+							data.destination = searchDestination;
+			 			}
+			 			if(searchBudget !=null && searchBudget !="" ){
+							data.budget = searchBudget;
+			 			}
+			 			if(searchStatus !=null && searchStatus !="" ){
+							data.status = searchStatus;
+			 			} */
 			 			var menu=$('#searchMenu').val();
 			 			var text=$('#searchText').val();
 			 			if(text !=null && text !="" ){
@@ -268,7 +297,7 @@
 			 				order.status = text;
 			 			}
 
-			 			}
+			 			} 
 					},
 
 			 		dataFilter: function(data){

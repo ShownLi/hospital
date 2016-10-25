@@ -33,8 +33,6 @@ public class UserController extends BaseSimpleFormController {
 	@RequestMapping(value = "/list.do",produces="application/json;charset=utf-8")
 	@ResponseBody
 	public String queryData(HttpServletRequest request, HttpSession session, Model model, User user, PageHelper page) {
-		System.out.println(user.getLoginName()+"&&&&");
-		System.out.println(user+"^^^^");
 		QueryResult<User> pageResult = service.queryUser(user, page, request);
 		String result = JSONUtilS.object2json(pageResult);
 

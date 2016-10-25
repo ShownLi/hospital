@@ -80,7 +80,7 @@
                 <div class="panel-footer align-center">
                     <button id="btn-baseDeal" class="btn btn-primary">成行</button>&nbsp;
                     <button id="btn-baseNoDeal" class="btn btn-primary">未成行</button>&nbsp;
-                    <button class="btn btn-back">返回</button>
+                    <button id="btn-back" class="btn btn-default">返回</button>
 					<input type="hidden" name="orderId" value="${order.orderId}" />	
         		</div><!-- panel-footer -->
             </div>
@@ -660,7 +660,13 @@
    	});
 
     
-	// Date Picker
+    //订单返回
+    $("#btn-back").click( function () {
+    	 history.go(-1);
+    	alert("正在返回，请稍后...");
+	}); 
+	
+    // Date Picker
 	jQuery(".datepicker").datepicker({
 		  dateFormat: "yy-mm-dd"
   });

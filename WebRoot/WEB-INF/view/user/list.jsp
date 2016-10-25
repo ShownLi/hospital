@@ -16,8 +16,7 @@
 				<h2>
 					<i class="fa fa-user"></i> 用户管理 <span>用户列表</span>
 				</h2>
-				<input id="searchName" type="text"></input>
-				<input id="searchUser" type="button" value="搜索"></input>	
+			
 			</div>
 			
 			<div class="contentpanel">
@@ -87,9 +86,7 @@
 			$(".nav-parent").eq(4).addClass("nav-active");
       		$(".nav-parent").eq(4).find(".children").show();
       		
-      		$('#searchUser').on( 'click', function () {
-	        	t.draw();
-    		});	
+      		
       				
 			var t = jQuery('#dataTable').DataTable({
 				pageLength: 10,
@@ -98,9 +95,6 @@
 				serverSide: true,
 				ajax: {
 					url: '${rootPath}user/list.do',
-					data: function (user) {
-   						 user.loginName=$('#searchName').val();
-					},
 					
 					dataFilter: function(data){
 			            var json = jQuery.parseJSON( data );

@@ -113,6 +113,36 @@
 				ajax: {
 					url: '${rootPath}customer/list.do',
 					data:function ( data ) {
+						/* var searchChineseName=$('#searchChineseName').val();
+			 			var searchCustomerId=$('#searchCustomerId').val();
+			 			var searchEnglishName=$('#searchEnglishName').val();
+			 			var searchMobilephone=$('#searchMobilephone').val();
+			 			var searchEmail=$('#searchEmail').val();
+			 			var searchLocation=$('#searchLocation').val();
+			 			var searchLevel=$('#searchLevel').val();
+			 			
+			 			if(searchChineseName !=null && searchChineseName !="" ){
+							data.chineseName = searchChineseName;
+			 			}
+			 			if(searchCustomerId !=null && searchCustomerId !="" ){
+							data.customerId = searchCustomerId;
+			 			}
+			 			if(searchEnglishName !=null && searchEnglishName !="" ){
+							data.englishName = searchEnglishName;
+			 			}
+			 			if(searchMobilephone !=null && searchMobilephone !="" ){
+							data.mobilephone = searchMobilephone;
+			 			}
+			 			if(searchEmail !=null && searchEmail !="" ){
+							data.email = searchEmail;
+			 			}
+			 			if(searchLocation !=null && searchLocation !="" ){
+							data.location = searchLocation;
+			 			}
+			 			if(searchLevel !=null && searchLevel !="" ){
+							data.level = searchLevel;
+			 			}  */
+			 			
 			 			var menu=$('#searchMenu').val();
 			 			var text=$('#searchText').val();
 			 			if(text !=null && text !="" ){

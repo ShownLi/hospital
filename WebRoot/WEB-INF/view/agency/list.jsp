@@ -102,6 +102,17 @@
 			ajax: {
 			url: '${rootPath}agency/list.do',
 			data:function ( data ) {
+				/* var searchAgencyName=$('#searchAgencyName').val();
+	 			var searchCountry=$('#searchCountry').val();
+	 			
+	 			
+	 			if(searchAgencyName !=null && searchAgencyName !="" ){
+					data.agencyName = searchAgencyName;
+	 			}
+	 			if(searchCountry !=null && searchCountry !="" ){
+					data.country = searchCountry;
+	 			} */
+	 			
 	 			var menu=$('#searchMenu').val();
 	 			var text=$('#searchText').val();
 	 			if(text !=null && text !="" ){
