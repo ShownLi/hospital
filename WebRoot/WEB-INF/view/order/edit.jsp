@@ -310,7 +310,7 @@
                   <div class="form-group col-sm-6">
                       <label class="col-sm-4 control-label">货币种类<span class="asterisk">*</span></label>
                       <div class="col-sm-8">
-                        <input type="text" name="currency" placeholder="货币种类" class="form-control"/>
+                        <input type="text" name="currency" placeholder="货币种类" class="currency-select fullwidth"/>
                       </div>
                   </div>
                   <div class="form-group col-sm-6">
@@ -358,7 +358,7 @@
                       <input class="reason-select fullwidth" name="reason" placeholder="若未成行，原因是" />
                       <input type="hidden" name="orderId" value="${order.orderId}" />	
                       <input type="hidden" name="caseId" value="${order.caseId}" />		                     
-                       <input type="hidden" name="status" value="3" />
+                      <input type="hidden" name="status" value="3" />
 
                     </div>
                   </div>
@@ -384,13 +384,18 @@
 	
 
 <script type="text/javascript">
-	var status = ${status};
+	var orderStatus = ${orderStatus};
 	var country = ${country};
 	var reason = ${reason};
+	var currency=${currency};
+
+ 	$(".currency-select").select2({
+		data: currency
+	})  
 	
-	$(".status-select").select2({
-		data: status
-	})
+ 	$(".status-select").select2({
+		data: orderStatus
+	}) 
 
 	$(".destination-select").select2({
         placeholder: '国家',
@@ -415,7 +420,6 @@
       $("#btn-baseDeal").attr("disabled",true);
       $("#btn-baseNoDeal").attr("disabled",true);
   	}		
-
 	
 	jQuery(document).ready(function() {
 		jQuery("#form-deal").validate({
@@ -468,14 +472,14 @@
               },
 		          groupNumber: "请输入一个数字",
 		          groupPrice: "请输入一个数字",
-              currency: "请输入一个数字",
+              	  currency: "请选择货币种类",
 		          exchangeRate: "请输入一个数字",
 		          rmbPrice: "请输入一个数字",
 
 		      },
           highlight: function(element) {
             jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
-          },
+          }, 
           success: function(element) {
             jQuery(element).closest('.form-group').removeClass('has-error');
           },
@@ -486,10 +490,10 @@
               deal_submit();
               return false;
           }
-
 		});
+		
 		$(".nav-parent").eq(1).addClass("nav-active");
-    $(".nav-parent").eq(1).find(".children").show();
+   	    $(".nav-parent").eq(1).find(".children").show();
       		
 		/* jQuery("#baseForm").validate({
 				
@@ -507,6 +511,19 @@
 			    return false;
 			}
 		}); */
+		
+		/* function baseForm_submit() {
+			var f = $("#baseForm").serialize();
+			$.post('${rootPath}order/edit.do', f, function(result) {
+				var rmsg = result.msg;
+				if (result.success) {
+					window.parent.location = "${rootPath}order/list.html";
+				} 
+				else {
+					$("#msgModal").modal('show');
+				}
+			}, "JSON");
+        } */
 		
 		jQuery("#form-comment").validate({
 			rules:{
@@ -526,7 +543,7 @@
 			},
 			submitHandler : function(){
 				comment_submit();
-			  return false;
+			    return false;
 			}
 		});
 			
@@ -557,13 +574,13 @@
 		                targets: 3
 					  },		 
 
-			],
+				],
 		columns: [
 	  			    { data: "commentId" },
 	  			    { data: "userName" },
 	  			    { data: "content" },
 	  			    { data: "creatTime" }
-	    ]
+	    		]
 		});
 	    
 	var r = jQuery('#dataTable-record').DataTable({
@@ -590,7 +607,6 @@
 		                },
 		                targets: 3
 					  },		 
-
 			],
 		columns: [
 	  			    { data: "orderRecordId" },
@@ -619,18 +635,7 @@
 			}
 		});	
 	}
-	/* function baseForm_submit() {
-		var f = $("#baseForm").serialize();
-		$.post('${rootPath}order/edit.do', f, function(result) {
-			var rmsg = result.msg;
-			if (result.success) {
-				window.parent.location = "${rootPath}order/list.html";
-			} 
-			else {
-				$("#msgModal").modal('show');
-			}
-		}, "JSON");
-	} */
+
 	$("#btn-baseDeal").click(function(){
 		$(".dealModal").modal('show');
 	  return false;
@@ -638,9 +643,9 @@
 	$("#btn-updateDealModify").click(function(){
 		updateDeal_submit();
 	});
-     $(".dealModal .submit").click(function(){
+/*      $(".dealModal .submit").click(function(){
      		deal_submit();
-       });
+       }); */
      $(".noDealModal .submit").click(function(){
     	
     		noDeal_submit();
@@ -683,9 +688,7 @@
 			}
 		}, "JSON");
 	}
-/* 	$.ajaxSetup({
-		async:false
-	}); */
+
 	function noDeal_submit() {
 		var f1 = $("#form-noDeal").serialize();
 		try{

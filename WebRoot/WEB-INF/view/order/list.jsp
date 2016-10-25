@@ -79,6 +79,7 @@
     <script src="${rootPath}assets/js/jquery-ui-1.10.3.min.js"></script>
 	<script src="${rootPath}assets/js/jquery.datatables.min.js"></script>
 	<script src="${rootPath}assets/js/select2.min.js"></script>
+	<script src="${rootPath}assets/js/jquery.validate.min.js"></script>
 
 <!-- Modal -->
 <!-- <div class="modal fade" id="confirmDelModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
@@ -109,72 +110,70 @@
         <div class="nextModal-title">请填写以下订单信息</div>
       </div>
 
+      <form class="form-horizontal" id="form-deal">
       <div class="modal-body">
-    		  <form class="form-horizontal" id="form-deal">
               <div class="section-block noline">
                   <div class="form-group col-sm-6">
-                      <label class="col-sm-4 control-label">成团日期</label>
+                      <label class="col-sm-4 control-label">成团日期<span class="asterisk">*</span></label>
                       <div class="col-sm-8 input-group input-datepicker">
-                        <input type="text" name="groupTime" class="form-control datepicker" autocomplete="off">
+                        <input type="text" name="groupTime" class="form-control datepicker" autocomplete="off" placeholder="成团日期">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                       </div>
                   </div>
                   <div class="form-group col-sm-6">
-                      <label class="col-sm-4 control-label">出发日期</label>
+                      <label class="col-sm-4 control-label">出发日期<span class="asterisk">*</span></label>
                       <div class="col-sm-8 input-group input-datepicker">
                         <input type="text" name="startDate" placeholder="出发日期" class="form-control datepicker" autocomplete="off" />
                         <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                       </div>
                   </div>
                   <div class="form-group col-sm-6">
-                    <label class="col-sm-4 control-label">返回日期</label>
+                    <label class="col-sm-4 control-label">返回日期<span class="asterisk">*</span></label>
                     <div class="col-sm-8 input-group input-datepicker">
                       <input type="text" name="endDate" placeholder="返回日期" class="form-control datepicker" autocomplete="off" />
                       <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                     </div>
                   </div>
                   <div class="form-group col-sm-6">
-                      <label class="col-sm-4 control-label">成团人数</label>
+                      <label class="col-sm-4 control-label">成团人数<span class="asterisk">*</span></label>
                       <div class="col-sm-8">
                         <input type="text" name="groupNumber" placeholder="成团人数" class="form-control"/>
                       </div>
                   </div>
                   <div class="form-group col-sm-6">
-                      <label class="col-sm-4 control-label">成团价格</label>
+                      <label class="col-sm-4 control-label">成团价格<span class="asterisk">*</span></label>
                       <div class="col-sm-8">
                         <input type="text" name="groupPrice" placeholder="成团价格" class="form-control" />
                       </div>
                   </div>
                   <div class="form-group col-sm-6">
-                      <label class="col-sm-4 control-label">货币种类</label>
+                      <label class="col-sm-4 control-label">货币种类<span class="asterisk">*</span></label>
                       <div class="col-sm-8">
-                        <input type="text" name="currency" placeholder="货币种类" class="form-control"/>
+                        <input type="text" name="currency" placeholder="货币种类" class="currency-select fullwidth"/>
                       </div>
                   </div>
                   <div class="form-group col-sm-6">
-                      <label class="col-sm-4 control-label">汇率</label>
+                      <label class="col-sm-4 control-label">汇率<span class="asterisk">*</span></label>
                       <div class="col-sm-8">
-                        <input type="text" name="exchangeRate" placeholder="汇率" class="form-control" value="0" />
+                        <input type="text" name="exchangeRate" placeholder="汇率" class="form-control" value="" />
                       </div>
                   </div>
                   <div class="form-group col-sm-6">
-                      <label class="col-sm-4 control-label">人民币价格</label>
+                      <label class="col-sm-4 control-label">人民币价格<span class="asterisk">*</span></label>
                       <div class="col-sm-8">
                         <input type="text" name="rmbPrice" placeholder="人民币价格" class="form-control"/>
                       </div>
                   </div>
-                  <input type="hidden" id="dealOrderId" name="orderId"/>
-                  	<%--
-                      <input  type="hidden" name="caseid" value="0"/>
-                      <input  type="hidden" name="customerid" value="0"/>
-                    --%>
-              </div>  
-          </form>     
+                  <input type="hidden" name="orderId" value="${order.orderId}" />
+                  <input type="hidden" name="caseId" value="${order.caseId}" />	
+                  <input type="hidden" name="customerId" value="${order.customerId}" />	
+              </div>           
       </div>
       <div class="modal-footer align-center">
-          <a class="submit btn btn-primary" >保存</a>
+          <button class="submit btn btn-primary">保存</button>
           <a class="cancel btn btn-primary" >取消</a>        
       </div>
+      </form>     
 
     </div><!-- modal-content --> 
   </div><!-- modal-dialog -->
@@ -213,19 +212,88 @@
   </div><!-- modal-dialog -->
 </div><!-- bmodal -->
 
-
 	<script type="text/javascript">
 	var orderStatus = ${orderStatus};
 	var destination = ${destination};
 	var reason = ${reason};
+	var currency=${currency};
 	
-		jQuery(document).ready(function() {
-			 
-		  
-	    
-
-			$(".nav-parent").eq(1).addClass("nav-active");
-      		$(".nav-parent").eq(1).find(".children").show();
+	$(".currency-select").select2({
+        data: currency,
+    });
+	
+		jQuery(document).ready(function() {			
+			jQuery("#form-deal").validate({
+		        rules: {
+			        groupTime: {
+	                required: true,
+	                date: true
+	              },
+			          startDate: {
+	                required: true,
+	                date: true
+	              },
+			          endDate: {
+	                required: true,
+	                date: true
+	              },
+			          groupNumber: {
+	                required: true,
+	                number: true
+	              },
+			          groupPrice: {
+	                required: true,
+	                number: true
+	              },
+	              currency: {
+	                required: true,
+	                number: true
+	              },
+			          exchangeRate: {
+	                required: true,
+	                number: true
+	              },
+			          rmbPrice: {
+	                required: true,
+	                number: true
+	              },
+			   },
+			   
+		      messages: {
+		        groupTime: {
+	                required: "请输入成团日期",
+	                date: "日期格式 mm/dd/yyyy"
+             	 },
+		          startDate: {
+	                required: "请输入出发日期",
+	                date: "日期格式 mm/dd/yyyy"
+                 },
+		           endDate: {
+	                required: "请输入返回日期",
+	                date: "日期格式 mm/dd/yyyy"
+              	 },
+		          groupNumber: "请输入一个数字",
+		          groupPrice: "请输入一个数字",
+              	  currency: "请选择货币种类",
+		          exchangeRate: "请输入一个数字",
+		          rmbPrice: "请输入一个数字",
+		      },
+		      
+	          highlight: function(element) {
+	            jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+	          },
+	          success: function(element) {
+	            jQuery(element).closest('.form-group').removeClass('has-error');
+	          },
+	          invalidHandler : function(){
+	            return false;
+	          },
+	          submitHandler : function(){
+	              deal_submit();
+	              return false;
+	          } 
+	        });
+	       });  	     	   	    		      		
 			
 			 var t = jQuery('#dataTable').DataTable({
 			 	pageLength: 10,
@@ -402,9 +470,8 @@
 		        minimumResultsForSearch: -1
 		    });
 		    
-		    jQuery('select').removeClass('form-control');
-			
-		});
+		    jQuery('select').removeClass('form-control');		
+		
 		function edit(id) {
 			window.parent.location = "${rootPath}order/edit.html?id="+id;
 		}
@@ -420,9 +487,9 @@
 		jQuery(".datepicker").datepicker({
 			  dateFormat: "yy-mm-dd"
 	  	});
-	    $(".dealModal .submit").click(function(){
+ 	    $(".dealModal .submit").click(function(){
 	    	deal_submit();
-	      });
+	      }); 
 	    $(".noDealModal .submit").click(function(){
 	    	noDeal_submit();
 	      });
@@ -437,10 +504,7 @@
 	    $(".reason-select").select2({
 	    	placeholder:"未成行原因",
 	    	data:reason
-	    })    
-	    
-	    
-
+	    }) 
 	    
 		function deal_submit() {
 			var f = $("#form-deal").serialize();
@@ -466,7 +530,7 @@
 					$("#msgModal").modal('show');
 				}
 			}, "JSON");
-		}
+		}		
 		/* function doDel(id){
 			$.ajax({
 				url: "${rootPath}user/del.do?id=" + id, 

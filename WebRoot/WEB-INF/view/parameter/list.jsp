@@ -20,6 +20,27 @@
 
 			<div class="contentpanel">
 				<!-- content goes here... -->
+				
+			<div class="section-block">    
+	            <div class="form-group col-sm-4">
+	              <label class="col-sm-4 control-label"><span class="asterisk">*</span></label>
+	              <div class="col-sm-8">
+	                <input type="text" id="domain" name="domain" placeholder="作用域" class="form-control" />
+	              </div>
+	            </div>
+	            <div class="form-group col-sm-4">
+	              <label class="col-sm-4 control-label">值 <span class="asterisk">*</span></label>
+	              <div class="col-sm-8">
+	                <input type="text" id="value" name="value" placeholder="值" class="form-control" />
+	              </div>
+	            </div> 			
+	            <div class="form-group col-sm-4">
+	              <label class="col-sm-4 control-label">描述 <span class="asterisk">&nbsp;</span></label>
+	              <div class="col-sm-8">
+	                <input type="text" name="depict" placeholder="描述" class="form-control" />
+	              </div>
+	            </div> 	
+	        </div>
 
 				<div class="panel panel-default">
 					<div class="panel-heading">
@@ -27,15 +48,15 @@
 							<a href="" class="minimize">&minus;</a>
 						</div>
 						<!-- panel-btns -->
-						<h3 class="panel-title">系统参数列表</h3>
-						<input type="text" id="searchText" value="" />
+	<!-- 					<h3 class="panel-title">系统参数列表</h3>
+						 <input type="text" id="searchText" value="" /> 
 						 <select  id="searchMenu">
 						 <option value="domain">作用域</option>
 						 <option value="value">存值</option>
 						 <option value="chinese">中文</option>						 
 						 <option value="english">英文</option>			
-						 </select>
-						 <input type="button" id="searchBtn" value="搜索"/> 	
+					 </select>
+						 <input type="button" id="searchBtn" value="搜索"/> 	  -->
 					</div>
 					<div class="panel-body">
 						<br />
@@ -64,11 +85,6 @@
 					<!-- panel-body -->
 				</div>
 				<!-- panel -->
-
-
-
-
-
 			</div>
 
 		</div>
@@ -199,10 +215,10 @@
 		        ]
 			});
 			
-			$('#searchBtn').on( 'click', function () {
-		    	//alert($('#customerName').attr("value"));
+/* 			$('#searchBtn').on( 'click', function () {
+		    	alert($('#customerName').attr("value"));
 		        t.draw();
-		    } );
+		    } ); */
 			
 			$('#dataTable tbody').on( 'click', 'a.btn-success', function () {
 		        var data = t.row($(this).parents('tr')).data();
