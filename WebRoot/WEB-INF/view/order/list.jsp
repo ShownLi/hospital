@@ -53,8 +53,8 @@
 										<th>客人姓名</th>
 										<th>地接社</th>
 										<th>销售姓名</th>
-										<th>目的地</th>
-										<th>预算</th>
+<!-- 										<th>目的地</th> 
+ 										<th>预算</th> -->
 										<th>状态</th>
 										<th>编辑</th>
 									</tr>
@@ -214,7 +214,7 @@
 
 	<script type="text/javascript">
 	var orderStatus = ${orderStatus};
-	var destination = ${destination};
+//	var destination = ${destination};
 	var reason = ${reason};
 	var currency=${currency};
 	
@@ -355,7 +355,7 @@
 						 	      render: function ( data, type, full, meta ) {
 					              	return '<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a>&nbsp<a class="btn btn-primary btn-xs" id="'+data+'"></span> 成行</a>&nbsp<a class="btn btn-default btn-xs" id="'+data+'"></span> 未成行</a>&nbsp;';
 						 	  	  },
-						 	    	targets: 7
+						 	    	targets: 5
 						 		},
 								{
 					                data: "status",
@@ -367,13 +367,13 @@
 						                			return orderStatus[i].text
 						                		}
 						                	}
-						                	return "";
+						                	return ""
 					                	}
 					                	else{return ""}
 					                },
 					                  targets: 4
 								},
-								{
+/* 								{
 					                data: "destination",
 					                orderable: false,
 					                render: function ( data ) {
@@ -389,7 +389,7 @@
 					                	else{return ""}
 					                },
 					                  targets: 6
-								},					
+								},	 */				
 						 	  {
 						 		  orderable: false,
 						 		  searchable: false,
@@ -401,8 +401,8 @@
 		             { data: "customerName" },
 		             { data: "agencyName" },
 		             { data: "salesName" },
-		             { data: "destination" },
-		             { data: "budget" },
+//		             { data: "destination" },
+//		             { data: "budget" },
 		             { data: "status" }
 		         ]
 			 });

@@ -82,7 +82,8 @@ public class EmailService extends BaseService {
 		template.setDuring(crmcase.getDuring());
 		template.setStartDate(crmcase.getStartDate());
 		template.setEndDate(crmcase.getEndDate());
-		String budget = DecimalFormat.getNumberInstance().format(Integer.parseInt(order.getBudget()));
+//		String budget = DecimalFormat.getNumberInstance().format(Integer.parseInt(order.getBudget()));
+		String budget = DecimalFormat.getNumberInstance().format(crmcase.getBudget());
 		template.setBudget(budget);
 		template.setRequirement(crmcase.getRequirement());
 		
