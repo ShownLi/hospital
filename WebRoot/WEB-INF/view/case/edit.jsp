@@ -248,7 +248,7 @@
                 <div class="form-group col-sm-8">
                   <label class="col-sm-2 control-label">客人的要求</label>
                   <div class="col-sm-9" style="margin-left: 23px;">
-                    <textarea id="requirement" name="requirement" class="form-control" placeholder="客人的要求" rows="5"></textarea>
+              		<textarea id="requirement" name="requirement" class="form-control" placeholder="客人的要求" rows="5"></textarea>
                   </div>
                 </div>
             </div>
@@ -446,6 +446,7 @@
   </div><!-- modal-dialog -->
 </div><!-- modal -->
 
+
 <div class="nextModal modal fade" id="nextModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -513,9 +514,19 @@
 	var level = ${level};
 	var agegroup = ${ageGroup}; 
 	var genderData = [{ id: 'male', text: '男' }, { id:'female' , text: '女' }];
+<<<<<<< HEAD
 	 
 	$("#requirement").val("${crmcase.requirement}");	
 	$("#birthday").val(getBirthday());
+=======
+	
+
+	$("#requirement").val("${crmcase.requirement}"); 
+	$("#birthday").val(getBirthday());
+
+	$("#requirement").val("${crmcase.requirement}");	
+	$("#birthday").val(getBirthday());
+>>>>>>> 671d6bdd1da41214b5000c5eab26947fc66400f6
 	
 	function getBirthday(){
 		var date = $("#birthday").val();	

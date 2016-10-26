@@ -268,16 +268,16 @@
 	<script type="text/javascript">
 	var leval = ${level};
 //	var source = ${source};
+	var promote = ${promote};
 	var ageGroup = ${ageGroup};
 	var source = ${source};
 	var caseStatus = ${status};
 	var customerList = ${customerList};
 	var user = ${user};
 	var destination = ${destination};
-	
 	$(".promote-select").select2({
 		placeholder: '选择一个客人来源',
-	  	data: source
+	  	data: promote
 	});
 	$(".agegroup-select").select2({
 		placeholder: '选择一个年龄段',
