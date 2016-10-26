@@ -267,12 +267,12 @@
         <div class="section-block">
          <form id="form-order">
             <div class="section-title">选择目的地及地接社,继续添加订单</div>
-<!--             <div class="form-group col-sm-8 col-sm-offset-2">
+             <div class="form-group col-sm-8 col-sm-offset-2">
                 <label class="col-sm-3 control-label">目的地</label>
                 <div class="col-sm-9">
-                    <input type="text" name="destination" id="destination" placeholder="国家" class="country-select fullwidth" value="" />
+                    <input type="text" name="destination" id="orderDestination" placeholder="国家" class="country-select fullwidth" value="" />
                 </div>
-            </div> -->
+            </div> 
             <div class="form-group col-sm-8 col-sm-offset-2">
                 <label class="col-sm-3 control-label">销售</label>
                 <div class="col-sm-9">

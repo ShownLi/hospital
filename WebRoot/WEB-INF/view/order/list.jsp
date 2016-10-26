@@ -67,8 +67,8 @@
 										<th>客人姓名</th>
 										<th>地接社</th>
 										<th>销售姓名</th>
-<!-- 									<th>目的地</th> 
- 										<th>预算</th> -->
+										<th>目的地</th> 
+ <!-- 									<th>预算</th> -->
 										<th>状态</th>
 										<th>编辑</th>
 									</tr>
@@ -228,14 +228,14 @@
 
 	<script type="text/javascript">
 	var orderStatus = ${orderStatus};
-	//var destination = ${destination};
+	var destination = ${destination};
 	var reason = ${reason};
 	var currency=${currency};
 	
- 	/* $(".destination-select").select2({
+ 	$(".destination-select").select2({
         placeholder: '国家',
         data: destination
-    }); */ 
+    }); 
 	
 	$(".currency-select").select2({
         data: currency,
@@ -369,13 +369,12 @@
 			 	},
 			 	columnDefs: [
 						       {
-						           data: "orderId",
-						           //defaultContent: '<a class="btn btn-success btn-xs"><span class="fa fa-edit"></span> 编辑</a>&nbsp;<a class="btn btn-danger btn-xs"><span class="fa fa-minus-circle"></span> 删除</a>',
+						          data: "orderId",
 						 	      orderable: false,
 						 	      render: function ( data, type, full, meta ) {
 					              	return '<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a>&nbsp<a class="btn btn-primary btn-xs" id="'+data+'"></span> 成行</a>&nbsp<a class="btn btn-default btn-xs" id="'+data+'"></span> 未成行</a>&nbsp;';
 						 	  	  },
-						 	    	targets: 5
+						 	    	targets: 6
 						 		},
 								{
 					                data: "status",
@@ -391,9 +390,9 @@
 					                	}
 					                	else{return ""}
 					                },
-					                  targets: 4
+					                  targets: 5
 								},
-								/* {
+								 {
 					                data: "destination",
 					                orderable: false,
 					                render: function ( data ) {
@@ -410,7 +409,7 @@
 					                },
 
 					                  targets: 4
-								}, */					
+								}, 					
 
 						 	  {
 						 		  orderable: false,
@@ -423,7 +422,7 @@
 		             { data: "customerName" },
 		             { data: "agencyName" },
 		             { data: "salesName" },
-//		             { data: "destination" },
+		             { data: "destination" },
 //		             { data: "budget" },
 		             { data: "status" }
 		         ]
