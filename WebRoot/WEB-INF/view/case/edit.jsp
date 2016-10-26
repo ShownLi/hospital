@@ -519,8 +519,6 @@
 	$("#requirement").val("${crmcase.requirement}"); 
 	$("#birthday").val(getBirthday());
 
-	$("#requirement").val("${crmcase.requirement}");	
-	$("#birthday").val(getBirthday());
 	
 	function getBirthday(){
 		var date = $("#birthday").val();	
