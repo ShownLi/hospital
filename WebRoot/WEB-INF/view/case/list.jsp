@@ -137,12 +137,12 @@
         <div class="section-block">
         <form id="form-order">
             <div class="section-title">选择目的地及地接社,添加订单</div>
-      <!--   <div class="form-group col-sm-8 col-sm-offset-2">
+      	   <div class="form-group col-sm-8 col-sm-offset-2">
                 <label class="col-sm-3 control-label">目的地</label>
                 <div class="col-sm-9">
                     <input type="text" id="destination" name="destination" placeholder="目的地" class="destination-select fullwidth" value="" />
                 </div>
-            </div> -->
+            </div> 
             <div class="form-group col-sm-8 col-sm-offset-2">
                 <label class="col-sm-3 control-label">所属销售</label>
                 <div class="col-sm-9">
@@ -406,7 +406,7 @@
 			window.parent.location = "${rootPath}case/edit.html?id="+id;
 		}
 		
-		function addOrder(id) {
+/* 		function addOrder(id) {
 			 var destination = $("#destination").val();
 	          $.ajax({
 	              type: "post",
@@ -422,7 +422,7 @@
 	          }); 
 			$("#nextModal").modal('show');			
 			$('#caseId').attr("value",id );
-		}
+		} */
 		
 		function del(id) {
 			$("#confirmDelModal .hiddenId").val("");

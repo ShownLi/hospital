@@ -133,7 +133,7 @@
                 <div class="form-group col-sm-4">
                   <label class="col-sm-4 control-label">目的地</label>
                 <div class="col-sm-8">
-                    <input id="destination" type="text" name="destination" class="destination-select fullwidth" value="${crmcase.destination}" />
+                    <input type="text" id="destination" name="destination" class="destination-select fullwidth" value="${crmcase.destination}" />
                 </div>
                 </div>
                      
@@ -452,14 +452,14 @@
     <div class="modal-content">
       <div class="modal-body align-center">
         <div class="section-block">
-        <form id="order">
+        <form id="form-order">
             <div class="section-title">选择目的地及地接社,添加订单</div>
-<!--             <div class="form-group col-sm-8 col-sm-offset-2">
+             <div class="form-group col-sm-8 col-sm-offset-2">
                 <label class="col-sm-3 control-label">目的地</label>
                 <div class="col-sm-9">
-                    <input type="text" id="destination" name="destination" placeholder="目的地" class="destination-select fullwidth" value="" />
+                    <input type="text" id="orderDestination" name="destination" readonly class="destination-select fullwidth" value="" />
                 </div>
-            </div> -->
+            </div>
             <div class="form-group col-sm-8 col-sm-offset-2">
                 <label class="col-sm-3 control-label">所属销售</label>
                 <div class="col-sm-9">
@@ -514,12 +514,10 @@
 	var level = ${level};
 	var agegroup = ${ageGroup}; 
 	var genderData = [{ id: 'male', text: '男' }, { id:'female' , text: '女' }];
-	
 
-	$("#requirement").val("${crmcase.requirement}"); 
+	$("#requirement").val("${crmcase.requirement}");	
 	$("#birthday").val(getBirthday());
 
-	
 	function getBirthday(){
 		var date = $("#birthday").val();	
 		var dateformat = null;
@@ -733,8 +731,7 @@
   		  history.go(-1);
   	  }); 
   	  
-	  
-      
+	   
       //询单无效
       $("#btn-invalid").click(function(){
       	 $("#reconfirmDelModal").modal('show');
@@ -756,39 +753,67 @@
 	  }
 	  
 	   //添加订单
+/* 	   jQuery("#form-order").validate({  
+          rules: {
+            salesId:"required",
+          },
+          messages: {
+            salesId:"请选择一个销售",          
+          },        
+          highlight: function(element) {
+            jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+          },
+          success: function(element) {
+            jQuery(element).closest('.form-group').removeClass('has-error');
+          },
+          invalidHandler : function(){
+            return false;
+          },
+          submitHandler : function(){
+            order_submit();
+            return false;
+          }
+      }); */
+	   
       $("#btn-addorder").click(function(){
-      	  var destination = $("#destination").val();
-          $.ajax({
-              type: "post",
-              url: "${rootPath}case/getSales.do?destination="+destination,
-              data: destination,
-              success: function(sales){
-            	  var json = jQuery.parseJSON( sales );
-                  $("#salesId").select2({	
-                      placeholder: '销售',
-                      data: json
-                  });
-              }   
-          }); 
-          $("#nextModal").modal('show');        
+      	  var destination = $("#destination").val();      	  
+      	  if(destination==""){
+      	  	 alert("请先选择目的地，再添加订单");
+      	  }else{
+	      	  	$.ajax({
+	              type: "post",
+	              url: "${rootPath}case/getSales.do?destination="+destination,
+	              data: destination,
+	              success: function(sales){
+	            	  var json = jQuery.parseJSON( sales );
+	                  $("#salesId").select2({	
+	                      placeholder: '销售',
+	                      data: json
+	                  });
+	              }   
+	          });  
+	          $("#orderDestination").val(destination);    
+      	  	  $("#nextModal").modal('show');         	         	  
+      	  }  
           return false;
       });
       
-      $(".nextModal .submit").click(function(){
+       $(".nextModal .submit").click(function(){
       	  order_submit();
-      });     
+      });  
+      
       function order_submit() {
-			var f = $("#order").serialize();
-			$.post('${rootPath}order/add.do', f, function(result) {
-				var rmsg = result.msg;
-				if (result.success) {
-					window.parent.location = "${rootPath}case/edit.html?id=${crmcase.caseId}";
-				} else {
-					$("#NoEmail").modal('show');
-          			$("#nextModal").modal('hide');
-				}
-			}, "JSON");
-    	}
+		var f = $("#form-order").serialize();
+		$.post('${rootPath}order/add.do', f, function(result) {
+			var rmsg = result.msg;
+			if (result.success) {
+				window.parent.location = "${rootPath}case/edit.html?id=${crmcase.caseId}";
+			} else {
+				$("#NoEmail").modal('show');
+         			$("#nextModal").modal('hide');
+			}
+		}, "JSON");
+      }
       
       //进入订单编辑页面
       $('#dataTable-order tbody').on( 'click', 'a.btn-success', function () {

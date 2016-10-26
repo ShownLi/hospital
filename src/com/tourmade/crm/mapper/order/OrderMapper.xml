@@ -62,7 +62,7 @@
 			u.sales_id as salesId,
 			u.sales_name as salesName,
 			u.destination as destination,
-			u.budget as budget,
+			<!-- u.budget as budget, -->
 			u.status as status
 		from tm_order u  
 		where u.isdel = 0 and u.case_id = #{caseId}
