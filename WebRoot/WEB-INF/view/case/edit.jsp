@@ -483,6 +483,7 @@
     </div><!-- modal-content -->
   </div><!-- modal-dialog -->
 </div><!-- modal -->
+	
 
 	<%@ include file="../assets/pages/foot.jsp"%>
 	<script src="${rootPath}assets/js/jquery-ui-1.10.3.min.js"></script>
@@ -492,6 +493,7 @@
 	<script src="${rootPath}assets/js/jquery.validate.min.js"></script>
 	
 <script type="text/javascript">
+	
 	var country = ${country};
     var language = ${language};
     var withwho = ${withwho};
@@ -515,6 +517,9 @@
 	
 
 	$("#requirement").val("${crmcase.requirement}"); 
+	$("#birthday").val(getBirthday());
+
+	$("#requirement").val("${crmcase.requirement}");	
 	$("#birthday").val(getBirthday());
 	
 	function getBirthday(){
