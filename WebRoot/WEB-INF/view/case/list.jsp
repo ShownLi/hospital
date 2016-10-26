@@ -137,24 +137,24 @@
         <div class="section-block">
         <form id="form-order">
             <div class="section-title">选择目的地及地接社,添加订单</div>
-            <div class="form-group col-sm-8 col-sm-offset-2">
+      <!--   <div class="form-group col-sm-8 col-sm-offset-2">
                 <label class="col-sm-3 control-label">目的地</label>
                 <div class="col-sm-9">
                     <input type="text" id="destination" name="destination" placeholder="目的地" class="destination-select fullwidth" value="" />
                 </div>
-            </div>
+            </div> -->
             <div class="form-group col-sm-8 col-sm-offset-2">
                 <label class="col-sm-3 control-label">所属销售</label>
                 <div class="col-sm-9">
                     <input type="text" id="salesId" name="salesId" placeholder="选择一个销售" class="sales-select fullwidth" value="" />
                 </div>
             </div>
-              <div class="form-group col-sm-8 col-sm-offset-2">
+<!--               <div class="form-group col-sm-8 col-sm-offset-2">
                   <label class="col-sm-3 control-label">客人的预算</label>
                   <div class="col-sm-9">
                     <input type="text" name="budget" placeholder="客人的预算" class="form-control" value="" />
                   </div>
-                </div>
+                </div> -->
             <div class="col-sm-12">
              <a class="submit btn btn-primary">保存</a>
               <input  type="hidden" id="caseId" name="caseId" value="" />
@@ -300,7 +300,6 @@
 			                data: "source",
 			                orderable: false,
 			                render: function ( data ) {
-
 			                	if(data){
 			                		for(var i=0;i < source.length;i++){
 				                		if(data==source[i].id){
@@ -400,7 +399,7 @@
 			
 			
 		});
-	    $(".nextModal .submit").click(function(){
+	    $(".nextModal .submit").click(function(){	    		
 	    	  order_submit();
 	    });
 		function edit(id) {
@@ -408,7 +407,20 @@
 		}
 		
 		function addOrder(id) {
-			$("#nextModal").modal('show');
+			 var destination = $("#destination").val();
+	          $.ajax({
+	              type: "post",
+	              url: "${rootPath}case/getSales.do?destination="+destination,
+	              data: destination,
+	              success: function(sales){
+	            	  var json = jQuery.parseJSON( sales );
+	                  $("#salesId").select2({	
+	                      placeholder: '销售',
+	                      data: json
+	                  });
+	              }   
+	          }); 
+			$("#nextModal").modal('show');			
 			$('#caseId').attr("value",id );
 		}
 		
@@ -442,7 +454,7 @@
 			}, "JSON");
 	}
 	      //添加订单弹出框，目的地与销售联动
-	      $("#destination").change(function(){
+/* 	      $("#destination").change(function(){
 	          var destination = $(this).val();
 	          $.ajax({
 	              type: "post",
@@ -456,7 +468,7 @@
 	                  });
 	              }   
 	          }); 
-	      });
+	      }); */
 	</script>
 
 </body>

@@ -482,6 +482,7 @@
     </div><!-- modal-content -->
   </div><!-- modal-dialog -->
 </div><!-- modal -->
+	
 
 	<%@ include file="../assets/pages/foot.jsp"%>
 	<script src="${rootPath}assets/js/jquery-ui-1.10.3.min.js"></script>
@@ -491,6 +492,7 @@
 	<script src="${rootPath}assets/js/jquery.validate.min.js"></script>
 	
 <script type="text/javascript">
+	
 	var country = ${country};
     var language = ${language};
     var withwho = ${withwho};
@@ -512,9 +514,29 @@
 	var agegroup = ${ageGroup}; 
 	var genderData = [{ id: 'male', text: '男' }, { id:'female' , text: '女' }];
 	
-	$("#requirement").val("${crmcase.requirement}"); 
-	$("#birthday").val(getBirthday());
+
+ 
+/*  	var str=${crmcase.requirement}
+	alert(str)  */
+	$("#requirement").val("${crmcase.requirement}")
 	
+//	${crmcase.requirement}
+/* 	function ReplaceSeperator() {
+		var requirement= $("#requirement").val("${crmcase.requirement}");
+	    var i;
+	    var result = "";
+	    var c;
+		    for (i = 0; i < requirement.length; i++) {
+		        c = requirement.substr(i, 1);
+		        if (c == ";" || c == "," || c == "，" || c == "\n")
+		            result = result + "；";
+		        else if (c != "\r")
+		            result = result + c;
+		    }
+	    return result;
+	} */
+	
+	$("#birthday").val(getBirthday());
 	function getBirthday(){
 		var date = $("#birthday").val();	
 		var dateformat = null;

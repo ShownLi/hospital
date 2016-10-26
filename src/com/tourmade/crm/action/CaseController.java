@@ -230,6 +230,17 @@ public class CaseController extends BaseSimpleFormController {
 		if (null != id && !"".equals(id)) {
 			int caseId = Integer.parseInt(id);
 			Case crmcase = service.getCaseById(caseId);
+			
+			//解决客人的要求换行符问题
+			if(crmcase.getRequirement()!=null){				
+				String[] splits= crmcase.getRequirement().split("\r\n");
+				String realRequire="";
+				for(String split:splits){
+					realRequire+=split+"\\r\\n";
+				}		
+				crmcase.setRequirement(realRequire);
+			}
+			
 			crmcase=service.validateStartTime(crmcase);
 			Customer cus=service.getCustomerInfoById(crmcase.getCustomerId());
 			String country = "country";
@@ -320,6 +331,12 @@ public class CaseController extends BaseSimpleFormController {
 
 		Json json = new Json();		
 		try {
+/*			System.out.println(crmcase.getRequirement());
+			String replace = crmcase.getRequirement().replaceAll("\n", "<br/>");
+			System.out.println(replace);
+			crmcase.setRequirement(replace);
+			System.out.println("存数据："+crmcase.getRequirement());*/
+			
 			service.updateCase(crmcase);
 			json.setSuccess(true);
 		} catch (Exception e) {

@@ -64,7 +64,7 @@
 	                <div class="form-group col-sm-4">
 	                    <label class="col-sm-4 control-label">跟单员</label>
 	                    <div class="col-sm-8">
-	                      <input type="text" name="operator" class="user-select fullwidth" value="0" />
+	                      <input type="text"  name="operator" class="user-select fullwidth" value="0" />
 	                    </div>
 	                </div>                        
                 </div>
@@ -72,7 +72,7 @@
                    	<div class="form-group col-sm-4">
                       <label class="col-sm-4 control-label">目的地</label>
                       <div class="col-sm-8">
-                        <input type="text" name="destination" class="country-select fullwidth" value="" />              
+                        <input type="text" id="destination" name="destination" class="country-select fullwidth" value="" />              
                       </div>
                     </div>    
                 </div>
@@ -267,24 +267,24 @@
         <div class="section-block">
          <form id="form-order">
             <div class="section-title">选择目的地及地接社,继续添加订单</div>
-            <div class="form-group col-sm-8 col-sm-offset-2">
+<!--             <div class="form-group col-sm-8 col-sm-offset-2">
                 <label class="col-sm-3 control-label">目的地</label>
                 <div class="col-sm-9">
                     <input type="text" name="destination" id="destination" placeholder="国家" class="country-select fullwidth" value="" />
                 </div>
-            </div>
+            </div> -->
             <div class="form-group col-sm-8 col-sm-offset-2">
                 <label class="col-sm-3 control-label">销售</label>
                 <div class="col-sm-9">
                     <input type="text" name="salesId" id="salesId" placeholder="选择一个销售" class="sales-select fullwidth" value="" />
                 </div>
             </div>
-            <div class="form-group col-sm-8 col-sm-offset-2">
+<!--             <div class="form-group col-sm-8 col-sm-offset-2">
                 <label class="col-sm-3 control-label">预算</label>
                 <div class="col-sm-9">
                     <input type="text" name="budget" id="budget"  class="form-control" value="" />
                 </div>
-            </div>
+            </div> -->
             <div class="col-sm-12">
         	   <a class="submit btn btn-primary">保存</a>
         	 <input type="hidden"  name="caseId" id="caseId" value="" />
@@ -455,7 +455,7 @@
 		    }); 
 			  
 		      //添加订单弹出框，目的地与销售联动
-		      $("#destination").change(function(){
+/* 		      $("#destination").change(function(){
 		          var destination = $(this).val();
 		          $.ajax({
 		              type: "post",
@@ -469,18 +469,30 @@
 		                  });
 		              }   
 		          }); 
-		      });
+		      }); */
 		});
 			      
 		function case_submit() {
-			var f = $("#form-case").serialize();
-			
+			var f = $("#form-case").serialize();			
 			$.post('${rootPath}case/add.do', f, function(result) {
 				var caseId = result.obj.caseId;
 				$("#caseId").val(caseId);
 				var rmsg = result.msg;
 				if (result.success) {
 					//window.parent.location = "${rootPath}case/list.html";
+					var destination = $("#destination").val();
+			        $.ajax({
+			             type: "post",
+			             url: "${rootPath}case/getSales.do?destination="+destination,
+			             data: destination,
+			             success: function(sales){
+			            	 var json = jQuery.parseJSON( sales );
+			                 $("#salesId").select2({
+			                      placeholder: '销售',
+			                      data: json
+			                  });
+			              }   
+			         });
 					$("#nextModal").modal('show');
 					
 				} else {
@@ -493,6 +505,7 @@
 	      $(".nextModal .submit").click(function(){
 	      	  order_submit();
 	      });
+	      
 	  		function order_submit() {
 	    			var f = $("#form-order").serialize();
 	    			$.post('${rootPath}order/add.do', f, function(result) {
