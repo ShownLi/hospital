@@ -78,7 +78,6 @@ public class OrderService extends BaseService {
 		if(order.getStatus()!=null){
 			map.put("status", order.getStatus());
 		}
-		
 		List<Order> data = orderMapper.queryOrder(map);
 		long count = orderMapper.countOrder(order);
 			

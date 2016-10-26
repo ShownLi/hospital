@@ -28,18 +28,32 @@
 						</div>
 						<!-- panel-btns -->
 						<h3 class="panel-title">订单列表</h3>
-						
-						<input type="text" id="searchText" value="" />
-						 <select  id="searchMenu">
-						 <option value="customerName">客人姓名</option>
-						 <option value="orderId">订单id</option>
-						 <option value="agencyName">地接社</option>						 
-						 <option value="salesName">销售姓名</option>						 
-						 <option value="destination">目的地</option>						 
-						 <option value="budget">预算</option>
-						 <option value="status">状态</option>
-						 </select>
-						<input type="button" id="searchBtn" value="搜索"/> 			 				
+						<div class="row" style="margin-top: 20px">
+							<div class="form-group col-sm-10">
+								<div class="col-sm-2">
+									<input type="text" id="searchCustomerName" class="form-control" placeholder="客人姓名" value="" />
+								</div>
+								<div class="col-sm-2">
+									<input type="text" id="searchOrderId" class="form-control" placeholder="订单id"  value="" />
+								</div>
+								<div class="col-sm-2">
+									<input type="text" id="searchAgencyName" class="form-control" placeholder="地接社" value="" />
+								</div>
+								<div class="col-sm-2">
+									<input type="text" id="searchSalesName" class="form-control" placeholder="销售姓名" value="" />
+								</div>
+								<!-- <div class="col-sm-2">
+									<input type="text" id="searchDestination" class="destination-select fullwidth" value="" />
+								</div> -->
+								<div class="col-sm-2">
+									<input type="text" id="searchStatus" class="status-select fullwidth" value="" />
+								</div>
+							</div>	
+							<div class="col-sm-2">					 		                        		
+								<input class="btn btn-primary" type="button" id="searchBtn" value="搜索"/>
+							</div> 	
+						</div>
+					
 
 					</div>
 					<div class="panel-body">
@@ -53,7 +67,7 @@
 										<th>客人姓名</th>
 										<th>地接社</th>
 										<th>销售姓名</th>
-<!-- 										<th>目的地</th> 
+<!-- 									<th>目的地</th> 
  										<th>预算</th> -->
 										<th>状态</th>
 										<th>编辑</th>
@@ -214,12 +228,22 @@
 
 	<script type="text/javascript">
 	var orderStatus = ${orderStatus};
-//	var destination = ${destination};
+	//var destination = ${destination};
 	var reason = ${reason};
 	var currency=${currency};
 	
+ 	/* $(".destination-select").select2({
+        placeholder: '国家',
+        data: destination
+    }); */ 
+	
 	$(".currency-select").select2({
         data: currency,
+    });
+	
+	$(".status-select").select2({
+        placeholder: '状态',
+        data: orderStatus
     });
 	
 		jQuery(document).ready(function() {			
@@ -303,7 +327,7 @@
 			 	ajax: {
 			 		url: '${rootPath}order/list.do',
 			 		data:function ( data ) {
-			 			/* var searchCustomerName=$('#searchCustomerName').val();
+			 			var searchCustomerName=$('#searchCustomerName').val();
 			 			var searchOrderId=$('#searchOrderId').val();
 			 			var searchAgencyName=$('#searchAgencyName').val();
 			 			var searchSalesName=$('#searchSalesName').val();
@@ -325,47 +349,14 @@
 			 			}
 			 			if(searchDestination !=null && searchDestination !="" ){
 							data.destination = searchDestination;
-			 			}
+			 			} 
 			 			if(searchBudget !=null && searchBudget !="" ){
 							data.budget = searchBudget;
 			 			}
 			 			if(searchStatus !=null && searchStatus !="" ){
 							data.status = searchStatus;
-			 			} */
-			 			var menu=$('#searchMenu').val();
-			 			var text=$('#searchText').val();
-			 			if(text !=null && text !="" ){
-			 			if(menu=="customerName"){
-			 				order.customerName = text;	
-			 			}
-			 			
-			 			if(menu=="orderId"){
-			 				order.orderId = text;
-			 			}
-			 			
-			 			if(menu=="agencyName"){
-			 				order.agencyName = text;
-			 			}
-			 			
-			 			if(menu=="salesName"){
-			 				order.salesName = text;
-			 			}
-			 			
-			 			
-			 			if(menu=="destination"){
-			 				order.destination = text;
-			 			}
-			 			
-			 			if(menu=="budget"){
-			 				order.budget = text;
-			 			}
-			 		
-
-			 			if(menu=="status"){
-			 				order.status = text;
-			 			}
-
 			 			} 
+			 			
 					},
 
 			 		dataFilter: function(data){
@@ -402,7 +393,7 @@
 					                },
 					                  targets: 4
 								},
-/* 								{
+								/* {
 					                data: "destination",
 					                orderable: false,
 					                render: function ( data ) {
@@ -417,8 +408,10 @@
 					                	}
 					                	else{return ""}
 					                },
-					                  targets: 6
-								},	 */				
+
+					                  targets: 4
+								}, */					
+
 						 	  {
 						 		  orderable: false,
 						 		  searchable: false,
@@ -460,10 +453,10 @@
 		         $("#noDealOrderid").val($(this).attr('id'));
 		     } );
 			 
-			 /* $('#confirmDelModal').on( 'click', 'button.btn-danger', function () {
+			  $('#confirmDelModal').on( 'click', 'button.btn-danger', function () {
 		         var id = $("#confirmDelModal .hiddenId").val();
 		         doDel(id);
-		     } );  */
+		     } );  
 		    
 			// Select2
 		    jQuery('select').select2({
@@ -531,7 +524,7 @@
 				}
 			}, "JSON");
 		}		
-		/* function doDel(id){
+		 function doDel(id){
 			$.ajax({
 				url: "${rootPath}user/del.do?id=" + id, 
 				async: true,
@@ -543,7 +536,7 @@
 				}
 			});
 			
-		} */
+		} 
 
 	</script>
 
