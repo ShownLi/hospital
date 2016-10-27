@@ -178,7 +178,7 @@
                         <input type="text" name="rmbPrice" placeholder="人民币价格" class="form-control"/>
                       </div>
                   </div>
-                  <input type="hidden" name="orderId" value="${order.orderId}" />
+                  <input type="hidden" id="dealOrderId" name="orderId" value="${order.orderId}" />
                   <input type="hidden" name="caseId" value="${order.caseId}" />	
                   <input type="hidden" name="customerId" value="${order.customerId}" />	
               </div>           
@@ -271,7 +271,7 @@
 	              },
 	              currency: {
 	                required: true,
-	                number: true
+//	                number: true
 	              },
 			          exchangeRate: {
 	                required: true,
@@ -533,10 +533,8 @@
 				error: function(o) {
 					alert(2);
 				}
-			});
-			
+			});		
 		} 
-
 	</script>
 
 </body>

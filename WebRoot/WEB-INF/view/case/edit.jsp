@@ -322,8 +322,8 @@
                     <th>客人姓名</th>
                     <th>地接社</th>
                     <th>销售姓名</th>
-<!-- 	            <th>目的地</th>
-                    <th>预算</th> -->
+	 	            <th>目的地</th>
+               <!-- <th>预算</th> -->
                     <th>状态</th>
                     <th>编辑</th>
                   </tr>
@@ -428,6 +428,24 @@
   </div><!-- modal-dialog -->
 </div><!-- modal -->
 
+<!-- Modal 添加订单没有地址 -->
+<div class="modal fade" id="msgDestination" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">信息</h4>
+      </div>
+      <div class="modal-body">
+       	 请选择目的地，再添加订单
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+      </div>
+    </div><!-- modal-content -->
+  </div><!-- modal-dialog -->
+</div><!-- modal -->
+
 <!-- Modal -->
 <div class="modal fade" id="NoEmail" tabindex="-2" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -457,7 +475,7 @@
              <div class="form-group col-sm-8 col-sm-offset-2">
                 <label class="col-sm-3 control-label">目的地</label>
                 <div class="col-sm-9">
-                    <input type="text" id="orderDestination" name="destination" readonly class="destination-select fullwidth" value="" />
+                    <input type="text" id="orderDestination" name="destination" readonly="readonly" class="fullwidth" value="" />
                 </div>
             </div>
             <div class="form-group col-sm-8 col-sm-offset-2">
@@ -500,7 +518,7 @@
     var hotel = ${hotel};
     var meals = ${meals};
     var guide = ${guide};
-    var caseStatus = ${status};
+    var caseStatus = ${status};   
     
     var source = ${source};
     var tailormade = ${tailormade};
@@ -514,11 +532,10 @@
 	var level = ${level};
 	var agegroup = ${ageGroup}; 
 	var genderData = [{ id: 'male', text: '男' }, { id:'female' , text: '女' }];
-<<<<<<< HEAD
+
 	 
 	$("#requirement").val("${crmcase.requirement}");	
 	$("#birthday").val(getBirthday());
-=======
 	
 
 	$("#requirement").val("${crmcase.requirement}"); 
@@ -526,7 +543,6 @@
 
 	$("#requirement").val("${crmcase.requirement}");	
 	$("#birthday").val(getBirthday());
->>>>>>> 671d6bdd1da41214b5000c5eab26947fc66400f6
 	
 	function getBirthday(){
 		var date = $("#birthday").val();	
@@ -551,7 +567,8 @@
      $(".destination-select").select2({
         placeholder: '国家',
         data: country
-    }); 	
+    }); 
+    
     $(".language-select").select2({
     	placeholder: '选择一个沟通语言',
      	data: language
@@ -637,7 +654,7 @@
 	 	       render: function ( data, type, full, meta ) {
                		return '<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a>&nbsp;';
 	 	       },
-	 	       targets: 5
+	 	       targets: 6
 	 		},
 	 		{
                data: "status",
@@ -652,9 +669,9 @@
 			        }
               	    else{return ""}
               	},
-                targets: 4
+                targets: 5
 			},
-/*  		{
+    		{
               data: "destination",
               orderable: false,
               render: function ( data ) {
@@ -668,7 +685,7 @@
 	              else{return ""}
               },
                 targets: 4
-			},  */		  
+			},  		  
 	 	    {
 			    orderable: false,
 			    searchable: false,
@@ -680,8 +697,8 @@
              { data: "customerId" },
              { data: "agencyName" },
              { data: "salesName" },
-/*           { data: "destination" },
-             { data: "budget" }, */
+           	 { data: "destination" },
+ /*            { data: "budget" }, */
              { data: "status" }
        ]		 	
 	});
@@ -739,8 +756,7 @@
 	   //询单返回
   	  $("#btn-back").click( function () {
   		  history.go(-1);
-  	  }); 
-  	  
+  	  });  	  
 	   
       //询单无效
       $("#btn-invalid").click(function(){
@@ -761,35 +777,22 @@
 			}
 		});			
 	  }
-	  
-	   //添加订单
-/* 	   jQuery("#form-order").validate({  
-          rules: {
-            salesId:"required",
-          },
-          messages: {
-            salesId:"请选择一个销售",          
-          },        
-          highlight: function(element) {
-            jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
-          },
-          success: function(element) {
-            jQuery(element).closest('.form-group').removeClass('has-error');
-          },
-          invalidHandler : function(){
-            return false;
-          },
-          submitHandler : function(){
-            order_submit();
-            return false;
-          }
-      }); */
 	   
+	  //添加订单
       $("#btn-addorder").click(function(){
-      	  var destination = $("#destination").val();      	  
+      	  var destination = $("#destination").val();     	  
       	  if(destination==""){
-      	  	 alert("请先选择目的地，再添加订单");
+      	  	$("#msgDestination").modal('show');
       	  }else{
+      	  		alert("&&&&");
+      	  		console.log(country)
+      	  		console.log(country[3])
+      	  		alert(country.destination+"^^^^")
+      	  		for(var i=0;i<country.length;i++){
+      	  			if(country[i].id==destination) 
+      	  			realDest=country[i].text;
+      	  		}
+      	  		$("#orderDestination").val(realDest); 
 	      	  	$.ajax({
 	              type: "post",
 	              url: "${rootPath}case/getSales.do?destination="+destination,
@@ -802,7 +805,7 @@
 	                  });
 	              }   
 	          });  
-	          $("#orderDestination").val(destination);    
+	             
       	  	  $("#nextModal").modal('show');         	         	  
       	  }  
           return false;
@@ -820,7 +823,7 @@
 				window.parent.location = "${rootPath}case/edit.html?id=${crmcase.caseId}";
 			} else {
 				$("#NoEmail").modal('show');
-         			$("#nextModal").modal('hide');
+         		$("#nextModal").modal('hide');
 			}
 		}, "JSON");
       }

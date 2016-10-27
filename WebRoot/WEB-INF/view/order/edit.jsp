@@ -428,36 +428,36 @@
                 required: true,
                 date: true
               },
-		          startDate: {
+		        startDate: {
                 required: true,
                 date: true
               },
-		          endDate: {
+		        endDate: {
                 required: true,
                 date: true
               },
-		          groupNumber: {
+		        groupNumber: {
                 required: true,
                 number: true
               },
-		          groupPrice: {
+		        groupPrice: {
                 required: true,
                 number: true
               },
-              currency: {
+                currency: {
+                required: true,
+ //               number: true
+              },
+		        exchangeRate: {
                 required: true,
                 number: true
               },
-		          exchangeRate: {
-                required: true,
-                number: true
-              },
-		          rmbPrice: {
+		        rmbPrice: {
                 required: true,
                 number: true
               },
 		      },
-		      messages: {
+		        messages: {
 		        groupTime: {
                 required: "请输入成团日期",
                 date: "日期格式 mm/dd/yyyy"
@@ -466,7 +466,7 @@
                 required: "请输入出发日期",
                 date: "日期格式 mm/dd/yyyy"
               },
-		          endDate: {
+		        endDate: {
                 required: "请输入返回日期",
                 date: "日期格式 mm/dd/yyyy"
               },

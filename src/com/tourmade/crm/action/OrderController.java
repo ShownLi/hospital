@@ -186,7 +186,9 @@ public class OrderController extends BaseSimpleFormController {
 	@RequestMapping(value = "/orderDeal.do")
 	@ResponseBody
 	public Json orderDeal(HttpServletRequest request, HttpSession session, Model model, Order order) {
-		Json json = new Json();
+		
+		Json json = new Json();	
+		System.out.println(order.getOrderId());
 		Order oldOrder = service.getOrderById(order.getOrderId());
 		Case crmcase = caseService.getCaseById(oldOrder.getCaseId());
 		

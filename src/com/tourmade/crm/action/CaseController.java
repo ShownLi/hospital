@@ -330,13 +330,7 @@ public class CaseController extends BaseSimpleFormController {
 	public Json doEdit(HttpServletRequest request, HttpSession session, Model model, Case crmcase) {
 
 		Json json = new Json();		
-		try {
-/*			System.out.println(crmcase.getRequirement());
-			String replace = crmcase.getRequirement().replaceAll("\n", "<br/>");
-			System.out.println(replace);
-			crmcase.setRequirement(replace);
-			System.out.println("存数据："+crmcase.getRequirement());*/
-			
+		try {			
 			service.updateCase(crmcase);
 			json.setSuccess(true);
 		} catch (Exception e) {
