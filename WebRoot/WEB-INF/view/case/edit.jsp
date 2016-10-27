@@ -277,7 +277,7 @@
         <div class="panel-footer align-center">
             <button id="btn-addorder" class="btn btn-primary">添加订单</button>&nbsp;
             <button class="btn btn-primary">保存</button>&nbsp;
-            	<input  type="hidden" name="caseId" value="${crmcase.caseId}" />
+            <input  type="hidden" name="caseId" value="${crmcase.caseId}" />
             <button id="btn-invalid"  class="btn btn-danger" >无效</button>&nbsp;
             <button id="btn-back" class="btn btn-default">返回</button>
 		    </div><!-- panel-footer -->
@@ -475,7 +475,8 @@
              <div class="form-group col-sm-8 col-sm-offset-2">
                 <label class="col-sm-3 control-label">目的地</label>
                 <div class="col-sm-9">
-                    <input type="text" id="orderDestination" name="destination" readonly="readonly" class="fullwidth" value="" />
+                    <input type="text" id="orderDestinationText"  readonly="readonly" class="form-control" value="" />
+                    <input type="hidden" id="orderDestination" name="destination"  value="" />
                 </div>
             </div>
             <div class="form-group col-sm-8 col-sm-offset-2">
@@ -549,18 +550,17 @@
         data: level
     });
 	
+ 	
 	$("#gender").select2({
         data: genderData
     });  
-      $(".country-select").select2({
-        placeholder: '国家',
-        data: country
-    });  
-     $(".destination-select").select2({
+    
+    $(".destination-select").select2({
         placeholder: '国家',
         data: country
     }); 
-    
+	
+
     $(".language-select").select2({
     	placeholder: '选择一个沟通语言',
      	data: language
@@ -773,19 +773,13 @@
 	   
 	  //添加订单
       $("#btn-addorder").click(function(){
-      	  var destination = $("#destination").val();     	  
+      	  var destination = $("#destination").val();  
+      	  var destinationText = $("#destination").select2('data').text;
       	  if(destination==""){
       	  	$("#msgDestination").modal('show');
-      	  }else{
-      	  		alert("&&&&");
-      	  		console.log(country)
-      	  		console.log(country[3])
-      	  		alert(country.destination+"^^^^")
-      	  		for(var i=0;i<country.length;i++){
-      	  			if(country[i].id==destination) 
-      	  			realDest=country[i].text;
-      	  		}
-      	  		$("#orderDestination").val(realDest); 
+      	  }else{   	  		
+      	  		$("#orderDestinationText").val(destinationText); 
+      	  		$("#orderDestination").val(destination);
 	      	  	$.ajax({
 	              type: "post",
 	              url: "${rootPath}case/getSales.do?destination="+destination,
@@ -796,7 +790,7 @@
 	                      placeholder: '销售',
 	                      data: json
 	                  });
-	              }   
+	              }  
 	          });  
 	             
       	  	  $("#nextModal").modal('show');         	         	  
