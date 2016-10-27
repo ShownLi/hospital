@@ -129,6 +129,7 @@
       		$(".nav-parent").eq(2).find(".children").show();
 			
 			var t = jQuery('#dataTable').DataTable({
+				searching:false,
 				pageLength: 10,
 				processing: true,
 				language: datatable_local_language, // my.js
