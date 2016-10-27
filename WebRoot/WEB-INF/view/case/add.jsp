@@ -478,7 +478,9 @@
 				var caseId = result.obj.caseId;
 				$("#caseId").val(caseId);
 				var rmsg = result.msg;
-				if (result.success) {
+				
+				//保存完询单弹出modal直接保存订单
+				/* if (result.success) {
 					//window.parent.location = "${rootPath}case/list.html";
 					var destination = $("#destination").val();
 			        $.ajax({
@@ -494,6 +496,14 @@
 			              }   
 			         });
 					$("#nextModal").modal('show');
+					
+			} else {
+				$("#msgModal").modal('show');
+				$("#nextModal").modal('hide'); */
+				
+				if (result.success) {
+					window.parent.location = "${rootPath}case/edit.html?id="+caseId;
+					
 					
 				} else {
 					$("#msgModal").modal('show');

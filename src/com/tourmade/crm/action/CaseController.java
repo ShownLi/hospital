@@ -231,7 +231,7 @@ public class CaseController extends BaseSimpleFormController {
 			int caseId = Integer.parseInt(id);
 			Case crmcase = service.getCaseById(caseId);
 			//解决客人的要求换行符问题
-			if(crmcase.getRequirement()!=null||crmcase.getRequirement().length()>0){			
+			if(crmcase.getRequirement()!=null){			
 				String[] splits= crmcase.getRequirement().split("\r\n");
 				String realRequire="";
 				for(String split:splits){

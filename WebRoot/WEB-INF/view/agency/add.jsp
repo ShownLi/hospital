@@ -168,13 +168,21 @@
 			$.post('${rootPath}agency/add.do',f, function(result) {
 				var agencyId = result.obj.agencyId;
 				var rmsg = result.msg;
-				if (result.success) {
+				
+				//弹出Modal询问直接添加销售还是跳到list页面
+				/* if (result.success) {
 					//window.parent.location = "${rootPath}agency/list.html";
 					$("#nextModal").modal('show');
 
 					// 添加销售的url需要该地接社的id
 			      	var href = $("#addsale").attr("href");
 			      	$("#addsale").attr("href",href+agencyId);
+				} else {
+					$("#msgModal").modal('show');
+				} */
+				
+				if (result.success) {
+					window.parent.location = "${rootPath}sale/add.html?agencyId="+agencyId;
 				} else {
 					$("#msgModal").modal('show');
 				}
