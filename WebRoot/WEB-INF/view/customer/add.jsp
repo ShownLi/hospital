@@ -295,11 +295,20 @@
 			$.post('${rootPath}customer/add.do', f, function(result) {
 				var customerId = result.obj.customerId;
 				var rmsg = result.msg;
-				if (result.success) {
+				
+				//弹出modal询问直接添加询单还是跳转到list页面
+				/* if (result.success) {
 					$("#nextModal").modal('show');
 					//添加询单的url需要该客人的id
 			      	var href = $("#addCase").attr("href");
 			      	$("#addCase").attr("href",href+customerId);
+				} else {
+					$("#msgModal").modal('show');
+				} */
+				
+				if (result.success) {
+					window.parent.location = "${rootPath}customer/list.html";
+			      	
 				} else {
 					$("#msgModal").modal('show');
 				}

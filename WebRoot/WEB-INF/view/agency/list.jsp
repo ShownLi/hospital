@@ -33,6 +33,7 @@
 									</div>
 									<div class="col-sm-2">
 										<input type="text" id="searchCountry" class="country-select fullwidth" value="" />
+										<input class="btn tn-primary" type="button" id="serarchCountryClear"/> 
 									</div>
 								</div>	
 								<div class="col-sm-2">					 		                        		
@@ -108,6 +109,7 @@
     	$(".nav-parent").eq(3).find(".children").show();
 
 		var agencyTable = jQuery('#dataTable').DataTable({
+			searching:false,
 			pageLength: 10,
 			processing: true,
 			language: datatable_local_language, // my.js
@@ -207,6 +209,9 @@
 		        doDel(id);
 		    } ); 
 		    
+			$('#serarchCountryClear').on('click',function(){
+				$("#searchCountry").val(null).trigger("change");
+			})
 			// Select2
 		    jQuery('select').select2({
 		        minimumResultsForSearch: -1

@@ -532,6 +532,7 @@
 	var level = ${level};
 	var agegroup = ${ageGroup}; 
 	var genderData = [{ id: 'male', text: '男' }, { id:'female' , text: '女' }];
+<<<<<<< HEAD
 
 	 
 	$("#requirement").val("${crmcase.requirement}");	
@@ -544,6 +545,12 @@
 	$("#requirement").val("${crmcase.requirement}");	
 	$("#birthday").val(getBirthday());
 	
+=======
+
+	$("#requirement").val("${crmcase.requirement}");	
+	$("#birthday").val(getBirthday());
+
+>>>>>>> fba4e012f0e0a680fd539e1ba0035c85e0d8b324
 	function getBirthday(){
 		var date = $("#birthday").val();	
 		var dateformat = null;
