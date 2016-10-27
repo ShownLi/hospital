@@ -185,7 +185,7 @@
 			$.post('${rootPath}parameter/add.do', f, function(result) {
 				var rmsg = result.msg;
 				if (result.success) {
-					window.parent.location = "${rootPath}parameter/list.html";
+					window.parent.location = "${rootPath}parameter/add.html";
 				} else {
 					$("#msgModal").modal('show');
 				}
