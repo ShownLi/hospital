@@ -532,25 +532,10 @@
 	var level = ${level};
 	var agegroup = ${ageGroup}; 
 	var genderData = [{ id: 'male', text: '男' }, { id:'female' , text: '女' }];
-<<<<<<< HEAD
-
-	 
-	$("#requirement").val("${crmcase.requirement}");	
-	$("#birthday").val(getBirthday());
-	
-
-	$("#requirement").val("${crmcase.requirement}"); 
-	$("#birthday").val(getBirthday());
-
-	$("#requirement").val("${crmcase.requirement}");	
-	$("#birthday").val(getBirthday());
-	
-=======
 
 	$("#requirement").val("${crmcase.requirement}");	
 	$("#birthday").val(getBirthday());
 
->>>>>>> fba4e012f0e0a680fd539e1ba0035c85e0d8b324
 	function getBirthday(){
 		var date = $("#birthday").val();	
 		var dateformat = null;
@@ -640,6 +625,7 @@
 	
 	//订单回显数据
   	var orderTable = jQuery('#dataTable-order').DataTable({
+  		searching:false,
 	 	pageLength: 10,
 	 	processing: true,
 	 	language: datatable_local_language, // my.js
@@ -846,6 +832,7 @@
   		
 		//沟通记录   回显
   		var recordTable = jQuery('#dataTable-record').DataTable({
+  				searching:false,
     			pageLength: 10,
     			processing: true,
     			language: datatable_local_language, // my.js
@@ -880,6 +867,7 @@
 		
 	   //注释 ~ 回显，效验，添加
    		var commentTable= jQuery('#dataTable-comment').DataTable({
+   			searching:false,
 			pageLength: 10,
 			processing: true,
 			language: datatable_local_language, // my.js

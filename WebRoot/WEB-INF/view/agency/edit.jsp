@@ -218,6 +218,7 @@
 		}
 		
 	var t = jQuery('#dataTable').DataTable({
+		searching:false,
 		pageLength: 10,
 		processing: true,
 		language: datatable_local_language, // my.js

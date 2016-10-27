@@ -299,6 +299,7 @@
       	$(".nav-parent").eq(2).find(".children").show();
       	
 			var caseTable= jQuery('#dataTable-case').DataTable({
+				searching:false,
 				pageLength: 10,
 				processing: true,
 				language: datatable_local_language, // my.js
@@ -543,6 +544,7 @@
 		}
 		
 		var commentTable = jQuery('#dataTable-comment').DataTable({
+			searching:false,
 			pageLength: 10,
 			processing: true,
 			language: datatable_local_language, // my.js
