@@ -85,6 +85,57 @@ public class Case extends BaseBean<Case> {
 	private Date creatTime;
 	
 	private Date updateTime;
+	
+	private String chineseName;
+	
+	private String mobile;
+	
+	private String email;
+	
+	private String wechat;
+
+	private String qq;
+	
+	
+	public String getQq() {
+		return qq;
+	}
+
+	public void setQq(String qq) {
+		this.qq = qq;
+	}
+
+	public String getChineseName() {
+		return chineseName;
+	}
+
+	public void setChineseName(String chineseName) {
+		this.chineseName = chineseName;
+	}
+
+	public String getMobile() {
+		return mobile;
+	}
+
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getWechat() {
+		return wechat;
+	}
+
+	public void setWechat(String wechat) {
+		this.wechat = wechat;
+	}
 
 	public Integer getCaseId() {
 		return caseId;

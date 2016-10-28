@@ -277,7 +277,7 @@
         <div class="panel-footer align-center">
             <button id="btn-addorder" class="btn btn-primary">添加订单</button>&nbsp;
             <button class="btn btn-primary">保存</button>&nbsp;
-            	<input  type="hidden" name="caseId" value="${crmcase.caseId}" />
+            <input  type="hidden" name="caseId" value="${crmcase.caseId}" />
             <button id="btn-invalid"  class="btn btn-danger" >无效</button>&nbsp;
             <button id="btn-back" class="btn btn-default">返回</button>
 		    </div><!-- panel-footer -->
@@ -475,8 +475,13 @@
              <div class="form-group col-sm-8 col-sm-offset-2">
                 <label class="col-sm-3 control-label">目的地</label>
                 <div class="col-sm-9">
+<<<<<<< HEAD
                     <input type="text" id="orderDestination" readonly="readonly" class="fullwidth" value="" />
                		<input type="text" id="englishDestination" name="destination" style="display:none" />
+=======
+                    <input type="text" id="orderDestinationText"  readonly="readonly" class="form-control" value="" />
+                    <input type="hidden" id="orderDestination" name="destination"  value="" />
+>>>>>>> 1cbc8d1962aece95dfa9c6f82ac928de16ab51bb
                 </div>
             </div>
             <div class="form-group col-sm-8 col-sm-offset-2">
@@ -534,7 +539,10 @@
 	var agegroup = ${ageGroup}; 
 	var genderData = [{ id: 'male', text: '男' }, { id:'female' , text: '女' }];
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 1cbc8d1962aece95dfa9c6f82ac928de16ab51bb
 	$("#requirement").val("${crmcase.requirement}");	
 	$("#birthday").val(getBirthday());
 
@@ -551,18 +559,17 @@
         data: level
     });
 	
+ 	
 	$("#gender").select2({
         data: genderData
     });  
-      $(".country-select").select2({
-        placeholder: '国家',
-        data: country
-    });  
-     $(".destination-select").select2({
+    
+    $(".destination-select").select2({
         placeholder: '国家',
         data: country
     }); 
-    
+	
+
     $(".language-select").select2({
     	placeholder: '选择一个沟通语言',
      	data: language
@@ -627,6 +634,7 @@
 	
 	//订单回显数据
   	var orderTable = jQuery('#dataTable-order').DataTable({
+  		searching:false,
 	 	pageLength: 10,
 	 	processing: true,
 	 	language: datatable_local_language, // my.js
@@ -775,6 +783,7 @@
 	   
 	  //添加订单
       $("#btn-addorder").click(function(){
+<<<<<<< HEAD
       	  var destination = $("#destination").val(); 
       	  $("#englishDestination").val(destination);    	  
       	  if(destination==""){
@@ -785,6 +794,15 @@
       	  			realDest=country[i].text;
       	  		}
       	  		$("#orderDestination").val(realDest); 
+=======
+      	  var destination = $("#destination").val();  
+      	  if(destination==""){
+      	  	$("#msgDestination").modal('show');
+      	  }else{ 
+      		var destinationText = $("#destination").select2('data').text;
+      	  		$("#orderDestinationText").val(destinationText); 
+      	  		$("#orderDestination").val(destination);
+>>>>>>> 1cbc8d1962aece95dfa9c6f82ac928de16ab51bb
 	      	  	$.ajax({
 	              type: "post",
 	              url: "${rootPath}case/getSales.do?destination="+destination,
@@ -795,7 +813,7 @@
 	                      placeholder: '销售',
 	                      data: json
 	                  });
-	              }   
+	              }  
 	          });  
 	             
       	  	  $("#nextModal").modal('show');         	         	  
@@ -831,6 +849,7 @@
   		
 		//沟通记录   回显
   		var recordTable = jQuery('#dataTable-record').DataTable({
+  				searching:false,
     			pageLength: 10,
     			processing: true,
     			language: datatable_local_language, // my.js
@@ -865,6 +884,7 @@
 		
 	   //注释 ~ 回显，效验，添加
    		var commentTable= jQuery('#dataTable-comment').DataTable({
+   			searching:false,
 			pageLength: 10,
 			processing: true,
 			language: datatable_local_language, // my.js

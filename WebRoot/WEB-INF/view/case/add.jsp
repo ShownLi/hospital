@@ -202,6 +202,11 @@
                           <input type="text" name="flight" placeholder="国际航班" class="flight-select fullwidth" />
                         </div>
                     </div>
+                    <input type="hidden" name="chineseName" value="${customerInfo.chineseName}"/>
+                    <input type="hidden" name="mobile" value="${customerInfo.mobilephone}"/>
+                    <input type="hidden" name="email" value="${customerInfo.email}"/>
+                    <input type="hidden" name="wechat" value="${customerInfo.wechat}"/>
+                    <input type="hidden" name="qq" value="${customerInfo.qq}"/>
                 </div>
             </div><!-- panel-body -->
             
