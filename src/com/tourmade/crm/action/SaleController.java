@@ -90,7 +90,7 @@ public class SaleController extends BaseSimpleFormController {
 	@RequestMapping(value = "/edit.do")
 	@ResponseBody
 	public Json doEdit(HttpServletRequest request, HttpSession session, Model model, Sale sale) {
-
+		
 		Json json = new Json();
 		
 		try {

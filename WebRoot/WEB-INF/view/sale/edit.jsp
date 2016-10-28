@@ -31,12 +31,11 @@
         <form class="form-horizontal form-bordered" id="form">
         <div class="panel-body panel-body-nopadding">
           
-          
-            
             <div class="form-group">
               <label class="col-sm-4 control-label">销售名称 <span class="asterisk">*</span></label>
               <div class="col-sm-4">
                 <input type="text" name="salesName" placeholder="销售名" class="form-control" value="${sales.salesName }" />
+                <input type="text" name="salesId" placeholder="销售名" class="form-control" value="${sales.salesId}" style="display:none" />
               </div>
             </div>
             <div class="form-group">
@@ -66,11 +65,6 @@
 		</div><!-- panel-footer -->
      </form>   
       </div><!-- panel -->
-
-
-
-
-
 			</div>
 
 		</div>

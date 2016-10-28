@@ -52,4 +52,7 @@ public interface OrderMapper extends BaseMapper {
 	public List<EntityList> getParameterInfo(String domain);
 
 	public Customer getCustomerByCaseId(int caseId);
+	
+	//根据saleId获得agency的sendmail值，决定是否发邮件
+	public int selectAgencyBySaleId(int saleId);
 }

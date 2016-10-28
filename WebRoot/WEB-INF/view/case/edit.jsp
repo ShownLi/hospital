@@ -475,7 +475,8 @@
              <div class="form-group col-sm-8 col-sm-offset-2">
                 <label class="col-sm-3 control-label">目的地</label>
                 <div class="col-sm-9">
-                    <input type="text" id="orderDestination" name="destination" readonly="readonly" class="fullwidth" value="" />
+                    <input type="text" id="orderDestination" readonly="readonly" class="fullwidth" value="" />
+               		<input type="text" id="englishDestination" name="destination" style="display:none" />
                 </div>
             </div>
             <div class="form-group col-sm-8 col-sm-offset-2">
@@ -532,25 +533,11 @@
 	var level = ${level};
 	var agegroup = ${ageGroup}; 
 	var genderData = [{ id: 'male', text: '男' }, { id:'female' , text: '女' }];
-<<<<<<< HEAD
 
-	 
-	$("#requirement").val("${crmcase.requirement}");	
-	$("#birthday").val(getBirthday());
-	
-
-	$("#requirement").val("${crmcase.requirement}"); 
-	$("#birthday").val(getBirthday());
-
-	$("#requirement").val("${crmcase.requirement}");	
-	$("#birthday").val(getBirthday());
-	
-=======
 
 	$("#requirement").val("${crmcase.requirement}");	
 	$("#birthday").val(getBirthday());
 
->>>>>>> fba4e012f0e0a680fd539e1ba0035c85e0d8b324
 	function getBirthday(){
 		var date = $("#birthday").val();	
 		var dateformat = null;
@@ -688,6 +675,7 @@
 	               			return country[i].text
 	               		}
 	               	 }
+	               	 return ""
 	              }
 	              else{return ""}
               },
@@ -787,14 +775,11 @@
 	   
 	  //添加订单
       $("#btn-addorder").click(function(){
-      	  var destination = $("#destination").val();     	  
+      	  var destination = $("#destination").val(); 
+      	  $("#englishDestination").val(destination);    	  
       	  if(destination==""){
       	  	$("#msgDestination").modal('show');
       	  }else{
-      	  		alert("&&&&");
-      	  		console.log(country)
-      	  		console.log(country[3])
-      	  		alert(country.destination+"^^^^")
       	  		for(var i=0;i<country.length;i++){
       	  			if(country[i].id==destination) 
       	  			realDest=country[i].text;

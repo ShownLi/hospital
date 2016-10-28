@@ -71,8 +71,7 @@ public class AgencyController extends BaseSimpleFormController {
 	@ResponseBody
 	public Json doAdd(HttpServletRequest request, HttpSession session, Model model, Agency agency) {
 		
-		Json json = new Json();
-		
+		Json json = new Json();		
 		try {
 			service.saveAgency(agency);
 			json.setObj(agency);
