@@ -11,11 +11,20 @@
 			u.source as source,
 			u.destination as destination,
 			u.status as status,
-			u.operator as operator
+			u.operator as operator,
+			u.customer_name as chineseName,
+			u.customer_mobile as mobile,
+			u.customer_email as email,
+			u.customer_wechat as wechat,
+			u.customer_qq as qq,
+			u.creat_time as creatTime
 		from tm_case u  
 		where u.isdel = 0 
 		<if test="customerId != null and customerId != ''">
 			and customer_id = #{customerId}
+		</if> 
+		<if test="chineseName != null and chineseName != ''">
+			and customer_name like '%${chineseName}%'
 		</if> 
 		<if test="caseId != null and caseId != ''">
 			and case_id = #{caseId}
@@ -60,6 +69,9 @@
 		u.isdel = 0
 		<if test="customerId != null and customerId != ''">
 			and customer_id = #{customerId}
+		</if> 
+		<if test="chineseName != null and chineseName != ''">
+			and customer_name like '%${chineseName}%'
 		</if> 
 		<if test="caseId != null and caseId != ''">
 			and case_id = #{caseId}
@@ -121,9 +133,15 @@
 			visa,
 			flight,
 			ip_address,
+			customer_name,
+			customer_mobile,
+			customer_email,
+			customer_wechat,
+			customer_qq,
 			creat_time,
 			update_time,
 			isdel
+
 		)values(
 			#{customerId,jdbcType=VARCHAR},
 			#{operator,jdbcType=VARCHAR},
@@ -157,6 +175,11 @@
 			#{visa,jdbcType=VARCHAR},
 			#{flight,jdbcType=VARCHAR},
 			#{ipAddress,jdbcType=VARCHAR},
+			#{chineseName,jdbcType=VARCHAR},
+			#{mobile,jdbcType=VARCHAR},
+			#{email,jdbcType=VARCHAR},
+			#{wechat,jdbcType=VARCHAR},
+			#{qq,jdbcType=VARCHAR},
 			NOW(),
 			NOW(),
 			0
@@ -313,7 +336,12 @@
 
 	<select id="getCustomerInfoById" parameterType="int" resultType="Customer">
 		select 
+		u.customer_name_zh as chineseName,
 		u.customer_name_en as englishName,
+		u.mobilephone as mobilephone,
+		u.email as email,
+		u.wechat as wechat,
+		u.qq as qq,
 		u.gender as gender,
 		u.birthday as birthday,
 		u.age_group as ageGroup,

@@ -774,10 +774,10 @@
 	  //添加订单
       $("#btn-addorder").click(function(){
       	  var destination = $("#destination").val();  
-      	  var destinationText = $("#destination").select2('data').text;
       	  if(destination==""){
       	  	$("#msgDestination").modal('show');
-      	  }else{   	  		
+      	  }else{ 
+      		var destinationText = $("#destination").select2('data').text;
       	  		$("#orderDestinationText").val(destinationText); 
       	  		$("#orderDestination").val(destination);
 	      	  	$.ajax({
