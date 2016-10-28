@@ -376,4 +376,13 @@
 		where
 		order_id = #{orderId}
 	</update>
+	
+	<select id="selectAgencyBySaleId" parameterType="int" flushCache="true" resultType="int">
+		select
+		a.is_sendmail as isSendmail 
+		from tm_sales s 
+		left join tm_agency a on a.agency_id=s.agency_id
+		where
+		a.isdel = 0 and s.isdel = 0 and s.sales_id=#{salesId}
+	</select>
 </mapper>

@@ -28,6 +28,8 @@ public class Agency extends BaseBean<Agency> {
 	private Date creatTime;
 	
 	private Date updateTime;
+	
+	private Integer isSendmail;
 
 	public Integer getAgencyId() {
 		return agencyId;
@@ -77,6 +79,14 @@ public class Agency extends BaseBean<Agency> {
 		this.updateTime = updateTime;
 	}
 
+	public Integer getIsSendmail() {
+		return isSendmail;
+	}
+
+	public void setIsSendmail(Integer isSendmail) {
+		this.isSendmail = isSendmail;
+	}
+
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
@@ -85,7 +95,10 @@ public class Agency extends BaseBean<Agency> {
 	public String toString() {
 		return "Agency [agencyId=" + agencyId + ", name=" + name + ", country="
 				+ country + ", language=" + language + ", creatTime="
-				+ creatTime + ", updateTime=" + updateTime + "]";
+				+ creatTime + ", updateTime=" + updateTime + ", isSendmail="
+				+ isSendmail + "]";
 	}
+
+
 
 }

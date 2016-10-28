@@ -52,6 +52,13 @@
 	                <input type="text" name="country" class="country-select fullwidth"/>
 	              </div>
 	            </div>
+ 	            <div class="form-group col-sm-4">
+	              <label  class="col-sm-4 control-label">是否发邮件</label>
+	              <div class="col-sm-8">
+	                   <input type="radio" name="isSendmail" value="1" />是
+      				   <input type="radio" name="isSendmail" value="0" checked/>否
+	              </div>
+	            </div> 	 	                   
 	        </div>
         </div><!-- panel-body -->
         <div class="panel-footer align-center">

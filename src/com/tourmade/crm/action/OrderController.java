@@ -106,13 +106,13 @@ public class OrderController extends BaseSimpleFormController {
 	@RequestMapping(value = "/add.do")
 	@ResponseBody
 	public Json doAdd(HttpServletRequest request, HttpSession session, Model model, Order order) {
-
+		
+		System.out.println("&&&&"+order);
 		Json json = new Json();
 		
 		if(order.getCaseId()!=0){
 		   Customer customer = service.getCustomerByCaseId(order.getCaseId());
-		   order.setCustomerId(customer.getCustomerId());
-		   
+		   order.setCustomerId(customer.getCustomerId());		   
 		}
 		
 		try {
@@ -130,21 +130,28 @@ public class OrderController extends BaseSimpleFormController {
 				caseService.case2order(order.getCaseId());
 				//补充order信息并存储该order
 				order = service.saveOrder(order);
-
-				//邮件别名操作（创建邮件别名并将其写入order表）
-				service.MailAlias(order);	
 				
-				//生成给地接社的第一封邮件
-				//DemoCustomer customer = service.getCustomerById(order.getCustomerid());
-				Case crmcase = service.getCaseById(order.getCaseId());
-				order = service.getOrderById(order.getOrderId());
-				String result = emailService.creatTemplate(crmcase, order);
-							
-				//生成待发送邮件
-				order = service.getOrderById(order.getOrderId());
-				emailService.saveEmail(order,result);
-				
-				json.setSuccess(true);
+				//判断是否要发送邮件
+				int isSendmail = service.selectAgencyBySaleId(order.getSalesId());
+				if(isSendmail==0){
+					json.setSuccess(true);
+					return json;
+				}else{
+					//邮件别名操作（创建邮件别名并将其写入order表）
+					service.MailAlias(order);	
+					
+					//生成给地接社的第一封邮件
+					//DemoCustomer customer = service.getCustomerById(order.getCustomerid());
+					Case crmcase = service.getCaseById(order.getCaseId());
+					order = service.getOrderById(order.getOrderId());
+					String result = emailService.creatTemplate(crmcase, order);
+								
+					//生成待发送邮件
+					order = service.getOrderById(order.getOrderId());
+					emailService.saveEmail(order,result);
+					
+					json.setSuccess(true);
+				}
 			}
 			else{
 				json.setSuccess(false);
