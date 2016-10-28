@@ -30,8 +30,11 @@
 						<h3 class="panel-title">询单列表</h3>
 						<div class="row" style="margin-top: 20px">
 							<div class="form-group col-sm-10">
-								<div class="col-sm-2">
+								<!-- <div class="col-sm-2">
 									<input type="text" id="searchCustomerId" class="customer-select fullwidth" value="" />
+								</div> -->
+								<div class="col-sm-2">
+									<input type="text" id="searchCustomerName" class="form-control" placeholder="客人" value="" />
 								</div>
 								<div class="col-sm-2">
 									<input type="text" id="searchCaseId" class="form-control" placeholder="询单id"  value="" />
@@ -64,11 +67,14 @@
 									<tr>
 										<th>ID</th>
 										<th>客人</th>
+										<th>手机</th>
+										<th>邮箱</th>
 										<th>预算</th>
 										<th>目的地</th>
 										<th>询单来源</th>
 										<th>跟单员</th>
 										<th>状态</th>
+										<th>创建时间</th>
 										<th>编辑</th>
 									</tr>
 								</thead>
@@ -218,6 +224,7 @@
 					url: '${rootPath}case/list.do',
 					data: function( data){
 			 			var searchCustomerId=$('#searchCustomerId').val();
+			 			var searchCustomerName=$('#searchCustomerName').val();
 			 			var searchCaseId=$('#searchCaseId').val();
 			 			var searchBudget=$('#searchBudget').val();
 			 			var searchDestination=$('#searchDestination').val();
@@ -227,6 +234,9 @@
 			 			
 			 			if(searchCustomerId !=null && searchCustomerId !="" ){
 							data.customerId = searchCustomerId;
+			 			}
+			 			if(searchCustomerName !=null && searchCustomerName !="" ){
+							data.chineseName = searchCustomerName;
 			 			}
 			 			if(searchCaseId !=null && searchCaseId !="" ){
 							data.caseId = searchCaseId;
@@ -263,24 +273,9 @@
 		                  render: function ( data, type, full, meta ) {
 		                      return '<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a>&nbsp;<a class="btn btn-danger btn-xs" id="'+data+'"><span class="fa fa-minus-circle"></span> 无效</a>&nbsp<a class="btn btn-primary btn-xs" id="'+data+'"></span> 增加订单</a>&nbsp';
 		                  },
-		                  targets: 7
+		                  targets: 10
 					  },
-					  {		
-			                data: "customerId",
-			                orderable: false,
-			                render: function ( data ) {
-			                	if(data){
-			                		for(var i=0;i <customer.length;i++){
-				                		if(data==customer[i].id){
-				                			return customer[i].text
-				                		}
-				                	}
-			                		return "";
-			                	}
-			                	else{return ""}
-			                },
-			                  targets: 1
-					  },
+					  
  					  {
 			                data: "destination",
 			                orderable: false,
@@ -295,7 +290,7 @@
 			                	}
 			                	else{return ""}
 			                },
-			                  targets: 3
+			                  targets: 5
 						},	 
 					  {
 			                data: "source",
@@ -313,7 +308,7 @@
 			                	}
 			                	else{return ""}
 			                },
-			                  targets: 4
+			                  targets: 6
 						},
 						{
 							data: "operator",
@@ -329,7 +324,7 @@
 			                	}
 			                	else{return ""}
 			                },
-			                  targets: 5
+			                  targets: 7
 						},
 						{
 			                data: "status",
@@ -345,7 +340,18 @@
 			                	}
 			                	else{return ""}
 			                },
-			                  targets: 6
+			                  targets: 8
+						},
+						{
+			                data: "creatTime",
+			                orderable: false,
+			                render: function ( data ) {
+			                	if(data){
+			                		return new Date(data.time).format("yyyy-MM-dd hh:mm:ss");
+			                	}
+			                	else{return ""}
+			                },
+			                  targets: 9
 						},
 					  {
 						  orderable: false,
@@ -356,12 +362,15 @@
 					],
 					columns: [
 			            { data: "caseId" },
-			            { data: "customerId" },
+			            { data:"chineseName"},
+			            { data:"mobile"},
+			            { data:"email"},
 			            { data: "budget" },
 			            { data: "destination" },
 			            { data: "source" },
 			            { data: "operator" },
-			            { data: "status" }
+			            { data: "status" },
+			            { data: "creatTime"}
 			        ]
 				});
 				

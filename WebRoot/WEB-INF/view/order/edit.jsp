@@ -550,6 +550,7 @@
 	});
 	
 	var t = jQuery('#dataTable-note').DataTable({
+		searching:false,
 		pageLength: 10,
 		processing: true,
 		language: datatable_local_language, // my.js
@@ -584,6 +585,7 @@
 		});
 	    
 	var r = jQuery('#dataTable-record').DataTable({
+		searching:false,
 		pageLength: 10,
 		processing: true,
 		language: datatable_local_language, // my.js

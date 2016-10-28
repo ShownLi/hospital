@@ -144,7 +144,9 @@ public class CaseController extends BaseSimpleFormController {
 	 */
 	@RequestMapping(value = "/addCase.html", method = { RequestMethod.POST, RequestMethod.GET })
 	public String addfromcustomer(Model model, int customerId) {
-
+		
+		Customer cus=service.getCustomerInfoById(customerId);
+		
 		String country = "country";
 		String language = "case.preferlanguage";
 		String withwho = "case.withwho";
@@ -203,6 +205,7 @@ public class CaseController extends BaseSimpleFormController {
 		model.addAttribute("flight",flightResult);
 		model.addAttribute("customerId",customerId);
 		model.addAttribute("user",userResult);
+		model.addAttribute("customerInfo", cus);
 		
 		return "/case/add";
 	}

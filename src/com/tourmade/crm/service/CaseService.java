@@ -42,8 +42,11 @@ public class CaseService extends BaseService {
 		map.put("start", ph.getStart());
 		map.put("length", ph.getLength());;
 		
-		if(crmcase!=null){
+		if(crmcase.getCustomerId()!=null){
 			map.put("customerId", crmcase.getCustomerId());
+		}
+		if(crmcase.getChineseName()!=null){
+			map.put("chineseName", crmcase.getChineseName());
 		}
 		if(crmcase.getCaseId()!=null){
 			map.put("caseId", crmcase.getCaseId());

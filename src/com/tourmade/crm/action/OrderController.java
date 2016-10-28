@@ -112,6 +112,7 @@ public class OrderController extends BaseSimpleFormController {
 		
 		if(order.getCaseId()!=0){
 		   Customer customer = service.getCustomerByCaseId(order.getCaseId());
+<<<<<<< HEAD
 		   System.out.println("&&&"+customer.getEmail());
 		   System.out.println("&&&"+customer.getEmail().equals(""));
 		   System.out.println("&&&"+customer.getEmail()=="");
@@ -119,6 +120,8 @@ public class OrderController extends BaseSimpleFormController {
 			   json.setSuccess(false);
 			   return  json;
 		   }
+=======
+>>>>>>> fc09c0e2c91d679b10e7804f201315e216e194a9
 		   order.setCustomerId(customer.getCustomerId());		   
 		}
 		
@@ -159,7 +162,11 @@ public class OrderController extends BaseSimpleFormController {
 					
 					json.setSuccess(true);
 				}
+<<<<<<< HEAD
 				/*			}
+=======
+			}
+>>>>>>> fc09c0e2c91d679b10e7804f201315e216e194a9
 			else{
 				json.setSuccess(false);
 			}*/
