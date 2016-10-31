@@ -544,14 +544,6 @@
 	var agegroup = ${ageGroup}; 
 	var genderData = [{ id: 'male', text: '男' }, { id:'female' , text: '女' }];
 
-<<<<<<< HEAD
-
-=======
-<<<<<<< HEAD
-
-=======
->>>>>>> 1cbc8d1962aece95dfa9c6f82ac928de16ab51bb
->>>>>>> fc09c0e2c91d679b10e7804f201315e216e194a9
 	$("#requirement").val("${crmcase.requirement}");	
 	$("#birthday").val(getBirthday());
 
@@ -792,29 +784,15 @@
 	   
 	  //添加订单
       $("#btn-addorder").click(function(){
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> fc09c0e2c91d679b10e7804f201315e216e194a9
       	  var destination = $("#destination").val(); 
-      	  $("#englishDestination").val(destination);    	  
+      	  $("#englishDestination").val(destination);
+      	      	  
       	  if(destination==""){
       	  	$("#msgDestination").modal('show');
-      	  }else{
-      	  		for(var i=0;i<country.length;i++){
-      	  			if(country[i].id==destination) 
-      	  			realDest=country[i].text;
-      	  		}
-      	  		$("#orderDestination").val(realDest); 
-=======
-      	  var destination = $("#destination").val();  
-      	  if(destination==""){
-      	  	$("#msgDestination").modal('show');
-      	  }else{ 
+ 		  }else{ 
       		var destinationText = $("#destination").select2('data').text;
       	  		$("#orderDestinationText").val(destinationText); 
       	  		$("#orderDestination").val(destination);
->>>>>>> 1cbc8d1962aece95dfa9c6f82ac928de16ab51bb
 	      	  	$.ajax({
 	              type: "post",
 	              url: "${rootPath}case/getSales.do?destination="+destination,

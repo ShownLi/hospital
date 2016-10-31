@@ -107,7 +107,6 @@ public class OrderController extends BaseSimpleFormController {
 	@ResponseBody
 	public Json doAdd(HttpServletRequest request, HttpSession session, Model model, Order order) {
 		
-		System.out.println("&&&&"+order);
 		Json json = new Json();
 		
 		if(order.getCaseId()!=0){
@@ -224,7 +223,7 @@ public class OrderController extends BaseSimpleFormController {
 	public Json orderNoDeal(HttpServletRequest request, HttpSession session, Model model, Order order) {
 
 		Json json = new Json();
-		
+		System.out.println(order.getOrderId()+"^^^");
 		Case crmcase = caseService.getCaseByOrderId(order.getOrderId());
 		try {
 			service.updateOrder(order);
