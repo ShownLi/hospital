@@ -41,7 +41,7 @@
 	            <div class="form-group col-sm-4">
 	              <label class="col-sm-3 control-label">英文名</label>
 	              <div class="col-sm-9">
-	                <input type="text" name="ename" placeholder="英文名" class="form-control" />
+	                <input type="text" name="englishName" placeholder="英文名" class="form-control" />
 	              </div>
 	            </div> 
 	            <div class="form-group col-sm-4">

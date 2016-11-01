@@ -72,6 +72,9 @@ public class CommentController extends BaseSimpleFormController {
 	public Json doAdd(HttpServletRequest request, HttpSession session, Model model, Comment comment) {
 		Json json = new Json();
 		try {
+			if(comment.getCommentType().equals("case")){
+				service.updateCaseComment(comment);
+			}
 			if(comment.getContent() != ""){
 				service.saveComment(comment);
 				json.setSuccess(true);

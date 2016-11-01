@@ -16,6 +16,8 @@ public interface CommentMapper extends BaseMapper {
 	public void saveComment(Comment comment);
 
 	public void updateComment(Comment comment);
+	
+	public void updateCaseComment(Comment comment);
 
 	public void deleteCommentById(int commentId);
 	

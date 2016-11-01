@@ -66,6 +66,9 @@ public class CaseService extends BaseService {
 		if(crmcase.getStatus()!=null){
 			map.put("status", crmcase.getStatus());
 		}
+		if(crmcase.getComment()!=null){
+			map.put("comment", crmcase.getComment());
+		}
 		
 		List<Case> data = caseMapper.queryCase(map);
 		long count = caseMapper.countCase(crmcase);

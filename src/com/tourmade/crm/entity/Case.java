@@ -88,6 +88,8 @@ public class Case extends BaseBean<Case> {
 	
 	private String chineseName;
 	
+	private String englishName;
+	
 	private String mobile;
 	
 	private String email;
@@ -96,7 +98,45 @@ public class Case extends BaseBean<Case> {
 
 	private String qq;
 	
+	private String reason;
 	
+	private Integer portalId;
+	
+	private String comment;
+	
+	
+	public String getComment() {
+		return comment;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
+
+	public String getEnglishName() {
+		return englishName;
+	}
+
+	public void setEnglishName(String englishName) {
+		this.englishName = englishName;
+	}
+
+	public Integer getPortalId() {
+		return portalId;
+	}
+
+	public void setPortalId(Integer portalId) {
+		this.portalId = portalId;
+	}
+
+	public String getReason() {
+		return reason;
+	}
+
+	public void setReason(String reason) {
+		this.reason = reason;
+	}
+
 	public String getQq() {
 		return qq;
 	}
@@ -447,6 +487,9 @@ public class Case extends BaseBean<Case> {
 				+ submitType + ", ipAddress=" + ipAddress + ", source="
 				+ source + ", promoteCode=" + promoteCode + ", status="
 				+ status + ", startMonth=" + startMonth + ", creatTime="
-				+ creatTime + ", updateTime=" + updateTime + "]";
+				+ creatTime + ", updateTime=" + updateTime 
+				+", chineseName="+chineseName+", mobile="+mobile
+				+", email="+email+", wechat="+wechat+", qq="+qq
+				+", reason="+reason+"]";
 	}
 }

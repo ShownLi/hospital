@@ -52,6 +52,9 @@
 								<div class="col-sm-2">
 									<input type="text" id="searchStatus" class="status-select fullwidth" value="" />
 								</div>
+								<div class="col-sm-2">
+									<input type="text" id="searchComment" class="form-control" placeholder="注释" value="" />
+								</div>
 							</div>	
 							<div class="col-sm-2">					 		                        		
 								<input class="btn btn-primary" type="button" id="searchBtn" value="搜索"/>
@@ -75,6 +78,7 @@
 										<th>跟单员</th>
 										<th>状态</th>
 										<th>创建时间</th>
+										<th>注释</th>
 										<th>编辑</th>
 									</tr>
 								</thead>
@@ -231,6 +235,7 @@
 			 			var searchSource=$('#searchSource').val();
 			 			var searchOperator=$('#searchOperator').val();
 			 			var searchStatus=$('#searchStatus').val();
+			 			var searchComment=$('#searchComment').val();
 			 			
 			 			if(searchCustomerId !=null && searchCustomerId !="" ){
 							data.customerId = searchCustomerId;
@@ -256,6 +261,9 @@
 			 			if(searchStatus !=null && searchStatus !="" ){
 							data.status = searchStatus;
 			 			}
+			 			if(searchComment !=null && searchComment !=""){
+			 				data.comment = searchComment;
+			 			}
 					},
 					
 					dataFilter: function(data){
@@ -273,7 +281,7 @@
 		                  render: function ( data, type, full, meta ) {
 		                      return '<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a>&nbsp;<a class="btn btn-danger btn-xs" id="'+data+'"><span class="fa fa-minus-circle"></span> 无效</a>&nbsp<a class="btn btn-primary btn-xs" id="'+data+'"></span> 增加订单</a>&nbsp';
 		                  },
-		                  targets: 10
+		                  targets: 11
 					  },
 					  
  					  {
@@ -353,6 +361,18 @@
 			                },
 			                  targets: 9
 						},
+						{
+							data:"comment",
+							orderable: false,
+							render:function ( data ) {
+								if(data){
+									return data
+								}
+								else{return ""}
+							},
+							  targets: 10
+						
+						},
 					  {
 						  orderable: false,
 						  searchable: false,
@@ -370,10 +390,11 @@
 			            { data: "source" },
 			            { data: "operator" },
 			            { data: "status" },
-			            { data: "creatTime"}
+			            { data: "creatTime"},
+			            { data: "comment"}
 			        ]
 				});
-				
+
 			
 				$('#searchBtn').on( 'click', function () {
 			    	//alert($('#searchText').attr("value"));

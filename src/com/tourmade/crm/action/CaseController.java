@@ -259,6 +259,7 @@ public class CaseController extends BaseSimpleFormController {
 			String flight = "case.flight";
 			String level = "customer.level";
 			String ageGroup = "customer.agegroup";
+			String reason = "case.reason";
 			
 			
 			List<EntityList> countryList = service.getParameterInfo(country);
@@ -278,7 +279,8 @@ public class CaseController extends BaseSimpleFormController {
 			List<EntityList> sales = service.getSales();
 			List<EntityList> levelList= service.getParameterInfo(level);
 			List<EntityList> ageGroupList = service.getParameterInfo(ageGroup);
-
+			List<EntityList> reasonList = service.getParameterInfo(reason);
+			
 			
 			JSONArray countryResult = JSONArray.fromObject(countryList);
 			JSONArray languageResult = JSONArray.fromObject(languageList);
@@ -296,7 +298,8 @@ public class CaseController extends BaseSimpleFormController {
 			JSONArray userResult = JSONArray.fromObject(user);
 			JSONArray salesResult = JSONArray.fromObject(sales);
 			JSONArray levelResult = JSONArray.fromObject(levelList);
-			JSONArray  ageGroupResult = JSONArray.fromObject(ageGroupList);
+			JSONArray ageGroupResult = JSONArray.fromObject(ageGroupList);
+			JSONArray reasonResult = JSONArray.fromObject(reasonList);
 			
 			model.addAttribute("country",countryResult);
 			model.addAttribute("language",languageResult);
@@ -318,6 +321,7 @@ public class CaseController extends BaseSimpleFormController {
 			
 			model.addAttribute("level",levelResult);
 			model.addAttribute("ageGroup",ageGroupResult);
+			model.addAttribute("reason", reasonResult);
 			
 			String orderStatus = "order.status";
 			List<EntityList> orderStatusList = service.getParameterInfo(orderStatus);
@@ -355,17 +359,21 @@ public class CaseController extends BaseSimpleFormController {
 	
 	@RequestMapping(value = "/del.do")
 	@ResponseBody
-	public Json doDel(HttpServletRequest request, HttpSession session, Model model, String id) {
+	public Json doDel(HttpServletRequest request, HttpSession session, Model model, String id,Case crmcase) {
 
 		Json json = new Json();
 		try {
-			if (null != id && !"".equals(id)) {
+			/*if (null != id && !"".equals(id)) {
 				int caseId = Integer.parseInt(id);
 				service.deleteCaseById(caseId);
 				json.setSuccess(true);
 			} else {
 				json.setSuccess(false);
-			}
+			}*/
+
+			service.updateCase(crmcase);
+			service.deleteCaseById(crmcase.getCaseId());
+			json.setSuccess(true);
 		} catch (Exception e) {
 			json.setSuccess(false);
 			logger.error("CaseController.doDel() --> " + id + "\n" + e.getMessage());

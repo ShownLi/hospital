@@ -203,6 +203,8 @@
                         </div>
                     </div>
                     <input type="hidden" name="chineseName" value="${customerInfo.chineseName}"/>
+                    <input type="hidden" name="englishName" value="${customerInfo.englishName}"/>
+                    <input type="hidden" name="portalId" value="${customerInfo.portalId}"/>
                     <input type="hidden" name="mobile" value="${customerInfo.mobilephone}"/>
                     <input type="hidden" name="email" value="${customerInfo.email}"/>
                     <input type="hidden" name="wechat" value="${customerInfo.wechat}"/>

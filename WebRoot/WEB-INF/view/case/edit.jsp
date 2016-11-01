@@ -71,6 +71,7 @@
                 </div>
             </div>
             
+     
            <div class="section-block">
             	<div class="form-group col-sm-4">
             	<label class="col-sm-4 control-label">英文名</label>
@@ -271,6 +272,12 @@
                           <input type="text" name="flight" placeholder="国际航班" class="flight-select fullwidth" value="${crmcase.flight}" />
                         </div>
                     </div>
+                     <div class="form-group col-sm-4" id="div-delInfo" style="display:none">
+                        <label class="col-sm-4 control-label">无效原因</label>
+                        <div class="col-sm-8">
+                          <input type="text" name="reason" placeholder="无效原因" class="reason-select fullwidth"  value="${crmcase.reason}" />
+                        </div>
+                    </div>
                 </div>
         </div><!-- panel-body -->
         
@@ -284,6 +291,31 @@
      </form>   
       </div><!-- panel -->
       
+ <%--        <!-- panel 是否无效 -->
+      <div class="panel panel-default">
+          <div class="panel-heading">
+
+              <div class="panel-btns">
+                  <a href="" class="minimize">&minus;</a>
+              </div>
+              <h4 class="panel-title">无效原因</h4>
+          </div>
+          <div class="panel-body panel-body-nopadding">
+             
+              <form id="form-delInfo" class="form-horizontal" style="display:none">
+                  <div class="section-block">
+                      <div class="form-group col-sm-6">
+                        <label class="col-sm-4 control-label">无效原因是</label>
+                        <div class="col-sm-6">
+                          <input class="reason-select fullwidth" name="reason" value="${crmcase.reason}" placeholder="无效原因是" />
+                        </div>
+                    	<button id="btn-updateDel" class="btn btn-primary">更改</button>&nbsp;
+                      </div>
+                  </div><!-- panel-body -->
+                      <input type="hidden" name="caseId" value="${crmcase.caseId}" />
+              </form> 
+          </div>
+      </div> --%>
       
       <!-- Modal  -->
 <div class="modal fade" id="reconfirmDelModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -503,6 +535,35 @@
   </div><!-- modal-dialog -->
 </div><!-- modal -->
 	
+	
+<div class="confirmDelModal modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <div class="nextModal-title">请填写无效原因</div>
+      </div>
+      <form class="form-horizontal" id="form-del">
+          <div class="modal-body">     
+              <div class="section-block noline">
+                  <div class="form-group col-sm-12">
+                    <label class="col-sm-4 control-label">无效原因是</label>
+                    <div class="col-sm-8">
+                      <input class="reason-select fullwidth" name="reason" placeholder="无效原因是" />
+                      <input type="hidden" name="caseId" value="${crmcase.caseId}" />	
+                    </div>
+                  </div>
+              </div><!-- noDealModal-body -->
+          </div>
+          <div class="modal-footer align-center">
+            <button class="submit btn btn-primary">保存</button> 
+              <a class="cancel btn btn-primary" >取消</a>
+          </div>
+      </form>
+    </div><!-- modal-content -->
+  </div><!-- modal-dialog -->
+</div><!-- bmodal -->
+
 
 	<%@ include file="../assets/pages/foot.jsp"%>
 	<script src="${rootPath}assets/js/jquery-ui-1.10.3.min.js"></script>
@@ -533,7 +594,9 @@
 	var level = ${level};
 	var agegroup = ${ageGroup}; 
 	var genderData = [{ id: 'male', text: '男' }, { id:'female' , text: '女' }];
-
+	
+	var reason = ${reason};
+	
 	$("#requirement").val("${crmcase.requirement}");	
 	$("#birthday").val(getBirthday());
 
@@ -623,6 +686,39 @@
         data: sales
     });
 	
+    $(".reason-select").select2({
+    	placeholder:"无效原因",
+    	data:reason
+    });
+	if("${crmcase.reason}"!=null&&"${crmcase.reason}"!=""){
+   	  $("#div-delInfo").show();
+   	 };
+    
+   	 
+   	jQuery(document).ready(function() {
+   		jQuery("#form-del").validate({
+			rules:{
+				reason: "required"
+			},
+			messages:{
+				reason:"请输入无效原因"
+			},
+			highlight: function(element) {
+				jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+			},
+			success: function(element) {
+				jQuery(element).closest('.form-group').removeClass('has-error');
+			},
+			invalidHandler : function(){
+				return false;
+			},
+			submitHandler : function(){
+				delSubmit();
+			    return false;
+			}
+		});
+   	});
+   	
 	//订单回显数据
   	var orderTable = jQuery('#dataTable-order').DataTable({
   		searching:false,
@@ -753,23 +849,41 @@
 	   
       //询单无效
       $("#btn-invalid").click(function(){
-      	 $("#reconfirmDelModal").modal('show');
+      	 $(".confirmDelModal").modal('show');
 		 return false;
       });
       $("#confirm-invalid").click(function(){
       	doDel()
-      })
-      function doDel(){
-		$.ajax({
-			url: "${rootPath}case/del.do?id=${crmcase.caseId}", 
-			success: function() {
-				window.location.reload();
-			},
-			error: function() {
-				alert(2);
-			}
-		});			
-	  }
+      });
+      
+      //更改无效原因
+      $("#btn-updateDel").click(function(){
+    	 updateDel_submit(); 
+      });
+      
+      $(".confirmDelModal .cancel").click(function(){
+      	$(".confirmDelModal").modal("hide");
+  	  });
+      function updateDel_submit(){
+
+    	  var f1=$("#form-delInfo").serialize();
+     	  try{
+     		  $.post("${rootPath}case/del.do", f1, function(result) {
+				var rmsg = result.msg;
+				if (result.success) {
+					window.parent.location = "${rootPath}case/edit.html?id=${crmcase.caseId}";
+				} 
+				else {
+					$("#msgModal").modal('show');
+				}
+			}, "JSON");
+     		  }
+     	  catch(e) {
+     		  alert(e);
+     	  }
+     	 alert("页面正在加载，请稍后...");
+      }
+     
 	   
 	  //添加订单
       $("#btn-addorder").click(function(){
@@ -813,6 +927,25 @@
          		$("#nextModal").modal('hide');
 			}
 		}, "JSON");
+      }
+      
+      function delSubmit() {
+    	  var f1=$("#form-del").serialize();
+     	  try{
+     		  $.post("${rootPath}case/del.do", f1, function(result) {
+				var rmsg = result.msg;
+				if (result.success) {
+					window.parent.location = "${rootPath}case/edit.html?id=${crmcase.caseId}";
+				} 
+				else {
+					$("#msgModal").modal('show');
+				}
+			}, "JSON");
+     		  }
+     	  catch(e) {
+     		  alert(e);
+     	  }
+     	 alert("页面正在加载，请稍后...");
       }
       
       //进入订单编辑页面

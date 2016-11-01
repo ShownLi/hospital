@@ -17,7 +17,9 @@
 			u.customer_email as email,
 			u.customer_wechat as wechat,
 			u.customer_qq as qq,
-			u.creat_time as creatTime
+			u.creat_time as creatTime,
+			u.reason as reason,
+			u.last_comment as comment
 		from tm_case u  
 		where u.isdel = 0 
 		<if test="customerId != null and customerId != ''">
@@ -44,6 +46,9 @@
 		<if test="status != null and status != ''">
 			and status = #{status}
 		</if>
+		<if test="comment != null and comment != ''">
+			and last_comment  like '%${comment}%'
+		</if> 
 		order by u.creat_time desc
 		limit #{start},#{length}
 	</select>
@@ -91,6 +96,9 @@
 		<if test="status != null and status != ''">
 			and status = #{status}
 		</if>
+		<if test="comment != null and comment != ''">
+			and last_comment  like '%${comment}%'
+		</if> 
 	</select>
 	
 	<select id="countCaseFC" parameterType="Case" resultType="long">
@@ -134,6 +142,8 @@
 			flight,
 			ip_address,
 			customer_name,
+			customer_name_en,
+			customer_portal_id,
 			customer_mobile,
 			customer_email,
 			customer_wechat,
@@ -176,6 +186,8 @@
 			#{flight,jdbcType=VARCHAR},
 			#{ipAddress,jdbcType=VARCHAR},
 			#{chineseName,jdbcType=VARCHAR},
+			#{englishName,jdbcType=VARCHAR},
+			#{portalId,jdbcType=VARCHAR},
 			#{mobile,jdbcType=VARCHAR},
 			#{email,jdbcType=VARCHAR},
 			#{wechat,jdbcType=VARCHAR},
@@ -218,6 +230,7 @@
 		passport=#{passport},
 		visa=#{visa},
 		flight=#{flight},
+		reason=#{reason},
 		update_time=NOW()
 		where
 		case_id=#{caseId}
@@ -257,6 +270,7 @@
 		u.flight as flight,
 		u.ip_address as ipAddress,
 		u.creat_time as creatTime,
+		u.reason as reason,
 		u.isdel
 		from tm_case u where u.isdel = 0 and u.case_id = #{caseId}
 	</select>
@@ -342,6 +356,7 @@
 		u.email as email,
 		u.wechat as wechat,
 		u.qq as qq,
+		u.customer_portal_id as portalId,
 		u.gender as gender,
 		u.birthday as birthday,
 		u.age_group as ageGroup,

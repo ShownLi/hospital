@@ -316,6 +316,13 @@
 		u.visa as visa,
 		u.flight as flight,
 		u.ip_address as ipAddress,
+		u.customer_name as chineseName,
+		u.customer_name_en as englishName,
+		u.customer_mobile as mobile,
+		u.customer_email as email,
+		u.customer_wechat as wechat,
+		u.customer_qq as qq,
+		u.reason as reason,
 		u.creat_time as creatTime,
 		u.isdel
 		from tm_case u where u.isdel = 0 and u.case_id = #{id}

@@ -123,6 +123,15 @@ public class CommentService extends BaseService {
 
 		}
 	}
+	
+	public void updateCaseComment(Comment comment) {
+		try{
+			commentMapper.updateCaseComment(comment);
+		} catch(Exception e) {
+			logger.error("CommentService.updateCaseCommment() --> "+comment+ "-->" + e.getMessage());
+			
+		}
+	}
 
 	/**
 	 * 删除注释（假删除）

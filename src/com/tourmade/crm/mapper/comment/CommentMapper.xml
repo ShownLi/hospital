@@ -59,6 +59,14 @@
 		comment_id=#{commentId}
 	</update>
 	
+	<update id="updateCaseComment" parameterType="Comment" flushCache="true">
+		update tm_case
+		set
+		last_comment=#{content}
+		where
+		case_id=#{objectId}
+	</update>
+	
 	<select id="getCommentById" parameterType="int" resultType="Comment">
 		select
 		u.comment_id as commentId,

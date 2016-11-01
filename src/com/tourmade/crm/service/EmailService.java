@@ -98,12 +98,14 @@ public class EmailService extends BaseService {
 			template.setRouteUrl(url+crmcase.getRouteId());			
 		}
 		template.setRouteName(crmcase.getRoute());
-		if(order.getCustomerId() != 0){
-			boat.setId(""+order.getCustomerId());
+		template.setCustomerChineseName(crmcase.getChineseName());
+		template.setCustomerEnglishName(crmcase.getEnglishName());
+		/*if(crmcase.getCustomerId() != 0){
+			boat.setId(""+crmcase.getCustomerId());
 			boat = emailMapper.getCusZE(boat);
 			template.setCustomerChineseName(boat.getChinese());
 			template.setCustomerEnglishName(boat.getEnglish());
-		}
+		}*/
 		if(order.getSalesId() != 0){
 			boat.setId(""+order.getSalesId());
 			boat = emailMapper.getSalesZE(boat);
@@ -145,9 +147,9 @@ public class EmailService extends BaseService {
 			template.setMealsChinese(boat.getChinese());
 			template.setMealsEnglish(boat.getEnglish());
 		}
-		if(order.getDestination() != null && !"".equals(order.getDestination())){
+		if(crmcase.getDestination() != null && !"".equals(crmcase.getDestination())){
 			boat.setDomain("country");
-			boat.setValue(order.getDestination());
+			boat.setValue(crmcase.getDestination());
 			boat = emailMapper.getZhEn(boat);
 			template.setDestinationChinese(boat.getChinese());
 			template.setDestinationEnglish(boat.getEnglish());
@@ -505,6 +507,17 @@ public class EmailService extends BaseService {
 	public void saveEmail(Order order, String result) {
 		Email email = new Email();
 		try {
+			MailTepBoat boat = new MailTepBoat();
+			boat.setDomain("country");
+			boat.setValue(order.getDestination());
+			boat = emailMapper.getZhEn(boat);
+			String destinationChinese = boat.getChinese();
+			String destinationEnglish = boat.getEnglish();
+			boat.setId(""+order.getCustomerId());
+			boat = emailMapper.getCusZE(boat);
+			String customerChineseName = boat.getChinese();
+			String customerEnglishName = boat.getEnglish();
+			
 			email.setContent(result);
 			email.setAcount("order");
 			email.setOrderId(order.getOrderId());
@@ -512,7 +525,8 @@ public class EmailService extends BaseService {
 			email.setSender(order.getCustomerReEmailAlias());
 			email.setSendName(order.getCustomerName());
 			email.setRecieveName(order.getSalesName());
-			email.setSubject(order.getCustomerName()+"去"+order.getDestination()+"的需求");
+			email.setSubject(customerChineseName+"去"+destinationChinese+"的需求/Enquiry for "
+					+customerEnglishName+" about "+destinationEnglish);
 			emailMapper.saveEmail(email);
 		} catch (Exception e) {
 			logger.error("EmailService.saveEmail() --> " + email + "-->" + e.getMessage());
