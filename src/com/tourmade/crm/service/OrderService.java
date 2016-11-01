@@ -508,5 +508,15 @@ public class OrderService extends BaseService {
 		return customer;
 	}
 	
+	//根据saleId获得agency的sendmail值，决定是否发邮件
+	public int selectAgencyBySaleId(int saleId){
+		int isSendmail=0;
+		try{
+			isSendmail= orderMapper.selectAgencyBySaleId(saleId);
+		}catch(Exception e){
+			logger.error("OrderService.selectAgencyBySaleId() --> " + isSendmail + "-->" + e.getMessage());
+		}
+		return isSendmail;
+	}
 
 }

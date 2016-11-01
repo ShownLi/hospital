@@ -50,7 +50,14 @@
 			              			<div class="col-sm-8">
 			              				<input type="text" id="country" name="country" class="country-select fullwidth" value="${agency.country }"/>
 			              			</div>
-			            		</div>            
+			            		</div>
+			            		<div class="form-group col-sm-4">
+					              <label  class="col-sm-4 control-label">是否发邮件</label>
+					              <div class="col-sm-8">
+					                   <input type="radio" id="yes" name="isSendmail" value="1" />是
+				      				   <input type="radio" id="no" name="isSendmail" value="0"/>否
+					              </div>
+					            </div>            
 			        		</div>
 		        		</div><!-- panel-body -->
 		        
@@ -148,6 +155,12 @@
 	$(".language-select").select2({
 	  	data: language
 	})
+	
+	if("${agency.isSendmail}"==1){
+    	$('#yes').attr('checked','true');
+    }else{
+    	$('#no').attr('checked','true');
+    }
 
 	jQuery(document).ready(function() {
 		
@@ -203,7 +216,7 @@
 	    } ); 
 		
 	});
-//			      
+			      
 	function form_submit() {
 		var agencyInfo= $("#form-agency").serialize();
 		$.post('${rootPath}agency/edit.do', agencyInfo, function(result) {

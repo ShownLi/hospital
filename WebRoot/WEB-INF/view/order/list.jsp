@@ -194,6 +194,7 @@
 </div><!-- dealModal -->
 
 <!-- noDealModal -->
+<!-- noDealModal -->
 <div class="noDealModal modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -201,27 +202,28 @@
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <div class="nextModal-title">请填写以下订单信息</div>
       </div>
-      <div class="modal-body">
-          <form class="form-horizontal" id="form-noDeal">
+      <form class="form-horizontal" id="form-noDeal">
+          <div class="modal-body">     
               <div class="section-block noline">
                   <div class="form-group col-sm-12">
                     <label class="col-sm-4 control-label">若未成行，原因是</label>
                     <div class="col-sm-8">
                       <input class="reason-select fullwidth" name="reason" placeholder="若未成行，原因是" />
-                      <input  type="hidden" id="noDealOrderid" name="orderId" />
-                      <%--
-                      <input  type="hidden" name="caseid" value="0"/>
-                      <input  type="hidden" name="customerid" value="0"/>
-                      --%>
+                      <input type="hidden" id="noDeal-orderId" name="orderId" value="${order.orderId}" />	
+                      <input type="hidden" name="caseId" value="${order.caseId}" />		                     
+                      <input type="hidden" name="status" value="3" />
                     </div>
                   </div>
               </div><!-- noDealModal-body -->
-          </form>
-      </div>
-      <div class="modal-footer align-center">
-          <a class="submit btn btn-primary" >保存</a>
-          <a class="cancel btn btn-primary" >取消</a>
-      </div>
+          </div>
+          <div class="modal-footer align-center">
+               <!-- <button class="submit btn btn-primary">保存</button>-->
+            <button class="btn btn-primary" >保存</button> 
+
+            <!--   <button class="btn btn-primary" onclick="form2_submit()">保存</button> -->
+              <a class="cancel btn btn-primary" >取消</a>
+          </div>
+      </form>
     </div><!-- modal-content -->
   </div><!-- modal-dialog -->
 </div><!-- bmodal -->
@@ -245,6 +247,11 @@
         placeholder: '状态',
         data: orderStatus
     });
+    
+    $(".reason-select").select2({
+    	placeholder:"未成行原因",
+    	data:reason
+	 }) 
 	
 		jQuery(document).ready(function() {			
 			jQuery("#form-deal").validate({
@@ -271,7 +278,6 @@
 	              },
 	              currency: {
 	                required: true,
-//	                number: true
 	              },
 			          exchangeRate: {
 	                required: true,
@@ -317,7 +323,32 @@
 	              return false;
 	          } 
 	        });
-	       });  	     	   	    		      		
+//	       });  	     	   	    		      		
+					
+			jQuery("#form-noDeal").validate({
+		        rules: {
+			        reason: {
+			        	required: true,
+			        },	              	
+				},				
+		     	 messages: {
+		            reason: "请选择一个原因",
+		      	 },			      
+		          highlight: function(element) {
+		            jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+		          },
+		          success: function(element) {
+		            jQuery(element).closest('.form-group').removeClass('has-error');
+		          },
+		          invalidHandler : function(){
+		            return false;
+		          },
+		          submitHandler : function(){
+		              noDeal_submit();
+		              return false;
+		          } 
+	        });
+          });  
 			
 			 var t = jQuery('#dataTable').DataTable({
 				searching:false,
@@ -424,13 +455,11 @@
 		             { data: "agencyName" },
 		             { data: "salesName" },
 		             { data: "destination" },
-//		             { data: "budget" },
 		             { data: "status" }
 		         ]
 			 });
 			
 			  $('#searchBtn').on( 'click', function () {
-			    	//alert($('#customerName').attr("value"));
 			        t.draw();
 			    } );
 		    
@@ -474,18 +503,19 @@
 		}
 		
 		function nogroup(id) {
+			$("#noDeal-orderId").val(id);
 			$(".noDealModal").modal('show');
 		}
 		// Date Picker
 		jQuery(".datepicker").datepicker({
 			  dateFormat: "yy-mm-dd"
 	  	});
- 	    $(".dealModal .submit").click(function(){
+/*  	    $(".dealModal .submit").click(function(){
 	    	deal_submit();
-	      }); 
-	    $(".noDealModal .submit").click(function(){
+	      });  */
+ 	    $(".noDealModal .submit").click(function(){
 	    	noDeal_submit();
-	      });
+	      }); 
 	    
 	    $(".dealModal .cancel").click(function(){
 	    	$(".dealModal").modal('hide');
@@ -493,11 +523,6 @@
 	    $(".noDealModal .cancel").click(function(){
 	    	$(".noDealModal").modal('hide');
 	    })
-	    
-	    $(".reason-select").select2({
-	    	placeholder:"未成行原因",
-	    	data:reason
-	    }) 
 	    
 		function deal_submit() {
 			var f = $("#form-deal").serialize();

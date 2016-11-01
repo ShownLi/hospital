@@ -366,7 +366,7 @@
           </div>
           <div class="modal-footer align-center">
                <!-- <button class="submit btn btn-primary">保存</button>-->
-            <button class="btn btn-primary" onclick="noDeal_submit()">保存</button> 
+            <button class="btn btn-primary" >保存</button> 
 
             <!--   <button class="btn btn-primary" onclick="form2_submit()">保存</button> -->
               <a class="cancel btn btn-primary" >取消</a>
@@ -446,7 +446,6 @@
               },
                 currency: {
                 required: true,
- //               number: true
               },
 		        exchangeRate: {
                 required: true,
@@ -491,6 +490,30 @@
               return false;
           }
 		});
+		
+		jQuery("#form-noDeal").validate({
+		        rules: {
+			        reason: {
+			        	required: true,
+			        },	              	
+				},				
+		     	 messages: {
+		            reason: "请选择一个原因",
+		      	 },			      
+		          highlight: function(element) {
+		            jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+		          },
+		          success: function(element) {
+		            jQuery(element).closest('.form-group').removeClass('has-error');
+		          },
+		          invalidHandler : function(){
+		            return false;
+		          },
+		          submitHandler : function(){
+		              noDeal_submit();
+		              return false;
+		          } 
+	        });
 		
 		$(".nav-parent").eq(1).addClass("nav-active");
    	    $(".nav-parent").eq(1).find(".children").show();
@@ -648,8 +671,7 @@
 /*      $(".dealModal .submit").click(function(){
      		deal_submit();
        }); */
-     $(".noDealModal .submit").click(function(){
-    	
+     $(".noDealModal .submit").click(function(){ 	
     		noDeal_submit();
        }); 
     $("#btn-baseNoDeal").click(function(){

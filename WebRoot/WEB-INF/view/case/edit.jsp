@@ -507,8 +507,18 @@
              <div class="form-group col-sm-8 col-sm-offset-2">
                 <label class="col-sm-3 control-label">目的地</label>
                 <div class="col-sm-9">
+<<<<<<< HEAD
+                    <input type="text" id="orderDestination" readonly="readonly" class="fullwidth" value="" />
+               		<input type="text" id="englishDestination" name="destination" style="display:none" />
+=======
+<<<<<<< HEAD
+                    <input type="text" id="orderDestination" readonly="readonly" class="fullwidth" value="" />
+               		<input type="text" id="englishDestination" name="destination" style="display:none" />
+=======
                     <input type="text" id="orderDestinationText"  readonly="readonly" class="form-control" value="" />
                     <input type="hidden" id="orderDestination" name="destination"  value="" />
+>>>>>>> 1cbc8d1962aece95dfa9c6f82ac928de16ab51bb
+>>>>>>> fc09c0e2c91d679b10e7804f201315e216e194a9
                 </div>
             </div>
             <div class="form-group col-sm-8 col-sm-offset-2">
@@ -770,6 +780,7 @@
 	               			return country[i].text
 	               		}
 	               	 }
+	               	 return ""
 	              }
 	              else{return ""}
               },
@@ -887,10 +898,12 @@
 	   
 	  //添加订单
       $("#btn-addorder").click(function(){
-      	  var destination = $("#destination").val();  
+      	  var destination = $("#destination").val(); 
+      	  $("#englishDestination").val(destination);
+      	      	  
       	  if(destination==""){
       	  	$("#msgDestination").modal('show');
-      	  }else{ 
+ 		  }else{ 
       		var destinationText = $("#destination").select2('data').text;
       	  		$("#orderDestinationText").val(destinationText); 
       	  		$("#orderDestination").val(destination);
