@@ -318,7 +318,7 @@
       </div> --%>
       
       <!-- Modal  -->
-<div class="modal fade" id="reconfirmDelModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<!-- <div class="modal fade" id="reconfirmDelModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
       <div class="modal-header">
@@ -332,10 +332,10 @@
         <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
         <button id="confirm-invalid" type="button" class="btn btn-danger">无效</button>
       </div>
-    </div><!-- modal-content -->
-  </div><!-- modal-dialog -->
-</div><!-- modal -->
-
+    </div>modal-content
+  </div>modal-dialog
+</div>modal
+ -->
       <!-- panel 订单列表  -->
     <div class="panel panel-default">
       <div class="panel-heading">
@@ -507,18 +507,10 @@
              <div class="form-group col-sm-8 col-sm-offset-2">
                 <label class="col-sm-3 control-label">目的地</label>
                 <div class="col-sm-9">
-<<<<<<< HEAD
-                    <input type="text" id="orderDestination" readonly="readonly" class="fullwidth" value="" />
-               		<input type="text" id="englishDestination" name="destination" style="display:none" />
-=======
-<<<<<<< HEAD
-                    <input type="text" id="orderDestination" readonly="readonly" class="fullwidth" value="" />
-               		<input type="text" id="englishDestination" name="destination" style="display:none" />
-=======
+
                     <input type="text" id="orderDestinationText"  readonly="readonly" class="form-control" value="" />
                     <input type="hidden" id="orderDestination" name="destination"  value="" />
->>>>>>> 1cbc8d1962aece95dfa9c6f82ac928de16ab51bb
->>>>>>> fc09c0e2c91d679b10e7804f201315e216e194a9
+
                 </div>
             </div>
             <div class="form-group col-sm-8 col-sm-offset-2">

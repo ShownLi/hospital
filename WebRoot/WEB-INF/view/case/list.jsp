@@ -55,6 +55,13 @@
 								<div class="col-sm-2">
 									<input type="text" id="searchComment" class="form-control" placeholder="注释" value="" />
 								</div>
+								<div class="col-sm-2">
+									<input type="text" id="searchMail" class="form-control" placeholder="邮箱" value="" />
+								</div>
+								<div class="col-sm-2">
+									<input type="text" id="searchMobile" class="form-control" placeholder="手机" value="" />
+								</div>
+							 
 							</div>	
 							<div class="col-sm-2">					 		                        		
 								<input class="btn btn-primary" type="button" id="searchBtn" value="搜索"/>
@@ -103,7 +110,7 @@
 	<script src="${rootPath}assets/js/select2.min.js"></script>
 
 <!-- Modal -->
-<div class="modal fade" id="confirmDelModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
+<!-- <div class="modal fade" id="confirmDelModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
       <div class="modal-header">
@@ -118,9 +125,9 @@
         <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
         <button type="button" class="btn btn-danger">无效</button>
       </div>
-    </div><!-- modal-content -->
-  </div><!-- modal-dialog -->
-</div><!-- modal -->
+    </div>modal-content
+  </div>modal-dialog
+</div>modal -->
 
 <!-- Modal -->
 <div class="modal fade" id="NoEmail" tabindex="-2" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -176,6 +183,36 @@
   </div><!-- modal-dialog -->
 </div><!-- modal -->
 
+<!-- 询单无效modal -->
+<div class="confirmDelModal modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <div class="nextModal-title">请填写无效原因</div>
+      </div>
+      <form class="form-horizontal" id="form-del">
+          <div class="modal-body">     
+              <div class="section-block noline">
+                  <div class="form-group col-sm-12">
+                    <label class="col-sm-4 control-label">无效原因是</label>
+                    <div class="col-sm-8">
+                      <input class="reason-select fullwidth"  name="reason" placeholder="无效原因是" />
+                      <input type="hidden" class="hiddenId" name="caseId" value="" />	
+                    </div>
+                  </div>
+              </div><!-- noDealModal-body -->
+          </div>
+          <div class="modal-footer align-center">
+            <button class="submit btn btn-primary">保存</button> 
+              <a class="cancel btn btn-primary" >取消</a>
+          </div>
+      </form>
+    </div><!-- modal-content -->
+  </div><!-- modal-dialog -->
+</div><!-- bmodal -->
+
+
 	<script type="text/javascript">
 	var source = ${source};
 	var caseStatus = ${caseStatus};
@@ -183,6 +220,7 @@
 	var customer = ${customer};
 	var user = ${user};
     var sales = ${sales};
+	var reason = ${reason};
 
 	$(".destination-select").select2({
         placeholder: '国家',
@@ -212,12 +250,24 @@
     $(".sales-select").select2({
         placeholder: '销售',
         data: sales
-    })
-		 jQuery(document).ready(function() {
-
-			$(".nav-parent").eq(0).addClass("nav-active");
-			$(".nav-parent").eq(0).find(".children").show();
-			
+    });
+    
+    $(".reason-select").select2({
+    	placeholder:"无效原因",
+    	data:reason
+    });
+    
+    $(".confirmDelModal .submit").click(function(){
+    	delSubmit();
+    });
+   	
+    
+    $(".confirmDelModal .cancel").click(function(){
+      	$(".confirmDelModal").modal("hide");
+  	});
+    
+		 
+		 
 			var t = jQuery('#dataTable').DataTable({
 				searching:false,
 				pageLength: 10,
@@ -236,6 +286,8 @@
 			 			var searchOperator=$('#searchOperator').val();
 			 			var searchStatus=$('#searchStatus').val();
 			 			var searchComment=$('#searchComment').val();
+			 			var searchMail=$('#searchMail').val();
+			 			var searchMobile=$('#searchMobile').val();
 			 			
 			 			if(searchCustomerId !=null && searchCustomerId !="" ){
 							data.customerId = searchCustomerId;
@@ -264,6 +316,13 @@
 			 			if(searchComment !=null && searchComment !=""){
 			 				data.comment = searchComment;
 			 			}
+			 			if(searchMail !=null && searchMail !=""){
+			 				data.email = searchMail;
+			 			}
+			 			if(searchMobile !=null && searchMobile !=""){
+			 				data.mobile = searchMobile;
+			 			}
+			 			
 					},
 					
 					dataFilter: function(data){
@@ -279,7 +338,9 @@
 		                  data: "caseId",
 		                  orderable: false,
 		                  render: function ( data, type, full, meta ) {
-		                      return '<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a>&nbsp;<a class="btn btn-danger btn-xs" id="'+data+'"><span class="fa fa-minus-circle"></span> 无效</a>&nbsp<a class="btn btn-primary btn-xs" id="'+data+'"></span> 增加订单</a>&nbsp';
+		                      //return '<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a>&nbsp;<a class="btn btn-danger btn-xs" id="'+data+'"><span class="fa fa-minus-circle"></span> 无效</a>&nbsp<a class="btn btn-primary btn-xs" id="'+data+'"></span> 增加订单</a>&nbsp';
+		                      //return '<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a>&nbsp;<a class="btn btn-danger btn-xs" id="'+data+'"><span class="fa fa-minus-circle"></span> 无效</a>&nbsp';
+		                      return '<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a>&nbsp;';
 		                  },
 		                  targets: 11
 					  },
@@ -396,40 +457,40 @@
 				});
 
 			
-				$('#searchBtn').on( 'click', function () {
-			    	//alert($('#searchText').attr("value"));
-			        t.draw();
-			    } );
-			
-				$('#dataTable tbody').on( 'click', 'a.btn-success', function () {
-			        var data = t.row($(this).parents('tr')).data();
-			        edit($(this).attr('id'));
-			    } );
+		 
+			$('#searchBtn').on( 'click', function () {
+		    	//alert($('#searchText').attr("value"));
+		        t.draw();
+		    } );
+		
+			$('#dataTable tbody').on( 'click', 'a.btn-success', function () {
+		        var data = t.row($(this).parents('tr')).data();
+		        edit($(this).attr('id'));
+		    } );
 
-				$('#dataTable tbody').on( 'click', 'a.btn-danger', function () {
-			        var data = t.row($(this).parents('tr')).data();
-			        del($(this).attr('id'));
-			    } );
-				
-				$('#dataTable tbody').on( 'click', 'a.btn-primary', function () {
-			        var data = t.row($(this).parents('tr')).data();
-			        addOrder($(this).attr('id'));
-			    } );
-				
-				$('#confirmDelModal').on( 'click', 'button.btn-danger', function () {
-			        var id = $("#confirmDelModal .hiddenId").val();
-			        doDel(id);
-			    } ); 
-		    
-			// Select2
-		    jQuery('select').select2({
-		        minimumResultsForSearch: -1
-		    });
-		    
-		    jQuery('select').removeClass('form-control');
+			$('#dataTable tbody').on( 'click', 'a.btn-danger', function () {
+		        var data = t.row($(this).parents('tr')).data();
+		        del($(this).attr('id'));
+		    } );
 			
+			$('#dataTable tbody').on( 'click', 'a.btn-primary', function () {
+		        var data = t.row($(this).parents('tr')).data();
+		        addOrder($(this).attr('id'));
+		    } );
 			
-		});
+			/* $('#confirmDelModal').on( 'click', 'button.btn-danger', function () {
+		        var id = $("#confirmDelModal .hiddenId").val();
+		        doDel(id);
+		    } );  */
+	    
+		// Select2
+	    jQuery('select').select2({
+	        minimumResultsForSearch: -1
+	    });
+	    
+	    jQuery('select').removeClass('form-control');
+		
+		
 	    $(".nextModal .submit").click(function(){	    		
 	    	  order_submit();
 	    });
@@ -456,9 +517,10 @@
 		} */
 		
 		function del(id) {
-			$("#confirmDelModal .hiddenId").val("");
-			$("#confirmDelModal .hiddenId").val(id);
-			$("#confirmDelModal").modal('show');
+			 
+			 $(".confirmDelModal .hiddenId").val("");
+			 $(".confirmDelModal .hiddenId").val(Number(id));
+		 	 $(".confirmDelModal").modal('show');
 		}
 		
 		function doDel(id){
@@ -484,6 +546,26 @@
 				}
 			}, "JSON");
 	}
+  		
+  	  function delSubmit() {
+    	  var f1=$("#form-del").serialize();
+     	  try{
+     		  $.post("${rootPath}case/del.do", f1, function(result) {
+				var rmsg = result.msg;
+				if (result.success) {
+					window.parent.location = "${rootPath}case/list.html";
+				} 
+				else {
+					$("#msgModal").modal('show');
+				}
+			}, "JSON");
+     		  }
+     	  catch(e) {
+     		  alert(e);
+     	  }
+     	 alert("页面正在加载，请稍后...");
+      }
+      
 	      //添加订单弹出框，目的地与销售联动
 /* 	      $("#destination").change(function(){
 	          var destination = $(this).val();

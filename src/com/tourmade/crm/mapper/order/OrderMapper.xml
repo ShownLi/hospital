@@ -12,7 +12,6 @@
 			u.sales_id as salesId,
 			u.sales_name as salesName,
 			u.destination as destination,
-			u.budget as budget,
 			u.status as status,
 			u.reason as reason,
 			u.group_time as groupTime,
@@ -157,7 +156,6 @@
 		agency_email_real,
 
 		destination,
-		budget,
 		status,
 		reason,
 		group_time,
@@ -183,7 +181,6 @@
 		#{agencyEmailReal},
 
 		#{destination,jdbcType=VARCHAR},
-		#{budget,jdbcType=VARCHAR},
 		#{status,jdbcType=VARCHAR},
 		#{reason,jdbcType=VARCHAR},
 		#{groupTime,jdbcType=VARCHAR},
@@ -212,7 +209,6 @@
 		agency_re_email_alias = #{agencyReEmailAlias},
 		agency_se_email_alias = #{agencySeEmailAlias},
 		destination=#{destination},
-		budget=#{budget},
 		status=#{status},
 		reason=#{reason},
 		group_time=#{groupTime},
@@ -348,7 +344,6 @@
 		u.agency_re_email_alias as agencyReEmailAlias,
 		u.agency_se_email_alias as agencySeEmailAlias,
 		
-		u.budget as budget,
 		u.status as status,
 		u.reason as reason,
 		u.group_time as groupTime,
@@ -386,7 +381,7 @@
 	
 	<select id="selectAgencyBySaleId" parameterType="int" flushCache="true" resultType="int">
 		select
-		a.is_sendmail as isSendmail 
+		a.sendmail as isSendmail 
 		from tm_sales s 
 		left join tm_agency a on a.agency_id=s.agency_id
 		where

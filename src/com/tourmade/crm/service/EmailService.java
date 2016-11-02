@@ -83,7 +83,10 @@ public class EmailService extends BaseService {
 		template.setStartDate(crmcase.getStartDate());
 		template.setEndDate(crmcase.getEndDate());
 //		String budget = DecimalFormat.getNumberInstance().format(Integer.parseInt(order.getBudget()));
-		String budget = DecimalFormat.getNumberInstance().format(crmcase.getBudget());
+		String budget="";
+		if(crmcase.getBudget()!=null){
+			budget = DecimalFormat.getNumberInstance().format(crmcase.getBudget());
+		}
 		template.setBudget(budget);
 		template.setRequirement(crmcase.getRequirement());
 		
@@ -259,7 +262,13 @@ public class EmailService extends BaseService {
 						result = result.replace("${customername_en}",
 								template.getCustomerEnglishName());
 					}
-					else{result = result.replace("${customername_en}",template.getCustomerChineseName());}
+					else{
+						if(null != template.getCustomerChineseName() && !"".equals(template.getCustomerChineseName())){
+							result = result.replace("${customername_en}", 
+								template.getCustomerChineseName());
+						}
+						else{result = result.replace("${customername_en}", "");}
+					}
 
 					if (null != template.getPreferChineseLanguage() && !"".equals(template.getPreferChineseLanguage())) {
 						result = result.replace("${preferlanguage_zh}",
@@ -478,15 +487,23 @@ public class EmailService extends BaseService {
 				
 
 					if (null != template.getRouteUrl() && !"".equals(template.getRouteUrl())) {
+						
 						result = result.replace("${route_url}",
 								template.getRouteUrl());
-						result = result.replace("${route_name}", 
-								template.getRouteName());
+						
 					}
 					else{
 						result = result.replace("${route_url}","");
+					}
+					
+					if(null != template.getRouteName() && !"".equals(template.getRouteName())) {
+					result = result.replace("${route_name}", 
+							template.getRouteName());	
+					}
+					else{
 						 result = result.replace("${route_name}","");}
-				}
+					}
+					
 			}
 		} catch (Exception e) {
 			throw e;

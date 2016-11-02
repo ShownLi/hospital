@@ -43,7 +43,7 @@
 		language,
 		creat_time,
 		update_time,
-		is_Sendmail,
+		sendmail,
 		isdel
 		)values(
 		#{name,jdbcType=VARCHAR},
@@ -62,7 +62,7 @@
 		agency_name=#{name},
 		country=#{country},
 		language=#{language},
-		is_sendmail=#{isSendmail},
+		sendmail=#{isSendmail},
 		update_time=NOW()
 		where
 		agency_id=#{agencyId}
@@ -74,7 +74,7 @@
 		u.agency_name as name,
 		u.country as country,
 		u.language as language,
-		u.is_sendmail as isSendmail,
+		u.sendmail as isSendmail,
 		u.isdel as isdel
 		from tm_agency u where u.agency_id = #{agencyId}
 	</select>

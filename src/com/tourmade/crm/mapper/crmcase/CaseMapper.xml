@@ -49,6 +49,12 @@
 		<if test="comment != null and comment != ''">
 			and last_comment  like '%${comment}%'
 		</if> 
+		<if test="email != null and email != ''">
+			and customer_email  like '%${email}%'
+		</if> 
+		<if test="mobile != null and mobile != ''">
+			and customer_mobile  like '%${mobile}%'
+		</if> 
 		order by u.creat_time desc
 		limit #{start},#{length}
 	</select>
@@ -98,6 +104,12 @@
 		</if>
 		<if test="comment != null and comment != ''">
 			and last_comment  like '%${comment}%'
+		</if> 
+		<if test="email != null and email != ''">
+			and customer_email  like '%${email}%'
+		</if> 
+		<if test="mobile != null and mobile != ''">
+			and customer_mobile  like '%${mobile}%'
 		</if> 
 	</select>
 	

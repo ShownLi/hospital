@@ -36,24 +36,28 @@ public class CaseController extends BaseSimpleFormController {
 		String source = "case.source";
 		String status = "case.status";
 		String country = "country";
+		String reason = "case.reason";
 		List<EntityList> userList = service.getAllUser();
 		List<EntityList> customerList = service.getCustomer();
 		List<EntityList> salesList = service.getSales();
 		List<EntityList> sourceList = service.getParameterInfo(source);
 		List<EntityList> statusList = service.getParameterInfo(status);
 		List<EntityList> countryList = service.getParameterInfo(country);
+		List<EntityList> reasonList = service.getParameterInfo(reason);
 		JSONArray countryResult = JSONArray.fromObject(countryList);
 		JSONArray sourceResult = JSONArray.fromObject(sourceList);
 		JSONArray statusResult = JSONArray.fromObject(statusList);
 		JSONArray customerResult = JSONArray.fromObject(customerList);
 		JSONArray userResult = JSONArray.fromObject(userList);
 		JSONArray salesResult = JSONArray.fromObject(salesList);
+		JSONArray reasonResult = JSONArray.fromObject(reasonList);
 		model.addAttribute("destination",countryResult);
 		model.addAttribute("source",sourceResult);
 		model.addAttribute("caseStatus",statusResult);
 		model.addAttribute("customer",customerResult);
 		model.addAttribute("user",userResult);
 		model.addAttribute("sales",salesResult);
+		model.addAttribute("reason", reasonResult);
 		return "/case/list";
 	}
 	

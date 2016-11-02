@@ -69,6 +69,12 @@ public class CaseService extends BaseService {
 		if(crmcase.getComment()!=null){
 			map.put("comment", crmcase.getComment());
 		}
+		if(crmcase.getEmail()!=null){
+			map.put("email", crmcase.getEmail());
+		}
+		if(crmcase.getMobile()!=null){
+			map.put("mobile", crmcase.getMobile());
+		}
 		
 		List<Case> data = caseMapper.queryCase(map);
 		long count = caseMapper.countCase(crmcase);
