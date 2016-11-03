@@ -7,6 +7,7 @@ import com.tourmade.crm.common.framework.BaseMapper;
 import com.tourmade.crm.entity.Email;
 import com.tourmade.crm.entity.EntityList;
 import com.tourmade.crm.entity.MailTepBoat;
+import com.tourmade.crm.entity.Order;
 
 public interface EmailMapper extends BaseMapper {
 	
@@ -34,4 +35,5 @@ public interface EmailMapper extends BaseMapper {
 	
 	public String getUrl(String domain);
 	
+	public Email getBccEmail(int operator);
 }

@@ -19,7 +19,8 @@
 			u.customer_qq as qq,
 			u.creat_time as creatTime,
 			u.reason as reason,
-			u.last_comment as comment
+			u.last_comment as comment,
+			u.requirement as requirement
 		from tm_case u  
 		where u.isdel = 0 
 		<if test="customerId != null and customerId != ''">
@@ -49,6 +50,9 @@
 		<if test="comment != null and comment != ''">
 			and last_comment  like '%${comment}%'
 		</if> 
+		<if test="requirement != null and requirement != ''">
+			and requirement like '%${requirement}%'
+		</if>
 		<if test="email != null and email != ''">
 			and customer_email  like '%${email}%'
 		</if> 
@@ -105,6 +109,9 @@
 		<if test="comment != null and comment != ''">
 			and last_comment  like '%${comment}%'
 		</if> 
+		<if test="requirement != null and requirement != ''">
+			and requirement like '%${requirement}%'
+		</if>
 		<if test="email != null and email != ''">
 			and customer_email  like '%${email}%'
 		</if> 

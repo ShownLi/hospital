@@ -37,6 +37,8 @@
 		recievename,
 		sender,
 		reciever,
+		bccname,
+		bcc,
 		subject,
 		content,
 		file_url,
@@ -50,6 +52,8 @@
 		#{recieveName},
 		#{sender},
 		#{reciever},
+		#{bccName},
+		#{bcc},
 		#{subject},
 		#{content},
 		#{fileUrl},
@@ -139,4 +143,13 @@
 		where u.isdel = 0 
 		and u.sales_id = #{id}
 	</select>
+	
+	<select id="getBccEmail" parameterType="int" resultType="Email">
+		select
+		u.user_name as bccName,
+		u.user_email as bcc
+		from tm_user u where u.user_id = #{operator}
+		and u.isdel=0
+	</select>
+	
 </mapper>

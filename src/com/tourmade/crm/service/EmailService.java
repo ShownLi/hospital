@@ -82,6 +82,7 @@ public class EmailService extends BaseService {
 		template.setDuring(crmcase.getDuring());
 		template.setStartDate(crmcase.getStartDate());
 		template.setEndDate(crmcase.getEndDate());
+		template.setSubject(getSubject(order));
 //		String budget = DecimalFormat.getNumberInstance().format(Integer.parseInt(order.getBudget()));
 		String budget="";
 		if(crmcase.getBudget()!=null){
@@ -226,7 +227,7 @@ public class EmailService extends BaseService {
 			
 				//InputStreamReader isr = new InputStreamReader(new FileInputStream(f), "UTF-8");
 				reader = new BufferedReader(new InputStreamReader(ossObject.getObjectContent(),"UTF-8"));
-			//reader = new BufferedReader(new InputStreamReader(new FileInputStream("C:/Users/TM/Desktop/order.html"),"UTF-8"));
+			    //reader = new BufferedReader(new InputStreamReader(new FileInputStream("C:/Users/TM/Desktop/order.html"),"UTF-8"));
 				
 				String tempString = null;
 				StringBuffer str = new StringBuffer();
@@ -484,8 +485,12 @@ public class EmailService extends BaseService {
 								template.getReplyto());
 					}
 					else{result = result.replace("${replyto}","");}
-				
-
+					
+					if (null != template.getSubject() && !"".equals(template.getSubject())) {
+						result = result.replace("${replySubject}",
+								template.getSubject());
+					}
+					
 					if (null != template.getRouteUrl() && !"".equals(template.getRouteUrl())) {
 						
 						result = result.replace("${route_url}",
@@ -515,15 +520,9 @@ public class EmailService extends BaseService {
 		return result;
 	}
 	
-	/**
-	 * 新增邮件
-	 * 
-	 * @param email
-	 * @return
-	 */
-	public void saveEmail(Order order, String result) {
-		Email email = new Email();
-		try {
+	
+	public String getSubject(Order order){
+
 			MailTepBoat boat = new MailTepBoat();
 			boat.setDomain("country");
 			boat.setValue(order.getDestination());
@@ -535,6 +534,23 @@ public class EmailService extends BaseService {
 			String customerChineseName = boat.getChinese();
 			String customerEnglishName = boat.getEnglish();
 			
+			String subject = customerChineseName+"去"+destinationChinese+"的需求/Enquiry for "
+					+customerEnglishName+" about "+destinationEnglish;
+			
+			return subject;
+
+	}
+	
+	/**
+	 * 新增邮件
+	 * 
+	 * @param email
+	 * @return
+	 */
+	public void saveEmail(Order order, String result) {
+		Email email = new Email();
+		try {
+			
 			email.setContent(result);
 			email.setAcount("order");
 			email.setOrderId(order.getOrderId());
@@ -542,14 +558,26 @@ public class EmailService extends BaseService {
 			email.setSender(order.getCustomerReEmailAlias());
 			email.setSendName(order.getCustomerName());
 			email.setRecieveName(order.getSalesName());
-			email.setSubject(customerChineseName+"去"+destinationChinese+"的需求/Enquiry for "
-					+customerEnglishName+" about "+destinationEnglish);
+			
+			//得到跟单员姓名与邮箱，写入bccName与bcc字段中
+			Email bccEmail = getBccEmail(order);
+			email.setBcc(bccEmail.getBcc());
+			email.setBccName(bccEmail.getBccName());
+			
+			email.setSubject(getSubject(order));
 			emailMapper.saveEmail(email);
 		} catch (Exception e) {
 			logger.error("EmailService.saveEmail() --> " + email + "-->" + e.getMessage());
 			e.printStackTrace();
 		}
 	}
+
+	private Email getBccEmail(Order order) {
+		Email bccEmail = emailMapper.getBccEmail(order.getOperator());
+		return bccEmail;
+	}
+
+
 
 	/**
 	 * 新增邮件

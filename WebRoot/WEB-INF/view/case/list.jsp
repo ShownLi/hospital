@@ -34,10 +34,16 @@
 									<input type="text" id="searchCustomerId" class="customer-select fullwidth" value="" />
 								</div> -->
 								<div class="col-sm-2">
+									<input type="text" id="searchCaseId" class="form-control" placeholder="询单id"  value="" />
+								</div>
+								<div class="col-sm-2">
 									<input type="text" id="searchCustomerName" class="form-control" placeholder="客人" value="" />
 								</div>
 								<div class="col-sm-2">
-									<input type="text" id="searchCaseId" class="form-control" placeholder="询单id"  value="" />
+									<input type="text" id="searchMobile" class="form-control" placeholder="手机" value="" />
+								</div>
+								<div class="col-sm-2">
+									<input type="text" id="searchMail" class="form-control" placeholder="邮箱" value="" />
 								</div>
 								<!-- <input type="text" id="searchBudget" class="form-control" placeholder="预算" value="" /> -->
 								<div class="col-sm-2">
@@ -53,13 +59,10 @@
 									<input type="text" id="searchStatus" class="status-select fullwidth" value="" />
 								</div>
 								<div class="col-sm-2">
+									<input type="text" id="searchRequirment" class="form-control" placeholder="客人要求" value="" />
+								</div>
+								<div class="col-sm-2">
 									<input type="text" id="searchComment" class="form-control" placeholder="注释" value="" />
-								</div>
-								<div class="col-sm-2">
-									<input type="text" id="searchMail" class="form-control" placeholder="邮箱" value="" />
-								</div>
-								<div class="col-sm-2">
-									<input type="text" id="searchMobile" class="form-control" placeholder="手机" value="" />
 								</div>
 							 
 							</div>	
@@ -84,8 +87,10 @@
 										<th>询单来源</th>
 										<th>跟单员</th>
 										<th>状态</th>
-										<th>创建时间</th>
+										<th>客人要求</th>
 										<th>注释</th>
+										<th>创建时间</th>
+										<th>无效原因</th>
 										<th>编辑</th>
 									</tr>
 								</thead>
@@ -286,6 +291,7 @@
 			 			var searchOperator=$('#searchOperator').val();
 			 			var searchStatus=$('#searchStatus').val();
 			 			var searchComment=$('#searchComment').val();
+			 			var searchRequirment=$('#searchRequirment').val();
 			 			var searchMail=$('#searchMail').val();
 			 			var searchMobile=$('#searchMobile').val();
 			 			
@@ -316,6 +322,9 @@
 			 			if(searchComment !=null && searchComment !=""){
 			 				data.comment = searchComment;
 			 			}
+			 			if(searchRequirment !=null && searchRequirment !=""){
+			 				data.requirement = searchRequirment;
+			 			}
 			 			if(searchMail !=null && searchMail !=""){
 			 				data.email = searchMail;
 			 			}
@@ -342,7 +351,7 @@
 		                      //return '<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a>&nbsp;<a class="btn btn-danger btn-xs" id="'+data+'"><span class="fa fa-minus-circle"></span> 无效</a>&nbsp';
 		                      return '<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a>&nbsp;';
 		                  },
-		                  targets: 11
+		                  targets: 13
 					  },
 					  
  					  {
@@ -420,8 +429,24 @@
 			                	}
 			                	else{return ""}
 			                },
-			                  targets: 9
+			                  targets: 11
 						},
+						{
+			                data: "reason",
+			                orderable: false,
+			                render: function ( data ) {
+			                	if(data){
+			                		for(var i=0;i <  reason.length;i++){
+				                		if(data==reason[i].id){
+				                			return reason[i].text
+				                		}
+				                	}
+			                		return "";
+			                	}
+			                	else{return ""}
+			                },
+			                  targets: 12
+						},						
 						{
 							data:"comment",
 							orderable: false,
@@ -433,6 +458,17 @@
 							},
 							  targets: 10
 						
+						},
+						{
+							data:"requirement",
+							orderable: false,
+							render:function(data) {
+								if(data){
+									return data
+								}
+								else{return ""}	
+							},
+							targets: 9
 						},
 					  {
 						  orderable: false,
@@ -451,8 +487,10 @@
 			            { data: "source" },
 			            { data: "operator" },
 			            { data: "status" },
+			            { data: "requirement" },
+			            { data: "comment"},
 			            { data: "creatTime"},
-			            { data: "comment"}
+			            { data: "reason"}
 			        ]
 				});
 

@@ -18,17 +18,18 @@
 		from tm_parameter u 
 		where u.isdel = 0
 		<if test="domain != null and domain != ''">
-                and   para_domain = #{domain} 
+                and   para_domain like '%${domain}%' 
         </if>
         <if test="value != null and value != ''">
-                and   para_value = #{value} 
+                and   para_value like '%${value}%' 
         </if>
         <if test="chinese != null and chinese != ''">
-                and   chinese like #{chinese} 
+                and   chinese like '%${chinese}%' 
         </if>
         <if test="english != null and english != ''">
-                and   english like #{english} 
+                and   english like '%${english}%' 
         </if>
+
 		order by u.creat_time
 		limit #{start},#{length}
 	</select>

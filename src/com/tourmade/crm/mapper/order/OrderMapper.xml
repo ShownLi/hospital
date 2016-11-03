@@ -11,6 +11,7 @@
 			u.agency_name as agencyName,
 			u.sales_id as salesId,
 			u.sales_name as salesName,
+			u.operator as operator,
 			u.destination as destination,
 			u.status as status,
 			u.reason as reason,
@@ -43,6 +44,9 @@
          </if>
           <if test="budget != null and budget != ''">
          		and   budget = #{budget}
+         </if>
+          <if test="operator != null and operator != ''">
+         		and   operator = #{operator}
          </if>
        	  <if test="status != null and status != ''">
          		and   status = #{status}
@@ -90,6 +94,9 @@
          </if>
           <if test="budget != null and budget != ''">
          		and   budget = #{budget}
+         </if>
+          <if test="operator != null and operator != ''">
+         		and   operator = #{operator}
          </if>
        	  <if test="status != null and status != ''">
          		and   status = #{status}
@@ -152,9 +159,9 @@
 		sales_id,
 		sales_name,
 		customer_email_real,
-
 		agency_email_real,
-
+		
+		operator,
 		destination,
 		status,
 		reason,
@@ -177,9 +184,9 @@
 		#{salesId,jdbcType=VARCHAR},
 		#{salesName,jdbcType=VARCHAR},
 		#{customerEmailReal},
-
 		#{agencyEmailReal},
 
+		#{operator},
 		#{destination,jdbcType=VARCHAR},
 		#{status,jdbcType=VARCHAR},
 		#{reason,jdbcType=VARCHAR},
@@ -335,6 +342,7 @@
 		u.sales_id as salesId,
 		u.sales_name as salesName,
 		u.destination as destination,
+		u.operator as operator,
 		
 		u.customer_email_real as customerEmailReal,
 		u.agency_email_real as agencyEmailReal,

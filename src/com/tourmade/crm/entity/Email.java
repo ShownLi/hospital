@@ -36,6 +36,27 @@ public class Email extends BaseBean<Email> {
 	private String fileUrl;
 	
 	private String mailstatus;
+	
+	private String bcc;
+	
+	private String bccName;
+
+	
+	public String getBcc() {
+		return bcc;
+	}
+
+	public void setBcc(String bcc) {
+		this.bcc = bcc;
+	}
+
+	public String getBccName() {
+		return bccName;
+	}
+
+	public void setBccName(String bccName) {
+		this.bccName = bccName;
+	}
 
 	public Integer getOrderId() {
 		return orderId;

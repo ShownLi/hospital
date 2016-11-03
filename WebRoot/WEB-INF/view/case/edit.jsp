@@ -529,6 +529,7 @@
              <a class="submit btn btn-primary">保存</a>
              <input  type="hidden" name="caseId" value="${crmcase.caseId}" />
              <input  type="hidden" name="customerId" value="${crmcase.customerId}" />
+             <input  type="hidden" name="operator" value="${crmcase.operator}" />
             </div>
             </form>
         </div>

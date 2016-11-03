@@ -45,6 +45,14 @@ public class MailTemplate extends BaseBean<MailTemplate> {
 	private String routeUrl;
 	private String routeName;
 	private Integer orderId;
+	private String subject;
+	
+	public String getSubject() {
+		return subject;
+	}
+	public void setSubject(String subject) {
+		this.subject = subject;
+	}
 	public String getCustomerChineseName() {
 		return customerChineseName;
 	}

@@ -74,7 +74,10 @@ public class OrderService extends BaseService {
 			map.put("budget", order.getBudget());
 		}
 
-
+		if(order.getOperator()!=null){
+			map.put("operator", order.getOperator());
+		}
+		
 		if(order.getStatus()!=null){
 			map.put("status", order.getStatus());
 		}

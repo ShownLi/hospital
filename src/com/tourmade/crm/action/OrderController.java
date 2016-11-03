@@ -44,14 +44,18 @@ public class OrderController extends BaseSimpleFormController {
 		String country = "country";
 		String status = "order.status";
 		String reason = "order.reason";
+		
+		List<EntityList> userList = caseService.getAllUser();
 		List<EntityList> currencyList = service.getParameterInfo(currency);
 		List<EntityList> statusList = service.getParameterInfo(status);
 		List<EntityList> countryList = service.getParameterInfo(country);
 		List<EntityList> reasonLiat = service.getParameterInfo(reason);
+		JSONArray userResult = JSONArray.fromObject(userList);
 		JSONArray currencyResult = JSONArray.fromObject(currencyList);
 		JSONArray countryResult = JSONArray.fromObject(countryList);
 		JSONArray statusResult = JSONArray.fromObject(statusList);
 		JSONArray reasonResult = JSONArray.fromObject(reasonLiat);
+		model.addAttribute("user",userResult);
 		model.addAttribute("currency",currencyResult);
 		model.addAttribute("orderStatus",statusResult);
 		model.addAttribute("destination",countryResult);
@@ -222,7 +226,6 @@ public class OrderController extends BaseSimpleFormController {
 	public Json orderNoDeal(HttpServletRequest request, HttpSession session, Model model, Order order) {
 
 		Json json = new Json();
-		System.out.println(order.getOrderId()+"^^^");
 		Case crmcase = caseService.getCaseByOrderId(order.getOrderId());
 		try {
 			service.updateOrder(order);

@@ -46,6 +46,9 @@
 									<input type="text" id="searchDestination" class="destination-select fullwidth" value="" />
 								</div> -->
 								<div class="col-sm-2">
+									<input type="text" id="searchOperator" class="operator-select fullwidth" value="" />
+								</div>
+								<div class="col-sm-2">
 									<input type="text" id="searchStatus" class="status-select fullwidth" value="" />
 								</div>
 							</div>	
@@ -69,7 +72,10 @@
 										<th>销售姓名</th>
 										<th>目的地</th> 
  <!-- 									<th>预算</th> -->
+ 										<th>跟单员</th>
 										<th>状态</th>
+										<th>创建时间</th>
+										<th>最后回复时间</th>
 										<th>编辑</th>
 									</tr>
 								</thead>
@@ -233,6 +239,7 @@
 	var destination = ${destination};
 	var reason = ${reason};
 	var currency=${currency};
+	var user = ${user};
 	
  	$(".destination-select").select2({
         placeholder: '国家',
@@ -251,7 +258,13 @@
     $(".reason-select").select2({
     	placeholder:"未成行原因",
     	data:reason
-	 }) 
+	 });
+    
+    $(".operator-select").select2({
+    	placeholder:"跟单员",
+    	data:user
+	 });
+    
 	
 		jQuery(document).ready(function() {			
 			jQuery("#form-deal").validate({
@@ -366,7 +379,8 @@
 			 			var searchDestination=$('#searchDestination').val();
 			 			var searchBudget=$('#searchBudget').val();
 			 			var searchStatus=$('#searchStatus').val();
-			 			
+			 			var searchOperator=$('#searchOperator').val();
+			 				
 			 			if(searchCustomerName !=null && searchCustomerName !="" ){
 							data.customerName = searchCustomerName;
 			 			}
@@ -384,6 +398,9 @@
 			 			} 
 			 			if(searchBudget !=null && searchBudget !="" ){
 							data.budget = searchBudget;
+			 			}
+			 			if(searchOperator !=null && searchOperator !=""){
+			 				data.operator = searchOperator;
 			 			}
 			 			if(searchStatus !=null && searchStatus !="" ){
 							data.status = searchStatus;
@@ -406,7 +423,7 @@
 						 	      render: function ( data, type, full, meta ) {
 					              	return '<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a>&nbsp<a class="btn btn-primary btn-xs" id="'+data+'"></span> 成行</a>&nbsp<a class="btn btn-default btn-xs" id="'+data+'"></span> 未成行</a>&nbsp;';
 						 	  	  },
-						 	    	targets: 6
+						 	    	targets: 9
 						 		},
 								{
 					                data: "status",
@@ -419,6 +436,22 @@
 						                		}
 						                	}
 						                	return ""
+					                	}
+					                	else{return ""}
+					                },
+					                  targets: 6
+								},
+								{
+									data: "operator",
+					                orderable: false,
+					                render: function ( data ) {
+					                	if(data){
+						                	for(var i=0;i <  user.length;i++){
+						                		if(data==user[i].id){
+						                			return user[i].text
+						                		}				                		
+						                	}
+						                	return "";
 					                	}
 					                	else{return ""}
 					                },
@@ -441,7 +474,29 @@
 					                },
 
 					                  targets: 4
-								}, 					
+								}, 			
+								{
+					                data: "creatTime",
+					                orderable: false,
+					                render: function ( data ) {
+					                	if(data){
+					                		return new Date(data.time).format("yyyy-MM-dd hh:mm:ss");
+					                	}
+					                	else{return ""}
+					                },
+					                  targets: 7
+								},
+								{
+					                data: "lastResponse",
+					                orderable: false,
+					                render: function ( data ) {
+					                	if(data){
+					                		return new Date(data.time).format("yyyy-MM-dd hh:mm:ss");
+					                	}
+					                	else{return ""}
+					                },
+					                  targets: 8
+								},
 
 						 	  {
 						 		  orderable: false,
@@ -455,10 +510,13 @@
 		             { data: "agencyName" },
 		             { data: "salesName" },
 		             { data: "destination" },
-		             { data: "status" }
+		             { data: "operator"},
+		             { data: "status" },
+		             { data: "creatTime"},
+			 		 { data: "lastResponse"}
 		         ]
 			 });
-			
+				
 			  $('#searchBtn').on( 'click', function () {
 			        t.draw();
 			    } );

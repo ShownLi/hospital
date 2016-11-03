@@ -69,6 +69,9 @@ public class CaseService extends BaseService {
 		if(crmcase.getComment()!=null){
 			map.put("comment", crmcase.getComment());
 		}
+		if(crmcase.getRequirement()!=null){
+			map.put("requirement", crmcase.getRequirement());
+		}
 		if(crmcase.getEmail()!=null){
 			map.put("email", crmcase.getEmail());
 		}

@@ -79,6 +79,17 @@ public class Order extends BaseBean<Order> {
 	private String customerReEmailAlias;
 	
 	private String customerSeEmailAlias;
+	
+	private Integer operator;
+	
+	
+	public Integer getOperator() {
+		return operator;
+	}
+
+	public void setOperator(Integer operator) {
+		this.operator = operator;
+	}
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
