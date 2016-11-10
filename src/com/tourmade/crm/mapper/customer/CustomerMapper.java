@@ -22,4 +22,6 @@ public interface CustomerMapper extends BaseMapper {
 	public Customer getCustomerById(int customerId);
 	
 	public List<EntityList> getParameterInfo(String domain);
+
+	public Customer getCustomerByEmail(Customer customer);
 }

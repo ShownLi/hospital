@@ -111,6 +111,7 @@
 	</section>
 
 	<%@ include file="../assets/pages/foot.jsp"%>
+
 	<script src="${rootPath}assets/js/jquery.datatables.min.js"></script>
 	<script src="${rootPath}assets/js/select2.min.js"></script>
 

@@ -10,6 +10,7 @@ import com.tourmade.crm.entity.Case;
 import com.tourmade.crm.entity.Customer;
 import com.tourmade.crm.entity.EntityList;
 import com.tourmade.crm.entity.Order;
+import com.tourmade.crm.entity.PortalOrder;
 
 public interface OrderMapper extends BaseMapper {
 	
@@ -55,4 +56,10 @@ public interface OrderMapper extends BaseMapper {
 	
 	//根据saleId获得agency的sendmail值，决定是否发邮件
 	public int selectAgencyBySaleId(int saleId);
+	
+	public List<PortalOrder> queryPortalOrder(Map<String, Object> map);
+
+	public long countPortalOrder(int customerId);
+
+	public Order getOrderByEmail(String recieverEmail);
 }

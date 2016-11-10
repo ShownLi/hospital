@@ -589,4 +589,23 @@ public class EmailService extends BaseService {
 		boat = emailMapper.getZhEn(boat);
 		return boat;
 	}
+	
+	/**
+	 * 新增邮件队列
+	 * 
+	 * @param orderrecord
+	 * @return
+	 */
+	public int saveEmailQueue(Email email) {
+
+		
+		try {
+			emailMapper.saveEmail(email);
+		} catch (Exception e) {
+			logger.error("OrderRecordService.saveOrderRecord() --> " + email + "-->" + e.getMessage());
+			e.printStackTrace();
+			return 0;
+		}
+		return email.getEmailId();
+	}
 }

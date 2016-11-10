@@ -27,6 +27,12 @@ public class OrderRecord extends BaseBean<OrderRecord> {
 	
 	private String senderName;
 	
+	private String recieverEmail;
+	
+	private String recieverName;
+	
+	private String subject;
+	
 	private String content;
 	
 	private String fileUrl;
@@ -38,6 +44,30 @@ public class OrderRecord extends BaseBean<OrderRecord> {
 	private Date updateTime;
 	
 	private Integer isdel;
+
+	public String getRecieverEmail() {
+		return recieverEmail;
+	}
+
+	public void setRecieverEmail(String recieverEmail) {
+		this.recieverEmail = recieverEmail;
+	}
+
+	public String getRecieverName() {
+		return recieverName;
+	}
+
+	public void setRecieverName(String recieverName) {
+		this.recieverName = recieverName;
+	}
+
+	public String getSubject() {
+		return subject;
+	}
+
+	public void setSubject(String subject) {
+		this.subject = subject;
+	}
 
 	public Integer getOrderRecordId() {
 		return orderRecordId;
