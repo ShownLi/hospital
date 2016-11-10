@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.itextpdf.text.log.SysoLogger;
 import com.tourmade.crm.common.framework.BaseService;
 import com.tourmade.crm.common.framework.bean.QueryResult;
 import com.tourmade.crm.common.model.base.value.baseconfig.PageHelper;
@@ -76,7 +77,7 @@ public class CaseService extends BaseService {
 			map.put("email", crmcase.getEmail());
 		}
 		if(crmcase.getMobile()!=null){
-			map.put("mobile", crmcase.getMobile());
+			map.put("mobilephone", crmcase.getMobile());
 		}
 		
 		List<Case> data = caseMapper.queryCase(map);
@@ -125,13 +126,43 @@ public class CaseService extends BaseService {
 	 * @return
 	 */
 	public int saveCase(Case crmcase) {
-
+		System.out.println(crmcase.getSource());
 		
 		try {
-//			Parameter parameter = caseMapper.getParameterByCountryChinese(crmcase.getDestination());
-//			crmcase.setDestination(parameter.getChinese());
-//			crmcase.setDestinationCode(parameter.getValue());
-			crmcase.setStatus("0");
+			Customer customer = caseMapper.getCustomerByCommunication(crmcase);
+			System.out.println(" 1 ^^^^^^"+customer);
+			if(customer!=null){	
+				System.out.println("-----------");
+				Customer customer2=new Customer();
+				customer2.setCustomerId(customer.getCustomerId());
+				if(crmcase.getChineseName()!=null){customer2.setChineseName(crmcase.getChineseName());}
+				if(crmcase.getAgeGroup()!=null){customer2.setAgeGroup(crmcase.getAgeGroup());}
+				if(crmcase.getBirthday()!=null){customer2.setBirthday(crmcase.getBirthday());}
+				if(crmcase.getEmail()!=null){customer2.setEmail(crmcase.getEmail());}
+				if(crmcase.getEnglishName()!=null){customer2.setEnglishName(crmcase.getEnglishName());}
+				if(crmcase.getGender()!=null){customer2.setGender(crmcase.getGender());}			
+				if(crmcase.getLocation()!=null){customer2.setLocation(crmcase.getLocation());}
+				if(crmcase.getMobile()!=null){customer2.setMobilephone(crmcase.getMobile());}
+				if(crmcase.getPortalId()!=null){customer2.setPortalId(crmcase.getPortalId());}
+				if(crmcase.getQq()!=null){customer2.setQq(crmcase.getQq());}
+				if(crmcase.getSource()!=null){customer2.setSource(crmcase.getSource());}
+				if(crmcase.getTelephone()!=null){customer2.setTelephone(crmcase.getTelephone());}
+				if(crmcase.getWechat()!=null){customer2.setWechat(crmcase.getWechat());}
+				System.out.println("customer2 :"+customer2);
+				if(!customer2.getLevel().equals("0")){
+					customer2.setLevel(crmcase.getLevel());
+				}else{
+					customer2.setLevel("0");
+				}				
+				caseMapper.updateCustomer(customer2);
+				crmcase.setCustomerId(customer.getCustomerId());
+				System.out.println(" ^^^^^^^^^^");
+			}else{
+				int customerId = caseMapper.saveCustomer(crmcase);
+				crmcase.setCustomerId(customerId);
+				System.out.println("########");
+			}		
+			crmcase.setStatus("1");
 			caseMapper.saveCase(crmcase);
 		} catch (Exception e) {
 			logger.error("CaseService.saveCase() --> " + crmcase + "-->" + e.getMessage());

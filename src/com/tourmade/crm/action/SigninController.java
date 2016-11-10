@@ -74,12 +74,13 @@ public class SigninController extends BaseSimpleFormController {
 			if (null != realUser) {
 				json.setSuccess(true);
 				json.setMsg("登录成功");
+//			session.setAttribute("login", realUser);
+				
 				request.getSession().setAttribute(Constants.LOGIN_KEY, realUser);
 			} else {
 				json.setMsg("用户名或密码错误");
 			}
 		}
-
 		return json;
 	}
 

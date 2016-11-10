@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:task="http://www.springframework.org/schema/task"  
+       xsi:schemaLocation="
+http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.1.xsd
+http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
+http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd">
+
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="ignoreResourceNotFound" value="true" />
+		<property name="locations">
+			<list>
+				<value>classpath:/AppConfig.properties</value>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"> 
+		<property name="driverClassName" value="org.logicalcobwebs.proxool.ProxoolDriver"/> 
+		<property name="url" value="proxool.dbpool"/> 
+	</bean>
+	<!-- 启动 注解方式 自动装载 -->
+    <context:annotation-config />
+	<!-- 激活annotation功能 -->
+	<context:spring-configured/>
+	<!-- 只要注解为启动事务的方法才有事务
+    <tx:annotation-driven /> -->
+	<tx:annotation-driven transaction-manager="txManager" proxy-target-class="true" />
+	<!-- 不扫描带有@Controller注解的类。因为这些类已经随容器启动时，在servlet-context中扫描过一遍了 -->
+	<context:component-scan base-package="com.tourmade">
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+	</context:component-scan>
+	
+	<!-- <bean id="paginationInterceptor" class="com.tourmade.crm.common.pagination.PaginationInterceptor"></bean> -->
+	
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"/>
+		<property name="typeAliasesPackage" value="com.tourmade.crm.entity" />
+		<!-- <property name="plugins" ref="paginationInterceptor"/> -->
+	</bean>
+	
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate" autowire="byName">
+		<constructor-arg index="0" ref="sqlSessionFactory"></constructor-arg>
+		<!--<constructor-arg index="1" value="BATCH"></constructor-arg>-->
+	</bean>
+	
+	<bean id="baseDao" class="com.tourmade.crm.common.framework.util.MybatisDaoImpl" autowire="byName">
+		<property name="sqlSession" ref="sqlSession"></property>
+	</bean>
+	
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.tourmade.crm.mapper" />
+    </bean>
+    
+    <!-- 通用事务配置 -->
+	<bean id="txManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource"><ref local="dataSource" /></property>
+	</bean>
+	 <!-- 声明式事务管理
+    <bean id="baseTransactionProxy" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" abstract="true">
+        <property name="transactionManager" ref="txManager"></property>
+        <property name="transactionAttributes">
+            <props>
+                <prop key="insert*">PROPAGATION_REQUIRED</prop>            
+                <prop key="update*">PROPAGATION_REQUIRED</prop>
+                <prop key="delete*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>
+	
+	<tx:advice id="txAdvice" transaction-manager="txManager">
+		<tx:attributes>
+			<tx:method name="spe*" read-only="false" propagation="REQUIRED" rollback-for="java.lang.Exception" />
+			<tx:method name="get*" read-only="true" />
+			<tx:method name="find*" read-only="true" />
+			<tx:method name="select*" read-only="true" />
+			<tx:method name="count*" read-only="true" />
+			<tx:method name="search*" read-only="true" />
+			<tx:method name="query*" read-only="true" />
+			<tx:method name="*" propagation="REQUIRED" rollback-for="java.lang.Exception" read-only="false" />
+		</tx:attributes>
+	</tx:advice>
+
+	<aop:config>
+		<aop:pointcut id="serviceOperation" expression="execution(* com.tourmade.*.service.*.*(..))" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="serviceOperation" />
+	</aop:config>
+ -->
+</beans>

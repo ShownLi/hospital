@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd
+		http://www.springframework.org/schema/fex   
+        http://www.springframework.org/schema/fex/spring-fex-1.5.xsd   
+        http://www.springframework.org/schema/task    
+        http://www.springframework.org/schema/task/spring-task-3.0.xsd">
+
+
+	<!-- <context:annotation-config /> -->
+	<!-- 扫描业务组件,让spring不扫描带有@Service注解的类(留在root-context.xml中扫描@Service注解的类),防止事务失效 -->
+	<context:component-scan base-package="com.tourmade">
+		<context:exclude-filter type="annotation"
+			expression="org.springframework.stereotype.Service" />
+	</context:component-scan>
+
+	<!-- 启动Spring MVC的注解功能，完成请求和注解POJO的映射 -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="defaultEncoding" value="UTF-8"></property>
+	</bean>
+	<!-- Spring MVC JSON配置 -->
+	<mvc:annotation-driven
+		ignoreDefaultModelOnRedirect="true">
+		<mvc:message-converters register-defaults="true">
+			<bean class="org.springframework.http.converter.ByteArrayHttpMessageConverter" />
+			<bean class="org.springframework.http.converter.StringHttpMessageConverter">
+				<property name="supportedMediaTypes" value="text/plain;charset=UTF-8" />
+			</bean>
+			<bean class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+				<property name="supportedMediaTypes" value="text/plain;charset=UTF-8" />
+			</bean>
+		</mvc:message-converters>
+
+	</mvc:annotation-driven>
+
+	<!-- 拦截器 -->
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<bean class="com.tourmade.crm.common.interceptors.SecurityInterceptor">
+				<property name="excludeUrls">
+					<list>
+						<value>/signin.html</value>
+						<value>/signin.do</value>
+					</list>
+				</property>
+			</bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
+
+
+	<!--通用视图解析器 -->
+	<bean id="viewResolverCommon"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/view" />
+		<property name="contentType" value="text/html; charset=UTF-8" />
+		<property name="suffix" value=".jsp" /><!--可为空,方便实现自已的依据扩展名来选择视图解释类的逻辑 -->
+		<property name="viewClass">
+			<value>org.springframework.web.servlet.view.InternalResourceView</value>
+		</property>
+		<property name="order" value="0" />
+	</bean>
+
+
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+
+			</list>
+		</property>
+	</bean>
+	<!-- 定时任务end -->
+
+	<mvc:resources mapping="assets/**" location="WEB-INF/view/assets/" cache-period="31556926" />
+
+
+	<task:annotation-driven />
+
+
+
+</beans> 

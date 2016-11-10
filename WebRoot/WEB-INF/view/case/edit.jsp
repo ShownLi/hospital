@@ -31,6 +31,96 @@
         </div>
         <form class="form-horizontal" id="form-case">
         <div class="panel-body panel-body-nopadding">
+        
+        	<div class="section-block">
+        		<h5 class="section-title">客人基本信息</h5>
+	            <div class="form-group col-sm-4">
+	              <label class="col-sm-3 control-label">中文名<span class="asterisk">*</span></label>
+	              <div class="col-sm-9">
+	                <input type="text" name="chineseName" placeholder="中文名" class="customer-select fullwidth" value="${crmcase.customerId}" />
+	              </div>
+	            </div>
+	            <div class="form-group col-sm-4">
+	              <label class="col-sm-3 control-label">英文名</label>
+	              <div class="col-sm-9">
+	                <input type="text" name="englishName" placeholder="英文名" class="form-control" />
+	              </div>
+	            </div> 
+	            <div class="form-group col-sm-4">
+	              <label class="col-sm-3 control-label" >性别 <span class="asterisk">&nbsp;</span></label>
+	              <div class="col-sm-9">
+	                <div class="rdio rdio-primary rdio-inline">
+	                  <input type="radio" id="male" value="male" name="gender">
+	                  <label for="male">男</label>
+	                </div><!-- rdio -->
+	                <div class="rdio rdio-primary rdio-inline">
+	                  <input type="radio" id="female" value="female" name="gender" >
+	                  <label for="female">女</label>
+	                </div><!-- rdio -->
+	              </div>
+	            </div>
+	            <div class="form-group col-sm-4">
+	            	<label class="col-sm-3 control-label">生日</label>
+	            	<div class="col-sm-9 input-group input-datepicker">
+		                <input type="text" name="birthday" class="datepicker form-control" placeholder="yyyy/mm/dd" id="birthday" autocomplete="off">
+		                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+	                </div>
+	            </div> 
+	            <div class="form-group col-sm-4">
+	              <label class="col-sm-3 control-label" >年龄段</label>
+	              <div class="col-sm-9">
+	                <input type="text" name="ageGroup" placeholder="请选择一个年龄段" class="agegroup-select fullwidth" />
+	              </div>
+	            </div>
+ 	            <div class="form-group col-sm-4">
+	              <label class="col-sm-3 control-label">客人级别</label>
+	              <div class="col-sm-9">
+	                <input type="text" readonly name="level" placeholder="客人级别" class="level-select fullwidth" value="{crmcase.level}" />
+	              </div>
+	            </div>  
+	        </div>
+	        
+	        <div class="section-block">
+	        	<h5 class="section-title">客人联系方式  <span class="contact-note">(手机、微信、QQ、邮箱至少填写一个)</span></h5>
+	            <div class="form-group col-sm-4 contact-field">
+	              <label class="col-sm-3 control-label">固定电话</label>
+	              <div class="col-sm-9">
+	                <input type="text" name="telephone" placeholder="固定电话" class="form-control" />
+	              </div>
+	            </div>
+	            <div class="form-group col-sm-4 contact-field">
+	              <label class="col-sm-3 control-label">手机</label>
+	              <div class="col-sm-9">
+	                <input type="text" name="mobile" placeholder="手机" class="form-control" />
+	              </div>
+	            </div>    
+	            <div class="form-group col-sm-4 contact-field">
+	              <label class="col-sm-3 control-label">微信</label>
+	              <div class="col-sm-9">
+	                <input type="text" name="wechat" placeholder="微信" class="form-control" />
+	              </div>
+	            </div>       
+	            <div class="form-group col-sm-4 contact-field">
+	              <label class="col-sm-3 control-label">QQ</label>
+	              <div class="col-sm-9">
+	                <input type="text" name="qq" placeholder="QQ" class="form-control" />
+	              </div>
+	            </div>            
+	            <div class="form-group col-sm-4 contact-field">
+	              <label class="col-sm-3 control-label">邮箱</label>
+	              <div class="col-sm-9">
+	                <input type="text" name="email" placeholder="邮箱" class="form-control"  />
+	              </div>
+	            </div>  
+	            <div class="form-group col-sm-4">
+	              <label class="col-sm-3 control-label">所在地</label>
+	              <div class="col-sm-9">
+	                <input type="text" name="location" placeholder="所在地" class="form-control" />
+	              </div>
+	            </div> 
+	        </div>
+        
+        
             <div class="section-block">
               	<div class="form-group col-sm-4">
               	   <label class="col-sm-4 control-label">所属客人</label>
@@ -576,7 +666,7 @@
 	<script src="${rootPath}assets/js/jquery.validate.min.js"></script>
 	
 <script type="text/javascript">
-	
+	console.log("${crmcase}");
 	var country = ${country};
     var language = ${language};
     var withwho = ${withwho};
@@ -791,7 +881,6 @@
              { data: "agencyName" },
              { data: "salesName" },
            	 { data: "destination" },
- /*            { data: "budget" }, */
              { data: "status" }
        ]		 	
 	});

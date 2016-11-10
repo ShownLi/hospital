@@ -116,7 +116,7 @@
 			and customer_email  like '%${email}%'
 		</if> 
 		<if test="mobile != null and mobile != ''">
-			and customer_mobile  like '%${mobile}%'
+			and customer_mobile like '%${mobile}%'
 		</if> 
 	</select>
 	
@@ -129,6 +129,16 @@
 	<insert id="saveCase" parameterType="Case" flushCache="true" useGeneratedKeys="true" keyProperty="caseId" keyColumn="GENERATED_KEY">
 		insert into tm_case(
 			customer_id,
+			customer_name,
+			customer_name_en,
+			customer_portal_id,
+			customer_mobile,
+			customer_email,
+			customer_wechat,
+			customer_qq,
+			customer_location,
+			customer_ageGroup,
+			customer_gender,
 			operator,
 			prefer_language,
 			with_who,
@@ -160,19 +170,21 @@
 			visa,
 			flight,
 			ip_address,
-			customer_name,
-			customer_name_en,
-			customer_portal_id,
-			customer_mobile,
-			customer_email,
-			customer_wechat,
-			customer_qq,
 			creat_time,
 			update_time,
 			isdel
-
 		)values(
 			#{customerId,jdbcType=VARCHAR},
+			#{chineseName,jdbcType=VARCHAR},
+			#{englishName,jdbcType=VARCHAR},
+			#{portalId,jdbcType=VARCHAR},
+			#{mobile,jdbcType=VARCHAR},
+			#{email,jdbcType=VARCHAR},
+			#{wechat,jdbcType=VARCHAR},
+			#{qq,jdbcType=VARCHAR},
+			#{location,jdbcType=VARCHAR},
+			#{ageGroup,jdbcType=VARCHAR},
+			#{gender,jdbcType=VARCHAR},
 			#{operator,jdbcType=VARCHAR},
 			#{preferLanguage,jdbcType=VARCHAR},
 			#{withwho,jdbcType=VARCHAR},
@@ -204,13 +216,6 @@
 			#{visa,jdbcType=VARCHAR},
 			#{flight,jdbcType=VARCHAR},
 			#{ipAddress,jdbcType=VARCHAR},
-			#{chineseName,jdbcType=VARCHAR},
-			#{englishName,jdbcType=VARCHAR},
-			#{portalId,jdbcType=VARCHAR},
-			#{mobile,jdbcType=VARCHAR},
-			#{email,jdbcType=VARCHAR},
-			#{wechat,jdbcType=VARCHAR},
-			#{qq,jdbcType=VARCHAR},
 			NOW(),
 			NOW(),
 			0
@@ -259,6 +264,16 @@
 		select
 		u.case_id as caseId,
 		u.customer_id as customerId, 
+		customer_name as chineseName,
+		customer_name_en as englishName,
+		customer_portal_id as portalId,
+		customer_mobile as mobile,
+		customer_email as email,
+		customer_wechat as wechat,
+		customer_qq as qq,
+		customer_location as location,
+		customer_ageGroup as ageGroup,
+		customer_gender as gender,
 		u.operator as operator,
 		u.prefer_language as preferLanguage,
 		u.contact_type as contactType,
@@ -436,4 +451,120 @@
 		where
 		case_id = #{caseId}
 	</update>
+	
+	<select id="getCustomerByCommunication" parameterType="Case" resultType="Customer">
+		select
+			customer_portal_id as portalId,
+			email as email,
+			mobilephone as mobilephone,
+			qq ,
+			wechat,
+			customer_id as customerId
+		from tm_customer
+		<where> 
+			<if test="portalId != null and portalId != ''">
+				customer_portal_id = #{portalId}
+			</if> 
+			<if test="email != null and email != ''">
+				 or email = #{email} 
+			</if>
+			<if test="mobile != null and mobile != ''">
+				or mobilephone = #{mobile} 
+			</if>
+			<if test="qq != null and qq != ''">
+				or qq = #{qq} 
+			</if>
+			<if test="wechat!= null and wechat != ''">
+				or wechat = #{wechat}
+			</if>
+		</where>
+		limit 1		
+	</select>
+	
+	<!-- 不确定Case是否可以 
+	
+	<update id="updateCustomer" parameterType="com.tourmade.crm.entity.Customer">
+		update tm_customer
+			<set>	
+ 　　　	   <if test="chineseName!= null and chineseName!=''" >customer_name_zh = #{chineseName},</if> 
+　　　　　　<if test="englishName!= null and englishName!=''">customer_name_en = #{englishName},</if>
+	      <if test="level != null and level !=''"> customer_level = #{level},</if>
+		   　<if test="location != null and location!= ''"> location = #{location},</if>
+		   　<if test="source != null and source!= ''"> source = #{source},</if>
+		   　<if test="ageGroup != null and ageGroup!= ''"> age_group = #{ageGroup},</if>
+		   　<if test="gender != null and gender!= ''"> gender = #{gender},</if>
+		   　<if test="telephone != null and telephone!= ''"> telephone = #{telephone},</if>
+		   　<if test="mobilephone != null and mobilephone!= ''"> mobilephone = #{mobilephone},</if>
+		   　<if test="wechat != null and wechat!= ''"> wechat = #{wechat},</if>	
+		   <if test="qq != null and qq!= ''"> qq = #{qq},</if>
+		   <if test="email != null and email!= ''"> email = #{email},</if>
+		   <if test="birthday != null and birthday!= ''"> birthday = #{birthday},</if>
+		   	update_time=NOW()	   
+　　　　		</set>
+		where
+			customer_id=#{customerId}
+	</update>  -->
+	
+	 <update id="updateCustomer" parameterType="Customer" flushCache="true">
+		update tm_customer
+		set
+		customer_name_zh=#{chineseName},
+		customer_name_en=#{englishName},
+		customer_level=#{level},
+		location=#{location},
+		source=#{source},
+		age_group=#{ageGroup},
+		gender=#{gender},
+		telephone=#{telephone},
+		mobilephone=#{mobilephone},
+		wechat=#{wechat},
+		qq=#{qq},
+		email=#{email},
+		birthday=#{birthday},
+		update_time=NOW()
+		where
+		customer_id=#{customerId}
+	</update> 
+	
+	<insert id="saveCustomer" parameterType="Case" flushCache="true" useGeneratedKeys="true" keyProperty="customerId" keyColumn="GENERATED_KEY">
+		insert into tm_customer(
+			customer_name_zh,
+			customer_name_en,
+			customer_level,
+			location,
+			source,
+			age_group,
+			gender,
+			telephone,
+			mobilephone,
+			wechat,
+			qq,
+			email,
+			birthday,
+			creat_time,
+			update_time,
+			isdel
+		)values(
+			#{chineseName,jdbcType=VARCHAR},
+			#{englishName,jdbcType=VARCHAR},
+			#{level,jdbcType=VARCHAR},
+			#{location,jdbcType=VARCHAR},
+			#{source,jdbcType=VARCHAR},
+			#{ageGroup,jdbcType=VARCHAR},
+			#{gender,jdbcType=VARCHAR},
+			#{telephone,jdbcType=VARCHAR},
+			#{mobile,jdbcType=VARCHAR},
+			#{wechat,jdbcType=VARCHAR},
+			#{qq,jdbcType=VARCHAR},
+			#{email,jdbcType=VARCHAR},
+			#{birthday,jdbcType=VARCHAR},
+			NOW(),
+			NOW(),
+			0
+		)
+	</insert>
 </mapper>
+
+
+
+

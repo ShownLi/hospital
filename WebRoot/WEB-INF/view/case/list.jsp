@@ -17,7 +17,7 @@
 					<i class="fa fa-user"></i> 询单管理 <span>询单列表</span>
 				</h2>				 
 			</div>
-
+			
 			<div class="contentpanel">
 				<!-- content goes here... -->
 
@@ -212,6 +212,7 @@
           <div class="modal-footer align-center">
             <button class="submit btn btn-primary">保存</button> 
               <a class="cancel btn btn-primary" >取消</a>
+              
           </div>
       </form>
     </div><!-- modal-content -->
@@ -330,7 +331,7 @@
 			 				data.email = searchMail;
 			 			}
 			 			if(searchMobile !=null && searchMobile !=""){
-			 				data.mobile = searchMobile;
+			 				data.mobilePhone = searchMobile;
 			 			}
 			 			
 					},
@@ -495,10 +496,8 @@
 			        ]
 				});
 
-			
-		 
+					 
 			$('#searchBtn').on( 'click', function () {
-		    	//alert($('#searchText').attr("value"));
 		        t.draw();
 		    } );
 		
@@ -516,11 +515,6 @@
 		        var data = t.row($(this).parents('tr')).data();
 		        addOrder($(this).attr('id'));
 		    } );
-			
-			/* $('#confirmDelModal').on( 'click', 'button.btn-danger', function () {
-		        var id = $("#confirmDelModal .hiddenId").val();
-		        doDel(id);
-		    } );  */
 	    
 		// Select2
 	    jQuery('select').select2({
@@ -537,23 +531,6 @@
 			window.parent.location = "${rootPath}case/edit.html?id="+id;
 		}
 		
-/* 		function addOrder(id) {
-			 var destination = $("#destination").val();
-	          $.ajax({
-	              type: "post",
-	              url: "${rootPath}case/getSales.do?destination="+destination,
-	              data: destination,
-	              success: function(sales){
-	            	  var json = jQuery.parseJSON( sales );
-	                  $("#salesId").select2({	
-	                      placeholder: '销售',
-	                      data: json
-	                  });
-	              }   
-	          }); 
-			$("#nextModal").modal('show');			
-			$('#caseId').attr("value",id );
-		} */
 		
 		function del(id) {
 			 
@@ -605,22 +582,6 @@
      	 alert("页面正在加载，请稍后...");
       }
       
-	      //添加订单弹出框，目的地与销售联动
-/* 	      $("#destination").change(function(){
-	          var destination = $(this).val();
-	          $.ajax({
-	              type: "post",
-	              url: "${rootPath}case/getSales.do?destination="+destination,
-	              data: destination,
-	              success: function(sales){
-	            	  var json = jQuery.parseJSON( sales );
-	                  $("#salesId").select2({
-	                      placeholder: '销售',
-	                      data: json
-	                  });
-	              }   
-	          }); 
-	      }); */
 	</script>
 
 </body>

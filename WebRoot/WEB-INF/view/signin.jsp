@@ -109,6 +109,7 @@
 					$("#form div.error label.error").hide();
 					jQuery("#form div.error label.error").text("");
 					window.parent.location = "${rootPath}/main.html";
+					alert("${sessionScope.loginUser.userId}")
 				} else {
 					$("#form div.error").show();
 					$("#form div.error label.error").show();

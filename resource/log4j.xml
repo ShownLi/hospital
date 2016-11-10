@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+    <appender name="Export" class="org.apache.log4j.ConsoleAppender">  
+        <layout class="org.apache.log4j.PatternLayout">  
+            <param name="ConversionPattern"     
+                value="[%d{yyyy-MM-dd HH:mm:ss,SSS\} -%C{1}.%M(%L) %-5p]-%m%n" />  
+        </layout> 
+        
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+			<param name="LevelMin" value="INFO" />
+			<param name="LevelMax" value="ERROR" />
+		</filter> 
+    </appender>
+    <appender name="File" class="org.apache.log4j.RollingFileAppender">     
+        <param name="File" value="/usr/local/tomcat7/logs/error.log" />
+        <!-- 设置是否在重新启动服务时，在原有日志的基础添加新日志 -->  
+        <param name="Append" value="true" />
+        <param name="MaxFileSize" value="5MB" />  
+        <param name="MaxBackupIndex" value="10" />  
+        <layout class="org.apache.log4j.PatternLayout">  
+            <param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss,SSS\} -%C{1}.%M(%L) %-5p]-%m%n" />  
+        </layout>  
+    </appender>
+
+    <logger name="org.apache">
+        <level value="WARN"/>
+    </logger>
+
+    <logger name="org.springframework">
+        <level value="WARN"/>
+    </logger>
+    
+    <logger name="com.tourmade">
+        <level value="INFO"/>
+    </logger>
+   
+   <!-- 如果不想控制台输出sql语句，则注释掉下面两个category标签
+    -->
+    <!-- 是否显示数据库连接状态 deng+-->
+	<category name="java.sql.Connection">
+		<priority value="info" />
+	</category>
+	<!--打印SQL语句执行的ibatis方法 deng+-->
+	<category name="java.sql.Statement">
+		<priority value="info" />
+	</category>
+	<!-- SQL语句执行打印 deng+-->
+	<category name="java.sql.PreparedStatement">
+		<priority value="info" />
+	</category>
+	<!-- 是否显示sql执行返回值 deng+ -->
+	<category name="java.sql.ResultSet">
+		<priority value="info" />
+	</category>
+	<category name="com.ibatis">
+		<priority value="info" />
+	</category>
+	  
+    <root>
+        <level value="WARN"/>
+        <appender-ref ref="Export"/>
+        <appender-ref ref="File"/>
+    </root>
+    
+</log4j:configuration>
