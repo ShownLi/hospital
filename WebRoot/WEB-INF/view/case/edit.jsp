@@ -138,12 +138,12 @@
                     <label class="col-sm-4 control-label">希望联系方式</label>
                     <div class="col-sm-8">
                       <select name="contactType" class="contact-select fullwidth" multiple="multiple">
-					  <option value="wechat">微信</option>
-					  <option value="mobilephone">手机</option>
-					  
-					  <option value="qq">qq</option>
-					  <option value="mail">邮箱</option>
-					</select>
+              					  <option value="wechat">微信</option>
+              					  <option value="mobilephone">手机</option>
+              					  
+              					  <option value="qq">qq</option>
+              					  <option value="mail">邮箱</option>
+					            </select>
                     </div>
                 </div>   
                 <div class="form-group col-sm-4">
