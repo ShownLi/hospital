@@ -18,6 +18,30 @@ public class Case extends BaseBean<Case> {
 	
 	private Integer customerId;
 	
+	private String chineseName;
+	
+	private String englishName;
+	
+	private String telephone;
+	
+	private String mobile;
+	
+	private String email;
+	
+	private String wechat;
+
+	private String qq;
+	
+	private String level;
+	
+	private Date birthday;
+	
+	private String ageGroup;
+	
+	private String gender;
+	
+	private String location;
+	
 	private Integer operator;
 	
 	private String preferLanguage;
@@ -85,18 +109,6 @@ public class Case extends BaseBean<Case> {
 	private Date creatTime;
 	
 	private Date updateTime;
-	
-	private String chineseName;
-	
-	private String englishName;
-	
-	private String mobile;
-	
-	private String email;
-	
-	private String wechat;
-
-	private String qq;
 	
 	private String reason;
 	
@@ -469,27 +481,82 @@ public class Case extends BaseBean<Case> {
 		return serialVersionUID;
 	}
 
+	public Date getBirthday() {
+		return birthday;
+	}
+
+	public void setBirthday(Date birthday) {
+		this.birthday = birthday;
+	}
+
+	public String getAgeGroup() {
+		return ageGroup;
+	}
+
+	public void setAgeGroup(String ageGroup) {
+		this.ageGroup = ageGroup;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
+	}
+	
+	public String getLevel() {
+		return level;
+	}
+
+	public void setLevel(String level) {
+		this.level = level;
+	}	
+
+	public String getTelephone() {
+		return telephone;
+	}
+
+	public void setTelephone(String telephone) {
+		this.telephone = telephone;
+	}
+
 	@Override
 	public String toString() {
 		return "Case [caseId=" + caseId + ", customerId=" + customerId
-				+ ", operator=" + operator + ", preferLanguage="
-				+ preferLanguage + ", withwho=" + withwho + ", adult=" + adult
-				+ ", children=" + children + ", baby=" + baby + ", startTime="
-				+ startTime + ", during=" + during + ", startDate=" + startDate
-				+ ", endDate=" + endDate + ", hotel=" + hotel + ", meals="
-				+ meals + ", requirement=" + requirement + ", guide=" + guide
-				+ ", budget=" + budget + ", contactType=" + contactType
-				+ ", salesId=" + salesId + ", salesName=" + salesName
-				+ ", destination=" + destination + ", destinationCode="
-				+ destinationCode + ", route=" + route + ", routeId=" + routeId
-				+ ", tailormade=" + tailormade + ", passport=" + passport
-				+ ", visa=" + visa + ", flight=" + flight + ", submitType="
-				+ submitType + ", ipAddress=" + ipAddress + ", source="
-				+ source + ", promoteCode=" + promoteCode + ", status="
-				+ status + ", startMonth=" + startMonth + ", creatTime="
-				+ creatTime + ", updateTime=" + updateTime 
-				+", chineseName="+chineseName+", mobile="+mobile
-				+", email="+email+", wechat="+wechat+", qq="+qq
-				+", reason="+reason+"]";
+				+ ", chineseName=" + chineseName + ", englishName="
+				+ englishName + ", telephone=" + telephone + ", mobile="
+				+ mobile + ", email=" + email + ", wechat=" + wechat
+				+ ", qq=" + qq + ", level=" + level + ", birthday=" + birthday
+				+ ", ageGroup=" + ageGroup + ", gender=" + gender
+				+ ", location=" + location + ", operator=" + operator
+				+ ", preferLanguage=" + preferLanguage + ", withwho=" + withwho
+				+ ", adult=" + adult + ", children=" + children + ", baby="
+				+ baby + ", startTime=" + startTime + ", during=" + during
+				+ ", startDate=" + startDate + ", endDate=" + endDate
+				+ ", hotel=" + hotel + ", meals=" + meals + ", requirement="
+				+ requirement + ", guide=" + guide + ", budget=" + budget
+				+ ", contactType=" + contactType + ", salesId=" + salesId
+				+ ", salesName=" + salesName + ", destination=" + destination
+				+ ", destinationCode=" + destinationCode + ", route=" + route
+				+ ", routeId=" + routeId + ", tailormade=" + tailormade
+				+ ", passport=" + passport + ", visa=" + visa + ", flight="
+				+ flight + ", submitType=" + submitType + ", ipAddress="
+				+ ipAddress + ", source=" + source + ", promoteCode="
+				+ promoteCode + ", status=" + status + ", startMonth="
+				+ startMonth + ", creatTime=" + creatTime + ", updateTime="
+				+ updateTime + ", reason=" + reason + ", portalId=" + portalId
+				+ ", comment=" + comment + "]";
 	}
+
+	
+	
 }

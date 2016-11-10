@@ -94,6 +94,10 @@ public class CaseController extends BaseSimpleFormController {
 		String passport = "case.passport";
 		String visa = "case.visa";
 		String flight = "case.flight";
+		String level = "customer.level";
+		String ageGroup = "customer.agegroup";
+		List<EntityList> levelList = service.getParameterInfo(level);
+		List<EntityList> ageGroupList = service.getParameterInfo(ageGroup);
 		List<EntityList> countryList = service.getParameterInfo(country);
 		List<EntityList> languageList = service.getParameterInfo(language);
 		List<EntityList> withList = service.getParameterInfo(withwho);
@@ -109,6 +113,8 @@ public class CaseController extends BaseSimpleFormController {
 		List<EntityList> customer = service.getCustomer();
 		List<EntityList> user = service.getUser();
 		List<EntityList> sales = service.getSales();
+		JSONArray levelResult = JSONArray.fromObject(levelList);
+		JSONArray  ageGroupResult = JSONArray.fromObject(ageGroupList);
 		JSONArray countryResult = JSONArray.fromObject(countryList);
 		JSONArray languageResult = JSONArray.fromObject(languageList);
 		JSONArray withResult = JSONArray.fromObject(withList);
@@ -124,6 +130,8 @@ public class CaseController extends BaseSimpleFormController {
 		JSONArray customerResult = JSONArray.fromObject(customer);
 		JSONArray userResult = JSONArray.fromObject(user);
 		JSONArray salesResult = JSONArray.fromObject(sales);
+		model.addAttribute("level",levelResult);
+		model.addAttribute("ageGroup",ageGroupResult);
 		model.addAttribute("country",countryResult);
 		model.addAttribute("language",languageResult);
 		model.addAttribute("withwho",withResult);
@@ -140,7 +148,7 @@ public class CaseController extends BaseSimpleFormController {
 		model.addAttribute("flight",flightResult);
 		model.addAttribute("user",userResult);
 
-		return "/case/add";
+		return "/case/addCase";
 	}
 	
 	/*
@@ -219,6 +227,7 @@ public class CaseController extends BaseSimpleFormController {
 	public Json doAdd(HttpServletRequest request, HttpSession session, Model model, Case crmcase) {
 		
 		Json json = new Json();
+		System.out.println("&&&&&&"+crmcase);
 		
 		try {
 			service.saveCase(crmcase);
@@ -237,6 +246,8 @@ public class CaseController extends BaseSimpleFormController {
 		if (null != id && !"".equals(id)) {
 			int caseId = Integer.parseInt(id);
 			Case crmcase = service.getCaseById(caseId);
+			System.out.println("#1#: "+crmcase);
+			
 			//解决客人的要求换行符问题
 			if(crmcase.getRequirement()!=null){			
 				String[] splits= crmcase.getRequirement().split("\r\n");

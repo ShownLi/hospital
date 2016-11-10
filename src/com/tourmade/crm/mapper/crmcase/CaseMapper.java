@@ -3,6 +3,8 @@ package com.tourmade.crm.mapper.crmcase;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.tourmade.crm.common.framework.BaseMapper;
 import com.tourmade.crm.entity.Case;
 import com.tourmade.crm.entity.Customer;
@@ -48,5 +50,11 @@ public interface CaseMapper extends BaseMapper {
 	public List<EntityList> getSalesByAgency(String destination);
 
 	public Case getCaseByOrderId(int orderId);
+	
+	public Customer getCustomerByCommunication(Case crmcase);
+	
+	public void updateCustomer(Customer customer);
+	
+	public int saveCustomer(Case crmcase);
 
 }

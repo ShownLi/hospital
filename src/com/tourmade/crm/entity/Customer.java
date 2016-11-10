@@ -2,6 +2,8 @@ package com.tourmade.crm.entity;
 
 import java.util.Date;
 
+import org.apache.ibatis.type.Alias;
+
 import com.tourmade.crm.common.framework.BaseBean;
 
 /**
@@ -12,9 +14,6 @@ import com.tourmade.crm.common.framework.BaseBean;
  */
 public class Customer extends BaseBean<Customer> {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1423523863575074623L;
 
 	private Integer customerId;
@@ -196,13 +195,11 @@ public class Customer extends BaseBean<Customer> {
 		return "Customer [customerId=" + customerId + ", portalId=" + portalId
 				+ ", chineseName=" + chineseName + ", englishName="
 				+ englishName + ", level=" + level + ", location=" + location
-				+ ", source=" + source + ", ageGroup=" + ageGroup
-				+ ", gender=" + gender + ", telephone=" + telephone
-				+ ", mobilephone=" + mobilephone + ", wechat=" + wechat
-				+ ", qq=" + qq + ", email=" + email + ", birthday=" + birthday
+				+ ", source=" + source + ", ageGroup=" + ageGroup + ", gender="
+				+ gender + ", telephone=" + telephone + ", mobilephone="
+				+ mobilephone + ", wechat=" + wechat + ", qq=" + qq
+				+ ", email=" + email + ", birthday=" + birthday
 				+ ", creatTime=" + creatTime + ", updateTime=" + updateTime
 				+ "]";
 	}
-
-	
 }
