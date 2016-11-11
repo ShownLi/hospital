@@ -5,7 +5,7 @@
 <%@ include file="../assets/pages/head.jsp"%>
 </head>
 
-<body>
+<body class="leftpanel-collapsed">
 	<%@ include file="../assets/pages/preloader.jsp"%>
 	<section>
 		<%@ include file="../assets/pages/leftpanel.jsp"%>

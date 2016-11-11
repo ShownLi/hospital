@@ -1,3 +1,9 @@
+section .leftpanel{
+	width: 200px;
+}
+section .mainpanel{
+	margin-left: 200px;
+}
 .form-horizontal .form-group{
 	padding-bottom: 15px;
 }
@@ -143,4 +149,49 @@ label.error{
 }
 .ui-state-disabled {
 	color: #3e3e3e;
+}
+/*.caselist-1{
+	width: 50px;
+}*/
+.caselist-2{
+	width: 200px;
+}
+/*.caselist-3{
+	width: 85px;
+}
+.caselist-4{
+	width: 50px;
+}
+.caselist-5{
+	width: 50px;
+}
+.caselist-6{
+	width: 50px;
+}
+.caselist-7{
+	width: 50px;
+}*/
+.width150{
+	width: 150px;
+}
+.width100{
+	width: 100px;
+}
+.width85{
+	width: 85px;
+}
+.width60{
+	width: 60px;
+}
+.minw50{
+	min-width: 50px;
+}
+.panel-body{
+	padding: 20px 5px;
+}
+.table thead > tr > th, .table tbody > tr > th, .table tfoot > tr > th, .table thead > tr > td, .table tbody > tr > td, .table tfoot > tr > td {
+    vertical-align: middle;
+}
+.odd{
+	background: #f0f0f0;
 }
