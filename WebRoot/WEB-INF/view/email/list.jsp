@@ -6,7 +6,7 @@
 <link href="${rootPath }assets/css/jquery.datatables.css" rel="stylesheet">
 </head>
 
-<body>
+<body class="leftpanel-collapsed">
 	<%@ include file="../assets/pages/preloader.jsp"%>
 	<section>
 		<%@ include file="../assets/pages/leftpanel.jsp"%>
