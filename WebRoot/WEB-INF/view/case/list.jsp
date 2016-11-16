@@ -338,24 +338,8 @@
 						return JSON.stringify( json );
 					}
 				},
-				columnDefs: [
-<<<<<<< HEAD
-					  {
-		                  data: "caseId",
-		                  orderable: false,
-		                  render: function ( data, type, full, meta ) {
-		                      //return '<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a>&nbsp;<a class="btn btn-danger btn-xs" id="'+data+'"><span class="fa fa-minus-circle"></span> 无效</a>&nbsp<a class="btn btn-primary btn-xs" id="'+data+'"></span> 增加订单</a>&nbsp';
-		                      //return '<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a>&nbsp;<a class="btn btn-danger btn-xs" id="'+data+'"><span class="fa fa-minus-circle"></span> 无效</a>&nbsp';
-		                      return '<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a>&nbsp;<a class="btn btn-handle btn-xs" id="'+data+'"></span>处理</a>&nbsp';
-		                  },
-		                  targets: 13
-					  },
-					  
+				columnDefs: [		  
  					  {
-			                data: "destination",
-=======
-						{
->>>>>>> 4162e9a29316e3eac13fbac0849f0250cc9d9cd9
 			                orderable: false,
 			                render: function ( data, type, full, meta ) {
 			                    return "<div class='minw50'>" + full.caseId + "</div>" + "<div class='minw50'>" + full.chineseName + "</div>"
