@@ -119,21 +119,94 @@ public class CaseService extends BaseService {
 		return result;
 	}
 	
+
+	/*
+	 * 查询是否有老客人
+	 */
+	public List judgeCustomer(Case crmcase){
+		try {
+			List<Customer> list = caseMapper.getCustomerByCommunication(crmcase);	
+			return list;
+		} catch (Exception e) {
+			logger.error("CaseService.judgeCustomer() --> "  + "-->" + e.getMessage());
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	/*
+	 * 添加客人
+	 */
+	public void saveCustomer(Case crmcase){
+		try {
+			caseMapper.saveCustomer(crmcase);
+		} catch (Exception e) {
+			logger.error("CaseService.seveCustomer() --> " + crmcase.getCustomerId() + "-->" + e.getMessage());
+			e.printStackTrace();
+		}
+	}
+	
 	/**
 	 * 新增询单
 	 * 
 	 * @param case
 	 * @return
 	 */
-	public int saveCase(Case crmcase) {
-		System.out.println(crmcase.getSource());
-		
+	public void saveCase(Case crmcase) {
 		try {
-			Customer customer = caseMapper.getCustomerByCommunication(crmcase);
-			System.out.println(" 1 ^^^^^^"+customer);
-			if(customer!=null){	
-				System.out.println("-----------");
-				Customer customer2=new Customer();
+			crmcase.setStatus("1");
+			crmcase.setLevel("0");
+			caseMapper.saveCase(crmcase);
+		} catch (Exception e) {
+			logger.error("CaseService.saveCase() --> " + crmcase + "-->" + e.getMessage());
+			e.printStackTrace();
+
+		}
+	}	
+		/*
+		 * 修改客人信息
+		 */
+	
+	public void updateCustomer(Case crmcase) {
+		Customer customer=new Customer();		
+		try {
+			customer.setCustomerId(crmcase.getCustomerId());
+			if(crmcase.getChineseName()!=null){customer.setChineseName(crmcase.getChineseName());}
+			if(crmcase.getAgeGroup()!=null){customer.setAgeGroup(crmcase.getAgeGroup());}
+			if(crmcase.getBirthday()!=null){customer.setBirthday(crmcase.getBirthday());}
+			if(crmcase.getEmail()!=null){customer.setEmail(crmcase.getEmail());}
+			if(crmcase.getEnglishName()!=null){customer.setEnglishName(crmcase.getEnglishName());}
+			if(crmcase.getGender()!=null){customer.setGender(crmcase.getGender());}			
+			if(crmcase.getLocation()!=null){customer.setLocation(crmcase.getLocation());}
+			if(crmcase.getMobile()!=null){customer.setMobilephone(crmcase.getMobile());}
+			if(crmcase.getPortalId()!=null){customer.setPortalId(crmcase.getPortalId());}
+			if(crmcase.getQq()!=null){customer.setQq(crmcase.getQq());}
+			if(crmcase.getSource()!=null){customer.setSource(crmcase.getSource());}
+			if(crmcase.getTelephone()!=null){customer.setTelephone(crmcase.getTelephone());}
+			if(crmcase.getWechat()!=null){customer.setWechat(crmcase.getWechat());}
+			caseMapper.updateCustomer(customer);
+			
+/*			crmcase.setStatus("1");
+			caseMapper.saveCase(crmcase);*/
+
+			
+/*			if(!customer.getLevel().equals("0")){
+				customer.setLevel(crmcase.getLevel());
+			}else{
+				customer.setLevel("0");
+			}	*/			
+			
+		} catch (Exception e) {
+			logger.error("CaseService.saveCase() --> " + crmcase + "-->" + e.getMessage());
+			e.printStackTrace();
+
+		}
+	}	
+		
+		
+//		try {
+
+/*				Customer customer2=new Customer();
 				customer2.setCustomerId(customer.getCustomerId());
 				if(crmcase.getChineseName()!=null){customer2.setChineseName(crmcase.getChineseName());}
 				if(crmcase.getAgeGroup()!=null){customer2.setAgeGroup(crmcase.getAgeGroup());}
@@ -155,22 +228,21 @@ public class CaseService extends BaseService {
 					customer2.setLevel("0");
 				}				
 				caseMapper.updateCustomer(customer2);
-				crmcase.setCustomerId(customer.getCustomerId());
-				System.out.println(" ^^^^^^^^^^");
-			}else{
+				crmcase.setCustomerId(customer.getCustomerId());*/
+/*			}else{
+				//生成新客人
 				int customerId = caseMapper.saveCustomer(crmcase);
-				crmcase.setCustomerId(customerId);
-				System.out.println("########");
+				crmcase.setCustomerId(crmcase.getCustomerId());
 			}		
 			crmcase.setStatus("1");
-			caseMapper.saveCase(crmcase);
-		} catch (Exception e) {
+			caseMapper.saveCase(crmcase);*/
+/*		} catch (Exception e) {
 			logger.error("CaseService.saveCase() --> " + crmcase + "-->" + e.getMessage());
 			e.printStackTrace();
-			return 0;
+			return map;
 		}
-		return crmcase.getCaseId();
-	}
+		return map;*/
+	
 
 	/**
 	 * 根据主键获取询单信息

@@ -51,7 +51,7 @@ public interface CaseMapper extends BaseMapper {
 
 	public Case getCaseByOrderId(int orderId);
 	
-	public Customer getCustomerByCommunication(Case crmcase);
+	public List<Customer> getCustomerByCommunication(Case crmcase);
 	
 	public void updateCustomer(Customer customer);
 	

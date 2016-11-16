@@ -350,7 +350,7 @@
 		                  render: function ( data, type, full, meta ) {
 		                      //return '<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a>&nbsp;<a class="btn btn-danger btn-xs" id="'+data+'"><span class="fa fa-minus-circle"></span> 无效</a>&nbsp<a class="btn btn-primary btn-xs" id="'+data+'"></span> 增加订单</a>&nbsp';
 		                      //return '<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a>&nbsp;<a class="btn btn-danger btn-xs" id="'+data+'"><span class="fa fa-minus-circle"></span> 无效</a>&nbsp';
-		                      return '<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a>&nbsp;';
+		                      return '<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a>&nbsp;<a class="btn btn-handle btn-xs" id="'+data+'"></span>处理</a>&nbsp';
 		                  },
 		                  targets: 13
 					  },
@@ -499,6 +499,12 @@
 			$('#searchBtn').on( 'click', function () {
 		        t.draw();
 		    } );
+		    
+		    //处理询单
+		    $('#dataTable tbody').on( 'click', 'a.btn-handle', function () {
+		        var data = t.row($(this).parents('tr')).data();
+		        handle($(this).attr('id'));
+		    } );
 		
 			$('#dataTable tbody').on( 'click', 'a.btn-success', function () {
 		        var data = t.row($(this).parents('tr')).data();
@@ -526,10 +532,14 @@
 	    $(".nextModal .submit").click(function(){	    		
 	    	  order_submit();
 	    });
+	    
 		function edit(id) {
 			window.parent.location = "${rootPath}case/edit.html?id="+id;
 		}
 		
+		function handle(id) {
+			window.parent.location = "${rootPath}case/handle.html?id="+id;
+		}
 		
 		function del(id) {
 			 

@@ -11,7 +11,7 @@
 			u.agency_name as agencyName,
 			u.sales_id as salesId,
 			u.sales_name as salesName,
-			u.operator as operator,
+		<!-- 	u.operator as operator, -->
 			u.destination as destination,
 			u.status as status,
 			u.reason as reason,
