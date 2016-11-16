@@ -85,9 +85,7 @@
 
 			$(".nav-parent").eq(4).addClass("nav-active");
       		$(".nav-parent").eq(4).find(".children").show();
-      		
-      		
-      				
+      		     				
 			var t = jQuery('#dataTable').DataTable({
 				searching:false,
 				pageLength: 10,
