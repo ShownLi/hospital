@@ -78,11 +78,11 @@
 							<table id="dataTable" class="table">
 								<thead>
 									<tr>
-										<th>ID <br>/ 客人</th>
-										<th>手机 <br>/ 邮箱</th>
-										<th>目的地<br> / 预算 </th>
-										<th>询单来源 <br>/ 跟单员</th>
-										<th>状态 <br>/ 创建时间</th>
+										<th>ID <br>客人</th>
+										<th>手机 <br>邮箱</th>
+										<th>目的地<br>预算 </th>
+										<th>询单来源 <br>跟单员</th>
+										<th>状态 <br>创建时间</th>
 										<th>客人要求</th>
 										<th>无效原因</th>
 										<th>注释</th>
