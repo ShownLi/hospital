@@ -28,18 +28,18 @@
 
         <h5 class="sidebartitle"></h5>
         <ul class="nav nav-pills nav-stacked nav-bracket">  
-            <li class="nav-parent"><a href="javascript:void(0);"><i class="fa fa-user"></i> <span>询单管理</span></a>
+            <li class="nav-parent"><a href="javascript:void(0);"><i class="fa fa-paw"></i> <span>询单管理</span></a>
                 <ul class="children">
                     <li><a href="${rootPath }case/list.html"><i class="fa fa-caret-right"></i> 询单列表</a></li>
                     <li><a href="${rootPath }case/add.html"><i class="fa fa-caret-right"></i> 新增询单</a></li>
                 </ul>
             </li> 
-            <li class="nav-parent"><a href="javascript:void(0);"><i class="fa fa-user"></i> <span>订单管理</span></a>
+            <li class="nav-parent"><a href="javascript:void(0);"><i class="fa fa-envelope"></i> <span>订单管理</span></a>
                 <ul class="children">
                     <li><a href="${rootPath }order/list.html"><i class="fa fa-caret-right"></i> 订单列表</a></li>
                 </ul>
             </li> 
-            <li class="nav-parent"><a href="javascript:void(0);"><i class="fa fa-user"></i> <span>客人管理</span></a>
+            <li class="nav-parent"><a href="javascript:void(0);"><i class="fa fa-address-book"></i> <span>客人管理</span></a>
                 <ul class="children">
                     <li><a href="${rootPath }customer/list.html"><i class="fa fa-caret-right"></i> 客人列表</a></li>
                     <li><a href="${rootPath }customer/add.html"><i class="fa fa-caret-right"></i> 新增客人</a></li>

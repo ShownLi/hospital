@@ -89,13 +89,15 @@ public class CustomerService extends BaseService {
 	 */
 	public int saveCustomer(Customer customer) {	
 		try {
-			customerMapper.saveCustomer(customer);
+			int kk = customerMapper.saveCustomer(customer);
+			System.out.println("^^^"+kk);
 		} catch (Exception e) {
 			logger.error("CustomerService.saveCustomer() --> " + customer + "-->" + e.getMessage());
 			e.printStackTrace();
 			return 0;
 		}
-		return customer.getCustomerId();
+//		return customer.getCustomerId();
+		return 0;
 	}
 
 	/**

@@ -445,12 +445,13 @@
 	
 	<select id="getCustomerByCommunication" parameterType="Case" resultType="Customer">
 		select
+			customer_id as customerId,
 			customer_portal_id as portalId,
+			customer_name_zh as chineseName,
 			email as email,
 			mobilephone as mobilephone,
 			qq ,
-			wechat,
-			customer_id as customerId
+			wechat			
 		from tm_customer
 		<where> 
 			<if test="portalId != null and portalId != ''">
@@ -468,8 +469,7 @@
 			<if test="wechat!= null and wechat != ''">
 				or wechat = #{wechat}
 			</if>
-		</where>
-		limit 1		
+		</where>	
 	</select>
 	
 	<!-- 不确定Case是否可以 

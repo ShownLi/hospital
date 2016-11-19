@@ -6,7 +6,7 @@
 <link href="${rootPath }assets/css/jquery.datatables.css" rel="stylesheet">
 </head>
 
-<body>
+<body class="leftpanel-collapsed">
 	<%@ include file="../assets/pages/preloader.jsp"%>
 	<section>
 		<%@ include file="../assets/pages/leftpanel.jsp"%>
@@ -78,19 +78,14 @@
 							<table id="dataTable" class="table">
 								<thead>
 									<tr>
-										<th>ID</th>
-										<th>客人</th>
-										<th>手机</th>
-										<th>邮箱</th>
-										<th>预算</th>
-										<th>目的地</th>
-										<th>询单来源</th>
-										<th>跟单员</th>
-										<th>状态</th>
+										<th>ID <br>客人</th>
+										<th>手机 <br>邮箱</th>
+										<th>目的地<br>预算 </th>
+										<th>询单来源 <br>跟单员</th>
+										<th>状态 <br>创建时间</th>
 										<th>客人要求</th>
-										<th>注释</th>
-										<th>创建时间</th>
 										<th>无效原因</th>
+										<th>注释</th>
 										<th>编辑</th>
 									</tr>
 								</thead>
@@ -344,94 +339,81 @@
 						return JSON.stringify( json );
 					}
 				},
-				columnDefs: [
-					  {
-		                  data: "caseId",
-		                  orderable: false,
-		                  render: function ( data, type, full, meta ) {
-		                      //return '<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a>&nbsp;<a class="btn btn-danger btn-xs" id="'+data+'"><span class="fa fa-minus-circle"></span> 无效</a>&nbsp<a class="btn btn-primary btn-xs" id="'+data+'"></span> 增加订单</a>&nbsp';
-		                      //return '<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a>&nbsp;<a class="btn btn-danger btn-xs" id="'+data+'"><span class="fa fa-minus-circle"></span> 无效</a>&nbsp';
-		                      return '<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a>&nbsp;';
-		                  },
-		                  targets: 13
-					  },
-					  
+				columnDefs: [		  
  					  {
-			                data: "destination",
 			                orderable: false,
-			                render: function ( data ) {
-			                	if(data){
+			                render: function ( data, type, full, meta ) {
+			                    return "<div class='minw50'>" + full.caseId + "</div>" + "<div class='minw50'>" + full.chineseName + "</div>"
+			                },
+			                targets: 0
+						},
+						{
+			                orderable: false,
+			                render: function ( data, type, full, meta ) {
+			                    return "<div>" + full.mobile + "</div>" + "<div>" + full.email + "</div>"
+			                },
+			                targets: 1
+						},
+	 					{
+			                orderable: false,
+			                render: function ( data, type, full, meta ) {
+			                	if(full.destination){
 				                	for(var i=0;i <destination.length;i++){
-				                		if(data==destination[i].id){
-				                			return destination[i].text
+				                		if(full.destination==destination[i].id){
+				                			return "<div class='width85'>" + destination[i].text + "</div>" + "<div class='width85'>" + full.budget + "</div>"
 				                		}				                	
 				                	}
 				                	return "";
 			                	}
 			                	else{return ""}
 			                },
-			                  targets: 5
+			                targets: 2
 						},	 
-					  {
-			                data: "source",
-			                orderable: false,
-			                render: function ( data ) {
-			                	if(data){
-			                		for(var i=0;i < source.length;i++){
-				                		if(data==source[i].id){
-				                			return source[i].text
-				                		}
-				                	
-				                	}
-			                		return "";
-			                		
-			                	}
-			                	else{return ""}
-			                },
-			                  targets: 6
-						},
 						{
-							data: "operator",
 			                orderable: false,
-			                render: function ( data ) {
-			                	if(data){
-				                	for(var i=0;i <  user.length;i++){
-				                		if(data==user[i].id){
-				                			return user[i].text
+			                render: function ( data, type, full, meta ) {
+			                	var dataSource = full.source;
+			                	var dataOperator = full.operator;
+				                	for(var i=0;i < source.length;i++){
+				                		if(dataSource==source[i].id){
+				                			// return "<div class='caselist-5'>" + user[i].text + "</div>"
+				                			m = source[i].text;
 				                		}				                		
 				                	}
-				                	return "";
-			                	}
-			                	else{return ""}
-			                },
-			                  targets: 7
-						},
-						{
-			                data: "status",
-			                orderable: false,
-			                render: function ( data ) {
-			                	if(data){
-				                	for(var i=0;i <  caseStatus.length;i++){
-				                		if(data==caseStatus[i].id){
-				                			return caseStatus[i].text
+				                	for(var i=0;i < user.length;i++){
+				                		if(dataOperator==user[i].id){
+				                			n=user[i].text;
 				                		}
 				                	}
-			                		return "";
-			                	}
-			                	else{return ""}
+				                	return "<div class='width85'>" + m + "</div>" + "<div class='width85'>" + n + "</div>";
 			                },
-			                  targets: 8
+			                  targets: 3
 						},
 						{
-			                data: "creatTime",
 			                orderable: false,
-			                render: function ( data ) {
-			                	if(data){
-			                		return new Date(data.time).format("yyyy-MM-dd hh:mm:ss");
+			                render: function ( data, type, full, meta ) {
+			                	if(full){
+			                		for(var i=0;i <  caseStatus.length;i++){
+				                		if(full.status==caseStatus[i].id){
+				                			return "<div class='caselist-6'>" + caseStatus[i].text + "</div>" + "<div class='caselist-7'>" + new Date(data.time).format("yyyy-MM-dd hh:mm:ss"); + "</div>"
+				                		}
+				                	}
 			                	}
 			                	else{return ""}
 			                },
-			                  targets: 11
+			                  targets: 4
+						},
+						{
+							data:"requirement",
+							orderable: false,
+							render:function(data) {
+								if(data.length > 24){
+									return "<div class='width150' data-toggle='tooltip' data-placement='bottom' title='" + data + "'>" + data.substring(0,28) + "...</div>"
+								}else{
+									return "<div class='width150'>" + data + "</div>"
+								}	
+							},
+							targets: 5
 						},
 						{
 			                data: "reason",
@@ -440,65 +422,64 @@
 			                	if(data){
 			                		for(var i=0;i <  reason.length;i++){
 				                		if(data==reason[i].id){
-				                			return reason[i].text
+				                			return  "<div class='caselist-10'>" + reason[i].text + "</div>"
 				                		}
 				                	}
 			                		return "";
 			                	}
 			                	else{return ""}
 			                },
-			                  targets: 12
-						},						
+			                  targets: 6
+						},
 						{
 							data:"comment",
 							orderable: false,
 							render:function ( data ) {
-								if(data){
-									return data
+								if(data.length > 24){
+									return "<div class='width150' data-toggle='tooltip' data-placement='bottom' title='" + data + "'>" + data.substring(0,28) + "...</div>"
+								}else{
+									return "<div class='width150'>" + data + "</div>"
 								}
-								else{return ""}
 							},
-							  targets: 10
+							  targets: 7
 						
 						},
 						{
-							data:"requirement",
-							orderable: false,
-							render:function(data) {
-								if(data){
-									return data
-								}
-								else{return ""}	
-							},
-							targets: 9
-						},
-					  {
-						  orderable: false,
-						  searchable: false,
-					      targets: [0]
-					  },
+		                  data: "caseId",
+		                  orderable: false,
+		                  render: function ( data, type, full, meta ) {
+		                      return '<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a>&nbsp;';
+		                  },
+		                  targets: 8
+					    },
+					    {
+						    orderable: false,
+						    searchable: false,
+					        targets: [0]
+					    },
 
 					],
 					columns: [
 			            { data: "caseId" },
-			            { data:"chineseName"},
 			            { data:"mobile"},
-			            { data:"email"},
-			            { data: "budget" },
 			            { data: "destination" },
-			            { data: "source" },
 			            { data: "operator" },
-			            { data: "status" },
-			            { data: "requirement" },
-			            { data: "comment"},
 			            { data: "creatTime"},
-			            { data: "reason"}
+			            { data: "requirement" },
+			            { data: "reason"},
+			            { data: "comment"},
 			        ]
 				});
 
 					 
 			$('#searchBtn').on( 'click', function () {
 		        t.draw();
+		    } );
+		    
+		    //处理询单
+		    $('#dataTable tbody').on( 'click', 'a.btn-handle', function () {
+		        var data = t.row($(this).parents('tr')).data();
+		        handle($(this).attr('id'));
 		    } );
 		
 			$('#dataTable tbody').on( 'click', 'a.btn-success', function () {
@@ -527,10 +508,14 @@
 	    $(".nextModal .submit").click(function(){	    		
 	    	  order_submit();
 	    });
+	    
 		function edit(id) {
 			window.parent.location = "${rootPath}case/edit.html?id="+id;
 		}
 		
+		function handle(id) {
+			window.parent.location = "${rootPath}case/handle.html?id="+id;
+		}
 		
 		function del(id) {
 			 

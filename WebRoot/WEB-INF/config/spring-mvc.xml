@@ -54,7 +54,7 @@
 				</property>
 			</bean>
 		</mvc:interceptor>
-	</mvc:interceptors>
+	</mvc:interceptors> 
 
 
 	<!--通用视图解析器 -->
@@ -80,7 +80,6 @@
 	<!-- 定时任务end -->
 
 	<mvc:resources mapping="assets/**" location="WEB-INF/view/assets/" cache-period="31556926" />
-
 
 	<task:annotation-driven />
 

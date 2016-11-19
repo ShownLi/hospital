@@ -1,4 +1,5 @@
 ﻿<%@ page language="java" pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -346,7 +347,7 @@
   </div><!-- modal-dialog -->
 </div><!-- modal -->
 
-<div class="nextModal modal fade" id="nextModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<%-- <div class="nextModal modal fade" id="nextModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -380,7 +381,39 @@
       </div>
     </div><!-- modal-content -->
   </div><!-- modal-dialog -->
-</div><!-- modal -->
+</div><!-- modal --> --%>
+
+
+<div id="bindCustomer" class="nextModal modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+	<div class="modal-dialog">
+    <div class="modal-content">
+     <div class="modal-header">
+     	<form id="form-judgeBind" action="${rootPath}/case/bindCustomer.do">
+			<table id="showCustomer" border="1">
+			  <tr>	
+			  	<td>客人ID</td>		  	
+			  	<td>客人名</td>
+			  	<td>电话</td>
+			  	<td>邮件</td>
+			  	<td>QQ</td>
+			  	<td>微信</td>
+			  </tr>
+			</table>
+			<%-- <input name="caseId" value="${sessionScope.caseId}"/> --%>
+			<input id="ccaseId" style="display: none" name="caseId" />
+			<label  class="col-sm-4 control-label">是否绑定老客人</label></td>
+	              <div class="col-sm-8">
+	              <input type="radio" name="isJudge" value="1" checked/>是
+      			  <input type="radio" name="isJudge" value="0" />否
+			<input type="submit" name="submit" value="提交"> 
+		</form>
+	    </div><!-- modal-content -->
+  </div><!-- modal-dialog -->
+ </div><!-- modal -->	
+</div>  
+
+
+
 
 
 	<%@ include file="../assets/pages/foot.jsp"%>
@@ -606,45 +639,8 @@
 					$(".contact-field").removeClass("has-error");
 				}
 			});
-
-			$("#btn-back").click( function () {
-				history.go(-1);
-		    }); 
-		});
-			      
-		function case_submit() {
-			var f = $("#form-case").serialize();			
-			$.post('${rootPath}case/add.do', f, function(result) {
-				var caseId = result.obj.caseId;
-				$("#caseId").val(caseId);
-				var rmsg = result.msg;				
-				if (result.success) {
-					window.parent.location = "${rootPath}case/list.html";					
-				} else {
-					$("#msgModal").modal('show');
-					$("#nextModal").modal('hide');
-				}
-			}, "JSON");
-		}
-		
-	      $(".nextModal .submit").click(function(){
-	      	  order_submit();
-	      });
-	      
-	  		function order_submit() {
-	    			var f = $("#form-order").serialize();
-	    			$.post('${rootPath}order/add.do', f, function(result) {
-	    				var rmsg = result.msg;
-	    				if (result.success) {
-	    					window.parent.location = "${rootPath}order/list.html";
-	    				} else {
-	    					$("#nextModal").modal('hide');
-	    					$("#NoEmail").modal('show');
-	    				}
-	    			}, "JSON");
-	    	}
-	  		
-        $(".start-date").hide();
+			
+	    $(".start-date").hide();
         $(".start-time").show();
         $("input[name='startTime']").change(function() {
             var val = $("input[name='startTime']:checked").val();
@@ -661,8 +657,81 @@
         	document.getElementById("customerId").value=val;
         });
         
-	var newHref = "../customer/edit.html?id="+$("#customerId").val();
-        $('#aAddEmail').attr("href",newHref)
+
+			$("#btn-back").click( function () {
+				history.go(-1);
+		    }); 
+		});
+		
+/* 		function sociation(){
+   		 	var f = $("#form-case").serialize();
+   		 	var h=$("#form-judgeBind").serialize();
+   		 	alert("crmcase="+f+"&"+h);
+	   		$.ajax({
+				type:"POST",
+				url:"${rootPath}/case/bindCustomer.do?crmcase="+f+"&"+h,		
+				success:function (result){
+					if (result=="ok") {
+						alert("&&&&&")
+						window.parent.location ="${rootPath}case/list.html";					
+					} else{
+						$("#msgModal").modal('show');
+						$("#nextModal").modal('hide');
+					}
+				}
+			}, "JSON"); 	
+		} */
+			      
+		function case_submit() {
+			var f = $("#form-case").serialize();			
+			$.post('${rootPath}case/add.do', f, function(result) {			
+				if (result.ok=="ok") {
+					window.parent.location = "${rootPath}case/list.html";					
+				} else if(result.error=="error"){
+					$("#msgModal").modal('show');
+					$("#nextModal").modal('hide');
+				}else{
+					alert(result.cid);
+					$("#ccaseId").val(result.cid);
+					var custumerList=result.cust;
+					for(var i=0;i<custumerList.length;i++){
+						$("#showCustomer").append("<tr><td>"+custumerList[i].customerId+"</td>"+
+								"<td name='chineseName'>"+custumerList[i].chineseName+"</td>"+
+								"<td name='mobilephone'>"+custumerList[i].mobilephone+"</td>"+
+								"<td name='email'>"+custumerList[i].email+"</td>"+
+								"<td name='qq'>"+custumerList[i].qq+"</td>"+
+								"<td name='wechat'>"+custumerList[i].wechat+"</td>"+
+								"<td style='display:none'><input type='checkbox' name='customerId' checked='true' value="+custumerList[i].customerId+"></td></tr>" 																				
+							);
+					}
+					$("#bindCustomer").modal('show'); 										
+				}
+			}, "JSON");
+		}
+		
+		
+		
+
+/* 	      $(".nextModal .submit").click(function(){
+	      	  order_submit();
+	      });
+	      
+	  		function order_submit() {
+	    			var f = $("#form-order").serialize();
+	    			$.post('${rootPath}/case/add.do', f, function(result) {
+	    				var rmsg = result.msg;
+	    				if (result.success) {
+	    					window.parent.location = "${rootPath}case/list.html";
+	    				} else {
+	    					$("#nextModal").modal('hide');
+	    					$("#NoEmail").modal('show');
+	    				}
+	    			}, "JSON");
+	    	}
+	  		 */
+ 
+/* 	var newHref = "../customer/edit.html?id="+$("#customerId").val();
+        $('#aAddEmail').attr("href",newHref) */
 	</script>
 
 

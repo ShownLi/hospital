@@ -6,7 +6,7 @@
 <link href="${rootPath }assets/css/jquery.datatables.css" rel="stylesheet">
 </head>
 
-<body class="leftpanel-collapsed">
+<body>
 	<%@ include file="../assets/pages/preloader.jsp"%>
 	<section>
 		<%@ include file="../assets/pages/leftpanel.jsp"%>
@@ -139,12 +139,12 @@
                     <label class="col-sm-4 control-label">希望联系方式</label>
                     <div class="col-sm-8">
                       <select name="contactType" class="contact-select fullwidth" multiple="multiple">
-              					  <option value="wechat">微信</option>
-              					  <option value="mobilephone">手机</option>
-              					  
-              					  <option value="qq">qq</option>
-              					  <option value="mail">邮箱</option>
-					   </select>
+					  <option value="wechat">微信</option>
+					  <option value="mobilephone">手机</option>
+					  
+					  <option value="qq">qq</option>
+					  <option value="mail">邮箱</option>
+					</select>
                     </div>
                 </div>   
                 <div class="form-group col-sm-4">
@@ -364,16 +364,16 @@
                           <input type="text" name="reason" placeholder="无效原因" class="reason-select fullwidth"  value="${crmcase.reason}" />
                         </div>
                     </div>
-               
+                </div>
         </div><!-- panel-body -->
         
         <div class="panel-footer align-center">
-            <button id="btn-addorder" class="btn btn-primary">添加订单</button>&nbsp;
+           <!--  <button id="btn-addorder" class="btn btn-primary">添加订单</button>&nbsp; -->
             <button class="btn btn-primary">保存</button>&nbsp;
             <input  type="hidden" name="caseId" value="${crmcase.caseId}" />
             <button id="btn-invalid"  class="btn btn-danger" >无效</button>&nbsp;
             <button id="btn-back" class="btn btn-default">返回</button>
-		 </div><!-- panel-footer -->
+		    </div><!-- panel-footer -->
      </form>   
       </div><!-- panel -->
       
@@ -653,6 +653,33 @@
   </div><!-- modal-dialog -->
 </div><!-- bmodal -->
 
+<div id="bindCustomer" class="nextModal modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+	<div class="modal-dialog">
+    <div class="modal-content">
+     <div class="modal-header">
+     	<form id="form-judgeBind">
+			<table id="showCustomer" border="1">
+			  <tr>			  	
+			  	<td>客人名</td>
+			  	<td>电话</td>
+			  	<td>邮件</td>
+			  	<td>QQ</td>
+			  	<td>微信</td>
+			  	<td style="display:block">客人ID</td>
+			  </tr>
+			</table>
+			<%-- <input name="caseId" value="${sessionScope.caseId}"/> --%>
+			<label  class="col-sm-4 control-label">是否绑定老客人</label></td>
+	              <div class="col-sm-8">
+	              <input type="radio" name="judgeCustomer" value="1" checked/>是
+      			  <input type="radio" name="judgeCustomer" value="0" />否
+			<input type="submit" name="submit" value="提交" onclick="sociation()"> 
+		</form>
+	    </div><!-- modal-content -->
+  </div><!-- modal-dialog -->
+ </div><!-- modal -->	
+</div>  
+
 
 	<%@ include file="../assets/pages/foot.jsp"%>
 	<script src="${rootPath}assets/js/jquery-ui-1.10.3.min.js"></script>
@@ -685,7 +712,7 @@
 	var genderData = [{ id: 'male', text: '男' }, { id:'female' , text: '女' }];
 	
 	var reason = ${reason};
-	var contactData = [{ id: 0, text: 'qq' }, { id: 1, text: 'email' }, { id: 2, text: 'wechat' }, { id: 3, text: 'phone' }];
+	
 	$("#requirement").val("${crmcase.requirement}");	
 	$("#birthday").val(getBirthday());
 
@@ -720,11 +747,9 @@
     $(".contact-select").select2({
     	placeholder: '可多选',
     	minimumResultsForSearch: Infinity,
-    	data: contactData
      });
-    //$(".contact-select").select2("val", '${crmcase.contactType}'.split(","));
+    $(".contact-select").select2("val", '${crmcase.contactType}'.split(","));
     
-   
     $(".withwho-select").select2({
     	placeholder: '与谁同行',
      	data: withwho
@@ -793,6 +818,28 @@
 			},
 			messages:{
 				reason:"请输入无效原因"
+			},
+			highlight: function(element) {
+				jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+			},
+			success: function(element) {
+				jQuery(element).closest('.form-group').removeClass('has-error');
+			},
+			invalidHandler : function(){
+				return false;
+			},
+			submitHandler : function(){
+				delSubmit();
+			    return false;
+			}
+		});
+		
+		jQuery("#form-case").validate({
+			rules:{
+				operater: "operator"
+			},
+			messages:{
+				reason:"请录入跟单员"
 			},
 			highlight: function(element) {
 				jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
@@ -886,6 +933,7 @@
 	//询单效验数据，修改
 	jQuery("#form-case").validate({      
           rules: {
+          	operator:"required",
             adult: "digits",
             children: "digits",
             baby: "digits",
@@ -896,6 +944,7 @@
             during: "digits",
           },
           messages: {
+            operator:"请录入跟单员",
             adult: "请输入一个整数",
             children: "请输入一个整数",
             baby: "请输入一个整数",
@@ -921,9 +970,9 @@
           }
       });
       
-  	  function case_submit(){
+/*   	  function case_submit(){
    			var f = $("#form-case").serialize();
-   			$.post('${rootPath}case/edit.do', f, function(result) {
+   			$.post('${rootPath}case/handle.do', f, function(result) {
    				var rmsg = result.msg;
    				if (result.success) {
    					window.parent.location = "${rootPath}case/edit.html?id=${crmcase.caseId}";
@@ -931,7 +980,51 @@
    					$("#msgModal").modal('show');
    				}
    			}, "JSON");
-  		}
+  		} */
+  		
+  		 function case_submit() {
+			var f = $("#form-case").serialize();			
+			$.post('${rootPath}case/handle.do', f, function(result) {		
+				if (result.ok=="ok") {
+					window.parent.location = "${rootPath}case/list.html";					
+				} else if(result.error=="error"){
+					$("#msgModal").modal('show');
+					$("#nextModal").modal('hide');
+				}else{
+					var custumerList=result.cust;
+					for(var i=0;i<custumerList.length;i++){
+						$("#showCustomer").append("<tr><td style='display:none'>"+custumerList[i].customerId+"</td>"+
+								"<td name='chineseName'>"+custumerList[i].chineseName+"</td>"+
+								"<td name='mobilephone'>"+custumerList[i].mobilephone+"</td>"+
+								"<td name='email'>"+custumerList[i].email+"</td>"+
+								"<td name='qq'>"+custumerList[i].qq+"</td>"+
+								"<td name='wechat'>"+custumerList[i].wechat+"</td>"+
+								"<td name='wechat'>"+custumerList[i].customerId+"</td>"+
+								"<td><input type='checkbox' name='customerId' checked='true' value="+custumerList[i].customerId+"></td></tr>" 																				
+							);
+					}
+					$("#bindCustomer").modal('show'); 										
+				}
+			}, "JSON");
+		}
+		
+		function sociation(){
+   		 	var f = $("#form-case").serialize();
+   		 	var h=$("#form-judgeBind").serialize();
+   		 	alert(f+"&"+h);
+	   		$.ajax({
+				type:"POST",
+				url:"${rootPath}case/bindCustomer2.do?crmcase="+f+"&"+h,		
+				success:function (result){
+					if (result=="ok") {
+						window.parent.location = "${pageContext.request.contextPath}/case/list.html";					
+					} else{
+						$("#msgModal").modal('show');
+						$("#nextModal").modal('hide');
+					}
+				}
+			}, "JSON"); 	
+		}      
 	  
 	   //询单返回
   	  $("#btn-back").click( function () {
@@ -1233,28 +1326,10 @@
           $(".start-date").hide();
           $(".start-time").show();
       }
-
-      //添加订单弹出框，目的地与销售联动
-/*       $("#destination").change(function(){
-          var destination = $(this).val();
-          $.ajax({
-              type: "post",
-              url: "${rootPath}case/getSales.do?destination="+destination,
-              data: destination,
-              success: function(sales){
-            	  var json = jQuery.parseJSON( sales );
-                  $("#salesId").select2({	
-                      placeholder: '销售',
-                      data: json
-                  });
-              }   
-          }); 
-      }); */
-
   });
   
-  var newHref = "../customer/edit.html?id="+${crmcase.customerId};
-  $('#addEmail').attr("href",newHref)
+/*   var newHref = "../customer/edit.html?id="+${crmcase.customerId};
+  $('#addEmail').attr("href",newHref) */
   
 	</script>
 
