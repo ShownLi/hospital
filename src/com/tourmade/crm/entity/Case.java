@@ -7,7 +7,7 @@ import com.tourmade.crm.common.framework.BaseBean;
 /**
  * 询单model
  * 
- * @author lianzheng
+ * @author 
  *
  */
 public class Case extends BaseBean<Case> {

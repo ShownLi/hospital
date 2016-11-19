@@ -96,7 +96,7 @@
 		update_time,
 		isdel
 		)values(
-		#{portalid,jdbcType=VARCHAR},
+		#{portalId,jdbcType=VARCHAR},
 		#{chineseName,jdbcType=VARCHAR},
 		#{englishName,jdbcType=VARCHAR},
 		#{level,jdbcType=VARCHAR},

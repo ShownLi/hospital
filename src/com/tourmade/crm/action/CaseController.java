@@ -227,7 +227,6 @@ public class CaseController extends BaseSimpleFormController {
 	public Json doAdd(HttpServletRequest request, HttpSession session, Model model, Case crmcase) {
 		
 		Json json = new Json();
-		System.out.println("&&&&&&"+crmcase);
 		
 		try {
 			service.saveCase(crmcase);
@@ -246,7 +245,6 @@ public class CaseController extends BaseSimpleFormController {
 		if (null != id && !"".equals(id)) {
 			int caseId = Integer.parseInt(id);
 			Case crmcase = service.getCaseById(caseId);
-			System.out.println("#1#: "+crmcase);
 			
 			//解决客人的要求换行符问题
 			if(crmcase.getRequirement()!=null){			

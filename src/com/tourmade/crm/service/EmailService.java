@@ -572,7 +572,7 @@ public class EmailService extends BaseService {
 		}
 	}
 
-	private Email getBccEmail(Order order) {
+	public Email getBccEmail(Order order) {
 		Email bccEmail = emailMapper.getBccEmail(order.getOperator());
 		return bccEmail;
 	}

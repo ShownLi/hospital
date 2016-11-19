@@ -57,4 +57,6 @@ public interface CaseMapper extends BaseMapper {
 	
 	public int saveCustomer(Case crmcase);
 
+	public Customer getCustomerByPortalId(int portalId);
+
 }

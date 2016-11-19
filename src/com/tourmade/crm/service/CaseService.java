@@ -1,5 +1,7 @@
 package com.tourmade.crm.service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,12 +15,15 @@ import org.springframework.transaction.annotation.Transactional;
 import com.itextpdf.text.log.SysoLogger;
 import com.tourmade.crm.common.framework.BaseService;
 import com.tourmade.crm.common.framework.bean.QueryResult;
+import com.tourmade.crm.common.model.base.value.baseconfig.Json;
 import com.tourmade.crm.common.model.base.value.baseconfig.PageHelper;
 import com.tourmade.crm.entity.Case;
 import com.tourmade.crm.entity.Customer;
 import com.tourmade.crm.entity.EntityList;
 import com.tourmade.crm.entity.Parameter;
 import com.tourmade.crm.mapper.crmcase.CaseMapper;
+
+import net.sf.json.JSONObject;
 
 @Service
 @Transactional(readOnly = false)
@@ -126,13 +131,10 @@ public class CaseService extends BaseService {
 	 * @return
 	 */
 	public int saveCase(Case crmcase) {
-		System.out.println(crmcase.getSource());
 		
 		try {
 			Customer customer = caseMapper.getCustomerByCommunication(crmcase);
-			System.out.println(" 1 ^^^^^^"+customer);
 			if(customer!=null){	
-				System.out.println("-----------");
 				Customer customer2=new Customer();
 				customer2.setCustomerId(customer.getCustomerId());
 				if(crmcase.getChineseName()!=null){customer2.setChineseName(crmcase.getChineseName());}
@@ -148,7 +150,6 @@ public class CaseService extends BaseService {
 				if(crmcase.getSource()!=null){customer2.setSource(crmcase.getSource());}
 				if(crmcase.getTelephone()!=null){customer2.setTelephone(crmcase.getTelephone());}
 				if(crmcase.getWechat()!=null){customer2.setWechat(crmcase.getWechat());}
-				System.out.println("customer2 :"+customer2);
 				if(!customer2.getLevel().equals("0")){
 					customer2.setLevel(crmcase.getLevel());
 				}else{
@@ -156,11 +157,9 @@ public class CaseService extends BaseService {
 				}				
 				caseMapper.updateCustomer(customer2);
 				crmcase.setCustomerId(customer.getCustomerId());
-				System.out.println(" ^^^^^^^^^^");
 			}else{
 				int customerId = caseMapper.saveCustomer(crmcase);
 				crmcase.setCustomerId(customerId);
-				System.out.println("########");
 			}		
 			crmcase.setStatus("1");
 			caseMapper.saveCase(crmcase);
@@ -418,5 +417,136 @@ public class CaseService extends BaseService {
 		}
 		return crmcase;
 	}
+		
+	
+	public Json validatePortalId(JSONObject jsonObject, Json j) {
+		try {
+			
+			if(jsonObject.has("portal_id")&&!jsonObject.getString("protal_id").equals("")){
+				j.setSuccess(true);
+			}
+			else {
+				j.setMsg("找不到客人Id");
+			}
+			}catch (Exception e) {
+				e.getMessage();
+		}
+		return j;
+	}
+	
+	/**
+	 * 根据Json信息校验必填字段
+	 * 
+	 * @param 
+	 * @return
+	 */
+	public Json validateUserInfo(JSONObject jsonobject, Json j) {
+		try {
+    		if(!jsonobject.has("customer_name_zh") || jsonobject.getString("customer_name_zh").equals("")){j.setMsg("立刻咨询验证失败，找不到中文名");}
+    		else if(!jsonobject.has("requirement") || jsonobject.getString("requirement").equals("")){j.setMsg("立刻咨询验证失败，找不到客人要求");}
+    		else if((!jsonobject.has("email") || jsonobject.getString("email").equals("")) &&
+    				(!jsonobject.has("mobilephone") || jsonobject.getString("mobilephone").equals("")) &&
+    				(!jsonobject.has("wechat") || jsonobject.getString("wechat").equals(""))){j.setMsg("立刻咨询验证失败，找不到联系方式");}
+    		else{
+    			j.setSuccess(true);
+    		}
+			}catch (Exception e) {
+				e.getMessage();
+		}
+		return j;
+	}
 
+	/**
+	 * 根据Json信息生成询单
+	 * 
+	 * @param 
+	 * @return
+	 */
+	public Case Json2case(JSONObject jsonObject) {
+		Case crmcase = new Case();
+		Customer customer = null;
+		try {	
+			if(jsonObject.has("portal_id") && !jsonObject.getString("portal_id").equals("")){
+				int portalId = Integer.valueOf(jsonObject.getString("portal_id"));
+				customer = getCustomerByPortalId(portalId);
+				crmcase.setCustomerId(customer.getCustomerId());
+				
+				if(jsonObject.has("email") && !jsonObject.getString("email").equals("")){customer.setEmail(jsonObject.getString("email"));}
+				if(jsonObject.has("customer_name_zh") && !jsonObject.getString("customer_name_zh").equals("")){customer.setChineseName(jsonObject.getString("customer_name_zh"));}
+				if(jsonObject.has("customer_name_en") && !jsonObject.getString("customer_name_en").equals("")){customer.setEnglishName(jsonObject.getString("customer_name_en"));}
+				if(jsonObject.has("mobilephone") && !jsonObject.getString("mobilephone").equals("")){customer.setMobilephone(jsonObject.getString("mobilephone"));}
+				if(jsonObject.has("wechat") && !jsonObject.getString("wechat").equals("")){customer.setWechat(jsonObject.getString("wechat"));}
+				if(jsonObject.has("qq") && !jsonObject.getString("qq").equals("")){customer.setQq(jsonObject.getString("qq"));}
+				caseMapper.updateCustomer(customer);
+				crmcase.setEmail(customer.getEmail());
+				crmcase.setChineseName(customer.getChineseName());
+				crmcase.setEnglishName(customer.getEnglishName());
+				crmcase.setMobile(customer.getMobilephone());
+				crmcase.setWechat(customer.getWechat());
+				crmcase.setQq(customer.getQq());
+				}
+			
+
+			crmcase.setStatus("0");
+    		if(jsonObject.has("requirement") && !jsonObject.getString("requirement").equals("")){crmcase.setRequirement(jsonObject.getString("requirement"));}
+    		if(jsonObject.has("customer_name_zh") && !jsonObject.getString("customer_name_zh").equals("")){customer.setChineseName(jsonObject.getString("customer_name_zh"));}
+    		if(jsonObject.has("customer_name_en") && !jsonObject.getString("customer_name_en").equals("")){customer.setEnglishName(jsonObject.getString("customer_name_en"));}
+    		if(jsonObject.has("email") && !jsonObject.getString("email").equals("")){customer.setEmail(jsonObject.getString("email"));}
+    		if(jsonObject.has("mobilephone") && !jsonObject.getString("mobilephone").equals("")){customer.setMobilephone(jsonObject.getString("mobilephone"));}
+			if(jsonObject.has("wechat") && !jsonObject.getString("wechat").equals("")){customer.setWechat(jsonObject.getString("wechat"));}
+			if(jsonObject.has("qq") && !jsonObject.getString("qq").equals("")){customer.setQq(jsonObject.getString("qq"));}
+		
+    		if(jsonObject.has("with_who") && !jsonObject.getString("with_who").equals("")){crmcase.setWithwho(jsonObject.getString("with_who"));}	 
+    		if(jsonObject.has("adult") && !jsonObject.getString("adult").equals("")){crmcase.setAdult(jsonObject.getInt("adult"));}	 
+    		if(jsonObject.has("children") && !jsonObject.getString("children").equals("")){crmcase.setChildren(jsonObject.getInt("children"));}	 
+    		if(jsonObject.has("baby") && !jsonObject.getString("baby").equals("")){crmcase.setBaby(jsonObject.getInt("baby"));}	 
+    		if(jsonObject.has("start_time") && !jsonObject.getString("start_time").equals("")){crmcase.setStartTime(jsonObject.getString("start_time"));}	 
+    		if(jsonObject.has("start_month") && !jsonObject.getString("start_month").equals("")){
+    			Date startmonth = new SimpleDateFormat("yyyy-MM-ddHH:mm:ss").parse(jsonObject.getString("start_month"));
+    			crmcase.setStartMonth(startmonth);}	 
+    		if(jsonObject.has("start_date") && !jsonObject.getString("start_date").equals("")){
+    			Date startdate = new SimpleDateFormat("yyyy-MM-ddHH:mm:ss").parse(jsonObject.getString("start_date"));
+    			crmcase.setStartDate(startdate);}
+    		if(jsonObject.has("end_date") && !jsonObject.getString("end_date").equals("")){
+    			Date enddate = new SimpleDateFormat("yyyy-MM-ddHH:mm:ss").parse(jsonObject.getString("end_date"));
+    			crmcase.setEndDate(enddate);}
+    		if(jsonObject.has("during") && !jsonObject.getString("during").equals("")){crmcase.setDuring(jsonObject.getString("during"));}	 
+    		if(jsonObject.has("hotel") && !jsonObject.getString("hotel").equals("")){crmcase.setHotel(jsonObject.getString("hotel"));}	 
+    		if(jsonObject.has("meals") && !jsonObject.getString("meals").equals("")){crmcase.setMeals(jsonObject.getString("meals"));}	 
+    		if(jsonObject.has("guide") && !jsonObject.getString("guide").equals("")){crmcase.setGuide(jsonObject.getString("guide"));}	 
+    		if(jsonObject.has("budget") && !jsonObject.getString("budget").equals("")){crmcase.setBudget(jsonObject.getInt("budget"));}	 
+    		if(jsonObject.has("sales_id") && !jsonObject.getString("sales_id").equals("")){
+    			crmcase.setSalesId(jsonObject.getInt("sales_id"));
+    			}	 
+    		if(jsonObject.has("sales_name") && !jsonObject.getString("sales_name").equals("")){crmcase.setSalesName(jsonObject.getString("sales_name"));}	
+    		if(jsonObject.has("destination_code") && !jsonObject.getString("destination_code").equals("")){crmcase.setDestinationCode(jsonObject.getString("destination_code"));}	
+    		if(jsonObject.has("destination") && !jsonObject.getString("destination").equals("")){crmcase.setDestination(jsonObject.getString("destination"));}	
+    		if(jsonObject.has("route_id") && !jsonObject.getString("route_id").equals("")){crmcase.setRouteId(jsonObject.getString("route_id"));}
+    		if(jsonObject.has("route") && !jsonObject.getString("route").equals("")){crmcase.setRoute(jsonObject.getString("route"));}
+    		if(jsonObject.has("passport") && !jsonObject.getString("passport").equals("")){crmcase.setPassport(jsonObject.getString("passport"));}
+    		if(jsonObject.has("visa") && !jsonObject.getString("visa").equals("")){crmcase.setVisa(jsonObject.getString("visa"));}
+    		if(jsonObject.has("flight") && !jsonObject.getString("flight").equals("")){crmcase.setFlight(jsonObject.getString("flight"));}
+    		if(jsonObject.has("tailormade") && !jsonObject.getString("tailormade").equals("")){crmcase.setTailormade(jsonObject.getString("tailormade"));}
+    		if(jsonObject.has("submit_type") && !jsonObject.getString("submit_type").equals("")){crmcase.setSubmitType(jsonObject.getString("submit_type"));}
+    		if(jsonObject.has("source") && !jsonObject.getString("source").equals("")){crmcase.setSource(jsonObject.getString("source"));}
+    		if(jsonObject.has("promote_code") && !jsonObject.getString("promote_code").equals("")){crmcase.setPromoteCode(jsonObject.getString("promote_code"));}
+    		if(jsonObject.has("ip_address") && !jsonObject.getString("ip_address").equals("")){crmcase.setIpAddress(jsonObject.getString("ip_address"));}
+		}catch (Exception e) {
+			e.printStackTrace();
+			crmcase.setCustomerId(0);
+		}
+			return crmcase;
+		
+	}
+
+	private Customer getCustomerByPortalId(int portalId) {
+		Customer customer = null;
+		try {
+			customer = caseMapper.getCustomerByPortalId(portalId);
+		} catch (Exception e) {
+			logger.error("CaseService.getCustomerByPortalId() --> " + portalId + "-->" + e.getMessage());
+			customer = null;
+		}
+		return customer;
+	}
 }

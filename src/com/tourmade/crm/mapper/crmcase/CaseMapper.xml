@@ -136,9 +136,6 @@
 			customer_email,
 			customer_wechat,
 			customer_qq,
-			customer_location,
-			customer_ageGroup,
-			customer_gender,
 			operator,
 			prefer_language,
 			with_who,
@@ -182,9 +179,6 @@
 			#{email,jdbcType=VARCHAR},
 			#{wechat,jdbcType=VARCHAR},
 			#{qq,jdbcType=VARCHAR},
-			#{location,jdbcType=VARCHAR},
-			#{ageGroup,jdbcType=VARCHAR},
-			#{gender,jdbcType=VARCHAR},
 			#{operator,jdbcType=VARCHAR},
 			#{preferLanguage,jdbcType=VARCHAR},
 			#{withwho,jdbcType=VARCHAR},
@@ -271,9 +265,6 @@
 		customer_email as email,
 		customer_wechat as wechat,
 		customer_qq as qq,
-		customer_location as location,
-		customer_ageGroup as ageGroup,
-		customer_gender as gender,
 		u.operator as operator,
 		u.prefer_language as preferLanguage,
 		u.contact_type as contactType,
@@ -563,6 +554,26 @@
 			0
 		)
 	</insert>
+	
+	<select id="getCustomerByPortalId" parameterType="int" resultType="Customer">
+		select 
+		u.customer_id as customerId,
+		u.customer_name_zh as chineseName,
+		u.customer_name_en as englishName,
+		u.mobilephone as mobilephone,
+		u.email as email,
+		u.wechat as wechat,
+		u.qq as qq,
+		u.customer_portal_id as portalId,
+		u.gender as gender,
+		u.birthday as birthday,
+		u.age_group as ageGroup,
+		u.customer_level as level,
+		u.isdel as isdel
+		from tm_customer u  
+		where u.isdel = 0 and u.customer_portal_id = #{portalId}
+	</select>
+	
 </mapper>
 
 
