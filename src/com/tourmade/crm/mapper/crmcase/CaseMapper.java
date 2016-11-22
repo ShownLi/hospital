@@ -59,4 +59,10 @@ public interface CaseMapper extends BaseMapper {
 
 	public Customer getCustomerByPortalId(int portalId);
 
+	public List<Customer> queryCusByComm(Map<String, Object> map);
+
+	public long countCusByComm(Map<String, Object> map);
+
+	public Customer getCustomerByCusId(Integer customerId);
+
 }

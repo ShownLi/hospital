@@ -174,9 +174,9 @@ public class CaseService extends BaseService {
 		 */
 	
 	public void updateCustomer(Case crmcase) {
-		Customer customer=new Customer();		
+		
 		try {
-			customer.setCustomerId(crmcase.getCustomerId());
+			Customer customer = getCustomerByCusId(crmcase.getCustomerId());
 			if(crmcase.getChineseName()!=null){customer.setChineseName(crmcase.getChineseName());}
 			if(crmcase.getAgeGroup()!=null){customer.setAgeGroup(crmcase.getAgeGroup());}
 			if(crmcase.getBirthday()!=null){customer.setBirthday(crmcase.getBirthday());}
@@ -203,7 +203,7 @@ public class CaseService extends BaseService {
 			}	*/			
 			
 		} catch (Exception e) {
-			logger.error("CaseService.saveCase() --> " + crmcase + "-->" + e.getMessage());
+			logger.error("CaseService.updateCustomer() --> " + crmcase + "-->" + e.getMessage());
 			e.printStackTrace();
 
 		}
@@ -256,6 +256,17 @@ public class CaseService extends BaseService {
 		}
 		return map;*/
 	
+
+	private Customer getCustomerByCusId(Integer customerId) {
+		Customer customer = null;
+		try {
+			customer = caseMapper.getCustomerByCusId(customerId);
+		} catch (Exception e) {
+			logger.error("CaseService.getCustomerById() --> " + customerId + "-->" + e.getMessage());
+			customer = null;
+		}
+		return customer;
+	}
 
 	/**
 	 * 根据主键获取询单信息
@@ -625,7 +636,7 @@ public class CaseService extends BaseService {
 		
 	}
 
-	private Customer getCustomerByPortalId(int portalId) {
+	public Customer getCustomerByPortalId(int portalId) {
 		Customer customer = null;
 		try {
 			customer = caseMapper.getCustomerByPortalId(portalId);
@@ -635,4 +646,37 @@ public class CaseService extends BaseService {
 		}
 		return customer;
 	}
+
+	public QueryResult<Customer> queryCusByComm(Case crmcase, PageHelper ph, HttpServletRequest request) {
+		QueryResult<Customer> result = new QueryResult<Customer>();
+		Map<String, Object> map = new HashMap<String, Object>();
+
+		map.put("start", ph.getStart());
+		map.put("length", ph.getLength());;
+		
+		
+		if(crmcase.getEmail()!=null){
+			map.put("email", crmcase.getEmail());
+		}
+		if(crmcase.getMobile()!=null){
+			map.put("mobilephone", crmcase.getMobile());
+		}
+		if(crmcase.getWechat()!=null){
+			map.put("wechat", crmcase.getWechat());
+		}
+		if(crmcase.getQq()!=null){
+			map.put("qq", crmcase.getQq());
+		}
+		
+		List<Customer> data = caseMapper.queryCusByComm(map);
+		long count = caseMapper.countCusByComm(map);
+			
+		result.setData(data);
+		result.setCountTotal(count);
+		result.setCountFiltered(count);
+	
+		return result;
+	}
+
+
 }

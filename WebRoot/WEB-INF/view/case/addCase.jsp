@@ -1,12 +1,11 @@
 ﻿<%@ page language="java" pageEncoding="utf-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <%@ include file="../assets/pages/head.jsp"%>
 </head>
 
-<body>
+<body class="leftpanel-collapsed">
 	<%@ include file="../assets/pages/preloader.jsp"%>
 	<section>
 		<%@ include file="../assets/pages/leftpanel.jsp"%>
@@ -31,101 +30,13 @@
         </div>
         <form class="form-horizontal" id="form-case">
             <div class="panel-body panel-body-nopadding">
-            	<div class="section-block">
-        		<h5 class="section-title">客人基本信息</h5>
-	            <div class="form-group col-sm-4">
-	              <label class="col-sm-3 control-label">中文名<span class="asterisk">*</span></label>
-	              <div class="col-sm-9">
-	                <input type="text" name="chineseName" placeholder="中文名" class="form-control" />
-	              </div>
-	            </div>
-	            <div class="form-group col-sm-4">
-	              <label class="col-sm-3 control-label">英文名</label>
-	              <div class="col-sm-9">
-	                <input type="text" name="englishName" placeholder="英文名" class="form-control" />
-	              </div>
-	            </div> 
-	            <div class="form-group col-sm-4">
-	              <label class="col-sm-3 control-label" >性别 <span class="asterisk">&nbsp;</span></label>
-	              <div class="col-sm-9">
-	                <div class="rdio rdio-primary rdio-inline">
-	                  <input type="radio" id="male" value="male" name="gender">
-	                  <label for="male">男</label>
-	                </div><!-- rdio -->
-	                <div class="rdio rdio-primary rdio-inline">
-	                  <input type="radio" id="female" value="female" name="gender" >
-	                  <label for="female">女</label>
-	                </div><!-- rdio -->
-	              </div>
-	            </div>
-	            <div class="form-group col-sm-4">
-	            	<label class="col-sm-3 control-label">生日</label>
-	            	<div class="col-sm-9 input-group input-datepicker">
-		                <input type="text" name="birthday" class="datepicker form-control" placeholder="yyyy/mm/dd" id="birthday" autocomplete="off">
-		                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-	                </div>
-	            </div> 
-	            <div class="form-group col-sm-4">
-	              <label class="col-sm-3 control-label" >年龄段</label>
-	              <div class="col-sm-9">
-	                <input type="text" name="ageGroup" placeholder="请选择一个年龄段" class="agegroup-select fullwidth" />
-	              </div>
-	            </div>
-<!-- 	            <div class="form-group col-sm-4">
-	              <label class="col-sm-3 control-label">客人级别</label>
-	              <div class="col-sm-9">
-	                <input type="text" name="level" placeholder="客人级别" class="level-select fullwidth" value="0" />
-	              </div>
-	            </div>  -->
-	        </div>
-	        
-	        <div class="section-block">
-	        	<h5 class="section-title">客人联系方式  <span class="contact-note">(手机、微信、QQ、邮箱至少填写一个)</span></h5>
-	            <div class="form-group col-sm-4 contact-field">
-	              <label class="col-sm-3 control-label">固定电话</label>
-	              <div class="col-sm-9">
-	                <input type="text" name="telephone" placeholder="固定电话" class="form-control" />
-	              </div>
-	            </div>
-	            <div class="form-group col-sm-4 contact-field">
-	              <label class="col-sm-3 control-label">手机</label>
-	              <div class="col-sm-9">
-	                <input type="text" name="mobile" placeholder="手机" class="form-control" />
-	              </div>
-	            </div>    
-	            <div class="form-group col-sm-4 contact-field">
-	              <label class="col-sm-3 control-label">微信</label>
-	              <div class="col-sm-9">
-	                <input type="text" name="wechat" placeholder="微信" class="form-control" />
-	              </div>
-	            </div>       
-	            <div class="form-group col-sm-4 contact-field">
-	              <label class="col-sm-3 control-label">QQ</label>
-	              <div class="col-sm-9">
-	                <input type="text" name="qq" placeholder="QQ" class="form-control" />
-	              </div>
-	            </div>            
-	            <div class="form-group col-sm-4 contact-field">
-	              <label class="col-sm-3 control-label">邮箱</label>
-	              <div class="col-sm-9">
-	                <input type="text" name="email" placeholder="邮箱" class="form-control"  />
-	              </div>
-	            </div>  
-	            <div class="form-group col-sm-4">
-	              <label class="col-sm-3 control-label">所在地</label>
-	              <div class="col-sm-9">
-	                <input type="text" name="location" placeholder="所在地" class="form-control" />
-	              </div>
-	            </div> 
-	        </div>
-	        
                 <div class="section-block">
                     <div class="form-group col-sm-4">
-                      <label class="col-sm-4 control-label">目的地</label>
+                      <label class="col-sm-4 control-label">所属客人</label>
                       <div class="col-sm-8">
-                        <input type="text" id="destination" name="destination" class="country-select fullwidth" value="" />              
+                        <input type="text" name="customerId" placeholder="所属客人" class="customer-select fullwidth" value="${customerId}" />
                       </div>
-                    </div>  
+                    </div>
                     <div class="form-group col-sm-4">
                       <label class="col-sm-4 control-label">沟通语言</label>
                       <div class="col-sm-8">
@@ -137,10 +48,11 @@
                       <div class="col-sm-8">
 	                      <select name="contactType" class="contact-select fullwidth" multiple="multiple">
 							  <option value="wechat">微信</option>
-							  <option value="mobile">手机</option>							  
+							  <option value="mobilephone">手机</option>
+							  
 							  <option value="qq">qq</option>
 					  		  <option value="mail">邮箱</option>
-						</select>
+					</select>
                       </div>
                     </div> 
                     <div class="form-group col-sm-4">
@@ -149,16 +61,21 @@
                         <input type="text" name="source" class="source-select fullwidth" value="" />
                       </div>
                     </div>
-
-<!-- 	                <div class="form-group col-sm-4">
+	                <div class="form-group col-sm-4">
 	                    <label class="col-sm-4 control-label">跟单员</label>
 	                    <div class="col-sm-8">
 	                      <input type="text"  name="operator" class="user-select fullwidth" value="0" />
 	                    </div>
-	                </div>   -->                      
-  
+	                </div>                        
                 </div>
-                
+                    <div class="section-block">
+                   	<div class="form-group col-sm-4">
+                      <label class="col-sm-4 control-label">目的地</label>
+                      <div class="col-sm-8">
+                        <input type="text" id="destination" name="destination" class="country-select fullwidth" value="" />              
+                      </div>
+                    </div>    
+                </div>
                 <div class="section-block">
                     <div class="form-group col-sm-4">
                       <label class="col-sm-4 control-label">与谁同行</label>
@@ -285,20 +202,19 @@
                           <input type="text" name="flight" placeholder="国际航班" class="flight-select fullwidth" />
                         </div>
                     </div>
-<%--                     <input type="hidden" name="chineseName" value="${customerInfo.chineseName}"/>
-                    <input type="hidden" name="englishName" value="${customerInfo.englishName}"/> --%>
-<%--                     <input type="hidden" name="portalId" value="${customerInfo.portalId}"/> --%>
-<%--                     <input type="hidden" name="mobile" value="${customerInfo.mobilephone}"/>
+                    <input type="hidden" name="chineseName" value="${customerInfo.chineseName}"/>
+                    <input type="hidden" name="englishName" value="${customerInfo.englishName}"/>
+                    <input type="hidden" name="portalId" value="${customerInfo.portalId}"/>
+                    <input type="hidden" name="mobile" value="${customerInfo.mobilephone}"/>
                     <input type="hidden" name="email" value="${customerInfo.email}"/>
                     <input type="hidden" name="wechat" value="${customerInfo.wechat}"/>
-                    <input type="hidden" name="qq" value="${customerInfo.qq}"/> --%>
+                    <input type="hidden" name="qq" value="${customerInfo.qq}"/>
                 </div>
             </div><!-- panel-body -->
             
             <div class="panel-footer align-center">
                 <button class="btn btn-primary">保存</button>&nbsp;
                 <button class="btn btn-default">取消</button>
-                <input type="hidden" name="operator" value="${sessionScope.loginUser.userId}"/>
     		    </div><!-- panel-footer -->
         </form>   
       </div><!-- panel -->
@@ -347,7 +263,7 @@
   </div><!-- modal-dialog -->
 </div><!-- modal -->
 
-<%-- <div class="nextModal modal fade" id="nextModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="nextModal modal fade" id="nextModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -370,50 +286,23 @@
                     <input type="text" name="salesId" id="salesId" placeholder="选择一个销售" class="sales-select fullwidth" value="" />
                 </div>
             </div>
+<!--             <div class="form-group col-sm-8 col-sm-offset-2">
+                <label class="col-sm-3 control-label">预算</label>
+                <div class="col-sm-9">
+                    <input type="text" name="budget" id="budget"  class="form-control" value="" />
+                </div>
+            </div> -->
             <div class="col-sm-12">
         	   <a class="submit btn btn-primary">保存</a>
         	 <input type="hidden"  name="caseId" id="caseId" value="" />
-             <input type="hidden"  name="customerId" id="customerId" value="${customerId}"/>
-            
+             <input type="hidden"  name="customerId" id="customerId" value="${customerId}" />
             </div>
           </form>
         </div>
       </div>
     </div><!-- modal-content -->
   </div><!-- modal-dialog -->
-</div><!-- modal --> --%>
-
-
-<div id="bindCustomer" class="nextModal modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
-	<div class="modal-dialog">
-    <div class="modal-content">
-     <div class="modal-header">
-     	<form id="form-judgeBind" action="${rootPath}/case/bindCustomer.do">
-			<table id="showCustomer" border="1">
-			  <tr>	
-			  	<td>客人ID</td>		  	
-			  	<td>客人名</td>
-			  	<td>电话</td>
-			  	<td>邮件</td>
-			  	<td>QQ</td>
-			  	<td>微信</td>
-			  </tr>
-			</table>
-			<%-- <input name="caseId" value="${sessionScope.caseId}"/> --%>
-			<input id="ccaseId" style="display: none" name="caseId" />
-			<label  class="col-sm-4 control-label">是否绑定老客人</label></td>
-	              <div class="col-sm-8">
-	              <input type="radio" name="isJudge" value="1" checked/>是
-      			  <input type="radio" name="isJudge" value="0" />否
-			<input type="submit" name="submit" value="提交"> 
-		</form>
-	    </div><!-- modal-content -->
-  </div><!-- modal-dialog -->
- </div><!-- modal -->	
-</div>  
-
-
-
+</div><!-- modal -->
 
 
 	<%@ include file="../assets/pages/foot.jsp"%>
@@ -437,16 +326,6 @@
     var customer = ${customer};
     var user = ${user};
     var sales = ${sales};
-    var level = ${level};
-	var ageGroup = ${ageGroup};
-	
-	$(".agegroup-select").select2({
-		placeholder: '选择一个年龄段',
-	  	data: ageGroup
-	});
-	$(".level-select").select2({
-	  	data: level
-	});	
 
     $(".country-select").select2({
         placeholder: '国家',
@@ -511,7 +390,7 @@
         placeholder: '销售',
         data: sales
     });
-    	
+    
 		jQuery(document).ready(function() {
 			
         $(".nav-parent").eq(0).addClass("nav-active");
@@ -536,25 +415,10 @@
           changeMonth: true,
           minDate: 0
         });
-        // Date Picker
-		jQuery(".datepicker").datepicker({
-			dateFormat: "yy-mm-dd",
-			changeYear: true,
-			changeMonth: true,
-			maxDate: 0,
-		});
 			 
   			jQuery("#form-case").validate({				
     		rules: {
- //		      customerId: "required",
- 			  chineseName: "required",
-			  qq: "number",
-			  email: "email",
-			  birthday: "date",
-			  source: "required",
-			  mobile:{
-					isMobile:true,
-			  },		
+ 		      customerId: "required",
  			  source: "required",
  			  adult: "digits",
  			  children: "digits",
@@ -566,7 +430,7 @@
               during: "digits",
     		},
     		messages: {
- //  				customerId: "必须选择所属客人",
+   				customerId: "必须选择所属客人",
    				source:"请选择询单来源",
    				adult: "请输入一个整数",
              	children: "请输入一个整数",
@@ -576,11 +440,6 @@
             	endDate: "请输入正确的日期格式 mm/dd/yyyy",
              	startMonth: "请输入正确的日期格式 mm/dd/yyyy",
             	during: "请输入一个整数",
-            	chineseName: "请输入中文名",
-				qq: "请输入有效的QQ账号",
-				email: "请输入有效的邮箱",
-				birthday: "请输入正确的日期",
-				source: "请选择一个客人来源"
    			},
   				
   			    highlight: function(element) {
@@ -590,57 +449,78 @@
   			      jQuery(element).closest('.form-group').removeClass('has-error');
   			    },
   			    invalidHandler : function(){
-  			      var qq = $.trim($("input[name=qq]").val()),
-			    		wechat = $.trim($("input[name=wechat]").val()),
-			    		mobile = $.trim($("input[name=mobile]").val()),
-			    		email = $.trim($("input[name=email]").val()),
-			    		telephone = $.trim($("input[name=telephone]").val());
-
-			    	// 手机，邮箱，微信，QQ，至少输入一个
-			      	if(qq==""&&wechat==""&&mobile==""&&email==""&&telephone==""){
-			      		$(".contact-note").addClass("noted");
-			      		$(".contact-field").addClass("has-error");
-			      	}else{
-			      		$(".contact-note").removeClass("noted");
-			      		$(".contact-field").removeClass("has-error");
-				    }
   			      return false;
   			    },
   			    submitHandler : function(){
-  			      var qq = $.trim($("input[name=qq]").val()),
-		    			wechat = $.trim($("input[name=wechat]").val()),
-		    			mobile = $.trim($("input[name=mobile]").val()),
-		    			email = $.trim($("input[name=email]").val()),
-		    			telephone = $.trim($("input[name=telephone]").val());
-			    	// 手机，邮箱，微信，QQ，至少输入一个
-			      	if(qq==""&&wechat==""&&mobile==""&&email==""&&telephone==""){
-			      		$(".contact-note").addClass("noted");
-			      		$(".contact-field").addClass("has-error");
-			      		return false;
-			      	}else{
-			      		$(".contact-note").removeClass("noted");
-			      		$(".contact-field").removeClass("has-error");
-  			      		case_submit();
-  			      		return false;
-				    }
+  			      case_submit();
+  			      return false;
   			    }
   			});
-  			
-  			//验证手机号码
-			jQuery.validator.addMethod("isMobile", function(value, element) {  
-    			var length = value.length;  
-    			var regPhone = /^1([3578]\d|4[57])\d{8}$/;  
-    			return this.optional(element) || ( length == 11 && regPhone.test( value ) );    
-			}, "请正确填写您的手机号码");
-
-			// 手机，邮箱，微信，QQ，输入一个以后移除错误提示
-			$(".contact-field").find("input").blur(function(){
-				if($.trim($(this).val()) !== ""){
-					$(".contact-field").removeClass("has-error");
-				}
-			});
 			
-	    $(".start-date").hide();
+			  $("#btn-back").click( function () {
+				    history.go(-1);
+		   	  }); 
+		    });			  		
+			      
+		function case_submit() {
+			var f = $("#form-case").serialize();			
+			$.post('${rootPath}case/add.do', f, function(result) {
+				var caseId = result.obj.caseId;
+				$("#caseId").val(caseId);
+				var rmsg = result.msg;
+				
+				//保存完询单弹出modal直接保存订单
+				/* if (result.success) {
+					//window.parent.location = "${rootPath}case/list.html";
+					var destination = $("#destination").val();
+			        $.ajax({
+			             type: "post",
+			             url: "${rootPath}case/getSales.do?destination="+destination,
+			             data: destination,
+			             success: function(sales){
+			            	 var json = jQuery.parseJSON( sales );
+			                 $("#salesId").select2({
+			                      placeholder: '销售',
+			                      data: json
+			                  });
+			              }   
+			         });
+					$("#nextModal").modal('show');
+					
+			} else {
+				$("#msgModal").modal('show');
+				$("#nextModal").modal('hide'); */
+				
+				if (result.success) {
+					window.parent.location = "${rootPath}case/edit.html?id="+caseId;
+					
+					
+				} else {
+					$("#msgModal").modal('show');
+					$("#nextModal").modal('hide');
+				}
+			}, "JSON");
+		}
+		
+	      $(".nextModal .submit").click(function(){
+	      	  order_submit();
+	      });
+	      
+	  		function order_submit() {
+	    			var f = $("#form-order").serialize();
+	    			$.post('${rootPath}order/add.do', f, function(result) {
+	    				var rmsg = result.msg;
+	    				if (result.success) {
+	    					window.parent.location = "${rootPath}order/list.html";
+	    					//$("#nextModal").modal('show');
+	    				} else {
+	    					$("#nextModal").modal('hide');
+	    					$("#NoEmail").modal('show');
+	    				}
+	    			}, "JSON");
+	    	}
+	  		
+        $(".start-date").hide();
         $(".start-time").show();
         $("input[name='startTime']").change(function() {
             var val = $("input[name='startTime']:checked").val();
@@ -657,81 +537,8 @@
         	document.getElementById("customerId").value=val;
         });
         
-
-			$("#btn-back").click( function () {
-				history.go(-1);
-		    }); 
-		});
-		
-/* 		function sociation(){
-   		 	var f = $("#form-case").serialize();
-   		 	var h=$("#form-judgeBind").serialize();
-   		 	alert("crmcase="+f+"&"+h);
-	   		$.ajax({
-				type:"POST",
-				url:"${rootPath}/case/bindCustomer.do?crmcase="+f+"&"+h,		
-				success:function (result){
-					if (result=="ok") {
-						alert("&&&&&")
-						window.parent.location ="${rootPath}case/list.html";					
-					} else{
-						$("#msgModal").modal('show');
-						$("#nextModal").modal('hide');
-					}
-				}
-			}, "JSON"); 	
-		} */
-			      
-		function case_submit() {
-			var f = $("#form-case").serialize();			
-			$.post('${rootPath}case/add.do', f, function(result) {			
-				if (result.ok=="ok") {
-					window.parent.location = "${rootPath}case/list.html";					
-				} else if(result.error=="error"){
-					$("#msgModal").modal('show');
-					$("#nextModal").modal('hide');
-				}else{
-					alert(result.cid);
-					$("#ccaseId").val(result.cid);
-					var custumerList=result.cust;
-					for(var i=0;i<custumerList.length;i++){
-						$("#showCustomer").append("<tr><td>"+custumerList[i].customerId+"</td>"+
-								"<td name='chineseName'>"+custumerList[i].chineseName+"</td>"+
-								"<td name='mobilephone'>"+custumerList[i].mobilephone+"</td>"+
-								"<td name='email'>"+custumerList[i].email+"</td>"+
-								"<td name='qq'>"+custumerList[i].qq+"</td>"+
-								"<td name='wechat'>"+custumerList[i].wechat+"</td>"+
-								"<td style='display:none'><input type='checkbox' name='customerId' checked='true' value="+custumerList[i].customerId+"></td></tr>" 																				
-							);
-					}
-					$("#bindCustomer").modal('show'); 										
-				}
-			}, "JSON");
-		}
-		
-		
-		
-
-/* 	      $(".nextModal .submit").click(function(){
-	      	  order_submit();
-	      });
-	      
-	  		function order_submit() {
-	    			var f = $("#form-order").serialize();
-	    			$.post('${rootPath}/case/add.do', f, function(result) {
-	    				var rmsg = result.msg;
-	    				if (result.success) {
-	    					window.parent.location = "${rootPath}case/list.html";
-	    				} else {
-	    					$("#nextModal").modal('hide');
-	    					$("#NoEmail").modal('show');
-	    				}
-	    			}, "JSON");
-	    	}
-	  		 */
- 
-/* 	var newHref = "../customer/edit.html?id="+$("#customerId").val();
-        $('#aAddEmail').attr("href",newHref) */
+	var newHref = "../customer/edit.html?id="+$("#customerId").val();
+        $('#aAddEmail').attr("href",newHref)
 	</script>
 
 

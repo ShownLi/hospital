@@ -340,7 +340,7 @@
 					}
 				},
 				columnDefs: [		  
- 					  {
+ 					   {
 			                orderable: false,
 			                render: function ( data, type, full, meta ) {
 			                    return "<div class='minw50'>" + full.caseId + "</div>" + "<div class='minw50'>" + full.chineseName + "</div>"
@@ -368,17 +368,19 @@
 			                	else{return ""}
 			                },
 			                targets: 2
-						},	 
+						},	  
 						{
 			                orderable: false,
 			                render: function ( data, type, full, meta ) {
 			                	var dataSource = full.source;
 			                	var dataOperator = full.operator;
+			                	var m = "";
+			                	var n = "";
 				                	for(var i=0;i < source.length;i++){
 				                		if(dataSource==source[i].id){
 				                			// return "<div class='caselist-5'>" + user[i].text + "</div>"
 				                			m = source[i].text;
-				                		}				                		
+				                		}	
 				                	}
 				                	for(var i=0;i < user.length;i++){
 				                		if(dataOperator==user[i].id){
@@ -389,7 +391,7 @@
 			                },
 			                  targets: 3
 						},
-						{
+						 {
 			                orderable: false,
 			                render: function ( data, type, full, meta ) {
 			                	if(full){
@@ -448,7 +450,7 @@
 		                  data: "caseId",
 		                  orderable: false,
 		                  render: function ( data, type, full, meta ) {
-		                      return '<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a>&nbsp;';
+		                      return '<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a>&nbsp;<a class="btn btn-primary btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 处理</a> &nbsp;';
 		                  },
 		                  targets: 8
 					    },
@@ -456,7 +458,7 @@
 						    orderable: false,
 						    searchable: false,
 					        targets: [0]
-					    },
+					    }, 
 
 					],
 					columns: [
@@ -477,10 +479,10 @@
 		    } );
 		    
 		    //处理询单
-		    $('#dataTable tbody').on( 'click', 'a.btn-handle', function () {
+		   /*  $('#dataTable tbody').on( 'click', 'a.btn-handle', function () {
 		        var data = t.row($(this).parents('tr')).data();
 		        handle($(this).attr('id'));
-		    } );
+		    } ); */
 		
 			$('#dataTable tbody').on( 'click', 'a.btn-success', function () {
 		        var data = t.row($(this).parents('tr')).data();
@@ -494,7 +496,7 @@
 			
 			$('#dataTable tbody').on( 'click', 'a.btn-primary', function () {
 		        var data = t.row($(this).parents('tr')).data();
-		        addOrder($(this).attr('id'));
+		        handle($(this).attr('id'));
 		    } );
 	    
 		// Select2

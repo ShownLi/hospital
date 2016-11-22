@@ -41,7 +41,7 @@
                     </div>
               	</div> 
 	            <div class="form-group col-sm-4">
-	              <label class="col-sm-3 control-label">客人名<span class="asterisk">*</span></label>
+	              <label class="col-sm-3 control-label">客人姓名<span class="asterisk">*</span></label>
 	              <div class="col-sm-9">
 	                <input type="text" name="chineseName" placeholder="中文名" class="form-control" value="${crmcase.chineseName}" />
 	              </div>
@@ -60,7 +60,7 @@
 	                </div>
 	            </div> 
 	            <div class="form-group col-sm-4">
-	              <label class="col-sm-3 control-label" >年龄段</label>
+	              <label class="col-sm-3 control-label">年龄段</label>
 	              <div class="col-sm-9">
 	                <input type="text" name="ageGroup" placeholder="请选择一个年龄段" readonly class="form-control" value="${crmcase.ageGroup}"/>
 	              </div>
@@ -685,10 +685,21 @@
 	var genderData = [{ id: 'male', text: '男' }, { id:'female' , text: '女' }];
 	
 	var reason = ${reason};
-	var contactData = [{ id: 0, text: 'qq' }, { id: 1, text: 'email' }, { id: 2, text: 'wechat' }, { id: 3, text: 'phone' }];
+	/* var contactData = [{ id: 0, text: 'qq' }, { id: 1, text: 'email' }, { id: 2, text: 'wechat' }, { id: 3, text: 'phone' }];
+	 */
+	var newHref;
+
+	if($.trim("${crmcase.requirement}")==""){
+		newHref = "../customer/list.html";
+	}
+	else{
+		newHref = "../customer/edit.html?id="+"${crmcase.customerId}";
+	}
+		 
+	$('#addEmail').attr("href",newHref);
 	$("#requirement").val("${crmcase.requirement}");	
 	$("#birthday").val(getBirthday());
-
+	
 	function getBirthday(){
 		var date = $("#birthday").val();	
 		var dateformat = null;
@@ -720,7 +731,7 @@
     $(".contact-select").select2({
     	placeholder: '可多选',
     	minimumResultsForSearch: Infinity,
-    	data: contactData
+    	//data: contactData
      });
     //$(".contact-select").select2("val", '${crmcase.contactType}'.split(","));
     
@@ -1252,10 +1263,9 @@
       }); */
 
   });
-  
-  var newHref = "../customer/edit.html?id="+${crmcase.customerId};
-  $('#addEmail').attr("href",newHref)
-  
+ 
+
+
 	</script>
 
 

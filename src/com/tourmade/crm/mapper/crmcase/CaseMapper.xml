@@ -219,6 +219,7 @@
 	<update id="updateCase" parameterType="Case" flushCache="true">
 		update tm_case
 		set
+		customer_id=#{customerId},
 		prefer_language=#{preferLanguage},
 		operator=#{operator},
 		with_who=#{withwho},
@@ -296,6 +297,7 @@
 		u.ip_address as ipAddress,
 		u.creat_time as creatTime,
 		u.reason as reason,
+		u.customer_portal_id as portalId,
 		u.isdel
 		from tm_case u where u.isdel = 0 and u.case_id = #{caseId}
 	</select>
@@ -574,6 +576,108 @@
 		where u.isdel = 0 and u.customer_portal_id = #{portalId}
 	</select>
 	
+	<!-- <select id="queryCusByComm" parameterType="Map" resultType="Customer">
+		select
+			u.customer_id as customerId,
+			u.customer_portal_id as portalId,
+			u.customer_name_zh as chineseName,
+			u.email as email,
+			u.mobilephone as mobilephone,
+			u.qq ,
+			u.wechat			
+		from tm_customer u
+		<where> 
+			<if test="email != null and email != ''">
+				 or email = #{email} 
+			</if>
+			<if test="mobile != null and mobile != ''">
+				or mobilephone = #{mobile} 
+			</if>
+			<if test="qq != null and qq != ''">
+				or qq = #{qq} 
+			</if>
+			<if test="wechat!= null and wechat != ''">
+				or wechat = #{wechat}
+			</if>
+		</where>	
+	</select> -->
+	
+ 	<select id="queryCusByComm" parameterType="Map" resultType="Customer">
+		select
+			u.customer_id as customerId,
+			u.customer_name_zh as chineseName,
+			u.customer_name_en as englishName,
+			u.customer_level as level,
+			u.location as location,
+			u.source as source,
+			u.age_group as ageGroup,
+			u.gender as gender,
+			u.telephone as telephone,
+			u.mobilephone as mobilephone,
+			u.wechat as wechat,
+			u.qq as qq,
+			u.email as email,
+			u.birthday as birthday,
+			u.creat_time as creatTime,
+			u.isdel as isdel
+		from tm_customer u 
+
+        <where>  
+			<if test="email != null and email != ''">
+				  email = #{email} 
+			</if>
+			<if test="mobile != null and mobile != ''">
+				or mobilephone = #{mobile} 
+			</if>
+			<if test="qq != null and qq != ''">
+				or qq = #{qq} 
+			</if>
+			<if test="wechat!= null and wechat != ''">
+				or wechat = #{wechat}
+			</if>
+		</where>	
+		
+	</select> 
+
+	<select id="countCusByComm" parameterType="Customer" resultType="long">
+		select count(u.customer_id) from tm_customer u
+
+		<where> 
+			<if test="email != null and email != ''">
+				  email = #{email} 
+			</if>
+			<if test="mobile != null and mobile != ''">
+				or mobilephone = #{mobile} 
+			</if>
+			<if test="qq != null and qq != ''">
+				or qq = #{qq} 
+			</if>
+			<if test="wechat!= null and wechat != ''">
+				or wechat = #{wechat}
+			</if>
+		</where>	
+
+	</select>
+	
+	<select id="getCustomerByCusId" parameterType="int" resultType="Customer">
+		select
+		u.customer_id as customerId,
+		u.customer_name_zh as chineseName,
+		u.customer_name_en as englishName,
+		u.customer_level as level,
+		u.location as location,
+		u.source as source,
+		u.age_group as ageGroup,
+		u.gender as gender,
+		u.telephone as telephone,
+		u.mobilephone as mobilephone,
+		u.wechat as wechat,
+		u.qq as qq,
+		u.email as email,
+		u.birthday as birthday,
+		u.isdel as isdel
+		from tm_customer u where u.customer_id = #{customerId}
+	</select>
 </mapper>
 
 
