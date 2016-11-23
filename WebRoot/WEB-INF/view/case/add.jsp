@@ -384,34 +384,42 @@
 </div><!-- modal --> --%>
 
  
- <div id="bindCustomer" class="nextModal modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+ <div id="bindCustomer" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
 	<div class="modal-dialog">
     <div class="modal-content">
      <div class="modal-header">
-     <h4 class="modal-title">联系方式已存在</h4>
+        <h4 class="modal-title">联系方式已存在</h4>
      </div>
+     <div class="modal-body">
      	<form id="form-judgeBind" action="${rootPath}/case/bindCustomer.do">
 
-        <table id="showCustomer" border="1" width="100%">
-          <tr>  
-            <td align="center">客人ID</td>        
-            <td align="center">客人名</td>
-            <td align="center">电话</td>
-            <td align="center">邮件</td>
-            <td align="center">QQ</td>
-            <td align="center">微信</td>
-          </tr>
-        </table>
-        <input id="ccaseId" style="display: none" type="text" name="caseId" />
-        <div style="margin: 10px 0;">
-          <input type="radio" name="isJudge" value="1" checked/>绑定客人
-          <input type="radio" name="isJudge" value="0" />新建客人
-        </div>
-        <div style="text-align: right;">
-          <input class="btn btn-primary" type="submit" name="submit" value="提交"/> 
-          <button class="btn btn-default" type="button" data-dismiss="modal">取消</button>
-        </div> 
-		</form>
+          <table id="showCustomer" border="1" width="100%">
+            <tr>  
+              <td align="center">客人ID</td>        
+              <td align="center">客人名</td>
+              <td align="center">电话</td>
+              <td align="center">邮件</td>
+              <td align="center">QQ</td>
+              <td align="center">微信</td>
+            </tr>
+          </table>
+          <input id="ccaseId" style="display: none" type="text" name="caseId" />
+          <div style="margin: 10px 0;">
+            <div class="rdio rdio-primary rdio-inline">
+              <input id="bingding" type="radio" name="isJudge" value="1" checked/>
+              <label for="bingding">绑定客人</label>
+            </div>
+            <div class="rdio rdio-primary rdio-inline">
+              <input id="cratenew" type="radio" name="isJudge" value="0" />
+              <label for="cratenew">新建客人</label>
+            </div>
+          </div>
+          <div style="text-align: right;">
+            <input class="btn btn-primary" type="submit" name="submit" value="提交"/> 
+            <button class="btn btn-default" type="button" data-dismiss="modal">取消</button>
+          </div> 
+  		</form>
+       </div>
 	    </div><!-- modal-content -->
   </div><!-- modal-dialog -->
  </div><!-- modal -->	
