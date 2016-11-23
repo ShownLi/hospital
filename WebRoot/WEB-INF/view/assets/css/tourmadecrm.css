@@ -195,3 +195,19 @@ label.error{
 .odd{
 	background: #f0f0f0;
 }
+/** select2 styles reset ***/
+.select2-container--default .select2-selection--single .select2-selection__arrow{
+	height: 38px;
+}
+.select2-container--default .select2-selection--single .select2-selection__rendered{
+	line-height: 40px;
+}
+.select2-container .select2-selection--single{
+	height: 40px;
+}
+.select2-container .select2-selection--multiple{
+	min-height: 40px;
+}
+.select2-container .select2-search--inline .select2-search__field{
+	margin-top: 8px;
+}
