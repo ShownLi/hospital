@@ -225,8 +225,8 @@ public class CaseController extends BaseSimpleFormController {
 		return "/case/addCase";
 	}
 	
-	//map形式，在table里追加
-	@RequestMapping(value = "/add.do")
+	//map形式，在table里追加,直接生成询单再操作
+	/*@RequestMapping(value = "/add.do")
 	@ResponseBody
 
 	public Map doAdd(HttpServletRequest request, HttpSession session, Model model, Case crmcase) {
@@ -248,6 +248,43 @@ public class CaseController extends BaseSimpleFormController {
 			}else{
 				service.saveCustomer(crmcase);
 				crmcase.setCustomerId(crmcase.getCustomerId());
+				service.saveCase(crmcase);				
+				map.put("ok","ok");
+				return map;
+			}
+			
+		} catch (Exception e) {
+			logger.error("CaseController.doAdd() --> " + crmcase.toString() + "\n" + e.getMessage());
+			map.put("error", "error");
+			return map;
+		}		
+	}*/
+	
+	//map形式，在table里追加,先判断联系方式是否已存在，然后选择是否绑定再保存询单
+	@RequestMapping(value = "/add.do")
+	@ResponseBody
+	
+	public Map doAdd(HttpServletRequest request, HttpSession session, Model model, Case crmcase) {
+		
+		Map<String,Object> customerMap =new HashMap<String,Object>();
+		Map<String,String> map =new HashMap();
+		
+		try {
+			//判断是否有老客人,( 添加询单)
+			List judgeCustomer = service.judgeCustomer(crmcase);
+			if(judgeCustomer.size()>0){
+				customerMap.put("cust", judgeCustomer);
+				crmcase.setStatus("0");
+				service.saveCase(crmcase);
+//				String.valueOf(crmcase.getCaseId());
+				customerMap.put("cid",crmcase.getCaseId());
+//				customerMap.put("crmcase",crmcase);
+				return customerMap;
+				//没有老客人，添加客人和询单
+			}else{
+				service.saveCustomer(crmcase);
+				crmcase.setCustomerId(crmcase.getCustomerId());
+				crmcase.setStatus("1");
 				service.saveCase(crmcase);				
 				map.put("ok","ok");
 				return map;
@@ -300,14 +337,16 @@ public class CaseController extends BaseSimpleFormController {
 			
 		try {
 			//新建客人
-			if(isJudge.equals("0")){			    
+			if(isJudge.equals("0")){	
 				service.saveCustomer(realCase);
 				crmcase.setCustomerId(realCase.getCustomerId());
+				realCase.setStatus("1");
 				service.updateCase(realCase);
 				System.out.println("^^^^");
 			}else{
 			//绑定客人,添加询单
 				realCase.setCustomerId(id);
+				realCase.setStatus("1");
 				System.out.println(realCase);
 				service.updateCustomer(realCase);
 				service.updateCase(realCase);
@@ -476,6 +515,7 @@ public class CaseController extends BaseSimpleFormController {
 			if( crmcase.getPortalId()!=null && crmcase.getPortalId()!=0) {
 				Customer regular = service.getCustomerByPortalId(crmcase.getPortalId());
 				crmcase.setCustomerId(regular.getCustomerId());
+				crmcase.setStatus("1");
 				service.updateCustomer(crmcase);
 				service.updateCase(crmcase);
 				map.put("ok", "ok");
@@ -493,6 +533,7 @@ public class CaseController extends BaseSimpleFormController {
 				}else{
 					service.saveCustomer(crmcase);
 					crmcase.setCustomerId(crmcase.getCustomerId());
+					crmcase.setStatus("1");
 					service.updateCase(crmcase);		
 					map.put("ok","ok");
 					return map;

@@ -52,7 +52,7 @@
 	                <input type="text" name="englishName" placeholder="英文名" class="form-control" value="${crmcase.englishName}"/>
 	              </div>
 	            </div> 	
-	            <input type="text" name="portalId" placeholder="portalId" class="form-control" value="${crmcase.portalId}"/>
+	            <input type="text" style="display: none" name="portalId" placeholder="portalId" class="form-control" value="${crmcase.portalId}"/>
 	             	
 	            <%-- <div class="form-group col-sm-4">
 	            	<label class="col-sm-3 control-label">生日</label>
@@ -671,10 +671,11 @@
 			</table>
 			<%-- <input name="caseId" value="${sessionScope.caseId}"/> --%>
 			<input id="ccaseId" style="display: none" type="text" name="caseId" />
-			<label  class="col-sm-4 control-label">是否绑定老客人</label>
-	              <input type="radio" name="isJudge" value="1" checked/>是
-      			  <input type="radio" name="isJudge" value="0" />否
-			<input type="submit" name="submit" value="提交"> 
+			<!-- <label  class="col-sm-4 control-label">是否绑定老客人</label> -->
+
+	              <input type="radio" name="isJudge" value="1" checked/>绑定客人
+      			  <input type="radio" name="isJudge" value="0" />新建客人
+			<input type="submit" name="submit" value="提交"/> 
 		</form>
 	    </div><!-- modal-content -->
   </div><!-- modal-dialog -->
