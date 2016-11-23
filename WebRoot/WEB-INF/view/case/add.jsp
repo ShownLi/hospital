@@ -384,11 +384,15 @@
 </div><!-- modal --> --%>
 
  
- <div id="bindCustomer" class="nextModal modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+ <div id="bindCustomer" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
 	<div class="modal-dialog">
     <div class="modal-content">
-     <div class="modal-header">
+      <div class="modal-header">
+        <h4 class="modal-title">联系方式已存在</h4>
+      </div>
+      <div class="modal-body">
      	<form id=" " action="${rootPath}/case/bindCustomer.do">
+<<<<<<< HEAD
 			<table id="showCustomer" border="1">
 			  <tr>	
 			  	<td>客人ID</td>		  	
@@ -436,6 +440,29 @@
       			  <input type="radio" name="isJudge" value="0" />否
 			<input type="submit" name="submit" value="提交"/> 
 		</form>
+=======
+  			<table id="showCustomer" border="1" width="100%">
+  			  <tr>	
+  			  	<td align="center">客人ID</td>		  	
+  			  	<td align="center">客人名</td>
+  			  	<td align="center">电话</td>
+  			  	<td align="center">邮件</td>
+  			  	<td align="center">QQ</td>
+  			  	<td align="center">微信</td>
+  			  </tr>
+  			</table>
+  			<input id="ccaseId" style="display: none" type="text" name="caseId" />
+        <div style="margin: 10px 0;">
+          <input type="radio" name="isJudge" value="1" checked/>绑定客人
+    	    <input type="radio" name="isJudge" value="0" />新建客人
+        </div>
+        <div style="text-align: right;">
+          <input class="btn btn-primary" type="submit" name="submit" value="提交"/> 
+          <button class="btn btn-default" type="button" data-dismiss="modal">取消</button>
+        </div>
+			        
+		  </form>
+>>>>>>> 528190f5545b69654509c155ebf338638c139f7d
 	    </div><!-- modal-content -->
   </div><!-- modal-dialog -->
  </div><!-- modal -->	
@@ -758,13 +785,13 @@
 					$("#ccaseId").val(result.cid);
 					var custumerList=result.cust;
 					for(var i=0;i<custumerList.length;i++){
-						$("#showCustomer").append("<tr><td>"+custumerList[i].customerId+"</td>"+
-								"<td name='chineseName'>"+custumerList[i].chineseName+"</td>"+
-								"<td name='mobilephone'>"+custumerList[i].mobilephone+"</td>"+
-								"<td name='email'>"+custumerList[i].email+"</td>"+
-								"<td name='qq'>"+custumerList[i].qq+"</td>"+
-								"<td name='wechat'>"+custumerList[i].wechat+"</td>"+
-								"<td style='display:none'><input type='checkbox' name='customerId' checked='true' value="+custumerList[i].customerId+"></td></tr>" 																				
+						$("#showCustomer").append("<tr><td align='center'>"+custumerList[i].customerId+"</td>"+
+								"<td align='center' name='chineseName'>"+custumerList[i].chineseName+"</td>"+
+								"<td align='center' name='mobilephone'>"+custumerList[i].mobilephone+"</td>"+
+								"<td align='center' name='email'>"+custumerList[i].email+"</td>"+
+								"<td align='center' name='qq'>"+custumerList[i].qq+"</td>"+
+								"<td align='center' name='wechat'>"+custumerList[i].wechat+"</td>"+
+								"<td align='center' style='display:none'><input type='checkbox' name='customerId' checked='true' value="+custumerList[i].customerId+"></td></tr>" 																				
 							);
 					}
 					$("#bindCustomer").modal('show'); 										
