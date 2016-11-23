@@ -160,8 +160,7 @@ public class CaseService extends BaseService {
 
 	public void saveCase(Case crmcase) {
 		try {
-			crmcase.setStatus("1");
-			crmcase.setLevel("0");
+			
 			caseMapper.saveCase(crmcase);
 		} catch (Exception e) {
 			logger.error("CaseService.saveCase() --> " + crmcase + "-->" + e.getMessage());

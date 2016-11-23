@@ -52,7 +52,7 @@
 	                <input type="text" name="englishName" placeholder="英文名" class="form-control" value="${crmcase.englishName}"/>
 	              </div>
 	            </div> 	
-	            <input type="text" name="portalId" placeholder="portalId" class="form-control" value="${crmcase.portalId}"/>
+	            <input type="text" style="display: none" name="portalId" placeholder="portalId" class="form-control" value="${crmcase.portalId}"/>
 	             	
 	            <%-- <div class="form-group col-sm-4">
 	            	<label class="col-sm-3 control-label">生日</label>
@@ -659,6 +659,25 @@
     <div class="modal-content">
      <div class="modal-header">
      	<form id="form-judgeBind" action="${rootPath}/case/bindCustomer.do">
+<<<<<<< HEAD
+			<table id="showCustomer" border="1">
+			  <tr>	
+			  	<td>客人ID</td>		  	
+			  	<td>客人名</td>
+			  	<td>电话</td>
+			  	<td>邮件</td>
+			  	<td>QQ</td>
+			  	<td>微信</td>
+			  </tr>
+			</table>
+			<%-- <input name="caseId" value="${sessionScope.caseId}"/> --%>
+			<input id="ccaseId" style="display: none" type="text" name="caseId" />
+			<!-- <label  class="col-sm-4 control-label">是否绑定老客人</label> -->
+
+	              <input type="radio" name="isJudge" value="1" checked/>绑定客人
+      			  <input type="radio" name="isJudge" value="0" />新建客人
+			<input type="submit" name="submit" value="提交"/> 
+=======
         <table id="showCustomer" border="1" width="100%">
           <tr>  
             <td align="center">客人ID</td>        
@@ -678,6 +697,7 @@
           <input class="btn btn-primary" type="submit" name="submit" value="提交"/> 
           <button class="btn btn-default" type="button" data-dismiss="modal">取消</button>
         </div> 
+>>>>>>> 528190f5545b69654509c155ebf338638c139f7d
 		</form>
 	    </div><!-- modal-content -->
   </div><!-- modal-dialog -->

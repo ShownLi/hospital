@@ -392,6 +392,55 @@
       </div>
       <div class="modal-body">
      	<form id=" " action="${rootPath}/case/bindCustomer.do">
+<<<<<<< HEAD
+			<table id="showCustomer" border="1">
+			  <tr>	
+			  	<td>客人ID</td>		  	
+			  	<td>客人名</td>
+			  	<td>电话</td>
+			  	<td>邮件</td>
+			  	<td>QQ</td>
+			  	<td>微信</td>
+			  </tr>
+			</table>
+			<%-- <input name="caseId" value="${sessionScope.caseId}"/> --%>
+			<input id="ccaseId" style="display: none" type="text" name="caseId" />
+			<!-- <label  class="col-sm-4 control-label">是否绑定老客人</label> -->
+
+	              <input type="radio" name="isJudge" value="1" checked/>绑定客人
+      			  <input type="radio" name="isJudge" value="0" />新建客人
+			<input type="submit" name="submit" value="提交"/> 
+		</form>
+	    </div><!-- modal-content -->
+  </div><!-- modal-dialog -->
+ </div><!-- modal -->	
+</div>    
+ 
+ 
+<%--  <div id="bindCustomer" class="nextModal modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+	<div class="modal-dialog">
+    <div class="modal-content">
+     <div class="modal-header">
+     	<form id=" " action="${rootPath}/case/bindCustomer.do">
+			<table id="showCustomer" border="1">
+			  <tr>	
+			  	<td>客人ID</td>		  	
+			  	<td>客人名</td>
+			  	<td>电话</td>
+			  	<td>邮件</td>
+			  	<td>QQ</td>
+			  	<td>微信</td>
+			  </tr>
+			</table>
+			<input name="caseId" value="${sessionScope.caseId}"/>
+			<input id="ccaseId" style="display: none" type="text" name="caseId" />
+			<label  class="col-sm-4 control-label">是否绑定老客人</label>
+
+	              <input type="radio" name="isJudge" value="1" checked/>是
+      			  <input type="radio" name="isJudge" value="0" />否
+			<input type="submit" name="submit" value="提交"/> 
+		</form>
+=======
   			<table id="showCustomer" border="1" width="100%">
   			  <tr>	
   			  	<td align="center">客人ID</td>		  	
@@ -413,11 +462,13 @@
         </div>
 			        
 		  </form>
+>>>>>>> 528190f5545b69654509c155ebf338638c139f7d
 	    </div><!-- modal-content -->
   </div><!-- modal-dialog -->
  </div><!-- modal -->	
 </div>    
  
+  --%>
 <%-- <div id="bindCustomer" class="nextModal modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
 	<div class="modal-dialog">
     <div class="modal-content">

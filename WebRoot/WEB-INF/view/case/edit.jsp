@@ -986,7 +986,7 @@
      	 alert("页面正在加载，请稍后...");
       }
      
-	   
+ 
 	  //添加订单
       $("#btn-addorder").click(function(){
       	  var destination = $("#destination").val(); 
@@ -995,7 +995,8 @@
       	  if(destination==""){
       	  	$("#msgDestination").modal('show');
  		  }else{ 
-      		var destinationText = $("#destination").select2('data').text;
+      		var destinationText = $("#destination").select2('data')[0].text;
+      		
       	  		$("#orderDestinationText").val(destinationText); 
       	  		$("#orderDestination").val(destination);
 	      	  	$.ajax({
