@@ -654,7 +654,7 @@
   </div><!-- modal-dialog -->
 </div><!-- bmodal -->
 
-<div id="bindCustomer" class="nextModal modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+<div id="bindCustomer" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
 	<div class="modal-dialog">
     <div class="modal-content">
      <div class="modal-header">
