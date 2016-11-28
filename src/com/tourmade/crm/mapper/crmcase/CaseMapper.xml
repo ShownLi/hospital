@@ -220,6 +220,7 @@
 		update tm_case
 		set
 		customer_id=#{customerId},
+		customer_name=#{chineseName},
 		prefer_language=#{preferLanguage},
 		operator=#{operator},
 		with_who=#{withwho},
@@ -519,43 +520,48 @@
 		customer_id=#{customerId}
 	</update> 
 	
-	<insert id="saveCustomer" parameterType="Case" flushCache="true" useGeneratedKeys="true" keyProperty="customerId" keyColumn="GENERATED_KEY">
+	
+	<insert id="saveCustomer" parameterType="Customer" flushCache="true" useGeneratedKeys="true" keyProperty="customerId" keyColumn="GENERATED_KEY">
+
 		insert into tm_customer(
-			customer_name_zh,
-			customer_name_en,
-			customer_level,
-			location,
-			source,
-			age_group,
-			gender,
-			telephone,
-			mobilephone,
-			wechat,
-			qq,
-			email,
-			birthday,
-			creat_time,
-			update_time,
-			isdel
+		customer_portal_id,
+		customer_name_zh,
+		customer_name_en,
+		customer_level,
+		location,
+		source,
+		age_group,
+		gender,
+		telephone,
+		mobilephone,
+		wechat,
+		qq,
+		email,
+		birthday,
+		creat_time,
+		update_time,
+		isdel
 		)values(
-			#{chineseName,jdbcType=VARCHAR},
-			#{englishName,jdbcType=VARCHAR},
-			#{level,jdbcType=VARCHAR},
-			#{location,jdbcType=VARCHAR},
-			#{source,jdbcType=VARCHAR},
-			#{ageGroup,jdbcType=VARCHAR},
-			#{gender,jdbcType=VARCHAR},
-			#{telephone,jdbcType=VARCHAR},
-			#{mobile,jdbcType=VARCHAR},
-			#{wechat,jdbcType=VARCHAR},
-			#{qq,jdbcType=VARCHAR},
-			#{email,jdbcType=VARCHAR},
-			#{birthday,jdbcType=VARCHAR},
-			NOW(),
-			NOW(),
-			0
+		#{portalId,jdbcType=VARCHAR},
+		#{chineseName,jdbcType=VARCHAR},
+		#{englishName,jdbcType=VARCHAR},
+		#{level,jdbcType=VARCHAR},
+		#{location,jdbcType=VARCHAR},
+		#{source,jdbcType=VARCHAR},
+		#{ageGroup,jdbcType=VARCHAR},
+		#{gender,jdbcType=VARCHAR},
+		#{telephone,jdbcType=VARCHAR},
+		#{mobilephone,jdbcType=VARCHAR},
+		#{wechat,jdbcType=VARCHAR},
+		#{qq,jdbcType=VARCHAR},
+		#{email,jdbcType=VARCHAR},
+		#{birthday,jdbcType=VARCHAR},
+		NOW(),
+		NOW(),
+		0
 		)
 	</insert>
+	
 	
 	<select id="getCustomerByPortalId" parameterType="int" resultType="Customer">
 		select 

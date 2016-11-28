@@ -52,7 +52,7 @@
 	                <input type="text" name="englishName" placeholder="英文名" class="form-control" value="${crmcase.englishName}"/>
 	              </div>
 	            </div>  --%>
-	            <div class="form-group col-sm-4">
+	            <%-- <div class="form-group col-sm-4">
 	            	<label class="col-sm-3 control-label">生日</label>
 	            	<div class="col-sm-9 input-group input-datepicker">
 		                <input type="text" name="birthday" class="datepicker form-control" placeholder="yyyy/mm/dd" id="birthday" autocomplete="off" value="${crmcase.birthday}">
@@ -83,17 +83,17 @@
 	                  <label for="female">女</label>
 	                </div><!-- rdio -->
 	              </div>
-	            </div> 
+	            </div>  --%>
 	        </div>
 	        
 	        <div class="section-block">
 	        	<h5 class="section-title">客人联系方式  <span class="contact-note">(手机、微信、QQ、邮箱至少填写一个)</span></h5>
-	            <div class="form-group col-sm-4 contact-field">
+	            <%-- <div class="form-group col-sm-4 contact-field">
 	              <label class="col-sm-3 control-label">固定电话</label>
 	              <div class="col-sm-9">
 	                <input type="text" name="telephone" placeholder="固定电话" class="form-control" value="${crmcase.telephone}" />
 	              </div>
-	            </div>
+	            </div> --%>
 	            <div class="form-group col-sm-4 contact-field">
 	              <label class="col-sm-3 control-label">手机</label>
 	              <div class="col-sm-9">
@@ -698,7 +698,7 @@
 		 
 	$('#addEmail').attr("href",newHref);
 	$("#requirement").val("${crmcase.requirement}");	
-	$("#birthday").val(getBirthday());
+	//$("#birthday").val(getBirthday());
 	
 	function getBirthday(){
 		var date = $("#birthday").val();	

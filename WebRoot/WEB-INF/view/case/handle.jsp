@@ -67,12 +67,12 @@
 	                <input type="text" name="ageGroup" placeholder="请选择一个年龄段" readonly class="form-control" value="${crmcase.ageGroup}"/>
 	              </div>
 	            </div> --%>
-            	<div class="form-group col-sm-4">
+            	<%-- <div class="form-group col-sm-4">
             	<label class="col-sm-4 control-label">客人级别</label>
             	<div class="col-sm-8">
                     <input type="text" name="level" id="level" class="level-select fullwidth" readonly  value="${customerInfo.level}" />
                 </div>
-            	</div> 
+            	</div>  --%>
 	            <!-- <div class="form-group col-sm-4">
 	              <label class="col-sm-3 control-label" >性别 <span class="asterisk">&nbsp;</span></label>
 	              <div class="col-sm-9">

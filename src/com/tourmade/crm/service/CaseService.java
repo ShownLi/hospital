@@ -144,13 +144,93 @@ public class CaseService extends BaseService {
 	 */
 	public void saveCustomer(Case crmcase){
 		try {
-			caseMapper.saveCustomer(crmcase);
+			Customer cus = case2Customer(crmcase);
+			setCusLevel(cus);
+			String caseSource = crmcase.getSource().trim();
+			cus.setSource("others");
+			if(caseSource.equals("web_form")){
+				cus.setSource("form");
+			}
+			if(caseSource.equals("mobile_form")){
+				cus.setSource("form");
+			}
+			if(caseSource.equals("direct_form")){
+				cus.setSource("form");
+			}
+			if(caseSource.equals("wechat_form")){
+				cus.setSource("form");
+			}
+			if(caseSource.equals("web_service")){
+				cus.setSource("online_service");
+			}
+			if(caseSource.equals("mobile_service")){
+				cus.setSource("online_service");
+			}
+			if(caseSource.equals("phone_service")){
+				cus.setSource("phone_service");
+			}
+			if(caseSource.equals("wechat_service")){
+				cus.setSource("wechat_service");
+			}
+			if(caseSource.equals("offline")){
+				cus.setSource("offline");
+			}
+			if(caseSource.equals("email")){
+				cus.setSource("email");
+			}
+			if(caseSource.equals("friends")){
+				cus.setSource("friends");
+			}
+			if(caseSource.equals("ctrip")){
+				cus.setSource("ctrip");
+			}
+			
+			
+			//caseMapper.saveCustomer(crmcase);
+			caseMapper.saveCustomer(cus);
+			crmcase.setCustomerId(cus.getCustomerId());
 		} catch (Exception e) {
 			logger.error("CaseService.seveCustomer() --> " + crmcase.getCustomerId() + "-->" + e.getMessage());
 			e.printStackTrace();
 		}
 	}
 	
+	private Customer case2Customer(Case crmcase) {
+		Customer cus = new Customer();
+		if(crmcase.getChineseName()!=null){
+			cus.setChineseName(crmcase.getChineseName());
+		}
+		if(crmcase.getEnglishName()!=null){
+			cus.setEnglishName(crmcase.getEnglishName());
+		}
+		if(crmcase.getLevel()!=null){
+			cus.setLevel(crmcase.getLevel());
+		}
+		if(crmcase.getLocation()!=null){
+			cus.setLocation(crmcase.getLocation());
+		}
+		if(crmcase.getSource()!=null){
+			cus.setSource(crmcase.getLocation());
+		}
+		if(crmcase.getTelephone()!=null){
+			cus.setTelephone(crmcase.getTelephone());
+		}
+		if(crmcase.getMobile()!=null){
+			cus.setMobilephone(crmcase.getMobile());
+		}
+		if(crmcase.getWechat()!=null){
+			cus.setWechat(crmcase.getWechat());
+		}
+		if(crmcase.getQq()!=null){
+			cus.setQq(crmcase.getQq());
+		}
+		if(crmcase.getEmail()!=null){
+			cus.setEmail(crmcase.getEmail());
+		}
+		
+		return cus;
+	}
+
 	/**
 	 * 新增询单
 	 * 
@@ -170,12 +250,14 @@ public class CaseService extends BaseService {
 	}	
 		/*
 		 * 修改客人信息
+		 * 同时将客人等级设置为普通客人
 		 */
 	
 	public void updateCustomer(Case crmcase) {
 		
 		try {
 			Customer customer = getCustomerByCusId(crmcase.getCustomerId());
+			setCusLevel(customer);
 			if(crmcase.getChineseName()!=null){customer.setChineseName(crmcase.getChineseName());}
 			if(crmcase.getAgeGroup()!=null){customer.setAgeGroup(crmcase.getAgeGroup());}
 			if(crmcase.getBirthday()!=null){customer.setBirthday(crmcase.getBirthday());}
@@ -186,7 +268,6 @@ public class CaseService extends BaseService {
 			if(crmcase.getMobile()!=null){customer.setMobilephone(crmcase.getMobile());}
 			if(crmcase.getPortalId()!=null){customer.setPortalId(crmcase.getPortalId());}
 			if(crmcase.getQq()!=null){customer.setQq(crmcase.getQq());}
-			if(crmcase.getSource()!=null){customer.setSource(crmcase.getSource());}
 			if(crmcase.getTelephone()!=null){customer.setTelephone(crmcase.getTelephone());}
 			if(crmcase.getWechat()!=null){customer.setWechat(crmcase.getWechat());}
 			caseMapper.updateCustomer(customer);
@@ -255,6 +336,21 @@ public class CaseService extends BaseService {
 		}
 		return map;*/
 	
+	/*
+	 * 设置客人等级
+	 */
+	private void setCusLevel(Customer customer) {
+		if(customer.getLevel()!=null){	
+			int cusLevel = Integer.parseInt(customer.getLevel());
+			if(cusLevel!=3){
+				customer.setLevel("2");
+			}
+		}
+		else{
+			customer.setLevel("2");
+		}
+	
+	}
 
 	private Customer getCustomerByCusId(Integer customerId) {
 		Customer customer = null;

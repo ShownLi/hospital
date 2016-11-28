@@ -790,7 +790,6 @@
 					$("#msgModal").modal('show');
 					$("#nextModal").modal('hide');
 				}else{
-					alert(result.cid);
 					$("#ccaseId").val(result.cid);
 					var custumerList=result.cust;
 					for(var i=0;i<custumerList.length;i++){

@@ -534,7 +534,7 @@ public class EmailService extends BaseService {
 			String customerChineseName = boat.getChinese();
 			String customerEnglishName = boat.getEnglish();
 			
-			String subject = customerChineseName+"去"+destinationChinese+"的需求/Enquiry for "
+			String subject = customerChineseName+"去"+destinationChinese+"的需求 / Enquiry for "
 					+customerEnglishName+" about "+destinationEnglish;
 			
 			return subject;

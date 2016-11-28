@@ -329,10 +329,8 @@ public class CaseController extends BaseSimpleFormController {
 	@RequestMapping(value = "/bindCustomer.do")
 //	@ResponseBody
 	public String bindCustomer(HttpServletRequest request, HttpSession session, Case crmcase, String[] customerId, String isJudge) {
-			System.out.println(crmcase);
 			int id = 0;
 			id= Integer.parseInt(customerId[0]);
-			System.out.println("^^^^"+id);
 			Case realCase = service.getCaseById(crmcase.getCaseId());
 			
 		try {
@@ -342,17 +340,13 @@ public class CaseController extends BaseSimpleFormController {
 				crmcase.setCustomerId(realCase.getCustomerId());
 				realCase.setStatus("1");
 				service.updateCase(realCase);
-				System.out.println("^^^^");
 			}else{
 			//绑定客人,添加询单
 				realCase.setCustomerId(id);
 				realCase.setStatus("1");
-				System.out.println(realCase);
 				service.updateCustomer(realCase);
 				service.updateCase(realCase);
-				System.out.println("&&&&&&&");
 			}
-			System.out.println("+++++++++++++");
 			
 			return "redirect:/case/list.html";
 		} catch (Exception e) {
@@ -366,25 +360,20 @@ public class CaseController extends BaseSimpleFormController {
 	@RequestMapping(value = "/bindCustomer2.do")
 	@ResponseBody
 	public String bindCustomer2(HttpServletRequest request, HttpSession session, Case crmcase, String[] customerId, String judgeCustomer) {
-			System.out.println(crmcase);
 			int id = 0;
 			id= Integer.parseInt(customerId[0]);
-			System.out.println("^^^^"+id);
 		try {
 			//新建客人
 			if(judgeCustomer.equals("0")){
 				service.saveCustomer(crmcase);
 				crmcase.setCustomerId(crmcase.getCustomerId());
 				service.saveCase(crmcase);	
-				System.out.println("^^^^");
 			}else{
 			//绑定客人,添加询单
 				crmcase.setCustomerId(id);
 				service.updateCustomer(crmcase);
 				service.saveCase(crmcase);
-				System.out.println("&&&&&&&");
 			}
-			System.out.println("--------------");
 			
 			return "/case/list.jsp";
 		} catch (Exception e) {
@@ -525,6 +514,8 @@ public class CaseController extends BaseSimpleFormController {
 				//判断是否有老客人
 				List judgeCustomer = service.judgeCustomer(crmcase);
 				if(judgeCustomer.size()>0){
+					
+					service.updateCase(crmcase);
 					customerMap.put("cust", judgeCustomer);
 //					service.saveCase(crmcase);
 					customerMap.put("cid",crmcase.getCaseId());
@@ -704,8 +695,12 @@ public class CaseController extends BaseSimpleFormController {
 			} else {
 				json.setSuccess(false);
 			}
-
-			service.updateCase(crmcase);
+			Case upCase = service.getCaseById(crmcase.getCaseId());
+		
+			upCase.setReason(crmcase.getReason());
+			
+			service.updateCase(upCase);
+			
 			service.deleteCaseById(crmcase.getCaseId());
 			json.setSuccess(true);
 		} catch (Exception e) {
