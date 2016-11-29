@@ -136,10 +136,7 @@
                       <label class="col-sm-4 control-label">希望联系方式</label>
                       <div class="col-sm-8">
 	                      <select name="contactType" class="contact-select fullwidth" multiple="multiple">
-							  <option value="wechat">微信</option>
-							  <option value="mobile">手机</option>							  
-							  <option value="qq">qq</option>
-					  		  <option value="mail">邮箱</option>
+							  
 						</select>
                       </div>
                     </div> 
@@ -538,7 +535,7 @@
     var sales = ${sales};
     var level = ${level};
 	var ageGroup = ${ageGroup};
-	
+	var contactData=${contact};
 	$(".agegroup-select").select2({
 		placeholder: '选择一个年龄段',
 	  	data: ageGroup
@@ -557,6 +554,7 @@
     });
     $(".contact-select").select2({
         placeholder: '选择希望联系方式',
+        data: contactData
      });
     $(".withwho-select").select2({
     	placeholder: '与谁同行',

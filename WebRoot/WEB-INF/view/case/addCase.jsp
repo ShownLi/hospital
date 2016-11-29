@@ -47,11 +47,7 @@
                       <label class="col-sm-4 control-label">希望联系方式</label>
                       <div class="col-sm-8">
 	                      <select name="contactType" class="contact-select fullwidth" multiple="multiple">
-							  <option value="wechat">微信</option>
-							  <option value="mobilephone">手机</option>
-							  
-							  <option value="qq">qq</option>
-					  		  <option value="mail">邮箱</option>
+							 
 					</select>
                       </div>
                     </div> 
@@ -326,7 +322,7 @@
     var customer = ${customer};
     var user = ${user};
     var sales = ${sales};
-
+	var contactData=${contact};
     $(".country-select").select2({
         placeholder: '国家',
         data: country,
@@ -337,6 +333,7 @@
     });
     $(".contact-select").select2({
         placeholder: '选择希望联系方式',
+        data:contactData
      });
     $(".withwho-select").select2({
     	placeholder: '与谁同行',

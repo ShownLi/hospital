@@ -99,6 +99,9 @@ public class CaseController extends BaseSimpleFormController {
 		String flight = "case.flight";
 		String level = "customer.level";
 		String ageGroup = "customer.agegroup";
+		
+		String contact ="case.contactType";
+		
 		List<EntityList> levelList = service.getParameterInfo(level);
 		List<EntityList> ageGroupList = service.getParameterInfo(ageGroup);
 		List<EntityList> countryList = service.getParameterInfo(country);
@@ -113,9 +116,14 @@ public class CaseController extends BaseSimpleFormController {
 		List<EntityList> passList = service.getParameterInfo(passport);
 		List<EntityList> visaList = service.getParameterInfo(visa);
 		List<EntityList> flightList = service.getParameterInfo(flight);
+		//获取联系方式
+		List<EntityList> contactList=service.getParameterInfo(contact);
+		
 		List<EntityList> customer = service.getCustomer();
 		List<EntityList> user = service.getUser();
 		List<EntityList> sales = service.getSales();
+		
+		
 		JSONArray levelResult = JSONArray.fromObject(levelList);
 		JSONArray  ageGroupResult = JSONArray.fromObject(ageGroupList);
 		JSONArray countryResult = JSONArray.fromObject(countryList);
@@ -133,6 +141,9 @@ public class CaseController extends BaseSimpleFormController {
 		JSONArray customerResult = JSONArray.fromObject(customer);
 		JSONArray userResult = JSONArray.fromObject(user);
 		JSONArray salesResult = JSONArray.fromObject(sales);
+		//转换成Json字符串
+		JSONArray contactResult=JSONArray.fromObject(contactList);
+		
 		model.addAttribute("level",levelResult);
 		model.addAttribute("ageGroup",ageGroupResult);
 		model.addAttribute("country",countryResult);
@@ -150,7 +161,7 @@ public class CaseController extends BaseSimpleFormController {
 		model.addAttribute("visa",visaResult);
 		model.addAttribute("flight",flightResult);
 		model.addAttribute("user",userResult);
-
+		model.addAttribute("contact", contactResult);
 		return "/case/add";
 	}
 	
@@ -174,6 +185,7 @@ public class CaseController extends BaseSimpleFormController {
 		String passport = "case.passport";
 		String visa = "case.visa";
 		String flight = "case.flight";
+		String contact ="case.contactType";
 		List<EntityList> countryList = service.getParameterInfo(country);
 		List<EntityList> languageList = service.getParameterInfo(language);
 		List<EntityList> withwhoList = service.getParameterInfo(withwho);
@@ -186,9 +198,12 @@ public class CaseController extends BaseSimpleFormController {
 		List<EntityList> passportList = service.getParameterInfo(passport);
 		List<EntityList> visaList = service.getParameterInfo(visa);
 		List<EntityList> flightList = service.getParameterInfo(flight);
+		//获取联系方式
+		List<EntityList> contactList=service.getParameterInfo(contact);
 		List<EntityList> customerList = service.getCustomer();
 		List<EntityList> userList = service.getUser();
 		List<EntityList> salesList = service.getSales();
+		
 		JSONArray countryResult = JSONArray.fromObject(countryList);
 		JSONArray languageResult = JSONArray.fromObject(languageList);
 		JSONArray withResult = JSONArray.fromObject(withwhoList);
@@ -204,6 +219,8 @@ public class CaseController extends BaseSimpleFormController {
 		JSONArray customerResult = JSONArray.fromObject(customerList);
 		JSONArray userResult = JSONArray.fromObject(userList);
 		JSONArray salesResult = JSONArray.fromObject(salesList);
+		//转换成Json字符串
+		JSONArray contactResult=JSONArray.fromObject(contactList);
 		model.addAttribute("country",countryResult);
 		model.addAttribute("language",languageResult);
 		model.addAttribute("withwho",withResult);
@@ -221,7 +238,7 @@ public class CaseController extends BaseSimpleFormController {
 		model.addAttribute("customerId",customerId);
 		model.addAttribute("user",userResult);
 		model.addAttribute("customerInfo", cus);
-		
+		model.addAttribute("contact", contactResult);
 		return "/case/addCase";
 	}
 	
@@ -422,7 +439,7 @@ public class CaseController extends BaseSimpleFormController {
 			String level = "customer.level";
 			String ageGroup = "customer.agegroup";
 			String reason = "case.reason";
-			
+			String contact ="case.contactType";
 			
 			List<EntityList> countryList = service.getParameterInfo(country);
 			List<EntityList> languageList = service.getParameterInfo(language);
@@ -442,7 +459,8 @@ public class CaseController extends BaseSimpleFormController {
 			List<EntityList> levelList= service.getParameterInfo(level);
 			List<EntityList> ageGroupList = service.getParameterInfo(ageGroup);
 			List<EntityList> reasonList = service.getParameterInfo(reason);
-			
+			//获取联系方式
+			List<EntityList> contactList=service.getParameterInfo(contact);
 			
 			JSONArray countryResult = JSONArray.fromObject(countryList);
 			JSONArray languageResult = JSONArray.fromObject(languageList);
@@ -463,6 +481,9 @@ public class CaseController extends BaseSimpleFormController {
 			JSONArray ageGroupResult = JSONArray.fromObject(ageGroupList);
 			JSONArray reasonResult = JSONArray.fromObject(reasonList);
 			
+			//转换成Json字符串
+			JSONArray contactResult=JSONArray.fromObject(contactList);
+
 			model.addAttribute("country",countryResult);
 			model.addAttribute("language",languageResult);
 			model.addAttribute("withwho",withResult);
@@ -484,7 +505,7 @@ public class CaseController extends BaseSimpleFormController {
 			model.addAttribute("level",levelResult);
 			model.addAttribute("ageGroup",ageGroupResult);
 			model.addAttribute("reason", reasonResult);
-			
+			model.addAttribute("contact", contactResult);
 			String orderStatus = "order.status";
 			List<EntityList> orderStatusList = service.getParameterInfo(orderStatus);
 			JSONArray orderStatusResult = JSONArray.fromObject(orderStatusList);
@@ -604,8 +625,7 @@ public class CaseController extends BaseSimpleFormController {
 			List<EntityList> orderStatusList = service.getParameterInfo(orderStatus);
 			//获取联系方式
 			List<EntityList> contactList=service.getParameterInfo(contact);
-			System.out.println("-------------------");
-			System.out.println(contactList);
+		
 			
 			JSONArray countryResult = JSONArray.fromObject(countryList);
 			JSONArray languageResult = JSONArray.fromObject(languageList);
