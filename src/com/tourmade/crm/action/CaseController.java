@@ -581,6 +581,8 @@ public class CaseController extends BaseSimpleFormController {
 			String reason = "case.reason";
 			String orderStatus = "order.status";
 			
+			String contact="case.contactType";
+			
 			List<EntityList> countryList = service.getParameterInfo(country);
 			List<EntityList> languageList = service.getParameterInfo(language);
 			List<EntityList> withwhoList = service.getParameterInfo(withwho);
@@ -600,7 +602,10 @@ public class CaseController extends BaseSimpleFormController {
 			List<EntityList> ageGroupList = service.getParameterInfo(ageGroup);
 			List<EntityList> reasonList = service.getParameterInfo(reason);
 			List<EntityList> orderStatusList = service.getParameterInfo(orderStatus);
-			
+			//获取联系方式
+			List<EntityList> contactList=service.getParameterInfo(contact);
+			System.out.println("-------------------");
+			System.out.println(contactList);
 			
 			JSONArray countryResult = JSONArray.fromObject(countryList);
 			JSONArray languageResult = JSONArray.fromObject(languageList);
@@ -621,6 +626,8 @@ public class CaseController extends BaseSimpleFormController {
 			JSONArray ageGroupResult = JSONArray.fromObject(ageGroupList);
 			JSONArray reasonResult = JSONArray.fromObject(reasonList);
 			JSONArray orderStatusResult = JSONArray.fromObject(orderStatusList);
+			//转换成Json字符串
+			JSONArray contactResult=JSONArray.fromObject(contactList);
 			
 			
 			model.addAttribute("country",countryResult);
@@ -646,7 +653,7 @@ public class CaseController extends BaseSimpleFormController {
 			model.addAttribute("reason", reasonResult);
 			
 			model.addAttribute("orderStatus",orderStatusResult);
-		
+			model.addAttribute("contact", contactResult);
 			
 		}
 		return "/case/edit";

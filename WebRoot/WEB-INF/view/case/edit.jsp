@@ -139,11 +139,7 @@
                     <label class="col-sm-4 control-label">希望联系方式</label>
                     <div class="col-sm-8">
                       <select name="contactType" class="contact-select fullwidth" multiple="multiple">
-              					  <option value="wechat">微信</option>
-              					  <option value="mobilephone">手机</option>
-              					  
-              					  <option value="qq">qq</option>
-              					  <option value="mail">邮箱</option>
+              					 
 					   </select>
                     </div>
                 </div>   
@@ -685,6 +681,9 @@
 	var genderData = [{ id: 'male', text: '男' }, { id:'female' , text: '女' }];
 	
 	var reason = ${reason};
+	//接收联系方式
+	var contactData=${contact};
+	
 	/* var contactData = [{ id: 0, text: 'qq' }, { id: 1, text: 'email' }, { id: 2, text: 'wechat' }, { id: 3, text: 'phone' }];
 	 */
 	var newHref;
@@ -731,10 +730,20 @@
     $(".contact-select").select2({
     	placeholder: '可多选',
     	minimumResultsForSearch: Infinity,
-    	//data: contactData
+    	data: contactData
      });
-    //$(".contact-select").select2("val", '${crmcase.contactType}'.split(","));
+    //循环去除数组中元素的空格
+   
+    var temp='${crmcase.contactType}'.split(",");
+    var value=[];
+    $.each(temp,function(index,item){
+    	value.push(item.trim());
+    	
+    })
     
+    //给select2赋值
+    $(".contact-select").val(value).trigger("change");
+   
    
     $(".withwho-select").select2({
     	placeholder: '与谁同行',
