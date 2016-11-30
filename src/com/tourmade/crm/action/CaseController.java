@@ -668,7 +668,7 @@ public class CaseController extends BaseSimpleFormController {
 			model.addAttribute("user",userResult);
 			
 			model.addAttribute("crmcase",crmcase);
-			System.out.println(crmcase);
+			
 			
 			model.addAttribute("customerInfo",cus);
 			

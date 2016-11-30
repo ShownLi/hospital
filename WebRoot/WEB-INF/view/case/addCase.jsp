@@ -339,10 +339,12 @@
     	placeholder: '选择一个沟通语言',
      	data: language
     });
+    //选择希望的联系方式下拉框
     $(".contact-select").select2({
         placeholder: '选择希望联系方式',
         data:contactData
      });
+    //选择真实的联系方式下拉框
     $(".contact-real-select").select2({
         placeholder: '选择真实联系方式',
         data: contactData

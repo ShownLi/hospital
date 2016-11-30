@@ -768,7 +768,6 @@
      });
     
   //循环去除数组中元素的空格
-    
     var temp='${crmcase.contactType}'.split(",");
     var value=[];
     $.each(temp,function(index,item){
@@ -776,8 +775,9 @@
     	
     })
     
-    //给select2赋值
+    //给contact-select赋值
     $(".contact-select").val(value).trigger("change");
+    
     //选择真实的联系方式
     $(".contact-real-select").select2({
         placeholder: '选择真实联系方式',

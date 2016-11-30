@@ -749,12 +749,14 @@
     
     //给select2赋值
     $(".contact-select").val(value).trigger("change");
-    //选择真是的联系方式
+    
+    //选择真实的联系方式
     $(".contact-real-select").select2({
         placeholder: '选择真实联系方式',
         data: contactData
      });
     $(".contact-real-select").val('${crmcase.contactReal}').trigger("change");
+    
     $(".withwho-select").select2({
     	placeholder: '与谁同行',
      	data: withwho

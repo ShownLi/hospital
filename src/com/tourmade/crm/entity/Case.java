@@ -73,6 +73,7 @@ public class Case extends BaseBean<Case> {
 	private Integer budget;
 	
 	private String contactType;
+	
 	private String contactReal;
 	
 	public String getContactReal() {
@@ -556,7 +557,5 @@ public class Case extends BaseBean<Case> {
 				+ ", creatTime=" + creatTime + ", updateTime=" + updateTime + ", reason=" + reason + ", portalId="
 				+ portalId + ", comment=" + comment + "]";
 	}
-
-	
 	
 }
