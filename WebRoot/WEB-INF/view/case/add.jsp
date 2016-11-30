@@ -293,8 +293,8 @@
             </div><!-- panel-body -->
             
             <div class="panel-footer align-center">
-                <button class="btn btn-primary">保存</button>&nbsp;
-                <button class="btn btn-default">取消</button>
+                <input class="btn btn-primary" type="submit" value="保存"/>&nbsp;
+                <input class="btn btn-default" type="button" id="btn-back" value="取消"/>
                 <input type="hidden" name="operator" value="${sessionScope.loginUser.userId}"/>
     		    </div><!-- panel-footer -->
         </form>   
@@ -652,7 +652,9 @@
 			maxDate: 0,
 		});
 			 
-  			jQuery("#form-case").validate({				
+  			jQuery("#form-case").validate({	
+  				
+  			
     		rules: {
  //		      customerId: "required",
  			  chineseName: "required",
@@ -760,6 +762,7 @@
                 $(".start-time").show();
             }
         }); 
+        
         $(".customer-select").change(function() {
              var val= $(".customer-select").select2("val");
         	document.getElementById("customerId").value=val;
@@ -770,6 +773,7 @@
 				history.go(-1);
 		    }); 
 		});
+		
 		
 /* 		function sociation(){
    		 	var f = $("#form-case").serialize();

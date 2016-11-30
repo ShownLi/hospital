@@ -555,7 +555,8 @@
 		
 		var commentTable = jQuery('#dataTable-comment').DataTable({
 			searching:false,
-			pageLength: 10,
+			paging:false,
+			/* pageLength: 10, */
 			processing: true,
 			language: datatable_local_language, // my.js
 			serverSide: true,

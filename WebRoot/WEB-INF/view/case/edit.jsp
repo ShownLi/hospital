@@ -370,11 +370,13 @@
         </div><!-- panel-body -->
         
         <div class="panel-footer align-center">
-            <button id="btn-addorder" class="btn btn-primary">添加订单</button>&nbsp;
-            <button class="btn btn-primary">保存</button>&nbsp;
+        
+            <input class="btn btn-primary" id="btn-addorder"  type="button" value="添加订单"/>&nbsp;
+            <input class="btn btn-primary" type="submit" value="保存"/>&nbsp;
+            <input class="btn btn-danger" id="btn-invalid"   type="button" value="无效"/>&nbsp;
+            <input class="btn btn-default" type="button" id="btn-back" value="返回"/>
             <input  type="hidden" name="caseId" value="${crmcase.caseId}" />
-            <button id="btn-invalid"  class="btn btn-danger" >无效</button>&nbsp;
-            <button id="btn-back" class="btn btn-default">返回</button>
+           
 		 </div><!-- panel-footer -->
      </form>   
       </div><!-- panel -->
@@ -845,7 +847,7 @@
 	//订单回显数据
   	var orderTable = jQuery('#dataTable-order').DataTable({
   		searching:false,
-	 	pageLength: 10,
+  		paging: false,
 	 	processing: true,
 	 	language: datatable_local_language, // my.js
 	 	serverSide: true,
@@ -854,7 +856,7 @@
 	 		dataFilter: function(data){
 	             var json = jQuery.parseJSON( data );
 	             json.recordsTotal = json.countTotal;
-	             json.recordsFiltered = json.countFiltered;
+	             json.recordsFiltered = json.countFiltered;  
 	             json.data = json.data;
 	             return JSON.stringify( json );
 	         }
@@ -1121,7 +1123,8 @@
 	   //注释 ~ 回显，效验，添加
    		var commentTable= jQuery('#dataTable-comment').DataTable({
    			searching:false,
-			pageLength: 10,
+   			paging:false,
+			/* pageLength: 10, */
 			processing: true,
 			language: datatable_local_language, // my.js
 			serverSide: true,

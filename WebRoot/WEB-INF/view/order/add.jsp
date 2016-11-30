@@ -82,8 +82,8 @@
         <div class="panel-footer">
 			 <div class="row">
 				<div class="col-sm-6 col-sm-offset-3">
-				  <button class="btn btn-primary">提交</button>&nbsp;
-				  <button class="btn btn-default" id="btn-back">取消</button>
+				  <input class="btn btn-primary" type="submit" value="提交"/>&nbsp;
+			<input class="btn btn-default" type="button" id="btn-back" value="取消"/>
 				</div>
 			 </div>
 		  </div><!-- panel-footer -->

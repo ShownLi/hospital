@@ -82,7 +82,7 @@ public class OrderController extends BaseSimpleFormController {
 	 * @param page
 	 * @return
 	 */
-	@RequestMapping(value = "/listByCaseId.do",produces="application/json;charset=utf-8")
+	/*@RequestMapping(value = "/listByCaseId.do",produces="application/json;charset=utf-8")
 	@ResponseBody
 	public String queryData(HttpServletRequest request, HttpSession session, Model model, int caseId, PageHelper page) {
 
@@ -90,7 +90,25 @@ public class OrderController extends BaseSimpleFormController {
 		String result = JSONUtilS.object2json(order);
 
 		return result;
+	}*/
+	/**
+	 * 根据caseid获取相应订单,不使用分页
+	 * @param request
+	 * @param session
+	 * @param model
+	 * @param caseId
+	 * @param page
+	 * @return
+	 */
+	@RequestMapping(value = "/listByCaseId.do",produces="application/json;charset=utf-8")
+	@ResponseBody
+	public String queryData2(HttpServletRequest request, HttpSession session, Model model, int caseId){
+		QueryResult<Order> order = service.queryOrderByCaseId(caseId, request);
+		String result = JSONUtilS.object2json(order);
+
+		return result;
 	}
+	
 	
 	@RequestMapping(value = "/add.html", method = { RequestMethod.POST, RequestMethod.GET })
 	public String add(Model model) {
