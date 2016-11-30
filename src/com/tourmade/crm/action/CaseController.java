@@ -100,7 +100,7 @@ public class CaseController extends BaseSimpleFormController {
 		String level = "customer.level";
 		String ageGroup = "customer.agegroup";
 		
-		String contact ="case.contactType";
+		String contact ="case.contact";
 		
 		List<EntityList> levelList = service.getParameterInfo(level);
 		List<EntityList> ageGroupList = service.getParameterInfo(ageGroup);
@@ -185,7 +185,7 @@ public class CaseController extends BaseSimpleFormController {
 		String passport = "case.passport";
 		String visa = "case.visa";
 		String flight = "case.flight";
-		String contact ="case.contactType";
+		String contact ="case.contact";
 		List<EntityList> countryList = service.getParameterInfo(country);
 		List<EntityList> languageList = service.getParameterInfo(language);
 		List<EntityList> withwhoList = service.getParameterInfo(withwho);
@@ -439,7 +439,7 @@ public class CaseController extends BaseSimpleFormController {
 			String level = "customer.level";
 			String ageGroup = "customer.agegroup";
 			String reason = "case.reason";
-			String contact ="case.contactType";
+			String contact ="case.contact";
 			
 			List<EntityList> countryList = service.getParameterInfo(country);
 			List<EntityList> languageList = service.getParameterInfo(language);
@@ -585,6 +585,7 @@ public class CaseController extends BaseSimpleFormController {
 					crmcase.getCustomerId()!=0){
 				cus = service.getCustomerInfoById(crmcase.getCustomerId());
 			}
+			
 			String country = "country";
 			String language = "case.preferlanguage";
 			String withwho = "case.withwho";
@@ -602,7 +603,7 @@ public class CaseController extends BaseSimpleFormController {
 			String reason = "case.reason";
 			String orderStatus = "order.status";
 			
-			String contact="case.contactType";
+			String contact="case.contact";
 			
 			List<EntityList> countryList = service.getParameterInfo(country);
 			List<EntityList> languageList = service.getParameterInfo(language);
@@ -665,7 +666,10 @@ public class CaseController extends BaseSimpleFormController {
 			model.addAttribute("visa",visaResult);
 			model.addAttribute("flight",flightResult);
 			model.addAttribute("user",userResult);
+			
 			model.addAttribute("crmcase",crmcase);
+			System.out.println(crmcase);
+			
 			model.addAttribute("customerInfo",cus);
 			
 			model.addAttribute("level",levelResult);

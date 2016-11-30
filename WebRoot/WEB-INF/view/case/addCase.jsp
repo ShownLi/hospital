@@ -62,7 +62,15 @@
 	                    <div class="col-sm-8">
 	                      <input type="text"  name="operator" class="user-select fullwidth" value="0" />
 	                    </div>
-	                </div>                        
+	                </div>  
+	                
+	                <div class="form-group col-sm-4">
+	                    <label class="col-sm-4 control-label">沟通方式</label>
+	                    <div class="col-sm-8">
+	                      <input type="text"  name="contactReal" class="contact-real-select fullwidth" value="0" />
+	                    </div>
+	                </div>  
+	                                      
                 </div>
                     <div class="section-block">
                    	<div class="form-group col-sm-4">
@@ -334,6 +342,10 @@
     $(".contact-select").select2({
         placeholder: '选择希望联系方式',
         data:contactData
+     });
+    $(".contact-real-select").select2({
+        placeholder: '选择真实联系方式',
+        data: contactData
      });
     $(".withwho-select").select2({
     	placeholder: '与谁同行',
