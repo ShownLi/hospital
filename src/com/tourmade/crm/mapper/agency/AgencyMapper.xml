@@ -8,6 +8,7 @@
 			u.agency_id as agencyId,
 			u.agency_name as name,
 			u.country as country,
+			u.destination as destination,
 			u.language as language,
 			u.creat_time as creatTime,
 			u.isdel as isdel
@@ -41,18 +42,20 @@
 		agency_name,
 		country,
 		language,
+		destination,
 		creat_time,
 		update_time,
 		sendmail,
 		isdel
 		)values(
-		#{name,jdbcType=VARCHAR},
-		#{country,jdbcType=VARCHAR},
-		#{language,jdbcType=VARCHAR},
-		NOW(),
-		NOW(),
-		#{isSendmail},
-		0
+			#{name,jdbcType=VARCHAR},
+			#{country,jdbcType=VARCHAR},
+			#{language,jdbcType=VARCHAR},
+			#{destination,jdbcType=VARCHAR},
+			NOW(),
+			NOW(),
+			#{isSendmail},
+			0
 		)
 	</insert>
 
@@ -61,8 +64,10 @@
 		set
 		agency_name=#{name},
 		country=#{country},
+		destination=#{destination},
 		language=#{language},
 		sendmail=#{isSendmail},
+		
 		update_time=NOW()
 		where
 		agency_id=#{agencyId}
@@ -74,6 +79,7 @@
 		u.agency_name as name,
 		u.country as country,
 		u.language as language,
+		u.destination as destination,
 		u.sendmail as isSendmail,
 		u.isdel as isdel
 		from tm_agency u where u.agency_id = #{agencyId}

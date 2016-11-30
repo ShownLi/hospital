@@ -123,7 +123,8 @@
                     <div class="form-group col-sm-4">
                       <label class="col-sm-4 control-label">目的地</label>
                       <div class="col-sm-8">
-                        <input type="text" id="destination" name="destination" class="country-select fullwidth" value="" />              
+                        <select name="destination" class="contact-select-country fullwidth" multiple="multiple">
+					</select>         
                       </div>
                     </div>  
                     <div class="form-group col-sm-4">
@@ -135,7 +136,7 @@
                     <div class="form-group col-sm-4">
                       <label class="col-sm-4 control-label">希望联系方式</label>
                       <div class="col-sm-8">
-	                      <select name="contactType" class="contact-select fullwidth" multiple="multiple">
+	                    <select name="contactType" class="contact-select fullwidth" multiple="multiple">
 							  <option value="wechat">微信</option>
 							  <option value="mobile">手机</option>							  
 							  <option value="qq">qq</option>
@@ -447,7 +448,12 @@
 	$(".level-select").select2({
 	  	data: level
 	});	
-
+	$(".contact-select-country").select2({
+	    	placeholder: '可多选',
+	    	minimumResultsForSearch: Infinity,
+	    	data: country
+	     });
+	    $(".contact-select-country").val('${crmcase.destination}'.split(",")).trigger("change");
     $(".country-select").select2({
         placeholder: '国家',
         data: country,

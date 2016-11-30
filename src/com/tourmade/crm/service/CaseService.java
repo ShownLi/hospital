@@ -1,6 +1,7 @@
 package com.tourmade.crm.service;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -209,7 +210,6 @@ public class CaseService extends BaseService {
 		}
 	}	
 		
-		
 //		try {
 
 /*				Customer customer2=new Customer();
@@ -397,10 +397,13 @@ public class CaseService extends BaseService {
 	 * @param id
 	 * @return
 	 */
-	public List<EntityList> getSalesByAgency(String destination) {
-		List<EntityList> agencys = null;
+	public List<EntityList> getSalesByAgency(List<String> destinationList) {
+		System.out.println("**************"+destinationList);
+		List<EntityList> agencys = new ArrayList<>();
+//		List<String> sList = new ArrayList<String>();
+		
 		try {
-			agencys = caseMapper.getSalesByAgency(destination);
+			agencys = caseMapper.getSalesByAgency(destinationList);
 		} catch (Exception e) {
 			logger.error("CaseService.getSalesByAgency() --> -->" + e.getMessage());
 			agencys = null;

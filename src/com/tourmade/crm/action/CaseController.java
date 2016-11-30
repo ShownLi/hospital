@@ -239,9 +239,7 @@ public class CaseController extends BaseSimpleFormController {
 			if(judgeCustomer.size()>0){
 				customerMap.put("cust", judgeCustomer);
 				service.saveCase(crmcase);
-//				String.valueOf(crmcase.getCaseId());
 				customerMap.put("cid",crmcase.getCaseId());
-//				customerMap.put("crmcase",crmcase);
 				return customerMap;
 			//没有老客人，添加客人和询单
 			}else{
@@ -266,7 +264,6 @@ public class CaseController extends BaseSimpleFormController {
 			System.out.println(crmcase);
 			int id = 0;
 			id= Integer.parseInt(customerId[0]);
-			System.out.println("^^^^"+id);
 			Case realCase = service.getCaseById(crmcase.getCaseId());
 			
 		try {
@@ -275,16 +272,12 @@ public class CaseController extends BaseSimpleFormController {
 				service.saveCustomer(realCase);
 				crmcase.setCustomerId(realCase.getCustomerId());
 				service.updateCase(realCase);
-				System.out.println("^^^^");
 			}else{
 			//绑定客人,添加询单
 				realCase.setCustomerId(id);
-				System.out.println(realCase);
 				service.updateCustomer(realCase);
 				service.updateCase(realCase);
-				System.out.println("&&&&&&&");
 			}
-			System.out.println("+++++++++++++");
 			
 			return "redirect:/case/list.html";
 		} catch (Exception e) {
@@ -301,22 +294,18 @@ public class CaseController extends BaseSimpleFormController {
 			System.out.println(crmcase);
 			int id = 0;
 			id= Integer.parseInt(customerId[0]);
-			System.out.println("^^^^"+id);
 		try {
 			//新建客人
 			if(judgeCustomer.equals("0")){
 				service.saveCustomer(crmcase);
 				crmcase.setCustomerId(crmcase.getCustomerId());
 				service.saveCase(crmcase);	
-				System.out.println("^^^^");
 			}else{
 			//绑定客人,添加询单
 				crmcase.setCustomerId(id);
 				service.updateCustomer(crmcase);
 				service.saveCase(crmcase);
-				System.out.println("&&&&&&&");
 			}
-			System.out.println("--------------");
 			
 			return "/case/list.jsp";
 		} catch (Exception e) {
@@ -342,7 +331,6 @@ public class CaseController extends BaseSimpleFormController {
 				crmcase.setRequirement(realRequire);
 			}
 			
-			
 			crmcase=service.validateStartTime(crmcase);
 			Customer cus=service.getCustomerInfoById(crmcase.getCustomerId());
 			String country = "country";
@@ -360,7 +348,6 @@ public class CaseController extends BaseSimpleFormController {
 			String level = "customer.level";
 			String ageGroup = "customer.agegroup";
 			String reason = "case.reason";
-			
 			
 			List<EntityList> countryList = service.getParameterInfo(country);
 			List<EntityList> languageList = service.getParameterInfo(language);
@@ -380,7 +367,6 @@ public class CaseController extends BaseSimpleFormController {
 			List<EntityList> levelList= service.getParameterInfo(level);
 			List<EntityList> ageGroupList = service.getParameterInfo(ageGroup);
 			List<EntityList> reasonList = service.getParameterInfo(reason);
-			
 			
 			JSONArray countryResult = JSONArray.fromObject(countryList);
 			JSONArray languageResult = JSONArray.fromObject(languageList);
@@ -460,8 +446,6 @@ public class CaseController extends BaseSimpleFormController {
 		}		
 	}
 	
-	
-	
 	@RequestMapping(value = "/edit.html", method = { RequestMethod.POST, RequestMethod.GET })
 	public String edit(Model model, String id) {
 		if (null != id && !"".equals(id)) {
@@ -477,7 +461,6 @@ public class CaseController extends BaseSimpleFormController {
 				}		
 				crmcase.setRequirement(realRequire);
 			}
-			
 			
 			crmcase=service.validateStartTime(crmcase);
 			Customer cus=service.getCustomerInfoById(crmcase.getCustomerId());
@@ -496,7 +479,8 @@ public class CaseController extends BaseSimpleFormController {
 			String level = "customer.level";
 			String ageGroup = "customer.agegroup";
 			String reason = "case.reason";
-			
+			String contactType = "case.contactType";
+			String destination = "case.destination";
 			
 			List<EntityList> countryList = service.getParameterInfo(country);
 			List<EntityList> languageList = service.getParameterInfo(language);
@@ -516,7 +500,8 @@ public class CaseController extends BaseSimpleFormController {
 			List<EntityList> levelList= service.getParameterInfo(level);
 			List<EntityList> ageGroupList = service.getParameterInfo(ageGroup);
 			List<EntityList> reasonList = service.getParameterInfo(reason);
-			
+			List<EntityList> contactTypeList = service.getParameterInfo(contactType);
+			List<EntityList> destinationList = service.getParameterInfo(destination);
 			
 			JSONArray countryResult = JSONArray.fromObject(countryList);
 			JSONArray languageResult = JSONArray.fromObject(languageList);
@@ -536,6 +521,8 @@ public class CaseController extends BaseSimpleFormController {
 			JSONArray levelResult = JSONArray.fromObject(levelList);
 			JSONArray ageGroupResult = JSONArray.fromObject(ageGroupList);
 			JSONArray reasonResult = JSONArray.fromObject(reasonList);
+			JSONArray contactResult = JSONArray.fromObject(contactTypeList);
+			JSONArray destinationResult = JSONArray.fromObject(destinationList);
 			
 			model.addAttribute("country",countryResult);
 			model.addAttribute("language",languageResult);
@@ -554,10 +541,11 @@ public class CaseController extends BaseSimpleFormController {
 			model.addAttribute("user",userResult);
 			model.addAttribute("crmcase",crmcase);
 			model.addAttribute("customerInfo",cus);
-			
 			model.addAttribute("level",levelResult);
 			model.addAttribute("ageGroup",ageGroupResult);
 			model.addAttribute("reason", reasonResult);
+			model.addAttribute("contact", contactResult);
+			model.addAttribute("destinations", destinationResult);
 			
 			String orderStatus = "order.status";
 			List<EntityList> orderStatusList = service.getParameterInfo(orderStatus);
@@ -566,10 +554,7 @@ public class CaseController extends BaseSimpleFormController {
 		}
 		return "/case/edit";
 	}
-	
 
-	
-	
 	@RequestMapping(value = "/edit.do")
 	@ResponseBody
 	public Json doEdit(HttpServletRequest request, HttpSession session, Model model, Case crmcase) {
@@ -591,9 +576,15 @@ public class CaseController extends BaseSimpleFormController {
 	@RequestMapping(value = "/getSales.do")
 	@ResponseBody
 	public List<EntityList> getSales(Model model, String destination) {
+		System.out.println(destination);
+		String[] dStr = destination.split(",");
+		List<String> destinationList = new ArrayList<String>();
 		
-		List<EntityList> sales = service.getSalesByAgency(destination);
-		
+		for(int i=0; i<dStr.length; i++){
+			destinationList.add(dStr[i]);
+		}
+		List<EntityList> sales = service.getSalesByAgency(destinationList);
+		System.out.println(sales);
 		return sales;
 	}
 	

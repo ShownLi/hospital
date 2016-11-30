@@ -72,7 +72,8 @@
                    	<div class="form-group col-sm-4">
                       <label class="col-sm-4 control-label">目的地</label>
                       <div class="col-sm-8">
-                        <input type="text" id="destination" name="destination" class="country-select fullwidth" value="" />              
+                        <select name="destination" class="contact-select-country fullwidth" multiple="multiple">
+					</select>             
                       </div>
                     </div>    
                 </div>
@@ -335,6 +336,12 @@
     	placeholder: '选择一个沟通语言',
      	data: language
     });
+    $(".contact-select-country").select2({
+    	placeholder: '可多选',
+    	minimumResultsForSearch: Infinity,
+    	data: country
+     });
+    $(".contact-select-country").val('${crmcase.destination}'.split(",")).trigger("change");
     $(".contact-select").select2({
         placeholder: '选择希望联系方式',
      });
@@ -465,7 +472,7 @@
 		function case_submit() {
 			var f = $("#form-case").serialize();			
 			$.post('${rootPath}case/add.do', f, function(result) {
-				var caseId = result.obj.caseId;
+				var caseId = result.cid;
 				$("#caseId").val(caseId);
 				var rmsg = result.msg;
 				
@@ -491,10 +498,8 @@
 				$("#msgModal").modal('show');
 				$("#nextModal").modal('hide'); */
 				
-				if (result.success) {
+				if (result.cid) {
 					window.parent.location = "${rootPath}case/edit.html?id="+caseId;
-					
-					
 				} else {
 					$("#msgModal").modal('show');
 					$("#nextModal").modal('hide');

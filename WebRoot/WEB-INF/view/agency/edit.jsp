@@ -52,6 +52,13 @@
 			              			</div>
 			            		</div>
 			            		<div class="form-group col-sm-4">
+					              <label  class="col-sm-4 control-label">目的地</label>
+					              <div class="col-sm-8">
+					                <select name="destination" class="destination-select fullwidth" multiple="multiple">
+									</select>
+					              </div>
+					            </div>
+			            		<div class="form-group col-sm-4">
 					              <label  class="col-sm-4 control-label">是否发邮件</label>
 					              <div class="col-sm-8">
 					                   <input type="radio" id="yes" name="isSendmail" value="1" />是
@@ -155,7 +162,12 @@
 	$(".language-select").select2({
 	  	data: language
 	})
-	
+	$(".destination-select").select2({
+    	placeholder: '可多选',
+    	minimumResultsForSearch: Infinity,
+    	data: country
+     });
+    $(".destination-select").val('${agency.destination}'.split(",")).trigger("change");
 	if("${agency.isSendmail}"==1){
     	$('#yes').attr('checked','true');
     }else{

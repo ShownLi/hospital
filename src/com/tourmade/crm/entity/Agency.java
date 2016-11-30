@@ -29,6 +29,16 @@ public class Agency extends BaseBean<Agency> {
 	private Date updateTime;
 	
 	private Integer isSendmail;
+	
+	private String destination;
+
+	public String getDestination() {
+		return destination;
+	}
+
+	public void setDestination(String destination) {
+		this.destination = destination;
+	}
 
 	public Integer getAgencyId() {
 		return agencyId;
@@ -92,12 +102,8 @@ public class Agency extends BaseBean<Agency> {
 
 	@Override
 	public String toString() {
-		return "Agency [agencyId=" + agencyId + ", name=" + name + ", country="
-				+ country + ", language=" + language + ", creatTime="
-				+ creatTime + ", updateTime=" + updateTime + ", isSendmail="
-				+ isSendmail + "]";
+		return "Agency [agencyId=" + agencyId + ", name=" + name + ", country=" + country + ", language=" + language
+				+ ", creatTime=" + creatTime + ", updateTime=" + updateTime + ", isSendmail=" + isSendmail
+				+ ", destination=" + destination + "]";
 	}
-
-
-
 }

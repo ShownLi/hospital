@@ -126,7 +126,6 @@
 	            </div> 
 	        </div>
         
-        
             <div class="section-block">
 
                 <div class="form-group col-sm-4">
@@ -139,12 +138,7 @@
                     <label class="col-sm-4 control-label">希望联系方式</label>
                     <div class="col-sm-8">
                       <select name="contactType" class="contact-select fullwidth" multiple="multiple">
-              					  <option value="wechat">微信</option>
-              					  <option value="mobilephone">手机</option>
-              					  
-              					  <option value="qq">qq</option>
-              					  <option value="mail">邮箱</option>
-					   </select>
+					  </select>
                     </div>
                 </div>   
                 <div class="form-group col-sm-4">
@@ -220,7 +214,8 @@
                 <div class="form-group col-sm-4">
                   <label class="col-sm-4 control-label">目的地</label>
                 <div class="col-sm-8">
-                    <input type="text" id="destination" name="destination" class="destination-select fullwidth" value="${crmcase.destination}" />
+                    <!-- <input type="text" id="destination" name="destination" class="destination-select fullwidth" value="${crmcase.destination}" /> -->
+                    <select id="destination" name="destination" class="contact-select-country fullwidth" multiple="multiple"></select>
                 </div>
                 </div>
                      
@@ -683,9 +678,8 @@
 	var level = ${level};
 	var agegroup = ${ageGroup}; 
 	var genderData = [{ id: 'male', text: '男' }, { id:'female' , text: '女' }];
-	
 	var reason = ${reason};
-	var contactData = [{ id: 0, text: 'qq' }, { id: 1, text: 'email' }, { id: 2, text: 'wechat' }, { id: 3, text: 'phone' }];
+	var contact =${contact};
 	$("#requirement").val("${crmcase.requirement}");	
 	$("#birthday").val(getBirthday());
 
@@ -720,11 +714,17 @@
     $(".contact-select").select2({
     	placeholder: '可多选',
     	minimumResultsForSearch: Infinity,
-    	data: contactData
+    	data: contact
      });
-    //$(".contact-select").select2("val", '${crmcase.contactType}'.split(","));
+    $(".contact-select").val('${crmcase.contactType}'.split(",")).trigger("change");
+      
+    $(".contact-select-country").select2({
+    	placeholder: '可多选',
+    	minimumResultsForSearch: Infinity,
+    	data: country
+     });
+    $(".contact-select-country").val('${crmcase.destination}'.split(",")).trigger("change");
     
-   
     $(".withwho-select").select2({
     	placeholder: '与谁同行',
      	data: withwho
@@ -975,16 +975,25 @@
      	 alert("页面正在加载，请稍后...");
       }
      
-	   
 	  //添加订单
       $("#btn-addorder").click(function(){
       	  var destination = $("#destination").val(); 
       	  $("#englishDestination").val(destination);
-      	      	  
       	  if(destination==""){
       	  	$("#msgDestination").modal('show');
  		  }else{ 
-      		var destinationText = $("#destination").select2('data').text;
+      			//var destinationText01 = $("#destination").select2('data')[0].text;
+      			//var destinationText02 = $("#destination").select2('data')[1].text;
+      			//var destinationText = destinationText01 + "," + destinationText02;
+      			var destinationText;
+      			for(var i=0; i<$("#destination").select2('data').length; i++){
+      				if(destinationText==null){
+      					destinationText = $("#destination").select2('data')[i].text + ",";
+      				}else{
+      					destinationText = destinationText + $("#destination").select2('data')[i].text + ",";
+      				}
+      			}
+      			var destinationText = destinationText.substring(0,destinationText.length-1);
       	  		$("#orderDestinationText").val(destinationText); 
       	  		$("#orderDestination").val(destination);
 	      	  	$.ajax({
@@ -999,7 +1008,6 @@
 	                  });
 	              }  
 	          });  
-	             
       	  	  $("#nextModal").modal('show');         	         	  
       	  }  
           return false;

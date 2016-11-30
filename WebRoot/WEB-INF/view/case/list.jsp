@@ -167,12 +167,6 @@
                     <input type="text" id="salesId" name="salesId" placeholder="选择一个销售" class="sales-select fullwidth" value="" />
                 </div>
             </div>
-<!--               <div class="form-group col-sm-8 col-sm-offset-2">
-                  <label class="col-sm-3 control-label">客人的预算</label>
-                  <div class="col-sm-9">
-                    <input type="text" name="budget" placeholder="客人的预算" class="form-control" value="" />
-                  </div>
-                </div> -->
             <div class="col-sm-12">
              <a class="submit btn btn-primary">保存</a>
               <input  type="hidden" id="caseId" name="caseId" value="" />
@@ -267,8 +261,6 @@
     $(".confirmDelModal .cancel").click(function(){
       	$(".confirmDelModal").modal("hide");
   	});
-    
-		 
 		 
 			var t = jQuery('#dataTable').DataTable({
 				searching:false,
@@ -278,7 +270,7 @@
 				serverSide: true,
 				ajax: {
 					url: '${rootPath}case/list.do',
-					data: function( data){
+					data: function(data){
 			 			var searchCustomerId=$('#searchCustomerId').val();
 			 			var searchCustomerName=$('#searchCustomerName').val();
 			 			var searchCaseId=$('#searchCaseId').val();
@@ -328,7 +320,6 @@
 			 			if(searchMobile !=null && searchMobile !=""){
 			 				data.mobilePhone = searchMobile;
 			 			}
-			 			
 					},
 					
 					dataFilter: function(data){
@@ -340,7 +331,7 @@
 					}
 				},
 				columnDefs: [		  
- 					  {
+ 					   {
 			                orderable: false,
 			                render: function ( data, type, full, meta ) {
 			                    return "<div class='minw50'>" + full.caseId + "</div>" + "<div class='minw50'>" + full.chineseName + "</div>"
@@ -368,17 +359,19 @@
 			                	else{return ""}
 			                },
 			                targets: 2
-						},	 
+						},	  
 						{
 			                orderable: false,
 			                render: function ( data, type, full, meta ) {
 			                	var dataSource = full.source;
 			                	var dataOperator = full.operator;
+			                	var m = "";
+			                	var n = "";
 				                	for(var i=0;i < source.length;i++){
 				                		if(dataSource==source[i].id){
 				                			// return "<div class='caselist-5'>" + user[i].text + "</div>"
 				                			m = source[i].text;
-				                		}				                		
+				                		}	
 				                	}
 				                	for(var i=0;i < user.length;i++){
 				                		if(dataOperator==user[i].id){
@@ -389,7 +382,7 @@
 			                },
 			                  targets: 3
 						},
-						{
+						 {
 			                orderable: false,
 			                render: function ( data, type, full, meta ) {
 			                	if(full){
@@ -456,7 +449,7 @@
 						    orderable: false,
 						    searchable: false,
 					        targets: [0]
-					    },
+					    }, 
 
 					],
 					columns: [

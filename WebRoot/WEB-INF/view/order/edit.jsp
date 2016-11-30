@@ -409,14 +409,12 @@
     
 	if("${order.status}"==2){
  	  $("#form-updateDeal").show();
- 
       $("#btn-baseDeal").attr("disabled",true);
       $("#btn-baseNoDeal").attr("disabled",true);
  	 }
     
 	if("${order.status}"==3){
       $("#form-updateNoDeal").show();
-      
       $("#btn-baseDeal").attr("disabled",true);
       $("#btn-baseNoDeal").attr("disabled",true);
   	}		
@@ -597,8 +595,7 @@
 		                },
 		                targets: 3
 					  },		 
-
-				],
+				    ],
 		columns: [
 	  			    { data: "commentId" },
 	  			    { data: "userName" },
