@@ -17,12 +17,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.tourmade.crm.common.framework.BaseService;
 import com.tourmade.crm.common.framework.bean.QueryResult;
+import com.tourmade.crm.common.model.base.value.baseconfig.Json;
 import com.tourmade.crm.common.model.base.value.baseconfig.PageHelper;
 import com.tourmade.crm.entity.Case;
 import com.tourmade.crm.entity.Customer;
 import com.tourmade.crm.entity.EntityList;
 import com.tourmade.crm.entity.Order;
 import com.tourmade.crm.mapper.order.OrderMapper;
+import com.tourmade.crm.entity.PortalOrder;
 
 import net.sf.json.JSONObject;
 
@@ -237,7 +239,7 @@ public class OrderService extends BaseService {
 		upOrder.setAgencySeEmailAlias("as"+formatedOrderid+"@"+domain);
 		upOrder.setCustomerReEmailAlias("cr"+formatedOrderid+"@"+domain);
 		upOrder.setCustomerSeEmailAlias("cs"+formatedOrderid+"@"+domain);
-	
+		System.out.println(upOrder);
 		updateOrder(upOrder);
 	}
 	
@@ -520,6 +522,59 @@ public class OrderService extends BaseService {
 			logger.error("OrderService.selectAgencyBySaleId() --> " + isSendmail + "-->" + e.getMessage());
 		}
 		return isSendmail;
+	}
+	
+	/**
+	 * 根据Json信息校验必填字段
+	 * @param jsonobject
+	 * @param j
+	 * @return
+	 */
+	public Json validate(JSONObject jsonobject, Json j) {
+
+    		if(!jsonobject.has("customer_id") || jsonobject.getString("customer_id").equals("")){j.setDesc("订单查询验证失败，客人ID不存在");}
+    		else{
+    			j.setSuccess(true);
+    		}
+
+		return j;
+	}
+	
+	/**
+	 * 从API查询订单数据
+	 * @param customerId
+	 * @return
+	 */
+	public QueryResult<PortalOrder> queryOrder(int customerId) {
+	
+		QueryResult<PortalOrder> result = new QueryResult<PortalOrder>();
+		Map<String, Object> map = new HashMap<String, Object>();
+			
+		map.put("customerId", customerId);
+		
+		List<PortalOrder> data = orderMapper.queryPortalOrder(map);
+		long count = orderMapper.countPortalOrder(customerId);
+		
+		result.setData(data);
+		result.setCountTotal(count);
+		result.setCountFiltered(count);
+		return result;
+	}
+	
+	/**
+	 * 根据邮箱地址获取订单信息
+	 * @param recieverEmail
+	 * @return
+	 */
+	public Order getOrderByEmail(String recieverEmail) {
+		Order result = new Order();
+		try {
+			result = orderMapper.getOrderByEmail(recieverEmail);
+		} catch (Exception e) {
+			logger.error("OrderRecordService.getOrderId()-->" + e.getMessage());
+			result = null;
+		}
+		return result;
 	}
 
 }

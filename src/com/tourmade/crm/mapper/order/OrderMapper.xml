@@ -395,4 +395,53 @@
 		where
 		a.isdel = 0 and s.isdel = 0 and s.sales_id=#{salesId}
 	</select>
+	
+	<select id="queryPortalOrder" resultType="PortalOrder">
+		select
+		u.order_id as orderId,
+		u.last_response as lastResponse,
+		v.chinese as status,
+		x.sales_portal_id as salesPortalId,
+		o.content as content
+		from tm_order u 
+		left join tm_parameter v on v.para_domain = 'portal.order.status' and v.para_value = u.status 
+		left join tm_sales x on x.sales_id = u.sales_id
+		left join tm_order_record o on u.order_id = o.order_id 
+		where u.isdel = 0 
+		and u.customer_id = #{customerId}
+		order by u.creat_time
+	</select>
+	
+	<select id="countPortalOrder" parameterType="int" resultType="long">
+		select count(u.order_id) from tm_order u
+		where
+		u.isdel = 0 
+		and u.customer_id = #{customerid}
+	</select>
+	
+	<select id="getOrderByEmail" parameterType="String" resultType="Order">
+		select
+		u.order_id as orderId,
+		u.case_id as caseId,
+		u.agency_name as agencyName,
+		u.last_response as lastResponse,
+		
+		u.customer_re_email_alias as customerReEmailAlias,
+		u.customer_se_email_alias as customerSeEmailAlias,
+		u.agency_re_email_alias as agencyReEmailAlias,
+		u.agency_se_email_alias as agencySeEmailAlias,
+		u.operator as operator,
+		
+		
+		u.agency_email_real as agencyEmailReal,
+		u.customer_email_real as customerEmailReal,
+		u.customer_name as customerName,
+		u.sales_name as salesName
+		
+		from tm_order u 
+		where  u.isdel = 0 and 
+		(u.customer_re_email_alias = #{recieverEmail} 
+		 or
+		 u.agency_re_email_alias = #{recieverEmail})
+	</select>
 </mapper>

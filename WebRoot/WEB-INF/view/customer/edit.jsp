@@ -73,7 +73,7 @@
 			            <div class="form-group col-sm-4">
 							<label class="col-sm-3 control-label">客人级别</label>
 							<div class="col-sm-9">
-							    <input type="text" name="level" placeholder="客人级别" class="level-select fullwidth" value="${customer.level}" disabled />
+							    <input type="text" name="level" placeholder="客人级别" class="level-select fullwidth" value="${customer.level}"  />
 							</div>
 			            </div> 
 			        </div>
@@ -327,11 +327,15 @@
 		                data: "customerId",
 		                orderable: false,
 		                render: function ( data ) {
-		                	for(var i=0;i <  customerList.length;i++){
-		                		if(data==customerList[i].id){
-		                			return customerList[i].text
-		                		}
+		                	if(data){
+			                	for(var i=0;i <  customerList.length;i++){
+			                		if(data==customerList[i].id){
+			                			return customerList[i].text
+			                		}
+			                	}
+			                	return ""
 		                	}
+		                	else{return ""}
 		                },
 		                  targets: 1
 					},
@@ -346,6 +350,7 @@
 			                		}
 			                	
 			                	}
+			                	return ""
 		                	}
 		                	else{return ""}
 		                },
@@ -361,6 +366,7 @@
 			                			return source[i].text
 			                		}
 			                	}
+			                	return ""
 		                	}
 		                	else{return ""}
 		                },
@@ -376,6 +382,7 @@
 			                			return user[i].text
 			                		}
 			                	}
+			                	return ""
 		                	}
 		                	else{return ""}
 		                },
@@ -391,6 +398,7 @@
 			                			return caseStatus[i].text
 			                		}
 			                	}
+			                	return ""
 		                	}
 		                	else{return ""}
 		                },
@@ -511,7 +519,7 @@
 			    }
 		    }
 			 
-		});
+		}); 
 		
 		$("#btn-back").click( function () {
 			history.go(-1);
@@ -519,8 +527,10 @@
 		
 		//生日格式转换
 		var date = $("#birthday").val();
-		var dateformat = new Date(date).toISOString("yyyy-MM-dd hh:mm:ss.S").substring(0,10);
-		$("#birthday").val(dateformat)
+		if(date!=null&&date!=""){
+			var dateformat = new Date(date).toISOString("yyyy-MM-dd hh:mm:ss.S").substring(0,10);
+			$("#birthday").val(dateformat);
+		}
 		
 		// 手机，邮箱，微信，QQ，输入一个以后移除错误提示
 		$(".contact-field").find("input").blur(function(){

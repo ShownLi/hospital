@@ -78,11 +78,11 @@
 							<table id="dataTable" class="table">
 								<thead>
 									<tr>
-										<th>ID <br>/ 客人</th>
-										<th>手机 <br>/ 邮箱</th>
-										<th>目的地<br> / 预算 </th>
-										<th>询单来源 <br>/ 跟单员</th>
-										<th>状态 <br>/ 创建时间</th>
+										<th>ID <br>客人</th>
+										<th>手机 <br>邮箱</th>
+										<th>目的地<br>预算 </th>
+										<th>询单来源 <br>跟单员</th>
+										<th>状态 <br>创建时间</th>
 										<th>客人要求</th>
 										<th>无效原因</th>
 										<th>注释</th>
@@ -106,6 +106,7 @@
 	</section>
 
 	<%@ include file="../assets/pages/foot.jsp"%>
+
 	<script src="${rootPath}assets/js/jquery.datatables.min.js"></script>
 	<script src="${rootPath}assets/js/select2.min.js"></script>
 
@@ -338,24 +339,8 @@
 						return JSON.stringify( json );
 					}
 				},
-				columnDefs: [
-<<<<<<< HEAD
-					  {
-		                  data: "caseId",
-		                  orderable: false,
-		                  render: function ( data, type, full, meta ) {
-		                      //return '<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a>&nbsp;<a class="btn btn-danger btn-xs" id="'+data+'"><span class="fa fa-minus-circle"></span> 无效</a>&nbsp<a class="btn btn-primary btn-xs" id="'+data+'"></span> 增加订单</a>&nbsp';
-		                      //return '<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a>&nbsp;<a class="btn btn-danger btn-xs" id="'+data+'"><span class="fa fa-minus-circle"></span> 无效</a>&nbsp';
-		                      return '<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a>&nbsp;<a class="btn btn-handle btn-xs" id="'+data+'"></span>处理</a>&nbsp';
-		                  },
-		                  targets: 13
-					  },
-					  
- 					  {
-			                data: "destination",
-=======
-						{
->>>>>>> 4162e9a29316e3eac13fbac0849f0250cc9d9cd9
+				columnDefs: [		  
+ 					   {
 			                orderable: false,
 			                render: function ( data, type, full, meta ) {
 			                    return "<div class='minw50'>" + full.caseId + "</div>" + "<div class='minw50'>" + full.chineseName + "</div>"
@@ -383,17 +368,19 @@
 			                	else{return ""}
 			                },
 			                targets: 2
-						},	 
+						},	  
 						{
 			                orderable: false,
 			                render: function ( data, type, full, meta ) {
 			                	var dataSource = full.source;
 			                	var dataOperator = full.operator;
+			                	var m = "";
+			                	var n = "";
 				                	for(var i=0;i < source.length;i++){
 				                		if(dataSource==source[i].id){
 				                			// return "<div class='caselist-5'>" + user[i].text + "</div>"
 				                			m = source[i].text;
-				                		}				                		
+				                		}	
 				                	}
 				                	for(var i=0;i < user.length;i++){
 				                		if(dataOperator==user[i].id){
@@ -404,7 +391,7 @@
 			                },
 			                  targets: 3
 						},
-						{
+						 {
 			                orderable: false,
 			                render: function ( data, type, full, meta ) {
 			                	if(full){
@@ -463,7 +450,14 @@
 		                  data: "caseId",
 		                  orderable: false,
 		                  render: function ( data, type, full, meta ) {
-		                      return '<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a>&nbsp;';
+		                	  
+		                	  if(full.status==0){
+		                		  return '<a class="btn btn-primary btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 处理</a> &nbsp;';  
+		                	  }
+		                	  else {
+		                		  return '<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a>&nbsp;';    
+		                	  }
+		                      
 		                  },
 		                  targets: 8
 					    },
@@ -471,7 +465,7 @@
 						    orderable: false,
 						    searchable: false,
 					        targets: [0]
-					    },
+					    }, 
 
 					],
 					columns: [
@@ -492,10 +486,10 @@
 		    } );
 		    
 		    //处理询单
-		    $('#dataTable tbody').on( 'click', 'a.btn-handle', function () {
+		   /*  $('#dataTable tbody').on( 'click', 'a.btn-handle', function () {
 		        var data = t.row($(this).parents('tr')).data();
 		        handle($(this).attr('id'));
-		    } );
+		    } ); */
 		
 			$('#dataTable tbody').on( 'click', 'a.btn-success', function () {
 		        var data = t.row($(this).parents('tr')).data();
@@ -509,7 +503,7 @@
 			
 			$('#dataTable tbody').on( 'click', 'a.btn-primary', function () {
 		        var data = t.row($(this).parents('tr')).data();
-		        addOrder($(this).attr('id'));
+		        handle($(this).attr('id'));
 		    } );
 	    
 		// Select2

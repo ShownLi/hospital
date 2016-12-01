@@ -82,6 +82,7 @@
 	        select last_insert_id() 
 	    </selectKey> -->
 		insert into tm_customer(
+		customer_portal_id,
 		customer_name_zh,
 		customer_name_en,
 		customer_level,
@@ -99,6 +100,7 @@
 		update_time,
 		isdel
 		)values(
+		#{portalId,jdbcType=VARCHAR},
 		#{chineseName,jdbcType=VARCHAR},
 		#{englishName,jdbcType=VARCHAR},
 		#{level,jdbcType=VARCHAR},
@@ -177,4 +179,24 @@
 		where
 		customer_id = #{customerId}
 	</update>
+	
+	<select id="getCustomerByEmail" parameterType="String" resultType="Customer">
+		select
+		u.customer_id as customerId,
+		u.customer_name_zh as chineseName,
+		u.customer_name_en as englishName,
+		u.customer_level as level,
+		u.location as location,
+		u.source as source,
+		u.age_group as ageGroup,
+		u.gender as gender,
+		u.telephone as telephone,
+		u.mobilephone as mobilephone,
+		u.wechat as wechat,
+		u.qq as qq,
+		u.email as email,
+		u.birthday as birthday,
+		u.isdel as isdel
+		from tm_customer u where u.email = #{email}
+	</select>
 </mapper>

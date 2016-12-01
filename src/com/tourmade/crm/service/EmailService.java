@@ -534,7 +534,7 @@ public class EmailService extends BaseService {
 			String customerChineseName = boat.getChinese();
 			String customerEnglishName = boat.getEnglish();
 			
-			String subject = customerChineseName+"去"+destinationChinese+"的需求/Enquiry for "
+			String subject = customerChineseName+"去"+destinationChinese+"的需求 / Enquiry for "
 					+customerEnglishName+" about "+destinationEnglish;
 			
 			return subject;
@@ -572,7 +572,7 @@ public class EmailService extends BaseService {
 		}
 	}
 
-	private Email getBccEmail(Order order) {
+	public Email getBccEmail(Order order) {
 		Email bccEmail = emailMapper.getBccEmail(order.getOperator());
 		return bccEmail;
 	}
@@ -588,5 +588,24 @@ public class EmailService extends BaseService {
 	public MailTepBoat getZhEn(MailTepBoat boat) {
 		boat = emailMapper.getZhEn(boat);
 		return boat;
+	}
+	
+	/**
+	 * 新增邮件队列
+	 * 
+	 * @param orderrecord
+	 * @return
+	 */
+	public int saveEmailQueue(Email email) {
+
+		
+		try {
+			emailMapper.saveEmail(email);
+		} catch (Exception e) {
+			logger.error("OrderRecordService.saveOrderRecord() --> " + email + "-->" + e.getMessage());
+			e.printStackTrace();
+			return 0;
+		}
+		return email.getEmailId();
 	}
 }

@@ -14,7 +14,9 @@ public class Email extends BaseBean<Email> {
 	 * 
 	 */
 	private static final long serialVersionUID = 1423523863575074623L;
-
+	
+	private Integer emailId;
+	
 	private Integer orderId;
 	
 	private String mailType;
@@ -42,6 +44,15 @@ public class Email extends BaseBean<Email> {
 	private String bccName;
 
 	
+	
+	public Integer getEmailId() {
+		return emailId;
+	}
+
+	public void setEmailId(Integer emailId) {
+		this.emailId = emailId;
+	}
+
 	public String getBcc() {
 		return bcc;
 	}

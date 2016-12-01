@@ -6,8 +6,7 @@ import com.tourmade.crm.common.framework.BaseBean;
 
 /**
  * 地接社model
- * 
- * @author lianzheng
+ *
  *
  */
 public class Agency extends BaseBean<Agency> {

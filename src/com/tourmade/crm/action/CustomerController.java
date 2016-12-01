@@ -61,7 +61,7 @@ public class CustomerController extends BaseSimpleFormController {
 	public String add(Model model) {
 		
 		String level = "customer.level";
-		String source = "customer.promote";
+		String source = "customer.source";
 		String ageGroup = "customer.agegroup";
 		List<EntityList> levelList = customerService.getParameterInfo(level);
 		List<EntityList> sourceList = customerService.getParameterInfo(source);
@@ -100,7 +100,7 @@ public class CustomerController extends BaseSimpleFormController {
 			int customerId = Integer.parseInt(id);
 			Customer customer = customerService.getCustomerById(customerId);
 			String level = "customer.level";
-			String promote = "customer.promote";
+			String promote = "customer.source";
 			String ageGroup = "customer.agegroup";
 			String country = "country";
 			List<EntityList> levelList = customerService.getParameterInfo(level);

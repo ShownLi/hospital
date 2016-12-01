@@ -41,7 +41,7 @@
                     </div>
               	</div> 
 	            <div class="form-group col-sm-4">
-	              <label class="col-sm-3 control-label">客人名<span class="asterisk">*</span></label>
+	              <label class="col-sm-3 control-label">客人姓名<span class="asterisk">*</span></label>
 	              <div class="col-sm-9">
 	                <input type="text" name="chineseName" placeholder="中文名" class="form-control" value="${crmcase.chineseName}" />
 	              </div>
@@ -52,7 +52,7 @@
 	                <input type="text" name="englishName" placeholder="英文名" class="form-control" value="${crmcase.englishName}"/>
 	              </div>
 	            </div>  --%>
-	            <div class="form-group col-sm-4">
+	            <%-- <div class="form-group col-sm-4">
 	            	<label class="col-sm-3 control-label">生日</label>
 	            	<div class="col-sm-9 input-group input-datepicker">
 		                <input type="text" name="birthday" class="datepicker form-control" placeholder="yyyy/mm/dd" id="birthday" autocomplete="off" value="${crmcase.birthday}">
@@ -60,7 +60,7 @@
 	                </div>
 	            </div> 
 	            <div class="form-group col-sm-4">
-	              <label class="col-sm-3 control-label" >年龄段</label>
+	              <label class="col-sm-3 control-label">年龄段</label>
 	              <div class="col-sm-9">
 	                <input type="text" name="ageGroup" placeholder="请选择一个年龄段" readonly class="form-control" value="${crmcase.ageGroup}"/>
 	              </div>
@@ -83,17 +83,17 @@
 	                  <label for="female">女</label>
 	                </div><!-- rdio -->
 	              </div>
-	            </div> 
+	            </div>  --%>
 	        </div>
 	        
 	        <div class="section-block">
 	        	<h5 class="section-title">客人联系方式  <span class="contact-note">(手机、微信、QQ、邮箱至少填写一个)</span></h5>
-	            <div class="form-group col-sm-4 contact-field">
+	            <%-- <div class="form-group col-sm-4 contact-field">
 	              <label class="col-sm-3 control-label">固定电话</label>
 	              <div class="col-sm-9">
 	                <input type="text" name="telephone" placeholder="固定电话" class="form-control" value="${crmcase.telephone}" />
 	              </div>
-	            </div>
+	            </div> --%>
 	            <div class="form-group col-sm-4 contact-field">
 	              <label class="col-sm-3 control-label">手机</label>
 	              <div class="col-sm-9">
@@ -144,7 +144,7 @@
               					  
               					  <option value="qq">qq</option>
               					  <option value="mail">邮箱</option>
-					            </select>
+					   </select>
                     </div>
                 </div>   
                 <div class="form-group col-sm-4">
@@ -364,7 +364,7 @@
                           <input type="text" name="reason" placeholder="无效原因" class="reason-select fullwidth"  value="${crmcase.reason}" />
                         </div>
                     </div>
-                </div>
+               
         </div><!-- panel-body -->
         
         <div class="panel-footer align-center">
@@ -373,7 +373,7 @@
             <input  type="hidden" name="caseId" value="${crmcase.caseId}" />
             <button id="btn-invalid"  class="btn btn-danger" >无效</button>&nbsp;
             <button id="btn-back" class="btn btn-default">返回</button>
-		    </div><!-- panel-footer -->
+		 </div><!-- panel-footer -->
      </form>   
       </div><!-- panel -->
       
@@ -685,10 +685,21 @@
 	var genderData = [{ id: 'male', text: '男' }, { id:'female' , text: '女' }];
 	
 	var reason = ${reason};
-	
-	$("#requirement").val("${crmcase.requirement}");	
-	$("#birthday").val(getBirthday());
+	/* var contactData = [{ id: 0, text: 'qq' }, { id: 1, text: 'email' }, { id: 2, text: 'wechat' }, { id: 3, text: 'phone' }];
+	 */
+	var newHref;
 
+	if($.trim("${crmcase.requirement}")==""){
+		newHref = "../customer/list.html";
+	}
+	else{
+		newHref = "../customer/edit.html?id="+"${crmcase.customerId}";
+	}
+		 
+	$('#addEmail').attr("href",newHref);
+	$("#requirement").val("${crmcase.requirement}");	
+	//$("#birthday").val(getBirthday());
+	
 	function getBirthday(){
 		var date = $("#birthday").val();	
 		var dateformat = null;
@@ -720,9 +731,11 @@
     $(".contact-select").select2({
     	placeholder: '可多选',
     	minimumResultsForSearch: Infinity,
+    	//data: contactData
      });
-    $(".contact-select").select2("val", '${crmcase.contactType}'.split(","));
+    //$(".contact-select").select2("val", '${crmcase.contactType}'.split(","));
     
+   
     $(".withwho-select").select2({
     	placeholder: '与谁同行',
      	data: withwho
@@ -973,7 +986,7 @@
      	 alert("页面正在加载，请稍后...");
       }
      
-	   
+ 
 	  //添加订单
       $("#btn-addorder").click(function(){
       	  var destination = $("#destination").val(); 
@@ -982,7 +995,8 @@
       	  if(destination==""){
       	  	$("#msgDestination").modal('show');
  		  }else{ 
-      		var destinationText = $("#destination").select2('data').text;
+      		var destinationText = $("#destination").select2('data')[0].text;
+      		
       	  		$("#orderDestinationText").val(destinationText); 
       	  		$("#orderDestination").val(destination);
 	      	  	$.ajax({
@@ -1250,10 +1264,9 @@
       }); */
 
   });
-  
-  var newHref = "../customer/edit.html?id="+${crmcase.customerId};
-  $('#addEmail').attr("href",newHref)
-  
+ 
+
+
 	</script>
 
 
