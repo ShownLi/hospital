@@ -47,11 +47,15 @@
                       <label class="col-sm-4 control-label">希望联系方式</label>
                       <div class="col-sm-8">
 	                      <select name="contactType" class="contact-select fullwidth" multiple="multiple">
+<<<<<<< HEAD
 							  <option value="wechat">微信</option>
 							  <option value="mobilephone">手机</option>
 							  
 							  <option value="qq">qq</option>
 					  		  <option value="mail">邮箱</option>
+=======
+							 
+>>>>>>> d9b144c8019260a9614ff1f5dbaa13d3de525714
 					</select>
                       </div>
                     </div> 
@@ -66,7 +70,19 @@
 	                    <div class="col-sm-8">
 	                      <input type="text"  name="operator" class="user-select fullwidth" value="0" />
 	                    </div>
+<<<<<<< HEAD
 	                </div>                        
+=======
+	                </div>  
+	                
+	                <div class="form-group col-sm-4">
+	                    <label class="col-sm-4 control-label">沟通方式</label>
+	                    <div class="col-sm-8">
+	                      <input type="text"  name="contactReal" class="contact-real-select fullwidth" value="0" />
+	                    </div>
+	                </div>  
+	                                      
+>>>>>>> d9b144c8019260a9614ff1f5dbaa13d3de525714
                 </div>
                     <div class="section-block">
                    	<div class="form-group col-sm-4">
@@ -213,8 +229,13 @@
             </div><!-- panel-body -->
             
             <div class="panel-footer align-center">
+<<<<<<< HEAD
                 <button class="btn btn-primary">保存</button>&nbsp;
                 <button class="btn btn-default">取消</button>
+=======
+                <input class="btn btn-primary" type="submit" value="保存"/>&nbsp;
+			<input class="btn btn-default" type="button" id="btn-back" value="取消"/>
+>>>>>>> d9b144c8019260a9614ff1f5dbaa13d3de525714
     		    </div><!-- panel-footer -->
         </form>   
       </div><!-- panel -->
@@ -326,7 +347,11 @@
     var customer = ${customer};
     var user = ${user};
     var sales = ${sales};
+<<<<<<< HEAD
 
+=======
+	var contactData=${contact};
+>>>>>>> d9b144c8019260a9614ff1f5dbaa13d3de525714
     $(".country-select").select2({
         placeholder: '国家',
         data: country,
@@ -335,8 +360,15 @@
     	placeholder: '选择一个沟通语言',
      	data: language
     });
+    //选择希望的联系方式下拉框
     $(".contact-select").select2({
         placeholder: '选择希望联系方式',
+        data:contactData
+     });
+    //选择真实的联系方式下拉框
+    $(".contact-real-select").select2({
+        placeholder: '选择真实联系方式',
+        data: contactData
      });
     $(".withwho-select").select2({
     	placeholder: '与谁同行',

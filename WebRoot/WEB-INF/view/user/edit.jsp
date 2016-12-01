@@ -72,8 +72,10 @@
         </div><!-- panel-body -->
         
         <div class="panel-footer align-center">
-			<button class="btn btn-primary">保存</button>&nbsp;
-			<button class="btn btn-default" id="btn-back">返回</button>
+        	<input class="btn btn-primary" type="submit" value="保存"/>&nbsp;
+			<input class="btn btn-default" type="button" id="btn-back" value="返回"/>&nbsp;
+			<!-- <button class="btn btn-primary">保存</button>&nbsp;
+			<button class="btn btn-default" id="btn-back">返回</button> -->
 			<input type="hidden" name="userId" value="${user.userId }" />
 		</div><!-- panel-footer -->
      </form>   

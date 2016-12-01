@@ -70,7 +70,9 @@
 		from tm_order u  
 		where u.isdel = 0 and u.case_id = #{caseId}
 		order by u.creat_time 
-		limit #{start},#{length}
+		
+		<!-- 		不使用分页
+limit #{start},#{length} -->
 	</select>
 	
 	<select id="countOrder" parameterType="Order" resultType="long">

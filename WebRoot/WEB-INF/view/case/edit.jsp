@@ -139,11 +139,15 @@
                     <label class="col-sm-4 control-label">希望联系方式</label>
                     <div class="col-sm-8">
                       <select name="contactType" class="contact-select fullwidth" multiple="multiple">
+<<<<<<< HEAD
               					  <option value="wechat">微信</option>
               					  <option value="mobilephone">手机</option>
               					  
               					  <option value="qq">qq</option>
               					  <option value="mail">邮箱</option>
+=======
+              					 
+>>>>>>> d9b144c8019260a9614ff1f5dbaa13d3de525714
 					   </select>
                     </div>
                 </div>   
@@ -229,7 +233,13 @@
                 <div class="col-sm-8">
                      <input type="text" name="operator" class="user-select fullwidth" value="${crmcase.operator}" />
                 </div>
-                </div>      
+                </div>  
+                <div class="form-group col-sm-4">
+	                    <label class="col-sm-4 control-label">沟通方式</label>
+	                    <div class="col-sm-8">
+	                      <input type="text"  name="contactReal" class="contact-real-select fullwidth" value="0" />
+	                    </div>
+	                </div>     
             </div>
             
             <div class="section-block">
@@ -368,11 +378,18 @@
         </div><!-- panel-body -->
         
         <div class="panel-footer align-center">
-            <button id="btn-addorder" class="btn btn-primary">添加订单</button>&nbsp;
-            <button class="btn btn-primary">保存</button>&nbsp;
+        
+            <input class="btn btn-primary" id="btn-addorder"  type="button" value="添加订单"/>&nbsp;
+            <input class="btn btn-primary" type="submit" value="保存"/>&nbsp;
+            <input class="btn btn-danger" id="btn-invalid"   type="button" value="无效"/>&nbsp;
+            <input class="btn btn-default" type="button" id="btn-back" value="返回"/>
             <input  type="hidden" name="caseId" value="${crmcase.caseId}" />
+<<<<<<< HEAD
             <button id="btn-invalid"  class="btn btn-danger" >无效</button>&nbsp;
             <button id="btn-back" class="btn btn-default">返回</button>
+=======
+           
+>>>>>>> d9b144c8019260a9614ff1f5dbaa13d3de525714
 		 </div><!-- panel-footer -->
      </form>   
       </div><!-- panel -->
@@ -685,6 +702,12 @@
 	var genderData = [{ id: 'male', text: '男' }, { id:'female' , text: '女' }];
 	
 	var reason = ${reason};
+<<<<<<< HEAD
+=======
+	//接收联系方式
+	var contactData=${contact};
+	
+>>>>>>> d9b144c8019260a9614ff1f5dbaa13d3de525714
 	/* var contactData = [{ id: 0, text: 'qq' }, { id: 1, text: 'email' }, { id: 2, text: 'wechat' }, { id: 3, text: 'phone' }];
 	 */
 	var newHref;
@@ -731,9 +754,32 @@
     $(".contact-select").select2({
     	placeholder: '可多选',
     	minimumResultsForSearch: Infinity,
+<<<<<<< HEAD
     	//data: contactData
      });
     //$(".contact-select").select2("val", '${crmcase.contactType}'.split(","));
+=======
+    	data: contactData
+     });
+    //循环去除数组中元素的空格
+   
+    var temp='${crmcase.contactType}'.split(",");
+    var value=[];
+    $.each(temp,function(index,item){
+    	value.push(item.trim());
+    	
+    })
+    
+    //给select2赋值
+    $(".contact-select").val(value).trigger("change");
+    
+    //选择真实的联系方式
+    $(".contact-real-select").select2({
+        placeholder: '选择真实联系方式',
+        data: contactData
+     });
+    $(".contact-real-select").val('${crmcase.contactReal}').trigger("change");
+>>>>>>> d9b144c8019260a9614ff1f5dbaa13d3de525714
     
    
     $(".withwho-select").select2({
@@ -824,7 +870,7 @@
 	//订单回显数据
   	var orderTable = jQuery('#dataTable-order').DataTable({
   		searching:false,
-	 	pageLength: 10,
+  		paging: false,
 	 	processing: true,
 	 	language: datatable_local_language, // my.js
 	 	serverSide: true,
@@ -833,7 +879,7 @@
 	 		dataFilter: function(data){
 	             var json = jQuery.parseJSON( data );
 	             json.recordsTotal = json.countTotal;
-	             json.recordsFiltered = json.countFiltered;
+	             json.recordsFiltered = json.countFiltered;  
 	             json.data = json.data;
 	             return JSON.stringify( json );
 	         }
@@ -1100,7 +1146,8 @@
 	   //注释 ~ 回显，效验，添加
    		var commentTable= jQuery('#dataTable-comment').DataTable({
    			searching:false,
-			pageLength: 10,
+   			paging:false,
+			/* pageLength: 10, */
 			processing: true,
 			language: datatable_local_language, // my.js
 			serverSide: true,

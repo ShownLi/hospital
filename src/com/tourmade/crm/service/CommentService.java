@@ -32,7 +32,7 @@ public class CommentService extends BaseService {
 	 * @param request
 	 * @return
 	 */
-	public QueryResult<Comment> queryComment(Comment comment, PageHelper ph, String type, int id, HttpServletRequest request) {
+	/*public QueryResult<Comment> queryComment(Comment comment, PageHelper ph, String type, int id, HttpServletRequest request) {
 
 		QueryResult<Comment> result = new QueryResult<Comment>();
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -53,8 +53,37 @@ public class CommentService extends BaseService {
 		result.setCountFiltered(count);
 	
 		return result;
-	}
+	}*/
+	/**
+	 * 查询注释数据，不分页展示
+	 * 
+	 * @param comment
+	 * @param ph
+	 * @param request
+	 * @return
+	 */
+	public QueryResult<Comment> queryComment(Comment comment,String type, int id, HttpServletRequest request) {
 
+		QueryResult<Comment> result = new QueryResult<Comment>();
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		/*	
+		map.put("start", ph.getStart());
+		map.put("length", ph.getLength());*/
+		map.put("commentType", type);
+		map.put("objectId", id);
+
+		List<Comment> data = commentMapper.queryComment(map);
+		comment.setCommentType(type);
+		comment.setObjectId(id);
+		long count = commentMapper.countComment(comment);
+			
+		result.setData(data);
+		result.setCountTotal(count);
+		result.setCountFiltered(count);
+	
+		return result;
+	}
 	/**
 	 * 新增注释
 	 * 

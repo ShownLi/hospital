@@ -20,7 +20,9 @@
 			u.creat_time as creatTime,
 			u.reason as reason,
 			u.last_comment as comment,
-			u.requirement as requirement
+			
+			u.requirement as requirement,
+			u.contact_real as contactReal
 		from tm_case u  
 		where u.isdel = 0 
 		<if test="customerId != null and customerId != ''">
@@ -153,6 +155,7 @@
 			guide,
 			budget,
 			contact_type,
+			contact_real,
 			sales_id,
 			sales_name,
 			destination,
@@ -196,6 +199,7 @@
 			#{guide,jdbcType=VARCHAR},
 			#{budget,jdbcType=VARCHAR},
 			#{contactType,jdbcType=VARCHAR},
+			#{contactReal,jdbcType=VARCHAR},
 			#{salesId,jdbcType=VARCHAR},
 			#{salesName,jdbcType=VARCHAR},
 			#{destination,jdbcType=VARCHAR},
@@ -238,6 +242,7 @@
 		guide=#{guide},
 		budget=#{budget},
 		contact_type=#{contactType},
+		contact_real=#{contactReal},
 		sales_id=#{salesId},
 		sales_name=#{salesName},
 		destination=#{destination},
@@ -270,6 +275,7 @@
 		u.operator as operator,
 		u.prefer_language as preferLanguage,
 		u.contact_type as contactType,
+		u.contact_real as contactReal,
 		u.with_who as withwho,
 		u.adult as adult,
 		u.children as children,
@@ -310,6 +316,7 @@
 		u.operator as operator,
 		u.prefer_language as preferLanguage,
 		u.contact_type as contactType,
+		u.contact_real as contactReal,
 		u.with_who as withwho,
 		u.adult as adult,
 		u.children as children,

@@ -141,11 +141,7 @@
                     <label class="col-sm-4 control-label">希望联系方式</label>
                     <div class="col-sm-8">
                       <select name="contactType" class="contact-select fullwidth" multiple="multiple">
-					  <option value="wechat">微信</option>
-					  <option value="mobilephone">手机</option>
 					  
-					  <option value="qq">qq</option>
-					  <option value="mail">邮箱</option>
 					</select>
                     </div>
                 </div>   
@@ -231,7 +227,13 @@
                 <div class="col-sm-8">
                      <input type="text" name="operator" class="user-select fullwidth" value="${crmcase.operator}" />
                 </div>
-                </div>      
+                </div> 
+                <div class="form-group col-sm-4">
+	                    <label class="col-sm-4 control-label">沟通方式</label>
+	                    <div class="col-sm-8">
+	                      <input type="text"  name="contactReal" class="contact-real-select fullwidth" value="0" />
+	                    </div>
+	                </div>       
             </div>
             
             <div class="section-block">
@@ -727,7 +729,7 @@
 	var genderData = [{ id: 'male', text: '男' }, { id:'female' , text: '女' }];
 	
 	var reason = ${reason};
-	
+	var contactData=${contact};
 	$("#requirement").val("${crmcase.requirement}");	
 	//$("#birthday").val(getBirthday());
 
@@ -762,8 +764,25 @@
     $(".contact-select").select2({
     	placeholder: '可多选',
     	minimumResultsForSearch: Infinity,
+    	data: contactData
      });
-    $(".contact-select").select2("val", '${crmcase.contactType}'.split(","));
+    
+  //循环去除数组中元素的空格
+    var temp='${crmcase.contactType}'.split(",");
+    var value=[];
+    $.each(temp,function(index,item){
+    	value.push(item.trim());
+    	
+    })
+    
+    //给contact-select赋值
+    $(".contact-select").val(value).trigger("change");
+    
+    //选择真实的联系方式
+    $(".contact-real-select").select2({
+        placeholder: '选择真实联系方式',
+        data: contactData
+     });
     
     $(".withwho-select").select2({
     	placeholder: '与谁同行',
