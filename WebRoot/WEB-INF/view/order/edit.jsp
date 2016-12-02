@@ -61,7 +61,7 @@
                     <div class="form-group col-sm-4">
                       <label class="col-sm-4 control-label">目的地</label>
                       <div class="col-sm-8">
-                        <input type="text" name="destination" placeholder="目的地" class="destination-select fullwidth" readonly value="${order.destination}" />
+                        <select id="destination" name="destination" class="contact-select-country fullwidth" multiple="multiple"></select>
                       </div>
                     </div>
                     <div class="form-group col-sm-4">
@@ -392,6 +392,13 @@
  	$(".currency-select").select2({
 		data: currency
 	})  
+	
+	 $(".contact-select-country").select2({
+    	placeholder: '可多选',
+    	minimumResultsForSearch: Infinity,
+    	data: country
+     });
+    $(".contact-select-country").val('${order.destination}'.split(",")).trigger("change");
 	
  	$(".status-select").select2({
 		data: orderStatus

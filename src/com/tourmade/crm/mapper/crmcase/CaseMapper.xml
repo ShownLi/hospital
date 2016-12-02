@@ -573,9 +573,5 @@
 		from tm_customer u  
 		where u.isdel = 0 and u.customer_portal_id = #{portalId}
 	</select>
-	
 </mapper>
-
-
-
 

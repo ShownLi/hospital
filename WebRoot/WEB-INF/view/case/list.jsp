@@ -256,7 +256,6 @@
     $(".confirmDelModal .submit").click(function(){
     	delSubmit();
     });
-   	
     
     $(".confirmDelModal .cancel").click(function(){
       	$(".confirmDelModal").modal("hide");
@@ -348,15 +347,19 @@
 	 					{
 			                orderable: false,
 			                render: function ( data, type, full, meta ) {
+			                	var destinations="";
 			                	if(full.destination){
-				                	for(var i=0;i <destination.length;i++){
-				                		if(full.destination==destination[i].id){
-				                			return "<div class='width85'>" + destination[i].text + "</div>" + "<div class='width85'>" + full.budget + "</div>"
+			                	var des=full.destination.split(",");
+			                	for(var j = 0;j<des.length;j++){
+			                		for(var i=0;i <destination.length;i++){
+				                		if(des[j]==destination[i].id){
+				                			destinations+=destination[i].text+",";
 				                		}				                	
 				                	}
-				                	return "";
 			                	}
-			                	else{return ""}
+			                }
+			                destinations=destinations.substring(0,destinations.length-1);
+			                return "<div class='width85'>" + destinations + "</div>" + "<div class='width85'>" + full.budget + "</div>";
 			                },
 			                targets: 2
 						},	  
@@ -385,12 +388,20 @@
 						 {
 			                orderable: false,
 			                render: function ( data, type, full, meta ) {
+			                	var time = data.time;
+			                	
+			                	if(data.time){
+			                		time=new Date(time).format("yyyy-MM-dd hh:mm:ss");
+			                	}else{
+			                		time="";
+			                	}
 			                	if(full){
-			                		for(var i=0;i <  caseStatus.length;i++){
+			                		for(var i=0;i<caseStatus.length;i++){
 				                		if(full.status==caseStatus[i].id){
-				                			return "<div class='caselist-6'>" + caseStatus[i].text + "</div>" + "<div class='caselist-7'>" + new Date(data.time).format("yyyy-MM-dd hh:mm:ss"); + "</div>"
+				                			return "<div class='caselist-6'>" + caseStatus[i].text + "</div>" + "<div class='caselist-7'>" + time + "</div>"
 				                		}
 				                	}
+			                		
 			                	}
 			                	else{return ""}
 			                },
@@ -540,7 +551,7 @@
 				}
 			}, "JSON");
 	}
-  		
+  	  
   	  function delSubmit() {
     	  var f1=$("#form-del").serialize();
      	  try{
@@ -559,8 +570,6 @@
      	  }
      	 alert("页面正在加载，请稍后...");
       }
-      
 	</script>
-
 </body>
 </html>

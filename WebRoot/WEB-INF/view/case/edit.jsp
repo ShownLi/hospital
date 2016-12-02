@@ -46,7 +46,7 @@
 	                <input type="text" name="chineseName" placeholder="中文名" class="form-control" value="${crmcase.chineseName}" />
 	              </div>
 	            </div>
-<%-- 	            <div class="form-group col-sm-4">
+				<%--<div class="form-group col-sm-4">
 	              <label class="col-sm-3 control-label">英文名</label>
 	              <div class="col-sm-9">
 	                <input type="text" name="englishName" placeholder="英文名" class="form-control" value="${crmcase.englishName}"/>
@@ -665,7 +665,6 @@
     var meals = ${meals};
     var guide = ${guide};
     var caseStatus = ${status};   
-    
     var source = ${source};
     var tailormade = ${tailormade};
     var passport = ${passport};
@@ -975,16 +974,13 @@
      	 alert("页面正在加载，请稍后...");
       }
      
-	  //添加订单
+	  //分配地接社
       $("#btn-addorder").click(function(){
-      	  var destination = $("#destination").val(); 
+      	  var destination = $("#destination").val();
       	  $("#englishDestination").val(destination);
       	  if(destination==""){
       	  	$("#msgDestination").modal('show');
  		  }else{ 
-      			//var destinationText01 = $("#destination").select2('data')[0].text;
-      			//var destinationText02 = $("#destination").select2('data')[1].text;
-      			//var destinationText = destinationText01 + "," + destinationText02;
       			var destinationText;
       			for(var i=0; i<$("#destination").select2('data').length; i++){
       				if(destinationText==null){
@@ -1001,7 +997,7 @@
 	              url: "${rootPath}case/getSales.do?destination="+destination,
 	              data: destination,
 	              success: function(sales){
-	            	  var json = jQuery.parseJSON( sales );
+	            	  var json = jQuery.parseJSON(sales);
 	                  $("#salesId").select2({	
 	                      placeholder: '销售',
 	                      data: json
@@ -1024,8 +1020,9 @@
 			if (result.success) {
 				window.parent.location = "${rootPath}case/edit.html?id=${crmcase.caseId}";
 			} else {
-				$("#NoEmail").modal('show');
-         		$("#nextModal").modal('hide');
+				//$("#NoEmail").modal('show');
+         		//$("#nextModal").modal('hide');
+				window.parent.location = "${rootPath}case/edit.html?id=${crmcase.caseId}";
 			}
 		}, "JSON");
       }

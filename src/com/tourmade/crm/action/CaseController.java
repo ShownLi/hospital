@@ -234,7 +234,7 @@ public class CaseController extends BaseSimpleFormController {
 		Map<String,String> map =new HashMap();
 
 		try {
-			//判断是否有老客人,( 添加询单)
+			//判断是否有老客人,(添加询单)
 			List judgeCustomer = service.judgeCustomer(crmcase);
 			if(judgeCustomer.size()>0){
 				customerMap.put("cust", judgeCustomer);
@@ -261,7 +261,6 @@ public class CaseController extends BaseSimpleFormController {
 	@RequestMapping(value = "/bindCustomer.do")
 //	@ResponseBody
 	public String bindCustomer(HttpServletRequest request, HttpSession session, Case crmcase, String[] customerId, String isJudge) {
-			System.out.println(crmcase);
 			int id = 0;
 			id= Integer.parseInt(customerId[0]);
 			Case realCase = service.getCaseById(crmcase.getCaseId());
@@ -291,7 +290,6 @@ public class CaseController extends BaseSimpleFormController {
 	@RequestMapping(value = "/bindCustomer2.do")
 	@ResponseBody
 	public String bindCustomer2(HttpServletRequest request, HttpSession session, Case crmcase, String[] customerId, String judgeCustomer) {
-			System.out.println(crmcase);
 			int id = 0;
 			id= Integer.parseInt(customerId[0]);
 		try {
@@ -576,15 +574,12 @@ public class CaseController extends BaseSimpleFormController {
 	@RequestMapping(value = "/getSales.do")
 	@ResponseBody
 	public List<EntityList> getSales(Model model, String destination) {
-		System.out.println(destination);
 		String[] dStr = destination.split(",");
 		List<String> destinationList = new ArrayList<String>();
-		
 		for(int i=0; i<dStr.length; i++){
 			destinationList.add(dStr[i]);
 		}
 		List<EntityList> sales = service.getSalesByAgency(destinationList);
-		System.out.println(sales);
 		return sales;
 	}
 	

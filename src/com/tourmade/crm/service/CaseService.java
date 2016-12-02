@@ -398,10 +398,7 @@ public class CaseService extends BaseService {
 	 * @return
 	 */
 	public List<EntityList> getSalesByAgency(List<String> destinationList) {
-		System.out.println("**************"+destinationList);
 		List<EntityList> agencys = new ArrayList<>();
-//		List<String> sList = new ArrayList<String>();
-		
 		try {
 			agencys = caseMapper.getSalesByAgency(destinationList);
 		} catch (Exception e) {
@@ -434,9 +431,7 @@ public class CaseService extends BaseService {
 	 * @return
 	 */
 	public boolean case2order(int id) {
-
 		boolean judge = false;
-
 		try {
 			Case  crmcase= caseMapper.getCaseById(id);
 			if (crmcase != null) {
@@ -450,7 +445,27 @@ public class CaseService extends BaseService {
 			logger.error("CaseService.updateCase() --> " + id + "-->" + e.getMessage());
 			judge = false;
 		}
-
+		return judge;
+	}
+	
+	/**
+	 * 询单分配地接社时，客人没有邮箱，询单状态改为“地接社设计中”
+	 */
+	public boolean case2orderNoEmail(int id) {
+		boolean judge = false;
+		try {
+			Case crmcase = caseMapper.getCaseById(id);
+			if (crmcase != null) {
+				crmcase.setStatus("2");
+				caseMapper.updateCase(crmcase);
+				judge = true;
+			} else {
+				judge = false;
+			}
+		} catch (Exception e) {
+			logger.error("CaseService.updateCase() --> " + id + "-->" + e.getMessage());
+			judge = false;
+		}
 		return judge;
 	}
 	
