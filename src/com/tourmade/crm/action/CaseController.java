@@ -605,7 +605,9 @@ public class CaseController extends BaseSimpleFormController {
 					crmcase.getCustomerId()!=0){
 				cus = service.getCustomerInfoById(crmcase.getCustomerId());
 			}
+
 			
+
 			String country = "country";
 			String language = "case.preferlanguage";
 			String withwho = "case.withwho";
@@ -647,7 +649,6 @@ public class CaseController extends BaseSimpleFormController {
 			//获取联系方式
 			List<EntityList> contactList=service.getParameterInfo(contact);
 			List<EntityList> reasonNodealList=service.getParameterInfo(reasonNodeal);
-		
 			
 			JSONArray countryResult = JSONArray.fromObject(countryList);
 			JSONArray languageResult = JSONArray.fromObject(languageList);
@@ -688,18 +689,15 @@ public class CaseController extends BaseSimpleFormController {
 			model.addAttribute("visa",visaResult);
 			model.addAttribute("flight",flightResult);
 			model.addAttribute("user",userResult);
-			
 			model.addAttribute("crmcase",crmcase);
-			
-			
 			model.addAttribute("customerInfo",cus);
-			
 			model.addAttribute("level",levelResult);
 			model.addAttribute("ageGroup",ageGroupResult);
 			model.addAttribute("reason", reasonResult);
-			
 			model.addAttribute("orderStatus",orderStatusResult);
+		
 			model.addAttribute("contact", contactResult);
+
 			model.addAttribute("reasonNodeal", reasonNodealResult);
 			
 		}

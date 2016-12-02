@@ -32,6 +32,7 @@
 					<form class="form-horizontal" id="form-case">
 						<div class="panel-body panel-body-nopadding">
 
+
 							<div class="section-block">
 								<h5 class="section-title">客人基本信息</h5>
 								<div class="form-group col-sm-4">
@@ -51,7 +52,6 @@
 									</div>
 								</div>
 							</div>
-
 							<div class="section-block">
 								<h5 class="section-title">
 									客人联系方式 <span class="contact-note">(手机、微信、QQ、邮箱至少填写一个)</span>
@@ -93,9 +93,7 @@
 								</div>
 							</div>
 
-
 							<div class="section-block">
-
 								<div class="form-group col-sm-4">
 									<label class="col-sm-4 control-label">沟通语言</label>
 									<div class="col-sm-8">
@@ -308,7 +306,7 @@
 								<label class="col-sm-2 control-label">客人的要求</label>
 								<div class="col-sm-9" style="margin-left: 23px;">
 									<textarea id="requirement" name="requirement"
-										class="form-control" placeholder="客人的要求" rows="5"></textarea>
+										class="form-control" placeholder="客人的要求" rows="5">${crmcase.requirement}</textarea>
 								</div>
 							</div>
 						</div>
@@ -591,36 +589,6 @@
 	<!-- modal -->
 
 
-	<%-- <div class="confirmDelModal modal fade" tabindex="-1" role="dialog"
-		aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-hidden="true">&times;</button>
-					<div class="nextModal-title">请填写无效原因</div>
-				</div>
-				<form class="form-horizontal" id="form-del">
-					<div class="modal-body">
-						<div class="section-block noline">
-							<div class="form-group col-sm-12">
-								<label class="col-sm-4 control-label">无效原因是</label>
-								<div class="col-sm-8">
-									<input class="reason-select fullwidth" name="reason"
-										placeholder="无效原因是" /> <input type="hidden" name="caseId"
-										value="${crmcase.caseId}" />
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="modal-footer align-center">
-						<button class="submit btn btn-primary">保存</button>
-						<a class="cancel btn btn-primary">取消</a>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div> --%>
 
 	<!-- 询单未成行 -->
 	<div class="confirmNoDealModal modal fade" tabindex="-1" role="dialog"
@@ -704,6 +672,7 @@
 	var contactData=${contact};
 	//接收询单未成行原因
 	var reasonNodeal=${reasonNodeal};
+	
 	var newHref;
 
 	if($.trim("${crmcase.requirement}")==""){
@@ -766,6 +735,7 @@
      });
     $(".contact-real-select").val('${crmcase.contactReal}').trigger("change");
     
+   
     $(".withwho-select").select2({
     	placeholder: '与谁同行',
      	data: withwho
@@ -842,27 +812,7 @@
       /*  设置未成行原因下拉框 结束*/
 	
     	jQuery(document).ready(function() {
-   		/* jQuery("#form-del").validate({
-			rules:{
-				reason: "required"
-			},
-			messages:{
-				reason:"请输入无效原因"
-			},
-			highlight: function(element) {
-				jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
-			},
-			success: function(element) {
-				jQuery(element).closest('.form-group').removeClass('has-error');
-			},
-			invalidHandler : function(){
-				return false;
-			},
-			submitHandler : function(){
-				delSubmit();
-			    return false;
-			}
-		});  */
+   		
    		jQuery("#form-nodeal").validate({
 			rules:{
 				reasonNodeal: "required"
@@ -1021,38 +971,12 @@
 		 return false;
       });
       
-      /* $("#confirm-invalid").click(function(){
-      	doDel()
-      }); */
       
-     /*  //更改无效原因
-      $("#btn-updateDel").click(function(){
-    	 updateDel_submit(); 
-      }); */
       
       $(".confirmDelModal .cancel").click(function(){
       	$(".confirmDelModal").modal("hide");
   	  });
-     /*  function updateDel_submit(){
-
-    	  var f1=$("#form-delInfo").serialize();
-     	  try{
-     		  $.post("${rootPath}case/del.do", f1, function(result) {
-				var rmsg = result.msg;
-				if (result.success) {
-					window.parent.location = "${rootPath}case/edit.html?id=${crmcase.caseId}";
-				} 
-				else {
-					$("#msgModal").modal('show');
-				}
-			}, "JSON");
-     		  }
-     	  catch(e) {
-     		  alert(e);
-     	  }
-     	 alert("页面正在加载，请稍后...");
-      }
-       */
+ 
       //订单为未成行
       $("#btn-nodeal").click(function(){
       	 $(".confirmNoDealModal").modal('show');
@@ -1109,25 +1033,7 @@
 			}
 		}, "JSON");
       }
-      //询单无效原因
-   /*    function delSubmit() {
-    	  var f1=$("#form-del").serialize();
-     	  try{
-     		  $.post("${rootPath}case/del.do", f1, function(result) {
-				var rmsg = result.msg;
-				if (result.success) {
-					window.parent.location = "${rootPath}case/edit.html?id=${crmcase.caseId}";
-				} 
-				else {
-					$("#msgModal").modal('show');
-				}
-			}, "JSON");
-     		  }
-     	  catch(e) {
-     		  alert(e);
-     	  }
-     	 alert("页面正在加载，请稍后...");
-      } */
+    
       
       //询单未成行
       function nodealSubmit() {
@@ -1342,23 +1248,6 @@
           $(".start-date").hide();
           $(".start-time").show();
       }
-
-      //添加订单弹出框，目的地与销售联动
-/*       $("#destination").change(function(){
-          var destination = $(this).val();
-          $.ajax({
-              type: "post",
-              url: "${rootPath}case/getSales.do?destination="+destination,
-              data: destination,
-              success: function(sales){
-            	  var json = jQuery.parseJSON( sales );
-                  $("#salesId").select2({	
-                      placeholder: '销售',
-                      data: json
-                  });
-              }   
-          }); 
-      }); */
 
   });
  

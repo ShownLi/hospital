@@ -47,7 +47,7 @@
                       <label class="col-sm-4 control-label">希望联系方式</label>
                       <div class="col-sm-8">
 	                      <select name="contactType" class="contact-select fullwidth" multiple="multiple">
-							 
+
 					</select>
                       </div>
                     </div> 
@@ -62,17 +62,17 @@
 	                    <div class="col-sm-8">
 	                      <input type="text"  name="operator" class="user-select fullwidth" value="0" />
 	                    </div>
-	                </div>  
-	                
+
+	                </div>                        
+
 	                <div class="form-group col-sm-4">
 	                    <label class="col-sm-4 control-label">沟通方式</label>
 	                    <div class="col-sm-8">
 	                      <input type="text"  name="contactReal" class="contact-real-select fullwidth" value="0" />
 	                    </div>
 	                </div>  
-	                                      
-                </div>
-                    <div class="section-block">
+	                </div>  
+                <div class="section-block">
                    	<div class="form-group col-sm-4">
                       <label class="col-sm-4 control-label">目的地</label>
                       <div class="col-sm-8">
@@ -214,18 +214,21 @@
                     <input type="hidden" name="wechat" value="${customerInfo.wechat}"/>
                     <input type="hidden" name="qq" value="${customerInfo.qq}"/>
                 </div>
-            </div><!-- panel-body -->
             
+            </div>
             <div class="panel-footer align-center">
-             <input class="btn btn-primary" type="submit" value="保存"/>&nbsp;
-			<input class="btn btn-default" type="button" id="btn-back" value="取消"/>
-    		    </div><!-- panel-footer -->
-        </form>   
-      </div><!-- panel -->
-		</div>
 
-		</div>
-		<!-- mainpanel -->
+             <input class="btn btn-primary" type="submit" value="保存"/>&nbsp;
+	     <input class="btn btn-default" type="button" id="btn-back" value="取消"/>
+
+    		    </div><!-- panel-footer -->
+			
+		</form>   
+		</div><!-- panel-body -->
+      </div><!-- panel -->
+		
+
+		</div>		<!-- mainpanel -->
 		<%@ include file="../assets/pages/rightpanel.jsp"%>
 
 	</section>
@@ -330,6 +333,7 @@
     var customer = ${customer};
     var user = ${user};
     var sales = ${sales};
+
 	var contactData=${contact};
     $(".country-select").select2({
         placeholder: '国家',

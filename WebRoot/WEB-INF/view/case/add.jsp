@@ -136,7 +136,14 @@
                       <label class="col-sm-4 control-label">希望联系方式</label>
                       <div class="col-sm-8">
 	                      <select name="contactType" class="contact-select fullwidth" multiple="multiple">
+<<<<<<< HEAD
+							  <option value="wechat">微信</option>
+							  <option value="mobile">手机</option>							  
+							  <option value="qq">qq</option>
+					  		  <option value="mail">邮箱</option>
+=======
 							  
+>>>>>>> d9b144c8019260a9614ff1f5dbaa13d3de525714
 						</select>
                       </div>
                     </div> 
@@ -147,12 +154,21 @@
                       </div>
                     </div>
 
+<<<<<<< HEAD
+<!-- 	                <div class="form-group col-sm-4">
+	                    <label class="col-sm-4 control-label">跟单员</label>
+=======
             	 <div class="form-group col-sm-4">
 	                    <label class="col-sm-4 control-label">沟通方式</label>
+>>>>>>> d9b144c8019260a9614ff1f5dbaa13d3de525714
 	                    <div class="col-sm-8">
 	                      <input type="text"  name="contactReal" class="contact-real-select fullwidth" value="0" />
 	                    </div>
+<<<<<<< HEAD
+	                </div>   -->                      
+=======
 	                </div>                     
+>>>>>>> d9b144c8019260a9614ff1f5dbaa13d3de525714
   
                 </div>
                 
@@ -293,8 +309,13 @@
             </div><!-- panel-body -->
             
             <div class="panel-footer align-center">
+<<<<<<< HEAD
+                <button class="btn btn-primary">保存</button>&nbsp;
+                <button class="btn btn-default">取消</button>
+=======
                 <input class="btn btn-primary" type="submit" value="保存"/>&nbsp;
                 <input class="btn btn-default" type="button" id="btn-back" value="取消"/>
+>>>>>>> d9b144c8019260a9614ff1f5dbaa13d3de525714
                 <input type="hidden" name="operator" value="${sessionScope.loginUser.userId}"/>
     		    </div><!-- panel-footer -->
         </form>   
@@ -535,7 +556,11 @@
     var sales = ${sales};
     var level = ${level};
 	var ageGroup = ${ageGroup};
+<<<<<<< HEAD
+	
+=======
 	var contactData=${contact};
+>>>>>>> d9b144c8019260a9614ff1f5dbaa13d3de525714
 	$(".agegroup-select").select2({
 		placeholder: '选择一个年龄段',
 	  	data: ageGroup
@@ -762,7 +787,10 @@
                 $(".start-time").show();
             }
         }); 
+<<<<<<< HEAD
+=======
         
+>>>>>>> d9b144c8019260a9614ff1f5dbaa13d3de525714
         $(".customer-select").change(function() {
              var val= $(".customer-select").select2("val");
         	document.getElementById("customerId").value=val;
@@ -774,7 +802,10 @@
 		    }); 
 		});
 		
+<<<<<<< HEAD
+=======
 		
+>>>>>>> d9b144c8019260a9614ff1f5dbaa13d3de525714
 /* 		function sociation(){
    		 	var f = $("#form-case").serialize();
    		 	var h=$("#form-judgeBind").serialize();
