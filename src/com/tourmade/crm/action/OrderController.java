@@ -145,10 +145,10 @@ public class OrderController extends BaseSimpleFormController {
 			//验证客人有邮箱
 			if(is)
 			{*/
-				boolean portalId = service.validatePortalId(order.getCustomerId());
+/*				boolean portalId = service.validatePortalId(order.getCustomerId());
 				if(!portalId){
 					service.creatPortal(order.getCustomerId());
-				}
+				}*/
 				//客人状态设置为下单客人
 				service.customerStatus(order.getCustomerId(),"2");
 				//询单状态设置为下单

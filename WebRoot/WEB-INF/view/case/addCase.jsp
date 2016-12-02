@@ -217,7 +217,7 @@
             </div><!-- panel-body -->
             
             <div class="panel-footer align-center">
-                <input class="btn btn-primary" type="submit" value="保存"/>&nbsp;
+             <input class="btn btn-primary" type="submit" value="保存"/>&nbsp;
 			<input class="btn btn-default" type="button" id="btn-back" value="取消"/>
     		    </div><!-- panel-footer -->
         </form>   
@@ -394,7 +394,7 @@
     }); 
 
     $(".user-select").select2({
-        placeholder: '客人',
+        placeholder: '跟单员',
         data: user
     });
     $(".sales-select").select2({
@@ -471,41 +471,17 @@
 			  $("#btn-back").click( function () {
 				    history.go(-1);
 		   	  }); 
-		    });			  		
-			      
+		});			  		
+		/* 保存新建的询单 */  
 		function case_submit() {
 			var f = $("#form-case").serialize();			
 			$.post('${rootPath}case/add.do', f, function(result) {
-				var caseId = result.obj.caseId;
+				var caseId = result.caseId;
 				$("#caseId").val(caseId);
-				var rmsg = result.msg;
-				
-				//保存完询单弹出modal直接保存订单
-				/* if (result.success) {
-					//window.parent.location = "${rootPath}case/list.html";
-					var destination = $("#destination").val();
-			        $.ajax({
-			             type: "post",
-			             url: "${rootPath}case/getSales.do?destination="+destination,
-			             data: destination,
-			             success: function(sales){
-			            	 var json = jQuery.parseJSON( sales );
-			                 $("#salesId").select2({
-			                      placeholder: '销售',
-			                      data: json
-			                  });
-			              }   
-			         });
-					$("#nextModal").modal('show');
-					
-			} else {
-				$("#msgModal").modal('show');
-				$("#nextModal").modal('hide'); */
-				
+			
+				/* 结果响应成功 */
 				if (result.success) {
 					window.parent.location = "${rootPath}case/edit.html?id="+caseId;
-					
-					
 				} else {
 					$("#msgModal").modal('show');
 					$("#nextModal").modal('hide');
@@ -513,23 +489,6 @@
 			}, "JSON");
 		}
 		
-	      $(".nextModal .submit").click(function(){
-	      	  order_submit();
-	      });
-	      
-	  		function order_submit() {
-	    			var f = $("#form-order").serialize();
-	    			$.post('${rootPath}order/add.do', f, function(result) {
-	    				var rmsg = result.msg;
-	    				if (result.success) {
-	    					window.parent.location = "${rootPath}order/list.html";
-	    					//$("#nextModal").modal('show');
-	    				} else {
-	    					$("#nextModal").modal('hide');
-	    					$("#NoEmail").modal('show');
-	    				}
-	    			}, "JSON");
-	    	}
 	  		
         $(".start-date").hide();
         $(".start-time").show();

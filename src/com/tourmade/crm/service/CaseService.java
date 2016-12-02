@@ -47,7 +47,7 @@ public class CaseService extends BaseService {
 
 		map.put("start", ph.getStart());
 		map.put("length", ph.getLength());;
-		
+		//分页条件
 		if(crmcase.getCustomerId()!=null){
 			map.put("customerId", crmcase.getCustomerId());
 		}
@@ -84,6 +84,7 @@ public class CaseService extends BaseService {
 		if(crmcase.getMobile()!=null){
 			map.put("mobilephone", crmcase.getMobile());
 		}
+		
 		
 		List<Case> data = caseMapper.queryCase(map);
 		long count = caseMapper.countCase(crmcase);
@@ -128,7 +129,7 @@ public class CaseService extends BaseService {
 	/*
 	 * 查询是否有老客人
 	 */
-	public List judgeCustomer(Case crmcase){
+	public List<Customer> judgeCustomer(Case crmcase){
 		try {
 			List<Customer> list = caseMapper.getCustomerByCommunication(crmcase);	
 			return list;
@@ -585,6 +586,31 @@ public class CaseService extends BaseService {
 			judge = false;
 		}
 
+		return judge;
+	}
+	/**
+	 * 询单未成行
+	 * 
+	 * @param case_id
+	 * @return
+	 */
+	public boolean deleteCaseNodealById(Map<String,Object> map) {
+		
+		boolean judge = false;
+		
+		try {
+			
+			int res = caseMapper.deleteCaseNodealById(map);
+			if (res > 0)
+				judge = true;
+			else
+				judge = false;
+			
+		} catch (Exception e) {
+			logger.error("CaseService.deleteCaseById() --> " + map.get("caseId") + "-->" + e.getMessage());
+			judge = false;
+		}
+		
 		return judge;
 	}
 	

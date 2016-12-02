@@ -122,11 +122,21 @@ public class Case extends BaseBean<Case> {
 	
 	private String reason;
 	
+	private String reasonNodeal;
+	
 	private Integer portalId;
 	
 	private String comment;
 	
 	
+	public String getReasonNodeal() {
+		return reasonNodeal;
+	}
+
+	public void setReasonNodeal(String reasonNodeal) {
+		this.reasonNodeal = reasonNodeal;
+	}
+
 	public String getComment() {
 		return comment;
 	}
@@ -554,8 +564,8 @@ public class Case extends BaseBean<Case> {
 				+ ", routeId=" + routeId + ", tailormade=" + tailormade + ", passport=" + passport + ", visa=" + visa
 				+ ", flight=" + flight + ", submitType=" + submitType + ", ipAddress=" + ipAddress + ", source="
 				+ source + ", promoteCode=" + promoteCode + ", status=" + status + ", startMonth=" + startMonth
-				+ ", creatTime=" + creatTime + ", updateTime=" + updateTime + ", reason=" + reason + ", portalId="
-				+ portalId + ", comment=" + comment + "]";
+				+ ", creatTime=" + creatTime + ", updateTime=" + updateTime + ", reason=" + reason + ", reasonNodeal="
+				+ reasonNodeal + ", portalId=" + portalId + ", comment=" + comment + "]";
 	}
 	
 }

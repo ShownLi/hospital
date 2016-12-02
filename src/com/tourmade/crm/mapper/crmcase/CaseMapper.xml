@@ -22,7 +22,8 @@
 			u.last_comment as comment,
 			
 			u.requirement as requirement,
-			u.contact_real as contactReal
+			u.contact_real as contactReal,
+			u.reason_nodeal as reasonNodeal
 		from tm_case u  
 		where u.isdel = 0 
 		<if test="customerId != null and customerId != ''">
@@ -256,6 +257,7 @@
 		visa=#{visa},
 		flight=#{flight},
 		reason=#{reason},
+		reason_nodeal =#{reasonNodeal},
 		update_time=NOW()
 		where
 		case_id=#{caseId}
@@ -304,6 +306,7 @@
 		u.ip_address as ipAddress,
 		u.creat_time as creatTime,
 		u.reason as reason,
+		u.reason_nodeal as reasonNodeal,
 		u.customer_portal_id as portalId,
 		u.isdel
 		from tm_case u where u.isdel = 0 and u.case_id = #{caseId}
@@ -444,7 +447,7 @@
 	</select>
 	
 	
-	
+	<!-- 设置询单无效 -->
 	<update id="deleteCaseById" parameterType="int" flushCache="true" statementType="PREPARED">
 		update tm_case
 		set
@@ -452,6 +455,18 @@
 		where
 		case_id = #{caseId}
 	</update>
+	<!-- 设置询单未成行 -->
+	<update id="deleteCaseNodealById" parameterType="map" flushCache="true" statementType="PREPARED">
+		update tm_case
+		set
+		reason_nodeal = #{reasonNodeal},
+		status = 4,
+		update_time=NOW()
+		where
+		case_id = #{caseId}
+	</update>
+	
+	
 	
 	<select id="getCustomerByCommunication" parameterType="Case" resultType="Customer">
 		select

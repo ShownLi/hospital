@@ -388,6 +388,17 @@ limit #{start},#{length} -->
 		where
 		order_id = #{orderId}
 	</update>
+	<!-- 通过询单未成行设置订单未成行 -->
+	<update id="deleteOrderNodealByCaseId" parameterType="map" flushCache="true"
+		statementType="PREPARED">
+		update tm_order
+		set
+		status = 3,
+		reason = #{reasonNodeal},
+		update_time=NOW()
+		where
+		case_id = #{caseId} and status != 3
+	</update>
 	
 	<select id="selectAgencyBySaleId" parameterType="int" flushCache="true" resultType="int">
 		select

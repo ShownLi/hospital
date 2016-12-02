@@ -310,16 +310,16 @@ public class OrderService extends BaseService {
 	 * @param email
 	 * @return
 	 */
-	public void creatPortal(int id) {
+	/*public void creatPortal(int id) {
 		Customer customer = orderMapper.getCustomerById(id);
 		String url = orderMapper.geturl("creatPortal.url");
-		/*String param="customer_id="+customer.getCustomerid()
+		String param="customer_id="+customer.getCustomerid()
 						+"&customer_name_zh="+customer.getZname()
 						+"&customer_name_en="+customer.getEname()
 						+"&email="+customer.getEmail()
 						+"&mobilephone="+customer.getMobilephone()
 						+"&wechat="+customer.getWechat()
-						+"&qq"+customer.getQq(); */
+						+"&qq"+customer.getQq(); 
 		BufferedReader in = null;
 		
 		
@@ -367,7 +367,7 @@ public class OrderService extends BaseService {
 			}
 		}
 	}
-	
+	*/
 	/**
 	 * 根据订单获取完整订单信息
 	 * 
@@ -602,6 +602,26 @@ public class OrderService extends BaseService {
 			result = null;
 		}
 		return result;
+	}
+	/**
+	 * 将订单的状态设置为未成行
+	 * @param map
+	 */
+	public boolean deleteOrderNodealByCaseId(Map<String, Object> map) {
+		boolean judge = false;
+
+		try {
+			int res = orderMapper.deleteOrderNodealByCaseId(map);
+			if(res>0)
+				judge = true;
+			else
+				judge = false;
+		} catch (Exception e) {
+			logger.error("OrderService.deleteOrderNodealByCaseId() --> " + map.get("caseId")+ "-->" + e.getMessage());
+			judge = false;
+		}
+
+		return judge;
 	}
 
 }

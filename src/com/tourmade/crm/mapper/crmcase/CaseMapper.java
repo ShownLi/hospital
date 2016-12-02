@@ -28,6 +28,7 @@ public interface CaseMapper extends BaseMapper {
 	public int caseStatus(int caseId);
 	
 	public void deleteCaseById(int caseId);
+	public int deleteCaseNodealById(Map<String,Object> map);
 	
 	public Case getCaseById(int caseId);
 	

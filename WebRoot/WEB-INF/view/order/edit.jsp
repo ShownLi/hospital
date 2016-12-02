@@ -162,7 +162,7 @@
               <form id="form-updateNoDeal" class="form-horizontal" style="display:none">
                   <div class="section-block">
                       <div class="form-group col-sm-6">
-                        <label class="col-sm-4 control-label">若未成行，原因是</label>
+                        <label class="col-sm-4 control-label">未成行原因</label>
                         <div class="col-sm-6">
                           <input class="reason-select fullwidth" name="reason" value="${order.reason}" placeholder="若未成行，原因是" />
                         </div>
