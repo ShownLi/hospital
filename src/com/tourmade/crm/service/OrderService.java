@@ -104,7 +104,7 @@ public class OrderService extends BaseService {
 	 * @param request
 	 * @return
 	 */
-	public QueryResult<Order> queryOrderByCaseId(int caseId, PageHelper ph, HttpServletRequest request) {
+/*	public QueryResult<Order> queryOrderByCaseId(int caseId, PageHelper ph, HttpServletRequest request) {
 
 		QueryResult<Order> result = new QueryResult<Order>();
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -118,6 +118,34 @@ public class OrderService extends BaseService {
 			
 		result.setData(data);
 		result.setCountTotal(count);
+		result.setCountFiltered(count);
+	
+		return result;
+	}*/
+	/**
+	 * 查询订单数据，不分页展示
+	 * 
+	 * @param order
+	 * @param ph
+	 * @param request
+	 * @return
+	 */
+	public QueryResult<Order> queryOrderByCaseId(int caseId, HttpServletRequest request) {
+
+		QueryResult<Order> result = new QueryResult<Order>();
+		Map<String, Object> map = new HashMap<String, Object>();
+			
+		map.put("caseId", caseId);
+		/*map.put("start", ph.getStart());
+		map.put("length", ph.getLength());*/
+
+		List<Order> data = orderMapper.queryOrderByCaseId(map);
+		long count = orderMapper.countOrderByCaseId(caseId);
+			
+		result.setData(data);
+		
+		result.setCountTotal(count);
+		
 		result.setCountFiltered(count);
 	
 		return result;
@@ -241,7 +269,7 @@ public class OrderService extends BaseService {
 		upOrder.setAgencySeEmailAlias("as"+formatedOrderid+"@"+domain);
 		upOrder.setCustomerReEmailAlias("cr"+formatedOrderid+"@"+domain);
 		upOrder.setCustomerSeEmailAlias("cs"+formatedOrderid+"@"+domain);
-	
+		System.out.println(upOrder);
 		updateOrder(upOrder);
 	}
 	
@@ -285,16 +313,16 @@ public class OrderService extends BaseService {
 	 * @param email
 	 * @return
 	 */
-	public void creatPortal(int id) {
+	/*public void creatPortal(int id) {
 		Customer customer = orderMapper.getCustomerById(id);
 		String url = orderMapper.geturl("creatPortal.url");
-		/*String param="customer_id="+customer.getCustomerid()
+		String param="customer_id="+customer.getCustomerid()
 						+"&customer_name_zh="+customer.getZname()
 						+"&customer_name_en="+customer.getEname()
 						+"&email="+customer.getEmail()
 						+"&mobilephone="+customer.getMobilephone()
 						+"&wechat="+customer.getWechat()
-						+"&qq"+customer.getQq(); */
+						+"&qq"+customer.getQq(); 
 		BufferedReader in = null;
 		
 		try {
@@ -339,7 +367,7 @@ public class OrderService extends BaseService {
 			}
 		}
 	}
-	
+	*/
 	/**
 	 * 根据订单获取完整订单信息
 	 * 
@@ -574,6 +602,26 @@ public class OrderService extends BaseService {
 			result = null;
 		}
 		return result;
+	}
+	/**
+	 * 将订单的状态设置为未成行
+	 * @param map
+	 */
+	public boolean deleteOrderNodealByCaseId(Map<String, Object> map) {
+		boolean judge = false;
+
+		try {
+			int res = orderMapper.deleteOrderNodealByCaseId(map);
+			if(res>0)
+				judge = true;
+			else
+				judge = false;
+		} catch (Exception e) {
+			logger.error("OrderService.deleteOrderNodealByCaseId() --> " + map.get("caseId")+ "-->" + e.getMessage());
+			judge = false;
+		}
+
+		return judge;
 	}
 
 }

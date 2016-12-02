@@ -46,54 +46,56 @@
 	                <input type="text" name="chineseName" placeholder="中文名" class="form-control" value="${crmcase.chineseName}" />
 	              </div>
 	            </div>
-<%-- 	            <div class="form-group col-sm-4">
+ 	            <div class="form-group col-sm-4">
 	              <label class="col-sm-3 control-label">英文名</label>
 	              <div class="col-sm-9">
 	                <input type="text" name="englishName" placeholder="英文名" class="form-control" value="${crmcase.englishName}"/>
 	              </div>
-	            </div>  --%>
-	            <div class="form-group col-sm-4">
+	            </div> 	
+	            <input type="text" style="display: none" name="portalId" placeholder="portalId" class="form-control" value="${crmcase.portalId}"/>
+	             	
+	            <%-- <div class="form-group col-sm-4">
 	            	<label class="col-sm-3 control-label">生日</label>
 	            	<div class="col-sm-9 input-group input-datepicker">
 		                <input type="text" name="birthday" class="datepicker form-control" placeholder="yyyy/mm/dd" id="birthday" autocomplete="off" value="${crmcase.birthday}">
 		                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
 	                </div>
-	            </div> 
-	            <div class="form-group col-sm-4">
+	            </div> --%> 
+	            <%-- <div class="form-group col-sm-4">
 	              <label class="col-sm-3 control-label" >年龄段</label>
 	              <div class="col-sm-9">
 	                <input type="text" name="ageGroup" placeholder="请选择一个年龄段" readonly class="form-control" value="${crmcase.ageGroup}"/>
 	              </div>
-	            </div>
-            	<div class="form-group col-sm-4">
+	            </div> --%>
+            	<%-- <div class="form-group col-sm-4">
             	<label class="col-sm-4 control-label">客人级别</label>
             	<div class="col-sm-8">
                     <input type="text" name="level" id="level" class="level-select fullwidth" readonly  value="${customerInfo.level}" />
                 </div>
-            	</div> 
-	            <div class="form-group col-sm-4">
+            	</div>  --%>
+	            <!-- <div class="form-group col-sm-4">
 	              <label class="col-sm-3 control-label" >性别 <span class="asterisk">&nbsp;</span></label>
 	              <div class="col-sm-9">
 	                <div class="rdio rdio-primary rdio-inline">
 	                  <input type="radio" id="male" value="male" name="gender">
 	                  <label for="male">男</label>
-	                </div><!-- rdio -->
+	                </div>rdio
 	                <div class="rdio rdio-primary rdio-inline">
 	                  <input type="radio" id="female" value="female" name="gender" >
 	                  <label for="female">女</label>
-	                </div><!-- rdio -->
+	                </div>rdio
 	              </div>
-	            </div> 
+	            </div> --> 
 	        </div>
 	        
 	        <div class="section-block">
 	        	<h5 class="section-title">客人联系方式  <span class="contact-note">(手机、微信、QQ、邮箱至少填写一个)</span></h5>
-	            <div class="form-group col-sm-4 contact-field">
+	           <%--  <div class="form-group col-sm-4 contact-field">
 	              <label class="col-sm-3 control-label">固定电话</label>
 	              <div class="col-sm-9">
 	                <input type="text" name="telephone" placeholder="固定电话" class="form-control" value="${crmcase.telephone}" />
 	              </div>
-	            </div>
+	            </div> --%>
 	            <div class="form-group col-sm-4 contact-field">
 	              <label class="col-sm-3 control-label">手机</label>
 	              <div class="col-sm-9">
@@ -118,12 +120,12 @@
 	                <input type="text" name="email" placeholder="邮箱" class="form-control" value="${crmcase.email}"/>
 	              </div>
 	            </div>  
-	            <div class="form-group col-sm-4">
+	            <%-- <div class="form-group col-sm-4">
 	              <label class="col-sm-3 control-label">所在地</label>
 	              <div class="col-sm-9">
 	                <input type="text" name="location" placeholder="所在地" class="form-control" value="${crmcase.location}"/>
 	              </div>
-	            </div> 
+	            </div> --%> 
 	        </div>
         
         
@@ -139,11 +141,7 @@
                     <label class="col-sm-4 control-label">希望联系方式</label>
                     <div class="col-sm-8">
                       <select name="contactType" class="contact-select fullwidth" multiple="multiple">
-					  <option value="wechat">微信</option>
-					  <option value="mobilephone">手机</option>
 					  
-					  <option value="qq">qq</option>
-					  <option value="mail">邮箱</option>
 					</select>
                     </div>
                 </div>   
@@ -230,7 +228,13 @@
                 <div class="col-sm-8">
                      <input type="text" name="operator" class="user-select fullwidth" value="${crmcase.operator}" />
                 </div>
-                </div>      
+                </div> 
+                <div class="form-group col-sm-4">
+	                    <label class="col-sm-4 control-label">沟通方式</label>
+	                    <div class="col-sm-8">
+	                      <input type="text"  name="contactReal" class="contact-real-select fullwidth" value="0" />
+	                    </div>
+	                </div>       
             </div>
             
             <div class="section-block">
@@ -364,17 +368,16 @@
                         <div class="col-sm-8">
                           <input type="text" name="reason" placeholder="无效原因" class="reason-select fullwidth"  value="${crmcase.reason}" />
                         </div>
-                    </div>
-                </div>
+                    </div>              
         </div><!-- panel-body -->
         
         <div class="panel-footer align-center">
            <!--  <button id="btn-addorder" class="btn btn-primary">添加订单</button>&nbsp; -->
-            <button class="btn btn-primary">保存</button>&nbsp;
+            <button class="btn btn-primary">处理</button>&nbsp;
             <input  type="hidden" name="caseId" value="${crmcase.caseId}" />
             <button id="btn-invalid"  class="btn btn-danger" >无效</button>&nbsp;
             <button id="btn-back" class="btn btn-default">返回</button>
-		    </div><!-- panel-footer -->
+		</div><!-- panel-footer -->
      </form>   
       </div><!-- panel -->
       
@@ -424,7 +427,7 @@
 </div>modal
  -->
       <!-- panel 订单列表  -->
-    <div class="panel panel-default">
+   <!--  <div class="panel panel-default">
       <div class="panel-heading">
         <div class="panel-btns">
           <a href="" class="minimize">&minus;</a>
@@ -442,7 +445,7 @@
                     <th>地接社</th>
                     <th>销售姓名</th>
 	 	            <th>目的地</th>
-               <!-- <th>预算</th> -->
+               <th>预算</th>
                     <th>状态</th>
                     <th>编辑</th>
                   </tr>
@@ -451,12 +454,12 @@
                 </tbody>
               </table>
             </div>
-            <!-- table-responsive -->
+            table-responsive
       </div>
-    </div><!-- end of panel 询单  -->
-
+    </div>end of panel 询单 
+ -->
             <!-- panel 沟通列表 -->
-      <div class="panel panel-default">
+      <!-- <div class="panel panel-default">
           <div class="panel-heading">
           <div class="panel-btns">
               <a href="" class="minimize">&minus;</a>
@@ -478,10 +481,10 @@
                     </tbody>
                   </table>
                 </div>
-                <!-- table-responsive -->
+                table-responsive
           </div>
-      </div><!-- end of panel 沟通列表 -->
-
+      </div>end of panel 沟通列表
+ -->
     <!-- panel 注释 -->
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -654,32 +657,46 @@
   </div><!-- modal-dialog -->
 </div><!-- bmodal -->
 
-<div id="bindCustomer" class="nextModal modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+<div id="bindCustomer" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
 	<div class="modal-dialog">
     <div class="modal-content">
      <div class="modal-header">
-     	<form id="form-judgeBind">
-			<table id="showCustomer" border="1">
-			  <tr>			  	
-			  	<td>客人名</td>
-			  	<td>电话</td>
-			  	<td>邮件</td>
-			  	<td>QQ</td>
-			  	<td>微信</td>
-			  	<td style="display:block">客人ID</td>
-			  </tr>
-			</table>
-			<%-- <input name="caseId" value="${sessionScope.caseId}"/> --%>
-			<label  class="col-sm-4 control-label">是否绑定老客人</label></td>
-	              <div class="col-sm-8">
-	              <input type="radio" name="judgeCustomer" value="1" checked/>是
-      			  <input type="radio" name="judgeCustomer" value="0" />否
-			<input type="submit" name="submit" value="提交" onclick="sociation()"> 
-		</form>
+     <h4 class="modal-title">联系方式已存在</h4>
+     </div>
+     <div class="modal-body">
+      <form id="form-judgeBind" action="${rootPath}/case/bindCustomer.do">
+
+          <table id="showCustomer" border="1" width="100%">
+            <tr>  
+              <td align="center">客人ID</td>        
+              <td align="center">客人名</td>
+              <td align="center">电话</td>
+              <td align="center">邮件</td>
+              <td align="center">QQ</td>
+              <td align="center">微信</td>
+            </tr>
+          </table>
+          <input id="ccaseId" style="display: none" type="text" name="caseId" />
+          <div style="margin: 10px 0;">
+            <div class="rdio rdio-primary rdio-inline">
+              <input id="bingding" type="radio" name="isJudge" value="1" checked/>
+              <label for="bingding">绑定客人</label>
+            </div>
+            <div class="rdio rdio-primary rdio-inline">
+              <input id="cratenew" type="radio" name="isJudge" value="0" />
+              <label for="cratenew">新建客人</label>
+            </div>
+          </div>
+          <div style="text-align: right;">
+            <input class="btn btn-primary" type="submit" name="submit" value="提交"/> 
+            <button class="btn btn-default" type="button" data-dismiss="modal">取消</button>
+          </div> 
+      </form>
+       </div>
 	    </div><!-- modal-content -->
   </div><!-- modal-dialog -->
  </div><!-- modal -->	
-</div>  
+
 
 
 	<%@ include file="../assets/pages/foot.jsp"%>
@@ -713,9 +730,9 @@
 	var genderData = [{ id: 'male', text: '男' }, { id:'female' , text: '女' }];
 	
 	var reason = ${reason};
-	
+	var contactData=${contact};
 	$("#requirement").val("${crmcase.requirement}");	
-	$("#birthday").val(getBirthday());
+	//$("#birthday").val(getBirthday());
 
 	function getBirthday(){
 		var date = $("#birthday").val();	
@@ -754,8 +771,25 @@
     $(".contact-select").select2({
     	placeholder: '可多选',
     	minimumResultsForSearch: Infinity,
+    	data: contactData
      });
-    $(".contact-select").select2("val", '${crmcase.contactType}'.split(","));
+    
+  //循环去除数组中元素的空格
+    var temp='${crmcase.contactType}'.split(",");
+    var value=[];
+    $.each(temp,function(index,item){
+    	value.push(item.trim());
+    	
+    })
+    
+    //给contact-select赋值
+    $(".contact-select").val(value).trigger("change");
+    
+    //选择真实的联系方式
+    $(".contact-real-select").select2({
+        placeholder: '选择真实联系方式',
+        data: contactData
+     });
     
     $(".withwho-select").select2({
     	placeholder: '与谁同行',
@@ -841,7 +875,7 @@
 			}
 		});
 		
-		jQuery("#form-case").validate({
+		/* jQuery("#form-case").validate({
 			rules:{
 				operater: "operator"
 			},
@@ -861,7 +895,7 @@
 				delSubmit();
 			    return false;
 			}
-		});
+		}); */
    	});
    	
 	//订单回显数据
@@ -998,16 +1032,16 @@
 					$("#msgModal").modal('show');
 					$("#nextModal").modal('hide');
 				}else{
+					$("#ccaseId").val(result.cid);
 					var custumerList=result.cust;
 					for(var i=0;i<custumerList.length;i++){
-						$("#showCustomer").append("<tr><td style='display:none'>"+custumerList[i].customerId+"</td>"+
-								"<td name='chineseName'>"+custumerList[i].chineseName+"</td>"+
-								"<td name='mobilephone'>"+custumerList[i].mobilephone+"</td>"+
-								"<td name='email'>"+custumerList[i].email+"</td>"+
-								"<td name='qq'>"+custumerList[i].qq+"</td>"+
-								"<td name='wechat'>"+custumerList[i].wechat+"</td>"+
-								"<td name='wechat'>"+custumerList[i].customerId+"</td>"+
-								"<td><input type='checkbox' name='customerId' checked='true' value="+custumerList[i].customerId+"></td></tr>" 																				
+						$("#showCustomer").append("<tr><td align='center'>"+custumerList[i].customerId+"</td>"+
+								"<td align='center' name='chineseName'>"+custumerList[i].chineseName+"</td>"+
+								"<td align='center' name='mobilephone'>"+custumerList[i].mobilephone+"</td>"+
+								"<td align='center' name='email'>"+custumerList[i].email+"</td>"+
+								"<td align='center' name='qq'>"+custumerList[i].qq+"</td>"+
+								"<td align='center' name='wechat'>"+custumerList[i].wechat+"</td>"+
+								"<td align='center' style='display:none'><input type='checkbox' name='customerId' checked='true' value="+custumerList[i].customerId+"></td></tr>" 																				
 							);
 					}
 					$("#bindCustomer").modal('show'); 										
@@ -1015,7 +1049,8 @@
 			}, "JSON");
 		}
 		
-		function sociation(){
+		
+/* 		function sociation(){
    		 	var f = $("#form-case").serialize();
    		 	var h=$("#form-judgeBind").serialize();
    		 	alert(f+"&"+h);
@@ -1031,7 +1066,7 @@
 					}
 				}
 			}, "JSON"); 	
-		}      
+		}       */
 	  
 	   //询单返回
   	  $("#btn-back").click( function () {

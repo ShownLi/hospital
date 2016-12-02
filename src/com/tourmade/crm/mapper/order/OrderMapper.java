@@ -62,4 +62,6 @@ public interface OrderMapper extends BaseMapper {
 	public long countPortalOrder(int customerId);
 
 	public Order getOrderByEmail(String recieverEmail);
+
+	public int deleteOrderNodealByCaseId(Map<String, Object> map);
 }

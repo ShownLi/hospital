@@ -71,8 +71,8 @@
       </div>
       <div class="modal-footer">
       	<input type="hidden" class="hiddenId" value="" />
-        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-        <button type="button" class="btn btn-danger">删除</button>
+        <button class="btn btn-default" data-dismiss="modal">取消</button>
+        <button class="btn btn-danger">删除</button>
       </div>
     </div><!-- modal-content -->
   </div><!-- modal-dialog -->

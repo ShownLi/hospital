@@ -78,9 +78,9 @@
                     </div>
                 </div> 
                 <div class="panel-footer align-center">
-                    <button id="btn-baseDeal" class="btn btn-primary">成行</button>&nbsp;
-                    <button id="btn-baseNoDeal" class="btn btn-primary">未成行</button>&nbsp;
-                    <button id="btn-back" class="btn btn-default">返回</button>
+	                <input class="btn btn-primary" id="btn-baseDeal" type="submit" value="成行"/>&nbsp;
+					<input class="btn btn-primary" id="btn-baseNoDeal" type="button" value="未成行"/>&nbsp;
+					<input class="btn btn-default" id="btn-back" type="button" value="返回"/>
 					<input type="hidden" name="orderId" value="${order.orderId}" />	
         		</div><!-- panel-footer -->
             </div>
@@ -152,7 +152,7 @@
                       </div>
                       <div class="form-group col-sm-4">
                       <div class="col-sm-6"></div>
-                      		&nbsp;<button id="btn-updateDealModify" class="btn btn-primary">更改</button>&nbsp;
+                      		&nbsp;<input id="btn-updateDealModify" class="btn btn-primary" type="button" value="更改"/>&nbsp;
                       	</div>
                   </div>
                   <input type="hidden" name="orderId" value="${order.orderId}" />
@@ -162,11 +162,11 @@
               <form id="form-updateNoDeal" class="form-horizontal" style="display:none">
                   <div class="section-block">
                       <div class="form-group col-sm-6">
-                        <label class="col-sm-4 control-label">若未成行，原因是</label>
+                        <label class="col-sm-4 control-label">未成行原因</label>
                         <div class="col-sm-6">
                           <input class="reason-select fullwidth" name="reason" value="${order.reason}" placeholder="若未成行，原因是" />
                         </div>
-                    	<button id="btn-updateNoDealModify" class="btn btn-primary">更改</button>&nbsp;
+                    	<input id="btn-updateNoDealModify" class="btn btn-primary" type="button" value="更改">&nbsp;
                       </div>
                   </div><!-- panel-body -->
                       <input type="hidden" name="orderId" value="${order.orderId}" />	
@@ -576,10 +576,11 @@
 		});
 			
 	});
-	
+	//注释分页
 	var t = jQuery('#dataTable-note').DataTable({
 		searching:false,
-		pageLength: 10,
+		paging:false,
+		/* pageLength: 10, */
 		processing: true,
 		language: datatable_local_language, // my.js
 		serverSide: true,
@@ -696,7 +697,7 @@
     //订单返回
     $("#btn-back").click( function () {
     	 history.go(-1);
-    	alert("正在返回，请稍后...");
+    	/* alert("正在返回，请稍后..."); */
 	}); 
 	
     // Date Picker
@@ -737,7 +738,7 @@
 		} catch(e){
 			alert(e);
 		};
-		alert("页面正在加载，请稍后...");
+	/* 	alert("页面正在加载，请稍后..."); */
 	}
 	
 	function updateDeal_submit() {
@@ -750,7 +751,7 @@
 				$("#msgModal").modal('show');
 			}
 		}, "JSON");
-		alert("");
+	/* 	alert(""); */
 	}
 	function updateNoDeal_submit() {
 		var f = $("#form-updateNoDeal").serialize();
@@ -762,7 +763,7 @@
 				$("#msgModal").modal('show');
 			}
 		}, "JSON");		
-		 alert("");
+		 /* alert(""); */
 	}
 	function comment_submit() {
 		var f = $("#form-comment").serialize();
@@ -775,7 +776,7 @@
 				$("#msgModal").modal('show');
 			}
 		}, "JSON");
-//		alert("")
+ 
 	}
 	//成团日期格式转换
 	var groupTime = $("#groupTime").val();	

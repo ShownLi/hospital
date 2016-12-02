@@ -20,7 +20,6 @@
 			
 			<div class="contentpanel">
 				<!-- content goes here... -->
-
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						<div class="panel-btns">
@@ -30,9 +29,6 @@
 						<h3 class="panel-title">询单列表</h3>
 						<div class="row" style="margin-top: 20px">
 							<div class="form-group col-sm-10">
-								<!-- <div class="col-sm-2">
-									<input type="text" id="searchCustomerId" class="customer-select fullwidth" value="" />
-								</div> -->
 								<div class="col-sm-2">
 									<input type="text" id="searchCaseId" class="form-control" placeholder="询单id"  value="" />
 								</div>
@@ -45,7 +41,6 @@
 								<div class="col-sm-2">
 									<input type="text" id="searchMail" class="form-control" placeholder="邮箱" value="" />
 								</div>
-								<!-- <input type="text" id="searchBudget" class="form-control" placeholder="预算" value="" /> -->
 								<div class="col-sm-2">
 									<input type="text" id="searchDestination" class="destination-select fullwidth" value="" />
 								</div>
@@ -84,7 +79,7 @@
 										<th>询单来源 <br>跟单员</th>
 										<th>状态 <br>创建时间</th>
 										<th>客人要求</th>
-										<th>无效原因</th>
+										<th>无效原因<br>未成行原因 </th>
 										<th>注释</th>
 										<th>编辑</th>
 									</tr>
@@ -93,15 +88,11 @@
 								</tbody>
 							</table>
 						</div>
-						<!-- table-responsive -->
 					</div>
-					<!-- panel-body -->
 				</div>
-				<!-- panel -->
 			</div>
 
 		</div>
-		<!-- mainpanel -->
 		<%@ include file="../assets/pages/rightpanel.jsp"%>
 	</section>
 
@@ -109,6 +100,7 @@
 
 	<script src="${rootPath}assets/js/jquery.datatables.min.js"></script>
 	<script src="${rootPath}assets/js/select2.min.js"></script>
+<<<<<<< HEAD
 
 <!-- Modal -->
 <!-- <div class="modal fade" id="confirmDelModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
@@ -209,15 +201,18 @@
 </div><!-- bmodal -->
 
 
+=======
+>>>>>>> 5d874c819f340cf1dc2f24915c875f49f271e08d
 	<script type="text/javascript">
-	var source = ${source};
+ 	var source = ${source}; 
 	var caseStatus = ${caseStatus};
 	var destination = ${destination};
 	var customer = ${customer};
 	var user = ${user};
     var sales = ${sales};
 	var reason = ${reason};
-
+	var reasonNodeal =${reasonNodeal};
+	
 	$(".destination-select").select2({
         placeholder: '国家',
         data: destination
@@ -242,6 +237,7 @@
         placeholder: '状态',
         data: caseStatus
     });
+<<<<<<< HEAD
 	
     $(".sales-select").select2({
         placeholder: '销售',
@@ -261,6 +257,8 @@
       	$(".confirmDelModal").modal("hide");
   	});
 		 
+=======
+>>>>>>> 5d874c819f340cf1dc2f24915c875f49f271e08d
 			var t = jQuery('#dataTable').DataTable({
 				searching:false,
 				pageLength: 10,
@@ -371,6 +369,7 @@
 			                	var m = "";
 			                	var n = "";
 				                	for(var i=0;i < source.length;i++){
+				                		
 				                		if(dataSource==source[i].id){
 				                			// return "<div class='caselist-5'>" + user[i].text + "</div>"
 				                			m = source[i].text;
@@ -385,7 +384,11 @@
 			                },
 			                  targets: 3
 						},
+<<<<<<< HEAD
 						 {
+=======
+						 {	
+>>>>>>> 5d874c819f340cf1dc2f24915c875f49f271e08d
 			                orderable: false,
 			                render: function ( data, type, full, meta ) {
 			                	var time = data.time;
@@ -420,18 +423,25 @@
 							targets: 5
 						},
 						{
-			                data: "reason",
 			                orderable: false,
-			                render: function ( data ) {
-			                	if(data){
-			                		for(var i=0;i <  reason.length;i++){
-				                		if(data==reason[i].id){
-				                			return  "<div class='caselist-10'>" + reason[i].text + "</div>"
+			                render: function ( data, type, full, meta ) {
+			                	var dataReason = full.reason;
+			                	var dataReasonNodeal= full.reasonNodeal;
+			                	var m = "";
+			                	var n = "";
+				                	for(var i=0;i < reason.length;i++){
+				                		
+				                		if(dataReason==reason[i].id){
+				                			// return "<div class='caselist-5'>" + user[i].text + "</div>"
+				                			m = reason[i].text;
+				                		}	
+				                	}
+				                	for(var i=0;i < reasonNodeal.length;i++){
+				                		if(dataReasonNodeal==reasonNodeal[i].id){
+				                			n=reasonNodeal[i].text;
 				                		}
 				                	}
-			                		return "";
-			                	}
-			                	else{return ""}
+				                	return "<div class='width85'>" + m + "</div>" + "<div class='width85'>" + n + "</div>";
 			                },
 			                  targets: 6
 						},
@@ -452,7 +462,14 @@
 		                  data: "caseId",
 		                  orderable: false,
 		                  render: function ( data, type, full, meta ) {
-		                      return '<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a>&nbsp;';
+		                	  
+		                	  if(full.status==0){
+		                		  return '<a class="btn btn-primary btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 处理</a> &nbsp;';  
+		                	  }
+		                	  else {
+		                		  return '<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a>&nbsp;';    
+		                	  }
+		                      
 		                  },
 		                  targets: 8
 					    },
@@ -481,10 +498,10 @@
 		    } );
 		    
 		    //处理询单
-		    $('#dataTable tbody').on( 'click', 'a.btn-handle', function () {
+		   /*  $('#dataTable tbody').on( 'click', 'a.btn-handle', function () {
 		        var data = t.row($(this).parents('tr')).data();
 		        handle($(this).attr('id'));
-		    } );
+		    } ); */
 		
 			$('#dataTable tbody').on( 'click', 'a.btn-success', function () {
 		        var data = t.row($(this).parents('tr')).data();
@@ -498,7 +515,7 @@
 			
 			$('#dataTable tbody').on( 'click', 'a.btn-primary', function () {
 		        var data = t.row($(this).parents('tr')).data();
-		        addOrder($(this).attr('id'));
+		        handle($(this).attr('id'));
 		    } );
 	    
 		// Select2
@@ -509,9 +526,7 @@
 	    jQuery('select').removeClass('form-control');
 		
 		
-	    $(".nextModal .submit").click(function(){	    		
-	    	  order_submit();
-	    });
+	   
 	    
 		function edit(id) {
 			window.parent.location = "${rootPath}case/edit.html?id="+id;
@@ -521,6 +536,7 @@
 			window.parent.location = "${rootPath}case/handle.html?id="+id;
 		}
 		
+<<<<<<< HEAD
 		function del(id) {
 			 
 			 $(".confirmDelModal .hiddenId").val("");
@@ -570,6 +586,9 @@
      	  }
      	 alert("页面正在加载，请稍后...");
       }
+=======
+
+>>>>>>> 5d874c819f340cf1dc2f24915c875f49f271e08d
 	</script>
 </body>
 </html>

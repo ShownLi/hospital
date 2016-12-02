@@ -28,6 +28,7 @@ public interface CaseMapper extends BaseMapper {
 	public int caseStatus(int caseId);
 	
 	public void deleteCaseById(int caseId);
+	public int deleteCaseNodealById(Map<String,Object> map);
 	
 	public Case getCaseById(int caseId);
 	
@@ -54,9 +55,15 @@ public interface CaseMapper extends BaseMapper {
 	public List<Customer> getCustomerByCommunication(Case crmcase);
 	
 	public void updateCustomer(Customer customer);
-	
-	public int saveCustomer(Case crmcase);
 
 	public Customer getCustomerByPortalId(int portalId);
+
+	public List<Customer> queryCusByComm(Map<String, Object> map);
+
+	public long countCusByComm(Map<String, Object> map);
+
+	public Customer getCustomerByCusId(Integer customerId);
+
+	public int saveCustomer(Customer cus);
 
 }

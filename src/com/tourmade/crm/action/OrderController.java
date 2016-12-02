@@ -87,7 +87,7 @@ public class OrderController extends BaseSimpleFormController {
 	 * @param page
 	 * @return
 	 */
-	@RequestMapping(value = "/listByCaseId.do",produces="application/json;charset=utf-8")
+	/*@RequestMapping(value = "/listByCaseId.do",produces="application/json;charset=utf-8")
 	@ResponseBody
 	public String queryData(HttpServletRequest request, HttpSession session, Model model, int caseId, PageHelper page) {
 
@@ -95,7 +95,25 @@ public class OrderController extends BaseSimpleFormController {
 		String result = JSONUtilS.object2json(order);
 
 		return result;
+	}*/
+	/**
+	 * 根据caseid获取相应订单,不使用分页
+	 * @param request
+	 * @param session
+	 * @param model
+	 * @param caseId
+	 * @param page
+	 * @return
+	 */
+	@RequestMapping(value = "/listByCaseId.do",produces="application/json;charset=utf-8")
+	@ResponseBody
+	public String queryData2(HttpServletRequest request, HttpSession session, Model model, int caseId){
+		QueryResult<Order> order = service.queryOrderByCaseId(caseId, request);
+		String result = JSONUtilS.object2json(order);
+
+		return result;
 	}
+	
 	
 	@RequestMapping(value = "/add.html", method = { RequestMethod.POST, RequestMethod.GET })
 	public String add(Model model) {
@@ -130,34 +148,39 @@ public class OrderController extends BaseSimpleFormController {
 			   return json;
 		   }
 		   else{
-				//客人状态设置为下单客人
-				service.customerStatus(order.getCustomerId(),"2");
-				//询单状态设置为下单
-				caseService.case2order(order.getCaseId());
-				//补充order信息并存储该order
-				order = service.saveOrder(order);
-				//判断是否要发送邮件
-				int isSendmail = service.selectAgencyBySaleId(order.getSalesId());
-				if(isSendmail==0){
-					json.setSuccess(true);
-					return json;
-				}else{
-					//邮件别名操作（创建邮件别名并将其写入order表）
-					service.MailAlias(order);	
-					
-					//生成给地接社的第一封邮件
-					//DemoCustomer customer = service.getCustomerById(order.getCustomerid());
-					Case crmcase = service.getCaseById(order.getCaseId());
-					order = service.getOrderById(order.getOrderId());
-					String result = emailService.creatTemplate(crmcase, order);
-								
-					//生成待发送邮件
-					order = service.getOrderById(order.getOrderId());
-					emailService.saveEmail(order,result);
-					
-					json.setSuccess(true);
-				}
-		   }
+		   order.setCustomerId(customer.getCustomerId());		   
+		}
+		
+		try {
+			//客人状态设置为下单客人
+			service.customerStatus(order.getCustomerId(),"2");
+			//询单状态设置为下单
+			caseService.case2order(order.getCaseId());
+			//补充order信息并存储该order
+			order = service.saveOrder(order);
+			//判断是否要发送邮件
+			int isSendmail = service.selectAgencyBySaleId(order.getSalesId());
+			if(isSendmail==0){
+				json.setSuccess(true);
+				return json;
+			}else{
+				//邮件别名操作（创建邮件别名并将其写入order表）
+				service.MailAlias(order);	
+				//生成给地接社的第一封邮件
+				//DemoCustomer customer = service.getCustomerById(order.getCustomerid());
+				Case crmcase = service.getCaseById(order.getCaseId());
+				order = service.getOrderById(order.getOrderId());
+				String result = emailService.creatTemplate(crmcase, order);
+							
+				//生成待发送邮件
+				order = service.getOrderById(order.getOrderId());
+				emailService.saveEmail(order,result);
+				
+				json.setSuccess(true);
+			}
+		}finally{
+			
+		}
 		   order.setCustomerId(customer.getCustomerId());		   
 		}
 //		try {

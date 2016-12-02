@@ -20,7 +20,10 @@
 			u.creat_time as creatTime,
 			u.reason as reason,
 			u.last_comment as comment,
-			u.requirement as requirement
+			
+			u.requirement as requirement,
+			u.contact_real as contactReal,
+			u.reason_nodeal as reasonNodeal
 		from tm_case u  
 		where u.isdel = 0 
 		<if test="customerId != null and customerId != ''">
@@ -153,6 +156,7 @@
 			guide,
 			budget,
 			contact_type,
+			contact_real,
 			sales_id,
 			sales_name,
 			destination,
@@ -196,6 +200,7 @@
 			#{guide,jdbcType=VARCHAR},
 			#{budget,jdbcType=VARCHAR},
 			#{contactType,jdbcType=VARCHAR},
+			#{contactReal,jdbcType=VARCHAR},
 			#{salesId,jdbcType=VARCHAR},
 			#{salesName,jdbcType=VARCHAR},
 			#{destination,jdbcType=VARCHAR},
@@ -219,6 +224,8 @@
 	<update id="updateCase" parameterType="Case" flushCache="true">
 		update tm_case
 		set
+		customer_id=#{customerId},
+		customer_name=#{chineseName},
 		prefer_language=#{preferLanguage},
 		operator=#{operator},
 		with_who=#{withwho},
@@ -236,6 +243,7 @@
 		guide=#{guide},
 		budget=#{budget},
 		contact_type=#{contactType},
+		contact_real=#{contactReal},
 		sales_id=#{salesId},
 		sales_name=#{salesName},
 		destination=#{destination},
@@ -249,6 +257,7 @@
 		visa=#{visa},
 		flight=#{flight},
 		reason=#{reason},
+		reason_nodeal =#{reasonNodeal},
 		update_time=NOW()
 		where
 		case_id=#{caseId}
@@ -268,6 +277,7 @@
 		u.operator as operator,
 		u.prefer_language as preferLanguage,
 		u.contact_type as contactType,
+		u.contact_real as contactReal,
 		u.with_who as withwho,
 		u.adult as adult,
 		u.children as children,
@@ -296,6 +306,8 @@
 		u.ip_address as ipAddress,
 		u.creat_time as creatTime,
 		u.reason as reason,
+		u.reason_nodeal as reasonNodeal,
+		u.customer_portal_id as portalId,
 		u.isdel
 		from tm_case u where u.isdel = 0 and u.case_id = #{caseId}
 	</select>
@@ -307,6 +319,7 @@
 		u.operator as operator,
 		u.prefer_language as preferLanguage,
 		u.contact_type as contactType,
+		u.contact_real as contactReal,
 		u.with_who as withwho,
 		u.adult as adult,
 		u.children as children,
@@ -435,6 +448,7 @@
 		and u.isdel = 0
 	</select>
 	
+	<!-- 设置询单无效 -->
 	<update id="deleteCaseById" parameterType="int" flushCache="true" statementType="PREPARED">
 		update tm_case
 		set
@@ -442,6 +456,18 @@
 		where
 		case_id = #{caseId}
 	</update>
+	<!-- 设置询单未成行 -->
+	<update id="deleteCaseNodealById" parameterType="map" flushCache="true" statementType="PREPARED">
+		update tm_case
+		set
+		reason_nodeal = #{reasonNodeal},
+		status = 4,
+		update_time=NOW()
+		where
+		case_id = #{caseId}
+	</update>
+	
+	
 	
 	<select id="getCustomerByCommunication" parameterType="Case" resultType="Customer">
 		select
@@ -517,43 +543,48 @@
 		customer_id=#{customerId}
 	</update> 
 	
-	<insert id="saveCustomer" parameterType="Case" flushCache="true" useGeneratedKeys="true" keyProperty="customerId" keyColumn="GENERATED_KEY">
+	
+	<insert id="saveCustomer" parameterType="Customer" flushCache="true" useGeneratedKeys="true" keyProperty="customerId" keyColumn="GENERATED_KEY">
+
 		insert into tm_customer(
-			customer_name_zh,
-			customer_name_en,
-			customer_level,
-			location,
-			source,
-			age_group,
-			gender,
-			telephone,
-			mobilephone,
-			wechat,
-			qq,
-			email,
-			birthday,
-			creat_time,
-			update_time,
-			isdel
+		customer_portal_id,
+		customer_name_zh,
+		customer_name_en,
+		customer_level,
+		location,
+		source,
+		age_group,
+		gender,
+		telephone,
+		mobilephone,
+		wechat,
+		qq,
+		email,
+		birthday,
+		creat_time,
+		update_time,
+		isdel
 		)values(
-			#{chineseName,jdbcType=VARCHAR},
-			#{englishName,jdbcType=VARCHAR},
-			#{level,jdbcType=VARCHAR},
-			#{location,jdbcType=VARCHAR},
-			#{source,jdbcType=VARCHAR},
-			#{ageGroup,jdbcType=VARCHAR},
-			#{gender,jdbcType=VARCHAR},
-			#{telephone,jdbcType=VARCHAR},
-			#{mobile,jdbcType=VARCHAR},
-			#{wechat,jdbcType=VARCHAR},
-			#{qq,jdbcType=VARCHAR},
-			#{email,jdbcType=VARCHAR},
-			#{birthday,jdbcType=VARCHAR},
-			NOW(),
-			NOW(),
-			0
+		#{portalId,jdbcType=VARCHAR},
+		#{chineseName,jdbcType=VARCHAR},
+		#{englishName,jdbcType=VARCHAR},
+		#{level,jdbcType=VARCHAR},
+		#{location,jdbcType=VARCHAR},
+		#{source,jdbcType=VARCHAR},
+		#{ageGroup,jdbcType=VARCHAR},
+		#{gender,jdbcType=VARCHAR},
+		#{telephone,jdbcType=VARCHAR},
+		#{mobilephone,jdbcType=VARCHAR},
+		#{wechat,jdbcType=VARCHAR},
+		#{qq,jdbcType=VARCHAR},
+		#{email,jdbcType=VARCHAR},
+		#{birthday,jdbcType=VARCHAR},
+		NOW(),
+		NOW(),
+		0
 		)
 	</insert>
+	
 	
 	<select id="getCustomerByPortalId" parameterType="int" resultType="Customer">
 		select 
@@ -572,6 +603,109 @@
 		u.isdel as isdel
 		from tm_customer u  
 		where u.isdel = 0 and u.customer_portal_id = #{portalId}
+	</select>
+	
+	<!-- <select id="queryCusByComm" parameterType="Map" resultType="Customer">
+		select
+			u.customer_id as customerId,
+			u.customer_portal_id as portalId,
+			u.customer_name_zh as chineseName,
+			u.email as email,
+			u.mobilephone as mobilephone,
+			u.qq ,
+			u.wechat			
+		from tm_customer u
+		<where> 
+			<if test="email != null and email != ''">
+				 or email = #{email} 
+			</if>
+			<if test="mobile != null and mobile != ''">
+				or mobilephone = #{mobile} 
+			</if>
+			<if test="qq != null and qq != ''">
+				or qq = #{qq} 
+			</if>
+			<if test="wechat!= null and wechat != ''">
+				or wechat = #{wechat}
+			</if>
+		</where>	
+	</select> -->
+	
+ 	<select id="queryCusByComm" parameterType="Map" resultType="Customer">
+		select
+			u.customer_id as customerId,
+			u.customer_name_zh as chineseName,
+			u.customer_name_en as englishName,
+			u.customer_level as level,
+			u.location as location,
+			u.source as source,
+			u.age_group as ageGroup,
+			u.gender as gender,
+			u.telephone as telephone,
+			u.mobilephone as mobilephone,
+			u.wechat as wechat,
+			u.qq as qq,
+			u.email as email,
+			u.birthday as birthday,
+			u.creat_time as creatTime,
+			u.isdel as isdel
+		from tm_customer u 
+
+        <where>  
+			<if test="email != null and email != ''">
+				  email = #{email} 
+			</if>
+			<if test="mobile != null and mobile != ''">
+				or mobilephone = #{mobile} 
+			</if>
+			<if test="qq != null and qq != ''">
+				or qq = #{qq} 
+			</if>
+			<if test="wechat!= null and wechat != ''">
+				or wechat = #{wechat}
+			</if>
+		</where>	
+		
+	</select> 
+
+	<select id="countCusByComm" parameterType="Customer" resultType="long">
+		select count(u.customer_id) from tm_customer u
+
+		<where> 
+			<if test="email != null and email != ''">
+				  email = #{email} 
+			</if>
+			<if test="mobile != null and mobile != ''">
+				or mobilephone = #{mobile} 
+			</if>
+			<if test="qq != null and qq != ''">
+				or qq = #{qq} 
+			</if>
+			<if test="wechat!= null and wechat != ''">
+				or wechat = #{wechat}
+			</if>
+		</where>	
+
+	</select>
+	
+	<select id="getCustomerByCusId" parameterType="int" resultType="Customer">
+		select
+		u.customer_id as customerId,
+		u.customer_name_zh as chineseName,
+		u.customer_name_en as englishName,
+		u.customer_level as level,
+		u.location as location,
+		u.source as source,
+		u.age_group as ageGroup,
+		u.gender as gender,
+		u.telephone as telephone,
+		u.mobilephone as mobilephone,
+		u.wechat as wechat,
+		u.qq as qq,
+		u.email as email,
+		u.birthday as birthday,
+		u.isdel as isdel
+		from tm_customer u where u.customer_id = #{customerId}
 	</select>
 </mapper>
 
