@@ -343,16 +343,22 @@
 		                data: "destination",
 		                orderable: false,
 		                render: function ( data ) {
-		                	if(data){
-			                	for(var i=0;i <destination.length;i++){
-			                		if(data==destination[i].id){
-			                			return destination[i].text
-			                		}
-			                	
+		                	
+	                	var destinations="";
+	                	
+	                	if(data){
+		                	var des=data.split(",");
+		                	for(var j = 0;j<des.length;j++){
+		                		for(var i=0;i <destination.length;i++){
+			                		if(des[j]==destination[i].id){
+			                			destinations+=destination[i].text+",";
+			                		}				                	
 			                	}
 			                	return ""
 		                	}
-		                	else{return ""}
+	                	}
+		                destinations=destinations.substring(0,destinations.length-1);
+		                return destinations;
 		                },
 		                  targets: 3
 					},	
@@ -555,7 +561,8 @@
 		
 		var commentTable = jQuery('#dataTable-comment').DataTable({
 			searching:false,
-			pageLength: 10,
+			paging:false,
+			/* pageLength: 10, */
 			processing: true,
 			language: datatable_local_language, // my.js
 			serverSide: true,

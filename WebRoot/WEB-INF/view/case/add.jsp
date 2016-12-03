@@ -136,10 +136,14 @@
                       <label class="col-sm-4 control-label">希望联系方式</label>
                       <div class="col-sm-8">
 	                      <select name="contactType" class="contact-select fullwidth" multiple="multiple">
+<<<<<<< HEAD
 							  <option value="wechat">微信</option>
 							  <option value="mobile">手机</option>							  
 							  <option value="qq">qq</option>
 					  		  <option value="mail">邮箱</option>
+=======
+							  
+>>>>>>> d9b144c8019260a9614ff1f5dbaa13d3de525714
 						</select>
                       </div>
                     </div> 
@@ -150,13 +154,35 @@
                       </div>
                     </div>
 
+<<<<<<< HEAD
 <!-- 	                <div class="form-group col-sm-4">
 	                    <label class="col-sm-4 control-label">跟单员</label>
+=======
+            	 <div class="form-group col-sm-4">
+	                    <label class="col-sm-4 control-label">沟通方式</label>
+>>>>>>> d9b144c8019260a9614ff1f5dbaa13d3de525714
 	                    <div class="col-sm-8">
-	                      <input type="text"  name="operator" class="user-select fullwidth" value="0" />
+	                      <input type="text"  name="contactReal" class="contact-real-select fullwidth" value="0" />
 	                    </div>
+<<<<<<< HEAD
+	                </div>                        
+                </div>
+                    <div class="section-block">
+                   	<div class="form-group col-sm-4">
+                      <label class="col-sm-4 control-label">目的地</label>
+                      <div class="col-sm-8">
+                        <select name="destination" class="contact-select-country fullwidth" multiple="multiple">
+					</select>             
+                      </div>
+                    </div>    
+=======
+<<<<<<< HEAD
 	                </div>   -->                      
+=======
+	                </div>                     
+>>>>>>> d9b144c8019260a9614ff1f5dbaa13d3de525714
   
+>>>>>>> 5d874c819f340cf1dc2f24915c875f49f271e08d
                 </div>
                 
                 <div class="section-block">
@@ -296,8 +322,13 @@
             </div><!-- panel-body -->
             
             <div class="panel-footer align-center">
+<<<<<<< HEAD
                 <button class="btn btn-primary">保存</button>&nbsp;
                 <button class="btn btn-default">取消</button>
+=======
+                <input class="btn btn-primary" type="submit" value="保存"/>&nbsp;
+                <input class="btn btn-default" type="button" id="btn-back" value="取消"/>
+>>>>>>> d9b144c8019260a9614ff1f5dbaa13d3de525714
                 <input type="hidden" name="operator" value="${sessionScope.loginUser.userId}"/>
     		    </div><!-- panel-footer -->
         </form>   
@@ -538,7 +569,11 @@
     var sales = ${sales};
     var level = ${level};
 	var ageGroup = ${ageGroup};
+<<<<<<< HEAD
 	
+=======
+	var contactData=${contact};
+>>>>>>> d9b144c8019260a9614ff1f5dbaa13d3de525714
 	$(".agegroup-select").select2({
 		placeholder: '选择一个年龄段',
 	  	data: ageGroup
@@ -555,9 +590,30 @@
     	placeholder: '选择一个沟通语言',
      	data: language
     });
+<<<<<<< HEAD
+    $(".contact-select-country").select2({
+    	placeholder: '可多选',
+    	minimumResultsForSearch: Infinity,
+    	data: country
+     });
+    $(".contact-select-country").val('${crmcase.destination}'.split(",")).trigger("change");
+=======
+  //选择希望的联系方式下拉框
+>>>>>>> 5d874c819f340cf1dc2f24915c875f49f271e08d
     $(".contact-select").select2({
         placeholder: '选择希望联系方式',
+        data: contactData
      });
+  //选择真实的联系方式下拉框
+    $(".contact-real-select").select2({
+        placeholder: '选择真实联系方式',
+        data: contactData
+     });
+    
+    $(".withwho-select").select2({
+    	placeholder: '与谁同行',
+     	data: withwho
+    });
     $(".withwho-select").select2({
     	placeholder: '与谁同行',
      	data: withwho
@@ -643,7 +699,9 @@
 			maxDate: 0,
 		});
 			 
-  			jQuery("#form-case").validate({				
+  			jQuery("#form-case").validate({	
+  				
+  			
     		rules: {
  //		      customerId: "required",
  			  chineseName: "required",
@@ -751,6 +809,10 @@
                 $(".start-time").show();
             }
         }); 
+<<<<<<< HEAD
+=======
+        
+>>>>>>> d9b144c8019260a9614ff1f5dbaa13d3de525714
         $(".customer-select").change(function() {
              var val= $(".customer-select").select2("val");
         	document.getElementById("customerId").value=val;
@@ -762,6 +824,10 @@
 		    }); 
 		});
 		
+<<<<<<< HEAD
+=======
+		
+>>>>>>> d9b144c8019260a9614ff1f5dbaa13d3de525714
 /* 		function sociation(){
    		 	var f = $("#form-case").serialize();
    		 	var h=$("#form-judgeBind").serialize();
@@ -783,10 +849,43 @@
 			      
 		 function case_submit() {
 			var f = $("#form-case").serialize();			
+<<<<<<< HEAD
+			$.post('${rootPath}case/add.do', f, function(result) {
+				var caseId = result.cid;
+				$("#caseId").val(caseId);
+				var rmsg = result.msg;
+				
+				//保存完询单弹出modal直接保存订单
+				/* if (result.success) {
+					//window.parent.location = "${rootPath}case/list.html";
+					var destination = $("#destination").val();
+			        $.ajax({
+			             type: "post",
+			             url: "${rootPath}case/getSales.do?destination="+destination,
+			             data: destination,
+			             success: function(sales){
+			            	 var json = jQuery.parseJSON( sales );
+			                 $("#salesId").select2({
+			                      placeholder: '销售',
+			                      data: json
+			                  });
+			              }   
+			         });
+					$("#nextModal").modal('show');
+					
+			} else {
+				$("#msgModal").modal('show');
+				$("#nextModal").modal('hide'); */
+				
+				if (result.cid) {
+					window.parent.location = "${rootPath}case/edit.html?id="+caseId;
+				} else {
+=======
 			$.post('${rootPath}case/add.do', f, function(result) {			
 				if (result.ok=="ok") {
 					window.parent.location = "${rootPath}case/list.html";					
 				} else if(result.error=="error"){
+>>>>>>> 5d874c819f340cf1dc2f24915c875f49f271e08d
 					$("#msgModal").modal('show');
 					$("#nextModal").modal('hide');
 				}else{

@@ -222,8 +222,6 @@
 			
 		});
 		
-	
-		
 		function edit(id) {
 			window.parent.location = "${rootPath}agency/edit.html?id="+id;
 		}

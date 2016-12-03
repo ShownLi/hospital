@@ -212,7 +212,7 @@
           <div class="modal-body">     
               <div class="section-block noline">
                   <div class="form-group col-sm-12">
-                    <label class="col-sm-4 control-label">若未成行，原因是</label>
+                    <label class="col-sm-4 control-label">未成行原因</label>
                     <div class="col-sm-8">
                       <input class="reason-select fullwidth" name="reason" placeholder="若未成行，原因是" />
                       <input type="hidden" id="noDeal-orderId" name="orderId" value="${order.orderId}" />	
@@ -234,12 +234,31 @@
   </div><!-- modal-dialog -->
 </div><!-- bmodal -->
 
+<!-- Modal -->
+<div class="modal fade" id="NoEmail" tabindex="-2" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">信息</h4>
+      </div>
+      <div class="modal-body">
+      		该客人没有邮箱，请<a href="#" id="addEmail">添加邮箱</a>后再进行操作
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+      </div>
+    </div><!-- modal-content -->
+  </div><!-- modal-dialog -->
+</div><!-- modal -->
+
 	<script type="text/javascript">
 	var orderStatus = ${orderStatus};
 	var destination = ${destination};
 	var reason = ${reason};
 	var currency=${currency};
 	var user = ${user};
+console.log(destination);
 	
  	$(".destination-select").select2({
         placeholder: '国家',
@@ -421,7 +440,11 @@
 						          data: "orderId",
 						 	      orderable: false,
 						 	      render: function ( data, type, full, meta ) {
-					              	return '<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a>&nbsp<a class="btn btn-primary btn-xs" id="'+data+'"></span> 成行</a>&nbsp<a class="btn btn-default btn-xs" id="'+data+'"></span> 未成行</a>&nbsp;';
+					              	return '<a class="btn btn-success btn-xs" id="'+data+
+					              	'"><span class="fa fa-edit"></span> 编辑</a>&nbsp<a class="btn btn-primary btn-xs" id="'+data+
+					              	'"></span> 成行</a>&nbsp<a class="btn btn-default btn-xs" id="'+data+
+					              	'"></span> 未成行</a>&nbsp<a class="btn btn-sendMaile btn-xs" id="'+data+
+					              	'"></span> 发订单邮件</a>&nbsp;';
 						 	  	  },
 						 	    	targets: 9
 						 		},
@@ -461,19 +484,24 @@
 					                data: "destination",
 					                orderable: false,
 					                render: function ( data ) {
-					                	if(data){
-
-						                	for(var i=0;i <destination.length;i++){
-						                		if(data==destination[i].id){
-						                			return destination[i].text
-						                		}
+				                	 if(data){
+					                	var des=data.split(",");
+					                	var destinations="";
+					                	for(var j = 0;j<des.length;j++){
+					                	
+					                		for(var i=0;i <destination.length;i++){
+						                		if(des[j]==destination[i].id){
+						                			destinations+=destination[i].text+",";
+						                		}				                	
 						                	}
-						                	return "";
 					                	}
-					                	else{return ""}
-					                },
-
-					                  targets: 4
+					                	console.log(destinations); 
+					                	destinations=destinations.substring(0,destinations.length-1);
+				                		return destinations;
+				                	}
+				                	else{return ""}
+				                },
+			                    targets: 4
 								}, 			
 								{
 					                data: "creatTime",
@@ -521,8 +549,6 @@
 			        t.draw();
 			    } );
 		    
-		    
-			    
 			 $('#dataTable tbody').on( 'click', 'a.btn-success', function () {
 		         var data = t.row($(this).parents('tr')).data();
 		         edit($(this).attr('id'));
@@ -538,6 +564,11 @@
 		         var data = t.row($(this).parents('tr')).data();
 		         nogroup($(this).attr('id'));
 		         $("#noDealOrderid").val($(this).attr('id'));
+		     } );
+			 
+			 $('#dataTable tbody').on( 'click', 'a.btn-sendMaile', function () {
+		         var data = t.row($(this).parents('tr')).data();
+		         sendOrderEmail(data);  //$(this).attr('id')获取属性节点(id)的值
 		     } );
 			 
 			  $('#confirmDelModal').on( 'click', 'button.btn-danger', function () {
@@ -564,6 +595,45 @@
 			$("#noDeal-orderId").val(id);
 			$(".noDealModal").modal('show');
 		}
+		
+		//判断客人是否有邮箱  有的话发送邮件 没有的话绑定邮箱
+		function sendOrderEmail(data){
+			if(data.customerEmailReal!=null&&data.customerEmailReal!=""){
+				//alert(data.customerReEmailAlias);
+				if(data.customerReEmailAlias!=null){
+					var f = data.orderId;
+					console.log(f);
+					$.post('${rootPath}order/orderSendEmail.do', {"orderId":f}, function(result) {
+						var rmsg = result.msg;
+						if (result.success) {
+							//window.parent.location = "${rootPath}order/list.html";
+							alert("邮件发送成功了");
+						} 
+						else {
+							alert("邮件发送失败了");
+						}
+					}, "JSON");
+				}else{
+					var f = data.orderId;
+					console.log(f);
+					$.post('${rootPath}order/orderSendEmailNoAlias.do', {"orderId":f}, function(result) {
+						var rmsg = result.msg;
+						if (result.success) {
+							//window.parent.location = "${rootPath}order/list.html";
+							alert("邮件发送成功了");
+						} 
+						else {
+							alert("邮件发送失败了");
+						}
+					}, "JSON");
+				}
+			}else{
+				$("#NoEmail").modal('show');
+				var newHref = "../customer/edit.html?id="+data.customerId
+				$('#addEmail').attr("href",newHref)
+			}
+		}
+		  
 		// Date Picker
 		jQuery(".datepicker").datepicker({
 			  dateFormat: "yy-mm-dd"

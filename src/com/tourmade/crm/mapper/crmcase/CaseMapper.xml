@@ -20,7 +20,10 @@
 			u.creat_time as creatTime,
 			u.reason as reason,
 			u.last_comment as comment,
-			u.requirement as requirement
+			
+			u.requirement as requirement,
+			u.contact_real as contactReal,
+			u.reason_nodeal as reasonNodeal
 		from tm_case u  
 		where u.isdel = 0 
 		<if test="customerId != null and customerId != ''">
@@ -153,6 +156,7 @@
 			guide,
 			budget,
 			contact_type,
+			contact_real,
 			sales_id,
 			sales_name,
 			destination,
@@ -196,6 +200,7 @@
 			#{guide,jdbcType=VARCHAR},
 			#{budget,jdbcType=VARCHAR},
 			#{contactType,jdbcType=VARCHAR},
+			#{contactReal,jdbcType=VARCHAR},
 			#{salesId,jdbcType=VARCHAR},
 			#{salesName,jdbcType=VARCHAR},
 			#{destination,jdbcType=VARCHAR},
@@ -242,6 +247,7 @@
 		guide=#{guide},
 		budget=#{budget},
 		contact_type=#{contactType},
+		contact_real=#{contactReal},
 		sales_id=#{salesId},
 		sales_name=#{salesName},
 		destination=#{destination},
@@ -255,6 +261,7 @@
 		visa=#{visa},
 		flight=#{flight},
 		reason=#{reason},
+		reason_nodeal =#{reasonNodeal},
 		update_time=NOW()
 		where
 		case_id=#{caseId}
@@ -274,6 +281,7 @@
 		u.operator as operator,
 		u.prefer_language as preferLanguage,
 		u.contact_type as contactType,
+		u.contact_real as contactReal,
 		u.with_who as withwho,
 		u.adult as adult,
 		u.children as children,
@@ -302,6 +310,7 @@
 		u.ip_address as ipAddress,
 		u.creat_time as creatTime,
 		u.reason as reason,
+		u.reason_nodeal as reasonNodeal,
 		u.customer_portal_id as portalId,
 		u.isdel
 		from tm_case u where u.isdel = 0 and u.case_id = #{caseId}
@@ -314,6 +323,7 @@
 		u.operator as operator,
 		u.prefer_language as preferLanguage,
 		u.contact_type as contactType,
+		u.contact_real as contactReal,
 		u.with_who as withwho,
 		u.adult as adult,
 		u.children as children,
@@ -422,15 +432,17 @@
 		from tm_sales u where u.isdel = 0
 	</select>
 	
-	<select id="getSalesByAgency" parameterType="String" resultType="EntityList">
+	<select id="getSalesByAgency" parameterType="list" resultType="EntityList">
 		select
 		u.sales_id as id,
 		u.sales_name as text,
-		u.isdel 
+		u.isdel
 		from tm_sales u 
 		left join tm_agency v on u.agency_id = v.agency_id 
-		where u.isdel = 0
-		and v.country = #{destination}
+		where u.isdel = 0 and 
+		 <foreach collection="list" item="item" index="index" open="" separator="OR" close="">  
+             v.destination LIKE '%${item}%'
+        </foreach>
 	</select>
 	
 	<select id="caseStatus" parameterType="int" resultType="int">
@@ -440,8 +452,7 @@
 		and u.isdel = 0
 	</select>
 	
-	
-	
+	<!-- 设置询单无效 -->
 	<update id="deleteCaseById" parameterType="int" flushCache="true" statementType="PREPARED">
 		update tm_case
 		set
@@ -449,6 +460,18 @@
 		where
 		case_id = #{caseId}
 	</update>
+	<!-- 设置询单未成行 -->
+	<update id="deleteCaseNodealById" parameterType="map" flushCache="true" statementType="PREPARED">
+		update tm_case
+		set
+		reason_nodeal = #{reasonNodeal},
+		status = 4,
+		update_time=NOW()
+		where
+		case_id = #{caseId}
+	</update>
+	
+	
 	
 	<select id="getCustomerByCommunication" parameterType="Case" resultType="Customer">
 		select
@@ -689,7 +712,4 @@
 		from tm_customer u where u.customer_id = #{customerId}
 	</select>
 </mapper>
-
-
-
 

@@ -34,7 +34,12 @@
                     <div class="form-group col-sm-4">
                       <label class="col-sm-4 control-label">所属客人</label>
                       <div class="col-sm-8">
+<<<<<<< HEAD
+                        <select name="destination" class="contact-select-country fullwidth" multiple="multiple">
+					</select>         
+=======
                         <input type="text" name="customerId" placeholder="所属客人" class="customer-select fullwidth" value="${customerId}" />
+>>>>>>> 5d874c819f340cf1dc2f24915c875f49f271e08d
                       </div>
                     </div>
                     <div class="form-group col-sm-4">
@@ -46,13 +51,18 @@
                     <div class="form-group col-sm-4">
                       <label class="col-sm-4 control-label">希望联系方式</label>
                       <div class="col-sm-8">
-	                      <select name="contactType" class="contact-select fullwidth" multiple="multiple">
+<<<<<<< HEAD
+	                    <select name="contactType" class="contact-select fullwidth" multiple="multiple">
 							  <option value="wechat">微信</option>
-							  <option value="mobilephone">手机</option>
-							  
+							  <option value="mobile">手机</option>							  
 							  <option value="qq">qq</option>
 					  		  <option value="mail">邮箱</option>
+						</select>
+=======
+	                      <select name="contactType" class="contact-select fullwidth" multiple="multiple">
+
 					</select>
+>>>>>>> 5d874c819f340cf1dc2f24915c875f49f271e08d
                       </div>
                     </div> 
                     <div class="form-group col-sm-4">
@@ -66,9 +76,17 @@
 	                    <div class="col-sm-8">
 	                      <input type="text"  name="operator" class="user-select fullwidth" value="0" />
 	                    </div>
+
 	                </div>                        
-                </div>
-                    <div class="section-block">
+
+	                <div class="form-group col-sm-4">
+	                    <label class="col-sm-4 control-label">沟通方式</label>
+	                    <div class="col-sm-8">
+	                      <input type="text"  name="contactReal" class="contact-real-select fullwidth" value="0" />
+	                    </div>
+	                </div>  
+	                </div>  
+                <div class="section-block">
                    	<div class="form-group col-sm-4">
                       <label class="col-sm-4 control-label">目的地</label>
                       <div class="col-sm-8">
@@ -210,18 +228,21 @@
                     <input type="hidden" name="wechat" value="${customerInfo.wechat}"/>
                     <input type="hidden" name="qq" value="${customerInfo.qq}"/>
                 </div>
-            </div><!-- panel-body -->
             
+            </div>
             <div class="panel-footer align-center">
-                <button class="btn btn-primary">保存</button>&nbsp;
-                <button class="btn btn-default">取消</button>
-    		    </div><!-- panel-footer -->
-        </form>   
-      </div><!-- panel -->
-		</div>
 
-		</div>
-		<!-- mainpanel -->
+             <input class="btn btn-primary" type="submit" value="保存"/>&nbsp;
+	     <input class="btn btn-default" type="button" id="btn-back" value="取消"/>
+
+    		    </div><!-- panel-footer -->
+			
+		</form>   
+		</div><!-- panel-body -->
+      </div><!-- panel -->
+		
+
+		</div>		<!-- mainpanel -->
 		<%@ include file="../assets/pages/rightpanel.jsp"%>
 
 	</section>
@@ -327,6 +348,26 @@
     var user = ${user};
     var sales = ${sales};
 
+    var level = ${level};
+	var ageGroup = ${ageGroup};
+	
+	$(".agegroup-select").select2({
+		placeholder: '选择一个年龄段',
+	  	data: ageGroup
+	});
+	$(".level-select").select2({
+	  	data: level
+	});	
+	$(".contact-select-country").select2({
+	    	placeholder: '可多选',
+	    	minimumResultsForSearch: Infinity,
+	    	data: country
+	     });
+	    $(".contact-select-country").val('${crmcase.destination}'.split(",")).trigger("change");
+
+
+	var contactData=${contact};
+
     $(".country-select").select2({
         placeholder: '国家',
         data: country,
@@ -335,8 +376,15 @@
     	placeholder: '选择一个沟通语言',
      	data: language
     });
+    //选择希望的联系方式下拉框
     $(".contact-select").select2({
         placeholder: '选择希望联系方式',
+        data:contactData
+     });
+    //选择真实的联系方式下拉框
+    $(".contact-real-select").select2({
+        placeholder: '选择真实联系方式',
+        data: contactData
      });
     $(".withwho-select").select2({
     	placeholder: '与谁同行',
@@ -383,7 +431,7 @@
     }); 
 
     $(".user-select").select2({
-        placeholder: '客人',
+        placeholder: '跟单员',
         data: user
     });
     $(".sales-select").select2({
@@ -460,11 +508,12 @@
 			  $("#btn-back").click( function () {
 				    history.go(-1);
 		   	  }); 
-		    });			  		
-			      
+		});			  		
+		/* 保存新建的询单 */  
 		function case_submit() {
 			var f = $("#form-case").serialize();			
 			$.post('${rootPath}case/add.do', f, function(result) {
+
 				var caseId = result.cid;
 				$("#caseId").val(caseId);
 				var rmsg = result.msg;
@@ -494,32 +543,20 @@
 				if (result.cid) {
 					//window.parent.location = "${rootPath}case/edit.html?id="+caseId;
 					window.parent.location = "${rootPath}case/list.html";
+				}
 					
-					
+			
+				/* 结果响应成功 */
+			/* 	if (result.success) {
+					window.parent.location = "${rootPath}case/edit.html?id="+caseId;
+
 				} else {
 					$("#msgModal").modal('show');
 					$("#nextModal").modal('hide');
-				}
+				} */
 			}, "JSON");
 		}
 		
-	      $(".nextModal .submit").click(function(){
-	      	  order_submit();
-	      });
-	      
-	  		function order_submit() {
-	    			var f = $("#form-order").serialize();
-	    			$.post('${rootPath}order/add.do', f, function(result) {
-	    				var rmsg = result.msg;
-	    				if (result.success) {
-	    					window.parent.location = "${rootPath}order/list.html";
-	    					//$("#nextModal").modal('show');
-	    				} else {
-	    					$("#nextModal").modal('hide');
-	    					$("#NoEmail").modal('show');
-	    				}
-	    			}, "JSON");
-	    	}
 	  		
         $(".start-date").hide();
         $(".start-time").show();

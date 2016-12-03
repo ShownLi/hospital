@@ -52,6 +52,13 @@
 	                <input type="text" name="country" class="country-select fullwidth"/>
 	              </div>
 	            </div>
+	            <div class="form-group col-sm-4">
+	              <label  class="col-sm-4 control-label">目的地</label>
+	              <div class="col-sm-8">
+	                <select name="destination" class="destination-select fullwidth" multiple="multiple">
+					</select>
+	              </div>
+	            </div>
  	            <div class="form-group col-sm-4">
 	              <label  class="col-sm-4 control-label">是否发邮件</label>
 	              <div class="col-sm-8">
@@ -62,8 +69,8 @@
 	        </div>
         </div><!-- panel-body -->
         <div class="panel-footer align-center">
-			<button class="btn btn-primary">提交</button>&nbsp;
-			<button class="btn btn-default" id="btn-back">取消</button>
+			<input class="btn btn-primary" type="submit" value="保存"/>&nbsp;
+			<input class="btn btn-default" type="button" id="btn-back" value="取消"/>
 		  </div><!-- panel-footer -->
      </form>   
       </div><!-- panel -->
@@ -112,22 +119,28 @@
 	<script src="${rootPath}assets/js/jquery.validate.min.js"></script>
 	
 	<script type="text/javascript">
-	var c = ${country};
-	var l = ${language};
+	var country = ${country};
+	var language = ${language};
 	$(".country-select").select2({
 		placeholder: '选择一个国家',
-	  	data: c
+	  	data: country
 	})
 
 	$(".language-select").select2({
 	    placeholder: '选择一个语言选项',
-     	data: l
+     	data: language
 	})
+	
+	$(".destination-select").select2({
+    	placeholder: '可多选',
+    	minimumResultsForSearch: Infinity,
+    	data: country
+     });
+    //$(".destination-select").val('${crmcase.destination}'.split(",")).trigger("change");
 	jQuery(document).ready(function() {	
 
 		$(".nav-parent").eq(3).addClass("nav-active");
       	$(".nav-parent").eq(3).find(".children").show();
-
 
 		jQuery("#form").validate({
 			rules: {

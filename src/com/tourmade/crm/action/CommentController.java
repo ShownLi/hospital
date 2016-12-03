@@ -42,12 +42,22 @@ public class CommentController extends BaseSimpleFormController {
 		model.addAttribute("language",languageResult);
 		return "/comment/list";
 	}
-	
+	/**
+	 * 获取注释信息，不分页
+	 * @param request
+	 * @param session
+	 * @param model
+	 * @param comment
+	 * @param type
+	 * @param id
+	 * @param page
+	 * @return
+	 */
 	@RequestMapping(value = "/list.do",produces="application/json;charset=utf-8")
 	@ResponseBody
 	public String queryData(HttpServletRequest request, HttpSession session, Model model, Comment comment, String type,int id, PageHelper page) {
 
-		QueryResult<Comment> pageResult = service.queryComment(comment, page, type ,id ,request);
+		QueryResult<Comment> pageResult = service.queryComment(comment, type ,id ,request);
 		String result = JSONUtilS.object2json(pageResult);
 		return result;
 	}

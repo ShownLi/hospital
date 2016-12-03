@@ -20,7 +20,6 @@
 			
 			<div class="contentpanel">
 				<!-- content goes here... -->
-
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						<div class="panel-btns">
@@ -30,9 +29,6 @@
 						<h3 class="panel-title">询单列表</h3>
 						<div class="row" style="margin-top: 20px">
 							<div class="form-group col-sm-10">
-								<!-- <div class="col-sm-2">
-									<input type="text" id="searchCustomerId" class="customer-select fullwidth" value="" />
-								</div> -->
 								<div class="col-sm-2">
 									<input type="text" id="searchCaseId" class="form-control" placeholder="询单id"  value="" />
 								</div>
@@ -45,7 +41,6 @@
 								<div class="col-sm-2">
 									<input type="text" id="searchMail" class="form-control" placeholder="邮箱" value="" />
 								</div>
-								<!-- <input type="text" id="searchBudget" class="form-control" placeholder="预算" value="" /> -->
 								<div class="col-sm-2">
 									<input type="text" id="searchDestination" class="destination-select fullwidth" value="" />
 								</div>
@@ -84,7 +79,7 @@
 										<th>询单来源 <br>跟单员</th>
 										<th>状态 <br>创建时间</th>
 										<th>客人要求</th>
-										<th>无效原因</th>
+										<th>无效原因<br>未成行原因 </th>
 										<th>注释</th>
 										<th>编辑</th>
 									</tr>
@@ -93,15 +88,11 @@
 								</tbody>
 							</table>
 						</div>
-						<!-- table-responsive -->
 					</div>
-					<!-- panel-body -->
 				</div>
-				<!-- panel -->
 			</div>
 
 		</div>
-		<!-- mainpanel -->
 		<%@ include file="../assets/pages/rightpanel.jsp"%>
 	</section>
 
@@ -109,6 +100,7 @@
 
 	<script src="${rootPath}assets/js/jquery.datatables.min.js"></script>
 	<script src="${rootPath}assets/js/select2.min.js"></script>
+<<<<<<< HEAD
 
 <!-- Modal -->
 <!-- <div class="modal fade" id="confirmDelModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
@@ -167,12 +159,6 @@
                     <input type="text" id="salesId" name="salesId" placeholder="选择一个销售" class="sales-select fullwidth" value="" />
                 </div>
             </div>
-<!--               <div class="form-group col-sm-8 col-sm-offset-2">
-                  <label class="col-sm-3 control-label">客人的预算</label>
-                  <div class="col-sm-9">
-                    <input type="text" name="budget" placeholder="客人的预算" class="form-control" value="" />
-                  </div>
-                </div> -->
             <div class="col-sm-12">
              <a class="submit btn btn-primary">保存</a>
               <input  type="hidden" id="caseId" name="caseId" value="" />
@@ -215,15 +201,18 @@
 </div><!-- bmodal -->
 
 
+=======
+>>>>>>> 5d874c819f340cf1dc2f24915c875f49f271e08d
 	<script type="text/javascript">
-	var source = ${source};
+ 	var source = ${source}; 
 	var caseStatus = ${caseStatus};
 	var destination = ${destination};
 	var customer = ${customer};
 	var user = ${user};
     var sales = ${sales};
 	var reason = ${reason};
-
+	var reasonNodeal =${reasonNodeal};
+	
 	$(".destination-select").select2({
         placeholder: '国家',
         data: destination
@@ -248,6 +237,7 @@
         placeholder: '状态',
         data: caseStatus
     });
+<<<<<<< HEAD
 	
     $(".sales-select").select2({
         placeholder: '销售',
@@ -262,14 +252,13 @@
     $(".confirmDelModal .submit").click(function(){
     	delSubmit();
     });
-   	
     
     $(".confirmDelModal .cancel").click(function(){
       	$(".confirmDelModal").modal("hide");
   	});
-    
 		 
-		 
+=======
+>>>>>>> 5d874c819f340cf1dc2f24915c875f49f271e08d
 			var t = jQuery('#dataTable').DataTable({
 				searching:false,
 				pageLength: 10,
@@ -278,7 +267,7 @@
 				serverSide: true,
 				ajax: {
 					url: '${rootPath}case/list.do',
-					data: function( data){
+					data: function(data){
 			 			var searchCustomerId=$('#searchCustomerId').val();
 			 			var searchCustomerName=$('#searchCustomerName').val();
 			 			var searchCaseId=$('#searchCaseId').val();
@@ -328,7 +317,6 @@
 			 			if(searchMobile !=null && searchMobile !=""){
 			 				data.mobilePhone = searchMobile;
 			 			}
-			 			
 					},
 					
 					dataFilter: function(data){
@@ -357,15 +345,19 @@
 	 					{
 			                orderable: false,
 			                render: function ( data, type, full, meta ) {
+			                	var destinations="";
 			                	if(full.destination){
-				                	for(var i=0;i <destination.length;i++){
-				                		if(full.destination==destination[i].id){
-				                			return "<div class='width85'>" + destination[i].text + "</div>" + "<div class='width85'>" + full.budget + "</div>"
+			                	var des=full.destination.split(",");
+			                	for(var j = 0;j<des.length;j++){
+			                		for(var i=0;i <destination.length;i++){
+				                		if(des[j]==destination[i].id){
+				                			destinations+=destination[i].text+",";
 				                		}				                	
 				                	}
-				                	return "";
 			                	}
-			                	else{return ""}
+			                }
+			                destinations=destinations.substring(0,destinations.length-1);
+			                return "<div class='width85'>" + destinations + "</div>" + "<div class='width85'>" + full.budget + "</div>";
 			                },
 			                targets: 2
 						},	  
@@ -377,6 +369,7 @@
 			                	var m = "";
 			                	var n = "";
 				                	for(var i=0;i < source.length;i++){
+				                		
 				                		if(dataSource==source[i].id){
 				                			// return "<div class='caselist-5'>" + user[i].text + "</div>"
 				                			m = source[i].text;
@@ -391,15 +384,27 @@
 			                },
 			                  targets: 3
 						},
+<<<<<<< HEAD
 						 {
+=======
+						 {	
+>>>>>>> 5d874c819f340cf1dc2f24915c875f49f271e08d
 			                orderable: false,
 			                render: function ( data, type, full, meta ) {
+			                	var time = data.time;
+			                	
+			                	if(data.time){
+			                		time=new Date(time).format("yyyy-MM-dd hh:mm:ss");
+			                	}else{
+			                		time="";
+			                	}
 			                	if(full){
-			                		for(var i=0;i <  caseStatus.length;i++){
+			                		for(var i=0;i<caseStatus.length;i++){
 				                		if(full.status==caseStatus[i].id){
-				                			return "<div class='caselist-6'>" + caseStatus[i].text + "</div>" + "<div class='caselist-7'>" + new Date(data.time).format("yyyy-MM-dd hh:mm:ss"); + "</div>"
+				                			return "<div class='caselist-6'>" + caseStatus[i].text + "</div>" + "<div class='caselist-7'>" + time + "</div>"
 				                		}
 				                	}
+			                		
 			                	}
 			                	else{return ""}
 			                },
@@ -418,18 +423,25 @@
 							targets: 5
 						},
 						{
-			                data: "reason",
 			                orderable: false,
-			                render: function ( data ) {
-			                	if(data){
-			                		for(var i=0;i <  reason.length;i++){
-				                		if(data==reason[i].id){
-				                			return  "<div class='caselist-10'>" + reason[i].text + "</div>"
+			                render: function ( data, type, full, meta ) {
+			                	var dataReason = full.reason;
+			                	var dataReasonNodeal= full.reasonNodeal;
+			                	var m = "";
+			                	var n = "";
+				                	for(var i=0;i < reason.length;i++){
+				                		
+				                		if(dataReason==reason[i].id){
+				                			// return "<div class='caselist-5'>" + user[i].text + "</div>"
+				                			m = reason[i].text;
+				                		}	
+				                	}
+				                	for(var i=0;i < reasonNodeal.length;i++){
+				                		if(dataReasonNodeal==reasonNodeal[i].id){
+				                			n=reasonNodeal[i].text;
 				                		}
 				                	}
-			                		return "";
-			                	}
-			                	else{return ""}
+				                	return "<div class='width85'>" + m + "</div>" + "<div class='width85'>" + n + "</div>";
 			                },
 			                  targets: 6
 						},
@@ -514,9 +526,7 @@
 	    jQuery('select').removeClass('form-control');
 		
 		
-	    $(".nextModal .submit").click(function(){	    		
-	    	  order_submit();
-	    });
+	   
 	    
 		function edit(id) {
 			window.parent.location = "${rootPath}case/edit.html?id="+id;
@@ -526,6 +536,7 @@
 			window.parent.location = "${rootPath}case/handle.html?id="+id;
 		}
 		
+<<<<<<< HEAD
 		function del(id) {
 			 
 			 $(".confirmDelModal .hiddenId").val("");
@@ -556,7 +567,7 @@
 				}
 			}, "JSON");
 	}
-  		
+  	  
   	  function delSubmit() {
     	  var f1=$("#form-del").serialize();
      	  try{
@@ -575,8 +586,9 @@
      	  }
      	 alert("页面正在加载，请稍后...");
       }
-      
-	</script>
+=======
 
+>>>>>>> 5d874c819f340cf1dc2f24915c875f49f271e08d
+	</script>
 </body>
 </html>
