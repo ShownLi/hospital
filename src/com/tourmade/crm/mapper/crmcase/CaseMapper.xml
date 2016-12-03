@@ -221,6 +221,10 @@
 		set
 		customer_id=#{customerId},
 		customer_name=#{chineseName},
+		customer_mobile=#{mobile},
+		customer_email=#{email},
+		customer_wechat=#{wechat},
+		customer_qq=#{qq},
 		prefer_language=#{preferLanguage},
 		operator=#{operator},
 		with_who=#{withwho},

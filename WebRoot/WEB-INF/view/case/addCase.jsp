@@ -465,7 +465,7 @@
 		function case_submit() {
 			var f = $("#form-case").serialize();			
 			$.post('${rootPath}case/add.do', f, function(result) {
-				var caseId = result.obj.caseId;
+				var caseId = result.cid;
 				$("#caseId").val(caseId);
 				var rmsg = result.msg;
 				
@@ -491,8 +491,9 @@
 				$("#msgModal").modal('show');
 				$("#nextModal").modal('hide'); */
 				
-				if (result.success) {
-					window.parent.location = "${rootPath}case/edit.html?id="+caseId;
+				if (result.cid) {
+					//window.parent.location = "${rootPath}case/edit.html?id="+caseId;
+					window.parent.location = "${rootPath}case/list.html";
 					
 					
 				} else {

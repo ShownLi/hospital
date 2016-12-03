@@ -118,12 +118,12 @@
 	                <input type="text" name="email" placeholder="邮箱" class="form-control" value="${crmcase.email}"/>
 	              </div>
 	            </div>  
-	            <div class="form-group col-sm-4">
+	            <%-- <div class="form-group col-sm-4">
 	              <label class="col-sm-3 control-label">所在地</label>
 	              <div class="col-sm-9">
 	                <input type="text" name="location" placeholder="所在地" class="form-control" value="${crmcase.location}"/>
 	              </div>
-	            </div> 
+	            </div>  --%>
 	        </div>
         
         
@@ -139,11 +139,7 @@
                     <label class="col-sm-4 control-label">希望联系方式</label>
                     <div class="col-sm-8">
                       <select name="contactType" class="contact-select fullwidth" multiple="multiple">
-              					  <option value="wechat">微信</option>
-              					  <option value="mobilephone">手机</option>
-              					  
-              					  <option value="qq">qq</option>
-              					  <option value="mail">邮箱</option>
+  
 					   </select>
                     </div>
                 </div>   
@@ -368,7 +364,7 @@
         </div><!-- panel-body -->
         
         <div class="panel-footer align-center">
-            <button id="btn-addorder" class="btn btn-primary">添加订单</button>&nbsp;
+            <button id="btn-addorder" class="btn btn-primary">分配地接社</button>&nbsp;
             <button class="btn btn-primary">保存</button>&nbsp;
             <input  type="hidden" name="caseId" value="${crmcase.caseId}" />
             <button id="btn-invalid"  class="btn btn-danger" >无效</button>&nbsp;
@@ -685,8 +681,8 @@
 	var genderData = [{ id: 'male', text: '男' }, { id:'female' , text: '女' }];
 	
 	var reason = ${reason};
-	/* var contactData = [{ id: 0, text: 'qq' }, { id: 1, text: 'email' }, { id: 2, text: 'wechat' }, { id: 3, text: 'phone' }];
-	 */
+	var contactData = [{ id: 0, text: 'qq' }, { id: 1, text: 'email' }, { id: 2, text: 'wechat' }, { id: 3, text: 'phone' }];
+	 
 	var newHref;
 
 	if($.trim("${crmcase.requirement}")==""){
@@ -731,7 +727,7 @@
     $(".contact-select").select2({
     	placeholder: '可多选',
     	minimumResultsForSearch: Infinity,
-    	//data: contactData
+    	data: contactData
      });
     //$(".contact-select").select2("val", '${crmcase.contactType}'.split(","));
     
