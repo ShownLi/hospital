@@ -83,6 +83,9 @@ public class OrderService extends BaseService {
 		if(order.getStatus()!=null){
 			map.put("status", order.getStatus());
 		}
+		if(order.getCustomerEmailReal()!=null){
+			map.put("email", order.getCustomerEmailReal());
+		}
 		List<Order> data = orderMapper.queryOrder(map);
 		long count = orderMapper.countOrder(order);
 			
@@ -322,7 +325,6 @@ public class OrderService extends BaseService {
 						+"&qq"+customer.getQq(); 
 		BufferedReader in = null;
 		
-		
 		try {
 			String param="customer_id="+customer.getCustomerId()
 			+"&customer_name_zh="+URLEncoder.encode(customer.getChineseName(),"UTF-8")
@@ -331,8 +333,6 @@ public class OrderService extends BaseService {
 			+"&mobilephone="+customer.getMobilephone()
 			+"&wechat="+customer.getWechat()
 			+"&qq"+customer.getQq();
-			
-			
 			
 			//String urlNameString = url + "?" + param;
 			//URL realUrl = new URL(urlNameString);

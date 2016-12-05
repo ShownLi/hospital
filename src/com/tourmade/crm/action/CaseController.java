@@ -1,6 +1,7 @@
 package com.tourmade.crm.action;
 
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -270,14 +271,12 @@ public class CaseController extends BaseSimpleFormController {
 		Map<String,String> map =new HashMap();
 
 		try {
-			//判断是否有老客人,( 添加询单)
+			//判断是否有老客人,(添加询单)
 			List judgeCustomer = service.judgeCustomer(crmcase);
 			if(judgeCustomer.size()>0){
 				customerMap.put("cust", judgeCustomer);
 				service.saveCase(crmcase);
-//				String.valueOf(crmcase.getCaseId());
 				customerMap.put("cid",crmcase.getCaseId());
-//				customerMap.put("crmcase",crmcase);
 				return customerMap;
 			//没有老客人，添加客人和询单
 			}else{
@@ -455,6 +454,7 @@ public class CaseController extends BaseSimpleFormController {
 			String level = "customer.level";
 			String ageGroup = "customer.agegroup";
 			String reason = "case.reason";
+			
 			String contact ="case.contact";
 			String reasonNodeal ="case.reasonnodeal";
 			List<EntityList> countryList = service.getParameterInfo(country);
@@ -579,8 +579,6 @@ public class CaseController extends BaseSimpleFormController {
 		}	
 	}
 	
-	
-	
 	@RequestMapping(value = "/edit.html", method = { RequestMethod.POST, RequestMethod.GET })
 	public String edit(Model model, String id) {
 		if (null != id && !"".equals(id)) {
@@ -596,7 +594,6 @@ public class CaseController extends BaseSimpleFormController {
 				}		
 				crmcase.setRequirement(realRequire);
 			}
-			
 			
 			crmcase=service.validateStartTime(crmcase);
 			Customer cus = null;
@@ -623,6 +620,8 @@ public class CaseController extends BaseSimpleFormController {
 			String level = "customer.level";
 			String ageGroup = "customer.agegroup";
 			String reason = "case.reason";
+			String destination = "case.destination";
+			
 			String orderStatus = "order.status";
 			
 			String contact="case.contact";
@@ -645,6 +644,7 @@ public class CaseController extends BaseSimpleFormController {
 			List<EntityList> levelList= service.getParameterInfo(level);
 			List<EntityList> ageGroupList = service.getParameterInfo(ageGroup);
 			List<EntityList> reasonList = service.getParameterInfo(reason);
+			List<EntityList> destinationList = service.getParameterInfo(destination);
 			List<EntityList> orderStatusList = service.getParameterInfo(orderStatus);
 			//获取联系方式
 			List<EntityList> contactList=service.getParameterInfo(contact);
@@ -668,6 +668,7 @@ public class CaseController extends BaseSimpleFormController {
 			JSONArray levelResult = JSONArray.fromObject(levelList);
 			JSONArray ageGroupResult = JSONArray.fromObject(ageGroupList);
 			JSONArray reasonResult = JSONArray.fromObject(reasonList);
+			JSONArray destinationResult = JSONArray.fromObject(destinationList);
 			JSONArray orderStatusResult = JSONArray.fromObject(orderStatusList);
 			//转换成Json字符串
 			JSONArray contactResult=JSONArray.fromObject(contactList);
@@ -694,6 +695,9 @@ public class CaseController extends BaseSimpleFormController {
 			model.addAttribute("level",levelResult);
 			model.addAttribute("ageGroup",ageGroupResult);
 			model.addAttribute("reason", reasonResult);
+			model.addAttribute("contact", contactResult);
+			model.addAttribute("destinations", destinationResult);
+			
 			model.addAttribute("orderStatus",orderStatusResult);
 		
 			model.addAttribute("contact", contactResult);
@@ -703,10 +707,7 @@ public class CaseController extends BaseSimpleFormController {
 		}
 		return "/case/edit";
 	}
-	
 
-	
-	
 	@RequestMapping(value = "/edit.do")
 	@ResponseBody
 	public Json doEdit(HttpServletRequest request, HttpSession session, Model model, Case crmcase) {
@@ -714,6 +715,8 @@ public class CaseController extends BaseSimpleFormController {
 		Json json = new Json();		
 		try {			
 			service.updateCase(crmcase);
+			service.updateCustomer(crmcase);
+			
 			json.setSuccess(true);
 		} catch (Exception e) {
 			json.setSuccess(false);
@@ -728,9 +731,12 @@ public class CaseController extends BaseSimpleFormController {
 	@RequestMapping(value = "/getSales.do")
 	@ResponseBody
 	public List<EntityList> getSales(Model model, String destination) {
-		
-		List<EntityList> sales = service.getSalesByAgency(destination);
-		
+		String[] dStr = destination.split(",");
+		List<String> destinationList = new ArrayList<String>();
+		for(int i=0; i<dStr.length; i++){
+			destinationList.add(dStr[i]);
+		}
+		List<EntityList> sales = service.getSalesByAgency(destinationList);
 		return sales;
 	}
 	//设置询单无效

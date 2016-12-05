@@ -218,7 +218,8 @@
                 <div class="form-group col-sm-4">
                   <label class="col-sm-4 control-label">目的地</label>
                 <div class="col-sm-8">
-                    <input type="text" id="destination" name="destination" class="destination-select fullwidth" value="${crmcase.destination}" />
+                    <select name="destination" class="contact-select-country fullwidth" multiple="multiple">
+					</select>
                 </div>
                 </div>
                      
@@ -761,6 +762,12 @@
     	placeholder: '选择一个沟通语言',
      	data: language
     });
+    $(".contact-select-country").select2({
+    	placeholder: '可多选',
+    	minimumResultsForSearch: Infinity,
+    	data: country
+     });
+    $(".contact-select-country").val('${crmcase.destination}'.split(",")).trigger("change");
     $(".contact-select").select2({
     	placeholder: '可多选',
     	minimumResultsForSearch: Infinity,

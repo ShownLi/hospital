@@ -13,6 +13,8 @@
 			u.sales_name as salesName,
 		<!-- 	u.operator as operator, -->
 			u.destination as destination,
+			u.customer_email_real as customerEmailReal,
+			u.customer_re_email_alias as customerReEmailAlias,
 			u.status as status,
 			u.reason as reason,
 			u.group_time as groupTime,

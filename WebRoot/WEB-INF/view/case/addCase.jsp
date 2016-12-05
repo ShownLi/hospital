@@ -34,7 +34,12 @@
                     <div class="form-group col-sm-4">
                       <label class="col-sm-4 control-label">所属客人</label>
                       <div class="col-sm-8">
+<<<<<<< HEAD
+                        <select name="destination" class="contact-select-country fullwidth" multiple="multiple">
+					</select>         
+=======
                         <input type="text" name="customerId" placeholder="所属客人" class="customer-select fullwidth" value="${customerId}" />
+>>>>>>> 5d874c819f340cf1dc2f24915c875f49f271e08d
                       </div>
                     </div>
                     <div class="form-group col-sm-4">
@@ -46,9 +51,18 @@
                     <div class="form-group col-sm-4">
                       <label class="col-sm-4 control-label">希望联系方式</label>
                       <div class="col-sm-8">
+<<<<<<< HEAD
+	                    <select name="contactType" class="contact-select fullwidth" multiple="multiple">
+							  <option value="wechat">微信</option>
+							  <option value="mobile">手机</option>							  
+							  <option value="qq">qq</option>
+					  		  <option value="mail">邮箱</option>
+						</select>
+=======
 	                      <select name="contactType" class="contact-select fullwidth" multiple="multiple">
 
 					</select>
+>>>>>>> 5d874c819f340cf1dc2f24915c875f49f271e08d
                       </div>
                     </div> 
                     <div class="form-group col-sm-4">
@@ -334,7 +348,26 @@
     var user = ${user};
     var sales = ${sales};
 
+    var level = ${level};
+	var ageGroup = ${ageGroup};
+	
+	$(".agegroup-select").select2({
+		placeholder: '选择一个年龄段',
+	  	data: ageGroup
+	});
+	$(".level-select").select2({
+	  	data: level
+	});	
+	$(".contact-select-country").select2({
+	    	placeholder: '可多选',
+	    	minimumResultsForSearch: Infinity,
+	    	data: country
+	     });
+	    $(".contact-select-country").val('${crmcase.destination}'.split(",")).trigger("change");
+
+
 	var contactData=${contact};
+
     $(".country-select").select2({
         placeholder: '国家',
         data: country,
@@ -480,16 +513,47 @@
 		function case_submit() {
 			var f = $("#form-case").serialize();			
 			$.post('${rootPath}case/add.do', f, function(result) {
-				var caseId = result.caseId;
+
+				var caseId = result.cid;
 				$("#caseId").val(caseId);
+				var rmsg = result.msg;
+				
+				//保存完询单弹出modal直接保存订单
+				/* if (result.success) {
+					//window.parent.location = "${rootPath}case/list.html";
+					var destination = $("#destination").val();
+			        $.ajax({
+			             type: "post",
+			             url: "${rootPath}case/getSales.do?destination="+destination,
+			             data: destination,
+			             success: function(sales){
+			            	 var json = jQuery.parseJSON( sales );
+			                 $("#salesId").select2({
+			                      placeholder: '销售',
+			                      data: json
+			                  });
+			              }   
+			         });
+					$("#nextModal").modal('show');
+					
+			} else {
+				$("#msgModal").modal('show');
+				$("#nextModal").modal('hide'); */
+				
+				if (result.cid) {
+					//window.parent.location = "${rootPath}case/edit.html?id="+caseId;
+					window.parent.location = "${rootPath}case/list.html";
+				}
+					
 			
 				/* 结果响应成功 */
-				if (result.success) {
+			/* 	if (result.success) {
 					window.parent.location = "${rootPath}case/edit.html?id="+caseId;
+
 				} else {
 					$("#msgModal").modal('show');
 					$("#nextModal").modal('hide');
-				}
+				} */
 			}, "JSON");
 		}
 		

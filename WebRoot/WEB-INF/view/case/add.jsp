@@ -165,11 +165,24 @@
 	                      <input type="text"  name="contactReal" class="contact-real-select fullwidth" value="0" />
 	                    </div>
 <<<<<<< HEAD
+	                </div>                        
+                </div>
+                    <div class="section-block">
+                   	<div class="form-group col-sm-4">
+                      <label class="col-sm-4 control-label">目的地</label>
+                      <div class="col-sm-8">
+                        <select name="destination" class="contact-select-country fullwidth" multiple="multiple">
+					</select>             
+                      </div>
+                    </div>    
+=======
+<<<<<<< HEAD
 	                </div>   -->                      
 =======
 	                </div>                     
 >>>>>>> d9b144c8019260a9614ff1f5dbaa13d3de525714
   
+>>>>>>> 5d874c819f340cf1dc2f24915c875f49f271e08d
                 </div>
                 
                 <div class="section-block">
@@ -577,7 +590,16 @@
     	placeholder: '选择一个沟通语言',
      	data: language
     });
+<<<<<<< HEAD
+    $(".contact-select-country").select2({
+    	placeholder: '可多选',
+    	minimumResultsForSearch: Infinity,
+    	data: country
+     });
+    $(".contact-select-country").val('${crmcase.destination}'.split(",")).trigger("change");
+=======
   //选择希望的联系方式下拉框
+>>>>>>> 5d874c819f340cf1dc2f24915c875f49f271e08d
     $(".contact-select").select2({
         placeholder: '选择希望联系方式',
         data: contactData
@@ -827,10 +849,43 @@
 			      
 		 function case_submit() {
 			var f = $("#form-case").serialize();			
+<<<<<<< HEAD
+			$.post('${rootPath}case/add.do', f, function(result) {
+				var caseId = result.cid;
+				$("#caseId").val(caseId);
+				var rmsg = result.msg;
+				
+				//保存完询单弹出modal直接保存订单
+				/* if (result.success) {
+					//window.parent.location = "${rootPath}case/list.html";
+					var destination = $("#destination").val();
+			        $.ajax({
+			             type: "post",
+			             url: "${rootPath}case/getSales.do?destination="+destination,
+			             data: destination,
+			             success: function(sales){
+			            	 var json = jQuery.parseJSON( sales );
+			                 $("#salesId").select2({
+			                      placeholder: '销售',
+			                      data: json
+			                  });
+			              }   
+			         });
+					$("#nextModal").modal('show');
+					
+			} else {
+				$("#msgModal").modal('show');
+				$("#nextModal").modal('hide'); */
+				
+				if (result.cid) {
+					window.parent.location = "${rootPath}case/edit.html?id="+caseId;
+				} else {
+=======
 			$.post('${rootPath}case/add.do', f, function(result) {			
 				if (result.ok=="ok") {
 					window.parent.location = "${rootPath}case/list.html";					
 				} else if(result.error=="error"){
+>>>>>>> 5d874c819f340cf1dc2f24915c875f49f271e08d
 					$("#msgModal").modal('show');
 					$("#nextModal").modal('hide');
 				}else{

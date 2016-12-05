@@ -226,6 +226,10 @@
 		set
 		customer_id=#{customerId},
 		customer_name=#{chineseName},
+		customer_mobile=#{mobile},
+		customer_email=#{email},
+		customer_wechat=#{wechat},
+		customer_qq=#{qq},
 		prefer_language=#{preferLanguage},
 		operator=#{operator},
 		with_who=#{withwho},
@@ -428,15 +432,17 @@
 		from tm_sales u where u.isdel = 0
 	</select>
 	
-	<select id="getSalesByAgency" parameterType="String" resultType="EntityList">
+	<select id="getSalesByAgency" parameterType="list" resultType="EntityList">
 		select
 		u.sales_id as id,
 		u.sales_name as text,
-		u.isdel 
+		u.isdel
 		from tm_sales u 
 		left join tm_agency v on u.agency_id = v.agency_id 
-		where u.isdel = 0
-		and v.country = #{destination}
+		where u.isdel = 0 and 
+		 <foreach collection="list" item="item" index="index" open="" separator="OR" close="">  
+             v.destination LIKE '%${item}%'
+        </foreach>
 	</select>
 	
 	<select id="caseStatus" parameterType="int" resultType="int">
@@ -445,7 +451,6 @@
 		and u.case_id = #{caseId}
 		and u.isdel = 0
 	</select>
-	
 	
 	<!-- 设置询单无效 -->
 	<update id="deleteCaseById" parameterType="int" flushCache="true" statementType="PREPARED">
@@ -707,7 +712,4 @@
 		from tm_customer u where u.customer_id = #{customerId}
 	</select>
 </mapper>
-
-
-
 

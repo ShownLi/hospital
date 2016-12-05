@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -152,11 +153,21 @@ public class EmailService extends BaseService {
 			template.setMealsEnglish(boat.getEnglish());
 		}
 		if(crmcase.getDestination() != null && !"".equals(crmcase.getDestination())){
-			boat.setDomain("country");
-			boat.setValue(crmcase.getDestination());
-			boat = emailMapper.getZhEn(boat);
-			template.setDestinationChinese(boat.getChinese());
-			template.setDestinationEnglish(boat.getEnglish());
+	
+			String[] destination = order.getDestination().split(",");
+			String destinationChinese = "";
+			String destinationEnglish = "";
+			for(int i=0; i<destination.length; i++){
+				boat.setDomain("country");
+				boat.setValue(destination[i]);
+				boat = emailMapper.getZhEn(boat);
+				destinationChinese += boat.getChinese() + ",";
+				destinationEnglish += boat.getEnglish() + ",";
+			}
+			destinationChinese=destinationChinese.substring(0, destinationChinese.length()-1);
+			destinationEnglish=destinationEnglish.substring(0, destinationEnglish.length()-1);
+			template.setDestinationChinese(destinationChinese);
+			template.setDestinationEnglish(destinationEnglish);
 		}
 		if(crmcase.getPassport() != null && !"".equals(crmcase.getPassport())){
 			boat.setDomain("case.passport");
@@ -524,11 +535,20 @@ public class EmailService extends BaseService {
 	public String getSubject(Order order){
 
 			MailTepBoat boat = new MailTepBoat();
-			boat.setDomain("country");
-			boat.setValue(order.getDestination());
-			boat = emailMapper.getZhEn(boat);
-			String destinationChinese = boat.getChinese();
-			String destinationEnglish = boat.getEnglish();
+			
+			String[] destination = order.getDestination().split(",");
+			String destinationChinese = "";
+			String destinationEnglish = "";
+			for(int i=0; i<destination.length; i++){
+				boat.setDomain("country");
+				boat.setValue(destination[i]);
+				boat = emailMapper.getZhEn(boat);
+				destinationChinese += boat.getChinese() + ",";
+				destinationEnglish += boat.getEnglish() + ",";
+			}
+			destinationChinese=destinationChinese.substring(0, destinationChinese.length()-1);
+			destinationEnglish=destinationEnglish.substring(0, destinationEnglish.length()-1);
+			
 			boat.setId(""+order.getCustomerId());
 			boat = emailMapper.getCusZE(boat);
 			String customerChineseName = boat.getChinese();

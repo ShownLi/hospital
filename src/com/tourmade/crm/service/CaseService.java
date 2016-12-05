@@ -1,6 +1,7 @@
 package com.tourmade.crm.service;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -290,7 +291,6 @@ public class CaseService extends BaseService {
 		}
 	}	
 		
-		
 //		try {
 
 /*				Customer customer2=new Customer();
@@ -504,10 +504,10 @@ public class CaseService extends BaseService {
 	 * @param id
 	 * @return
 	 */
-	public List<EntityList> getSalesByAgency(String destination) {
-		List<EntityList> agencys = null;
+	public List<EntityList> getSalesByAgency(List<String> destinationList) {
+		List<EntityList> agencys = new ArrayList<>();
 		try {
-			agencys = caseMapper.getSalesByAgency(destination);
+			agencys = caseMapper.getSalesByAgency(destinationList);
 		} catch (Exception e) {
 			logger.error("CaseService.getSalesByAgency() --> -->" + e.getMessage());
 			agencys = null;
@@ -538,9 +538,7 @@ public class CaseService extends BaseService {
 	 * @return
 	 */
 	public boolean case2order(int id) {
-
 		boolean judge = false;
-
 		try {
 			Case  crmcase= caseMapper.getCaseById(id);
 			if (crmcase != null) {
@@ -554,7 +552,27 @@ public class CaseService extends BaseService {
 			logger.error("CaseService.updateCase() --> " + id + "-->" + e.getMessage());
 			judge = false;
 		}
-
+		return judge;
+	}
+	
+	/**
+	 * 询单分配地接社时，客人没有邮箱，询单状态改为“地接社设计中”
+	 */
+	public boolean case2orderNoEmail(int id) {
+		boolean judge = false;
+		try {
+			Case crmcase = caseMapper.getCaseById(id);
+			if (crmcase != null) {
+				crmcase.setStatus("2");
+				caseMapper.updateCase(crmcase);
+				judge = true;
+			} else {
+				judge = false;
+			}
+		} catch (Exception e) {
+			logger.error("CaseService.updateCase() --> " + id + "-->" + e.getMessage());
+			judge = false;
+		}
 		return judge;
 	}
 	

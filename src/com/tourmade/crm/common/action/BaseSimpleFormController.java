@@ -32,6 +32,4 @@ public class BaseSimpleFormController extends BaseController{
 		binder.registerCustomEditor(Date.class, dateEditor);
 		this.setRequest(request);
 	}
-	
-	
 }

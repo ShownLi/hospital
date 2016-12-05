@@ -44,22 +44,27 @@ public class OrderController extends BaseSimpleFormController {
 		String country = "country";
 		String status = "order.status";
 		String reason = "order.reason";
+		String email = "order.email";
 		
 		List<EntityList> userList = caseService.getAllUser();
 		List<EntityList> currencyList = service.getParameterInfo(currency);
 		List<EntityList> statusList = service.getParameterInfo(status);
 		List<EntityList> countryList = service.getParameterInfo(country);
 		List<EntityList> reasonLiat = service.getParameterInfo(reason);
+		List<EntityList> emailList = service.getParameterInfo(email);
 		JSONArray userResult = JSONArray.fromObject(userList);
 		JSONArray currencyResult = JSONArray.fromObject(currencyList);
 		JSONArray countryResult = JSONArray.fromObject(countryList);
 		JSONArray statusResult = JSONArray.fromObject(statusList);
 		JSONArray reasonResult = JSONArray.fromObject(reasonLiat);
+		JSONArray emailResult = JSONArray.fromObject(emailList);
 		model.addAttribute("user",userResult);
 		model.addAttribute("currency",currencyResult);
 		model.addAttribute("orderStatus",statusResult);
 		model.addAttribute("destination",countryResult);
 		model.addAttribute("reason",reasonResult);
+		model.addAttribute("email",emailResult);
+		
 		return "/order/list";
 	}
 	
@@ -134,57 +139,56 @@ public class OrderController extends BaseSimpleFormController {
 		if(order.getCaseId()!=0){
 		   Customer customer = service.getCustomerByCaseId(order.getCaseId());
 		   if(customer.getEmail().equals("")){
-			   json.setSuccess(false);
-			   return  json;
+			   //客人状态设置为下单客人
+			   service.customerStatus(order.getCustomerId(),"2");
+			   //询单状态设置为“地接社设计中”
+			   caseService.case2orderNoEmail(order.getCaseId());
+			   //补充order信息并存储该order
+			   order = service.saveOrder(order);
+			   return json;
 		   }
+		   else{
 		   order.setCustomerId(customer.getCustomerId());		   
 		}
 		
 		try {
-/*			boolean is = service.validateEmail(order.getCustomerId());
-			//验证客人有邮箱
-			if(is)
-			{*/
-/*				boolean portalId = service.validatePortalId(order.getCustomerId());
-				if(!portalId){
-					service.creatPortal(order.getCustomerId());
-				}*/
-				//客人状态设置为下单客人
-				service.customerStatus(order.getCustomerId(),"2");
-				//询单状态设置为下单
-				caseService.case2order(order.getCaseId());
-				//补充order信息并存储该order
-				order = service.saveOrder(order);
+			//客人状态设置为下单客人
+			service.customerStatus(order.getCustomerId(),"2");
+			//询单状态设置为下单
+			caseService.case2order(order.getCaseId());
+			//补充order信息并存储该order
+			order = service.saveOrder(order);
+			//判断是否要发送邮件
+			int isSendmail = service.selectAgencyBySaleId(order.getSalesId());
+			if(isSendmail==0){
+				json.setSuccess(true);
+				return json;
+			}else{
+				//邮件别名操作（创建邮件别名并将其写入order表）
+				service.MailAlias(order);	
+				//生成给地接社的第一封邮件
+				//DemoCustomer customer = service.getCustomerById(order.getCustomerid());
+				Case crmcase = service.getCaseById(order.getCaseId());
+				order = service.getOrderById(order.getOrderId());
+				String result = emailService.creatTemplate(crmcase, order);
+							
+				//生成待发送邮件
+				order = service.getOrderById(order.getOrderId());
+				emailService.saveEmail(order,result);
 				
-				//判断是否要发送邮件
-				int isSendmail = service.selectAgencyBySaleId(order.getSalesId());
-				if(isSendmail==0){
-					json.setSuccess(true);
-					return json;
-				}else{
-					//邮件别名操作（创建邮件别名并将其写入order表）
-					service.MailAlias(order);	
-					
-					//生成给地接社的第一封邮件
-					//DemoCustomer customer = service.getCustomerById(order.getCustomerid());
-					Case crmcase = service.getCaseById(order.getCaseId());
-					order = service.getOrderById(order.getOrderId());
-					String result = emailService.creatTemplate(crmcase, order);
-								
-					//生成待发送邮件
-					order = service.getOrderById(order.getOrderId());
-					emailService.saveEmail(order,result);
-					
-					json.setSuccess(true);
-				}
-				/*			}
-			else{
-				json.setSuccess(false);
-			}*/
-		} catch (Exception e) {
-			e.printStackTrace();
-			logger.error("OrderController.doAdd() --> " + order.toString() + "\n" + e.getMessage());
-		}	
+				json.setSuccess(true);
+			}
+		}finally{
+			
+		}
+		   order.setCustomerId(customer.getCustomerId());		   
+		}
+//		try {
+//			放上面else代码
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			logger.error("OrderController.doAdd() --> " + order.toString() + "\n" + e.getMessage());
+//		}	
 		return json;
 	}
 	
@@ -225,9 +229,9 @@ public class OrderController extends BaseSimpleFormController {
 		
 		try {
 			service.updateOrder(order);			
-				crmcase.setStatus("3");
-				service.customerStatus(oldOrder.getCustomerId(), "3");
-				caseService.updateCase(crmcase);
+			crmcase.setStatus("3");
+			service.customerStatus(oldOrder.getCustomerId(), "3");
+			caseService.updateCase(crmcase);
 		
 			json.setSuccess(true);
 		} catch (Exception e) {
@@ -256,6 +260,57 @@ public class OrderController extends BaseSimpleFormController {
 		} catch (Exception e) {
 			json.setSuccess(false);
 			logger.error("OrderController.doEdit() --> " + order.toString() + "\n" + e.getMessage());
+		}
+		return json;
+	}
+	
+	@RequestMapping(value = "/orderSendEmail.do")
+	@ResponseBody
+	public Json orderSendEmail(HttpServletRequest request, HttpSession session, Model model, Integer orderId) {
+		Json json = new Json();
+		
+		//判断是否要发送邮件
+		Order order = service.getOrderById(orderId);
+		int isSendmail = service.selectAgencyBySaleId(order.getSalesId());
+		if(isSendmail==0){
+			json.setSuccess(true);
+			return json;
+		}else{
+			//邮件别名操作（创建邮件别名并将其写入order表）
+			//service.MailAlias(order);	
+			//生成给地接社的第一封邮件
+			Case crmcase = service.getCaseById(order.getCaseId());
+			String result = emailService.creatTemplate(crmcase, order);
+			
+			//生成待发送邮件
+			emailService.saveEmail(order,result);
+			json.setSuccess(true);
+		}
+		return json;
+	}
+	
+	@RequestMapping(value = "/orderSendEmailNoAlias.do")
+	@ResponseBody
+	public Json orderSendEmailNoAlias(HttpServletRequest request, HttpSession session, Model model, Integer orderId) {
+		Json json = new Json();
+		
+		//判断是否要发送邮件
+		Order order = service.getOrderById(orderId);
+		int isSendmail = service.selectAgencyBySaleId(order.getSalesId());
+		if(isSendmail==0){
+			json.setSuccess(true);
+			return json;
+		}else{
+			//邮件别名操作（创建邮件别名并将其写入order表）
+			service.MailAlias(order);	
+			
+			//生成给地接社的第一封邮件
+			Case crmcase = service.getCaseById(order.getCaseId());
+			String result = emailService.creatTemplate(crmcase, order);
+			
+			//生成待发送邮件
+			emailService.saveEmail(order,result);
+			json.setSuccess(true);
 		}
 		return json;
 	}

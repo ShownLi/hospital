@@ -100,6 +100,109 @@
 
 	<script src="${rootPath}assets/js/jquery.datatables.min.js"></script>
 	<script src="${rootPath}assets/js/select2.min.js"></script>
+<<<<<<< HEAD
+
+<!-- Modal -->
+<!-- <div class="modal fade" id="confirmDelModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel"><span class="fa fa-warning"></span> 提示</h4>
+      </div>
+      <div class="modal-body">
+        确定无效么？
+      </div>
+      <div class="modal-footer">
+      	<input type="hidden" class="hiddenId" value="" />
+        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        <button type="button" class="btn btn-danger">无效</button>
+      </div>
+    </div>modal-content
+  </div>modal-dialog
+</div>modal -->
+
+<!-- Modal -->
+<div class="modal fade" id="NoEmail" tabindex="-2" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">信息</h4>
+      </div>
+      <div class="modal-body">
+      		该客人没有邮箱，请添加邮箱后再进行操作
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+      </div>
+    </div><!-- modal-content -->
+  </div><!-- modal-dialog -->
+</div><!-- modal -->
+
+<div class="nextModal modal fade" id="nextModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body align-center">
+        <div class="section-block">
+        <form id="form-order">
+            <div class="section-title">选择目的地及地接社,添加订单</div>
+      	   <div class="form-group col-sm-8 col-sm-offset-2">
+                <label class="col-sm-3 control-label">目的地</label>
+                <div class="col-sm-9">
+                    <input type="text" id="destination" name="destination" placeholder="目的地" class="destination-select fullwidth" value="" />
+                </div>
+            </div> 
+            <div class="form-group col-sm-8 col-sm-offset-2">
+                <label class="col-sm-3 control-label">所属销售</label>
+                <div class="col-sm-9">
+                    <input type="text" id="salesId" name="salesId" placeholder="选择一个销售" class="sales-select fullwidth" value="" />
+                </div>
+            </div>
+            <div class="col-sm-12">
+             <a class="submit btn btn-primary">保存</a>
+              <input  type="hidden" id="caseId" name="caseId" value="" />
+            </div>
+            </form>
+        </div>
+      </div>
+    </div><!-- modal-content -->
+  </div><!-- modal-dialog -->
+</div><!-- modal -->
+
+<!-- 询单无效modal -->
+<div class="confirmDelModal modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <div class="nextModal-title">请填写无效原因</div>
+      </div>
+      <form class="form-horizontal" id="form-del">
+          <div class="modal-body">     
+              <div class="section-block noline">
+                  <div class="form-group col-sm-12">
+                    <label class="col-sm-4 control-label">无效原因是</label>
+                    <div class="col-sm-8">
+                      <input class="reason-select fullwidth"  name="reason" placeholder="无效原因是" />
+                      <input type="hidden" class="hiddenId" name="caseId" value="" />	
+                    </div>
+                  </div>
+              </div><!-- noDealModal-body -->
+          </div>
+          <div class="modal-footer align-center">
+            <button class="submit btn btn-primary">保存</button> 
+              <a class="cancel btn btn-primary" >取消</a>
+              
+          </div>
+      </form>
+    </div><!-- modal-content -->
+  </div><!-- modal-dialog -->
+</div><!-- bmodal -->
+
+
+=======
+>>>>>>> 5d874c819f340cf1dc2f24915c875f49f271e08d
 	<script type="text/javascript">
  	var source = ${source}; 
 	var caseStatus = ${caseStatus};
@@ -134,6 +237,28 @@
         placeholder: '状态',
         data: caseStatus
     });
+<<<<<<< HEAD
+	
+    $(".sales-select").select2({
+        placeholder: '销售',
+        data: sales
+    });
+    
+    $(".reason-select").select2({
+    	placeholder:"无效原因",
+    	data:reason
+    });
+    
+    $(".confirmDelModal .submit").click(function(){
+    	delSubmit();
+    });
+    
+    $(".confirmDelModal .cancel").click(function(){
+      	$(".confirmDelModal").modal("hide");
+  	});
+		 
+=======
+>>>>>>> 5d874c819f340cf1dc2f24915c875f49f271e08d
 			var t = jQuery('#dataTable').DataTable({
 				searching:false,
 				pageLength: 10,
@@ -142,7 +267,7 @@
 				serverSide: true,
 				ajax: {
 					url: '${rootPath}case/list.do',
-					data: function( data){
+					data: function(data){
 			 			var searchCustomerId=$('#searchCustomerId').val();
 			 			var searchCustomerName=$('#searchCustomerName').val();
 			 			var searchCaseId=$('#searchCaseId').val();
@@ -192,7 +317,6 @@
 			 			if(searchMobile !=null && searchMobile !=""){
 			 				data.mobilePhone = searchMobile;
 			 			}
-			 			
 					},
 					
 					dataFilter: function(data){
@@ -221,15 +345,19 @@
 	 					{
 			                orderable: false,
 			                render: function ( data, type, full, meta ) {
+			                	var destinations="";
 			                	if(full.destination){
-				                	for(var i=0;i <destination.length;i++){
-				                		if(full.destination==destination[i].id){
-				                			return "<div class='width85'>" + destination[i].text + "</div>" + "<div class='width85'>" + full.budget + "</div>"
+			                	var des=full.destination.split(",");
+			                	for(var j = 0;j<des.length;j++){
+			                		for(var i=0;i <destination.length;i++){
+				                		if(des[j]==destination[i].id){
+				                			destinations+=destination[i].text+",";
 				                		}				                	
 				                	}
-				                	return "";
 			                	}
-			                	else{return ""}
+			                }
+			                destinations=destinations.substring(0,destinations.length-1);
+			                return "<div class='width85'>" + destinations + "</div>" + "<div class='width85'>" + full.budget + "</div>";
 			                },
 			                targets: 2
 						},	  
@@ -256,15 +384,27 @@
 			                },
 			                  targets: 3
 						},
+<<<<<<< HEAD
+						 {
+=======
 						 {	
+>>>>>>> 5d874c819f340cf1dc2f24915c875f49f271e08d
 			                orderable: false,
 			                render: function ( data, type, full, meta ) {
+			                	var time = data.time;
+			                	
+			                	if(data.time){
+			                		time=new Date(time).format("yyyy-MM-dd hh:mm:ss");
+			                	}else{
+			                		time="";
+			                	}
 			                	if(full){
-			                		for(var i=0;i <  caseStatus.length;i++){
+			                		for(var i=0;i<caseStatus.length;i++){
 				                		if(full.status==caseStatus[i].id){
-				                			return "<div class='caselist-6'>" + caseStatus[i].text + "</div>" + "<div class='caselist-7'>" + new Date(data.time).format("yyyy-MM-dd hh:mm:ss"); + "</div>"
+				                			return "<div class='caselist-6'>" + caseStatus[i].text + "</div>" + "<div class='caselist-7'>" + time + "</div>"
 				                		}
 				                	}
+			                		
 			                	}
 			                	else{return ""}
 			                },
@@ -396,8 +536,59 @@
 			window.parent.location = "${rootPath}case/handle.html?id="+id;
 		}
 		
+<<<<<<< HEAD
+		function del(id) {
+			 
+			 $(".confirmDelModal .hiddenId").val("");
+			 $(".confirmDelModal .hiddenId").val(Number(id));
+		 	 $(".confirmDelModal").modal('show');
+		}
+		
+		function doDel(id){
+			$.ajax({
+				url: "${rootPath}case/del.do?id=" + id, 
+				success: function() {
+					window.location.reload();
+				},
+				error: function() {
+					alert(2);
+				}
+			});			
+		}
+  		function order_submit() {
+			var order= $("#form-order").serialize();
+			$.post('${rootPath}order/add.do', order, function(result) {
+				var rmsg = result.msg;
+				if (result.success) {
+					window.parent.location = "${rootPath}case/list.html";
+				} else {
+					$("#nextModal").modal('hide');
+					$("#NoEmail").modal('show');
+				}
+			}, "JSON");
+	}
+  	  
+  	  function delSubmit() {
+    	  var f1=$("#form-del").serialize();
+     	  try{
+     		  $.post("${rootPath}case/del.do", f1, function(result) {
+				var rmsg = result.msg;
+				if (result.success) {
+					window.parent.location = "${rootPath}case/list.html";
+				} 
+				else {
+					$("#msgModal").modal('show');
+				}
+			}, "JSON");
+     		  }
+     	  catch(e) {
+     		  alert(e);
+     	  }
+     	 alert("页面正在加载，请稍后...");
+      }
+=======
 
+>>>>>>> 5d874c819f340cf1dc2f24915c875f49f271e08d
 	</script>
-
 </body>
 </html>

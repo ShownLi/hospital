@@ -61,7 +61,7 @@
                     <div class="form-group col-sm-4">
                       <label class="col-sm-4 control-label">目的地</label>
                       <div class="col-sm-8">
-                        <input type="text" name="destination" placeholder="目的地" class="destination-select fullwidth" readonly value="${order.destination}" />
+                        <select id="destination" name="destination" class="contact-select-country fullwidth" multiple="multiple"></select>
                       </div>
                     </div>
                     <div class="form-group col-sm-4">
@@ -393,6 +393,13 @@
 		data: currency
 	})  
 	
+	 $(".contact-select-country").select2({
+    	placeholder: '可多选',
+    	minimumResultsForSearch: Infinity,
+    	data: country
+     });
+    $(".contact-select-country").val('${order.destination}'.split(",")).trigger("change");
+	
  	$(".status-select").select2({
 		data: orderStatus
 	}) 
@@ -409,14 +416,12 @@
     
 	if("${order.status}"==2){
  	  $("#form-updateDeal").show();
- 
       $("#btn-baseDeal").attr("disabled",true);
       $("#btn-baseNoDeal").attr("disabled",true);
  	 }
     
 	if("${order.status}"==3){
       $("#form-updateNoDeal").show();
-      
       $("#btn-baseDeal").attr("disabled",true);
       $("#btn-baseNoDeal").attr("disabled",true);
   	}		
@@ -598,8 +603,7 @@
 		                },
 		                targets: 3
 					  },		 
-
-				],
+				    ],
 		columns: [
 	  			    { data: "commentId" },
 	  			    { data: "userName" },
