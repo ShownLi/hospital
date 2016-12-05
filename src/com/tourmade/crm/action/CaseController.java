@@ -308,7 +308,7 @@ public class CaseController extends BaseSimpleFormController {
 			//判断是否有老客人,通过联系方式和portalId判断(添加询单)
 			List<Customer> judgeCustomer = service.judgeCustomer(crmcase);
 			if(judgeCustomer.size()>0){
-				crmcase.setStatus("1");
+				crmcase.setStatus("1");   
 				service.saveCase(crmcase);
 				customerMap.put("caseId",crmcase.getCaseId());
 				customerMap.put("success", true);
