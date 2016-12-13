@@ -269,7 +269,7 @@ public class OrderService extends BaseService {
 		upOrder.setAgencySeEmailAlias("as"+formatedOrderid+"@"+domain);
 		upOrder.setCustomerReEmailAlias("cr"+formatedOrderid+"@"+domain);
 		upOrder.setCustomerSeEmailAlias("cs"+formatedOrderid+"@"+domain);
-		System.out.println(upOrder);
+		//System.out.println(upOrder);
 		updateOrder(upOrder);
 	}
 	

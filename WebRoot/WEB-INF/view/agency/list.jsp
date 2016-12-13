@@ -33,7 +33,9 @@
 									</div>
 									<div class="col-sm-2">
 										<input type="text" id="searchCountry" class="country-select fullwidth" value="" />
-										<input class="btn tn-primary" type="button" id="serarchCountryClear"/> 
+									</div>
+									<div class="col-sm-2">
+										<input type="text" id="searchDestination" class="destination-select fullwidth" value="" />
 									</div>
 								</div>	
 								<div class="col-sm-2">					 		                        		
@@ -50,6 +52,7 @@
 								<thead>
 									<tr>
 										<th>地接社名</th>
+										<!-- <th>目的地</th> -->
 										<th>国家</th>
 										<th>语言</th>
 										<th>操作</th>
@@ -97,10 +100,15 @@
 <script type="text/javascript">
 	var country= ${country};
 	var language = ${language};
+	var destination = ${destination};
 	
 	$(".country-select").select2({
         placeholder: '国家',
         data: country
+    });
+	$(".destination-select").select2({
+        placeholder: '目的地',
+        data: destination
     });
 	
 	jQuery(document).ready(function() {
@@ -119,13 +127,16 @@
 			data:function ( data ) {
 				var searchAgencyName=$('#searchAgencyName').val();
 	 			var searchCountry=$('#searchCountry').val();
-	 			
+	 			var searchDestination=$('#searchDestination').val();
 	 			
 	 			if(searchAgencyName !=null && searchAgencyName !="" ){
 					data.name = searchAgencyName;
 	 			}
 	 			if(searchCountry !=null && searchCountry !="" ){
 					data.country = searchCountry;
+	 			}
+	 			if(searchDestination !=null && searchDestination !="" ){
+					data.destination = searchDestination;
 	 			} 
 	 			
 			},

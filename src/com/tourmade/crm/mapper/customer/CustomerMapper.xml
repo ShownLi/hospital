@@ -199,4 +199,17 @@
 		u.isdel as isdel
 		from tm_customer u where u.email = #{email}
 	</select>
+	
+	<update id="updateOrderEmail" parameterType="Customer" flushCache="true">
+		update tm_order 
+		set
+		customer_email_real = #{email} 
+		where order_id  
+		in (select a.id from 
+		((select order_id as id from tm_order 
+		where customer_id = ${customerId} 
+		and customer_email_real = "")a)
+		);
+	</update>
+	
 </mapper>

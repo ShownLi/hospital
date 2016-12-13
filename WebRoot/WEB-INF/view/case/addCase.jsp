@@ -34,12 +34,9 @@
                     <div class="form-group col-sm-4">
                       <label class="col-sm-4 control-label">所属客人</label>
                       <div class="col-sm-8">
-<<<<<<< HEAD
-                        <select name="destination" class="contact-select-country fullwidth" multiple="multiple">
-					</select>         
-=======
+
                         <input type="text" name="customerId" placeholder="所属客人" class="customer-select fullwidth" value="${customerId}" />
->>>>>>> 5d874c819f340cf1dc2f24915c875f49f271e08d
+
                       </div>
                     </div>
                     <div class="form-group col-sm-4">
@@ -51,18 +48,10 @@
                     <div class="form-group col-sm-4">
                       <label class="col-sm-4 control-label">希望联系方式</label>
                       <div class="col-sm-8">
-<<<<<<< HEAD
-	                    <select name="contactType" class="contact-select fullwidth" multiple="multiple">
-							  <option value="wechat">微信</option>
-							  <option value="mobile">手机</option>							  
-							  <option value="qq">qq</option>
-					  		  <option value="mail">邮箱</option>
-						</select>
-=======
-	                      <select name="contactType" class="contact-select fullwidth" multiple="multiple">
 
-					</select>
->>>>>>> 5d874c819f340cf1dc2f24915c875f49f271e08d
+	                    <select name="contactType" class="contact-select fullwidth" multiple="multiple">
+						</select>
+	              
                       </div>
                     </div> 
                     <div class="form-group col-sm-4">
@@ -74,7 +63,7 @@
 	                <div class="form-group col-sm-4">
 	                    <label class="col-sm-4 control-label">跟单员</label>
 	                    <div class="col-sm-8">
-	                      <input type="text"  name="operator" class="user-select fullwidth" value="0" />
+	                      <input type="text"  name="operator" class="user-select fullwidth" value="${sessionScope.loginUser.userId}" />
 	                    </div>
 
 	                </div>                        
@@ -90,7 +79,8 @@
                    	<div class="form-group col-sm-4">
                       <label class="col-sm-4 control-label">目的地</label>
                       <div class="col-sm-8">
-                        <input type="text" id="destination" name="destination" class="country-select fullwidth" value="" />              
+                      <select name="destination" class="contact-select-country fullwidth" multiple="multiple">
+					</select>         
                       </div>
                     </div>    
                 </div>
@@ -348,16 +338,16 @@
     var user = ${user};
     var sales = ${sales};
 
-    var level = ${level};
-	var ageGroup = ${ageGroup};
+    //var level = ${level};
+	//var ageGroup = ${ageGroup};
 	
-	$(".agegroup-select").select2({
+	/* $(".agegroup-select").select2({
 		placeholder: '选择一个年龄段',
 	  	data: ageGroup
 	});
 	$(".level-select").select2({
 	  	data: level
-	});	
+	});	 */
 	$(".contact-select-country").select2({
 	    	placeholder: '可多选',
 	    	minimumResultsForSearch: Infinity,

@@ -141,6 +141,10 @@ public class CustomerController extends BaseSimpleFormController {
 
 		Json j = new Json();
 		try {
+			//如果邮箱不为空，找到该客人对应的没有保存邮箱的订单，更新邮箱
+			if(customer.getEmail()!=""&&customer.getEmail()!=null){
+				customerService.updateOrderEmail(customer);
+			}
 			customerService.updateCustomer(customer);
 			j.setSuccess(true);
 		} catch (Exception e) {

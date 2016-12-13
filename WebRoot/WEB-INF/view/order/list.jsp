@@ -568,7 +568,8 @@ console.log(destination);
 			 
 			 $('#dataTable tbody').on( 'click', 'a.btn-sendMaile', function () {
 		         var data = t.row($(this).parents('tr')).data();
-		         sendOrderEmail(data);  //$(this).attr('id')获取属性节点(id)的值
+		         sendOrderEmail(data);  
+		         //$(this).attr('id')获取属性节点(id)的值
 		     } );
 			 
 			  $('#confirmDelModal').on( 'click', 'button.btn-danger', function () {
@@ -607,10 +608,10 @@ console.log(destination);
 						var rmsg = result.msg;
 						if (result.success) {
 							//window.parent.location = "${rootPath}order/list.html";
-							alert("邮件发送成功了");
+							alert("邮件发送成功");
 						} 
 						else {
-							alert("邮件发送失败了");
+							alert("邮件发送失败，请检查地接社是否允许发邮件");
 						}
 					}, "JSON");
 				}else{
@@ -623,7 +624,7 @@ console.log(destination);
 							alert("邮件发送成功了");
 						} 
 						else {
-							alert("邮件发送失败了");
+							alert("邮件发送失败，请检查地接社是否允许发邮件");
 						}
 					}, "JSON");
 				}

@@ -307,9 +307,10 @@ public class CaseController extends BaseSimpleFormController {
 			//判断是否有老客人,通过联系方式和portalId判断(添加询单)
 			List<Customer> judgeCustomer = service.judgeCustomer(crmcase);
 			if(judgeCustomer.size()>0){
-				crmcase.setStatus("1");   
+				crmcase.setStatus("1");
+				customerMap.put("cust", judgeCustomer);
 				service.saveCase(crmcase);
-				customerMap.put("caseId",crmcase.getCaseId());
+				customerMap.put("cid",crmcase.getCaseId());
 				customerMap.put("success", true);
 				return customerMap;
 				//没有老客人，添加客人和询单
@@ -328,8 +329,6 @@ public class CaseController extends BaseSimpleFormController {
 			return map;
 		}		
 	}
-	
-	
 	
 	//datatables形式
 	/*@RequestMapping(value = "/add.do",produces="application/json;charset=utf-8")

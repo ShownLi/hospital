@@ -100,7 +100,6 @@
 
 	<script src="${rootPath}assets/js/jquery.datatables.min.js"></script>
 	<script src="${rootPath}assets/js/select2.min.js"></script>
-<<<<<<< HEAD
 
 <!-- Modal -->
 <!-- <div class="modal fade" id="confirmDelModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
@@ -201,8 +200,7 @@
 </div><!-- bmodal -->
 
 
-=======
->>>>>>> 5d874c819f340cf1dc2f24915c875f49f271e08d
+
 	<script type="text/javascript">
  	var source = ${source}; 
 	var caseStatus = ${caseStatus};
@@ -237,7 +235,6 @@
         placeholder: '状态',
         data: caseStatus
     });
-<<<<<<< HEAD
 	
     $(".sales-select").select2({
         placeholder: '销售',
@@ -257,8 +254,7 @@
       	$(".confirmDelModal").modal("hide");
   	});
 		 
-=======
->>>>>>> 5d874c819f340cf1dc2f24915c875f49f271e08d
+
 			var t = jQuery('#dataTable').DataTable({
 				searching:false,
 				pageLength: 10,
@@ -384,11 +380,8 @@
 			                },
 			                  targets: 3
 						},
-<<<<<<< HEAD
-						 {
-=======
 						 {	
->>>>>>> 5d874c819f340cf1dc2f24915c875f49f271e08d
+
 			                orderable: false,
 			                render: function ( data, type, full, meta ) {
 			                	var time = data.time;
@@ -536,7 +529,7 @@
 			window.parent.location = "${rootPath}case/handle.html?id="+id;
 		}
 		
-<<<<<<< HEAD
+
 		function del(id) {
 			 
 			 $(".confirmDelModal .hiddenId").val("");
@@ -586,9 +579,8 @@
      	  }
      	 alert("页面正在加载，请稍后...");
       }
-=======
 
->>>>>>> 5d874c819f340cf1dc2f24915c875f49f271e08d
+
 	</script>
 </body>
 </html>
