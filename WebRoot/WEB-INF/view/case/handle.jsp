@@ -707,7 +707,6 @@
 	<script src="${rootPath}assets/js/jquery.validate.min.js"></script>
 	
 <script type="text/javascript">
-	console.log("${crmcase}");
 	var country = ${country};
     var language = ${language};
     var withwho = ${withwho};

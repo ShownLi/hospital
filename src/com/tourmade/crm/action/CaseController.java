@@ -308,8 +308,9 @@ public class CaseController extends BaseSimpleFormController {
 			List<Customer> judgeCustomer = service.judgeCustomer(crmcase);
 			if(judgeCustomer.size()>0){
 				crmcase.setStatus("1");
+				customerMap.put("cust", judgeCustomer);
 				service.saveCase(crmcase);
-				customerMap.put("caseId",crmcase.getCaseId());
+				customerMap.put("cid",crmcase.getCaseId());
 				customerMap.put("success", true);
 				return customerMap;
 				//没有老客人，添加客人和询单
@@ -422,14 +423,23 @@ public class CaseController extends BaseSimpleFormController {
 			Case crmcase = service.getCaseById(caseId);
 			
 			//解决客人的要求换行符问题
-			if(crmcase.getRequirement()!=null){			
-				String[] splits= crmcase.getRequirement().split("\r\n");
+			System.out.println(crmcase.getRequirement());
+			if(crmcase.getRequirement()!=null){
+				crmcase.setRequirement(crmcase.getRequirement().replaceAll("\r", ""));
+				String[] splits= crmcase.getRequirement().split("\n");
 				String realRequire="";
-				for(String split:splits){
-					realRequire+=split+"\\r\\n";
-				}		
+				for(int i=0;i<splits.length;i++){
+					if(i==splits.length-1){
+						realRequire+=splits[i];
+					}
+					else{
+						realRequire+=splits[i]+"\\r\\n";					
+					}
+				}					
 				crmcase.setRequirement(realRequire);
 			}
+			System.out.println(crmcase.getRequirement());
+			
 			
 			crmcase=service.validateStartTime(crmcase);
 			Customer cus = null;
@@ -540,6 +550,9 @@ public class CaseController extends BaseSimpleFormController {
 
 		Map<String,Object> customerMap =new HashMap<String, Object>();
 		Map<String,String> map =new HashMap();
+		
+		
+		
 		try {
 			//判断是否有portalId
 			if( crmcase.getPortalId()!=null && crmcase.getPortalId()!=0) {
@@ -589,9 +602,15 @@ public class CaseController extends BaseSimpleFormController {
 			if(crmcase.getRequirement()!=null){			
 				String[] splits= crmcase.getRequirement().split("\r\n");
 				String realRequire="";
-				for(String split:splits){
-					realRequire+=split+"\\r\\n";
-				}		
+				for(int i=0;i<splits.length;i++){
+					if(i==splits.length-1){
+						realRequire+=splits[i];
+					}
+					else{
+						realRequire+=splits[i]+"\\r\\n";					
+					}
+				}
+					
 				crmcase.setRequirement(realRequire);
 			}
 			

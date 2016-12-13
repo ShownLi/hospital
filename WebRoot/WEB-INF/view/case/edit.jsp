@@ -21,357 +21,7 @@
 			<div class="contentpanel">
 				<!-- content goes here... -->
 
-<<<<<<< HEAD
-		<div class="panel panel-default">
-        <div class="panel-heading">
-          <div class="panel-btns">
-            <a href="" class="minimize">&minus;</a>
-          </div>
-          <h4 class="panel-title">询单基本信息</h4>
-          <p>填写下表，完成询单编辑。</p>
-        </div>
-        <form class="form-horizontal" id="form-case">
-        <div class="panel-body panel-body-nopadding">
-        
-        	<div class="section-block">
-        		<h5 class="section-title">客人基本信息</h5>
-        		<div class="form-group col-sm-4" >
-              	   <label class="col-sm-4 control-label">客人ID</label>
-                  	<div class="col-sm-8">
-                      	<input type="text" name="customerId" placeholder="客人ID" readonly class="form-control" value="${crmcase.customerId}" readonly />
-                    </div>
-              	</div> 
-	            <div class="form-group col-sm-4">
-	              <label class="col-sm-3 control-label">客人名<span class="asterisk">*</span></label>
-	              <div class="col-sm-9">
-	                <input type="text" name="chineseName" placeholder="中文名" class="form-control" value="${crmcase.chineseName}" />
-	              </div>
-	            </div>
-				<%--<div class="form-group col-sm-4">
-	              <label class="col-sm-3 control-label">英文名</label>
-	              <div class="col-sm-9">
-	                <input type="text" name="englishName" placeholder="英文名" class="form-control" value="${crmcase.englishName}"/>
-	              </div>
-	            </div>  --%>
-	            <div class="form-group col-sm-4">
-	            	<label class="col-sm-3 control-label">生日</label>
-	            	<div class="col-sm-9 input-group input-datepicker">
-		                <input type="text" name="birthday" class="datepicker form-control" placeholder="yyyy/mm/dd" id="birthday" autocomplete="off" value="${crmcase.birthday}">
-		                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-	                </div>
-	            </div> 
-	            <div class="form-group col-sm-4">
-	              <label class="col-sm-3 control-label" >年龄段</label>
-	              <div class="col-sm-9">
-	                <input type="text" name="ageGroup" placeholder="请选择一个年龄段" readonly class="form-control" value="${crmcase.ageGroup}"/>
-	              </div>
-	            </div>
-            	<div class="form-group col-sm-4">
-            	<label class="col-sm-4 control-label">客人级别</label>
-            	<div class="col-sm-8">
-                    <input type="text" name="level" id="level" class="level-select fullwidth" readonly  value="${customerInfo.level}" />
-                </div>
-            	</div> 
-	            <div class="form-group col-sm-4">
-	              <label class="col-sm-3 control-label" >性别 <span class="asterisk">&nbsp;</span></label>
-	              <div class="col-sm-9">
-	                <div class="rdio rdio-primary rdio-inline">
-	                  <input type="radio" id="male" value="male" name="gender">
-	                  <label for="male">男</label>
-	                </div><!-- rdio -->
-	                <div class="rdio rdio-primary rdio-inline">
-	                  <input type="radio" id="female" value="female" name="gender" >
-	                  <label for="female">女</label>
-	                </div><!-- rdio -->
-	              </div>
-	            </div> 
-	        </div>
-	        
-	        <div class="section-block">
-	        	<h5 class="section-title">客人联系方式  <span class="contact-note">(手机、微信、QQ、邮箱至少填写一个)</span></h5>
-	            <div class="form-group col-sm-4 contact-field">
-	              <label class="col-sm-3 control-label">固定电话</label>
-	              <div class="col-sm-9">
-	                <input type="text" name="telephone" placeholder="固定电话" class="form-control" value="${crmcase.telephone}" />
-	              </div>
-	            </div>
-	            <div class="form-group col-sm-4 contact-field">
-	              <label class="col-sm-3 control-label">手机</label>
-	              <div class="col-sm-9">
-	                <input type="text" name="mobile" placeholder="手机" class="form-control" value="${crmcase.mobile}" />
-	              </div>
-	            </div>    
-	            <div class="form-group col-sm-4 contact-field">
-	              <label class="col-sm-3 control-label">微信</label>
-	              <div class="col-sm-9">
-	                <input type="text" name="wechat" placeholder="微信" class="form-control" value="${crmcase.wechat}"/>
-	              </div>
-	            </div>       
-	            <div class="form-group col-sm-4 contact-field">
-	              <label class="col-sm-3 control-label">QQ</label>
-	              <div class="col-sm-9">
-	                <input type="text" name="qq" placeholder="QQ" class="form-control" value="${crmcase.qq}"/>
-	              </div>
-	            </div>            
-	            <div class="form-group col-sm-4 contact-field">
-	              <label class="col-sm-3 control-label">邮箱</label>
-	              <div class="col-sm-9">
-	                <input type="text" name="email" placeholder="邮箱" class="form-control" value="${crmcase.email}"/>
-	              </div>
-	            </div>  
-	            <%-- <div class="form-group col-sm-4">
-	              <label class="col-sm-3 control-label">所在地</label>
-	              <div class="col-sm-9">
-	                <input type="text" name="location" placeholder="所在地" class="form-control" value="${crmcase.location}"/>
-	              </div>
-	            </div>  --%>
-	        </div>
-        
-            <div class="section-block">
 
-                <div class="form-group col-sm-4">
-                    <label class="col-sm-4 control-label">沟通语言</label>
-                    <div class="col-sm-8">
-                      <input type="text" name="preferLanguage" class="language-select fullwidth" value="${crmcase.preferLanguage}"/>
-                    </div>
-                </div>
-                <div class="form-group col-sm-4">
-                    <label class="col-sm-4 control-label">希望联系方式</label>
-                    <div class="col-sm-8">
-                      <select name="contactType" class="contact-select fullwidth" multiple="multiple">
-  					  </select>
-                    </div>
-                </div>   
-                <div class="form-group col-sm-4">
-                    <label class="col-sm-4 control-label">询单来源</label>
-                    <div class="col-sm-8">
-                      <input type="text" name="source" class="source-select fullwidth" value="${crmcase.source}" />
-                    </div>
-                </div>
-                
-                <div class="form-group col-sm-4">
-                <label class="col-sm-4 control-label">状态</label>
-                <div class="col-sm-8">
-                   <input type="text" name="status" class="status-select fullwidth" value="${crmcase.status}" />
-                </div>
-                </div>
-            </div>
-            
-     
-           <%-- <div class="section-block">
-            	<div class="form-group col-sm-4">
-            	<label class="col-sm-4 control-label">英文名</label>
-            	<div class="col-sm-8">
-                    <input type="text" name="englishName" id="englishName" class="form-control" readonly value="${customerInfo.englishName}" />
-                </div>
-            	</div>
-            	
-            	<div class="form-group col-sm-4">
-            	<label class="col-sm-4 control-label">性别</label>
-            	<div class="col-sm-8">
-                    <input type="text" name="gender" id="gender" class="gender-select fullwidth" readonly value="${customerInfo.gender}" />
-                </div>
-            	</div>
-            	
-            	<div class="form-group col-sm-4">
-            	<label class="col-sm-4 control-label">生日</label>
-            	<div class="col-sm-8">
-                    <input type="text" name="birthday" id="birthday" class="form-control" readonly value="${customerInfo.birthday}" />
-                </div>
-            	</div>
-            	
-            	<div class="form-group col-sm-4" style="clear: both;">
-            	<label class="col-sm-4 control-label">年龄段</label>
-            	<div class="col-sm-8">
-                    <input type="text" name="ageGroup" id="ageGroup" class="form-control" readonly value="${customerInfo.ageGroup}" />
-                </div>
-            	</div> --%>
-            	
-          	
-            </div> 
-            
-            <div class="section-block">           
-            	<div class="form-group col-sm-4">
-                <label class="col-sm-4 control-label">IP地址</label>
-                 <div class="col-sm-8">
-                     <input type="text" name="ipAddress" class="form-control" readonly value="${crmcase.ipAddress}" />
-                </div>
-                </div>               
-                
-                <div class="form-group col-sm-4">
-                <label class="col-sm-4 control-label">推广码</label>
-                <div class="col-sm-8">
-                   <input type="text" name="promoteCode" class="form-control" readonly value="${crmcase.promoteCode}" />
-                </div>
-                </div> 
-                
-               	<div class="form-group col-sm-4">
-                  <label class="col-sm-4 control-label">表单类型</label>
-                <div class="col-sm-8">
-                   <input type="text" name="submitType" class="form-control" readonly value="${crmcase.submitType}" />
-                </div>
-                </div>       
-                
-                <div class="form-group col-sm-4">
-                  <label class="col-sm-4 control-label">目的地</label>
-                <div class="col-sm-8">
-                    <!-- <input type="text" id="destination" name="destination" class="destination-select fullwidth" value="${crmcase.destination}" /> -->
-                    <select id="destination" name="destination" class="contact-select-country fullwidth" multiple="multiple"></select>
-                </div>
-                </div>
-                     
-                <div class="form-group col-sm-4">
-                <label class="col-sm-4 control-label">跟单员</label>
-                <div class="col-sm-8">
-                     <input type="text" name="operator" class="user-select fullwidth" value="${crmcase.operator}" />
-                </div>
-                </div>      
-            </div>
-            
-            <div class="section-block">
-                <div class="form-group col-sm-4">
-                  <label class="col-sm-4 control-label">与谁同行</label>
-                  <div class="col-sm-8">
-                    <input type="text" name="withwho" class="withwho-select fullwidth" value="${crmcase.withwho}" />
-                  </div>
-                </div>
-                <div class="form-group col-sm-4" style="clear: both;">
-                  <label class="col-sm-4 control-label">成人</label>
-                  <div class="col-sm-8">
-                    <input type="text" name="adult" placeholder="成人" class="form-control" value="${crmcase.adult}" />
-                  </div>
-                </div>
-                <div class="form-group col-sm-4">
-                  <label class="col-sm-6 control-label">儿童（12岁以下）</label>
-                  <div class="col-sm-6">
-                    <input type="text" name="children" placeholder="儿童（12岁以下）" class="form-control" value="${crmcase.children}" />
-                  </div>
-                </div>
-                <div class="form-group col-sm-4">
-                  <label class="col-sm-6 control-label">婴儿（0-2岁）</label>
-                  <div class="col-sm-6">
-                    <input type="text" name="baby" placeholder="婴儿（0-2岁）" class="form-control" value="${crmcase.baby}" />
-                  </div>
-                </div>
-            </div>
-            <div class="section-block">
-                   	<div class="form-group col-sm-4">
-        	              <label class="col-sm-4 control-label">出发时间 <span class="asterisk">&nbsp;</span></label>
-        	              <div class="col-sm-8">
-        	                <div class="rdio rdio-primary rdio-inline">
-        	                  <input type="radio" id="yes" value="1" name="startTime"/>
-        	                  <label for="yes">已确定</label>
-        	                </div><!-- rdio -->
-        	                <div class="rdio rdio-primary rdio-inline">
-        	                  <input type="radio" id="no" value="0" name="startTime" />
-        	                  <label for="no">未确定</label>
-        	                </div><!-- rdio -->
-        	                <label class="error" for="startTime"></label>
-        	              </div>
-                    </div>
-               <div class="form-group col-sm-4 start-time">
-                  <label class="col-sm-4 control-label">大约时间</label>
-                  <div class="col-sm-8 input-group input-datepicker">
-                    <input type="text" id="startMonth" name="startMonth" class="form-control datepicker" placeholder="yyyy/mm/dd" value="${crmcase.startMonth}" autocomplete="off">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                  </div>
-                </div> 
-                <div class="form-group col-sm-4 start-time">
-                  <label class="col-sm-4 control-label">大约天数</label>
-                  <div class="col-sm-8">
-                    <input type="text" name="during" placeholder="大约天数" class="form-control" value="${crmcase.during}" />
-                  </div>
-                </div> 
-                <div class="form-group col-sm-4 start-date">
-                  <label class="col-sm-4 control-label">出发日期</label>
-                  <div class="col-sm-8 input-group input-datepicker">
-                    <input type="text" id="startDate" name="startDate" class="form-control datepicker" placeholder="yyyy/mm/dd" value="${crmcase.startDate}" autocomplete="off">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                  </div>
-                </div> 
-                <div class="form-group col-sm-4 start-date">
-                  <label class="col-sm-4 control-label">返回日期</label>
-                  <div class="col-sm-8 input-group input-datepicker">
-                    <input type="text" id="endDate" name="endDate" class="form-control datepicker" placeholder="yyyy/mm/dd" value="${crmcase.endDate}" autocomplete="off">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                  </div>
-                </div>
-            </div>
-            <div class="section-block">
-                <div class="form-group col-sm-4">
-                    <label class="col-sm-5 control-label">定制偏好</label>
-                    <div class="col-sm-7">
-                      <input type="text" name="tailormade" placeholder="定制偏好" class="tailormade-select fullwidth" value="${crmcase.tailormade}" />
-                    </div>
-                </div>
-                <div class="form-group col-sm-4">
-                  <label class="col-sm-4 control-label">关于住宿</label>
-                  <div class="col-sm-8">
-                    <input type="text" name="hotel" class="hotel-select fullwidth" value="${crmcase.hotel}" />
-                  </div>
-                </div>
-                <div class="form-group col-sm-4">
-                  <label class="col-sm-4 control-label">关于用餐</label>
-                  <div class="col-sm-8">
-                    <input type="text" name="meals" class="meals-select fullwidth" value="${crmcase.meals}" />
-                  </div>
-                </div>
-                <div class="form-group col-sm-4">
-                  <label class="col-sm-5 control-label">关于司机和导游</label>
-                  <div class="col-sm-7">
-                    <input type="text" name="guide" class="guide-select fullwidth" value="${crmcase.guide}" />
-                  </div>
-                </div>
-                <div class="form-group col-sm-4">
-                  <label class="col-sm-4 control-label">客人的预算</label>
-                  <div class="col-sm-8">
-                    <input type="text" name="budget" placeholder="客人的预算" class="form-control" value="${crmcase.budget}" />
-                  </div>
-                </div>
-                <div class="form-group col-sm-8">
-                  <label class="col-sm-2 control-label">客人的要求</label>
-                  <div class="col-sm-9" style="margin-left: 23px;">
-              		<textarea id="requirement" name="requirement" class="form-control" placeholder="客人的要求" rows="5"></textarea>
-                  </div>
-                </div>
-            </div>
-            <div class="section-block">
-                    <div class="form-group col-sm-4">
-                        <label class="col-sm-4 control-label">护照</label>
-                        <div class="col-sm-8">
-                          <input type="text" name="passport" placeholder="护照" class="passport-select fullwidth" value="${crmcase.passport}" />
-                        </div>
-                    </div>
-                    <div class="form-group col-sm-4">
-                        <label class="col-sm-4 control-label">签证</label>
-                        <div class="col-sm-8">
-                          <input type="text" name="visa" placeholder="签证" class="visa-select fullwidth" value="${crmcase.visa}" />
-                        </div>
-                    </div>
-                    <div class="form-group col-sm-4">
-                        <label class="col-sm-4 control-label">国际航班</label>
-                        <div class="col-sm-8">
-                          <input type="text" name="flight" placeholder="国际航班" class="flight-select fullwidth" value="${crmcase.flight}" />
-                        </div>
-                    </div>
-                     <div class="form-group col-sm-4" id="div-delInfo" style="display:none">
-                        <label class="col-sm-4 control-label">无效原因</label>
-                        <div class="col-sm-8">
-                          <input type="text" name="reason" placeholder="无效原因" class="reason-select fullwidth"  value="${crmcase.reason}" />
-                        </div>
-                    </div>
-               
-        </div><!-- panel-body -->
-        
-        <div class="panel-footer align-center">
-            <button id="btn-addorder" class="btn btn-primary">分配地接社</button>&nbsp;
-            <button class="btn btn-primary">保存</button>&nbsp;
-            <input  type="hidden" name="caseId" value="${crmcase.caseId}" />
-            <button id="btn-invalid"  class="btn btn-danger" >无效</button>&nbsp;
-            <button id="btn-back" class="btn btn-default">返回</button>
-		 </div><!-- panel-footer -->
-     </form>   
-      </div><!-- panel -->
       
          <!-- panel 是否无效 -->
       <div class="panel panel-default">
@@ -387,7 +37,7 @@
 					<form class="form-horizontal" id="form-case">
 						<div class="panel-body panel-body-nopadding">
 
->>>>>>> 5d874c819f340cf1dc2f24915c875f49f271e08d
+
 
 							<div class="section-block">
 								<h5 class="section-title">客人基本信息</h5>
@@ -440,13 +90,13 @@
 											class="form-control" value="${crmcase.email}" />
 									</div>
 								</div>
-								<div class="form-group col-sm-4">
+								<%-- <div class="form-group col-sm-4">
 									<label class="col-sm-3 control-label">所在地</label>
 									<div class="col-sm-9">
 										<input type="text" name="location" placeholder="所在地"
 											class="form-control" value="${crmcase.location}" />
 									</div>
-								</div>
+								</div> --%>
 							</div>
 
 							<div class="section-block">
@@ -513,9 +163,8 @@
 							<div class="form-group col-sm-4">
 								<label class="col-sm-4 control-label">目的地</label>
 								<div class="col-sm-8">
-									<input type="text" id="destination" name="destination"
-										class="destination-select fullwidth"
-										value="${crmcase.destination}" />
+									 <select id="destination" name="destination" class="contact-select-country fullwidth" multiple="multiple">
+									</select>     
 								</div>
 							</div>
 
@@ -712,7 +361,7 @@
 
 						<div class="panel-footer align-center">
 
-							<input class="btn btn-primary" id="btn-addorder" type="button" value="添加订单" />&nbsp; 
+							<input class="btn btn-primary" id="btn-addorder" type="button" value="分配地接社" />&nbsp; 
 							<input class="btn btn-primary" type="submit" value="保存" />&nbsp;
 							<!-- <input class="btn btn-danger" id="btn-invalid"   type="button" value="无效"/>&nbsp; -->
 							<input class="btn btn-danger" id="btn-nodeal" type="button"
@@ -828,8 +477,10 @@
 				<!-- end of panel 注释 -->
 
 			</div>
-
+	
 		</div>
+		</div>
+	</div>
 		<!-- mainpanel -->
 		<%@ include file="../assets/pages/rightpanel.jsp"%>
 	</section>
@@ -1027,7 +678,7 @@
 
 	var contact =${contact};
 	$("#requirement").val("${crmcase.requirement}");	
-	$("#birthday").val(getBirthday());
+	//$("#birthday").val(getBirthday());
 
 	//接收联系方式
 	var contactData=${contact};
@@ -1048,14 +699,14 @@
 	$('#addEmail').attr("href",newHref);
 	$("#requirement").val("${crmcase.requirement}");	
 	
-	function getBirthday(){
+	/* function getBirthday(){
 		var date = $("#birthday").val();	
 		var dateformat = null;
 		if(!date.length==0){
 			dateformat = new Date(date).toISOString("yyyy-MM-dd hh:mm:ss.S").substring(0,10);
 		}
 		return dateformat;
-	}
+	} */
 	
  	$("#level").select2({
         data: level

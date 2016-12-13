@@ -135,7 +135,7 @@ public class OrderController extends BaseSimpleFormController {
 	public Json doAdd(HttpServletRequest request, HttpSession session, Model model, Order order) {
 		
 		Json json = new Json();
-		
+		//System.out.println("doAdd"+order);
 		if(order.getCaseId()!=0){
 		   Customer customer = service.getCustomerByCaseId(order.getCaseId());
 		   if(customer.getEmail().equals("")){
@@ -273,7 +273,7 @@ public class OrderController extends BaseSimpleFormController {
 		Order order = service.getOrderById(orderId);
 		int isSendmail = service.selectAgencyBySaleId(order.getSalesId());
 		if(isSendmail==0){
-			json.setSuccess(true);
+			json.setSuccess(false);
 			return json;
 		}else{
 			//邮件别名操作（创建邮件别名并将其写入order表）
@@ -298,7 +298,7 @@ public class OrderController extends BaseSimpleFormController {
 		Order order = service.getOrderById(orderId);
 		int isSendmail = service.selectAgencyBySaleId(order.getSalesId());
 		if(isSendmail==0){
-			json.setSuccess(true);
+			json.setSuccess(false);
 			return json;
 		}else{
 			//邮件别名操作（创建邮件别名并将其写入order表）

@@ -285,8 +285,12 @@ public class CustomerService extends BaseService {
 			logger.error("CustomerService.updateCustomerAPI() --> " + customer + "-->" + e.getMessage());
 			result = false;
 		}
-
+		
 		return result;
+	}
+
+	public void updateOrderEmail(Customer customer) {
+		customerMapper.updateOrderEmail(customer);
 	}
 
 }
