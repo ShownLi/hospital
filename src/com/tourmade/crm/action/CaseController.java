@@ -423,7 +423,6 @@ public class CaseController extends BaseSimpleFormController {
 			Case crmcase = service.getCaseById(caseId);
 			
 			//解决客人的要求换行符问题
-			System.out.println(crmcase.getRequirement());
 			if(crmcase.getRequirement()!=null){
 				crmcase.setRequirement(crmcase.getRequirement().replaceAll("\r", ""));
 				String[] splits= crmcase.getRequirement().split("\n");
@@ -438,7 +437,6 @@ public class CaseController extends BaseSimpleFormController {
 				}					
 				crmcase.setRequirement(realRequire);
 			}
-			System.out.println(crmcase.getRequirement());
 			
 			
 			crmcase=service.validateStartTime(crmcase);
@@ -599,8 +597,9 @@ public class CaseController extends BaseSimpleFormController {
 			Case crmcase = service.getCaseById(caseId);
 			
 			//解决客人的要求换行符问题
-			if(crmcase.getRequirement()!=null){			
-				String[] splits= crmcase.getRequirement().split("\r\n");
+			if(crmcase.getRequirement()!=null){		
+				crmcase.setRequirement(crmcase.getRequirement().replaceAll("\r", ""));
+				String[] splits= crmcase.getRequirement().split("\n");
 				String realRequire="";
 				for(int i=0;i<splits.length;i++){
 					if(i==splits.length-1){
@@ -610,7 +609,7 @@ public class CaseController extends BaseSimpleFormController {
 						realRequire+=splits[i]+"\\r\\n";					
 					}
 				}
-					
+
 				crmcase.setRequirement(realRequire);
 			}
 			

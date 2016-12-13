@@ -39,13 +39,13 @@ public class CaseService extends BaseService {
 	 * @param case
 	 * @param ph
 	 * @param request
-	 * @return
+	 * @return 
 	 */
 	public QueryResult<Case> queryCase(Case crmcase, PageHelper ph, HttpServletRequest request) {
 
 		QueryResult<Case> result = new QueryResult<Case>();
 		Map<String, Object> map = new HashMap<String, Object>();
-
+		
 		map.put("start", ph.getStart());
 		map.put("length", ph.getLength());;
 		//分页条件
@@ -83,7 +83,7 @@ public class CaseService extends BaseService {
 			map.put("email", crmcase.getEmail());
 		}
 		if(crmcase.getMobile()!=null){
-			map.put("mobilephone", crmcase.getMobile());
+			map.put("mobile", crmcase.getMobile());
 		}
 		
 		
