@@ -120,7 +120,9 @@ public class EmailService extends BaseService {
 		if(crmcase.getPreferLanguage() != null && !"".equals(crmcase.getPreferLanguage())){
 			boat.setDomain("case.preferlanguage");
 			boat.setValue(crmcase.getPreferLanguage());
+			System.out.println(crmcase.getPreferLanguage());
 			boat = emailMapper.getZhEn(boat);
+			System.out.println(boat);
 			template.setPreferChineseLanguage(boat.getChinese());
 			template.setPreferEnglishLanguage(boat.getEnglish());
 		}

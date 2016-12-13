@@ -707,7 +707,6 @@
 	<script src="${rootPath}assets/js/jquery.validate.min.js"></script>
 	
 <script type="text/javascript">
-	console.log("${crmcase}");
 	var country = ${country};
     var language = ${language};
     var withwho = ${withwho};
@@ -1107,7 +1106,6 @@
      	  catch(e) {
      		  alert(e);
      	  }
-     	 alert("页面正在加载，请稍后...");
       }
      
 	   
@@ -1173,7 +1171,6 @@
      	  catch(e) {
      		  alert(e);
      	  }
-     	 alert("页面正在加载，请稍后...");
       }
       
       //进入订单编辑页面

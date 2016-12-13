@@ -421,14 +421,21 @@ public class CaseController extends BaseSimpleFormController {
 			Case crmcase = service.getCaseById(caseId);
 			
 			//解决客人的要求换行符问题
-			if(crmcase.getRequirement()!=null){			
-				String[] splits= crmcase.getRequirement().split("\r\n");
+			if(crmcase.getRequirement()!=null){
+				crmcase.setRequirement(crmcase.getRequirement().replaceAll("\r", ""));
+				String[] splits= crmcase.getRequirement().split("\n");
 				String realRequire="";
-				for(String split:splits){
-					realRequire+=split+"\\r\\n";
-				}		
+				for(int i=0;i<splits.length;i++){
+					if(i==splits.length-1){
+						realRequire+=splits[i];
+					}
+					else{
+						realRequire+=splits[i]+"\\r\\n";					
+					}
+				}					
 				crmcase.setRequirement(realRequire);
 			}
+			
 			
 			crmcase=service.validateStartTime(crmcase);
 			Customer cus = null;
@@ -539,6 +546,9 @@ public class CaseController extends BaseSimpleFormController {
 
 		Map<String,Object> customerMap =new HashMap<String, Object>();
 		Map<String,String> map =new HashMap();
+		
+		
+		
 		try {
 			//判断是否有portalId
 			if( crmcase.getPortalId()!=null && crmcase.getPortalId()!=0) {
@@ -585,12 +595,19 @@ public class CaseController extends BaseSimpleFormController {
 			Case crmcase = service.getCaseById(caseId);
 			
 			//解决客人的要求换行符问题
-			if(crmcase.getRequirement()!=null){			
-				String[] splits= crmcase.getRequirement().split("\r\n");
+			if(crmcase.getRequirement()!=null){		
+				crmcase.setRequirement(crmcase.getRequirement().replaceAll("\r", ""));
+				String[] splits= crmcase.getRequirement().split("\n");
 				String realRequire="";
-				for(String split:splits){
-					realRequire+=split+"\\r\\n";
-				}		
+				for(int i=0;i<splits.length;i++){
+					if(i==splits.length-1){
+						realRequire+=splits[i];
+					}
+					else{
+						realRequire+=splits[i]+"\\r\\n";					
+					}
+				}
+
 				crmcase.setRequirement(realRequire);
 			}
 			

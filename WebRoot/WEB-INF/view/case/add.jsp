@@ -148,6 +148,34 @@
                     </div>
 				</div>
 					
+<<<<<<< HEAD
+=======
+<!-- 	                <div class="form-group col-sm-4">
+	                    <label class="col-sm-4 control-label">跟单员</label>
+=======
+            	 <div class="form-group col-sm-4">
+	                    <label class="col-sm-4 control-label">沟通方式</label>
+>>>>>>> d9b144c8019260a9614ff1f5dbaa13d3de525714
+	                    <div class="col-sm-8">
+	                      <input type="text"  name="contactReal" class="contact-real-select fullwidth" value="0" />
+	                    </div>
+<<<<<<< HEAD
+	                </div>                        
+                </div>
+                    <div class="section-block">
+                   	<div class="form-group col-sm-4">
+                      <label class="col-sm-4 control-label">目的地</label>
+                      <div class="col-sm-8">
+                        <select name="destination" class="contact-select-country fullwidth" multiple="multiple">
+					</select>             
+                      </div>
+                    </div>    
+=======
+<<<<<<< HEAD
+	                </div>   -->                      
+
+                
+>>>>>>> abf7de37612732d3c2b333e88583240c8a8672d7
                 <div class="section-block">
                     <div class="form-group col-sm-4">
                       <label class="col-sm-4 control-label">与谁同行</label>

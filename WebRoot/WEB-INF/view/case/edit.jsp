@@ -478,8 +478,13 @@
 
 			</div>
 	
+<<<<<<< HEAD
 		</div>
 		</div>
+=======
+		</div>
+		</div>
+>>>>>>> abf7de37612732d3c2b333e88583240c8a8672d7
 	</div>
 		<!-- mainpanel -->
 		<%@ include file="../assets/pages/rightpanel.jsp"%>
@@ -642,7 +647,7 @@
 	<script src="${rootPath}assets/js/jquery.validate.min.js"></script>
 
 	<script type="text/javascript">
-	console.log("${crmcase}");
+	
 	$(function(){
 		/* 当case无效，成行，未成行时，无未成行按钮 
 		         当case无效，成行，未成行没有下单按钮 
@@ -819,10 +824,7 @@
     	data:reason
     });
     
-    $(".reason-select").select2({
-    	placeholder:"未成行原因",
-    	data:reasonNodeal
-    });
+
     
 	if("${crmcase.reason}"!=null&&"${crmcase.reason}"!=""){
    	  $("#div-delInfo").show();
@@ -1020,7 +1022,6 @@
      	  catch(e) {
      		  alert(e);
      	  }
-     	 alert("页面正在加载，请稍后...");
       }
      
 	  //分配地接社
