@@ -52,7 +52,7 @@
 								<thead>
 									<tr>
 										<th>地接社名</th>
-										<!-- <th>目的地</th> -->
+										<th>目的地</th>
 										<th>国家</th>
 										<th>语言</th>
 										<th>操作</th>
@@ -155,7 +155,26 @@
 	                  render: function ( data, type, full, meta ) {
 	                      return '<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a>&nbsp;<a class="btn btn-danger btn-xs" id="'+data+'"><span class="fa fa-minus-circle"></span> 删除</a>';
 	                  },
-	                  targets: 3
+	                  targets: 4
+				  },
+				  {
+		                data: "destination",
+		                render: function ( data, type, full, meta ) {
+		                	var destinations="";
+		                	if(full.destination){
+		                	var des=full.destination.split(",");
+		                	for(var j = 0;j<des.length;j++){
+		                		for(var i=0;i <destination.length;i++){
+			                		if(des[j]==destination[i].id){
+			                			destinations+=destination[i].text+",";
+			                		}				                	
+			                	}
+		                	}
+		                }
+		                destinations=destinations.substring(0,destinations.length-1);
+		                return "<div class='width85'>" + destinations + "</div>";
+				   },
+				   		targets: 1
 				  },
 				  {
 	                data: "country",
@@ -170,7 +189,7 @@
 		                	return "";
 		                }else{return ""}
 	                },
-	                  targets: 1
+	                  targets: 2
 				  },
 				  {
 		                data: "language",
@@ -183,9 +202,11 @@
 			                		}
 			                	}
 			                	return "";
-			                 }else{return ""}
+			                 }else{
+			                	 return ""
+			                 }
 		                },
-		                  targets: 2
+		                  targets: 3
 					  },
 				  {
 					  orderable: false,
@@ -196,6 +217,7 @@
 				],
 				columns: [
 		            { data: "name" },
+		            { data: "destination" },
 		            { data: "country" },
 					{ data: "language" }
 		        ]
