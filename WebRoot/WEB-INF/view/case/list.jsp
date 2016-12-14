@@ -370,10 +370,6 @@
 						
 						$('#status6Count').html("已付款"+json.status6);
 						
-						console.log(json.status0);
-						console.log(json);
-						console.log("-------------------");						
-						console.log(JSON.stringify( json ));
 						return JSON.stringify( json );
 					}
 				},
