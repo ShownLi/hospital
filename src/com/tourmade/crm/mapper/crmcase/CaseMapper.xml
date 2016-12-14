@@ -20,7 +20,6 @@
 			u.creat_time as creatTime,
 			u.reason as reason,
 			u.last_comment as comment,
-			
 			u.requirement as requirement,
 			u.contact_real as contactReal,
 			u.reason_nodeal as reasonNodeal

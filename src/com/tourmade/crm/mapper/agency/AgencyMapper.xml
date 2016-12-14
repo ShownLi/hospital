@@ -20,6 +20,9 @@
         <if test="country != null and country != ''">
                 and   country = #{country}
         </if>
+        <if test="destination != null and destination != ''">
+                and   destination like '%${destination}%'
+        </if>
 		order by u.creat_time
 		limit #{start},#{length}
 	</select>
@@ -33,6 +36,9 @@
         </if>
         <if test="country != null and country != ''">
                 and   country = #{country}
+        </if>
+        <if test="destination != null and destination != ''">
+                and   destination like '%${destination}%'
         </if>
 
 	</select>

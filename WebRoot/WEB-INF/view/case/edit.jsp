@@ -478,8 +478,13 @@
 
 			</div>
 	
+<<<<<<< HEAD
 		</div>
 		</div>
+=======
+		</div>
+		</div>
+>>>>>>> abf7de37612732d3c2b333e88583240c8a8672d7
 	</div>
 		<!-- mainpanel -->
 		<%@ include file="../assets/pages/rightpanel.jsp"%>
@@ -944,6 +949,7 @@
             endDate: "date",
             startMonth: "date",
             during: "digits",
+            destination: "required",
           },
           messages: {
             adult: "请输入一个整数",
@@ -954,6 +960,7 @@
             endDate: "请输入正确的日期格式 mm/dd/yyyy",
             startMonth: "请输入正确的日期格式 mm/dd/yyyy",
             during: "请输入一个整数",
+            destination:"请选择目的地",
           },
         
           highlight: function(element) {

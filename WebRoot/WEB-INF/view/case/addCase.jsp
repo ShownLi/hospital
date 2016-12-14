@@ -466,6 +466,7 @@
               endDate: "date",
               startMonth: "date",
               during: "digits",
+              destination: "required",
     		},
     		messages: {
    				customerId: "必须选择所属客人",
@@ -478,6 +479,7 @@
             	endDate: "请输入正确的日期格式 mm/dd/yyyy",
              	startMonth: "请输入正确的日期格式 mm/dd/yyyy",
             	during: "请输入一个整数",
+            	destination: "请选择目的地",
    			},
   				
   			    highlight: function(element) {

@@ -330,8 +330,6 @@ public class CaseController extends BaseSimpleFormController {
 		}		
 	}
 	
-	
-	
 	//datatables形式
 	/*@RequestMapping(value = "/add.do",produces="application/json;charset=utf-8")
 	@ResponseBody
