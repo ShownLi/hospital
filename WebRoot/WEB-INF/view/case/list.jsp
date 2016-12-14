@@ -61,6 +61,38 @@
 								</div>
 							 
 							</div>	
+						
+							<div class="form-group col-sm-10">
+		        	                <div class="rdio rdio-primary rdio-inline">
+		        	                  <input type="radio" id="status0" value="0" name="status"/>
+		        	                  <label id="status0Count" for="status0">待处理</label>    	                  
+		        	                </div><!-- rdio -->
+		        	                <div class="rdio rdio-primary rdio-inline">
+		        	                  <input type="radio" id="status1" value="1" name="status"/>
+		        	                  <label id="status1Count" for="status1">客服沟通中</label>
+		        	                </div><!-- rdio -->
+		        	                <div class="rdio rdio-primary rdio-inline">
+		        	                  <input type="radio" id="status2" value="2" name="status"/>
+		        	                  <label id="status2Count" for="status2">地接设计中</label>
+		        	                </div><!-- rdio -->
+		        	                <div class="rdio rdio-primary rdio-inline">
+		        	                  <input type="radio" id="status3" value="3" name="status"/>
+		        	                  <label id="status3Count" for="status3">成行</label>
+		        	                </div><!-- rdio -->
+		        	                <div class="rdio rdio-primary rdio-inline">
+		        	                  <input type="radio" id="status4" value="4" name="status"/>
+		        	                  <label id="status4Count" for="status4">未成行</label>
+		        	                </div><!-- rdio -->
+		        	                <div class="rdio rdio-primary rdio-inline">
+		        	                  <input type="radio" id="status5" value="5" name="status"/>
+		        	                  <label id="status5Count" for="status5">无效</label>
+		        	                </div><!-- rdio -->
+		        	                <div class="rdio rdio-primary rdio-inline">
+		        	                  <input type="radio" id="status6" value="6" name="status"/>
+		        	                  <label id="status6Count" for="status6">已付款</label>
+		        	                </div><!-- rdio -->
+							</div>
+							
 							<div class="col-sm-2">					 		                        		
 								<input class="btn btn-primary" type="button" id="searchBtn" value="搜索"/>
 							</div> 	
@@ -271,11 +303,14 @@
 			 			var searchDestination=$('#searchDestination').val();
 			 			var searchSource=$('#searchSource').val();
 			 			var searchOperator=$('#searchOperator').val();
-			 			var searchStatus=$('#searchStatus').val();
+			 			//var searchStatus=$('#searchStatus').val();
 			 			var searchComment=$('#searchComment').val();
 			 			var searchRequirment=$('#searchRequirment').val();
 			 			var searchMail=$('#searchMail').val();
 			 			var searchMobile=$('#searchMobile').val();
+			 			
+			 			var searchStatus = $("input[name='status']:checked").val();
+			 	
 			 			
 			 			if(searchCustomerId !=null && searchCustomerId !="" ){
 							data.customerId = searchCustomerId;
@@ -320,6 +355,25 @@
 						json.recordsTotal = json.countTotal;
 						json.recordsFiltered = json.countFiltered;
 						json.data = json.data;
+						
+						$('#status0Count').html("待处理"+json.status0);
+
+						$('#status1Count').html("客服沟通中"+json.status1);
+				
+						$('#status2Count').html("地接设计中"+json.status2);						
+						
+						$('#status3Count').html("成行"+json.status3);						
+						
+						$('#status4Count').html("未成行"+json.status4);						
+						
+						$('#status5Count').html("无效"+json.status5);												
+						
+						$('#status6Count').html("已付款"+json.status6);
+						
+						console.log(json.status0);
+						console.log(json);
+						console.log("-------------------");						
+						console.log(JSON.stringify( json ));
 						return JSON.stringify( json );
 					}
 				},
@@ -385,7 +439,6 @@
 			                orderable: false,
 			                render: function ( data, type, full, meta ) {
 			                	var time = data.time;
-			                	
 			                	if(data.time){
 			                		time=new Date(time).format("yyyy-MM-dd hh:mm:ss");
 			                	}else{
@@ -489,6 +542,29 @@
 			$('#searchBtn').on( 'click', function () {
 		        t.draw();
 		    } );
+			
+			$('#status0').on('click',function(){
+				
+				t.draw();
+			});
+			$('#status1').on('click',function(){
+				t.draw();
+			});
+			$('#status2').on('click',function(){
+				t.draw();
+			});
+			$('#status3').on('click',function(){
+				t.draw();
+			});
+			$('#status4').on('click',function(){
+				t.draw();
+			});
+			$('#status5').on('click',function(){
+				t.draw();
+			});
+			$('#status6').on('click',function(){
+				t.draw();
+			});
 		    
 		    //处理询单
 		   /*  $('#dataTable tbody').on( 'click', 'a.btn-handle', function () {
