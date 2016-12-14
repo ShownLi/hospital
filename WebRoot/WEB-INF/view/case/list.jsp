@@ -59,12 +59,20 @@
 								<div class="col-sm-2">
 									<input type="text" id="searchComment" class="form-control" placeholder="注释" value="" />
 								</div>
+								<div class="col-sm-2 input-group input-datepicker">
+			                        <input id="searchStartDateTime" type="text" name="searchStartDateTime" class="form-control datepicker" placeholder="请点击输入查询开始日期" autocomplete="on">
+			                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+			                    </div>
+			                    <div class="col-sm-2 input-group input-datepicker">
+			                        <input id="searchEndDateTime" type="text" name="searchEndDateTime" class="form-control datepicker" placeholder="请点击输入查询截止日期" autocomplete="on">
+			                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+			                    </div>
 							 
-							</div>	
-							<div class="col-sm-2">					 		                        		
-								<input class="btn btn-primary" type="button" id="searchBtn" value="搜索"/>
-							</div> 	
-						</div>
+								</div>	
+									<div class="col-sm-2">					 		                        		
+									<input class="btn btn-primary" type="button" id="searchBtn" value="搜索"/>
+								</div> 	
+							</div>
 					</div>
 					<div class="panel-body">
 						<br />
@@ -100,6 +108,10 @@
 
 	<script src="${rootPath}assets/js/jquery.datatables.min.js"></script>
 	<script src="${rootPath}assets/js/select2.min.js"></script>
+	<script src="${rootPath}assets/js/jquery-ui-1.10.3.min.js"></script>
+	<script src="${rootPath}assets/js/jquery.validate.min.js"></script>
+	<script src="${rootPath}assets/js/datepicker-zh-CN.js"></script>
+	<script src="${rootPath}assets/js/datetimepicker-cn.js"></script>
 
 <!-- Modal -->
 <!-- <div class="modal fade" id="confirmDelModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
@@ -254,7 +266,17 @@
       	$(".confirmDelModal").modal("hide");
   	});
 		 
-
+    jQuery("#searchStartDateTime").datepicker({
+        dateFormat: "yy-mm-dd",
+        changeYear: true,
+        changeMonth: true,
+     });
+    
+    jQuery("#searchEndDateTime").datepicker({
+        dateFormat: "yy-mm-dd",
+        changeYear: true,
+        changeMonth: true,
+     });
 			var t = jQuery('#dataTable').DataTable({
 				searching:false,
 				pageLength: 10,
@@ -276,6 +298,8 @@
 			 			var searchRequirment=$('#searchRequirment').val();
 			 			var searchMail=$('#searchMail').val();
 			 			var searchMobile=$('#searchMobile').val();
+			 			var searchStartDateTime=$("#searchStartDateTime").val();
+			 			var searchEndDateTime=$("#searchEndDateTime").val();
 			 			
 			 			if(searchCustomerId !=null && searchCustomerId !="" ){
 							data.customerId = searchCustomerId;
@@ -312,6 +336,12 @@
 			 			}
 			 			if(searchMobile !=null && searchMobile !=""){
 			 				data.mobile = searchMobile;
+			 			}
+			 			if(searchStartDateTime !=null && searchStartDateTime !=""){
+			 				data.searchStartTime = searchStartDateTime;
+			 			}
+			 			if(searchEndDateTime !=null && searchEndDateTime !=""){
+			 				data.searchEndTime = searchEndDateTime;
 			 			}
 					},
 					
@@ -485,7 +515,6 @@
 			        ]
 				});
 
-					 
 			$('#searchBtn').on( 'click', function () {
 		        t.draw();
 		    } );
@@ -518,9 +547,6 @@
 	    
 	    jQuery('select').removeClass('form-control');
 		
-		
-	   
-	    
 		function edit(id) {
 			window.parent.location = "${rootPath}case/edit.html?id="+id;
 		}
@@ -529,7 +555,6 @@
 			window.parent.location = "${rootPath}case/handle.html?id="+id;
 		}
 		
-
 		function del(id) {
 			 
 			 $(".confirmDelModal .hiddenId").val("");
@@ -548,6 +573,7 @@
 				}
 			});			
 		}
+		
   		function order_submit() {
 			var order= $("#form-order").serialize();
 			$.post('${rootPath}order/add.do', order, function(result) {
@@ -559,7 +585,7 @@
 					$("#NoEmail").modal('show');
 				}
 			}, "JSON");
-	}
+		}
   	  
   	  function delSubmit() {
     	  var f1=$("#form-del").serialize();
@@ -579,8 +605,6 @@
      	  }
      	 alert("页面正在加载，请稍后...");
       }
-
-
 	</script>
 </body>
 </html>

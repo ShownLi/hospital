@@ -114,7 +114,6 @@ public class OrderController extends BaseSimpleFormController {
 		return result;
 	}
 	
-	
 	@RequestMapping(value = "/add.html", method = { RequestMethod.POST, RequestMethod.GET })
 	public String add(Model model) {
 		
@@ -135,7 +134,7 @@ public class OrderController extends BaseSimpleFormController {
 	public Json doAdd(HttpServletRequest request, HttpSession session, Model model, Order order) {
 		
 		Json json = new Json();
-		//System.out.println("doAdd"+order);
+
 		if(order.getCaseId()!=0){
 		   Customer customer = service.getCustomerByCaseId(order.getCaseId());
 		   if(customer.getEmail().equals("")){
@@ -148,8 +147,8 @@ public class OrderController extends BaseSimpleFormController {
 			   return json;
 		   }
 		   else{
-		   order.setCustomerId(customer.getCustomerId());		   
-		}
+			   order.setCustomerId(customer.getCustomerId());		   
+			}
 		
 		try {
 			//客人状态设置为下单客人
@@ -167,7 +166,6 @@ public class OrderController extends BaseSimpleFormController {
 				//邮件别名操作（创建邮件别名并将其写入order表）
 				service.MailAlias(order);	
 				//生成给地接社的第一封邮件
-				//DemoCustomer customer = service.getCustomerById(order.getCustomerid());
 				Case crmcase = service.getCaseById(order.getCaseId());
 				order = service.getOrderById(order.getOrderId());
 				String result = emailService.creatTemplate(crmcase, order);
@@ -178,9 +176,7 @@ public class OrderController extends BaseSimpleFormController {
 				
 				json.setSuccess(true);
 			}
-		}finally{
-			
-		}
+		}finally{}
 		   order.setCustomerId(customer.getCustomerId());		   
 		}
 //		try {

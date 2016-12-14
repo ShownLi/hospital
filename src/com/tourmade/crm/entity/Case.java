@@ -14,6 +14,10 @@ public class Case extends BaseBean<Case> {
 
 	private static final long serialVersionUID = 1423523863575074623L;
 
+	private String searchStartTime;
+	
+	private String searchEndTime;
+	
 	private Integer caseId;
 	
 	private Integer customerId;
@@ -128,6 +132,21 @@ public class Case extends BaseBean<Case> {
 	
 	private String comment;
 	
+	public String getSearchStartTime() {
+		return searchStartTime;
+	}
+
+	public void setSearchStartTime(String searchStartTime) {
+		this.searchStartTime = searchStartTime;
+	}
+
+	public String getSearchEndTime() {
+		return searchEndTime;
+	}
+
+	public void setSearchEndTime(String searchEndTime) {
+		this.searchEndTime = searchEndTime;
+	}
 	
 	public String getReasonNodeal() {
 		return reasonNodeal;
@@ -551,21 +570,22 @@ public class Case extends BaseBean<Case> {
 
 	@Override
 	public String toString() {
-		return "Case [caseId=" + caseId + ", customerId=" + customerId + ", chineseName=" + chineseName
-				+ ", englishName=" + englishName + ", telephone=" + telephone + ", mobile=" + mobile + ", email="
-				+ email + ", wechat=" + wechat + ", qq=" + qq + ", level=" + level + ", birthday=" + birthday
-				+ ", ageGroup=" + ageGroup + ", gender=" + gender + ", location=" + location + ", operator=" + operator
-				+ ", preferLanguage=" + preferLanguage + ", withwho=" + withwho + ", adult=" + adult + ", children="
-				+ children + ", baby=" + baby + ", startTime=" + startTime + ", during=" + during + ", startDate="
-				+ startDate + ", endDate=" + endDate + ", hotel=" + hotel + ", meals=" + meals + ", requirement="
-				+ requirement + ", guide=" + guide + ", budget=" + budget + ", contactType=" + contactType
-				+ ", contactReal=" + contactReal + ", salesId=" + salesId + ", salesName=" + salesName
-				+ ", destination=" + destination + ", destinationCode=" + destinationCode + ", route=" + route
-				+ ", routeId=" + routeId + ", tailormade=" + tailormade + ", passport=" + passport + ", visa=" + visa
-				+ ", flight=" + flight + ", submitType=" + submitType + ", ipAddress=" + ipAddress + ", source="
-				+ source + ", promoteCode=" + promoteCode + ", status=" + status + ", startMonth=" + startMonth
-				+ ", creatTime=" + creatTime + ", updateTime=" + updateTime + ", reason=" + reason + ", reasonNodeal="
-				+ reasonNodeal + ", portalId=" + portalId + ", comment=" + comment + "]";
+		return "Case [searchStartTime=" + searchStartTime + ", searchEndTime=" + searchEndTime + ", caseId=" + caseId
+				+ ", customerId=" + customerId + ", chineseName=" + chineseName + ", englishName=" + englishName
+				+ ", telephone=" + telephone + ", mobile=" + mobile + ", email=" + email + ", wechat=" + wechat
+				+ ", qq=" + qq + ", level=" + level + ", birthday=" + birthday + ", ageGroup=" + ageGroup + ", gender="
+				+ gender + ", location=" + location + ", operator=" + operator + ", preferLanguage=" + preferLanguage
+				+ ", withwho=" + withwho + ", adult=" + adult + ", children=" + children + ", baby=" + baby
+				+ ", startTime=" + startTime + ", during=" + during + ", startDate=" + startDate + ", endDate="
+				+ endDate + ", hotel=" + hotel + ", meals=" + meals + ", requirement=" + requirement + ", guide="
+				+ guide + ", budget=" + budget + ", contactType=" + contactType + ", contactReal=" + contactReal
+				+ ", salesId=" + salesId + ", salesName=" + salesName + ", destination=" + destination
+				+ ", destinationCode=" + destinationCode + ", route=" + route + ", routeId=" + routeId + ", tailormade="
+				+ tailormade + ", passport=" + passport + ", visa=" + visa + ", flight=" + flight + ", submitType="
+				+ submitType + ", ipAddress=" + ipAddress + ", source=" + source + ", promoteCode=" + promoteCode
+				+ ", status=" + status + ", startMonth=" + startMonth + ", creatTime=" + creatTime + ", updateTime="
+				+ updateTime + ", reason=" + reason + ", reasonNodeal=" + reasonNodeal + ", portalId=" + portalId
+				+ ", comment=" + comment + "]";
 	}
-	
+
 }

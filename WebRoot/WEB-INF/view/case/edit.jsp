@@ -478,13 +478,10 @@
 
 			</div>
 	
-<<<<<<< HEAD
 		</div>
 		</div>
-=======
 		</div>
 		</div>
->>>>>>> abf7de37612732d3c2b333e88583240c8a8672d7
 	</div>
 		<!-- mainpanel -->
 		<%@ include file="../assets/pages/rightpanel.jsp"%>
@@ -1044,7 +1041,7 @@
       $("#btn-addorder").click(function(){
       	  var destination = $("#destination").val();
       	  $("#englishDestination").val(destination);
-      	  if(destination==""){
+      	  if(destination=="" || destination == null){
       	  	$("#msgDestination").modal('show');
  		  }else{ 
       			var destinationText;

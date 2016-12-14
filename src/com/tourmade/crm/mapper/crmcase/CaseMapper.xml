@@ -61,6 +61,12 @@
 		<if test="mobile != null and mobile != ''">
 			and customer_mobile  like '%${mobile}%'
 		</if> 
+		<if test="searchStartTime != null and searchStartTime != ''">
+			and creat_time >= '${searchStartTime}'
+		</if> 
+		<if test="searchEndTime != null and searchEndTime != ''">
+			and  creat_time &lt;= '${searchEndTime}'
+		</if> 
 		order by u.creat_time desc
 		limit #{start},#{length}
 	</select>
@@ -119,6 +125,12 @@
 		</if> 
 		<if test="mobile != null and mobile != ''">
 			and customer_mobile like '%${mobile}%'
+		</if> 
+		<if test="searchStartTime != null and searchStartTime != ''">
+			and creat_time >= '${searchStartTime}'
+		</if> 
+		<if test="searchEndTime != null and searchEndTime != ''">
+			and creat_time &lt;= '${searchEndTime}'
 		</if> 
 	</select>
 	

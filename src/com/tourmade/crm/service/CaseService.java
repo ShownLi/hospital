@@ -85,7 +85,14 @@ public class CaseService extends BaseService {
 		if(crmcase.getMobile()!=null){
 			map.put("mobile", crmcase.getMobile());
 		}
-		
+		if(crmcase.getSearchStartTime()!=null){
+			crmcase.setSearchStartTime(crmcase.getSearchStartTime()+" 00:00:00");
+			map.put("searchStartTime", crmcase.getSearchStartTime());
+		}
+		if(crmcase.getSearchEndTime()!=null){
+			crmcase.setSearchEndTime(crmcase.getSearchEndTime()+" 24:00:00");
+			map.put("searchEndTime", crmcase.getSearchEndTime());
+		}
 		
 		List<Case> data = caseMapper.queryCase(map);
 		long count = caseMapper.countCase(crmcase);
