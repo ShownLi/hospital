@@ -331,32 +331,6 @@ public class CaseController extends BaseSimpleFormController {
 		}		
 	}
 	
-	//datatables形式
-	/*@RequestMapping(value = "/add.do",produces="application/json;charset=utf-8")
-	@ResponseBody
-
-	public String doAdd(HttpServletRequest request, HttpSession session, Model model,PageHelper page, Case crmcase) {
-		System.out.println(crmcase);
-		QueryResult<Customer> casePage = service.queryCusByComm(crmcase, page, request);
-		String result = null;
-		System.out.println(casePage.getData());
-		try {
-			//判断是否有老客人,( 添加询单)
-			if(casePage.getData().size()>0){
-				result = JSONUtilS.object2json(casePage);
-				return result;
-			}
-			else{
-				return result;
-			}
-	
-			
-			
-		} catch (Exception e) {
-			logger.error("CaseController.doAdd() --> " + crmcase.toString() + "\n" + e.getMessage());
-			return result;
-		}		
-	}*/
 	
 	@RequestMapping(value = "/bindCustomer.do")
 //	@ResponseBody
