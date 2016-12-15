@@ -1078,19 +1078,17 @@
       	 $(".confirmDelModal").modal('show');
 		 return false;
       });
-      $("#confirm-invalid").click(function(){
-      	doDel()
-      });
+     
       
       //更改无效原因
-      $("#btn-updateDel").click(function(){
+    /*   $("#btn-updateDel").click(function(){
     	 updateDel_submit(); 
-      });
+      }); */
       
       $(".confirmDelModal .cancel").click(function(){
       	$(".confirmDelModal").modal("hide");
   	  });
-      function updateDel_submit(){
+     /*  function updateDel_submit(){
 
     	  var f1=$("#form-delInfo").serialize();
      	  try{
@@ -1107,7 +1105,7 @@
      	  catch(e) {
      		  alert(e);
      	  }
-      }
+      } */
      
 	   
 	  //添加订单

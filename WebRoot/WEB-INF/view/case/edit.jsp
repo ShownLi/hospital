@@ -370,7 +370,7 @@
 
 							<input class="btn btn-primary" id="btn-addorder" type="button" value="分配地接社" />&nbsp; 
 							<input class="btn btn-primary" type="submit" value="保存" />&nbsp;
-							<!-- <input class="btn btn-danger" id="btn-invalid"   type="button" value="无效"/>&nbsp; -->
+							<input class="btn btn-danger" id="btn-invalid"   type="button" value="无效"/>&nbsp; 
 							<input class="btn btn-danger" id="btn-nodeal" type="button"
 								value="未成行" />&nbsp; <input class="btn btn-default"
 								type="button" id="btn-back" value="返回" /> <input type="hidden"
@@ -396,13 +396,23 @@
 							<table id="dataTable-order" class="table">
 								<thead>
 									<tr>
-										<th>ID</th>
+										<!-- <th>ID</th>
 										<th>客人姓名</th>
 										<th>地接社</th>
 										<th>销售姓名</th>
 										<th>目的地</th>
-										<!-- <th>预算</th> -->
+										<th>预算</th> 
 										<th>状态</th>
+										<th>编辑</th>  -->
+										<th>客人姓名<br>ID</th>
+										<th>地接社<br>销售</th>
+										<th>目的地<br>状态</th>
+										<th>成团人数</th>
+										<th>成团金额</th> 
+ 										<th>出发日期<br>返回日期</th> 
+ 										<th>跟单员</th>
+										<th>创建时间</th>
+										<th>最后回复时间</th>
 										<th>编辑</th>
 									</tr>
 								</thead>
@@ -476,7 +486,8 @@
 								<input type="hidden" name="commentType" value="case" />
 							</div>
 							<div class="form-group col-sm-12 align-center">
-								<button class="btn btn-primary">添加注释</button>
+								<!-- <button class="btn btn-primary">添加注释</button> -->
+								<input class="btn btn-primary" type="submit" value="添加注释"/>
 							</div>
 						</form>
 					</div>
@@ -485,13 +496,10 @@
 
 			</div>
 	
-<<<<<<< HEAD
 		</div>
 		</div>
-=======
 		</div>
 		</div>
->>>>>>> abf7de37612732d3c2b333e88583240c8a8672d7
 	</div>
 		<!-- mainpanel -->
 		<%@ include file="../assets/pages/rightpanel.jsp"%>
@@ -539,7 +547,133 @@
 		<!-- modal-dialog -->
 	</div>
 	<!-- modal -->
+<!-- dealModal -->
+<div class="dealModal modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">         
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <div class="nextModal-title">请填写以下订单信息</div>
+      </div>
 
+      <form class="form-horizontal" id="form-deal">
+      <div class="modal-body">
+              <div class="section-block noline">
+                  <div class="form-group col-sm-6">
+                      <label class="col-sm-4 control-label">成团日期<span class="asterisk">*</span></label>
+                      <div class="col-sm-8 input-group input-datepicker">
+                        <input type="text" name="groupTime" class="form-control datepicker" autocomplete="off" placeholder="成团日期">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                      </div>
+                  </div>
+                  <div class="form-group col-sm-6">
+                      <label class="col-sm-4 control-label">出发日期<span class="asterisk">*</span></label>
+                      <div class="col-sm-8 input-group input-datepicker">
+                        <input type="text" name="startDate" placeholder="出发日期" class="form-control datepicker" autocomplete="off" />
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                      </div>
+                  </div>
+                  <div class="form-group col-sm-6">
+                    <label class="col-sm-4 control-label">返回日期<span class="asterisk">*</span></label>
+                    <div class="col-sm-8 input-group input-datepicker">
+                      <input type="text" name="endDate" placeholder="返回日期" class="form-control datepicker" autocomplete="off" />
+                      <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                    </div>
+                  </div>
+                  <div class="form-group col-sm-6">
+                      <label class="col-sm-4 control-label">成团人数<span class="asterisk">*</span></label>
+                      <div class="col-sm-8">
+                        <input type="text" name="groupNumber" placeholder="成团人数" class="form-control"/>
+                      </div>
+                  </div>
+                  <div class="form-group col-sm-6">
+                      <label class="col-sm-4 control-label">成团价格<span class="asterisk">*</span></label>
+                      <div class="col-sm-8">
+                        <input type="text" name="groupPrice" placeholder="成团价格" class="form-control" />
+                      </div>
+                  </div>
+                  <div class="form-group col-sm-6">
+                      <label class="col-sm-4 control-label">货币种类<span class="asterisk">*</span></label>
+                      <div class="col-sm-8">
+                        <input type="text" name="currency" placeholder="货币种类" class="currency-select fullwidth"/>
+                      </div>
+                  </div>
+                  <div class="form-group col-sm-6">
+                      <label class="col-sm-4 control-label">汇率<span class="asterisk">*</span></label>
+                      <div class="col-sm-8">
+                        <input type="text" name="exchangeRate" placeholder="汇率" class="form-control" value="" />
+                      </div>
+                  </div>
+                  <div class="form-group col-sm-6">
+                      <label class="col-sm-4 control-label">人民币价格<span class="asterisk">*</span></label>
+                      <div class="col-sm-8">
+                        <input type="text" name="rmbPrice" placeholder="人民币价格" class="form-control"/>
+                      </div>
+                  </div>
+                  <input type="hidden" id="dealOrderId" name="orderId" value="${order.orderId}" />
+                  <input type="hidden" name="caseId" value="${order.caseId}" />	
+                  <input type="hidden" name="customerId" value="${order.customerId}" />	
+              </div>           
+      </div>
+      <div class="modal-footer align-center">
+          <button class="submit btn btn-primary">保存</button>
+          <a class="cancel btn btn-primary" >取消</a>        
+      </div>
+      </form>     
+
+    </div><!-- modal-content --> 
+  </div><!-- modal-dialog -->
+</div><!-- dealModal -->
+
+<!-- noDealModal -->
+<!-- noDealModal -->
+<div class="noDealModal modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <div class="nextModal-title">请填写以下订单信息</div>
+      </div>
+      <form class="form-horizontal" id="form-noDeal">
+          <div class="modal-body">     
+              <div class="section-block noline">
+                  <div class="form-group col-sm-12">
+                    <label class="col-sm-4 control-label">未成行原因</label>
+                    <div class="col-sm-8">
+                      <input class="orderNoDealReason-select fullwidth" name="reason" placeholder="若未成行，原因是" />
+                      <input type="hidden" id="noDeal-orderId" name="orderId" value="${order.orderId}" />	
+                      <input type="hidden" name="caseId" value="${order.caseId}" />		                     
+                      <input type="hidden" name="status" value="3" />
+                    </div>
+                  </div>
+              </div><!-- noDealModal-body -->
+          </div>
+          <div class="modal-footer align-center">
+            <button class="btn btn-primary" >保存</button> 
+            <a class="cancel btn btn-primary" >取消</a>
+          </div>
+      </form>
+    </div><!-- modal-content -->
+  </div><!-- modal-dialog -->
+</div><!-- bmodal -->
+
+<!-- Modal -->
+<div class="modal fade" id="NoEmail" tabindex="-2" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">信息</h4>
+      </div>
+      <div class="modal-body">
+      		该客人没有邮箱，请<a href="#" id="addEmail">添加邮箱</a>后再进行操作
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+      </div>
+    </div><!-- modal-content -->
+  </div><!-- modal-dialog -->
+</div><!-- modal -->
 	<!-- Modal 未填写邮件-->
 	<div class="modal fade" id="NoEmail" tabindex="-2" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">
@@ -606,8 +740,34 @@
 		<!-- modal-dialog -->
 	</div>
 	<!-- modal -->
-
-
+<!-- 询单无效 -->
+<div class="confirmDelModal modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <div class="nextModal-title">请填写无效原因</div>
+      </div>
+      <form class="form-horizontal" id="form-del">
+          <div class="modal-body">     
+              <div class="section-block noline">
+                  <div class="form-group col-sm-12">
+                    <label class="col-sm-4 control-label">无效原因是</label>
+                    <div class="col-sm-8">
+                      <input class="reason-select fullwidth" name="reason" placeholder="无效原因是" />
+                      <input type="hidden" name="caseId" value="${crmcase.caseId}" />	
+                    </div>
+                  </div>
+              </div><!-- noDealModal-body -->
+          </div>
+          <div class="modal-footer align-center">
+            <button class="submit btn btn-primary">保存</button> 
+              <a class="cancel btn btn-primary" >取消</a>
+          </div>
+      </form>
+    </div><!-- modal-content -->
+  </div><!-- modal-dialog -->
+</div><!-- bmodal -->
 
 	<!-- 询单未成行 -->
 	<div class="confirmNoDealModal modal fade" tabindex="-1" role="dialog"
@@ -664,7 +824,14 @@
 			$("#btn-addorder").css("display","none");
 		}
 		
+		
 	})
+	if("${crmcase.status}"==1){
+			$("#btn-invalid").css("display","display");
+		
+	}else{
+			$("#btn-invalid").css("display","none");
+	}
 	var country = ${country};
     var language = ${language};
     var withwho = ${withwho};
@@ -686,8 +853,8 @@
 	var genderData = [{ id: 'male', text: '男' }, { id:'female' , text: '女' }];
 	var reason = ${reason};
 	//var contactData = [{ id: 0, text: 'qq' }, { id: 1, text: 'email' }, { id: 2, text: 'wechat' }, { id: 3, text: 'phone' }];
-	 
-
+	 var orderNoDealReason=${orderNoDealReason};
+	var currency =${currency};
 	var contact =${contact};
 	$("#requirement").val("${crmcase.requirement}");	
 	//$("#birthday").val(getBirthday());
@@ -722,6 +889,12 @@
 	
  	$("#level").select2({
         data: level
+    });
+	
+	//货币种类下拉框
+ 	$(".currency-select").select2({
+ 		 placeholder: '货币种类',
+        data: currency
     });
 	
 	$("#gender").select2({
@@ -822,6 +995,9 @@
         placeholder: '跟单员',
         data: user
     });
+    if("${crmcase.status}">=2){
+		$(".user-select").prop("disabled", true);   
+	}
     $(".sales-select").select2({
         placeholder: '销售',
         data: sales
@@ -830,6 +1006,10 @@
     $(".reason-select").select2({
     	placeholder:"无效原因",
     	data:reason
+    });
+    $(".orderNoDealReason-select").select2({
+    	placeholder:"未成行原因",
+    	data:orderNoDealReason
     });
     
 
@@ -848,7 +1028,100 @@
       /*  设置未成行原因下拉框 结束*/
 	
     	jQuery(document).ready(function() {
-   		
+    		jQuery("#form-deal").validate({
+		        rules: {
+			        groupTime: {
+	                required: true,
+	                date: true
+	              },
+			          startDate: {
+	                required: true,
+	                date: true
+	              },
+			          endDate: {
+	                required: true,
+	                date: true
+	              },
+			          groupNumber: {
+	                required: true,
+	                number: true
+	              },
+			          groupPrice: {
+	                required: true,
+	                number: true
+	              },
+	              currency: {
+	                required: true,
+	              },
+			          exchangeRate: {
+	                required: true,
+	                number: true
+	              },
+			          rmbPrice: {
+	                required: true,
+	                number: true
+	              },
+			   },
+			   
+		      messages: {
+		        groupTime: {
+	                required: "请输入成团日期",
+	                date: "日期格式 mm/dd/yyyy"
+             	 },
+		          startDate: {
+	                required: "请输入出发日期",
+	                date: "日期格式 mm/dd/yyyy"
+                 },
+		           endDate: {
+	                required: "请输入返回日期",
+	                date: "日期格式 mm/dd/yyyy"
+              	 },
+		          groupNumber: "请输入一个数字",
+		          groupPrice: "请输入一个数字",
+              	  currency: "请选择货币种类",
+		          exchangeRate: "请输入一个数字",
+		          rmbPrice: "请输入一个数字",
+		      },
+		      
+	          highlight: function(element) {
+	            jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+	          },
+	          success: function(element) {
+	            jQuery(element).closest('.form-group').removeClass('has-error');
+	          },
+	          invalidHandler : function(){
+	            return false;
+	          },
+	          submitHandler : function(){
+	              deal_submit();
+	              return false;
+	          } 
+	        });
+    		//订单未成行
+    		jQuery("#form-noDeal").validate({
+		        rules: {
+			        reason: {
+			        	required: true,
+			        },	              	
+				},				
+		     	 messages: {
+		            reason: "请选择一个原因",
+		      	 },			      
+		          highlight: function(element) {
+		            jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+		          },
+		          success: function(element) {
+		            jQuery(element).closest('.form-group').removeClass('has-error');
+		          },
+		          invalidHandler : function(){
+		            return false;
+		          },
+		          submitHandler : function(){
+		              noDeal_submit();
+		              return false;
+		          } 
+	        });
+    		//询单未成行
    		jQuery("#form-nodeal").validate({
 			rules:{
 				reasonNodeal: "required"
@@ -871,7 +1144,32 @@
 			}
 		});
    	});
-   	
+      //订单成行
+    	function deal_submit() {
+			var f = $("#form-deal").serialize();
+			$.post('${rootPath}order/orderDeal.do', f, function(result) {
+				var rmsg = result.msg;
+				if (result.success) {
+					window.parent.location = "${rootPath}case/edit.html?id=${crmcase.caseId}";
+				} 
+				else {
+					$("#msgModal").modal('show');
+				}
+			}, "JSON");
+		}
+      //订单未成行
+    	function noDeal_submit() {
+			var f = $("#form-noDeal").serialize();
+			$.post('${rootPath}order/orderNoDeal.do', f, function(result) {
+				var rmsg = result.msg;
+				if (result.success) {
+					window.parent.location = "${rootPath}case/edit.html?id=${crmcase.caseId}";
+				} 
+				else {
+					$("#msgModal").modal('show');
+				}
+			}, "JSON");
+		}	
    	
 	//订单回显数据
   	var orderTable = jQuery('#dataTable-order').DataTable({
@@ -891,59 +1189,141 @@
 	         }
 	 	},
 	 	columnDefs: [
-	       {
-	           data: "orderId",
-	 	       orderable: false,
-	 	       render: function ( data, type, full, meta ) {
-               		return '<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a>&nbsp;';
-	 	       },
-	 	       targets: 6
-	 		},
-	 		{
-               data: "status",
-               orderable: false,
-               render: function ( data ) {
-		           if(data){
-			           for(var i=0;i <  orderStatus.length;i++){
-			               if(data==orderStatus[i].id){
-			             		return orderStatus[i].text
-			               }
-			           }
-			        }
-              	    else{return ""}
-              	},
-                targets: 5
-			},
-    		{
-              data: "destination",
-              orderable: false,
-              render: function ( data ) {
-	              if(data){
-	               	 for(var i=0;i <country.length;i++){
-	               		if(data==country[i].id){
-	               			return country[i].text
-	               		}
-	               	 }
-	               	 return ""
-	              }
-	              else{return ""}
-              },
-                targets: 4
-			},  		  
-	 	    {
-			    orderable: false,
-			    searchable: false,
-			 	targets: [0,1,2]
-	 	    },
-	 	],
+				 	  {//客人姓名<br>ID
+				 		  orderable: false,
+				 		  render:function ( data, type, full, meta ){
+				 			  return full.customerName+"<br>"+full.orderId;
+				 		  },
+				 	      targets: 0
+				 	  },
+				 	  {//地接社<br>销售
+				 		  orderable: false,
+				 		  render:function ( data, type, full, meta ){
+				 			  return full.agencyName+"<br>"+full.salesName;
+				 		  },
+				 	      targets: 1
+				 	  },
+						 {//目的地<br>状态
+			                orderable: false,
+			                render: function ( data, type, full, meta ) {
+		                	 if(full){
+			                	var des=data.split(",");
+			                	var destinations="";
+			                	for(var j = 0;j<des.length;j++){
+			                	
+			                		for(var i=0;i <country.length;i++){
+				                		if(des[j]==country[i].id){
+				                			destinations+=country[i].text+",";
+				                		}				                	
+				                	}
+			                	}
+			                	
+			                	destinations=destinations.substring(0,destinations.length-1);
+			                	var orderStatusText="";
+			                	for(var i=0;i < orderStatus.length;i++){
+			                		if(full.status==orderStatus[i].id){
+			                			orderStatusText= orderStatus[i].text;
+			                		
+			                		}
+			                	}
+		                		return destinations+"<br>"+orderStatusText;
+		                	}
+		                	else{
+		                			return "";
+		                		}
+		                },
+	                    targets: 2
+						},
+						{//成团人数
+							data: "groupNumber",
+			                orderable: false,
+			                render: function ( data ) {
+			                	if(data){
+				                	return data;
+			                	}
+			                	else{return ""}
+			                },
+			                  targets: 3
+						},
+						{//成团金额
+			                orderable: false,
+			                render: function ( data, type, full, meta )  {
+			                	
+			                	return full.currency+full.groupPrice+"<br>￥"+full.rmbPrice;
+			                },
+			                  targets: 4
+						},
+						{//出发日期<br>返回日期
+			                orderable: false,
+			                render: function ( data, type, full, meta )  {
+			                	if(full.startDate&&full.endDate){
+			                		return new Date(full.startDate.time).format("yyyy-MM-dd")+"<br>"+new Date(full.startDate.time).format("yyyy-MM-dd");
+			                	}
+			                	return "";
+			                },
+			                  targets: 5
+						},
+						{//跟单员
+							data:"operator",
+							orderable: false,
+			                render: function ( data, type, full, meta  )  {
+			                	for(var i=0;i<user.length;i++){
+			                		if(data==user[i].id){
+			                			return user[i].text;
+			                		}
+			                	}
+			                	return "";
+			                },
+			                  targets: 6
+						}
+						,
+						{
+			                data: "creatTime",
+			                orderable: false,
+			                render: function ( data ) {
+			                	if(data){
+			                		return new Date(data.time).format("yyyy-MM-dd hh:mm:ss");
+			                	}
+			                	else{return ""}
+			                },
+			                  targets: 7
+						},
+						{
+			                data: "lastResponse",
+			                orderable: false,
+			                render: function ( data ) {
+			                	if(data){
+			                		return new Date(data.time).format("yyyy-MM-dd hh:mm:ss");
+			                	}
+			                	else{return ""}
+			                },
+			                  targets: 8
+						}, 
+						{
+					          data: "orderId",
+					 	      orderable: false,
+					 	      render: function ( data, type, full, meta ) {
+				              	return '<a class="btn btn-success btn-xs" id="'+data+
+				              	'"><span class="fa fa-edit"></span> 编辑</a>&nbsp<a class="btn btn-primary btn-xs" id="'+data+
+				              	'"></span> 成行</a>&nbsp<a class="btn btn-default btn-xs" id="'+data+
+				              	'"></span> 未成行</a>&nbsp<a class="btn btn-sendMaile btn-xs" id="'+data+
+				              	'"></span> 发订单邮件</a>&nbsp;';
+					 	  	  },
+					 	    	targets: 9
+					 	}
+				 	  
+				 	],
 	 	columns: [
-             { data: "orderId" },
-             { data: "customerId" },
-             { data: "agencyName" },
-             { data: "salesName" },
-           	 { data: "destination" },
-             { data: "status" }
-       ]		 	
+            { data: "orderId" },
+            { data: "agencyName" },
+            { data: "destination" },
+            { data: "groupNumber"},
+            { data: "groupPrice"},
+            { data: "startDate"},
+            { data: "operator"},
+            { data: "creatTime"}, 
+	 		 { data: "lastResponse"}
+        ]		 	
 	});
 	
 	//询单效验数据，修改
@@ -987,6 +1367,7 @@
       });
       
   	  function case_submit(){
+  			$(".user-select").prop("disabled", false);
    			var f = $("#form-case").serialize();
    			$.post('${rootPath}case/edit.do', f, function(result) {
    				var rmsg = result.msg;
@@ -1010,12 +1391,36 @@
       });
       
       
+     /*  $("#btn-updateDel").click(function(){
+     	 updateDel_submit(); 
+       }); */
       
       $(".confirmDelModal .cancel").click(function(){
       	$(".confirmDelModal").modal("hide");
   	  });
 
-      function updateDel_submit(){
+      jQuery("#form-del").validate({
+			rules:{
+				reason: "required"
+			},
+			messages:{
+				reason:"请输入无效原因"
+			},
+			highlight: function(element) {
+				jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+			},
+			success: function(element) {
+				jQuery(element).closest('.form-group').removeClass('has-error');
+			},
+			invalidHandler : function(){
+				return false;
+			},
+			submitHandler : function(){
+				delSubmit();
+			    return false;
+			}
+		});
+     /*  function updateDel_submit(){
 
     	  var f1=$("#form-delInfo").serialize();
      	  try{
@@ -1032,7 +1437,7 @@
      	  catch(e) {
      		  alert(e);
      	  }
-      }
+      } */
      
 	  //分配地接社
 
@@ -1052,7 +1457,7 @@
       $("#btn-addorder").click(function(){
       	  var destination = $("#destination").val();
       	  $("#englishDestination").val(destination);
-      	  if(destination==""){
+      	  if(destination=="" || destination == null){
       	  	$("#msgDestination").modal('show');
  		  }else{ 
       			var destinationText;
@@ -1101,8 +1506,24 @@
 			}
 		}, "JSON");
       }
-    
-      
+    //询单无效
+      function delSubmit() {
+    	  var f1=$("#form-del").serialize();
+     	  try{
+     		  $.post("${rootPath}case/del.do", f1, function(result) {
+				var rmsg = result.msg;
+				if (result.success) {
+					window.parent.location = "${rootPath}case/edit.html?id=${crmcase.caseId}";
+				} 
+				else {
+					$("#msgModal").modal('show');
+				}
+			}, "JSON");
+     		  }
+     	  catch(e) {
+     		  alert(e);
+     	  }
+      }
       //询单未成行
       function nodealSubmit() {
     	  var f1=$("#form-nodeal").serialize();
@@ -1127,10 +1548,89 @@
       $('#dataTable-order tbody').on( 'click', 'a.btn-success', function () {
          var data = orderTable.row($(this).parents('tr')).data();
          edit($(this).attr('id'));
-      });     
-     function edit(id) {
-		window.parent.location = "${rootPath}order/edit.html?id="+id;
-	 }	
+      });    
+      
+      $('#dataTable-order tbody').on( 'click', 'a.btn-primary', function () {
+	         var data = orderTable.row($(this).parents('tr')).data();
+	         group($(this).attr('id'));
+	         $("#dealOrderId").val($(this).attr('id'));
+	     } );
+
+		 $('#dataTable-order tbody').on( 'click', 'a.btn-default', function () {
+	         var data = orderTable.row($(this).parents('tr')).data();
+	         nogroup($(this).attr('id'));
+	         $("#noDealOrderid").val($(this).attr('id'));
+	     } );
+		 
+		 $('#dataTable-order tbody').on( 'click', 'a.btn-sendMaile', function () {
+	         var data = orderTable.row($(this).parents('tr')).data();
+	         sendOrderEmail(data);  
+	         //$(this).attr('id')获取属性节点(id)的值
+	     } );
+      
+	     function edit(id) {
+			window.parent.location = "${rootPath}order/edit.html?id="+id;
+		 }	
+	    
+	     function group(id) {
+			$(".dealModal").modal('show');
+		}
+		
+		function nogroup(id) {
+			$("#noDeal-orderId").val(id);
+			$(".noDealModal").modal('show');
+		}
+	    $(".dealModal .cancel").click(function(){
+	    	$(".dealModal").modal('hide');
+	    });
+	    $(".noDealModal .cancel").click(function(){
+	    	$(".noDealModal").modal('hide');
+	    })
+	    //日期控件
+	    jQuery(".datepicker").datepicker({
+        dateFormat: "yy-mm-dd",
+        changeYear: true,
+        changeMonth: true,
+        minDate: 0
+     	});
+		//判断客人是否有邮箱  有的话发送邮件 没有的话绑定邮箱
+		function sendOrderEmail(data){
+			if(data.customerEmailReal!=null&&data.customerEmailReal!=""){
+				//alert(data.customerReEmailAlias);
+				if(data.customerReEmailAlias!=null){
+					var f = data.orderId;
+					console.log(f);
+					$.post('${rootPath}order/orderSendEmail.do', {"orderId":f}, function(result) {
+						var rmsg = result.msg;
+						if (result.success) {
+							//window.parent.location = "${rootPath}order/list.html";
+							alert("邮件发送成功");
+						} 
+						else {
+							alert("邮件发送失败，请检查地接社是否允许发邮件");
+						}
+					}, "JSON");
+				}else{
+					var f = data.orderId;
+					console.log(f);
+					$.post('${rootPath}order/orderSendEmailNoAlias.do', {"orderId":f}, function(result) {
+						var rmsg = result.msg;
+						if (result.success) {
+							//window.parent.location = "${rootPath}order/list.html";
+							alert("邮件发送成功了");
+						} 
+						else {
+							alert("邮件发送失败，请检查地接社是否允许发邮件");
+						}
+					}, "JSON");
+				}
+			}else{
+				$("#NoEmail").modal('show');
+				var newHref = "../customer/edit.html?id="+data.customerId
+				$('#addEmail').attr("href",newHref)
+			}
+		}
+		  
   		
 		//沟通记录   回显
   		var recordTable = jQuery('#dataTable-record').DataTable({

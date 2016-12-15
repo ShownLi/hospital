@@ -22,7 +22,9 @@
 			u.last_comment as comment,
 			u.requirement as requirement,
 			u.contact_real as contactReal,
-			u.reason_nodeal as reasonNodeal
+			u.reason_nodeal as reasonNodeal,
+			u.start_date as startDate,
+			u.start_month as startMonth
 		from tm_case u  
 		where u.isdel = 0 
 		<if test="customerId != null and customerId != ''">
@@ -60,6 +62,12 @@
 		</if> 
 		<if test="mobile != null and mobile != ''">
 			and customer_mobile  like '%${mobile}%'
+		</if> 
+		<if test="searchStartTime != null and searchStartTime != ''">
+			and creat_time >= '${searchStartTime}'
+		</if> 
+		<if test="searchEndTime != null and searchEndTime != ''">
+			and  creat_time &lt;= '${searchEndTime}'
 		</if> 
 		order by u.creat_time desc
 		limit #{start},#{length}
@@ -120,6 +128,12 @@
 		<if test="mobile != null and mobile != ''">
 			and customer_mobile like '%${mobile}%'
 		</if> 
+		<if test="searchStartTime != null and searchStartTime != ''">
+			and creat_time >= '${searchStartTime}'
+		</if> 
+		<if test="searchEndTime != null and searchEndTime != ''">
+			and creat_time &lt;= '${searchEndTime}'
+		</if> 
 	</select>
 
 
@@ -164,6 +178,12 @@
 		</if> 
 		<if test="mobile != null and mobile != ''">
 			and customer_mobile like '%${mobile}%'
+		</if> 
+		<if test="searchStartTime != null and searchStartTime != ''">
+			and creat_time >= '${searchStartTime}'
+		</if> 
+		<if test="searchEndTime != null and searchEndTime != ''">
+			and creat_time &lt;= '${searchEndTime}'
 		</if> 
 		group by u.`status`	
 		ORDER BY u.status ASC

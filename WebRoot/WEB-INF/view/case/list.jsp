@@ -59,7 +59,22 @@
 								<div class="col-sm-2">
 									<input type="text" id="searchComment" class="form-control" placeholder="注释" value="" />
 								</div>
+								<div class="col-sm-2 input-group input-datepicker">
+			                        <input id="searchStartDateTime" type="text" name="searchStartDateTime" class="form-control datepicker" placeholder="请点击输入查询开始日期" autocomplete="on">
+			                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+			                    </div>
+			                    <div class="col-sm-2 input-group input-datepicker">
+			                        <input id="searchEndDateTime" type="text" name="searchEndDateTime" class="form-control datepicker" placeholder="请点击输入查询截止日期" autocomplete="on">
+			                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+			                    </div>
 							 
+
+								</div>	
+									<div class="col-sm-2">					 		                        		
+									<input class="btn btn-primary" type="button" id="searchBtn" value="搜索"/>
+								</div> 	
+							</div>
+
 							</div>	
 						
 							<div class="form-group col-sm-10">
@@ -93,9 +108,6 @@
 		        	                </div><!-- rdio -->
 							</div>
 							
-							<div class="col-sm-2">					 		                        		
-								<input class="btn btn-primary" type="button" id="searchBtn" value="搜索"/>
-							</div> 	
 						</div>
 					</div>
 					<div class="panel-body">
@@ -105,14 +117,15 @@
 							<table id="dataTable" class="table">
 								<thead>
 									<tr>
-										<th>ID <br>客人</th>
-										<th>手机 <br>邮箱</th>
-										<th>目的地<br>预算 </th>
-										<th>询单来源 <br>跟单员</th>
-										<th>状态 <br>创建时间</th>
+										<th>客人<br>ID</th>
+										<th>手机 <br>邮箱<br>QQ</th>
+										<th>目的地<br>出发时间 </th>									
 										<th>客人要求</th>
 										<th>无效原因<br>未成行原因 </th>
-										<th>注释</th>
+										<th>备注</th>
+										<th>询单来源 <br>状态</th>
+										<th>跟单员 <br>沟通方式</th>
+										<th>创建时间</th>
 										<th>编辑</th>
 									</tr>
 								</thead>
@@ -122,9 +135,6 @@
 						</div>
 					</div>
 				</div>
-			</div>
-
-		</div>
 		<%@ include file="../assets/pages/rightpanel.jsp"%>
 	</section>
 
@@ -132,106 +142,10 @@
 
 	<script src="${rootPath}assets/js/jquery.datatables.min.js"></script>
 	<script src="${rootPath}assets/js/select2.min.js"></script>
-
-<!-- Modal -->
-<!-- <div class="modal fade" id="confirmDelModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
-  <div class="modal-dialog modal-sm">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="myModalLabel"><span class="fa fa-warning"></span> 提示</h4>
-      </div>
-      <div class="modal-body">
-        确定无效么？
-      </div>
-      <div class="modal-footer">
-      	<input type="hidden" class="hiddenId" value="" />
-        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-        <button type="button" class="btn btn-danger">无效</button>
-      </div>
-    </div>modal-content
-  </div>modal-dialog
-</div>modal -->
-
-<!-- Modal -->
-<div class="modal fade" id="NoEmail" tabindex="-2" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="myModalLabel">信息</h4>
-      </div>
-      <div class="modal-body">
-      		该客人没有邮箱，请添加邮箱后再进行操作
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-      </div>
-    </div><!-- modal-content -->
-  </div><!-- modal-dialog -->
-</div><!-- modal -->
-
-<div class="nextModal modal fade" id="nextModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-body align-center">
-        <div class="section-block">
-        <form id="form-order">
-            <div class="section-title">选择目的地及地接社,添加订单</div>
-      	   <div class="form-group col-sm-8 col-sm-offset-2">
-                <label class="col-sm-3 control-label">目的地</label>
-                <div class="col-sm-9">
-                    <input type="text" id="destination" name="destination" placeholder="目的地" class="destination-select fullwidth" value="" />
-                </div>
-            </div> 
-            <div class="form-group col-sm-8 col-sm-offset-2">
-                <label class="col-sm-3 control-label">所属销售</label>
-                <div class="col-sm-9">
-                    <input type="text" id="salesId" name="salesId" placeholder="选择一个销售" class="sales-select fullwidth" value="" />
-                </div>
-            </div>
-            <div class="col-sm-12">
-             <a class="submit btn btn-primary">保存</a>
-              <input  type="hidden" id="caseId" name="caseId" value="" />
-            </div>
-            </form>
-        </div>
-      </div>
-    </div><!-- modal-content -->
-  </div><!-- modal-dialog -->
-</div><!-- modal -->
-
-<!-- 询单无效modal -->
-<div class="confirmDelModal modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <div class="nextModal-title">请填写无效原因</div>
-      </div>
-      <form class="form-horizontal" id="form-del">
-          <div class="modal-body">     
-              <div class="section-block noline">
-                  <div class="form-group col-sm-12">
-                    <label class="col-sm-4 control-label">无效原因是</label>
-                    <div class="col-sm-8">
-                      <input class="reason-select fullwidth"  name="reason" placeholder="无效原因是" />
-                      <input type="hidden" class="hiddenId" name="caseId" value="" />	
-                    </div>
-                  </div>
-              </div><!-- noDealModal-body -->
-          </div>
-          <div class="modal-footer align-center">
-            <button class="submit btn btn-primary">保存</button> 
-              <a class="cancel btn btn-primary" >取消</a>
-              
-          </div>
-      </form>
-    </div><!-- modal-content -->
-  </div><!-- modal-dialog -->
-</div><!-- bmodal -->
-
-
+	<script src="${rootPath}assets/js/jquery-ui-1.10.3.min.js"></script>
+	<script src="${rootPath}assets/js/jquery.validate.min.js"></script>
+	<script src="${rootPath}assets/js/datepicker-zh-CN.js"></script>
+	<script src="${rootPath}assets/js/datetimepicker-cn.js"></script>
 
 	<script type="text/javascript">
  	var source = ${source}; 
@@ -245,6 +159,9 @@
 	
 	var searchFlag = false;
 	var searchStatusCheck = "";
+
+	var contactReal =${contactReal};
+	
 	$(".destination-select").select2({
         placeholder: '国家',
         data: destination
@@ -280,15 +197,21 @@
     	data:reason
     });
     
-    $(".confirmDelModal .submit").click(function(){
-    	delSubmit();
-    });
+  
     
-    $(".confirmDelModal .cancel").click(function(){
-      	$(".confirmDelModal").modal("hide");
-  	});
+   
 		 
-
+    jQuery("#searchStartDateTime").datepicker({
+        dateFormat: "yy-mm-dd",
+        changeYear: true,
+        changeMonth: true,
+     });
+    
+    jQuery("#searchEndDateTime").datepicker({
+        dateFormat: "yy-mm-dd",
+        changeYear: true,
+        changeMonth: true,
+     });
 			var t = jQuery('#dataTable').DataTable({
 				searching:false,
 				pageLength: 10,
@@ -310,6 +233,8 @@
 			 			var searchRequirment=$('#searchRequirment').val();
 			 			var searchMail=$('#searchMail').val();
 			 			var searchMobile=$('#searchMobile').val();
+			 			var searchStartDateTime=$("#searchStartDateTime").val();
+			 			var searchEndDateTime=$("#searchEndDateTime").val();
 			 			
 			 			//var searchStatus = $("input[name='status']:checked").val();
 			 			var searchStatus = searchStatusCheck;
@@ -353,6 +278,12 @@
 			 			if(searchMobile !=null && searchMobile !=""){
 			 				data.mobile = searchMobile;
 			 			}
+			 			if(searchStartDateTime !=null && searchStartDateTime !=""){
+			 				data.searchStartTime = searchStartDateTime;
+			 			}
+			 			if(searchEndDateTime !=null && searchEndDateTime !=""){
+			 				data.searchEndTime = searchEndDateTime;
+			 			}
 					},
 					
 					dataFilter: function(data){
@@ -378,59 +309,7 @@
 							$('#status6Count').html("已付款"+json.status6);
 							
 						}
-						/* if(searchFlag==true){
-							if(json.status0!=null&&json.status0!=0&&json.status0!=""){
-								$('#status0Count').html("待处理"+json.status0);
-							}
-							
-							if(json.status1!=null&&json.status1!=0&&json.status1!=""){
-								$('#status1Count').html("客服沟通中"+json.status1);
-							}
-							
-							if(json.status2!=null&&json.status2!=0&&json.status2!=""){
-								$('#status2Count').html("地接设计中"+json.status2);	
-							}
-							
-							if(json.status3!=null&&json.status3!=0&&json.status3!=""){
-								$('#status3Count').html("成行"+json.status3);	
-							}
-							
-							if(json.status4!=null&&json.status4!=0&&json.status4!=""){
-								$('#status4Count').html("未成行"+json.status4);		
-							}
-							
-							if(json.status5!=null&&json.status5!=0&&json.status5!=""){
-								$('#status5Count').html("无效"+json.status5);		
-							}
-							
-							if(json.status6!=null&&json.status6!=0&&json.status6!=""){
-								$('#status6Count').html("已付款"+json.status6);	
-							}
-							searchFlag = false;
-						}
-									 */		
 						
-											
-						
-										
-						
-																
-						
-						
-						
-/* 						$('#status0Count').html("待处理"+json.status0);
-
-						$('#status1Count').html("客服沟通中"+json.status1);
-				
-						$('#status2Count').html("地接设计中"+json.status2);						
-						
-						$('#status3Count').html("成行"+json.status3);						
-						
-						$('#status4Count').html("未成行"+json.status4);						
-						
-						$('#status5Count').html("无效"+json.status5);												
-						
-						$('#status6Count').html("已付款"+json.status6); */
 						
 						return JSON.stringify( json );
 					}
@@ -439,14 +318,14 @@
  					   {
 			                orderable: false,
 			                render: function ( data, type, full, meta ) {
-			                    return "<div class='minw50'>" + full.caseId + "</div>" + "<div class='minw50'>" + full.chineseName + "</div>"
+			                    return "<div class='minw50'>" + full.chineseName + "</div>" + "<div class='minw50'>" + full.caseId + "</div>"
 			                },
 			                targets: 0
 						},
 						{
 			                orderable: false,
 			                render: function ( data, type, full, meta ) {
-			                    return "<div>" + full.mobile + "</div>" + "<div>" + full.email + "</div>"
+			                    return "<div>" + full.mobile + "</div>" + "<div>" + full.email + "</div>"+ "<div>" + full.qq + "</div>"
 			                },
 			                targets: 1
 						},
@@ -454,6 +333,7 @@
 			                orderable: false,
 			                render: function ( data, type, full, meta ) {
 			                	var destinations="";
+			                	
 			                	if(full.destination){
 			                	var des=full.destination.split(",");
 			                	for(var j = 0;j<des.length;j++){
@@ -464,8 +344,24 @@
 				                	}
 			                	}
 			                }
+			                	
 			                destinations=destinations.substring(0,destinations.length-1);
-			                return "<div class='width85'>" + destinations + "</div>" + "<div class='width85'>" + full.budget + "</div>";
+			              	//出发日期
+		                	var start_date = full.startDate;
+		                	//大约出发日期
+		                	var start_month =full.startMonth;
+		                	
+			                if(start_date!=null){
+			                	var time=new Date(start_date.time).format("yyyy-MM-dd");
+			                	return "<div class='caselist-7'>" + destinations + "</div>" + "<div class='caselist-7'>" + time + "</div>";
+		                		
+		                	}
+		                	if(start_month!=null){
+		                		var time=new Date(start_month.time).format("yyyy-MM-dd");
+		                		 return "<div class='caselist-7'>" + destinations + "</div>" + "<div class='caselist-7'>" + time + "</div>";
+		                	}
+		                	
+			                return "<div class='width85'>" + destinations + "</div>" ;
 			                },
 			                targets: 2
 						},	  
@@ -524,10 +420,10 @@
 									return "<div class='width150'>" + data + "</div>"
 								}	
 							},
-							targets: 5
+							targets: 3
 						},
-						{
-			                orderable: false,
+						 {	
+							orderable: false,
 			                render: function ( data, type, full, meta ) {
 			                	var dataReason = full.reason;
 			                	var dataReasonNodeal= full.reasonNodeal;
@@ -547,7 +443,7 @@
 				                	}
 				                	return "<div class='width85'>" + m + "</div>" + "<div class='width85'>" + n + "</div>";
 			                },
-			                  targets: 6
+			                  targets: 4
 						},
 						{
 							data:"comment",
@@ -559,9 +455,78 @@
 									return "<div class='width150'>" + data + "</div>"
 								}
 							},
+							  targets: 5
+						},
+						{
+			                  orderable: false,
+				                render:  function ( data, type, full, meta ) {
+				                	var dataSource = full.source;
+				                	var dataCaseStatus = full.status;
+				                	
+				                	var m = "";
+				                	var n = "";
+					                	for(var i=0;i < source.length;i++){
+					                		
+					                		if(dataSource==source[i].id){
+					                			m = source[i].text;
+					                			break;
+					                		}	
+					                	}
+					                	
+					                	for(var i=0;i<caseStatus.length;i++){
+					                		if(dataCaseStatus==caseStatus[i].id){
+					                			n=caseStatus[i].text;
+					                			break;
+					                		}
+					                	}
+					                	
+					                	return "<div class='width85'>" + m + "</div>" + "<div class='width85'>" + n + "</div>";
+				                },
+				                  targets: 6
+			                  
+			                 
+						},
+						{
+							orderable: false,
+							render:function ( data, type, full, meta ) {
+								var oper = full.operator;
+								var contReal = full.contactReal;
+								var operator = "";
+								var contRealText = "";
+								for(var i=0;i < user.length;i++){
+			                		if(oper==user[i].id){
+			                			operator=user[i].text;
+			                			break;
+			                		}
+			                	}
+								
+								for(var i=0;i < contactReal.length;i++){
+			                		if(full.contactReal==contactReal[i].id){
+			                			
+			                			contRealText=contactReal[i].text;
+			                			break;
+			                		}
+			                	}
+								return "<div class='width85'>" + operator + "</div>" + "<div class='width85'>" +contRealText+ "</div>";
+							},
 							  targets: 7
 						
 						},
+						{
+			                  data: "creatTime",
+			                  orderable: false,
+			                  render: function ( data ) {
+			                	  
+			                	  var time = data.time;
+				                	if(data.time){
+				                		time=new Date(time).format("yyyy-MM-dd hh:mm:ss");
+				                	}else{
+				                		time="";
+				                	}
+				                	return "<div class='caselist-7'>" + time + "</div>"
+			                  },
+			                  targets: 8
+						    },
 						{
 		                  data: "caseId",
 		                  orderable: false,
@@ -575,7 +540,7 @@
 		                	  }
 		                      
 		                  },
-		                  targets: 8
+		                  targets: 9
 					    },
 					    {
 						    orderable: false,
@@ -588,15 +553,15 @@
 			            { data: "caseId" },
 			            { data:"mobile"},
 			            { data: "destination" },
-			            { data: "operator" },
-			            { data: "creatTime"},
 			            { data: "requirement" },
-			            { data: "reason"},
+			            { data: "operator" },
 			            { data: "comment"},
+			            { data: "creatTime"},
+			            { data: "reason"}
+			           
 			        ]
 				});
 
-					 
 			$('#searchBtn').on( 'click', function () {
 				//$("input[name='status']:checked").val(null);
 				searchStatusCheck = "";
@@ -641,26 +606,17 @@
 				t.draw();
 			});
 		    
-		    //处理询单
-		   /*  $('#dataTable tbody').on( 'click', 'a.btn-handle', function () {
-		        var data = t.row($(this).parents('tr')).data();
-		        handle($(this).attr('id'));
-		    } ); */
+		  
 		
 			$('#dataTable tbody').on( 'click', 'a.btn-success', function () {
 		        var data = t.row($(this).parents('tr')).data();
 		        edit($(this).attr('id'));
 		    } );
-
-			$('#dataTable tbody').on( 'click', 'a.btn-danger', function () {
-		        var data = t.row($(this).parents('tr')).data();
-		        del($(this).attr('id'));
-		    } );
-			
 			$('#dataTable tbody').on( 'click', 'a.btn-primary', function () {
 		        var data = t.row($(this).parents('tr')).data();
 		        handle($(this).attr('id'));
 		    } );
+
 	    
 		// Select2
 	    jQuery('select').select2({
@@ -669,18 +625,14 @@
 	    
 	    jQuery('select').removeClass('form-control');
 		
-		
-	   
-	    
 		function edit(id) {
 			window.parent.location = "${rootPath}case/edit.html?id="+id;
 		}
-		
+		//处理询单
 		function handle(id) {
 			window.parent.location = "${rootPath}case/handle.html?id="+id;
 		}
 		
-
 		function del(id) {
 			 
 			 $(".confirmDelModal .hiddenId").val("");
@@ -699,6 +651,7 @@
 				}
 			});			
 		}
+		
   		function order_submit() {
 			var order= $("#form-order").serialize();
 			$.post('${rootPath}order/add.do', order, function(result) {
@@ -710,7 +663,7 @@
 					$("#NoEmail").modal('show');
 				}
 			}, "JSON");
-	}
+		}
   	  
   	  function delSubmit() {
     	  var f1=$("#form-del").serialize();
@@ -730,8 +683,6 @@
      	  }
      	 alert("页面正在加载，请稍后...");
       }
-
-
 	</script>
 </body>
 </html>

@@ -52,8 +52,6 @@ public class CaseController extends BaseSimpleFormController {
 		List<EntityList> statusList = service.getParameterInfo(status);
 		List<EntityList> countryList = service.getParameterInfo(country);
 		List<EntityList> reasonList = service.getParameterInfo(reason);
-
-	
 		
 		JSONArray countryResult = JSONArray.fromObject(countryList);
 		JSONArray sourceResult = JSONArray.fromObject(sourceList);
@@ -62,7 +60,6 @@ public class CaseController extends BaseSimpleFormController {
 		JSONArray userResult = JSONArray.fromObject(userList);
 		JSONArray salesResult = JSONArray.fromObject(salesList);
 		JSONArray reasonResult = JSONArray.fromObject(reasonList);
-		
 		
 		model.addAttribute("destination",countryResult);
 		model.addAttribute("source",sourceResult);
@@ -78,6 +75,10 @@ public class CaseController extends BaseSimpleFormController {
 		JSONArray reasonNodealResult = JSONArray.fromObject(reasonNodealList);
 		model.addAttribute("reasonNodeal", reasonNodealResult);
 
+		String contact ="case.contact";
+		List<EntityList> contactList = service.getParameterInfo(contact);
+		JSONArray contactResult = JSONArray.fromObject(contactList);
+		model.addAttribute("contactReal", contactResult);
 		
 		return "/case/list";
 	}
@@ -101,6 +102,7 @@ public class CaseController extends BaseSimpleFormController {
 		String result = JSONUtilS.object2json(casePage);
 		return result;
 	}
+	
 	@RequestMapping(value = "/add.html", method = { RequestMethod.POST, RequestMethod.GET })
 	public String add(Model model) {
 		
@@ -141,7 +143,6 @@ public class CaseController extends BaseSimpleFormController {
 		List<EntityList> customer = service.getCustomer();
 		List<EntityList> user = service.getUser();
 		List<EntityList> sales = service.getSales();
-		
 		
 		JSONArray levelResult = JSONArray.fromObject(levelList);
 		JSONArray  ageGroupResult = JSONArray.fromObject(ageGroupList);
@@ -590,6 +591,7 @@ public class CaseController extends BaseSimpleFormController {
 	
 	@RequestMapping(value = "/edit.html", method = { RequestMethod.POST, RequestMethod.GET })
 	public String edit(Model model, String id) {
+		
 		if (null != id && !"".equals(id)) {
 			int caseId = Integer.parseInt(id);
 			Case crmcase = service.getCaseById(caseId);
@@ -619,8 +621,6 @@ public class CaseController extends BaseSimpleFormController {
 				cus = service.getCustomerInfoById(crmcase.getCustomerId());
 			}
 
-			
-
 			String country = "country";
 			String language = "case.preferlanguage";
 			String withwho = "case.withwho";
@@ -639,9 +639,9 @@ public class CaseController extends BaseSimpleFormController {
 			String destination = "case.destination";
 			
 			String orderStatus = "order.status";
-			
 			String contact="case.contact";
 			String reasonNodeal ="case.reasonnodeal";
+			
 			List<EntityList> countryList = service.getParameterInfo(country);
 			List<EntityList> languageList = service.getParameterInfo(language);
 			List<EntityList> withwhoList = service.getParameterInfo(withwho);
@@ -689,7 +689,10 @@ public class CaseController extends BaseSimpleFormController {
 			//转换成Json字符串
 			JSONArray contactResult=JSONArray.fromObject(contactList);
 			JSONArray reasonNodealResult=JSONArray.fromObject(reasonNodealList);
-			
+			String orderNoDeal= "order.reason";
+			List<EntityList> orderNoDealList = service.getParameterInfo(orderNoDeal);
+			JSONArray orderNoDealResult = JSONArray.fromObject(orderNoDealList);
+			model.addAttribute("orderNoDealReason",orderNoDealResult);
 			
 			model.addAttribute("country",countryResult);
 			model.addAttribute("language",languageResult);
@@ -713,13 +716,14 @@ public class CaseController extends BaseSimpleFormController {
 			model.addAttribute("reason", reasonResult);
 			model.addAttribute("contact", contactResult);
 			model.addAttribute("destinations", destinationResult);
-			
 			model.addAttribute("orderStatus",orderStatusResult);
-		
 			model.addAttribute("contact", contactResult);
-
 			model.addAttribute("reasonNodeal", reasonNodealResult);
 			
+			String currency="order.currency";
+			List<EntityList> currencyList = service.getParameterInfo(currency);
+			JSONArray currencyResult = JSONArray.fromObject(currencyList);
+			model.addAttribute("currency",currencyResult);
 		}
 		return "/case/edit";
 	}
@@ -742,7 +746,6 @@ public class CaseController extends BaseSimpleFormController {
 		return json;
 	}
 	
-	
 	//添加询单时 ，选择目的地及地接社，  目的地与销售联动
 	@RequestMapping(value = "/getSales.do")
 	@ResponseBody
@@ -755,6 +758,7 @@ public class CaseController extends BaseSimpleFormController {
 		List<EntityList> sales = service.getSalesByAgency(destinationList);
 		return sales;
 	}
+	
 	//设置询单无效
 	@RequestMapping(value = "/del.do")
 	@ResponseBody
@@ -784,6 +788,7 @@ public class CaseController extends BaseSimpleFormController {
 		
 		return json;
 	}
+	
 	//设置询单未成行
 	@RequestMapping(value = "/nodeal.do")
 	@ResponseBody
