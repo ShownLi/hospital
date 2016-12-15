@@ -33,7 +33,9 @@
 									</div>
 									<div class="col-sm-2">
 										<input type="text" id="searchCountry" class="country-select fullwidth" value="" />
-										<input class="btn tn-primary" type="button" id="serarchCountryClear"/> 
+									</div>
+									<div class="col-sm-2">
+										<input type="text" id="searchDestination" class="destination-select fullwidth" value="" />
 									</div>
 								</div>	
 								<div class="col-sm-2">					 		                        		
@@ -50,6 +52,7 @@
 								<thead>
 									<tr>
 										<th>地接社名</th>
+										<th>目的地</th>
 										<th>国家</th>
 										<th>语言</th>
 										<th>操作</th>
@@ -97,10 +100,15 @@
 <script type="text/javascript">
 	var country= ${country};
 	var language = ${language};
+	var destination = ${destination};
 	
 	$(".country-select").select2({
         placeholder: '国家',
         data: country
+    });
+	$(".destination-select").select2({
+        placeholder: '目的地',
+        data: destination
     });
 	
 	jQuery(document).ready(function() {
@@ -119,13 +127,16 @@
 			data:function ( data ) {
 				var searchAgencyName=$('#searchAgencyName').val();
 	 			var searchCountry=$('#searchCountry').val();
-	 			
+	 			var searchDestination=$('#searchDestination').val();
 	 			
 	 			if(searchAgencyName !=null && searchAgencyName !="" ){
 					data.name = searchAgencyName;
 	 			}
 	 			if(searchCountry !=null && searchCountry !="" ){
 					data.country = searchCountry;
+	 			}
+	 			if(searchDestination !=null && searchDestination !="" ){
+					data.destination = searchDestination;
 	 			} 
 	 			
 			},
@@ -144,7 +155,26 @@
 	                  render: function ( data, type, full, meta ) {
 	                      return '<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a>&nbsp;<a class="btn btn-danger btn-xs" id="'+data+'"><span class="fa fa-minus-circle"></span> 删除</a>';
 	                  },
-	                  targets: 3
+	                  targets: 4
+				  },
+				  {
+		                data: "destination",
+		                render: function ( data, type, full, meta ) {
+		                	var destinations="";
+		                	if(full.destination){
+		                	var des=full.destination.split(",");
+		                	for(var j = 0;j<des.length;j++){
+		                		for(var i=0;i <destination.length;i++){
+			                		if(des[j]==destination[i].id){
+			                			destinations+=destination[i].text+",";
+			                		}				                	
+			                	}
+		                	}
+		                }
+		                destinations=destinations.substring(0,destinations.length-1);
+		                return "<div class='width85'>" + destinations + "</div>";
+				   },
+				   		targets: 1
 				  },
 				  {
 	                data: "country",
@@ -159,7 +189,7 @@
 		                	return "";
 		                }else{return ""}
 	                },
-	                  targets: 1
+	                  targets: 2
 				  },
 				  {
 		                data: "language",
@@ -172,9 +202,11 @@
 			                		}
 			                	}
 			                	return "";
-			                 }else{return ""}
+			                 }else{
+			                	 return ""
+			                 }
 		                },
-		                  targets: 2
+		                  targets: 3
 					  },
 				  {
 					  orderable: false,
@@ -185,6 +217,7 @@
 				],
 				columns: [
 		            { data: "name" },
+		            { data: "destination" },
 		            { data: "country" },
 					{ data: "language" }
 		        ]

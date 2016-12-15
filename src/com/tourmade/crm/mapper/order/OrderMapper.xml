@@ -187,7 +187,6 @@ limit #{start},#{length} -->
 		sales_name,
 		customer_email_real,
 		agency_email_real,
-		
 		operator,
 		destination,
 		status,
@@ -212,7 +211,6 @@ limit #{start},#{length} -->
 		#{salesName,jdbcType=VARCHAR},
 		#{customerEmailReal},
 		#{agencyEmailReal},
-
 		#{operator},
 		#{destination,jdbcType=VARCHAR},
 		#{status,jdbcType=VARCHAR},

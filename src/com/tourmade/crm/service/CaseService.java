@@ -19,6 +19,7 @@ import com.tourmade.crm.common.framework.bean.QueryResult;
 import com.tourmade.crm.common.model.base.value.baseconfig.Json;
 import com.tourmade.crm.common.model.base.value.baseconfig.PageHelper;
 import com.tourmade.crm.entity.Case;
+import com.tourmade.crm.entity.CaseStatus;
 import com.tourmade.crm.entity.Customer;
 import com.tourmade.crm.entity.EntityList;
 import com.tourmade.crm.entity.Parameter;
@@ -85,11 +86,41 @@ public class CaseService extends BaseService {
 		if(crmcase.getMobile()!=null){
 			map.put("mobile", crmcase.getMobile());
 		}
-		
+		if(crmcase.getSearchStartTime()!=null){
+			crmcase.setSearchStartTime(crmcase.getSearchStartTime()+" 00:00:00");
+			map.put("searchStartTime", crmcase.getSearchStartTime());
+		}
+		if(crmcase.getSearchEndTime()!=null){
+			crmcase.setSearchEndTime(crmcase.getSearchEndTime()+" 24:00:00");
+			map.put("searchEndTime", crmcase.getSearchEndTime());
+		}
 		
 		List<Case> data = caseMapper.queryCase(map);
 		long count = caseMapper.countCase(crmcase);
-			
+		List<CaseStatus> countStatus = caseMapper.countCaseByStatus(crmcase);	
+		for(CaseStatus caseStatus : countStatus){
+			if(caseStatus.getStatus()==0){
+				result.setStatus0(caseStatus.getCount());
+			}
+			if(caseStatus.getStatus()==1){
+				result.setStatus1(caseStatus.getCount());
+			}
+			if(caseStatus.getStatus()==2){
+				result.setStatus2(caseStatus.getCount());
+			}
+			if(caseStatus.getStatus()==3){
+				result.setStatus3(caseStatus.getCount());
+			}
+			if(caseStatus.getStatus()==4){
+				result.setStatus4(caseStatus.getCount());
+			}
+			if(caseStatus.getStatus()==5){
+				result.setStatus5(caseStatus.getCount());
+			}
+			if(caseStatus.getStatus()==6){
+				result.setStatus6(caseStatus.getCount());
+			}
+		}
 		result.setData(data);
 		result.setCountTotal(count);
 		result.setCountFiltered(count);

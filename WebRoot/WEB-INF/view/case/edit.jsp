@@ -491,6 +491,8 @@
 	
 		</div>
 		</div>
+		</div>
+		</div>
 	</div>
 		<!-- mainpanel -->
 		<%@ include file="../assets/pages/rightpanel.jsp"%>
@@ -815,6 +817,7 @@
 			$("#btn-addorder").css("display","none");
 		}
 		
+		
 	})
 	if("${crmcase.status}"==1){
 			$("#btn-invalid").css("display","display");
@@ -984,6 +987,9 @@
         placeholder: '跟单员',
         data: user
     });
+    if("${crmcase.status}">=2){
+		$(".user-select").prop("disabled", true);   
+	}
     $(".sales-select").select2({
         placeholder: '销售',
         data: sales
@@ -1254,10 +1260,6 @@
 							orderable: false,
 			                render: function ( data, type, full, meta  )  {
 			                	for(var i=0;i<user.length;i++){
-			                		console.log("跟单员data="+data);
-			                		console.log("跟单员full="+full.operator);
-		                			console.log("跟单员="+user[i].id);
-		                			console.log("跟单员姓名="+user[i].text);
 			                		if(data==user[i].id){
 			                			return user[i].text;
 			                		}
@@ -1327,6 +1329,7 @@
             endDate: "date",
             startMonth: "date",
             during: "digits",
+            destination: "required",
           },
           messages: {
             adult: "请输入一个整数",
@@ -1337,6 +1340,7 @@
             endDate: "请输入正确的日期格式 mm/dd/yyyy",
             startMonth: "请输入正确的日期格式 mm/dd/yyyy",
             during: "请输入一个整数",
+            destination:"请选择目的地",
           },
         
           highlight: function(element) {
@@ -1355,6 +1359,7 @@
       });
       
   	  function case_submit(){
+  			$(".user-select").prop("disabled", false);
    			var f = $("#form-case").serialize();
    			$.post('${rootPath}case/edit.do', f, function(result) {
    				var rmsg = result.msg;
@@ -1444,7 +1449,7 @@
       $("#btn-addorder").click(function(){
       	  var destination = $("#destination").val();
       	  $("#englishDestination").val(destination);
-      	  if(destination==""){
+      	  if(destination=="" || destination == null){
       	  	$("#msgDestination").modal('show');
  		  }else{ 
       			var destinationText;

@@ -714,7 +714,6 @@
     var meals = ${meals};
     var guide = ${guide};
     var caseStatus = ${status};   
-    
     var source = ${source};
     var tailormade = ${tailormade};
     var passport = ${passport};
@@ -982,6 +981,7 @@
             endDate: "date",
             startMonth: "date",
             during: "digits",
+            destination: "required",
           },
           messages: {
             operator:"请录入跟单员",
@@ -993,6 +993,7 @@
             endDate: "请输入正确的日期格式 mm/dd/yyyy",
             startMonth: "请输入正确的日期格式 mm/dd/yyyy",
             during: "请输入一个整数",
+            destination:"请选择目的地",
           },
         
           highlight: function(element) {

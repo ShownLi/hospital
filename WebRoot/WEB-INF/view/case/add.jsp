@@ -136,7 +136,7 @@
                     <div class="form-group col-sm-4">
                       <label class="col-sm-4 control-label">希望联系方式</label>
                       <div class="col-sm-8">
-	                      <select name="contactType" class="contact-select fullwidth" multiple="multiple">
+	                    <select name="contactType" class="contact-select fullwidth" multiple="multiple">
 						</select>
                       </div>
                     </div> 
@@ -524,17 +524,13 @@
  </div><!-- modal -->	
 </div>  --%> 
 
-
-
-
-
 	<%@ include file="../assets/pages/foot.jsp"%>
 	<script src="${rootPath}assets/js/select2.min.js"></script>
 	<script src="${rootPath}assets/js/jquery-ui-1.10.3.min.js"></script>
 	<script src="${rootPath}assets/js/jquery.validate.min.js"></script>
 	<script src="${rootPath}assets/js/jquery.datatables.min.js"></script>
 	
-	<script type="text/javascript">
+<script type="text/javascript">
     var country = ${country};
     var language = ${language};
     var withwho = ${withwho};
@@ -552,7 +548,6 @@
     var sales = ${sales};
     var level = ${level};
 	var ageGroup = ${ageGroup};
-
 	var contactData=${contact};
 
 	$(".agegroup-select").select2({
@@ -580,7 +575,6 @@
     $(".contact-select-country").val('${crmcase.destination}'.split(",")).trigger("change");
 
   //选择希望的联系方式下拉框
-
     $(".contact-select").select2({
         placeholder: '选择希望联系方式',
         data: contactData
@@ -590,7 +584,6 @@
         placeholder: '选择真实联系方式',
         data: contactData
      });
-    
     $(".withwho-select").select2({
     	placeholder: '与谁同行',
      	data: withwho
@@ -690,6 +683,7 @@
 			  email: "email",
 			  birthday: "date",
 			  source: "required",
+			  destination: "required",
 			  mobile:{
 					isMobile:true,
 			  },		
@@ -704,7 +698,7 @@
               during: "digits",
     		},
     		messages: {
- //  				customerId: "必须选择所属客人",
+ //  			customerId: "必须选择所属客人",
    				source:"请选择询单来源",
    				adult: "请输入一个整数",
              	children: "请输入一个整数",
@@ -718,7 +712,8 @@
 				qq: "请输入有效的QQ账号",
 				email: "请输入有效的邮箱",
 				birthday: "请输入正确的日期",
-				source: "请选择一个客人来源"
+				source: "请选择一个客人来源",
+				destination:"请选择目的地",
    			},
   				
   			    highlight: function(element) {
@@ -832,8 +827,10 @@
 					$("#msgModal").modal('show');
 					$("#nextModal").modal('hide');
 				}else{
+					alert(result.cid);
 					$("#ccaseId").val(result.cid);
 					var custumerList=result.cust;
+					alert(custumerList);
 					for(var i=0;i<custumerList.length;i++){
 						$("#showCustomer").append("<tr><td align='center'>"+custumerList[i].customerId+"</td>"+
 								"<td align='center' name='chineseName'>"+custumerList[i].chineseName+"</td>"+
@@ -848,7 +845,6 @@
 				}
 			}, "JSON");
 		} 
-		
 		
 		//datatables形式
 		/* function case_submit() {

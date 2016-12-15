@@ -59,11 +59,55 @@
 								<div class="col-sm-2">
 									<input type="text" id="searchComment" class="form-control" placeholder="注释" value="" />
 								</div>
+								<div class="col-sm-2 input-group input-datepicker">
+			                        <input id="searchStartDateTime" type="text" name="searchStartDateTime" class="form-control datepicker" placeholder="请点击输入查询开始日期" autocomplete="on">
+			                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+			                    </div>
+			                    <div class="col-sm-2 input-group input-datepicker">
+			                        <input id="searchEndDateTime" type="text" name="searchEndDateTime" class="form-control datepicker" placeholder="请点击输入查询截止日期" autocomplete="on">
+			                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+			                    </div>
 							 
+
+								</div>	
+									<div class="col-sm-2">					 		                        		
+									<input class="btn btn-primary" type="button" id="searchBtn" value="搜索"/>
+								</div> 	
+							</div>
+
 							</div>	
-							<div class="col-sm-2">					 		                        		
-								<input class="btn btn-primary" type="button" id="searchBtn" value="搜索"/>
-							</div> 	
+						
+							<div class="form-group col-sm-10">
+		        	                <div class="rdio rdio-primary rdio-inline">
+		        	                  <input type="radio" id="status0" value="0" name="status"/>
+		        	                  <label id="status0Count" for="status0">待处理</label>    	                  
+		        	                </div><!-- rdio -->
+		        	                <div class="rdio rdio-primary rdio-inline">
+		        	                  <input type="radio" id="status1" value="1" name="status"/>
+		        	                  <label id="status1Count" for="status1">客服沟通中</label>
+		        	                </div><!-- rdio -->
+		        	                <div class="rdio rdio-primary rdio-inline">
+		        	                  <input type="radio" id="status2" value="2" name="status"/>
+		        	                  <label id="status2Count" for="status2">地接设计中</label>
+		        	                </div><!-- rdio -->
+		        	                <div class="rdio rdio-primary rdio-inline">
+		        	                  <input type="radio" id="status3" value="3" name="status"/>
+		        	                  <label id="status3Count" for="status3">成行</label>
+		        	                </div><!-- rdio -->
+		        	                <div class="rdio rdio-primary rdio-inline">
+		        	                  <input type="radio" id="status4" value="4" name="status"/>
+		        	                  <label id="status4Count" for="status4">未成行</label>
+		        	                </div><!-- rdio -->
+		        	                <div class="rdio rdio-primary rdio-inline">
+		        	                  <input type="radio" id="status5" value="5" name="status"/>
+		        	                  <label id="status5Count" for="status5">无效</label>
+		        	                </div><!-- rdio -->
+		        	                <div class="rdio rdio-primary rdio-inline">
+		        	                  <input type="radio" id="status6" value="6" name="status"/>
+		        	                  <label id="status6Count" for="status6">已付款</label>
+		        	                </div><!-- rdio -->
+							</div>
+							
 						</div>
 					</div>
 					<div class="panel-body">
@@ -111,6 +155,10 @@
 
 	<script src="${rootPath}assets/js/jquery.datatables.min.js"></script>
 	<script src="${rootPath}assets/js/select2.min.js"></script>
+	<script src="${rootPath}assets/js/jquery-ui-1.10.3.min.js"></script>
+	<script src="${rootPath}assets/js/jquery.validate.min.js"></script>
+	<script src="${rootPath}assets/js/datepicker-zh-CN.js"></script>
+	<script src="${rootPath}assets/js/datetimepicker-cn.js"></script>
 
 	<script type="text/javascript">
  	var source = ${source}; 
@@ -161,7 +209,17 @@
     
    
 		 
-
+    jQuery("#searchStartDateTime").datepicker({
+        dateFormat: "yy-mm-dd",
+        changeYear: true,
+        changeMonth: true,
+     });
+    
+    jQuery("#searchEndDateTime").datepicker({
+        dateFormat: "yy-mm-dd",
+        changeYear: true,
+        changeMonth: true,
+     });
 			var t = jQuery('#dataTable').DataTable({
 				searching:false,
 				pageLength: 10,
@@ -178,11 +236,16 @@
 			 			var searchDestination=$('#searchDestination').val();
 			 			var searchSource=$('#searchSource').val();
 			 			var searchOperator=$('#searchOperator').val();
-			 			var searchStatus=$('#searchStatus').val();
+			 			//var searchStatus=$('#searchStatus').val();
 			 			var searchComment=$('#searchComment').val();
 			 			var searchRequirment=$('#searchRequirment').val();
 			 			var searchMail=$('#searchMail').val();
 			 			var searchMobile=$('#searchMobile').val();
+			 			var searchStartDateTime=$("#searchStartDateTime").val();
+			 			var searchEndDateTime=$("#searchEndDateTime").val();
+			 			
+			 			var searchStatus = $("input[name='status']:checked").val();
+			 	
 			 			
 			 			if(searchCustomerId !=null && searchCustomerId !="" ){
 							data.customerId = searchCustomerId;
@@ -220,6 +283,12 @@
 			 			if(searchMobile !=null && searchMobile !=""){
 			 				data.mobile = searchMobile;
 			 			}
+			 			if(searchStartDateTime !=null && searchStartDateTime !=""){
+			 				data.searchStartTime = searchStartDateTime;
+			 			}
+			 			if(searchEndDateTime !=null && searchEndDateTime !=""){
+			 				data.searchEndTime = searchEndDateTime;
+			 			}
 					},
 					
 					dataFilter: function(data){
@@ -227,6 +296,21 @@
 						json.recordsTotal = json.countTotal;
 						json.recordsFiltered = json.countFiltered;
 						json.data = json.data;
+						
+						$('#status0Count').html("待处理"+json.status0);
+
+						$('#status1Count').html("客服沟通中"+json.status1);
+				
+						$('#status2Count').html("地接设计中"+json.status2);						
+						
+						$('#status3Count').html("成行"+json.status3);						
+						
+						$('#status4Count').html("未成行"+json.status4);						
+						
+						$('#status5Count').html("无效"+json.status5);												
+						
+						$('#status6Count').html("已付款"+json.status6);
+						
 						return JSON.stringify( json );
 					}
 				},
@@ -281,6 +365,51 @@
 			                },
 			                targets: 2
 						},	  
+						{
+			                orderable: false,
+			                render: function ( data, type, full, meta ) {
+			                	var dataSource = full.source;
+			                	var dataOperator = full.operator;
+			                	var m = "";
+			                	var n = "";
+				                	for(var i=0;i < source.length;i++){
+				                		
+				                		if(dataSource==source[i].id){
+				                			// return "<div class='caselist-5'>" + user[i].text + "</div>"
+				                			m = source[i].text;
+				                		}	
+				                	}
+				                	for(var i=0;i < user.length;i++){
+				                		if(dataOperator==user[i].id){
+				                			n=user[i].text;
+				                		}
+				                	}
+				                	return "<div class='width85'>" + m + "</div>" + "<div class='width85'>" + n + "</div>";
+			                },
+			                  targets: 3
+						},
+						 {	
+
+			                orderable: false,
+			                render: function ( data, type, full, meta ) {
+			                	var time = data.time;
+			                	if(data.time){
+			                		time=new Date(time).format("yyyy-MM-dd hh:mm:ss");
+			                	}else{
+			                		time="";
+			                	}
+			                	if(full){
+			                		for(var i=0;i<caseStatus.length;i++){
+				                		if(full.status==caseStatus[i].id){
+				                			return "<div class='caselist-6'>" + caseStatus[i].text + "</div>" + "<div class='caselist-7'>" + time + "</div>"
+				                		}
+				                	}
+			                		
+			                	}
+			                	else{return ""}
+			                },
+			                  targets: 4
+						},
 						{
 							data:"requirement",
 							orderable: false,
@@ -433,16 +562,42 @@
 			        ]
 				});
 
-					 
 			$('#searchBtn').on( 'click', function () {
 		        t.draw();
 		    } );
+			
+			$('#status0').on('click',function(){
+				
+				t.draw();
+			});
+			$('#status1').on('click',function(){
+				t.draw();
+			});
+			$('#status2').on('click',function(){
+				t.draw();
+			});
+			$('#status3').on('click',function(){
+				t.draw();
+			});
+			$('#status4').on('click',function(){
+				t.draw();
+			});
+			$('#status5').on('click',function(){
+				t.draw();
+			});
+			$('#status6').on('click',function(){
+				t.draw();
+			});
 		    
 		  
 		
 			$('#dataTable tbody').on( 'click', 'a.btn-success', function () {
 		        var data = t.row($(this).parents('tr')).data();
 		        edit($(this).attr('id'));
+		    } );
+			$('#dataTable tbody').on( 'click', 'a.btn-primary', function () {
+		        var data = t.row($(this).parents('tr')).data();
+		        handle($(this).attr('id'));
 		    } );
 
 	    
@@ -456,7 +611,61 @@
 		function edit(id) {
 			window.parent.location = "${rootPath}case/edit.html?id="+id;
 		}
+		//处理询单
+		function handle(id) {
+			window.parent.location = "${rootPath}case/handle.html?id="+id;
+		}
 		
+		function del(id) {
+			 
+			 $(".confirmDelModal .hiddenId").val("");
+			 $(".confirmDelModal .hiddenId").val(Number(id));
+		 	 $(".confirmDelModal").modal('show');
+		}
+		
+		function doDel(id){
+			$.ajax({
+				url: "${rootPath}case/del.do?id=" + id, 
+				success: function() {
+					window.location.reload();
+				},
+				error: function() {
+					alert(2);
+				}
+			});			
+		}
+		
+  		function order_submit() {
+			var order= $("#form-order").serialize();
+			$.post('${rootPath}order/add.do', order, function(result) {
+				var rmsg = result.msg;
+				if (result.success) {
+					window.parent.location = "${rootPath}case/list.html";
+				} else {
+					$("#nextModal").modal('hide');
+					$("#NoEmail").modal('show');
+				}
+			}, "JSON");
+		}
+  	  
+  	  function delSubmit() {
+    	  var f1=$("#form-del").serialize();
+     	  try{
+     		  $.post("${rootPath}case/del.do", f1, function(result) {
+				var rmsg = result.msg;
+				if (result.success) {
+					window.parent.location = "${rootPath}case/list.html";
+				} 
+				else {
+					$("#msgModal").modal('show');
+				}
+			}, "JSON");
+     		  }
+     	  catch(e) {
+     		  alert(e);
+     	  }
+     	 alert("页面正在加载，请稍后...");
+      }
 	</script>
 </body>
 </html>
