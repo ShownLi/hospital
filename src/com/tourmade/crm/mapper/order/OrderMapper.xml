@@ -11,7 +11,7 @@
 			u.agency_name as agencyName,
 			u.sales_id as salesId,
 			u.sales_name as salesName,
-		<!-- 	u.operator as operator, -->
+			u.operator as operator, 
 			u.destination as destination,
 			u.customer_email_real as customerEmailReal,
 			u.customer_re_email_alias as customerReEmailAlias,
@@ -59,7 +59,7 @@
 
 	<select id="queryOrderByCaseId" parameterType="Map" resultType="Order">
 		select
-			u.order_id as orderId,
+			<!-- u.order_id as orderId,
 			u.customer_id as customerId,
 			u.customer_name as customerName,
 			u.agency_id as agencyId,
@@ -67,8 +67,31 @@
 			u.sales_id as salesId,
 			u.sales_name as salesName,
 			u.destination as destination,
-			<!-- u.budget as budget, -->
-			u.status as status
+			u.budget as budget,
+			u.status as status -->
+			u.order_id as orderId,
+			u.customer_id as customerId,
+			u.customer_name as customerName,
+			u.agency_id as agencyId,
+			u.agency_name as agencyName,
+			u.sales_id as salesId,
+			u.sales_name as salesName,
+			u.operator as operator, 
+			u.destination as destination,
+			u.customer_email_real as customerEmailReal,
+			u.customer_re_email_alias as customerReEmailAlias,
+			u.status as status,
+			u.reason as reason,
+			u.group_time as groupTime,
+			u.group_number as groupNumber,
+			u.start_date as startDate,
+			u.end_date as endDate,
+			u.group_price as groupPrice,
+			u.currency as currency,
+			u.rmb_price as rmbPrice,
+			u.exchange_rate as exchangeRate,
+			u.last_response as lastResponse,	
+			u.creat_time as creatTime
 		from tm_order u  
 		where u.isdel = 0 and u.case_id = #{caseId}
 		order by u.creat_time 

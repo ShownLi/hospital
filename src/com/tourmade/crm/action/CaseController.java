@@ -78,6 +78,10 @@ public class CaseController extends BaseSimpleFormController {
 		JSONArray reasonNodealResult = JSONArray.fromObject(reasonNodealList);
 		model.addAttribute("reasonNodeal", reasonNodealResult);
 
+		String contact ="case.contact";
+		List<EntityList> contactList = service.getParameterInfo(contact);
+		JSONArray contactResult = JSONArray.fromObject(contactList);
+		model.addAttribute("contactReal", contactResult);
 		
 		return "/case/list";
 	}
@@ -592,6 +596,7 @@ public class CaseController extends BaseSimpleFormController {
 	
 	@RequestMapping(value = "/edit.html", method = { RequestMethod.POST, RequestMethod.GET })
 	public String edit(Model model, String id) {
+		
 		if (null != id && !"".equals(id)) {
 			int caseId = Integer.parseInt(id);
 			Case crmcase = service.getCaseById(caseId);
@@ -641,9 +646,9 @@ public class CaseController extends BaseSimpleFormController {
 			String destination = "case.destination";
 			
 			String orderStatus = "order.status";
-			
 			String contact="case.contact";
 			String reasonNodeal ="case.reasonnodeal";
+			
 			List<EntityList> countryList = service.getParameterInfo(country);
 			List<EntityList> languageList = service.getParameterInfo(language);
 			List<EntityList> withwhoList = service.getParameterInfo(withwho);
@@ -691,7 +696,10 @@ public class CaseController extends BaseSimpleFormController {
 			//转换成Json字符串
 			JSONArray contactResult=JSONArray.fromObject(contactList);
 			JSONArray reasonNodealResult=JSONArray.fromObject(reasonNodealList);
-			
+			String orderNoDeal= "order.reason";
+			List<EntityList> orderNoDealList = service.getParameterInfo(orderNoDeal);
+			JSONArray orderNoDealResult = JSONArray.fromObject(orderNoDealList);
+			model.addAttribute("orderNoDealReason",orderNoDealResult);
 			
 			model.addAttribute("country",countryResult);
 			model.addAttribute("language",languageResult);
@@ -722,6 +730,10 @@ public class CaseController extends BaseSimpleFormController {
 
 			model.addAttribute("reasonNodeal", reasonNodealResult);
 			
+			String currency="order.currency";
+			List<EntityList> currencyList = service.getParameterInfo(currency);
+			JSONArray currencyResult = JSONArray.fromObject(currencyList);
+			model.addAttribute("currency",currencyResult);
 		}
 		return "/case/edit";
 	}

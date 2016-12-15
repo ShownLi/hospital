@@ -73,7 +73,7 @@
 							<table id="dataTable" class="table">
 								<thead>
 									<tr>
-										<th>ID <br>客人</th>
+										<!-- <th>ID <br>客人</th>
 										<th>手机 <br>邮箱</th>
 										<th>目的地<br>预算 </th>
 										<th>询单来源 <br>跟单员</th>
@@ -81,6 +81,17 @@
 										<th>客人要求</th>
 										<th>无效原因<br>未成行原因 </th>
 										<th>注释</th>
+										<th>编辑</th> -->
+										
+										<th>客人<br>ID</th>
+										<th>手机 <br>邮箱<br>QQ</th>
+										<th>目的地<br>出发时间 </th>									
+										<th>客人要求</th>
+										<th>无效原因<br>未成行原因 </th>
+										<th>备注</th>
+										<th>询单来源 <br>状态</th>
+										<th>跟单员 <br>沟通方式</th>
+										<th>创建时间</th>
 										<th>编辑</th>
 									</tr>
 								</thead>
@@ -101,106 +112,6 @@
 	<script src="${rootPath}assets/js/jquery.datatables.min.js"></script>
 	<script src="${rootPath}assets/js/select2.min.js"></script>
 
-<!-- Modal -->
-<!-- <div class="modal fade" id="confirmDelModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
-  <div class="modal-dialog modal-sm">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="myModalLabel"><span class="fa fa-warning"></span> 提示</h4>
-      </div>
-      <div class="modal-body">
-        确定无效么？
-      </div>
-      <div class="modal-footer">
-      	<input type="hidden" class="hiddenId" value="" />
-        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-        <button type="button" class="btn btn-danger">无效</button>
-      </div>
-    </div>modal-content
-  </div>modal-dialog
-</div>modal -->
-
-<!-- Modal -->
-<div class="modal fade" id="NoEmail" tabindex="-2" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="myModalLabel">信息</h4>
-      </div>
-      <div class="modal-body">
-      		该客人没有邮箱，请添加邮箱后再进行操作
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-      </div>
-    </div><!-- modal-content -->
-  </div><!-- modal-dialog -->
-</div><!-- modal -->
-
-<div class="nextModal modal fade" id="nextModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-body align-center">
-        <div class="section-block">
-        <form id="form-order">
-            <div class="section-title">选择目的地及地接社,添加订单</div>
-      	   <div class="form-group col-sm-8 col-sm-offset-2">
-                <label class="col-sm-3 control-label">目的地</label>
-                <div class="col-sm-9">
-                    <input type="text" id="destination" name="destination" placeholder="目的地" class="destination-select fullwidth" value="" />
-                </div>
-            </div> 
-            <div class="form-group col-sm-8 col-sm-offset-2">
-                <label class="col-sm-3 control-label">所属销售</label>
-                <div class="col-sm-9">
-                    <input type="text" id="salesId" name="salesId" placeholder="选择一个销售" class="sales-select fullwidth" value="" />
-                </div>
-            </div>
-            <div class="col-sm-12">
-             <a class="submit btn btn-primary">保存</a>
-              <input  type="hidden" id="caseId" name="caseId" value="" />
-            </div>
-            </form>
-        </div>
-      </div>
-    </div><!-- modal-content -->
-  </div><!-- modal-dialog -->
-</div><!-- modal -->
-
-<!-- 询单无效modal -->
-<div class="confirmDelModal modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <div class="nextModal-title">请填写无效原因</div>
-      </div>
-      <form class="form-horizontal" id="form-del">
-          <div class="modal-body">     
-              <div class="section-block noline">
-                  <div class="form-group col-sm-12">
-                    <label class="col-sm-4 control-label">无效原因是</label>
-                    <div class="col-sm-8">
-                      <input class="reason-select fullwidth"  name="reason" placeholder="无效原因是" />
-                      <input type="hidden" class="hiddenId" name="caseId" value="" />	
-                    </div>
-                  </div>
-              </div><!-- noDealModal-body -->
-          </div>
-          <div class="modal-footer align-center">
-            <button class="submit btn btn-primary">保存</button> 
-              <a class="cancel btn btn-primary" >取消</a>
-              
-          </div>
-      </form>
-    </div><!-- modal-content -->
-  </div><!-- modal-dialog -->
-</div><!-- bmodal -->
-
-
-
 	<script type="text/javascript">
  	var source = ${source}; 
 	var caseStatus = ${caseStatus};
@@ -210,7 +121,7 @@
     var sales = ${sales};
 	var reason = ${reason};
 	var reasonNodeal =${reasonNodeal};
-	
+	var contactReal =${contactReal};
 	$(".destination-select").select2({
         placeholder: '国家',
         data: destination
@@ -246,13 +157,9 @@
     	data:reason
     });
     
-    $(".confirmDelModal .submit").click(function(){
-    	delSubmit();
-    });
+  
     
-    $(".confirmDelModal .cancel").click(function(){
-      	$(".confirmDelModal").modal("hide");
-  	});
+   
 		 
 
 			var t = jQuery('#dataTable').DataTable({
@@ -327,14 +234,14 @@
  					   {
 			                orderable: false,
 			                render: function ( data, type, full, meta ) {
-			                    return "<div class='minw50'>" + full.caseId + "</div>" + "<div class='minw50'>" + full.chineseName + "</div>"
+			                    return "<div class='minw50'>" + full.chineseName + "</div>" + "<div class='minw50'>" + full.caseId + "</div>"
 			                },
 			                targets: 0
 						},
 						{
 			                orderable: false,
 			                render: function ( data, type, full, meta ) {
-			                    return "<div>" + full.mobile + "</div>" + "<div>" + full.email + "</div>"
+			                    return "<div>" + full.mobile + "</div>" + "<div>" + full.email + "</div>"+ "<div>" + full.qq + "</div>"
 			                },
 			                targets: 1
 						},
@@ -342,6 +249,7 @@
 			                orderable: false,
 			                render: function ( data, type, full, meta ) {
 			                	var destinations="";
+			                	
 			                	if(full.destination){
 			                	var des=full.destination.split(",");
 			                	for(var j = 0;j<des.length;j++){
@@ -352,57 +260,27 @@
 				                	}
 			                	}
 			                }
+			                	
 			                destinations=destinations.substring(0,destinations.length-1);
-			                return "<div class='width85'>" + destinations + "</div>" + "<div class='width85'>" + full.budget + "</div>";
+			              	//出发日期
+		                	var start_date = full.startDate;
+		                	//大约出发日期
+		                	var start_month =full.startMonth;
+		                	
+			                if(start_date!=null){
+			                	var time=new Date(start_date.time).format("yyyy-MM-dd");
+			                	return "<div class='caselist-7'>" + destinations + "</div>" + "<div class='caselist-7'>" + time + "</div>";
+		                		
+		                	}
+		                	if(start_month!=null){
+		                		var time=new Date(start_month.time).format("yyyy-MM-dd");
+		                		 return "<div class='caselist-7'>" + destinations + "</div>" + "<div class='caselist-7'>" + time + "</div>";
+		                	}
+		                	
+			                return "<div class='width85'>" + destinations + "</div>" ;
 			                },
 			                targets: 2
 						},	  
-						{
-			                orderable: false,
-			                render: function ( data, type, full, meta ) {
-			                	var dataSource = full.source;
-			                	var dataOperator = full.operator;
-			                	var m = "";
-			                	var n = "";
-				                	for(var i=0;i < source.length;i++){
-				                		
-				                		if(dataSource==source[i].id){
-				                			// return "<div class='caselist-5'>" + user[i].text + "</div>"
-				                			m = source[i].text;
-				                		}	
-				                	}
-				                	for(var i=0;i < user.length;i++){
-				                		if(dataOperator==user[i].id){
-				                			n=user[i].text;
-				                		}
-				                	}
-				                	return "<div class='width85'>" + m + "</div>" + "<div class='width85'>" + n + "</div>";
-			                },
-			                  targets: 3
-						},
-						 {	
-
-			                orderable: false,
-			                render: function ( data, type, full, meta ) {
-			                	var time = data.time;
-			                	
-			                	if(data.time){
-			                		time=new Date(time).format("yyyy-MM-dd hh:mm:ss");
-			                	}else{
-			                		time="";
-			                	}
-			                	if(full){
-			                		for(var i=0;i<caseStatus.length;i++){
-				                		if(full.status==caseStatus[i].id){
-				                			return "<div class='caselist-6'>" + caseStatus[i].text + "</div>" + "<div class='caselist-7'>" + time + "</div>"
-				                		}
-				                	}
-			                		
-			                	}
-			                	else{return ""}
-			                },
-			                  targets: 4
-						},
 						{
 							data:"requirement",
 							orderable: false,
@@ -413,10 +291,10 @@
 									return "<div class='width150'>" + data + "</div>"
 								}	
 							},
-							targets: 5
+							targets: 3
 						},
-						{
-			                orderable: false,
+						 {	
+							orderable: false,
 			                render: function ( data, type, full, meta ) {
 			                	var dataReason = full.reason;
 			                	var dataReasonNodeal= full.reasonNodeal;
@@ -436,7 +314,7 @@
 				                	}
 				                	return "<div class='width85'>" + m + "</div>" + "<div class='width85'>" + n + "</div>";
 			                },
-			                  targets: 6
+			                  targets: 4
 						},
 						{
 							data:"comment",
@@ -448,9 +326,78 @@
 									return "<div class='width150'>" + data + "</div>"
 								}
 							},
+							  targets: 5
+						},
+						{
+			                  orderable: false,
+				                render:  function ( data, type, full, meta ) {
+				                	var dataSource = full.source;
+				                	var dataCaseStatus = full.status;
+				                	
+				                	var m = "";
+				                	var n = "";
+					                	for(var i=0;i < source.length;i++){
+					                		
+					                		if(dataSource==source[i].id){
+					                			m = source[i].text;
+					                			break;
+					                		}	
+					                	}
+					                	
+					                	for(var i=0;i<caseStatus.length;i++){
+					                		if(dataCaseStatus==caseStatus[i].id){
+					                			n=caseStatus[i].text;
+					                			break;
+					                		}
+					                	}
+					                	
+					                	return "<div class='width85'>" + m + "</div>" + "<div class='width85'>" + n + "</div>";
+				                },
+				                  targets: 6
+			                  
+			                 
+						},
+						{
+							orderable: false,
+							render:function ( data, type, full, meta ) {
+								var oper = full.operator;
+								var contReal = full.contactReal;
+								var operator = "";
+								var contRealText = "";
+								for(var i=0;i < user.length;i++){
+			                		if(oper==user[i].id){
+			                			operator=user[i].text;
+			                			break;
+			                		}
+			                	}
+								
+								for(var i=0;i < contactReal.length;i++){
+			                		if(full.contactReal==contactReal[i].id){
+			                			
+			                			contRealText=contactReal[i].text;
+			                			break;
+			                		}
+			                	}
+								return "<div class='width85'>" + operator + "</div>" + "<div class='width85'>" +contRealText+ "</div>";
+							},
 							  targets: 7
 						
 						},
+						{
+			                  data: "creatTime",
+			                  orderable: false,
+			                  render: function ( data ) {
+			                	  
+			                	  var time = data.time;
+				                	if(data.time){
+				                		time=new Date(time).format("yyyy-MM-dd hh:mm:ss");
+				                	}else{
+				                		time="";
+				                	}
+				                	return "<div class='caselist-7'>" + time + "</div>"
+			                  },
+			                  targets: 8
+						    },
 						{
 		                  data: "caseId",
 		                  orderable: false,
@@ -464,7 +411,7 @@
 		                	  }
 		                      
 		                  },
-		                  targets: 8
+		                  targets: 9
 					    },
 					    {
 						    orderable: false,
@@ -477,11 +424,12 @@
 			            { data: "caseId" },
 			            { data:"mobile"},
 			            { data: "destination" },
-			            { data: "operator" },
-			            { data: "creatTime"},
 			            { data: "requirement" },
-			            { data: "reason"},
+			            { data: "operator" },
 			            { data: "comment"},
+			            { data: "creatTime"},
+			            { data: "reason"}
+			           
 			        ]
 				});
 
@@ -490,26 +438,13 @@
 		        t.draw();
 		    } );
 		    
-		    //处理询单
-		   /*  $('#dataTable tbody').on( 'click', 'a.btn-handle', function () {
-		        var data = t.row($(this).parents('tr')).data();
-		        handle($(this).attr('id'));
-		    } ); */
+		  
 		
 			$('#dataTable tbody').on( 'click', 'a.btn-success', function () {
 		        var data = t.row($(this).parents('tr')).data();
 		        edit($(this).attr('id'));
 		    } );
 
-			$('#dataTable tbody').on( 'click', 'a.btn-danger', function () {
-		        var data = t.row($(this).parents('tr')).data();
-		        del($(this).attr('id'));
-		    } );
-			
-			$('#dataTable tbody').on( 'click', 'a.btn-primary', function () {
-		        var data = t.row($(this).parents('tr')).data();
-		        handle($(this).attr('id'));
-		    } );
 	    
 		// Select2
 	    jQuery('select').select2({
@@ -518,69 +453,10 @@
 	    
 	    jQuery('select').removeClass('form-control');
 		
-		
-	   
-	    
 		function edit(id) {
 			window.parent.location = "${rootPath}case/edit.html?id="+id;
 		}
 		
-		function handle(id) {
-			window.parent.location = "${rootPath}case/handle.html?id="+id;
-		}
-		
-
-		function del(id) {
-			 
-			 $(".confirmDelModal .hiddenId").val("");
-			 $(".confirmDelModal .hiddenId").val(Number(id));
-		 	 $(".confirmDelModal").modal('show');
-		}
-		
-		function doDel(id){
-			$.ajax({
-				url: "${rootPath}case/del.do?id=" + id, 
-				success: function() {
-					window.location.reload();
-				},
-				error: function() {
-					alert(2);
-				}
-			});			
-		}
-  		function order_submit() {
-			var order= $("#form-order").serialize();
-			$.post('${rootPath}order/add.do', order, function(result) {
-				var rmsg = result.msg;
-				if (result.success) {
-					window.parent.location = "${rootPath}case/list.html";
-				} else {
-					$("#nextModal").modal('hide');
-					$("#NoEmail").modal('show');
-				}
-			}, "JSON");
-	}
-  	  
-  	  function delSubmit() {
-    	  var f1=$("#form-del").serialize();
-     	  try{
-     		  $.post("${rootPath}case/del.do", f1, function(result) {
-				var rmsg = result.msg;
-				if (result.success) {
-					window.parent.location = "${rootPath}case/list.html";
-				} 
-				else {
-					$("#msgModal").modal('show');
-				}
-			}, "JSON");
-     		  }
-     	  catch(e) {
-     		  alert(e);
-     	  }
-     	 alert("页面正在加载，请稍后...");
-      }
-
-
 	</script>
 </body>
 </html>

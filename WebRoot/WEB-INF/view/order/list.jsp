@@ -66,14 +66,13 @@
 							<table id="dataTable" class="table">
 								<thead>
 									<tr>
-										<th>ID</th>
-										<th>客人姓名</th>
-										<th>地接社</th>
-										<th>销售姓名</th>
-										<th>目的地</th> 
- <!-- 									<th>预算</th> -->
+										<th>客人姓名<br>ID</th>
+										<th>地接社<br>销售</th>
+										<th>目的地<br>状态</th>
+										<th>成团人数</th>
+										<th>成团金额</th> 
+ 										<th>出发日期<br>返回日期</th> 
  										<th>跟单员</th>
-										<th>状态</th>
 										<th>创建时间</th>
 										<th>最后回复时间</th>
 										<th>编辑</th>
@@ -101,26 +100,7 @@
 	<script src="${rootPath}assets/js/select2.min.js"></script>
 	<script src="${rootPath}assets/js/jquery.validate.min.js"></script>
 
-<!-- Modal -->
-<!-- <div class="modal fade" id="confirmDelModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
-  <div class="modal-dialog modal-sm">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="myModalLabel"><span class="fa fa-warning"></span> 提示</h4>
-      </div>
-      <div class="modal-body">
-        确定删除么？
-      </div>
-      <div class="modal-footer">
-      	<input type="hidden" class="hiddenId" value="" />
-        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-        <button type="button" class="btn btn-danger">删除</button>
-      </div>
-    </div>modal-content
-  </div>modal-dialog
-</div>modal
- -->
+
 <!-- dealModal -->
 <div class="dealModal modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -223,11 +203,8 @@
               </div><!-- noDealModal-body -->
           </div>
           <div class="modal-footer align-center">
-               <!-- <button class="submit btn btn-primary">保存</button>-->
             <button class="btn btn-primary" >保存</button> 
-
-            <!--   <button class="btn btn-primary" onclick="form2_submit()">保存</button> -->
-              <a class="cancel btn btn-primary" >取消</a>
+            <a class="cancel btn btn-primary" >取消</a>
           </div>
       </form>
     </div><!-- modal-content -->
@@ -258,7 +235,7 @@
 	var reason = ${reason};
 	var currency=${currency};
 	var user = ${user};
-console.log(destination);
+
 	
  	$(".destination-select").select2({
         placeholder: '国家',
@@ -436,55 +413,24 @@ console.log(destination);
 			         }
 			 	},
 			 	columnDefs: [
-						       {
-						          data: "orderId",
-						 	      orderable: false,
-						 	      render: function ( data, type, full, meta ) {
-					              	return '<a class="btn btn-success btn-xs" id="'+data+
-					              	'"><span class="fa fa-edit"></span> 编辑</a>&nbsp<a class="btn btn-primary btn-xs" id="'+data+
-					              	'"></span> 成行</a>&nbsp<a class="btn btn-default btn-xs" id="'+data+
-					              	'"></span> 未成行</a>&nbsp<a class="btn btn-sendMaile btn-xs" id="'+data+
-					              	'"></span> 发订单邮件</a>&nbsp;';
-						 	  	  },
-						 	    	targets: 9
-						 		},
-								{
-					                data: "status",
+						 	  {//客人姓名<br>ID
+						 		  orderable: false,
+						 		  render:function ( data, type, full, meta ){
+						 			  return full.customerName+"<br>"+full.orderId;
+						 		  },
+						 	      targets: 0
+						 	  },
+						 	  {//地接社<br>销售
+						 		  orderable: false,
+						 		  render:function ( data, type, full, meta ){
+						 			  return full.agencyName+"<br>"+full.salesName;
+						 		  },
+						 	      targets: 1
+						 	  },
+								 {//目的地<br>状态
 					                orderable: false,
-					                render: function ( data ) {
-					                	if(data){
-						                	for(var i=0;i < orderStatus.length;i++){
-						                		if(data==orderStatus[i].id){
-						                			return orderStatus[i].text
-						                		}
-						                	}
-						                	return ""
-					                	}
-					                	else{return ""}
-					                },
-					                  targets: 6
-								},
-								{
-									data: "operator",
-					                orderable: false,
-					                render: function ( data ) {
-					                	if(data){
-						                	for(var i=0;i <  user.length;i++){
-						                		if(data==user[i].id){
-						                			return user[i].text
-						                		}				                		
-						                	}
-						                	return "";
-					                	}
-					                	else{return ""}
-					                },
-					                  targets: 5
-								},
-								 {
-					                data: "destination",
-					                orderable: false,
-					                render: function ( data ) {
-				                	 if(data){
+					                render: function ( data, type, full, meta ) {
+				                	 if(full){
 					                	var des=data.split(",");
 					                	var destinations="";
 					                	for(var j = 0;j<des.length;j++){
@@ -497,12 +443,68 @@ console.log(destination);
 					                	}
 					                	console.log(destinations); 
 					                	destinations=destinations.substring(0,destinations.length-1);
-				                		return destinations;
+					                	var orderStatusText="";
+					                	for(var i=0;i < orderStatus.length;i++){
+					                		if(full.status==orderStatus[i].id){
+					                			orderStatusText= orderStatus[i].text;
+					                		
+					                		}
+					                	}
+				                		return destinations+"<br>"+orderStatusText;
 				                	}
-				                	else{return ""}
+				                	else{
+				                			return "";
+				                		}
 				                },
-			                    targets: 4
-								}, 			
+			                    targets: 2
+								},
+								{//成团人数
+									data: "groupNumber",
+					                orderable: false,
+					                render: function ( data ) {
+					                	if(data){
+						                	return data;
+					                	}
+					                	else{return ""}
+					                },
+					                  targets: 3
+								},
+								{//成团金额
+					                orderable: false,
+					                render: function ( data, type, full, meta )  {
+					                	
+					                	return full.currency+full.groupPrice+"<br>￥"+full.rmbPrice;
+					                },
+					                  targets: 4
+								},
+								{//出发日期<br>返回日期
+					                orderable: false,
+					                render: function ( data, type, full, meta )  {
+					                	if(full.startDate&&full.endDate){
+					                		return new Date(full.startDate.time).format("yyyy-MM-dd")+"<br>"+new Date(full.startDate.time).format("yyyy-MM-dd");
+					                	}
+					                	return "";
+					                },
+					                  targets: 5
+								},
+								{//跟单员
+									data:"operator",
+									orderable: false,
+					                render: function ( data, type, full, meta  )  {
+					                	for(var i=0;i<user.length;i++){
+					                		console.log("跟单员data="+data);
+					                		console.log("跟单员full="+full.operator);
+				                			console.log("跟单员="+user[i].id);
+				                			console.log("跟单员姓名="+user[i].text);
+					                		if(data==user[i].id){
+					                			return user[i].text;
+					                		}
+					                	}
+					                	return "";
+					                },
+					                  targets: 6
+								}
+								,
 								{
 					                data: "creatTime",
 					                orderable: false,
@@ -524,23 +526,30 @@ console.log(destination);
 					                	else{return ""}
 					                },
 					                  targets: 8
-								},
-
-						 	  {
-						 		  orderable: false,
-						 		  searchable: false,
-						 	      targets: [0,1,2]
-						 	  },
+								}, 
+								{
+							          data: "orderId",
+							 	      orderable: false,
+							 	      render: function ( data, type, full, meta ) {
+						              	return '<a class="btn btn-success btn-xs" id="'+data+
+						              	'"><span class="fa fa-edit"></span> 编辑</a>&nbsp<a class="btn btn-primary btn-xs" id="'+data+
+						              	'"></span> 成行</a>&nbsp<a class="btn btn-default btn-xs" id="'+data+
+						              	'"></span> 未成行</a>&nbsp<a class="btn btn-sendMaile btn-xs" id="'+data+
+						              	'"></span> 发订单邮件</a>&nbsp;';
+							 	  	  },
+							 	    	targets: 9
+							 	}
+						 	  
 						 	],
 			 	columns: [
 		             { data: "orderId" },
-		             { data: "customerName" },
 		             { data: "agencyName" },
-		             { data: "salesName" },
 		             { data: "destination" },
+		             { data: "groupNumber"},
+		             { data: "groupPrice"},
+		             { data: "startDate"},
 		             { data: "operator"},
-		             { data: "status" },
-		             { data: "creatTime"},
+		             { data: "creatTime"}, 
 			 		 { data: "lastResponse"}
 		         ]
 			 });
@@ -572,10 +581,10 @@ console.log(destination);
 		         //$(this).attr('id')获取属性节点(id)的值
 		     } );
 			 
-			  $('#confirmDelModal').on( 'click', 'button.btn-danger', function () {
+			 /*  $('#confirmDelModal').on( 'click', 'button.btn-danger', function () {
 		         var id = $("#confirmDelModal .hiddenId").val();
 		         doDel(id);
-		     } );  
+		     } );  */ 
 		    
 			// Select2
 		    jQuery('select').select2({
@@ -642,10 +651,10 @@ console.log(destination);
 /*  	    $(".dealModal .submit").click(function(){
 	    	deal_submit();
 	      });  */
- 	    $(".noDealModal .submit").click(function(){
+ 	    /* $(".noDealModal .submit").click(function(){
 	    	noDeal_submit();
 	      }); 
-	    
+	     */
 	    $(".dealModal .cancel").click(function(){
 	    	$(".dealModal").modal('hide');
 	    });
