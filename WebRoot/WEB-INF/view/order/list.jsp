@@ -601,9 +601,8 @@ console.log(destination);
 		function sendOrderEmail(data){
 			if(data.customerEmailReal!=null&&data.customerEmailReal!=""){
 				//alert(data.customerReEmailAlias);
-				if(data.customerReEmailAlias!=null){
+				if(data.customerReEmailAlias!=null && data.customerReEmailAlias!=""){
 					var f = data.orderId;
-					console.log(f);
 					$.post('${rootPath}order/orderSendEmail.do', {"orderId":f}, function(result) {
 						var rmsg = result.msg;
 						if (result.success) {
@@ -616,7 +615,6 @@ console.log(destination);
 					}, "JSON");
 				}else{
 					var f = data.orderId;
-					console.log(f);
 					$.post('${rootPath}order/orderSendEmailNoAlias.do', {"orderId":f}, function(result) {
 						var rmsg = result.msg;
 						if (result.success) {

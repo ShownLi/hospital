@@ -272,6 +272,7 @@
 		set
 		customer_id=#{customerId},
 		customer_name=#{chineseName},
+		customer_name_en=#{englishName},
 		customer_mobile=#{mobile},
 		customer_email=#{email},
 		customer_wechat=#{wechat},

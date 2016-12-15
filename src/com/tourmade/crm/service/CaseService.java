@@ -72,7 +72,7 @@ public class CaseService extends BaseService {
 			map.put("operator", crmcase.getOperator());
 		}
 		if(crmcase.getStatus()!=null){
-			map.put("status", crmcase.getStatus());
+			map.put("status", crmcase.getStatus().trim());
 		}
 		if(crmcase.getComment()!=null){
 			map.put("comment", crmcase.getComment());
@@ -86,7 +86,6 @@ public class CaseService extends BaseService {
 		if(crmcase.getMobile()!=null){
 			map.put("mobile", crmcase.getMobile());
 		}
-		
 		
 		List<Case> data = caseMapper.queryCase(map);
 		long count = caseMapper.countCase(crmcase);

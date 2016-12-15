@@ -243,6 +243,8 @@
 	var reason = ${reason};
 	var reasonNodeal =${reasonNodeal};
 	
+	var searchFlag = false;
+	var searchStatusCheck = "";
 	$(".destination-select").select2({
         placeholder: '国家',
         data: destination
@@ -309,8 +311,11 @@
 			 			var searchMail=$('#searchMail').val();
 			 			var searchMobile=$('#searchMobile').val();
 			 			
-			 			var searchStatus = $("input[name='status']:checked").val();
-			 	
+			 			//var searchStatus = $("input[name='status']:checked").val();
+			 			var searchStatus = searchStatusCheck;
+			 			searchStatusCheck = "";
+			 			
+			 			//alert(searchStatus);
 			 			
 			 			if(searchCustomerId !=null && searchCustomerId !="" ){
 							data.customerId = searchCustomerId;
@@ -356,7 +361,64 @@
 						json.recordsFiltered = json.countFiltered;
 						json.data = json.data;
 						
-						$('#status0Count').html("待处理"+json.status0);
+						
+						if(searchFlag==false){
+							$('#status0Count').html("待处理"+json.status0);
+
+							$('#status1Count').html("客服沟通中"+json.status1);
+					
+							$('#status2Count').html("地接设计中"+json.status2);						
+							
+							$('#status3Count').html("成行"+json.status3);						
+							
+							$('#status4Count').html("未成行"+json.status4);						
+							
+							$('#status5Count').html("无效"+json.status5);												
+							
+							$('#status6Count').html("已付款"+json.status6);
+							
+						}
+						/* if(searchFlag==true){
+							if(json.status0!=null&&json.status0!=0&&json.status0!=""){
+								$('#status0Count').html("待处理"+json.status0);
+							}
+							
+							if(json.status1!=null&&json.status1!=0&&json.status1!=""){
+								$('#status1Count').html("客服沟通中"+json.status1);
+							}
+							
+							if(json.status2!=null&&json.status2!=0&&json.status2!=""){
+								$('#status2Count').html("地接设计中"+json.status2);	
+							}
+							
+							if(json.status3!=null&&json.status3!=0&&json.status3!=""){
+								$('#status3Count').html("成行"+json.status3);	
+							}
+							
+							if(json.status4!=null&&json.status4!=0&&json.status4!=""){
+								$('#status4Count').html("未成行"+json.status4);		
+							}
+							
+							if(json.status5!=null&&json.status5!=0&&json.status5!=""){
+								$('#status5Count').html("无效"+json.status5);		
+							}
+							
+							if(json.status6!=null&&json.status6!=0&&json.status6!=""){
+								$('#status6Count').html("已付款"+json.status6);	
+							}
+							searchFlag = false;
+						}
+									 */		
+						
+											
+						
+										
+						
+																
+						
+						
+						
+/* 						$('#status0Count').html("待处理"+json.status0);
 
 						$('#status1Count').html("客服沟通中"+json.status1);
 				
@@ -368,7 +430,7 @@
 						
 						$('#status5Count').html("无效"+json.status5);												
 						
-						$('#status6Count').html("已付款"+json.status6);
+						$('#status6Count').html("已付款"+json.status6); */
 						
 						return JSON.stringify( json );
 					}
@@ -536,29 +598,46 @@
 
 					 
 			$('#searchBtn').on( 'click', function () {
+				//$("input[name='status']:checked").val(null);
+				searchStatusCheck = "";
+				searchFlag = false;
 		        t.draw();
+		        $('input:radio:checked').attr('checked',false);
 		    } );
 			
 			$('#status0').on('click',function(){
-				
+				searchStatusCheck = 0+" ";
+				searchFlag = true;
 				t.draw();
 			});
 			$('#status1').on('click',function(){
+				searchStatusCheck = 1;
+				searchFlag = true;
 				t.draw();
 			});
 			$('#status2').on('click',function(){
+				searchStatusCheck = 2;
+				searchFlag = true;
 				t.draw();
 			});
 			$('#status3').on('click',function(){
+				searchStatusCheck = 3;
+				searchFlag = true;
 				t.draw();
 			});
 			$('#status4').on('click',function(){
+				searchStatusCheck = 4;
+				searchFlag = true;
 				t.draw();
 			});
 			$('#status5').on('click',function(){
+				searchStatusCheck = 5;
+				searchFlag = true;
 				t.draw();
 			});
 			$('#status6').on('click',function(){
+				searchStatusCheck = 6;
+				searchFlag = true;
 				t.draw();
 			});
 		    

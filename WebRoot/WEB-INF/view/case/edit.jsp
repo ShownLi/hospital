@@ -55,6 +55,13 @@
 									<div class="col-sm-9">
 										<input type="text" name="chineseName" placeholder="中文名"
 											class="form-control" value="${crmcase.chineseName}" />
+									</div>									
+								</div>
+								<div class="form-group col-sm-4">
+								<label class="col-sm-3 control-label">英文名</label>
+									<div class="col-sm-9">								
+										<input type="text" name="englishName" placeholder="英文名"
+											class="form-control" value="${crmcase.englishName}" />
 									</div>
 								</div>
 							</div>
@@ -790,6 +797,7 @@
       placeholder: '选择一个推广渠道',
       data: source
     });
+    $(".source-select").prop("disabled", true); 
     $(".tailormade-select").select2({
         placeholder: '选择一个',
         data: tailormade
