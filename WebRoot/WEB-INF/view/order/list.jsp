@@ -552,7 +552,9 @@
 			  $('#searchBtn').on( 'click', function () {
 			        t.draw();
 			    } );
-		    
+			  jQuery(document).ready(function() {
+			   $('#dataTable .btn-success').css("display","none")
+			  });
 			 $('#dataTable tbody').on( 'click', 'a[name=btnEdit]', function () {
 		         var data = t.row($(this).parents('tr')).data();
 		         edit($(this).attr('id'));
