@@ -99,7 +99,6 @@ public class CaseController extends BaseSimpleFormController {
 	
 		//根据分页条件，获取caseList
 		QueryResult<Case> casePage = service.queryCase(crmcase, page, request);
-		System.out.println("=========="+casePage);
 		String result = JSONUtilS.object2json(casePage);
 		return result;
 	}
