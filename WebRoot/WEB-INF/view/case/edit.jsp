@@ -1303,11 +1303,11 @@
 					          data: "orderId",
 					 	      orderable: false,
 					 	      render: function ( data, type, full, meta ) {
-				              	return '<a class="btn btn-success btn-xs" id="'+data+
-				              	'"><span class="fa fa-edit"></span> 编辑</a>&nbsp<a class="btn btn-primary btn-xs" id="'+data+
-				              	'"></span> 成行</a>&nbsp<a class="btn btn-default btn-xs" id="'+data+
-				              	'"></span> 未成行</a>&nbsp<a class="btn btn-sendMaile btn-xs" id="'+data+
-				              	'"></span> 发订单邮件</a>&nbsp;';
+				              	return '<a name="btnEdit" class="btn btn-default btn-xs" id="'+data+
+				              	'"><span class="fa fa-edit"></span> 编辑</a>&nbsp<a name="btnDeal" class="btn btn-success btn-xs" id="'+data+
+				              	'"> 成行</a>&nbsp<a name="btnNoDeal" class="btn btn-warning btn-xs" id="'+data+
+				              	'">未成行</a>&nbsp<a name="btnSendEmail" class="btn btn-primary btn-sendMaile btn-xs" id="'+data+
+				              	'"> 发订单邮件</a>';
 					 	  	  },
 					 	    	targets: 9
 					 	}
@@ -1545,29 +1545,28 @@
       
       
       //进入订单编辑页面
-      $('#dataTable-order tbody').on( 'click', 'a.btn-success', function () {
-         var data = orderTable.row($(this).parents('tr')).data();
-         edit($(this).attr('id'));
-      });    
-      
-      $('#dataTable-order tbody').on( 'click', 'a.btn-primary', function () {
+		 $('#dataTable-order tbody').on( 'click', 'a[name=btnEdit]', function () {
+	         var data = orderTable.row($(this).parents('tr')).data();
+	         edit($(this).attr('id'));
+	     } );
+		
+		 $('#dataTable-order tbody').on( 'click', 'a[name=btnDeal]', function () {
 	         var data = orderTable.row($(this).parents('tr')).data();
 	         group($(this).attr('id'));
 	         $("#dealOrderId").val($(this).attr('id'));
 	     } );
 
-		 $('#dataTable-order tbody').on( 'click', 'a.btn-default', function () {
+		 $('#dataTable-order tbody').on( 'click', 'a[name=btnNoDeal]', function () {
 	         var data = orderTable.row($(this).parents('tr')).data();
 	         nogroup($(this).attr('id'));
 	         $("#noDealOrderid").val($(this).attr('id'));
 	     } );
 		 
-		 $('#dataTable-order tbody').on( 'click', 'a.btn-sendMaile', function () {
+		 $('#dataTable-order tbody').on( 'click', 'a[name=btnSendEmail]', function () {
 	         var data = orderTable.row($(this).parents('tr')).data();
 	         sendOrderEmail(data);  
-	         //$(this).attr('id')获取属性节点(id)的值
 	     } );
-      
+		 
 	     function edit(id) {
 			window.parent.location = "${rootPath}order/edit.html?id="+id;
 		 }	
