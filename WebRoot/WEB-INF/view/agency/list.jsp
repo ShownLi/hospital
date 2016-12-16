@@ -30,7 +30,7 @@
 								<div class="form-group col-sm-10">
 									<div class="col-sm-2">
 										<input type="text" id="searchAgencyName" class="form-control" placeholder="地接社名"  value="" />
-									</div>
+ 									</div>
 									<div class="col-sm-2">
 										<input type="text" id="searchCountry" class="country-select fullwidth" value="" />
 									</div>
@@ -102,13 +102,17 @@
 	var language = ${language};
 	var destination = ${destination};
 	
+	
+	
 	$(".country-select").select2({
         placeholder: '国家',
-        data: country
+        data: country,
+        allowClear: true
     });
 	$(".destination-select").select2({
         placeholder: '目的地',
-        data: destination
+        data: destination,
+        allowClear: true
     });
 	
 	jQuery(document).ready(function() {
@@ -226,10 +230,11 @@
 			$('#searchBtn').on( 'click', function () {
 				agencyTable.draw();
 		    } );
-		
+			
+			
 			$('#dataTable tbody').on( 'click', 'a.btn-success', function () {
 		        var data = agencyTable.row($(this).parents('tr')).data();
-		        edit($(this).attr('id'));
+		        edit($(this).attr("title",""));
 		    } );
 
 			$('#dataTable tbody').on( 'click', 'a.btn-danger', function () {
@@ -242,14 +247,13 @@
 		        doDel(id);
 		    } ); 
 		    
-			$('#serarchCountryClear').on('click',function(){
-				$("#searchCountry").val(null).trigger("change");
-			})
+			
 			// Select2
 		    jQuery('select').select2({
 		        minimumResultsForSearch: -1
 		    });
 		    
+			
 		    jQuery('select').removeClass('form-control');
 			
 			

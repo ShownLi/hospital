@@ -121,7 +121,8 @@
 	
 	$(".level-select").select2({
         placeholder: '客人级别',
-        data: leval
+        data: leval,
+        allowClear: true
     });
 	
 		jQuery(document).ready(function() {
