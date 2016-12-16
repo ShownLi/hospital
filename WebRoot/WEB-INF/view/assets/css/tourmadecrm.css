@@ -214,3 +214,33 @@ label.error{
 .select2-container--default .select2-selection--single{
 	border-color: #ccc;
 }
+.case-filter {
+	overflow: hidden;
+	padding: 0;
+	border-bottom: 2px solid #428bca;
+	margin-bottom: 2px;
+}
+.case-filter .rdio{
+	position: relative;
+	margin-right: 0;
+	float: left;
+}
+.case-filter .rdio input{
+	position: absolute;
+}
+.case-filter .rdio label{
+	padding: 10px 20px;
+	background: #fff;
+	border: 1px solid #dedede;
+	border-bottom: 1px solid #5bc0de;
+	margin-bottom: 0 !important;
+}
+.case-filter .rdio label::before,
+.case-filter .rdio-primary input[type="radio"]:checked + label::before,
+.case-filter .rdio-primary input[type="radio"]:checked + label::after{
+	display: none;
+}
+.case-filter .rdio-primary input[type="radio"]:checked + label{
+	background: #428bca;
+	color: #fff;
+}

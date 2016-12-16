@@ -59,13 +59,17 @@
 								<div class="col-sm-2">
 									<input type="text" id="searchComment" class="form-control" placeholder="注释" value="" />
 								</div>
-								<div class="col-sm-2 input-group input-datepicker">
-			                        <input id="searchStartDateTime" type="text" name="searchStartDateTime" class="form-control datepicker" placeholder="请点击输入查询开始日期" autocomplete="on">
-			                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-			                    </div>
-			                    <div class="col-sm-2 input-group input-datepicker">
-			                        <input id="searchEndDateTime" type="text" name="searchEndDateTime" class="form-control datepicker" placeholder="请点击输入查询截止日期" autocomplete="on">
-			                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+								<div class="col-sm-2">
+									<div class="input-group input-datepicker" style="padding: 0;">
+				                        <input id="searchStartDateTime" type="text" name="searchStartDateTime" class="form-control datepicker" placeholder="请点击输入查询开始日期" autocomplete="on">
+				                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+				                    </div>
+				                </div>
+			                    <div class="col-sm-2">
+				                    <div class="input-group input-datepicker" style="padding: 0;">
+				                        <input id="searchEndDateTime" type="text" name="searchEndDateTime" class="form-control datepicker" placeholder="请点击输入查询截止日期" autocomplete="on">
+				                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+				                    </div>
 			                    </div>
 							 
 
@@ -76,8 +80,10 @@
 							</div>
 
 							</div>	
-						
-							<div class="form-group col-sm-10">
+						</div>
+					</div>
+					<div class="panel-body">
+						<div class="form-group col-sm-12 case-filter">
 		        	                <div class="rdio rdio-primary rdio-inline">
 		        	                  <input type="radio" id="status0" value="0" name="status"/>
 		        	                  <label id="status0Count" for="status0">待处理</label>    	                  
@@ -107,11 +113,6 @@
 		        	                  <label id="status6Count" for="status6">已付款</label>
 		        	                </div><!-- rdio -->
 							</div>
-							
-						</div>
-					</div>
-					<div class="panel-body">
-						<br />
 						<div class="table-responsive">
 
 							<table id="dataTable" class="table">
