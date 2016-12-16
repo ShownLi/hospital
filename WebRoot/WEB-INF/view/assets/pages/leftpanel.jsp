@@ -58,6 +58,16 @@
                     
                 </ul>
             </li>  
+             <li class="nav-parent"><a href="javascript:void(0);"><i class="fa fa-user"></i> <span>统计分析</span></a>
+                <ul class="children">
+                    <li><a href="${rootPath }user/list.html"><i class="fa fa-caret-right"></i>询单来源统计</a></li>
+                    <li><a href="${rootPath }user/add.html"><i class="fa fa-caret-right"></i>沟通方式统计 </a></li>
+                     <li><a href="${rootPath }user/list.html"><i class="fa fa-caret-right"></i>询单分配统计</a></li>
+                    <li><a href="${rootPath }user/add.html"><i class="fa fa-caret-right"></i>流失原因统计 </a></li>
+                     <li><a href="${rootPath }user/list.html"><i class="fa fa-caret-right"></i>地接社业绩统计</a></li>
+                    <li><a href="${rootPath }user/add.html"><i class="fa fa-caret-right"></i>跟单员业绩统计 </a></li>
+                </ul>
+            </li>  
             <li class="nav-parent"><a href="javascript:void(0);"><i class="glyphicon glyphicon-cog"></i> <span>系统参数管理</span></a>
                 <ul class="children">
                     <li><a href="${rootPath }parameter/list.html"><i class="fa fa-caret-right"></i> 系统参数列表</a></li>

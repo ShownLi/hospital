@@ -441,7 +441,6 @@
 						                		}				                	
 						                	}
 					                	}
-					                	console.log(destinations); 
 					                	destinations=destinations.substring(0,destinations.length-1);
 					                	var orderStatusText="";
 					                	for(var i=0;i < orderStatus.length;i++){
@@ -492,10 +491,6 @@
 									orderable: false,
 					                render: function ( data, type, full, meta  )  {
 					                	for(var i=0;i<user.length;i++){
-					                		console.log("跟单员data="+data);
-					                		console.log("跟单员full="+full.operator);
-				                			console.log("跟单员="+user[i].id);
-				                			console.log("跟单员姓名="+user[i].text);
 					                		if(data==user[i].id){
 					                			return user[i].text;
 					                		}
@@ -531,11 +526,11 @@
 							          data: "orderId",
 							 	      orderable: false,
 							 	      render: function ( data, type, full, meta ) {
-						              	return '<a class="btn btn-default btn-xs" id="'+data+
-						              	'"><span class="fa fa-edit"></span> 编辑</a>&nbsp<a class="btn btn-success btn-xs" id="'+data+
-						              	'"></span> 成行</a>&nbsp<a class="btn btn-warning btn-xs" id="'+data+
-						              	'"></span> 未成行</a>&nbsp<a class="btn btn-primary btn-sendMaile btn-xs" id="'+data+
-						              	'"></span> 发订单邮件</a>&nbsp;';
+						              	return '<a name="btnEdit" class="btn btn-default btn-xs" id="'+data+
+						              	'"><span class="fa fa-edit"></span> 编辑</a>&nbsp<a name="btnDeal" class="btn btn-success btn-xs" id="'+data+
+						              	'"> 成行</a>&nbsp<a name="btnNoDeal" class="btn btn-warning btn-xs" id="'+data+
+						              	'">未成行</a>&nbsp<a name="btnSendEmail" class="btn btn-primary btn-sendMaile btn-xs" id="'+data+
+						              	'"> 发订单邮件</a>';
 							 	  	  },
 							 	    	targets: 9
 							 	}
@@ -557,28 +552,29 @@
 			  $('#searchBtn').on( 'click', function () {
 			        t.draw();
 			    } );
-		    
-			 $('#dataTable tbody').on( 'click', 'a.btn-success', function () {
+			  jQuery(document).ready(function() {
+			   $('#dataTable .btn-success').css("display","none")
+			  });
+			 $('#dataTable tbody').on( 'click', 'a[name=btnEdit]', function () {
 		         var data = t.row($(this).parents('tr')).data();
 		         edit($(this).attr('id'));
 		     } );
 			
-			 $('#dataTable tbody').on( 'click', 'a.btn-primary', function () {
+			 $('#dataTable tbody').on( 'click', 'a[name=btnDeal]', function () {
 		         var data = t.row($(this).parents('tr')).data();
 		         group($(this).attr('id'));
 		         $("#dealOrderId").val($(this).attr('id'));
 		     } );
 
-			 $('#dataTable tbody').on( 'click', 'a.btn-default', function () {
+			 $('#dataTable tbody').on( 'click', 'a[name=btnNoDeal]', function () {
 		         var data = t.row($(this).parents('tr')).data();
 		         nogroup($(this).attr('id'));
 		         $("#noDealOrderid").val($(this).attr('id'));
 		     } );
 			 
-			 $('#dataTable tbody').on( 'click', 'a.btn-sendMaile', function () {
+			 $('#dataTable tbody').on( 'click', 'a[name=btnSendEmail]', function () {
 		         var data = t.row($(this).parents('tr')).data();
 		         sendOrderEmail(data);  
-		         //$(this).attr('id')获取属性节点(id)的值
 		     } );
 			 
 			 /*  $('#confirmDelModal').on( 'click', 'button.btn-danger', function () {
