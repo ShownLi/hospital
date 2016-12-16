@@ -304,6 +304,9 @@ public class OrderController extends BaseSimpleFormController {
 			Case crmcase = service.getCaseById(order.getCaseId());
 			String result = emailService.creatTemplate(crmcase, order);
 			
+			//获取更新了别名的最新订单
+			order = service.getOrderById(order.getOrderId());
+			
 			//生成待发送邮件
 			emailService.saveEmail(order,result);
 			json.setSuccess(true);

@@ -72,7 +72,7 @@ public class CaseService extends BaseService {
 			map.put("operator", crmcase.getOperator());
 		}
 		if(crmcase.getStatus()!=null){
-			map.put("status", crmcase.getStatus());
+			map.put("status", crmcase.getStatus().trim());
 		}
 		if(crmcase.getComment()!=null){
 			map.put("comment", crmcase.getComment());
@@ -86,6 +86,7 @@ public class CaseService extends BaseService {
 		if(crmcase.getMobile()!=null){
 			map.put("mobile", crmcase.getMobile());
 		}
+
 		if(crmcase.getSearchStartTime()!=null){
 			crmcase.setSearchStartTime(crmcase.getSearchStartTime()+" 00:00:00");
 			map.put("searchStartTime", crmcase.getSearchStartTime());

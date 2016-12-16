@@ -82,6 +82,9 @@ public class CustomerController extends BaseSimpleFormController {
 
 		Json j = new Json();
 		try {
+			//设置客人级别为普通客人
+			customer.setLevel("0");
+			
 			customerService.saveCustomer(customer);
 			j.setObj(customer);
 			j.setSuccess(true);

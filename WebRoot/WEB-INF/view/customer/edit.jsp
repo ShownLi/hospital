@@ -73,7 +73,7 @@
 			            <div class="form-group col-sm-4">
 							<label class="col-sm-3 control-label">客人级别</label>
 							<div class="col-sm-9">
-							    <input type="text" name="level" placeholder="客人级别" class="level-select fullwidth" value="${customer.level}"  />
+							    <input type="text" name="level" placeholder="客人级别" class="level-select fullwidth" value="${customer.level}" disabled="disabled" />
 							</div>
 			            </div> 
 			        </div>
@@ -548,6 +548,7 @@
 	});
 	      
 		function base_submit() {
+			$(".level-select").attr("disabled",false); 
 			var customerInfo = $("#form-base").serialize();
 			$.post('${rootPath}customer/edit.do', customerInfo, function(result) {
 				var rmsg = result.msg;

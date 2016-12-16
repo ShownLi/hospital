@@ -70,12 +70,12 @@
 	                <input type="text" name="ageGroup" placeholder="请选择一个年龄段" class="agegroup-select fullwidth" />
 	              </div>
 	            </div>
-	            <div class="form-group col-sm-4">
+	           <!--  <div class="form-group col-sm-4">
 	              <label class="col-sm-3 control-label">客人级别</label>
 	              <div class="col-sm-9">
 	                <input type="text" name="level" placeholder="客人级别" class="level-select fullwidth" value="0" />
 	              </div>
-	            </div> 
+	            </div>  -->
 	        </div>
 	        <div class="section-block">
 	        	<h5 class="section-title">客人联系方式  <span class="contact-note">(手机、微信、QQ、邮箱至少填写一个)</span></h5>

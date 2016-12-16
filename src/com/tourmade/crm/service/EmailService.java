@@ -120,9 +120,7 @@ public class EmailService extends BaseService {
 		if(crmcase.getPreferLanguage() != null && !"".equals(crmcase.getPreferLanguage())){
 			boat.setDomain("case.preferlanguage");
 			boat.setValue(crmcase.getPreferLanguage());
-			System.out.println(crmcase.getPreferLanguage());
 			boat = emailMapper.getZhEn(boat);
-			System.out.println(boat);
 			template.setPreferChineseLanguage(boat.getChinese());
 			template.setPreferEnglishLanguage(boat.getEnglish());
 		}
@@ -501,7 +499,7 @@ public class EmailService extends BaseService {
 					
 					if (null != template.getSubject() && !"".equals(template.getSubject())) {
 						result = result.replace("${replySubject}",
-								template.getSubject());
+								"Re:"+template.getSubject());
 					}
 					
 					if (null != template.getRouteUrl() && !"".equals(template.getRouteUrl())) {
@@ -555,6 +553,10 @@ public class EmailService extends BaseService {
 			boat = emailMapper.getCusZE(boat);
 			String customerChineseName = boat.getChinese();
 			String customerEnglishName = boat.getEnglish();
+			
+			if(null == customerEnglishName || "".equals(customerEnglishName)){
+				customerEnglishName = customerChineseName;
+			}
 			
 			String subject = customerChineseName+"去"+destinationChinese+"的需求 / Enquiry for "
 					+customerEnglishName+" about "+destinationEnglish;

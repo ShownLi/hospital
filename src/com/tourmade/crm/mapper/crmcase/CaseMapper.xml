@@ -179,6 +179,12 @@
 		<if test="mobile != null and mobile != ''">
 			and customer_mobile like '%${mobile}%'
 		</if> 
+		<if test="searchStartTime != null and searchStartTime != ''">
+			and creat_time >= '${searchStartTime}'
+		</if> 
+		<if test="searchEndTime != null and searchEndTime != ''">
+			and creat_time &lt;= '${searchEndTime}'
+		</if> 
 		group by u.`status`	
 		ORDER BY u.status ASC
 	</select>
@@ -286,6 +292,7 @@
 		set
 		customer_id=#{customerId},
 		customer_name=#{chineseName},
+		customer_name_en=#{englishName},
 		customer_mobile=#{mobile},
 		customer_email=#{email},
 		customer_wechat=#{wechat},

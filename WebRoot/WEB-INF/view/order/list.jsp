@@ -531,10 +531,10 @@
 							          data: "orderId",
 							 	      orderable: false,
 							 	      render: function ( data, type, full, meta ) {
-						              	return '<a class="btn btn-success btn-xs" id="'+data+
-						              	'"><span class="fa fa-edit"></span> 编辑</a>&nbsp<a class="btn btn-primary btn-xs" id="'+data+
-						              	'"></span> 成行</a>&nbsp<a class="btn btn-default btn-xs" id="'+data+
-						              	'"></span> 未成行</a>&nbsp<a class="btn btn-sendMaile btn-xs" id="'+data+
+						              	return '<a class="btn btn-default btn-xs" id="'+data+
+						              	'"><span class="fa fa-edit"></span> 编辑</a>&nbsp<a class="btn btn-success btn-xs" id="'+data+
+						              	'"></span> 成行</a>&nbsp<a class="btn btn-warning btn-xs" id="'+data+
+						              	'"></span> 未成行</a>&nbsp<a class="btn btn-primary btn-sendMaile btn-xs" id="'+data+
 						              	'"></span> 发订单邮件</a>&nbsp;';
 							 	  	  },
 							 	    	targets: 9
@@ -610,9 +610,8 @@
 		function sendOrderEmail(data){
 			if(data.customerEmailReal!=null&&data.customerEmailReal!=""){
 				//alert(data.customerReEmailAlias);
-				if(data.customerReEmailAlias!=null){
+				if(data.customerReEmailAlias!=null && data.customerReEmailAlias!=""){
 					var f = data.orderId;
-					console.log(f);
 					$.post('${rootPath}order/orderSendEmail.do', {"orderId":f}, function(result) {
 						var rmsg = result.msg;
 						if (result.success) {
@@ -625,7 +624,6 @@
 					}, "JSON");
 				}else{
 					var f = data.orderId;
-					console.log(f);
 					$.post('${rootPath}order/orderSendEmailNoAlias.do', {"orderId":f}, function(result) {
 						var rmsg = result.msg;
 						if (result.success) {

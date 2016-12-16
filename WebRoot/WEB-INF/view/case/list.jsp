@@ -59,13 +59,17 @@
 								<div class="col-sm-2">
 									<input type="text" id="searchComment" class="form-control" placeholder="注释" value="" />
 								</div>
-								<div class="col-sm-2 input-group input-datepicker">
-			                        <input id="searchStartDateTime" type="text" name="searchStartDateTime" class="form-control datepicker" placeholder="请点击输入查询开始日期" autocomplete="on">
-			                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-			                    </div>
-			                    <div class="col-sm-2 input-group input-datepicker">
-			                        <input id="searchEndDateTime" type="text" name="searchEndDateTime" class="form-control datepicker" placeholder="请点击输入查询截止日期" autocomplete="on">
-			                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+								<div class="col-sm-2">
+									<div class="input-group input-datepicker" style="padding: 0;">
+				                        <input id="searchStartDateTime" type="text" name="searchStartDateTime" class="form-control datepicker" placeholder="请点击输入查询开始日期" autocomplete="on">
+				                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+				                    </div>
+				                </div>
+			                    <div class="col-sm-2">
+				                    <div class="input-group input-datepicker" style="padding: 0;">
+				                        <input id="searchEndDateTime" type="text" name="searchEndDateTime" class="form-control datepicker" placeholder="请点击输入查询截止日期" autocomplete="on">
+				                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+				                    </div>
 			                    </div>
 							 
 
@@ -76,8 +80,10 @@
 							</div>
 
 							</div>	
-						
-							<div class="form-group col-sm-10">
+						</div>
+					</div>
+					<div class="panel-body">
+						<div class="form-group col-sm-12 case-filter">
 		        	                <div class="rdio rdio-primary rdio-inline">
 		        	                  <input type="radio" id="status0" value="0" name="status"/>
 		        	                  <label id="status0Count" for="status0">待处理</label>    	                  
@@ -107,26 +113,11 @@
 		        	                  <label id="status6Count" for="status6">已付款</label>
 		        	                </div><!-- rdio -->
 							</div>
-							
-						</div>
-					</div>
-					<div class="panel-body">
-						<br />
 						<div class="table-responsive">
 
 							<table id="dataTable" class="table">
 								<thead>
 									<tr>
-										<!-- <th>ID <br>客人</th>
-										<th>手机 <br>邮箱</th>
-										<th>目的地<br>预算 </th>
-										<th>询单来源 <br>跟单员</th>
-										<th>状态 <br>创建时间</th>
-										<th>客人要求</th>
-										<th>无效原因<br>未成行原因 </th>
-										<th>注释</th>
-										<th>编辑</th> -->
-										
 										<th>客人<br>ID</th>
 										<th>手机 <br>邮箱<br>QQ</th>
 										<th>目的地<br>出发时间 </th>									
@@ -145,9 +136,6 @@
 						</div>
 					</div>
 				</div>
-			</div>
-
-		</div>
 		<%@ include file="../assets/pages/rightpanel.jsp"%>
 	</section>
 
@@ -169,7 +157,12 @@
     var sales = ${sales};
 	var reason = ${reason};
 	var reasonNodeal =${reasonNodeal};
+	
+	var searchFlag = false;
+	var searchStatusCheck = "";
+
 	var contactReal =${contactReal};
+	
 	$(".destination-select").select2({
         placeholder: '国家',
         data: destination
@@ -244,8 +237,11 @@
 			 			var searchStartDateTime=$("#searchStartDateTime").val();
 			 			var searchEndDateTime=$("#searchEndDateTime").val();
 			 			
-			 			var searchStatus = $("input[name='status']:checked").val();
-			 	
+			 			//var searchStatus = $("input[name='status']:checked").val();
+			 			var searchStatus = searchStatusCheck;
+			 			searchStatusCheck = "";
+			 			
+			 			//alert(searchStatus);
 			 			
 			 			if(searchCustomerId !=null && searchCustomerId !="" ){
 							data.customerId = searchCustomerId;
@@ -297,19 +293,24 @@
 						json.recordsFiltered = json.countFiltered;
 						json.data = json.data;
 						
-						$('#status0Count').html("待处理"+json.status0);
+						
+						if(searchFlag==false){
+							$('#status0Count').html("待处理"+json.status0);
 
-						$('#status1Count').html("客服沟通中"+json.status1);
-				
-						$('#status2Count').html("地接设计中"+json.status2);						
+							$('#status1Count').html("客服沟通中"+json.status1);
+					
+							$('#status2Count').html("地接设计中"+json.status2);						
+							
+							$('#status3Count').html("成行"+json.status3);						
+							
+							$('#status4Count').html("未成行"+json.status4);						
+							
+							$('#status5Count').html("无效"+json.status5);												
+							
+							$('#status6Count').html("已付款"+json.status6);
+							
+						}
 						
-						$('#status3Count').html("成行"+json.status3);						
-						
-						$('#status4Count').html("未成行"+json.status4);						
-						
-						$('#status5Count').html("无效"+json.status5);												
-						
-						$('#status6Count').html("已付款"+json.status6);
 						
 						return JSON.stringify( json );
 					}
@@ -563,29 +564,46 @@
 				});
 
 			$('#searchBtn').on( 'click', function () {
+				//$("input[name='status']:checked").val(null);
+				searchStatusCheck = "";
+				searchFlag = false;
 		        t.draw();
+		        $('input:radio:checked').attr('checked',false);
 		    } );
 			
 			$('#status0').on('click',function(){
-				
+				searchStatusCheck = 0+" ";
+				searchFlag = true;
 				t.draw();
 			});
 			$('#status1').on('click',function(){
+				searchStatusCheck = 1;
+				searchFlag = true;
 				t.draw();
 			});
 			$('#status2').on('click',function(){
+				searchStatusCheck = 2;
+				searchFlag = true;
 				t.draw();
 			});
 			$('#status3').on('click',function(){
+				searchStatusCheck = 3;
+				searchFlag = true;
 				t.draw();
 			});
 			$('#status4').on('click',function(){
+				searchStatusCheck = 4;
+				searchFlag = true;
 				t.draw();
 			});
 			$('#status5').on('click',function(){
+				searchStatusCheck = 5;
+				searchFlag = true;
 				t.draw();
 			});
 			$('#status6').on('click',function(){
+				searchStatusCheck = 6;
+				searchFlag = true;
 				t.draw();
 			});
 		    
