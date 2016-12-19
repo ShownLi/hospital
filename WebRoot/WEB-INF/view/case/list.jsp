@@ -365,51 +365,6 @@
 			                return "<div class='width85'>" + destinations + "</div>" ;
 			                },
 			                targets: 2
-						},	  
-						{
-			                orderable: false,
-			                render: function ( data, type, full, meta ) {
-			                	var dataSource = full.source;
-			                	var dataOperator = full.operator;
-			                	var m = "";
-			                	var n = "";
-				                	for(var i=0;i < source.length;i++){
-				                		
-				                		if(dataSource==source[i].id){
-				                			// return "<div class='caselist-5'>" + user[i].text + "</div>"
-				                			m = source[i].text;
-				                		}	
-				                	}
-				                	for(var i=0;i < user.length;i++){
-				                		if(dataOperator==user[i].id){
-				                			n=user[i].text;
-				                		}
-				                	}
-				                	return "<div class='width85'>" + m + "</div>" + "<div class='width85'>" + n + "</div>";
-			                },
-			                  targets: 3
-						},
-						 {	
-
-			                orderable: false,
-			                render: function ( data, type, full, meta ) {
-			                	var time = data.time;
-			                	if(data.time){
-			                		time=new Date(time).format("yyyy-MM-dd hh:mm:ss");
-			                	}else{
-			                		time="";
-			                	}
-			                	if(full){
-			                		for(var i=0;i<caseStatus.length;i++){
-				                		if(full.status==caseStatus[i].id){
-				                			return "<div class='caselist-6'>" + caseStatus[i].text + "</div>" + "<div class='caselist-7'>" + time + "</div>"
-				                		}
-				                	}
-			                		
-			                	}
-			                	else{return ""}
-			                },
-			                  targets: 4
 						},
 						{
 							data:"requirement",
