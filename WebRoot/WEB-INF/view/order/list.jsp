@@ -476,7 +476,6 @@
 								{//成团金额
 					                orderable: false,
 					                render: function ( data, type, full, meta )  {
-					                	
 					                	return full.currency+full.groupPrice+"<br>￥"+full.rmbPrice;
 					                },
 					                  targets: 4
