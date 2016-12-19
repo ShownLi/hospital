@@ -312,9 +312,10 @@
 								<div class="col-sm-8">
 									<input type="text" name="budget" placeholder="客人的预算"
 										class="form-control" value="${crmcase.budget}" />
+										<span style="position: absolute; right: 15px; top: 10px;">￥/人</span>
 								</div>
 							</div>
-							<div class="form-group col-sm-8">
+							<div class="form-group col-sm-8" style="clear: both;">
 								<label class="col-sm-2 control-label">客人的要求</label>
 								<div class="col-sm-9" style="margin-left: 23px;">
 									<textarea id="requirement" name="requirement"

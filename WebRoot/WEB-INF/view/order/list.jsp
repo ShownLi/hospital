@@ -239,26 +239,31 @@
 	
  	$(".destination-select").select2({
         placeholder: '国家',
-        data: destination
+        data: destination,
+        allowClear: true
     }); 
 	
 	$(".currency-select").select2({
         data: currency,
+        allowClear: true
     });
 	
 	$(".status-select").select2({
         placeholder: '状态',
-        data: orderStatus
+        data: orderStatus,
+        allowClear: true
     });
     
     $(".reason-select").select2({
     	placeholder:"未成行原因",
-    	data:reason
+    	data:reason,
+        allowClear: true
 	 });
     
     $(".operator-select").select2({
     	placeholder:"跟单员",
-    	data:user
+    	data:user,
+        allowClear: true
 	 });
     
 	

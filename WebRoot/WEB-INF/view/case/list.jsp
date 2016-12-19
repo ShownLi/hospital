@@ -50,9 +50,9 @@
 								<div class="col-sm-2">
 									<input type="text" id="searchOperator" class="operator-select fullwidth" value="" />
 								</div>
-								<div class="col-sm-2">
+								<!-- <div class="col-sm-2">
 									<input type="text" id="searchStatus" class="status-select fullwidth" value="" />
-								</div>
+								</div> -->
 								<div class="col-sm-2">
 									<input type="text" id="searchRequirment" class="form-control" placeholder="客人要求" value="" />
 								</div>
@@ -159,43 +159,50 @@
 	var reasonNodeal =${reasonNodeal};
 	
 	var searchFlag = false;
-	var searchStatusCheck = "";
+	var searchButtonClick = false;
 
 	var contactReal =${contactReal};
 	
 	$(".destination-select").select2({
         placeholder: '国家',
-        data: destination
+        data: destination,
+        allowClear: true
     });
 	
    	$(".customer-select").select2({
         placeholder: '客人',
-        data: customer
+        data: customer,
+        allowClear: true
     }); 
    	
 	$(".source-select").select2({
         placeholder: '来源',
-        data: source
+        data: source,
+        allowClear: true
     });
 	
 	$(".operator-select").select2({
         placeholder: '跟单员',
-        data: user
+        data: user,
+        allowClear: true
     });
 	
 	$(".status-select").select2({
         placeholder: '状态',
-        data: caseStatus
+        data: caseStatus,
+        allowClear: true
     });
 	
     $(".sales-select").select2({
         placeholder: '销售',
-        data: sales
+        data: sales,
+        allowClear: true
     });
     
     $(".reason-select").select2({
     	placeholder:"无效原因",
-    	data:reason
+    	data:reason,
+        allowClear: true
     });
     
   
@@ -237,9 +244,12 @@
 			 			var searchStartDateTime=$("#searchStartDateTime").val();
 			 			var searchEndDateTime=$("#searchEndDateTime").val();
 			 			
-			 			//var searchStatus = $("input[name='status']:checked").val();
-			 			var searchStatus = searchStatusCheck;
-			 			searchStatusCheck = "";
+			 			var searchStatus = $("input[name='status']:checked").val();
+			 			if(searchButtonClick == true){
+			 				searchStatus = "";
+			 				searchButtonClick =false;
+			 			}
+			 			
 			 			
 			 			//alert(searchStatus);
 			 			
@@ -520,44 +530,37 @@
 
 			$('#searchBtn').on( 'click', function () {
 				//$("input[name='status']:checked").val(null);
-				searchStatusCheck = "";
 				searchFlag = false;
+				searchButtonClick = true;
 		        t.draw();
 		        $('input:radio:checked').attr('checked',false);
 		    } );
 			
 			$('#status0').on('click',function(){
-				searchStatusCheck = 0+" ";
 				searchFlag = true;
 				t.draw();
 			});
 			$('#status1').on('click',function(){
-				searchStatusCheck = 1;
 				searchFlag = true;
 				t.draw();
 			});
 			$('#status2').on('click',function(){
-				searchStatusCheck = 2;
 				searchFlag = true;
 				t.draw();
 			});
 			$('#status3').on('click',function(){
-				searchStatusCheck = 3;
 				searchFlag = true;
 				t.draw();
 			});
 			$('#status4').on('click',function(){
-				searchStatusCheck = 4;
 				searchFlag = true;
 				t.draw();
 			});
 			$('#status5').on('click',function(){
-				searchStatusCheck = 5;
 				searchFlag = true;
 				t.draw();
 			});
 			$('#status6').on('click',function(){
-				searchStatusCheck = 6;
 				searchFlag = true;
 				t.draw();
 			});
