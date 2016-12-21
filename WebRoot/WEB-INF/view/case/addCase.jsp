@@ -223,7 +223,7 @@
             </div>
             <div class="panel-footer align-center">
 
-             <input class="btn btn-primary" type="submit" value="保存"/>&nbsp;
+             <input id="addCase2" class="btn btn-primary" type="submit" value="保存"/>&nbsp;
 	     <input class="btn btn-default" type="button" id="btn-back" value="取消"/>
 
     		    </div><!-- panel-footer -->
@@ -494,6 +494,7 @@
   			    },
   			    submitHandler : function(){
   			      case_submit();
+              $("#addCase2").attr("disabled","disabled");
   			      return false;
   			    }
   			});

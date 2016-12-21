@@ -69,7 +69,7 @@
 		        		</div><!-- panel-body -->
 		        
 		        		<div class="panel-footer align-center">
-							<input class="btn btn-primary" type="submit" value="保存"/>&nbsp;
+							<input id="editAgency" class="btn btn-primary" type="submit" value="保存"/>&nbsp;
 							<input class="btn btn-default" type="button" id="btn-back" value="取消"/>&nbsp;
 							<input type="hidden" name="agencyId" value="${agency.agencyId}" />
 						</div><!-- panel-footer -->
@@ -217,6 +217,7 @@
 		      return false;
 		    },
 		    submitHandler : function(){
+		      $("#editAgency").attr("disabled","disabled");
 		      form_submit();
 		      return false;
 		    }

@@ -244,3 +244,9 @@ label.error{
 	background: #428bca;
 	color: #fff;
 }
+.leftpanel-collapsed .nav-active ul{
+	display: none !important;
+}
+.leftpanel-collapsed .nav-hover ul{
+	display: block !important;
+}

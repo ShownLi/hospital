@@ -367,7 +367,7 @@
           </div>
           <div class="modal-footer align-center">
                <!-- <button class="submit btn btn-primary">保存</button>-->
-            <button class="btn btn-primary" >保存</button> 
+            <button class=" submit btn btn-primary" >保存</button> 
 
             <!--   <button class="btn btn-primary" onclick="form2_submit()">保存</button> -->
               <a class="cancel btn btn-primary" >取消</a>
@@ -492,6 +492,7 @@
             return false;
           },
           submitHandler : function(){
+            $("#form-deal .submit").attr("disabled","disabled");
               deal_submit();
               return false;
           }
@@ -516,6 +517,7 @@
 		            return false;
 		          },
 		          submitHandler : function(){
+                ("#form-noDeal .submit").attr("disabled","disabled");
 		              noDeal_submit();
 		              return false;
 		          } 

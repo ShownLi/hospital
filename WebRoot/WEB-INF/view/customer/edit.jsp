@@ -129,7 +129,7 @@
         </div><!-- panel-body -->
         
         <div class="panel-footer align-center">
-			<button class="btn btn-primary">保存</button>&nbsp;
+			<button id="editCustomer" class="btn btn-primary">保存</button>&nbsp;
 			<button class="btn btn-default" id="btn-back">返回</button>
 			<input type="hidden" name="customerId" value="${customer.customerId }" />
 		</div><!-- panel-footer -->
@@ -519,7 +519,7 @@
 		      	}else{
 		      		$(".contact-note").removeClass("noted");
 		      		$(".contact-field").removeClass("has-error");
-
+		      		$("#editCustomer").attr("disabled","disabled");
 			      	base_submit();
 			      	return false;
 			    }
