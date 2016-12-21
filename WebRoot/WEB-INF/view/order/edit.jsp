@@ -232,7 +232,7 @@
                 <input  type="hidden" name="commentType" value="order" />
           </div>
           <div class="form-group col-sm-12 align-center">
-            <button class="btn btn-primary">添加注释</button>
+            <button class="submit btn btn-primary">添加注释</button>
           </div>
           </form>
           		</div>
@@ -573,6 +573,7 @@
 				return false;
 			},
 			submitHandler : function(){
+        $("#form-comment .submit").attr("disabled","disabled");
 				comment_submit();
 			    return false;
 			}

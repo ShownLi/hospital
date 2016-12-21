@@ -493,8 +493,8 @@
   			      return false;
   			    },
   			    submitHandler : function(){
-  			      case_submit();
               $("#addCase2").attr("disabled","disabled");
+  			      case_submit();
   			      return false;
   			    }
   			});

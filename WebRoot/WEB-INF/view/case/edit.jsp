@@ -1365,8 +1365,8 @@
             return false;
           },
           submitHandler : function(){
+          	$("#form-case .submit").attr("disabled","disabled");
             case_submit();
-            $("#form-case .submit").attr("disabled","disabled");
             return false;
           }
       });
