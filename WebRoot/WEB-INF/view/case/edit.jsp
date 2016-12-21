@@ -1727,7 +1727,6 @@
               return false;
           },
           submitHandler : function(){
-          	$("#form-comment .submit").attr("disabled","disabled");
               comment_submit();
               return false;
           }

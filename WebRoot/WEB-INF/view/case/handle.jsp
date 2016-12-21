@@ -1271,7 +1271,7 @@
               return false;
           },
           submitHandler : function(){
-            $("#form-comment .btn-primary").attr("disabled","disabled");
+           
               comment_submit();
               return false;
           }
