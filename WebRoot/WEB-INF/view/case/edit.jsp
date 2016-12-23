@@ -1026,7 +1026,7 @@
      	placeholder:"未成行原因",
      	data:reasonNodeal
      });
-    	if("${crmcase.reasonNodeal}"!=null&&"${crmcase.reasonNodeal}"!=""){
+    	if("${crmcase.status}"==4){
       	  $("#div-nodealInfo").show();
       	 };
       /*  设置未成行原因下拉框 结束*/
