@@ -1,7 +1,9 @@
 package com.tourmade.crm.action;
 
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,6 +42,7 @@ public class CaseController extends BaseSimpleFormController {
 
 	@RequestMapping(value = "/list.html", method = { RequestMethod.POST, RequestMethod.GET })
 	public String list(Model model) {
+		
 		String source = "case.source";
 		String status = "case.status";
 		String country = "country";
@@ -69,6 +72,16 @@ public class CaseController extends BaseSimpleFormController {
 		model.addAttribute("sales",salesResult);
 		model.addAttribute("reason", reasonResult);
 		
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		
+		Calendar calendar = Calendar.getInstance();    //获取当前日期
+		calendar.add(Calendar.MONTH, 0);    //设置当前月份
+		calendar.set(Calendar.DAY_OF_MONTH, 1);    //设置为本月1号
+		model.addAttribute("searchStartDateTime",format.format(calendar.getTime()));
+		
+		Calendar calendar1 = Calendar.getInstance();
+		model.addAttribute("searchEndDateTime",format.format(calendar1.getTime()));
+		
 		//添加未成行
 		String reasonNodeal ="case.reasonnodeal";
 		List<EntityList> reasonNodealList = service.getParameterInfo(reasonNodeal);
@@ -97,6 +110,13 @@ public class CaseController extends BaseSimpleFormController {
 	@ResponseBody
 	public String queryData(HttpServletRequest request, HttpSession session, Model model, Case crmcase, PageHelper page) {
 	
+		if(crmcase.getSearchStartTime()==null){
+			crmcase.setSearchStartTime("");
+		}
+		if(crmcase.getSearchEndTime()==null){
+			crmcase.setSearchEndTime("");
+		}
+		
 		//根据分页条件，获取caseList
 		QueryResult<Case> casePage = service.queryCase(crmcase, page, request);
 		String result = JSONUtilS.object2json(casePage);
@@ -120,7 +140,6 @@ public class CaseController extends BaseSimpleFormController {
 		String flight = "case.flight";
 		String level = "customer.level";
 		String ageGroup = "customer.agegroup";
-		
 		String contact ="case.contact";
 		
 		List<EntityList> levelList = service.getParameterInfo(level);
@@ -139,7 +158,6 @@ public class CaseController extends BaseSimpleFormController {
 		List<EntityList> flightList = service.getParameterInfo(flight);
 		//获取联系方式
 		List<EntityList> contactList=service.getParameterInfo(contact);
-		
 		List<EntityList> customer = service.getCustomer();
 		List<EntityList> user = service.getUser();
 		List<EntityList> sales = service.getSales();
@@ -522,8 +540,6 @@ public class CaseController extends BaseSimpleFormController {
 		Map<String,Object> customerMap =new HashMap<String, Object>();
 		Map<String,String> map =new HashMap();
 		
-		
-		
 		try {
 			//判断是否有portalId
 			if( crmcase.getPortalId()!=null && crmcase.getPortalId()!=0) {
@@ -611,7 +627,6 @@ public class CaseController extends BaseSimpleFormController {
 			String ageGroup = "customer.agegroup";
 			String reason = "case.reason";
 			String destination = "case.destination";
-			
 			String orderStatus = "order.status";
 			String contact="case.contact";
 			String reasonNodeal ="case.reasonnodeal";
@@ -666,8 +681,8 @@ public class CaseController extends BaseSimpleFormController {
 			String orderNoDeal= "order.reason";
 			List<EntityList> orderNoDealList = service.getParameterInfo(orderNoDeal);
 			JSONArray orderNoDealResult = JSONArray.fromObject(orderNoDealList);
-			model.addAttribute("orderNoDealReason",orderNoDealResult);
 			
+			model.addAttribute("orderNoDealReason",orderNoDealResult);
 			model.addAttribute("country",countryResult);
 			model.addAttribute("language",languageResult);
 			model.addAttribute("withwho",withResult);
