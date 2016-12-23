@@ -848,5 +848,17 @@ public class CaseService extends BaseService {
 		return result;
 	}
 
+	public void confirmPay(Case crmcase) {
+		try {
+			Case caseInfo = caseMapper.getCaseById(crmcase.getCaseId());
+			caseInfo.setStatus("6");
+			caseMapper.updateCase(caseInfo);
+			
+			caseMapper.updateOrderConPay(crmcase);
+		} catch (Exception e) {
+			logger.error("CaseService.confirmPay() --> " + crmcase + "-->" + e.getMessage());
+		}
+	}
+
 
 }

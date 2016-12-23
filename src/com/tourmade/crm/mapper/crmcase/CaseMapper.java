@@ -67,4 +67,6 @@ public interface CaseMapper extends BaseMapper {
 
 	public List<CaseStatus> countCaseByStatus(Case crmcase);
 
+	public void updateOrderConPay(Case crmcase);
+
 }

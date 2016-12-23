@@ -481,4 +481,16 @@ limit #{start},#{length} -->
 		 or
 		 u.agency_re_email_alias = #{recieverEmail})
 	</select>
+	
+	<select id="getSaleBySalesId" parameterType="int" resultType="Sale">
+		select
+			u.sales_id as salesId,
+			u.sales_portal_id as salesPortalId,
+			u.sales_name as salesName,
+			u.sales_name_en as salesEnglishName,
+			u.agency_id as agencyId,
+			u.sales_email as salesEmail,
+			u.isdel as isdel
+		from tm_sales u where u.sales_id = #{salesId}
+	</select>	
 </mapper>

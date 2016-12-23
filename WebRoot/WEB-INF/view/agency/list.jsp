@@ -234,7 +234,7 @@
 			
 			$('#dataTable tbody').on( 'click', 'a.btn-success', function () {
 		        var data = agencyTable.row($(this).parents('tr')).data();
-		        edit($(this).attr("title",""));
+		        edit($(this).attr("id"));
 		    } );
 
 			$('#dataTable tbody').on( 'click', 'a.btn-danger', function () {

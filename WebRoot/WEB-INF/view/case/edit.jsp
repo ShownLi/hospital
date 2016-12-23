@@ -372,10 +372,10 @@
 							<input class="btn btn-primary" id="btn-addorder" type="button" value="分配地接社" />&nbsp; 
 							<input class="btn btn-primary" type="submit" value="保存" />&nbsp;
 							<input class="btn btn-danger" id="btn-invalid"   type="button" value="无效"/>&nbsp; 
-							<input class="btn btn-danger" id="btn-nodeal" type="button"
-								value="未成行" />&nbsp; <input class="btn btn-default"
-								type="button" id="btn-back" value="返回" /> <input type="hidden"
-								name="caseId" value="${crmcase.caseId}" />
+							<input class="btn btn-danger" id="btn-nodeal" type="button" value="未成行" />&nbsp; 
+							<input class="btn btn-primary" id="btn-confirmpay" type="button" value="收款确认" />&nbsp; 
+							<input class="btn btn-default" type="button" id="btn-back" value="返回" /> 
+							<input type="hidden"name="caseId" value="${crmcase.caseId}" />
 
 						</div>
 						<!-- panel-footer -->
@@ -497,8 +497,6 @@
 
 			</div>
 	
-		</div>
-		</div>
 		</div>
 		</div>
 	</div>
@@ -819,12 +817,18 @@
 	$(function(){
 		/* 当case无效，成行，未成行时，无未成行按钮 
 		         当case无效，成行，未成行没有下单按钮 
+		   
+		   	当case不为成行时，无收款确认按钮
 		*/
 		if("${crmcase.status}"==3||"${crmcase.status}"==5||"${crmcase.status}"==4){
 			$("#btn-nodeal").css("display","none");
 			$("#btn-addorder").css("display","none");
 		}
 		
+		if("${crmcase.status}"!=3){
+			//alert("${crmcase.status}");
+			$("#btn-confirmpay").css("display","none");
+		} 
 		
 	})
 	if("${crmcase.status}"==1){
@@ -971,7 +975,6 @@
       placeholder: '选择一个推广渠道',
       data: source
     });
-    $(".source-select").prop("disabled", true); 
     $(".tailormade-select").select2({
         placeholder: '选择一个',
         data: tailormade
@@ -1015,7 +1018,7 @@
     
 
     
-	if("${crmcase.reason}"!=null&&"${crmcase.reason}"!=""){
+	if("${crmcase.status}"==5){
    	  $("#div-delInfo").show();
    	 };
    	/* 	 设置未成行原因下拉框 开始 */
@@ -1391,7 +1394,9 @@
 		 return false;
       });
       
-      
+      $("#btn-confirmpay").click(function(){
+    	  confirmpaySubmit();
+      })
      /*  $("#btn-updateDel").click(function(){
      	 updateDel_submit(); 
        }); */
@@ -1452,7 +1457,7 @@
       $(".confirmNoDealModal .cancel").click(function(){
         	$(".confirmNoDealModal").modal("hide");
     	  });
- 
+ 	
 	  //添加订单
 
       $("#btn-addorder").click(function(){
@@ -1501,9 +1506,25 @@
 			if (result.success) {
 				window.parent.location = "${rootPath}case/edit.html?id=${crmcase.caseId}";
 			} else {
+				if(result.text=="noCustomerEmail"){
+					alert("分配地接社成功，由于客人没有邮箱，无法发送订单邮件");
+					$('#nextModal').modal('hide');
+					window.parent.location = "${rootPath}case/edit.html?id=${crmcase.caseId}";
+				}
+				else if(result.text=="noSaleEmail"){
+					alert("分配地接社成功，由于销售没有邮箱，无法发送订单邮件");
+					$('#nextModal').modal('hide');
+					window.parent.location = "${rootPath}case/edit.html?id=${crmcase.caseId}";
+
+				}
+				else if(result.text=="noSendmail"){
+					alert("分配地接社成功，由于地接社设置为不发送邮件，所以未发送订单邮件");
+					$('#nextModal').modal('hide');
+					window.parent.location = "${rootPath}case/edit.html?id=${crmcase.caseId}";
+				}
 				//$("#NoEmail").modal('show');
          		//$("#nextModal").modal('hide');
-				window.parent.location = "${rootPath}case/edit.html?id=${crmcase.caseId}";
+         		else {window.parent.location = "${rootPath}case/edit.html?id=${crmcase.caseId}";}
 			}
 		}, "JSON");
       }
@@ -1542,6 +1563,19 @@
      	  catch(e) {
      		  alert(e);
      	  }
+      }
+      
+      function confirmpaySubmit() {
+    	  $(".user-select").prop("disabled", false);
+ 			var f = $("#form-case").serialize();
+ 			$.post('${rootPath}case/confirmPay.do', f, function(result) {
+ 				var rmsg = result.msg;
+ 				if (result.success) {
+ 					window.parent.location = "${rootPath}case/edit.html?id=${crmcase.caseId}";
+ 				} else {
+ 					$("#msgModal").modal('show');
+ 				}
+ 			}, "JSON");
       }
       
       

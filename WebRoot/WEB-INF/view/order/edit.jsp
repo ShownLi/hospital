@@ -153,7 +153,8 @@
                       </div>
                       <div class="form-group col-sm-4">
                       <div class="col-sm-6"></div>
-                      		&nbsp;<input id="btn-updateDealModify" class="btn btn-primary" type="button" value="更改"/>&nbsp;
+                      		<!-- &nbsp;<input id="btn-updateDealModify" class="submit btn btn-primary" type="button" value="更改"/>&nbsp;
+ -->                      		<button class="submit btn btn-primary" >更改</button>
                       	</div>
                   </div>
                   <input type="hidden" name="orderId" value="${order.orderId}" />
@@ -167,7 +168,8 @@
                         <div class="col-sm-6">
                           <input class="reason-select fullwidth" name="reason" value="${order.reason}" placeholder="若未成行，原因是" />
                         </div>
-                    	<input id="btn-updateNoDealModify" class="btn btn-primary" type="button" value="更改">&nbsp;
+                    	<button class="btn btn-primary">更改</button>
+<!--                     	<input id="btn-updateNoDealModify" class="btn btn-primary" type="button" value="更改">&nbsp; -->
                       </div>
                   </div><!-- panel-body -->
                       <input type="hidden" name="orderId" value="${order.orderId}" />	
@@ -497,6 +499,75 @@
           }
 		});
 		
+		jQuery("#form-updateDeal").validate({
+	        rules: {
+		        groupTime: {
+                required: true,
+                date: true
+              },
+		        startDate: {
+                required: true,
+                date: true
+              },
+		        endDate: {
+                required: true,
+                date: true
+              },
+		        groupNumber: {
+                required: true,
+                number: true
+              },
+		        groupPrice: {
+                required: true,
+                number: true
+              },
+                currency: {
+                required: true,
+              },
+		        exchangeRate: {
+                required: true,
+                number: true
+              },
+		        rmbPrice: {
+                required: true,
+                number: true
+              },
+		      },
+		        messages: {
+		        groupTime: {
+                required: "请输入成团日期",
+                date: "日期格式 mm/dd/yyyy"
+              },
+		          startDate: {
+                required: "请输入出发日期",
+                date: "日期格式 mm/dd/yyyy"
+              },
+		        endDate: {
+                required: "请输入返回日期",
+                date: "日期格式 mm/dd/yyyy"
+              },
+		          groupNumber: "请输入一个数字",
+		          groupPrice: "请输入一个数字",
+              	  currency: "请选择货币种类",
+		          exchangeRate: "请输入一个数字",
+		          rmbPrice: "请输入一个数字",
+
+		      },
+          highlight: function(element) {
+            jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+          }, 
+          success: function(element) {
+            jQuery(element).closest('.form-group').removeClass('has-error');
+          },
+          invalidHandler : function(){
+            return false;
+          },
+          submitHandler : function(){
+        	  updateDeal_submit();
+              return false;
+          }
+		});
+		
 		jQuery("#form-noDeal").validate({
 		        rules: {
 			        reason: {
@@ -517,6 +588,30 @@
 		          },
 		          submitHandler : function(){
 		              noDeal_submit();
+		              return false;
+		          } 
+	        });
+		
+		jQuery("#form-updateNoDeal").validate({
+		        rules: {
+			        reason: {
+			        	required: true,
+			        },	              	
+				},				
+		     	 messages: {
+		            reason: "请选择一个原因",
+		      	 },			      
+		          highlight: function(element) {
+		            jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+		          },
+		          success: function(element) {
+		            jQuery(element).closest('.form-group').removeClass('has-error');
+		          },
+		          invalidHandler : function(){
+		            return false;
+		          },
+		          submitHandler : function(){
+		        	  updateNoDeal_submit();
 		              return false;
 		          } 
 	        });
@@ -575,6 +670,8 @@
 			    return false;
 			}
 		});
+
+        
 			
 	});
 	//注释分页
@@ -671,9 +768,9 @@
 		$(".dealModal").modal('show');
 	  return false;
 	});
-	$("#btn-updateDealModify").click(function(){
+	/* $("#btn-updateDealModify").click(function(){
 		updateDeal_submit();
-	});
+	}); */
 /*      $(".dealModal .submit").click(function(){
      		deal_submit();
        }); */
@@ -683,9 +780,6 @@
     $("#btn-baseNoDeal").click(function(){
         $(".noDealModal").modal('show');
         return false;
-    });
-    $("#btn-updateNoDealModify").click(function(){
-    	updateNoDeal_submit();
     });
     $(".dealModal .cancel").click(function(){
     	$(".dealModal").modal("hide");

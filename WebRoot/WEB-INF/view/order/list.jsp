@@ -609,6 +609,10 @@
 		//判断客人是否有邮箱  有的话发送邮件 没有的话绑定邮箱
 		function sendOrderEmail(data){
 			if(data.customerEmailReal!=null&&data.customerEmailReal!=""){
+				if(data.agencyEmailReal==null||data.agencyEmailReal==""){
+					alert("销售没有邮箱地址，不能发送邮件");
+					return ;
+				}			
 				//alert(data.customerReEmailAlias);
 				if(data.customerReEmailAlias!=null && data.customerReEmailAlias!=""){
 					var f = data.orderId;
@@ -635,10 +639,11 @@
 						}
 					}, "JSON");
 				}
-			}else{
+			}
+			else{
 				$("#NoEmail").modal('show');
 				var newHref = "../customer/edit.html?id="+data.customerId
-				$('#addEmail').attr("href",newHref)
+				$('#addEmail').attr("href",newHref);
 			}
 		}
 		  
