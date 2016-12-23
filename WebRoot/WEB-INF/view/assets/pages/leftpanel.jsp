@@ -58,7 +58,7 @@
                     
                 </ul>
             </li>  
-             <li class="nav-parent"><a href="javascript:void(0);"><i class="fa fa-user"></i> <span>统计分析</span></a>
+             <li class="nav-parent"><a href="javascript:void(0);"><i class="fa fa-pie-chart"></i> <span>统计分析</span></a>
                 <ul class="children">
                    	<li><a href="${rootPath }statistics/caseSourceStats.html"><i class="fa fa-caret-right"></i>询单来源状态统计</a></li>
                     <li><a href="${rootPath }statistics/contactrealstats.html"><i class="fa fa-caret-right"></i>沟通方式统计 </a></li>
