@@ -333,6 +333,7 @@
 	            return false;
 	          },
 	          submitHandler : function(){
+	          	$("#form-deal .submit").attr("disabled","disabled");
 	              deal_submit();
 	              return false;
 	          } 
@@ -358,6 +359,7 @@
 		            return false;
 		          },
 		          submitHandler : function(){
+		          	$("#form-noDeal .submit").attr("disabled","disabled");
 		              noDeal_submit();
 		              return false;
 		          } 

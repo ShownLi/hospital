@@ -648,7 +648,7 @@
               </div><!-- noDealModal-body -->
           </div>
           <div class="modal-footer align-center">
-            <button class="btn btn-primary" >保存</button> 
+            <button class="submit btn btn-primary" >保存</button> 
             <a class="cancel btn btn-primary" >取消</a>
           </div>
       </form>
@@ -1097,6 +1097,7 @@
 	            return false;
 	          },
 	          submitHandler : function(){
+	          	$("#form-deal .submit").attr("disabled","disabled");
 	              deal_submit();
 	              return false;
 	          } 
@@ -1121,6 +1122,7 @@
 		            return false;
 		          },
 		          submitHandler : function(){
+		          	$("#form-noDeal .submit").attr("disabled","disabled");
 		              noDeal_submit();
 		              return false;
 		          } 
@@ -1143,6 +1145,7 @@
 				return false;
 			},
 			submitHandler : function(){
+				$("#form-nodeal .submit").attr("disabled","disabled");
 				nodealSubmit();
 			    return false;
 			}
@@ -1365,6 +1368,7 @@
             return false;
           },
           submitHandler : function(){
+          	$("#form-case .submit").attr("disabled","disabled");
             case_submit();
             return false;
           }
@@ -1422,6 +1426,7 @@
 				return false;
 			},
 			submitHandler : function(){
+				$("#form-del .submit").attr("disabled","disabled");
 				delSubmit();
 			    return false;
 			}
@@ -1478,6 +1483,7 @@
 
       	  		$("#orderDestinationText").val(destinationText); 
       	  		$("#orderDestination").val(destination);
+
 	      	  	$.ajax({
 	              type: "post",
 	              url: "${rootPath}case/getSales.do?destination="+destination,
@@ -1489,15 +1495,16 @@
 	                      data: json
 	                  });
 	              }  
-	          });  
-      	  	  $("#nextModal").modal('show');         	         	  
-      	  }  
-          return false;
-      });
+	            });  
+      	  	    $("#nextModal").modal('show');         	         	  
+      	    }  
+            return false;
+        });
       
-       $("#nextModal .submit").click(function(){
+        $("#nextModal .submit").click(function(){
+          $(this).attr("disabled","disabled");
       	  order_submit();
-      });  
+        });  
       
       function order_submit() {
 		var f = $("#form-order").serialize();

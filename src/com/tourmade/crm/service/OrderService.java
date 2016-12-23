@@ -262,7 +262,6 @@ public class OrderService extends BaseService {
 		creatAlias(url, param1);
 		creatAlias(url, param);*/
 		
-		
 		//将别名存入order表中
 		Order upOrder = new Order();
 		upOrder.setOrderId(orderid);

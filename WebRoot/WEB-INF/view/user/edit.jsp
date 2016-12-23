@@ -72,7 +72,7 @@
         </div><!-- panel-body -->
         
         <div class="panel-footer align-center">
-        	<input class="btn btn-primary" type="submit" value="保存"/>&nbsp;
+        	<input id="editUser" class="btn btn-primary" type="submit" value="保存"/>&nbsp;
 			<input class="btn btn-default" type="button" id="btn-back" value="返回"/>&nbsp;
 			<!-- <button class="btn btn-primary">保存</button>&nbsp;
 			<button class="btn btn-default" id="btn-back">返回</button> -->
@@ -178,6 +178,7 @@
 			      return false;
 			    },
 			    submitHandler : function(){
+			      $("#editUser").attr("disabled","disabled");
 			      form_submit();
 			      return false;
 			    }

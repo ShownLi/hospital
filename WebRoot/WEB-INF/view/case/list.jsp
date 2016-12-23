@@ -61,13 +61,13 @@
 								</div>
 								<div class="col-sm-2">
 									<div class="input-group input-datepicker" style="padding: 0;">
-				                        <input id="searchStartDateTime" type="text" name="searchStartDateTime" class="form-control datepicker" placeholder="请点击输入查询开始日期" autocomplete="on">
+				                        <input id="searchStartDateTime" type="text" name="searchStartDateTime" class="form-control datepicker" placeholder="请点击输入查询开始日期" value="${searchStartDateTime}" autocomplete="on">
 				                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
 				                    </div>
 				                </div>
 			                    <div class="col-sm-2">
 				                    <div class="input-group input-datepicker" style="padding: 0;">
-				                        <input id="searchEndDateTime" type="text" name="searchEndDateTime" class="form-control datepicker" placeholder="请点击输入查询截止日期" autocomplete="on">
+				                        <input id="searchEndDateTime" type="text" name="searchEndDateTime" class="form-control datepicker" placeholder="请点击输入查询截止日期" value="${searchEndDateTime}" autocomplete="on">
 				                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
 				                    </div>
 			                    </div>
@@ -130,6 +130,7 @@
 										<th>备注</th>
 										<th>询单来源 <br>状态</th>
 										<th>跟单员 <br>沟通方式</th>
+										<th>更新时间</th>
 										<th>创建时间</th>
 										<th>编辑</th>
 									</tr>
@@ -161,10 +162,13 @@
     var sales = ${sales};
 	var reason = ${reason};
 	var reasonNodeal =${reasonNodeal};
-	
 	var searchFlag = false;
+<<<<<<< HEAD
+	var searchStatusCheck = "";
+=======
 	var searchButtonClick = false;
 
+>>>>>>> 5d1a9ee23d744136f75d2e985cca0e765089df1a
 	var contactReal =${contactReal};
 	
 	$(".destination-select").select2({
@@ -208,11 +212,7 @@
     	data:reason,
         allowClear: true
     });
-    
-  
-    
-   
-		 
+
     jQuery("#searchStartDateTime").datepicker({
         dateFormat: "yy-mm-dd",
         changeYear: true,
@@ -247,6 +247,11 @@
 			 			var searchMobile=$('#searchMobile').val();
 			 			var searchStartDateTime=$("#searchStartDateTime").val();
 			 			var searchEndDateTime=$("#searchEndDateTime").val();
+<<<<<<< HEAD
+			 			//var searchStatus = $("input[name='status']:checked").val();
+			 			var searchStatus = searchStatusCheck;
+			 			searchStatusCheck = "";
+=======
 			 			
 			 			var searchStatus = $("input[name='status']:checked").val();
 			 			if(searchButtonClick == true){
@@ -254,8 +259,7 @@
 			 				searchButtonClick =false;
 			 			}
 			 			
-			 			
-			 			//alert(searchStatus);
+>>>>>>> 5d1a9ee23d744136f75d2e985cca0e765089df1a
 			 			
 			 			if(searchCustomerId !=null && searchCustomerId !="" ){
 							data.customerId = searchCustomerId;
@@ -307,7 +311,6 @@
 						json.recordsFiltered = json.countFiltered;
 						json.data = json.data;
 						
-						
 						if(searchFlag==false){
 
 							$('#statusAllCount').html("全部"+json.countTotal);
@@ -325,9 +328,7 @@
 							$('#status5Count').html("无效"+json.status5);												
 							
 							$('#status6Count').html("已付款"+json.status6);
-							
 						}
-						
 						
 						return JSON.stringify( json );
 					}
@@ -354,16 +355,16 @@
 			                	
 			                	if(full.destination){
 			                	var des=full.destination.split(",");
-			                	for(var j = 0;j<des.length;j++){
-			                		for(var i=0;i <destination.length;i++){
-				                		if(des[j]==destination[i].id){
-				                			destinations+=destination[i].text+",";
-				                		}				                	
+				                	for(var j = 0;j<des.length;j++){
+				                		for(var i=0;i <destination.length;i++){
+					                		if(des[j]==destination[i].id){
+					                			destinations+=destination[i].text+",";
+					                		}				                	
+					                	}
 				                	}
-			                	}
-			                }
+				                }
 			                	
-			                destinations=destinations.substring(0,destinations.length-1);
+			                	destinations=destinations.substring(0,destinations.length-1);
 			              	//出发日期
 		                	var start_date = full.startDate;
 		                	//大约出发日期
@@ -405,7 +406,6 @@
 				                	for(var i=0;i < reason.length;i++){
 				                		
 				                		if(dataReason==reason[i].id){
-				                			// return "<div class='caselist-5'>" + user[i].text + "</div>"
 				                			m = reason[i].text;
 				                		}	
 				                	}
@@ -455,9 +455,7 @@
 					                	
 					                	return "<div class='width85'>" + m + "</div>" + "<div class='width85'>" + n + "</div>";
 				                },
-				                  targets: 6
-			                  
-			                 
+				                targets: 6
 						},
 						{
 							orderable: false,
@@ -484,7 +482,21 @@
 							},
 							  targets: 7
 						
-						},
+						},{
+			                  
+			                  orderable: false,
+			                  render: function ( data, type, full, meta ) {
+			                	  
+			                	  var time = full.updateTime.time;
+				                	if(full.updateTime){
+				                		time=new Date(time).format("yyyy-MM-dd hh:mm:ss");
+				                	}else{
+				                		time="";
+				                	}
+				                	return "<div class='caselist-7'>" + time + "</div>"
+			                  },
+			                  targets: 8
+						    },
 						{
 			                  data: "creatTime",
 			                  orderable: false,
@@ -498,7 +510,7 @@
 				                	}
 				                	return "<div class='caselist-7'>" + time + "</div>"
 			                  },
-			                  targets: 8
+			                  targets: 9
 						    },
 						{
 		                  data: "caseId",
@@ -513,7 +525,7 @@
 		                	  }
 		                      
 		                  },
-		                  targets: 9
+		                  targets: 10
 					    },
 					    {
 						    orderable: false,

@@ -311,7 +311,7 @@
             </div><!-- panel-body -->
             
             <div class="panel-footer align-center">
-                <input class="btn btn-primary" type="submit" value="保存"/>&nbsp;
+                <input id="addCase" class="btn btn-primary" type="submit" value="保存"/>&nbsp;
                 <input class="btn btn-default" type="button" id="btn-back" value="取消"/>
                 <input type="hidden" name="operator" value="${sessionScope.loginUser.userId}"/>
     		   </div><!-- panel-footer -->
@@ -755,6 +755,7 @@
 			      		$(".contact-note").removeClass("noted");
 			      		$(".contact-field").removeClass("has-error");
   			      		case_submit();
+                  $("#addCase").attr("disabled","disabled");
   			      		return false;
 				    }
   			    }

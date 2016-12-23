@@ -86,7 +86,6 @@ public class CaseService extends BaseService {
 		if(crmcase.getMobile()!=null){
 			map.put("mobile", crmcase.getMobile());
 		}
-
 		if(crmcase.getSearchStartTime()!=null){
 			crmcase.setSearchStartTime(crmcase.getSearchStartTime()+" 00:00:00");
 			map.put("searchStartTime", crmcase.getSearchStartTime());
@@ -157,7 +156,6 @@ public class CaseService extends BaseService {
 		return result;
 	}
 	
-
 	/*
 	 * 查询是否有老客人
 	 */
@@ -753,7 +751,6 @@ public class CaseService extends BaseService {
 				crmcase.setQq(customer.getQq());
 				}
 			
-
 			crmcase.setStatus("0");
     		if(jsonObject.has("requirement") && !jsonObject.getString("requirement").equals("")){crmcase.setRequirement(jsonObject.getString("requirement"));}
     		if(jsonObject.has("customer_name_zh") && !jsonObject.getString("customer_name_zh").equals("")){customer.setChineseName(jsonObject.getString("customer_name_zh"));}
@@ -824,7 +821,6 @@ public class CaseService extends BaseService {
 		map.put("start", ph.getStart());
 		map.put("length", ph.getLength());;
 		
-		
 		if(crmcase.getEmail()!=null){
 			map.put("email", crmcase.getEmail());
 		}
@@ -848,6 +844,7 @@ public class CaseService extends BaseService {
 		return result;
 	}
 
+
 	public void confirmPay(Case crmcase) {
 		try {
 			Case caseInfo = caseMapper.getCaseById(crmcase.getCaseId());
@@ -859,6 +856,5 @@ public class CaseService extends BaseService {
 			logger.error("CaseService.confirmPay() --> " + crmcase + "-->" + e.getMessage());
 		}
 	}
-
 
 }

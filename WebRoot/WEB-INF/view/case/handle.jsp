@@ -869,6 +869,7 @@
 				return false;
 			},
 			submitHandler : function(){
+        $("#form-del .submit").attr("disabled","disabled");
 				delSubmit();
 			    return false;
 			}
@@ -1007,6 +1008,7 @@
             return false;
           },
           submitHandler : function(){
+            //$("#form-case .btn-primary").attr("disabled","disabled");
             case_submit();
             return false;
           }
@@ -1269,6 +1271,7 @@
               return false;
           },
           submitHandler : function(){
+           
               comment_submit();
               return false;
           }
