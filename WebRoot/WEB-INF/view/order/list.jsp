@@ -612,6 +612,7 @@
 		function sendOrderEmail(data){
 			if(data.customerEmailReal!=null&&data.customerEmailReal!=""){
 				if(data.agencyEmailReal==null||data.agencyEmailReal==""){
+					alert(data.agencyEmailReal);
 					alert("销售没有邮箱地址，不能发送邮件");
 					return ;
 				}			

@@ -30,7 +30,7 @@
 	
 	<select id="queryCaseSourceStats" parameterType="Map" resultType="CaseSourceStats">
 		select 
-			c.source as hah,
+			c.source as source_en,
 			p.chinese sourceName,
 			count(1) as total,
 			sum(case when o.status=0 then 1 else 0 end) as status0 ,
@@ -86,18 +86,18 @@
 		select 
 			o.agency_id,
 			o.agency_name as agencyName,
-			concat(format(sum(if(month(o.creat_time) = 1 &amp;&amp; o.status = '3',1,0))/sum(if(month(o.creat_time) = 1 ,1,0))*100,2),'%') as percentjan,
-			concat(format(sum(if(month(o.creat_time) = 2 &amp;&amp; o.status = '3',1,0))/sum(if(month(o.creat_time) = 2 ,1,0))*100,2),'%') as percentfeb,
-			concat(format(sum(if(month(o.creat_time) = 3 &amp;&amp; o.status = '3',1,0))/sum(if(month(o.creat_time) = 3 ,1,0))*100,2),'%') as percentmar,
-			concat(format(sum(if(month(o.creat_time) = 4 &amp;&amp; o.status = '3',1,0))/sum(if(month(o.creat_time) = 4 ,1,0))*100,2),'%') as percentapr,
-			concat(format(sum(if(month(o.creat_time) = 5 &amp;&amp; o.status = '3',1,0))/sum(if(month(o.creat_time) = 5 ,1,0))*100,2),'%') as percentmay,
-			concat(format(sum(if(month(o.creat_time) = 6 &amp;&amp; o.status = '3',1,0))/sum(if(month(o.creat_time) = 6 ,1,0))*100,2),'%') as percentjun,
-			concat(format(sum(if(month(o.creat_time) = 7 &amp;&amp; o.status = '3',1,0))/sum(if(month(o.creat_time) = 7 ,1,0))*100,2),'%') as percentjul,
-			concat(format(sum(if(month(o.creat_time) = 8 &amp;&amp; o.status = '3',1,0))/sum(if(month(o.creat_time) = 8 ,1,0))*100,2),'%') as percentaug,
-			concat(format(sum(if(month(o.creat_time) = 9 &amp;&amp; o.status = '3',1,0))/sum(if(month(o.creat_time) = 9 ,1,0))*100,2),'%') as percentsep,
-			concat(format(sum(if(month(o.creat_time) = 10 &amp;&amp; o.status = '3',1,0))/sum(if(month(o.creat_time) = 10 ,1,0))*100,2),'%') as percentoct,
-			concat(format(sum(if(month(o.creat_time) = 11 &amp;&amp; o.status = '3',1,0))/sum(if(month(o.creat_time) = 11 ,1,0))*100,2),'%') as percentnov,
-			concat(format(sum(if(month(o.creat_time) = 12 &amp;&amp; o.status = '3',1,0))/sum(if(month(o.creat_time) = 12 ,1,0))*100,2),'%') as percentdece     
+			IFNULL(concat(format(sum(if(month(o.creat_time) = 1 &amp;&amp; o.status = '3',1,0))/sum(if(month(o.creat_time) = 1 ,1,0))*100,2),'%'),'--') as percentjan,
+			IFNULL(concat(format(sum(if(month(o.creat_time) = 2 &amp;&amp; o.status = '3',1,0))/sum(if(month(o.creat_time) = 2 ,1,0))*100,2),'%'),'--') as percentfeb,
+			IFNULL(concat(format(sum(if(month(o.creat_time) = 3 &amp;&amp; o.status = '3',1,0))/sum(if(month(o.creat_time) = 3 ,1,0))*100,2),'%'),'--') as percentmar,
+			IFNULL(concat(format(sum(if(month(o.creat_time) = 4 &amp;&amp; o.status = '3',1,0))/sum(if(month(o.creat_time) = 4 ,1,0))*100,2),'%'),'--') as percentapr,
+			IFNULL(concat(format(sum(if(month(o.creat_time) = 5 &amp;&amp; o.status = '3',1,0))/sum(if(month(o.creat_time) = 5 ,1,0))*100,2),'%'),'--') as percentmay,
+			IFNULL(concat(format(sum(if(month(o.creat_time) = 6 &amp;&amp; o.status = '3',1,0))/sum(if(month(o.creat_time) = 6 ,1,0))*100,2),'%'),'--') as percentjun,
+			IFNULL(concat(format(sum(if(month(o.creat_time) = 7 &amp;&amp; o.status = '3',1,0))/sum(if(month(o.creat_time) = 7 ,1,0))*100,2),'%'),'--') as percentjul,
+			IFNULL(concat(format(sum(if(month(o.creat_time) = 8 &amp;&amp; o.status = '3',1,0))/sum(if(month(o.creat_time) = 8 ,1,0))*100,2),'%'),'--') as percentaug,
+			IFNULL(concat(format(sum(if(month(o.creat_time) = 9 &amp;&amp; o.status = '3',1,0))/sum(if(month(o.creat_time) = 9 ,1,0))*100,2),'%'),'--') as percentsep,
+			IFNULL(concat(format(sum(if(month(o.creat_time) = 10 &amp;&amp; o.status = '3',1,0))/sum(if(month(o.creat_time) = 10 ,1,0))*100,2),'%'),'--') as percentoct,
+			IFNULL(concat(format(sum(if(month(o.creat_time) = 11 &amp;&amp; o.status = '3',1,0))/sum(if(month(o.creat_time) = 11 ,1,0))*100,2),'%'),'--') as percentnov,
+			IFNULL(concat(format(sum(if(month(o.creat_time) = 12 &amp;&amp; o.status = '3',1,0))/sum(if(month(o.creat_time) = 12 ,1,0))*100,2),'%'),'--') as percentdece     
 			from tm_order o
 			where o.isdel = 0
         <if test="searchStartTime != null and searchStartTime != ''">
@@ -208,7 +208,7 @@
 	</select>
 	
 	<select id="countCustomerSourceLevelStats" parameterType="CustomerSourceLevelStats" resultType="long">
-		select count(source_en) from (
+		select count(1) from (
 			select 
 				c.source as source_en,
 				p.chinese as source,
@@ -262,7 +262,7 @@
 	</select>
 	
 	<select id="countSellerNotAskStats" parameterType="SellerNotAskStats" resultType="long">
-		select count(country) from (
+		select count(number) from (
 			select 
 				a.country country_en,
 				p.chinese country,
@@ -345,7 +345,7 @@
 	</select>
 	
 	<select id="countAgencyOrderStatus" parameterType="AgencyOrderStatus" resultType="long">
-		select count(agency_id) from (
+		select count(1) from (
 			select 
 				agency_name as agencyName,
 				agency_id,
@@ -373,9 +373,9 @@
 	</select>
 	
 	<select id="countCaseSourceStats" parameterType="CaseSourceStats" resultType="long">
-		select count(sourceName) from (
+		select count(1) from (
 			select 
-				c.source as hah,
+				c.source as source_en,
 				p.chinese sourceName,
 				count(1) as total,
 				sum(case when o.status=0 then 1 else 0 end) as status0 ,
@@ -400,7 +400,7 @@
 	</select>
 	
 	<select id="countCaseAllotStats" parameterType="CaseAllotStats" resultType="long">
-		select count(userName) from(
+		select count(1) from(
 			select 
 				u.user_name as userName,
 				u.user_id,

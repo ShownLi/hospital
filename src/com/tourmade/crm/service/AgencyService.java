@@ -46,7 +46,6 @@ public class AgencyService extends BaseService {
 		if(agency.getDestination()!=null){
 			map.put("destination", agency.getDestination());
 		}
-			
 		List<Agency> data = agencyMapper.queryAgency(map);
 		long count = agencyMapper.countAgency(agency);
 			

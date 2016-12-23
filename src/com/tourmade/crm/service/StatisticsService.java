@@ -208,6 +208,7 @@ public class StatisticsService extends BaseService {
 		result.setCountTotal(count);
 		result.setCountFiltered(count);
 		return result;
+		}
 	
 	/**
 	 * 地接社业绩统计表，分页展示

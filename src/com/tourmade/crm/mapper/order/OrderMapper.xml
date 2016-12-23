@@ -15,6 +15,7 @@
 			u.destination as destination,
 			u.customer_email_real as customerEmailReal,
 			u.customer_re_email_alias as customerReEmailAlias,
+			u.agency_email_real as agencyEmailReal,
 			u.status as status,
 			u.reason as reason,
 			u.group_time as groupTime,

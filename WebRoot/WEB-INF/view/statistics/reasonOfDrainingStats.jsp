@@ -14,7 +14,7 @@
 			<%@ include file="../assets/pages/headerbar.jsp"%>
 			<div class="pageheader">
 				<h2>
-					<i class="fa fa-user"></i>统计分析<span>沟通方式统计</span>
+					<i class="fa fa-user"></i>统计分析<span>流失原因统计</span>
 				</h2>				 
 			</div>
 			
@@ -26,7 +26,7 @@
 							<a href="" class="minimize">&minus;</a>
 						</div>
 						<!-- panel-btns -->
-						<h3 class="panel-title">沟通方式统计</h3>
+						<h3 class="panel-title">流失原因统计</h3>
 						<div class="row" style="margin-top: 20px">
 							<div class="form-group col-sm-10">
 								<div class="col-sm-2">
