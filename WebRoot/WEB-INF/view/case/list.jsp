@@ -61,13 +61,13 @@
 								</div>
 								<div class="col-sm-2">
 									<div class="input-group input-datepicker" style="padding: 0;">
-				                        <input id="searchStartDateTime" type="text" name="searchStartDateTime" class="form-control datepicker" placeholder="请点击输入查询开始日期" autocomplete="on">
+				                        <input id="searchStartDateTime" type="text" name="searchStartDateTime" class="form-control datepicker" placeholder="请点击输入查询开始日期" value="${searchStartDateTime}" autocomplete="on">
 				                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
 				                    </div>
 				                </div>
 			                    <div class="col-sm-2">
 				                    <div class="input-group input-datepicker" style="padding: 0;">
-				                        <input id="searchEndDateTime" type="text" name="searchEndDateTime" class="form-control datepicker" placeholder="请点击输入查询截止日期" autocomplete="on">
+				                        <input id="searchEndDateTime" type="text" name="searchEndDateTime" class="form-control datepicker" placeholder="请点击输入查询截止日期" value="${searchEndDateTime}" autocomplete="on">
 				                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
 				                    </div>
 			                    </div>
@@ -84,6 +84,10 @@
 					</div>
 					<div class="panel-body">
 						<div class="form-group col-sm-12 case-filter">
+		        	                <div class="rdio rdio-primary rdio-inline">
+		        	                  <input type="radio" id="statusAll" value="" name="status"/>
+		        	                  <label id="statusAllCount" for="statusAll">全部</label>    	                  
+		        	                </div><!-- rdio -->
 		        	                <div class="rdio rdio-primary rdio-inline">
 		        	                  <input type="radio" id="status0" value="0" name="status"/>
 		        	                  <label id="status0Count" for="status0">待处理</label>    	                  
@@ -158,10 +162,13 @@
     var sales = ${sales};
 	var reason = ${reason};
 	var reasonNodeal =${reasonNodeal};
-	
 	var searchFlag = false;
+<<<<<<< HEAD
+	var searchStatusCheck = "";
+=======
 	var searchButtonClick = false;
 
+>>>>>>> 5d1a9ee23d744136f75d2e985cca0e765089df1a
 	var contactReal =${contactReal};
 	
 	$(".destination-select").select2({
@@ -205,11 +212,7 @@
     	data:reason,
         allowClear: true
     });
-    
-  
-    
-   
-		 
+
     jQuery("#searchStartDateTime").datepicker({
         dateFormat: "yy-mm-dd",
         changeYear: true,
@@ -244,6 +247,11 @@
 			 			var searchMobile=$('#searchMobile').val();
 			 			var searchStartDateTime=$("#searchStartDateTime").val();
 			 			var searchEndDateTime=$("#searchEndDateTime").val();
+<<<<<<< HEAD
+			 			//var searchStatus = $("input[name='status']:checked").val();
+			 			var searchStatus = searchStatusCheck;
+			 			searchStatusCheck = "";
+=======
 			 			
 			 			var searchStatus = $("input[name='status']:checked").val();
 			 			if(searchButtonClick == true){
@@ -251,8 +259,7 @@
 			 				searchButtonClick =false;
 			 			}
 			 			
-			 			
-			 			//alert(searchStatus);
+>>>>>>> 5d1a9ee23d744136f75d2e985cca0e765089df1a
 			 			
 			 			if(searchCustomerId !=null && searchCustomerId !="" ){
 							data.customerId = searchCustomerId;
@@ -304,8 +311,10 @@
 						json.recordsFiltered = json.countFiltered;
 						json.data = json.data;
 						
-						
 						if(searchFlag==false){
+
+							$('#statusAllCount').html("全部"+json.countTotal);
+
 							$('#status0Count').html("待处理"+json.status0);
 
 							$('#status1Count').html("客服沟通中"+json.status1);
@@ -319,9 +328,7 @@
 							$('#status5Count').html("无效"+json.status5);												
 							
 							$('#status6Count').html("已付款"+json.status6);
-							
 						}
-						
 						
 						return JSON.stringify( json );
 					}
@@ -348,16 +355,16 @@
 			                	
 			                	if(full.destination){
 			                	var des=full.destination.split(",");
-			                	for(var j = 0;j<des.length;j++){
-			                		for(var i=0;i <destination.length;i++){
-				                		if(des[j]==destination[i].id){
-				                			destinations+=destination[i].text+",";
-				                		}				                	
+				                	for(var j = 0;j<des.length;j++){
+				                		for(var i=0;i <destination.length;i++){
+					                		if(des[j]==destination[i].id){
+					                			destinations+=destination[i].text+",";
+					                		}				                	
+					                	}
 				                	}
-			                	}
-			                }
+				                }
 			                	
-			                destinations=destinations.substring(0,destinations.length-1);
+			                	destinations=destinations.substring(0,destinations.length-1);
 			              	//出发日期
 		                	var start_date = full.startDate;
 		                	//大约出发日期
@@ -376,7 +383,7 @@
 			                return "<div class='width85'>" + destinations + "</div>" ;
 			                },
 			                targets: 2
-						},
+						},	  
 						{
 							data:"requirement",
 							orderable: false,
@@ -448,9 +455,7 @@
 					                	
 					                	return "<div class='width85'>" + m + "</div>" + "<div class='width85'>" + n + "</div>";
 				                },
-				                  targets: 6
-			                  
-			                 
+				                targets: 6
 						},
 						{
 							orderable: false,
@@ -550,6 +555,11 @@
 		        $('input:radio:checked').attr('checked',false);
 		    } );
 			
+			
+			$('#statusAll').on('click',function(){
+				searchFlag = true;
+				t.draw();
+			});
 			$('#status0').on('click',function(){
 				searchFlag = true;
 				t.draw();
