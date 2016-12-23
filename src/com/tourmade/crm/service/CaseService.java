@@ -94,7 +94,6 @@ public class CaseService extends BaseService {
 			crmcase.setSearchEndTime(crmcase.getSearchEndTime()+" 24:00:00");
 			map.put("searchEndTime", crmcase.getSearchEndTime());
 		}
-		
 		List<Case> data = caseMapper.queryCase(map);
 		long count = caseMapper.countCase(crmcase);
 		List<CaseStatus> countStatus = caseMapper.countCaseByStatus(crmcase);	

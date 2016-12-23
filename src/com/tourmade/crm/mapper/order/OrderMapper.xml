@@ -22,6 +22,7 @@
 			u.start_date as startDate,
 			u.end_date as endDate,
 			u.group_price as groupPrice,
+			u.rmb_price as rmbPrice,
 			u.currency as currency,
 			u.exchange_rate as exchangeRate,
 			u.last_response as lastResponse,	

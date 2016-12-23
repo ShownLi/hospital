@@ -312,9 +312,10 @@
 								<div class="col-sm-8">
 									<input type="text" name="budget" placeholder="客人的预算"
 										class="form-control" value="${crmcase.budget}" />
+										<span style="position: absolute; right: 15px; top: 10px;">￥/人</span>
 								</div>
 							</div>
-							<div class="form-group col-sm-8">
+							<div class="form-group col-sm-8" style="clear: both;">
 								<label class="col-sm-2 control-label">客人的要求</label>
 								<div class="col-sm-9" style="margin-left: 23px;">
 									<textarea id="requirement" name="requirement"
@@ -649,7 +650,7 @@
               </div><!-- noDealModal-body -->
           </div>
           <div class="modal-footer align-center">
-            <button class="btn btn-primary" >保存</button> 
+            <button class="submit btn btn-primary" >保存</button> 
             <a class="cancel btn btn-primary" >取消</a>
           </div>
       </form>
@@ -1093,6 +1094,7 @@
 	            return false;
 	          },
 	          submitHandler : function(){
+	          	$("#form-deal .submit").attr("disabled","disabled");
 	              deal_submit();
 	              return false;
 	          } 
@@ -1117,6 +1119,7 @@
 		            return false;
 		          },
 		          submitHandler : function(){
+		          	$("#form-noDeal .submit").attr("disabled","disabled");
 		              noDeal_submit();
 		              return false;
 		          } 
@@ -1139,6 +1142,7 @@
 				return false;
 			},
 			submitHandler : function(){
+				$("#form-nodeal .submit").attr("disabled","disabled");
 				nodealSubmit();
 			    return false;
 			}
@@ -1361,6 +1365,7 @@
             return false;
           },
           submitHandler : function(){
+          	$("#form-case .submit").attr("disabled","disabled");
             case_submit();
             return false;
           }
@@ -1416,6 +1421,7 @@
 				return false;
 			},
 			submitHandler : function(){
+				$("#form-del .submit").attr("disabled","disabled");
 				delSubmit();
 			    return false;
 			}
@@ -1472,6 +1478,7 @@
 
       	  		$("#orderDestinationText").val(destinationText); 
       	  		$("#orderDestination").val(destination);
+
 	      	  	$.ajax({
 	              type: "post",
 	              url: "${rootPath}case/getSales.do?destination="+destination,
@@ -1483,15 +1490,16 @@
 	                      data: json
 	                  });
 	              }  
-	          });  
-      	  	  $("#nextModal").modal('show');         	         	  
-      	  }  
-          return false;
-      });
+	            });  
+      	  	    $("#nextModal").modal('show');         	         	  
+      	    }  
+            return false;
+        });
       
-       $("#nextModal .submit").click(function(){
+        $("#nextModal .submit").click(function(){
+          $(this).attr("disabled","disabled");
       	  order_submit();
-      });  
+        });  
       
       function order_submit() {
 		var f = $("#form-order").serialize();

@@ -68,6 +68,7 @@
                       <label class="col-sm-4 control-label">预算(元/人)</label>
                       <div class="col-sm-8">
                         <input type="text" name="budget" placeholder="预算" class="form-control" readonly value="${order.budget}" />
+                        <span style="position: absolute; right: 15px; top: 10px;">￥/人</span>
                       </div>
                     </div>
                     <div class="form-group col-sm-4">
@@ -231,7 +232,7 @@
                 <input  type="hidden" name="commentType" value="order" />
           </div>
           <div class="form-group col-sm-12 align-center">
-            <button class="btn btn-primary">添加注释</button>
+            <button class="submit btn btn-primary">添加注释</button>
           </div>
           </form>
           		</div>
@@ -366,7 +367,7 @@
           </div>
           <div class="modal-footer align-center">
                <!-- <button class="submit btn btn-primary">保存</button>-->
-            <button class="btn btn-primary" >保存</button> 
+            <button class=" submit btn btn-primary" >保存</button> 
 
             <!--   <button class="btn btn-primary" onclick="form2_submit()">保存</button> -->
               <a class="cancel btn btn-primary" >取消</a>
@@ -491,6 +492,7 @@
             return false;
           },
           submitHandler : function(){
+            $("#form-deal .submit").attr("disabled","disabled");
               deal_submit();
               return false;
           }
@@ -515,6 +517,7 @@
 		            return false;
 		          },
 		          submitHandler : function(){
+                ("#form-noDeal .submit").attr("disabled","disabled");
 		              noDeal_submit();
 		              return false;
 		          } 

@@ -62,14 +62,20 @@
  	            <div class="form-group col-sm-4">
 	              <label  class="col-sm-4 control-label">是否发邮件</label>
 	              <div class="col-sm-8">
-	                   <input type="radio" name="isSendmail" value="1" />是
-      				   <input type="radio" name="isSendmail" value="0" checked/>否
+	                <div class="rdio rdio-primary rdio-inline">
+	                  <input id="yesSendmail" type="radio" name="isSendmail" value="1" />
+	                  <label for="yesSendmail">是</label>
+	                </div>
+	                <div class="rdio rdio-primary rdio-inline">
+	                  <input id="noSendmail" type="radio" name="isSendmail" value="0" checked/>
+	                  <label for="noSendmail">否</label>
+	                </div>
 	              </div>
 	            </div> 	 	                   
 	        </div>
         </div><!-- panel-body -->
         <div class="panel-footer align-center">
-			<input class="btn btn-primary" type="submit" value="保存"/>&nbsp;
+			<input id="addAgency" class="btn btn-primary" type="submit" value="保存"/>&nbsp;
 			<input class="btn btn-default" type="button" id="btn-back" value="取消"/>
 		  </div><!-- panel-footer -->
      </form>   
@@ -173,6 +179,7 @@
 		      return false;
 		    },
 		    submitHandler : function(){
+		      $("#addAgency").attr("disabled","disabled");
 		      form_submit();
 		      return false;
 		    }

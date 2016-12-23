@@ -128,7 +128,7 @@
         </div><!-- panel-body -->
         
         <div class="panel-footer align-center">
-			<input class="btn btn-primary" type="submit" value="保存"/>&nbsp;
+			<input id="addCustomer" class="btn btn-primary" type="submit" value="保存"/>&nbsp;
 			<input class="btn btn-default" type="button" id="btn-back" value="取消"/>
 		</div><!-- panel-footer -->
      </form>   
@@ -265,6 +265,7 @@
 			      	}else{
 			      		$(".contact-note").removeClass("noted");
 			      		$(".contact-field").removeClass("has-error");
+			      		$("#addCustomer").attr("disabled","disabled");
 				      	form_submit();
 				      	return false;
 				    }

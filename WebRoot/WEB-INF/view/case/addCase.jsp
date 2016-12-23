@@ -182,11 +182,12 @@
                       <label class="col-sm-4 control-label">客人的预算</label>
                       <div class="col-sm-8">
                         <input type="text" name="budget" placeholder="客人的预算" class="form-control" value="0" />
+                        <span style="position: absolute; right: 15px; top: 10px;">￥/人</span>
                       </div>
                     </div>
-                    <div class="form-group col-sm-4">
-                      <label class="col-sm-4 control-label">客人的要求</label>
-                      <div class="col-sm-8">
+                    <div class="form-group col-sm-8" style="clear: both;">
+                      <label class="col-sm-2 control-label">客人的要求</label>
+                      <div class="col-sm-9" style="margin-left: 23px;">
                         <textarea name="requirement" class="form-control" placeholder="客人的要求" rows="5"></textarea>
                       </div>
                     </div>
@@ -222,7 +223,7 @@
             </div>
             <div class="panel-footer align-center">
 
-             <input class="btn btn-primary" type="submit" value="保存"/>&nbsp;
+             <input id="addCase2" class="btn btn-primary" type="submit" value="保存"/>&nbsp;
 	     <input class="btn btn-default" type="button" id="btn-back" value="取消"/>
 
     		    </div><!-- panel-footer -->
@@ -492,6 +493,7 @@
   			      return false;
   			    },
   			    submitHandler : function(){
+              $("#addCase2").attr("disabled","disabled");
   			      case_submit();
   			      return false;
   			    }

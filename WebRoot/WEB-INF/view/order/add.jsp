@@ -82,7 +82,7 @@
         <div class="panel-footer">
 			 <div class="row">
 				<div class="col-sm-6 col-sm-offset-3">
-				  <input class="btn btn-primary" type="submit" value="提交"/>&nbsp;
+				  <input class="submit btn btn-primary" type="submit" value="提交"/>&nbsp;
 			<input class="btn btn-default" type="button" id="btn-back" value="取消"/>
 				</div>
 			 </div>
@@ -162,6 +162,7 @@
 			      return false;
 			    },
 			    submitHandler : function(){
+			    	$("#form .submit").attr("disabled","disabled");
 			      form_submit();
 			      return false;
 			    }

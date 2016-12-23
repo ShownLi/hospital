@@ -50,9 +50,9 @@
 								<div class="col-sm-2">
 									<input type="text" id="searchOperator" class="operator-select fullwidth" value="" />
 								</div>
-								<div class="col-sm-2">
+								<!-- <div class="col-sm-2">
 									<input type="text" id="searchStatus" class="status-select fullwidth" value="" />
-								</div>
+								</div> -->
 								<div class="col-sm-2">
 									<input type="text" id="searchRequirment" class="form-control" placeholder="客人要求" value="" />
 								</div>
@@ -84,6 +84,10 @@
 					</div>
 					<div class="panel-body">
 						<div class="form-group col-sm-12 case-filter">
+		        	                <div class="rdio rdio-primary rdio-inline">
+		        	                  <input type="radio" id="statusAll" value="" name="status"/>
+		        	                  <label id="statusAllCount" for="statusAll">全部</label>    	                  
+		        	                </div><!-- rdio -->
 		        	                <div class="rdio rdio-primary rdio-inline">
 		        	                  <input type="radio" id="status0" value="0" name="status"/>
 		        	                  <label id="status0Count" for="status0">待处理</label>    	                  
@@ -158,42 +162,54 @@
 	var reason = ${reason};
 	var reasonNodeal =${reasonNodeal};
 	var searchFlag = false;
+<<<<<<< HEAD
 	var searchStatusCheck = "";
+=======
+	var searchButtonClick = false;
+
+>>>>>>> 5d1a9ee23d744136f75d2e985cca0e765089df1a
 	var contactReal =${contactReal};
 	
 	$(".destination-select").select2({
         placeholder: '国家',
-        data: destination
+        data: destination,
+        allowClear: true
     });
 	
    	$(".customer-select").select2({
         placeholder: '客人',
-        data: customer
+        data: customer,
+        allowClear: true
     }); 
    	
 	$(".source-select").select2({
         placeholder: '来源',
-        data: source
+        data: source,
+        allowClear: true
     });
 	
 	$(".operator-select").select2({
         placeholder: '跟单员',
-        data: user
+        data: user,
+        allowClear: true
     });
 	
 	$(".status-select").select2({
         placeholder: '状态',
-        data: caseStatus
+        data: caseStatus,
+        allowClear: true
     });
 	
     $(".sales-select").select2({
         placeholder: '销售',
-        data: sales
+        data: sales,
+        allowClear: true
     });
     
     $(".reason-select").select2({
     	placeholder:"无效原因",
-    	data:reason
+    	data:reason,
+        allowClear: true
     });
 
     jQuery("#searchStartDateTime").datepicker({
@@ -230,9 +246,19 @@
 			 			var searchMobile=$('#searchMobile').val();
 			 			var searchStartDateTime=$("#searchStartDateTime").val();
 			 			var searchEndDateTime=$("#searchEndDateTime").val();
+<<<<<<< HEAD
 			 			//var searchStatus = $("input[name='status']:checked").val();
 			 			var searchStatus = searchStatusCheck;
 			 			searchStatusCheck = "";
+=======
+			 			
+			 			var searchStatus = $("input[name='status']:checked").val();
+			 			if(searchButtonClick == true){
+			 				searchStatus = "";
+			 				searchButtonClick =false;
+			 			}
+			 			
+>>>>>>> 5d1a9ee23d744136f75d2e985cca0e765089df1a
 			 			
 			 			if(searchCustomerId !=null && searchCustomerId !="" ){
 							data.customerId = searchCustomerId;
@@ -285,6 +311,9 @@
 						json.data = json.data;
 						
 						if(searchFlag==false){
+
+							$('#statusAllCount').html("全部"+json.countTotal);
+
 							$('#status0Count').html("待处理"+json.status0);
 
 							$('#status1Count').html("客服沟通中"+json.status1);
@@ -354,51 +383,6 @@
 			                },
 			                targets: 2
 						},	  
-						{
-			                orderable: false,
-			                render: function ( data, type, full, meta ) {
-			                	var dataSource = full.source;
-			                	var dataOperator = full.operator;
-			                	var m = "";
-			                	var n = "";
-				                	for(var i=0;i < source.length;i++){
-				                		
-				                		if(dataSource==source[i].id){
-				                			// return "<div class='caselist-5'>" + user[i].text + "</div>"
-				                			m = source[i].text;
-				                		}	
-				                	}
-				                	for(var i=0;i < user.length;i++){
-				                		if(dataOperator==user[i].id){
-				                			n=user[i].text;
-				                		}
-				                	}
-				                	return "<div class='width85'>" + m + "</div>" + "<div class='width85'>" + n + "</div>";
-			                },
-			                  targets: 3
-						},
-						 {	
-
-			                orderable: false,
-			                render: function ( data, type, full, meta ) {
-			                	var time = data.time;
-			                	if(data.time){
-			                		time=new Date(time).format("yyyy-MM-dd hh:mm:ss");
-			                	}else{
-			                		time="";
-			                	}
-			                	if(full){
-			                		for(var i=0;i<caseStatus.length;i++){
-				                		if(full.status==caseStatus[i].id){
-				                			return "<div class='caselist-6'>" + caseStatus[i].text + "</div>" + "<div class='caselist-7'>" + time + "</div>"
-				                		}
-				                	}
-			                		
-			                	}
-			                	else{return ""}
-			                },
-			                  targets: 4
-						},
 						{
 							data:"requirement",
 							orderable: false,
@@ -551,44 +535,42 @@
 
 			$('#searchBtn').on( 'click', function () {
 				//$("input[name='status']:checked").val(null);
-				searchStatusCheck = "";
 				searchFlag = false;
+				searchButtonClick = true;
 		        t.draw();
 		        $('input:radio:checked').attr('checked',false);
 		    } );
 			
+			
+			$('#statusAll').on('click',function(){
+				searchFlag = true;
+				t.draw();
+			});
 			$('#status0').on('click',function(){
-				searchStatusCheck = 0+" ";
 				searchFlag = true;
 				t.draw();
 			});
 			$('#status1').on('click',function(){
-				searchStatusCheck = 1;
 				searchFlag = true;
 				t.draw();
 			});
 			$('#status2').on('click',function(){
-				searchStatusCheck = 2;
 				searchFlag = true;
 				t.draw();
 			});
 			$('#status3').on('click',function(){
-				searchStatusCheck = 3;
 				searchFlag = true;
 				t.draw();
 			});
 			$('#status4').on('click',function(){
-				searchStatusCheck = 4;
 				searchFlag = true;
 				t.draw();
 			});
 			$('#status5').on('click',function(){
-				searchStatusCheck = 5;
 				searchFlag = true;
 				t.draw();
 			});
 			$('#status6').on('click',function(){
-				searchStatusCheck = 6;
 				searchFlag = true;
 				t.draw();
 			});

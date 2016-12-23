@@ -239,26 +239,31 @@
 	
  	$(".destination-select").select2({
         placeholder: '国家',
-        data: destination
+        data: destination,
+        allowClear: true
     }); 
 	
 	$(".currency-select").select2({
         data: currency,
+        allowClear: true
     });
 	
 	$(".status-select").select2({
         placeholder: '状态',
-        data: orderStatus
+        data: orderStatus,
+        allowClear: true
     });
     
     $(".reason-select").select2({
     	placeholder:"未成行原因",
-    	data:reason
+    	data:reason,
+        allowClear: true
 	 });
     
     $(".operator-select").select2({
     	placeholder:"跟单员",
-    	data:user
+    	data:user,
+        allowClear: true
 	 });
     
 	
@@ -328,6 +333,7 @@
 	            return false;
 	          },
 	          submitHandler : function(){
+	          	$("#form-deal .submit").attr("disabled","disabled");
 	              deal_submit();
 	              return false;
 	          } 
@@ -353,6 +359,7 @@
 		            return false;
 		          },
 		          submitHandler : function(){
+		          	$("#form-noDeal .submit").attr("disabled","disabled");
 		              noDeal_submit();
 		              return false;
 		          } 
@@ -471,7 +478,6 @@
 								{//成团金额
 					                orderable: false,
 					                render: function ( data, type, full, meta )  {
-					                	
 					                	return full.currency+full.groupPrice+"<br>￥"+full.rmbPrice;
 					                },
 					                  targets: 4
