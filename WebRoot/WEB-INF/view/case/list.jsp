@@ -126,6 +126,7 @@
 										<th>备注</th>
 										<th>询单来源 <br>状态</th>
 										<th>跟单员 <br>沟通方式</th>
+										<th>更新时间</th>
 										<th>创建时间</th>
 										<th>编辑</th>
 									</tr>
@@ -398,7 +399,6 @@
 				                	for(var i=0;i < reason.length;i++){
 				                		
 				                		if(dataReason==reason[i].id){
-				                			// return "<div class='caselist-5'>" + user[i].text + "</div>"
 				                			m = reason[i].text;
 				                		}	
 				                	}
@@ -477,7 +477,21 @@
 							},
 							  targets: 7
 						
-						},
+						},{
+			                  
+			                  orderable: false,
+			                  render: function ( data, type, full, meta ) {
+			                	  
+			                	  var time = full.updateTime.time;
+				                	if(full.updateTime){
+				                		time=new Date(time).format("yyyy-MM-dd hh:mm:ss");
+				                	}else{
+				                		time="";
+				                	}
+				                	return "<div class='caselist-7'>" + time + "</div>"
+			                  },
+			                  targets: 8
+						    },
 						{
 			                  data: "creatTime",
 			                  orderable: false,
@@ -491,7 +505,7 @@
 				                	}
 				                	return "<div class='caselist-7'>" + time + "</div>"
 			                  },
-			                  targets: 8
+			                  targets: 9
 						    },
 						{
 		                  data: "caseId",
@@ -506,7 +520,7 @@
 		                	  }
 		                      
 		                  },
-		                  targets: 9
+		                  targets: 10
 					    },
 					    {
 						    orderable: false,

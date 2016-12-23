@@ -18,6 +18,7 @@
 			u.customer_wechat as wechat,
 			u.customer_qq as qq,
 			u.creat_time as creatTime,
+			u.update_time as updateTime,
 			u.reason as reason,
 			u.last_comment as comment,
 			u.requirement as requirement,
