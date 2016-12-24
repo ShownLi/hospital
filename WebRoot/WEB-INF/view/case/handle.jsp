@@ -1008,7 +1008,7 @@
             return false;
           },
           submitHandler : function(){
-            //$("#form-case .btn-primary").attr("disabled","disabled");
+            $("#form-case .btn-primary").attr("disabled","disabled");
             case_submit();
             return false;
           }
