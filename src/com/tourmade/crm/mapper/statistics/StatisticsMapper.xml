@@ -12,7 +12,7 @@
 			sum(case when status=2 then 1 else 0 end) as status2 ,
 			sum(case when status=3 then 1 else 0 end) as status3 ,
 			sum(case when status=4 then 1 else 0 end) as status4 ,
-			concat ( left (sum(case when status=2 then 1 else 0 end) / count(1) *100,5),'%') as rate,
+			concat ( FORMAT (sum(case when status=2 then 1 else 0 end) / count(1) *100,2),'%') as rate,
 			sum(rmb_price) as dealmoney
 		from tm_order
 		where isdel = 0
@@ -37,7 +37,7 @@
 			sum(status3) as status3_T,
 			sum(status4) as status4_T,
 			sum(dealmoney) as dealmoney_T,
-			concat ( left (sum(status2) / sum(total) *100,5),'%') as rate_T
+			concat ( FORMAT (sum(status2) / sum(total) *100,2),'%') as rate_T
 		from(
 			select 
 				agency_name as agencyName,
@@ -48,7 +48,7 @@
 				sum(case when status=2 then 1 else 0 end) as status2 ,
 				sum(case when status=3 then 1 else 0 end) as status3 ,
 				sum(case when status=4 then 1 else 0 end) as status4 ,
-				concat ( left (sum(case when status=2 then 1 else 0 end) / count(1) *100,5),'%') as rate,
+				concat ( FORMAT (sum(case when status=2 then 1 else 0 end) / count(1) *100,2),'%') as rate,
 				sum(rmb_price) as dealmoney
 			from tm_order
 			where isdel = 0
@@ -77,7 +77,7 @@
 			sum(case when o.status=4 then 1 else 0 end) as status4 ,
 			sum(case when o.status=5 then 1 else 0 end) as status5 ,
 			sum(case when o.status=6 then 1 else 0 end) as status6 ,
-			concat (left (sum(case when o.status=3 then 1 else 0 end) / count(1) *100,5),'%') as rate,
+			concat (FORMAT (sum(case when o.status=3 then 1 else 0 end) / count(1) *100,2),'%') as rate,
 			sum(o.rmb_price) as dealMoney
 		from tm_case c left join tm_order o on c.case_id = o.case_id left join tm_parameter p on c.source=p.para_value
 		where c.isdel = 0 
@@ -100,7 +100,7 @@
 			sum(status4) as status4_T,
 			sum(status5) as status5_T,
 			sum(status6) as status6_T,
-			concat (left (sum(status3) / sum(total) *100,5),'%') as rate_T
+			concat (FORMAT (sum(status3) / sum(total) *100,2),'%') as rate_T
 		from(
 			select 
 					c.source as source_en,
@@ -113,7 +113,7 @@
 					sum(case when o.status=4 then 1 else 0 end) as status4 ,
 					sum(case when o.status=5 then 1 else 0 end) as status5 ,
 					sum(case when o.status=6 then 1 else 0 end) as status6 ,
-					concat (left (sum(case when o.status=3 then 1 else 0 end) / count(1) *100,5),'%') as rate,
+					concat (FORMAT (sum(case when o.status=3 then 1 else 0 end) / count(1) *100,2),'%') as rate,
 					sum(o.rmb_price) as dealMoney
 			from tm_case c left join tm_order o on c.case_id = o.case_id left join tm_parameter p on c.source=p.para_value
 			where c.isdel = 0    
@@ -429,7 +429,7 @@
 				sum(case when c.customer_level=1 then 1 else 0 end) as level1,
 				sum(case when c.customer_level=2 then 1 else 0 end) as level2 ,
 				sum(case when c.customer_level=3 then 1 else 0 end) as level3 ,
-				concat ( left (sum(case when c.customer_level=3 then 1 else 0 end) / count(1) *100,4),'%') as rate
+				concat ( FORMAT (sum(case when c.customer_level=3 then 1 else 0 end) / count(1) *100,2),'%') as rate
 		from tm_customer c left join tm_parameter p on c.source = p.para_value
 		where c.isdel = 0
 		group by c.source    
@@ -442,7 +442,7 @@
 			sum(level2) as level2_T,
 			sum(level3) as level3_T,
 			sum(level0)+sum(level1)+sum(level2)+sum(level3) as sumT2,
-			concat ( left (sum(level3) / (sum(level0)+sum(level1)+sum(level2)+sum(level3)) *100,4),'%') as rate_T 
+			concat ( FORMAT (sum(level3) / (sum(level0)+sum(level1)+sum(level2)+sum(level3)) *100,2),'%') as rate_T 
 		from(
 			select 
 				c.source as source_en,
@@ -452,7 +452,7 @@
 					sum(case when c.customer_level=1 then 1 else 0 end) as level1,
 					sum(case when c.customer_level=2 then 1 else 0 end) as level2 ,
 					sum(case when c.customer_level=3 then 1 else 0 end) as level3 ,
-					concat ( left (sum(case when c.customer_level=3 then 1 else 0 end) / count(1) *100,4),'%') as rate
+					concat ( FORMAT (sum(case when c.customer_level=3 then 1 else 0 end) / count(1) *100,2),'%') as rate
 			from tm_customer c left join tm_parameter p on c.source = p.para_value
 			where c.isdel = 0
 			group by c.source 
@@ -469,7 +469,7 @@
 					sum(case when c.customer_level=1 then 1 else 0 end) as level1,
 					sum(case when c.customer_level=2 then 1 else 0 end) as level2 ,
 					sum(case when c.customer_level=3 then 1 else 0 end) as level3 ,
-					concat ( left (sum(case when c.customer_level=3 then 1 else 0 end) / count(1) *100,4),'%') as rate
+					concat ( FORMAT (sum(case when c.customer_level=3 then 1 else 0 end) / count(1) *100,2),'%') as rate
 			from tm_customer c left join tm_parameter p on c.source = p.para_value
 			where c.isdel = 0
 			group by c.source    
@@ -607,7 +607,7 @@
 				sum(case when status=2 then 1 else 0 end) as status2 ,
 				sum(case when status=3 then 1 else 0 end) as status3 ,
 				sum(case when status=4 then 1 else 0 end) as status4 ,
-				concat ( left (sum(case when status=2 then 1 else 0 end) / count(1) *100,5),'%') as rate,
+				concat ( FORMAT (sum(case when status=2 then 1 else 0 end) / count(1) *100,2),'%') as rate,
 				sum(rmb_price) as dealmoney
 			from tm_order
 			where isdel = 0
@@ -637,7 +637,7 @@
 				sum(case when o.status=4 then 1 else 0 end) as status4 ,
 				sum(case when o.status=5 then 1 else 0 end) as status5 ,
 				sum(case when o.status=6 then 1 else 0 end) as status6 ,
-				concat (left (sum(case when o.status=3 then 1 else 0 end) / count(1) *100,5),'%') as rate,
+				concat (FORMAT (sum(case when o.status=3 then 1 else 0 end) / count(1) *100,2),'%') as rate,
 				sum(o.rmb_price) as dealMoney
 			from tm_case c left join tm_order o on c.case_id = o.case_id left join tm_parameter p on c.source=p.para_value
 			where c.isdel = 0 
@@ -863,9 +863,9 @@
 		SELECT chinese AS reasonOfDrainingName,count(1) AS num
 		FROM tm_case LEFT JOIN 
 		(
-		SELECT para_value,chinese
-		FROM tm_parameter
-		WHERE para_domain = 'case.reason' 
+			SELECT para_value,chinese
+			FROM tm_parameter
+			WHERE para_domain = 'case.reason' 
 		) r ON r.para_value = tm_case.reason
 		WHERE tm_case.`status`= '5' 
 		<if test="startCreateTime != null and startCreateTime != ''">
@@ -884,9 +884,9 @@
 			SELECT chinese AS reasonOfDrainingName,count(1) AS num
 			FROM tm_case LEFT JOIN 
 			(
-			SELECT para_value,chinese
-			FROM tm_parameter
-			WHERE para_domain = 'case.reason' 
+				SELECT para_value,chinese
+				FROM tm_parameter
+				WHERE para_domain = 'case.reason' 
 			) r ON r.para_value = tm_case.reason
 			WHERE tm_case.`status`= '5' 
 			<if test="startCreateTime != null and startCreateTime != ''">
