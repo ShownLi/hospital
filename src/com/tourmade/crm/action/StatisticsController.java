@@ -22,20 +22,22 @@ import com.tourmade.crm.common.framework.bean.QueryResult;
 import com.tourmade.crm.common.framework.util.JSONUtilS;
 import com.tourmade.crm.common.model.base.value.baseconfig.PageHelper;
 import com.tourmade.crm.entity.ContactRealStats;
+import com.tourmade.crm.entity.ContactRealStatsTotal;
 import com.tourmade.crm.entity.EntityList;
 import com.tourmade.crm.entity.ReasonOfDrainingStats;
+import com.tourmade.crm.entity.ReasonOfDrainingStatsTotal;
 import com.tourmade.crm.entity.UserAchRate;
 import com.tourmade.crm.entity.UserAchievement;
 import com.tourmade.crm.service.StatisticsService;
 import com.tourmade.crm.entity.AgencyAchievementStats;
 import com.tourmade.crm.entity.AgencyOrderStatus;
 import com.tourmade.crm.entity.CaseAllotStats;
+import com.tourmade.crm.entity.CaseAllotStatsTotal;
 import com.tourmade.crm.entity.CaseSourceStats;
+import com.tourmade.crm.entity.CaseSourceStatsTotal;
 import com.tourmade.crm.entity.CustomerSourceLevelStats;
 import com.tourmade.crm.entity.SellerCoverStats;
 import com.tourmade.crm.entity.SellerNotAskStats;
-import com.tourmade.crm.entity.SellerNotAskStatsD;
-import com.tourmade.crm.entity.AgencyAchievementStatsM;
 
 import net.sf.json.JSONArray;
 
@@ -93,6 +95,26 @@ public class StatisticsController extends BaseSimpleFormController{
 		String result = JSONUtilS.object2json(userAchievementList);
 		return result;
 	}
+	
+	@RequestMapping(value = "/usercasestatusstatstotal.do",produces="application/json;charset=utf-8")
+	@ResponseBody
+	public String queryData1(PageHelper page,String startCreateDateTime,String endCreateDateTime,String source) {
+		
+		//设置查询参数
+		Map<String,Object> map =new HashMap<>();
+		map.put("source", source);
+		if(startCreateDateTime==null||startCreateDateTime.trim()==""){
+			startCreateDateTime=getLastMothFirstDay();
+		}
+		if(endCreateDateTime==null||endCreateDateTime.trim()==""){
+			endCreateDateTime=getLastMothLastDay();
+		} 
+		map.put("startCreateTime", startCreateDateTime+" 00:00:00");
+		map.put("endCreateTime", endCreateDateTime+" 23:59:59");
+		QueryResult<UserAchievement> userAchievementList = service.queryUserAchievementStatsTotal(map);
+		String result = JSONUtilS.object2json(userAchievementList);
+		return result;
+	}
 	/**
 	 * 返回沟通方式统计界面
 	 * @param model
@@ -126,6 +148,24 @@ public class StatisticsController extends BaseSimpleFormController{
 		map.put("startCreateTime", startCreateDateTime+" 00:00:00");
 		map.put("endCreateTime", endCreateDateTime+" 23:59:59");
 		QueryResult<ContactRealStats> contactRealList = service.queryContactReal(map);
+		String result = JSONUtilS.object2json(contactRealList);
+		return result;
+	}
+	@RequestMapping(value = "/contactrealstatstotal.do",produces="application/json;charset=utf-8")
+	@ResponseBody
+	public String queryContactRealTotal(PageHelper page,String startCreateDateTime,String endCreateDateTime) {
+		
+		//设置查询参数
+		Map<String,Object> map =new HashMap<>();
+		if(startCreateDateTime==null||startCreateDateTime.trim()==""){
+			startCreateDateTime=getLastMothFirstDay();
+		}
+		if(endCreateDateTime==null||endCreateDateTime.trim()==""){
+			endCreateDateTime=getLastMothLastDay();
+		}
+		map.put("startCreateTime", startCreateDateTime+" 00:00:00");
+		map.put("endCreateTime", endCreateDateTime+" 23:59:59");
+		QueryResult<ContactRealStatsTotal> contactRealList = service.queryContactRealTotal(map);
 		String result = JSONUtilS.object2json(contactRealList);
 		return result;
 	}
@@ -166,6 +206,25 @@ public class StatisticsController extends BaseSimpleFormController{
 				return result;
 	}
 	
+	@RequestMapping( value = "/reasonofdrainingstats1Total.do",produces="application/json;charset=utf-8")
+	@ResponseBody
+	public String queryReasonOfDraining1Total(PageHelper page,String startCreateDateTime,String endCreateDateTime){
+		//设置查询参数
+		Map<String,Object> map =new HashMap<>();
+		if(startCreateDateTime==null||startCreateDateTime.trim()==""){
+			startCreateDateTime=getLastMothFirstDay();
+		}
+		if(endCreateDateTime==null||endCreateDateTime.trim()==""){
+			endCreateDateTime=getLastMothLastDay();
+		}
+		map.put("startCreateTime", startCreateDateTime+" 00:00:00");
+		map.put("endCreateTime", endCreateDateTime+" 23:59:59");
+		QueryResult<ReasonOfDrainingStatsTotal> contactRealList = service.queryReasonOfDrainingTotal(map);
+		String result = JSONUtilS.object2json(contactRealList);
+		
+		return result;
+	}
+	
 	/**
 	 * 未成行原因dataTables请求
 	 * @param model
@@ -188,6 +247,24 @@ public class StatisticsController extends BaseSimpleFormController{
 				String result = JSONUtilS.object2json(contactRealList);
 				
 				return result;
+	}
+	@RequestMapping( value = "/reasonofdrainingstats2Total.do",produces="application/json;charset=utf-8")
+	@ResponseBody
+	public String queryReasonOfDraining2Total(PageHelper page,String startCreateDateTime,String endCreateDateTime){
+		//设置查询参数
+		Map<String,Object> map =new HashMap<>();
+		if(startCreateDateTime==null||startCreateDateTime.trim()==""){
+			startCreateDateTime=getLastMothFirstDay();
+		}
+		if(endCreateDateTime==null||endCreateDateTime.trim()==""){
+			endCreateDateTime=getLastMothLastDay();
+		}
+		map.put("startCreateTime", startCreateDateTime+" 00:00:00");
+		map.put("endCreateTime", endCreateDateTime+" 23:59:59");
+		QueryResult<ReasonOfDrainingStatsTotal> contactRealList = service.queryReasonOfDrainingNoDealTotal(map);
+		String result = JSONUtilS.object2json(contactRealList);
+		
+		return result;
 	}
 	/**
 	 * 跟单员业绩统计
@@ -223,6 +300,21 @@ public class StatisticsController extends BaseSimpleFormController{
 				
 				return result;
 	}
+	
+	@RequestMapping( value = "/userachievementratestatstotal.do",produces="application/json;charset=utf-8")
+	@ResponseBody
+	public String queryUserAchiRateTotal(PageHelper page,String searchYear){
+		//设置查询参数
+		Map<String,Object> map =new HashMap<>();
+		if(searchYear==null||searchYear.trim()==""){
+			searchYear=String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
+		}
+		map.put("startCreateTime", searchYear+"-01-01 00:00:00");
+		map.put("endCreateTime", searchYear+"-12-31 23:59:59");
+		QueryResult<UserAchRate> contactRealList = service.queryUserAchiRateTotal(map);
+		String result = JSONUtilS.object2json(contactRealList);
+		return result;
+	}
 	/**
 	 * 跟单员金额dataTables请求
 	 * @param model
@@ -242,6 +334,21 @@ public class StatisticsController extends BaseSimpleFormController{
 				String result = JSONUtilS.object2json(contactRealList);
 				
 				return result;
+	}
+	
+	@RequestMapping( value = "/userachievementmoneystatstotal.do",produces="application/json;charset=utf-8")
+	@ResponseBody
+	public String queryUserAchiMoneyTotal(PageHelper page,String searchYear){
+		//设置查询参数
+		Map<String,Object> map =new HashMap<>();
+		if(searchYear==null||searchYear.trim()==""){
+			searchYear=String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
+		}
+		map.put("startCreateTime", searchYear+"-01-01 00:00:00");
+		map.put("endCreateTime", searchYear+"-12-31 23:59:59");
+		QueryResult<UserAchRate> contactRealList = service.queryUserAchiMoneyTotal(map);
+		String result = JSONUtilS.object2json(contactRealList);
+		return result;
 	}
 	
 	/**
@@ -283,6 +390,25 @@ public class StatisticsController extends BaseSimpleFormController{
 		return result;
 	}
 	
+	@RequestMapping(value = "/descasestatusstatstotal.do",produces="application/json;charset=utf-8")
+	@ResponseBody
+	public String queryDesCaseStatusTotal(PageHelper page,String startCreateDateTime,String endCreateDateTime) {
+		
+		//设置查询参数
+		Map<String,Object> map =new HashMap<>();
+		if(startCreateDateTime==null||startCreateDateTime.trim()==""){
+			startCreateDateTime=getLastMothFirstDay();
+		}
+		if(endCreateDateTime==null||endCreateDateTime.trim()==""){
+			endCreateDateTime=getLastMothLastDay();
+		}
+		map.put("startCreateTime", startCreateDateTime+" 00:00:00");
+		map.put("endCreateTime", endCreateDateTime+" 23:59:59");
+		QueryResult<UserAchievement> userAchievementList = service.queryDesCaseStatusTotal(map);
+		String result = JSONUtilS.object2json(userAchievementList);
+		return result;
+	}
+	
 	/**
 	 * 目的地成交统计
 	 * @param model
@@ -315,6 +441,20 @@ public class StatisticsController extends BaseSimpleFormController{
 		return result;
 	}
 	
+	@RequestMapping( value = "/desachievementcountstatstotal.do",produces="application/json;charset=utf-8")
+	@ResponseBody
+	public String queryDesAchiCaseCountTotal(PageHelper page,String searchYear){
+		//设置查询参数
+		Map<String,Object> map =new HashMap<>();
+		if(searchYear==null||searchYear.trim()==""){
+			searchYear=String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
+		}
+		map.put("startCreateTime", searchYear+"-01-01 00:00:00");
+		map.put("endCreateTime", searchYear+"-12-31 23:59:59");
+		QueryResult<UserAchRate> contactRealList = service.queryDesAchiCaseCountTotal(map);
+		String result = JSONUtilS.object2json(contactRealList);
+		return result;
+	}
 	
 	/**
 	 * 目的地成交率dataTables请求
@@ -333,6 +473,21 @@ public class StatisticsController extends BaseSimpleFormController{
 		map.put("endCreateTime", searchYear+"-12-31 23:59:59");
 		QueryResult<UserAchRate> contactRealList = service.queryDesAchiRate(map);
 		changeCountryCodeToChinese(service,contactRealList);
+		String result = JSONUtilS.object2json(contactRealList);
+		return result;
+	}
+	
+	@RequestMapping( value = "/desachievementratestatstotal.do",produces="application/json;charset=utf-8")
+	@ResponseBody
+	public String queryDesAchiRateTotal(PageHelper page,String searchYear){
+		//设置查询参数
+		Map<String,Object> map =new HashMap<>();
+		if(searchYear==null||searchYear.trim()==""){
+			searchYear=String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
+		}
+		map.put("startCreateTime", searchYear+"-01-01 00:00:00");
+		map.put("endCreateTime", searchYear+"-12-31 23:59:59");
+		QueryResult<UserAchRate> contactRealList = service.queryDesAchiRateTotal(map);
 		String result = JSONUtilS.object2json(contactRealList);
 		return result;
 	}
@@ -355,6 +510,22 @@ public class StatisticsController extends BaseSimpleFormController{
 		QueryResult<UserAchRate> contactRealList = service.queryDesAchiMoney(map);
 		
 		changeCountryCodeToChinese(service,contactRealList);
+		String result = JSONUtilS.object2json(contactRealList);
+		return result;
+	}
+	
+	@RequestMapping( value = "/desachievementmoneystatstotal.do",produces="application/json;charset=utf-8")
+	@ResponseBody
+	public String queryDesAchiMoneyTotal(PageHelper page,String searchYear){
+		//设置查询参数
+		
+		Map<String,Object> map =new HashMap<>();
+		if(searchYear==null||searchYear.trim()==""){
+			searchYear=String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
+		}
+		map.put("startCreateTime", searchYear+"-01-01 00:00:00");
+		map.put("endCreateTime", searchYear+"-12-31 23:59:59");
+		QueryResult<UserAchRate> contactRealList = service.queryDesAchiMoneyTotal(map);
 		String result = JSONUtilS.object2json(contactRealList);
 		return result;
 	}
@@ -389,6 +560,21 @@ public class StatisticsController extends BaseSimpleFormController{
 		map.put("startCreateTime", searchYear+"-01-01 00:00:00");
 		map.put("endCreateTime", searchYear+"-12-31 23:59:59");
 		QueryResult<UserAchRate> contactRealList = service.queryCustSource(map);
+		String result = JSONUtilS.object2json(contactRealList);
+		return result;
+	}
+	
+	@RequestMapping( value = "/custsourcestatstotal.do",produces="application/json;charset=utf-8")
+	@ResponseBody
+	public String queryCustSourceTotal(PageHelper page,String searchYear){
+		//设置查询参数
+		Map<String,Object> map =new HashMap<>();
+		if(searchYear==null||searchYear.trim()==""){
+			searchYear=String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
+		}
+		map.put("startCreateTime", searchYear+"-01-01 00:00:00");
+		map.put("endCreateTime", searchYear+"-12-31 23:59:59");
+		QueryResult<UserAchRate> contactRealList = service.queryCustSourceTotal(map);
 		String result = JSONUtilS.object2json(contactRealList);
 		return result;
 	}
@@ -479,6 +665,24 @@ public class StatisticsController extends BaseSimpleFormController{
 		return result;
 	}
 	
+	@RequestMapping(value = "/agencyOrderStatusStatsTotal.do",produces="application/json;charset=utf-8")
+	@ResponseBody
+	public String queryData2(HttpServletRequest request, HttpSession session, AgencyOrderStatus agencyOrderStatus, Model model, PageHelper page) {
+		
+		if(agencyOrderStatus.getSearchStartTime()==null){
+			agencyOrderStatus.setSearchStartTime("");
+		}
+		if(agencyOrderStatus.getSearchEndTime()==null){
+			agencyOrderStatus.setSearchEndTime("");
+		}
+		
+		QueryResult<AgencyOrderStatus> caseResult = service.queryAgencyOrderStatusTotal(agencyOrderStatus,page, request);
+		
+		String result = JSONUtilS.object2json(caseResult);
+		
+		return result;
+	}
+	
 	//询单分配统计
 	@RequestMapping(value = "/caseAllotStats.html", method = { RequestMethod.POST, RequestMethod.GET })
 	public String list2(Model model){
@@ -515,7 +719,25 @@ public class StatisticsController extends BaseSimpleFormController{
 		return result;
 	}
 	
-	//询单来源统计
+	@RequestMapping(value = "/caseAllotStatsTotal.do",produces="application/json;charset=utf-8")
+	@ResponseBody
+	public String queryData(HttpServletRequest request, HttpSession session, CaseAllotStatsTotal caseAllotStatsTotal, Model model, PageHelper page) {
+		
+		if(caseAllotStatsTotal.getSearchStartTime()==null){
+			caseAllotStatsTotal.setSearchStartTime("");
+		}
+		if(caseAllotStatsTotal.getSearchEndTime()==null){
+			caseAllotStatsTotal.setSearchEndTime("");
+		}
+		
+		QueryResult<CaseAllotStatsTotal> caseResult = service.queryCaseAllotStatsTotal(caseAllotStatsTotal, page, request);
+		
+		String result = JSONUtilS.object2json(caseResult);
+		
+		return result;
+	}
+	
+	//询单来源状态统计
 	@RequestMapping(value = "/caseSourceStats.html", method = { RequestMethod.POST, RequestMethod.GET })
 	public String list3(Model model){
 		
@@ -531,6 +753,23 @@ public class StatisticsController extends BaseSimpleFormController{
 		model.addAttribute("searchEndDateTime",format.format(calendar1.getTime()));
 		
 		return "/statistics/caseSourceStats";
+	}
+	@RequestMapping(value = "/caseSourceStatsTotal.do",produces="application/json;charset=utf-8")
+	@ResponseBody
+	public String queryData(HttpServletRequest request, HttpSession session, CaseSourceStatsTotal caseSourceStatsTotal, Model model, PageHelper page) {
+
+		if(caseSourceStatsTotal.getSearchStartTime()==null){
+			caseSourceStatsTotal.setSearchStartTime("");
+		}
+		if(caseSourceStatsTotal.getSearchEndTime()==null){
+			caseSourceStatsTotal.setSearchEndTime("");
+		}
+		
+		QueryResult<CaseSourceStatsTotal> caseResult = service.queryCaseSourceStatsTotal(caseSourceStatsTotal, page, request);
+		
+		String result = JSONUtilS.object2json(caseResult);
+
+		return result;
 	}
 	
 	@RequestMapping(value = "/caseSourceStats.do",produces="application/json;charset=utf-8")
@@ -555,7 +794,6 @@ public class StatisticsController extends BaseSimpleFormController{
 	@RequestMapping(value = "/agencyAchievementStats.html", method = { RequestMethod.POST, RequestMethod.GET })
 	public String list4(Model model){
 		
-		//SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		Calendar calendar = Calendar.getInstance();
 		model.addAttribute("searchYear", calendar.get(Calendar.YEAR));
 		
@@ -580,22 +818,58 @@ public class StatisticsController extends BaseSimpleFormController{
 		return result;
 	}
 	
+	@RequestMapping(value = "/agencyAchievementStatsTotal.do",produces="application/json;charset=utf-8")
+	@ResponseBody
+	public String queryData2(HttpServletRequest request, HttpSession session, AgencyAchievementStats agencyAchievementStats, Model model, PageHelper page) {
+		
+		if(agencyAchievementStats.getSearchStartTime()==null){
+			agencyAchievementStats.setSearchStartTime("");
+		}
+		if(agencyAchievementStats.getSearchEndTime()==null){
+			agencyAchievementStats.setSearchEndTime("");
+		}
+		
+		QueryResult<AgencyAchievementStats> caseResult = service.queryAgencyAchievementStatsTotal(agencyAchievementStats, page, request);
+		
+		String result = JSONUtilS.object2json(caseResult);
+		
+		return result;
+	}
+	
 	//地接社业绩统计(成交金额)
 	@RequestMapping(value = "/agencyAchievementStats2.do",produces="application/json;charset=utf-8")
 	@ResponseBody
-	public String queryData(HttpServletRequest request, HttpSession session, AgencyAchievementStatsM sellerNotAskStats, Model model, PageHelper page) {
+	public String queryData1(HttpServletRequest request, HttpSession session, AgencyAchievementStats agencyAchievementStats, Model model, PageHelper page) {
 
-		if(sellerNotAskStats.getSearchStartTime()==null){
-			sellerNotAskStats.setSearchStartTime("");
+		if(agencyAchievementStats.getSearchStartTime()==null){
+			agencyAchievementStats.setSearchStartTime("");
 		}
-		if(sellerNotAskStats.getSearchEndTime()==null){
-			sellerNotAskStats.setSearchEndTime("");
+		if(agencyAchievementStats.getSearchEndTime()==null){
+			agencyAchievementStats.setSearchEndTime("");
 		}
 		
-		QueryResult<AgencyAchievementStatsM> caseResult = service.queryAgencyAchievementStatsM(sellerNotAskStats, page, request);
+		QueryResult<AgencyAchievementStats> caseResult = service.queryAgencyAchievementStatsM(agencyAchievementStats, page, request);
 		
 		String result = JSONUtilS.object2json(caseResult);
 
+		return result;
+	}
+	
+	@RequestMapping(value = "/agencyAchievementStats2Total.do",produces="application/json;charset=utf-8")
+	@ResponseBody
+	public String queryData3(HttpServletRequest request, HttpSession session, AgencyAchievementStats agencyAchievementStats, Model model, PageHelper page) {
+		
+		if(agencyAchievementStats.getSearchStartTime()==null){
+			agencyAchievementStats.setSearchStartTime("");
+		}
+		if(agencyAchievementStats.getSearchEndTime()==null){
+			agencyAchievementStats.setSearchEndTime("");
+		}
+		
+		QueryResult<AgencyAchievementStats> caseResult = service.queryAgencyAchievementStatsMTotal(agencyAchievementStats, page, request);
+		
+		String result = JSONUtilS.object2json(caseResult);
+		
 		return result;
 	}
 	
@@ -614,6 +888,17 @@ public class StatisticsController extends BaseSimpleFormController{
 		
 		String result = JSONUtilS.object2json(caseResult);
 
+		return result;
+	}
+	
+	@RequestMapping(value = "/sellerCoverStatsTotal.do",produces="application/json;charset=utf-8")
+	@ResponseBody
+	public String queryDataTotal(HttpServletRequest request, HttpSession session, SellerCoverStats sellerCoverStats, Model model, PageHelper page) {
+		
+		QueryResult<SellerCoverStats> caseResult = service.querySellerCoverStatsTotal(sellerCoverStats, page, request);
+		
+		String result = JSONUtilS.object2json(caseResult);
+		
 		return result;
 	}
 	
@@ -651,9 +936,27 @@ public class StatisticsController extends BaseSimpleFormController{
 		return result;
 	}
 	
+	@RequestMapping(value = "/sellerNotAskStatsTotal.do",produces="application/json;charset=utf-8")
+	@ResponseBody
+	public String queryData3(HttpServletRequest request, HttpSession session, SellerNotAskStats sellerNotAskStats, Model model, PageHelper page) {
+		
+		if(sellerNotAskStats.getSearchStartTime()==null){
+			sellerNotAskStats.setSearchStartTime("");
+		}
+		if(sellerNotAskStats.getSearchEndTime()==null){
+			sellerNotAskStats.setSearchEndTime("");
+		}
+		
+		QueryResult<SellerNotAskStats> caseResult = service.querySellerNotAskStatsTotal(sellerNotAskStats, page, request);
+		
+		String result = JSONUtilS.object2json(caseResult);
+		
+		return result;
+	}
+	
 	@RequestMapping(value = "/sellerNotAskStatsD.do",produces="application/json;charset=utf-8")
 	@ResponseBody
-	public String queryData(HttpServletRequest request, HttpSession session, SellerNotAskStatsD sellerNotAskStatsD, Model model, PageHelper page) {
+	public String queryData2(HttpServletRequest request, HttpSession session, SellerNotAskStats sellerNotAskStatsD, Model model, PageHelper page) {
 		
 		if(sellerNotAskStatsD.getSearchStartTime()==null){
 			sellerNotAskStatsD.setSearchStartTime("");
@@ -662,7 +965,7 @@ public class StatisticsController extends BaseSimpleFormController{
 			sellerNotAskStatsD.setSearchEndTime("");
 		}
 		
-		QueryResult<SellerNotAskStatsD> caseResult = service.querySellerNotAskStatsD(sellerNotAskStatsD, page, request);
+		QueryResult<SellerNotAskStats> caseResult = service.querySellerNotAskStatsD(sellerNotAskStatsD, page, request);
 		
 		changeCountryCodeToChinese2(service,caseResult);
 		
@@ -689,15 +992,26 @@ public class StatisticsController extends BaseSimpleFormController{
 		return result;
 	}
 	
+	@RequestMapping(value = "/customerSourceLevelStatsTotal.do",produces="application/json;charset=utf-8")
+	@ResponseBody
+	public String queryData2(HttpServletRequest request, HttpSession session, CustomerSourceLevelStats customerSourceLevelStats, Model model, PageHelper page) {
+		
+		QueryResult<CustomerSourceLevelStats> caseResult = service.queryCustomerSourceLevelStatsTotal(customerSourceLevelStats, page, request);
+		
+		String result = JSONUtilS.object2json(caseResult);
+		
+		return result;
+	}
+	
 	/**
 	 * 将多选的目的地，显示中文
 	 * @param service
 	 * @param list
 	 */
-	public static void changeCountryCodeToChinese2(StatisticsService service,QueryResult<SellerNotAskStatsD> list){
+	public static void changeCountryCodeToChinese2(StatisticsService service,QueryResult<SellerNotAskStats> list){
 		String country = "country";
 		List<EntityList> countryList = service.getParameterInfo(country);
-		for(SellerNotAskStatsD temp:list.getData()){
+		for(SellerNotAskStats temp:list.getData()){
 			String str = temp.getCountry();
 			
 			if("".equals(str)||str==null){

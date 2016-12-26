@@ -59,7 +59,6 @@
 								<thead>
 									<tr>
 										<th>跟单员</th>
-										<th>询单总数量</th>
 										<th>网站表单询单数 </th>									
 										<th>手机表单</th>
 										<th>直发表单 </th>
@@ -73,6 +72,31 @@
 										<th>朋友介绍</th>
 										<th>老客人</th>
 										<th>携程</th>
+										<th>询单总数量</th>
+									</tr>
+								</thead>
+								<tbody>
+								</tbody>
+							</table>
+							
+							<table id="dataTable2" class="table">
+								<thead>
+									<tr>
+										<th></th>
+										<th>网站表单询单数 </th>									
+										<th>手机表单</th>
+										<th>直发表单 </th>
+										<th>微信表单</th>
+										<th>网站在线客服</th>
+										<th>手机在线客服</th>
+										<th>电话客服</th>
+										<th>微信客服</th>
+										<th>线下活动</th>
+										<th>邮件咨询</th>
+										<th>朋友介绍</th>
+										<th>老客人</th>
+										<th>携程</th>
+										<th>询单总数量</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -108,228 +132,334 @@
         changeYear: true,
         changeMonth: true,
      });
-			var t = jQuery('#dataTable').DataTable({
-				searching:false,
-				pageLength: 10,
-				processing: true,
-				paging: false, // 禁止分页
-				language: datatable_local_language, // my.js
-				serverSide: true,
-				ajax: {
-					url: '${rootPath}statistics/caseAllotStats.do',
-					data: function(data){
-			 			var searchStartDateTime=$("#searchStartDateTime").val();
-			 			var searchEndDateTime=$("#searchEndDateTime").val();
-			 			
-			 			var searchStatus = searchStatusCheck;
-			 			searchStatusCheck = "";
-			 			
-			 			if(searchStartDateTime !=null && searchStartDateTime !=""){
-			 				data.searchStartTime = searchStartDateTime;
-			 			}
-			 			if(searchEndDateTime !=null && searchEndDateTime !=""){
-			 				data.searchEndTime = searchEndDateTime;
-			 			}
-					},
-					dataFilter: function(data){
-						var json = jQuery.parseJSON( data );
-						json.recordsTotal = json.countTotal;
-						json.recordsFiltered = json.countFiltered;
-						json.data = json.data;
-						
-						if(searchFlag==false){
-							$('#status0Count').html("待处理"+json.status0);
-
-							$('#status1Count').html("客服沟通中"+json.status1);
-					
-							$('#status2Count').html("地接设计中"+json.status2);						
-							
-							$('#status3Count').html("成行"+json.status3);						
-							
-							$('#status4Count').html("未成行"+json.status4);						
-							
-							$('#status5Count').html("无效"+json.status5);												
-							
-							$('#status6Count').html("已付款"+json.status6);
-						}
-						
-						return JSON.stringify( json );
-					}
+	var t = jQuery('#dataTable').DataTable({
+		searching:false,
+		pageLength: 10,
+		processing: true,
+		paging: false, // 禁止分页
+		language: datatable_local_language, // my.js
+		serverSide: true,
+		bInfo : false,
+		ajax: {
+			url: '${rootPath}statistics/caseAllotStats.do',
+			data: function(data){
+	 			var searchStartDateTime=$("#searchStartDateTime").val();
+	 			var searchEndDateTime=$("#searchEndDateTime").val();
+	 			
+	 			var searchStatus = searchStatusCheck;
+	 			searchStatusCheck = "";
+	 			
+	 			if(searchStartDateTime !=null && searchStartDateTime !=""){
+	 				data.searchStartTime = searchStartDateTime;
+	 			}
+	 			if(searchEndDateTime !=null && searchEndDateTime !=""){
+	 				data.searchEndTime = searchEndDateTime;
+	 			}
+			},
+			dataFilter: function(data){
+				var json = jQuery.parseJSON( data );
+				json.recordsTotal = json.countTotal;
+				json.recordsFiltered = json.countFiltered;
+				json.data = json.data;
+				return JSON.stringify( json );
+			}
+		},
+		columnDefs: [		  
+				   {
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                    return "<div>" + full.userName + "</div>"
+	                },
+	                targets: 0
 				},
-				columnDefs: [		  
- 					   {
-			                orderable: false,
-			                render: function ( data, type, full, meta ) {
-			                    return "<div>" + full.userName + "</div>"
-			                },
-			                targets: 0
-						},
-						{
-			                orderable: false,
-			                render: function ( data, type, full, meta ) {
-			                    return "<div>" + full.total + "</div>" 
-			                },
-			                targets: 1
-						},
-						{
-			                orderable: false,
-			                render: function ( data, type, full, meta ) {
-			                    return "<div>" + full.web_form + "</div>" 
-			                },
-			                targets: 2
-						},
-						{
-			                orderable: false,
-			                render: function ( data, type, full, meta ) {
-			                    return "<div>" + full.mobile_form + "</div>" 
-			                },
-			                targets: 3
-						},
-						{
-			                orderable: false,
-			                render: function ( data, type, full, meta ) {
-			                    return "<div>" + full.direct_form + "</div>" 
-			                },
-			                targets: 4
-						},
-						{
-			                orderable: false,
-			                render: function ( data, type, full, meta ) {
-			                    return "<div>" + full.wechat_form + "</div>" 
-			                },
-			                targets: 5
-						},
-						{
-			                orderable: false,
-			                render: function ( data, type, full, meta ) {
-			                    return "<div>" + full.web_service + "</div>" 
-			                },
-			                targets: 6
-						},
-						{
-			                orderable: false,
-			                render: function ( data, type, full, meta ) {
-			                    return "<div>" + full.mobile_service + "</div>" 
-			                },
-			                targets: 7
-						},
-						{
-			                orderable: false,
-			                render: function ( data, type, full, meta ) {
-			                    return "<div>" + full.phone_service + "</div>" 
-			                },
-			                targets: 8
-						},
-						{
-			                orderable: false,
-			                render: function ( data, type, full, meta ) {
-			                    return "<div>" + full.wechat_service + "</div>" 
-			                },
-			                targets: 9
-						},
-						{
-			                orderable: false,
-			                render: function ( data, type, full, meta ) {
-			                    return "<div>" + full.offline + "</div>" 
-			                },
-			                targets: 10
-						},
-						{
-			                orderable: false,
-			                render: function ( data, type, full, meta ) {
-			                    return "<div>" + full.email + "</div>" 
-			                },
-			                targets: 11
-						},
-						{
-			                orderable: false,
-			                render: function ( data, type, full, meta ) {
-			                    return "<div>" + full.friends + "</div>" 
-			                },
-			                targets: 12
-						},
-						{
-			                orderable: false,
-			                render: function ( data, type, full, meta ) {
-			                    return "<div>" + full.customer + "</div>" 
-			                },
-			                targets: 13
-						},
-						{
-			                orderable: false,
-			                render: function ( data, type, full, meta ) {
-			                    return "<div>" + full.ctrip + "</div>" 
-			                },
-			                targets: 14
-						},
-						{
-						    orderable: false,
-						    searchable: false,
-					        targets: [0]
-					    }, 
-					],
-					columns: [
-			            { data: "userName" },
-			            { data:"total"},
-			            { data: "web_form" },
-			            { data: "mobile_form" },
-			            { data: "direct_form" },
-			            { data: "wechat_form"},
-			            { data: "web_service"},
-			            { data: "mobile_service"},
-			            { data: "phone_service"},
-			            { data: "wechat_service"},
-			            { data: "offline"},
-			            { data: "email"},
-			            { data: "friends"},
-			            { data: "customer"},
-			            { data: "ctrip"}
-			        ]
-				});
+				{
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                    return "<div>" + full.web_form + "</div>" 
+	                },
+	                targets: 1
+				},
+				{
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                    return "<div>" + full.mobile_form + "</div>" 
+	                },
+	                targets: 2
+				},
+				{
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                    return "<div>" + full.direct_form + "</div>" 
+	                },
+	                targets: 3
+				},
+				{
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                    return "<div>" + full.wechat_form + "</div>" 
+	                },
+	                targets: 4
+				},
+				{
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                    return "<div>" + full.web_service + "</div>" 
+	                },
+	                targets: 5
+				},
+				{
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                    return "<div>" + full.mobile_service + "</div>" 
+	                },
+	                targets: 6
+				},
+				{
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                    return "<div>" + full.phone_service + "</div>" 
+	                },
+	                targets: 7
+				},
+				{
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                    return "<div>" + full.wechat_service + "</div>" 
+	                },
+	                targets: 8
+				},
+				{
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                    return "<div>" + full.offline + "</div>" 
+	                },
+	                targets: 9
+				},
+				{
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                    return "<div>" + full.email + "</div>" 
+	                },
+	                targets: 10
+				},
+				{
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                    return "<div>" + full.friends + "</div>" 
+	                },
+	                targets: 11
+				},
+				{
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                    return "<div>" + full.customer + "</div>" 
+	                },
+	                targets: 12
+				},
+				{
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                    return "<div>" + full.ctrip + "</div>" 
+	                },
+	                targets: 13
+				},
+				{
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                    return "<div>" + full.total + "</div>" 
+	                },
+	                targets: 14
+				},
+				{
+				    orderable: false,
+				    searchable: false,
+			        targets: [0]
+			    }, 
+			],
+			columns: [
+	            { data: "userName" },
+	            { data: "web_form" },
+	            { data: "mobile_form" },
+	            { data: "direct_form" },
+	            { data: "wechat_form"},
+	            { data: "web_service"},
+	            { data: "mobile_service"},
+	            { data: "phone_service"},
+	            { data: "wechat_service"},
+	            { data: "offline"},
+	            { data: "email"},
+	            { data: "friends"},
+	            { data: "customer"},
+	            { data: "ctrip"},
+	            { data:"total"}
+	        ]
+		});
+	var t2 = jQuery('#dataTable2').DataTable({
+		searching:false,
+		pageLength: 10,
+		processing: true,
+		paging: false, // 禁止分页
+		language: datatable_local_language, // my.js
+		serverSide: true,
+		bInfo : false,
+		ajax: {
+			url: '${rootPath}statistics/caseAllotStatsTotal.do',
+			data: function(data){
+	 			var searchStartDateTime=$("#searchStartDateTime").val();
+	 			var searchEndDateTime=$("#searchEndDateTime").val();
+	 			
+	 			var searchStatus = searchStatusCheck;
+	 			searchStatusCheck = "";
+	 			
+	 			if(searchStartDateTime !=null && searchStartDateTime !=""){
+	 				data.searchStartTime = searchStartDateTime;
+	 			}
+	 			if(searchEndDateTime !=null && searchEndDateTime !=""){
+	 				data.searchEndTime = searchEndDateTime;
+	 			}
+			},
+			dataFilter: function(data){
+				var json = jQuery.parseJSON( data );
+				json.recordsTotal = json.countTotal;
+				json.recordsFiltered = json.countFiltered;
+				json.data = json.data;
+				return JSON.stringify( json );
+			}
+		},
+		columnDefs: [		  
+				   {
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                	return "<div class='minw50'>" + "<h3>" + '合计'  + "</h3>" + "</div>" 
+	                },
+	                targets: 0
+				},
+				{
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                    return "<div>" + full.web_form_T + "</div>" 
+	                },
+	                targets: 1
+				},
+				{
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                    return "<div>" + full.mobile_form_T + "</div>" 
+	                },
+	                targets: 2
+				},
+				{
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                    return "<div>" + full.direct_form_T + "</div>" 
+	                },
+	                targets: 3
+				},
+				{
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                    return "<div>" + full.wechat_form_T + "</div>" 
+	                },
+	                targets: 4
+				},
+				{
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                    return "<div>" + full.web_service_T + "</div>" 
+	                },
+	                targets: 5
+				},
+				{
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                    return "<div>" + full.mobile_service_T + "</div>" 
+	                },
+	                targets: 6
+				},
+				{
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                    return "<div>" + full.phone_service_T + "</div>" 
+	                },
+	                targets: 7
+				},
+				{
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                    return "<div>" + full.wechat_service_T + "</div>" 
+	                },
+	                targets: 8
+				},
+				{
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                    return "<div>" + full.offline_T + "</div>" 
+	                },
+	                targets: 9
+				},
+				{
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                    return "<div>" + full.email_T + "</div>" 
+	                },
+	                targets: 10
+				},
+				{
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                    return "<div>" + full.friends_T + "</div>" 
+	                },
+	                targets: 11
+				},
+				{
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                    return "<div>" + full.customer_T + "</div>" 
+	                },
+	                targets: 12
+				},
+				{
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                    return "<div>" + full.ctrip_T + "</div>" 
+	                },
+	                targets: 13
+				},
+				{
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                    return "<div>" + full.total_T + "</div>" 
+	                },
+	                targets: 14
+				},
+				{
+				    orderable: false,
+				    searchable: false,
+			        targets: [0]
+			    }, 
+			],
+			columns: [
+	            { data: "web_form_T" },
+	            { data: "mobile_form_T" },
+	            { data: "direct_form_T" },
+	            { data: "wechat_form_T"},
+	            { data: "web_service_T"},
+	            { data: "mobile_service_T"},
+	            { data: "phone_service_T"},
+	            { data: "wechat_service_T"},
+	            { data: "offline_T"},
+	            { data: "email_T"},
+	            { data: "friends_T"},
+	            { data: "customer_T"},
+	            { data: "ctrip_T"},
+	            { data:"total_T"}
+	        ]
+		});
 
-			$('#searchBtn').on( 'click', function () {
-				//$("input[name='status']:checked").val(null);
-				searchStatusCheck = "";
-				searchFlag = false;
-		        t.draw();
-		        $('input:radio:checked').attr('checked',false);
-		    } );
-			$('#status0').on('click',function(){
-				searchStatusCheck = 0+" ";
-				searchFlag = true;
-				t.draw();
-			});
-			$('#status1').on('click',function(){
-				searchStatusCheck = 1;
-				searchFlag = true;
-				t.draw();
-			});
-			$('#status2').on('click',function(){
-				searchStatusCheck = 2;
-				searchFlag = true;
-				t.draw();
-			});
-			$('#status3').on('click',function(){
-				searchStatusCheck = 3;
-				searchFlag = true;
-				t.draw();
-			});
-			$('#status4').on('click',function(){
-				searchStatusCheck = 4;
-				searchFlag = true;
-				t.draw();
-			});
-			$('#status5').on('click',function(){
-				searchStatusCheck = 5;
-				searchFlag = true;
-				t.draw();
-			});
-			$('#status6').on('click',function(){
-				searchStatusCheck = 6;
-				searchFlag = true;
-				t.draw();
-			});
-			
+		$('#searchBtn').on( 'click', function () {
+	        t.draw();
+	        t2.draw();
+	    } );
 	</script>
 </body>
 </html>

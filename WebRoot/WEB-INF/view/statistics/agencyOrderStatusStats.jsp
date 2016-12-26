@@ -62,19 +62,33 @@
 								<thead>
 									<tr>
 										<th>地接社名称</th>
+										<th>等待客人回复</th>									
+										<th>等待地接社回复</th>
+										<th>成行</th>
+										<th>未成行</th>
+										<th>付款</th>
 										<th>订单数量</th>
-										<th>等待客人回复订单数</th>									
-										<th>等待地接社回复订单数</th>
-										<th>成行订单数</th>
-										<th>未成行订单数</th>
-										<th>付款订单数</th>
 										<th>成交金额</th>
 										<th>成交比例</th>
 									</tr>
 								</thead>
-								<tbody>
-								</tbody>
 							</table>
+							<table id="dataTable2" class="table">
+								<thead>
+									<tr>
+										<th></th>
+										<th>等待客人回复</th>									
+										<th>等待地接社回复</th>
+										<th>成行</th>
+										<th>未成行</th>
+										<th>付款</th>
+										<th>订单数量</th>
+										<th>成交金额</th>
+										<th>成交比例</th>
+									</tr>
+								</thead>
+							</table>
+							
 						</div>
 					</div>
 				</div>
@@ -114,6 +128,7 @@
 		paging: false, // 禁止分页
 		language: datatable_local_language, // my.js
 		serverSide: true,
+		bInfo : false,
 		ajax: {
 			url: '${rootPath}statistics/agencyOrderStatusStats.do',
 			data: function(data){
@@ -151,14 +166,6 @@
 	                targets: 0
 				},
 				{
-					//订单总数
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                    return "<div>" + full.total + "</div>"
-	                },
-	                targets: 1
-				},
-					{
 					//状态0的订单总数
 	                orderable: false,
 	                render: function ( data, type, full, meta ) {
@@ -167,7 +174,7 @@
 	                	 
 	                	var destinations="";
 	                },
-	                targets: 2
+	                targets: 1
 				},	  
 					{
 					//状态1的订单总数
@@ -176,7 +183,7 @@
 	                	
 	                	return "<div>" + full.status1 + "</div>"
 	                },
-	                targets: 3
+	                targets: 2
 				},	  
 					{
 					//状态2的订单总数
@@ -185,7 +192,7 @@
 	                	
 	                	return "<div>" + full.status2 + "</div>"
 	                },
-	                targets: 4
+	                targets: 3
 				},	  
 					{
 					//状态3的订单总数
@@ -194,7 +201,7 @@
 	                	
 	                	return "<div>" + full.status3 + "</div>"
 	                },
-	                targets: 5
+	                targets: 4
 				},	  
 					{
 					//状态4的订单总数
@@ -203,9 +210,17 @@
 	                	
 	                	return "<div>" + full.status4 + "</div>"
 	                },
+	                targets: 5
+				},	
+				{
+					//订单总数
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                    return "<div>" + full.total + "</div>"
+	                },
 	                targets: 6
-				},	  
-					{
+				},
+				{
 					//成交金额
 	                orderable: false,
 	                render: function ( data, type, full, meta ) {
@@ -226,20 +241,152 @@
 			],
 			columns: [
 	            { data: "agencyName" },
-	            { data:"total"},
 	            { data: "status0" },
 	            { data: "status1" },
 	            { data: "status2" },
 	            { data: "status3"},
 	            { data: "status4"},
+	            { data:"total"},
 	            { data: "dealMoney"},
 	            { data: "rate"}
 	           
 	        ]
 		});
 	
+	var t2 = jQuery('#dataTable2').DataTable({
+		searching:false,
+		pageLength: 10,
+		processing: false,
+		paging: false, // 禁止分页
+		language: datatable_local_language, // my.js
+		serverSide: true,
+		bInfo : false,
+		ajax: {
+			url: '${rootPath}statistics/agencyOrderStatusStatsTotal.do',
+			data: function(data){
+	 			var searchDestination=$('#searchDestination').val();
+	 			var searchStartDateTime=$("#searchStartDateTime").val();
+	 			var searchEndDateTime=$("#searchEndDateTime").val();
+	 			
+	 			if(searchDestination !=null && searchDestination !="" ){
+					data.destination = searchDestination;
+	 			}
+	 			if(searchStartDateTime !=null && searchStartDateTime !=""){
+	 				data.searchStartTime = searchStartDateTime;
+	 			}
+	 			if(searchEndDateTime !=null && searchEndDateTime !=""){
+	 				data.searchEndTime = searchEndDateTime;
+	 			}
+			},
+			
+			dataFilter: function(data){
+				var json = jQuery.parseJSON( data );
+				json.recordsTotal = json.countTotal;
+				json.recordsFiltered = json.countFiltered;
+				json.data = json.data;
+				
+				return JSON.stringify( json );
+			}
+		},
+		columnDefs: [		  
+				   {
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                	return "<div class='minw50'>" + "<h3>" + '合计'  + "</h3>" + "</div>"
+	                },
+	                targets: 0
+				},
+				{
+					//状态0的订单总数
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                	
+	                	return "<div>" + full.status0_T + "</div>"
+	                	 
+	                	var destinations="";
+	                },
+	                targets: 1
+				},	  
+					{
+					//状态1的订单总数
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                	
+	                	return "<div>" + full.status1_T + "</div>"
+	                },
+	                targets: 2
+				},	  
+					{
+					//状态2的订单总数
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                	
+	                	return "<div>" + full.status2_T + "</div>"
+	                },
+	                targets: 3
+				},	  
+					{
+					//状态3的订单总数
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                	
+	                	return "<div>" + full.status3_T + "</div>"
+	                },
+	                targets: 4
+				},	  
+					{
+					//状态4的订单总数
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                	
+	                	return "<div>" + full.status4_T + "</div>"
+	                },
+	                targets: 5
+				},	
+				{
+					//订单总数
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                    return "<div>" + full.total_T + "</div>"
+	                },
+	                targets: 6
+				},
+				{
+					//成交金额
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                	
+	                	return "<div>" + full.dealMoney_T + "</div>"
+	                },
+	                targets: 7
+				},	  
+					{
+					//成交比率
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                	
+	                	return "<div>" + full.rate_T + "</div>"
+	                },
+	                targets: 8
+				},	  
+			],
+			columns: [
+	            { data: "" },
+	            { data: "status0_T" },
+	            { data: "status1_T" },
+	            { data: "status2_T" },
+	            { data: "status3_T"},
+	            { data: "status4_T"},
+	            { data:"total_T"},
+	            { data: "dealMoney_T"},
+	            { data: "rate_T"}
+	           
+	        ]
+		});
+	
 		$('#searchBtn').on( 'click', function () {
 	        t.draw();
+	        t2.draw();
 	    } );
 		
 		// Select2

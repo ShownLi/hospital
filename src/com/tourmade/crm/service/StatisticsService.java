@@ -14,8 +14,10 @@ import org.springframework.transaction.annotation.Transactional;
 import com.tourmade.crm.common.framework.BaseService;
 import com.tourmade.crm.common.framework.bean.QueryResult;
 import com.tourmade.crm.entity.ContactRealStats;
+import com.tourmade.crm.entity.ContactRealStatsTotal;
 import com.tourmade.crm.entity.EntityList;
 import com.tourmade.crm.entity.ReasonOfDrainingStats;
+import com.tourmade.crm.entity.ReasonOfDrainingStatsTotal;
 import com.tourmade.crm.entity.UserAchRate;
 import com.tourmade.crm.entity.UserAchievement;
 import com.tourmade.crm.mapper.statistics.StatisticsMapper;
@@ -23,13 +25,13 @@ import com.tourmade.crm.common.model.base.value.baseconfig.PageHelper;
 import com.tourmade.crm.entity.AgencyAchievementStats;
 import com.tourmade.crm.entity.AgencyOrderStatus;
 import com.tourmade.crm.entity.CaseAllotStats;
+import com.tourmade.crm.entity.CaseAllotStatsTotal;
 import com.tourmade.crm.entity.CaseSourceStats;
+import com.tourmade.crm.entity.CaseSourceStatsTotal;
 import com.tourmade.crm.entity.CustomerSourceLevelStats;
 import com.tourmade.crm.entity.EntityList;
 import com.tourmade.crm.entity.SellerCoverStats;
 import com.tourmade.crm.entity.SellerNotAskStats;
-import com.tourmade.crm.entity.SellerNotAskStatsD;
-import com.tourmade.crm.entity.AgencyAchievementStatsM;
 import com.tourmade.crm.mapper.statistics.StatisticsMapper;
 
 @Service
@@ -68,6 +70,14 @@ public class StatisticsService extends BaseService {
 	
 		return result;
 	}
+	
+	public QueryResult<UserAchievement> queryUserAchievementStatsTotal(Map<String, Object> map) {
+		
+		QueryResult<UserAchievement> result = new QueryResult<UserAchievement>();
+		List<UserAchievement> data = statisticsMapper.queryUserAchievementStatsTotal(map);
+		result.setData(data);
+		return result;
+	}
 
 	public QueryResult<ContactRealStats> queryContactReal(Map<String, Object> map) {
 		QueryResult<ContactRealStats> result = new QueryResult<ContactRealStats>();
@@ -78,6 +88,15 @@ public class StatisticsService extends BaseService {
 		result.setCountTotal(count);
 		result.setCountFiltered(count);
 
+		return result;
+	}
+	
+	public QueryResult<ContactRealStatsTotal> queryContactRealTotal(Map<String, Object> map) {
+		QueryResult<ContactRealStatsTotal> result = new QueryResult<ContactRealStatsTotal>();
+		
+		List<ContactRealStatsTotal> data = statisticsMapper.queryContactRealTotal(map);
+		result.setData(data);
+		
 		return result;
 	}
 
@@ -103,7 +122,30 @@ public class StatisticsService extends BaseService {
 		result.setCountTotal(count);
 		result.setCountFiltered(count);
 		return result;
-	}
+	}   
+	
+	public QueryResult<ReasonOfDrainingStatsTotal> queryReasonOfDrainingTotal(Map<String, Object> map) {
+		QueryResult<ReasonOfDrainingStatsTotal> result = new QueryResult<ReasonOfDrainingStatsTotal>();
+		List<ReasonOfDrainingStatsTotal> data = statisticsMapper.queryReasonOfDrainingTotal(map);
+		//查询所给定时间段的所有无效信息
+		long total = statisticsMapper.countCaseInvalid(map);
+		//查询出给定时间段的无效原因的条目数
+		long count = 0;
+		if(data!=null){
+			count = data.size();
+			for(ReasonOfDrainingStatsTotal r:data){
+				double temp = r.getNum_T();
+				double result1 =temp/total*100;
+				r.setPercent_T(String.format("%.2f", result1)+"%");
+			}
+		}else{
+			count = 0;
+		}
+		result.setData(data);
+		result.setCountTotal(count);
+		result.setCountFiltered(count);
+		return result;
+	}   
 
 	public QueryResult<ReasonOfDrainingStats> queryReasonOfDrainingNoDeal(Map<String, Object> map) {
 		QueryResult<ReasonOfDrainingStats> result = new QueryResult<ReasonOfDrainingStats>();
@@ -128,6 +170,30 @@ public class StatisticsService extends BaseService {
 		result.setCountFiltered(count);
 		return result;
 	}
+	
+	public QueryResult<ReasonOfDrainingStatsTotal> queryReasonOfDrainingNoDealTotal(Map<String, Object> map) {
+		QueryResult<ReasonOfDrainingStatsTotal> result = new QueryResult<ReasonOfDrainingStatsTotal>();
+		List<ReasonOfDrainingStatsTotal> data = statisticsMapper.queryReasonOfDrainingNoDealTotal(map);
+		//查询所给定时间段的所有无效信息
+		long total = statisticsMapper.countCaseNoDeal(map);
+		//查询出给定时间段的无效原因的条目数
+		long count = 0;
+		if(data!=null){
+			count = data.size();
+			for(ReasonOfDrainingStatsTotal r:data){
+				double temp = r.getNum_T();
+				double result1 =temp/total*100;
+				r.setPercent_T(String.format("%.2f", result1)+"%");
+			}
+		}else{
+			
+			count = 0;
+		}
+		result.setData(data);
+		result.setCountTotal(count);
+		result.setCountFiltered(count);
+		return result;
+	}
 
 	public QueryResult<UserAchRate> queryUserAchiRate(Map<String, Object> map) {
 		QueryResult<UserAchRate> result = new QueryResult<UserAchRate>();
@@ -136,6 +202,13 @@ public class StatisticsService extends BaseService {
 		result.setData(data);
 		result.setCountTotal(count);
 		result.setCountFiltered(count);
+		return result;
+	}
+	
+	public QueryResult<UserAchRate> queryUserAchiRateTotal(Map<String, Object> map) {
+		QueryResult<UserAchRate> result = new QueryResult<UserAchRate>();
+		List<UserAchRate> data = statisticsMapper.queryUserAchiRateTotal(map);
+		result.setData(data);
 		return result;
 	}
 
@@ -147,6 +220,13 @@ public class StatisticsService extends BaseService {
 		result.setData(data);
 		result.setCountTotal(count);
 		result.setCountFiltered(count);
+		return result;
+	}
+	
+	public QueryResult<UserAchRate> queryUserAchiMoneyTotal(Map<String, Object> map) {
+		QueryResult<UserAchRate> result = new QueryResult<UserAchRate>();
+		List<UserAchRate> data = statisticsMapper.queryUserAchiMoneyTotal(map);
+		result.setData(data);
 		return result;
 	}
 
@@ -161,6 +241,13 @@ public class StatisticsService extends BaseService {
 	
 		return result;
 	}
+	
+	public QueryResult<UserAchievement> queryDesCaseStatusTotal(Map<String, Object> map) {
+		QueryResult<UserAchievement> result = new QueryResult<UserAchievement>();
+		List<UserAchievement> data = statisticsMapper.queryDesCaseStatusTotal(map);
+		result.setData(data);
+		return result;
+	}
 
 	public QueryResult<UserAchRate> queryDesAchiRate(Map<String, Object> map) {
 		QueryResult<UserAchRate> result = new QueryResult<UserAchRate>();
@@ -172,21 +259,28 @@ public class StatisticsService extends BaseService {
 		result.setCountFiltered(count);
 		return result;
 	}
+	
+	public QueryResult<UserAchRate> queryDesAchiRateTotal(Map<String, Object> map) {
+		QueryResult<UserAchRate> result = new QueryResult<UserAchRate>();
+		List<UserAchRate> data = statisticsMapper.queryDesAchiRateTotal(map);
+		result.setData(data);
+		return result;
+	}
 
 	public QueryResult<UserAchRate> queryDesAchiMoney(Map<String, Object> map) {
 		QueryResult<UserAchRate> result = new QueryResult<UserAchRate>();
 		List<UserAchRate> data = statisticsMapper.queryDesAchiMoney(map);
-		UserAchRate rate=statisticsMapper.queryDesAchiMoneySum(map);
-		
 		long count = statisticsMapper.countOrderAllDes(map);
-		if(rate!=null){
-		rate.setUserName("合计");
-		data.add(rate);
-		count++;
-		}
 		result.setData(data);
 		result.setCountTotal(count);
 		result.setCountFiltered(count);
+		return result;
+	}
+	
+	public QueryResult<UserAchRate> queryDesAchiMoneyTotal(Map<String, Object> map) {
+		QueryResult<UserAchRate> result = new QueryResult<UserAchRate>();
+		List<UserAchRate> data = statisticsMapper.queryDesAchiMoneyTotal(map);
+		result.setData(data);
 		return result;
 	}
 
@@ -199,6 +293,13 @@ public class StatisticsService extends BaseService {
 		result.setCountFiltered(count);
 		return result;
 	}
+	
+	public QueryResult<UserAchRate> queryCustSourceTotal(Map<String, Object> map) {
+		QueryResult<UserAchRate> result = new QueryResult<UserAchRate>();
+		List<UserAchRate> data = statisticsMapper.queryCustSourceTotal(map);
+		result.setData(data);
+		return result;
+	}
 
 	public QueryResult<UserAchRate> queryDesAchiCaseCount(Map<String, Object> map) {
 		QueryResult<UserAchRate> result = new QueryResult<UserAchRate>();
@@ -208,7 +309,14 @@ public class StatisticsService extends BaseService {
 		result.setCountTotal(count);
 		result.setCountFiltered(count);
 		return result;
-		}
+	}
+	
+	public QueryResult<UserAchRate> queryDesAchiCaseCountTotal(Map<String, Object> map) {
+		QueryResult<UserAchRate> result = new QueryResult<UserAchRate>();
+		List<UserAchRate> data = statisticsMapper.queryDesAchiCaseCountTotal(map);
+		result.setData(data);
+		return result;
+	}
 	
 	/**
 	 * 地接社业绩统计表，分页展示
@@ -229,7 +337,7 @@ public class StatisticsService extends BaseService {
 			map.put("searchStartTime", agencyOrderStatus.getSearchStartTime());
 		}
 		if(agencyOrderStatus.getSearchEndTime()!=null){
-			agencyOrderStatus.setSearchEndTime(agencyOrderStatus.getSearchEndTime()+" 24:00:00");
+			agencyOrderStatus.setSearchEndTime(agencyOrderStatus.getSearchEndTime()+" 23:59:59");
 			map.put("searchEndTime", agencyOrderStatus.getSearchEndTime());
 		}
 		if(agencyOrderStatus.getDestination()!=null){
@@ -245,6 +353,31 @@ public class StatisticsService extends BaseService {
 		length.setData(data);
 		length.setCountTotal(count);
 		length.setCountFiltered(count);
+	
+		return length;
+	}
+	
+	public QueryResult<AgencyOrderStatus> queryAgencyOrderStatusTotal(AgencyOrderStatus agencyOrderStatus, PageHelper ph, HttpServletRequest request) {
+
+		QueryResult<AgencyOrderStatus> length = new QueryResult<AgencyOrderStatus>();
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		//分页条件
+		if(agencyOrderStatus.getSearchStartTime()!=null){
+			agencyOrderStatus.setSearchStartTime(agencyOrderStatus.getSearchStartTime()+" 00:00:00");
+			map.put("searchStartTime", agencyOrderStatus.getSearchStartTime());
+		}
+		if(agencyOrderStatus.getSearchEndTime()!=null){
+			agencyOrderStatus.setSearchEndTime(agencyOrderStatus.getSearchEndTime()+" 23:59:59");
+			map.put("searchEndTime", agencyOrderStatus.getSearchEndTime());
+		}
+		if(agencyOrderStatus.getDestination()!=null){
+			map.put("destination", agencyOrderStatus.getDestination());
+		}
+
+		List<AgencyOrderStatus> data = statisticsMapper.queryAgencyOrderStatusTotal(map);
+			
+		length.setData(data);
 	
 		return length;
 	}
@@ -268,7 +401,7 @@ public class StatisticsService extends BaseService {
 			map.put("searchStartTime", caseSourceStats.getSearchStartTime());
 		}
 		if(caseSourceStats.getSearchEndTime()!=null){
-			caseSourceStats.setSearchEndTime(caseSourceStats.getSearchEndTime()+" 24:00:00");
+			caseSourceStats.setSearchEndTime(caseSourceStats.getSearchEndTime()+" 23:59:59");
 			map.put("searchEndTime", caseSourceStats.getSearchEndTime());
 		}
 		
@@ -284,6 +417,40 @@ public class StatisticsService extends BaseService {
 	
 		return length;
 	}
+	
+	/**
+	 * 询单来源统计合计数
+	 * 
+	 * @param CaseSourceStatsTotal
+	 * @param ph
+	 * @param request
+	 * @return
+	 */
+	public QueryResult<CaseSourceStatsTotal> queryCaseSourceStatsTotal(CaseSourceStatsTotal caseSourceStatsTotal, PageHelper ph, HttpServletRequest request) {
+
+		QueryResult<CaseSourceStatsTotal> length = new QueryResult<CaseSourceStatsTotal>();
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		//分页条件
+		if(caseSourceStatsTotal.getSearchStartTime()!=null){
+			caseSourceStatsTotal.setSearchStartTime(caseSourceStatsTotal.getSearchStartTime()+" 00:00:00");
+			map.put("searchStartTime", caseSourceStatsTotal.getSearchStartTime());
+		}
+		if(caseSourceStatsTotal.getSearchEndTime()!=null){
+			caseSourceStatsTotal.setSearchEndTime(caseSourceStatsTotal.getSearchEndTime()+" 23:59:59");
+			map.put("searchEndTime", caseSourceStatsTotal.getSearchEndTime());
+		}
+		
+		map.put("start", ph.getStart());
+		map.put("length", ph.getLength());
+
+		List<CaseSourceStatsTotal> data = statisticsMapper.queryCaseSourceStatsTotal(map);
+			
+		length.setData(data);
+	
+		return length;
+	}
+	
 	
 	/**
 	 * 询单分配统计
@@ -304,7 +471,7 @@ public class StatisticsService extends BaseService {
 			map.put("searchStartTime", caseAllotStats.getSearchStartTime());
 		}
 		if(caseAllotStats.getSearchEndTime()!=null){
-			caseAllotStats.setSearchEndTime(caseAllotStats.getSearchEndTime()+" 24:00:00");
+			caseAllotStats.setSearchEndTime(caseAllotStats.getSearchEndTime()+" 23:59:59");
 			map.put("searchEndTime", caseAllotStats.getSearchEndTime());
 		}
 		
@@ -318,6 +485,32 @@ public class StatisticsService extends BaseService {
 		length.setCountTotal(count);
 		length.setCountFiltered(count);
 	
+		return length;
+	}
+	
+	public QueryResult<CaseAllotStatsTotal> queryCaseAllotStatsTotal(CaseAllotStatsTotal caseAllotStatsTotal, PageHelper ph, HttpServletRequest request) {
+		
+		QueryResult<CaseAllotStatsTotal> length = new QueryResult<CaseAllotStatsTotal>();
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		//分页条件
+		if(caseAllotStatsTotal.getSearchStartTime()!=null){
+			caseAllotStatsTotal.setSearchStartTime(caseAllotStatsTotal.getSearchStartTime()+" 00:00:00");
+			map.put("searchStartTime", caseAllotStatsTotal.getSearchStartTime());
+		}
+		if(caseAllotStatsTotal.getSearchEndTime()!=null){
+			caseAllotStatsTotal.setSearchEndTime(caseAllotStatsTotal.getSearchEndTime()+" 23:59:59");
+			map.put("searchEndTime", caseAllotStatsTotal.getSearchEndTime());
+		}
+		
+		map.put("start", ph.getStart());
+		map.put("length", ph.getLength());
+		
+		List<CaseAllotStatsTotal> data = statisticsMapper.queryCaseAllotStatsTotal(map);
+		
+		length.setData(data);
+		
 		return length;
 	}
 
@@ -341,7 +534,7 @@ public class StatisticsService extends BaseService {
 			map.put("searchStartTime", agencyAchievementStats.getSearchStartTime());
 		}
 		if(agencyAchievementStats.getSearchEndTime()!=null){
-			agencyAchievementStats.setSearchEndTime(agencyAchievementStats.getSearchEndTime()+" 24:00:00");
+			agencyAchievementStats.setSearchEndTime(agencyAchievementStats.getSearchEndTime()+" 23:59:59");
 			map.put("searchEndTime", agencyAchievementStats.getSearchEndTime());
 		}
 		
@@ -358,6 +551,30 @@ public class StatisticsService extends BaseService {
 		return length;
 	}
 	
+	public QueryResult<AgencyAchievementStats> queryAgencyAchievementStatsTotal(AgencyAchievementStats agencyAchievementStats, PageHelper ph, HttpServletRequest request) {
+		
+		QueryResult<AgencyAchievementStats> length = new QueryResult<AgencyAchievementStats>();
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		//分页条件
+		if(agencyAchievementStats.getSearchStartTime()!=null){
+			agencyAchievementStats.setSearchStartTime(agencyAchievementStats.getSearchStartTime()+" 00:00:00");
+			map.put("searchStartTime", agencyAchievementStats.getSearchStartTime());
+		}
+		if(agencyAchievementStats.getSearchEndTime()!=null){
+			agencyAchievementStats.setSearchEndTime(agencyAchievementStats.getSearchEndTime()+" 23:59:59");
+			map.put("searchEndTime", agencyAchievementStats.getSearchEndTime());
+		}
+		
+		
+		List<AgencyAchievementStats> data = statisticsMapper.queryAgencyAchievementStatsTotal(map);
+		
+		length.setData(data);
+		
+		return length;
+	}
+	
 	/**
 	 * 地接社业绩统计(成交额)
 	 * 
@@ -366,9 +583,9 @@ public class StatisticsService extends BaseService {
 	 * @param request
 	 * @return
 	 */
-	public QueryResult<AgencyAchievementStatsM> queryAgencyAchievementStatsM(AgencyAchievementStatsM agencyAchievementStatsM, PageHelper ph, HttpServletRequest request) {
+	public QueryResult<AgencyAchievementStats> queryAgencyAchievementStatsM(AgencyAchievementStats agencyAchievementStatsM, PageHelper ph, HttpServletRequest request) {
 		
-		QueryResult<AgencyAchievementStatsM> length = new QueryResult<AgencyAchievementStatsM>();
+		QueryResult<AgencyAchievementStats> length = new QueryResult<AgencyAchievementStats>();
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		
@@ -378,19 +595,42 @@ public class StatisticsService extends BaseService {
 			map.put("searchStartTime", agencyAchievementStatsM.getSearchStartTime());
 		}
 		if(agencyAchievementStatsM.getSearchEndTime()!=null){
-			agencyAchievementStatsM.setSearchEndTime(agencyAchievementStatsM.getSearchEndTime()+" 24:00:00");
+			agencyAchievementStatsM.setSearchEndTime(agencyAchievementStatsM.getSearchEndTime()+" 23:59:59");
 			map.put("searchEndTime", agencyAchievementStatsM.getSearchEndTime());
 		}
 		
 		map.put("start", ph.getStart());
 		map.put("length", ph.getLength());
 		
-		List<AgencyAchievementStatsM> data = statisticsMapper.queryAgencyAchievementStatsM(map);
-		long count = statisticsMapper.countAgencyAchievementStatsM(agencyAchievementStatsM);
+		List<AgencyAchievementStats> data = statisticsMapper.queryAgencyAchievementStatsM(map);
+		long count = statisticsMapper.countAgencyAchievementStats(agencyAchievementStatsM);
 		
 		length.setData(data);
 		length.setCountTotal(count);
 		length.setCountFiltered(count);
+		
+		return length;
+	}
+	//合计
+	public QueryResult<AgencyAchievementStats> queryAgencyAchievementStatsMTotal(AgencyAchievementStats agencyAchievementStatsM, PageHelper ph, HttpServletRequest request) {
+		
+		QueryResult<AgencyAchievementStats> length = new QueryResult<AgencyAchievementStats>();
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		//分页条件
+		if(agencyAchievementStatsM.getSearchStartTime()!=null){
+			agencyAchievementStatsM.setSearchStartTime(agencyAchievementStatsM.getSearchStartTime()+" 00:00:00");
+			map.put("searchStartTime", agencyAchievementStatsM.getSearchStartTime());
+		}
+		if(agencyAchievementStatsM.getSearchEndTime()!=null){
+			agencyAchievementStatsM.setSearchEndTime(agencyAchievementStatsM.getSearchEndTime()+" 23:59:59");
+			map.put("searchEndTime", agencyAchievementStatsM.getSearchEndTime());
+		}
+		
+		List<AgencyAchievementStats> data = statisticsMapper.queryAgencyAchievementStatsMTotal(map);
+		
+		length.setData(data);
 		
 		return length;
 	}
@@ -422,6 +662,15 @@ public class StatisticsService extends BaseService {
 		return length;
 	}
 	
+	public QueryResult<SellerCoverStats> querySellerCoverStatsTotal(SellerCoverStats sellerCoverStats, PageHelper ph, HttpServletRequest request) {
+		
+		QueryResult<SellerCoverStats> length = new QueryResult<SellerCoverStats>();
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<SellerCoverStats> data = statisticsMapper.querySellerCoverStatsTotal(map);
+		length.setData(data);
+		return length;
+	}
+	
 	/**
 	 * 商家未询统计(列出没有询单的目的地，包括目的地名称和包含地接社数量)
 	 * 
@@ -441,7 +690,7 @@ public class StatisticsService extends BaseService {
 			map.put("searchStartTime", sellerNotAskStats.getSearchStartTime());
 		}
 		if(sellerNotAskStats.getSearchEndTime()!=null){
-			sellerNotAskStats.setSearchEndTime(sellerNotAskStats.getSearchEndTime()+" 24:00:00");
+			sellerNotAskStats.setSearchEndTime(sellerNotAskStats.getSearchEndTime()+" 23:59:59");
 			map.put("searchEndTime", sellerNotAskStats.getSearchEndTime());
 		}
 		
@@ -458,6 +707,28 @@ public class StatisticsService extends BaseService {
 		return length;
 	}
 	
+public QueryResult<SellerNotAskStats> querySellerNotAskStatsTotal(SellerNotAskStats sellerNotAskStats, PageHelper ph, HttpServletRequest request) {
+		
+		QueryResult<SellerNotAskStats> length = new QueryResult<SellerNotAskStats>();
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		if(sellerNotAskStats.getSearchStartTime()!=null){
+			sellerNotAskStats.setSearchStartTime(sellerNotAskStats.getSearchStartTime()+" 00:00:00");
+			map.put("searchStartTime", sellerNotAskStats.getSearchStartTime());
+		}
+		if(sellerNotAskStats.getSearchEndTime()!=null){
+			sellerNotAskStats.setSearchEndTime(sellerNotAskStats.getSearchEndTime()+" 23:59:59");
+			map.put("searchEndTime", sellerNotAskStats.getSearchEndTime());
+		}
+		
+		List<SellerNotAskStats> data = statisticsMapper.querySellerNotAskStatsTotal(map);
+		
+		length.setData(data);
+		
+		return length;
+	}
+	
 	/**
 	 * 商家未询统计(列出没有订单的地接社，包含地接社名称和服务国家)
 	 * 
@@ -466,9 +737,9 @@ public class StatisticsService extends BaseService {
 	 * @param request
 	 * @return
 	 */
-	public QueryResult<SellerNotAskStatsD> querySellerNotAskStatsD(SellerNotAskStatsD sellerNotAskStatsD, PageHelper ph, HttpServletRequest request) {
+	public QueryResult<SellerNotAskStats> querySellerNotAskStatsD(SellerNotAskStats sellerNotAskStatsD, PageHelper ph, HttpServletRequest request) {
 		
-		QueryResult<SellerNotAskStatsD> length = new QueryResult<SellerNotAskStatsD>();
+		QueryResult<SellerNotAskStats> length = new QueryResult<SellerNotAskStats>();
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		
@@ -477,14 +748,14 @@ public class StatisticsService extends BaseService {
 			map.put("searchStartTime", sellerNotAskStatsD.getSearchStartTime());
 		}
 		if(sellerNotAskStatsD.getSearchEndTime()!=null){
-			sellerNotAskStatsD.setSearchEndTime(sellerNotAskStatsD.getSearchEndTime()+" 24:00:00");
+			sellerNotAskStatsD.setSearchEndTime(sellerNotAskStatsD.getSearchEndTime()+" 23:59:59");
 			map.put("searchEndTime", sellerNotAskStatsD.getSearchEndTime());
 		}
 		
 		map.put("start", ph.getStart());
 		map.put("length", ph.getLength());
 		
-		List<SellerNotAskStatsD> data = statisticsMapper.querySellerNotAskStatsD(map);
+		List<SellerNotAskStats> data = statisticsMapper.querySellerNotAskStatsD(map);
 		long count = statisticsMapper.countSellerNotAskStatsD(sellerNotAskStatsD);
 		
 		length.setData(data);
@@ -518,6 +789,15 @@ public class StatisticsService extends BaseService {
 		length.setCountTotal(count);
 		length.setCountFiltered(count);
 		
+		return length;
+	}
+	
+	public QueryResult<CustomerSourceLevelStats> queryCustomerSourceLevelStatsTotal(CustomerSourceLevelStats customerSourceLevelStats, PageHelper ph, HttpServletRequest request) {
+		
+		QueryResult<CustomerSourceLevelStats> length = new QueryResult<CustomerSourceLevelStats>();
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<CustomerSourceLevelStats> data = statisticsMapper.queryCustomerSourceLevelStatsTotal(map);
+		length.setData(data);
 		return length;
 	}
 	

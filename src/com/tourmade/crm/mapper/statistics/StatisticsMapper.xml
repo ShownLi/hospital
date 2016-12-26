@@ -28,6 +28,43 @@
 		group by agency_id
 	</select>
 	
+	 <select id="queryAgencyOrderStatusTotal" parameterType="Map" resultType="AgencyOrderStatus">
+		select
+			sum(total) as total_T,
+			sum(status0) as status0_T,
+			sum(status1) as status1_T,
+			sum(status2) as status2_T,
+			sum(status3) as status3_T,
+			sum(status4) as status4_T,
+			sum(dealmoney) as dealmoney_T,
+			concat ( left (sum(status2) / sum(total) *100,5),'%') as rate_T
+		from(
+			select 
+				agency_name as agencyName,
+				agency_id,
+				count(1) as total,
+				sum(case when status=0 then 1 else 0 end) as status0 ,
+				sum(case when status=1 then 1 else 0 end) as status1,
+				sum(case when status=2 then 1 else 0 end) as status2 ,
+				sum(case when status=3 then 1 else 0 end) as status3 ,
+				sum(case when status=4 then 1 else 0 end) as status4 ,
+				concat ( left (sum(case when status=2 then 1 else 0 end) / count(1) *100,5),'%') as rate,
+				sum(rmb_price) as dealmoney
+			from tm_order
+			where isdel = 0
+	        <if test="searchStartTime != null and searchStartTime != ''">
+				and creat_time >= '${searchStartTime}'
+			</if> 
+			<if test="searchEndTime != null and searchEndTime != ''">
+				and creat_time &lt;= '${searchEndTime}'
+			</if>
+			<if test="destination != null and destination != ''">
+	        	and destination = #{destination}
+	        </if>
+			group by agency_id
+		) temp
+	</select>
+	
 	<select id="queryCaseSourceStats" parameterType="Map" resultType="CaseSourceStats">
 		select 
 			c.source as source_en,
@@ -51,6 +88,43 @@
 			and c.creat_time &lt;= '${searchEndTime}'
 		</if>
 		group by c.source
+	</select>
+	
+	<select id="queryCaseSourceStatsTotal" parameterType="Map" resultType="CaseSourceStatsTotal">
+		select 
+			sum(total) as total_T,
+			sum(status0) as status0_T,
+			sum(status1) as status1_T,
+			sum(status2) as status2_T,
+			sum(status3) as status3_T,
+			sum(status4) as status4_T,
+			sum(status5) as status5_T,
+			sum(status6) as status6_T,
+			concat (left (sum(status3) / sum(total) *100,5),'%') as rate_T
+		from(
+			select 
+					c.source as source_en,
+					p.chinese sourceName,
+					count(1) as total,
+					sum(case when o.status=0 then 1 else 0 end) as status0 ,
+					sum(case when o.status=1 then 1 else 0 end) as status1,
+					sum(case when o.status=2 then 1 else 0 end) as status2 ,
+					sum(case when o.status=3 then 1 else 0 end) as status3 ,
+					sum(case when o.status=4 then 1 else 0 end) as status4 ,
+					sum(case when o.status=5 then 1 else 0 end) as status5 ,
+					sum(case when o.status=6 then 1 else 0 end) as status6 ,
+					concat (left (sum(case when o.status=3 then 1 else 0 end) / count(1) *100,5),'%') as rate,
+					sum(o.rmb_price) as dealMoney
+			from tm_case c left join tm_order o on c.case_id = o.case_id left join tm_parameter p on c.source=p.para_value
+			where c.isdel = 0    
+			<if test="searchStartTime != null and searchStartTime != ''">
+				and c.creat_time >= '${searchStartTime}'
+			</if> 
+			<if test="searchEndTime != null and searchEndTime != ''">
+				and c.creat_time &lt;= '${searchEndTime}'
+			</if>
+			group by c.source
+		) temp
 	</select>
 	
 	<select id="queryCaseAllotStats" parameterType="Map" resultType="CaseAllotStats">
@@ -82,6 +156,52 @@
 		group by u.user_id
 	</select>
 	
+	<select id="queryCaseAllotStatsTotal" parameterType="Map" resultType="CaseAllotStatsTotal">
+		select 
+			sum(web_form) AS web_form_T,
+			sum(mobile_form) AS mobile_form_T,
+			sum(direct_form) AS direct_form_T,
+			sum(wechat_form) AS wechat_form_T,
+			sum(web_service) AS web_service_T,
+			sum(mobile_service) AS mobile_service_T,
+			sum(phone_service) AS phone_service_T,
+			sum(wechat_service) AS wechat_service_T,
+			sum(offline) AS offline_T,
+			sum(email) AS email_T,
+			sum(friends) AS friends_T,
+			sum(customer) AS customer_T,
+			sum(ctrip) AS ctrip_T,
+			sum(total) AS total_T
+		from(
+			select 
+				u.user_name as userName,
+				u.user_id,
+				count(1) as total,
+				sum(case when c.source='web_form' then 1 else 0 end) as web_form ,
+				sum(case when c.source='mobile_form' then 1 else 0 end) as mobile_form,
+				sum(case when c.source='direct_form' then 1 else 0 end) as direct_form ,
+				sum(case when c.source='wechat_form' then 1 else 0 end) as wechat_form ,
+				sum(case when c.source='web_service' then 1 else 0 end) as web_service ,
+				sum(case when c.source='mobile_service' then 1 else 0 end) as mobile_service ,
+				sum(case when c.source='phone_service' then 1 else 0 end) as phone_service ,
+				sum(case when c.source='wechat_service' then 1 else 0 end) as wechat_service ,
+				sum(case when c.source='offline' then 1 else 0 end) as offline ,
+				sum(case when c.source='email' then 1 else 0 end) as email ,
+				sum(case when c.source='friends' then 1 else 0 end) as friends ,
+				sum(case when c.source='customer' then 1 else 0 end) as customer ,
+				sum(case when c.source='ctrip' then 1 else 0 end) as ctrip
+			from tm_user u left join tm_case c on u.user_id=c.operator 
+			where c.isdel = 0 
+	        <if test="searchStartTime != null and searchStartTime != ''">
+				and c.creat_time >= '${searchStartTime}'
+			</if> 
+			<if test="searchEndTime != null and searchEndTime != ''">
+				and c.creat_time &lt;= '${searchEndTime}'
+			</if>
+			group by u.user_id
+		) temp
+	</select>
+	
 	<select id="queryAgencyAchievementStats" parameterType="Map" resultType="AgencyAchievementStats">
 		select 
 			o.agency_id,
@@ -109,7 +229,31 @@
 		group by o.agency_id 
 	</select>
 	
-	<select id="queryAgencyAchievementStatsM" parameterType="Map" resultType="AgencyAchievementStatsM">
+	<select id="queryAgencyAchievementStatsTotal" parameterType="Map" resultType="AgencyAchievementStats">
+		select 
+			IFNULL(concat(format(sum(if(month(o.creat_time) = 1 &amp;&amp; o.status = '3',1,0))/sum(if(month(o.creat_time) = 1 ,1,0))*100,2),'%'),'--') as percentjan_T,
+			IFNULL(concat(format(sum(if(month(o.creat_time) = 2 &amp;&amp; o.status = '3',1,0))/sum(if(month(o.creat_time) = 2 ,1,0))*100,2),'%'),'--') as percentfeb_T,
+			IFNULL(concat(format(sum(if(month(o.creat_time) = 3 &amp;&amp; o.status = '3',1,0))/sum(if(month(o.creat_time) = 3 ,1,0))*100,2),'%'),'--') as percentmar_T,
+			IFNULL(concat(format(sum(if(month(o.creat_time) = 4 &amp;&amp; o.status = '3',1,0))/sum(if(month(o.creat_time) = 4 ,1,0))*100,2),'%'),'--') as percentapr_T,
+			IFNULL(concat(format(sum(if(month(o.creat_time) = 5 &amp;&amp; o.status = '3',1,0))/sum(if(month(o.creat_time) = 5 ,1,0))*100,2),'%'),'--') as percentmay_T,
+			IFNULL(concat(format(sum(if(month(o.creat_time) = 6 &amp;&amp; o.status = '3',1,0))/sum(if(month(o.creat_time) = 6 ,1,0))*100,2),'%'),'--') as percentjun_T,
+			IFNULL(concat(format(sum(if(month(o.creat_time) = 7 &amp;&amp; o.status = '3',1,0))/sum(if(month(o.creat_time) = 7 ,1,0))*100,2),'%'),'--') as percentjul_T,
+			IFNULL(concat(format(sum(if(month(o.creat_time) = 8 &amp;&amp; o.status = '3',1,0))/sum(if(month(o.creat_time) = 8 ,1,0))*100,2),'%'),'--') as percentaug_T,
+			IFNULL(concat(format(sum(if(month(o.creat_time) = 9 &amp;&amp; o.status = '3',1,0))/sum(if(month(o.creat_time) = 9 ,1,0))*100,2),'%'),'--') as percentsep_T,
+			IFNULL(concat(format(sum(if(month(o.creat_time) = 10 &amp;&amp; o.status = '3',1,0))/sum(if(month(o.creat_time) = 10 ,1,0))*100,2),'%'),'--') as percentoct_T,
+			IFNULL(concat(format(sum(if(month(o.creat_time) = 11 &amp;&amp; o.status = '3',1,0))/sum(if(month(o.creat_time) = 11 ,1,0))*100,2),'%'),'--') as percentnov_T,
+			IFNULL(concat(format(sum(if(month(o.creat_time) = 12 &amp;&amp; o.status = '3',1,0))/sum(if(month(o.creat_time) = 12 ,1,0))*100,2),'%'),'--') as percentdece_T     
+			from tm_order o
+			where o.isdel = 0
+        <if test="searchStartTime != null and searchStartTime != ''">
+			and o.creat_time >= '${searchStartTime}'
+		</if> 
+		<if test="searchEndTime != null and searchEndTime != ''">
+			and o.creat_time &lt;= '${searchEndTime}'
+		</if>
+	</select>
+	
+	<select id="queryAgencyAchievementStatsM" parameterType="Map" resultType="AgencyAchievementStats">
 		select 
 			o.agency_name as agencyname,
 			o.agency_id,
@@ -136,6 +280,48 @@
 		group by o.agency_id
 	</select>
 	
+	<select id="queryAgencyAchievementStatsMTotal" parameterType="Map" resultType="AgencyAchievementStats">
+		select 
+			sum(percentjan) as percentjanM_T,
+			sum(percentfeb) as percentfebM_T,
+			sum(percentmar) as percentmarM_T,
+			sum(percentapr) as percentaprM_T,
+			sum(percentmay) as percentmayM_T,
+			sum(percentjun) as percentjunM_T,
+			sum(percentjul) as percentjulM_T,
+			sum(percentaug) as percentaugM_T,
+			sum(percentsep) as percentsepM_T,
+			sum(percentoct) as percentoctM_T,
+			sum(percentnov) as percentnovM_T,
+			sum(percentdece) as percentdeceM_T
+		from (
+			select 
+				o.agency_name as agencyname,
+				o.agency_id,
+				sum(if(month(o.group_time) = 1 ,o.rmb_price,0)) as percentjan,
+				sum(if(month(o.group_time) = 2 ,o.rmb_price,0)) as percentfeb,
+				sum(if(month(o.group_time) = 3 ,o.rmb_price,0)) as percentmar,
+				sum(if(month(o.group_time) = 4 ,o.rmb_price,0)) as percentapr,
+				sum(if(month(o.group_time) = 5 ,o.rmb_price,0)) as percentmay,
+				sum(if(month(o.group_time) = 6 ,o.rmb_price,0)) as percentjun,
+				sum(if(month(o.group_time) = 7 ,o.rmb_price,0)) as percentjul,
+				sum(if(month(o.group_time) = 8 ,o.rmb_price,0)) as percentaug,
+				sum(if(month(o.group_time) = 9 ,o.rmb_price,0)) as percentsep,
+				sum(if(month(o.group_time) = 10 ,o.rmb_price,0)) as percentoct,
+				sum(if(month(o.group_time) = 11 ,o.rmb_price,0)) as percentnov,
+				sum(if(month(o.group_time) = 12 ,o.rmb_price,0)) as percentdece
+			from tm_order o
+			where o.isdel = 0 and o.`status` = '2'
+	        <if test="searchStartTime != null and searchStartTime != ''">
+				and o.group_time >= '${searchStartTime}'
+			</if> 
+			<if test="searchEndTime != null and searchEndTime != ''">
+				and o.group_time &lt;= '${searchEndTime}'
+			</if>
+			group by o.agency_id
+		) temp
+	</select>
+	
 	<select id="querySellerCoverStats" parameterType="Map" resultType="SellerCoverStats">
 		select 
 			a.country coun,
@@ -144,6 +330,21 @@
 		from tm_agency a left join tm_parameter p on a.country = p.para_value
 		group by a.country 
 		order by count(a.agency_id) desc  
+	</select>
+	
+	<select id="querySellerCoverStatsTotal" parameterType="Map" resultType="SellerCoverStats">
+		SELECT
+			count(coun) as countryTotal,
+			sum(number) as numberTotal
+		from(
+			select 
+				a.country coun,
+				p.chinese country,
+				count(a.agency_id) number
+			from tm_agency a left join tm_parameter p on a.country = p.para_value
+			group by a.country 
+			order by count(a.agency_id) desc 
+		) temp 
 	</select>
 	
 	<select id="querySellerNotAskStats" parameterType="Map" resultType="SellerNotAskStats">
@@ -169,7 +370,34 @@
 		order by count(a.agency_id) desc   
 	</select>
 	
-	<select id="querySellerNotAskStatsD" parameterType="Map" resultType="SellerNotAskStatsD">
+	<select id="querySellerNotAskStatsTotal" parameterType="Map" resultType="SellerNotAskStats">
+		select
+			sum(number) as number_T
+		from(
+			select 
+				a.country country_en,
+				p.chinese country,
+				count(a.agency_id) number
+			from tm_agency a left join tm_parameter p on a.country = p.para_value
+			WHERE country not in (
+				select 
+					destination AS country 
+					from tm_case 
+					WHERE destination IS NOT NULL
+					<if test="searchStartTime != null and searchStartTime != ''">
+						and creat_time >= '${searchStartTime}'
+					</if> 
+					<if test="searchEndTime != null and searchEndTime != ''">
+						and creat_time &lt;= '${searchEndTime}'
+					</if>
+					)
+			and a.isdel=0
+			group by a.country 
+			order by count(a.agency_id) desc 
+		) temp  
+	</select>
+	
+	<select id="querySellerNotAskStatsD" parameterType="Map" resultType="SellerNotAskStats">
 		select 
 			a.agency_name as destination, 
 			a.agency_id,
@@ -207,6 +435,30 @@
 		group by c.source    
 	</select>
 	
+	<select id="queryCustomerSourceLevelStatsTotal" parameterType="Map" resultType="CustomerSourceLevelStats">
+		select
+			sum(level0) as level0_T,
+			sum(level1) as level1_T,
+			sum(level2) as level2_T,
+			sum(level3) as level3_T,
+			sum(level0)+sum(level1)+sum(level2)+sum(level3) as sumT2,
+			concat ( left (sum(level3) / (sum(level0)+sum(level1)+sum(level2)+sum(level3)) *100,4),'%') as rate_T 
+		from(
+			select 
+				c.source as source_en,
+				p.chinese as source,
+				count(1) as sumT,
+					sum(case when c.customer_level=0 then 1 else 0 end) as level0 ,
+					sum(case when c.customer_level=1 then 1 else 0 end) as level1,
+					sum(case when c.customer_level=2 then 1 else 0 end) as level2 ,
+					sum(case when c.customer_level=3 then 1 else 0 end) as level3 ,
+					concat ( left (sum(case when c.customer_level=3 then 1 else 0 end) / count(1) *100,4),'%') as rate
+			from tm_customer c left join tm_parameter p on c.source = p.para_value
+			where c.isdel = 0
+			group by c.source 
+		) temp   
+	</select>
+	
 	<select id="countCustomerSourceLevelStats" parameterType="CustomerSourceLevelStats" resultType="long">
 		select count(1) from (
 			select 
@@ -224,7 +476,7 @@
 		) table_name
 	</select>
 	
-	<select id="countSellerNotAskStatsD" parameterType="SellerNotAskStatsD" resultType="long">
+	<select id="countSellerNotAskStatsD" parameterType="SellerNotAskStats" resultType="long">
 		select count(country) from (
 			select 
 				a.agency_name as destination, 
@@ -286,7 +538,7 @@
 		) table_name
 	</select>
 	
-	<select id="countAgencyAchievementStatsM" parameterType="AgencyAchievementStatsM" resultType="long">
+	<select id="countAgencyAchievementStatsM" parameterType="AgencyAchievementStats" resultType="long">
 		select count(agency_id) from (
 			select 
 				o.agency_name as agencyname,
@@ -430,7 +682,6 @@
 		) temp
 	</select>
 	
-
 	<select id="getParameterInfo" parameterType="String" resultType="EntityList">
 		select
 		u.para_domain,
@@ -473,13 +724,97 @@
 		GROUP BY tm_case.operator 
 		ORDER BY tm_case.operator
 	</select>
+	
+	<select id="queryUserAchievementStatsTotal" parameterType="Map" resultType="com.tourmade.crm.entity.UserAchievement">
+		
+		select
+			sum(total) as total_T,
+			sum(pendingNum) as pendingNum_T,
+			sum(communicatingNum) as communicatingNum_T,
+			sum(agencyDesigningNum) as agencyDesigningNum_T,
+			sum(dealNum) as dealNum_T,
+			sum(noDealNum) as noDealNum_T,
+			sum(invalidNum) as invalidNum_T,
+			sum(paidNum) as paidNum_T,
+			CONCAT(FORMAT(sum(dealNum)/sum(total)*100,2),'%') AS dealPercent_T
+		from(
+			SELECT 
+			tm_user.user_name AS userName,
+			tm_case.operator,
+			count(1) AS total,
+			sum(IF(tm_case.`status` = '0',1,0)) AS pendingNum,
+			sum(IF(tm_case.`status` = '1',1,0)) AS communicatingNum,
+			sum(IF(tm_case.`status` = '2',1,0)) AS agencyDesigningNum,
+			sum(IF(tm_case.`status` = '3',1,0)) AS dealNum,
+			sum(IF(tm_case.`status` = '4',1,0)) AS noDealNum,
+			sum(IF(tm_case.`status` = '5',1,0)) AS invalidNum,
+			sum(IF(tm_case.`status` = '6',1,0)) AS paidNum,
+			CONCAT(FORMAT(sum(IF(tm_case.`status` = '3',1,0))/count(1)*100,2),'%') AS dealPercent
+			FROM tm_case LEFT JOIN tm_user ON tm_case.operator = tm_user.user_id
+			<where>
+				<if test="startCreateTime != null and startCreateTime != ''">
+					AND tm_case.creat_time &gt;= #{startCreateTime}
+				</if> 
+				
+				<if test="endCreateTime != null and endCreateTime != ''">
+					AND tm_case.creat_time &lt;= #{endCreateTime}
+				</if>
+				<if test="source != null and source != '' and source != 'all' ">
+					AND tm_case.source = #{source}
+				</if>
+			</where>
+			GROUP BY tm_case.operator 
+			ORDER BY tm_case.operator
+		) temp
+	</select>
+	
 	<select id="countAllUsers" resultType="long">
 		SELECT COUNT(1) 
 		FROM tm_user
 	</select>
 	
 	<select id="queryContactReal" parameterType="Map" resultType="com.tourmade.crm.entity.ContactRealStats">
-				SELECT 
+		SELECT 
+			con.chinese AS contactName,
+			tm_case.contact_real AS contact_real,
+			count(1) AS total,
+			sum(IF(tm_case.`status` = '0',1,0)) AS pendingNum,
+			sum(IF(tm_case.`status` = '1',1,0)) AS communicatingNum,
+			sum(IF(tm_case.`status` = '2',1,0)) AS agencyDesigningNum,
+			sum(IF(tm_case.`status` = '3',1,0)) AS dealNum,
+			sum(IF(tm_case.`status` = '4',1,0)) AS noDealNum,
+			sum(IF(tm_case.`status` = '5',1,0)) AS invalidNum,
+			sum(IF(tm_case.`status` = '6',1,0)) AS paidNum,
+		CONCAT(FORMAT(sum(IF(tm_case.`status` = '3',1,0))/count(1)*100,2),'%') AS dealPercent
+		FROM tm_case LEFT JOIN 
+		(
+		SELECT para_value,chinese
+		FROM tm_parameter
+		WHERE para_domain = 'case.contact') con ON con.para_value = tm_case.contact_real
+		<where>
+			<if test="startCreateTime != null and startCreateTime != ''">
+				tm_case.creat_time &gt;= #{startCreateTime}
+			</if> 
+			<if test="endCreateTime != null and endCreateTime != ''">
+				and tm_case.creat_time &lt;= #{endCreateTime}
+			</if>
+		</where>
+		GROUP BY contact_real
+	</select>
+	
+	<select id="queryContactRealTotal" parameterType="Map" resultType="com.tourmade.crm.entity.ContactRealStatsTotal">
+		select 
+			sum(total) AS total_T,
+			sum(pendingNum) AS pendingNum_T,
+			sum(communicatingNum) AS communicatingNum_T,
+			sum(agencyDesigningNum) AS agencyDesigningNum_T,
+			sum(dealNum) AS dealNum_T,
+			sum(noDealNum) AS noDealNum_T,
+			sum(invalidNum) AS invalidNum_T,
+			sum(paidNum) AS paidNum_T,
+			CONCAT(FORMAT(sum(dealNum)/sum(total)*100,2),'%') AS dealPercent_T
+		from(
+			SELECT 
 				con.chinese AS contactName,
 				tm_case.contact_real AS contact_real,
 				count(1) AS total,
@@ -490,24 +825,25 @@
 				sum(IF(tm_case.`status` = '4',1,0)) AS noDealNum,
 				sum(IF(tm_case.`status` = '5',1,0)) AS invalidNum,
 				sum(IF(tm_case.`status` = '6',1,0)) AS paidNum,
-				CONCAT(FORMAT(sum(IF(tm_case.`status` = '3',1,0))/count(1)*100,2),'%') AS dealPercent
-				FROM tm_case LEFT JOIN 
-				(
-				SELECT para_value,chinese
-				FROM tm_parameter
-				WHERE para_domain = 'case.contact') con ON con.para_value = tm_case.contact_real
-				<where>
-					<if test="startCreateTime != null and startCreateTime != ''">
-						tm_case.creat_time &gt;= #{startCreateTime}
-					</if> 
-					<if test="endCreateTime != null and endCreateTime != ''">
-						and tm_case.creat_time &lt;= #{endCreateTime}
-					</if>
-				</where>
-				GROUP BY contact_real
+			CONCAT(FORMAT(sum(IF(tm_case.`status` = '3',1,0))/count(1)*100,2),'%') AS dealPercent
+			FROM tm_case LEFT JOIN 
+			(
+			SELECT para_value,chinese
+			FROM tm_parameter
+			WHERE para_domain = 'case.contact') con ON con.para_value = tm_case.contact_real
+			<where>
+				<if test="startCreateTime != null and startCreateTime != ''">
+					tm_case.creat_time &gt;= #{startCreateTime}
+				</if> 
+				<if test="endCreateTime != null and endCreateTime != ''">
+					and tm_case.creat_time &lt;= #{endCreateTime}
+				</if>
+			</where>
+			GROUP BY contact_real
+		) temp
 	</select>
+	
 	<select id="countAllContact" parameterType="Map" resultType="long">
-		
 		SELECT COUNT(1)
 		FROM(SELECT contact_real
 		FROM tm_case 
@@ -540,6 +876,29 @@
 		</if>
 		GROUP BY tm_case.reason
 	</select>
+	
+	<select id="queryReasonOfDrainingTotal" parameterType="Map" resultType="com.tourmade.crm.entity.ReasonOfDrainingStatsTotal">
+		select 
+			sum(num) as num_T
+		from (
+			SELECT chinese AS reasonOfDrainingName,count(1) AS num
+			FROM tm_case LEFT JOIN 
+			(
+			SELECT para_value,chinese
+			FROM tm_parameter
+			WHERE para_domain = 'case.reason' 
+			) r ON r.para_value = tm_case.reason
+			WHERE tm_case.`status`= '5' 
+			<if test="startCreateTime != null and startCreateTime != ''">
+				AND tm_case.creat_time &gt;= #{startCreateTime}
+			</if> 
+			<if test="endCreateTime != null and endCreateTime != ''">
+				AND tm_case.creat_time &lt;= #{endCreateTime}
+			</if>
+			GROUP BY tm_case.reason
+		) temp
+	</select>
+	
 	<select id="countCaseInvalid" parameterType="Map" resultType="long">
 		SELECT COUNT(1) AS total
 		FROM tm_case 
@@ -551,6 +910,7 @@
 			and tm_case.creat_time &lt;= #{endCreateTime}
 		</if>
 	</select>
+	
 	<select id="queryReasonOfDrainingNoDeal" parameterType="Map" resultType="com.tourmade.crm.entity.ReasonOfDrainingStats">
 		SELECT chinese AS reasonOfDrainingName ,count(1) AS num
 		FROM tm_case LEFT JOIN 
@@ -567,6 +927,28 @@
 			AND tm_case.creat_time &lt;= #{endCreateTime}
 		</if>
 		GROUP BY tm_case.reason_nodeal
+	</select>
+	
+	<select id="queryReasonOfDrainingNoDealTotal" parameterType="Map" resultType="com.tourmade.crm.entity.ReasonOfDrainingStatsTotal">
+		select 
+			sum(num) as num_T
+		from (
+			SELECT chinese AS reasonOfDrainingName ,count(1) AS num
+			FROM tm_case LEFT JOIN 
+			(
+			SELECT para_value,chinese
+			FROM tm_parameter
+			WHERE para_domain = 'case.reasonnodeal' 
+			) r ON r.para_value = tm_case.reason_nodeal
+			WHERE tm_case.`status`= '4' 
+			<if test="startCreateTime != null and startCreateTime != ''">
+				AND tm_case.creat_time &gt;= #{startCreateTime}
+			</if> 
+			<if test="endCreateTime != null and endCreateTime != ''">
+				AND tm_case.creat_time &lt;= #{endCreateTime}
+			</if>
+			GROUP BY tm_case.reason_nodeal
+		) temp
 	</select>
 	
 	<select id="countCaseNoDeal" parameterType="Map" resultType="long">
@@ -606,8 +988,33 @@
 			</if>
 		</where>
 		GROUP BY tm_case.operator 
-		ORDER BY tm_case.operator
 	</select>
+	
+	<select id="queryUserAchiRateTotal" parameterType="Map" resultType="com.tourmade.crm.entity.UserAchRate">
+		SELECT 
+			IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 1 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 1 ,1,0))*100,2),'%'),'--') AS percentJan_TR,                            
+			IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 2 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 2 ,1,0))*100,2),'%'),'--') AS percentFeb_TR,
+			IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 3 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 3 ,1,0))*100,2),'%'),'--') AS percentMar_TR,
+			IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 4 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 4 ,1,0))*100,2),'%'),'--') AS percentApr_TR,
+			IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 5 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 5 ,1,0))*100,2),'%'),'--') AS percentMay_TR,
+			IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 6 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 6 ,1,0))*100,2),'%'),'--') AS percentJun_TR,
+			IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 7 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 7 ,1,0))*100,2),'%'),'--') AS percentJul_TR,
+			IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 8 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 8 ,1,0))*100,2),'%'),'--') AS percentAug_TR,
+			IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 9 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 9 ,1,0))*100,2),'%'),'--') AS percentSep_TR,
+			IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 10 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 10 ,1,0))*100,2),'%'),'--') AS percentOct_TR,
+			IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 11 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 11 ,1,0))*100,2),'%'),'--') AS percentNov_TR,
+			IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 12 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 12 ,1,0))*100,2),'%'),'--') AS percentDec_TR
+			FROM tm_case LEFT JOIN tm_user ON tm_case.operator = tm_user.user_id
+		<where>
+			<if test="startCreateTime != null and startCreateTime != ''">
+				AND tm_case.creat_time &gt;= #{startCreateTime}
+			</if> 
+			<if test="endCreateTime != null and endCreateTime != ''">
+				AND tm_case.creat_time &lt;= #{endCreateTime}
+			</if>
+		</where>
+	</select>
+	
 	<select id="countCaseAllUsers" parameterType="Map" resultType="long"> 
 	SELECT COUNT(1)
 	FROM(SELECT operator
@@ -625,22 +1032,23 @@
 		</where>
 		GROUP BY tm_case.operator) u
 	</select>
+	
 	<select id="queryUserAchiMoney" parameterType="Map" resultType="com.tourmade.crm.entity.UserAchRate">
-	SELECT 
-		tm_user.user_name AS userName,
-		SUM(IF(MONTH(tm_order.group_time) = 1 ,tm_order.rmb_price,0)) AS percentJan,
-		SUM(IF(MONTH(tm_order.group_time) = 2 ,tm_order.rmb_price,0)) AS percentFeb,
-		SUM(IF(MONTH(tm_order.group_time) = 3 ,tm_order.rmb_price,0)) AS percentMar,
-		SUM(IF(MONTH(tm_order.group_time) = 4 ,tm_order.rmb_price,0)) AS percentApr,
-		SUM(IF(MONTH(tm_order.group_time) = 5 ,tm_order.rmb_price,0)) AS percentMay,
-		SUM(IF(MONTH(tm_order.group_time) = 6 ,tm_order.rmb_price,0)) AS percentJun,
-		SUM(IF(MONTH(tm_order.group_time) = 7 ,tm_order.rmb_price,0)) AS percentJul,
-		SUM(IF(MONTH(tm_order.group_time) = 8 ,tm_order.rmb_price,0)) AS percentAug,
-		SUM(IF(MONTH(tm_order.group_time) = 9 ,tm_order.rmb_price,0)) AS percentSep,
-		SUM(IF(MONTH(tm_order.group_time) = 10 ,tm_order.rmb_price,0)) AS percentOct,
-		SUM(IF(MONTH(tm_order.group_time) = 11 ,tm_order.rmb_price,0)) AS percentNov,
-		SUM(IF(MONTH(tm_order.group_time) = 12 ,tm_order.rmb_price,0)) AS percentDec
-		FROM tm_order LEFT JOIN tm_user ON tm_order.operator = tm_user.user_id
+		SELECT 
+			tm_user.user_name AS userName,
+			SUM(IF(MONTH(tm_order.group_time) = 1 ,tm_order.rmb_price,0)) AS percentJan,
+			SUM(IF(MONTH(tm_order.group_time) = 2 ,tm_order.rmb_price,0)) AS percentFeb,
+			SUM(IF(MONTH(tm_order.group_time) = 3 ,tm_order.rmb_price,0)) AS percentMar,
+			SUM(IF(MONTH(tm_order.group_time) = 4 ,tm_order.rmb_price,0)) AS percentApr,
+			SUM(IF(MONTH(tm_order.group_time) = 5 ,tm_order.rmb_price,0)) AS percentMay,
+			SUM(IF(MONTH(tm_order.group_time) = 6 ,tm_order.rmb_price,0)) AS percentJun,
+			SUM(IF(MONTH(tm_order.group_time) = 7 ,tm_order.rmb_price,0)) AS percentJul,
+			SUM(IF(MONTH(tm_order.group_time) = 8 ,tm_order.rmb_price,0)) AS percentAug,
+			SUM(IF(MONTH(tm_order.group_time) = 9 ,tm_order.rmb_price,0)) AS percentSep,
+			SUM(IF(MONTH(tm_order.group_time) = 10 ,tm_order.rmb_price,0)) AS percentOct,
+			SUM(IF(MONTH(tm_order.group_time) = 11 ,tm_order.rmb_price,0)) AS percentNov,
+			SUM(IF(MONTH(tm_order.group_time) = 12 ,tm_order.rmb_price,0)) AS percentDec
+			FROM tm_order LEFT JOIN tm_user ON tm_order.operator = tm_user.user_id
 		WHERE  tm_order.`status` = '2'
 			<if test="startCreateTime != null and startCreateTime != ''">
 			 	and tm_order.group_time &gt;= #{startCreateTime}
@@ -649,8 +1057,49 @@
 				and tm_order.group_time &lt;= #{endCreateTime}
 			</if>
 		GROUP BY tm_order.operator 
-		ORDER BY tm_order.operator
 	</select>
+	
+	<select id="queryUserAchiMoneyTotal" parameterType="Map" resultType="com.tourmade.crm.entity.UserAchRate">
+		select
+			sum(percentJan) as percentJan_TM,
+			sum(percentFeb) as percentFeb_TM,
+			sum(percentMar) as percentMar_TM,
+			sum(percentApr) as percentApr_TM,
+			sum(percentMay) as percentMay_TM,
+			sum(percentJun) as percentJun_TM,
+			sum(percentJul) as percentJul_TM,
+			sum(percentAug) as percentAug_TM,
+			sum(percentSep) as percentSep_TM,
+			sum(percentOct) as percentOct_TM,
+			sum(percentNov) as percentNov_TM,
+			sum(percentDec) as percentDec_TM
+		from (
+			SELECT 
+				tm_user.user_name AS userName,
+				SUM(IF(MONTH(tm_order.group_time) = 1 ,tm_order.rmb_price,0)) AS percentJan,
+				SUM(IF(MONTH(tm_order.group_time) = 2 ,tm_order.rmb_price,0)) AS percentFeb,
+				SUM(IF(MONTH(tm_order.group_time) = 3 ,tm_order.rmb_price,0)) AS percentMar,
+				SUM(IF(MONTH(tm_order.group_time) = 4 ,tm_order.rmb_price,0)) AS percentApr,
+				SUM(IF(MONTH(tm_order.group_time) = 5 ,tm_order.rmb_price,0)) AS percentMay,
+				SUM(IF(MONTH(tm_order.group_time) = 6 ,tm_order.rmb_price,0)) AS percentJun,
+				SUM(IF(MONTH(tm_order.group_time) = 7 ,tm_order.rmb_price,0)) AS percentJul,
+				SUM(IF(MONTH(tm_order.group_time) = 8 ,tm_order.rmb_price,0)) AS percentAug,
+				SUM(IF(MONTH(tm_order.group_time) = 9 ,tm_order.rmb_price,0)) AS percentSep,
+				SUM(IF(MONTH(tm_order.group_time) = 10 ,tm_order.rmb_price,0)) AS percentOct,
+				SUM(IF(MONTH(tm_order.group_time) = 11 ,tm_order.rmb_price,0)) AS percentNov,
+				SUM(IF(MONTH(tm_order.group_time) = 12 ,tm_order.rmb_price,0)) AS percentDec
+				FROM tm_order LEFT JOIN tm_user ON tm_order.operator = tm_user.user_id
+			WHERE  tm_order.`status` = '2'
+				<if test="startCreateTime != null and startCreateTime != ''">
+				 	and tm_order.group_time &gt;= #{startCreateTime}
+				</if> 
+				<if test="endCreateTime != null and endCreateTime != ''">
+					and tm_order.group_time &lt;= #{endCreateTime}
+				</if>
+			GROUP BY tm_order.operator 
+		) temp
+	</select>
+	
 	<select id="countOrderAllUsers" parameterType="Map" resultType="long">
 		SELECT COUNT(1)
 		FROM(
@@ -695,6 +1144,49 @@
 		GROUP BY tm_case.destination 
 		ORDER BY tm_case.destination
 	</select>
+	
+	<select id="queryDesCaseStatusTotal" parameterType="Map" resultType="com.tourmade.crm.entity.UserAchievement">
+		select 
+			sum(total) as total_T,
+			sum(pendingNum) as pendingNum_T,
+			sum(communicatingNum) as communicatingNum_T,
+			sum(agencyDesigningNum) as agencyDesigningNum_T,
+			sum(dealNum) as dealNum_T,
+			sum(noDealNum) as noDealNum_T,
+			sum(invalidNum) as invalidNum_T,
+			sum(paidNum) as paidNum_T,
+			CONCAT(FORMAT(sum(dealNum)/sum(total)*100,2),'%') AS dealPercent_T
+		from(
+			SELECT 
+			tm_case.destination AS destination,
+			d.chinese AS userName,
+			count(1) AS total,
+			sum(IF(tm_case.`status` = '0',1,0)) AS pendingNum,
+			sum(IF(tm_case.`status` = '1',1,0)) AS communicatingNum,
+			sum(IF(tm_case.`status` = '2',1,0)) AS agencyDesigningNum,
+			sum(IF(tm_case.`status` = '3',1,0)) AS dealNum,
+			sum(IF(tm_case.`status` = '4',1,0)) AS noDealNum,
+			sum(IF(tm_case.`status` = '5',1,0)) AS invalidNum,
+			sum(IF(tm_case.`status` = '6',1,0)) AS paidNum,
+			CONCAT(FORMAT(sum(IF(tm_case.`status` = '3',1,0))/count(1)*100,2),'%') AS dealPercent
+			FROM tm_case LEFT JOIN 
+			(SELECT tm_parameter.para_value,chinese
+				FROM tm_parameter
+				WHERE tm_parameter.para_domain = 'country') d
+			ON tm_case.destination = d.para_value
+			<where>
+				<if test="startCreateTime != null and startCreateTime != ''">
+				 	tm_case.creat_time &gt;= #{startCreateTime}
+				</if> 
+				<if test="endCreateTime != null and endCreateTime != ''">
+					and tm_case.creat_time &lt;= #{endCreateTime}
+				</if>
+			</where>
+			GROUP BY tm_case.destination 
+			ORDER BY tm_case.destination
+		) temp
+	</select>
+	
 	<select id="countCaseAllDes" parameterType="Map" resultType="long">
 		SELECT COUNT(1)
 		FROM(
@@ -739,23 +1231,22 @@
 			</if>
 		</where>
 		GROUP BY tm_case.destination 
-		ORDER BY tm_case.destination
-		
 	</select>
-	<select id="queryDesAchiRateSum" parameterType="Map" resultType="com.tourmade.crm.entity.UserAchRate">
+	
+	<select id="queryDesAchiRateTotal" parameterType="Map" resultType="com.tourmade.crm.entity.UserAchRate">
 		SELECT 
-		IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 1 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 1 ,1,0))*100,2),'%'),'--') AS percentJan,
-		IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 2 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 2 ,1,0))*100,2),'%'),'--') AS percentFeb,
-		IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 3 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 3 ,1,0))*100,2),'%'),'--') AS percentMar,
-		IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 4 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 4 ,1,0))*100,2),'%'),'--') AS percentApr,
-		IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 5 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 5 ,1,0))*100,2),'%'),'--') AS percentMay,
-		IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 6 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 6 ,1,0))*100,2),'%'),'--') AS percentJun,
-		IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 7 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 7 ,1,0))*100,2),'%'),'--') AS percentJul,
-		IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 8 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 8 ,1,0))*100,2),'%'),'--') AS percentAug,
-		IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 9 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 9 ,1,0))*100,2),'%'),'--') AS percentSep,
-		IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 10 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 10 ,1,0))*100,2),'%'),'--') AS percentOct,
-		IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 11 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 11 ,1,0))*100,2),'%'),'--') AS percentNov,
-		IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 12 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 12 ,1,0))*100,2),'%'),'--') AS percentDec
+		IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 1 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 1 ,1,0))*100,2),'%'),'--') AS percentJan_TR,
+		IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 2 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 2 ,1,0))*100,2),'%'),'--') AS percentFeb_TR,
+		IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 3 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 3 ,1,0))*100,2),'%'),'--') AS percentMar_TR,
+		IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 4 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 4 ,1,0))*100,2),'%'),'--') AS percentApr_TR,
+		IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 5 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 5 ,1,0))*100,2),'%'),'--') AS percentMay_TR,
+		IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 6 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 6 ,1,0))*100,2),'%'),'--') AS percentJun_TR,
+		IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 7 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 7 ,1,0))*100,2),'%'),'--') AS percentJul_TR,
+		IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 8 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 8 ,1,0))*100,2),'%'),'--') AS percentAug_TR,
+		IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 9 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 9 ,1,0))*100,2),'%'),'--') AS percentSep_TR,
+		IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 10 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 10 ,1,0))*100,2),'%'),'--') AS percentOct_TR,
+		IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 11 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 11 ,1,0))*100,2),'%'),'--') AS percentNov_TR,
+		IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 12 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 12 ,1,0))*100,2),'%'),'--') AS percentDec_TR
 		FROM tm_case LEFT JOIN (SELECT tm_parameter.para_value,chinese
 			FROM tm_parameter
 			WHERE tm_parameter.para_domain = 'country') d
@@ -769,6 +1260,35 @@
 			</if>
 		</where>
 	</select>
+	
+	<select id="queryDesAchiRateSumTotal" parameterType="Map" resultType="com.tourmade.crm.entity.UserAchRate">
+		SELECT 
+		IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 1 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 1 ,1,0))*100,2),'%'),'--') AS percentJan_TR,
+		IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 2 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 2 ,1,0))*100,2),'%'),'--') AS percentFeb_TR,
+		IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 3 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 3 ,1,0))*100,2),'%'),'--') AS percentMar_TR,
+		IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 4 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 4 ,1,0))*100,2),'%'),'--') AS percentApr_TR,
+		IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 5 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 5 ,1,0))*100,2),'%'),'--') AS percentMay_TR,
+		IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 6 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 6 ,1,0))*100,2),'%'),'--') AS percentJun_TR,
+		IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 7 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 7 ,1,0))*100,2),'%'),'--') AS percentJul_TR,
+		IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 8 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 8 ,1,0))*100,2),'%'),'--') AS percentAug_TR,
+		IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 9 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 9 ,1,0))*100,2),'%'),'--') AS percentSep_TR,
+		IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 10 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 10 ,1,0))*100,2),'%'),'--') AS percentOct_TR,
+		IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 11 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 11 ,1,0))*100,2),'%'),'--') AS percentNov_TR,
+		IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 12 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 12 ,1,0))*100,2),'%'),'--') AS percentDec_TR
+		FROM tm_case LEFT JOIN (SELECT tm_parameter.para_value,chinese
+			FROM tm_parameter
+			WHERE tm_parameter.para_domain = 'country') d
+		ON tm_case.destination = d.para_value
+		<where>
+			<if test="startCreateTime != null and startCreateTime != ''">
+			 	 tm_case.creat_time &gt;= #{startCreateTime}
+			</if> 
+			<if test="endCreateTime != null and endCreateTime != ''">
+				and tm_case.creat_time &lt;= #{endCreateTime}
+			</if>
+		</where>
+	</select>
+	
 	<select id="queryDesAchiMoney" parameterType="Map" resultType="com.tourmade.crm.entity.UserAchRate">
 		SELECT 
 		destination AS code,
@@ -798,33 +1318,51 @@
 		GROUP BY tm_order.destination 
 		ORDER BY tm_order.destination
 	</select>
-	<select id="queryDesAchiMoneySum" parameterType="Map" resultType="com.tourmade.crm.entity.UserAchRate">
-		SELECT 
-		destination AS code,
-		d.chinese AS userName,
-		SUM(IF(MONTH(tm_order.group_time) = 1 ,tm_order.rmb_price,0)) AS percentJan,
-		SUM(IF(MONTH(tm_order.group_time) = 2 ,tm_order.rmb_price,0)) AS percentFeb,
-		SUM(IF(MONTH(tm_order.group_time) = 3 ,tm_order.rmb_price,0)) AS percentMar,
-		SUM(IF(MONTH(tm_order.group_time) = 4 ,tm_order.rmb_price,0)) AS percentApr,
-		SUM(IF(MONTH(tm_order.group_time) = 5 ,tm_order.rmb_price,0)) AS percentMay,
-		SUM(IF(MONTH(tm_order.group_time) = 6 ,tm_order.rmb_price,0)) AS percentJun,
-		SUM(IF(MONTH(tm_order.group_time) = 7 ,tm_order.rmb_price,0)) AS percentJul,
-		SUM(IF(MONTH(tm_order.group_time) = 8 ,tm_order.rmb_price,0)) AS percentAug,
-		SUM(IF(MONTH(tm_order.group_time) = 9 ,tm_order.rmb_price,0)) AS percentSep,
-		SUM(IF(MONTH(tm_order.group_time) = 10 ,tm_order.rmb_price,0)) AS percentOct,
-		SUM(IF(MONTH(tm_order.group_time) = 11 ,tm_order.rmb_price,0)) AS percentNov,
-		SUM(IF(MONTH(tm_order.group_time) = 12 ,tm_order.rmb_price,0)) AS percentDec
-		FROM tm_order LEFT JOIN (SELECT tm_parameter.para_value,chinese
-			FROM tm_parameter
-			WHERE tm_parameter.para_domain = 'country' ) d ON tm_order.destination = d.para_value
-		WHERE  tm_order.`status` = '2'
-		<if test="startCreateTime != null and startCreateTime != ''">
-		 	and tm_order.group_time &gt;= #{startCreateTime}
-		</if> 
-		<if test="endCreateTime != null and endCreateTime != ''">
-			and tm_order.group_time &lt;= #{endCreateTime}
-		</if>
+	
+	<select id="queryDesAchiMoneyTotal" parameterType="Map" resultType="com.tourmade.crm.entity.UserAchRate">
+		select
+			sum(percentJan) as percentJan_TM,
+			sum(percentFeb) as percentFeb_TM,
+			sum(percentMar) as percentMar_TM,
+			sum(percentApr) as percentApr_TM,
+			sum(percentMay) as percentMay_TM,
+			sum(percentJun) as percentJun_TM,
+			sum(percentJul) as percentJul_TM,
+			sum(percentAug) as percentAug_TM,
+			sum(percentSep) as percentSep_TM,
+			sum(percentOct) as percentOct_TM,
+			sum(percentNov) as percentNov_TM,
+			sum(percentDec) as percentDec_TM
+		from(
+			SELECT 
+			destination AS code,
+			d.chinese AS userName,
+			SUM(IF(MONTH(tm_order.group_time) = 1 ,tm_order.rmb_price,0)) AS percentJan,
+			SUM(IF(MONTH(tm_order.group_time) = 2 ,tm_order.rmb_price,0)) AS percentFeb,
+			SUM(IF(MONTH(tm_order.group_time) = 3 ,tm_order.rmb_price,0)) AS percentMar,
+			SUM(IF(MONTH(tm_order.group_time) = 4 ,tm_order.rmb_price,0)) AS percentApr,
+			SUM(IF(MONTH(tm_order.group_time) = 5 ,tm_order.rmb_price,0)) AS percentMay,
+			SUM(IF(MONTH(tm_order.group_time) = 6 ,tm_order.rmb_price,0)) AS percentJun,
+			SUM(IF(MONTH(tm_order.group_time) = 7 ,tm_order.rmb_price,0)) AS percentJul,
+			SUM(IF(MONTH(tm_order.group_time) = 8 ,tm_order.rmb_price,0)) AS percentAug,
+			SUM(IF(MONTH(tm_order.group_time) = 9 ,tm_order.rmb_price,0)) AS percentSep,
+			SUM(IF(MONTH(tm_order.group_time) = 10 ,tm_order.rmb_price,0)) AS percentOct,
+			SUM(IF(MONTH(tm_order.group_time) = 11 ,tm_order.rmb_price,0)) AS percentNov,
+			SUM(IF(MONTH(tm_order.group_time) = 12 ,tm_order.rmb_price,0)) AS percentDec
+			FROM tm_order LEFT JOIN (SELECT tm_parameter.para_value,chinese
+				FROM tm_parameter
+				WHERE tm_parameter.para_domain = 'country' ) d ON tm_order.destination = d.para_value
+			WHERE  tm_order.`status` = '2'
+			<if test="startCreateTime != null and startCreateTime != ''">
+			 	and tm_order.group_time &gt;= #{startCreateTime}
+			</if> 
+			<if test="endCreateTime != null and endCreateTime != ''">
+				and tm_order.group_time &lt;= #{endCreateTime}
+			</if>
+			GROUP BY tm_order.destination 
+		) temp
 	</select>
+	
 	<select id="countOrderAllDes" parameterType="Map" resultType="long">
 			SELECT COUNT(1)
 			FROM(
@@ -839,6 +1377,7 @@
 			</if>
 			GROUP BY tm_order.destination) u
 	</select>
+	
 	<select id="queryCustSource" parameterType="Map" resultType="com.tourmade.crm.entity.UserAchRate">
 		SELECT 
 		d.chinese as userName,
@@ -869,6 +1408,53 @@
 		group by tm_customer.source
 		ORDER BY tm_customer.source 
 	</select>
+	
+	<select id="queryCustSourceTotal" parameterType="Map" resultType="com.tourmade.crm.entity.UserAchRate">
+		select 
+			sum(percentJan) as percentJan_T,
+			sum(percentFeb) as percentFeb_T,
+			sum(percentMar) as percentMar_T,
+			sum(percentApr) as percentApr_T,
+			sum(percentMay) as percentMay_T,
+			sum(percentJun) as percentJun_T,
+			sum(percentJul) as percentJul_T,
+			sum(percentAug) as percentAug_T,
+			sum(percentSep) as percentSep_T,
+			sum(percentOct) as percentOct_T,
+			sum(percentNov) as percentNov_T,
+			sum(percentDec) as percentDec_T
+		from (
+			SELECT 
+			d.chinese as userName,
+			SUM(IF(MONTH(tm_customer.creat_time) = 1 ,1,0)) AS percentJan,
+			SUM(IF(MONTH(tm_customer.creat_time) = 2 ,1,0)) AS percentFeb,
+			SUM(IF(MONTH(tm_customer.creat_time) = 3 ,1,0)) AS percentMar,
+			SUM(IF(MONTH(tm_customer.creat_time) = 4 ,1,0)) AS percentApr,
+			SUM(IF(MONTH(tm_customer.creat_time) = 5 ,1,0)) AS percentMay,
+			SUM(IF(MONTH(tm_customer.creat_time) = 6 ,1,0)) AS percentJun,
+			SUM(IF(MONTH(tm_customer.creat_time) = 7 ,1,0)) AS percentJul,
+			SUM(IF(MONTH(tm_customer.creat_time) = 8 ,1,0)) AS percentAug,
+			SUM(IF(MONTH(tm_customer.creat_time) = 9 ,1,0)) AS percentSep,
+			SUM(IF(MONTH(tm_customer.creat_time) = 10 ,1,0)) AS percentOct,
+			SUM(IF(MONTH(tm_customer.creat_time) = 11 ,1,0)) AS percentNov,
+			SUM(IF(MONTH(tm_customer.creat_time) = 12 ,1,0)) AS percentDec
+			FROM tm_customer LEFT JOIN (SELECT tm_parameter.para_value,chinese
+			FROM tm_parameter
+			WHERE tm_parameter.para_domain = 'customer.source') d
+			ON tm_customer.source = d.para_value
+			<where>
+				<if test="startCreateTime != null and startCreateTime != ''">
+				 	tm_customer.creat_time &gt;= #{startCreateTime}
+				</if> 
+				<if test="endCreateTime != null and endCreateTime != ''">
+					and tm_customer.creat_time &lt;= #{endCreateTime}
+				</if>
+			</where>
+			group by tm_customer.source
+			ORDER BY tm_customer.source 
+		) temp
+	</select>
+	
 	<select id="countAllCoustSource" parameterType="Map" resultType="long">
 		
 		SELECT COUNT(1)
@@ -885,6 +1471,7 @@
 		</where>
 		GROUP BY tm_customer.source) u
 	</select>
+	
 	<select id="queryDesAchiCaseCount" parameterType="Map" resultType="com.tourmade.crm.entity.UserAchRate">
 		SELECT 
 		tm_case.destination AS code,
@@ -914,5 +1501,51 @@
 			</if>
 		</where>
 		GROUP BY tm_case.destination
+	</select>
+	
+	<select id="queryDesAchiCaseCountTotal" parameterType="Map" resultType="com.tourmade.crm.entity.UserAchRate">
+		select
+			sum(percentJan) as percentJan_T,
+			sum(percentFeb) as percentFeb_T,
+			sum(percentMar) as percentMar_T,
+			sum(percentApr) as percentApr_T,
+			sum(percentMay) as percentMay_T,
+			sum(percentJun) as percentJun_T,
+			sum(percentJul) as percentJul_T,
+			sum(percentAug) as percentAug_T,
+			sum(percentSep) as percentSep_T,
+			sum(percentOct) as percentOct_T,
+			sum(percentNov) as percentNov_T,
+			sum(percentDec) as percentDec_T
+		from (
+			SELECT 
+			tm_case.destination AS code,
+			d.chinese AS userName,
+			SUM(IF(MONTH(tm_case.creat_time) = 1 ,1,0)) AS percentJan,
+			SUM(IF(MONTH(tm_case.creat_time) = 2 ,1,0)) AS percentFeb,
+			SUM(IF(MONTH(tm_case.creat_time) = 3 ,1,0)) AS percentMar,
+			SUM(IF(MONTH(tm_case.creat_time) = 4 ,1,0)) AS percentApr,
+			SUM(IF(MONTH(tm_case.creat_time) = 5 ,1,0)) AS percentMay,
+			SUM(IF(MONTH(tm_case.creat_time) = 6 ,1,0)) AS percentJun,
+			SUM(IF(MONTH(tm_case.creat_time) = 7 ,1,0)) AS percentJul,
+			SUM(IF(MONTH(tm_case.creat_time) = 8 ,1,0)) AS percentAug,
+			SUM(IF(MONTH(tm_case.creat_time) = 9 ,1,0)) AS percentSep,
+			SUM(IF(MONTH(tm_case.creat_time) = 10 ,1,0)) AS percentOct,
+			SUM(IF(MONTH(tm_case.creat_time) = 11 ,1,0)) AS percentNov,
+			SUM(IF(MONTH(tm_case.creat_time) = 12 ,1,0)) AS percentDec
+			FROM tm_case LEFT JOIN (SELECT tm_parameter.para_value,chinese
+			FROM tm_parameter
+			WHERE tm_parameter.para_domain = 'country') d
+			ON tm_case.destination = d.para_value
+			<where>
+				<if test="startCreateTime != null and startCreateTime != ''">
+				 	tm_case.creat_time &gt;= #{startCreateTime}
+				</if> 
+				<if test="endCreateTime != null and endCreateTime != ''">
+					and tm_case.creat_time &lt;= #{endCreateTime}
+				</if>
+			</where>
+			GROUP BY tm_case.destination
+		) temp
 	</select>
 </mapper>
