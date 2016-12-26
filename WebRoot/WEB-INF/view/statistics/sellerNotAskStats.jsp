@@ -60,14 +60,6 @@
 							</tr>
 						</thead>
 					</table>
-					<table id="dataTable3" class="table">
-						<thead>
-							<tr>
-								<th></th>
-								<th>地接社数量</th>
-							</tr>
-						</thead>
-					</table>
 				</div>
 			</div>
 			
@@ -222,62 +214,6 @@
 	            { data: "country" }
 	        ]
 		});
-	
-
-	var t3 = jQuery('#dataTable3').DataTable({
-		searching:false,
-		pageLength: 10,
-		processing: true,
-		paging: false, // 禁止分页
-		language: datatable_local_language, // my.js
-		serverSide: true,
-		bInfo : false,
-		ajax: {
-			url: '${rootPath}statistics/sellerNotAskStatsTotal.do',
-			data: function(data){
-	 			var searchStatus = searchStatusCheck;
-	 			searchStatusCheck = "";
-	 			var searchStartDateTime=$("#searchStartDateTime").val();
-	 			var searchEndDateTime=$("#searchEndDateTime").val();
-	 			
-	 			if(searchStartDateTime !=null && searchStartDateTime !=""){
-	 				data.searchStartTime = searchStartDateTime;
-	 			}
-	 			if(searchEndDateTime !=null && searchEndDateTime !=""){
-	 				data.searchEndTime = searchEndDateTime;
-	 			}
-			},
-			
-			dataFilter: function(data){
-				var json = jQuery.parseJSON( data );
-				json.recordsTotal = json.countTotal;
-				json.recordsFiltered = json.countFiltered;
-				json.data = json.data;
-				return JSON.stringify( json );
-			}
-		},
-		columnDefs: [		  
-				   {
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                	return "<div class='minw50'>" + "<h3>" + '合计'  + "</h3>" + "</div>"
-	                },
-	                targets: 0
-				},
-				{
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                    return "<div>" + full.number_T + "</div>"
-	                },
-	                targets: 1
-				}
-			],
-			columns: [
-	            { data: "" },
-	            { data: "number_T" }
-	        ]
-		});
-	
 
 		$('#searchBtn').on( 'click', function () {
 			searchStatusCheck = "";
