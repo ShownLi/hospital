@@ -20,6 +20,7 @@ public class ReasonOfDrainingStats extends BaseBean<ReasonOfDrainingStats>{
 	 * 占比（num/所有的询单数量，需要计算）
 	 */
 	private String percent;
+	
 	public String getReasonOfDrainingName() {
 		return reasonOfDrainingName;
 	}

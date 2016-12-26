@@ -67,8 +67,25 @@
 										<th>十二月</th>	
 									</tr>
 								</thead>
-								<tbody>
-								</tbody>
+							</table>
+							<table id="dataTable2" class="table">
+								<thead>
+									<tr>
+										<th></th>
+										<th>一月</th>		
+										<th>二月</th>		
+										<th>三月</th>		
+										<th>四月</th>		
+										<th>五月</th>		
+										<th>六月</th>		
+										<th>七月</th>		
+										<th>八月</th>		
+										<th>九月</th>		
+										<th>十月</th>		
+										<th>十一月</th>		
+										<th>十二月</th>	
+									</tr>
+								</thead>
 							</table>
 						</div>
 					</div>
@@ -93,161 +110,310 @@
         changDate:false
         
      });
-    
-			var table = jQuery('#dataTable').DataTable({
-				searching:false,
-				paging:false,
-				processing: true,
-				language: datatable_local_language, // my.js
-				serverSide: true,
-				ajax: {
-					url: '${rootPath}statistics/custsourcestats.do',
-					type:"post",
-					data: function(data){
-			 			var searchYear=$("#searchYear").val();
-			 			if(searchYear !=null && searchYear !=""){
-			 				data.searchYear = searchYear;
-			 			}
-					},
-					
-					dataFilter: function(data){
-						var json = jQuery.parseJSON( data );
-						json.recordsTotal = json.countTotal;
-						json.recordsFiltered = json.countFiltered;
-						json.data = json.data;
-						return JSON.stringify( json );
-					}
+  
+	var table = jQuery('#dataTable').DataTable({
+		searching:false,
+		paging:false,
+		processing: true,
+		language: datatable_local_language, // my.js
+		serverSide: true,
+		bInfo : false,
+		ajax: {
+			url: '${rootPath}statistics/custsourcestats.do',
+			type:"post",
+			data: function(data){
+	 			var searchYear=$("#searchYear").val();
+	 			if(searchYear !=null && searchYear !=""){
+	 				data.searchYear = searchYear;
+	 			}
+			},
+			
+			dataFilter: function(data){
+				var json = jQuery.parseJSON( data );
+				json.recordsTotal = json.countTotal;
+				json.recordsFiltered = json.countFiltered;
+				json.data = json.data;
+				return JSON.stringify( json );
+			}
+		},
+		columnDefs: [		  
+				   {
+					   data:"userName",
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                    return "<div>" + data + "</div>"
+	                },
+	                targets: 0
 				},
-				columnDefs: [		  
- 					   {
- 						   data:"userName",
-			                orderable: false,
-			                render: function ( data, type, full, meta ) {
-			                    return "<div>" + data + "</div>"
-			                },
-			                targets: 0
-						},
-						{
-							data:"percentJan",
-			                orderable: false,
-			                render: function ( data, type, full, meta ) {
-			                    return "<div>" + data + "</div>"
-			                },
-			                targets: 1
-						},
-	 					{
-							data:"percentFeb",
-			                orderable: false,
-			                render: function ( data, type, full, meta ) {
-			                	return "<div>" + data + "</div>"
-			                },
-			                targets: 2
-						},
-	 					{
-							data:"percentMar",
-			                orderable: false,
-			                render: function ( data, type, full, meta ) {
-			                	return "<div>" + data + "</div>"
-			                },
-			                targets: 3
-						},
-	 					{
-							data:"percentApr",
-			                orderable: false,
-			                render: function ( data, type, full, meta ) {
-			                	return "<div>" + data + "</div>"
-			                },
-			                targets: 4
-						},
-	 					{
-							data:"percentMay",
-			                orderable: false,
-			                render: function ( data, type, full, meta ) {
-			                	return "<div>" + data + "</div>"
-			                },
-			                targets: 5
-						},
-	 					{
-							data:"percentJun",
-			                orderable: false,
-			                render: function ( data, type, full, meta ) {
-			                	return "<div>" + data + "</div>"
-			                },
-			                targets: 6
-						},
-	 					{
-							data:"percentJul",
-			                orderable: false,
-			                render: function ( data, type, full, meta ) {
-			                	return "<div>" + data + "</div>"
-			                },
-			                targets: 7
-						},
-	 					{
-							data:"percentAug",
-			                orderable: false,
-			                render: function ( data, type, full, meta ) {
-			                	return "<div>" + data + "</div>"
-			                },
-			                targets: 8
-						},
-	 					{
-							data:"percentSep",
-			                orderable: false,
-			                render: function ( data, type, full, meta ) {
-			                	return "<div>" + data + "</div>"
-			                },
-			                targets: 9
-						},
-	 					{
-							data:"percentOct",
-			                orderable: false,
-			                render: function ( data, type, full, meta ) {
-			                	return "<div>" + data + "</div>"
-			                },
-			                targets: 10
-						},
-	 					{
-							data:"percentNov",
-			                orderable: false,
-			                render: function ( data, type, full, meta ) {
-			                	return "<div>" + data + "</div>"
-			                },
-			                targets: 11
-						},
-	 					{
-							data:"percentDec",
-			                orderable: false,
-			                render: function ( data, type, full, meta ) {
-			                	return "<div>" + data + "</div>"
-			                },
-			                targets: 12
-						}
-						
-					],
-					columns: [
-			            		{ data: "userName" },
-					            { data:	"percentJan"},
-					            { data: "percentFeb" },
-					            { data: "percentMar" },
-					            { data: "percentApr" },
-					            { data: "percentMay" },
-					            { data: "percentJun" },
-					            { data: "percentJul" },
-					            { data: "percentAug" },
-					            { data: "percentSep" },
-					            { data: "percentOct" },
-					            { data: "percentNov" },
-					            { data: "percentDec" }
-			        ]
-				});
-			
-			$('#searchBtn').on( 'click', function () {
-				table.draw();
+				{
+					data:"percentJan",
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                    return "<div>" + data + "</div>"
+	                },
+	                targets: 1
+				},
+					{
+					data:"percentFeb",
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                	return "<div>" + data + "</div>"
+	                },
+	                targets: 2
+				},
+					{
+					data:"percentMar",
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                	return "<div>" + data + "</div>"
+	                },
+	                targets: 3
+				},
+					{
+					data:"percentApr",
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                	return "<div>" + data + "</div>"
+	                },
+	                targets: 4
+				},
+					{
+					data:"percentMay",
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                	return "<div>" + data + "</div>"
+	                },
+	                targets: 5
+				},
+					{
+					data:"percentJun",
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                	return "<div>" + data + "</div>"
+	                },
+	                targets: 6
+				},
+					{
+					data:"percentJul",
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                	return "<div>" + data + "</div>"
+	                },
+	                targets: 7
+				},
+					{
+					data:"percentAug",
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                	return "<div>" + data + "</div>"
+	                },
+	                targets: 8
+				},
+					{
+					data:"percentSep",
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                	return "<div>" + data + "</div>"
+	                },
+	                targets: 9
+				},
+					{
+					data:"percentOct",
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                	return "<div>" + data + "</div>"
+	                },
+	                targets: 10
+				},
+					{
+					data:"percentNov",
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                	return "<div>" + data + "</div>"
+	                },
+	                targets: 11
+				},
+					{
+					data:"percentDec",
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                	return "<div>" + data + "</div>"
+	                },
+	                targets: 12
+				}
 				
-		    } );
+			],
+			columns: [
+	            		{ data: "userName" },
+			            { data:	"percentJan"},
+			            { data: "percentFeb" },
+			            { data: "percentMar" },
+			            { data: "percentApr" },
+			            { data: "percentMay" },
+			            { data: "percentJun" },
+			            { data: "percentJul" },
+			            { data: "percentAug" },
+			            { data: "percentSep" },
+			            { data: "percentOct" },
+			            { data: "percentNov" },
+			            { data: "percentDec" }
+	        ]
+		});
+	
+	var table2 = jQuery('#dataTable2').DataTable({
+		searching:false,
+		paging:false,
+		processing: true,
+		language: datatable_local_language, // my.js
+		serverSide: true,
+		bInfo : false,
+		ajax: {
+			url: '${rootPath}statistics/custsourcestatstotal.do',
+			type:"post",
+			data: function(data){
+	 			var searchYear=$("#searchYear").val();
+	 			if(searchYear !=null && searchYear !=""){
+	 				data.searchYear = searchYear;
+	 			}
+			},
 			
-
+			dataFilter: function(data){
+				var json = jQuery.parseJSON( data );
+				json.recordsTotal = json.countTotal;
+				json.recordsFiltered = json.countFiltered;
+				json.data = json.data;
+				return JSON.stringify( json );
+			}
+		},
+		columnDefs: [		  
+				   {
+					data:"",
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                	return "<div class='minw50'>" + "<h3>" + '合计'  + "</h3>" + "</div>"
+	                },
+	                targets: 0
+				},
+				{
+					data:"percentJan_T",
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                    return "<div>" + data + "</div>"
+	                },
+	                targets: 1
+				},
+					{
+					data:"percentFeb_T",
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                	return "<div>" + data + "</div>"
+	                },
+	                targets: 2
+				},
+					{
+					data:"percentMar_T",
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                	return "<div>" + data + "</div>"
+	                },
+	                targets: 3
+				},
+					{
+					data:"percentApr_T",
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                	return "<div>" + data + "</div>"
+	                },
+	                targets: 4
+				},
+					{
+					data:"percentMay_T",
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                	return "<div>" + data + "</div>"
+	                },
+	                targets: 5
+				},
+					{
+					data:"percentJun_T",
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                	return "<div>" + data + "</div>"
+	                },
+	                targets: 6
+				},
+					{
+					data:"percentJul_T",
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                	return "<div>" + data + "</div>"
+	                },
+	                targets: 7
+				},
+					{
+					data:"percentAug_T",
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                	return "<div>" + data + "</div>"
+	                },
+	                targets: 8
+				},
+					{
+					data:"percentSep_T",
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                	return "<div>" + data + "</div>"
+	                },
+	                targets: 9
+				},
+					{
+					data:"percentOct_T",
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                	return "<div>" + data + "</div>"
+	                },
+	                targets: 10
+				},
+					{
+					data:"percentNov_T",
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                	return "<div>" + data + "</div>"
+	                },
+	                targets: 11
+				},
+					{
+					data:"percentDec_T",
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                	return "<div>" + data + "</div>"
+	                },
+	                targets: 12
+				}
+				
+			],
+			columns: [
+	            		{ data: "" },
+			            { data:	"percentJan_T"},
+			            { data: "percentFeb_T" },
+			            { data: "percentMar_T" },
+			            { data: "percentApr_T" },
+			            { data: "percentMay_T" },
+			            { data: "percentJun_T" },
+			            { data: "percentJul_T" },
+			            { data: "percentAug_T" },
+			            { data: "percentSep_T" },
+			            { data: "percentOct_T" },
+			            { data: "percentNov_T" },
+			            { data: "percentDec_T" }
+	        ]
+		});
+	
+		$('#searchBtn').on( 'click', function () {
+			table.draw();
+			table2.draw();
+	    } );
+	
 		// Select2
 	    jQuery('select').select2({
 	        minimumResultsForSearch: -1

@@ -11,7 +11,11 @@ public class SellerNotAskStats extends BaseBean<Agency>{
 	
 	private String country;
 	
+	private String destination;
+	
 	private String number;
+	
+	private String number_T;
 	
 	private String searchStartTime;
 	
@@ -49,9 +53,26 @@ public class SellerNotAskStats extends BaseBean<Agency>{
 		this.searchEndTime = searchEndTime;
 	}
 
+	public String getNumber_T() {
+		return number_T;
+	}
+
+	public void setNumber_T(String number_T) {
+		this.number_T = number_T;
+	}
+
+	public String getDestination() {
+		return destination;
+	}
+
+	public void setDestination(String destination) {
+		this.destination = destination;
+	}
+
 	@Override
 	public String toString() {
-		return "SellerNotAskStats [country=" + country + ", number=" + number + ", searchStartTime=" + searchStartTime
-				+ ", searchEndTime=" + searchEndTime + "]";
+		return "SellerNotAskStats [country=" + country + ", destination=" + destination + ", number=" + number
+				+ ", number_T=" + number_T + ", searchStartTime=" + searchStartTime + ", searchEndTime=" + searchEndTime
+				+ "]";
 	}
 }

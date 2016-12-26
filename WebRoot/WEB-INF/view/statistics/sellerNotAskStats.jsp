@@ -59,8 +59,6 @@
 								<th>包含地接社数量</th>
 							</tr>
 						</thead>
-						<tbody>
-						</tbody>
 					</table>
 				</div>
 			</div>
@@ -109,206 +107,122 @@
         changeMonth: true,
      });
 	
-			var t = jQuery('#dataTable').DataTable({
-				searching:false,
-				pageLength: 10,
-				processing: true,
-				paging: false, // 禁止分页
-				language: datatable_local_language, // my.js
-				serverSide: true,
-				ajax: {
-					url: '${rootPath}statistics/sellerNotAskStats.do',
-					data: function(data){
-			 			var searchStatus = searchStatusCheck;
-			 			searchStatusCheck = "";
-			 			var searchStartDateTime=$("#searchStartDateTime").val();
-			 			var searchEndDateTime=$("#searchEndDateTime").val();
-			 			
-			 			if(searchStartDateTime !=null && searchStartDateTime !=""){
-			 				data.searchStartTime = searchStartDateTime;
-			 			}
-			 			if(searchEndDateTime !=null && searchEndDateTime !=""){
-			 				data.searchEndTime = searchEndDateTime;
-			 			}
-					},
-					
-					dataFilter: function(data){
-						var json = jQuery.parseJSON( data );
-						json.recordsTotal = json.countTotal;
-						json.recordsFiltered = json.countFiltered;
-						json.data = json.data;
-						
-						if(searchFlag==false){
-							$('#status0Count').html("待处理"+json.status0);
-
-							$('#status1Count').html("客服沟通中"+json.status1);
-					
-							$('#status2Count').html("地接设计中"+json.status2);						
-							
-							$('#status3Count').html("成行"+json.status3);						
-							
-							$('#status4Count').html("未成行"+json.status4);						
-							
-							$('#status5Count').html("无效"+json.status5);												
-							
-							$('#status6Count').html("已付款"+json.status6);
-						}
-						
-						return JSON.stringify( json );
-					}
-				},
-				columnDefs: [		  
- 					   {
-			                orderable: false,
-			                render: function ( data, type, full, meta ) {
-			                    return "<div class='minw50'>" + full.country + "</div>" 
-			                },
-			                targets: 0
-						},
-						{
-			                orderable: false,
-			                render: function ( data, type, full, meta ) {
-			                    return "<div>" + full.number + "</div>"
-			                },
-			                targets: 1
-						}
-					],
-					columns: [
-			            { data: "destination" },
-			            { data: "country" }
-			        ]
-				});
+	var t = jQuery('#dataTable').DataTable({
+		searching:false,
+		pageLength: 10,
+		processing: true,
+		paging: false, // 禁止分页
+		language: datatable_local_language, // my.js
+		serverSide: true,
+		bInfo : false,
+		ajax: {
+			url: '${rootPath}statistics/sellerNotAskStats.do',
+			data: function(data){
+	 			var searchStatus = searchStatusCheck;
+	 			searchStatusCheck = "";
+	 			var searchStartDateTime=$("#searchStartDateTime").val();
+	 			var searchEndDateTime=$("#searchEndDateTime").val();
+	 			
+	 			if(searchStartDateTime !=null && searchStartDateTime !=""){
+	 				data.searchStartTime = searchStartDateTime;
+	 			}
+	 			if(searchEndDateTime !=null && searchEndDateTime !=""){
+	 				data.searchEndTime = searchEndDateTime;
+	 			}
+			},
 			
-			var t2 = jQuery('#dataTable2').DataTable({
-				searching:false,
-				pageLength: 10,
-				processing: true,
-				paging: false, // 禁止分页
-				language: datatable_local_language, // my.js
-				serverSide: true,
-				ajax: {
-					url: '${rootPath}statistics/sellerNotAskStatsD.do',
-					data: function(data){
-			 			var searchStatus = searchStatusCheck;
-			 			searchStatusCheck = "";
-			 			var searchStartDateTime=$("#searchStartDateTime").val();
-			 			var searchEndDateTime=$("#searchEndDateTime").val();
-			 			
-			 			if(searchStartDateTime !=null && searchStartDateTime !=""){
-			 				data.searchStartTime = searchStartDateTime;
-			 			}
-			 			if(searchEndDateTime !=null && searchEndDateTime !=""){
-			 				data.searchEndTime = searchEndDateTime;
-			 			}
-					},
-					
-					dataFilter: function(data){
-						var json = jQuery.parseJSON( data );
-						json.recordsTotal = json.countTotal;
-						json.recordsFiltered = json.countFiltered;
-						json.data = json.data;
-						
-						if(searchFlag==false){
-							$('#status0Count').html("待处理"+json.status0);
-
-							$('#status1Count').html("客服沟通中"+json.status1);
-					
-							$('#status2Count').html("地接设计中"+json.status2);						
-							
-							$('#status3Count').html("成行"+json.status3);						
-							
-							$('#status4Count').html("未成行"+json.status4);						
-							
-							$('#status5Count').html("无效"+json.status5);												
-							
-							$('#status6Count').html("已付款"+json.status6);
-						}
-						
-						return JSON.stringify( json );
-					}
+			dataFilter: function(data){
+				var json = jQuery.parseJSON( data );
+				json.recordsTotal = json.countTotal;
+				json.recordsFiltered = json.countFiltered;
+				json.data = json.data;
+				return JSON.stringify( json );
+			}
+		},
+		columnDefs: [		  
+				   {
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                    return "<div class='minw50'>" + full.country + "</div>" 
+	                },
+	                targets: 0
 				},
-				columnDefs: [		  
- 					   {
-			                orderable: false,
-			                render: function ( data, type, full, meta ) {
-			                    return "<div class='minw50'>" + full.destination + "</div>" 
-			                }, 
-			                targets: 0
-						},
-						{
-			                orderable: false,
-			                render: function ( data, type, full, meta ) {
-			                    return "<div>" + full.country + "</div>"
-			                },
-			                targets: 1
-						}
-					],
-					columns: [
-			            { data: "destination" },
-			            { data: "country" }
-			        ]
-				});
-
-			$('#searchBtn').on( 'click', function () {
-				//$("input[name='status']:checked").val(null);
-				searchStatusCheck = "";
-				searchFlag = false;
-		        t.draw();
-		        t2.draw();
-		        $('input:radio:checked').attr('checked',false);
-		    } );
+				{
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                    return "<div>" + full.number + "</div>"
+	                },
+	                targets: 1
+				}
+			],
+			columns: [
+	            { data: "country" },
+	            { data: "number" }
+	        ]
+		});
+	
+	var t2 = jQuery('#dataTable2').DataTable({
+		searching:false,
+		pageLength: 10,
+		processing: true,
+		paging: false, // 禁止分页
+		language: datatable_local_language, // my.js
+		serverSide: true,
+		bInfo : false,
+		ajax: {
+			url: '${rootPath}statistics/sellerNotAskStatsD.do',
+			data: function(data){
+	 			var searchStatus = searchStatusCheck;
+	 			searchStatusCheck = "";
+	 			var searchStartDateTime=$("#searchStartDateTime").val();
+	 			var searchEndDateTime=$("#searchEndDateTime").val();
+	 			
+	 			if(searchStartDateTime !=null && searchStartDateTime !=""){
+	 				data.searchStartTime = searchStartDateTime;
+	 			}
+	 			if(searchEndDateTime !=null && searchEndDateTime !=""){
+	 				data.searchEndTime = searchEndDateTime;
+	 			}
+			},
 			
-			$('#status0').on('click',function(){
-				searchStatusCheck = 0+" ";
-				searchFlag = true;
-				t.draw();
-			});
-			$('#status1').on('click',function(){
-				searchStatusCheck = 1;
-				searchFlag = true;
-				t.draw();
-			});
-			$('#status2').on('click',function(){
-				searchStatusCheck = 2;
-				searchFlag = true;
-				t.draw();
-			});
-			$('#status3').on('click',function(){
-				searchStatusCheck = 3;
-				searchFlag = true;
-				t.draw();
-			});
-			$('#status4').on('click',function(){
-				searchStatusCheck = 4;
-				searchFlag = true;
-				t.draw();
-			});
-			$('#status5').on('click',function(){
-				searchStatusCheck = 5;
-				searchFlag = true;
-				t.draw();
-			});
-			$('#status6').on('click',function(){
-				searchStatusCheck = 6;
-				searchFlag = true;
-				t.draw();
-			});
-		    
-			$('#dataTable tbody').on( 'click', 'a.btn-success', function () {
-		        var data = t.row($(this).parents('tr')).data();
-		        edit($(this).attr('id'));
-		    } );
-			$('#dataTable tbody').on( 'click', 'a.btn-primary', function () {
-		        var data = t.row($(this).parents('tr')).data();
-		        handle($(this).attr('id'));
-		    } );
+			dataFilter: function(data){
+				var json = jQuery.parseJSON( data );
+				json.recordsTotal = json.countTotal;
+				json.recordsFiltered = json.countFiltered;
+				json.data = json.data;
+				return JSON.stringify( json );
+			}
+		},
+		columnDefs: [		  
+				   {
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                    return "<div class='minw50'>" + full.destination + "</div>" 
+	                }, 
+	                targets: 0
+				},
+				{
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                    return "<div>" + full.country + "</div>"
+	                },
+	                targets: 1
+				}
+			],
+			columns: [
+	            { data: "destination" },
+	            { data: "country" }
+	        ]
+		});
 
-	    
-		// Select2
-	    jQuery('select').select2({
-	        minimumResultsForSearch: -1
-	    });
-	    
+		$('#searchBtn').on( 'click', function () {
+			searchStatusCheck = "";
+			searchFlag = false;
+	        t.draw();
+	        t2.draw();
+	        t3.draw();
+	    } );
+			
 	    jQuery('select').removeClass('form-control');
 	</script>
 </body>

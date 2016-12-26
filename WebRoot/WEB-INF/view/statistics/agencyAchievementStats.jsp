@@ -64,8 +64,25 @@
 										<th>十二月成交率</th>
 									</tr>
 								</thead>
-								<tbody>
-								</tbody>
+							</table>
+							<table id="dataTable3" class="table">
+								<thead>
+									<tr>
+										<th></th>
+										<th>一月成交率</th>
+										<th>二月成交率</th>									
+										<th>三月成交率</th>
+										<th>四月成交率</th>
+										<th>五月成交率</th>
+										<th>六月成交率</th>
+										<th>七月成交率</th>
+										<th>八月成交率</th>
+										<th>九月成交率</th>
+										<th>十月成交率</th>
+										<th>十一月成交率</th>
+										<th>十二月成交率</th>
+									</tr>
+								</thead>
 							</table>
 						</div>
 					</div>
@@ -90,8 +107,25 @@
 										<th>十二月成交金额</th>
 									</tr>
 								</thead>
-								<tbody>
-								</tbody>
+							</table>
+							<table id="dataTable4" class="table">
+								<thead>
+									<tr>
+										<th></th>
+										<th>一月成交金额</th>
+										<th>二月成交金额</th>									
+										<th>三月成交金额</th>
+										<th>四月成交金额</th>
+										<th>五月成交金额</th>
+										<th>六月成交金额</th>
+										<th>七月成交金额</th>
+										<th>八月成交金额</th>
+										<th>九月成交金额</th>
+										<th>十月成交金额</th>
+										<th>十一月成交金额</th>
+										<th>十二月成交金额</th>
+									</tr>
+								</thead>
 							</table>
 						</div>
 					</div>
@@ -126,6 +160,7 @@
 		paging: false, // 禁止分页
 		language: datatable_local_language, // my.js
 		serverSide: true,
+		bInfo : false,
 		ajax: {
 			url: '${rootPath}statistics/agencyAchievementStats.do',
 			data: function(data){
@@ -144,23 +179,6 @@
 				json.recordsTotal = json.countTotal;
 				json.recordsFiltered = json.countFiltered;
 				json.data = json.data;
-				
-				if(searchFlag==false){
-					$('#status0Count').html("待处理"+json.status0);
-
-					$('#status1Count').html("客服沟通中"+json.status1);
-			
-					$('#status2Count').html("地接设计中"+json.status2);						
-					
-					$('#status3Count').html("成行"+json.status3);						
-					
-					$('#status4Count').html("未成行"+json.status4);						
-					
-					$('#status5Count').html("无效"+json.status5);												
-					
-					$('#status6Count').html("已付款"+json.status6);
-				}
-				
 				return JSON.stringify( json );
 			}
 		},
@@ -280,234 +298,453 @@
 	            { data: "percentdece" }
 	        ]
 		});
-
-			$('#searchBtn').on( 'click', function () {
-				//$("input[name='status']:checked").val(null);
-				searchStatusCheck = "";
-				searchFlag = false;
-		        t.draw();
-		        $('input:radio:checked').attr('checked',false);
-		    } );
+	
+	var t3 = jQuery('#dataTable3').DataTable({
+		searching:false,
+		pageLength: 10,
+		processing: true,
+		paging: false, // 禁止分页
+		language: datatable_local_language, // my.js
+		serverSide: true,
+		bInfo : false,
+		ajax: {
+			url: '${rootPath}statistics/agencyAchievementStatsTotal.do',
+			data: function(data){
+	 			var searchYear=$("#searchYear").val();
+	 			var searchStatus = searchStatusCheck;
+	 			searchStatusCheck = "";
+	 			
+	 			if(searchYear !=null && searchYear !=""){
+	 				data.searchStartTime = searchYear + "-01-01";
+	 				data.searchEndTime = searchYear + "-12-31";
+	 			}
+			},
 			
-			$('#status0').on('click',function(){
-				searchStatusCheck = 0+" ";
-				searchFlag = true;
-				t.draw();
-			});
-			$('#status1').on('click',function(){
-				searchStatusCheck = 1;
-				searchFlag = true;
-				t.draw();
-			});
-			$('#status2').on('click',function(){
-				searchStatusCheck = 2;
-				searchFlag = true;
-				t.draw();
-			});
-			$('#status3').on('click',function(){
-				searchStatusCheck = 3;
-				searchFlag = true;
-				t.draw();
-			});
-			$('#status4').on('click',function(){
-				searchStatusCheck = 4;
-				searchFlag = true;
-				t.draw();
-			});
-			$('#status5').on('click',function(){
-				searchStatusCheck = 5;
-				searchFlag = true;
-				t.draw();
-			});
-			$('#status6').on('click',function(){
-				searchStatusCheck = 6;
-				searchFlag = true;
-				t.draw();
-			});
-		    
-			var t2 = jQuery('#dataTable2').DataTable({
-				searching:false,
-				pageLength: 10,
-				processing: true,
-				paging: false, // 禁止分页
-				language: datatable_local_language, // my.js
-				serverSide: true,
-				ajax: {
-					url: '${rootPath}statistics/agencyAchievementStats2.do',
-					data: function(data){
-			 			var searchYear = $("#searchYear").val();
-			 			var searchStatus = searchStatusCheck;
-			 			searchStatusCheck = "";
-			 			
-			 			if(searchYear !=null && searchYear !=""){
-			 				data.searchStartTime = searchYear + "-01-01";
-			 				data.searchEndTime = searchYear + "-12-31";
-			 			}
-					},
-					
-					dataFilter: function(data){
-						var json = jQuery.parseJSON( data );
-						json.recordsTotal = json.countTotal;
-						json.recordsFiltered = json.countFiltered;
-						json.data = json.data;
-						
-						if(searchFlag==false){
-							$('#status0Count').html("待处理"+json.status0);
-
-							$('#status1Count').html("客服沟通中"+json.status1);
-					
-							$('#status2Count').html("地接设计中"+json.status2);						
-							
-							$('#status3Count').html("成行"+json.status3);						
-							
-							$('#status4Count').html("未成行"+json.status4);						
-							
-							$('#status5Count').html("无效"+json.status5);												
-							
-							$('#status6Count').html("已付款"+json.status6);
-						}
-						
-						return JSON.stringify( json );
-					}
+			dataFilter: function(data){
+				var json = jQuery.parseJSON( data );
+				json.recordsTotal = json.countTotal;
+				json.recordsFiltered = json.countFiltered;
+				json.data = json.data;
+				return JSON.stringify( json );
+			}
+		},
+		columnDefs: [		  
+				   {
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                	return "<div class='minw50'>" + "<h3>" + '合计'  + "</h3>" + "</div>" 
+	                },
+	                targets: 0
 				},
-				columnDefs: [		  
-						   {
-			                orderable: false,
-			                render: function ( data, type, full, meta ) {
-			                    return "<div class='minw50'>" + full.agencyName + "</div>" 
-			                },
-			                targets: 0
-						},
-						{
-			                orderable: false,
-			                render: function ( data, type, full, meta ) {
-			                    return "<div>" + full.percentjan + "</div>"
-			                },
-			                targets: 1
-						},
-						{
-			                orderable: false,
-			                render: function ( data, type, full, meta ) {
-			                    return "<div>" + full.percentfeb + "</div>"
-			                },
-			                targets: 2
-						},	  
-						{
-			                orderable: false,
-			                render: function ( data, type, full, meta ) {
-			                    return "<div>" + full.percentmar + "</div>"
-			                },
-			                targets: 3
-						},	  
-						{
-			                orderable: false,
-			                render: function ( data, type, full, meta ) {
-			                    return "<div>" + full.percentapr + "</div>"
-			                },
-			                targets: 4
-						},	  
-						{
-			                orderable: false,
-			                render: function ( data, type, full, meta ) {
-			                    return "<div>" + full.percentmay + "</div>"
-			                },
-			                targets: 5
-						},	  
-						{
-			                orderable: false,
-			                render: function ( data, type, full, meta ) {
-			                    return "<div>" + full.percentjun + "</div>"
-			                },
-			                targets: 6
-						},	  
-						{
-			                orderable: false,
-			                render: function ( data, type, full, meta ) {
-			                    return "<div>" + full.percentjul + "</div>"
-			                },
-			                targets: 7
-						},	  
-						{
-			                orderable: false,
-			                render: function ( data, type, full, meta ) {
-			                    return "<div>" + full.percentaug + "</div>"
-			                },
-			                targets: 8
-						},	  
-						{
-			                orderable: false,
-			                render: function ( data, type, full, meta ) {
-			                    return "<div>" + full.percentsep + "</div>"
-			                },
-			                targets: 9
-						},	  
-						{
-			                orderable: false,
-			                render: function ( data, type, full, meta ) {
-			                    return "<div>" + full.percentoct + "</div>"
-			                },
-			                targets: 10
-						},	  
-						{
-			                orderable: false,
-			                render: function ( data, type, full, meta ) {
-			                    return "<div>" + full.percentnov + "</div>"
-			                },
-			                targets: 11
-						},	  
-						{
-			                orderable: false,
-			                render: function ( data, type, full, meta ) {
-			                    return "<div>" + full.percentdece + "</div>"
-			                },
-			                targets: 12
-						},	  
-						 
-					    {
-						    orderable: false,
-						    searchable: false,
-					        targets: [0]
-					    }, 
+				{
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                    return "<div>" + full.percentjan_T + "</div>"
+	                },
+	                targets: 1
+				},
+				{
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                    return "<div>" + full.percentfeb_T + "</div>"
+	                },
+	                targets: 2
+				},	  
+				{
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                    return "<div>" + full.percentmar_T + "</div>"
+	                },
+	                targets: 3
+				},	  
+				{
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                    return "<div>" + full.percentapr_T + "</div>"
+	                },
+	                targets: 4
+				},	  
+				{
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                    return "<div>" + full.percentmay_T + "</div>"
+	                },
+	                targets: 5
+				},	  
+				{
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                    return "<div>" + full.percentjun_T + "</div>"
+	                },
+	                targets: 6
+				},	  
+				{
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                    return "<div>" + full.percentjul_T + "</div>"
+	                },
+	                targets: 7
+				},	  
+				{
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                    return "<div>" + full.percentaug_T + "</div>"
+	                },
+	                targets: 8
+				},	  
+				{
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                    return "<div>" + full.percentsep_T + "</div>"
+	                },
+	                targets: 9
+				},	  
+				{
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                    return "<div>" + full.percentoct_T + "</div>"
+	                },
+	                targets: 10
+				},	  
+				{
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                    return "<div>" + full.percentnov_T + "</div>"
+	                },
+	                targets: 11
+				},	  
+				{
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                    return "<div>" + full.percentdece_T + "</div>"
+	                },
+	                targets: 12
+				},	  
+				 
+			    {
+				    orderable: false,
+				    searchable: false,
+			        targets: [0]
+			    }, 
 
-					],
-					columns: [
-			            { data: "agencyName" },
-			            { data: "percentjan" },
-			            { data: "percentfeb" },
-			            { data: "percentmar" },
-			            { data: "percentapr" },
-			            { data: "percentmay" },
-			            { data: "percentjun" },
-			            { data: "percentjul" },
-			            { data: "percentaug" },
-			            { data: "percentsep" },
-			            { data: "percentoct" },
-			            { data: "percentnov" },
-			            { data: "percentdece" }
-			        ]
-				});
-			
-			$('#searchBtn').on( 'click', function () {
-				//$("input[name='status']:checked").val(null);
-				searchStatusCheck = "";
-				searchFlag = false;
-		        t2.draw();
-		        $('input:radio:checked').attr('checked',false);
-		    } );
-			
-			$('#dataTable tbody').on( 'click', 'a.btn-success', function () {
-		        var data = t.row($(this).parents('tr')).data();
-		        edit($(this).attr('id'));
-		    } );
-			$('#dataTable tbody').on( 'click', 'a.btn-primary', function () {
-		        var data = t.row($(this).parents('tr')).data();
-		        handle($(this).attr('id'));
-		    } );
+			],
+			columns: [
+	            { data: "" },
+	            { data: "percentjan_T" },
+	            { data: "percentfeb_T" },
+	            { data: "percentmar_T" },
+	            { data: "percentapr_T" },
+	            { data: "percentmay_T" },
+	            { data: "percentjun_T" },
+	            { data: "percentjul_T" },
+	            { data: "percentaug_T" },
+	            { data: "percentsep_T" },
+	            { data: "percentoct_T" },
+	            { data: "percentnov_T" },
+	            { data: "percentdece_T" }
+	        ]
+		});
 
-		// Select2
-	    jQuery('select').select2({
-	        minimumResultsForSearch: -1
-	    });
+	var t2 = jQuery('#dataTable2').DataTable({
+		searching:false,
+		pageLength: 10,
+		processing: true,
+		paging: false, // 禁止分页
+		language: datatable_local_language, // my.js
+		serverSide: true,
+		bInfo : false,
+		ajax: {
+			url: '${rootPath}statistics/agencyAchievementStats2.do',
+			data: function(data){
+	 			var searchYear = $("#searchYear").val();
+	 			var searchStatus = searchStatusCheck;
+	 			searchStatusCheck = "";
+	 			
+	 			if(searchYear !=null && searchYear !=""){
+	 				data.searchStartTime = searchYear + "-01-01";
+	 				data.searchEndTime = searchYear + "-12-31";
+	 			}
+			},
+			
+			dataFilter: function(data){
+				var json = jQuery.parseJSON( data );
+				json.recordsTotal = json.countTotal;
+				json.recordsFiltered = json.countFiltered;
+				json.data = json.data;
+				return JSON.stringify( json );
+			}
+		},
+		columnDefs: [		  
+				   {
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                    return "<div class='minw50'>" + full.agencyName + "</div>" 
+	                },
+	                targets: 0
+				},
+				{
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                    return "<div>" + full.percentjan + "</div>"
+	                },
+	                targets: 1
+				},
+				{
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                    return "<div>" + full.percentfeb + "</div>"
+	                },
+	                targets: 2
+				},	  
+				{
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                    return "<div>" + full.percentmar + "</div>"
+	                },
+	                targets: 3
+				},	  
+				{
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                    return "<div>" + full.percentapr + "</div>"
+	                },
+	                targets: 4
+				},	  
+				{
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                    return "<div>" + full.percentmay + "</div>"
+	                },
+	                targets: 5
+				},	  
+				{
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                    return "<div>" + full.percentjun + "</div>"
+	                },
+	                targets: 6
+				},	  
+				{
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                    return "<div>" + full.percentjul + "</div>"
+	                },
+	                targets: 7
+				},	  
+				{
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                    return "<div>" + full.percentaug + "</div>"
+	                },
+	                targets: 8
+				},	  
+				{
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                    return "<div>" + full.percentsep + "</div>"
+	                },
+	                targets: 9
+				},	  
+				{
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                    return "<div>" + full.percentoct + "</div>"
+	                },
+	                targets: 10
+				},	  
+				{
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                    return "<div>" + full.percentnov + "</div>"
+	                },
+	                targets: 11
+				},	  
+				{
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                    return "<div>" + full.percentdece + "</div>"
+	                },
+	                targets: 12
+				},	  
+				 
+			    {
+				    orderable: false,
+				    searchable: false,
+			        targets: [0]
+			    }, 
+
+			],
+			columns: [
+	            { data: "agencyName" },
+	            { data: "percentjan" },
+	            { data: "percentfeb" },
+	            { data: "percentmar" },
+	            { data: "percentapr" },
+	            { data: "percentmay" },
+	            { data: "percentjun" },
+	            { data: "percentjul" },
+	            { data: "percentaug" },
+	            { data: "percentsep" },
+	            { data: "percentoct" },
+	            { data: "percentnov" },
+	            { data: "percentdece" }
+	        ]
+		});
+	
+	var t4 = jQuery('#dataTable4').DataTable({
+		searching:false,
+		pageLength: 10,
+		processing: true,
+		paging: false, // 禁止分页
+		language: datatable_local_language, // my.js
+		serverSide: true,
+		bInfo : false,
+		ajax: {
+			url: '${rootPath}statistics/agencyAchievementStats2Total.do',
+			data: function(data){
+	 			var searchYear = $("#searchYear").val();
+	 			var searchStatus = searchStatusCheck;
+	 			searchStatusCheck = "";
+	 			
+	 			if(searchYear !=null && searchYear !=""){
+	 				data.searchStartTime = searchYear + "-01-01";
+	 				data.searchEndTime = searchYear + "-12-31";
+	 			}
+			},
+			
+			dataFilter: function(data){
+				var json = jQuery.parseJSON( data );
+				json.recordsTotal = json.countTotal;
+				json.recordsFiltered = json.countFiltered;
+				json.data = json.data;
+				return JSON.stringify( json );
+			}
+		},
+		columnDefs: [		  
+				   {
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                	return "<div class='minw50'>" + "<h3>" + '合计'  + "</h3>" + "</div>" 
+	                },
+	                targets: 0
+				},
+				{
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                    return "<div>" + full.percentjanM_T + "</div>"
+	                },
+	                targets: 1
+				},
+				{
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                    return "<div>" + full.percentfebM_T + "</div>"
+	                },
+	                targets: 2
+				},	  
+				{
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                    return "<div>" + full.percentmarM_T + "</div>"
+	                },
+	                targets: 3
+				},	  
+				{
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                    return "<div>" + full.percentaprM_T + "</div>"
+	                },
+	                targets: 4
+				},	  
+				{
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                    return "<div>" + full.percentmayM_T + "</div>"
+	                },
+	                targets: 5
+				},	  
+				{
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                    return "<div>" + full.percentjunM_T + "</div>"
+	                },
+	                targets: 6
+				},	  
+				{
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                    return "<div>" + full.percentjulM_T + "</div>"
+	                },
+	                targets: 7
+				},	  
+				{
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                    return "<div>" + full.percentaugM_T + "</div>"
+	                },
+	                targets: 8
+				},	  
+				{
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                    return "<div>" + full.percentsepM_T + "</div>"
+	                },
+	                targets: 9
+				},	  
+				{
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                    return "<div>" + full.percentoctM_T + "</div>"
+	                },
+	                targets: 10
+				},	  
+				{
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                    return "<div>" + full.percentnovM_T + "</div>"
+	                },
+	                targets: 11
+				},	  
+				{
+	                orderable: false,
+	                render: function ( data, type, full, meta ) {
+	                    return "<div>" + full.percentdeceM_T + "</div>"
+	                },
+	                targets: 12
+				},	  
+				 
+			    {
+				    orderable: false,
+				    searchable: false,
+			        targets: [0]
+			    }, 
+
+			],
+			columns: [
+	            { data: "" },
+	            { data: "percentjanM_T" },
+	            { data: "percentfebM_T" },
+	            { data: "percentmarM_T" },
+	            { data: "percentaprM_T" },
+	            { data: "percentmayM_T" },
+	            { data: "percentjunM_T" },
+	            { data: "percentjulM_T" },
+	            { data: "percentaugM_T" },
+	            { data: "percentsepM_T" },
+	            { data: "percentoctM_T" },
+	            { data: "percentnovM_T" },
+	            { data: "percentdeceM_T" }
+	        ]
+		});
+		
+		$('#searchBtn').on( 'click', function () {
+			searchStatusCheck = "";
+			searchFlag = false;
+	        t.draw();
+	        t2.draw();
+	        t3.draw();
+	        t4.draw();
+	    } );
 	    
 	    jQuery('select').removeClass('form-control');
 	</script>
