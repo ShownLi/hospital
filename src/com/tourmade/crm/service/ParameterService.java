@@ -54,6 +54,8 @@ public class ParameterService extends BaseService {
 		if(parameter.getEnglish()!=null){
 			map.put("english", parameter.getEnglish());
 		}
+		System.out.println(map);
+		System.out.println(parameter);
 		List<Parameter> data = parameterMapper.queryParameter(map);
 		long count = parameterMapper.countParameter(parameter);
 		
