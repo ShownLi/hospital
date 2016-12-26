@@ -136,7 +136,7 @@
                       <div class="form-group col-sm-4">
                           <label class="col-sm-4 control-label">货币种类</label>
                           <div class="col-sm-8">
-                            <input type="text" name="currency" value="${order.currency}" placeholder="货币种类" class="form-control"/>
+                            <input type="text" name="currency" value="${order.currency}" placeholder="货币种类" class="currency-select fullwidth"/>
                           </div>
                       </div>
                       <div class="form-group col-sm-4">
