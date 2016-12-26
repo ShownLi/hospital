@@ -666,7 +666,7 @@
      </div>
      <div class="modal-body">
       <form id="form-judgeBind" action="${rootPath}/case/bindCustomer.do">
-		 <table id="showCustomerHeader" border="1" width="100%">
+		 <!-- <table id="showCustomerHeader" border="1" width="100%">
             <tr>  
               <td align="center">客人ID</td>        
               <td align="center">客人名</td>
@@ -675,8 +675,20 @@
               <td align="center">QQ</td>
               <td align="center">微信</td>
             </tr>
-          </table>	
+          </table>	 -->
           <table id="showCustomer" border="1" width="100%">
+          	<thead>
+          		<tr>
+          		  <td align="center">客人ID</td>        
+	              <td align="center">客人名</td>
+	              <td align="center">电话</td>
+	              <td align="center">邮件</td>
+	              <td align="center">QQ</td>
+	              <td align="center">微信</td>
+          		</tr>
+          	</thead>
+          	<tbody>    		
+          	</tbody>
           </table>
           <input id="ccaseId" style="display: none" type="text" name="caseId" />
           <div style="margin: 10px 0;">
@@ -1039,8 +1051,8 @@
 					$("#ccaseId").val(result.cid);
 					var custumerList=result.cust;
 					for(var i=0;i<custumerList.length;i++){
-						$("#showCustomer").empty();
-						$("#showCustomer").append("<tr><td align='center'>"+custumerList[i].customerId+"</td>"+
+						$("#showCustomer tbody").empty();
+						$("#showCustomer tbody").append("<tr><td align='center'>"+custumerList[i].customerId+"</td>"+
 								"<td align='center' name='chineseName'>"+custumerList[i].chineseName+"</td>"+
 								"<td align='center' name='mobilephone'>"+custumerList[i].mobilephone+"</td>"+
 								"<td align='center' name='email'>"+custumerList[i].email+"</td>"+

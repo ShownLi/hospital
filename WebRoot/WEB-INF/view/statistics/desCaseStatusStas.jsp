@@ -58,7 +58,7 @@
 							<table id="dataTable" class="table">
 								<thead>
 									<tr>
-										<th>跟单员</th>
+										<th>目的地</th>
 										<th>询单数量</th>
 										<th>待处理 </th>									
 										<th>沟通中</th>
