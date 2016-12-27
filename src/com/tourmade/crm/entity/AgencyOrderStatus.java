@@ -131,9 +131,15 @@ public class AgencyOrderStatus extends BaseBean<Agency>{
 
 	@Override
 	public String toString() {
-		return "AgencyAchievement [agencyName=" + agencyName + ", total=" + total + ", status0=" + status0
+		return "AgencyOrderStatus [agencyName=" + agencyName + ", total=" + total + ", status0=" + status0
 				+ ", status1=" + status1 + ", status2=" + status2 + ", status3=" + status3 + ", status4=" + status4
-				+ ", destiantion=" + destination + ", rate=" + rate + ", searchStartTime=" + searchStartTime
+				+ ", destination=" + destination + ", rate=" + rate + ", searchStartTime=" + searchStartTime
 				+ ", searchEndTime=" + searchEndTime + ", dealMoney=" + dealMoney + "]";
+	}
+	
+	@Override
+	public String toCSVString() {
+		return agencyName + ", " + total + ", " + status0 + ", " + status1 + ", " + status2 + ", " + status3 + ", "
+				+ status4 + ", "  + dealMoney + ", "+  rate;
 	}
 }

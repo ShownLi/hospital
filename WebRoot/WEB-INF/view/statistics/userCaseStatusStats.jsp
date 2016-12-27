@@ -28,6 +28,7 @@
 						<!-- panel-btns -->
 						<h3 class="panel-title">跟单员询单状态统计</h3>
 						<div class="row" style="margin-top: 20px">
+						<form action="${rootPath}statistics/saveusercasestatus.do" method="post">
 							<div class="form-group col-sm-10">
 								<div class="col-sm-2">
 									<input type="text" id="searchSource" class="source-select form-control" placeholder="来源"  value="" />
@@ -48,7 +49,9 @@
 								</div>	
 									<div class="col-sm-2">					 		                        		
 									<input class="btn btn-primary" type="button" id="searchBtn" value="搜索"/>
-								</div> 	
+									<input class="btn btn-primary" type="submit" id="searchSave" value="导出"/>
+								</div>
+								</form> 	
 							</div>
 
 							</div>	
@@ -265,7 +268,22 @@
 	    });
 	    
 	    jQuery('select').removeClass('form-control');
-		
+		/* $("#searchSave").click(function(){
+			$.ajax({
+				url:"${rootPath}statistics/saveusercasestatus.do",//保存跟单员状态表到本地
+				data:{
+					"source":$('#searchSource').val(),
+					"startCreateDateTime":$("#searchStartCreateDateTime").val(),
+					"endCreateDateTime":$("#searchEndCreateDateTime").val()
+					},
+				type:"post",
+				success:function(res){
+				},
+				error:function(res){
+				}
+			})
+			
+		}) */
 	</script>
 </body>
 </html>

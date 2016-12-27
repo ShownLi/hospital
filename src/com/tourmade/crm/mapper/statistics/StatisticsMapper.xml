@@ -446,7 +446,7 @@
 	
 	<select id="queryUserAchievementStats" parameterType="Map" resultType="com.tourmade.crm.entity.UserAchievement">
 		SELECT 
-		tm_user.user_name AS userName,
+		IFNULL(tm_user.user_name,'--') AS userName,
 		tm_case.operator,
 		count(1) AS total,
 		sum(IF(tm_case.`status` = '0',1,0)) AS pendingNum,
@@ -480,7 +480,7 @@
 	
 	<select id="queryContactReal" parameterType="Map" resultType="com.tourmade.crm.entity.ContactRealStats">
 				SELECT 
-				con.chinese AS contactName,
+				IFNULL(con.chinese,'--') AS contactName,
 				tm_case.contact_real AS contact_real,
 				count(1) AS total,
 				sum(IF(tm_case.`status` = '0',1,0)) AS pendingNum,
@@ -524,7 +524,9 @@
 	
 	
 	<select id="queryReasonOfDraining" parameterType="Map" resultType="com.tourmade.crm.entity.ReasonOfDrainingStats">
-		SELECT chinese AS reasonOfDrainingName,count(1) AS num
+		SELECT 
+		IFNULL(chinese,'--') AS reasonOfDrainingName,
+		count(1) AS num
 		FROM tm_case LEFT JOIN 
 		(
 		SELECT para_value,chinese
@@ -552,7 +554,9 @@
 		</if>
 	</select>
 	<select id="queryReasonOfDrainingNoDeal" parameterType="Map" resultType="com.tourmade.crm.entity.ReasonOfDrainingStats">
-		SELECT chinese AS reasonOfDrainingName ,count(1) AS num
+		SELECT 
+		IFNULL(chinese,'--') AS reasonOfDrainingName ,
+		count(1) AS num
 		FROM tm_case LEFT JOIN 
 		(
 		SELECT para_value,chinese
@@ -583,7 +587,7 @@
 	
 	<select id="queryUserAchiRate" parameterType="Map" resultType="com.tourmade.crm.entity.UserAchRate">
 		SELECT 
-		tm_user.user_name AS userName,
+		IFNULL(tm_user.user_name,'--') AS userName,
 		IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 1 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 1 ,1,0))*100,2),'%'),'--') AS percentJan,
 		IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 2 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 2 ,1,0))*100,2),'%'),'--') AS percentFeb,
 		IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 3 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 3 ,1,0))*100,2),'%'),'--') AS percentMar,
@@ -627,7 +631,7 @@
 	</select>
 	<select id="queryUserAchiMoney" parameterType="Map" resultType="com.tourmade.crm.entity.UserAchRate">
 	SELECT 
-		tm_user.user_name AS userName,
+		IFNULL(tm_user.user_name,'--') AS userName,
 		SUM(IF(MONTH(tm_order.group_time) = 1 ,tm_order.rmb_price,0)) AS percentJan,
 		SUM(IF(MONTH(tm_order.group_time) = 2 ,tm_order.rmb_price,0)) AS percentFeb,
 		SUM(IF(MONTH(tm_order.group_time) = 3 ,tm_order.rmb_price,0)) AS percentMar,
@@ -669,7 +673,7 @@
 	<select id="queryDesCaseStatus" parameterType="Map" resultType="com.tourmade.crm.entity.UserAchievement">
 		SELECT 
 		tm_case.destination AS destination,
-		d.chinese AS userName,
+		IFNULL(d.chinese,'--') AS userName,
 		count(1) AS total,
 		sum(IF(tm_case.`status` = '0',1,0)) AS pendingNum,
 		sum(IF(tm_case.`status` = '1',1,0)) AS communicatingNum,
@@ -713,7 +717,7 @@
 	<select id="queryDesAchiRate" parameterType="Map" resultType="com.tourmade.crm.entity.UserAchRate">
 		SELECT 
 		destination AS code,
-		d.chinese AS userName,
+		IFNULL(d.chinese,'--') AS userName,
 		IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 1 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 1 ,1,0))*100,2),'%'),'--') AS percentJan,
 		IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 2 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 2 ,1,0))*100,2),'%'),'--') AS percentFeb,
 		IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 3 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 3 ,1,0))*100,2),'%'),'--') AS percentMar,
@@ -772,7 +776,7 @@
 	<select id="queryDesAchiMoney" parameterType="Map" resultType="com.tourmade.crm.entity.UserAchRate">
 		SELECT 
 		destination AS code,
-		d.chinese AS userName,
+		IFNULL(d.chinese,'--') AS userName,
 		SUM(IF(MONTH(tm_order.group_time) = 1 ,tm_order.rmb_price,0)) AS percentJan,
 		SUM(IF(MONTH(tm_order.group_time) = 2 ,tm_order.rmb_price,0)) AS percentFeb,
 		SUM(IF(MONTH(tm_order.group_time) = 3 ,tm_order.rmb_price,0)) AS percentMar,
@@ -801,7 +805,7 @@
 	<select id="queryDesAchiMoneySum" parameterType="Map" resultType="com.tourmade.crm.entity.UserAchRate">
 		SELECT 
 		destination AS code,
-		d.chinese AS userName,
+		IFNULL(d.chinese,'--') AS userName,
 		SUM(IF(MONTH(tm_order.group_time) = 1 ,tm_order.rmb_price,0)) AS percentJan,
 		SUM(IF(MONTH(tm_order.group_time) = 2 ,tm_order.rmb_price,0)) AS percentFeb,
 		SUM(IF(MONTH(tm_order.group_time) = 3 ,tm_order.rmb_price,0)) AS percentMar,
@@ -841,7 +845,7 @@
 	</select>
 	<select id="queryCustSource" parameterType="Map" resultType="com.tourmade.crm.entity.UserAchRate">
 		SELECT 
-		d.chinese as userName,
+		IFNULL(d.chinese,'--') as userName,
 		SUM(IF(MONTH(tm_customer.creat_time) = 1 ,1,0)) AS percentJan,
 		SUM(IF(MONTH(tm_customer.creat_time) = 2 ,1,0)) AS percentFeb,
 		SUM(IF(MONTH(tm_customer.creat_time) = 3 ,1,0)) AS percentMar,
@@ -888,7 +892,7 @@
 	<select id="queryDesAchiCaseCount" parameterType="Map" resultType="com.tourmade.crm.entity.UserAchRate">
 		SELECT 
 		tm_case.destination AS code,
-		d.chinese AS userName,
+		IFNULL(d.chinese,'--') AS userName,
 		SUM(IF(MONTH(tm_case.creat_time) = 1 ,1,0)) AS percentJan,
 		SUM(IF(MONTH(tm_case.creat_time) = 2 ,1,0)) AS percentFeb,
 		SUM(IF(MONTH(tm_case.creat_time) = 3 ,1,0)) AS percentMar,

@@ -208,6 +208,7 @@ public class StatisticsService extends BaseService {
 		result.setCountTotal(count);
 		result.setCountFiltered(count);
 		return result;
+		}
 	
 	/**
 	 * 地接社业绩统计表，分页展示
@@ -520,7 +521,7 @@ public class StatisticsService extends BaseService {
 		return length;
 	}
 	
-	public List<EntityList> getParameterInfo(String domain) {
+	/*public List<EntityList> getParameterInfo(String domain) {
 		List<EntityList> agencyAchievement = null;
 		try {
 			agencyAchievement = statisticsMapper.getParameterInfo(domain);
@@ -529,5 +530,5 @@ public class StatisticsService extends BaseService {
 			agencyAchievement = null;
 		}
 		return agencyAchievement;
-	}
+	}*/
 }

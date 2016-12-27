@@ -28,10 +28,11 @@
 						<!-- panel-btns -->
 						<h3 class="panel-title">目的地咨询、成交统计</h3>
 						<div class="row" style="margin-top: 20px">
+						
 							<div class="form-group col-sm-10">
 								<div class="col-sm-2">
 									<div class="input-group input-datepicker" style="padding: 0;">
-				                        <input id="searchYear" type="text" name="searchYear" class="form-control datepicker" placeholder="请选择查询年份" autocomplete="on" value="${searchYear }">
+				                        <input readonly="readonly" id="searchYear" type="text" name="searchYear" class="form-control datepicker" placeholder="请选择查询年份" autocomplete="on" value="${searchYear }">
 				                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
 				                    </div>
 				                </div>
@@ -39,6 +40,7 @@
 									<div class="col-sm-2">					 		                        		
 									<input class="btn btn-primary" type="button" id="searchBtn" value="搜索"/>
 								</div> 	
+							
 							</div>
 
 							</div>	
@@ -51,6 +53,11 @@
 							<a href="" class="minimize">&minus;</a>
 						</div>
 						<h4 class="panel-title">咨询数量统计（按咨询时间）</h4>
+						<form action="${rootPath }/statistics/savedesachicount.do" method="post">
+						<input type="hidden" class="searchYearInput" name="searchYear" value="${searchYear }">
+							<input class="btn btn-primary" type="submit" 
+									value="导出" />
+						</form>
 					</div>
 					<div class="panel-body">
 						<div class="table-responsive">
@@ -85,6 +92,11 @@
 							<a href="" class="minimize">&minus;</a>
 						</div>
 						<h4 class="panel-title">成交率统计（按咨询时间）</h4>
+						<form action="${rootPath }/statistics/savedesachirate.do" method="post">
+						<input type="hidden" class="searchYearInput" name="searchYear" value="${searchYear }">
+							<input class="btn btn-primary" type="submit" 
+									value="导出" />
+						</form>
 					</div>
 					<div class="panel-body">
 						<div class="table-responsive">
@@ -120,6 +132,11 @@
 							<a href="" class="minimize">&minus;</a>
 						</div>
 						<h4 class="panel-title">成交金额统计（按成交时间）</h4>
+						<form action="${rootPath }/statistics/savedesachimoney.do" method="post">
+						<input type="hidden" class="searchYearInput" name="searchYear" value="${searchYear }">
+							<input class="btn btn-primary" type="submit" 
+									value="导出" />
+						</form>
 					</div>
 					<div class="panel-body">
 						<div class="table-responsive">

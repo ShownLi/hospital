@@ -124,5 +124,4 @@ public interface StatisticsMapper extends BaseMapper{
 	
 	public long countCustomerSourceLevelStats(CustomerSourceLevelStats customerSourceLevelStats);
 	
-	public List<EntityList> getParameterInfo(String domain);
 }

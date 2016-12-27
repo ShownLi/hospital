@@ -14,7 +14,7 @@
 			<%@ include file="../assets/pages/headerbar.jsp"%>
 			<div class="pageheader">
 				<h2>
-					<i class="fa fa-user"></i>统计分析<span>沟通方式统计</span>
+					<i class="fa fa-user"></i>统计分析<span>流失原因统计</span>
 				</h2>				 
 			</div>
 			
@@ -26,29 +26,38 @@
 							<a href="" class="minimize">&minus;</a>
 						</div>
 						<!-- panel-btns -->
-						<h3 class="panel-title">沟通方式统计</h3>
+						<h3 class="panel-title">流失原因统计</h3>
 						<div class="row" style="margin-top: 20px">
+						
 							<div class="form-group col-sm-10">
 								<div class="col-sm-2">
 									<div class="input-group input-datepicker" style="padding: 0;">
-				                        <input id="searchStartCreateDateTime" type="text" name="searchStartDateTime" class="form-control datepicker" placeholder="请点击输入查询开始日期" autocomplete="on" value="${startTime }">
-				                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-				                    </div>
-				                </div>
-			                    <div class="col-sm-2">
-				                    <div class="input-group input-datepicker" style="padding: 0;">
-				                        <input id="searchEndCreateDateTime" type="text" name="searchEndDateTime" class="form-control datepicker" placeholder="请点击输入查询截止日期" autocomplete="on" value="${endTime }">
-				                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-				                    </div>
-			                    </div>
-							 
-								</div>	
-									<div class="col-sm-2">					 		                        		
-									<input class="btn btn-primary" type="button" id="searchBtn" value="搜索"/>
-								</div> 	
-							</div>
+										<input readonly="readonly" id="searchStartCreateDateTime" type="text" readonly="readonly"
+											name="startCreateDateTime" class="form-control datepicker"
+											placeholder="请点击输入查询开始日期" autocomplete="on"
+											value="${startTime }"> <span
+											class="input-group-addon"><i
+											class="glyphicon glyphicon-calendar"></i></span>
+									</div>
+								</div>
+								<div class="col-sm-2">
+									<div class="input-group input-datepicker" style="padding: 0;">
+										<input id="searchEndCreateDateTime" type="text" readonly="readonly"
+											name="endCreateDateTime" class="form-control datepicker"
+											placeholder="请点击输入查询截止日期" autocomplete="on"
+											value="${endTime }"> <span class="input-group-addon"><i
+											class="glyphicon glyphicon-calendar"></i></span>
+									</div>
+								</div>
 
-							</div>	
+							</div>
+							<div class="col-sm-2">
+								<input class="btn btn-primary" type="button" id="searchBtn"
+									value="搜索" />
+							</div>
+						</div>
+
+					</div>	
 						</div>
 					</div>
 					<!-- panel 无效统计 -->
@@ -58,6 +67,14 @@
 							<a href="" class="minimize">&minus;</a>
 						</div>
 						<h4 class="panel-title">无效原因统计</h4>
+						<span >
+						<form  action="${rootPath }/statistics/savereasonofdraininginvalid.do" method="post">
+						<input type="hidden" class="startTimeInput" name="startCreateDateTime" value="${startTime }">
+						<input type="hidden" class="endTimeInput" name="endCreateDateTime" value="${endTime }">
+							<input class="btn btn-primary" type="submit" 
+									value="导出" />
+						</form>
+						</span>
 					</div>
 					<div class="panel-body">
 						<div class="table-responsive">
@@ -83,6 +100,14 @@
 							<a href="" class="minimize">&minus;</a>
 						</div>
 						<h4 class="panel-title">未成行原因统计</h4>
+						<span >
+						<form action="${rootPath }/statistics/savereasonofdrainingnodeal.do" method="post">
+						<input type="hidden" class="startTimeInput" name="startCreateDateTime" value="${startTime }">
+						<input type="hidden" class="endTimeInput" name="endCreateDateTime" value="${endTime }">
+							<input class="btn btn-primary" type="submit" 
+									value="导出" />
+						</form>
+						</span>
 					</div>
 					<div class="panel-body">
 						<div class="table-responsive">
@@ -126,6 +151,13 @@
         changeYear: true,
         changeMonth: true,
      });
+    //设置时间联动
+    $("#searchStartCreateDateTime").change(function(){
+    	$(".startTimeInput").val($(this).val());
+    });
+    $("#searchEndCreateDateTime").change(function(){
+    	$(".endTimeInput").val($(this).val());
+    });
 			var invalidTable = jQuery('#dataTable-invalid').DataTable({
 				searching:false,
 				paging:false,

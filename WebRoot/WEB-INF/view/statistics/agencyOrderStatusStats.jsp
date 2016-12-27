@@ -28,19 +28,20 @@
 						<!-- panel-btns -->
 						<h3 class="panel-title">地接社订单状态统计</h3>
 						<div class="row" style="margin-top: 20px">
+						<form action="${rootPath }/statistics/saveagencyorderstatus.do" method="post">
 							<div class="form-group col-sm-10">
 								<div class="col-sm-2">
-									<input type="text" id="searchDestination" class="searchDestination-select fullwidth" value="" />
+									<input type="text" id="searchDestination" class="searchDestination-select fullwidth" name="destination"/>
 								</div>
 								<div class="col-sm-2">
 									<div class="input-group input-datepicker" style="padding: 0;">
-				                        <input id="searchStartDateTime" type="text" name="searchStartDateTime" class="form-control datepicker" value="${searchStartDateTime}" placeholder="请点击输入查询开始日期" autocomplete="on">
+				                        <input readonly="readonly" id="searchStartDateTime" type="text" name="searchStartTime" class="form-control datepicker" value="${searchStartDateTime}" placeholder="请点击输入查询开始日期" autocomplete="on">
 				                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
 				                    </div>
 				                </div>
 			                    <div class="col-sm-2">
 				                    <div class="input-group input-datepicker" style="padding: 0;">
-				                        <input id="searchEndDateTime" type="text" name="searchEndDateTime" class="form-control datepicker" value="${searchEndDateTime}" placeholder="请点击输入查询截止日期" autocomplete="on">
+				                        <input readonly="readonly" id="searchEndDateTime" type="text" name="searchEndTime" class="form-control datepicker" value="${searchEndDateTime}" placeholder="请点击输入查询截止日期" autocomplete="on">
 				                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
 				                    </div>
 			                    </div>
@@ -48,7 +49,9 @@
 								</div>	
 									<div class="col-sm-2">					 		                        		
 									<input class="btn btn-primary" type="button" id="searchBtn" value="搜索"/>
+									<input class="btn btn-primary" type="submit" value="导出"/>
 								</div> 	
+								</form>
 							</div>
 
 							</div>	

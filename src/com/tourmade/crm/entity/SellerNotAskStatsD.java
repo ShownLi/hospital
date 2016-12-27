@@ -54,4 +54,8 @@ public class SellerNotAskStatsD extends BaseBean<Agency>{
 		return "SellerNotAskStatsD [country=" + country + ", destination=" + destination + ", searchStartTime="
 				+ searchStartTime + ", searchEndTime=" + searchEndTime + "]";
 	}
+	@Override
+	public String toCSVString() {
+		return destination + ", " + country;
+	}
 }

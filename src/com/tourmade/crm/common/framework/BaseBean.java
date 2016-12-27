@@ -36,4 +36,8 @@ public class BaseBean<T> implements Serializable,Cloneable{
 		return (T)super.clone();
 	}
 	
+	public String toCSVString(){
+		return "";
+	}
+	
 }

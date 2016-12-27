@@ -31,7 +31,7 @@
 							<div class="form-group col-sm-10">
 								<div class="col-sm-2">
 									<div class="input-group input-datepicker" style="padding: 0;">
-				                        <input id="searchYear" type="text" name="searchYear" class="form-control datepicker" value="${searchYear}" placeholder="请点击输入查询年份" autocomplete="on">
+				                        <input id="searchYear" type="text" name="searchYear" class="form-control datepicker" value="${searchYear}" readonly="readonly" placeholder="请点击输入查询年份" autocomplete="on">
 				                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
 				                    </div>
 				                </div>
@@ -44,8 +44,9 @@
 							</div>	
 						</div>
 					</div>
-					<div class="panel-body">
+					<!-- <div class="panel-body">
 						<div class="table-responsive">
+							
 							<table id="dataTable" class="table">
 								<thead>
 									<tr>
@@ -68,9 +69,47 @@
 								</tbody>
 							</table>
 						</div>
+					</div> -->
+					<div class="panel panel-default">
+					<div class="panel-heading">
+						<div class="panel-btns">
+							<a href="" class="minimize">&minus;</a>
+						</div>
+						<h4 class="panel-title">成交率统计（按咨询时间）</h4>
+						<form action="${rootPath }/statistics/saveagencyachirate.do" method="post">
+						<input type="hidden" class="searchYearInput" name="searchYear" value="${searchYear }">
+							<input class="btn btn-primary" type="submit" 
+									value="导出" />
+						</form>
 					</div>
-					
 					<div class="panel-body">
+						<div class="table-responsive">
+							<table id="dataTable" class="table table-communicate">
+								<thead>
+									<tr>
+										<th>地接社名称</th>
+										<th>一月成交率</th>
+										<th>二月成交率</th>									
+										<th>三月成交率</th>
+										<th>四月成交率</th>
+										<th>五月成交率</th>
+										<th>六月成交率</th>
+										<th>七月成交率</th>
+										<th>八月成交率</th>
+										<th>九月成交率</th>
+										<th>十月成交率</th>
+										<th>十一月成交率</th>
+										<th>十二月成交率</th>	
+									</tr>
+								</thead>
+								<tbody>
+								</tbody>
+							</table>
+						</div>
+						<!-- table-responsive -->
+					</div>
+				</div>
+					<!-- <div class="panel-body">
 						<div class="table-responsive">
 							<table id="dataTable2" class="table">
 								<thead>
@@ -95,6 +134,46 @@
 							</table>
 						</div>
 					</div>
+					 -->
+					<div class="panel panel-default">
+					<div class="panel-heading">
+						<div class="panel-btns">
+							<a href="" class="minimize">&minus;</a>
+						</div>
+						<h4 class="panel-title">成交率统计（按咨询时间）</h4>
+						<form action="${rootPath }/statistics/saveagencyachimoney.do" method="post">
+						<input type="hidden" class="searchYearInput" name="searchYear" value="${searchYear }">
+							<input class="btn btn-primary" type="submit" 
+									value="导出" />
+						</form>
+					</div>
+					<div class="panel-body">
+						<div class="table-responsive">
+							<table id="dataTable2" class="table table-communicate">
+								<thead>
+									<tr>
+										<th>地接社名称</th>
+										<th>一月成交金额</th>
+										<th>二月成交金额</th>									
+										<th>三月成交金额</th>
+										<th>四月成交金额</th>
+										<th>五月成交金额</th>
+										<th>六月成交金额</th>
+										<th>七月成交金额</th>
+										<th>八月成交金额</th>
+										<th>九月成交金额</th>
+										<th>十月成交金额</th>
+										<th>十一月成交金额</th>
+										<th>十二月成交金额</th>
+									</tr>
+								</thead>
+								<tbody>
+								</tbody>
+							</table>
+						</div>
+						<!-- table-responsive -->
+					</div>
+				</div>
 				</div>
 		<%@ include file="../assets/pages/rightpanel.jsp"%>
 	</section>
@@ -117,6 +196,8 @@
         changeYear: true,
         changeMonth: false,
         changeDay:false
+     }).change(function(){
+    	 $(".searchYearInput").val($(this).val());
      });
     
 	var t = jQuery('#dataTable').DataTable({

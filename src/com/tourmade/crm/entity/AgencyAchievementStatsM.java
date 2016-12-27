@@ -161,11 +161,18 @@ public class AgencyAchievementStatsM extends BaseBean<Agency>{
 
 	@Override
 	public String toString() {
-		return "AgencyAchievementStats [agencyName=" + agencyName + ", percentjan=" + percentjan + ", percentfeb="
+		return "AgencyAchievementStatsM [agencyName=" + agencyName + ", percentjan=" + percentjan + ", percentfeb="
 				+ percentfeb + ", percentmar=" + percentmar + ", percentapr=" + percentapr + ", percentmay="
 				+ percentmay + ", percentjun=" + percentjun + ", percentjul=" + percentjul + ", percentaug="
 				+ percentaug + ", percentsep=" + percentsep + ", percentoct=" + percentoct + ", percentnov="
 				+ percentnov + ", percentdece=" + percentdece + ", searchStartTime=" + searchStartTime
 				+ ", searchEndTime=" + searchEndTime + "]";
+	}
+	@Override
+	public String toCSVString() {
+		return agencyName + ", " + percentjan + ", " + percentfeb + ", " + percentmar + ", " + percentapr + ", "
+				+ percentmay + ", " + percentjun + ", " + percentjul + ", " + percentaug + ", " + percentsep + ", "
+				+ percentoct + ", " + percentnov + ", " + percentdece ;
+	
 	}
 }

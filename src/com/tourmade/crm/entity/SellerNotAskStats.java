@@ -54,4 +54,9 @@ public class SellerNotAskStats extends BaseBean<Agency>{
 		return "SellerNotAskStats [country=" + country + ", number=" + number + ", searchStartTime=" + searchStartTime
 				+ ", searchEndTime=" + searchEndTime + "]";
 	}
+	@Override
+	public String toCSVString() {
+		// TODO Auto-generated method stub
+		return country + ", "  + number;
+	}
 }

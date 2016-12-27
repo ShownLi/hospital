@@ -27,6 +27,9 @@
 						</div>
 						<!-- panel-btns -->
 						<h3 class="panel-title">商家覆盖统计</h3>
+						<form action="${rootPath }/statistics/savesellercover.do" method="post">
+						<input class="btn btn-primary" type="submit" value="导出"/>
+						</form>
 						<div class="row" style="margin-top: 20px">
 						</div>
 					</div>	

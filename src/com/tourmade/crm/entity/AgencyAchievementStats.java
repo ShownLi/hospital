@@ -168,4 +168,10 @@ public class AgencyAchievementStats extends BaseBean<Agency>{
 				+ percentnov + ", percentdece=" + percentdece + ", searchStartTime=" + searchStartTime
 				+ ", searchEndTime=" + searchEndTime + "]";
 	}
+	@Override
+	public String toCSVString() {
+		return agencyName + ", " + percentjan + ", " + percentfeb + ", " + percentmar + ", " + percentapr + ", "
+				+ percentmay + ", " + percentjun + ", " + percentjul + ", " + percentaug + ", " + percentsep + ", "
+				+ percentoct + ", " + percentnov + ", " + percentdece ;
+	}
 }

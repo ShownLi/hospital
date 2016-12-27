@@ -163,12 +163,9 @@
 	var reason = ${reason};
 	var reasonNodeal =${reasonNodeal};
 	var searchFlag = false;
-<<<<<<< HEAD
 	var searchStatusCheck = "";
-=======
 	var searchButtonClick = false;
 
->>>>>>> 5d1a9ee23d744136f75d2e985cca0e765089df1a
 	var contactReal =${contactReal};
 	
 	$(".destination-select").select2({
@@ -247,19 +244,14 @@
 			 			var searchMobile=$('#searchMobile').val();
 			 			var searchStartDateTime=$("#searchStartDateTime").val();
 			 			var searchEndDateTime=$("#searchEndDateTime").val();
-<<<<<<< HEAD
 			 			//var searchStatus = $("input[name='status']:checked").val();
 			 			var searchStatus = searchStatusCheck;
 			 			searchStatusCheck = "";
-=======
-			 			
 			 			var searchStatus = $("input[name='status']:checked").val();
 			 			if(searchButtonClick == true){
 			 				searchStatus = "";
 			 				searchButtonClick =false;
 			 			}
-			 			
->>>>>>> 5d1a9ee23d744136f75d2e985cca0e765089df1a
 			 			
 			 			if(searchCustomerId !=null && searchCustomerId !="" ){
 							data.customerId = searchCustomerId;

@@ -28,24 +28,26 @@
 						<!-- panel-btns -->
 						<h3 class="panel-title">沟通方式统计</h3>
 						<div class="row" style="margin-top: 20px">
+						<form action="${rootPath}statistics/savecontactreal.do" method="post">
 							<div class="form-group col-sm-10">
 								<div class="col-sm-2">
 									<div class="input-group input-datepicker" style="padding: 0;">
-				                        <input id="searchStartCreateDateTime" type="text" name="searchStartDateTime" class="form-control datepicker" placeholder="请点击输入查询开始日期" autocomplete="on" value="${startTime }">
+				                        <input readonly="readonly" id="searchStartCreateDateTime" type="text" name="startCreateDateTime" class="form-control datepicker" placeholder="请点击输入查询开始日期" autocomplete="on" value="${startTime }">
 				                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
 				                    </div>
 				                </div>
 			                    <div class="col-sm-2">
 				                    <div class="input-group input-datepicker" style="padding: 0;">
-				                        <input id="searchEndCreateDateTime" type="text" name="searchEndDateTime" class="form-control datepicker" placeholder="请点击输入查询截止日期" autocomplete="on" value="${endTime }">
+				                        <input readonly="readonly" id="searchEndCreateDateTime" type="text" name="endCreateDateTime" class="form-control datepicker" placeholder="请点击输入查询截止日期" autocomplete="on" value="${endTime }">
 				                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
 				                    </div>
 			                    </div>
-							 
 								</div>	
 									<div class="col-sm-2">					 		                        		
 									<input class="btn btn-primary" type="button" id="searchBtn" value="搜索"/>
+									<input class="btn btn-primary" type="submit"  value="导出"/>
 								</div> 	
+							</form>
 							</div>
 
 							</div>	

@@ -33,4 +33,8 @@ public class SellerCoverStats extends BaseBean<Agency>{
 	public String toString() {
 		return "SellerCoverStats [country=" + country + ", number=" + number + "]";
 	}
+	@Override
+	public String toCSVString() {
+		return country + ", " + number;
+	}
 }

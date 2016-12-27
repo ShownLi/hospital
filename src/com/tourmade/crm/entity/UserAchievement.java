@@ -47,11 +47,11 @@ public class UserAchievement extends BaseBean<UserAchievement> {
 	/**
 	 * 成交总金额
 	 */
-	private int totalDealMoney;
+//	private int totalDealMoney;
 	/**
 	 * 已付款总金额
 	 */
-	private int totalPaidMoney;
+//	private int totalPaidMoney;
 	/**
 	 * 成交率
 	 */
@@ -110,7 +110,7 @@ public class UserAchievement extends BaseBean<UserAchievement> {
 	public void setPaidNum(int paidNum) {
 		this.paidNum = paidNum;
 	}
-	public int getTotalDealMoney() {
+/*	public int getTotalDealMoney() {
 		return totalDealMoney;
 	}
 	public void setTotalDealMoney(int totalDealMoney) {
@@ -121,7 +121,7 @@ public class UserAchievement extends BaseBean<UserAchievement> {
 	}
 	public void setTotalPaidMoney(int totalPaidMoney) {
 		this.totalPaidMoney = totalPaidMoney;
-	}
+	}*/
 	public String getDealPercent() {
 		return dealPercent;
 	}
@@ -147,8 +147,8 @@ public class UserAchievement extends BaseBean<UserAchievement> {
 		this.noDealNum = noDealNum;
 		this.invalidNum = invalidNum;
 		this.paidNum = paidNum;
-		this.totalDealMoney = totalDealMoney;
-		this.totalPaidMoney = totalPaidMoney;
+		/*this.totalDealMoney = totalDealMoney;
+		this.totalPaidMoney = totalPaidMoney;*/
 		this.dealPercent = dealPercent;
 	}
 	@Override
@@ -156,9 +156,11 @@ public class UserAchievement extends BaseBean<UserAchievement> {
 		return "UserAchievement [userName=" + userName + ", total=" + total + ", pendingNum=" + pendingNum
 				+ ", communicatingNum=" + communicatingNum + ", agencyDesigningNum=" + agencyDesigningNum + ", dealNum="
 				+ dealNum + ", noDealNum=" + noDealNum + ", invalidNum=" + invalidNum + ", paidNum=" + paidNum
-				+ ", totalDealMoney=" + totalDealMoney + ", totalPaidMoney=" + totalPaidMoney + ", dealPercent="
-				+ dealPercent + "]";
+				+ ", dealPercent=" + dealPercent + "]";
 	}
+	public String toCSVString(){
+		return userName.contains(",")?userName:"\""+userName+"\""+ ", " + total + ", " + pendingNum + ", " + communicatingNum + ", " + agencyDesigningNum + ", "
+				+ dealNum + ", " + noDealNum + ", " + invalidNum + ", " + paidNum + ", " + dealPercent;
 	
-	
-}
+	}
+	}
