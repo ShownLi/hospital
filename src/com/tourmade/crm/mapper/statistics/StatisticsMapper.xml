@@ -282,18 +282,18 @@
 	
 	<select id="queryAgencyAchievementStatsMTotal" parameterType="Map" resultType="AgencyAchievementStats">
 		select 
-			sum(percentjan) as percentjan,
-			sum(percentfeb) as percentfeb,
-			sum(percentmar) as percentmar,
-			sum(percentapr) as percentapr,
-			sum(percentmay) as percentmay,
-			sum(percentjun) as percentjun,
-			sum(percentjul) as percentjul,
-			sum(percentaug) as percentaug,
-			sum(percentsep) as percentsep,
-			sum(percentoct) as percentoct,
-			sum(percentnov) as percentnov,
-			sum(percentdece) as percentdece
+			IFNULL(sum(percentjan),'--') as percentjan,
+			IFNULL(sum(percentfeb),'--') as percentfeb,
+			IFNULL(sum(percentmar),'--') as percentmar,
+			IFNULL(sum(percentapr),'--') as percentapr,
+			IFNULL(sum(percentmay),'--') as percentmay,
+			IFNULL(sum(percentjun),'--') as percentjun,
+			IFNULL(sum(percentjul),'--') as percentjul,
+			IFNULL(sum(percentaug),'--') as percentaug,
+			IFNULL(sum(percentsep),'--') as percentsep,
+			IFNULL(sum(percentoct),'--') as percentoct,
+			IFNULL(sum(percentnov),'--') as percentnov,
+			IFNULL(sum(percentdece),'--') as percentdece
 		from (
 			select 
 				o.agency_name as agencyname,
@@ -1062,18 +1062,18 @@
 	
 	<select id="queryUserAchiMoneyTotal" parameterType="Map" resultType="com.tourmade.crm.entity.UserAchRate">
 		select
-			sum(percentJan) as percentJan,
-			sum(percentFeb) as percentFeb,
-			sum(percentMar) as percentMar,
-			sum(percentApr) as percentApr,
-			sum(percentMay) as percentMay,
-			sum(percentJun) as percentJun,
-			sum(percentJul) as percentJul,
-			sum(percentAug) as percentAug,
-			sum(percentSep) as percentSep,
-			sum(percentOct) as percentOct,
-			sum(percentNov) as percentNov,
-			sum(percentDec) as percentDec
+			IFNULL(sum(percentJan),'--') as percentJan,
+			IFNULL(sum(percentFeb),'--') as percentFeb,
+			IFNULL(sum(percentMar),'--') as percentMar,
+			IFNULL(sum(percentApr),'--') as percentApr,
+			IFNULL(sum(percentMay),'--') as percentMay,
+			IFNULL(sum(percentJun),'--') as percentJun,
+			IFNULL(sum(percentJul),'--') as percentJul,
+			IFNULL(sum(percentAug),'--') as percentAug,
+			IFNULL(sum(percentSep),'--') as percentSep,
+			IFNULL(sum(percentOct),'--') as percentOct,
+			IFNULL(sum(percentNov),'--') as percentNov,
+			IFNULL(sum(percentDec),'--') as percentDec
 		from (
 			SELECT 
 				tm_user.user_name AS userName,
@@ -1321,18 +1321,18 @@
 	
 	<select id="queryDesAchiMoneyTotal" parameterType="Map" resultType="com.tourmade.crm.entity.UserAchRate">
 		select
-			sum(percentJan) as percentJan,
-			sum(percentFeb) as percentFeb,
-			sum(percentMar) as percentMar,
-			sum(percentApr) as percentApr,
-			sum(percentMay) as percentMay,
-			sum(percentJun) as percentJun,
-			sum(percentJul) as percentJul,
-			sum(percentAug) as percentAug,
-			sum(percentSep) as percentSep,
-			sum(percentOct) as percentOct,
-			sum(percentNov) as percentNov,
-			sum(percentDec) as percentDec
+			IFNULL(sum(percentJan),'--') as percentJan,
+			IFNULL(sum(percentFeb),'--') as percentFeb,
+			IFNULL(sum(percentMar),'--') as percentMar,
+			IFNULL(sum(percentApr),'--') as percentApr,
+			IFNULL(sum(percentMay),'--') as percentMay,
+			IFNULL(sum(percentJun),'--') as percentJun,
+			IFNULL(sum(percentJul),'--') as percentJul,
+			IFNULL(sum(percentAug),'--') as percentAug,
+			IFNULL(sum(percentSep),'--') as percentSep,
+			IFNULL(sum(percentOct),'--') as percentOct,
+			IFNULL(sum(percentNov),'--') as percentNov,
+			IFNULL(sum(percentDec),'--') as percentDec
 		from(
 			SELECT 
 			destination AS code,
@@ -1505,18 +1505,18 @@
 	
 	<select id="queryDesAchiCaseCountTotal" parameterType="Map" resultType="com.tourmade.crm.entity.UserAchRate">
 		select
-			sum(percentJan) as percentJan,
-			sum(percentFeb) as percentFeb,
-			sum(percentMar) as percentMar,
-			sum(percentApr) as percentApr,
-			sum(percentMay) as percentMay,
-			sum(percentJun) as percentJun,
-			sum(percentJul) as percentJul,
-			sum(percentAug) as percentAug,
-			sum(percentSep) as percentSep,
-			sum(percentOct) as percentOct,
-			sum(percentNov) as percentNov,
-			sum(percentDec) as percentDec
+			IFNULL(sum(percentJan),'--') as percentJan,
+			IFNULL(sum(percentFeb),'--') as percentFeb,
+			IFNULL(sum(percentMar),'--') as percentMar,
+			IFNULL(sum(percentApr),'--') as percentApr,
+			IFNULL(sum(percentMay),'--') as percentMay,
+			IFNULL(sum(percentJun),'--') as percentJun,
+			IFNULL(sum(percentJul),'--') as percentJul,
+			IFNULL(sum(percentAug),'--') as percentAug,
+			IFNULL(sum(percentSep),'--') as percentSep,
+			IFNULL(sum(percentOct),'--') as percentOct,
+			IFNULL(sum(percentNov),'--') as percentNov,
+			IFNULL(sum(percentDec),'--') as percentDec
 		from (
 			SELECT 
 			tm_case.destination AS code,

@@ -76,7 +76,7 @@ public class CaseController extends BaseSimpleFormController {
 		
 		Calendar calendar = Calendar.getInstance();    //获取当前日期
 		calendar.add(Calendar.MONTH, 0);    //设置当前月份
-		calendar.set(Calendar.DAY_OF_MONTH, 1);    //设置为本月1号
+		calendar.add(Calendar.DAY_OF_MONTH, -90); // 设置开始时间为90天
 		model.addAttribute("searchStartDateTime",format.format(calendar.getTime()));
 		
 		Calendar calendar1 = Calendar.getInstance();
