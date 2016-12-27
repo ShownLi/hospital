@@ -349,6 +349,29 @@ public class CaseController extends BaseSimpleFormController {
 		}		
 	}
 	
+	@RequestMapping(value = "/addCase.do")
+	@ResponseBody
+	
+	public Map doAddCase(HttpServletRequest request, HttpSession session, Model model, Case crmcase) {
+		
+		Map<String,Object> map =new HashMap<String,Object>();
+		
+		try {
+			crmcase.setStatus("1");
+			service.saveCase(crmcase);	
+			service.updateCustomer(crmcase);
+			map.put("cid",crmcase.getCaseId());
+			map.put("success", true);
+			return map;
+			
+			
+		} catch (Exception e) {
+			logger.error("CaseController.doAddCase() --> " + crmcase.toString() + "\n" + e.getMessage());
+			map.put("error", "error");
+			return map;
+		}		
+	}
+	
 	
 	@RequestMapping(value = "/bindCustomer.do")
 //	@ResponseBody
@@ -807,6 +830,25 @@ public class CaseController extends BaseSimpleFormController {
 			logger.error("CaseController.doNoDeal() --> " + caseId + "\n" + e.getMessage());
 		}
 	
+		return json;
+	}
+	
+	
+	//设置询单状态为收款确认
+	@RequestMapping(value = "/confirmPay.do")
+	@ResponseBody
+	public Json doConfirmPay(HttpServletRequest request, HttpSession session, Model model, Case crmcase) {
+
+		Json json = new Json();		
+		try {
+			service.confirmPay(crmcase);
+			
+			json.setSuccess(true);
+		} catch (Exception e) {
+			json.setSuccess(false);
+			logger.error("CaseController.doConfirmPay() --> " + crmcase.toString() + "\n" + e.getMessage());
+		}
+		
 		return json;
 	}
 }

@@ -11,7 +11,6 @@ import com.tourmade.crm.entity.EntityList;
 import com.tourmade.crm.entity.SellerCoverStats;
 import com.tourmade.crm.entity.SellerNotAskStats;
 import com.tourmade.crm.entity.SellerNotAskStatsD;
-import com.tourmade.crm.entity.AgencyAchievementStatsM;
 import com.tourmade.crm.common.framework.BaseMapper;
 import com.tourmade.crm.entity.ContactRealStats;
 import com.tourmade.crm.entity.ReasonOfDrainingStats;
@@ -28,10 +27,14 @@ public interface StatisticsMapper extends BaseMapper{
 	List<EntityList> getParameterInfo(String domain);
 
 	List<UserAchievement> queryUserAchievementStats(Map<String, Object> map);
+	
+	List<UserAchievement> queryUserAchievementStatsTotal(Map<String, Object> map);
 
 	long countAllUsers();
 
 	List<ContactRealStats> queryContactReal(Map<String, Object> map);
+	
+	List<ContactRealStats> queryContactRealTotal(Map<String, Object> map);
 
 	long countAllContact(Map<String, Object> map);
 	/**
@@ -40,7 +43,9 @@ public interface StatisticsMapper extends BaseMapper{
 	 * @return
 	 */
 	List<ReasonOfDrainingStats> queryReasonOfDraining(Map<String, Object> map);
-
+	
+	List<ReasonOfDrainingStats> queryReasonOfDrainingTotal(Map<String, Object> map);
+	
 	/**
 	 * 计算一段时间内的无效询单总数
 	 * @param map 
@@ -49,24 +54,34 @@ public interface StatisticsMapper extends BaseMapper{
 	long countCaseInvalid(Map<String, Object> map);
 
 	List<ReasonOfDrainingStats> queryReasonOfDrainingNoDeal(Map<String, Object> map);
+	
+	List<ReasonOfDrainingStats> queryReasonOfDrainingNoDealTotal(Map<String, Object> map);
 
 	long countCaseNoDeal(Map<String, Object> map);
 
 	List<UserAchRate> queryUserAchiRate(Map<String, Object> map);
+	
+	List<UserAchRate> queryUserAchiRateTotal(Map<String, Object> map);
 
 	long countCaseAllUsers(Map<String, Object> map);
 
 	List<UserAchRate> queryUserAchiMoney(Map<String, Object> map);
+	
+	List<UserAchRate> queryUserAchiMoneyTotal(Map<String, Object> map);
 
 	long countOrderAllUsers(Map<String, Object> map);
 
 	List<UserAchievement> queryDesCaseStatus(Map<String, Object> map);
+	
+	List<UserAchievement> queryDesCaseStatusTotal(Map<String, Object> map);
 
 	long countCaseAllDes(Map<String, Object> map);
 
 	List<UserAchRate> queryDesAchiRate(Map<String, Object> map);
-
+	
 	List<UserAchRate> queryDesAchiMoney(Map<String, Object> map);
+	
+	List<UserAchRate> queryDesAchiMoneyTotal(Map<String, Object> map);
 
 	long countOrderAllDes(Map<String, Object> map);
 
@@ -75,36 +90,51 @@ public interface StatisticsMapper extends BaseMapper{
 	 * @param map
 	 * @return
 	 */
-	UserAchRate queryDesAchiRateSum(Map<String, Object> map);
-
-	UserAchRate queryDesAchiMoneySum(Map<String, Object> map);
+	List<UserAchRate> queryDesAchiRateTotal(Map<String, Object> map);
 
 	List<UserAchRate> queryCustSource(Map<String, Object> map);
+	
+	List<UserAchRate> queryCustSourceTotal(Map<String, Object> map);
 
 	long countAllCoustSource(Map<String, Object> map);
 
 	List<UserAchRate> queryDesAchiCaseCount(Map<String, Object> map);
-
-
-
+	
+	List<UserAchRate> queryDesAchiCaseCountTotal(Map<String, Object> map);
 
 	public List<AgencyOrderStatus> queryAgencyOrderStatus(Map<String, Object> params);
 	
+	public List<AgencyOrderStatus> queryAgencyOrderStatusTotal(Map<String, Object> params);
+	
 	public List<CaseSourceStats> queryCaseSourceStats(Map<String, Object> params);
+	
+	public List<CaseSourceStats> queryCaseSourceStatsTotal(Map<String, Object> params);
 	
 	public List<CaseAllotStats> queryCaseAllotStats(Map<String, Object> params);
 	
+	public List<CaseAllotStats> queryCaseAllotStatsTotal(Map<String, Object> params);
+	
 	public List<AgencyAchievementStats> queryAgencyAchievementStats(Map<String, Object> params);
 	
-	public List<AgencyAchievementStatsM> queryAgencyAchievementStatsM(Map<String, Object> params);
+	public List<AgencyAchievementStats> queryAgencyAchievementStatsTotal(Map<String, Object> params);
+	
+	public List<AgencyAchievementStats> queryAgencyAchievementStatsM(Map<String, Object> params);
+	
+	public List<AgencyAchievementStats> queryAgencyAchievementStatsMTotal(Map<String, Object> params);
 	
 	public List<SellerCoverStats> querySellerCoverStats(Map<String, Object> params);
 	
+	public List<SellerCoverStats> querySellerCoverStatsTotal(Map<String, Object> params);
+	
 	public List<SellerNotAskStats> querySellerNotAskStats(Map<String, Object> params);
+	
+	public List<SellerNotAskStats> querySellerNotAskStatsTotal(Map<String, Object> params);
 	
 	public List<SellerNotAskStatsD> querySellerNotAskStatsD(Map<String, Object> params);
 	
 	public List<CustomerSourceLevelStats> queryCustomerSourceLevelStats(Map<String, Object> params);
+	
+	public List<CustomerSourceLevelStats> queryCustomerSourceLevelStatsTotal(Map<String, Object> params);
 	
 	public long countAgencyOrderStatus(AgencyOrderStatus agencyOrderStatus);
 	
@@ -112,7 +142,7 @@ public interface StatisticsMapper extends BaseMapper{
 	
 	public long countCaseAllotStats(CaseAllotStats caseAllotStats);
 	
-	public long countAgencyAchievementStatsM(AgencyAchievementStatsM agencyAchievementStatsM);
+	public long countAgencyAchievementStatsM(AgencyAchievementStats agencyAchievementStatsM);
 	
 	public long countAgencyAchievementStats(AgencyAchievementStats agencyAchievementStats);
 	

@@ -34,11 +34,11 @@ public class AgencyAchievementStats extends BaseBean<Agency>{
 	private String percentnov;
 	
 	private String percentdece;
-
+	
 	private String searchStartTime;
 	
 	private String searchEndTime;
-	
+
 	public String getAgencyName() {
 		return agencyName;
 	}

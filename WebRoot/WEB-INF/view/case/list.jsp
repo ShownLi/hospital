@@ -130,8 +130,7 @@
 										<th>备注</th>
 										<th>询单来源 <br>状态</th>
 										<th>跟单员 <br>沟通方式</th>
-										<th>更新时间</th>
-										<th>创建时间</th>
+										<th>更新时间 <br>创建时间</th>
 										<th>编辑</th>
 									</tr>
 								</thead>
@@ -247,6 +246,7 @@
 			 			//var searchStatus = $("input[name='status']:checked").val();
 			 			var searchStatus = searchStatusCheck;
 			 			searchStatusCheck = "";
+
 			 			var searchStatus = $("input[name='status']:checked").val();
 			 			if(searchButtonClick == true){
 			 				searchStatus = "";
@@ -479,30 +479,22 @@
 			                  orderable: false,
 			                  render: function ( data, type, full, meta ) {
 			                	  
-			                	  var time = full.updateTime.time;
+			                	  	var m = full.updateTime.time;
 				                	if(full.updateTime){
-				                		time=new Date(time).format("yyyy-MM-dd hh:mm:ss");
+				                		m=new Date(m).format("yyyy-MM-dd hh:mm:ss");
 				                	}else{
-				                		time="";
+				                		m="";
 				                	}
-				                	return "<div class='caselist-7'>" + time + "</div>"
+				                	
+				                	var n = full.creatTime.time;
+				                	if(full.creatTime){
+				                		n=new Date(n).format("yyyy-MM-dd hh:mm:ss");
+				                	}else{
+				                		n="";
+				                	}
+				                	return "<div class='caselist-7'>" + m + "</div>"+"<div class='caselist-7'>" + n + "</div>"
 			                  },
 			                  targets: 8
-						    },
-						{
-			                  data: "creatTime",
-			                  orderable: false,
-			                  render: function ( data ) {
-			                	  
-			                	  var time = data.time;
-				                	if(data.time){
-				                		time=new Date(time).format("yyyy-MM-dd hh:mm:ss");
-				                	}else{
-				                		time="";
-				                	}
-				                	return "<div class='caselist-7'>" + time + "</div>"
-			                  },
-			                  targets: 9
 						    },
 						{
 		                  data: "caseId",
@@ -517,7 +509,7 @@
 		                	  }
 		                      
 		                  },
-		                  targets: 10
+		                  targets: 9
 					    },
 					    {
 						    orderable: false,
@@ -531,11 +523,12 @@
 			            { data:"mobile"},
 			            { data: "destination" },
 			            { data: "requirement" },
-			            { data: "operator" },
+			            { data: "reason"},
 			            { data: "comment"},
-			            { data: "creatTime"},
-			            { data: "reason"}
-			           
+			            { data: "source" },
+			            { data: "operator" },
+			            { data: "updateTime"},
+			            { data: "caseId"}
 			        ]
 				});
 

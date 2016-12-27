@@ -11,6 +11,7 @@ import com.tourmade.crm.entity.Customer;
 import com.tourmade.crm.entity.EntityList;
 import com.tourmade.crm.entity.Order;
 import com.tourmade.crm.entity.PortalOrder;
+import com.tourmade.crm.entity.Sale;
 
 public interface OrderMapper extends BaseMapper {
 	
@@ -64,4 +65,6 @@ public interface OrderMapper extends BaseMapper {
 	public Order getOrderByEmail(String recieverEmail);
 
 	public int deleteOrderNodealByCaseId(Map<String, Object> map);
+
+	public Sale getSaleBySalesId(int salesId);
 }

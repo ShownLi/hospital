@@ -117,4 +117,13 @@ public class SaleService extends BaseService {
 			logger.error("SaleService.deleteSaleById() --> " + saleId + "-->" + e.getMessage());
 		}
 	}
+
+	public void updateOrderEmail(Sale sale) {
+		
+		try {
+			saleMapper.updateOrderEmail(sale);
+		} catch (Exception e) {
+			logger.error("SaleService.updateOrderEmail() --> " + sale + "-->" + e.getMessage());
+		}
+	}
 }

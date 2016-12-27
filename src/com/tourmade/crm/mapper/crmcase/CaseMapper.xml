@@ -779,5 +779,17 @@
 		u.isdel as isdel
 		from tm_customer u where u.customer_id = #{customerId}
 	</select>
+	
+	<update id="updateOrderConPay" parameterType="Case" flushCache="true">
+		update tm_order u
+		set
+		 u.`status`= 4 
+		where order_id  
+		in (select a.id from 
+		((select order_id as id from tm_order 
+		where case_id = ${caseId} 
+		and `status`=2)a)
+		);
+	</update>
 </mapper>
 

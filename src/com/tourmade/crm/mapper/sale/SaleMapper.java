@@ -22,4 +22,6 @@ public interface SaleMapper extends BaseMapper {
 	public Sale getSaleById(int saleId);
 
 	public List<EntityList> getAgency();
+
+	public void updateOrderEmail(Sale sale);
 }

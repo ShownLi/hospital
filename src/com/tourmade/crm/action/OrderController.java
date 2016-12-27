@@ -21,6 +21,7 @@ import com.tourmade.crm.entity.Case;
 import com.tourmade.crm.entity.Customer;
 import com.tourmade.crm.entity.EntityList;
 import com.tourmade.crm.entity.Order;
+import com.tourmade.crm.entity.Sale;
 import com.tourmade.crm.service.CaseService;
 import com.tourmade.crm.service.EmailService;
 import com.tourmade.crm.service.OrderService;
@@ -138,6 +139,8 @@ public class OrderController extends BaseSimpleFormController {
 		if(order.getCaseId()!=0){
 		   Customer customer = service.getCustomerByCaseId(order.getCaseId());
 		   if(customer.getEmail().equals("")){
+
+				json.setText("noCustomerEmail");
 			   //客人状态设置为下单客人
 			   service.customerStatus(order.getCustomerId(),"2");
 			   //询单状态设置为“地接社设计中”
@@ -147,6 +150,17 @@ public class OrderController extends BaseSimpleFormController {
 			   return json;
 		   }
 		   else{
+			   Sale sale = service.getSaleBySalesId(order.getSalesId());
+			   if(sale.getSalesEmail().equals("")){
+				   json.setText("noSaleEmail");
+				   //客人状态设置为下单客人
+				   service.customerStatus(order.getCustomerId(),"2");
+				   //询单状态设置为“地接社设计中”
+				   caseService.case2orderNoEmail(order.getCaseId());
+				   //补充order信息并存储该order
+				   order = service.saveOrder(order);
+				   return json;
+			   }
 			   order.setCustomerId(customer.getCustomerId());		   
 			}
 		
@@ -160,7 +174,7 @@ public class OrderController extends BaseSimpleFormController {
 			//判断是否要发送邮件
 			int isSendmail = service.selectAgencyBySaleId(order.getSalesId());
 			if(isSendmail==0){
-				json.setSuccess(true);
+				json.setText("noSendmail");
 				return json;
 			}else{
 				//邮件别名操作（创建邮件别名并将其写入order表）

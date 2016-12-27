@@ -25,6 +25,7 @@ import com.tourmade.crm.entity.EntityList;
 import com.tourmade.crm.entity.Order;
 import com.tourmade.crm.mapper.order.OrderMapper;
 import com.tourmade.crm.entity.PortalOrder;
+import com.tourmade.crm.entity.Sale;
 
 import net.sf.json.JSONObject;
 
@@ -621,6 +622,17 @@ public class OrderService extends BaseService {
 		}
 
 		return judge;
+	}
+
+	public Sale getSaleBySalesId(Integer salesId) {
+		Sale sale = null;
+		try {
+			sale = orderMapper.getSaleBySalesId(salesId);
+		} catch (Exception e) {
+			logger.error("OrderService.getSaleBySalesId() --> " + salesId + "-->" + e.getMessage());
+			sale = null;
+		}
+		return sale;
 	}
 
 }

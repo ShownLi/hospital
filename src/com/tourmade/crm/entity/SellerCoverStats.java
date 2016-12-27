@@ -12,7 +12,7 @@ public class SellerCoverStats extends BaseBean<Agency>{
 	private String country;
 	
 	private String number;
-
+	
 	public String getCountry() {
 		return country;
 	}

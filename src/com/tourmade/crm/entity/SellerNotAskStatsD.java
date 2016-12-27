@@ -25,14 +25,6 @@ public class SellerNotAskStatsD extends BaseBean<Agency>{
 		this.country = country;
 	}
 
-	public String getDestination() {
-		return destination;
-	}
-
-	public void setDestination(String destination) {
-		this.destination = destination;
-	}
-
 	public String getSearchStartTime() {
 		return searchStartTime;
 	}
@@ -47,6 +39,14 @@ public class SellerNotAskStatsD extends BaseBean<Agency>{
 
 	public void setSearchEndTime(String searchEndTime) {
 		this.searchEndTime = searchEndTime;
+	}
+
+	public String getDestination() {
+		return destination;
+	}
+
+	public void setDestination(String destination) {
+		this.destination = destination;
 	}
 
 	@Override

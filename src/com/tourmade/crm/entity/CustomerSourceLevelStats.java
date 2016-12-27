@@ -20,7 +20,7 @@ public class CustomerSourceLevelStats extends BaseBean<Agency>{
 	private Integer level3;
 	
 	private String rate;
-
+	
 	public String getSource() {
 		return source;
 	}

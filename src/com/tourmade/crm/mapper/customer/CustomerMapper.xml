@@ -76,8 +76,8 @@
 
 	</select>
 	
-	<insert id="saveCustomer" parameterType="Customer" flushCache="true" useGeneratedKeys="true" keyProperty="id" keyColumn="GENERATED_KEY">
-<!-- 		<insert id="saveCustomer" parameterType="Customer" >
+ 	<insert id="saveCustomer" parameterType="Customer" flushCache="true" useGeneratedKeys="true" keyProperty="id" keyColumn="GENERATED_KEY">
+		<!-- <insert id="saveCustomer" parameterType="Customer" >
 	    <selectKey keyProperty="id" resultType="int" order="AFTER">
 	        select last_insert_id() 
 	    </selectKey> -->

@@ -81,4 +81,16 @@
 		where
 		sales_id = #{salesId}
 	</update>
+	
+	<update id="updateOrderEmail" parameterType="Sale" flushCache="true">
+		update tm_order 
+		set
+		agency_email_real = #{salesEmail} 
+		where order_id  
+		in (select a.id from 
+		((select order_id as id from tm_order 
+		where sales_id = ${salesId} 
+		and agency_email_real = "")a)
+		);
+	</update>
 </mapper>

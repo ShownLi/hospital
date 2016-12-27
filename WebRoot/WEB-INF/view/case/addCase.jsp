@@ -506,7 +506,7 @@
 		/* 保存新建的询单 */  
 		function case_submit() {
 			var f = $("#form-case").serialize();			
-			$.post('${rootPath}case/add.do', f, function(result) {
+			$.post('${rootPath}case/addCase.do', f, function(result) {
 
 				var caseId = result.cid;
 				$("#caseId").val(caseId);

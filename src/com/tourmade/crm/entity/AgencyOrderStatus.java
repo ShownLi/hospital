@@ -32,7 +32,7 @@ public class AgencyOrderStatus extends BaseBean<Agency>{
 	private String searchEndTime;
 	
 	private String dealMoney;
-
+	
 	public Integer getTotal() {
 		return total;
 	}

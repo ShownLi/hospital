@@ -94,6 +94,10 @@ public class SaleController extends BaseSimpleFormController {
 		Json json = new Json();
 		
 		try {
+			//如果邮箱不为空，找到该客人对应的没有保存邮箱的订单，更新邮箱
+			if(sale.getSalesEmail()!=""&&sale.getSalesEmail()!=null){
+				service.updateOrderEmail(sale);
+			}
 			service.updateSale(sale);
 			json.setSuccess(true);
 		} catch (Exception e) {
