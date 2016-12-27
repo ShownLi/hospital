@@ -44,49 +44,6 @@
 							</div>	
 						</div>
 					</div>
-					<!-- <div class="panel-body">
-						<div class="table-responsive">
-							
-							<table id="dataTable" class="table">
-								<thead>
-									<tr>
-										<th>地接社名称</th>
-										<th>一月成交率</th>
-										<th>二月成交率</th>									
-										<th>三月成交率</th>
-										<th>四月成交率</th>
-										<th>五月成交率</th>
-										<th>六月成交率</th>
-										<th>七月成交率</th>
-										<th>八月成交率</th>
-										<th>九月成交率</th>
-										<th>十月成交率</th>
-										<th>十一月成交率</th>
-										<th>十二月成交率</th>
-									</tr>
-								</thead>
-							</table>
-							<table id="dataTable3" class="table">
-								<thead>
-									<tr>
-										<th></th>
-										<th>一月成交率</th>
-										<th>二月成交率</th>									
-										<th>三月成交率</th>
-										<th>四月成交率</th>
-										<th>五月成交率</th>
-										<th>六月成交率</th>
-										<th>七月成交率</th>
-										<th>八月成交率</th>
-										<th>九月成交率</th>
-										<th>十月成交率</th>
-										<th>十一月成交率</th>
-										<th>十二月成交率</th>
-									</tr>
-								</thead>
-							</table>
-						</div>
-					</div> -->
 					<div class="panel panel-default">
 					<div class="panel-heading">
 						<div class="panel-btns">
@@ -94,7 +51,8 @@
 						</div>
 						<h4 class="panel-title">成交率统计（按咨询时间）</h4>
 						<form action="${rootPath }/statistics/saveagencyachirate.do" method="post">
-						<input type="hidden" class="searchYearInput" name="searchYear" value="${searchYear }">
+						<input type="hidden" class="searchYearInputBegin" name="searchStartTime" value="${searchYear }-01-01">
+						<input type="hidden" class="searchYearInputEnd" name="searchEndTime" value="${searchYear }-12-31">
 							<input class="btn btn-primary" type="submit" 
 									value="导出" />
 						</form>
@@ -126,49 +84,6 @@
 						<!-- table-responsive -->
 					</div>
 				</div>
-					<!-- <div class="panel-body">
-						<div class="table-responsive">
-							<table id="dataTable2" class="table">
-								<thead>
-									<tr>
-										<th>地接社名称</th>
-										<th>一月成交金额</th>
-										<th>二月成交金额</th>									
-										<th>三月成交金额</th>
-										<th>四月成交金额</th>
-										<th>五月成交金额</th>
-										<th>六月成交金额</th>
-										<th>七月成交金额</th>
-										<th>八月成交金额</th>
-										<th>九月成交金额</th>
-										<th>十月成交金额</th>
-										<th>十一月成交金额</th>
-										<th>十二月成交金额</th>
-									</tr>
-								</thead>
-							</table>
-							<table id="dataTable4" class="table">
-								<thead>
-									<tr>
-										<th></th>
-										<th>一月成交金额</th>
-										<th>二月成交金额</th>									
-										<th>三月成交金额</th>
-										<th>四月成交金额</th>
-										<th>五月成交金额</th>
-										<th>六月成交金额</th>
-										<th>七月成交金额</th>
-										<th>八月成交金额</th>
-										<th>九月成交金额</th>
-										<th>十月成交金额</th>
-										<th>十一月成交金额</th>
-										<th>十二月成交金额</th>
-									</tr>
-								</thead>
-							</table>
-						</div>
-					</div>
-					 -->
 					<div class="panel panel-default">
 					<div class="panel-heading">
 						<div class="panel-btns">
@@ -176,7 +91,8 @@
 						</div>
 						<h4 class="panel-title">成交率统计（按咨询时间）</h4>
 						<form action="${rootPath }/statistics/saveagencyachimoney.do" method="post">
-						<input type="hidden" class="searchYearInput" name="searchYear" value="${searchYear }">
+						<input type="hidden" class="searchYearInputBegin" name="searchStartTime" value="${searchYear }-01-01">
+						<input type="hidden" class="searchYearInputEnd" name="searchEndTime" value="${searchYear }-12-31">
 							<input class="btn btn-primary" type="submit" 
 									value="导出" />
 						</form>
@@ -230,9 +146,12 @@
         changeYear: true,
         changeMonth: false,
         changeDay:false
-     }).change(function(){
-    	 $(".searchYearInput").val($(this).val());
      });
+    $("#searchYear").change(function(){
+   	 $(".searchYearInputBegin").val($(this).val()+'-01-01');
+   	 $(".searchYearInputEnd").val($(this).val()+'-12-31');
+ });
+     
     
 	var t = jQuery('#dataTable').DataTable({
 		searching:false,

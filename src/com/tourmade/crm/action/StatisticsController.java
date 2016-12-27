@@ -1388,8 +1388,8 @@ public class StatisticsController extends BaseSimpleFormController {
 		QueryResult<AgencyOrderStatus> result = queryAgencyOrderStatusMethod(request, agencyOrderStatus, page);
 		dataMap.put("dataList", result.getData());// 将数据放入Map中
 		String title = "地接社名称,订单数量,等待客人回复订单数,等待地接社回复订单数,成行订单数,未成行订单数,付款订单数,成交金额,成交比例";
-		dataMap.put("fileName", "地接社订单状态统计表（" + agencyOrderStatus.getSearchStartTime() + "-"
-				+ agencyOrderStatus.getSearchEndTime() + "）.csv");// 拼接csv表名
+		dataMap.put("fileName", "地接社订单状态统计表（" + agencyOrderStatus.getSearchStartTime().substring(0,agencyOrderStatus.getSearchStartTime().length()-9 ) + "-"
+				+ agencyOrderStatus.getSearchEndTime().substring(0, agencyOrderStatus.getSearchEndTime().length()-9) + "）.csv");// 拼接csv表名
 		try {
 			CSVUtil.saveCsv(response, dataMap, title);
 		} catch (IOException e) {
@@ -1404,8 +1404,8 @@ public class StatisticsController extends BaseSimpleFormController {
 		QueryResult<CaseAllotStats> result = queryCaseAllotStatsMethod(request, caseAllotStats, page);
 		dataMap.put("dataList", result.getData());// 将数据放入Map中
 		String title = "跟单员,询单总数量,网站表单询单数,手机表单,直发表单,微信表单,网站在线客服,手机在线客服,电话客服,微信客服,线下活动,邮件咨询,朋友介绍,老客人,携程";
-		dataMap.put("fileName", "地接社订单状态统计表（" + caseAllotStats.getSearchStartTime() + "-"
-				+ caseAllotStats.getSearchEndTime() + "）.csv");// 拼接csv表名
+		dataMap.put("fileName", "询单分配统计表（" + caseAllotStats.getSearchStartTime().substring(0,caseAllotStats.getSearchStartTime().length()-9 ) + "-"
+				+ caseAllotStats.getSearchEndTime().substring(0,caseAllotStats.getSearchEndTime().length()-9 ) + "）.csv");// 拼接csv表名
 		try {
 			CSVUtil.saveCsv(response, dataMap, title);
 		} catch (IOException e) {
@@ -1417,12 +1417,10 @@ public class StatisticsController extends BaseSimpleFormController {
 	public void saveAgencyAchiRate(HttpServletRequest request, HttpServletResponse response,
 			AgencyAchievementStats agencyAchievementStats, PageHelper page) {
 		Map<String, Object> dataMap = new HashMap<>();
-		QueryResult<AgencyAchievementStats> result = queryAgencyAchievementStatsMethod(request, agencyAchievementStats,
-				page);
+		QueryResult<AgencyAchievementStats> result = queryAgencyAchievementStatsMethod(request, agencyAchievementStats,page);
 		dataMap.put("dataList", result.getData());// 将数据放入Map中
 		String title = "地接社名称,一月成交率,二月成交率,三月成交率,四月成交率,五月成交率,六月成交率,七月成交率,八月成交率,九月成交率,十月成交率,十一月成交率,十二月成交率";
-		dataMap.put("fileName", "地接社业绩-成交率统计表（" + agencyAchievementStats.getSearchStartTime() + "-"
-				+ agencyAchievementStats.getSearchEndTime() + "）.csv");// 拼接csv表名
+		dataMap.put("fileName", "地接社业绩-成交率统计表（" + agencyAchievementStats.getSearchStartTime().substring(0,agencyAchievementStats.getSearchStartTime().length()-15 )+ "）.csv");// 拼接csv表名
 		try {
 			CSVUtil.saveCsv(response, dataMap, title);
 		} catch (IOException e) {
@@ -1437,9 +1435,9 @@ public class StatisticsController extends BaseSimpleFormController {
 		QueryResult<AgencyAchievementStats> result = queryAgencyAchievementStatsMMethod(request, sellerNotAskStats,
 				page);
 		dataMap.put("dataList", result.getData());// 将数据放入Map中
+		
 		String title = "地接社名称,一月成交金额,二月成交金额,三月成交金额,四月成交金额,五月成交金额,六月成交金额,七月成交金额	,八月成交金额,九月成交金额,十月成交金额,十一月成交金额,十二月成交金额";
-		dataMap.put("fileName", "地接社业绩-成交金额统计表（" + sellerNotAskStats.getSearchStartTime() + "-"
-				+ sellerNotAskStats.getSearchEndTime() + "）.csv");// 拼接csv表名
+		dataMap.put("fileName", "地接社业绩-成交金额统计表（" + sellerNotAskStats.getSearchStartTime().substring(0,sellerNotAskStats.getSearchStartTime().length()-15 ) + "）.csv");// 拼接csv表名
 		try {
 			CSVUtil.saveCsv(response, dataMap, title);
 		} catch (IOException e) {
@@ -1455,7 +1453,7 @@ public class StatisticsController extends BaseSimpleFormController {
 		dataMap.put("dataList", result.getData());// 将数据放入Map中
 		String title = "询单来源,待处理订单数,沟通中点单数,地接设计中订单数,成行订单数,未成行订单数,无效订单数,付款订单数,询单总数,成交率";
 		dataMap.put("fileName",
-				"询单来源统计表（" + caseSourceStats.getSearchStartTime() + "-" + caseSourceStats.getSearchEndTime() + "）.csv");// 拼接csv表名
+				"询单来源统计表（" + caseSourceStats.getSearchStartTime().substring(0,caseSourceStats.getSearchStartTime().length()-9 ) + "-" + caseSourceStats.getSearchEndTime().substring(0,caseSourceStats.getSearchEndTime().length()-9 ) + "）.csv");// 拼接csv表名
 		try {
 			CSVUtil.saveCsv(response, dataMap, title);
 		} catch (IOException e) {
@@ -1502,8 +1500,8 @@ public class StatisticsController extends BaseSimpleFormController {
 
 		dataMap.put("dataList", result.getData());// 将数据放入Map中
 		String title = "目的地国家名称,包含地接社数量";
-		dataMap.put("fileName", "商家未询-无询单目的地统计表（" + sellerNotAskStats.getSearchStartTime() + "-"
-				+ sellerNotAskStats.getSearchEndTime() + "）.csv");// 拼接csv表名
+		dataMap.put("fileName", "商家未询-无询单目的地统计表（" + sellerNotAskStats.getSearchStartTime().substring(0,sellerNotAskStats.getSearchStartTime().length()-9 ) + "-"
+				+ sellerNotAskStats.getSearchEndTime().substring(0,sellerNotAskStats.getSearchEndTime().length()-9 ) + "）.csv");// 拼接csv表名
 		try {
 			CSVUtil.saveCsv(response, dataMap, title);
 		} catch (IOException e) {
@@ -1519,8 +1517,8 @@ public class StatisticsController extends BaseSimpleFormController {
 		changeCountryCodeToChinese2(service, result);
 		dataMap.put("dataList", result.getData());// 将数据放入Map中
 		String title = "地接社国家名称,	服务国家";
-		dataMap.put("fileName", "商家未询-无订单地接社统计表（" + sellerNotAskStatsD.getSearchStartTime() + "-"
-				+ sellerNotAskStatsD.getSearchEndTime() + "）.csv");// 拼接csv表名
+		dataMap.put("fileName", "商家未询-无订单地接社统计表（" + sellerNotAskStatsD.getSearchStartTime().substring(0,sellerNotAskStatsD.getSearchStartTime().length()-9 ) + "-"
+				+ sellerNotAskStatsD.getSearchEndTime().substring(0,sellerNotAskStatsD.getSearchEndTime().length()-9 ) + "）.csv");// 拼接csv表名
 		try {
 			CSVUtil.saveCsv(response, dataMap, title);
 		} catch (IOException e) {
