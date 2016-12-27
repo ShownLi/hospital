@@ -80,6 +80,27 @@
 								<tbody>
 								</tbody>
 							</table>
+
+							<table id="dataTable3" class="table">
+								<thead>
+									<tr>
+										<th></th>
+										<th>一月成交率</th>
+										<th>二月成交率</th>									
+										<th>三月成交率</th>
+										<th>四月成交率</th>
+										<th>五月成交率</th>
+										<th>六月成交率</th>
+										<th>七月成交率</th>
+										<th>八月成交率</th>
+										<th>九月成交率</th>
+										<th>十月成交率</th>
+										<th>十一月成交率</th>
+										<th>十二月成交率</th>
+									</tr>
+								</thead>
+							</table>
+
 						</div>
 						<!-- table-responsive -->
 					</div>
@@ -89,7 +110,7 @@
 						<div class="panel-btns">
 							<a href="" class="minimize">&minus;</a>
 						</div>
-						<h4 class="panel-title">成交率统计（按咨询时间）</h4>
+						<h4 class="panel-title">成交金额统计（按咨询时间）</h4>
 						<form action="${rootPath }/statistics/saveagencyachimoney.do" method="post">
 						<input type="hidden" class="searchYearInputBegin" name="searchStartTime" value="${searchYear }-01-01">
 						<input type="hidden" class="searchYearInputEnd" name="searchEndTime" value="${searchYear }-12-31">
@@ -117,8 +138,25 @@
 										<th>十二月成交金额</th>
 									</tr>
 								</thead>
-								<tbody>
-								</tbody>
+							</table>
+							<table id="dataTable4" class="table" class="table table-communicate">
+									<thead>
+										<tr>
+											<th></th>
+											<th>一月成交金额</th>
+											<th>二月成交金额</th>									
+											<th>三月成交金额</th>
+											<th>四月成交金额</th>
+											<th>五月成交金额</th>
+											<th>六月成交金额</th>
+											<th>七月成交金额</th>
+											<th>八月成交金额</th>
+											<th>九月成交金额</th>
+											<th>十月成交金额</th>
+											<th>十一月成交金额</th>
+											<th>十二月成交金额</th>
+										</tr>
+									</thead>
 							</table>
 						</div>
 						<!-- table-responsive -->

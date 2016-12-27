@@ -957,7 +957,7 @@ public class StatisticsController extends BaseSimpleFormController {
 			agencyAchievementStats.setSearchEndTime("");
 		}
 
-		QueryResult<AgencyAchievementStats> caseResult = service.queryAgencyAchievementStats(agencyAchievementStats,
+		QueryResult<AgencyAchievementStats> caseResult = service.queryAgencyAchievementStatsM(agencyAchievementStats,
 				page, request);
 
 		return caseResult;
