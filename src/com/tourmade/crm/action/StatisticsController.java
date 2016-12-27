@@ -6,8 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,22 +20,19 @@ import com.tourmade.crm.common.framework.bean.QueryResult;
 import com.tourmade.crm.common.framework.util.JSONUtilS;
 import com.tourmade.crm.common.model.base.value.baseconfig.PageHelper;
 import com.tourmade.crm.entity.ContactRealStats;
-import com.tourmade.crm.entity.ContactRealStatsTotal;
 import com.tourmade.crm.entity.EntityList;
 import com.tourmade.crm.entity.ReasonOfDrainingStats;
-import com.tourmade.crm.entity.ReasonOfDrainingStatsTotal;
 import com.tourmade.crm.entity.UserAchRate;
 import com.tourmade.crm.entity.UserAchievement;
 import com.tourmade.crm.service.StatisticsService;
 import com.tourmade.crm.entity.AgencyAchievementStats;
 import com.tourmade.crm.entity.AgencyOrderStatus;
 import com.tourmade.crm.entity.CaseAllotStats;
-import com.tourmade.crm.entity.CaseAllotStatsTotal;
 import com.tourmade.crm.entity.CaseSourceStats;
-import com.tourmade.crm.entity.CaseSourceStatsTotal;
 import com.tourmade.crm.entity.CustomerSourceLevelStats;
 import com.tourmade.crm.entity.SellerCoverStats;
 import com.tourmade.crm.entity.SellerNotAskStats;
+import com.tourmade.crm.entity.SellerNotAskStatsD;
 
 import net.sf.json.JSONArray;
 
@@ -151,6 +146,7 @@ public class StatisticsController extends BaseSimpleFormController{
 		String result = JSONUtilS.object2json(contactRealList);
 		return result;
 	}
+	
 	@RequestMapping(value = "/contactrealstatstotal.do",produces="application/json;charset=utf-8")
 	@ResponseBody
 	public String queryContactRealTotal(PageHelper page,String startCreateDateTime,String endCreateDateTime) {
@@ -165,7 +161,7 @@ public class StatisticsController extends BaseSimpleFormController{
 		}
 		map.put("startCreateTime", startCreateDateTime+" 00:00:00");
 		map.put("endCreateTime", endCreateDateTime+" 23:59:59");
-		QueryResult<ContactRealStatsTotal> contactRealList = service.queryContactRealTotal(map);
+		QueryResult<ContactRealStats> contactRealList = service.queryContactRealTotal(map);
 		String result = JSONUtilS.object2json(contactRealList);
 		return result;
 	}
@@ -219,7 +215,7 @@ public class StatisticsController extends BaseSimpleFormController{
 		}
 		map.put("startCreateTime", startCreateDateTime+" 00:00:00");
 		map.put("endCreateTime", endCreateDateTime+" 23:59:59");
-		QueryResult<ReasonOfDrainingStatsTotal> contactRealList = service.queryReasonOfDrainingTotal(map);
+		QueryResult<ReasonOfDrainingStats> contactRealList = service.queryReasonOfDrainingTotal(map);
 		String result = JSONUtilS.object2json(contactRealList);
 		
 		return result;
@@ -261,7 +257,7 @@ public class StatisticsController extends BaseSimpleFormController{
 		}
 		map.put("startCreateTime", startCreateDateTime+" 00:00:00");
 		map.put("endCreateTime", endCreateDateTime+" 23:59:59");
-		QueryResult<ReasonOfDrainingStatsTotal> contactRealList = service.queryReasonOfDrainingNoDealTotal(map);
+		QueryResult<ReasonOfDrainingStats> contactRealList = service.queryReasonOfDrainingNoDealTotal(map);
 		String result = JSONUtilS.object2json(contactRealList);
 		
 		return result;
@@ -721,7 +717,7 @@ public class StatisticsController extends BaseSimpleFormController{
 	
 	@RequestMapping(value = "/caseAllotStatsTotal.do",produces="application/json;charset=utf-8")
 	@ResponseBody
-	public String queryData(HttpServletRequest request, HttpSession session, CaseAllotStatsTotal caseAllotStatsTotal, Model model, PageHelper page) {
+	public String queryDataTotal(HttpServletRequest request, HttpSession session, CaseAllotStats caseAllotStatsTotal, Model model, PageHelper page) {
 		
 		if(caseAllotStatsTotal.getSearchStartTime()==null){
 			caseAllotStatsTotal.setSearchStartTime("");
@@ -730,7 +726,7 @@ public class StatisticsController extends BaseSimpleFormController{
 			caseAllotStatsTotal.setSearchEndTime("");
 		}
 		
-		QueryResult<CaseAllotStatsTotal> caseResult = service.queryCaseAllotStatsTotal(caseAllotStatsTotal, page, request);
+		QueryResult<CaseAllotStats> caseResult = service.queryCaseAllotStatsTotal(caseAllotStatsTotal, page, request);
 		
 		String result = JSONUtilS.object2json(caseResult);
 		
@@ -756,7 +752,7 @@ public class StatisticsController extends BaseSimpleFormController{
 	}
 	@RequestMapping(value = "/caseSourceStatsTotal.do",produces="application/json;charset=utf-8")
 	@ResponseBody
-	public String queryData(HttpServletRequest request, HttpSession session, CaseSourceStatsTotal caseSourceStatsTotal, Model model, PageHelper page) {
+	public String queryDataTotal(HttpServletRequest request, HttpSession session, CaseSourceStats caseSourceStatsTotal, Model model, PageHelper page) {
 
 		if(caseSourceStatsTotal.getSearchStartTime()==null){
 			caseSourceStatsTotal.setSearchStartTime("");
@@ -765,7 +761,7 @@ public class StatisticsController extends BaseSimpleFormController{
 			caseSourceStatsTotal.setSearchEndTime("");
 		}
 		
-		QueryResult<CaseSourceStatsTotal> caseResult = service.queryCaseSourceStatsTotal(caseSourceStatsTotal, page, request);
+		QueryResult<CaseSourceStats> caseResult = service.queryCaseSourceStatsTotal(caseSourceStatsTotal, page, request);
 		
 		String result = JSONUtilS.object2json(caseResult);
 
@@ -956,7 +952,7 @@ public class StatisticsController extends BaseSimpleFormController{
 	
 	@RequestMapping(value = "/sellerNotAskStatsD.do",produces="application/json;charset=utf-8")
 	@ResponseBody
-	public String queryData2(HttpServletRequest request, HttpSession session, SellerNotAskStats sellerNotAskStatsD, Model model, PageHelper page) {
+	public String queryData2(HttpServletRequest request, HttpSession session, SellerNotAskStatsD sellerNotAskStatsD, Model model, PageHelper page) {
 		
 		if(sellerNotAskStatsD.getSearchStartTime()==null){
 			sellerNotAskStatsD.setSearchStartTime("");
@@ -965,7 +961,7 @@ public class StatisticsController extends BaseSimpleFormController{
 			sellerNotAskStatsD.setSearchEndTime("");
 		}
 		
-		QueryResult<SellerNotAskStats> caseResult = service.querySellerNotAskStatsD(sellerNotAskStatsD, page, request);
+		QueryResult<SellerNotAskStatsD> caseResult = service.querySellerNotAskStatsD(sellerNotAskStatsD, page, request);
 		
 		changeCountryCodeToChinese2(service,caseResult);
 		
@@ -1008,10 +1004,10 @@ public class StatisticsController extends BaseSimpleFormController{
 	 * @param service
 	 * @param list
 	 */
-	public static void changeCountryCodeToChinese2(StatisticsService service,QueryResult<SellerNotAskStats> list){
+	public static void changeCountryCodeToChinese2(StatisticsService service,QueryResult<SellerNotAskStatsD> list){
 		String country = "country";
 		List<EntityList> countryList = service.getParameterInfo(country);
-		for(SellerNotAskStats temp:list.getData()){
+		for(SellerNotAskStatsD temp:list.getData()){
 			String str = temp.getCountry();
 			
 			if("".equals(str)||str==null){

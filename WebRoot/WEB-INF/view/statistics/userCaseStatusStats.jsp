@@ -298,7 +298,7 @@
 	                targets: 0
 				},
 					{
-					data:"pendingNum_T",
+					data:"pendingNum",
 	                orderable: false,
 	                render: function ( data, type, full, meta ) {
 	                	return "<div>" + data + "</div>"
@@ -306,7 +306,7 @@
 	                targets: 1
 				},	  
 					{
-					data:"communicatingNum_T",
+					data:"communicatingNum",
 	                orderable: false,
 	                render: function ( data, type, full, meta ) {
 	                	return "<div>" + data + "</div>"
@@ -314,7 +314,7 @@
 	                targets: 2
 				},	  
 					{
-					data:"agencyDesigningNum_T",
+					data:"agencyDesigningNum",
 	                orderable: false,
 	                render: function ( data, type, full, meta ) {
 	                	return "<div>" + data + "</div>"
@@ -322,14 +322,14 @@
 	                targets: 3
 				},	  
 					{
-	                data:"dealNum_T",
+	                data:"dealNum",
 	                render: function ( data, type, full, meta ) {
 	                	return "<div>" + data + "</div>"
 	                },
 	                targets: 4
 				},	  
 					{
-					data:"noDealNum_T",
+					data:"noDealNum",
 	                orderable: false,
 	                render: function ( data, type, full, meta ) {
 	                	return "<div>" + data + "</div>"
@@ -337,7 +337,7 @@
 	                targets: 5
 				},	  
 					{
-					data:"invalidNum_T",
+					data:"invalidNum",
 	                orderable: false,
 	                render: function ( data, type, full, meta ) {
 	                	return "<div>" + data + "</div>"
@@ -345,7 +345,7 @@
 	                targets: 6
 				},	  
 					{
-					data:"paidNum_T",
+					data:"paidNum",
 	                orderable: false,
 	                render: function ( data, type, full, meta ) {
 	                	return "<div>" + data+ "</div>"
@@ -353,14 +353,14 @@
 	                targets: 7
 				},
 				{
-					data:"total_T",
+					data:"total",
 	                orderable: false,
 	                render: function ( data, type, full, meta ) {
 	                    return "<div>" + data + "</div>"
 	                },
 	                targets: 8
 				},
-				{data:"dealPercent_T",
+				{data:"dealPercent",
 					orderable: false,
 					render: function ( data ) {
 					    return  data;
@@ -371,15 +371,15 @@
 			],
 			columns: [
 	            		{ data: "" },
-			            { data: "pendingNum_T" },
-			            { data: "communicatingNum_T" },
-			            { data: "agencyDesigningNum_T" },
-			            { data: "dealNum_T"},
-			            { data: "noDealNum_T"},
-			            { data: "invalidNum_T"},
-			            { data: "paidNum_T"},
-			            { data:	"total_T"},
-			            { data: "dealPercent_T"}
+			            { data: "pendingNum" },
+			            { data: "communicatingNum" },
+			            { data: "agencyDesigningNum" },
+			            { data: "dealNum"},
+			            { data: "noDealNum"},
+			            { data: "invalidNum"},
+			            { data: "paidNum"},
+			            { data:	"total"},
+			            { data: "dealPercent"}
 	        ]
 		});
 	

@@ -195,35 +195,35 @@
 				{
 	                orderable: false,
 	                render: function ( data, type, full, meta ) {
-	                    return "<div>" + full.level0_T + "</div>"
+	                    return "<div>" + full.level0 + "</div>"
 	                },
 	                targets: 1
 				},
 				{
 	                orderable: false,
 	                render: function ( data, type, full, meta ) {
-	                    return "<div>" + full.level1_T + "</div>"
+	                    return "<div>" + full.level1 + "</div>"
 	                },
 	                targets: 2
 				},	  
 				{
 	                orderable: false,
 	                render: function ( data, type, full, meta ) {
-	                    return "<div>" + full.level2_T + "</div>"
+	                    return "<div>" + full.level2 + "</div>"
 	                },
 	                targets: 3
 				},	  
 				{
 	                orderable: false,
 	                render: function ( data, type, full, meta ) {
-	                    return "<div>" + full.level3_T + "</div>"
+	                    return "<div>" + full.level3 + "</div>"
 	                },
 	                targets: 4
 				},	  
 				{
 	                orderable: false,
 	                render: function ( data, type, full, meta ) {
-	                    return "<div>" + full.rate_T + "</div>"
+	                    return "<div>" + full.rate + "</div>"
 	                },
 	                targets: 5
 				},
@@ -236,11 +236,11 @@
 			],
 			columns: [
 	            { data: "" },
-	            { data:"level0_T"},
-	            { data: "level1_T" },
-	            { data: "level2_T" },
-	            { data: "level3_T" },
-	            { data: "rate_T" }
+	            { data:"level0"},
+	            { data: "level1" },
+	            { data: "level2" },
+	            { data: "level3" },
+	            { data: "rate" }
 	        ]
 		});
 

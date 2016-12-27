@@ -53,5 +53,4 @@ public class ReasonOfDrainingStats extends BaseBean<ReasonOfDrainingStats>{
 		return "ReasonOfDrainingStats [reasonOfDrainingName=" + reasonOfDrainingName + ", num=" + num + ", percent="
 				+ percent + "]";
 	}
-	
 }

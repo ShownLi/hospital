@@ -14,10 +14,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.tourmade.crm.common.framework.BaseService;
 import com.tourmade.crm.common.framework.bean.QueryResult;
 import com.tourmade.crm.entity.ContactRealStats;
-import com.tourmade.crm.entity.ContactRealStatsTotal;
 import com.tourmade.crm.entity.EntityList;
 import com.tourmade.crm.entity.ReasonOfDrainingStats;
-import com.tourmade.crm.entity.ReasonOfDrainingStatsTotal;
 import com.tourmade.crm.entity.UserAchRate;
 import com.tourmade.crm.entity.UserAchievement;
 import com.tourmade.crm.mapper.statistics.StatisticsMapper;
@@ -25,13 +23,12 @@ import com.tourmade.crm.common.model.base.value.baseconfig.PageHelper;
 import com.tourmade.crm.entity.AgencyAchievementStats;
 import com.tourmade.crm.entity.AgencyOrderStatus;
 import com.tourmade.crm.entity.CaseAllotStats;
-import com.tourmade.crm.entity.CaseAllotStatsTotal;
 import com.tourmade.crm.entity.CaseSourceStats;
-import com.tourmade.crm.entity.CaseSourceStatsTotal;
 import com.tourmade.crm.entity.CustomerSourceLevelStats;
 import com.tourmade.crm.entity.EntityList;
 import com.tourmade.crm.entity.SellerCoverStats;
 import com.tourmade.crm.entity.SellerNotAskStats;
+import com.tourmade.crm.entity.SellerNotAskStatsD;
 import com.tourmade.crm.mapper.statistics.StatisticsMapper;
 
 @Service
@@ -91,10 +88,10 @@ public class StatisticsService extends BaseService {
 		return result;
 	}
 	
-	public QueryResult<ContactRealStatsTotal> queryContactRealTotal(Map<String, Object> map) {
-		QueryResult<ContactRealStatsTotal> result = new QueryResult<ContactRealStatsTotal>();
+	public QueryResult<ContactRealStats> queryContactRealTotal(Map<String, Object> map) {
+		QueryResult<ContactRealStats> result = new QueryResult<ContactRealStats>();
 		
-		List<ContactRealStatsTotal> data = statisticsMapper.queryContactRealTotal(map);
+		List<ContactRealStats> data = statisticsMapper.queryContactRealTotal(map);
 		result.setData(data);
 		
 		return result;
@@ -124,19 +121,19 @@ public class StatisticsService extends BaseService {
 		return result;
 	}   
 	
-	public QueryResult<ReasonOfDrainingStatsTotal> queryReasonOfDrainingTotal(Map<String, Object> map) {
-		QueryResult<ReasonOfDrainingStatsTotal> result = new QueryResult<ReasonOfDrainingStatsTotal>();
-		List<ReasonOfDrainingStatsTotal> data = statisticsMapper.queryReasonOfDrainingTotal(map);
+	public QueryResult<ReasonOfDrainingStats> queryReasonOfDrainingTotal(Map<String, Object> map) {
+		QueryResult<ReasonOfDrainingStats> result = new QueryResult<ReasonOfDrainingStats>();
+		List<ReasonOfDrainingStats> data = statisticsMapper.queryReasonOfDrainingTotal(map);
 		//查询所给定时间段的所有无效信息
 		long total = statisticsMapper.countCaseInvalid(map);
 		//查询出给定时间段的无效原因的条目数
 		long count = 0;
 		if(data!=null){
 			count = data.size();
-			for(ReasonOfDrainingStatsTotal r:data){
-				double temp = r.getNum_T();
+			for(ReasonOfDrainingStats r:data){
+				double temp = r.getNum();
 				double result1 =temp/total*100;
-				r.setPercent_T(String.format("%.2f", result1)+"%");
+				r.setPercent(String.format("%.2f", result1)+"%");
 			}
 		}else{
 			count = 0;
@@ -171,19 +168,19 @@ public class StatisticsService extends BaseService {
 		return result;
 	}
 	
-	public QueryResult<ReasonOfDrainingStatsTotal> queryReasonOfDrainingNoDealTotal(Map<String, Object> map) {
-		QueryResult<ReasonOfDrainingStatsTotal> result = new QueryResult<ReasonOfDrainingStatsTotal>();
-		List<ReasonOfDrainingStatsTotal> data = statisticsMapper.queryReasonOfDrainingNoDealTotal(map);
+	public QueryResult<ReasonOfDrainingStats> queryReasonOfDrainingNoDealTotal(Map<String, Object> map) {
+		QueryResult<ReasonOfDrainingStats> result = new QueryResult<ReasonOfDrainingStats>();
+		List<ReasonOfDrainingStats> data = statisticsMapper.queryReasonOfDrainingNoDealTotal(map);
 		//查询所给定时间段的所有无效信息
 		long total = statisticsMapper.countCaseNoDeal(map);
 		//查询出给定时间段的无效原因的条目数
 		long count = 0;
 		if(data!=null){
 			count = data.size();
-			for(ReasonOfDrainingStatsTotal r:data){
-				double temp = r.getNum_T();
+			for(ReasonOfDrainingStats r:data){
+				double temp = r.getNum();
 				double result1 =temp/total*100;
-				r.setPercent_T(String.format("%.2f", result1)+"%");
+				r.setPercent(String.format("%.2f", result1)+"%");
 			}
 		}else{
 			
@@ -426,9 +423,9 @@ public class StatisticsService extends BaseService {
 	 * @param request
 	 * @return
 	 */
-	public QueryResult<CaseSourceStatsTotal> queryCaseSourceStatsTotal(CaseSourceStatsTotal caseSourceStatsTotal, PageHelper ph, HttpServletRequest request) {
+	public QueryResult<CaseSourceStats> queryCaseSourceStatsTotal(CaseSourceStats caseSourceStatsTotal, PageHelper ph, HttpServletRequest request) {
 
-		QueryResult<CaseSourceStatsTotal> length = new QueryResult<CaseSourceStatsTotal>();
+		QueryResult<CaseSourceStats> length = new QueryResult<CaseSourceStats>();
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		//分页条件
@@ -444,7 +441,7 @@ public class StatisticsService extends BaseService {
 		map.put("start", ph.getStart());
 		map.put("length", ph.getLength());
 
-		List<CaseSourceStatsTotal> data = statisticsMapper.queryCaseSourceStatsTotal(map);
+		List<CaseSourceStats> data = statisticsMapper.queryCaseSourceStatsTotal(map);
 			
 		length.setData(data);
 	
@@ -488,9 +485,9 @@ public class StatisticsService extends BaseService {
 		return length;
 	}
 	
-	public QueryResult<CaseAllotStatsTotal> queryCaseAllotStatsTotal(CaseAllotStatsTotal caseAllotStatsTotal, PageHelper ph, HttpServletRequest request) {
+	public QueryResult<CaseAllotStats> queryCaseAllotStatsTotal(CaseAllotStats caseAllotStatsTotal, PageHelper ph, HttpServletRequest request) {
 		
-		QueryResult<CaseAllotStatsTotal> length = new QueryResult<CaseAllotStatsTotal>();
+		QueryResult<CaseAllotStats> length = new QueryResult<CaseAllotStats>();
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		
@@ -507,7 +504,7 @@ public class StatisticsService extends BaseService {
 		map.put("start", ph.getStart());
 		map.put("length", ph.getLength());
 		
-		List<CaseAllotStatsTotal> data = statisticsMapper.queryCaseAllotStatsTotal(map);
+		List<CaseAllotStats> data = statisticsMapper.queryCaseAllotStatsTotal(map);
 		
 		length.setData(data);
 		
@@ -737,9 +734,9 @@ public QueryResult<SellerNotAskStats> querySellerNotAskStatsTotal(SellerNotAskSt
 	 * @param request
 	 * @return
 	 */
-	public QueryResult<SellerNotAskStats> querySellerNotAskStatsD(SellerNotAskStats sellerNotAskStatsD, PageHelper ph, HttpServletRequest request) {
+	public QueryResult<SellerNotAskStatsD> querySellerNotAskStatsD(SellerNotAskStatsD sellerNotAskStatsD, PageHelper ph, HttpServletRequest request) {
 		
-		QueryResult<SellerNotAskStats> length = new QueryResult<SellerNotAskStats>();
+		QueryResult<SellerNotAskStatsD> length = new QueryResult<SellerNotAskStatsD>();
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		
@@ -755,7 +752,7 @@ public QueryResult<SellerNotAskStats> querySellerNotAskStatsTotal(SellerNotAskSt
 		map.put("start", ph.getStart());
 		map.put("length", ph.getLength());
 		
-		List<SellerNotAskStats> data = statisticsMapper.querySellerNotAskStatsD(map);
+		List<SellerNotAskStatsD> data = statisticsMapper.querySellerNotAskStatsD(map);
 		long count = statisticsMapper.countSellerNotAskStatsD(sellerNotAskStatsD);
 		
 		length.setData(data);

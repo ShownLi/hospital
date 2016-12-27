@@ -301,7 +301,7 @@
 	                orderable: false,
 	                render: function ( data, type, full, meta ) {
 	                	
-	                	return "<div>" + full.status0_T + "</div>"
+	                	return "<div>" + full.status0 + "</div>"
 	                	 
 	                	var destinations="";
 	                },
@@ -312,7 +312,7 @@
 	                orderable: false,
 	                render: function ( data, type, full, meta ) {
 	                	
-	                	return "<div>" + full.status1_T + "</div>"
+	                	return "<div>" + full.status1 + "</div>"
 	                },
 	                targets: 2
 				},	  
@@ -321,7 +321,7 @@
 	                orderable: false,
 	                render: function ( data, type, full, meta ) {
 	                	
-	                	return "<div>" + full.status2_T + "</div>"
+	                	return "<div>" + full.status2 + "</div>"
 	                },
 	                targets: 3
 				},	  
@@ -330,7 +330,7 @@
 	                orderable: false,
 	                render: function ( data, type, full, meta ) {
 	                	
-	                	return "<div>" + full.status3_T + "</div>"
+	                	return "<div>" + full.status3 + "</div>"
 	                },
 	                targets: 4
 				},	  
@@ -339,7 +339,7 @@
 	                orderable: false,
 	                render: function ( data, type, full, meta ) {
 	                	
-	                	return "<div>" + full.status4_T + "</div>"
+	                	return "<div>" + full.status4 + "</div>"
 	                },
 	                targets: 5
 				},	
@@ -347,7 +347,7 @@
 					//订单总数
 	                orderable: false,
 	                render: function ( data, type, full, meta ) {
-	                    return "<div>" + full.total_T + "</div>"
+	                    return "<div>" + full.total + "</div>"
 	                },
 	                targets: 6
 				},
@@ -356,7 +356,7 @@
 	                orderable: false,
 	                render: function ( data, type, full, meta ) {
 	                	
-	                	return "<div>" + full.dealMoney_T + "</div>"
+	                	return "<div>" + full.dealMoney + "</div>"
 	                },
 	                targets: 7
 				},	  
@@ -365,21 +365,21 @@
 	                orderable: false,
 	                render: function ( data, type, full, meta ) {
 	                	
-	                	return "<div>" + full.rate_T + "</div>"
+	                	return "<div>" + full.rate + "</div>"
 	                },
 	                targets: 8
 				},	  
 			],
 			columns: [
 	            { data: "" },
-	            { data: "status0_T" },
-	            { data: "status1_T" },
-	            { data: "status2_T" },
-	            { data: "status3_T"},
-	            { data: "status4_T"},
-	            { data:"total_T"},
-	            { data: "dealMoney_T"},
-	            { data: "rate_T"}
+	            { data: "status0" },
+	            { data: "status1" },
+	            { data: "status2" },
+	            { data: "status3"},
+	            { data: "status4"},
+	            { data:"total"},
+	            { data: "dealMoney"},
+	            { data: "rate"}
 	           
 	        ]
 		});

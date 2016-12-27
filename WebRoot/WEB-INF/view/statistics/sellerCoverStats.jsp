@@ -150,22 +150,22 @@
 				{
 	                orderable: false,
 	                render: function ( data, type, full, meta ) {
-	                    return "<div>" + full.countryTotal + "</div>"
+	                    return "<div>" + full.country + "</div>"
 	                },
 	                targets: 1
 				},
 				{
 	                orderable: false,
 	                render: function ( data, type, full, meta ) {
-	                    return "<div>" + full.numberTotal + "</div>"
+	                    return "<div>" + full.number + "</div>"
 	                },
 	                targets: 2
 				}
 			],
 			columns: [
 	            { data: "" },
-	            { data: "countryTotal" },
-	            { data: "numberTotal" }
+	            { data: "country" },
+	            { data: "number" }
 	        ]
 		});
 

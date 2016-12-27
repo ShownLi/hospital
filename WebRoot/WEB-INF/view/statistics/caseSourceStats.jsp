@@ -291,63 +291,63 @@
 				{
 	                orderable: false,
 	                render: function ( data, type, full, meta ) {
-	                    return "<div>" + full.status0_T + "</div>"
+	                    return "<div>" + full.status0 + "</div>"
 	                },
 	                targets: 1
 				},	  
 				{
 	                orderable: false,
 	                render: function ( data, type, full, meta ) {
-	                    return "<div>" + full.status1_T + "</div>"
+	                    return "<div>" + full.status1 + "</div>"
 	                },
 	                targets: 2
 				},	  
 				{
 	                orderable: false,
 	                render: function ( data, type, full, meta ) {
-	                    return "<div>" + full.status2_T + "</div>"
+	                    return "<div>" + full.status2 + "</div>"
 	                },
 	                targets: 3
 				},	  
 				{
 	                orderable: false,
 	                render: function ( data, type, full, meta ) {
-	                    return "<div>" + full.status3_T + "</div>"
+	                    return "<div>" + full.status3 + "</div>"
 	                },
 	                targets: 4
 				},	  
 				{
 	                orderable: false,
 	                render: function ( data, type, full, meta ) {
-	                    return "<div>" + full.status4_T + "</div>"
+	                    return "<div>" + full.status4 + "</div>"
 	                },
 	                targets: 5
 				},	  
 				{
 	                orderable: false,
 	                render: function ( data, type, full, meta ) {
-	                    return "<div>" + full.status5_T + "</div>"
+	                    return "<div>" + full.status5 + "</div>"
 	                },
 	                targets: 6
 				},	  
 				{
 	                orderable: false,
 	                render: function ( data, type, full, meta ) {
-	                    return "<div>" + full.status6_T + "</div>"
+	                    return "<div>" + full.status6 + "</div>"
 	                },
 	                targets: 7
 				},
 				{
 	                orderable: false,
 	                render: function ( data, type, full, meta ) {
-	                    return "<div>" + full.total_T + "</div>"
+	                    return "<div>" + full.total + "</div>"
 	                },
 	                targets: 8
 				},
 				{
 	                orderable: false,
 	                render: function ( data, type, full, meta ) {
-	                    return "<div>" + full.rate_T + "</div>"
+	                    return "<div>" + full.rate + "</div>"
 	                },
 	                targets: 9
 				},	  
@@ -360,15 +360,15 @@
 
 			],
 			columns: [
-	            { data: "status0_T" },
-	            { data: "status1_T" },
-	            { data: "status2_T" },
-	            { data: "status3_T" },
-	            { data: "status4_T" },
-	            { data: "status5_T" },
-	            { data: "status6_T" },
-	            { data:"total_T"},
-	            { data: "rate_T" }
+	            { data: "status0" },
+	            { data: "status1" },
+	            { data: "status2" },
+	            { data: "status3" },
+	            { data: "status4" },
+	            { data: "status5" },
+	            { data: "status6" },
+	            { data:"total"},
+	            { data: "rate" }
 	        ]
 		});
 

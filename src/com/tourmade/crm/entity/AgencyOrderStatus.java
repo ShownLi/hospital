@@ -13,33 +13,19 @@ public class AgencyOrderStatus extends BaseBean<Agency>{
 
 	private Integer total;
 	
-	private Integer total_T;
-	
 	private Integer status0;
-	
-	private Integer status0_T;
 	
 	private Integer status1;
 	
-	private Integer status1_T;
-	
 	private Integer status2;
-	
-	private Integer status2_T;
 	
 	private Integer status3;
 	
-	private Integer status3_T;
-	
 	private Integer status4;
-	
-	private Integer status4_T;
 	
 	private String destination;
 	
 	private String rate;
-	
-	private String rate_T;
 	
 	private String searchStartTime;
 	
@@ -47,8 +33,6 @@ public class AgencyOrderStatus extends BaseBean<Agency>{
 	
 	private String dealMoney;
 	
-	private String dealMoney_T;
-
 	public Integer getTotal() {
 		return total;
 	}
@@ -145,78 +129,11 @@ public class AgencyOrderStatus extends BaseBean<Agency>{
 		this.dealMoney = dealMoney;
 	}
 
-	public Integer getTotal_T() {
-		return total_T;
-	}
-
-	public void setTotal_T(Integer total_T) {
-		this.total_T = total_T;
-	}
-
-	public Integer getStatus0_T() {
-		return status0_T;
-	}
-
-	public void setStatus0_T(Integer status0_T) {
-		this.status0_T = status0_T;
-	}
-
-	public Integer getStatus1_T() {
-		return status1_T;
-	}
-
-	public void setStatus1_T(Integer status1_T) {
-		this.status1_T = status1_T;
-	}
-
-	public Integer getStatus2_T() {
-		return status2_T;
-	}
-
-	public void setStatus2_T(Integer status2_T) {
-		this.status2_T = status2_T;
-	}
-
-	public Integer getStatus3_T() {
-		return status3_T;
-	}
-
-	public void setStatus3_T(Integer status3_T) {
-		this.status3_T = status3_T;
-	}
-
-	public Integer getStatus4_T() {
-		return status4_T;
-	}
-
-	public void setStatus4_T(Integer status4_T) {
-		this.status4_T = status4_T;
-	}
-
-	public String getRate_T() {
-		return rate_T;
-	}
-
-	public void setRate_T(String rate_T) {
-		this.rate_T = rate_T;
-	}
-
-	public String getDealMoney_T() {
-		return dealMoney_T;
-	}
-
-	public void setDealMoney_T(String dealMoney_T) {
-		this.dealMoney_T = dealMoney_T;
-	}
-
 	@Override
 	public String toString() {
-		return "AgencyOrderStatus [agencyName=" + agencyName + ", total=" + total + ", total_T=" + total_T
-				+ ", status0=" + status0 + ", status0_T=" + status0_T + ", status1=" + status1 + ", status1_T="
-				+ status1_T + ", status2=" + status2 + ", status2_T=" + status2_T + ", status3=" + status3
-				+ ", status3_T=" + status3_T + ", status4=" + status4 + ", status4_T=" + status4_T + ", destination="
-				+ destination + ", rate=" + rate + ", rate_T=" + rate_T + ", searchStartTime=" + searchStartTime
-				+ ", searchEndTime=" + searchEndTime + ", dealMoney=" + dealMoney + ", dealMoney_T=" + dealMoney_T
-				+ "]";
+		return "AgencyOrderStatus [agencyName=" + agencyName + ", total=" + total + ", status0=" + status0
+				+ ", status1=" + status1 + ", status2=" + status2 + ", status3=" + status3 + ", status4=" + status4
+				+ ", destination=" + destination + ", rate=" + rate + ", searchStartTime=" + searchStartTime
+				+ ", searchEndTime=" + searchEndTime + ", dealMoney=" + dealMoney + "]";
 	}
 }

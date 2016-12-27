@@ -337,98 +337,98 @@
 				{
 	                orderable: false,
 	                render: function ( data, type, full, meta ) {
-	                    return "<div>" + full.web_form_T + "</div>" 
+	                    return "<div>" + full.web_form + "</div>" 
 	                },
 	                targets: 1
 				},
 				{
 	                orderable: false,
 	                render: function ( data, type, full, meta ) {
-	                    return "<div>" + full.mobile_form_T + "</div>" 
+	                    return "<div>" + full.mobile_form + "</div>" 
 	                },
 	                targets: 2
 				},
 				{
 	                orderable: false,
 	                render: function ( data, type, full, meta ) {
-	                    return "<div>" + full.direct_form_T + "</div>" 
+	                    return "<div>" + full.direct_form + "</div>" 
 	                },
 	                targets: 3
 				},
 				{
 	                orderable: false,
 	                render: function ( data, type, full, meta ) {
-	                    return "<div>" + full.wechat_form_T + "</div>" 
+	                    return "<div>" + full.wechat_form + "</div>" 
 	                },
 	                targets: 4
 				},
 				{
 	                orderable: false,
 	                render: function ( data, type, full, meta ) {
-	                    return "<div>" + full.web_service_T + "</div>" 
+	                    return "<div>" + full.web_service + "</div>" 
 	                },
 	                targets: 5
 				},
 				{
 	                orderable: false,
 	                render: function ( data, type, full, meta ) {
-	                    return "<div>" + full.mobile_service_T + "</div>" 
+	                    return "<div>" + full.mobile_service + "</div>" 
 	                },
 	                targets: 6
 				},
 				{
 	                orderable: false,
 	                render: function ( data, type, full, meta ) {
-	                    return "<div>" + full.phone_service_T + "</div>" 
+	                    return "<div>" + full.phone_service + "</div>" 
 	                },
 	                targets: 7
 				},
 				{
 	                orderable: false,
 	                render: function ( data, type, full, meta ) {
-	                    return "<div>" + full.wechat_service_T + "</div>" 
+	                    return "<div>" + full.wechat_service + "</div>" 
 	                },
 	                targets: 8
 				},
 				{
 	                orderable: false,
 	                render: function ( data, type, full, meta ) {
-	                    return "<div>" + full.offline_T + "</div>" 
+	                    return "<div>" + full.offline + "</div>" 
 	                },
 	                targets: 9
 				},
 				{
 	                orderable: false,
 	                render: function ( data, type, full, meta ) {
-	                    return "<div>" + full.email_T + "</div>" 
+	                    return "<div>" + full.email + "</div>" 
 	                },
 	                targets: 10
 				},
 				{
 	                orderable: false,
 	                render: function ( data, type, full, meta ) {
-	                    return "<div>" + full.friends_T + "</div>" 
+	                    return "<div>" + full.friends + "</div>" 
 	                },
 	                targets: 11
 				},
 				{
 	                orderable: false,
 	                render: function ( data, type, full, meta ) {
-	                    return "<div>" + full.customer_T + "</div>" 
+	                    return "<div>" + full.customer + "</div>" 
 	                },
 	                targets: 12
 				},
 				{
 	                orderable: false,
 	                render: function ( data, type, full, meta ) {
-	                    return "<div>" + full.ctrip_T + "</div>" 
+	                    return "<div>" + full.ctrip + "</div>" 
 	                },
 	                targets: 13
 				},
 				{
 	                orderable: false,
 	                render: function ( data, type, full, meta ) {
-	                    return "<div>" + full.total_T + "</div>" 
+	                    return "<div>" + full.total + "</div>" 
 	                },
 	                targets: 14
 				},
@@ -439,20 +439,20 @@
 			    }, 
 			],
 			columns: [
-	            { data: "web_form_T" },
-	            { data: "mobile_form_T" },
-	            { data: "direct_form_T" },
-	            { data: "wechat_form_T"},
-	            { data: "web_service_T"},
-	            { data: "mobile_service_T"},
-	            { data: "phone_service_T"},
-	            { data: "wechat_service_T"},
-	            { data: "offline_T"},
-	            { data: "email_T"},
-	            { data: "friends_T"},
-	            { data: "customer_T"},
-	            { data: "ctrip_T"},
-	            { data:"total_T"}
+	            { data: "web_form" },
+	            { data: "mobile_form" },
+	            { data: "direct_form" },
+	            { data: "wechat_form"},
+	            { data: "web_service"},
+	            { data: "mobile_service"},
+	            { data: "phone_service"},
+	            { data: "wechat_service"},
+	            { data: "offline"},
+	            { data: "email"},
+	            { data: "friends"},
+	            { data: "customer"},
+	            { data: "ctrip"},
+	            { data:"total"}
 	        ]
 		});
 

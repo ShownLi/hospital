@@ -250,7 +250,7 @@
 	                targets: 0
 				},
 				{
-					data:"num_T",
+					data:"num",
 	                orderable: false,
 	                render: function ( data, type, full, meta ) {
 	                    return "<div>" + data + "</div>"
@@ -258,7 +258,7 @@
 	                targets: 1
 				},
 					{
-					data:"percent_T",
+					data:"percent",
 	                orderable: false,
 	                render: function ( data, type, full, meta ) {
 	                	return "<div>" + data + "</div>"
@@ -269,8 +269,8 @@
 			],
 			columns: [
 	            		{ data: "" },
-			            { data:	"num_T"},
-			            { data: "percent_T" }
+			            { data:	"num"},
+			            { data: "percent" }
 	        ]
 		});
 	
@@ -376,7 +376,7 @@
 	                targets: 0
 				},
 				{
-					data:"num_T",
+					data:"num",
 	                orderable: false,
 	                render: function ( data, type, full, meta ) {
 	                    return "<div>" + data + "</div>"
@@ -384,7 +384,7 @@
 	                targets: 1
 				},
 					{
-					data:"percent_T",
+					data:"percent",
 	                orderable: false,
 	                render: function ( data, type, full, meta ) {
 	                	return "<div>" + data + "</div>"
@@ -395,8 +395,8 @@
 			],
 			columns: [
 	            		{ data: "" },
-			            { data:	"num_T"},
-			            { data: "percent_T" }
+			            { data:	"num"},
+			            { data: "percent" }
 	        ]
 		});
 		$('#searchBtn').on( 'click', function () {

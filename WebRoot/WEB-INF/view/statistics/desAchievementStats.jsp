@@ -405,7 +405,7 @@
 	                targets: 0
 				},
 				{
-					data:"percentJan_T",
+					data:"percentJan",
 	                orderable: false,
 	                render: function ( data, type, full, meta ) {
 	                    return "<div>" + data + "</div>"
@@ -413,7 +413,7 @@
 	                targets: 1
 				},
 					{
-					data:"percentFeb_T",
+					data:"percentFeb",
 	                orderable: false,
 	                render: function ( data, type, full, meta ) {
 	                	return "<div>" + data + "</div>"
@@ -421,7 +421,7 @@
 	                targets: 2
 				},
 					{
-					data:"percentMar_T",
+					data:"percentMar",
 	                orderable: false,
 	                render: function ( data, type, full, meta ) {
 	                	return "<div>" + data + "</div>"
@@ -429,7 +429,7 @@
 	                targets: 3
 				},
 					{
-					data:"percentApr_T",
+					data:"percentApr",
 	                orderable: false,
 	                render: function ( data, type, full, meta ) {
 	                	return "<div>" + data + "</div>"
@@ -437,7 +437,7 @@
 	                targets: 4
 				},
 					{
-					data:"percentMay_T",
+					data:"percentMay",
 	                orderable: false,
 	                render: function ( data, type, full, meta ) {
 	                	return "<div>" + data + "</div>"
@@ -445,7 +445,7 @@
 	                targets: 5
 				},
 					{
-					data:"percentJun_T",
+					data:"percentJun",
 	                orderable: false,
 	                render: function ( data, type, full, meta ) {
 	                	return "<div>" + data + "</div>"
@@ -453,7 +453,7 @@
 	                targets: 6
 				},
 					{
-					data:"percentJul_T",
+					data:"percentJul",
 	                orderable: false,
 	                render: function ( data, type, full, meta ) {
 	                	return "<div>" + data + "</div>"
@@ -461,7 +461,7 @@
 	                targets: 7
 				},
 					{
-					data:"percentAug_T",
+					data:"percentAug",
 	                orderable: false,
 	                render: function ( data, type, full, meta ) {
 	                	return "<div>" + data + "</div>"
@@ -469,7 +469,7 @@
 	                targets: 8
 				},
 					{
-					data:"percentSep_T",
+					data:"percentSep",
 	                orderable: false,
 	                render: function ( data, type, full, meta ) {
 	                	return "<div>" + data + "</div>"
@@ -477,7 +477,7 @@
 	                targets: 9
 				},
 					{
-					data:"percentOct_T",
+					data:"percentOct",
 	                orderable: false,
 	                render: function ( data, type, full, meta ) {
 	                	return "<div>" + data + "</div>"
@@ -485,7 +485,7 @@
 	                targets: 10
 				},
 					{
-					data:"percentNov_T",
+					data:"percentNov",
 	                orderable: false,
 	                render: function ( data, type, full, meta ) {
 	                	return "<div>" + data + "</div>"
@@ -493,7 +493,7 @@
 	                targets: 11
 				},
 					{
-					data:"percentDec_T",
+					data:"percentDec",
 	                orderable: false,
 	                render: function ( data, type, full, meta ) {
 	                	return "<div>" + data + "</div>"
@@ -504,18 +504,18 @@
 			],
 			columns: [
 	            		{ data: "" },
-			            { data:	"percentJan_T"},
-			            { data: "percentFeb_T" },
-			            { data: "percentMar_T" },
-			            { data: "percentApr_T" },
-			            { data: "percentMay_T" },
-			            { data: "percentJun_T" },
-			            { data: "percentJul_T" },
-			            { data: "percentAug_T" },
-			            { data: "percentSep_T" },
-			            { data: "percentOct_T" },
-			            { data: "percentNov_T" },
-			            { data: "percentDec_T" }
+			            { data:	"percentJan"},
+			            { data: "percentFeb" },
+			            { data: "percentMar" },
+			            { data: "percentApr" },
+			            { data: "percentMay" },
+			            { data: "percentJun" },
+			            { data: "percentJul" },
+			            { data: "percentAug" },
+			            { data: "percentSep" },
+			            { data: "percentOct" },
+			            { data: "percentNov" },
+			            { data: "percentDec" }
 	        ]
 		});
 	var rateTable = jQuery('#dataTable-rate').DataTable({
@@ -702,7 +702,7 @@
 	                targets: 0
 				},
 				{
-					data:"percentJan_TR",
+					data:"percentJan",
 	                orderable: false,
 	                render: function ( data, type, full, meta ) {
 	                    return "<div>" + data + "</div>"
@@ -710,7 +710,7 @@
 	                targets: 1
 				},
 					{
-					data:"percentFeb_TR",
+					data:"percentFeb",
 	                orderable: false,
 	                render: function ( data, type, full, meta ) {
 	                	return "<div>" + data + "</div>"
@@ -718,7 +718,7 @@
 	                targets: 2
 				},
 					{
-					data:"percentMar_TR",
+					data:"percentMar",
 	                orderable: false,
 	                render: function ( data, type, full, meta ) {
 	                	return "<div>" + data + "</div>"
@@ -726,7 +726,7 @@
 	                targets: 3
 				},
 					{
-					data:"percentApr_TR",
+					data:"percentApr",
 	                orderable: false,
 	                render: function ( data, type, full, meta ) {
 	                	return "<div>" + data + "</div>"
@@ -734,7 +734,7 @@
 	                targets: 4
 				},
 					{
-					data:"percentMay_TR",
+					data:"percentMay",
 	                orderable: false,
 	                render: function ( data, type, full, meta ) {
 	                	return "<div>" + data + "</div>"
@@ -742,7 +742,7 @@
 	                targets: 5
 				},
 					{
-					data:"percentJun_TR",
+					data:"percentJun",
 	                orderable: false,
 	                render: function ( data, type, full, meta ) {
 	                	return "<div>" + data + "</div>"
@@ -750,7 +750,7 @@
 	                targets: 6
 				},
 					{
-					data:"percentJul_TR",
+					data:"percentJul",
 	                orderable: false,
 	                render: function ( data, type, full, meta ) {
 	                	return "<div>" + data + "</div>"
@@ -758,7 +758,7 @@
 	                targets: 7
 				},
 					{
-					data:"percentAug_TR",
+					data:"percentAug",
 	                orderable: false,
 	                render: function ( data, type, full, meta ) {
 	                	return "<div>" + data + "</div>"
@@ -766,7 +766,7 @@
 	                targets: 8
 				},
 					{
-					data:"percentSep_TR",
+					data:"percentSep",
 	                orderable: false,
 	                render: function ( data, type, full, meta ) {
 	                	return "<div>" + data + "</div>"
@@ -774,7 +774,7 @@
 	                targets: 9
 				},
 					{
-					data:"percentOct_TR",
+					data:"percentOct",
 	                orderable: false,
 	                render: function ( data, type, full, meta ) {
 	                	return "<div>" + data + "</div>"
@@ -782,7 +782,7 @@
 	                targets: 10
 				},
 					{
-					data:"percentNov_TR",
+					data:"percentNov",
 	                orderable: false,
 	                render: function ( data, type, full, meta ) {
 	                	return "<div>" + data + "</div>"
@@ -790,7 +790,7 @@
 	                targets: 11
 				},
 					{
-					data:"percentDec_TR",
+					data:"percentDec",
 	                orderable: false,
 	                render: function ( data, type, full, meta ) {
 	                	return "<div>" + data + "</div>"
@@ -801,18 +801,18 @@
 			],
 			columns: [
 	            		{ data: "" },
-			            { data:	"percentJan_TR"},
-			            { data: "percentFeb_TR" },
-			            { data: "percentMar_TR" },
-			            { data: "percentApr_TR" },
-			            { data: "percentMay_TR" },
-			            { data: "percentJun_TR" },
-			            { data: "percentJul_TR" },
-			            { data: "percentAug_TR" },
-			            { data: "percentSep_TR" },
-			            { data: "percentOct_TR" },
-			            { data: "percentNov_TR" },
-			            { data: "percentDec_TR" }
+			            { data:	"percentJan"},
+			            { data: "percentFeb" },
+			            { data: "percentMar" },
+			            { data: "percentApr" },
+			            { data: "percentMay" },
+			            { data: "percentJun" },
+			            { data: "percentJul" },
+			            { data: "percentAug" },
+			            { data: "percentSep" },
+			            { data: "percentOct" },
+			            { data: "percentNov" },
+			            { data: "percentDec" }
 	        ]
 		});
 	
@@ -845,10 +845,6 @@
  						   data:"userName",
 			                orderable: false,
 			                render: function ( data, type, full, meta ) {
-			                	/* if(data=='合计'){
-			                		alert(data);
-			                		console.log($(this));
-			                	} */
 			                    return "<div>" + data + "</div>"
 			                },
 			                targets: 0
@@ -1002,7 +998,7 @@
 			                targets: 0
 						},
 						{
-							data:"percentJan_TM",
+							data:"percentJan",
 			                orderable: false,
 			                render: function ( data, type, full, meta ) {
 			                    return "<div>" + data + "</div>"
@@ -1010,7 +1006,7 @@
 			                targets: 1
 						},
 	 					{
-							data:"percentFeb_TM",
+							data:"percentFeb",
 			                orderable: false,
 			                render: function ( data, type, full, meta ) {
 			                	return "<div>" + data + "</div>"
@@ -1018,7 +1014,7 @@
 			                targets: 2
 						},
 	 					{
-							data:"percentMar_TM",
+							data:"percentMar",
 			                orderable: false,
 			                render: function ( data, type, full, meta ) {
 			                	return "<div>" + data + "</div>"
@@ -1026,7 +1022,7 @@
 			                targets: 3
 						},
 	 					{
-							data:"percentApr_TM",
+							data:"percentApr",
 			                orderable: false,
 			                render: function ( data, type, full, meta ) {
 			                	return "<div>" + data + "</div>"
@@ -1034,7 +1030,7 @@
 			                targets: 4
 						},
 	 					{
-							data:"percentMay_TM",
+							data:"percentMay",
 			                orderable: false,
 			                render: function ( data, type, full, meta ) {
 			                	return "<div>" + data + "</div>"
@@ -1042,7 +1038,7 @@
 			                targets: 5
 						},
 	 					{
-							data:"percentJun_TM",
+							data:"percentJun",
 			                orderable: false,
 			                render: function ( data, type, full, meta ) {
 			                	return "<div>" + data + "</div>"
@@ -1050,7 +1046,7 @@
 			                targets: 6
 						},
 	 					{
-							data:"percentJul_TM",
+							data:"percentJul",
 			                orderable: false,
 			                render: function ( data, type, full, meta ) {
 			                	return "<div>" + data + "</div>"
@@ -1058,7 +1054,7 @@
 			                targets: 7
 						},
 	 					{
-							data:"percentAug_TM",
+							data:"percentAug",
 			                orderable: false,
 			                render: function ( data, type, full, meta ) {
 			                	return "<div>" + data + "</div>"
@@ -1066,7 +1062,7 @@
 			                targets: 8
 						},
 	 					{
-							data:"percentSep_TM",
+							data:"percentSep",
 			                orderable: false,
 			                render: function ( data, type, full, meta ) {
 			                	return "<div>" + data + "</div>"
@@ -1074,7 +1070,7 @@
 			                targets: 9
 						},
 	 					{
-							data:"percentOct_TM",
+							data:"percentOct",
 			                orderable: false,
 			                render: function ( data, type, full, meta ) {
 			                	return "<div>" + data + "</div>"
@@ -1082,7 +1078,7 @@
 			                targets: 10
 						},
 	 					{
-							data:"percentNov_TM",
+							data:"percentNov",
 			                orderable: false,
 			                render: function ( data, type, full, meta ) {
 			                	return "<div>" + data + "</div>"
@@ -1090,7 +1086,7 @@
 			                targets: 11
 						},
 	 					{
-							data:"percentDec_TM",
+							data:"percentDec",
 			                orderable: false,
 			                render: function ( data, type, full, meta ) {
 			                	return "<div>" + data + "</div>"
@@ -1101,18 +1097,18 @@
 					],
 					columns: [
 			            		{ data: "" },
-					            { data:	"percentJan_TM"},
-					            { data: "percentFeb_TM" },
-					            { data: "percentMar_TM" },
-					            { data: "percentApr_TM" },
-					            { data: "percentMay_TM" },
-					            { data: "percentJun_TM" },
-					            { data: "percentJul_TM" },
-					            { data: "percentAug_TM" },
-					            { data: "percentSep_TM" },
-					            { data: "percentOct_TM" },
-					            { data: "percentNov_TM" },
-					            { data: "percentDec_TM" }
+					            { data:	"percentJan"},
+					            { data: "percentFeb" },
+					            { data: "percentMar" },
+					            { data: "percentApr" },
+					            { data: "percentMay" },
+					            { data: "percentJun" },
+					            { data: "percentJul" },
+					            { data: "percentAug" },
+					            { data: "percentSep" },
+					            { data: "percentOct" },
+					            { data: "percentNov" },
+					            { data: "percentDec" }
 			        ]
 		});
 
