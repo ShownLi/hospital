@@ -44,49 +44,6 @@
 							</div>	
 						</div>
 					</div>
-					<!-- <div class="panel-body">
-						<div class="table-responsive">
-							
-							<table id="dataTable" class="table">
-								<thead>
-									<tr>
-										<th>地接社名称</th>
-										<th>一月成交率</th>
-										<th>二月成交率</th>									
-										<th>三月成交率</th>
-										<th>四月成交率</th>
-										<th>五月成交率</th>
-										<th>六月成交率</th>
-										<th>七月成交率</th>
-										<th>八月成交率</th>
-										<th>九月成交率</th>
-										<th>十月成交率</th>
-										<th>十一月成交率</th>
-										<th>十二月成交率</th>
-									</tr>
-								</thead>
-							</table>
-							<table id="dataTable3" class="table">
-								<thead>
-									<tr>
-										<th></th>
-										<th>一月成交率</th>
-										<th>二月成交率</th>									
-										<th>三月成交率</th>
-										<th>四月成交率</th>
-										<th>五月成交率</th>
-										<th>六月成交率</th>
-										<th>七月成交率</th>
-										<th>八月成交率</th>
-										<th>九月成交率</th>
-										<th>十月成交率</th>
-										<th>十一月成交率</th>
-										<th>十二月成交率</th>
-									</tr>
-								</thead>
-							</table>
-						</div>
-					</div> -->
 					<div class="panel panel-default">
 					<div class="panel-heading">
 						<div class="panel-btns">
@@ -122,53 +79,29 @@
 								<tbody>
 								</tbody>
 							</table>
+							<table id="dataTable3" class="table">
+								<thead>
+									<tr>
+										<th></th>
+										<th>一月成交率</th>
+										<th>二月成交率</th>									
+										<th>三月成交率</th>
+										<th>四月成交率</th>
+										<th>五月成交率</th>
+										<th>六月成交率</th>
+										<th>七月成交率</th>
+										<th>八月成交率</th>
+										<th>九月成交率</th>
+										<th>十月成交率</th>
+										<th>十一月成交率</th>
+										<th>十二月成交率</th>
+									</tr>
+								</thead>
+							</table>
 						</div>
 						<!-- table-responsive -->
 					</div>
 				</div>
-					<!-- <div class="panel-body">
-						<div class="table-responsive">
-							<table id="dataTable2" class="table">
-								<thead>
-									<tr>
-										<th>地接社名称</th>
-										<th>一月成交金额</th>
-										<th>二月成交金额</th>									
-										<th>三月成交金额</th>
-										<th>四月成交金额</th>
-										<th>五月成交金额</th>
-										<th>六月成交金额</th>
-										<th>七月成交金额</th>
-										<th>八月成交金额</th>
-										<th>九月成交金额</th>
-										<th>十月成交金额</th>
-										<th>十一月成交金额</th>
-										<th>十二月成交金额</th>
-									</tr>
-								</thead>
-							</table>
-							<table id="dataTable4" class="table">
-								<thead>
-									<tr>
-										<th></th>
-										<th>一月成交金额</th>
-										<th>二月成交金额</th>									
-										<th>三月成交金额</th>
-										<th>四月成交金额</th>
-										<th>五月成交金额</th>
-										<th>六月成交金额</th>
-										<th>七月成交金额</th>
-										<th>八月成交金额</th>
-										<th>九月成交金额</th>
-										<th>十月成交金额</th>
-										<th>十一月成交金额</th>
-										<th>十二月成交金额</th>
-									</tr>
-								</thead>
-							</table>
-						</div>
-					</div>
-					 -->
 					<div class="panel panel-default">
 					<div class="panel-heading">
 						<div class="panel-btns">
@@ -201,8 +134,25 @@
 										<th>十二月成交金额</th>
 									</tr>
 								</thead>
-								<tbody>
-								</tbody>
+							</table>
+							<table id="dataTable4" class="table" class="table table-communicate">
+									<thead>
+										<tr>
+											<th></th>
+											<th>一月成交金额</th>
+											<th>二月成交金额</th>									
+											<th>三月成交金额</th>
+											<th>四月成交金额</th>
+											<th>五月成交金额</th>
+											<th>六月成交金额</th>
+											<th>七月成交金额</th>
+											<th>八月成交金额</th>
+											<th>九月成交金额</th>
+											<th>十月成交金额</th>
+											<th>十一月成交金额</th>
+											<th>十二月成交金额</th>
+										</tr>
+									</thead>
 							</table>
 						</div>
 						<!-- table-responsive -->
