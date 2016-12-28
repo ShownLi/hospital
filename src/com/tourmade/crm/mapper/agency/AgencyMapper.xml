@@ -99,6 +99,7 @@
 		u.isdisplay,
 		u.isdel 
 		from tm_parameter u where u.isdisplay = 1 and u.isdel = 0 and u.para_domain = #{domain}
+		ORDER BY u.para_sort desc
 	</select>
 	
 	<update id="deleteAgencyById" parameterType="int" flushCache="true"
