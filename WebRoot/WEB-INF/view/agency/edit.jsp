@@ -245,10 +245,11 @@
 		
 	var t = jQuery('#dataTable').DataTable({
 		searching:false,
-		pageLength: 10,
+		paging: false,
 		processing: true,
 		language: datatable_local_language, // my.js
 		serverSide: true,
+		bInfo:false,
 		ajax: {
 			url: '${rootPath}sale/list.do?agencyId=${agency.agencyId}',
 			dataFilter: function(data){

@@ -187,8 +187,8 @@ public class UserAchRate extends BaseBean<UserAchRate>{
 	@Override
 	public String toCSVString() {
 		String temp=userName.contains(",")? "\""+userName+"\"":userName;
-		return 	temp+ ", "  + percentJan + ", " + percentFeb + ", " + percentMar + ", " + percentApr
-				+ ", " + percentMay + ", " + percentJun + ", " + percentJul + ", " + percentAug + ", " + percentSep
-				+ ", " + percentOct + ", " + percentNov + ", " + percentDec;
+		return 	temp+ ","  + percentJan + "," + percentFeb + "," + percentMar + "," + percentApr
+				+ "," + percentMay + "," + percentJun + "," + percentJul + "," + percentAug + "," + percentSep
+				+ "," + percentOct + "," + percentNov + "," + percentDec;
 	}
 }

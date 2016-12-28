@@ -12,7 +12,7 @@
 			u.isdel
 		from tm_sales u where u.agency_id = #{agencyId} and u.isdel = 0
 		order by u.creat_time
-		limit #{start},#{length}
+		<!-- limit #{start},#{length} -->
 	</select>
 
 	<select id="countSale" parameterType="Sale" resultType="long">

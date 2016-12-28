@@ -38,15 +38,15 @@ public class SaleService extends BaseService {
 		Map<String, Object> map = new HashMap<String, Object>();		
 		
 		map.put("agencyId", agencyId);
-		map.put("start", pageHelper.getStart());
-		map.put("length", pageHelper.getLength());
+//		map.put("start", pageHelper.getStart());
+//		map.put("length", pageHelper.getLength());
 
 		List<Sale> data = saleMapper.querySale(map);
-		long count = saleMapper.countSale(sale);
+		/*long count = saleMapper.countSale(sale);*/
 		
 		pageResult.setData(data);
-		pageResult.setCountTotal(count);
-		pageResult.setCountFiltered(count);
+//		pageResult.setCountTotal(count);
+//		pageResult.setCountFiltered(count);
 
 		return pageResult;
 	}

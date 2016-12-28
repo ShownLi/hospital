@@ -57,6 +57,6 @@ public class SellerNotAskStats extends BaseBean<Agency>{
 	@Override
 	public String toCSVString() {
 		// TODO Auto-generated method stub
-		return country + ", "  + number;
+		return country + ","  + number;
 	}
 }

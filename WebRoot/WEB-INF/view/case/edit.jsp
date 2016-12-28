@@ -1185,6 +1185,7 @@
 	 	processing: true,
 	 	language: datatable_local_language, // my.js
 	 	serverSide: true,
+	 	bInfo:false,
 	 	ajax: {
 	 		url: '${rootPath}order/listByCaseId.do?caseId=${crmcase.caseId}',
 	 		dataFilter: function(data){
@@ -1716,6 +1717,7 @@
 			processing: true,
 			language: datatable_local_language, // my.js
 			serverSide: true,
+			bInfo:false,
 			ajax: {
   				url: '${rootPath}comment/list.do?type=case&id=${crmcase.caseId}',
   				dataFilter: function(data){

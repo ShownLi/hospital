@@ -300,10 +300,11 @@
       	
 			var caseTable= jQuery('#dataTable-case').DataTable({
 				searching:false,
-				pageLength: 10,
+				paging: false,
 				processing: true,
 				language: datatable_local_language, // my.js
 				serverSide: true,
+				bInfo:false,
 				ajax: {
 					url: '${rootPath}case/listByCustomerId.do?customerId=${customer.customerId}',
 					dataFilter: function(data){
@@ -567,6 +568,7 @@
 			processing: true,
 			language: datatable_local_language, // my.js
 			serverSide: true,
+			bInfo:false,
 			ajax: {
 				url: '${rootPath}comment/list.do?type=customer&id=${customer.customerId}',
 				dataFilter: function(data){

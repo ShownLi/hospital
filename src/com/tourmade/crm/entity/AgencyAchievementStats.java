@@ -170,8 +170,8 @@ public class AgencyAchievementStats extends BaseBean<Agency>{
 	}
 	@Override
 	public String toCSVString() {
-		return agencyName + ", " + percentjan + ", " + percentfeb + ", " + percentmar + ", " + percentapr + ", "
-				+ percentmay + ", " + percentjun + ", " + percentjul + ", " + percentaug + ", " + percentsep + ", "
-				+ percentoct + ", " + percentnov + ", " + percentdece ;
+		return agencyName + "," + percentjan + "," + percentfeb + "," + percentmar + "," + percentapr + ","
+				+ percentmay + "," + percentjun + "," + percentjul + "," + percentaug + "," + percentsep + ","
+				+ percentoct + "," + percentnov + "," + percentdece ;
 	}
 }

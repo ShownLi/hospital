@@ -139,7 +139,7 @@ public class AgencyOrderStatus extends BaseBean<Agency>{
 	
 	@Override
 	public String toCSVString() {
-		return agencyName + ", " + total + ", " + status0 + ", " + status1 + ", " + status2 + ", " + status3 + ", "
-				+ status4 + ", "  + dealMoney + ", "+  rate;
+		return agencyName + "," + total + "," + status0 + "," + status1 + "," + status2 + "," + status3 + ","
+				+ status4 + ","  + dealMoney + ","+  rate;
 	}
 }
