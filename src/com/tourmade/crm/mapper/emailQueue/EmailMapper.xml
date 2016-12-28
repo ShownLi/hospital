@@ -110,7 +110,7 @@
 		statementType="PREPARED">
 		update tm_email
 		set
-		isdel=1
+		isdel=1,update_time=NOW()
 		where
 		email_id = #{email_id}
 	</update>

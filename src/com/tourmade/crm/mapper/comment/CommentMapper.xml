@@ -91,7 +91,7 @@
 		statementType="PREPARED">
 		update tm_comment
 		set
-		isdel=1
+		isdel=1,update_time=NOW()
 		where
 		comment_id = #{commentId}
 	</update>

@@ -26,12 +26,13 @@
 							<a href="" class="minimize">&minus;</a>
 						</div>
 						<!-- panel-btns -->
-						<h3 class="panel-title">客人来源级别统计</h3>
-						<form action="${rootPath }/statistics/savecustsourcelevel.do" method="post">
-						<input class="btn btn-primary" type="submit" value="导出"/>
-						</form>
-						<div class="row" style="margin-top: 20px">
-						</div>	
+						<div class="row" style="clear: both;">
+							<h3 class="panel-title col-sm-11">客人来源级别统计</h3>
+							<div class="col-sm-1">
+								<form action="${rootPath }/statistics/savecustsourcelevel.do" method="post">
+								<input class="btn btn-primary" type="submit" value="导出"/>
+								</form>
+							</div>
 						</div>
 					</div>
 					<div class="panel-body">
