@@ -66,15 +66,17 @@
 						<div class="panel-btns">
 							<a href="" class="minimize">&minus;</a>
 						</div>
-						<h4 class="panel-title">无效原因统计</h4>
-						<span >
-						<form  action="${rootPath }/statistics/savereasonofdraininginvalid.do" method="post">
-						<input type="hidden" class="startTimeInput" name="startCreateDateTime" value="${startTime }">
-						<input type="hidden" class="endTimeInput" name="endCreateDateTime" value="${endTime }">
-							<input class="btn btn-primary" type="submit" 
-									value="导出" />
-						</form>
-						</span>
+						<div class="row" style="clear: both;">
+							<h4 class="panel-title col-sm-11">无效原因统计</h4>
+							<div class="col-sm-1">
+							<form  action="${rootPath }/statistics/savereasonofdraininginvalid.do" method="post">
+							<input type="hidden" class="startTimeInput" name="startCreateDateTime" value="${startTime }">
+							<input type="hidden" class="endTimeInput" name="endCreateDateTime" value="${endTime }">
+								<input class="btn btn-primary" type="submit" 
+										value="导出" />
+							</form>
+							</div>
+						</div>
 					</div>
 					<div class="panel-body">
 						<div class="table-responsive">
@@ -110,15 +112,17 @@
 						<div class="panel-btns">
 							<a href="" class="minimize">&minus;</a>
 						</div>
-						<h4 class="panel-title">未成行原因统计</h4>
-						<span >
-						<form action="${rootPath }/statistics/savereasonofdrainingnodeal.do" method="post">
-						<input type="hidden" class="startTimeInput" name="startCreateDateTime" value="${startTime }">
-						<input type="hidden" class="endTimeInput" name="endCreateDateTime" value="${endTime }">
-							<input class="btn btn-primary" type="submit" 
-									value="导出" />
-						</form>
-						</span>
+						<div class="row" style="clear: both;">
+							<h4 class="panel-title col-sm-11">未成行原因统计</h4>
+							<div class="col-sm-1">
+								<form action="${rootPath }/statistics/savereasonofdrainingnodeal.do" method="post">
+								<input type="hidden" class="startTimeInput" name="startCreateDateTime" value="${startTime }">
+								<input type="hidden" class="endTimeInput" name="endCreateDateTime" value="${endTime }">
+									<input class="btn btn-primary" type="submit" 
+											value="导出" />
+								</form>
+							</div>
+						</div>
 					</div>
 					<div class="panel-body">
 						<div class="table-responsive">

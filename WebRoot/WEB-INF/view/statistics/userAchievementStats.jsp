@@ -50,13 +50,17 @@
 						<div class="panel-btns">
 							<a href="" class="minimize">&minus;</a>
 						</div>
-						<h4 class="panel-title">成交率统计（按咨询时间）</h4>
-						<form action="${rootPath }/statistics/saveuserachirate.do" method="post">
-						<input type="hidden" class="searchYearInput" name="searchYear" value="${searchYear }">
-						
-							<input class="btn btn-primary" type="submit" 
-									value="导出" />
-						</form>
+						<div class="row" style="clear: both;">
+							<h4 class="panel-title col-sm-11">成交率统计（按咨询时间）</h4>
+							<div class="col-sm-1">
+								<form action="${rootPath }/statistics/saveuserachirate.do" method="post">
+								<input type="hidden" class="searchYearInput" name="searchYear" value="${searchYear }">
+								
+									<input class="btn btn-primary" type="submit" 
+											value="导出" />
+								</form>
+							</div>
+						</div>
 					</div>
 					<div class="panel-body">
 						<div class="table-responsive">
@@ -108,12 +112,16 @@
 						<div class="panel-btns">
 							<a href="" class="minimize">&minus;</a>
 						</div>
-						<h4 class="panel-title">成交金额统计（按成交时间）</h4>
-						<form action="${rootPath }/statistics/saveuserachimoney.do" method="post">
-						<input type="hidden" class="searchYearInput" name="searchYear" value="${searchYear }">
-							<input class="btn btn-primary" type="submit" 
-									value="导出" />
-						</form>
+						<div class="row" style="clear: both;">
+							<h4 class="panel-title col-sm-11">成交金额统计（按成交时间）</h4>
+							<div class="col-sm-1">
+								<form action="${rootPath }/statistics/saveuserachimoney.do" method="post">
+								<input type="hidden" class="searchYearInput" name="searchYear" value="${searchYear }">
+									<input class="btn btn-primary" type="submit" 
+											value="导出" />
+								</form>
+							</div>
+						</div>
 					</div>
 					<div class="panel-body">
 						<div class="table-responsive">
