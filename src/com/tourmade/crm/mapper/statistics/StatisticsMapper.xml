@@ -13,7 +13,7 @@
 			sum(case when status=3 then 1 else 0 end) as status3 ,
 			sum(case when status=4 then 1 else 0 end) as status4 ,
 			concat ( FORMAT (sum(case when status=2 then 1 else 0 end) / count(1) *100,2),'%') as rate,
-			sum(rmb_price) as dealmoney
+			IFNULL(sum(rmb_price),"--") as dealmoney
 		from tm_order
 		where isdel = 0
         <if test="searchStartTime != null and searchStartTime != ''">
