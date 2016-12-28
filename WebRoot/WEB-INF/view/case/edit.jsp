@@ -478,7 +478,10 @@
 							</table>
 						</div>
 						<!-- 添加注释 -->
-						<form id="form-comment" class="form">
+						<div class="form-group col-sm-12 align-center" id="addNoteDiv">
+							<input class="btn btn-primary" type="button" id="addNote" onclick="showNote()" value="添加注释"/>
+						</div>
+						<form id="form-comment" class="form" hidden="hidden">
 							<div class="form-group col-sm-6 col-sm-offset-3">
 								<textarea name="content" class="form-control" rows="5"></textarea>
 								<input type="hidden" name="userId" value="${loginUser.userId}" />
@@ -487,8 +490,7 @@
 								<input type="hidden" name="commentType" value="case" />
 							</div>
 							<div class="form-group col-sm-12 align-center">
-								<!-- <button class="btn btn-primary">添加注释</button> -->
-								<input class="btn btn-primary" type="submit" value="添加注释"/>
+								<input class="btn btn-primary" type="submit" value="保存注释"/>
 							</div>
 						</form>
 					</div>
@@ -814,12 +816,12 @@
 
 	<script type="text/javascript">
 	
+	function showNote() {
+		$("#form-comment").show();
+		$("#addNoteDiv").hide();
+	}
+	
 	$(function(){
-		/* 当case无效，成行，未成行时，无未成行按钮 
-		         当case无效，成行，未成行没有下单按钮 
-		   
-		   	当case不为成行时，无收款确认按钮
-		*/
 		if("${crmcase.status}"==3||"${crmcase.status}"==5||"${crmcase.status}"==4){
 			$("#btn-nodeal").css("display","none");
 			$("#btn-addorder").css("display","none");

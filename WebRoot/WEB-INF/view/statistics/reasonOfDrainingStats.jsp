@@ -88,19 +88,6 @@
 										<th>比例</th>		
 									</tr>
 								</thead>
-								<tbody>
-								</tbody>
-							</table>
-							<table id="dataTable2-invalid" class="table table-communicate">
-								<thead>
-									<tr>
-										<th></th>
-										<th>询单数量</th>
-										<th>比例</th>		
-									</tr>
-								</thead>
-								<tbody>
-								</tbody>
 							</table>
 						</div>
 						<!-- table-responsive -->
@@ -134,19 +121,6 @@
 										<th>比例</th>		
 									</tr>
 								</thead>
-								<tbody>
-								</tbody>
-							</table>
-							<table id="dataTable2-nodeal" class="table table-communicate">
-								<thead>
-									<tr>
-										<th></th>
-										<th>询单数量</th>
-										<th>比例</th>		
-									</tr>
-								</thead>
-								<tbody>
-								</tbody>
 							</table>
 						</div>
 						<!-- table-responsive -->
@@ -184,33 +158,6 @@
     $("#searchEndCreateDateTime").change(function(){
     	$(".endTimeInput").val($(this).val());
     });
-			/* var invalidTable = jQuery('#dataTable-invalid').DataTable({
-				searching:false,
-				paging:false,
-				processing: true,
-				language: datatable_local_language, // my.js
-				serverSide: true,
-				ajax: {
-					url: '${rootPath}statistics/reasonofdrainingstats1.do',
-					type:"post",
-					data: function(data){
-			 			var searchStartDateTime=$("#searchStartCreateDateTime").val();
-			 			var searchEndDateTime=$("#searchEndCreateDateTime").val();
-			 			if(searchStartDateTime !=null && searchStartDateTime !=""){
-			 				data.startCreateDateTime = searchStartDateTime;
-			 			}
-			 			if(searchEndDateTime !=null && searchEndDateTime !=""){
-			 				data.endCreateDateTime = searchEndDateTime;
-			 			}
-					},
-					
-					dataFilter: function(data){
-						var json = jQuery.parseJSON( data );
-						json.recordsTotal = json.countTotal;
-						json.recordsFiltered = json.countFiltered;
-						json.data = json.data;
-						return JSON.stringify( json );
-					} */
 	var invalidTable = jQuery('#dataTable-invalid').DataTable({
 		searching:false,
 		paging:false,
@@ -269,69 +216,6 @@
 			],
 			columns: [
 	            		{ data: "reasonOfDrainingName" },
-			            { data:	"num"},
-			            { data: "percent" }
-	        ]
-		});
-	
-	var invalidTableTotal = jQuery('#dataTable2-invalid').DataTable({
-		searching:false,
-		paging:false,
-		processing: true,
-		language: datatable_local_language, // my.js
-		serverSide: true,
-		bInfo : false,
-		ajax: {
-			url: '${rootPath}statistics/reasonofdrainingstats1Total.do',
-			type:"post",
-			data: function(data){
-	 			var searchStartDateTime=$("#searchStartCreateDateTime").val();
-	 			var searchEndDateTime=$("#searchEndCreateDateTime").val();
-	 			if(searchStartDateTime !=null && searchStartDateTime !=""){
-	 				data.startCreateDateTime = searchStartDateTime;
-	 			}
-	 			if(searchEndDateTime !=null && searchEndDateTime !=""){
-	 				data.endCreateDateTime = searchEndDateTime;
-	 			}
-			},
-			
-			dataFilter: function(data){
-				var json = jQuery.parseJSON( data );
-				json.recordsTotal = json.countTotal;
-				json.recordsFiltered = json.countFiltered;
-				json.data = json.data;
-				return JSON.stringify( json );
-			}
-		},
-		columnDefs: [		  
-				   {
-					   data:"",
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                	return "<div class='minw50'>" + "<h3>" + '合计'  + "</h3>" + "</div>" 
-	                },
-	                targets: 0
-				},
-				{
-					data:"num",
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                    return "<div>" + data + "</div>"
-	                },
-	                targets: 1
-				},
-					{
-					data:"percent",
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                	return "<div>" + data + "</div>"
-	                },
-	                targets: 2
-				}
-				
-			],
-			columns: [
-	            		{ data: "" },
 			            { data:	"num"},
 			            { data: "percent" }
 	        ]
@@ -400,76 +284,11 @@
 	        ]
 		});
 
-	var noDealTableTotal = jQuery('#dataTable2-nodeal').DataTable({
-		searching:false,
-		paging:false,
-		processing: true,
-		language: datatable_local_language, // my.js
-		serverSide: true,
-		bInfo : false,
-		ajax: {
-			url: '${rootPath}statistics/reasonofdrainingstats2Total.do',
-			type:"post",
-			data: function(data){
-	 			var searchStartDateTime=$("#searchStartCreateDateTime").val();
-	 			var searchEndDateTime=$("#searchEndCreateDateTime").val();
-	 			if(searchStartDateTime !=null && searchStartDateTime !=""){
-	 				data.startCreateDateTime = searchStartDateTime;
-	 			}
-	 			if(searchEndDateTime !=null && searchEndDateTime !=""){
-	 				data.endCreateDateTime = searchEndDateTime;
-	 			}
-			},
-			
-			dataFilter: function(data){
-				var json = jQuery.parseJSON( data );
-				json.recordsTotal = json.countTotal;
-				json.recordsFiltered = json.countFiltered;
-				json.data = json.data;
-				return JSON.stringify( json );
-			}
-		},
-		columnDefs: [		  
-				   {
-					   data:"",
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                	return "<div class='minw50'>" + "<h3>" + '合计'  + "</h3>" + "</div>" 
-	                },
-	                targets: 0
-				},
-				{
-					data:"num",
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                    return "<div>" + data + "</div>"
-	                },
-	                targets: 1
-				},
-					{
-					data:"percent",
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                	return "<div>" + data + "</div>"
-	                },
-	                targets: 2
-				}
-				
-			],
-			columns: [
-	            		{ data: "" },
-			            { data:	"num"},
-			            { data: "percent" }
-	        ]
-		});
 		$('#searchBtn').on( 'click', function () {
 			invalidTable.draw();
 			noDealTable.draw();
-			invalidTableTotal.draw();
-			noDealTableTotal.draw();
 	    } );
 			
-
 		// Select2
 	    jQuery('select').select2({
 	        minimumResultsForSearch: -1

@@ -130,16 +130,21 @@ public class AgencyController extends BaseSimpleFormController {
 		try {
 			if (null != id && !"".equals(id)) {
 				int agencyId = Integer.parseInt(id);
-				service.deleteAgencyById(agencyId);
-				json.setSuccess(true);
-			} else {
+				String agencyName = service.checkAgencyHaveOrder(agencyId);
+				if("".equals(agencyName) && null!=agencyName){
+					service.deleteAgencyById(agencyId);
+					json.setSuccess(true);
+				}else{
+					//json.setText("有地接社不能删除");
+					json.setSuccess(false);
+				}
+			} else {}
 				json.setSuccess(false);
-			}
+			
 		} catch (Exception e) {
 			json.setSuccess(false);
 			logger.error("AgencyController.doDel() --> " + id + "\n" + e.getMessage());
 		}		
 		return json;
 	}
-
 }

@@ -103,27 +103,11 @@ public class StatisticsController extends BaseSimpleFormController {
 		map.put("startCreateTime", startCreateDateTime + " 00:00:00");
 		map.put("endCreateTime", endCreateDateTime + " 23:59:59");
 		QueryResult<UserAchievement> userAchievementList = service.queryUserAchievementStats(map);
+		QueryResult<UserAchievement> userAchievementList2 = service.queryUserAchievementStatsTotal(map);
+		List<UserAchievement> data = userAchievementList2.getData();
+		data.get(0).setUserName("合计");
+		userAchievementList.getData().addAll(data);
 		return userAchievementList;
-	}
-
-	@RequestMapping(value = "/usercasestatusstatstotal.do", produces = "application/json;charset=utf-8")
-	@ResponseBody
-	public String queryData1(PageHelper page, String startCreateDateTime, String endCreateDateTime, String source) {
-
-		// 设置查询参数
-		Map<String, Object> map = new HashMap<>();
-		map.put("source", source);
-		if (startCreateDateTime == null || startCreateDateTime.trim() == "") {
-			startCreateDateTime = getLastMothFirstDay();
-		}
-		if (endCreateDateTime == null || endCreateDateTime.trim() == "") {
-			endCreateDateTime = getLastMothLastDay();
-		}
-		map.put("startCreateTime", startCreateDateTime + " 00:00:00");
-		map.put("endCreateTime", endCreateDateTime + " 23:59:59");
-		QueryResult<UserAchievement> userAchievementList = service.queryUserAchievementStatsTotal(map);
-		String result = JSONUtilS.object2json(userAchievementList);
-		return result;
 	}
 
 	/**
@@ -168,26 +152,11 @@ public class StatisticsController extends BaseSimpleFormController {
 		map.put("startCreateTime", startCreateDateTime + " 00:00:00");
 		map.put("endCreateTime", endCreateDateTime + " 23:59:59");
 		QueryResult<ContactRealStats> contactRealList = service.queryContactReal(map);
+		QueryResult<ContactRealStats> contactRealList2 = service.queryContactRealTotal(map);
+		List<ContactRealStats> data = contactRealList2.getData();
+		data.get(0).setContactName("合计");
+		contactRealList.getData().addAll(data);
 		return contactRealList;
-	}
-
-	@RequestMapping(value = "/contactrealstatstotal.do", produces = "application/json;charset=utf-8")
-	@ResponseBody
-	public String queryContactRealTotal(PageHelper page, String startCreateDateTime, String endCreateDateTime) {
-
-		// 设置查询参数
-		Map<String, Object> map = new HashMap<>();
-		if (startCreateDateTime == null || startCreateDateTime.trim() == "") {
-			startCreateDateTime = getLastMothFirstDay();
-		}
-		if (endCreateDateTime == null || endCreateDateTime.trim() == "") {
-			endCreateDateTime = getLastMothLastDay();
-		}
-		map.put("startCreateTime", startCreateDateTime + " 00:00:00");
-		map.put("endCreateTime", endCreateDateTime + " 23:59:59");
-		QueryResult<ContactRealStats> contactRealList = service.queryContactRealTotal(map);
-		String result = JSONUtilS.object2json(contactRealList);
-		return result;
 	}
 
 	/**
@@ -234,26 +203,11 @@ public class StatisticsController extends BaseSimpleFormController {
 		map.put("startCreateTime", startCreateDateTime + " 00:00:00");
 		map.put("endCreateTime", endCreateDateTime + " 23:59:59");
 		QueryResult<ReasonOfDrainingStats> contactRealList = service.queryReasonOfDraining(map);
+		QueryResult<ReasonOfDrainingStats> contactRealList2 = service.queryReasonOfDrainingTotal(map);
+		List<ReasonOfDrainingStats> data = contactRealList2.getData();
+		data.get(0).setReasonOfDrainingName("合计");
+		contactRealList.getData().addAll(data);
 		return contactRealList;
-	}
-
-	@RequestMapping(value = "/reasonofdrainingstats1Total.do", produces = "application/json;charset=utf-8")
-	@ResponseBody
-	public String queryReasonOfDraining1Total(PageHelper page, String startCreateDateTime, String endCreateDateTime) {
-		// 设置查询参数
-		Map<String, Object> map = new HashMap<>();
-		if (startCreateDateTime == null || startCreateDateTime.trim() == "") {
-			startCreateDateTime = getLastMothFirstDay();
-		}
-		if (endCreateDateTime == null || endCreateDateTime.trim() == "") {
-			endCreateDateTime = getLastMothLastDay();
-		}
-		map.put("startCreateTime", startCreateDateTime + " 00:00:00");
-		map.put("endCreateTime", endCreateDateTime + " 23:59:59");
-		QueryResult<ReasonOfDrainingStats> contactRealList = service.queryReasonOfDrainingTotal(map);
-		String result = JSONUtilS.object2json(contactRealList);
-
-		return result;
 	}
 
 	/**
@@ -286,26 +240,11 @@ public class StatisticsController extends BaseSimpleFormController {
 		map.put("startCreateTime", startCreateDateTime + " 00:00:00");
 		map.put("endCreateTime", endCreateDateTime + " 23:59:59");
 		QueryResult<ReasonOfDrainingStats> contactRealList = service.queryReasonOfDrainingNoDeal(map);
+		QueryResult<ReasonOfDrainingStats> contactRealList2 = service.queryReasonOfDrainingNoDealTotal(map);
+		List<ReasonOfDrainingStats> data = contactRealList2.getData();
+		data.get(0).setReasonOfDrainingName("合计");
+		contactRealList.getData().addAll(data);
 		return contactRealList;
-	}
-
-	@RequestMapping(value = "/reasonofdrainingstats2Total.do", produces = "application/json;charset=utf-8")
-	@ResponseBody
-	public String queryReasonOfDraining2Total(PageHelper page, String startCreateDateTime, String endCreateDateTime) {
-		// 设置查询参数
-		Map<String, Object> map = new HashMap<>();
-		if (startCreateDateTime == null || startCreateDateTime.trim() == "") {
-			startCreateDateTime = getLastMothFirstDay();
-		}
-		if (endCreateDateTime == null || endCreateDateTime.trim() == "") {
-			endCreateDateTime = getLastMothLastDay();
-		}
-		map.put("startCreateTime", startCreateDateTime + " 00:00:00");
-		map.put("endCreateTime", endCreateDateTime + " 23:59:59");
-		QueryResult<ReasonOfDrainingStats> contactRealList = service.queryReasonOfDrainingNoDealTotal(map);
-		String result = JSONUtilS.object2json(contactRealList);
-
-		return result;
 	}
 
 	/**
@@ -345,22 +284,11 @@ public class StatisticsController extends BaseSimpleFormController {
 		map.put("startCreateTime", searchYear + "-01-01 00:00:00");
 		map.put("endCreateTime", searchYear + "-12-31 23:59:59");
 		QueryResult<UserAchRate> contactRealList = service.queryUserAchiRate(map);
+		QueryResult<UserAchRate> contactRealList2 = service.queryUserAchiRateTotal(map);
+		List<UserAchRate> data = contactRealList2.getData();
+		data.get(0).setUserName("合计");
+		contactRealList.getData().addAll(data);
 		return contactRealList;
-	}
-
-	@RequestMapping(value = "/userachievementratestatstotal.do", produces = "application/json;charset=utf-8")
-	@ResponseBody
-	public String queryUserAchiRateTotal(PageHelper page, String searchYear) {
-		// 设置查询参数
-		Map<String, Object> map = new HashMap<>();
-		if (searchYear == null || searchYear.trim() == "") {
-			searchYear = String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
-		}
-		map.put("startCreateTime", searchYear + "-01-01 00:00:00");
-		map.put("endCreateTime", searchYear + "-12-31 23:59:59");
-		QueryResult<UserAchRate> contactRealList = service.queryUserAchiRateTotal(map);
-		String result = JSONUtilS.object2json(contactRealList);
-		return result;
 	}
 
 	/**
@@ -388,23 +316,13 @@ public class StatisticsController extends BaseSimpleFormController {
 		map.put("startCreateTime", searchYear + "-01-01 00:00:00");
 		map.put("endCreateTime", searchYear + "-12-31 23:59:59");
 		QueryResult<UserAchRate> contactRealList = service.queryUserAchiMoney(map);
+		QueryResult<UserAchRate> contactRealList2 = service.queryUserAchiMoneyTotal(map);
+		List<UserAchRate> data = contactRealList2.getData();
+		data.get(0).setUserName("合计");
+		contactRealList.getData().addAll(data);
 		return contactRealList;
 	}
 
-	@RequestMapping(value = "/userachievementmoneystatstotal.do", produces = "application/json;charset=utf-8")
-	@ResponseBody
-	public String queryUserAchiMoneyTotal(PageHelper page, String searchYear) {
-		// 设置查询参数
-		Map<String, Object> map = new HashMap<>();
-		if (searchYear == null || searchYear.trim() == "") {
-			searchYear = String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
-		}
-		map.put("startCreateTime", searchYear + "-01-01 00:00:00");
-		map.put("endCreateTime", searchYear + "-12-31 23:59:59");
-		QueryResult<UserAchRate> contactRealList = service.queryUserAchiMoneyTotal(map);
-		String result = JSONUtilS.object2json(contactRealList);
-		return result;
-	}
 
 	/**
 	 * 目的地询单状态统计
@@ -450,26 +368,11 @@ public class StatisticsController extends BaseSimpleFormController {
 		map.put("startCreateTime", startCreateDateTime + " 00:00:00");
 		map.put("endCreateTime", endCreateDateTime + " 23:59:59");
 		QueryResult<UserAchievement> userAchievementList = service.queryDesCaseStatus(map);
+		QueryResult<UserAchievement> userAchievementList2 = service.queryDesCaseStatusTotal(map);
+		List<UserAchievement> data = userAchievementList2.getData();
+		data.get(0).setUserName("合计");
+		userAchievementList.getData().addAll(data);
 		return userAchievementList;
-	}
-
-	@RequestMapping(value = "/descasestatusstatstotal.do", produces = "application/json;charset=utf-8")
-	@ResponseBody
-	public String queryDesCaseStatusTotal(PageHelper page, String startCreateDateTime, String endCreateDateTime) {
-
-		// 设置查询参数
-		Map<String, Object> map = new HashMap<>();
-		if (startCreateDateTime == null || startCreateDateTime.trim() == "") {
-			startCreateDateTime = getLastMothFirstDay();
-		}
-		if (endCreateDateTime == null || endCreateDateTime.trim() == "") {
-			endCreateDateTime = getLastMothLastDay();
-		}
-		map.put("startCreateTime", startCreateDateTime + " 00:00:00");
-		map.put("endCreateTime", endCreateDateTime + " 23:59:59");
-		QueryResult<UserAchievement> userAchievementList = service.queryDesCaseStatusTotal(map);
-		String result = JSONUtilS.object2json(userAchievementList);
-		return result;
 	}
 
 	/**
@@ -509,22 +412,11 @@ public class StatisticsController extends BaseSimpleFormController {
 		map.put("startCreateTime", searchYear + "-01-01 00:00:00");
 		map.put("endCreateTime", searchYear + "-12-31 23:59:59");
 		QueryResult<UserAchRate> contactRealList = service.queryDesAchiCaseCount(map);
+		QueryResult<UserAchRate> contactRealList2 = service.queryDesAchiCaseCountTotal(map);
+		List<UserAchRate> data = contactRealList2.getData();
+		data.get(0).setUserName("合计");
+		contactRealList.getData().addAll(data);
 		return contactRealList;
-	}
-
-	@RequestMapping(value = "/desachievementcountstatstotal.do", produces = "application/json;charset=utf-8")
-	@ResponseBody
-	public String queryDesAchiCaseCountTotal(PageHelper page, String searchYear) {
-		// 设置查询参数
-		Map<String, Object> map = new HashMap<>();
-		if (searchYear == null || searchYear.trim() == "") {
-			searchYear = String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
-		}
-		map.put("startCreateTime", searchYear + "-01-01 00:00:00");
-		map.put("endCreateTime", searchYear + "-12-31 23:59:59");
-		QueryResult<UserAchRate> contactRealList = service.queryDesAchiCaseCountTotal(map);
-		String result = JSONUtilS.object2json(contactRealList);
-		return result;
 	}
 
 	/**
@@ -551,22 +443,11 @@ public class StatisticsController extends BaseSimpleFormController {
 		map.put("startCreateTime", searchYear + "-01-01 00:00:00");
 		map.put("endCreateTime", searchYear + "-12-31 23:59:59");
 		QueryResult<UserAchRate> contactRealList = service.queryDesAchiRate(map);
+		QueryResult<UserAchRate> contactRealList2 = service.queryDesAchiRateTotal(map);
+		List<UserAchRate> data = contactRealList2.getData();
+		data.get(0).setUserName("合计");
+		contactRealList.getData().addAll(data);
 		return contactRealList;
-	}
-
-	@RequestMapping(value = "/desachievementratestatstotal.do", produces = "application/json;charset=utf-8")
-	@ResponseBody
-	public String queryDesAchiRateTotal(PageHelper page, String searchYear) {
-		// 设置查询参数
-		Map<String, Object> map = new HashMap<>();
-		if (searchYear == null || searchYear.trim() == "") {
-			searchYear = String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
-		}
-		map.put("startCreateTime", searchYear + "-01-01 00:00:00");
-		map.put("endCreateTime", searchYear + "-12-31 23:59:59");
-		QueryResult<UserAchRate> contactRealList = service.queryDesAchiRateTotal(map);
-		String result = JSONUtilS.object2json(contactRealList);
-		return result;
 	}
 
 	/**
@@ -592,23 +473,11 @@ public class StatisticsController extends BaseSimpleFormController {
 		map.put("startCreateTime", searchYear + "-01-01 00:00:00");
 		map.put("endCreateTime", searchYear + "-12-31 23:59:59");
 		QueryResult<UserAchRate> contactRealList = service.queryDesAchiMoney(map);
+		QueryResult<UserAchRate> contactRealList2 = service.queryDesAchiMoneyTotal(map);
+		List<UserAchRate> data = contactRealList2.getData();
+		data.get(0).setUserName("合计");
+		contactRealList.getData().addAll(data);
 		return contactRealList;
-	}
-
-	@RequestMapping(value = "/desachievementmoneystatstotal.do", produces = "application/json;charset=utf-8")
-	@ResponseBody
-	public String queryDesAchiMoneyTotal(PageHelper page, String searchYear) {
-		// 设置查询参数
-
-		Map<String, Object> map = new HashMap<>();
-		if (searchYear == null || searchYear.trim() == "") {
-			searchYear = String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
-		}
-		map.put("startCreateTime", searchYear + "-01-01 00:00:00");
-		map.put("endCreateTime", searchYear + "-12-31 23:59:59");
-		QueryResult<UserAchRate> contactRealList = service.queryDesAchiMoneyTotal(map);
-		String result = JSONUtilS.object2json(contactRealList);
-		return result;
 	}
 
 	/**
@@ -647,22 +516,11 @@ public class StatisticsController extends BaseSimpleFormController {
 		map.put("startCreateTime", searchYear + "-01-01 00:00:00");
 		map.put("endCreateTime", searchYear + "-12-31 23:59:59");
 		QueryResult<UserAchRate> contactRealList = service.queryCustSource(map);
+		QueryResult<UserAchRate> contactRealList2 = service.queryCustSourceTotal(map);
+		List<UserAchRate> data = contactRealList2.getData();
+		data.get(0).setUserName("合计");
+		contactRealList.getData().addAll(data);
 		return contactRealList;
-	}
-
-	@RequestMapping(value = "/custsourcestatstotal.do", produces = "application/json;charset=utf-8")
-	@ResponseBody
-	public String queryCustSourceTotal(PageHelper page, String searchYear) {
-		// 设置查询参数
-		Map<String, Object> map = new HashMap<>();
-		if (searchYear == null || searchYear.trim() == "") {
-			searchYear = String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
-		}
-		map.put("startCreateTime", searchYear + "-01-01 00:00:00");
-		map.put("endCreateTime", searchYear + "-12-31 23:59:59");
-		QueryResult<UserAchRate> contactRealList = service.queryCustSourceTotal(map);
-		String result = JSONUtilS.object2json(contactRealList);
-		return result;
 	}
 
 	/**
@@ -758,29 +616,15 @@ public class StatisticsController extends BaseSimpleFormController {
 		}
 
 		QueryResult<AgencyOrderStatus> caseResult = service.queryAgencyOrderStatus(agencyOrderStatus, page, request);
+		
+		QueryResult<AgencyOrderStatus> caseResult2 = service.queryAgencyOrderStatusTotal(agencyOrderStatus, page,
+				request);
+		List<AgencyOrderStatus> data = caseResult2.getData();
+		data.get(0).setAgencyName("合计");
+		caseResult.getData().addAll(data);
+		
 		return caseResult;
 
-	}
-
-	// 询单分配统计
-	@RequestMapping(value = "/agencyOrderStatusStatsTotal.do", produces = "application/json;charset=utf-8")
-	@ResponseBody
-	public String queryData2(HttpServletRequest request, HttpSession session, AgencyOrderStatus agencyOrderStatus,
-			Model model, PageHelper page) {
-
-		if (agencyOrderStatus.getSearchStartTime() == null) {
-			agencyOrderStatus.setSearchStartTime("");
-		}
-		if (agencyOrderStatus.getSearchEndTime() == null) {
-			agencyOrderStatus.setSearchEndTime("");
-		}
-
-		QueryResult<AgencyOrderStatus> caseResult = service.queryAgencyOrderStatusTotal(agencyOrderStatus, page,
-				request);
-
-		String result = JSONUtilS.object2json(caseResult);
-
-		return result;
 	}
 
 	// 询单分配统计
@@ -823,28 +667,12 @@ public class StatisticsController extends BaseSimpleFormController {
 		}
 
 		QueryResult<CaseAllotStats> caseResult = service.queryCaseAllotStats(caseAllotStats, page, request);
+		QueryResult<CaseAllotStats> caseResult2 = service.queryCaseAllotStatsTotal(caseAllotStats, page, request);
+		List<CaseAllotStats> data = caseResult2.getData();
+		data.get(0).setUserName("合计");
+		caseResult.getData().addAll(data);
 		return caseResult;
 
-	}
-
-	// 询单来源统计
-	@RequestMapping(value = "/caseAllotStatsTotal.do", produces = "application/json;charset=utf-8")
-	@ResponseBody
-	public String queryDataTotal(HttpServletRequest request, HttpSession session, CaseAllotStats caseAllotStatsTotal,
-			Model model, PageHelper page) {
-
-		if (caseAllotStatsTotal.getSearchStartTime() == null) {
-			caseAllotStatsTotal.setSearchStartTime("");
-		}
-		if (caseAllotStatsTotal.getSearchEndTime() == null) {
-			caseAllotStatsTotal.setSearchEndTime("");
-		}
-
-		QueryResult<CaseAllotStats> caseResult = service.queryCaseAllotStatsTotal(caseAllotStatsTotal, page, request);
-
-		String result = JSONUtilS.object2json(caseResult);
-
-		return result;
 	}
 
 	// 询单来源状态统计
@@ -863,26 +691,6 @@ public class StatisticsController extends BaseSimpleFormController {
 		model.addAttribute("searchEndDateTime", format.format(calendar1.getTime()));
 
 		return "/statistics/caseSourceStats";
-	}
-
-	@RequestMapping(value = "/caseSourceStatsTotal.do", produces = "application/json;charset=utf-8")
-	@ResponseBody
-	public String queryDataTotal(HttpServletRequest request, HttpSession session, CaseSourceStats caseSourceStatsTotal,
-			Model model, PageHelper page) {
-
-		if (caseSourceStatsTotal.getSearchStartTime() == null) {
-			caseSourceStatsTotal.setSearchStartTime("");
-		}
-		if (caseSourceStatsTotal.getSearchEndTime() == null) {
-			caseSourceStatsTotal.setSearchEndTime("");
-		}
-
-		QueryResult<CaseSourceStats> caseResult = service.queryCaseSourceStatsTotal(caseSourceStatsTotal, page,
-				request);
-
-		String result = JSONUtilS.object2json(caseResult);
-
-		return result;
 	}
 
 	@RequestMapping(value = "/caseSourceStats.do", produces = "application/json;charset=utf-8")
@@ -907,6 +715,11 @@ public class StatisticsController extends BaseSimpleFormController {
 		}
 
 		QueryResult<CaseSourceStats> caseResult = service.queryCaseSourceStats(caseSourceStats, page, request);
+		QueryResult<CaseSourceStats> caseResult2 = service.queryCaseSourceStatsTotal(caseSourceStats, page,
+				request);
+		List<CaseSourceStats> data = caseResult2.getData();
+		data.get(0).setSourceName("合计");
+		caseResult.getData().addAll(data);
 		return caseResult;
 
 	}
@@ -927,7 +740,7 @@ public class StatisticsController extends BaseSimpleFormController {
 
 		QueryResult<AgencyAchievementStats> caseResult = queryAgencyAchievementStatsMethod(request,
 				agencyAchievementStats, page);
-
+		
 		String result = JSONUtilS.object2json(caseResult);
 
 		return result;
@@ -944,6 +757,13 @@ public class StatisticsController extends BaseSimpleFormController {
 
 		QueryResult<AgencyAchievementStats> caseResult = service.queryAgencyAchievementStats(agencyAchievementStats,
 				page, request);
+		
+		QueryResult<AgencyAchievementStats> caseResult2 = service
+				.queryAgencyAchievementStatsTotal(agencyAchievementStats, page, request);
+		List<AgencyAchievementStats> data = caseResult2.getData();
+		data.get(0).setAgencyName("合计");
+		caseResult.getData().addAll(data);
+		
 		return caseResult;
 
 	}
@@ -963,26 +783,6 @@ public class StatisticsController extends BaseSimpleFormController {
 		return caseResult;
 	}
 
-	@RequestMapping(value = "/agencyAchievementStatsTotal.do", produces = "application/json;charset=utf-8")
-	@ResponseBody
-	public String queryData2(HttpServletRequest request, HttpSession session,
-			AgencyAchievementStats agencyAchievementStats, Model model, PageHelper page) {
-
-		if (agencyAchievementStats.getSearchStartTime() == null) {
-			agencyAchievementStats.setSearchStartTime("");
-		}
-		if (agencyAchievementStats.getSearchEndTime() == null) {
-			agencyAchievementStats.setSearchEndTime("");
-		}
-
-		QueryResult<AgencyAchievementStats> caseResult = service
-				.queryAgencyAchievementStatsTotal(agencyAchievementStats, page, request);
-
-		String result = JSONUtilS.object2json(caseResult);
-
-		return result;
-	}
-
 	// 地接社业绩统计(成交金额)
 	@RequestMapping(value = "/agencyAchievementStats2.do", produces = "application/json;charset=utf-8")
 	@ResponseBody
@@ -992,6 +792,12 @@ public class StatisticsController extends BaseSimpleFormController {
 		QueryResult<AgencyAchievementStats> caseResult = queryAgencyAchievementStatsMMethod(request,
 				agencyAchievementStats, page);
 
+		QueryResult<AgencyAchievementStats> caseResult2 = service
+				.queryAgencyAchievementStatsMTotal(agencyAchievementStats, page, request);
+		List<AgencyAchievementStats> data = caseResult2.getData();
+		data.get(0).setAgencyName("合计");
+		caseResult.getData().addAll(data);
+		
 		String result = JSONUtilS.object2json(caseResult);
 
 		return result;
@@ -1031,19 +837,9 @@ public class StatisticsController extends BaseSimpleFormController {
 			Model model, PageHelper page) {
 
 		QueryResult<SellerCoverStats> caseResult = service.querySellerCoverStats(sellerCoverStats, page, request);
-
-		String result = JSONUtilS.object2json(caseResult);
-
-		return result;
-	}
-
-	// 商家未询统计
-	@RequestMapping(value = "/sellerCoverStatsTotal.do", produces = "application/json;charset=utf-8")
-	@ResponseBody
-	public String queryDataTotal(HttpServletRequest request, HttpSession session, SellerCoverStats sellerCoverStats,
-			Model model, PageHelper page) {
-
-		QueryResult<SellerCoverStats> caseResult = service.querySellerCoverStatsTotal(sellerCoverStats, page, request);
+		QueryResult<SellerCoverStats> caseResult2 = service.querySellerCoverStatsTotal(sellerCoverStats, page, request);
+		List<SellerCoverStats> data = caseResult2.getData();
+		caseResult.getData().addAll(data);
 
 		String result = JSONUtilS.object2json(caseResult);
 
@@ -1151,19 +947,11 @@ public class StatisticsController extends BaseSimpleFormController {
 
 		QueryResult<CustomerSourceLevelStats> caseResult = service
 				.queryCustomerSourceLevelStats(customerSourceLevelStats, page, request);
-
-		String result = JSONUtilS.object2json(caseResult);
-
-		return result;
-	}
-
-	@RequestMapping(value = "/customerSourceLevelStatsTotal.do", produces = "application/json;charset=utf-8")
-	@ResponseBody
-	public String queryData2(HttpServletRequest request, HttpSession session,
-			CustomerSourceLevelStats customerSourceLevelStats, Model model, PageHelper page) {
-
-		QueryResult<CustomerSourceLevelStats> caseResult = service
+		QueryResult<CustomerSourceLevelStats> caseResult2 = service
 				.queryCustomerSourceLevelStatsTotal(customerSourceLevelStats, page, request);
+		List<CustomerSourceLevelStats> data = caseResult2.getData();
+		data.get(0).setSource("合计");
+		caseResult.getData().addAll(data);
 
 		String result = JSONUtilS.object2json(caseResult);
 

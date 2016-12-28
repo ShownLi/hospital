@@ -47,15 +47,6 @@
 									</tr>
 								</thead>
 							</table>
-							<table id="dataTable2" class="table">
-								<thead>
-									<tr>
-										<th></th>
-										<th>目的地国家数量</th>
-										<th>地接社数量</th>
-									</tr>
-								</thead>
-							</table>
 						</div>
 					</div>
 				</div>
@@ -121,64 +112,10 @@
 	        ]
 		});
 	
-	var t2 = jQuery('#dataTable2').DataTable({
-		searching:false,
-		pageLength: 10,
-		processing: true,
-		paging: false, // 禁止分页
-		language: datatable_local_language, // my.js
-		serverSide: true,
-		bInfo : false,
-		ajax: {
-			url: '${rootPath}statistics/sellerCoverStatsTotal.do',
-			data: function(data){
-	 			var searchStatus = searchStatusCheck;
-	 			searchStatusCheck = "";
-			},
-			
-			dataFilter: function(data){
-				var json = jQuery.parseJSON( data );
-				json.recordsTotal = json.countTotal;
-				json.recordsFiltered = json.countFiltered;
-				json.data = json.data;
-				return JSON.stringify( json );
-			}
-		},
-		columnDefs: [		  
-				   {
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                	return "<div class='minw50'>" + "<h3>" + '合计'  + "</h3>" + "</div>" 
-	                },
-	                targets: 0
-				},
-				{
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                    return "<div>" + full.country + "</div>"
-	                },
-	                targets: 1
-				},
-				{
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                    return "<div>" + full.number + "</div>"
-	                },
-	                targets: 2
-				}
-			],
-			columns: [
-	            { data: "" },
-	            { data: "country" },
-	            { data: "number" }
-	        ]
-		});
-
 	$('#searchBtn').on( 'click', function () {
 		searchStatusCheck = "";
 		searchFlag = false;
         t.draw();
-        t2.draw();
     } );
     
 	// Select2

@@ -133,5 +133,22 @@ public class AgencyService extends BaseService {
 			logger.error("AgencyService.deleteAgencyById() --> " + agencyId + "-->" + e.getMessage());
 		}
 	}
-
+	
+	/**
+	 * 判断地接社是否有过订单
+	 */
+	public String checkAgencyHaveOrder(int agencyId) {
+		try {
+			return agencyMapper.checkAgencyHaveOrder(agencyId);
+		} catch (Exception e) {
+			logger.error("AgencyService.checkAgencyHaveOrder() --> " + agencyId + "-->" + e.getMessage());
+		}
+		return null;
+	}
 }
+
+
+
+
+
+

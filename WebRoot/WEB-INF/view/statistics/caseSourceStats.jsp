@@ -74,27 +74,6 @@
 										<th>成交率</th>
 									</tr>
 								</thead>
-								<tbody>
-								</tbody>
-							</table>
-							
-							<table id="dataTable2" class="table">
-								<thead>
-									<tr>
-										<th>&nbsp;&nbsp;&nbsp;&nbsp;</th>
-										<th>待处理</th>									
-										<th>沟通中</th>
-										<th>地接设计中</th>
-										<th>成行</th>
-										<th>未成行</th>
-										<th>无效</th>
-										<th>付款</th>
-										<th>询单总数合计</th>
-										<th>成交率</th>
-									</tr>
-								</thead>
-								<tbody>
-								</tbody>
 							</table>
 						</div>
 					</div>
@@ -251,135 +230,10 @@
 	        ]
 		});
 	
-	var t2 = jQuery('#dataTable2').DataTable({
-		searching:false,
-		pageLength: 10,
-		processing: true,
-		paging: false, // 禁止分页
-		language: datatable_local_language, // my.js
-		serverSide: true,
-		bInfo : false,
-		ajax: {
-			url: '${rootPath}statistics/caseSourceStatsTotal.do',
-			data: function(data){
-	 			var searchStartDateTime=$("#searchStartDateTime").val();
-	 			var searchEndDateTime=$("#searchEndDateTime").val();
-	 			var searchStatus = searchStatusCheck;
-	 			searchStatusCheck = "";
-	 			
-	 			if(searchStartDateTime !=null && searchStartDateTime !=""){
-	 				data.searchStartTime = searchStartDateTime;
-	 			}
-	 			if(searchEndDateTime !=null && searchEndDateTime !=""){
-	 				data.searchEndTime = searchEndDateTime;
-	 			}
-			},
-			
-			dataFilter: function(data){
-				var json = jQuery.parseJSON( data );
-				json.recordsTotal = json.countTotal;
-				json.recordsFiltered = json.countFiltered;
-				json.data = json.data;
-				return JSON.stringify( json );
-			}
-		},
-		columnDefs: [		  
-				   {
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                    return "<div class='minw50'>" + "<h3>" + '合计'  + "</h3>" + "</div>" 
-	                },
-	                targets: 0
-				},
-				{
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                    return "<div>" + full.status0 + "</div>"
-	                },
-	                targets: 1
-				},	  
-				{
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                    return "<div>" + full.status1 + "</div>"
-	                },
-	                targets: 2
-				},	  
-				{
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                    return "<div>" + full.status2 + "</div>"
-	                },
-	                targets: 3
-				},	  
-				{
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                    return "<div>" + full.status3 + "</div>"
-	                },
-	                targets: 4
-				},	  
-				{
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                    return "<div>" + full.status4 + "</div>"
-	                },
-	                targets: 5
-				},	  
-				{
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                    return "<div>" + full.status5 + "</div>"
-	                },
-	                targets: 6
-				},	  
-				{
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                    return "<div>" + full.status6 + "</div>"
-	                },
-	                targets: 7
-				},
-				{
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                    return "<div>" + full.total + "</div>"
-	                },
-	                targets: 8
-				},
-				{
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                    return "<div>" + full.rate + "</div>"
-	                },
-	                targets: 9
-				},	  
-				 
-			    {
-				    orderable: false,
-				    searchable: false,
-			        targets: [0]
-			    }, 
-
-			],
-			columns: [
-	            { data: "status0" },
-	            { data: "status1" },
-	            { data: "status2" },
-	            { data: "status3" },
-	            { data: "status4" },
-	            { data: "status5" },
-	            { data: "status6" },
-	            { data:"total"},
-	            { data: "rate" }
-	        ]
-		});
-
 		$('#searchBtn').on( 'click', function () {
 			searchStatusCheck = "";
 			searchFlag = false;
 	        t.draw();
-	        t2.draw();
 	        $('input:radio:checked').attr('checked',false);
 	    } );
 	</script>

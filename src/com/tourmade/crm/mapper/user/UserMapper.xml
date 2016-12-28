@@ -6,8 +6,8 @@
 	<select id="queryUser" parameterType="Map" resultType="User">
 		select
 			u.user_id as userId,
-			u.user_name as name,
-			u.loginname as loginName,
+			u.user_name as loginName,
+			u.loginname as name,
 			u.password as pwd,
 			u.user_email as email,
 			u.mobilephone as mobilephone,

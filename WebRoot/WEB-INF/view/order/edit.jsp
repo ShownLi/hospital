@@ -225,18 +225,21 @@
 						</thead>
 					</table>
 				          <!-- 添加注释 -->
-	<form id="form-comment" class="form">
-          <div class="form-group col-sm-6 col-sm-offset-3">
-                <textarea name="content" class="form-control" rows="5"></textarea>
-                <input  type="hidden" name="userId" value="${loginUser.userId}" />
-                <input  type="hidden" name="userName" value="${loginUser.name}" />
-                <input  type="hidden" name="objectId" value="${order.orderId}" />
-                <input  type="hidden" name="commentType" value="order" />
-          </div>
-          <div class="form-group col-sm-12 align-center">
-            <button class="submit btn btn-primary">添加注释</button>
-          </div>
-          </form>
+			          <div class="form-group col-sm-12 align-center" id="addNoteDiv">
+						<input class="btn btn-primary" type="button" id="addNote" onclick="showNote()" value="添加注释"/>
+					</div>
+					<form id="form-comment" class="form" hidden="hidden">
+			          <div class="form-group col-sm-6 col-sm-offset-3">
+			                <textarea name="content" class="form-control" rows="5"></textarea>
+			                <input  type="hidden" name="userId" value="${loginUser.userId}" />
+			                <input  type="hidden" name="userName" value="${loginUser.name}" />
+			                <input  type="hidden" name="objectId" value="${order.orderId}" />
+			                <input  type="hidden" name="commentType" value="order" />
+			          </div>
+			          <div class="form-group col-sm-12 align-center">
+			            <button class="submit btn btn-primary">保存注释</button>
+			          </div>
+			          </form>
           		</div>
 				</div>
 				<!-- end of panel 沟通列表 -->
@@ -386,6 +389,11 @@
 	
 
 <script type="text/javascript">
+	function showNote() {
+		$("#form-comment").show();
+		$("#addNoteDiv").hide();
+	}
+
 	var orderStatus = ${orderStatus};
 	var country = ${country};
 	var reason = ${reason};
