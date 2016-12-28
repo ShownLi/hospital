@@ -77,7 +77,7 @@ public class CustomerSourceLevelStats extends BaseBean<Agency>{
 	
 	@Override
 	public String toCSVString() {
-		return source + ", " + level0 + ", " + level1 + ", " + level2 + ", " + level3 + ", " + rate;
+		return source + "," + level0 + "," + level1 + "," + level2 + "," + level3 + "," + rate;
 		
 	}
 }

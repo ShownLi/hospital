@@ -173,10 +173,10 @@ public class UserAchievement extends BaseBean<UserAchievement> {
 	}
 
 	public String toCSVString() {
-		return userName.contains(",") ? userName
-				: "\"" + userName + "\"" + ", " + total + ", " + pendingNum + ", " + communicatingNum + ", "
-						+ agencyDesigningNum + ", " + dealNum + ", " + noDealNum + ", " + invalidNum + ", " + paidNum
-						+ ", " + dealPercent;
+		return userName.contains(",") ? "\"" + userName + "\"" 
+				: userName+ "," + total + "," + pendingNum + "," + communicatingNum + ","
+						+ agencyDesigningNum + "," + dealNum + "," + noDealNum + "," + invalidNum + "," + paidNum
+						+ "," + dealPercent;
 
 	}
 }

@@ -54,6 +54,6 @@ public class ReasonOfDrainingStats extends BaseBean<ReasonOfDrainingStats>{
 				+ percent + "]";
 	}
 	public String toCSVString() {
-		return reasonOfDrainingName + ", " + num + ", " + percent;
+		return reasonOfDrainingName + "," + num + "," + percent;
 	}
 }

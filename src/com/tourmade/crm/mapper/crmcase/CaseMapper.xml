@@ -86,7 +86,7 @@
 		from tm_case u  
 		where u.isdel = 0 and u.customer_id = #{customerId}
 		order by u.creat_time
-		limit #{start},#{length}
+		<!-- limit #{start},#{length} -->
 	</select>
 	
 	<select id="countCase" parameterType="Case" resultType="long">

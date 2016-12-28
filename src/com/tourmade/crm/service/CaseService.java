@@ -143,15 +143,15 @@ public class CaseService extends BaseService {
 
 		
 		map.put("customerId", customerId);
-		map.put("start", ph.getStart());
-		map.put("length", ph.getLength());
+		/*map.put("start", ph.getStart());
+		map.put("length", ph.getLength());*/
 
 		List<Case> data = caseMapper.queryCasesByCustomerId(map);
-		long count = caseMapper.countCaseFC(customerId);
+		/*long count = caseMapper.countCaseFC(customerId);*/
 			
 		result.setData(data);
-		result.setCountTotal(count);
-		result.setCountFiltered(count);
+//		result.setCountTotal(count);
+//		result.setCountFiltered(count);
 	
 		return result;
 	}

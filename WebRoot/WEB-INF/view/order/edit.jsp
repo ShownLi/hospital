@@ -89,7 +89,7 @@
       			</div><!-- panel -->
 
 		      <!-- panel 是否成行 -->
-      <div class="panel panel-default">
+      <div class="panel panel-default" id="dealInfo" style="display:none">
           <div class="panel-heading">
 
               <div class="panel-btns">
@@ -98,7 +98,7 @@
               <h4 class="panel-title">成行信息</h4>
           </div>
           <div class="panel-body panel-body-nopadding">
-              <form id="form-updateDeal" class="form-horizontal form-updateDeal" style="display:none">
+              <form id="form-updateDeal" class="form-horizontal form-updateDeal" >
                   <div class="section-block">
                       <div class="form-group col-sm-4">
                           <label class="col-sm-4 control-label">成团日期</label>
@@ -391,6 +391,9 @@
 	var reason = ${reason};
 	var currency=${currency};
 
+	if('${order.status}'=='2'){
+		$("#dealInfo").css("display","block");
+	}
  	$(".currency-select").select2({
 		data: currency
 	})  
@@ -683,6 +686,7 @@
 		processing: true,
 		language: datatable_local_language, // my.js
 		serverSide: true,
+		bInfo:false,
 		ajax: {
 			url: '${rootPath}comment/list.do?type=order&id=${order.orderId}',
 			dataFilter: function(data){

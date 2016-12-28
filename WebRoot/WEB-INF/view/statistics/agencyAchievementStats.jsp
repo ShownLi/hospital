@@ -45,17 +45,22 @@
 						</div>
 					</div>
 					<div class="panel panel-default">
+					
 					<div class="panel-heading">
 						<div class="panel-btns">
 							<a href="" class="minimize">&minus;</a>
 						</div>
-						<h4 class="panel-title">成交率统计（按咨询时间）</h4>
-						<form action="${rootPath }/statistics/saveagencyachirate.do" method="post">
-						<input type="hidden" class="searchYearInputBegin" name="searchStartTime" value="${searchYear }-01-01">
-						<input type="hidden" class="searchYearInputEnd" name="searchEndTime" value="${searchYear }-12-31">
-							<input class="btn btn-primary" type="submit" 
-									value="导出" />
-						</form>
+						<div class="row" style="clear: both;">
+							<h4 class="panel-title col-sm-11">成交率统计（按咨询时间）</h4>
+							<div class="col-sm-1">
+								<form action="${rootPath }/statistics/saveagencyachirate.do" method="post">
+								<input type="hidden" class="searchYearInputBegin" name="searchStartTime" value="${searchYear }-01-01">
+								<input type="hidden" class="searchYearInputEnd" name="searchEndTime" value="${searchYear }-12-31">
+									<input class="btn btn-primary" type="submit" 
+											value="导出" />
+								</form>
+							</div>
+						</div>
 					</div>
 					<div class="panel-body">
 						<div class="table-responsive">
@@ -110,13 +115,17 @@
 						<div class="panel-btns">
 							<a href="" class="minimize">&minus;</a>
 						</div>
-						<h4 class="panel-title">成交金额统计（按咨询时间）</h4>
-						<form action="${rootPath }/statistics/saveagencyachimoney.do" method="post">
-						<input type="hidden" class="searchYearInputBegin" name="searchStartTime" value="${searchYear }-01-01">
-						<input type="hidden" class="searchYearInputEnd" name="searchEndTime" value="${searchYear }-12-31">
-							<input class="btn btn-primary" type="submit" 
-									value="导出" />
-						</form>
+						<div class="row" style="clear: both;">
+							<h4 class="panel-title col-sm-11">成交金额统计（按咨询时间）</h4>
+							<div class="col-sm-1">
+								<form action="${rootPath }/statistics/saveagencyachimoney.do" method="post">
+								<input type="hidden" class="searchYearInputBegin" name="searchStartTime" value="${searchYear }-01-01">
+								<input type="hidden" class="searchYearInputEnd" name="searchEndTime" value="${searchYear }-12-31">
+									<input class="btn btn-primary" type="submit" 
+											value="导出" />
+								</form>
+							</div>
+						</div>
 					</div>
 					<div class="panel-body">
 						<div class="table-responsive">

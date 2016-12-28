@@ -321,7 +321,7 @@ public class CaseController extends BaseSimpleFormController {
 		
 		Map<String,Object> customerMap =new HashMap<String,Object>();
 		Map<String,String> map =new HashMap<>();
-		
+		crmcase.setEmail(crmcase.getEmail().trim());
 		try {
 			//判断是否有老客人,通过联系方式和portalId判断(添加询单)
 			List<Customer> judgeCustomer = service.judgeCustomer(crmcase);

@@ -190,8 +190,8 @@ public class CaseAllotStats extends BaseBean<Agency>{
 	}
 	@Override
 	public String toCSVString() {
-		return userName + ", " + total + ", " + web_form + ", " + mobile_form + ", " + direct_form + ", " + wechat_form
-				+ ", " + web_service + ", " + mobile_service + ", " + phone_service + ", " + wechat_service + ", "
-				+ offline + ", " + email + ", " + friends + ", " + customer + ", " + ctrip 	;
+		return userName + "," + total + "," + web_form + "," + mobile_form + "," + direct_form + "," + wechat_form
+				+ "," + web_service + "," + mobile_service + "," + phone_service + "," + wechat_service + ","
+				+ offline + "," + email + "," + friends + "," + customer + "," + ctrip 	;
 	}
 }

@@ -56,6 +56,7 @@ public class SellerNotAskStatsD extends BaseBean<Agency>{
 	}
 	@Override
 	public String toCSVString() {
-		return destination + ", " + country;
+		String temp=country.contains(",")? "\""+country+"\"":country;
+		return destination + "," + temp;
 	}
 }
