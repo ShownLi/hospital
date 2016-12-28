@@ -105,7 +105,7 @@
 		statementType="PREPARED">
 		update tm_agency
 		set
-		isdel=1
+		isdel=1,update_time=NOW()
 		where
 		agency_id = #{agencyId}
 	</update>

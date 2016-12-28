@@ -78,7 +78,7 @@
 		statementType="PREPARED">
 		update tm_user
 		set
-		isdel=1
+		isdel=1,update_time=NOW()
 		where
 		user_id = #{userId}
 	</update>

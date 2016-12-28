@@ -175,7 +175,7 @@
 		statementType="PREPARED">
 		update tm_customer
 		set
-		isdel=1
+		isdel=1,update_time=NOW()
 		where
 		customer_id = #{customerId}
 	</update>

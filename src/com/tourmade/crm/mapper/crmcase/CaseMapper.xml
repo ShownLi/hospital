@@ -524,7 +524,7 @@
 	<update id="deleteCaseById" parameterType="int" flushCache="true" statementType="PREPARED">
 		update tm_case
 		set
-		status = 5 
+		status = 5,update_time=NOW() 
 		where
 		case_id = #{caseId}
 	</update>
@@ -538,8 +538,6 @@
 		where
 		case_id = #{caseId}
 	</update>
-	
-	
 	
 	<select id="getCustomerByCommunication" parameterType="Case" resultType="Customer">
 		select

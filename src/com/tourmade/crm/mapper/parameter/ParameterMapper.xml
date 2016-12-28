@@ -112,7 +112,7 @@
 		statementType="PREPARED">
 		update tm_parameter
 		set
-		isdel=1
+		isdel=1,update_time=NOW()
 		where
 		para_id = #{parameterId}
 	</update>
