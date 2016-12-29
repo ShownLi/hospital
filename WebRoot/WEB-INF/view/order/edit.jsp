@@ -377,7 +377,7 @@
         <div class="nextModal-title">添加注释信息</div>
       </div>
       <div class="modal-body">
-	      <form id="form-comment" class="form">
+	      <form id="form-comment" class="form row">
 	        <div class="form-group col-sm-6 col-sm-offset-3">
 	              <textarea name="content" class="form-control" rows="5"></textarea>
 	              <input  type="hidden" name="userId" value="${loginUser.userId}" />
