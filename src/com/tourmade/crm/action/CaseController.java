@@ -76,7 +76,7 @@ public class CaseController extends BaseSimpleFormController {
 		
 		Calendar calendar = Calendar.getInstance();    //获取当前日期
 		calendar.add(Calendar.MONTH, 0);    //设置当前月份
-		calendar.set(Calendar.DAY_OF_MONTH, 1);    //设置为本月1号
+		calendar.add(Calendar.DAY_OF_MONTH, -90); // 设置开始时间为90天
 		model.addAttribute("searchStartDateTime",format.format(calendar.getTime()));
 		
 		Calendar calendar1 = Calendar.getInstance();
@@ -321,7 +321,7 @@ public class CaseController extends BaseSimpleFormController {
 		
 		Map<String,Object> customerMap =new HashMap<String,Object>();
 		Map<String,String> map =new HashMap<>();
-		
+		crmcase.setEmail(crmcase.getEmail().trim());
 		try {
 			//判断是否有老客人,通过联系方式和portalId判断(添加询单)
 			List<Customer> judgeCustomer = service.judgeCustomer(crmcase);

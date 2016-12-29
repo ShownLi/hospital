@@ -137,4 +137,10 @@ public class ContactRealStats extends BaseBean<UserAchievement> {
 				+ ", dealPercent=" + dealPercent + "]";
 	}
 	
+	@Override
+	public String toCSVString() {
+		return contactName.contains(",")?contactName:"\""+contactName+"\"" + ", " + total + ", " + pendingNum + ", " + communicatingNum + ", " + agencyDesigningNum
+				+ ", " + dealNum + ", " + noDealNum + ", " + invalidNum + ", " + paidNum + ", " + dealPercent;
+	
+	}
 }

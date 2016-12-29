@@ -96,13 +96,30 @@
   </div><!-- modal-dialog -->
 </div><!-- modal -->
 
+<!-- Modal -->
+<div class="modal fade" id="noDelModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel"><span class="fa fa-warning"></span> 提示</h4>
+      </div>
+      <div class="modal-body">
+       	此地接社存在订单，不能删除哦^_^!
+      </div>
+      <div class="modal-footer">
+      	<input type="hidden" class="hiddenId" value="" />
+        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+      </div>
+    </div><!-- modal-content -->
+  </div><!-- modal-dialog -->
+</div><!-- modal -->
+
 
 <script type="text/javascript">
 	var country= ${country};
 	var language = ${language};
 	var destination = ${destination};
-	
-	
 	
 	$(".country-select").select2({
         placeholder: '国家',
@@ -120,167 +137,172 @@
 		$(".nav-parent").eq(3).addClass("nav-active");
     	$(".nav-parent").eq(3).find(".children").show();
 
-		var agencyTable = jQuery('#dataTable').DataTable({
-			searching:false,
-			pageLength: 10,
-			processing: true,
-			language: datatable_local_language, // my.js
-			serverSide: true,
-			ajax: {
-			url: '${rootPath}agency/list.do',
-			data:function ( data ) {
-				var searchAgencyName=$('#searchAgencyName').val();
-	 			var searchCountry=$('#searchCountry').val();
-	 			var searchDestination=$('#searchDestination').val();
-	 			
-	 			if(searchAgencyName !=null && searchAgencyName !="" ){
-					data.name = searchAgencyName;
-	 			}
-	 			if(searchCountry !=null && searchCountry !="" ){
-					data.country = searchCountry;
-	 			}
-	 			if(searchDestination !=null && searchDestination !="" ){
-					data.destination = searchDestination;
-	 			} 
-	 			
-			},
-				dataFilter: function(data){					
-					var json = jQuery.parseJSON( data );
-					json.recordsTotal = json.countTotal;
-					json.recordsFiltered = json.countFiltered;
-					json.data = json.data;
-					return JSON.stringify( json );
-				}
-			},
-			columnDefs: [
-				  {
-	                  data: "agencyId",
-	                  orderable: false,
-	                  render: function ( data, type, full, meta ) {
-	                      return '<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a>&nbsp;<a class="btn btn-danger btn-xs" id="'+data+'"><span class="fa fa-minus-circle"></span> 删除</a>';
-	                  },
-	                  targets: 4
-				  },
-				  {
-		                data: "destination",
-		                render: function ( data, type, full, meta ) {
-		                	var destinations="";
-		                	if(full.destination){
-		                	var des=full.destination.split(",");
-		                	for(var j = 0;j<des.length;j++){
-		                		for(var i=0;i <destination.length;i++){
-			                		if(des[j]==destination[i].id){
-			                			destinations+=destination[i].text+",";
-			                		}				                	
-			                	}
+	var agencyTable = jQuery('#dataTable').DataTable({
+		searching:false,
+		pageLength: 10,
+		processing: true,
+		language: datatable_local_language, // my.js
+		serverSide: true,
+		ajax: {
+		url: '${rootPath}agency/list.do',
+		data:function ( data ) {
+			var searchAgencyName=$('#searchAgencyName').val();
+ 			var searchCountry=$('#searchCountry').val();
+ 			var searchDestination=$('#searchDestination').val();
+ 			
+ 			if(searchAgencyName !=null && searchAgencyName !="" ){
+				data.name = searchAgencyName;
+ 			}
+ 			if(searchCountry !=null && searchCountry !="" ){
+				data.country = searchCountry;
+ 			}
+ 			if(searchDestination !=null && searchDestination !="" ){
+				data.destination = searchDestination;
+ 			} 
+ 			
+		},
+			dataFilter: function(data){					
+				var json = jQuery.parseJSON( data );
+				json.recordsTotal = json.countTotal;
+				json.recordsFiltered = json.countFiltered;
+				json.data = json.data;
+				return JSON.stringify( json );
+			}
+		},
+		columnDefs: [
+			  {
+                  data: "agencyId",
+                  orderable: false,
+                  render: function ( data, type, full, meta ) {
+                      return '<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a>&nbsp;<a class="btn btn-danger btn-xs" id="'+data+'"><span class="fa fa-minus-circle"></span> 删除</a>';
+                  },
+                  targets: 4
+			  },
+			  {
+	                data: "destination",
+	                render: function ( data, type, full, meta ) {
+	                	var destinations="";
+	                	if(full.destination){
+	                	var des=full.destination.split(",");
+	                	for(var j = 0;j<des.length;j++){
+	                		for(var i=0;i <destination.length;i++){
+		                		if(des[j]==destination[i].id){
+		                			destinations+=destination[i].text+",";
+		                		}				                	
 		                	}
-		                }
-		                destinations=destinations.substring(0,destinations.length-1);
-		                return "<div class='width85'>" + destinations + "</div>";
-				   },
-				   		targets: 1
-				  },
-				  {
-	                data: "country",
+	                	}
+	                }
+	                destinations=destinations.substring(0,destinations.length-1);
+	                return "<div class='width85'>" + destinations + "</div>";
+			   },
+			   		targets: 1
+			  },
+			  {
+                data: "country",
+                orderable: false,
+                render: function ( data ) {
+                	if(data){
+	                	for(var i=0;i <country.length;i++){
+	                		if(data==country[i].id){
+	                			return country[i].text	                			
+	                		}
+	                	}
+	                	return "";
+	                }else{return ""}
+                },
+                  targets: 2
+			  },
+			  {
+	                data: "language",
 	                orderable: false,
 	                render: function ( data ) {
 	                	if(data){
-		                	for(var i=0;i <country.length;i++){
-		                		if(data==country[i].id){
-		                			return country[i].text	                			
+		                	for(var i=0;i <language.length;i++){		                	
+		                		if(data==language[i].id){
+		                			return language[i].text
 		                		}
 		                	}
 		                	return "";
-		                }else{return ""}
+		                 }else{
+		                	 return ""
+		                 }
 	                },
-	                  targets: 2
+	                  targets: 3
 				  },
-				  {
-		                data: "language",
-		                orderable: false,
-		                render: function ( data ) {
-		                	if(data){
-			                	for(var i=0;i <language.length;i++){		                	
-			                		if(data==language[i].id){
-			                			return language[i].text
-			                		}
-			                	}
-			                	return "";
-			                 }else{
-			                	 return ""
-			                 }
-		                },
-		                  targets: 3
-					  },
-				  {
-					  orderable: false,
-					  searchable: false,
-				      targets: [0]
-				  },
+			  {
+				  orderable: false,
+				  searchable: false,
+			      targets: [0]
+			  },
 
-				],
-				columns: [
-		            { data: "name" },
-		            { data: "destination" },
-		            { data: "country" },
-					{ data: "language" }
-		        ]
-			});
-			
-			$('#searchBtn').on( 'click', function () {
-				agencyTable.draw();
-		    } );
-			
-			
-			$('#dataTable tbody').on( 'click', 'a.btn-success', function () {
-		        var data = agencyTable.row($(this).parents('tr')).data();
-		        edit($(this).attr("id"));
-		    } );
-
-			$('#dataTable tbody').on( 'click', 'a.btn-danger', function () {
-		        var data = agencyTable.row($(this).parents('tr')).data();
-		        del($(this).attr('id'));
-		    } );
-			
-			$('#confirmDelModal').on( 'click', 'button.btn-danger', function () {
-		        var id = $("#confirmDelModal .hiddenId").val();
-		        doDel(id);
-		    } ); 
-		    
-			
-			// Select2
-		    jQuery('select').select2({
-		        minimumResultsForSearch: -1
-		    });
-		    
-			
-		    jQuery('select').removeClass('form-control');
-			
-			
+			],
+			columns: [
+	            { data: "name" },
+	            { data: "destination" },
+	            { data: "country" },
+				{ data: "language" }
+	        ]
 		});
 		
-		function edit(id) {
-			window.parent.location = "${rootPath}agency/edit.html?id="+id;
-		}
+		$('#searchBtn').on( 'click', function () {
+			agencyTable.draw();
+	    } );
 		
-		function del(id) {
-			$("#confirmDelModal .hiddenId").val("");
-			$("#confirmDelModal .hiddenId").val(id);
-			$("#confirmDelModal").modal('show');
-		}
 		
-		function doDel(id){
-			$.ajax({
-				url: "${rootPath}agency/del.do?id=" + id, 
-				async: true,
-				success: function(o) {
-					window.location.reload();
-				},
-				error: function(o) {
-					alert(2);
-				}
-			});		
-		}		
-	</script>
+		$('#dataTable tbody').on( 'click', 'a.btn-success', function () {
+	        var data = agencyTable.row($(this).parents('tr')).data();
+	        edit($(this).attr("id"));
+	    } );
+
+		$('#dataTable tbody').on( 'click', 'a.btn-danger', function () {
+	        var data = agencyTable.row($(this).parents('tr')).data();
+	        del($(this).attr('id'));
+	    } );
+		
+		$('#confirmDelModal').on( 'click', 'button.btn-danger', function () {
+	        var id = $("#confirmDelModal .hiddenId").val();
+	        doDel(id);
+	    } ); 
+	    
+		// Select2
+	    jQuery('select').select2({
+	        minimumResultsForSearch: -1
+	    });
+		
+	    jQuery('select').removeClass('form-control');
+			
+	});
+		
+	function edit(id) {
+		window.parent.location = "${rootPath}agency/edit.html?id="+id;
+	}
+	
+	function del(id) {
+		$("#confirmDelModal .hiddenId").val("");
+		$("#confirmDelModal .hiddenId").val(id);
+		
+		 $.post("${rootPath}agency/checkDel.do?id="+id, id, function(result) {
+			if (result.success) {
+				$("#noDelModal").modal('show');
+			} 
+			else {
+				$("#confirmDelModal").modal('show');
+			}
+		}, "JSON");
+	}
+	
+	function doDel(id){
+		$.ajax({
+			url: "${rootPath}agency/del.do?id=" + id, 
+			async: true,
+			success: function(o) {
+				window.location.reload();
+			},
+			error: function(o) {
+				alert(2);
+			}
+		});		
+	}		
+</script>
 </body>
 </html>

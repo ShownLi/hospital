@@ -131,9 +131,15 @@ public class CaseSourceStats extends BaseBean<Agency>{
 
 	@Override
 	public String toString() {
-		return "CaseSourceStatus [sourceName=" + sourceName + ", total=" + total + ", status0=" + status0 + ", status1="
+		return "CaseSourceStats [sourceName=" + sourceName + ", total=" + total + ", status0=" + status0 + ", status1="
 				+ status1 + ", status2=" + status2 + ", status3=" + status3 + ", status4=" + status4 + ", status5="
 				+ status5 + ", status6=" + status6 + ", rate=" + rate + ", searchStartTime=" + searchStartTime
 				+ ", searchEndTime=" + searchEndTime + "]";
+	}
+	@Override
+	public String toCSVString() {
+		return sourceName + "," + status0 + "," + status1 + "," + status2 + "," + status3 + ","
+				+ status4 + "," + status5 + "," + status6 + "," + total + "," + rate ;
+	
 	}
 }

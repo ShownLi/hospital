@@ -21,5 +21,7 @@ public interface AgencyMapper extends BaseMapper {
 	
 	public Agency getAgencyById(int agencyId);
 	
+	public String checkAgencyHaveOrder(int agencyId);
+	
 	public List<EntityList> getParameterInfo(String domain);
 }

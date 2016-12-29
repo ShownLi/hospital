@@ -186,8 +186,9 @@ label.error{
 .minw50{
 	min-width: 50px;
 }
-.panel-body{
-	padding: 20px 5px;
+.panel-body,
+.contentpanel{
+	padding: 20px 5px !important;
 }
 .table thead > tr > th, .table tbody > tr > th, .table tfoot > tr > th, .table thead > tr > td, .table tbody > tr > td, .table tfoot > tr > td {
     vertical-align: middle;
@@ -249,4 +250,8 @@ label.error{
 }
 .leftpanel-collapsed .nav-hover ul{
 	display: block !important;
+}
+.table-statistics tbody tr:last-child{
+	background: #d6e2f9;
+	font-weight: bold;
 }

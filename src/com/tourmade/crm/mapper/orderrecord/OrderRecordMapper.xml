@@ -115,7 +115,7 @@
 		statementType="PREPARED">
 		update tm_orderrecord
 		set
-		isdel=1
+		isdel=1,update_time=NOW()
 		where
 		orderrecord_id = #{orderRecordId}
 	</update>

@@ -99,14 +99,26 @@
 		u.isdisplay,
 		u.isdel 
 		from tm_parameter u where u.isdisplay = 1 and u.isdel = 0 and u.para_domain = #{domain}
+		ORDER BY u.para_sort desc, u.para_value
 	</select>
 	
-	<update id="deleteAgencyById" parameterType="int" flushCache="true"
-		statementType="PREPARED">
+	<update id="deleteAgencyById" parameterType="int" flushCache="true" statementType="PREPARED">
 		update tm_agency
 		set
-		isdel=1
+		isdel=1,update_time=NOW()
 		where
 		agency_id = #{agencyId}
 	</update>
+	
+	<select id="checkAgencyHaveOrder"  parameterType="int" resultType="String">
+		select 
+			o.order_id
+		from tm_agency a LEFT JOIN tm_order o on a.agency_id = o.agency_id 
+		where a.agency_id = #{agencyId} 
+		GROUP BY a.agency_id
+	</select>
+	
 </mapper>
+
+
+

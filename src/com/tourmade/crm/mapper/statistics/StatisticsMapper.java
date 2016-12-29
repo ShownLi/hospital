@@ -5,18 +5,15 @@ import java.util.Map;
 import com.tourmade.crm.entity.AgencyAchievementStats;
 import com.tourmade.crm.entity.AgencyOrderStatus;
 import com.tourmade.crm.entity.CaseAllotStats;
-import com.tourmade.crm.entity.CaseAllotStatsTotal;
 import com.tourmade.crm.entity.CaseSourceStats;
-import com.tourmade.crm.entity.CaseSourceStatsTotal;
 import com.tourmade.crm.entity.CustomerSourceLevelStats;
 import com.tourmade.crm.entity.EntityList;
 import com.tourmade.crm.entity.SellerCoverStats;
 import com.tourmade.crm.entity.SellerNotAskStats;
+import com.tourmade.crm.entity.SellerNotAskStatsD;
 import com.tourmade.crm.common.framework.BaseMapper;
 import com.tourmade.crm.entity.ContactRealStats;
-import com.tourmade.crm.entity.ContactRealStatsTotal;
 import com.tourmade.crm.entity.ReasonOfDrainingStats;
-import com.tourmade.crm.entity.ReasonOfDrainingStatsTotal;
 import com.tourmade.crm.entity.UserAchRate;
 import com.tourmade.crm.entity.UserAchievement;
 
@@ -37,7 +34,7 @@ public interface StatisticsMapper extends BaseMapper{
 
 	List<ContactRealStats> queryContactReal(Map<String, Object> map);
 	
-	List<ContactRealStatsTotal> queryContactRealTotal(Map<String, Object> map);
+	List<ContactRealStats> queryContactRealTotal(Map<String, Object> map);
 
 	long countAllContact(Map<String, Object> map);
 	/**
@@ -47,7 +44,7 @@ public interface StatisticsMapper extends BaseMapper{
 	 */
 	List<ReasonOfDrainingStats> queryReasonOfDraining(Map<String, Object> map);
 	
-	List<ReasonOfDrainingStatsTotal> queryReasonOfDrainingTotal(Map<String, Object> map);
+	List<ReasonOfDrainingStats> queryReasonOfDrainingTotal(Map<String, Object> map);
 	
 	/**
 	 * 计算一段时间内的无效询单总数
@@ -58,7 +55,7 @@ public interface StatisticsMapper extends BaseMapper{
 
 	List<ReasonOfDrainingStats> queryReasonOfDrainingNoDeal(Map<String, Object> map);
 	
-	List<ReasonOfDrainingStatsTotal> queryReasonOfDrainingNoDealTotal(Map<String, Object> map);
+	List<ReasonOfDrainingStats> queryReasonOfDrainingNoDealTotal(Map<String, Object> map);
 
 	long countCaseNoDeal(Map<String, Object> map);
 
@@ -111,11 +108,11 @@ public interface StatisticsMapper extends BaseMapper{
 	
 	public List<CaseSourceStats> queryCaseSourceStats(Map<String, Object> params);
 	
-	public List<CaseSourceStatsTotal> queryCaseSourceStatsTotal(Map<String, Object> params);
+	public List<CaseSourceStats> queryCaseSourceStatsTotal(Map<String, Object> params);
 	
 	public List<CaseAllotStats> queryCaseAllotStats(Map<String, Object> params);
 	
-	public List<CaseAllotStatsTotal> queryCaseAllotStatsTotal(Map<String, Object> params);
+	public List<CaseAllotStats> queryCaseAllotStatsTotal(Map<String, Object> params);
 	
 	public List<AgencyAchievementStats> queryAgencyAchievementStats(Map<String, Object> params);
 	
@@ -133,7 +130,7 @@ public interface StatisticsMapper extends BaseMapper{
 	
 	public List<SellerNotAskStats> querySellerNotAskStatsTotal(Map<String, Object> params);
 	
-	public List<SellerNotAskStats> querySellerNotAskStatsD(Map<String, Object> params);
+	public List<SellerNotAskStatsD> querySellerNotAskStatsD(Map<String, Object> params);
 	
 	public List<CustomerSourceLevelStats> queryCustomerSourceLevelStats(Map<String, Object> params);
 	
@@ -153,7 +150,7 @@ public interface StatisticsMapper extends BaseMapper{
 	
 	public long countSellerNotAskStats(SellerNotAskStats sellerNotAskStats);
 	
-	public long countSellerNotAskStatsD(SellerNotAskStats sellerNotAskStatsD);
+	public long countSellerNotAskStatsD(SellerNotAskStatsD sellerNotAskStatsD);
 	
 	public long countCustomerSourceLevelStats(CustomerSourceLevelStats customerSourceLevelStats);
 	

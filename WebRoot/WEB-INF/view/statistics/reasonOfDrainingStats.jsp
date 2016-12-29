@@ -28,27 +28,36 @@
 						<!-- panel-btns -->
 						<h3 class="panel-title">流失原因统计</h3>
 						<div class="row" style="margin-top: 20px">
+						
 							<div class="form-group col-sm-10">
 								<div class="col-sm-2">
 									<div class="input-group input-datepicker" style="padding: 0;">
-				                        <input id="searchStartCreateDateTime" type="text" name="searchStartDateTime" class="form-control datepicker" placeholder="请点击输入查询开始日期" autocomplete="on" value="${startTime }">
-				                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-				                    </div>
-				                </div>
-			                    <div class="col-sm-2">
-				                    <div class="input-group input-datepicker" style="padding: 0;">
-				                        <input id="searchEndCreateDateTime" type="text" name="searchEndDateTime" class="form-control datepicker" placeholder="请点击输入查询截止日期" autocomplete="on" value="${endTime }">
-				                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-				                    </div>
-			                    </div>
-							 
-								</div>	
-									<div class="col-sm-2">					 		                        		
-									<input class="btn btn-primary" type="button" id="searchBtn" value="搜索"/>
-								</div> 	
-							</div>
+										<input readonly="readonly" id="searchStartCreateDateTime" type="text" readonly="readonly"
+											name="startCreateDateTime" class="form-control datepicker"
+											placeholder="请点击输入查询开始日期" autocomplete="on"
+											value="${startTime }"> <span
+											class="input-group-addon"><i
+											class="glyphicon glyphicon-calendar"></i></span>
+									</div>
+								</div>
+								<div class="col-sm-2">
+									<div class="input-group input-datepicker" style="padding: 0;">
+										<input id="searchEndCreateDateTime" type="text" readonly="readonly"
+											name="endCreateDateTime" class="form-control datepicker"
+											placeholder="请点击输入查询截止日期" autocomplete="on"
+											value="${endTime }"> <span class="input-group-addon"><i
+											class="glyphicon glyphicon-calendar"></i></span>
+									</div>
+								</div>
 
-							</div>	
+							</div>
+							<div class="col-sm-2">
+								<input class="btn btn-primary" type="button" id="searchBtn"
+									value="搜索" />
+							</div>
+						</div>
+
+					</div>	
 						</div>
 					</div>
 					<!-- panel 无效统计 -->
@@ -57,11 +66,21 @@
 						<div class="panel-btns">
 							<a href="" class="minimize">&minus;</a>
 						</div>
-						<h4 class="panel-title">无效原因统计</h4>
+						<div class="row" style="clear: both;">
+							<h4 class="panel-title col-sm-11">无效原因统计</h4>
+							<div class="col-sm-1">
+							<form  action="${rootPath }/statistics/savereasonofdraininginvalid.do" method="post">
+							<input type="hidden" class="startTimeInput" name="startCreateDateTime" value="${startTime }">
+							<input type="hidden" class="endTimeInput" name="endCreateDateTime" value="${endTime }">
+								<input class="btn btn-primary" type="submit" 
+										value="导出" />
+							</form>
+							</div>
+						</div>
 					</div>
 					<div class="panel-body">
 						<div class="table-responsive">
-							<table id="dataTable-invalid" class="table table-communicate">
+							<table id="dataTable-invalid" class="table table-statistics">
 								<thead>
 									<tr>
 										<th>无效原因</th>
@@ -69,19 +88,6 @@
 										<th>比例</th>		
 									</tr>
 								</thead>
-								<tbody>
-								</tbody>
-							</table>
-							<table id="dataTable2-invalid" class="table table-communicate">
-								<thead>
-									<tr>
-										<th></th>
-										<th>询单数量</th>
-										<th>比例</th>		
-									</tr>
-								</thead>
-								<tbody>
-								</tbody>
 							</table>
 						</div>
 						<!-- table-responsive -->
@@ -93,11 +99,21 @@
 						<div class="panel-btns">
 							<a href="" class="minimize">&minus;</a>
 						</div>
-						<h4 class="panel-title">未成行原因统计</h4>
+						<div class="row" style="clear: both;">
+							<h4 class="panel-title col-sm-11">未成行原因统计</h4>
+							<div class="col-sm-1">
+								<form action="${rootPath }/statistics/savereasonofdrainingnodeal.do" method="post">
+								<input type="hidden" class="startTimeInput" name="startCreateDateTime" value="${startTime }">
+								<input type="hidden" class="endTimeInput" name="endCreateDateTime" value="${endTime }">
+									<input class="btn btn-primary" type="submit" 
+											value="导出" />
+								</form>
+							</div>
+						</div>
 					</div>
 					<div class="panel-body">
 						<div class="table-responsive">
-							<table id="dataTable-nodeal" class="table table-communicate">
+							<table id="dataTable-nodeal" class="table table-statistics">
 								<thead>
 									<tr>
 										<th>未成行原因</th>
@@ -105,19 +121,6 @@
 										<th>比例</th>		
 									</tr>
 								</thead>
-								<tbody>
-								</tbody>
-							</table>
-							<table id="dataTable2-nodeal" class="table table-communicate">
-								<thead>
-									<tr>
-										<th></th>
-										<th>询单数量</th>
-										<th>比例</th>		
-									</tr>
-								</thead>
-								<tbody>
-								</tbody>
 							</table>
 						</div>
 						<!-- table-responsive -->
@@ -148,6 +151,13 @@
         changeYear: true,
         changeMonth: true,
      });
+    //设置时间联动
+    $("#searchStartCreateDateTime").change(function(){
+    	$(".startTimeInput").val($(this).val());
+    });
+    $("#searchEndCreateDateTime").change(function(){
+    	$(".endTimeInput").val($(this).val());
+    });
 	var invalidTable = jQuery('#dataTable-invalid').DataTable({
 		searching:false,
 		paging:false,
@@ -208,69 +218,6 @@
 	            		{ data: "reasonOfDrainingName" },
 			            { data:	"num"},
 			            { data: "percent" }
-	        ]
-		});
-	
-	var invalidTableTotal = jQuery('#dataTable2-invalid').DataTable({
-		searching:false,
-		paging:false,
-		processing: true,
-		language: datatable_local_language, // my.js
-		serverSide: true,
-		bInfo : false,
-		ajax: {
-			url: '${rootPath}statistics/reasonofdrainingstats1Total.do',
-			type:"post",
-			data: function(data){
-	 			var searchStartDateTime=$("#searchStartCreateDateTime").val();
-	 			var searchEndDateTime=$("#searchEndCreateDateTime").val();
-	 			if(searchStartDateTime !=null && searchStartDateTime !=""){
-	 				data.startCreateDateTime = searchStartDateTime;
-	 			}
-	 			if(searchEndDateTime !=null && searchEndDateTime !=""){
-	 				data.endCreateDateTime = searchEndDateTime;
-	 			}
-			},
-			
-			dataFilter: function(data){
-				var json = jQuery.parseJSON( data );
-				json.recordsTotal = json.countTotal;
-				json.recordsFiltered = json.countFiltered;
-				json.data = json.data;
-				return JSON.stringify( json );
-			}
-		},
-		columnDefs: [		  
-				   {
-					   data:"",
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                	return "<div class='minw50'>" + "<h3>" + '合计'  + "</h3>" + "</div>" 
-	                },
-	                targets: 0
-				},
-				{
-					data:"num_T",
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                    return "<div>" + data + "</div>"
-	                },
-	                targets: 1
-				},
-					{
-					data:"percent_T",
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                	return "<div>" + data + "</div>"
-	                },
-	                targets: 2
-				}
-				
-			],
-			columns: [
-	            		{ data: "" },
-			            { data:	"num_T"},
-			            { data: "percent_T" }
 	        ]
 		});
 	
@@ -337,76 +284,11 @@
 	        ]
 		});
 
-	var noDealTableTotal = jQuery('#dataTable2-nodeal').DataTable({
-		searching:false,
-		paging:false,
-		processing: true,
-		language: datatable_local_language, // my.js
-		serverSide: true,
-		bInfo : false,
-		ajax: {
-			url: '${rootPath}statistics/reasonofdrainingstats2Total.do',
-			type:"post",
-			data: function(data){
-	 			var searchStartDateTime=$("#searchStartCreateDateTime").val();
-	 			var searchEndDateTime=$("#searchEndCreateDateTime").val();
-	 			if(searchStartDateTime !=null && searchStartDateTime !=""){
-	 				data.startCreateDateTime = searchStartDateTime;
-	 			}
-	 			if(searchEndDateTime !=null && searchEndDateTime !=""){
-	 				data.endCreateDateTime = searchEndDateTime;
-	 			}
-			},
-			
-			dataFilter: function(data){
-				var json = jQuery.parseJSON( data );
-				json.recordsTotal = json.countTotal;
-				json.recordsFiltered = json.countFiltered;
-				json.data = json.data;
-				return JSON.stringify( json );
-			}
-		},
-		columnDefs: [		  
-				   {
-					   data:"",
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                	return "<div class='minw50'>" + "<h3>" + '合计'  + "</h3>" + "</div>" 
-	                },
-	                targets: 0
-				},
-				{
-					data:"num_T",
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                    return "<div>" + data + "</div>"
-	                },
-	                targets: 1
-				},
-					{
-					data:"percent_T",
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                	return "<div>" + data + "</div>"
-	                },
-	                targets: 2
-				}
-				
-			],
-			columns: [
-	            		{ data: "" },
-			            { data:	"num_T"},
-			            { data: "percent_T" }
-	        ]
-		});
 		$('#searchBtn').on( 'click', function () {
 			invalidTable.draw();
 			noDealTable.draw();
-			invalidTableTotal.draw();
-			noDealTableTotal.draw();
 	    } );
 			
-
 		// Select2
 	    jQuery('select').select2({
 	        minimumResultsForSearch: -1

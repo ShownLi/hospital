@@ -20,8 +20,6 @@
 
 			<div class="contentpanel">
 				<!-- content goes here... -->
-
-
       
          <!-- panel 是否无效 -->
       <div class="panel panel-default">
@@ -478,19 +476,9 @@
 							</table>
 						</div>
 						<!-- 添加注释 -->
-						<form id="form-comment" class="form">
-							<div class="form-group col-sm-6 col-sm-offset-3">
-								<textarea name="content" class="form-control" rows="5"></textarea>
-								<input type="hidden" name="userId" value="${loginUser.userId}" />
-								<input type="hidden" name="userName" value="${loginUser.name}" />
-								<input type="hidden" name="objectId" value="${crmcase.caseId}" />
-								<input type="hidden" name="commentType" value="case" />
-							</div>
-							<div class="form-group col-sm-12 align-center">
-								<!-- <button class="btn btn-primary">添加注释</button> -->
-								<input class="btn btn-primary" type="submit" value="添加注释"/>
-							</div>
-						</form>
+						<div class="form-group col-sm-12 align-center" id="addNoteDiv">
+							<input class="btn btn-primary" type="button" id="addNote" onclick="showNote()" value="添加注释"/>
+						</div>
 					</div>
 				</div>
 				<!-- end of panel 注释 -->
@@ -802,6 +790,37 @@
 		</div>
 		<!-- modal-dialog -->
 	</div>
+	
+	<!-- Modal 保存注释-->
+	<div class="modal fade" id="addNote2" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel">添加注释信息</h4>
+				</div>
+				<div class="modal-body">
+					<form id="form-comment" class="form row">
+					<div class="form-group col-sm-6 col-sm-offset-3">
+						<textarea name="content" class="form-control" rows="5"></textarea>
+						<input type="hidden" name="userId" value="${loginUser.userId}" />
+						<input type="hidden" name="userName" value="${loginUser.name}" />
+						<input type="hidden" name="objectId" value="${crmcase.caseId}" />
+						<input type="hidden" name="commentType" value="case" />
+					</div>
+					<div class="form-group col-sm-12 align-center">
+						<input class="btn btn-primary" type="submit" value="保存注释"/>
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					</div>
+					</form>
+				</div>
+			</div>
+			<!-- modal-content -->
+		</div>
+		<!-- modal-dialog -->
+	</div>
 	<!-- bmodal -->
 
 
@@ -814,12 +833,11 @@
 
 	<script type="text/javascript">
 	
+	function showNote() {
+		$("#addNote2").modal('show')
+	}
+	
 	$(function(){
-		/* 当case无效，成行，未成行时，无未成行按钮 
-		         当case无效，成行，未成行没有下单按钮 
-		   
-		   	当case不为成行时，无收款确认按钮
-		*/
 		if("${crmcase.status}"==3||"${crmcase.status}"==5||"${crmcase.status}"==4){
 			$("#btn-nodeal").css("display","none");
 			$("#btn-addorder").css("display","none");
@@ -883,15 +901,6 @@
 		 
 	$('#addEmail').attr("href",newHref);
 	$("#requirement").val("${crmcase.requirement}");	
-	
-	/* function getBirthday(){
-		var date = $("#birthday").val();	
-		var dateformat = null;
-		if(!date.length==0){
-			dateformat = new Date(date).toISOString("yyyy-MM-dd hh:mm:ss.S").substring(0,10);
-		}
-		return dateformat;
-	} */
 	
  	$("#level").select2({
         data: level
@@ -1186,6 +1195,7 @@
 	 	processing: true,
 	 	language: datatable_local_language, // my.js
 	 	serverSide: true,
+	 	bInfo:false,
 	 	ajax: {
 	 		url: '${rootPath}order/listByCaseId.do?caseId=${crmcase.caseId}',
 	 		dataFilter: function(data){
@@ -1717,6 +1727,7 @@
 			processing: true,
 			language: datatable_local_language, // my.js
 			serverSide: true,
+			bInfo:false,
 			ajax: {
   				url: '${rootPath}comment/list.do?type=case&id=${crmcase.caseId}',
   				dataFilter: function(data){

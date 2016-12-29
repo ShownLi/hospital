@@ -28,19 +28,20 @@
 						<!-- panel-btns -->
 						<h3 class="panel-title">跟单员询单状态统计</h3>
 						<div class="row" style="margin-top: 20px">
+						<form action="${rootPath}statistics/saveusercasestatus.do" method="post">
 							<div class="form-group col-sm-10">
 								<div class="col-sm-2">
 									<input type="text" id="searchSource" class="source-select form-control" placeholder="来源"  value="" />
 								</div>
 								<div class="col-sm-2">
 									<div class="input-group input-datepicker" style="padding: 0;">
-				                        <input id="searchStartCreateDateTime" type="text" name="searchStartDateTime" class="form-control datepicker" placeholder="请点击输入查询开始日期" autocomplete="on" value="${startTime }">
+				                        <input readonly="readonly" id="searchStartCreateDateTime" type="text" name="searchStartDateTime" class="form-control datepicker" placeholder="请点击输入查询开始日期" autocomplete="on" value="${startTime }">
 				                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
 				                    </div>
 				                </div>
 			                    <div class="col-sm-2">
 				                    <div class="input-group input-datepicker" style="padding: 0;">
-				                        <input id="searchEndCreateDateTime" type="text" name="searchEndDateTime" class="form-control datepicker" placeholder="请点击输入查询截止日期" autocomplete="on" value="${endTime }">
+				                        <input readonly="readonly" id="searchEndCreateDateTime" type="text" name="searchEndDateTime" class="form-control datepicker" placeholder="请点击输入查询截止日期" autocomplete="on" value="${endTime }">
 				                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
 				                    </div>
 			                    </div>
@@ -48,7 +49,9 @@
 								</div>	
 									<div class="col-sm-2">					 		                        		
 									<input class="btn btn-primary" type="button" id="searchBtn" value="搜索"/>
-								</div> 	
+									<input class="btn btn-primary" type="submit" id="searchSave" value="导出"/>
+								</div>
+								</form> 	
 							</div>
 
 							</div>	
@@ -58,7 +61,7 @@
 						
 						<div class="table-responsive">
 
-							<table id="dataTable" class="table">
+							<table id="dataTable" class="table table-statistics">
 								<thead>
 									<tr>
 										<th>跟单员</th>
@@ -71,22 +74,6 @@
 										<th>已付款</th>
 										<!-- <th>成交金额</th>
 										<th>收款金额</th> -->
-										<th>询单数量</th>
-										<th>成交率</th>
-									</tr>
-								</thead>
-							</table>
-							<table id="dataTable2" class="table">
-								<thead>
-									<tr>
-										<th></th>
-										<th>待处理 </th>									
-										<th>沟通中</th>
-										<th>地接设计中 </th>
-										<th>成行</th>
-										<th>未成行</th>
-										<th>无效</th>
-										<th>已付款</th>
 										<th>询单数量</th>
 										<th>成交率</th>
 									</tr>
@@ -255,137 +242,8 @@
 	        ]
 		});
 
-	var t2 = jQuery('#dataTable2').DataTable({
-		searching:false,
-		paging:false,
-		processing: true,
-		language: datatable_local_language, // my.js
-		serverSide: true,
-		bInfo : false,
-		ajax: {
-			url: '${rootPath}statistics/usercasestatusstatstotal.do',
-			data: function(data){
-				var searchSource=$('#searchSource').val();
-	 			var searchStartDateTime=$("#searchStartCreateDateTime").val();
-	 			var searchEndDateTime=$("#searchEndCreateDateTime").val();
-	 			
-	 			if(searchSource !=null && searchSource !="" ){
-					data.source = searchSource;
-	 			}
-	 			if(searchStartDateTime !=null && searchStartDateTime !=""){
-	 				data.startCreateDateTime = searchStartDateTime;
-	 			}
-	 			if(searchEndDateTime !=null && searchEndDateTime !=""){
-	 				data.endCreateDateTime = searchEndDateTime;
-	 			}
-			},
-			
-			dataFilter: function(data){
-				var json = jQuery.parseJSON( data );
-				json.recordsTotal = json.countTotal;
-				json.recordsFiltered = json.countFiltered;
-				json.data = json.data;
-				return JSON.stringify( json );
-			}
-		},
-		columnDefs: [		  
-				   {
-					   data:"",
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                	return "<div class='minw50'>" + "<h3>" + '合计'  + "</h3>" + "</div>"
-	                },
-	                targets: 0
-				},
-					{
-					data:"pendingNum_T",
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                	return "<div>" + data + "</div>"
-	                },
-	                targets: 1
-				},	  
-					{
-					data:"communicatingNum_T",
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                	return "<div>" + data + "</div>"
-	                },
-	                targets: 2
-				},	  
-					{
-					data:"agencyDesigningNum_T",
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                	return "<div>" + data + "</div>"
-	                },
-	                targets: 3
-				},	  
-					{
-	                data:"dealNum_T",
-	                render: function ( data, type, full, meta ) {
-	                	return "<div>" + data + "</div>"
-	                },
-	                targets: 4
-				},	  
-					{
-					data:"noDealNum_T",
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                	return "<div>" + data + "</div>"
-	                },
-	                targets: 5
-				},	  
-					{
-					data:"invalidNum_T",
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                	return "<div>" + data + "</div>"
-	                },
-	                targets: 6
-				},	  
-					{
-					data:"paidNum_T",
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                	return "<div>" + data+ "</div>"
-	                },
-	                targets: 7
-				},
-				{
-					data:"total_T",
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                    return "<div>" + data + "</div>"
-	                },
-	                targets: 8
-				},
-				{data:"dealPercent_T",
-					orderable: false,
-					render: function ( data ) {
-					    return  data;
-					},
-					targets: 9
-				}
-				
-			],
-			columns: [
-	            		{ data: "" },
-			            { data: "pendingNum_T" },
-			            { data: "communicatingNum_T" },
-			            { data: "agencyDesigningNum_T" },
-			            { data: "dealNum_T"},
-			            { data: "noDealNum_T"},
-			            { data: "invalidNum_T"},
-			            { data: "paidNum_T"},
-			            { data:	"total_T"},
-			            { data: "dealPercent_T"}
-	        ]
-		});
-	
 		$('#searchBtn').on( 'click', function () {
 	        t.draw();
-	        t2.draw();
 	    } );
 		// Select2
 	    jQuery('select').select2({
@@ -393,7 +251,6 @@
 	    });
 	    
 	    jQuery('select').removeClass('form-control');
-		
 	</script>
 </body>
 </html>

@@ -31,7 +31,7 @@
 							<div class="form-group col-sm-10">
 								<div class="col-sm-2">
 									<div class="input-group input-datepicker" style="padding: 0;">
-				                        <input id="searchYear" type="text" name="searchYear" class="form-control datepicker" value="${searchYear}" placeholder="请点击输入查询年份" autocomplete="on">
+				                        <input id="searchYear" type="text" name="searchYear" class="form-control datepicker" value="${searchYear}" readonly="readonly" placeholder="请点击输入查询年份" autocomplete="on">
 				                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
 				                    </div>
 				                </div>
@@ -44,52 +44,71 @@
 							</div>	
 						</div>
 					</div>
-					<div class="panel-body">
-						<div class="table-responsive">
-							<table id="dataTable" class="table">
-								<thead>
-									<tr>
-										<th>地接社名称</th>
-										<th>一月成交率</th>
-										<th>二月成交率</th>									
-										<th>三月成交率</th>
-										<th>四月成交率</th>
-										<th>五月成交率</th>
-										<th>六月成交率</th>
-										<th>七月成交率</th>
-										<th>八月成交率</th>
-										<th>九月成交率</th>
-										<th>十月成交率</th>
-										<th>十一月成交率</th>
-										<th>十二月成交率</th>
-									</tr>
-								</thead>
-							</table>
-							<table id="dataTable3" class="table">
-								<thead>
-									<tr>
-										<th></th>
-										<th>一月成交率</th>
-										<th>二月成交率</th>									
-										<th>三月成交率</th>
-										<th>四月成交率</th>
-										<th>五月成交率</th>
-										<th>六月成交率</th>
-										<th>七月成交率</th>
-										<th>八月成交率</th>
-										<th>九月成交率</th>
-										<th>十月成交率</th>
-										<th>十一月成交率</th>
-										<th>十二月成交率</th>
-									</tr>
-								</thead>
-							</table>
-						</div>
-					</div>
+					<div class="panel panel-default">
 					
+					<div class="panel-heading">
+						<div class="panel-btns">
+							<a href="" class="minimize">&minus;</a>
+						</div>
+						<div class="row" style="clear: both;">
+							<h4 class="panel-title col-sm-11">成交率统计（按咨询时间）</h4>
+							<div class="col-sm-1">
+								<form action="${rootPath }/statistics/saveagencyachirate.do" method="post">
+								<input type="hidden" class="searchYearInputBegin" name="searchStartTime" value="${searchYear }-01-01">
+								<input type="hidden" class="searchYearInputEnd" name="searchEndTime" value="${searchYear }-12-31">
+									<input class="btn btn-primary" type="submit" 
+											value="导出" />
+								</form>
+							</div>
+						</div>
+					</div>
 					<div class="panel-body">
 						<div class="table-responsive">
-							<table id="dataTable2" class="table">
+							<table id="dataTable" class="table table-statistics">
+								<thead>
+									<tr>
+										<th>地接社名称</th>
+										<th>一月成交率</th>
+										<th>二月成交率</th>									
+										<th>三月成交率</th>
+										<th>四月成交率</th>
+										<th>五月成交率</th>
+										<th>六月成交率</th>
+										<th>七月成交率</th>
+										<th>八月成交率</th>
+										<th>九月成交率</th>
+										<th>十月成交率</th>
+										<th>十一月成交率</th>
+										<th>十二月成交率</th>	
+									</tr>
+								</thead>
+								<tbody>
+								</tbody>
+							</table>
+						</div>
+						<!-- table-responsive -->
+					</div>
+				</div>
+					<div class="panel panel-default">
+					<div class="panel-heading">
+						<div class="panel-btns">
+							<a href="" class="minimize">&minus;</a>
+						</div>
+						<div class="row" style="clear: both;">
+							<h4 class="panel-title col-sm-11">成交金额统计（按咨询时间）</h4>
+							<div class="col-sm-1">
+								<form action="${rootPath }/statistics/saveagencyachimoney.do" method="post">
+								<input type="hidden" class="searchYearInputBegin" name="searchStartTime" value="${searchYear }-01-01">
+								<input type="hidden" class="searchYearInputEnd" name="searchEndTime" value="${searchYear }-12-31">
+									<input class="btn btn-primary" type="submit" 
+											value="导出" />
+								</form>
+							</div>
+						</div>
+					</div>
+					<div class="panel-body">
+						<div class="table-responsive">
+							<table id="dataTable2" class="table table-statistics">
 								<thead>
 									<tr>
 										<th>地接社名称</th>
@@ -108,27 +127,10 @@
 									</tr>
 								</thead>
 							</table>
-							<table id="dataTable4" class="table">
-								<thead>
-									<tr>
-										<th></th>
-										<th>一月成交金额</th>
-										<th>二月成交金额</th>									
-										<th>三月成交金额</th>
-										<th>四月成交金额</th>
-										<th>五月成交金额</th>
-										<th>六月成交金额</th>
-										<th>七月成交金额</th>
-										<th>八月成交金额</th>
-										<th>九月成交金额</th>
-										<th>十月成交金额</th>
-										<th>十一月成交金额</th>
-										<th>十二月成交金额</th>
-									</tr>
-								</thead>
-							</table>
 						</div>
+						<!-- table-responsive -->
 					</div>
+				</div>
 				</div>
 		<%@ include file="../assets/pages/rightpanel.jsp"%>
 	</section>
@@ -152,6 +154,11 @@
         changeMonth: false,
         changeDay:false
      });
+    $("#searchYear").change(function(){
+   	 $(".searchYearInputBegin").val($(this).val()+'-01-01');
+   	 $(".searchYearInputEnd").val($(this).val()+'-12-31');
+ });
+     
     
 	var t = jQuery('#dataTable').DataTable({
 		searching:false,
@@ -299,151 +306,6 @@
 	        ]
 		});
 	
-	var t3 = jQuery('#dataTable3').DataTable({
-		searching:false,
-		pageLength: 10,
-		processing: true,
-		paging: false, // 禁止分页
-		language: datatable_local_language, // my.js
-		serverSide: true,
-		bInfo : false,
-		ajax: {
-			url: '${rootPath}statistics/agencyAchievementStatsTotal.do',
-			data: function(data){
-	 			var searchYear=$("#searchYear").val();
-	 			var searchStatus = searchStatusCheck;
-	 			searchStatusCheck = "";
-	 			
-	 			if(searchYear !=null && searchYear !=""){
-	 				data.searchStartTime = searchYear + "-01-01";
-	 				data.searchEndTime = searchYear + "-12-31";
-	 			}
-			},
-			
-			dataFilter: function(data){
-				var json = jQuery.parseJSON( data );
-				json.recordsTotal = json.countTotal;
-				json.recordsFiltered = json.countFiltered;
-				json.data = json.data;
-				return JSON.stringify( json );
-			}
-		},
-		columnDefs: [		  
-				   {
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                	return "<div class='minw50'>" + "<h3>" + '合计'  + "</h3>" + "</div>" 
-	                },
-	                targets: 0
-				},
-				{
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                    return "<div>" + full.percentjan_T + "</div>"
-	                },
-	                targets: 1
-				},
-				{
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                    return "<div>" + full.percentfeb_T + "</div>"
-	                },
-	                targets: 2
-				},	  
-				{
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                    return "<div>" + full.percentmar_T + "</div>"
-	                },
-	                targets: 3
-				},	  
-				{
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                    return "<div>" + full.percentapr_T + "</div>"
-	                },
-	                targets: 4
-				},	  
-				{
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                    return "<div>" + full.percentmay_T + "</div>"
-	                },
-	                targets: 5
-				},	  
-				{
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                    return "<div>" + full.percentjun_T + "</div>"
-	                },
-	                targets: 6
-				},	  
-				{
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                    return "<div>" + full.percentjul_T + "</div>"
-	                },
-	                targets: 7
-				},	  
-				{
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                    return "<div>" + full.percentaug_T + "</div>"
-	                },
-	                targets: 8
-				},	  
-				{
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                    return "<div>" + full.percentsep_T + "</div>"
-	                },
-	                targets: 9
-				},	  
-				{
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                    return "<div>" + full.percentoct_T + "</div>"
-	                },
-	                targets: 10
-				},	  
-				{
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                    return "<div>" + full.percentnov_T + "</div>"
-	                },
-	                targets: 11
-				},	  
-				{
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                    return "<div>" + full.percentdece_T + "</div>"
-	                },
-	                targets: 12
-				},	  
-				 
-			    {
-				    orderable: false,
-				    searchable: false,
-			        targets: [0]
-			    }, 
-
-			],
-			columns: [
-	            { data: "" },
-	            { data: "percentjan_T" },
-	            { data: "percentfeb_T" },
-	            { data: "percentmar_T" },
-	            { data: "percentapr_T" },
-	            { data: "percentmay_T" },
-	            { data: "percentjun_T" },
-	            { data: "percentjul_T" },
-	            { data: "percentaug_T" },
-	            { data: "percentsep_T" },
-	            { data: "percentoct_T" },
-	            { data: "percentnov_T" },
-	            { data: "percentdece_T" }
-	        ]
-		});
 
 	var t2 = jQuery('#dataTable2').DataTable({
 		searching:false,
@@ -591,159 +453,11 @@
 	        ]
 		});
 	
-	var t4 = jQuery('#dataTable4').DataTable({
-		searching:false,
-		pageLength: 10,
-		processing: true,
-		paging: false, // 禁止分页
-		language: datatable_local_language, // my.js
-		serverSide: true,
-		bInfo : false,
-		ajax: {
-			url: '${rootPath}statistics/agencyAchievementStats2Total.do',
-			data: function(data){
-	 			var searchYear = $("#searchYear").val();
-	 			var searchStatus = searchStatusCheck;
-	 			searchStatusCheck = "";
-	 			
-	 			if(searchYear !=null && searchYear !=""){
-	 				data.searchStartTime = searchYear + "-01-01";
-	 				data.searchEndTime = searchYear + "-12-31";
-	 			}
-			},
-			
-			dataFilter: function(data){
-				var json = jQuery.parseJSON( data );
-				json.recordsTotal = json.countTotal;
-				json.recordsFiltered = json.countFiltered;
-				json.data = json.data;
-				return JSON.stringify( json );
-			}
-		},
-		columnDefs: [		  
-				   {
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                	return "<div class='minw50'>" + "<h3>" + '合计'  + "</h3>" + "</div>" 
-	                },
-	                targets: 0
-				},
-				{
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                    return "<div>" + full.percentjanM_T + "</div>"
-	                },
-	                targets: 1
-				},
-				{
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                    return "<div>" + full.percentfebM_T + "</div>"
-	                },
-	                targets: 2
-				},	  
-				{
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                    return "<div>" + full.percentmarM_T + "</div>"
-	                },
-	                targets: 3
-				},	  
-				{
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                    return "<div>" + full.percentaprM_T + "</div>"
-	                },
-	                targets: 4
-				},	  
-				{
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                    return "<div>" + full.percentmayM_T + "</div>"
-	                },
-	                targets: 5
-				},	  
-				{
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                    return "<div>" + full.percentjunM_T + "</div>"
-	                },
-	                targets: 6
-				},	  
-				{
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                    return "<div>" + full.percentjulM_T + "</div>"
-	                },
-	                targets: 7
-				},	  
-				{
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                    return "<div>" + full.percentaugM_T + "</div>"
-	                },
-	                targets: 8
-				},	  
-				{
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                    return "<div>" + full.percentsepM_T + "</div>"
-	                },
-	                targets: 9
-				},	  
-				{
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                    return "<div>" + full.percentoctM_T + "</div>"
-	                },
-	                targets: 10
-				},	  
-				{
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                    return "<div>" + full.percentnovM_T + "</div>"
-	                },
-	                targets: 11
-				},	  
-				{
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                    return "<div>" + full.percentdeceM_T + "</div>"
-	                },
-	                targets: 12
-				},	  
-				 
-			    {
-				    orderable: false,
-				    searchable: false,
-			        targets: [0]
-			    }, 
-
-			],
-			columns: [
-	            { data: "" },
-	            { data: "percentjanM_T" },
-	            { data: "percentfebM_T" },
-	            { data: "percentmarM_T" },
-	            { data: "percentaprM_T" },
-	            { data: "percentmayM_T" },
-	            { data: "percentjunM_T" },
-	            { data: "percentjulM_T" },
-	            { data: "percentaugM_T" },
-	            { data: "percentsepM_T" },
-	            { data: "percentoctM_T" },
-	            { data: "percentnovM_T" },
-	            { data: "percentdeceM_T" }
-	        ]
-		});
-		
 		$('#searchBtn').on( 'click', function () {
 			searchStatusCheck = "";
 			searchFlag = false;
 	        t.draw();
 	        t2.draw();
-	        t3.draw();
-	        t4.draw();
 	    } );
 	    
 	    jQuery('select').removeClass('form-control');

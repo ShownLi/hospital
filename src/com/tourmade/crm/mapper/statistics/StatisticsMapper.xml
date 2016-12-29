@@ -12,8 +12,8 @@
 			sum(case when status=2 then 1 else 0 end) as status2 ,
 			sum(case when status=3 then 1 else 0 end) as status3 ,
 			sum(case when status=4 then 1 else 0 end) as status4 ,
-			concat ( FORMAT (sum(case when status=2 then 1 else 0 end) / count(1) *100,2),'%') as rate,
-			sum(rmb_price) as dealmoney
+			concat ( FORMAT ((sum(case when status=2 then 1 else 0 end)+sum(case when status=4 then 1 else 0 end)) / count(1) *100,2),'%') as rate,
+			IFNULL(sum(rmb_price),"--") as dealmoney
 		from tm_order
 		where isdel = 0
         <if test="searchStartTime != null and searchStartTime != ''">
@@ -30,14 +30,14 @@
 	
 	 <select id="queryAgencyOrderStatusTotal" parameterType="Map" resultType="AgencyOrderStatus">
 		select
-			sum(total) as total_T,
-			sum(status0) as status0_T,
-			sum(status1) as status1_T,
-			sum(status2) as status2_T,
-			sum(status3) as status3_T,
-			sum(status4) as status4_T,
-			sum(dealmoney) as dealmoney_T,
-			concat ( FORMAT (sum(status2) / sum(total) *100,2),'%') as rate_T
+			sum(total) as total,
+			sum(status0) as status0,
+			sum(status1) as status1,
+			sum(status2) as status2,
+			sum(status3) as status3,
+			sum(status4) as status4,
+			sum(dealmoney) as dealmoney,
+			concat ( FORMAT ((sum(status2)+sum(status4)) / sum(total) *100,2),'%') as rate
 		from(
 			select 
 				agency_name as agencyName,
@@ -48,7 +48,7 @@
 				sum(case when status=2 then 1 else 0 end) as status2 ,
 				sum(case when status=3 then 1 else 0 end) as status3 ,
 				sum(case when status=4 then 1 else 0 end) as status4 ,
-				concat ( FORMAT (sum(case when status=2 then 1 else 0 end) / count(1) *100,2),'%') as rate,
+				concat ( FORMAT ((sum(case when status=2 then 1 else 0 end)+sum(case when status=4 then 1 else 0 end)) / count(1) *100,2),'%') as rate,
 				sum(rmb_price) as dealmoney
 			from tm_order
 			where isdel = 0
@@ -77,7 +77,7 @@
 			sum(case when o.status=4 then 1 else 0 end) as status4 ,
 			sum(case when o.status=5 then 1 else 0 end) as status5 ,
 			sum(case when o.status=6 then 1 else 0 end) as status6 ,
-			concat (FORMAT (sum(case when o.status=3 then 1 else 0 end) / count(1) *100,2),'%') as rate,
+			concat (FORMAT ((sum(case when o.status=3 then 1 else 0 end)+sum(case when o.status=6 then 1 else 0 end)) / count(1) *100,2),'%') as rate,
 			sum(o.rmb_price) as dealMoney
 		from tm_case c left join tm_order o on c.case_id = o.case_id left join tm_parameter p on c.source=p.para_value
 		where c.isdel = 0 
@@ -90,17 +90,17 @@
 		group by c.source
 	</select>
 	
-	<select id="queryCaseSourceStatsTotal" parameterType="Map" resultType="CaseSourceStatsTotal">
+	<select id="queryCaseSourceStatsTotal" parameterType="Map" resultType="CaseSourceStats">
 		select 
-			sum(total) as total_T,
-			sum(status0) as status0_T,
-			sum(status1) as status1_T,
-			sum(status2) as status2_T,
-			sum(status3) as status3_T,
-			sum(status4) as status4_T,
-			sum(status5) as status5_T,
-			sum(status6) as status6_T,
-			concat (FORMAT (sum(status3) / sum(total) *100,2),'%') as rate_T
+			sum(total) as total,
+			sum(status0) as status0,
+			sum(status1) as status1,
+			sum(status2) as status2,
+			sum(status3) as status3,
+			sum(status4) as status4,
+			sum(status5) as status5,
+			sum(status6) as status6,
+			concat (FORMAT ((sum(status3)+sum(status6)) / sum(total) *100,2),'%') as rate
 		from(
 			select 
 					c.source as source_en,
@@ -113,7 +113,7 @@
 					sum(case when o.status=4 then 1 else 0 end) as status4 ,
 					sum(case when o.status=5 then 1 else 0 end) as status5 ,
 					sum(case when o.status=6 then 1 else 0 end) as status6 ,
-					concat (FORMAT (sum(case when o.status=3 then 1 else 0 end) / count(1) *100,2),'%') as rate,
+					concat (FORMAT ((sum(case when o.status=3 then 1 else 0 end)+sum(case when o.status=6 then 1 else 0 end)) / count(1) *100,2),'%') as rate,
 					sum(o.rmb_price) as dealMoney
 			from tm_case c left join tm_order o on c.case_id = o.case_id left join tm_parameter p on c.source=p.para_value
 			where c.isdel = 0    
@@ -156,22 +156,22 @@
 		group by u.user_id
 	</select>
 	
-	<select id="queryCaseAllotStatsTotal" parameterType="Map" resultType="CaseAllotStatsTotal">
+	<select id="queryCaseAllotStatsTotal" parameterType="Map" resultType="CaseAllotStats">
 		select 
-			sum(web_form) AS web_form_T,
-			sum(mobile_form) AS mobile_form_T,
-			sum(direct_form) AS direct_form_T,
-			sum(wechat_form) AS wechat_form_T,
-			sum(web_service) AS web_service_T,
-			sum(mobile_service) AS mobile_service_T,
-			sum(phone_service) AS phone_service_T,
-			sum(wechat_service) AS wechat_service_T,
-			sum(offline) AS offline_T,
-			sum(email) AS email_T,
-			sum(friends) AS friends_T,
-			sum(customer) AS customer_T,
-			sum(ctrip) AS ctrip_T,
-			sum(total) AS total_T
+			sum(web_form) AS web_form,
+			sum(mobile_form) AS mobile_form,
+			sum(direct_form) AS direct_form,
+			sum(wechat_form) AS wechat_form,
+			sum(web_service) AS web_service,
+			sum(mobile_service) AS mobile_service,
+			sum(phone_service) AS phone_service,
+			sum(wechat_service) AS wechat_service,
+			sum(offline) AS offline,
+			sum(email) AS email,
+			sum(friends) AS friends,
+			sum(customer) AS customer,
+			sum(ctrip) AS ctrip,
+			sum(total) AS total
 		from(
 			select 
 				u.user_name as userName,
@@ -206,18 +206,18 @@
 		select 
 			o.agency_id,
 			o.agency_name as agencyName,
-			IFNULL(concat(format(sum(if(month(o.creat_time) = 1 &amp;&amp; o.status = '3',1,0))/sum(if(month(o.creat_time) = 1 ,1,0))*100,2),'%'),'--') as percentjan,
-			IFNULL(concat(format(sum(if(month(o.creat_time) = 2 &amp;&amp; o.status = '3',1,0))/sum(if(month(o.creat_time) = 2 ,1,0))*100,2),'%'),'--') as percentfeb,
-			IFNULL(concat(format(sum(if(month(o.creat_time) = 3 &amp;&amp; o.status = '3',1,0))/sum(if(month(o.creat_time) = 3 ,1,0))*100,2),'%'),'--') as percentmar,
-			IFNULL(concat(format(sum(if(month(o.creat_time) = 4 &amp;&amp; o.status = '3',1,0))/sum(if(month(o.creat_time) = 4 ,1,0))*100,2),'%'),'--') as percentapr,
-			IFNULL(concat(format(sum(if(month(o.creat_time) = 5 &amp;&amp; o.status = '3',1,0))/sum(if(month(o.creat_time) = 5 ,1,0))*100,2),'%'),'--') as percentmay,
-			IFNULL(concat(format(sum(if(month(o.creat_time) = 6 &amp;&amp; o.status = '3',1,0))/sum(if(month(o.creat_time) = 6 ,1,0))*100,2),'%'),'--') as percentjun,
-			IFNULL(concat(format(sum(if(month(o.creat_time) = 7 &amp;&amp; o.status = '3',1,0))/sum(if(month(o.creat_time) = 7 ,1,0))*100,2),'%'),'--') as percentjul,
-			IFNULL(concat(format(sum(if(month(o.creat_time) = 8 &amp;&amp; o.status = '3',1,0))/sum(if(month(o.creat_time) = 8 ,1,0))*100,2),'%'),'--') as percentaug,
-			IFNULL(concat(format(sum(if(month(o.creat_time) = 9 &amp;&amp; o.status = '3',1,0))/sum(if(month(o.creat_time) = 9 ,1,0))*100,2),'%'),'--') as percentsep,
-			IFNULL(concat(format(sum(if(month(o.creat_time) = 10 &amp;&amp; o.status = '3',1,0))/sum(if(month(o.creat_time) = 10 ,1,0))*100,2),'%'),'--') as percentoct,
-			IFNULL(concat(format(sum(if(month(o.creat_time) = 11 &amp;&amp; o.status = '3',1,0))/sum(if(month(o.creat_time) = 11 ,1,0))*100,2),'%'),'--') as percentnov,
-			IFNULL(concat(format(sum(if(month(o.creat_time) = 12 &amp;&amp; o.status = '3',1,0))/sum(if(month(o.creat_time) = 12 ,1,0))*100,2),'%'),'--') as percentdece     
+			IFNULL(concat(format((sum(if(month(o.creat_time) = 1 &amp;&amp; (o.status = '2'),1,0))+sum(if(month(o.creat_time) = 1 &amp;&amp; (o.status = '4'),1,0)))/sum(if(month(o.creat_time) = 1 ,1,0))*100,2),'%'),'--') as percentjan,
+			IFNULL(concat(format((sum(if(month(o.creat_time) = 2 &amp;&amp; (o.status = '2'),1,0))+sum(if(month(o.creat_time) = 2 &amp;&amp; (o.status = '4'),1,0)))/sum(if(month(o.creat_time) = 2 ,1,0))*100,2),'%'),'--') as percentfeb,
+			IFNULL(concat(format((sum(if(month(o.creat_time) = 3 &amp;&amp; (o.status = '2'),1,0))+sum(if(month(o.creat_time) = 3 &amp;&amp; (o.status = '4'),1,0)))/sum(if(month(o.creat_time) = 3 ,1,0))*100,2),'%'),'--') as percentmar,
+			IFNULL(concat(format((sum(if(month(o.creat_time) = 4 &amp;&amp; (o.status = '2'),1,0))+sum(if(month(o.creat_time) = 4 &amp;&amp; (o.status = '4'),1,0)))/sum(if(month(o.creat_time) = 4 ,1,0))*100,2),'%'),'--') as percentapr,
+			IFNULL(concat(format((sum(if(month(o.creat_time) = 5 &amp;&amp; (o.status = '2'),1,0))+sum(if(month(o.creat_time) = 5 &amp;&amp; (o.status = '4'),1,0)))/sum(if(month(o.creat_time) = 5 ,1,0))*100,2),'%'),'--') as percentmay,
+			IFNULL(concat(format((sum(if(month(o.creat_time) = 6 &amp;&amp; (o.status = '2'),1,0))+sum(if(month(o.creat_time) = 6 &amp;&amp; (o.status = '4'),1,0)))/sum(if(month(o.creat_time) = 6 ,1,0))*100,2),'%'),'--') as percentjun,
+			IFNULL(concat(format((sum(if(month(o.creat_time) = 7 &amp;&amp; (o.status = '2'),1,0))+sum(if(month(o.creat_time) = 7 &amp;&amp; (o.status = '4'),1,0)))/sum(if(month(o.creat_time) = 7 ,1,0))*100,2),'%'),'--') as percentjul,
+			IFNULL(concat(format((sum(if(month(o.creat_time) = 8 &amp;&amp; (o.status = '2'),1,0))+sum(if(month(o.creat_time) = 8 &amp;&amp; (o.status = '4'),1,0)))/sum(if(month(o.creat_time) = 8 ,1,0))*100,2),'%'),'--') as percentaug,
+			IFNULL(concat(format((sum(if(month(o.creat_time) = 9 &amp;&amp; (o.status = '2'),1,0))+sum(if(month(o.creat_time) = 9 &amp;&amp; (o.status = '4'),1,0)))/sum(if(month(o.creat_time) = 9 ,1,0))*100,2),'%'),'--') as percentsep,
+			IFNULL(concat(format((sum(if(month(o.creat_time) = 10 &amp;&amp; (o.status = '2'),1,0))+sum(if(month(o.creat_time) = 10 &amp;&amp; (o.status = '4'),1,0)))/sum(if(month(o.creat_time) = 10 ,1,0))*100,2),'%'),'--') as percentoct,
+			IFNULL(concat(format((sum(if(month(o.creat_time) = 11 &amp;&amp; (o.status = '2'),1,0))+sum(if(month(o.creat_time) = 11 &amp;&amp; (o.status = '4'),1,0)))/sum(if(month(o.creat_time) = 11 ,1,0))*100,2),'%'),'--') as percentnov,
+			IFNULL(concat(format((sum(if(month(o.creat_time) = 12 &amp;&amp; (o.status = '2'),1,0))+sum(if(month(o.creat_time) = 12 &amp;&amp; (o.status = '4'),1,0)))/sum(if(month(o.creat_time) = 12 ,1,0))*100,2),'%'),'--') as percentdece     
 			from tm_order o
 			where o.isdel = 0
         <if test="searchStartTime != null and searchStartTime != ''">
@@ -231,18 +231,18 @@
 	
 	<select id="queryAgencyAchievementStatsTotal" parameterType="Map" resultType="AgencyAchievementStats">
 		select 
-			IFNULL(concat(format(sum(if(month(o.creat_time) = 1 &amp;&amp; o.status = '3',1,0))/sum(if(month(o.creat_time) = 1 ,1,0))*100,2),'%'),'--') as percentjan_T,
-			IFNULL(concat(format(sum(if(month(o.creat_time) = 2 &amp;&amp; o.status = '3',1,0))/sum(if(month(o.creat_time) = 2 ,1,0))*100,2),'%'),'--') as percentfeb_T,
-			IFNULL(concat(format(sum(if(month(o.creat_time) = 3 &amp;&amp; o.status = '3',1,0))/sum(if(month(o.creat_time) = 3 ,1,0))*100,2),'%'),'--') as percentmar_T,
-			IFNULL(concat(format(sum(if(month(o.creat_time) = 4 &amp;&amp; o.status = '3',1,0))/sum(if(month(o.creat_time) = 4 ,1,0))*100,2),'%'),'--') as percentapr_T,
-			IFNULL(concat(format(sum(if(month(o.creat_time) = 5 &amp;&amp; o.status = '3',1,0))/sum(if(month(o.creat_time) = 5 ,1,0))*100,2),'%'),'--') as percentmay_T,
-			IFNULL(concat(format(sum(if(month(o.creat_time) = 6 &amp;&amp; o.status = '3',1,0))/sum(if(month(o.creat_time) = 6 ,1,0))*100,2),'%'),'--') as percentjun_T,
-			IFNULL(concat(format(sum(if(month(o.creat_time) = 7 &amp;&amp; o.status = '3',1,0))/sum(if(month(o.creat_time) = 7 ,1,0))*100,2),'%'),'--') as percentjul_T,
-			IFNULL(concat(format(sum(if(month(o.creat_time) = 8 &amp;&amp; o.status = '3',1,0))/sum(if(month(o.creat_time) = 8 ,1,0))*100,2),'%'),'--') as percentaug_T,
-			IFNULL(concat(format(sum(if(month(o.creat_time) = 9 &amp;&amp; o.status = '3',1,0))/sum(if(month(o.creat_time) = 9 ,1,0))*100,2),'%'),'--') as percentsep_T,
-			IFNULL(concat(format(sum(if(month(o.creat_time) = 10 &amp;&amp; o.status = '3',1,0))/sum(if(month(o.creat_time) = 10 ,1,0))*100,2),'%'),'--') as percentoct_T,
-			IFNULL(concat(format(sum(if(month(o.creat_time) = 11 &amp;&amp; o.status = '3',1,0))/sum(if(month(o.creat_time) = 11 ,1,0))*100,2),'%'),'--') as percentnov_T,
-			IFNULL(concat(format(sum(if(month(o.creat_time) = 12 &amp;&amp; o.status = '3',1,0))/sum(if(month(o.creat_time) = 12 ,1,0))*100,2),'%'),'--') as percentdece_T     
+			IFNULL(concat(format((sum(if(month(o.creat_time) = 1 &amp;&amp; (o.status = '2'),1,0))+sum(if(month(o.creat_time) = 1 &amp;&amp; (o.status = '4'),1,0)))/sum(if(month(o.creat_time) = 1 ,1,0))*100,2),'%'),'--') as percentjan,
+			IFNULL(concat(format((sum(if(month(o.creat_time) = 2 &amp;&amp; (o.status = '2'),1,0))+sum(if(month(o.creat_time) = 2 &amp;&amp; (o.status = '4'),1,0)))/sum(if(month(o.creat_time) = 2 ,1,0))*100,2),'%'),'--') as percentfeb,
+			IFNULL(concat(format((sum(if(month(o.creat_time) = 3 &amp;&amp; (o.status = '2'),1,0))+sum(if(month(o.creat_time) = 3 &amp;&amp; (o.status = '4'),1,0)))/sum(if(month(o.creat_time) = 3 ,1,0))*100,2),'%'),'--') as percentmar,
+			IFNULL(concat(format((sum(if(month(o.creat_time) = 4 &amp;&amp; (o.status = '2'),1,0))+sum(if(month(o.creat_time) = 4 &amp;&amp; (o.status = '4'),1,0)))/sum(if(month(o.creat_time) = 4 ,1,0))*100,2),'%'),'--') as percentapr,
+			IFNULL(concat(format((sum(if(month(o.creat_time) = 5 &amp;&amp; (o.status = '2'),1,0))+sum(if(month(o.creat_time) = 5 &amp;&amp; (o.status = '4'),1,0)))/sum(if(month(o.creat_time) = 5 ,1,0))*100,2),'%'),'--') as percentmay,
+			IFNULL(concat(format((sum(if(month(o.creat_time) = 6 &amp;&amp; (o.status = '2'),1,0))+sum(if(month(o.creat_time) = 6 &amp;&amp; (o.status = '4'),1,0)))/sum(if(month(o.creat_time) = 6 ,1,0))*100,2),'%'),'--') as percentjun,
+			IFNULL(concat(format((sum(if(month(o.creat_time) = 7 &amp;&amp; (o.status = '2'),1,0))+sum(if(month(o.creat_time) = 7 &amp;&amp; (o.status = '4'),1,0)))/sum(if(month(o.creat_time) = 7 ,1,0))*100,2),'%'),'--') as percentjul,
+			IFNULL(concat(format((sum(if(month(o.creat_time) = 8 &amp;&amp; (o.status = '2'),1,0))+sum(if(month(o.creat_time) = 8 &amp;&amp; (o.status = '4'),1,0)))/sum(if(month(o.creat_time) = 8 ,1,0))*100,2),'%'),'--') as percentaug,
+			IFNULL(concat(format((sum(if(month(o.creat_time) = 9 &amp;&amp; (o.status = '2'),1,0))+sum(if(month(o.creat_time) = 9 &amp;&amp; (o.status = '4'),1,0)))/sum(if(month(o.creat_time) = 9 ,1,0))*100,2),'%'),'--') as percentsep,
+			IFNULL(concat(format((sum(if(month(o.creat_time) = 10 &amp;&amp; (o.status = '2'),1,0))+sum(if(month(o.creat_time) = 10 &amp;&amp; (o.status = '4'),1,0)))/sum(if(month(o.creat_time) = 10 ,1,0))*100,2),'%'),'--') as percentoct,
+			IFNULL(concat(format((sum(if(month(o.creat_time) = 11 &amp;&amp; (o.status = '2'),1,0))+sum(if(month(o.creat_time) = 11 &amp;&amp; (o.status = '4'),1,0)))/sum(if(month(o.creat_time) = 11 ,1,0))*100,2),'%'),'--') as percentnov,
+			IFNULL(concat(format((sum(if(month(o.creat_time) = 12 &amp;&amp; (o.status = '2'),1,0))+sum(if(month(o.creat_time) = 12 &amp;&amp; (o.status = '4'),1,0)))/sum(if(month(o.creat_time) = 12 ,1,0))*100,2),'%'),'--') as percentdece     
 			from tm_order o
 			where o.isdel = 0
         <if test="searchStartTime != null and searchStartTime != ''">
@@ -282,18 +282,18 @@
 	
 	<select id="queryAgencyAchievementStatsMTotal" parameterType="Map" resultType="AgencyAchievementStats">
 		select 
-			sum(percentjan) as percentjanM_T,
-			sum(percentfeb) as percentfebM_T,
-			sum(percentmar) as percentmarM_T,
-			sum(percentapr) as percentaprM_T,
-			sum(percentmay) as percentmayM_T,
-			sum(percentjun) as percentjunM_T,
-			sum(percentjul) as percentjulM_T,
-			sum(percentaug) as percentaugM_T,
-			sum(percentsep) as percentsepM_T,
-			sum(percentoct) as percentoctM_T,
-			sum(percentnov) as percentnovM_T,
-			sum(percentdece) as percentdeceM_T
+			IFNULL(sum(percentjan),'--') as percentjan,
+			IFNULL(sum(percentfeb),'--') as percentfeb,
+			IFNULL(sum(percentmar),'--') as percentmar,
+			IFNULL(sum(percentapr),'--') as percentapr,
+			IFNULL(sum(percentmay),'--') as percentmay,
+			IFNULL(sum(percentjun),'--') as percentjun,
+			IFNULL(sum(percentjul),'--') as percentjul,
+			IFNULL(sum(percentaug),'--') as percentaug,
+			IFNULL(sum(percentsep),'--') as percentsep,
+			IFNULL(sum(percentoct),'--') as percentoct,
+			IFNULL(sum(percentnov),'--') as percentnov,
+			IFNULL(sum(percentdece),'--') as percentdece
 		from (
 			select 
 				o.agency_name as agencyname,
@@ -334,8 +334,8 @@
 	
 	<select id="querySellerCoverStatsTotal" parameterType="Map" resultType="SellerCoverStats">
 		SELECT
-			count(coun) as countryTotal,
-			sum(number) as numberTotal
+			count(coun) as country,
+			sum(number) as number
 		from(
 			select 
 				a.country coun,
@@ -372,7 +372,7 @@
 	
 	<select id="querySellerNotAskStatsTotal" parameterType="Map" resultType="SellerNotAskStats">
 		select
-			sum(number) as number_T
+			sum(number) as number
 		from(
 			select 
 				a.country country_en,
@@ -397,7 +397,7 @@
 		) temp  
 	</select>
 	
-	<select id="querySellerNotAskStatsD" parameterType="Map" resultType="SellerNotAskStats">
+	<select id="querySellerNotAskStatsD" parameterType="Map" resultType="SellerNotAskStatsD">
 		select 
 			a.agency_name as destination, 
 			a.agency_id,
@@ -437,12 +437,12 @@
 	
 	<select id="queryCustomerSourceLevelStatsTotal" parameterType="Map" resultType="CustomerSourceLevelStats">
 		select
-			sum(level0) as level0_T,
-			sum(level1) as level1_T,
-			sum(level2) as level2_T,
-			sum(level3) as level3_T,
+			sum(level0) as level0,
+			sum(level1) as level1,
+			sum(level2) as level2,
+			sum(level3) as level3,
 			sum(level0)+sum(level1)+sum(level2)+sum(level3) as sumT2,
-			concat ( FORMAT (sum(level3) / (sum(level0)+sum(level1)+sum(level2)+sum(level3)) *100,2),'%') as rate_T 
+			concat ( FORMAT (sum(level3) / (sum(level0)+sum(level1)+sum(level2)+sum(level3)) *100,2),'%') as rate 
 		from(
 			select 
 				c.source as source_en,
@@ -476,7 +476,7 @@
 		) table_name
 	</select>
 	
-	<select id="countSellerNotAskStatsD" parameterType="SellerNotAskStats" resultType="long">
+	<select id="countSellerNotAskStatsD" parameterType="SellerNotAskStatsD" resultType="long">
 		select count(country) from (
 			select 
 				a.agency_name as destination, 
@@ -572,18 +572,18 @@
 			select 
 				o.agency_id,
 				o.agency_name as agencyName,
-				concat(format(sum(if(month(o.creat_time) = 1 &amp;&amp; o.status = '3',1,0))/sum(if(month(o.creat_time) = 1 ,1,0))*100,2),'%') as percentjan,
-				concat(format(sum(if(month(o.creat_time) = 2 &amp;&amp; o.status = '3',1,0))/sum(if(month(o.creat_time) = 2 ,1,0))*100,2),'%') as percentfeb,
-				concat(format(sum(if(month(o.creat_time) = 3 &amp;&amp; o.status = '3',1,0))/sum(if(month(o.creat_time) = 3 ,1,0))*100,2),'%') as percentmar,
-				concat(format(sum(if(month(o.creat_time) = 4 &amp;&amp; o.status = '3',1,0))/sum(if(month(o.creat_time) = 4 ,1,0))*100,2),'%') as percentapr,
-				concat(format(sum(if(month(o.creat_time) = 5 &amp;&amp; o.status = '3',1,0))/sum(if(month(o.creat_time) = 5 ,1,0))*100,2),'%') as percentmay,
-				concat(format(sum(if(month(o.creat_time) = 6 &amp;&amp; o.status = '3',1,0))/sum(if(month(o.creat_time) = 6 ,1,0))*100,2),'%') as percentjun,
-				concat(format(sum(if(month(o.creat_time) = 7 &amp;&amp; o.status = '3',1,0))/sum(if(month(o.creat_time) = 7 ,1,0))*100,2),'%') as percentjul,
-				concat(format(sum(if(month(o.creat_time) = 8 &amp;&amp; o.status = '3',1,0))/sum(if(month(o.creat_time) = 8 ,1,0))*100,2),'%') as percentaug,
-				concat(format(sum(if(month(o.creat_time) = 9 &amp;&amp; o.status = '3',1,0))/sum(if(month(o.creat_time) = 9 ,1,0))*100,2),'%') as percentsep,
-				concat(format(sum(if(month(o.creat_time) = 10 &amp;&amp; o.status = '3',1,0))/sum(if(month(o.creat_time) = 10 ,1,0))*100,2),'%') as percentoct,
-				concat(format(sum(if(month(o.creat_time) = 11 &amp;&amp; o.status = '3',1,0))/sum(if(month(o.creat_time) = 11 ,1,0))*100,2),'%') as percentnov,
-				concat(format(sum(if(month(o.creat_time) = 12 &amp;&amp; o.status = '3',1,0))/sum(if(month(o.creat_time) = 12 ,1,0))*100,2),'%') as percentdece     
+				IFNULL(concat(format((sum(if(month(o.creat_time) = 1 &amp;&amp; (o.status = '2'),1,0))+sum(if(month(o.creat_time) = 1 &amp;&amp; (o.status = '4'),1,0)))/sum(if(month(o.creat_time) = 1 ,1,0))*100,2),'%'),'--') as percentjan,
+				IFNULL(concat(format((sum(if(month(o.creat_time) = 2 &amp;&amp; (o.status = '2'),1,0))+sum(if(month(o.creat_time) = 2 &amp;&amp; (o.status = '4'),1,0)))/sum(if(month(o.creat_time) = 2 ,1,0))*100,2),'%'),'--') as percentfeb,
+				IFNULL(concat(format((sum(if(month(o.creat_time) = 3 &amp;&amp; (o.status = '2'),1,0))+sum(if(month(o.creat_time) = 3 &amp;&amp; (o.status = '4'),1,0)))/sum(if(month(o.creat_time) = 3 ,1,0))*100,2),'%'),'--') as percentmar,
+				IFNULL(concat(format((sum(if(month(o.creat_time) = 4 &amp;&amp; (o.status = '2'),1,0))+sum(if(month(o.creat_time) = 4 &amp;&amp; (o.status = '4'),1,0)))/sum(if(month(o.creat_time) = 4 ,1,0))*100,2),'%'),'--') as percentapr,
+				IFNULL(concat(format((sum(if(month(o.creat_time) = 5 &amp;&amp; (o.status = '2'),1,0))+sum(if(month(o.creat_time) = 5 &amp;&amp; (o.status = '4'),1,0)))/sum(if(month(o.creat_time) = 5 ,1,0))*100,2),'%'),'--') as percentmay,
+				IFNULL(concat(format((sum(if(month(o.creat_time) = 6 &amp;&amp; (o.status = '2'),1,0))+sum(if(month(o.creat_time) = 6 &amp;&amp; (o.status = '4'),1,0)))/sum(if(month(o.creat_time) = 6 ,1,0))*100,2),'%'),'--') as percentjun,
+				IFNULL(concat(format((sum(if(month(o.creat_time) = 7 &amp;&amp; (o.status = '2'),1,0))+sum(if(month(o.creat_time) = 7 &amp;&amp; (o.status = '4'),1,0)))/sum(if(month(o.creat_time) = 7 ,1,0))*100,2),'%'),'--') as percentjul,
+				IFNULL(concat(format((sum(if(month(o.creat_time) = 8 &amp;&amp; (o.status = '2'),1,0))+sum(if(month(o.creat_time) = 8 &amp;&amp; (o.status = '4'),1,0)))/sum(if(month(o.creat_time) = 8 ,1,0))*100,2),'%'),'--') as percentaug,
+				IFNULL(concat(format((sum(if(month(o.creat_time) = 9 &amp;&amp; (o.status = '2'),1,0))+sum(if(month(o.creat_time) = 9 &amp;&amp; (o.status = '4'),1,0)))/sum(if(month(o.creat_time) = 9 ,1,0))*100,2),'%'),'--') as percentsep,
+				IFNULL(concat(format((sum(if(month(o.creat_time) = 10 &amp;&amp; (o.status = '2'),1,0))+sum(if(month(o.creat_time) = 10 &amp;&amp; (o.status = '4'),1,0)))/sum(if(month(o.creat_time) = 10 ,1,0))*100,2),'%'),'--') as percentoct,
+				IFNULL(concat(format((sum(if(month(o.creat_time) = 11 &amp;&amp; (o.status = '2'),1,0))+sum(if(month(o.creat_time) = 11 &amp;&amp; (o.status = '4'),1,0)))/sum(if(month(o.creat_time) = 11 ,1,0))*100,2),'%'),'--') as percentnov,
+				IFNULL(concat(format((sum(if(month(o.creat_time) = 12 &amp;&amp; (o.status = '2'),1,0))+sum(if(month(o.creat_time) = 12 &amp;&amp; (o.status = '4'),1,0)))/sum(if(month(o.creat_time) = 12 ,1,0))*100,2),'%'),'--') as percentdece     
 				from tm_order o
 				where o.isdel = 0
 	        <if test="searchStartTime != null and searchStartTime != ''">
@@ -690,14 +690,11 @@
 		u.isdisplay,
 		u.isdel 
 		from tm_parameter u where u.isdisplay = 1 and u.para_domain = #{domain}
-
-		<!-- from tm_parameter u where u.isdisplay = 1 and u.isdel = 0 and u.para_domain = #{domain} -->
-
 	</select>
 	
 	<select id="queryUserAchievementStats" parameterType="Map" resultType="com.tourmade.crm.entity.UserAchievement">
 		SELECT 
-		tm_user.user_name AS userName,
+		IFNULL(tm_user.user_name,'--') AS userName,
 		tm_case.operator,
 		count(1) AS total,
 		sum(IF(tm_case.`status` = '0',1,0)) AS pendingNum,
@@ -707,7 +704,7 @@
 		sum(IF(tm_case.`status` = '4',1,0)) AS noDealNum,
 		sum(IF(tm_case.`status` = '5',1,0)) AS invalidNum,
 		sum(IF(tm_case.`status` = '6',1,0)) AS paidNum,
-		CONCAT(FORMAT(sum(IF(tm_case.`status` = '3',1,0))/count(1)*100,2),'%') AS dealPercent
+		CONCAT(FORMAT( (sum(IF(tm_case.`status` = '3',1,0))+sum(IF(tm_case.`status` = '6',1,0))) /count(1)*100,2),'%') AS dealPercent
 		FROM tm_case LEFT JOIN tm_user ON tm_case.operator = tm_user.user_id
 		<where>
 			<if test="startCreateTime != null and startCreateTime != ''">
@@ -728,15 +725,15 @@
 	<select id="queryUserAchievementStatsTotal" parameterType="Map" resultType="com.tourmade.crm.entity.UserAchievement">
 		
 		select
-			sum(total) as total_T,
-			sum(pendingNum) as pendingNum_T,
-			sum(communicatingNum) as communicatingNum_T,
-			sum(agencyDesigningNum) as agencyDesigningNum_T,
-			sum(dealNum) as dealNum_T,
-			sum(noDealNum) as noDealNum_T,
-			sum(invalidNum) as invalidNum_T,
-			sum(paidNum) as paidNum_T,
-			CONCAT(FORMAT(sum(dealNum)/sum(total)*100,2),'%') AS dealPercent_T
+			sum(total) as total,
+			sum(pendingNum) as pendingNum,
+			sum(communicatingNum) as communicatingNum,
+			sum(agencyDesigningNum) as agencyDesigningNum,
+			sum(dealNum) as dealNum,
+			sum(noDealNum) as noDealNum,
+			sum(invalidNum) as invalidNum,
+			sum(paidNum) as paidNum,
+			CONCAT(FORMAT((sum(dealNum)+sum(paidNum))/sum(total)*100,2),'%') AS dealPercent
 		from(
 			SELECT 
 			tm_user.user_name AS userName,
@@ -749,7 +746,7 @@
 			sum(IF(tm_case.`status` = '4',1,0)) AS noDealNum,
 			sum(IF(tm_case.`status` = '5',1,0)) AS invalidNum,
 			sum(IF(tm_case.`status` = '6',1,0)) AS paidNum,
-			CONCAT(FORMAT(sum(IF(tm_case.`status` = '3',1,0))/count(1)*100,2),'%') AS dealPercent
+			CONCAT(FORMAT( (sum(IF(tm_case.`status` = '3',1,0))+sum(IF(tm_case.`status` = '6',1,0))) /count(1)*100,2),'%') AS dealPercent
 			FROM tm_case LEFT JOIN tm_user ON tm_case.operator = tm_user.user_id
 			<where>
 				<if test="startCreateTime != null and startCreateTime != ''">
@@ -775,7 +772,7 @@
 	
 	<select id="queryContactReal" parameterType="Map" resultType="com.tourmade.crm.entity.ContactRealStats">
 		SELECT 
-			con.chinese AS contactName,
+			IFNULL(con.chinese,'--') AS contactName,
 			tm_case.contact_real AS contact_real,
 			count(1) AS total,
 			sum(IF(tm_case.`status` = '0',1,0)) AS pendingNum,
@@ -785,7 +782,7 @@
 			sum(IF(tm_case.`status` = '4',1,0)) AS noDealNum,
 			sum(IF(tm_case.`status` = '5',1,0)) AS invalidNum,
 			sum(IF(tm_case.`status` = '6',1,0)) AS paidNum,
-		CONCAT(FORMAT(sum(IF(tm_case.`status` = '3',1,0))/count(1)*100,2),'%') AS dealPercent
+		CONCAT(FORMAT((sum(IF(tm_case.`status` = '3',1,0)) + sum(IF(tm_case.`status` = '6',1,0)))/count(1)*100,2),'%') AS dealPercent
 		FROM tm_case LEFT JOIN 
 		(
 		SELECT para_value,chinese
@@ -802,17 +799,17 @@
 		GROUP BY contact_real
 	</select>
 	
-	<select id="queryContactRealTotal" parameterType="Map" resultType="com.tourmade.crm.entity.ContactRealStatsTotal">
+	<select id="queryContactRealTotal" parameterType="Map" resultType="com.tourmade.crm.entity.ContactRealStats">
 		select 
-			sum(total) AS total_T,
-			sum(pendingNum) AS pendingNum_T,
-			sum(communicatingNum) AS communicatingNum_T,
-			sum(agencyDesigningNum) AS agencyDesigningNum_T,
-			sum(dealNum) AS dealNum_T,
-			sum(noDealNum) AS noDealNum_T,
-			sum(invalidNum) AS invalidNum_T,
-			sum(paidNum) AS paidNum_T,
-			CONCAT(FORMAT(sum(dealNum)/sum(total)*100,2),'%') AS dealPercent_T
+			sum(total) AS total,
+			sum(pendingNum) AS pendingNum,
+			sum(communicatingNum) AS communicatingNum,
+			sum(agencyDesigningNum) AS agencyDesigningNum,
+			sum(dealNum) AS dealNum,
+			sum(noDealNum) AS noDealNum,
+			sum(invalidNum) AS invalidNum,
+			sum(paidNum) AS paidNum,
+			CONCAT(FORMAT((sum(dealNum)+sum(paidNum))/sum(total)*100,2),'%') AS dealPercent
 		from(
 			SELECT 
 				con.chinese AS contactName,
@@ -825,7 +822,7 @@
 				sum(IF(tm_case.`status` = '4',1,0)) AS noDealNum,
 				sum(IF(tm_case.`status` = '5',1,0)) AS invalidNum,
 				sum(IF(tm_case.`status` = '6',1,0)) AS paidNum,
-			CONCAT(FORMAT(sum(IF(tm_case.`status` = '3',1,0))/count(1)*100,2),'%') AS dealPercent
+			CONCAT(FORMAT((sum(IF(tm_case.`status` = '3',1,0)) + sum(IF(tm_case.`status` = '6',1,0)))/count(1)*100,2),'%') AS dealPercent
 			FROM tm_case LEFT JOIN 
 			(
 			SELECT para_value,chinese
@@ -860,7 +857,9 @@
 	
 	
 	<select id="queryReasonOfDraining" parameterType="Map" resultType="com.tourmade.crm.entity.ReasonOfDrainingStats">
-		SELECT chinese AS reasonOfDrainingName,count(1) AS num
+		SELECT 
+		IFNULL(chinese,'--') AS reasonOfDrainingName,
+		count(1) AS num
 		FROM tm_case LEFT JOIN 
 		(
 			SELECT para_value,chinese
@@ -877,9 +876,9 @@
 		GROUP BY tm_case.reason
 	</select>
 	
-	<select id="queryReasonOfDrainingTotal" parameterType="Map" resultType="com.tourmade.crm.entity.ReasonOfDrainingStatsTotal">
+	<select id="queryReasonOfDrainingTotal" parameterType="Map" resultType="com.tourmade.crm.entity.ReasonOfDrainingStats">
 		select 
-			sum(num) as num_T
+			sum(num) as num
 		from (
 			SELECT chinese AS reasonOfDrainingName,count(1) AS num
 			FROM tm_case LEFT JOIN 
@@ -912,7 +911,9 @@
 	</select>
 	
 	<select id="queryReasonOfDrainingNoDeal" parameterType="Map" resultType="com.tourmade.crm.entity.ReasonOfDrainingStats">
-		SELECT chinese AS reasonOfDrainingName ,count(1) AS num
+		SELECT 
+		IFNULL(chinese,'--') AS reasonOfDrainingName ,
+		count(1) AS num
 		FROM tm_case LEFT JOIN 
 		(
 		SELECT para_value,chinese
@@ -929,9 +930,9 @@
 		GROUP BY tm_case.reason_nodeal
 	</select>
 	
-	<select id="queryReasonOfDrainingNoDealTotal" parameterType="Map" resultType="com.tourmade.crm.entity.ReasonOfDrainingStatsTotal">
+	<select id="queryReasonOfDrainingNoDealTotal" parameterType="Map" resultType="com.tourmade.crm.entity.ReasonOfDrainingStats">
 		select 
-			sum(num) as num_T
+			sum(num) as num
 		from (
 			SELECT chinese AS reasonOfDrainingName ,count(1) AS num
 			FROM tm_case LEFT JOIN 
@@ -965,19 +966,19 @@
 	
 	<select id="queryUserAchiRate" parameterType="Map" resultType="com.tourmade.crm.entity.UserAchRate">
 		SELECT 
-		tm_user.user_name AS userName,
-		IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 1 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 1 ,1,0))*100,2),'%'),'--') AS percentJan,
-		IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 2 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 2 ,1,0))*100,2),'%'),'--') AS percentFeb,
-		IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 3 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 3 ,1,0))*100,2),'%'),'--') AS percentMar,
-		IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 4 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 4 ,1,0))*100,2),'%'),'--') AS percentApr,
-		IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 5 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 5 ,1,0))*100,2),'%'),'--') AS percentMay,
-		IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 6 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 6 ,1,0))*100,2),'%'),'--') AS percentJun,
-		IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 7 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 7 ,1,0))*100,2),'%'),'--') AS percentJul,
-		IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 8 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 8 ,1,0))*100,2),'%'),'--') AS percentAug,
-		IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 9 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 9 ,1,0))*100,2),'%'),'--') AS percentSep,
-		IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 10 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 10 ,1,0))*100,2),'%'),'--') AS percentOct,
-		IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 11 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 11 ,1,0))*100,2),'%'),'--') AS percentNov,
-		IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 12 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 12 ,1,0))*100,2),'%'),'--') AS percentDec
+		IFNULL(tm_user.user_name,'--') AS userName,
+		IFNULL(CONCAT(FORMAT( (SUM(IF(MONTH(tm_case.creat_time) = 1 &amp;&amp; tm_case.`status` = '3',1,0))+SUM(IF(MONTH(tm_case.creat_time) = 1 &amp;&amp; tm_case.`status` = '6',1,0))) /SUM(IF(MONTH(tm_case.creat_time) = 1 ,1,0))*100,2),'%'),'--') AS percentJan,
+		IFNULL(CONCAT(FORMAT((SUM(IF(MONTH(tm_case.creat_time) = 2 &amp;&amp; tm_case.`status` = '3',1,0))+SUM(IF(MONTH(tm_case.creat_time) = 2 &amp;&amp; tm_case.`status` = '6',1,0)))/SUM(IF(MONTH(tm_case.creat_time) = 2 ,1,0))*100,2),'%'),'--') AS percentFeb,
+		IFNULL(CONCAT(FORMAT((SUM(IF(MONTH(tm_case.creat_time) = 3 &amp;&amp; tm_case.`status` = '3',1,0))+SUM(IF(MONTH(tm_case.creat_time) = 3 &amp;&amp; tm_case.`status` = '6',1,0)))/SUM(IF(MONTH(tm_case.creat_time) = 3 ,1,0))*100,2),'%'),'--') AS percentMar,
+		IFNULL(CONCAT(FORMAT((SUM(IF(MONTH(tm_case.creat_time) = 4 &amp;&amp; tm_case.`status` = '3',1,0))+SUM(IF(MONTH(tm_case.creat_time) = 4 &amp;&amp; tm_case.`status` = '6',1,0)))/SUM(IF(MONTH(tm_case.creat_time) = 4 ,1,0))*100,2),'%'),'--') AS percentApr,
+		IFNULL(CONCAT(FORMAT((SUM(IF(MONTH(tm_case.creat_time) = 5 &amp;&amp; tm_case.`status` = '3',1,0))+SUM(IF(MONTH(tm_case.creat_time) = 5 &amp;&amp; tm_case.`status` = '6',1,0)))/SUM(IF(MONTH(tm_case.creat_time) = 5 ,1,0))*100,2),'%'),'--') AS percentMay,
+		IFNULL(CONCAT(FORMAT((SUM(IF(MONTH(tm_case.creat_time) = 6 &amp;&amp; tm_case.`status` = '3',1,0))+SUM(IF(MONTH(tm_case.creat_time) = 6 &amp;&amp; tm_case.`status` = '6',1,0)))/SUM(IF(MONTH(tm_case.creat_time) = 6 ,1,0))*100,2),'%'),'--') AS percentJun,
+		IFNULL(CONCAT(FORMAT((SUM(IF(MONTH(tm_case.creat_time) = 7 &amp;&amp; tm_case.`status` = '3',1,0))+SUM(IF(MONTH(tm_case.creat_time) = 7 &amp;&amp; tm_case.`status` = '6',1,0)))/SUM(IF(MONTH(tm_case.creat_time) = 7 ,1,0))*100,2),'%'),'--') AS percentJul,
+		IFNULL(CONCAT(FORMAT((SUM(IF(MONTH(tm_case.creat_time) = 8 &amp;&amp; tm_case.`status` = '3',1,0))+SUM(IF(MONTH(tm_case.creat_time) = 8 &amp;&amp; tm_case.`status` = '6',1,0)))/SUM(IF(MONTH(tm_case.creat_time) = 8 ,1,0))*100,2),'%'),'--') AS percentAug,
+		IFNULL(CONCAT(FORMAT((SUM(IF(MONTH(tm_case.creat_time) = 9 &amp;&amp; tm_case.`status` = '3',1,0))+SUM(IF(MONTH(tm_case.creat_time) = 9 &amp;&amp; tm_case.`status` = '6',1,0)))/SUM(IF(MONTH(tm_case.creat_time) = 9 ,1,0))*100,2),'%'),'--') AS percentSep,
+		IFNULL(CONCAT(FORMAT((SUM(IF(MONTH(tm_case.creat_time) = 10 &amp;&amp; tm_case.`status` = '3',1,0))+SUM(IF(MONTH(tm_case.creat_time) = 10 &amp;&amp; tm_case.`status` = '6',1,0)))/SUM(IF(MONTH(tm_case.creat_time) = 10 ,1,0))*100,2),'%'),'--') AS percentOct,
+		IFNULL(CONCAT(FORMAT((SUM(IF(MONTH(tm_case.creat_time) = 11 &amp;&amp; tm_case.`status` = '3',1,0))+SUM(IF(MONTH(tm_case.creat_time) = 11 &amp;&amp; tm_case.`status` = '6',1,0)))/SUM(IF(MONTH(tm_case.creat_time) = 11 ,1,0))*100,2),'%'),'--') AS percentNov,
+		IFNULL(CONCAT(FORMAT((SUM(IF(MONTH(tm_case.creat_time) = 12 &amp;&amp; tm_case.`status` = '3',1,0))+SUM(IF(MONTH(tm_case.creat_time) = 12 &amp;&amp; tm_case.`status` = '6',1,0)))/SUM(IF(MONTH(tm_case.creat_time) = 12 ,1,0))*100,2),'%'),'--') AS percentDec
 		FROM tm_case LEFT JOIN tm_user ON tm_case.operator = tm_user.user_id
 		<where>
 			<if test="startCreateTime != null and startCreateTime != ''">
@@ -992,18 +993,18 @@
 	
 	<select id="queryUserAchiRateTotal" parameterType="Map" resultType="com.tourmade.crm.entity.UserAchRate">
 		SELECT 
-			IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 1 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 1 ,1,0))*100,2),'%'),'--') AS percentJan_TR,                            
-			IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 2 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 2 ,1,0))*100,2),'%'),'--') AS percentFeb_TR,
-			IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 3 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 3 ,1,0))*100,2),'%'),'--') AS percentMar_TR,
-			IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 4 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 4 ,1,0))*100,2),'%'),'--') AS percentApr_TR,
-			IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 5 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 5 ,1,0))*100,2),'%'),'--') AS percentMay_TR,
-			IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 6 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 6 ,1,0))*100,2),'%'),'--') AS percentJun_TR,
-			IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 7 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 7 ,1,0))*100,2),'%'),'--') AS percentJul_TR,
-			IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 8 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 8 ,1,0))*100,2),'%'),'--') AS percentAug_TR,
-			IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 9 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 9 ,1,0))*100,2),'%'),'--') AS percentSep_TR,
-			IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 10 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 10 ,1,0))*100,2),'%'),'--') AS percentOct_TR,
-			IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 11 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 11 ,1,0))*100,2),'%'),'--') AS percentNov_TR,
-			IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 12 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 12 ,1,0))*100,2),'%'),'--') AS percentDec_TR
+			IFNULL(CONCAT(FORMAT( (SUM(IF(MONTH(tm_case.creat_time) = 1 &amp;&amp; tm_case.`status` = '3',1,0))+SUM(IF(MONTH(tm_case.creat_time) = 1 &amp;&amp; tm_case.`status` = '6',1,0))) /SUM(IF(MONTH(tm_case.creat_time) = 1 ,1,0))*100,2),'%'),'--') AS percentJan,
+			IFNULL(CONCAT(FORMAT((SUM(IF(MONTH(tm_case.creat_time) = 2 &amp;&amp; tm_case.`status` = '3',1,0))+SUM(IF(MONTH(tm_case.creat_time) = 2 &amp;&amp; tm_case.`status` = '6',1,0)))/SUM(IF(MONTH(tm_case.creat_time) = 2 ,1,0))*100,2),'%'),'--') AS percentFeb,
+			IFNULL(CONCAT(FORMAT((SUM(IF(MONTH(tm_case.creat_time) = 3 &amp;&amp; tm_case.`status` = '3',1,0))+SUM(IF(MONTH(tm_case.creat_time) = 3 &amp;&amp; tm_case.`status` = '6',1,0)))/SUM(IF(MONTH(tm_case.creat_time) = 3 ,1,0))*100,2),'%'),'--') AS percentMar,
+			IFNULL(CONCAT(FORMAT((SUM(IF(MONTH(tm_case.creat_time) = 4 &amp;&amp; tm_case.`status` = '3',1,0))+SUM(IF(MONTH(tm_case.creat_time) = 4 &amp;&amp; tm_case.`status` = '6',1,0)))/SUM(IF(MONTH(tm_case.creat_time) = 4 ,1,0))*100,2),'%'),'--') AS percentApr,
+			IFNULL(CONCAT(FORMAT((SUM(IF(MONTH(tm_case.creat_time) = 5 &amp;&amp; tm_case.`status` = '3',1,0))+SUM(IF(MONTH(tm_case.creat_time) = 5 &amp;&amp; tm_case.`status` = '6',1,0)))/SUM(IF(MONTH(tm_case.creat_time) = 5 ,1,0))*100,2),'%'),'--') AS percentMay,
+			IFNULL(CONCAT(FORMAT((SUM(IF(MONTH(tm_case.creat_time) = 6 &amp;&amp; tm_case.`status` = '3',1,0))+SUM(IF(MONTH(tm_case.creat_time) = 6 &amp;&amp; tm_case.`status` = '6',1,0)))/SUM(IF(MONTH(tm_case.creat_time) = 6 ,1,0))*100,2),'%'),'--') AS percentJun,
+			IFNULL(CONCAT(FORMAT((SUM(IF(MONTH(tm_case.creat_time) = 7 &amp;&amp; tm_case.`status` = '3',1,0))+SUM(IF(MONTH(tm_case.creat_time) = 7 &amp;&amp; tm_case.`status` = '6',1,0)))/SUM(IF(MONTH(tm_case.creat_time) = 7 ,1,0))*100,2),'%'),'--') AS percentJul,
+			IFNULL(CONCAT(FORMAT((SUM(IF(MONTH(tm_case.creat_time) = 8 &amp;&amp; tm_case.`status` = '3',1,0))+SUM(IF(MONTH(tm_case.creat_time) = 8 &amp;&amp; tm_case.`status` = '6',1,0)))/SUM(IF(MONTH(tm_case.creat_time) = 8 ,1,0))*100,2),'%'),'--') AS percentAug,
+			IFNULL(CONCAT(FORMAT((SUM(IF(MONTH(tm_case.creat_time) = 9 &amp;&amp; tm_case.`status` = '3',1,0))+SUM(IF(MONTH(tm_case.creat_time) = 9 &amp;&amp; tm_case.`status` = '6',1,0)))/SUM(IF(MONTH(tm_case.creat_time) = 9 ,1,0))*100,2),'%'),'--') AS percentSep,
+			IFNULL(CONCAT(FORMAT((SUM(IF(MONTH(tm_case.creat_time) = 10 &amp;&amp; tm_case.`status` = '3',1,0))+SUM(IF(MONTH(tm_case.creat_time) = 10 &amp;&amp; tm_case.`status` = '6',1,0)))/SUM(IF(MONTH(tm_case.creat_time) = 10 ,1,0))*100,2),'%'),'--') AS percentOct,
+			IFNULL(CONCAT(FORMAT((SUM(IF(MONTH(tm_case.creat_time) = 11 &amp;&amp; tm_case.`status` = '3',1,0))+SUM(IF(MONTH(tm_case.creat_time) = 11 &amp;&amp; tm_case.`status` = '6',1,0)))/SUM(IF(MONTH(tm_case.creat_time) = 11 ,1,0))*100,2),'%'),'--') AS percentNov,
+			IFNULL(CONCAT(FORMAT((SUM(IF(MONTH(tm_case.creat_time) = 12 &amp;&amp; tm_case.`status` = '3',1,0))+SUM(IF(MONTH(tm_case.creat_time) = 12 &amp;&amp; tm_case.`status` = '6',1,0)))/SUM(IF(MONTH(tm_case.creat_time) = 12 ,1,0))*100,2),'%'),'--') AS percentDec
 			FROM tm_case LEFT JOIN tm_user ON tm_case.operator = tm_user.user_id
 		<where>
 			<if test="startCreateTime != null and startCreateTime != ''">
@@ -1034,21 +1035,21 @@
 	</select>
 	
 	<select id="queryUserAchiMoney" parameterType="Map" resultType="com.tourmade.crm.entity.UserAchRate">
-		SELECT 
-			tm_user.user_name AS userName,
-			SUM(IF(MONTH(tm_order.group_time) = 1 ,tm_order.rmb_price,0)) AS percentJan,
-			SUM(IF(MONTH(tm_order.group_time) = 2 ,tm_order.rmb_price,0)) AS percentFeb,
-			SUM(IF(MONTH(tm_order.group_time) = 3 ,tm_order.rmb_price,0)) AS percentMar,
-			SUM(IF(MONTH(tm_order.group_time) = 4 ,tm_order.rmb_price,0)) AS percentApr,
-			SUM(IF(MONTH(tm_order.group_time) = 5 ,tm_order.rmb_price,0)) AS percentMay,
-			SUM(IF(MONTH(tm_order.group_time) = 6 ,tm_order.rmb_price,0)) AS percentJun,
-			SUM(IF(MONTH(tm_order.group_time) = 7 ,tm_order.rmb_price,0)) AS percentJul,
-			SUM(IF(MONTH(tm_order.group_time) = 8 ,tm_order.rmb_price,0)) AS percentAug,
-			SUM(IF(MONTH(tm_order.group_time) = 9 ,tm_order.rmb_price,0)) AS percentSep,
-			SUM(IF(MONTH(tm_order.group_time) = 10 ,tm_order.rmb_price,0)) AS percentOct,
-			SUM(IF(MONTH(tm_order.group_time) = 11 ,tm_order.rmb_price,0)) AS percentNov,
-			SUM(IF(MONTH(tm_order.group_time) = 12 ,tm_order.rmb_price,0)) AS percentDec
-			FROM tm_order LEFT JOIN tm_user ON tm_order.operator = tm_user.user_id
+	SELECT 
+		IFNULL(tm_user.user_name,'--') AS userName,
+		SUM(IF(MONTH(tm_order.group_time) = 1 ,tm_order.rmb_price,0)) AS percentJan,
+		SUM(IF(MONTH(tm_order.group_time) = 2 ,tm_order.rmb_price,0)) AS percentFeb,
+		SUM(IF(MONTH(tm_order.group_time) = 3 ,tm_order.rmb_price,0)) AS percentMar,
+		SUM(IF(MONTH(tm_order.group_time) = 4 ,tm_order.rmb_price,0)) AS percentApr,
+		SUM(IF(MONTH(tm_order.group_time) = 5 ,tm_order.rmb_price,0)) AS percentMay,
+		SUM(IF(MONTH(tm_order.group_time) = 6 ,tm_order.rmb_price,0)) AS percentJun,
+		SUM(IF(MONTH(tm_order.group_time) = 7 ,tm_order.rmb_price,0)) AS percentJul,
+		SUM(IF(MONTH(tm_order.group_time) = 8 ,tm_order.rmb_price,0)) AS percentAug,
+		SUM(IF(MONTH(tm_order.group_time) = 9 ,tm_order.rmb_price,0)) AS percentSep,
+		SUM(IF(MONTH(tm_order.group_time) = 10 ,tm_order.rmb_price,0)) AS percentOct,
+		SUM(IF(MONTH(tm_order.group_time) = 11 ,tm_order.rmb_price,0)) AS percentNov,
+		SUM(IF(MONTH(tm_order.group_time) = 12 ,tm_order.rmb_price,0)) AS percentDec
+		FROM tm_order LEFT JOIN tm_user ON tm_order.operator = tm_user.user_id
 		WHERE  tm_order.`status` = '2'
 			<if test="startCreateTime != null and startCreateTime != ''">
 			 	and tm_order.group_time &gt;= #{startCreateTime}
@@ -1061,18 +1062,18 @@
 	
 	<select id="queryUserAchiMoneyTotal" parameterType="Map" resultType="com.tourmade.crm.entity.UserAchRate">
 		select
-			sum(percentJan) as percentJan_TM,
-			sum(percentFeb) as percentFeb_TM,
-			sum(percentMar) as percentMar_TM,
-			sum(percentApr) as percentApr_TM,
-			sum(percentMay) as percentMay_TM,
-			sum(percentJun) as percentJun_TM,
-			sum(percentJul) as percentJul_TM,
-			sum(percentAug) as percentAug_TM,
-			sum(percentSep) as percentSep_TM,
-			sum(percentOct) as percentOct_TM,
-			sum(percentNov) as percentNov_TM,
-			sum(percentDec) as percentDec_TM
+			IFNULL(sum(percentJan),'--') as percentJan,
+			IFNULL(sum(percentFeb),'--') as percentFeb,
+			IFNULL(sum(percentMar),'--') as percentMar,
+			IFNULL(sum(percentApr),'--') as percentApr,
+			IFNULL(sum(percentMay),'--') as percentMay,
+			IFNULL(sum(percentJun),'--') as percentJun,
+			IFNULL(sum(percentJul),'--') as percentJul,
+			IFNULL(sum(percentAug),'--') as percentAug,
+			IFNULL(sum(percentSep),'--') as percentSep,
+			IFNULL(sum(percentOct),'--') as percentOct,
+			IFNULL(sum(percentNov),'--') as percentNov,
+			IFNULL(sum(percentDec),'--') as percentDec
 		from (
 			SELECT 
 				tm_user.user_name AS userName,
@@ -1118,7 +1119,7 @@
 	<select id="queryDesCaseStatus" parameterType="Map" resultType="com.tourmade.crm.entity.UserAchievement">
 		SELECT 
 		tm_case.destination AS destination,
-		d.chinese AS userName,
+		IFNULL(d.chinese,'--') AS userName,
 		count(1) AS total,
 		sum(IF(tm_case.`status` = '0',1,0)) AS pendingNum,
 		sum(IF(tm_case.`status` = '1',1,0)) AS communicatingNum,
@@ -1127,7 +1128,7 @@
 		sum(IF(tm_case.`status` = '4',1,0)) AS noDealNum,
 		sum(IF(tm_case.`status` = '5',1,0)) AS invalidNum,
 		sum(IF(tm_case.`status` = '6',1,0)) AS paidNum,
-		CONCAT(FORMAT(sum(IF(tm_case.`status` = '3',1,0))/count(1)*100,2),'%') AS dealPercent
+		CONCAT(FORMAT((sum(IF(tm_case.`status` = '3',1,0))+sum(IF(tm_case.`status` = '6',1,0))) /count(1)*100,2),'%') AS dealPercent
 		FROM tm_case LEFT JOIN 
 		(SELECT tm_parameter.para_value,chinese
 			FROM tm_parameter
@@ -1142,20 +1143,19 @@
 			</if>
 		</where>
 		GROUP BY tm_case.destination 
-		ORDER BY tm_case.destination
 	</select>
 	
 	<select id="queryDesCaseStatusTotal" parameterType="Map" resultType="com.tourmade.crm.entity.UserAchievement">
 		select 
-			sum(total) as total_T,
-			sum(pendingNum) as pendingNum_T,
-			sum(communicatingNum) as communicatingNum_T,
-			sum(agencyDesigningNum) as agencyDesigningNum_T,
-			sum(dealNum) as dealNum_T,
-			sum(noDealNum) as noDealNum_T,
-			sum(invalidNum) as invalidNum_T,
-			sum(paidNum) as paidNum_T,
-			CONCAT(FORMAT(sum(dealNum)/sum(total)*100,2),'%') AS dealPercent_T
+			sum(total) as total,
+			sum(pendingNum) as pendingNum,
+			sum(communicatingNum) as communicatingNum,
+			sum(agencyDesigningNum) as agencyDesigningNum,
+			sum(dealNum) as dealNum,
+			sum(noDealNum) as noDealNum,
+			sum(invalidNum) as invalidNum,
+			sum(paidNum) as paidNum,
+			CONCAT(FORMAT((sum(dealNum)+sum(paidNum))/sum(total)*100,2),'%') AS dealPercent
 		from(
 			SELECT 
 			tm_case.destination AS destination,
@@ -1168,7 +1168,7 @@
 			sum(IF(tm_case.`status` = '4',1,0)) AS noDealNum,
 			sum(IF(tm_case.`status` = '5',1,0)) AS invalidNum,
 			sum(IF(tm_case.`status` = '6',1,0)) AS paidNum,
-			CONCAT(FORMAT(sum(IF(tm_case.`status` = '3',1,0))/count(1)*100,2),'%') AS dealPercent
+			CONCAT(FORMAT((sum(IF(tm_case.`status` = '3',1,0))+sum(IF(tm_case.`status` = '6',1,0)))/count(1)*100,2),'%') AS dealPercent
 			FROM tm_case LEFT JOIN 
 			(SELECT tm_parameter.para_value,chinese
 				FROM tm_parameter
@@ -1205,19 +1205,19 @@
 	<select id="queryDesAchiRate" parameterType="Map" resultType="com.tourmade.crm.entity.UserAchRate">
 		SELECT 
 		destination AS code,
-		d.chinese AS userName,
-		IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 1 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 1 ,1,0))*100,2),'%'),'--') AS percentJan,
-		IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 2 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 2 ,1,0))*100,2),'%'),'--') AS percentFeb,
-		IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 3 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 3 ,1,0))*100,2),'%'),'--') AS percentMar,
-		IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 4 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 4 ,1,0))*100,2),'%'),'--') AS percentApr,
-		IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 5 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 5 ,1,0))*100,2),'%'),'--') AS percentMay,
-		IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 6 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 6 ,1,0))*100,2),'%'),'--') AS percentJun,
-		IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 7 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 7 ,1,0))*100,2),'%'),'--') AS percentJul,
-		IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 8 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 8 ,1,0))*100,2),'%'),'--') AS percentAug,
-		IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 9 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 9 ,1,0))*100,2),'%'),'--') AS percentSep,
-		IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 10 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 10 ,1,0))*100,2),'%'),'--') AS percentOct,
-		IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 11 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 11 ,1,0))*100,2),'%'),'--') AS percentNov,
-		IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 12 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 12 ,1,0))*100,2),'%'),'--') AS percentDec
+		IFNULL(d.chinese,'--') AS userName,
+		IFNULL(CONCAT(FORMAT( (SUM(IF(MONTH(tm_case.creat_time) = 1 &amp;&amp; tm_case.`status` = '3',1,0))+SUM(IF(MONTH(tm_case.creat_time) = 1 &amp;&amp; tm_case.`status` = '6',1,0)))/SUM(IF(MONTH(tm_case.creat_time) = 1 ,1,0))*100,2),'%'),'--') AS percentJan,
+		IFNULL(CONCAT(FORMAT( (SUM(IF(MONTH(tm_case.creat_time) = 2 &amp;&amp; tm_case.`status` = '3',1,0))+SUM(IF(MONTH(tm_case.creat_time) = 2 &amp;&amp; tm_case.`status` = '6',1,0)))/SUM(IF(MONTH(tm_case.creat_time) = 2 ,1,0))*100,2),'%'),'--') AS percentFeb,
+		IFNULL(CONCAT(FORMAT( (SUM(IF(MONTH(tm_case.creat_time) = 3 &amp;&amp; tm_case.`status` = '3',1,0))+SUM(IF(MONTH(tm_case.creat_time) = 3 &amp;&amp; tm_case.`status` = '6',1,0)))/SUM(IF(MONTH(tm_case.creat_time) = 3 ,1,0))*100,2),'%'),'--') AS percentMar,
+		IFNULL(CONCAT(FORMAT( (SUM(IF(MONTH(tm_case.creat_time) = 4 &amp;&amp; tm_case.`status` = '3',1,0))+SUM(IF(MONTH(tm_case.creat_time) = 4 &amp;&amp; tm_case.`status` = '6',1,0)))/SUM(IF(MONTH(tm_case.creat_time) = 4 ,1,0))*100,2),'%'),'--') AS percentApr,
+		IFNULL(CONCAT(FORMAT( (SUM(IF(MONTH(tm_case.creat_time) = 5 &amp;&amp; tm_case.`status` = '3',1,0))+SUM(IF(MONTH(tm_case.creat_time) = 5 &amp;&amp; tm_case.`status` = '6',1,0)))/SUM(IF(MONTH(tm_case.creat_time) = 5 ,1,0))*100,2),'%'),'--') AS percentMay,
+		IFNULL(CONCAT(FORMAT( (SUM(IF(MONTH(tm_case.creat_time) = 6 &amp;&amp; tm_case.`status` = '3',1,0))+SUM(IF(MONTH(tm_case.creat_time) = 6 &amp;&amp; tm_case.`status` = '6',1,0)))/SUM(IF(MONTH(tm_case.creat_time) = 6 ,1,0))*100,2),'%'),'--') AS percentJun,
+		IFNULL(CONCAT(FORMAT( (SUM(IF(MONTH(tm_case.creat_time) = 7 &amp;&amp; tm_case.`status` = '3',1,0))+SUM(IF(MONTH(tm_case.creat_time) = 7 &amp;&amp; tm_case.`status` = '6',1,0)))/SUM(IF(MONTH(tm_case.creat_time) = 7 ,1,0))*100,2),'%'),'--') AS percentJul,
+		IFNULL(CONCAT(FORMAT( (SUM(IF(MONTH(tm_case.creat_time) = 8 &amp;&amp; tm_case.`status` = '3',1,0))+SUM(IF(MONTH(tm_case.creat_time) = 8 &amp;&amp; tm_case.`status` = '6',1,0)))/SUM(IF(MONTH(tm_case.creat_time) = 8 ,1,0))*100,2),'%'),'--') AS percentAug,
+		IFNULL(CONCAT(FORMAT( (SUM(IF(MONTH(tm_case.creat_time) = 9 &amp;&amp; tm_case.`status` = '3',1,0))+SUM(IF(MONTH(tm_case.creat_time) = 9 &amp;&amp; tm_case.`status` = '6',1,0)))/SUM(IF(MONTH(tm_case.creat_time) = 9 ,1,0))*100,2),'%'),'--') AS percentSep,
+		IFNULL(CONCAT(FORMAT( (SUM(IF(MONTH(tm_case.creat_time) = 10 &amp;&amp; tm_case.`status` = '3',1,0))+SUM(IF(MONTH(tm_case.creat_time) = 10 &amp;&amp; tm_case.`status` = '6',1,0)))/SUM(IF(MONTH(tm_case.creat_time) = 10 ,1,0))*100,2),'%'),'--') AS percentOct,
+		IFNULL(CONCAT(FORMAT( (SUM(IF(MONTH(tm_case.creat_time) = 11 &amp;&amp; tm_case.`status` = '3',1,0))+SUM(IF(MONTH(tm_case.creat_time) = 11 &amp;&amp; tm_case.`status` = '6',1,0)))/SUM(IF(MONTH(tm_case.creat_time) = 11 ,1,0))*100,2),'%'),'--') AS percentNov,
+		IFNULL(CONCAT(FORMAT( (SUM(IF(MONTH(tm_case.creat_time) = 12 &amp;&amp; tm_case.`status` = '3',1,0))+SUM(IF(MONTH(tm_case.creat_time) = 12 &amp;&amp; tm_case.`status` = '6',1,0)))/SUM(IF(MONTH(tm_case.creat_time) = 12 ,1,0))*100,2),'%'),'--') AS percentDec
 		FROM tm_case LEFT JOIN (SELECT tm_parameter.para_value,chinese
 			FROM tm_parameter
 			WHERE tm_parameter.para_domain = 'country' ) d
@@ -1235,18 +1235,18 @@
 	
 	<select id="queryDesAchiRateTotal" parameterType="Map" resultType="com.tourmade.crm.entity.UserAchRate">
 		SELECT 
-		IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 1 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 1 ,1,0))*100,2),'%'),'--') AS percentJan_TR,
-		IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 2 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 2 ,1,0))*100,2),'%'),'--') AS percentFeb_TR,
-		IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 3 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 3 ,1,0))*100,2),'%'),'--') AS percentMar_TR,
-		IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 4 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 4 ,1,0))*100,2),'%'),'--') AS percentApr_TR,
-		IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 5 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 5 ,1,0))*100,2),'%'),'--') AS percentMay_TR,
-		IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 6 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 6 ,1,0))*100,2),'%'),'--') AS percentJun_TR,
-		IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 7 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 7 ,1,0))*100,2),'%'),'--') AS percentJul_TR,
-		IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 8 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 8 ,1,0))*100,2),'%'),'--') AS percentAug_TR,
-		IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 9 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 9 ,1,0))*100,2),'%'),'--') AS percentSep_TR,
-		IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 10 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 10 ,1,0))*100,2),'%'),'--') AS percentOct_TR,
-		IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 11 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 11 ,1,0))*100,2),'%'),'--') AS percentNov_TR,
-		IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 12 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 12 ,1,0))*100,2),'%'),'--') AS percentDec_TR
+		IFNULL(CONCAT(FORMAT( (SUM(IF(MONTH(tm_case.creat_time) = 1 &amp;&amp; tm_case.`status` = '3',1,0))+SUM(IF(MONTH(tm_case.creat_time) = 1 &amp;&amp; tm_case.`status` = '6',1,0)))/SUM(IF(MONTH(tm_case.creat_time) = 1 ,1,0))*100,2),'%'),'--') AS percentJan,
+		IFNULL(CONCAT(FORMAT( (SUM(IF(MONTH(tm_case.creat_time) = 2 &amp;&amp; tm_case.`status` = '3',1,0))+SUM(IF(MONTH(tm_case.creat_time) = 2 &amp;&amp; tm_case.`status` = '6',1,0)))/SUM(IF(MONTH(tm_case.creat_time) = 2 ,1,0))*100,2),'%'),'--') AS percentFeb,
+		IFNULL(CONCAT(FORMAT( (SUM(IF(MONTH(tm_case.creat_time) = 3 &amp;&amp; tm_case.`status` = '3',1,0))+SUM(IF(MONTH(tm_case.creat_time) = 3 &amp;&amp; tm_case.`status` = '6',1,0)))/SUM(IF(MONTH(tm_case.creat_time) = 3 ,1,0))*100,2),'%'),'--') AS percentMar,
+		IFNULL(CONCAT(FORMAT( (SUM(IF(MONTH(tm_case.creat_time) = 4 &amp;&amp; tm_case.`status` = '3',1,0))+SUM(IF(MONTH(tm_case.creat_time) = 4 &amp;&amp; tm_case.`status` = '6',1,0)))/SUM(IF(MONTH(tm_case.creat_time) = 4 ,1,0))*100,2),'%'),'--') AS percentApr,
+		IFNULL(CONCAT(FORMAT( (SUM(IF(MONTH(tm_case.creat_time) = 5 &amp;&amp; tm_case.`status` = '3',1,0))+SUM(IF(MONTH(tm_case.creat_time) = 5 &amp;&amp; tm_case.`status` = '6',1,0)))/SUM(IF(MONTH(tm_case.creat_time) = 5 ,1,0))*100,2),'%'),'--') AS percentMay,
+		IFNULL(CONCAT(FORMAT( (SUM(IF(MONTH(tm_case.creat_time) = 6 &amp;&amp; tm_case.`status` = '3',1,0))+SUM(IF(MONTH(tm_case.creat_time) = 6 &amp;&amp; tm_case.`status` = '6',1,0)))/SUM(IF(MONTH(tm_case.creat_time) = 6 ,1,0))*100,2),'%'),'--') AS percentJun,
+		IFNULL(CONCAT(FORMAT( (SUM(IF(MONTH(tm_case.creat_time) = 7 &amp;&amp; tm_case.`status` = '3',1,0))+SUM(IF(MONTH(tm_case.creat_time) = 7 &amp;&amp; tm_case.`status` = '6',1,0)))/SUM(IF(MONTH(tm_case.creat_time) = 7 ,1,0))*100,2),'%'),'--') AS percentJul,
+		IFNULL(CONCAT(FORMAT( (SUM(IF(MONTH(tm_case.creat_time) = 8 &amp;&amp; tm_case.`status` = '3',1,0))+SUM(IF(MONTH(tm_case.creat_time) = 8 &amp;&amp; tm_case.`status` = '6',1,0)))/SUM(IF(MONTH(tm_case.creat_time) = 8 ,1,0))*100,2),'%'),'--') AS percentAug,
+		IFNULL(CONCAT(FORMAT( (SUM(IF(MONTH(tm_case.creat_time) = 9 &amp;&amp; tm_case.`status` = '3',1,0))+SUM(IF(MONTH(tm_case.creat_time) = 9 &amp;&amp; tm_case.`status` = '6',1,0)))/SUM(IF(MONTH(tm_case.creat_time) = 9 ,1,0))*100,2),'%'),'--') AS percentSep,
+		IFNULL(CONCAT(FORMAT( (SUM(IF(MONTH(tm_case.creat_time) = 10 &amp;&amp; tm_case.`status` = '3',1,0))+SUM(IF(MONTH(tm_case.creat_time) = 10 &amp;&amp; tm_case.`status` = '6',1,0)))/SUM(IF(MONTH(tm_case.creat_time) = 10 ,1,0))*100,2),'%'),'--') AS percentOct,
+		IFNULL(CONCAT(FORMAT( (SUM(IF(MONTH(tm_case.creat_time) = 11 &amp;&amp; tm_case.`status` = '3',1,0))+SUM(IF(MONTH(tm_case.creat_time) = 11 &amp;&amp; tm_case.`status` = '6',1,0)))/SUM(IF(MONTH(tm_case.creat_time) = 11 ,1,0))*100,2),'%'),'--') AS percentNov,
+		IFNULL(CONCAT(FORMAT( (SUM(IF(MONTH(tm_case.creat_time) = 12 &amp;&amp; tm_case.`status` = '3',1,0))+SUM(IF(MONTH(tm_case.creat_time) = 12 &amp;&amp; tm_case.`status` = '6',1,0)))/SUM(IF(MONTH(tm_case.creat_time) = 12 ,1,0))*100,2),'%'),'--') AS percentDec
 		FROM tm_case LEFT JOIN (SELECT tm_parameter.para_value,chinese
 			FROM tm_parameter
 			WHERE tm_parameter.para_domain = 'country') d
@@ -1263,18 +1263,18 @@
 	
 	<select id="queryDesAchiRateSumTotal" parameterType="Map" resultType="com.tourmade.crm.entity.UserAchRate">
 		SELECT 
-		IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 1 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 1 ,1,0))*100,2),'%'),'--') AS percentJan_TR,
-		IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 2 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 2 ,1,0))*100,2),'%'),'--') AS percentFeb_TR,
-		IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 3 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 3 ,1,0))*100,2),'%'),'--') AS percentMar_TR,
-		IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 4 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 4 ,1,0))*100,2),'%'),'--') AS percentApr_TR,
-		IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 5 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 5 ,1,0))*100,2),'%'),'--') AS percentMay_TR,
-		IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 6 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 6 ,1,0))*100,2),'%'),'--') AS percentJun_TR,
-		IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 7 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 7 ,1,0))*100,2),'%'),'--') AS percentJul_TR,
-		IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 8 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 8 ,1,0))*100,2),'%'),'--') AS percentAug_TR,
-		IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 9 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 9 ,1,0))*100,2),'%'),'--') AS percentSep_TR,
-		IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 10 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 10 ,1,0))*100,2),'%'),'--') AS percentOct_TR,
-		IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 11 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 11 ,1,0))*100,2),'%'),'--') AS percentNov_TR,
-		IFNULL(CONCAT(FORMAT(SUM(IF(MONTH(tm_case.creat_time) = 12 &amp;&amp; tm_case.`status` = '3',1,0))/SUM(IF(MONTH(tm_case.creat_time) = 12 ,1,0))*100,2),'%'),'--') AS percentDec_TR
+		IFNULL(CONCAT(FORMAT( (SUM(IF(MONTH(tm_case.creat_time) = 1 &amp;&amp; tm_case.`status` = '3',1,0))+SUM(IF(MONTH(tm_case.creat_time) = 1 &amp;&amp; tm_case.`status` = '6',1,0)))/SUM(IF(MONTH(tm_case.creat_time) = 1 ,1,0))*100,2),'%'),'--') AS percentJan,
+		IFNULL(CONCAT(FORMAT( (SUM(IF(MONTH(tm_case.creat_time) = 2 &amp;&amp; tm_case.`status` = '3',1,0))+SUM(IF(MONTH(tm_case.creat_time) = 2 &amp;&amp; tm_case.`status` = '6',1,0)))/SUM(IF(MONTH(tm_case.creat_time) = 2 ,1,0))*100,2),'%'),'--') AS percentFeb,
+		IFNULL(CONCAT(FORMAT( (SUM(IF(MONTH(tm_case.creat_time) = 3 &amp;&amp; tm_case.`status` = '3',1,0))+SUM(IF(MONTH(tm_case.creat_time) = 3 &amp;&amp; tm_case.`status` = '6',1,0)))/SUM(IF(MONTH(tm_case.creat_time) = 3 ,1,0))*100,2),'%'),'--') AS percentMar,
+		IFNULL(CONCAT(FORMAT( (SUM(IF(MONTH(tm_case.creat_time) = 4 &amp;&amp; tm_case.`status` = '3',1,0))+SUM(IF(MONTH(tm_case.creat_time) = 4 &amp;&amp; tm_case.`status` = '6',1,0)))/SUM(IF(MONTH(tm_case.creat_time) = 4 ,1,0))*100,2),'%'),'--') AS percentApr,
+		IFNULL(CONCAT(FORMAT( (SUM(IF(MONTH(tm_case.creat_time) = 5 &amp;&amp; tm_case.`status` = '3',1,0))+SUM(IF(MONTH(tm_case.creat_time) = 5 &amp;&amp; tm_case.`status` = '6',1,0)))/SUM(IF(MONTH(tm_case.creat_time) = 5 ,1,0))*100,2),'%'),'--') AS percentMay,
+		IFNULL(CONCAT(FORMAT( (SUM(IF(MONTH(tm_case.creat_time) = 6 &amp;&amp; tm_case.`status` = '3',1,0))+SUM(IF(MONTH(tm_case.creat_time) = 6 &amp;&amp; tm_case.`status` = '6',1,0)))/SUM(IF(MONTH(tm_case.creat_time) = 6 ,1,0))*100,2),'%'),'--') AS percentJun,
+		IFNULL(CONCAT(FORMAT( (SUM(IF(MONTH(tm_case.creat_time) = 7 &amp;&amp; tm_case.`status` = '3',1,0))+SUM(IF(MONTH(tm_case.creat_time) = 7 &amp;&amp; tm_case.`status` = '6',1,0)))/SUM(IF(MONTH(tm_case.creat_time) = 7 ,1,0))*100,2),'%'),'--') AS percentJul,
+		IFNULL(CONCAT(FORMAT( (SUM(IF(MONTH(tm_case.creat_time) = 8 &amp;&amp; tm_case.`status` = '3',1,0))+SUM(IF(MONTH(tm_case.creat_time) = 8 &amp;&amp; tm_case.`status` = '6',1,0)))/SUM(IF(MONTH(tm_case.creat_time) = 8 ,1,0))*100,2),'%'),'--') AS percentAug,
+		IFNULL(CONCAT(FORMAT( (SUM(IF(MONTH(tm_case.creat_time) = 9 &amp;&amp; tm_case.`status` = '3',1,0))+SUM(IF(MONTH(tm_case.creat_time) = 9 &amp;&amp; tm_case.`status` = '6',1,0)))/SUM(IF(MONTH(tm_case.creat_time) = 9 ,1,0))*100,2),'%'),'--') AS percentSep,
+		IFNULL(CONCAT(FORMAT( (SUM(IF(MONTH(tm_case.creat_time) = 10 &amp;&amp; tm_case.`status` = '3',1,0))+SUM(IF(MONTH(tm_case.creat_time) = 10 &amp;&amp; tm_case.`status` = '6',1,0)))/SUM(IF(MONTH(tm_case.creat_time) = 10 ,1,0))*100,2),'%'),'--') AS percentOct,
+		IFNULL(CONCAT(FORMAT( (SUM(IF(MONTH(tm_case.creat_time) = 11 &amp;&amp; tm_case.`status` = '3',1,0))+SUM(IF(MONTH(tm_case.creat_time) = 11 &amp;&amp; tm_case.`status` = '6',1,0)))/SUM(IF(MONTH(tm_case.creat_time) = 11 ,1,0))*100,2),'%'),'--') AS percentNov,
+		IFNULL(CONCAT(FORMAT( (SUM(IF(MONTH(tm_case.creat_time) = 12 &amp;&amp; tm_case.`status` = '3',1,0))+SUM(IF(MONTH(tm_case.creat_time) = 12 &amp;&amp; tm_case.`status` = '6',1,0)))/SUM(IF(MONTH(tm_case.creat_time) = 12 ,1,0))*100,2),'%'),'--') AS percentDec
 		FROM tm_case LEFT JOIN (SELECT tm_parameter.para_value,chinese
 			FROM tm_parameter
 			WHERE tm_parameter.para_domain = 'country') d
@@ -1292,7 +1292,7 @@
 	<select id="queryDesAchiMoney" parameterType="Map" resultType="com.tourmade.crm.entity.UserAchRate">
 		SELECT 
 		destination AS code,
-		d.chinese AS userName,
+		IFNULL(d.chinese,'--') AS userName,
 		SUM(IF(MONTH(tm_order.group_time) = 1 ,tm_order.rmb_price,0)) AS percentJan,
 		SUM(IF(MONTH(tm_order.group_time) = 2 ,tm_order.rmb_price,0)) AS percentFeb,
 		SUM(IF(MONTH(tm_order.group_time) = 3 ,tm_order.rmb_price,0)) AS percentMar,
@@ -1321,18 +1321,18 @@
 	
 	<select id="queryDesAchiMoneyTotal" parameterType="Map" resultType="com.tourmade.crm.entity.UserAchRate">
 		select
-			sum(percentJan) as percentJan_TM,
-			sum(percentFeb) as percentFeb_TM,
-			sum(percentMar) as percentMar_TM,
-			sum(percentApr) as percentApr_TM,
-			sum(percentMay) as percentMay_TM,
-			sum(percentJun) as percentJun_TM,
-			sum(percentJul) as percentJul_TM,
-			sum(percentAug) as percentAug_TM,
-			sum(percentSep) as percentSep_TM,
-			sum(percentOct) as percentOct_TM,
-			sum(percentNov) as percentNov_TM,
-			sum(percentDec) as percentDec_TM
+			IFNULL(sum(percentJan),'--') as percentJan,
+			IFNULL(sum(percentFeb),'--') as percentFeb,
+			IFNULL(sum(percentMar),'--') as percentMar,
+			IFNULL(sum(percentApr),'--') as percentApr,
+			IFNULL(sum(percentMay),'--') as percentMay,
+			IFNULL(sum(percentJun),'--') as percentJun,
+			IFNULL(sum(percentJul),'--') as percentJul,
+			IFNULL(sum(percentAug),'--') as percentAug,
+			IFNULL(sum(percentSep),'--') as percentSep,
+			IFNULL(sum(percentOct),'--') as percentOct,
+			IFNULL(sum(percentNov),'--') as percentNov,
+			IFNULL(sum(percentDec),'--') as percentDec
 		from(
 			SELECT 
 			destination AS code,
@@ -1380,7 +1380,7 @@
 	
 	<select id="queryCustSource" parameterType="Map" resultType="com.tourmade.crm.entity.UserAchRate">
 		SELECT 
-		d.chinese as userName,
+		IFNULL(d.chinese,'--') as userName,
 		SUM(IF(MONTH(tm_customer.creat_time) = 1 ,1,0)) AS percentJan,
 		SUM(IF(MONTH(tm_customer.creat_time) = 2 ,1,0)) AS percentFeb,
 		SUM(IF(MONTH(tm_customer.creat_time) = 3 ,1,0)) AS percentMar,
@@ -1411,18 +1411,18 @@
 	
 	<select id="queryCustSourceTotal" parameterType="Map" resultType="com.tourmade.crm.entity.UserAchRate">
 		select 
-			sum(percentJan) as percentJan_T,
-			sum(percentFeb) as percentFeb_T,
-			sum(percentMar) as percentMar_T,
-			sum(percentApr) as percentApr_T,
-			sum(percentMay) as percentMay_T,
-			sum(percentJun) as percentJun_T,
-			sum(percentJul) as percentJul_T,
-			sum(percentAug) as percentAug_T,
-			sum(percentSep) as percentSep_T,
-			sum(percentOct) as percentOct_T,
-			sum(percentNov) as percentNov_T,
-			sum(percentDec) as percentDec_T
+			sum(percentJan) as percentJan,
+			sum(percentFeb) as percentFeb,
+			sum(percentMar) as percentMar,
+			sum(percentApr) as percentApr,
+			sum(percentMay) as percentMay,
+			sum(percentJun) as percentJun,
+			sum(percentJul) as percentJul,
+			sum(percentAug) as percentAug,
+			sum(percentSep) as percentSep,
+			sum(percentOct) as percentOct,
+			sum(percentNov) as percentNov,
+			sum(percentDec) as percentDec
 		from (
 			SELECT 
 			d.chinese as userName,
@@ -1475,7 +1475,7 @@
 	<select id="queryDesAchiCaseCount" parameterType="Map" resultType="com.tourmade.crm.entity.UserAchRate">
 		SELECT 
 		tm_case.destination AS code,
-		d.chinese AS userName,
+		IFNULL(d.chinese,'--') AS userName,
 		SUM(IF(MONTH(tm_case.creat_time) = 1 ,1,0)) AS percentJan,
 		SUM(IF(MONTH(tm_case.creat_time) = 2 ,1,0)) AS percentFeb,
 		SUM(IF(MONTH(tm_case.creat_time) = 3 ,1,0)) AS percentMar,
@@ -1505,18 +1505,18 @@
 	
 	<select id="queryDesAchiCaseCountTotal" parameterType="Map" resultType="com.tourmade.crm.entity.UserAchRate">
 		select
-			sum(percentJan) as percentJan_T,
-			sum(percentFeb) as percentFeb_T,
-			sum(percentMar) as percentMar_T,
-			sum(percentApr) as percentApr_T,
-			sum(percentMay) as percentMay_T,
-			sum(percentJun) as percentJun_T,
-			sum(percentJul) as percentJul_T,
-			sum(percentAug) as percentAug_T,
-			sum(percentSep) as percentSep_T,
-			sum(percentOct) as percentOct_T,
-			sum(percentNov) as percentNov_T,
-			sum(percentDec) as percentDec_T
+			IFNULL(sum(percentJan),'--') as percentJan,
+			IFNULL(sum(percentFeb),'--') as percentFeb,
+			IFNULL(sum(percentMar),'--') as percentMar,
+			IFNULL(sum(percentApr),'--') as percentApr,
+			IFNULL(sum(percentMay),'--') as percentMay,
+			IFNULL(sum(percentJun),'--') as percentJun,
+			IFNULL(sum(percentJul),'--') as percentJul,
+			IFNULL(sum(percentAug),'--') as percentAug,
+			IFNULL(sum(percentSep),'--') as percentSep,
+			IFNULL(sum(percentOct),'--') as percentOct,
+			IFNULL(sum(percentNov),'--') as percentNov,
+			IFNULL(sum(percentDec),'--') as percentDec
 		from (
 			SELECT 
 			tm_case.destination AS code,

@@ -12,7 +12,7 @@
 			u.isdel
 		from tm_sales u where u.agency_id = #{agencyId} and u.isdel = 0
 		order by u.creat_time
-		limit #{start},#{length}
+		<!-- limit #{start},#{length} -->
 	</select>
 
 	<select id="countSale" parameterType="Sale" resultType="long">
@@ -77,7 +77,7 @@
 		statementType="PREPARED">
 		update tm_sales
 		set
-		isdel=1
+		isdel=1,update_time=NOW()
 		where
 		sales_id = #{salesId}
 	</update>

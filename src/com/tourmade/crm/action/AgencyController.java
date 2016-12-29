@@ -141,5 +141,29 @@ public class AgencyController extends BaseSimpleFormController {
 		}		
 		return json;
 	}
-
+	
+	//校验地接社是否有订单
+	@RequestMapping(value = "/checkDel.do")
+	@ResponseBody
+	public Json doCheckDel(HttpServletRequest request, HttpSession session, Model model, String id) {
+		
+		Json json = new Json();
+		try {
+			if (null != id && !"".equals(id)) {
+				int agencyId = Integer.parseInt(id);
+				String agencyId2 = service.checkAgencyHaveOrder(agencyId);
+				if(null!=agencyId2){
+					json.setSuccess(true);
+				}else{
+					json.setSuccess(false);
+				}
+			} else {
+				json.setSuccess(false);
+			}
+		} catch (Exception e) {
+			json.setSuccess(false);
+			logger.error("AgencyController.doDel() --> " + id + "\n" + e.getMessage());
+		}		
+		return json;
+	}
 }

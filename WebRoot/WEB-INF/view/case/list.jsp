@@ -61,13 +61,13 @@
 								</div>
 								<div class="col-sm-2">
 									<div class="input-group input-datepicker" style="padding: 0;">
-				                        <input id="searchStartDateTime" type="text" name="searchStartDateTime" class="form-control datepicker" placeholder="请点击输入查询开始日期" value="${searchStartDateTime}" autocomplete="on">
+				                        <input readonly="readonly" id="searchStartDateTime" type="text" name="searchStartDateTime" class="form-control datepicker" placeholder="请点击输入查询开始日期" value="${searchStartDateTime}" autocomplete="on">
 				                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
 				                    </div>
 				                </div>
 			                    <div class="col-sm-2">
 				                    <div class="input-group input-datepicker" style="padding: 0;">
-				                        <input id="searchEndDateTime" type="text" name="searchEndDateTime" class="form-control datepicker" placeholder="请点击输入查询截止日期" value="${searchEndDateTime}" autocomplete="on">
+				                        <input readonly="readonly" id="searchEndDateTime" type="text" name="searchEndDateTime" class="form-control datepicker" placeholder="请点击输入查询截止日期" value="${searchEndDateTime}" autocomplete="on">
 				                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
 				                    </div>
 			                    </div>
@@ -162,7 +162,6 @@
 	var reason = ${reason};
 	var reasonNodeal =${reasonNodeal};
 	var searchFlag = false;
-
 	var searchStatusCheck = "";
 	var searchButtonClick = false;
 
@@ -244,15 +243,15 @@
 			 			var searchMobile=$('#searchMobile').val();
 			 			var searchStartDateTime=$("#searchStartDateTime").val();
 			 			var searchEndDateTime=$("#searchEndDateTime").val();
+			 			//var searchStatus = $("input[name='status']:checked").val();
+			 			var searchStatus = searchStatusCheck;
+			 			searchStatusCheck = "";
 
-			 			
 			 			var searchStatus = $("input[name='status']:checked").val();
 			 			if(searchButtonClick == true){
 			 				searchStatus = "";
 			 				searchButtonClick =false;
 			 			}
-			 			
-
 			 			
 			 			if(searchCustomerId !=null && searchCustomerId !="" ){
 							data.customerId = searchCustomerId;

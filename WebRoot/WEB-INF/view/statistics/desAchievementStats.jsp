@@ -28,10 +28,11 @@
 						<!-- panel-btns -->
 						<h3 class="panel-title">目的地咨询、成交统计</h3>
 						<div class="row" style="margin-top: 20px">
+						
 							<div class="form-group col-sm-10">
 								<div class="col-sm-2">
 									<div class="input-group input-datepicker" style="padding: 0;">
-				                        <input id="searchYear" type="text" name="searchYear" class="form-control datepicker" placeholder="请选择查询年份" autocomplete="on" value="${searchYear }">
+				                        <input readonly="readonly" id="searchYear" type="text" name="searchYear" class="form-control datepicker" placeholder="请选择查询年份" autocomplete="on" value="${searchYear }">
 				                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
 				                    </div>
 				                </div>
@@ -39,6 +40,7 @@
 									<div class="col-sm-2">					 		                        		
 									<input class="btn btn-primary" type="button" id="searchBtn" value="搜索"/>
 								</div> 	
+							
 							</div>
 
 							</div>	
@@ -50,33 +52,23 @@
 						<div class="panel-btns">
 							<a href="" class="minimize">&minus;</a>
 						</div>
-						<h4 class="panel-title">咨询数量统计（按咨询时间）</h4>
+						<div class="row" style="clear: both;">
+							<h4 class="panel-title col-sm-11">咨询数量统计（按咨询时间）</h4>
+							<div class="col-sm-1">
+								<form action="${rootPath }/statistics/savedesachicount.do" method="post">
+								<input type="hidden" class="searchYearInput" name="searchYear" value="${searchYear }">
+									<input class="btn btn-primary" type="submit" 
+											value="导出" />
+								</form>
+							</div>
+						</div>
 					</div>
 					<div class="panel-body">
 						<div class="table-responsive">
-							<table id="dataTable-count" class="table table-communicate">
+							<table id="dataTable-count" class="table table-statistics">
 								<thead>
 									<tr>
 										<th>目的地</th>
-										<th>一月</th>		
-										<th>二月</th>		
-										<th>三月</th>		
-										<th>四月</th>		
-										<th>五月</th>		
-										<th>六月</th>		
-										<th>七月</th>		
-										<th>八月</th>		
-										<th>九月</th>		
-										<th>十月</th>		
-										<th>十一月</th>		
-										<th>十二月</th>		
-									</tr>
-								</thead>
-							</table>
-							<table id="dataTable-count2" class="table table-communicate">
-								<thead>
-									<tr>
-										<th></th>
 										<th>一月</th>		
 										<th>二月</th>		
 										<th>三月</th>		
@@ -101,33 +93,23 @@
 						<div class="panel-btns">
 							<a href="" class="minimize">&minus;</a>
 						</div>
-						<h4 class="panel-title">成交率统计（按咨询时间）</h4>
+						<div class="row" style="clear: both;">
+							<h4 class="panel-title col-sm-11">成交率统计（按咨询时间）</h4>
+							<div class="col-sm-1">
+								<form action="${rootPath }/statistics/savedesachirate.do" method="post">
+								<input type="hidden" class="searchYearInput" name="searchYear" value="${searchYear }">
+									<input class="btn btn-primary" type="submit" 
+											value="导出" />
+								</form>
+							</div>
+						</div>
 					</div>
 					<div class="panel-body">
 						<div class="table-responsive">
-							<table id="dataTable-rate" class="table table-communicate">
+							<table id="dataTable-rate" class="table table-statistics">
 								<thead>
 									<tr>
 										<th>目的地</th>
-										<th>一月</th>		
-										<th>二月</th>		
-										<th>三月</th>		
-										<th>四月</th>		
-										<th>五月</th>		
-										<th>六月</th>		
-										<th>七月</th>		
-										<th>八月</th>		
-										<th>九月</th>		
-										<th>十月</th>		
-										<th>十一月</th>		
-										<th>十二月</th>		
-									</tr>
-								</thead>
-							</table>
-							<table id="dataTable-rate2" class="table table-communicate">
-								<thead>
-									<tr>
-										<th></th>
 										<th>一月</th>		
 										<th>二月</th>		
 										<th>三月</th>		
@@ -153,33 +135,23 @@
 						<div class="panel-btns">
 							<a href="" class="minimize">&minus;</a>
 						</div>
-						<h4 class="panel-title">成交金额统计（按成交时间）</h4>
+						<div class="row" style="clear: both;">
+							<h4 class="panel-title col-sm-11">成交金额统计（按成交时间）</h4>
+							<div class="col-sm-1">
+								<form action="${rootPath }/statistics/savedesachimoney.do" method="post">
+								<input type="hidden" class="searchYearInput" name="searchYear" value="${searchYear }">
+									<input class="btn btn-primary" type="submit" 
+											value="导出" />
+								</form>
+							</div>
+						</div>
 					</div>
 					<div class="panel-body">
 						<div class="table-responsive">
-							<table id="dataTable-money" class="table table-communicate">
+							<table id="dataTable-money" class="table table-statistics">
 								<thead>
 									<tr>
 										<th>目的地</th>
-										<th>一月</th>		
-										<th>二月</th>		
-										<th>三月</th>		
-										<th>四月</th>		
-										<th>五月</th>		
-										<th>六月</th>		
-										<th>七月</th>		
-										<th>八月</th>		
-										<th>九月</th>		
-										<th>十月</th>		
-										<th>十一月</th>		
-										<th>十二月</th>	
-									</tr>
-								</thead>
-							</table>
-							<table id="dataTable-money2" class="table table-communicate">
-								<thead>
-									<tr>
-										<th></th>
 										<th>一月</th>		
 										<th>二月</th>		
 										<th>三月</th>		
@@ -370,154 +342,6 @@
 	        ]
 		});
 	
-	var countTable2 = jQuery('#dataTable-count2').DataTable({
-		searching:false,
-		paging:false,
-		processing: true,
-		language: datatable_local_language, // my.js
-		serverSide: true,
-		bInfo : false,
-		ajax: {
-			url: '${rootPath}statistics/desachievementcountstatstotal.do',
-			type:"post",
-			data: function(data){
-	 			var searchYear=$("#searchYear").val();
-	 			if(searchYear !=null && searchYear !=""){
-	 				data.searchYear = searchYear;
-	 			}
-			},
-			
-			dataFilter: function(data){
-				var json = jQuery.parseJSON( data );
-				json.recordsTotal = json.countTotal;
-				json.recordsFiltered = json.countFiltered;
-				json.data = json.data;
-				return JSON.stringify( json );
-			}
-		},
-		columnDefs: [		  
-				   {
-					   data:"",
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                	return "<div class='minw50'>" + "<h3>" + '合计'  + "</h3>" + "</div>" 
-	                },
-	                targets: 0
-				},
-				{
-					data:"percentJan_T",
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                    return "<div>" + data + "</div>"
-	                },
-	                targets: 1
-				},
-					{
-					data:"percentFeb_T",
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                	return "<div>" + data + "</div>"
-	                },
-	                targets: 2
-				},
-					{
-					data:"percentMar_T",
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                	return "<div>" + data + "</div>"
-	                },
-	                targets: 3
-				},
-					{
-					data:"percentApr_T",
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                	return "<div>" + data + "</div>"
-	                },
-	                targets: 4
-				},
-					{
-					data:"percentMay_T",
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                	return "<div>" + data + "</div>"
-	                },
-	                targets: 5
-				},
-					{
-					data:"percentJun_T",
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                	return "<div>" + data + "</div>"
-	                },
-	                targets: 6
-				},
-					{
-					data:"percentJul_T",
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                	return "<div>" + data + "</div>"
-	                },
-	                targets: 7
-				},
-					{
-					data:"percentAug_T",
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                	return "<div>" + data + "</div>"
-	                },
-	                targets: 8
-				},
-					{
-					data:"percentSep_T",
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                	return "<div>" + data + "</div>"
-	                },
-	                targets: 9
-				},
-					{
-					data:"percentOct_T",
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                	return "<div>" + data + "</div>"
-	                },
-	                targets: 10
-				},
-					{
-					data:"percentNov_T",
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                	return "<div>" + data + "</div>"
-	                },
-	                targets: 11
-				},
-					{
-					data:"percentDec_T",
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                	return "<div>" + data + "</div>"
-	                },
-	                targets: 12
-				}
-				
-			],
-			columns: [
-	            		{ data: "" },
-			            { data:	"percentJan_T"},
-			            { data: "percentFeb_T" },
-			            { data: "percentMar_T" },
-			            { data: "percentApr_T" },
-			            { data: "percentMay_T" },
-			            { data: "percentJun_T" },
-			            { data: "percentJul_T" },
-			            { data: "percentAug_T" },
-			            { data: "percentSep_T" },
-			            { data: "percentOct_T" },
-			            { data: "percentNov_T" },
-			            { data: "percentDec_T" }
-	        ]
-		});
 	var rateTable = jQuery('#dataTable-rate').DataTable({
 		searching:false,
 		paging:false,
@@ -667,155 +491,6 @@
 	        ]
 		});
 	
-	var rateTable2 = jQuery('#dataTable-rate2').DataTable({
-		searching:false,
-		paging:false,
-		processing: true,
-		language: datatable_local_language, // my.js
-		serverSide: true,
-		bInfo : false,
-		ajax: {
-			url: '${rootPath}statistics/desachievementratestatstotal.do',
-			type:"post",
-			data: function(data){
-	 			var searchYear=$("#searchYear").val();
-	 			if(searchYear !=null && searchYear !=""){
-	 				data.searchYear = searchYear;
-	 			}
-			},
-			
-			dataFilter: function(data){
-				var json = jQuery.parseJSON( data );
-				json.recordsTotal = json.countTotal;
-				json.recordsFiltered = json.countFiltered;
-				json.data = json.data;
-				return JSON.stringify( json );
-			}
-		},
-		columnDefs: [		  
-				   {
-					   data:"",
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                	return "<div class='minw50'>" + "<h3>" + '合计'  + "</h3>" + "</div>" 
-	                },
-	                targets: 0
-				},
-				{
-					data:"percentJan_TR",
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                    return "<div>" + data + "</div>"
-	                },
-	                targets: 1
-				},
-					{
-					data:"percentFeb_TR",
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                	return "<div>" + data + "</div>"
-	                },
-	                targets: 2
-				},
-					{
-					data:"percentMar_TR",
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                	return "<div>" + data + "</div>"
-	                },
-	                targets: 3
-				},
-					{
-					data:"percentApr_TR",
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                	return "<div>" + data + "</div>"
-	                },
-	                targets: 4
-				},
-					{
-					data:"percentMay_TR",
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                	return "<div>" + data + "</div>"
-	                },
-	                targets: 5
-				},
-					{
-					data:"percentJun_TR",
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                	return "<div>" + data + "</div>"
-	                },
-	                targets: 6
-				},
-					{
-					data:"percentJul_TR",
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                	return "<div>" + data + "</div>"
-	                },
-	                targets: 7
-				},
-					{
-					data:"percentAug_TR",
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                	return "<div>" + data + "</div>"
-	                },
-	                targets: 8
-				},
-					{
-					data:"percentSep_TR",
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                	return "<div>" + data + "</div>"
-	                },
-	                targets: 9
-				},
-					{
-					data:"percentOct_TR",
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                	return "<div>" + data + "</div>"
-	                },
-	                targets: 10
-				},
-					{
-					data:"percentNov_TR",
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                	return "<div>" + data + "</div>"
-	                },
-	                targets: 11
-				},
-					{
-					data:"percentDec_TR",
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                	return "<div>" + data + "</div>"
-	                },
-	                targets: 12
-				}
-				
-			],
-			columns: [
-	            		{ data: "" },
-			            { data:	"percentJan_TR"},
-			            { data: "percentFeb_TR" },
-			            { data: "percentMar_TR" },
-			            { data: "percentApr_TR" },
-			            { data: "percentMay_TR" },
-			            { data: "percentJun_TR" },
-			            { data: "percentJul_TR" },
-			            { data: "percentAug_TR" },
-			            { data: "percentSep_TR" },
-			            { data: "percentOct_TR" },
-			            { data: "percentNov_TR" },
-			            { data: "percentDec_TR" }
-	        ]
-		});
-	
 	var moneyTable = jQuery('#dataTable-money').DataTable({
 		searching:false,
 		paging:false,
@@ -845,10 +520,6 @@
  						   data:"userName",
 			                orderable: false,
 			                render: function ( data, type, full, meta ) {
-			                	/* if(data=='合计'){
-			                		alert(data);
-			                		console.log($(this));
-			                	} */
 			                    return "<div>" + data + "</div>"
 			                },
 			                targets: 0
@@ -968,161 +639,10 @@
 			        ]
 		});
 	
-	var moneyTable2 = jQuery('#dataTable-money2').DataTable({
-		searching:false,
-		paging:false,
-		processing: true,
-		language: datatable_local_language, // my.js
-		serverSide: true,
-		bInfo : false,
-		ajax: {
-			url: '${rootPath}statistics/desachievementmoneystatstotal.do',
-			type:"post",
-			data: function(data){
-				var searchYear=$("#searchYear").val();
-	 			if(searchYear !=null && searchYear !=""){
-	 				data.searchYear = searchYear;
-	 			}
-			},
-			dataFilter: function(data){
-				var json = jQuery.parseJSON( data );
-				json.recordsTotal = json.countTotal;
-				json.recordsFiltered = json.countFiltered;
-				json.data = json.data;
-				return JSON.stringify( json );
-			}
-		},
-		columnDefs: [		  
- 					   {
- 						   data:"",
-			                orderable: false,
-			                render: function ( data, type, full, meta ) {
-			                	return "<div class='minw50'>" + "<h3>" + '合计'  + "</h3>" + "</div>" 
-			                },
-			                targets: 0
-						},
-						{
-							data:"percentJan_TM",
-			                orderable: false,
-			                render: function ( data, type, full, meta ) {
-			                    return "<div>" + data + "</div>"
-			                },
-			                targets: 1
-						},
-	 					{
-							data:"percentFeb_TM",
-			                orderable: false,
-			                render: function ( data, type, full, meta ) {
-			                	return "<div>" + data + "</div>"
-			                },
-			                targets: 2
-						},
-	 					{
-							data:"percentMar_TM",
-			                orderable: false,
-			                render: function ( data, type, full, meta ) {
-			                	return "<div>" + data + "</div>"
-			                },
-			                targets: 3
-						},
-	 					{
-							data:"percentApr_TM",
-			                orderable: false,
-			                render: function ( data, type, full, meta ) {
-			                	return "<div>" + data + "</div>"
-			                },
-			                targets: 4
-						},
-	 					{
-							data:"percentMay_TM",
-			                orderable: false,
-			                render: function ( data, type, full, meta ) {
-			                	return "<div>" + data + "</div>"
-			                },
-			                targets: 5
-						},
-	 					{
-							data:"percentJun_TM",
-			                orderable: false,
-			                render: function ( data, type, full, meta ) {
-			                	return "<div>" + data + "</div>"
-			                },
-			                targets: 6
-						},
-	 					{
-							data:"percentJul_TM",
-			                orderable: false,
-			                render: function ( data, type, full, meta ) {
-			                	return "<div>" + data + "</div>"
-			                },
-			                targets: 7
-						},
-	 					{
-							data:"percentAug_TM",
-			                orderable: false,
-			                render: function ( data, type, full, meta ) {
-			                	return "<div>" + data + "</div>"
-			                },
-			                targets: 8
-						},
-	 					{
-							data:"percentSep_TM",
-			                orderable: false,
-			                render: function ( data, type, full, meta ) {
-			                	return "<div>" + data + "</div>"
-			                },
-			                targets: 9
-						},
-	 					{
-							data:"percentOct_TM",
-			                orderable: false,
-			                render: function ( data, type, full, meta ) {
-			                	return "<div>" + data + "</div>"
-			                },
-			                targets: 10
-						},
-	 					{
-							data:"percentNov_TM",
-			                orderable: false,
-			                render: function ( data, type, full, meta ) {
-			                	return "<div>" + data + "</div>"
-			                },
-			                targets: 11
-						},
-	 					{
-							data:"percentDec_TM",
-			                orderable: false,
-			                render: function ( data, type, full, meta ) {
-			                	return "<div>" + data + "</div>"
-			                },
-			                targets: 12
-						}
-						
-					],
-					columns: [
-			            		{ data: "" },
-					            { data:	"percentJan_TM"},
-					            { data: "percentFeb_TM" },
-					            { data: "percentMar_TM" },
-					            { data: "percentApr_TM" },
-					            { data: "percentMay_TM" },
-					            { data: "percentJun_TM" },
-					            { data: "percentJul_TM" },
-					            { data: "percentAug_TM" },
-					            { data: "percentSep_TM" },
-					            { data: "percentOct_TM" },
-					            { data: "percentNov_TM" },
-					            { data: "percentDec_TM" }
-			        ]
-		});
-
 		$('#searchBtn').on( 'click', function () {
 			countTable.draw();
-			countTable2.draw();
 			rateTable.draw();
-			rateTable2.draw();
 			moneyTable.draw();
-			moneyTable2.draw();
 	    } );
 			
 		// Select2

@@ -86,7 +86,7 @@
 		from tm_case u  
 		where u.isdel = 0 and u.customer_id = #{customerId}
 		order by u.creat_time
-		limit #{start},#{length}
+		<!-- limit #{start},#{length} -->
 	</select>
 	
 	<select id="countCase" parameterType="Case" resultType="long">
@@ -433,6 +433,7 @@
 		u.isdisplay,
 		u.isdel 
 		from tm_parameter u where u.isdisplay = 1 and u.isdel = 0 and u.para_domain = #{domain}
+		ORDER BY u.para_sort desc, u.para_value
 	</select>
 	
 	<select id="getParameterByCountryChinese" parameterType="String" resultType="Parameter">
@@ -524,7 +525,7 @@
 	<update id="deleteCaseById" parameterType="int" flushCache="true" statementType="PREPARED">
 		update tm_case
 		set
-		status = 5 
+		status = 5,update_time=NOW() 
 		where
 		case_id = #{caseId}
 	</update>
@@ -538,8 +539,6 @@
 		where
 		case_id = #{caseId}
 	</update>
-	
-	
 	
 	<select id="getCustomerByCommunication" parameterType="Case" resultType="Customer">
 		select

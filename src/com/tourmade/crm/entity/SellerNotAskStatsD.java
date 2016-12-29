@@ -2,7 +2,7 @@ package com.tourmade.crm.entity;
 
 import com.tourmade.crm.common.framework.BaseBean;
 
-public class SellerNotAskStats extends BaseBean<Agency>{
+public class SellerNotAskStatsD extends BaseBean<Agency>{
 
 	/**
 	 * 
@@ -11,7 +11,7 @@ public class SellerNotAskStats extends BaseBean<Agency>{
 	
 	private String country;
 	
-	private String number;
+	private String destination;
 	
 	private String searchStartTime;
 	
@@ -23,14 +23,6 @@ public class SellerNotAskStats extends BaseBean<Agency>{
 
 	public void setCountry(String country) {
 		this.country = country;
-	}
-
-	public String getNumber() {
-		return number;
-	}
-
-	public void setNumber(String number) {
-		this.number = number;
 	}
 
 	public String getSearchStartTime() {
@@ -49,14 +41,22 @@ public class SellerNotAskStats extends BaseBean<Agency>{
 		this.searchEndTime = searchEndTime;
 	}
 
+	public String getDestination() {
+		return destination;
+	}
+
+	public void setDestination(String destination) {
+		this.destination = destination;
+	}
+
 	@Override
 	public String toString() {
-		return "SellerNotAskStats [country=" + country + ", number=" + number + ", searchStartTime=" + searchStartTime
-				+ ", searchEndTime=" + searchEndTime + "]";
+		return "SellerNotAskStatsD [country=" + country + ", destination=" + destination + ", searchStartTime="
+				+ searchStartTime + ", searchEndTime=" + searchEndTime + "]";
 	}
 	@Override
 	public String toCSVString() {
-		// TODO Auto-generated method stub
-		return country + ","  + number;
+		String temp=country.contains(",")? "\""+country+"\"":country;
+		return destination + "," + temp;
 	}
 }

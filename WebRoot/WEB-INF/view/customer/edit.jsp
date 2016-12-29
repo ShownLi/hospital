@@ -193,18 +193,9 @@
 						</table>
 					</div>
 					<!-- 添加注释 -->
-					<form id="form-comment" class="form">
-						<div class="form-group col-sm-6 col-sm-offset-3">
-						    <textarea name="content" class="form-control" rows="5"></textarea>
-						    <input  type="hidden" name="userId" value="${loginUser.userId}" />
-						    <input  type="hidden" name="userName" value="${loginUser.name}" />
-						    <input  type="hidden" name="objectId" value="${customer.customerId}" />
-						    <input  type="hidden" name="commentType" value="customer" />
-						</div>
-						<div class="form-group col-sm-12 align-center">
-							<button class="btn btn-primary">添加注释</button>
-						</div>
-		            </form>
+					<div class="form-group col-sm-12 align-center" id="addNoteDiv">
+						<input class="btn btn-primary" type="button" id="addNote" onclick="showNote()" value="添加注释"/>
+					</div>
           		</div>
 				</div>
 				<!-- end of panel 注释列表 -->
@@ -256,8 +247,36 @@
   </div><!-- modal-dialog -->
 </div><!-- modal -->
 
-
-
+<!-- 保存注释信息 -->
+<div class="modal fade" id="addNote2" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel">添加注释信息</h4>
+				</div>
+				<div class="modal-body">
+					<form id="form-comment" class="form row" >
+						<div class="form-group col-sm-6 col-sm-offset-3">
+						    <textarea name="content" class="form-control" rows="5"></textarea>
+						    <input  type="hidden" name="userId" value="${loginUser.userId}" />
+						    <input  type="hidden" name="userName" value="${loginUser.name}" />
+						    <input  type="hidden" name="objectId" value="${customer.customerId}" />
+						    <input  type="hidden" name="commentType" value="customer" />
+						</div>
+						<div class="form-group col-sm-12 align-center">
+							<button class="btn btn-primary">添加注释</button>
+							<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						</div>
+		            </form>
+				</div>
+			</div>
+			<!-- modal-content -->
+		</div>
+		<!-- modal-dialog -->
+	</div>
 	<%@ include file="../assets/pages/foot.jsp"%>
 	<script src="${rootPath}assets/js/jquery-ui-1.10.3.min.js"></script>
 	<script src="${rootPath}assets/js/datepicker-zh-CN.js"></script>
@@ -266,6 +285,11 @@
 	<script src="${rootPath}assets/js/jquery.validate.min.js"></script>
 	
 	<script type="text/javascript">
+	
+	function showNote() {
+		$("#addNote2").modal('show');
+	}
+	
 	var leval = ${level};
 //	var source = ${source};
 	var promote = ${promote};
@@ -300,10 +324,11 @@
       	
 			var caseTable= jQuery('#dataTable-case').DataTable({
 				searching:false,
-				pageLength: 10,
+				paging: false,
 				processing: true,
 				language: datatable_local_language, // my.js
 				serverSide: true,
+				bInfo:false,
 				ajax: {
 					url: '${rootPath}case/listByCustomerId.do?customerId=${customer.customerId}',
 					dataFilter: function(data){
@@ -567,6 +592,7 @@
 			processing: true,
 			language: datatable_local_language, // my.js
 			serverSide: true,
+			bInfo:false,
 			ajax: {
 				url: '${rootPath}comment/list.do?type=customer&id=${customer.customerId}',
 				dataFilter: function(data){

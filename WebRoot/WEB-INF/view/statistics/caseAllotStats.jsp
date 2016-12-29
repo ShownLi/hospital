@@ -28,16 +28,17 @@
 						<!-- panel-btns -->
 						<h3 class="panel-title">询单分配统计</h3>
 						<div class="row" style="margin-top: 20px">
+						<form action="${rootPath }/statistics/savecaseallot.do" method="post">
 							<div class="form-group col-sm-10">
 								<div class="col-sm-2">
 									<div class="input-group input-datepicker" style="padding: 0;">
-				                        <input id="searchStartDateTime" type="text" name="searchStartDateTime" class="form-control datepicker" value="${searchStartDateTime}" placeholder="请点击输入查询开始日期" autocomplete="on">
+				                        <input readonly="readonly" id="searchStartDateTime" type="text" name="searchStartTime" class="form-control datepicker" value="${searchStartDateTime}" placeholder="请点击输入查询开始日期" autocomplete="on">
 				                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
 				                    </div>
 				                </div>
 			                    <div class="col-sm-2">
 				                    <div class="input-group input-datepicker" style="padding: 0;">
-				                        <input id="searchEndDateTime" type="text" name="searchEndDateTime" class="form-control datepicker" value="${searchEndDateTime}" placeholder="请点击输入查询截止日期" autocomplete="on">
+				                        <input readonly="readonly" id="searchEndDateTime" type="text" name="searchEndTime" class="form-control datepicker" value="${searchEndDateTime}" placeholder="请点击输入查询截止日期" autocomplete="on">
 				                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
 				                    </div>
 			                    </div>
@@ -45,7 +46,9 @@
 								</div>	
 									<div class="col-sm-2">					 		                        		
 									<input class="btn btn-primary" type="button" id="searchBtn" value="搜索"/>
+									<input class="btn btn-primary" type="submit" value="导出"/>
 								</div> 	
+								</form>
 							</div>
 
 							</div>	
@@ -55,34 +58,10 @@
 						
 						<div class="table-responsive">
 
-							<table id="dataTable" class="table">
+							<table id="dataTable" class="table table-statistics">
 								<thead>
 									<tr>
 										<th>跟单员</th>
-										<th>网站表单询单数 </th>									
-										<th>手机表单</th>
-										<th>直发表单 </th>
-										<th>微信表单</th>
-										<th>网站在线客服</th>
-										<th>手机在线客服</th>
-										<th>电话客服</th>
-										<th>微信客服</th>
-										<th>线下活动</th>
-										<th>邮件咨询</th>
-										<th>朋友介绍</th>
-										<th>老客人</th>
-										<th>携程</th>
-										<th>询单总数量</th>
-									</tr>
-								</thead>
-								<tbody>
-								</tbody>
-							</table>
-							
-							<table id="dataTable2" class="table">
-								<thead>
-									<tr>
-										<th></th>
 										<th>网站表单询单数 </th>									
 										<th>手机表单</th>
 										<th>直发表单 </th>
@@ -294,171 +273,9 @@
 	            { data:"total"}
 	        ]
 		});
-	var t2 = jQuery('#dataTable2').DataTable({
-		searching:false,
-		pageLength: 10,
-		processing: true,
-		paging: false, // 禁止分页
-		language: datatable_local_language, // my.js
-		serverSide: true,
-		bInfo : false,
-		ajax: {
-			url: '${rootPath}statistics/caseAllotStatsTotal.do',
-			data: function(data){
-	 			var searchStartDateTime=$("#searchStartDateTime").val();
-	 			var searchEndDateTime=$("#searchEndDateTime").val();
-	 			
-	 			var searchStatus = searchStatusCheck;
-	 			searchStatusCheck = "";
-	 			
-	 			if(searchStartDateTime !=null && searchStartDateTime !=""){
-	 				data.searchStartTime = searchStartDateTime;
-	 			}
-	 			if(searchEndDateTime !=null && searchEndDateTime !=""){
-	 				data.searchEndTime = searchEndDateTime;
-	 			}
-			},
-			dataFilter: function(data){
-				var json = jQuery.parseJSON( data );
-				json.recordsTotal = json.countTotal;
-				json.recordsFiltered = json.countFiltered;
-				json.data = json.data;
-				return JSON.stringify( json );
-			}
-		},
-		columnDefs: [		  
-				   {
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                	return "<div class='minw50'>" + "<h3>" + '合计'  + "</h3>" + "</div>" 
-	                },
-	                targets: 0
-				},
-				{
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                    return "<div>" + full.web_form_T + "</div>" 
-	                },
-	                targets: 1
-				},
-				{
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                    return "<div>" + full.mobile_form_T + "</div>" 
-	                },
-	                targets: 2
-				},
-				{
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                    return "<div>" + full.direct_form_T + "</div>" 
-	                },
-	                targets: 3
-				},
-				{
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                    return "<div>" + full.wechat_form_T + "</div>" 
-	                },
-	                targets: 4
-				},
-				{
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                    return "<div>" + full.web_service_T + "</div>" 
-	                },
-	                targets: 5
-				},
-				{
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                    return "<div>" + full.mobile_service_T + "</div>" 
-	                },
-	                targets: 6
-				},
-				{
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                    return "<div>" + full.phone_service_T + "</div>" 
-	                },
-	                targets: 7
-				},
-				{
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                    return "<div>" + full.wechat_service_T + "</div>" 
-	                },
-	                targets: 8
-				},
-				{
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                    return "<div>" + full.offline_T + "</div>" 
-	                },
-	                targets: 9
-				},
-				{
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                    return "<div>" + full.email_T + "</div>" 
-	                },
-	                targets: 10
-				},
-				{
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                    return "<div>" + full.friends_T + "</div>" 
-	                },
-	                targets: 11
-				},
-				{
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                    return "<div>" + full.customer_T + "</div>" 
-	                },
-	                targets: 12
-				},
-				{
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                    return "<div>" + full.ctrip_T + "</div>" 
-	                },
-	                targets: 13
-				},
-				{
-	                orderable: false,
-	                render: function ( data, type, full, meta ) {
-	                    return "<div>" + full.total_T + "</div>" 
-	                },
-	                targets: 14
-				},
-				{
-				    orderable: false,
-				    searchable: false,
-			        targets: [0]
-			    }, 
-			],
-			columns: [
-	            { data: "web_form_T" },
-	            { data: "mobile_form_T" },
-	            { data: "direct_form_T" },
-	            { data: "wechat_form_T"},
-	            { data: "web_service_T"},
-	            { data: "mobile_service_T"},
-	            { data: "phone_service_T"},
-	            { data: "wechat_service_T"},
-	            { data: "offline_T"},
-	            { data: "email_T"},
-	            { data: "friends_T"},
-	            { data: "customer_T"},
-	            { data: "ctrip_T"},
-	            { data:"total_T"}
-	        ]
-		});
 
 		$('#searchBtn').on( 'click', function () {
 	        t.draw();
-	        t2.draw();
 	    } );
 	</script>
 </body>
