@@ -856,6 +856,7 @@
 			$("#btn-invalid").css("display","none");
 	}
 	var country = ${country};
+	console.log(JSON.stringify(country));
     var language = ${language};
     var withwho = ${withwho};
     var hotel = ${hotel};
