@@ -251,3 +251,6 @@ label.error{
 .leftpanel-collapsed .nav-hover ul{
 	display: block !important;
 }
+.table-statistics tbody tr:last-child{
+	background: #e6ecff;
+}
