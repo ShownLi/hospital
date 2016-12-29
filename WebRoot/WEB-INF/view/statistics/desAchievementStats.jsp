@@ -65,7 +65,7 @@
 					</div>
 					<div class="panel-body">
 						<div class="table-responsive">
-							<table id="dataTable-count" class="table table-communicate">
+							<table id="dataTable-count" class="table table-statistics">
 								<thead>
 									<tr>
 										<th>目的地</th>
@@ -106,7 +106,7 @@
 					</div>
 					<div class="panel-body">
 						<div class="table-responsive">
-							<table id="dataTable-rate" class="table table-communicate">
+							<table id="dataTable-rate" class="table table-statistics">
 								<thead>
 									<tr>
 										<th>目的地</th>
@@ -148,7 +148,7 @@
 					</div>
 					<div class="panel-body">
 						<div class="table-responsive">
-							<table id="dataTable-money" class="table table-communicate">
+							<table id="dataTable-money" class="table table-statistics">
 								<thead>
 									<tr>
 										<th>目的地</th>

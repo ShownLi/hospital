@@ -64,7 +64,7 @@
 					</div>
 					<div class="panel-body">
 						<div class="table-responsive">
-							<table id="dataTable-rate" class="table table-communicate">
+							<table id="dataTable-rate" class="table table-statistics">
 								<thead>
 									<tr>
 										<th>跟单员</th>
@@ -106,7 +106,7 @@
 					</div>
 					<div class="panel-body">
 						<div class="table-responsive">
-							<table id="dataTable-money" class="table table-communicate">
+							<table id="dataTable-money" class="table table-statistics">
 								<thead>
 									<tr>
 										<th>跟单员</th>

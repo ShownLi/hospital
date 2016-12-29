@@ -96,6 +96,25 @@
   </div><!-- modal-dialog -->
 </div><!-- modal -->
 
+<!-- Modal -->
+<div class="modal fade" id="noDelModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel"><span class="fa fa-warning"></span> 提示</h4>
+      </div>
+      <div class="modal-body">
+       	此地接社存在订单，不能删除哦^_^!
+      </div>
+      <div class="modal-footer">
+      	<input type="hidden" class="hiddenId" value="" />
+        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+      </div>
+    </div><!-- modal-content -->
+  </div><!-- modal-dialog -->
+</div><!-- modal -->
+
 
 <script type="text/javascript">
 	var country= ${country};
@@ -261,7 +280,15 @@
 	function del(id) {
 		$("#confirmDelModal .hiddenId").val("");
 		$("#confirmDelModal .hiddenId").val(id);
-		$("#confirmDelModal").modal('show');
+		
+		 $.post("${rootPath}agency/checkDel.do?id="+id, id, function(result) {
+			if (result.success) {
+				$("#noDelModal").modal('show');
+			} 
+			else {
+				$("#confirmDelModal").modal('show');
+			}
+		}, "JSON");
 	}
 	
 	function doDel(id){

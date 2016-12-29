@@ -52,7 +52,7 @@
 						
 						<div class="table-responsive">
 
-							<table id="dataTable" class="table">
+							<table id="dataTable" class="table table-statistics">
 								<thead>
 									<tr>
 										<th>客人来源</th>

@@ -112,7 +112,7 @@
 	
 	<select id="checkAgencyHaveOrder"  parameterType="int" resultType="String">
 		select 
-			a.agency_name 
+			o.order_id
 		from tm_agency a LEFT JOIN tm_order o on a.agency_id = o.agency_id 
 		where a.agency_id = #{agencyId} 
 		GROUP BY a.agency_id

@@ -80,7 +80,7 @@
 					</div>
 					<div class="panel-body">
 						<div class="table-responsive">
-							<table id="dataTable-invalid" class="table table-communicate">
+							<table id="dataTable-invalid" class="table table-statistics">
 								<thead>
 									<tr>
 										<th>无效原因</th>
@@ -113,7 +113,7 @@
 					</div>
 					<div class="panel-body">
 						<div class="table-responsive">
-							<table id="dataTable-nodeal" class="table table-communicate">
+							<table id="dataTable-nodeal" class="table table-statistics">
 								<thead>
 									<tr>
 										<th>未成行原因</th>

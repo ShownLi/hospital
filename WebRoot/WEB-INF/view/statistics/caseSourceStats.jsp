@@ -59,7 +59,7 @@
 						
 						<div class="table-responsive">
 
-							<table id="dataTable" class="table">
+							<table id="dataTable" class="table table-statistics">
 								<thead>
 									<tr>
 										<th>询单来源</th>

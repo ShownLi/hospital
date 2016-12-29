@@ -147,6 +147,25 @@
 		  </div><!-- modal-dialog -->
 		</div><!-- modal -->
 
+		<!-- Modal -->
+		<div class="modal fade" id="notDelModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
+		  <div class="modal-dialog modal-sm">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		        <h4 class="modal-title" id="myModalLabel"><span class="fa fa-warning"></span> 提示</h4>
+		      </div>
+		      <div class="modal-body">
+		       		 当前地接社存在订单，不能删除！
+		      </div>
+		      <div class="modal-footer">
+		      	<input type="hidden" class="hiddenId" value="" />
+		        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+		      </div>
+		    </div><!-- modal-content -->
+		  </div><!-- modal-dialog -->
+		</div><!-- modal -->
+
 	<%@ include file="../assets/pages/foot.jsp"%>
 	<script src="${rootPath}assets/js/jquery.datatables.min.js"></script>
 	<script src="${rootPath}assets/js/select2.min.js"></script>
@@ -290,7 +309,7 @@
 	$('#confirmDelModal').on( 'click', 'button.btn-danger', function () {
 	    var id = $("#confirmDelModal .hiddenId").val();
 	    doDel(id);
-	    }); 
+	}); 
 	    
 		// Select2
 	jQuery('select').select2({
@@ -307,21 +326,20 @@
 	function del(id) {
 		$("#confirmDelModal .hiddenId").val("");
 		$("#confirmDelModal .hiddenId").val(id);
-		$("#confirmDelModal").modal('show');
 	}
 	
 	function doDel(id){
 		$.ajax({
 			url: "${rootPath}sale/del.do?id=" + id, 
 			async: true,
-			success: function(o) {
+			success: function() {
+				alert(22);
 				window.location.reload();
 			},
-			error: function(o) {
+			error: function() {
 				alert(2);
 			}
 		});
-		
 	}
 </script>
 

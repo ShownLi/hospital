@@ -61,7 +61,7 @@
 						
 						<div class="table-responsive">
 
-							<table id="dataTable" class="table">
+							<table id="dataTable" class="table table-statistics">
 								<thead>
 									<tr>
 										<th>地接社名称</th>

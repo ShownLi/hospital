@@ -64,7 +64,7 @@
 					</div>
 					<div class="panel-body">
 						<div class="table-responsive">
-							<table id="dataTable" class="table table-communicate">
+							<table id="dataTable" class="table table-statistics">
 								<thead>
 									<tr>
 										<th>地接社名称</th>
@@ -108,7 +108,7 @@
 					</div>
 					<div class="panel-body">
 						<div class="table-responsive">
-							<table id="dataTable2" class="table table-communicate">
+							<table id="dataTable2" class="table table-statistics">
 								<thead>
 									<tr>
 										<th>地接社名称</th>

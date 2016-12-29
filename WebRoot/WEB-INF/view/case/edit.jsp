@@ -20,8 +20,6 @@
 
 			<div class="contentpanel">
 				<!-- content goes here... -->
-
-
       
          <!-- panel 是否无效 -->
       <div class="panel panel-default">
@@ -481,18 +479,6 @@
 						<div class="form-group col-sm-12 align-center" id="addNoteDiv">
 							<input class="btn btn-primary" type="button" id="addNote" onclick="showNote()" value="添加注释"/>
 						</div>
-						<form id="form-comment" class="form" hidden="hidden">
-							<div class="form-group col-sm-6 col-sm-offset-3">
-								<textarea name="content" class="form-control" rows="5"></textarea>
-								<input type="hidden" name="userId" value="${loginUser.userId}" />
-								<input type="hidden" name="userName" value="${loginUser.name}" />
-								<input type="hidden" name="objectId" value="${crmcase.caseId}" />
-								<input type="hidden" name="commentType" value="case" />
-							</div>
-							<div class="form-group col-sm-12 align-center">
-								<input class="btn btn-primary" type="submit" value="保存注释"/>
-							</div>
-						</form>
 					</div>
 				</div>
 				<!-- end of panel 注释 -->
@@ -804,6 +790,37 @@
 		</div>
 		<!-- modal-dialog -->
 	</div>
+	
+	<!-- Modal 保存注释-->
+	<div class="modal fade" id="addNote2" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel">添加注释信息</h4>
+				</div>
+				<div class="modal-body">
+					<form id="form-comment" class="form">
+					<div class="form-group col-sm-6 col-sm-offset-3">
+						<textarea name="content" class="form-control" rows="5"></textarea>
+						<input type="hidden" name="userId" value="${loginUser.userId}" />
+						<input type="hidden" name="userName" value="${loginUser.name}" />
+						<input type="hidden" name="objectId" value="${crmcase.caseId}" />
+						<input type="hidden" name="commentType" value="case" />
+					</div>
+					<div class="form-group col-sm-12 align-center">
+						<input class="btn btn-primary" type="submit" value="保存注释"/>
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					</div>
+					</form>
+				</div>
+			</div>
+			<!-- modal-content -->
+		</div>
+		<!-- modal-dialog -->
+	</div>
 	<!-- bmodal -->
 
 
@@ -817,8 +834,7 @@
 	<script type="text/javascript">
 	
 	function showNote() {
-		$("#form-comment").show();
-		$("#addNoteDiv").hide();
+		$("#addNote2").modal('show')
 	}
 	
 	$(function(){
@@ -884,15 +900,6 @@
 		 
 	$('#addEmail').attr("href",newHref);
 	$("#requirement").val("${crmcase.requirement}");	
-	
-	/* function getBirthday(){
-		var date = $("#birthday").val();	
-		var dateformat = null;
-		if(!date.length==0){
-			dateformat = new Date(date).toISOString("yyyy-MM-dd hh:mm:ss.S").substring(0,10);
-		}
-		return dateformat;
-	} */
 	
  	$("#level").select2({
         data: level

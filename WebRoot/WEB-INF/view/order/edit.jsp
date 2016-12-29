@@ -228,18 +228,6 @@
 			          <div class="form-group col-sm-12 align-center" id="addNoteDiv">
 						<input class="btn btn-primary" type="button" id="addNote" onclick="showNote()" value="添加注释"/>
 					</div>
-					<form id="form-comment" class="form" hidden="hidden">
-			          <div class="form-group col-sm-6 col-sm-offset-3">
-			                <textarea name="content" class="form-control" rows="5"></textarea>
-			                <input  type="hidden" name="userId" value="${loginUser.userId}" />
-			                <input  type="hidden" name="userName" value="${loginUser.name}" />
-			                <input  type="hidden" name="objectId" value="${order.orderId}" />
-			                <input  type="hidden" name="commentType" value="order" />
-			          </div>
-			          <div class="form-group col-sm-12 align-center">
-			            <button class="submit btn btn-primary">保存注释</button>
-			          </div>
-			          </form>
           		</div>
 				</div>
 				<!-- end of panel 沟通列表 -->
@@ -381,6 +369,62 @@
   </div><!-- modal-dialog -->
 </div><!-- bmodal -->
 
+<div class="noDealModal modal fade" id="addNote2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <div class="nextModal-title">添加注释信息</div>
+      </div>
+      <div class="modal-body">
+	      <form id="form-comment" class="form">
+	        <div class="form-group col-sm-6 col-sm-offset-3">
+	              <textarea name="content" class="form-control" rows="5"></textarea>
+	              <input  type="hidden" name="userId" value="${loginUser.userId}" />
+	              <input  type="hidden" name="userName" value="${loginUser.name}" />
+	              <input  type="hidden" name="objectId" value="${order.orderId}" />
+	              <input  type="hidden" name="commentType" value="order" />
+	        </div>
+	        <div class="form-group col-sm-12 align-center">
+	          <button class="submit btn btn-primary">保存注释</button>
+	          <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+	        </div>
+        </form>
+        </div>
+    </div><!-- modal-content -->
+  </div><!-- modal-dialog -->
+</div><!-- bmodal -->
+
+	<!-- Modal 保存注释信息-->
+	<div class="modal fade" id="addNote2" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel">保存注释信息</h4>
+				</div>
+				<div class="modal-body">
+				<form id="form-comment" class="form">
+				<div class="form-group col-sm-6 col-sm-offset-3">
+					<textarea name="content" class="form-control" rows="5"></textarea>
+					<input type="hidden" name="userId" value="${loginUser.userId}" />
+					<input type="hidden" name="userName" value="${loginUser.name}" />
+					<input type="hidden" name="objectId" value="${crmcase.caseId}" />
+					<input type="hidden" name="commentType" value="case" />
+				</div>
+				<div class="form-group col-sm-12 align-center">
+					<input class="btn btn-primary" type="submit" value="保存注释"/>
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				</div>
+				</form>
+				</div>
+			</div>
+			<!-- modal-content -->
+		</div>
+		<!-- modal-dialog -->
+	</div>
 	<%@ include file="../assets/pages/foot.jsp"%>
   <script src="${rootPath}assets/js/jquery-ui-1.10.3.min.js"></script>
 	<script src="${rootPath}assets/js/jquery.datatables.min.js"></script>
@@ -390,8 +434,7 @@
 
 <script type="text/javascript">
 	function showNote() {
-		$("#form-comment").show();
-		$("#addNoteDiv").hide();
+		$("#addNote2").modal('show');
 	}
 
 	var orderStatus = ${orderStatus};
