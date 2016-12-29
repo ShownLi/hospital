@@ -998,7 +998,7 @@ public class StatisticsController extends BaseSimpleFormController {
 
 		Map<String, Object> dataMap = new HashMap<>();
 		dataMap.put("dataList", queryUserCaseStatusMethod(startCreateDateTime, endCreateDateTime, source).getData());// 将数据放入Map中
-		String title = "跟单员,询单数量,待处理,沟通中,地接设计中,成行,未成行,无效,已付款,成交率";
+		String title = "跟单员,待处理,沟通中,地接设计中,成行,未成行,无效,已付款,询单数量,成交率";
 		dataMap.put("fileName", "跟单员询单状态表（" + startCreateDateTime + "-" + endCreateDateTime + "）.csv");// 拼接csv表名
 		try {
 			CSVUtil.saveCsv(response, dataMap, title);
@@ -1012,7 +1012,7 @@ public class StatisticsController extends BaseSimpleFormController {
 
 		Map<String, Object> dataMap = new HashMap<>();
 		dataMap.put("dataList", queryContactRealMethod(startCreateDateTime, endCreateDateTime).getData());// 将数据放入Map中
-		String title = "沟通方式,询单数量,待处理,沟通中,地接设计中,成行,未成行,无效,已付款,成交率";
+		String title = "沟通方式,待处理,沟通中,地接设计中,成行,未成行,无效,已付款,询单数量,成交率";
 		dataMap.put("fileName", "沟通方式统计表（" + startCreateDateTime + "-" + endCreateDateTime + "）.csv");// 拼接csv表名
 		try {
 			CSVUtil.saveCsv(response, dataMap, title);
@@ -1026,7 +1026,7 @@ public class StatisticsController extends BaseSimpleFormController {
 
 		Map<String, Object> dataMap = new HashMap<>();
 		dataMap.put("dataList", queryDesCaseStatusMethod(startCreateDateTime, endCreateDateTime).getData());// 将数据放入Map中
-		String title = "目的地,询单数量,待处理,沟通中,地接设计中,成行,未成行,无效,已付款,成交率";
+		String title = "目的地,待处理,沟通中,地接设计中,成行,未成行,无效,已付款,询单数量,成交率";
 		dataMap.put("fileName", "目的地询单状态统计表（" + startCreateDateTime + "-" + endCreateDateTime + "）.csv");// 拼接csv表名
 		try {
 			CSVUtil.saveCsv(response, dataMap, title);
@@ -1222,6 +1222,14 @@ public class StatisticsController extends BaseSimpleFormController {
 		Map<String, Object> dataMap = new HashMap<>();
 		QueryResult<AgencyAchievementStats> result = queryAgencyAchievementStatsMMethod(request, sellerNotAskStats,
 				page);
+		
+		QueryResult<AgencyAchievementStats> caseResult2 = service
+				.queryAgencyAchievementStatsMTotal(sellerNotAskStats, page, request);
+		List<AgencyAchievementStats> data = caseResult2.getData();
+		data.get(0).setAgencyName("合计");
+		result.getData().addAll(data);
+		
+		
 		dataMap.put("dataList", result.getData());// 将数据放入Map中
 		
 		String title = "地接社名称,一月成交金额,二月成交金额,三月成交金额,四月成交金额,五月成交金额,六月成交金额,七月成交金额	,八月成交金额,九月成交金额,十月成交金额,十一月成交金额,十二月成交金额";
@@ -1255,9 +1263,14 @@ public class StatisticsController extends BaseSimpleFormController {
 		Map<String, Object> dataMap = new HashMap<>();
 		QueryResult<CustomerSourceLevelStats> result = service.queryCustomerSourceLevelStats(customerSourceLevelStats,
 				page, request);
+		QueryResult<CustomerSourceLevelStats> caseResult2 = service
+				.queryCustomerSourceLevelStatsTotal(customerSourceLevelStats, page, request);
+		List<CustomerSourceLevelStats> data = caseResult2.getData();
+		data.get(0).setSource("合计");
+		result.getData().addAll(data);
 		dataMap.put("dataList", result.getData());// 将数据放入Map中
 		String title = "客人来源,普通客人数量,注册客人数量,下单客人数量,成行客人数量,成交比";
-		dataMap.put("fileName", "客人来源统计表.csv");// 拼接csv表名
+		dataMap.put("fileName", "客人来源级别统计表.csv");// 拼接csv表名
 		try {
 			CSVUtil.saveCsv(response, dataMap, title);
 		} catch (IOException e) {
@@ -1270,6 +1283,9 @@ public class StatisticsController extends BaseSimpleFormController {
 			SellerCoverStats sellerCoverStats, PageHelper page) {
 		Map<String, Object> dataMap = new HashMap<>();
 		QueryResult<SellerCoverStats> result = service.querySellerCoverStats(sellerCoverStats, page, request);
+		QueryResult<SellerCoverStats> caseResult2 = service.querySellerCoverStatsTotal(sellerCoverStats, page, request);
+		List<SellerCoverStats> data = caseResult2.getData();
+		result.getData().addAll(data);
 		dataMap.put("dataList", result.getData());// 将数据放入Map中
 		String title = "目的地国家名称,地接社数量(降序排列)";
 		dataMap.put("fileName", "商家覆盖统计表.csv");// 拼接csv表名

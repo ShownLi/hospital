@@ -192,7 +192,11 @@
         changDate:false
         
      });
-    
+    $("#searchYear").change(function(){
+    	
+    	$(".searchYearInput").val($(this).val());
+    	
+    });
 	var countTable = jQuery('#dataTable-count').DataTable({
 		searching:false,
 		paging:false,
