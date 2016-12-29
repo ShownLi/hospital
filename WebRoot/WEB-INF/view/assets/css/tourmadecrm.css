@@ -253,4 +253,5 @@ label.error{
 }
 .table-statistics tbody tr:last-child{
 	background: #e6ecff;
+	font-weight: bold;
 }
