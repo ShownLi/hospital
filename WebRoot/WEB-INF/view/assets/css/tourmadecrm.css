@@ -255,3 +255,7 @@ label.error{
 	background: #d6e2f9;
 	font-weight: bold;
 }
+.datepicker.form-control[readonly]{
+	cursor: pointer;
+	background: none;
+}
