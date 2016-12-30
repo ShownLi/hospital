@@ -31,17 +31,17 @@
 						<form action="${rootPath}statistics/saveusercasestatus.do" method="post">
 							<div class="form-group col-sm-10">
 								<div class="col-sm-2">
-									<input type="text" id="searchSource" class="source-select form-control" placeholder="来源"  value="" />
+									<input type="text" id="searchSource" name="source" class="source-select form-control" placeholder="来源"  value="" />
 								</div>
 								<div class="col-sm-2">
 									<div class="input-group input-datepicker" style="padding: 0;">
-				                        <input readonly="readonly" id="searchStartCreateDateTime" type="text" name="searchStartDateTime" class="form-control datepicker" placeholder="请点击输入查询开始日期" autocomplete="on" value="${startTime }">
+				                        <input readonly="readonly" id="searchStartCreateDateTime" type="text" name="startCreateDateTime" class="form-control datepicker" placeholder="请点击输入查询开始日期" autocomplete="on" value="${startTime }">
 				                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
 				                    </div>
 				                </div>
 			                    <div class="col-sm-2">
 				                    <div class="input-group input-datepicker" style="padding: 0;">
-				                        <input readonly="readonly" id="searchEndCreateDateTime" type="text" name="searchEndDateTime" class="form-control datepicker" placeholder="请点击输入查询截止日期" autocomplete="on" value="${endTime }">
+				                        <input readonly="readonly" id="searchEndCreateDateTime" type="text" name="endCreateDateTime" class="form-control datepicker" placeholder="请点击输入查询截止日期" autocomplete="on" value="${endTime }">
 				                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
 				                    </div>
 			                    </div>
@@ -112,6 +112,7 @@
         changeYear: true,
         changeMonth: true,
      });
+    
 	var t = jQuery('#dataTable').DataTable({
 		searching:false,
 		paging:false,
