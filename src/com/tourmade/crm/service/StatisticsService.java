@@ -360,15 +360,6 @@ public class StatisticsService extends BaseService {
 		QueryResult<AgencyOrderStatus> length = new QueryResult<AgencyOrderStatus>();
 
 		Map<String, Object> map = new HashMap<String, Object>();
-		// 分页条件
-		if (agencyOrderStatus.getSearchStartTime() != null) {
-			agencyOrderStatus.setSearchStartTime(agencyOrderStatus.getSearchStartTime() + " 00:00:00");
-			map.put("searchStartTime", agencyOrderStatus.getSearchStartTime());
-		}
-		if (agencyOrderStatus.getSearchEndTime() != null) {
-			agencyOrderStatus.setSearchEndTime(agencyOrderStatus.getSearchEndTime() + " 23:59:59");
-			map.put("searchEndTime", agencyOrderStatus.getSearchEndTime());
-		}
 		if (agencyOrderStatus.getDestination() != null) {
 			map.put("destination", agencyOrderStatus.getDestination());
 		}
@@ -431,15 +422,6 @@ public class StatisticsService extends BaseService {
 		QueryResult<CaseSourceStats> length = new QueryResult<CaseSourceStats>();
 
 		Map<String, Object> map = new HashMap<String, Object>();
-		// 分页条件
-		if (caseSourceStatsTotal.getSearchStartTime() != null) {
-			caseSourceStatsTotal.setSearchStartTime(caseSourceStatsTotal.getSearchStartTime() + " 00:00:00");
-			map.put("searchStartTime", caseSourceStatsTotal.getSearchStartTime());
-		}
-		if (caseSourceStatsTotal.getSearchEndTime() != null) {
-			caseSourceStatsTotal.setSearchEndTime(caseSourceStatsTotal.getSearchEndTime() + " 23:59:59");
-			map.put("searchEndTime", caseSourceStatsTotal.getSearchEndTime());
-		}
 
 		map.put("start", ph.getStart());
 		map.put("length", ph.getLength());
@@ -495,16 +477,6 @@ public class StatisticsService extends BaseService {
 
 		Map<String, Object> map = new HashMap<String, Object>();
 
-		// 分页条件
-		if (caseAllotStatsTotal.getSearchStartTime() != null) {
-			caseAllotStatsTotal.setSearchStartTime(caseAllotStatsTotal.getSearchStartTime() + " 00:00:00");
-			map.put("searchStartTime", caseAllotStatsTotal.getSearchStartTime());
-		}
-		if (caseAllotStatsTotal.getSearchEndTime() != null) {
-			caseAllotStatsTotal.setSearchEndTime(caseAllotStatsTotal.getSearchEndTime() + " 23:59:59");
-			map.put("searchEndTime", caseAllotStatsTotal.getSearchEndTime());
-		}
-
 		map.put("start", ph.getStart());
 		map.put("length", ph.getLength());
 
@@ -559,17 +531,9 @@ public class StatisticsService extends BaseService {
 		QueryResult<AgencyAchievementStats> length = new QueryResult<AgencyAchievementStats>();
 
 		Map<String, Object> map = new HashMap<String, Object>();
-
-		// 分页条件
-		if (agencyAchievementStats.getSearchStartTime() != null) {
-			agencyAchievementStats.setSearchStartTime(agencyAchievementStats.getSearchStartTime() + " 00:00:00");
-			map.put("searchStartTime", agencyAchievementStats.getSearchStartTime());
-		}
-		if (agencyAchievementStats.getSearchEndTime() != null) {
-			agencyAchievementStats.setSearchEndTime(agencyAchievementStats.getSearchEndTime() + " 23:59:59");
-			map.put("searchEndTime", agencyAchievementStats.getSearchEndTime());
-		}
-
+		map.put("searchStartTime", agencyAchievementStats.getSearchStartTime());
+		map.put("searchEndTime", agencyAchievementStats.getSearchEndTime());
+		
 		List<AgencyAchievementStats> data = statisticsMapper.queryAgencyAchievementStatsTotal(map);
 
 		length.setData(data);
@@ -622,17 +586,8 @@ public class StatisticsService extends BaseService {
 		QueryResult<AgencyAchievementStats> length = new QueryResult<AgencyAchievementStats>();
 
 		Map<String, Object> map = new HashMap<String, Object>();
-
-		// 分页条件
-		if (agencyAchievementStatsM.getSearchStartTime() != null) {
-			agencyAchievementStatsM.setSearchStartTime(agencyAchievementStatsM.getSearchStartTime() + " 00:00:00");
-			map.put("searchStartTime", agencyAchievementStatsM.getSearchStartTime());
-		}
-		if (agencyAchievementStatsM.getSearchEndTime() != null) {
-			agencyAchievementStatsM.setSearchEndTime(agencyAchievementStatsM.getSearchEndTime() + " 23:59:59");
-			map.put("searchEndTime", agencyAchievementStatsM.getSearchEndTime());
-		}
-
+		map.put("searchStartTime", agencyAchievementStatsM.getSearchStartTime());
+		map.put("searchEndTime", agencyAchievementStatsM.getSearchEndTime());
 		List<AgencyAchievementStats> data = statisticsMapper.queryAgencyAchievementStatsMTotal(map);
 
 		length.setData(data);
@@ -721,15 +676,6 @@ public class StatisticsService extends BaseService {
 		QueryResult<SellerNotAskStats> length = new QueryResult<SellerNotAskStats>();
 
 		Map<String, Object> map = new HashMap<String, Object>();
-
-		if (sellerNotAskStats.getSearchStartTime() != null) {
-			sellerNotAskStats.setSearchStartTime(sellerNotAskStats.getSearchStartTime() + " 00:00:00");
-			map.put("searchStartTime", sellerNotAskStats.getSearchStartTime());
-		}
-		if (sellerNotAskStats.getSearchEndTime() != null) {
-			sellerNotAskStats.setSearchEndTime(sellerNotAskStats.getSearchEndTime() + " 23:59:59");
-			map.put("searchEndTime", sellerNotAskStats.getSearchEndTime());
-		}
 
 		List<SellerNotAskStats> data = statisticsMapper.querySellerNotAskStatsTotal(map);
 
