@@ -341,7 +341,7 @@
                 <div class="form-group col-sm-8">
                   <label class="col-sm-2 control-label">客人的要求</label>
                   <div class="col-sm-9" style="margin-left: 23px;">
-              		<textarea id="requirement" name="requirement" class="form-control" placeholder="客人的要求" rows="5"></textarea>
+              		<textarea id="requirement" name="requirement" class="form-control" placeholder="客人的要求" rows="5">${crmcase.requirement}</textarea>
                   </div>
                 </div>
             </div>
@@ -743,7 +743,7 @@
 	
 	var reason = ${reason};
 	var contactData=${contact};
-	$("#requirement").val("${crmcase.requirement}");	
+	
 	//$("#birthday").val(getBirthday());
 
 	function getBirthday(){
