@@ -856,7 +856,6 @@
 			$("#btn-invalid").css("display","none");
 	}
 	var country = ${country};
-	console.log(JSON.stringify(country));
     var language = ${language};
     var withwho = ${withwho};
     var hotel = ${hotel};
@@ -880,7 +879,7 @@
 	 var orderNoDealReason=${orderNoDealReason};
 	var currency =${currency};
 	var contact =${contact};
-	$("#requirement").val("${crmcase.requirement}");	
+	/* $("#requirement").val("${crmcase.requirement}"); */	
 	//$("#birthday").val(getBirthday());
 
 	//接收联系方式
@@ -892,15 +891,15 @@
 	var newHref;
 
 
-	if($.trim("${crmcase.requirement}")==""){
+	/* if($.trim("${crmcase.requirement}")==""){
 		newHref = "../customer/list.html";
 	}
 	else{
 		newHref = "../customer/edit.html?id="+"${crmcase.customerId}";
 	}
 		 
-	$('#addEmail').attr("href",newHref);
-	$("#requirement").val("${crmcase.requirement}");	
+	$('#addEmail').attr("href",newHref); */
+	/* $("#requirement").val("${crmcase.requirement}");	 */
 	
  	$("#level").select2({
         data: level
