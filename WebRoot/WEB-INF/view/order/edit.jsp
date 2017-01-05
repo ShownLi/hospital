@@ -16,14 +16,6 @@
 				<h2>
 					<i class="glyphicon glyphicon-briefcase"></i> 订单管理 <span>编辑订单</span>
 				</h2>
-				<!-- <div class="breadcrumb-wrapper">
-					<span class="label">你在这里:</span>
-					<ol class="breadcrumb">
-						<li><a href="＃">CRM</a></li>
-						<li><a href="${rootPath }order/list.html">订单管理</a></li>
-						<li class="active">编辑订单</li>
-					</ol>
-				</div> -->
 			</div>
 
 			<div class="contentpanel">
@@ -177,7 +169,34 @@
               </form> 
           </div>
       </div><!-- end of panel 是否成行 -->
-      
+       <div class="panel panel-default">
+          <div class="panel-heading">
+          <div class="panel-btns">
+              <a href="" class="minimize">&minus;</a>
+          </div>
+          <h4 class="panel-title">收款记录 </h4>
+          </div>
+          <div class="panel-body">
+              <div class="table-responsive">
+                  <table id="dataTable-payRecord" class="table table-communicate">
+                    <thead>
+                      <tr>
+                        <th>收款编号</th>
+                        <th>应收金额</th>
+                        <th>付款日期</th>
+                        <th>付款截止日期</th>
+                        <th>收款方</th>
+                        <th>状态</th>
+                        <th>操作</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                  </table>
+                </div>
+                <!-- table-responsive -->
+          </div>
+      </div><!-- end of panel 沟通列表 -->
             <!-- panel 沟通列表 -->
       <div class="panel panel-default">
           <div class="panel-heading">
@@ -188,7 +207,7 @@
           </div>
           <div class="panel-body">
               <div class="table-responsive">
-                  <table id="dataTable-record" class="table table-communicate">
+                  <table id="dataTable-record" class="table">
                     <thead>
                       <tr>
                         <th>序号</th>
@@ -847,8 +866,7 @@
     
     //订单返回
     $("#btn-back").click( function () {
-    	 history.go(-1);
-    	/* alert("正在返回，请稍后..."); */
+    	 window.location = "${rootPath}order/list.html?flag=old";
 	}); 
 	
     // Date Picker

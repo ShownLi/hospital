@@ -29,13 +29,14 @@
 		 					<div class="row" style="margin-top: 20px">
 								<div class="form-group col-sm-10">
 									<div class="col-sm-2">
-										<input type="text" id="searchAgencyName" class="form-control" placeholder="地接社名"  value="" />
+										<input type="text" id="searchAgencyName" class="form-control" placeholder="地接社名"  value="${sessionScope.searchAgency.name }" />
  									</div>
 									<div class="col-sm-2">
-										<input type="text" id="searchCountry" class="country-select fullwidth" value="" />
+										<input type="text" id="searchCountry" class="country-select fullwidth" value="${sessionScope.searchAgency.country }" />
 									</div>
 									<div class="col-sm-2">
-										<input type="text" id="searchDestination" class="destination-select fullwidth" value="" />
+										<input type="text" id="searchDestination" class="destination-select fullwidth" value="${sessionScope.searchAgency.destination }" />
+										<input type="hidden" id="searchAngencyFlag"  value="${flag}" />
 									</div>
 								</div>	
 								<div class="col-sm-2">					 		                        		
@@ -136,19 +137,22 @@
 
 		$(".nav-parent").eq(3).addClass("nav-active");
     	$(".nav-parent").eq(3).find(".children").show();
-
+	
 	var agencyTable = jQuery('#dataTable').DataTable({
 		searching:false,
 		pageLength: 10,
 		processing: true,
 		language: datatable_local_language, // my.js
 		serverSide: true,
+		stateSave:true,
 		ajax: {
 		url: '${rootPath}agency/list.do',
 		data:function ( data ) {
 			var searchAgencyName=$('#searchAgencyName').val();
  			var searchCountry=$('#searchCountry').val();
  			var searchDestination=$('#searchDestination').val();
+ 			var searchAngencyFlag=$('#searchAngencyFlag').val();
+ 			
  			
  			if(searchAgencyName !=null && searchAgencyName !="" ){
 				data.name = searchAgencyName;
@@ -159,6 +163,7 @@
  			if(searchDestination !=null && searchDestination !="" ){
 				data.destination = searchDestination;
  			} 
+ 			data.flag = searchAngencyFlag;
  			
 		},
 			dataFilter: function(data){					
@@ -244,7 +249,12 @@
 	        ]
 		});
 		
+		if($('#searchAngencyFlag').val()=="restart"){
+			agencyTable.ajax.reload();
+		}
 		$('#searchBtn').on( 'click', function () {
+			//通知后台，使用界面的条件来重绘table
+			$('#searchAngencyFlag').val("restart");
 			agencyTable.draw();
 	    } );
 		
@@ -270,7 +280,6 @@
 	    });
 		
 	    jQuery('select').removeClass('form-control');
-			
 	});
 		
 	function edit(id) {

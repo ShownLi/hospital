@@ -553,7 +553,7 @@
 		}); 
 		
 		$("#btn-back").click( function () {
-			history.go(-1);
+			window.location = "${rootPath}customer/list.html?flag=old";
 	    } ); 
 		
 		//生日格式转换

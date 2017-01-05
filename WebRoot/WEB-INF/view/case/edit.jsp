@@ -95,13 +95,6 @@
 											class="form-control" value="${crmcase.email}" />
 									</div>
 								</div>
-								<%-- <div class="form-group col-sm-4">
-									<label class="col-sm-3 control-label">所在地</label>
-									<div class="col-sm-9">
-										<input type="text" name="location" placeholder="所在地"
-											class="form-control" value="${crmcase.location}" />
-									</div>
-								</div> --%>
 							</div>
 
 							<div class="section-block">
@@ -395,14 +388,6 @@
 							<table id="dataTable-order" class="table">
 								<thead>
 									<tr>
-										<!-- <th>ID</th>
-										<th>客人姓名</th>
-										<th>地接社</th>
-										<th>销售姓名</th>
-										<th>目的地</th>
-										<th>预算</th> 
-										<th>状态</th>
-										<th>编辑</th>  -->
 										<th>客人姓名<br>ID</th>
 										<th>地接社<br>销售</th>
 										<th>目的地<br>状态</th>
@@ -875,12 +860,9 @@
 	var agegroup = ${ageGroup}; 
 	var genderData = [{ id: 'male', text: '男' }, { id:'female' , text: '女' }];
 	var reason = ${reason};
-	//var contactData = [{ id: 0, text: 'qq' }, { id: 1, text: 'email' }, { id: 2, text: 'wechat' }, { id: 3, text: 'phone' }];
 	 var orderNoDealReason=${orderNoDealReason};
 	var currency =${currency};
 	var contact =${contact};
-	/* $("#requirement").val("${crmcase.requirement}"); */	
-	//$("#birthday").val(getBirthday());
 
 	//接收联系方式
 	var contactData=${contact};
@@ -891,15 +873,6 @@
 	var newHref;
 
 
-	/* if($.trim("${crmcase.requirement}")==""){
-		newHref = "../customer/list.html";
-	}
-	else{
-		newHref = "../customer/edit.html?id="+"${crmcase.customerId}";
-	}
-		 
-	$('#addEmail').attr("href",newHref); */
-	/* $("#requirement").val("${crmcase.requirement}");	 */
 	
  	$("#level").select2({
         data: level
@@ -1340,7 +1313,7 @@
             { data: "operator"},
             { data: "creatTime"}, 
 	 		 { data: "lastResponse"}
-        ]		 	
+        ]
 	});
 	
 	//询单效验数据，修改
@@ -1399,7 +1372,7 @@
 	  
 	   //询单返回
   	  $("#btn-back").click( function () {
-  		  history.go(-1);
+  		window.location = "${rootPath}case/list.html?flag=old";
   	  });  	  
 	   
       //询单无效

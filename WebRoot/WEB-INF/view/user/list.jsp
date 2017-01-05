@@ -92,6 +92,7 @@
 				processing: true,
 				language: datatable_local_language, // my.js
 				serverSide: true,
+				stateSave:true,
 				ajax: {
 					url: '${rootPath}user/list.do',
 					
