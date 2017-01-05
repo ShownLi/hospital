@@ -733,7 +733,7 @@
               </div><!-- noDealModal-body -->
           </div>
           <div class="modal-footer align-center">
-            <button class="submit btn btn-primary">保存</button> 
+              <input type="submit" class="submit btn btn-primary" value="保存"/>
               <a class="cancel btn btn-primary" >取消</a>
           </div>
       </form>
@@ -829,7 +829,6 @@
 		}
 		
 		if("${crmcase.status}"!=3){
-			//alert("${crmcase.status}");
 			$("#btn-confirmpay").css("display","none");
 		} 
 		
@@ -868,11 +867,6 @@
 	var contactData=${contact};
 	//接收询单未成行原因
 	var reasonNodeal=${reasonNodeal};
-	
-
-	var newHref;
-
-
 	
  	$("#level").select2({
         data: level
@@ -1384,9 +1378,6 @@
       $("#btn-confirmpay").click(function(){
     	  confirmpaySubmit();
       })
-     /*  $("#btn-updateDel").click(function(){
-     	 updateDel_submit(); 
-       }); */
       
       $(".confirmDelModal .cancel").click(function(){
       	$(".confirmDelModal").modal("hide");
@@ -1414,27 +1405,7 @@
 			    return false;
 			}
 		});
-     /*  function updateDel_submit(){
-
-    	  var f1=$("#form-delInfo").serialize();
-     	  try{
-     		  $.post("${rootPath}case/del.do", f1, function(result) {
-				var rmsg = result.msg;
-				if (result.success) {
-					window.parent.location = "${rootPath}case/edit.html?id=${crmcase.caseId}";
-				} 
-				else {
-					$("#msgModal").modal('show');
-				}
-			}, "JSON");
-     		  }
-     	  catch(e) {
-     		  alert(e);
-     	  }
-      } */
      
-	  //分配地接社
-
  
       //订单为未成行
       $("#btn-nodeal").click(function(){
@@ -1525,7 +1496,7 @@
      		  $.post("${rootPath}case/del.do", f1, function(result) {
 				var rmsg = result.msg;
 				if (result.success) {
-					window.parent.location = "${rootPath}case/edit.html?id=${crmcase.caseId}";
+					window.location = "${rootPath}case/list.html?flag=old";
 				} 
 				else {
 					$("#msgModal").modal('show');
