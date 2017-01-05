@@ -36,7 +36,6 @@ public class ParameterController extends BaseSimpleFormController {
 
 		QueryResult<Parameter> pageResult = service.queryParameter(parameter, page, request);
 		String result = JSONUtilS.object2json(pageResult);
-
 		return result;
 	}
 	

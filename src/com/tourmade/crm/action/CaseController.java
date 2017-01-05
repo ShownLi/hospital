@@ -140,7 +140,9 @@ public class CaseController extends BaseSimpleFormController {
 		QueryResult<Case> casePage = service.queryCase(crmcase, page, request);
 		String result = JSONUtilS.object2json(casePage);
 		//为了去掉时间的时分秒
+		if(crmcase.getSearchStartTime()!=null&&crmcase.getSearchStartTime()!="")
 		crmcase.setSearchStartTime(crmcase.getSearchStartTime().substring(0,10));
+		if(crmcase.getSearchEndTime()!=null&&crmcase.getSearchEndTime()!="")
 		crmcase.setSearchEndTime(crmcase.getSearchEndTime().substring(0,10));
 		return result;
 	}

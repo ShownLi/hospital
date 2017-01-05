@@ -40,11 +40,11 @@ public class ParameterService extends BaseService {
 		
 		map.put("length", pageHelper.getLength());
 		if(parameter.getDomain()!=null){
-			map.put("domain", parameter.getDomain());
+			map.put("pdomain", parameter.getDomain());
 		}
 		
 		if(parameter.getValue()!=null){
-			map.put("value", parameter.getValue());
+			map.put("pvalue", parameter.getValue());
 		}
 		
 		if(parameter.getChinese()!=null){
