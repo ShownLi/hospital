@@ -51,6 +51,7 @@ public class ParameterController extends BaseSimpleFormController {
 		Json json = new Json();
 		
 		try {
+			parameter.setValue(parameter.getValue().trim());
 			service.saveParameter(parameter);
 			json.setSuccess(true);
 		} catch (Exception e) {
