@@ -30,44 +30,42 @@
 						<div class="row" style="margin-top: 20px">
 							<div class="form-group col-sm-10">
 								<div class="col-sm-2">
-									<input type="text" id="searchCaseId" class="form-control" placeholder="询单id"  value="" />
+									<input type="text" name="caseId" id="searchCaseId" class="form-control" placeholder="询单id"  value="${searchCase.caseId }" />
 								</div>
 								<div class="col-sm-2">
-									<input type="text" id="searchCustomerName" class="form-control" placeholder="客人" value="" />
+									<input type="text" id="searchCustomerName" class="form-control" placeholder="客人" value="${searchCase.chineseName }" />
 								</div>
 								<div class="col-sm-2">
-									<input type="text" id="searchMobile" class="form-control" placeholder="手机" value="" />
+									<input type="text" id="searchMobile" class="form-control" placeholder="手机" value="${searchCase.mobile }" />
 								</div>
 								<div class="col-sm-2">
-									<input type="text" id="searchMail" class="form-control" placeholder="邮箱" value="" />
+									<input type="text" id="searchMail" class="form-control" placeholder="邮箱" value="${searchCase.email }" />
 								</div>
 								<div class="col-sm-2">
-									<input type="text" id="searchDestination" class="destination-select fullwidth" value="" />
+									<input type="text" id="searchDestination" class="destination-select fullwidth" value="${searchCase.destination }" />
 								</div>
 								<div class="col-sm-2">
-									<input type="text" id="searchSource" class="source-select fullwidth" value="" />
+									<input type="text" id="searchSource" class="source-select fullwidth" value="${searchCase.source }" />
 								</div>
 								<div class="col-sm-2">
-									<input type="text" id="searchOperator" class="operator-select fullwidth" value="" />
+									<input type="text" id="searchOperator" class="operator-select fullwidth" value="${searchCase.operator }" />
 								</div>
-								<!-- <div class="col-sm-2">
-									<input type="text" id="searchStatus" class="status-select fullwidth" value="" />
-								</div> -->
+								
 								<div class="col-sm-2">
-									<input type="text" id="searchRequirment" class="form-control" placeholder="客人要求" value="" />
+									<input type="text" id="searchRequirment" class="form-control" placeholder="客人要求" value="${searchCase.requirement }" />
 								</div>
 								<div class="col-sm-2">
-									<input type="text" id="searchComment" class="form-control" placeholder="注释" value="" />
+									<input type="text" id="searchComment" class="form-control" placeholder="注释" value="${searchCase.comment }" />
 								</div>
 								<div class="col-sm-2">
 									<div class="input-group input-datepicker" style="padding: 0;">
-				                        <input readonly="readonly" id="searchStartDateTime" type="text" name="searchStartDateTime" class="form-control datepicker" placeholder="请点击输入查询开始日期" value="${searchStartDateTime}" autocomplete="on">
+				                        <input readonly="readonly" id="searchStartDateTime" type="text" name="searchStartDateTime" class="form-control datepicker" placeholder="请点击输入查询开始日期" value="${searchCase.searchStartTime}" autocomplete="on">
 				                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
 				                    </div>
 				                </div>
 			                    <div class="col-sm-2">
 				                    <div class="input-group input-datepicker" style="padding: 0;">
-				                        <input readonly="readonly" id="searchEndDateTime" type="text" name="searchEndDateTime" class="form-control datepicker" placeholder="请点击输入查询截止日期" value="${searchEndDateTime}" autocomplete="on">
+				                        <input readonly="readonly" id="searchEndDateTime" type="text" name="searchEndDateTime" class="form-control datepicker" placeholder="请点击输入查询截止日期" value="${searchCase.searchEndTime}" autocomplete="on">
 				                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
 				                    </div>
 			                    </div>
@@ -76,6 +74,7 @@
 								</div>	
 									<div class="col-sm-2">					 		                        		
 									<input class="btn btn-primary" type="button" id="searchBtn" value="搜索"/>
+									<input type="hidden" id="searchCaseFlag"  value="${flag}" />
 								</div> 	
 							</div>
 
@@ -85,7 +84,7 @@
 					<div class="panel-body">
 						<div class="form-group col-sm-12 case-filter">
 		        	                <div class="rdio rdio-primary rdio-inline">
-		        	                  <input type="radio" id="statusAll" value="" name="status"/>
+		        	                  <input type="radio" id="statusAll" value="" name="status" checked="checked"/>
 		        	                  <label id="statusAllCount" for="statusAll">全部</label>    	                  
 		        	                </div><!-- rdio -->
 		        	                <div class="rdio rdio-primary rdio-inline">
@@ -161,9 +160,6 @@
     var sales = ${sales};
 	var reason = ${reason};
 	var reasonNodeal =${reasonNodeal};
-	var searchFlag = false;
-	var searchStatusCheck = "";
-	var searchButtonClick = false;
 
 	var contactReal =${contactReal};
 	
@@ -208,7 +204,7 @@
     	data:reason,
         allowClear: true
     });
-
+    
     jQuery("#searchStartDateTime").datepicker({
         dateFormat: "yy-mm-dd",
         changeYear: true,
@@ -220,12 +216,34 @@
         changeYear: true,
         changeMonth: true,
      });
+    
+    if($('#searchCaseFlag').val()=="old"){
+	    if("${searchCase.status}" == ""){
+	    	$("#statusAll").attr("checked",true);
+	    }else if("${searchCase.status}" == "0"){
+	    	$("#status0").attr("checked",true);
+	    }else if("${searchCase.status}" == "1"){
+	    	$("#status1").attr("checked",true);
+	    }else if("${searchCase.status}" == "2"){
+	    	$("#status2").attr("checked",true);
+	    }else if("${searchCase.status}" == "3"){
+	    	$("#status3").attr("checked",true);
+	    }else if("${searchCase.status}" == "4"){
+	    	$("#status4").attr("checked",true);
+	    }else if("${searchCase.status}" == "5"){
+	    	$("#status5").attr("checked",true);
+	    }else if("${searchCase.status}" == "6"){
+	    	$("#status6").attr("checked",true);
+	    }
+	}
+   
 			var t = jQuery('#dataTable').DataTable({
 				searching:false,
 				pageLength: 10,
 				processing: true,
 				language: datatable_local_language, // my.js
-				serverSide: true,
+				serverSide: true, 
+				stateSave: true,
 				ajax: {
 					url: '${rootPath}case/list.do',
 					data: function(data){
@@ -236,22 +254,15 @@
 			 			var searchDestination=$('#searchDestination').val();
 			 			var searchSource=$('#searchSource').val();
 			 			var searchOperator=$('#searchOperator').val();
-			 			//var searchStatus=$('#searchStatus').val();
 			 			var searchComment=$('#searchComment').val();
 			 			var searchRequirment=$('#searchRequirment').val();
 			 			var searchMail=$('#searchMail').val();
 			 			var searchMobile=$('#searchMobile').val();
 			 			var searchStartDateTime=$("#searchStartDateTime").val();
 			 			var searchEndDateTime=$("#searchEndDateTime").val();
-			 			//var searchStatus = $("input[name='status']:checked").val();
-			 			var searchStatus = searchStatusCheck;
-			 			searchStatusCheck = "";
-
 			 			var searchStatus = $("input[name='status']:checked").val();
-			 			if(searchButtonClick == true){
-			 				searchStatus = "";
-			 				searchButtonClick =false;
-			 			}
+			 			var searchCaseFlag=$('#searchCaseFlag').val();
+			 			data.flag = searchCaseFlag;
 			 			
 			 			if(searchCustomerId !=null && searchCustomerId !="" ){
 							data.customerId = searchCustomerId;
@@ -302,26 +313,21 @@
 						json.recordsTotal = json.countTotal;
 						json.recordsFiltered = json.countFiltered;
 						json.data = json.data;
+						$('#statusAllCount').html("全部"+json.statusAll);
+
+						$('#status0Count').html("待处理"+json.status0);
+
+						$('#status1Count').html("客服沟通中"+json.status1);
+				
+						$('#status2Count').html("地接设计中"+json.status2);						
 						
-						if(searchFlag==false){
-
-							$('#statusAllCount').html("全部"+json.countTotal);
-
-							$('#status0Count').html("待处理"+json.status0);
-
-							$('#status1Count').html("客服沟通中"+json.status1);
-					
-							$('#status2Count').html("地接设计中"+json.status2);						
-							
-							$('#status3Count').html("成行"+json.status3);						
-							
-							$('#status4Count').html("未成行"+json.status4);						
-							
-							$('#status5Count').html("无效"+json.status5);												
-							
-							$('#status6Count').html("已付款"+json.status6);
-						}
+						$('#status3Count').html("成行"+json.status3);						
 						
+						$('#status4Count').html("未成行"+json.status4);						
+						
+						$('#status5Count').html("无效"+json.status5);												
+						
+						$('#status6Count').html("已付款"+json.status6);
 						return JSON.stringify( json );
 					}
 				},
@@ -533,49 +539,43 @@
 				});
 
 			$('#searchBtn').on( 'click', function () {
-				//$("input[name='status']:checked").val(null);
-				searchFlag = false;
-				searchButtonClick = true;
+				//通知后台，使用界面的条件来重绘table
+				$('#searchCaseFlag').val("restart");
+				$('#statusAll').attr('checked',true);
 		        t.draw();
-		        $('input:radio:checked').attr('checked',false);
 		    } );
 			
+			if($('#searchCaseFlag').val()=="restart"){
+				t.ajax.reload();
+			}
+			//给radioButton设置点击事件
+			$('input[name=status]').on('click',function(){
+				$('#searchCaseFlag').val("restart");
+				t.draw();
+			});
 			
-			$('#statusAll').on('click',function(){
-				searchFlag = true;
-				t.draw();
-			});
-			$('#status0').on('click',function(){
-				searchFlag = true;
-				t.draw();
-			});
-			$('#status1').on('click',function(){
-				searchFlag = true;
-				t.draw();
-			});
-			$('#status2').on('click',function(){
-				searchFlag = true;
-				t.draw();
-			});
-			$('#status3').on('click',function(){
-				searchFlag = true;
-				t.draw();
-			});
-			$('#status4').on('click',function(){
-				searchFlag = true;
-				t.draw();
-			});
-			$('#status5').on('click',function(){
-				searchFlag = true;
-				t.draw();
-			});
-			$('#status6').on('click',function(){
-				searchFlag = true;
-				t.draw();
-			});
-		    
-		  
-		
+			/*if($('#searchCaseFlag').val()=="old"){
+			    if("${searchCase.status}" == ""){
+			    	$("#statusAll").attr("checked",true).click();
+			    }else if("${searchCase.status}" == "0"){
+			    	$("#status0").attr("checked",true).click();
+			    }else if("${searchCase.status}" == "1"){
+			    	$("#status1").attr("checked",true).click();
+			    }else if("${searchCase.status}" == "2"){
+			    	$("#status2").attr("checked",true).click();
+			    }else if("${searchCase.status}" == "3"){
+			    	$("#status3").attr("checked",true).click();
+			    }else if("${searchCase.status}" == "4"){
+			    	$("#status4").attr("checked",true).click();
+			    }else if("${searchCase.status}" == "5"){
+			    	$("#status5").attr("checked",true).click();
+			    }else if("${searchCase.status}" == "6"){
+			    	$("#status6").attr("checked",true).click();
+			    }
+			} else{
+				//若是从侧边栏进如，则flag默认为‘restart’
+				t.ajax.reload();
+			} */
 			$('#dataTable tbody').on( 'click', 'a.btn-success', function () {
 		        var data = t.row($(this).parents('tr')).data();
 		        edit($(this).attr('id'));

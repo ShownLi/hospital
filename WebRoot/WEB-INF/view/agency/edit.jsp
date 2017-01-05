@@ -175,6 +175,9 @@
 <script type="text/javascript">
 	var country = ${country};
 	var language= ${language};
+	
+	//返回到list.html记录数
+	var backNum = -1;
 	$(".country-select").select2({
 	  	data: country
 	})
@@ -244,7 +247,7 @@
 		
 		
 		$("#btn-back").click( function () {
-			history.go(-1);
+			window.location = "${rootPath}agency/list.html?flag=old";
 	    } ); 
 		
 	});
@@ -254,7 +257,7 @@
 		$.post('${rootPath}agency/edit.do', agencyInfo, function(result) {
 			var rmsg = result.msg;
 			if (result.success) {
-				window.parent.location = "${rootPath}agency/list.html";
+				window.parent.location =  "${rootPath}agency/edit.html?id=${agency.agencyId}";
 				} 
 			else {
 				$("#msgModal").modal('show');

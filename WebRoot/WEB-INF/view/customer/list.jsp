@@ -30,29 +30,30 @@
 						<div class="row" style="margin-top: 20px">
 							<div class="form-group col-sm-10">
 								<div class="col-sm-2">
-									<input type="text" id="searchChineseName" class="form-control" placeholder="客人姓名" value="" />
+									<input type="text" id="searchChineseName" class="form-control" placeholder="客人姓名" value="${searchCustomer.chineseName }" />
 								</div>
 								<div class="col-sm-2">
-									<input type="text" id="searchCustomerId" class="form-control" placeholder="客人id"  value="" />
+									<input type="text" id="searchCustomerId" class="form-control" placeholder="客人id"  value="${searchCustomer.customerId }" />
 								</div>
 								<div class="col-sm-2">
-									<input type="text" id="searchEnglishName" class="form-control" placeholder="英文名" value="" />
+									<input type="text" id="searchEnglishName" class="form-control" placeholder="英文名" value="${searchCustomer.englishName }" />
 								</div>
 								<div class="col-sm-2">
-									<input type="text" id="searchMobilephone" class="form-control" placeholder="手机" value="" />
+									<input type="text" id="searchMobilephone" class="form-control" placeholder="手机" value="${searchCustomer.mobilephone }" />
 								</div>
 								<div class="col-sm-2">
-									<input type="text" id="searchEmail" class="form-control" placeholder="邮箱" value="" />
+									<input type="text" id="searchEmail" class="form-control" placeholder="邮箱" value="${searchCustomer.email }" />
 								</div>
 								<div class="col-sm-2">
-									<input type="text" id="searchLocation" class="form-control" placeholder="所在地" value="" />
+									<input type="text" id="searchLocation" class="form-control" placeholder="所在地" value="${searchCustomer.location }" />
 								</div>
 								<div class="col-sm-2">
-									<input type="text" id="searchLevel" class="level-select fullwidth" value="" />
+									<input type="text" id="searchLevel" class="level-select fullwidth" value="${searchCustomer.level }" />
 								</div>
 							</div>	
 							<div class="col-sm-2">					 		                        		
 								<input class="btn btn-primary" type="button" id="searchBtn" value="搜索"/>
+								<input type="hidden" id="searchFlag" value="${flag}" />
 							</div> 	
 						</div>
 						
@@ -135,6 +136,7 @@
 				processing: true,
 				language: datatable_local_language, // my.js
 				serverSide: true,
+				stateSave:true,
 				ajax: {
 					url: '${rootPath}customer/list.do',
 					data:function ( data ) {
@@ -145,7 +147,8 @@
 			 			var searchEmail=$('#searchEmail').val();
 			 			var searchLocation=$('#searchLocation').val();
 			 			var searchLevel=$('#searchLevel').val();
-			 			
+			 			var searchFlag=$('#searchFlag').val();
+			 			data.flag = searchFlag;
 			 			if(searchChineseName !=null && searchChineseName !="" ){
 							data.chineseName = searchChineseName;
 			 			}
@@ -244,8 +247,12 @@
 		        ]
 			});
 			
+			if($('#searchFlag').val()=="restart"){
+				t.ajax.reload();
+			}
 		  	$('#searchBtn').on( 'click', function () {
-		    	//alert($('#customerName').attr("value"));
+		  		//通知后台，使用界面的条件来重绘table
+				$('#searchFlag').val("restart");
 		        t.draw();
 		    } );
 		  

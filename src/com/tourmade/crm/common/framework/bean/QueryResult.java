@@ -21,6 +21,7 @@ public class QueryResult<T> implements java.io.Serializable  {
 	
 	private long countFiltered = 0l;
 	
+	private long statusAll = 0l;
 	private long status0 = 0l;
 
 	private long status1 = 0l;
@@ -36,6 +37,14 @@ public class QueryResult<T> implements java.io.Serializable  {
 	private long status6 = 0l;
 	
 	
+	public long getStatusAll() {
+		return statusAll;
+	}
+
+	public void setStatusAll(long statusAll) {
+		this.statusAll = statusAll;
+	}
+
 	public long getStatus0() {
 		return status0;
 	}
