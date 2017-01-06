@@ -941,7 +941,7 @@
   				searching:false,
     			pageLength: 10,
     			processing: true,
-    			language:  , // my.js
+    			language:  datatable_local_language, // my.js
     			serverSide: true,
     			ajax: {
       				url: '${rootPath}record/list.case?caseId=${crmcase.caseId}',
