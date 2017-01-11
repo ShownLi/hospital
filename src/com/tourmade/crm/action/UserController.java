@@ -1,5 +1,7 @@
 package com.tourmade.crm.action;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -15,8 +17,11 @@ import com.tourmade.crm.common.framework.bean.QueryResult;
 import com.tourmade.crm.common.framework.util.JSONUtilS;
 import com.tourmade.crm.common.model.base.value.baseconfig.Json;
 import com.tourmade.crm.common.model.base.value.baseconfig.PageHelper;
+import com.tourmade.crm.entity.EntityList;
 import com.tourmade.crm.entity.User;
 import com.tourmade.crm.service.UserService;
+
+import net.sf.json.JSONArray;
 
 @Controller
 @RequestMapping("/user")
@@ -42,6 +47,9 @@ public class UserController extends BaseSimpleFormController {
 
 	@RequestMapping(value = "/add.html", method = { RequestMethod.POST, RequestMethod.GET })
 	public String add(Model model) {
+		List<EntityList> roleList = service.getUserRoles();
+		JSONArray roleResult = JSONArray.fromObject(roleList);
+		model.addAttribute("role_id", roleResult);
 		return "/user/add";
 	}
 
@@ -63,6 +71,10 @@ public class UserController extends BaseSimpleFormController {
 
 	@RequestMapping(value = "/edit.html", method = { RequestMethod.POST, RequestMethod.GET })
 	public String edit(Model model, String id) {
+		
+		List<EntityList> roleList = service.getUserRoles();
+		JSONArray roleResult = JSONArray.fromObject(roleList);
+		model.addAttribute("role_id", roleResult);
 		
 		if (null != id && !"".equals(id)) {
 			int userId = Integer.parseInt(id);

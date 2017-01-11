@@ -1,7 +1,6 @@
 package com.tourmade.crm.service;
 
 import java.security.MessageDigest;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.tourmade.crm.common.framework.BaseService;
 import com.tourmade.crm.common.framework.bean.QueryResult;
 import com.tourmade.crm.common.model.base.value.baseconfig.PageHelper;
+import com.tourmade.crm.entity.EntityList;
 import com.tourmade.crm.entity.User;
 import com.tourmade.crm.mapper.user.UserMapper;
 
@@ -59,6 +59,24 @@ public class UserService extends BaseService {
 		return result;
 	}
 
+	/**
+	 * 权限检验，根据用户登录名获取角色ID
+	 * 
+	 */
+	public String permissionCheckRole(String username){
+		String role = userMapper.permissionCheckRole(username);
+		return role;
+	}
+	
+	/**
+	 * 权限检验，根据用户登录名可以访问的URL
+	 * 
+	 */
+	public List<?> permissionCheckUrl(String username){
+		List<?> urlList = userMapper.permissionCheckUrl(username);
+		return urlList;
+	}
+	
 	/**
 	 * 新增用户
 	 * 
@@ -159,7 +177,7 @@ public class UserService extends BaseService {
 			user.setPwd(md5StrBuff.toString());
 			u = userMapper.signin(user);
 		} catch (Exception e) {
-			logger.error("UserService.sighin() --> " + user + "-->" + e.getMessage());
+			logger.error("UserService.signin() --> " + user + "-->" + e.getMessage());
 			u = null;
 		}
 
@@ -178,6 +196,32 @@ public class UserService extends BaseService {
 		return result ;
 	}
 	
+	/**
+	 * 获取角色权限列表
+	 * @return
+	 */
+	public List<EntityList> getUserRoles() {
+		
+		List<EntityList> result = userMapper.getUserRoles();
+		return result ;
+	}
+	
+	/**
+	 * 根据作用域获得参数
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public List<EntityList> getParameterInfo(String domain) {
+		List<EntityList> userinfo = null;
+		try {
+			userinfo = userMapper.getParameterInfo(domain);
+		} catch (Exception e) {
+			logger.error("CaseService.getParameterInfo() --> " + domain + "-->" + e.getMessage());
+			userinfo = null;
+		}
+		return userinfo;
+	}
 	
 	public String MD5(String pwd) {
 		StringBuffer md5StrBuff = new StringBuffer(); 

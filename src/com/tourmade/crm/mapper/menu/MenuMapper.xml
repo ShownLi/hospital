@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="GBK" ?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tourmade.crm.mapper.menu.MenuMapper">
+
+	<select id="queryMenu" parameterType="Map" resultType="Menu">
+		SELECT
+			m.menu_id as menuID,
+			m.menu_name as menuName,
+			p.chinese as menuCategory,
+			m.url as url
+		from tm_menu m left join tm_parameter p 
+		on CONVERT(m.menu_category USING utf8) COLLATE utf8_unicode_ci =p.para_value
+		where m.isdel=0
+		order by menuCategory
+		limit #{start},#{length}
+	</select>
+
+	<select id="countMenu" parameterType="Menu" resultType="long">
+		select count(menu_id) from (
+			SELECT
+				m.menu_id,
+				m.menu_name as menuName,
+				p.chinese as menuCategory,
+				m.url as url
+			from tm_menu m left join tm_parameter p 
+			on CONVERT(m.menu_category USING utf8) COLLATE utf8_unicode_ci =p.para_value
+			where m.isdel=0
+			order by menuCategory
+		)temp
+	</select>
+
+	<select id="permissionCheckUrl" parameterType="String" resultType="String">
+		select url as url from tm_menu where menu_id in (
+			select menu_id from tm_rolemixmenu where role_id=(				
+				select 
+				role_id 
+				from tm_user 
+				where loginname=#{username}
+			)
+		)
+	</select>
+	
+	<select id="permissionCheckRole" parameterType="String" resultType="String">
+		select role_id from tm_user where loginname=#{username}
+	</select>
+
+	<insert id="saveMenu" parameterType="Menu" flushCache="true" useGeneratedKeys="true" keyProperty="menuID" keyColumn="GENERATED_KEY">
+		insert into tm_menu(
+			menu_name,
+			url,
+			menu_category,
+			isdel
+		)values(
+			#{menuName,jdbcType=VARCHAR},
+			#{url,jdbcType=VARCHAR},
+			#{menuCategory,jdbcType=VARCHAR},
+			0
+		)
+	</insert>
+	
+	<insert id="saveRoleAllotMenu" parameterType="Role" >
+		insert into tm_rolemixmenu(
+			role_id,
+			menu_id
+		)values(
+			#{role_id},
+			#{menu_id}			
+		)
+	</insert>
+
+	<insert id="saveRole" parameterType="String">
+		insert into tm_role (role_name) values (#{role_name});
+	</insert>
+
+	<delete id="deleteRoleAllotMenu" parameterType="int">
+		delete from tm_rolemixmenu where role_id=#{role_id}
+	</delete>
+
+	<update id="updateMenu" parameterType="Menu" flushCache="true">
+		update tm_menu
+		<set>
+			<if test="menuName != null">menu_name=#{menuName},</if>
+			<if test="menuCategory != null">menu_category=#{menuCategory},</if>
+			<if test="url != null">url=#{url},</if>
+			<if test="menuID != null ">menu_id=#{menuID}</if>
+		</set>
+		where
+		menu_id=#{menuID}
+	</update>
+	
+	<update id="updateRole" parameterType="Role" flushCache="true">
+		update tm_role
+		<set>
+			<if test="role_name != null">role_name=#{role_name}</if>
+		</set>
+		where
+		role_id=#{role_id}
+	</update>
+
+	<select id="getMenuById" parameterType="int" resultType="Menu">
+		SELECT
+			menuID as menuID,
+			menuName as menuName,
+			menuCategory as menuCategory,
+			url as url
+		from(
+			SELECT
+				m.menu_id as menuID,
+				m.menu_name as menuName,
+				p.chinese as menuCategory,
+				m.url as url
+			from tm_menu m left join tm_parameter p 
+			on CONVERT(m.menu_category USING utf8) COLLATE utf8_unicode_ci =p.para_value
+			where m.isdel=0
+		) temp
+		where menuID = #{menuID}
+	</select>
+	
+	<select id="getRoleById" parameterType="int" resultType="Role">
+		SELECT
+			role_id as role_id,
+			role_name as role_name
+		from tm_role
+		where role_id = #{role_id}
+	</select>
+	
+	<select id="getRoleByName"  parameterType="String" resultType="Role">
+		select 	
+			role_id as role_id,
+			role_id as role_name
+		from tm_role
+		where role_name=#{role_name}
+	</select>
+	
+	<select id="getParameterInfo" parameterType="String" resultType="EntityList">
+		select
+		u.para_domain,
+		u.para_value as id,
+		u.chinese as text,
+		u.isdisplay,
+		u.isdel 
+		from tm_parameter u where u.isdisplay = 1 and u.isdel = 0 and u.para_domain = #{domain}
+		ORDER BY u.para_sort desc, u.para_value
+	</select>
+	
+	<select id="getMenuCategory" resultType="EntityList">
+		select para_value as id, chinese as text from tm_parameter where para_domain="menu.category"
+	</select>
+	
+	<select id="getMenuIdByRoleId" parameterType="int" resultType="String">
+		select menu_id from tm_rolemixmenu where role_id=#{role_id}
+	</select>
+	
+	<select id="queryRole" resultType="Role">
+		select role_id as role_id, role_name as role_name from tm_role where isdel=0
+	</select>
+	
+	<select id="countRole" resultType="long">
+		select count(role_id) from tm_role where isdel=0
+	</select>
+	
+	<select id="checkMenuHaveRole"  parameterType="int" resultType="String">
+		select 
+			r.role_id
+		from tm_rolemixmenu r left join tm_menu m on r.menu_id=m.menu_id
+		where m.menu_id=#{menuid}
+		GROUP BY r.role_id
+	</select>
+	
+	<update id="deleteMenuById" parameterType="int" flushCache="true" statementType="PREPARED">
+		update tm_menu
+		set
+		isdel=1
+		where
+		menu_id = #{menuid}
+	</update>
+	
+	<select id="checkRoleHaveUser"  parameterType="int" resultType="String">
+		select 
+			u.user_id
+		from tm_role r left join tm_user u on r.role_id=u.role_id
+		where r.role_id=#{roleid}
+		GROUP BY u.user_id
+	</select>
+	
+	<update id="deleteRoleById" parameterType="int" flushCache="true" statementType="PREPARED">
+		update tm_role
+		set
+		isdel=1
+		where
+		role_id = #{roleid}
+	</update>
+	
+</mapper>
+
+
+
+

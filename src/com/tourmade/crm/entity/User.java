@@ -32,6 +32,8 @@ public class User extends BaseBean<User> {
 	private Date creatTime;
 	
 	private Date updateTime;
+	
+	private Integer role_id;
 
 	public Integer getUserId() {
 		return userId;
@@ -101,12 +103,18 @@ public class User extends BaseBean<User> {
 		this.updateTime = updateTime;
 	}
 
+	public Integer getRole_id() {
+		return role_id;
+	}
+
+	public void setRole_id(Integer role_id) {
+		this.role_id = role_id;
+	}
+
 	@Override
 	public String toString() {
-		return "User [userId=" + userId + ", name=" + name + ", loginName="
-				+ loginName + ", pwd=" + pwd + ", email=" + email
-				+ ", mobilephone=" + mobilephone + ", creatTime=" + creatTime
-				+ ", updateTime=" + updateTime + "]";
+		return "User [userId=" + userId + ", name=" + name + ", loginName=" + loginName + ", pwd=" + pwd + ", email="
+				+ email + ", mobilephone=" + mobilephone + ", creatTime=" + creatTime + ", updateTime=" + updateTime
+				+ ", role_id=" + role_id + "]";
 	}
-	
 }

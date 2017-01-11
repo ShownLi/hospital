@@ -844,7 +844,6 @@
 		}
 		
 		if("${crmcase.status}"!=3){
-			//alert("${crmcase.status}");
 			$("#btn-confirmpay").css("display","none");
 		} 
 		
@@ -929,7 +928,6 @@
     $(".contact-select").select2({
     	placeholder: '可多选',
     	minimumResultsForSearch: Infinity,
-
     	data: contact
 
      });

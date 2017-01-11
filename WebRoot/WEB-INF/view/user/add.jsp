@@ -69,7 +69,14 @@
 	              <div class="col-sm-8">
 	                <input type="text" name="email" placeholder="邮箱" class="form-control"  />
 	              </div>
-	            </div>      
+	            </div> 
+	            <div class="form-group col-sm-4">
+                  <label class="col-sm-4 control-label">用户权限授权</label>
+                  <div class="col-sm-8">
+                    <select name="role_id" class="permission-select fullwidth" multiple="multiple">
+					</select>     
+                  </div>
+                </div>      
 	        </div>
         </div><!-- panel-body -->
         
@@ -114,9 +121,17 @@
 
 	<%@ include file="../assets/pages/foot.jsp"%>
 	<script src="${rootPath}assets/js/jquery.validate.min.js"></script>
+	<script src="${rootPath}assets/js/select2.min.js"></script>
+	<script src="${rootPath}assets/js/jquery-ui-1.10.3.min.js"></script>
+	<script src="${rootPath}assets/js/jquery.datatables.min.js"></script>
 	
 	<script type="text/javascript">
-	
+		var role = ${role_id}
+		$(".permission-select").select2({
+	        placeholder: '分配权限',
+	        data: role
+	     });
+		
 		jQuery(document).ready(function() {
 			$(".nav-parent").eq(4).addClass("nav-active");
       		$(".nav-parent").eq(4).find(".children").show();

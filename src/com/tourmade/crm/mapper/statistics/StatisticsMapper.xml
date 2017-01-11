@@ -70,14 +70,14 @@
 			c.source as source_en,
 			p.chinese sourceName,
 			count(1) as total,
-			sum(case when o.status=0 then 1 else 0 end) as status0 ,
-			sum(case when o.status=1 then 1 else 0 end) as status1,
-			sum(case when o.status=2 then 1 else 0 end) as status2 ,
-			sum(case when o.status=3 then 1 else 0 end) as status3 ,
-			sum(case when o.status=4 then 1 else 0 end) as status4 ,
-			sum(case when o.status=5 then 1 else 0 end) as status5 ,
-			sum(case when o.status=6 then 1 else 0 end) as status6 ,
-			concat (FORMAT ((sum(case when o.status=3 then 1 else 0 end)+sum(case when o.status=6 then 1 else 0 end)) / count(1) *100,2),'%') as rate,
+			sum(case when c.status=0 then 1 else 0 end) as status0 ,
+			sum(case when c.status=1 then 1 else 0 end) as status1,
+			sum(case when c.status=2 then 1 else 0 end) as status2 ,
+			sum(case when c.status=3 then 1 else 0 end) as status3 ,
+			sum(case when c.status=4 then 1 else 0 end) as status4 ,
+			sum(case when c.status=5 then 1 else 0 end) as status5 ,
+			sum(case when c.status=6 then 1 else 0 end) as status6 ,
+			concat (FORMAT ((sum(case when c.status=3 then 1 else 0 end)+sum(case when c.status=6 then 1 else 0 end)) / count(1) *100,2),'%') as rate,
 			sum(o.rmb_price) as dealMoney
 		from tm_case c left join tm_order o on c.case_id = o.case_id left join tm_parameter p on c.source=p.para_value
 		where c.isdel = 0 
