@@ -895,7 +895,6 @@
     $(".contact-select").select2({
     	placeholder: '可多选',
     	minimumResultsForSearch: Infinity,
-
     	data: contact
 
      });

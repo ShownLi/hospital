@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
@@ -57,6 +58,7 @@ public class SecurityInterceptor implements HandlerInterceptor {
 
 		String requestUri = request.getRequestURI();
 		String contextPath = request.getContextPath();
+		HttpSession session = ((HttpServletRequest) request).getSession();
 		String url = requestUri.substring(contextPath.length());
 
 		logger.debug("---->> your location is:  " + url);
@@ -76,8 +78,19 @@ public class SecurityInterceptor implements HandlerInterceptor {
 			response.sendRedirect(contextPath + "/signin.html");
 			return false;
 		}
-
+		else{
+			if(!((List<String>) session.getAttribute("url")).contains(requestUri)){
+				
+//				if(session.getAttribute("url").equals("/TmCRM/signin.html") || 
+//						session.getAttribute("url").equals("/TmCRM//main.html") || 
+//						session.getAttribute("url").equals("/TmCRM/signout.html")){
+//					return true;
+//				}else{
+					//response.sendRedirect(contextPath + "/notfound.html");
+					return false;
+//				}
+			}
+		}
 		return true;
-
 	}
 }

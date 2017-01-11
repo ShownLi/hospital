@@ -1,6 +1,7 @@
 package com.tourmade.crm.action;
 
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -72,9 +73,15 @@ public class SigninController extends BaseSimpleFormController {
 		} else {
 			User realUser = service.signin(user);
 			if (null != realUser) {
+				 
+				//将登录者的权限ID和可以访问的URl放在session中
+				String roleID = service.permissionCheckRole(realUser.getLoginName());
+				List<?> url = service.permissionCheckUrl(realUser.getLoginName());
+				session.setAttribute("roleID", roleID);
+				session.setAttribute("url", url);
+				
 				json.setSuccess(true);
 				json.setMsg("登录成功");
-//			session.setAttribute("login", realUser);
 				
 				request.getSession().setAttribute(Constants.LOGIN_KEY, realUser);
 			} else {
@@ -83,5 +90,4 @@ public class SigninController extends BaseSimpleFormController {
 		}
 		return json;
 	}
-
 }
