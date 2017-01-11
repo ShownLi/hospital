@@ -757,7 +757,6 @@ public class StatisticsController extends BaseSimpleFormController {
 
 		QueryResult<AgencyAchievementStats> caseResult = service.queryAgencyAchievementStats(agencyAchievementStats,
 				page, request);
-		
 		QueryResult<AgencyAchievementStats> caseResult2 = service
 				.queryAgencyAchievementStatsTotal(agencyAchievementStats, page, request);
 		List<AgencyAchievementStats> data = caseResult2.getData();
@@ -1247,9 +1246,9 @@ public class StatisticsController extends BaseSimpleFormController {
 		Map<String, Object> dataMap = new HashMap<>();
 		QueryResult<CaseSourceStats> result = queryCaseSourceStatsMethod(request, caseSourceStats, page);
 		dataMap.put("dataList", result.getData());// 将数据放入Map中
-		String title = "询单来源,待处理订单数,沟通中点单数,地接设计中订单数,成行订单数,未成行订单数,无效订单数,付款订单数,询单总数,成交率";
+		String title = "询单来源,待处理,沟通中,地接设计中,成行,未成行,无效,付款,询单总数,成交率";
 		dataMap.put("fileName",
-				"询单来源统计表（" + caseSourceStats.getSearchStartTime().substring(0,caseSourceStats.getSearchStartTime().length()-9 ) + "-" + caseSourceStats.getSearchEndTime().substring(0,caseSourceStats.getSearchEndTime().length()-9 ) + "）.csv");// 拼接csv表名
+				"询单来源状态统计表（" + caseSourceStats.getSearchStartTime().substring(0,caseSourceStats.getSearchStartTime().length()-9 ) + "-" + caseSourceStats.getSearchEndTime().substring(0,caseSourceStats.getSearchEndTime().length()-9 ) + "）.csv");// 拼接csv表名
 		try {
 			CSVUtil.saveCsv(response, dataMap, title);
 		} catch (IOException e) {

@@ -3,25 +3,25 @@
 
 <mapper namespace="com.tourmade.crm.mapper.parameter.ParameterMapper">
 
-	<select id="queryParameter" parameterType="Map" resultType="Parameter">
+	<select id="queryParameter" parameterType="map" resultType="com.tourmade.crm.entity.Parameter">
 		select
-			u.para_id as parameterId,
-			u.para_domain as domain,
-			u.para_value as value,
-			u.chinese as chinese,
-			u.english as english,
-			u.para_sort as sort,
-			u.para_desc as depict,
-			u.isdisplay as isdisplay,
-			u.creat_time as creatTime,
-			u.isdel as isdel
-		from tm_parameter u 
-		where u.isdel = 0
-		<if test="domain != null and domain != ''">
-                and   para_domain like '%${domain}%' 
+			para_id as parameterId,
+			para_domain as domain,
+			para_value as value,
+			chinese as chinese,
+			english as english,
+			para_sort as sort,
+			para_desc as depict,
+			isdisplay as isdisplay,
+			creat_time as creatTime,
+			isdel as isdel
+		from tm_parameter  
+		where isdel = 0
+		<if test="pdomain != null and pdomain != ''">
+                and   para_domain like '%${pdomain}%' 
         </if>
-        <if test="value != null and value != ''">
-                and   para_value like '%${value}%' 
+        <if test="pvalue != null and pvalue != ''">
+                and   para_value like '%${pvalue}%' 
         </if>
         <if test="chinese != null and chinese != ''">
                 and   chinese like '%${chinese}%' 
@@ -29,8 +29,7 @@
         <if test="english != null and english != ''">
                 and   english like '%${english}%' 
         </if>
-
-		order by u.creat_time
+		order by creat_time
 		limit #{start},#{length}
 	</select>
 

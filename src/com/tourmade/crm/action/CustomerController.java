@@ -35,7 +35,7 @@ public class CustomerController extends BaseSimpleFormController {
 	private CaseService caseService;
 
 	@RequestMapping(value = "/list.html", method = { RequestMethod.POST, RequestMethod.GET })
-	public String list(Model model) {
+	public String list(Model model,String flag,HttpSession session) {
 		String ageGroup = "customer.agegroup";
 		String level = "customer.level";
 		List<EntityList> ageGroupList = customerService.getParameterInfo(ageGroup);
@@ -44,13 +44,28 @@ public class CustomerController extends BaseSimpleFormController {
 		JSONArray levelResult = JSONArray.fromObject(levelList);
 		model.addAttribute("ageGroup",ageGroupResult);
 		model.addAttribute("level",levelResult);
+		
+			//没有传递flag参数时，表示时从侧边栏访问的
+				if ("".equals(flag) || flag == null) {
+					model.addAttribute("flag", "restart");
+					session.removeAttribute("searchCustomer");
+				} else
+					model.addAttribute("flag", flag);
+					
 		return "/customer/list";
 	}
 	
 	@RequestMapping(value = "/list.do",produces="application/json;charset=utf-8")
 	@ResponseBody
-	public String queryData(HttpServletRequest request, HttpSession session, Model model, Customer customer, PageHelper page) {
-
+	public String queryData(String flag,HttpServletRequest request, HttpSession session, Model model, Customer customer, PageHelper page) {
+		if ("old".equals(flag)) {
+			Customer search = (Customer) session.getAttribute("searchCustomer");
+			if(search==null)
+				search=new Customer();
+			customer = search;
+		}else{
+			session.setAttribute("searchCustomer", customer);
+		}
 		QueryResult<Customer> pageCustomer = customerService.queryCustomer(customer, page, request);
 		String result = JSONUtilS.object2json(pageCustomer);
 

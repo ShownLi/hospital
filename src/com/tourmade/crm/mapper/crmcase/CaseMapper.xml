@@ -138,12 +138,18 @@
 	</select>
 
 
-	<select id="countCaseByStatus" parameterType="Case" resultType="CaseStatus">
-		select u.status as status,
-		count(u.case_id) as count
+	<select id="countCaseStatusNum" parameterType="Case" resultType="CaseStatus">
+		select 
+			IFNULL(count(u.case_id),0) as statusAll,
+			IFNULL(SUM(IF(u.`status`='0',1,0)),0) as status1,
+			IFNULL(SUM(IF(u.`status`='1',1,0)),0) as status2,
+			IFNULL(SUM(IF(u.`status`='2',1,0)),0) as status3,
+			IFNULL(SUM(IF(u.`status`='3',1,0)),0) as status4,
+			IFNULL(SUM(IF(u.`status`='4',1,0)),0) as status5,
+			IFNULL(SUM(IF(u.`status`='5',1,0)),0) as status6,
+			IFNULL(SUM(IF(u.`status`='6',1,0)),0) as status7
 		from tm_case u
-		where
-		u.isdel = 0
+		where	u.isdel = 0
 		<if test="customerId != null and customerId != ''">
 			and customer_id = #{customerId}
 		</if> 
@@ -165,9 +171,6 @@
 		<if test="operator != null and operator != ''">
 			and operator = #{operator}
 		</if>
-		<if test="status != null and status != ''">
-			and status = #{status}
-		</if>
 		<if test="comment != null and comment != ''">
 			and last_comment  like '%${comment}%'
 		</if> 
@@ -186,8 +189,6 @@
 		<if test="searchEndTime != null and searchEndTime != ''">
 			and creat_time &lt;= '${searchEndTime}'
 		</if> 
-		group by u.`status`	
-		ORDER BY u.status ASC
 	</select>
 	
 	<select id="countCaseFC" parameterType="Case" resultType="long">

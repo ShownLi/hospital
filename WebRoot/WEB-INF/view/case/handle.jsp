@@ -54,38 +54,6 @@
 	            </div> 	
 	            <input type="text" style="display: none" name="portalId" placeholder="portalId" class="form-control" value="${crmcase.portalId}"/>
 	             	
-	            <%-- <div class="form-group col-sm-4">
-	            	<label class="col-sm-3 control-label">生日</label>
-	            	<div class="col-sm-9 input-group input-datepicker">
-		                <input type="text" name="birthday" class="datepicker form-control" placeholder="yyyy/mm/dd" id="birthday" autocomplete="off" value="${crmcase.birthday}">
-		                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-	                </div>
-	            </div> --%> 
-	            <%-- <div class="form-group col-sm-4">
-	              <label class="col-sm-3 control-label" >年龄段</label>
-	              <div class="col-sm-9">
-	                <input type="text" name="ageGroup" placeholder="请选择一个年龄段" readonly class="form-control" value="${crmcase.ageGroup}"/>
-	              </div>
-	            </div> --%>
-            	<%-- <div class="form-group col-sm-4">
-            	<label class="col-sm-4 control-label">客人级别</label>
-            	<div class="col-sm-8">
-                    <input type="text" name="level" id="level" class="level-select fullwidth" readonly  value="${customerInfo.level}" />
-                </div>
-            	</div>  --%>
-	            <!-- <div class="form-group col-sm-4">
-	              <label class="col-sm-3 control-label" >性别 <span class="asterisk">&nbsp;</span></label>
-	              <div class="col-sm-9">
-	                <div class="rdio rdio-primary rdio-inline">
-	                  <input type="radio" id="male" value="male" name="gender">
-	                  <label for="male">男</label>
-	                </div>rdio
-	                <div class="rdio rdio-primary rdio-inline">
-	                  <input type="radio" id="female" value="female" name="gender" >
-	                  <label for="female">女</label>
-	                </div>rdio
-	              </div>
-	            </div> --> 
 	        </div>
 	        
 	        <div class="section-block">
@@ -120,12 +88,6 @@
 	                <input type="text" name="email" placeholder="邮箱" class="form-control" value="${crmcase.email}"/>
 	              </div>
 	            </div>  
-	            <%-- <div class="form-group col-sm-4">
-	              <label class="col-sm-3 control-label">所在地</label>
-	              <div class="col-sm-9">
-	                <input type="text" name="location" placeholder="所在地" class="form-control" value="${crmcase.location}"/>
-	              </div>
-	            </div> --%> 
 	        </div>
         
         
@@ -160,37 +122,6 @@
                 </div>
             </div>
             
-     
-           <%-- <div class="section-block">
-            	<div class="form-group col-sm-4">
-            	<label class="col-sm-4 control-label">英文名</label>
-            	<div class="col-sm-8">
-                    <input type="text" name="englishName" id="englishName" class="form-control" readonly value="${customerInfo.englishName}" />
-                </div>
-            	</div>
-            	
-            	<div class="form-group col-sm-4">
-            	<label class="col-sm-4 control-label">性别</label>
-            	<div class="col-sm-8">
-                    <input type="text" name="gender" id="gender" class="gender-select fullwidth" readonly value="${customerInfo.gender}" />
-                </div>
-            	</div>
-            	
-            	<div class="form-group col-sm-4">
-            	<label class="col-sm-4 control-label">生日</label>
-            	<div class="col-sm-8">
-                    <input type="text" name="birthday" id="birthday" class="form-control" readonly value="${customerInfo.birthday}" />
-                </div>
-            	</div>
-            	
-            	<div class="form-group col-sm-4" style="clear: both;">
-            	<label class="col-sm-4 control-label">年龄段</label>
-            	<div class="col-sm-8">
-                    <input type="text" name="ageGroup" id="ageGroup" class="form-control" readonly value="${customerInfo.ageGroup}" />
-                </div>
-            	</div> --%>
-            	
-          	
             </div> 
             
             <div class="section-block">           
@@ -341,7 +272,7 @@
                 <div class="form-group col-sm-8">
                   <label class="col-sm-2 control-label">客人的要求</label>
                   <div class="col-sm-9" style="margin-left: 23px;">
-              		<textarea id="requirement" name="requirement" class="form-control" placeholder="客人的要求" rows="5"></textarea>
+              		<textarea id="requirement" name="requirement" class="form-control" placeholder="客人的要求" rows="5">${crmcase.requirement}</textarea>
                   </div>
                 </div>
             </div>
@@ -382,110 +313,6 @@
      </form>   
       </div><!-- panel -->
       
- <%--        <!-- panel 是否无效 -->
-      <div class="panel panel-default">
-          <div class="panel-heading">
-
-              <div class="panel-btns">
-                  <a href="" class="minimize">&minus;</a>
-              </div>
-              <h4 class="panel-title">无效原因</h4>
-          </div>
-          <div class="panel-body panel-body-nopadding">
-             
-              <form id="form-delInfo" class="form-horizontal" style="display:none">
-                  <div class="section-block">
-                      <div class="form-group col-sm-6">
-                        <label class="col-sm-4 control-label">无效原因是</label>
-                        <div class="col-sm-6">
-                          <input class="reason-select fullwidth" name="reason" value="${crmcase.reason}" placeholder="无效原因是" />
-                        </div>
-                    	<button id="btn-updateDel" class="btn btn-primary">更改</button>&nbsp;
-                      </div>
-                  </div><!-- panel-body -->
-                      <input type="hidden" name="caseId" value="${crmcase.caseId}" />
-              </form> 
-          </div>
-      </div> --%>
-      
-      <!-- Modal  -->
-<!-- <div class="modal fade" id="reconfirmDelModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-sm">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="myModalLabel"><span class="fa fa-warning"></span> 提示</h4>
-      </div>
-      <div class="modal-body">
-        确定无效么？
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-        <button id="confirm-invalid" type="button" class="btn btn-danger">无效</button>
-      </div>
-    </div>modal-content
-  </div>modal-dialog
-</div>modal
- -->
-      <!-- panel 订单列表  -->
-   <!--  <div class="panel panel-default">
-      <div class="panel-heading">
-        <div class="panel-btns">
-          <a href="" class="minimize">&minus;</a>
-        </div>
-        <h4 class="panel-title">订单列表</h4>
-      </div>
-      <div class="panel-body">
-          <div class="table-responsive">
-
-              <table id="dataTable-order" class="table">
-                <thead>
-                  <tr>
-                    <th>ID</th>
-                    <th>客人姓名</th>
-                    <th>地接社</th>
-                    <th>销售姓名</th>
-	 	            <th>目的地</th>
-               <th>预算</th>
-                    <th>状态</th>
-                    <th>编辑</th>
-                  </tr>
-                </thead>
-                <tbody>
-                </tbody>
-              </table>
-            </div>
-            table-responsive
-      </div>
-    </div>end of panel 询单 
- -->
-            <!-- panel 沟通列表 -->
-      <!-- <div class="panel panel-default">
-          <div class="panel-heading">
-          <div class="panel-btns">
-              <a href="" class="minimize">&minus;</a>
-          </div>
-          <h4 class="panel-title">沟通记录 </h4>
-          </div>
-          <div class="panel-body">
-              <div class="table-responsive">
-                  <table id="dataTable-record" class="table table-communicate">
-                    <thead>
-                      <tr>
-                        <th>序号</th>
-                        <th>姓名</th>
-                        <th>沟通内容</th>
-                        <th>时间</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                  </table>
-                </div>
-                table-responsive
-          </div>
-      </div>end of panel 沟通列表
- -->
     <!-- panel 注释 -->
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -610,12 +437,6 @@
                     <input type="text" id="salesId" name="salesId" placeholder="选择一个销售" class="sales-select fullwidth" value="" />
                 </div>
             </div>
-  <%--             <div class="form-group col-sm-8 col-sm-offset-2">
-                  <label class="col-sm-3 control-label">客人的预算</label>
-                  <div class="col-sm-9">
-                    <input type="text" name="budget" placeholder="客人的预算" class="form-control" value="${crmcase.budget}" />
-                  </div>
-                </div> --%>
             <div class="col-sm-12">
              <a class="submit btn btn-primary">保存</a>
              <input  type="hidden" name="caseId" value="${crmcase.caseId}" />
@@ -666,16 +487,6 @@
      </div>
      <div class="modal-body">
       <form id="form-judgeBind" action="${rootPath}/case/bindCustomer.do">
-		 <!-- <table id="showCustomerHeader" border="1" width="100%">
-            <tr>  
-              <td align="center">客人ID</td>        
-              <td align="center">客人名</td>
-              <td align="center">电话</td>
-              <td align="center">邮件</td>
-              <td align="center">QQ</td>
-              <td align="center">微信</td>
-            </tr>
-          </table>	 -->
           <table id="showCustomer" border="1" width="100%">
           	<thead>
           		<tr>
@@ -743,9 +554,7 @@
 	
 	var reason = ${reason};
 	var contactData=${contact};
-	$("#requirement").val("${crmcase.requirement}");	
-	//$("#birthday").val(getBirthday());
-
+	
 	function getBirthday(){
 		var date = $("#birthday").val();	
 		var dateformat = null;
@@ -888,27 +697,6 @@
 			}
 		});
 		
-		/* jQuery("#form-case").validate({
-			rules:{
-				operater: "operator"
-			},
-			messages:{
-				reason:"请录入跟单员"
-			},
-			highlight: function(element) {
-				jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
-			},
-			success: function(element) {
-				jQuery(element).closest('.form-group').removeClass('has-error');
-			},
-			invalidHandler : function(){
-				return false;
-			},
-			submitHandler : function(){
-				delSubmit();
-			    return false;
-			}
-		}); */
    	});
    	
 	//订单回显数据
@@ -1027,17 +815,6 @@
           }
       });
       
-/*   	  function case_submit(){
-   			var f = $("#form-case").serialize();
-   			$.post('${rootPath}case/handle.do', f, function(result) {
-   				var rmsg = result.msg;
-   				if (result.success) {
-   					window.parent.location = "${rootPath}case/edit.html?id=${crmcase.caseId}";
-   				} else {
-   					$("#msgModal").modal('show');
-   				}
-   			}, "JSON");
-  		} */
   		
   		 function case_submit() {
 			var f = $("#form-case").serialize();			
@@ -1067,24 +844,6 @@
 		}
 		
 		
-/* 		function sociation(){
-   		 	var f = $("#form-case").serialize();
-   		 	var h=$("#form-judgeBind").serialize();
-   		 	alert(f+"&"+h);
-	   		$.ajax({
-				type:"POST",
-				url:"${rootPath}case/bindCustomer2.do?crmcase="+f+"&"+h,		
-				success:function (result){
-					if (result=="ok") {
-						window.parent.location = "${pageContext.request.contextPath}/case/list.html";					
-					} else{
-						$("#msgModal").modal('show');
-						$("#nextModal").modal('hide');
-					}
-				}
-			}, "JSON"); 	
-		}       */
-	  
 	   //询单返回
   	  $("#btn-back").click( function () {
   		  history.go(-1);
@@ -1098,31 +857,10 @@
      
       
       //更改无效原因
-    /*   $("#btn-updateDel").click(function(){
-    	 updateDel_submit(); 
-      }); */
       
       $(".confirmDelModal .cancel").click(function(){
       	$(".confirmDelModal").modal("hide");
   	  });
-     /*  function updateDel_submit(){
-
-    	  var f1=$("#form-delInfo").serialize();
-     	  try{
-     		  $.post("${rootPath}case/del.do", f1, function(result) {
-				var rmsg = result.msg;
-				if (result.success) {
-					window.parent.location = "${rootPath}case/edit.html?id=${crmcase.caseId}";
-				} 
-				else {
-					$("#msgModal").modal('show');
-				}
-			}, "JSON");
-     		  }
-     	  catch(e) {
-     		  alert(e);
-     	  }
-      } */
      
 	   
 	  //添加订单
@@ -1177,7 +915,7 @@
      		  $.post("${rootPath}case/del.do", f1, function(result) {
 				var rmsg = result.msg;
 				if (result.success) {
-					window.parent.location = "${rootPath}case/edit.html?id=${crmcase.caseId}";
+					window.location = "${rootPath}case/list.html?flag=old";
 				} 
 				else {
 					$("#msgModal").modal('show');
@@ -1203,7 +941,7 @@
   				searching:false,
     			pageLength: 10,
     			processing: true,
-    			language: datatable_local_language, // my.js
+    			language:  datatable_local_language, // my.js
     			serverSide: true,
     			ajax: {
       				url: '${rootPath}record/list.case?caseId=${crmcase.caseId}',
@@ -1383,10 +1121,6 @@
           $(".start-time").show();
       }
   });
-  
-/*   var newHref = "../customer/edit.html?id="+${crmcase.customerId};
-  $('#addEmail').attr("href",newHref) */
-  
 	</script>
 
 

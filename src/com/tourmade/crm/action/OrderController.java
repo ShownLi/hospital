@@ -40,7 +40,7 @@ public class OrderController extends BaseSimpleFormController {
 	CaseService caseService;
 
 	@RequestMapping(value = "/list.html", method = { RequestMethod.POST, RequestMethod.GET })
-	public String list(Model model) {
+	public String list(Model model,String flag,HttpSession session) {
 		String currency="order.currency";		
 		String country = "country";
 		String status = "order.status";
@@ -66,13 +66,27 @@ public class OrderController extends BaseSimpleFormController {
 		model.addAttribute("reason",reasonResult);
 		model.addAttribute("email",emailResult);
 		
+		if ("".equals(flag) || flag == null) {
+			model.addAttribute("flag", "restart");
+			session.removeAttribute("searchOrder");
+		} else
+			model.addAttribute("flag", flag);
 		return "/order/list";
 	}
 	
 	@RequestMapping(value = "/list.do",produces="application/json;charset=utf-8")
 	@ResponseBody
-	public String queryData(HttpServletRequest request, HttpSession session, Model model, Order order, PageHelper page) {
+	public String queryData(String flag,HttpServletRequest request, HttpSession session, Model model, Order order, PageHelper page) {
 
+		if ("old".equals(flag)) {
+			Order search = (Order) session.getAttribute("searchOrder");
+			if(search==null)
+				search=new Order();
+			order = search;
+		}else{
+			session.setAttribute("searchOrder", order);
+		}
+		
 		QueryResult<Order> queryResult = service.queryOrder(order, page, request);
 		String result = JSONUtilS.object2json(queryResult);
 

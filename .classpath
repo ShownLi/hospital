@@ -128,7 +128,7 @@
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/httpclient-4.4.1.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/httpcore-4.4.1.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/jdom-1.1.jar"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/freemarker-2.3.16.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/freemarker-2.3.16.jar"/>
 	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
 </classpath>

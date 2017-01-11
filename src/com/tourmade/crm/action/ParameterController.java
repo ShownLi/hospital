@@ -36,7 +36,6 @@ public class ParameterController extends BaseSimpleFormController {
 
 		QueryResult<Parameter> pageResult = service.queryParameter(parameter, page, request);
 		String result = JSONUtilS.object2json(pageResult);
-
 		return result;
 	}
 	
@@ -52,6 +51,7 @@ public class ParameterController extends BaseSimpleFormController {
 		Json json = new Json();
 		
 		try {
+			parameter.setValue(parameter.getValue().trim());
 			service.saveParameter(parameter);
 			json.setSuccess(true);
 		} catch (Exception e) {

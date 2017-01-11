@@ -95,13 +95,6 @@
 											class="form-control" value="${crmcase.email}" />
 									</div>
 								</div>
-								<%-- <div class="form-group col-sm-4">
-									<label class="col-sm-3 control-label">所在地</label>
-									<div class="col-sm-9">
-										<input type="text" name="location" placeholder="所在地"
-											class="form-control" value="${crmcase.location}" />
-									</div>
-								</div> --%>
 							</div>
 
 							<div class="section-block">
@@ -395,14 +388,6 @@
 							<table id="dataTable-order" class="table">
 								<thead>
 									<tr>
-										<!-- <th>ID</th>
-										<th>客人姓名</th>
-										<th>地接社</th>
-										<th>销售姓名</th>
-										<th>目的地</th>
-										<th>预算</th> 
-										<th>状态</th>
-										<th>编辑</th>  -->
 										<th>客人姓名<br>ID</th>
 										<th>地接社<br>销售</th>
 										<th>目的地<br>状态</th>
@@ -748,7 +733,7 @@
               </div><!-- noDealModal-body -->
           </div>
           <div class="modal-footer align-center">
-            <button class="submit btn btn-primary">保存</button> 
+              <input type="submit" class="submit btn btn-primary" value="保存"/>
               <a class="cancel btn btn-primary" >取消</a>
           </div>
       </form>
@@ -855,7 +840,6 @@
 			$("#btn-invalid").css("display","none");
 	}
 	var country = ${country};
-	console.log(JSON.stringify(country));
     var language = ${language};
     var withwho = ${withwho};
     var hotel = ${hotel};
@@ -875,31 +859,14 @@
 	var agegroup = ${ageGroup}; 
 	var genderData = [{ id: 'male', text: '男' }, { id:'female' , text: '女' }];
 	var reason = ${reason};
-	//var contactData = [{ id: 0, text: 'qq' }, { id: 1, text: 'email' }, { id: 2, text: 'wechat' }, { id: 3, text: 'phone' }];
 	 var orderNoDealReason=${orderNoDealReason};
 	var currency =${currency};
 	var contact =${contact};
-	$("#requirement").val("${crmcase.requirement}");	
-	//$("#birthday").val(getBirthday());
 
 	//接收联系方式
 	var contactData=${contact};
 	//接收询单未成行原因
 	var reasonNodeal=${reasonNodeal};
-	
-
-	var newHref;
-
-
-	if($.trim("${crmcase.requirement}")==""){
-		newHref = "../customer/list.html";
-	}
-	else{
-		newHref = "../customer/edit.html?id="+"${crmcase.customerId}";
-	}
-		 
-	$('#addEmail').attr("href",newHref);
-	$("#requirement").val("${crmcase.requirement}");	
 	
  	$("#level").select2({
         data: level
@@ -1339,7 +1306,7 @@
             { data: "operator"},
             { data: "creatTime"}, 
 	 		 { data: "lastResponse"}
-        ]		 	
+        ]
 	});
 	
 	//询单效验数据，修改
@@ -1398,7 +1365,7 @@
 	  
 	   //询单返回
   	  $("#btn-back").click( function () {
-  		  history.go(-1);
+  		window.location = "${rootPath}case/list.html?flag=old";
   	  });  	  
 	   
       //询单无效
@@ -1410,9 +1377,6 @@
       $("#btn-confirmpay").click(function(){
     	  confirmpaySubmit();
       })
-     /*  $("#btn-updateDel").click(function(){
-     	 updateDel_submit(); 
-       }); */
       
       $(".confirmDelModal .cancel").click(function(){
       	$(".confirmDelModal").modal("hide");
@@ -1440,27 +1404,7 @@
 			    return false;
 			}
 		});
-     /*  function updateDel_submit(){
-
-    	  var f1=$("#form-delInfo").serialize();
-     	  try{
-     		  $.post("${rootPath}case/del.do", f1, function(result) {
-				var rmsg = result.msg;
-				if (result.success) {
-					window.parent.location = "${rootPath}case/edit.html?id=${crmcase.caseId}";
-				} 
-				else {
-					$("#msgModal").modal('show');
-				}
-			}, "JSON");
-     		  }
-     	  catch(e) {
-     		  alert(e);
-     	  }
-      } */
      
-	  //分配地接社
-
  
       //订单为未成行
       $("#btn-nodeal").click(function(){
@@ -1551,7 +1495,7 @@
      		  $.post("${rootPath}case/del.do", f1, function(result) {
 				var rmsg = result.msg;
 				if (result.success) {
-					window.parent.location = "${rootPath}case/edit.html?id=${crmcase.caseId}";
+					window.location = "${rootPath}case/list.html?flag=old";
 				} 
 				else {
 					$("#msgModal").modal('show');

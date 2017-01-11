@@ -26,12 +26,12 @@ import net.sf.json.JSONArray;
 @Controller
 @RequestMapping("/agency")
 public class AgencyController extends BaseSimpleFormController {
-	
+
 	@Autowired
 	private AgencyService service;
 
 	@RequestMapping(value = "/list.html", method = { RequestMethod.POST, RequestMethod.GET })
-	public String list(Model model) {
+	public String list(Model model, String flag, HttpSession session) {
 		String country = "country";
 		String language = "agency.language";
 		String destination = "country";
@@ -41,16 +41,30 @@ public class AgencyController extends BaseSimpleFormController {
 		JSONArray countryResult = JSONArray.fromObject(countryList);
 		JSONArray languageResult = JSONArray.fromObject(languageList);
 		JSONArray destinationResult = JSONArray.fromObject(destinationList);
-		model.addAttribute("country",countryResult);
-		model.addAttribute("language",languageResult);
-		model.addAttribute("destination",destinationResult);
+		model.addAttribute("country", countryResult);
+		model.addAttribute("language", languageResult);
+		model.addAttribute("destination", destinationResult);
+		//没有传递flag参数时，表示时从侧边栏访问的
+		if ("".equals(flag) || flag == null) {
+			model.addAttribute("flag", "restart");
+			session.removeAttribute("searchAgency");
+		} else
+			model.addAttribute("flag", flag);
 		return "/agency/list";
 	}
-	
-	@RequestMapping(value = "/list.do",produces="application/json;charset=utf-8")
+
+	@RequestMapping(value = "/list.do", produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public String queryData(HttpServletRequest request, HttpSession session, Model model, Agency agency, PageHelper page) {
-		
+	public String queryData(String flag, HttpServletRequest request, HttpSession session, Model model,
+			 Agency agency, PageHelper page) {
+		if ("old".equals(flag)) {
+			Agency search = (Agency) session.getAttribute("searchAgency");
+			if(search==null)
+				search=new Agency();
+			agency = search;
+		}else{
+			session.setAttribute("searchAgency", agency);
+		}
 		QueryResult<Agency> agencyPage = service.queryAgency(agency, page, request);
 		String result = JSONUtilS.object2json(agencyPage);
 		return result;
@@ -58,24 +72,24 @@ public class AgencyController extends BaseSimpleFormController {
 
 	@RequestMapping(value = "/add.html", method = { RequestMethod.POST, RequestMethod.GET })
 	public String add(Model model) {
-		
+
 		String country = "country";
 		String language = "agency.language";
 		List<EntityList> countryList = service.getParameterInfo(country);
 		List<EntityList> languageList = service.getParameterInfo(language);
 		JSONArray countryResult = JSONArray.fromObject(countryList);
-		JSONArray  languageResult = JSONArray.fromObject(languageList);
-		model.addAttribute("country",countryResult);
-		model.addAttribute("language",languageResult);
-		
+		JSONArray languageResult = JSONArray.fromObject(languageList);
+		model.addAttribute("country", countryResult);
+		model.addAttribute("language", languageResult);
+
 		return "/agency/add";
 	}
 
 	@RequestMapping(value = "/add.do")
 	@ResponseBody
 	public Json doAdd(HttpServletRequest request, HttpSession session, Model model, Agency agency) {
-		
-		Json json = new Json();		
+
+		Json json = new Json();
 		try {
 			service.saveAgency(agency);
 			json.setObj(agency);
@@ -84,10 +98,10 @@ public class AgencyController extends BaseSimpleFormController {
 			json.setSuccess(false);
 			logger.error("AgencyController.doAdd() --> " + agency.toString() + "\n" + e.getMessage());
 		}
-		
+
 		return json;
 	}
-	
+
 	@RequestMapping(value = "/edit.html", method = { RequestMethod.POST, RequestMethod.GET })
 	public String edit(Model model, String id) {
 		if (null != id && !"".equals(id)) {
@@ -99,9 +113,9 @@ public class AgencyController extends BaseSimpleFormController {
 			List<EntityList> languageList = service.getParameterInfo(language);
 			JSONArray countryResult = JSONArray.fromObject(countryList);
 			JSONArray languageResult = JSONArray.fromObject(languageList);
-			model.addAttribute("country",countryResult);
-			model.addAttribute("language",languageResult);
-			model.addAttribute("agency",agency);
+			model.addAttribute("country", countryResult);
+			model.addAttribute("language", languageResult);
+			model.addAttribute("agency", agency);
 		}
 		return "/agency/edit";
 	}
@@ -110,7 +124,7 @@ public class AgencyController extends BaseSimpleFormController {
 	@ResponseBody
 	public Json doEdit(HttpServletRequest request, HttpSession session, Model model, Agency agency) {
 
-		Json json = new Json();		
+		Json json = new Json();
 		try {
 			service.updateAgency(agency);
 			json.setSuccess(true);
@@ -118,10 +132,10 @@ public class AgencyController extends BaseSimpleFormController {
 			json.setSuccess(false);
 			logger.error("AgencyController.doEdit() --> " + agency.toString() + "\n" + e.getMessage());
 		}
-		
+
 		return json;
 	}
-	
+
 	@RequestMapping(value = "/del.do")
 	@ResponseBody
 	public Json doDel(HttpServletRequest request, HttpSession session, Model model, String id) {
@@ -138,23 +152,23 @@ public class AgencyController extends BaseSimpleFormController {
 		} catch (Exception e) {
 			json.setSuccess(false);
 			logger.error("AgencyController.doDel() --> " + id + "\n" + e.getMessage());
-		}		
+		}
 		return json;
 	}
-	
-	//校验地接社是否有订单
+
+	// 校验地接社是否有订单
 	@RequestMapping(value = "/checkDel.do")
 	@ResponseBody
 	public Json doCheckDel(HttpServletRequest request, HttpSession session, Model model, String id) {
-		
+
 		Json json = new Json();
 		try {
 			if (null != id && !"".equals(id)) {
 				int agencyId = Integer.parseInt(id);
 				String agencyId2 = service.checkAgencyHaveOrder(agencyId);
-				if(null!=agencyId2){
+				if (null != agencyId2) {
 					json.setSuccess(true);
-				}else{
+				} else {
 					json.setSuccess(false);
 				}
 			} else {
@@ -163,7 +177,7 @@ public class AgencyController extends BaseSimpleFormController {
 		} catch (Exception e) {
 			json.setSuccess(false);
 			logger.error("AgencyController.doDel() --> " + id + "\n" + e.getMessage());
-		}		
+		}
 		return json;
 	}
 }

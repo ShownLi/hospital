@@ -31,29 +31,27 @@
 						<div class="row" style="margin-top: 20px">
 							<div class="form-group col-sm-10">
 								<div class="col-sm-2">
-									<input type="text" id="searchCustomerName" class="form-control" placeholder="客人姓名" value="" />
+									<input type="text" id="searchCustomerName" class="form-control" placeholder="客人姓名" value="${searchOrder.customerName }" />
 								</div>
 								<div class="col-sm-2">
-									<input type="text" id="searchOrderId" class="form-control" placeholder="订单id"  value="" />
+									<input type="text" id="searchOrderId" class="form-control" placeholder="订单id"  value="${searchOrder.orderId }" />
 								</div>
 								<div class="col-sm-2">
-									<input type="text" id="searchAgencyName" class="form-control" placeholder="地接社" value="" />
+									<input type="text" id="searchAgencyName" class="form-control" placeholder="地接社" value="${searchOrder.agencyName }" />
 								</div>
 								<div class="col-sm-2">
-									<input type="text" id="searchSalesName" class="form-control" placeholder="销售姓名" value="" />
-								</div>
-								<!-- <div class="col-sm-2">
-									<input type="text" id="searchDestination" class="destination-select fullwidth" value="" />
-								</div> -->
-								<div class="col-sm-2">
-									<input type="text" id="searchOperator" class="operator-select fullwidth" value="" />
+									<input type="text" id="searchSalesName" class="form-control" placeholder="销售姓名" value="${searchOrder.salesName }" />
 								</div>
 								<div class="col-sm-2">
-									<input type="text" id="searchStatus" class="status-select fullwidth" value="" />
+									<input type="text" id="searchOperator" class="operator-select fullwidth" value="${searchOrder.operator }" />
+								</div>
+								<div class="col-sm-2">
+									<input type="text" id="searchStatus" class="status-select fullwidth" value="${searchOrder.status }" />
 								</div>
 							</div>	
 							<div class="col-sm-2">					 		                        		
 								<input class="btn btn-primary" type="button" id="searchBtn" value="搜索"/>
+								<input type="hidden" id="searchFlag" name="flag" value="${flag}" />
 							</div> 	
 						</div>
 					
@@ -372,6 +370,7 @@
 			 	processing: true,
 			 	language: datatable_local_language, // my.js
 			 	serverSide: true,
+			 	stateSave:true,
 			 	ajax: {
 			 		url: '${rootPath}order/list.do',
 			 		data:function ( data ) {
@@ -383,7 +382,9 @@
 			 			var searchBudget=$('#searchBudget').val();
 			 			var searchStatus=$('#searchStatus').val();
 			 			var searchOperator=$('#searchOperator').val();
-			 				
+			 			
+			 			var searchFlag=$('#searchFlag').val();
+			 			data.flag = searchFlag;
 			 			if(searchCustomerName !=null && searchCustomerName !="" ){
 							data.customerName = searchCustomerName;
 			 			}
@@ -554,8 +555,12 @@
 			 		 { data: "lastResponse"}
 		         ]
 			 });
-				
+			 if($('#searchFlag').val()=="restart"){
+					t.ajax.reload();
+				}
 			  $('#searchBtn').on( 'click', function () {
+					//通知后台，使用界面的条件来重绘table
+					$('#searchFlag').val("restart");
 			        t.draw();
 			    } );
 			  jQuery(document).ready(function() {
