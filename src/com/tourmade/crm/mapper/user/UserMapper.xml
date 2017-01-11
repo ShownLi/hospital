@@ -18,6 +18,20 @@
 		limit #{start},#{length}
 	</select>
 
+	<select id="permissionCheckUrl" parameterType="String" resultType="String">
+		select url as url from tm_menu where menu_id in (
+			select menu_id from tm_rolemixmenu where role_id=(				
+				select 
+				role_id 
+				from tm_user 
+				where loginname=#{username}
+			)
+		)
+	</select>
+	
+	<select id="permissionCheckRole" parameterType="String" resultType="String">
+		select role_id from tm_user where loginname=#{username}
+	</select>
 
 	<select id="countUser" parameterType="User" resultType="long">
 		select count(u.user_id) from tm_user u
@@ -34,6 +48,7 @@
 		mobilephone,
 		creat_time,
 		update_time,
+		role_id,
 		isdel
 		)values(
 		#{name,jdbcType=VARCHAR},
@@ -43,6 +58,7 @@
 		#{mobilephone,jdbcType=VARCHAR},
 		NOW(),
 		NOW(),
+		#{role_id},
 		0
 		)
 	</insert>
@@ -55,6 +71,7 @@
 			<if test="email != null">user_email=#{email},	</if>
 			<if test="pwd != null and pwd !=''">password=#{pwd},</if>
 			<if test="mobilephone != null">mobilephone=#{mobilephone},</if>
+			<if test="role_id != null">role_id=#{role_id},</if>
 			update_time=NOW(),
 		</set>
 		where
@@ -105,4 +122,36 @@
 		limit 1
 	</select>
 	
+	<select id="getParameterInfo" parameterType="String" resultType="EntityList">
+		select
+		u.para_domain,
+		u.para_value as id,
+		u.chinese as text,
+		u.isdisplay,
+		u.isdel 
+		from tm_parameter u where u.isdisplay = 1 and u.isdel = 0 and u.para_domain = #{domain}
+		ORDER BY u.para_sort desc, u.para_value
+	</select>
+	
+	<select id="getUserRoles" resultType="EntityList">
+		select role_id as id, role_name as text from tm_role
+	</select>
+	
+	<select id="getRoleNameByid" parameterType="int" resultType="String">
+		select 
+			r.role_name 
+		from tm_user u left join tm_role r on u.role_id=r.role_id 
+		where u.user_id=#{userId} 
+		and u.isdel=0
+		GROUP BY r.role_name
+	</select>
+	
 </mapper>
+
+
+
+
+
+
+
+

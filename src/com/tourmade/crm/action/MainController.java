@@ -2,7 +2,9 @@ package com.tourmade.crm.action;
 
 import java.io.IOException;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -48,8 +50,12 @@ public class MainController extends BaseSimpleFormController {
 	}
 
 	@RequestMapping(value = "/main.html", method = { RequestMethod.POST, RequestMethod.GET })
-	public String main(Model model) {
-		return "redirect:/case/list.html";
+	public String main(HttpServletRequest request, HttpSession session,Model model) {
+		String roleID = (String) session.getAttribute("roleID");
+		if("5".equals(roleID)){
+			return "redirect:/agency/list.html";
+		}else{
+			return "redirect:/case/list.html";
+		}
 	}
-
 }

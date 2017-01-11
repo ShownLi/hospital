@@ -44,18 +44,22 @@
 	<!-- 拦截器 -->
 	<mvc:interceptors>
 		<mvc:interceptor>
-			<mvc:mapping path="/**" />
+			<!-- 配置只拦截.html的请求 -->
+			<mvc:mapping path="/**/*.html" />
 			<bean class="com.tourmade.crm.common.interceptors.SecurityInterceptor">
 				<property name="excludeUrls">
 					<list>
 						<value>/signin.html</value>
 						<value>/signin.do</value>
+						<value>/signout.html</value>
+						<value>/signout.do</value>
+						<value>/main.html</value>
+						<value>/main.do</value>
 					</list>
 				</property>
 			</bean>
 		</mvc:interceptor>
 	</mvc:interceptors> 
-
 
 	<!--通用视图解析器 -->
 	<bean id="viewResolverCommon"
