@@ -26,7 +26,7 @@ public class CSVUtil {
 		try {
 			if(dataList!=null){
 				for(BaseBean<?> d:dataList){
-					//直接toString方法被重写，各个属性之间用,链接
+					//直接toCSVString方法被重写，各个属性之间用,链接
 					out.write(d.toCSVString()+"\n");
 				}
 			
