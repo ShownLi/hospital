@@ -391,9 +391,6 @@ public class MenuService extends BaseService {
 		try {
 			
 			List<?> rolelist = menuMapper.checkRoleHaveUser(roleid);
-			
-			System.out.println(rolelist);
-			
 			return rolelist;
 		} catch (Exception e) {
 			logger.error("MenuService.checkRoleHaveUser() --> " + roleid + "-->" + e.getMessage());
