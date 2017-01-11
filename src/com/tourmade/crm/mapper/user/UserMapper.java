@@ -23,6 +23,8 @@ public interface UserMapper extends BaseMapper {
 
 	public User getUserById(int userId);
 	
+	public String getRoleNameByid(int userId);
+	
 	public User signin(User user);
 	
 	public List<?> permissionCheckUrl(String username);

@@ -70,6 +70,9 @@
 							<label><input name="menu_id" type="checkbox" value="12" />地接社展示列表界面 </label> 
 							<label><input name="menu_id" type="checkbox" value="13" />新增地接社界面 </label> 
 							<label><input name="menu_id" type="checkbox" value="14" />编辑地接社页面 </label> 
+							<label><input name="menu_id" type="checkbox" value="45" />新增销售界面 </label> 
+							<label><input name="menu_id" type="checkbox" value="46" />编辑销售界面 </label> 
+							<label><input name="menu_id" type="checkbox" value="47" />销售列表界面 </label> 
 						</li>
 						<li>
 							用户栏列表&nbsp;<input type="button" value="全选"><br/><br/> 

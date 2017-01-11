@@ -45,9 +45,6 @@
 	            </div> 
 	            <div class="form-group col-sm-6">
 	              <label class="col-sm-3 control-label">所属权限</label>
-	              <%-- <div class="col-sm-6">
-	                <input type="text" name="menuCategory" placeholder="所属权限" class="form-control" value="${menu.menuCategory}" />
-	              </div> --%>
 	              <div class="col-sm-6">
                     <select name="menuCategory" class="menuCategory-select fullwidth" multiple="multiple" >
 					</select>     

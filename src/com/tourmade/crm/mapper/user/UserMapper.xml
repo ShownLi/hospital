@@ -136,4 +136,22 @@
 	<select id="getUserRoles" resultType="EntityList">
 		select role_id as id, role_name as text from tm_role
 	</select>
+	
+	<select id="getRoleNameByid" parameterType="int" resultType="String">
+		select 
+			r.role_name 
+		from tm_user u left join tm_role r on u.role_id=r.role_id 
+		where u.user_id=#{userId} 
+		and u.isdel=0
+		GROUP BY r.role_name
+	</select>
+	
 </mapper>
+
+
+
+
+
+
+
+

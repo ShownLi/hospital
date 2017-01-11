@@ -121,7 +121,7 @@
 	<script type="text/javascript">
 		var role = ${role_id}
 		$(".permission-select").select2({
-	        placeholder: '分配权限',
+	        placeholder: '${roleName}',
 	        data: role
 	     });
 		

@@ -197,6 +197,14 @@ public class UserService extends BaseService {
 	}
 	
 	/**
+	 * 根据客人id获取角色名称
+	 */
+	public String getRoleNameByid(int userId) {
+		String result = userMapper.getRoleNameByid(userId);
+		return result ;
+	}
+	
+	/**
 	 * 获取角色权限列表
 	 * @return
 	 */
