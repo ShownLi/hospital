@@ -631,6 +631,7 @@
     $(".status-select").select2({
         data: caseStatus
      });
+    $(".status-select").prop("disabled", true);
     $(".source-select").select2({
       placeholder: '选择一个推广渠道',
       data: source
@@ -817,6 +818,7 @@
       
   		
   		 function case_submit() {
+  			$(".status-select").prop("disabled", false);
 			var f = $("#form-case").serialize();			
 			$.post('${rootPath}case/handle.do', f, function(result) {		
 				if (result.ok=="ok") {
@@ -941,7 +943,7 @@
   				searching:false,
     			pageLength: 10,
     			processing: true,
-    			language:  , // my.js
+    			language:  datatable_local_language, // my.js
     			serverSide: true,
     			ajax: {
       				url: '${rootPath}record/list.case?caseId=${crmcase.caseId}',

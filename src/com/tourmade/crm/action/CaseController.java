@@ -401,6 +401,8 @@ public class CaseController extends BaseSimpleFormController {
 				service.saveCustomer(realCase);
 				crmcase.setCustomerId(realCase.getCustomerId());
 				realCase.setStatus("1");
+				
+				//更新客人id和状态
 				service.updateCase(realCase);
 			} else {
 				// 绑定客人,添加询单

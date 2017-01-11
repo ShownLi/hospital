@@ -791,5 +791,14 @@
 		and `status`=2)a)
 		);
 	</update>
+	
+	<update id="updateCaseStatus" parameterType="Case" flushCache="true">
+		update tm_case
+		set
+		status=#{status},
+		update_time=NOW()
+		where
+		case_id=#{caseId}
+	</update>
 </mapper>
 

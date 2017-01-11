@@ -255,7 +255,7 @@ public class OrderController extends BaseSimpleFormController {
 			service.updateOrder(order);			
 			crmcase.setStatus("3");
 			service.customerStatus(oldOrder.getCustomerId(), "3");
-			caseService.updateCase(crmcase);
+			caseService.updateCaseStatus(crmcase);
 		
 			json.setSuccess(true);
 		} catch (Exception e) {
@@ -278,7 +278,7 @@ public class OrderController extends BaseSimpleFormController {
 			int i = caseService.caseStatus(crmcase.getCaseId());
 			if(i==0){
 				crmcase.setStatus("4");
-				caseService.updateCase(crmcase);
+				caseService.updateCaseStatus(crmcase);
 			}
 			json.setSuccess(true);
 		} catch (Exception e) {
