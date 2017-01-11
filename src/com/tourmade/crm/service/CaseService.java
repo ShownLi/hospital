@@ -560,6 +560,7 @@ public class CaseService extends BaseService {
 	public void updateCase(Case crmcase) {
 
 		try {
+			
 			caseMapper.updateCase(crmcase);
 		} catch (Exception e) {
 			logger.error("CaseService.updateCase() --> " + crmcase + "-->" + e.getMessage());
@@ -940,6 +941,15 @@ public class CaseService extends BaseService {
 		} catch (Exception e) {
 			logger.error("CaseService.confirmPay() --> " + crmcase + "-->" + e.getMessage());
 		}
+	}
+
+	public void updateCaseStatus(Case crmcase) {
+		try {	
+			caseMapper.updateCaseStatus(crmcase);
+		} catch (Exception e) {
+			logger.error("CaseService.updateCaseStatus() --> " + crmcase + "-->" + e.getMessage());
+		}
+
 	}
 
 }

@@ -946,6 +946,7 @@
     $(".status-select").select2({
         data: caseStatus
      });
+    $(".status-select").prop("disabled", true);  
     $(".source-select").select2({
       placeholder: '选择一个推广渠道',
       data: source
@@ -1352,6 +1353,7 @@
       
   	  function case_submit(){
   			$(".user-select").prop("disabled", false);
+  			$(".status-select").prop("disabled", false);
    			var f = $("#form-case").serialize();
    			$.post('${rootPath}case/edit.do', f, function(result) {
    				var rmsg = result.msg;
@@ -1527,6 +1529,7 @@
       
       function confirmpaySubmit() {
     	  $(".user-select").prop("disabled", false);
+    	  $(".status-select").prop("disabled", false);
  			var f = $("#form-case").serialize();
  			$.post('${rootPath}case/confirmPay.do', f, function(result) {
  				var rmsg = result.msg;
