@@ -5,6 +5,6 @@
 	<%@ include file="./assets/pages/head.jsp" %>
     </head>
     <body>
-		404
+		<h3>没有访问权限，请联系管理员</h3>
     </body>
 </html>

@@ -39,12 +39,6 @@
 	            </div>
 	            <div>
 	           		<ul>
-		           		<li>
-							主菜单&nbsp;<input type="button" value="全选"><br/><br/> 
-							<label><input name="menu_id" type="checkbox" value="1" />系统登录界面 </label> 
-							<label><input name="menu_id" type="checkbox" value="2" />系统主界面 </label> 
-							<label><input name="menu_id" type="checkbox" value="40" />系统退出页面 </label> 
-						</li>
 						<li>
 							询单栏列表&nbsp;<input type="button" value="全选"><br/><br/> 
 							<label><input name="menu_id" type="checkbox" value="3" />询单展示列表界面 </label> 
@@ -205,8 +199,8 @@
 	 $.post('${rootPath}menu/roleedit.do?f='+f, function(result) {
 	  	 var rmsg = result.msg;
 	     if (result.success) {
-		  	//window.parent.location = "${rootPath}menu/list.html";
-		  	alert("保存成功");
+	    	 alert("保存成功");
+	    	 window.parent.location = "${rootPath}menu/rolelist.html";
 		  } else {
 			$("#msgModal").modal('show');
 		  }

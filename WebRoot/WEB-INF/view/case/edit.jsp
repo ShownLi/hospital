@@ -176,8 +176,7 @@
 							<div class="form-group col-sm-4">
 								<label class="col-sm-4 control-label">沟通方式</label>
 								<div class="col-sm-8">
-									<input type="text" name="contactReal"
-										class="contact-real-select fullwidth"/>
+									<input type="text" name="contactReal" id="contactReal" class="contact-real-select fullwidth" />
 								</div>
 							</div>
 						</div>
@@ -1322,6 +1321,7 @@
             startMonth: "date",
             during: "digits",
             destination: "required",
+            contactReal: "required",
           },
           messages: {
             adult: "请输入一个整数",
@@ -1333,6 +1333,7 @@
             startMonth: "请输入正确的日期格式 mm/dd/yyyy",
             during: "请输入一个整数",
             destination:"请选择目的地",
+            contactReal:"请选择沟通方式",
           },
         
           highlight: function(element) {
@@ -1816,11 +1817,6 @@
       }
 
   });
- 
-
-
 	</script>
-
-
 </body>
 </html>
