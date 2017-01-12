@@ -205,8 +205,8 @@
 	 $.post('${rootPath}menu/roleedit.do?f='+f, function(result) {
 	  	 var rmsg = result.msg;
 	     if (result.success) {
-		  	//window.parent.location = "${rootPath}menu/list.html";
-		  	alert("保存成功");
+	    	 alert("保存成功");
+	    	 window.parent.location = "${rootPath}menu/rolelist.html";
 		  } else {
 			$("#msgModal").modal('show');
 		  }

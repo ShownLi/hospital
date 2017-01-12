@@ -715,8 +715,8 @@ public class StatisticsController extends BaseSimpleFormController {
 		}
 
 		QueryResult<CaseSourceStats> caseResult = service.queryCaseSourceStats(caseSourceStats, page, request);
-		QueryResult<CaseSourceStats> caseResult2 = service.queryCaseSourceStatsTotal(caseSourceStats, page,
-				request);
+		QueryResult<CaseSourceStats> caseResult2 = service.queryCaseSourceStatsTotal(caseSourceStats, page, request);
+		
 		List<CaseSourceStats> data = caseResult2.getData();
 		data.get(0).setSourceName("合计");
 		caseResult.getData().addAll(data);
