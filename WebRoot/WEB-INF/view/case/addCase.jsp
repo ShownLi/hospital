@@ -71,7 +71,7 @@
 	                <div class="form-group col-sm-4">
 	                    <label class="col-sm-4 control-label">沟通方式</label>
 	                    <div class="col-sm-8">
-	                      <input type="text"  name="contactReal" class="contact-real-select fullwidth" value="0" />
+	                      <input type="text"  name="contactReal" class="contact-real-select fullwidth" />
 	                    </div>
 	                </div>  
 	                </div>  
