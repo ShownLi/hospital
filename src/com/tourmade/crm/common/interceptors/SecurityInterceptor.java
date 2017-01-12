@@ -86,11 +86,14 @@ public class SecurityInterceptor implements HandlerInterceptor {
 //						session.getAttribute("url").equals("/TmCRM/signout.html")){
 //					return true;
 //				}else{
-					//response.sendRedirect(contextPath + "/notfound.html");
+					response.sendRedirect(contextPath + "/notfound.html");
 					return false;
 //				}
 			}
+			else{
+				return true;
+			}
 		}
-		return true;
+//		return true;
 	}
 }

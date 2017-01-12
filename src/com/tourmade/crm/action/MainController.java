@@ -52,10 +52,14 @@ public class MainController extends BaseSimpleFormController {
 	@RequestMapping(value = "/main.html", method = { RequestMethod.POST, RequestMethod.GET })
 	public String main(HttpServletRequest request, HttpSession session,Model model) {
 		String roleID = (String) session.getAttribute("roleID");
-		if("5".equals(roleID)){
-			return "redirect:/agency/list.html";
+		if(roleID==null||"".equals(roleID)){
+			return "redirect:/signin.html";
 		}else{
-			return "redirect:/case/list.html";
+			if("5".equals(roleID)){
+				return "redirect:/agency/list.html";
+			}else{
+				return "redirect:/case/list.html";
+			}
 		}
 	}
 }
