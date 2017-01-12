@@ -111,12 +111,6 @@
 	                <input type="text" name="email" placeholder="邮箱" class="form-control"  />
 	              </div>
 	            </div>  
-	            <!-- <div class="form-group col-sm-4">
-	              <label class="col-sm-3 control-label">所在地</label>
-	              <div class="col-sm-9">
-	                <input type="text" name="location" placeholder="所在地" class="form-control" />
-	              </div>
-	            </div>  -->
 	        </div>
 	        
                 <div class="section-block">
@@ -140,6 +134,13 @@
 						</select>
                       </div>
                     </div> 
+                    <div class="form-group col-sm-4">
+						<label class="col-sm-4 control-label">沟通方式</label>
+						<div class="col-sm-8">
+							<input type="text" name="contactReal"
+								class="contact-real-select fullwidth"/>
+						</div>
+					</div>
                     <div class="form-group col-sm-4">
                       <label class="col-sm-4 control-label">询单来源</label>
                       <div class="col-sm-8">
@@ -275,13 +276,6 @@
                           <input type="text" name="flight" placeholder="国际航班" class="flight-select fullwidth" />
                         </div>
                     </div>
-<%--                     <input type="hidden" name="chineseName" value="${customerInfo.chineseName}"/>
-                    <input type="hidden" name="englishName" value="${customerInfo.englishName}"/> --%>
-<%--                     <input type="hidden" name="portalId" value="${customerInfo.portalId}"/> --%>
-<%--                     <input type="hidden" name="mobile" value="${customerInfo.mobilephone}"/>
-                    <input type="hidden" name="email" value="${customerInfo.email}"/>
-                    <input type="hidden" name="wechat" value="${customerInfo.wechat}"/>
-                    <input type="hidden" name="qq" value="${customerInfo.qq}"/> --%>
                 </div>
             </div><!-- panel-body -->
             
@@ -336,43 +330,6 @@
     </div><!-- modal-content -->
   </div><!-- modal-dialog -->
 </div><!-- modal -->
-
-<%-- <div class="nextModal modal fade" id="nextModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <div class="nextModal-title">您可以继续添加订单，或 <a style="text-decoration:underline;" href="${rootPath}case/list.html">回到询单列表页面</a></div>
-      </div>
-      <div class="modal-body align-center">
-        <div class="section-block">
-         <form id="form-order">
-            <div class="section-title">选择目的地及地接社,继续添加订单</div>
-             <div class="form-group col-sm-8 col-sm-offset-2">
-                <label class="col-sm-3 control-label">目的地</label>
-                <div class="col-sm-9">
-                    <input type="text" name="destination" id="orderDestination" placeholder="国家" class="country-select fullwidth" value="" />
-                </div>
-            </div> 
-            <div class="form-group col-sm-8 col-sm-offset-2">
-                <label class="col-sm-3 control-label">销售</label>
-                <div class="col-sm-9">
-                    <input type="text" name="salesId" id="salesId" placeholder="选择一个销售" class="sales-select fullwidth" value="" />
-                </div>
-            </div>
-            <div class="col-sm-12">
-        	   <a class="submit btn btn-primary">保存</a>
-        	 <input type="hidden"  name="caseId" id="caseId" value="" />
-             <input type="hidden"  name="customerId" id="customerId" value="${customerId}"/>
-            
-            </div>
-          </form>
-        </div>
-      </div>
-    </div><!-- modal-content -->
-  </div><!-- modal-dialog -->
-</div><!-- modal --> --%>
-
  
  <div id="bindCustomer" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
 	<div class="modal-dialog">
@@ -413,92 +370,6 @@
 	    </div><!-- modal-content -->
   </div><!-- modal-dialog -->
  </div><!-- modal -->	
-   
- 
- 
-<%--  <div id="bindCustomer" class="nextModal modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
-	<div class="modal-dialog">
-    <div class="modal-content">
-     <div class="modal-header">
-     	<form id=" " action="${rootPath}/case/bindCustomer.do">
-			<table id="showCustomer" border="1">
-			  <tr>	
-			  	<td>客人ID</td>		  	
-			  	<td>客人名</td>
-			  	<td>电话</td>
-			  	<td>邮件</td>
-			  	<td>QQ</td>
-			  	<td>微信</td>
-			  </tr>
-			</table>
-			<input name="caseId" value="${sessionScope.caseId}"/>
-			<input id="ccaseId" style="display: none" type="text" name="caseId" />
-			<label  class="col-sm-4 control-label">是否绑定老客人</label>
-
-	              <input type="radio" name="isJudge" value="1" checked/>是
-      			  <input type="radio" name="isJudge" value="0" />否
-			<input type="submit" name="submit" value="提交"/> 
-		</form>
-=======
-  			<table id="showCustomer" border="1" width="100%">
-  			  <tr>	
-  			  	<td align="center">客人ID</td>		  	
-  			  	<td align="center">客人名</td>
-  			  	<td align="center">电话</td>
-  			  	<td align="center">邮件</td>
-  			  	<td align="center">QQ</td>
-  			  	<td align="center">微信</td>
-  			  </tr>
-  			</table>
-  			<input id="ccaseId" style="display: none" type="text" name="caseId" />
-        <div style="margin: 10px 0;">
-          <input type="radio" name="isJudge" value="1" checked/>绑定客人
-    	    <input type="radio" name="isJudge" value="0" />新建客人
-        </div>
-        <div style="text-align: right;">
-          <input class="btn btn-primary" type="submit" name="submit" value="提交"/> 
-          <button class="btn btn-default" type="button" data-dismiss="modal">取消</button>
-        </div>
-			        
-		  </form>
->>>>>>> 528190f5545b69654509c155ebf338638c139f7d
-	    </div><!-- modal-content -->
-  </div><!-- modal-dialog -->
- </div><!-- modal -->	
-</div>    
- 
-  --%>
-<%-- <div id="bindCustomer" class="nextModal modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
-	<div class="modal-dialog">
-    <div class="modal-content">
-     <div class="modal-header">
-     	<form id=" " action="${rootPath}/case/bindCustomer.do">
-			<table id="dataTable" class="table">
-				<thead>
-					<tr>
-				<th>客人ID</th>		  	
-			  	<th>客人名</th>
-			  	<th>电话</th>
-			  	<th>邮件</th>
-			  	<th>QQ</th>
-			  	<th>微信</th>
-					</tr>
-				</thead>
-				<tbody>
-				</tbody>
-			</table>
-			<input name="caseId" value="${sessionScope.caseId}"/>
-			<input id="ccaseId" style="display: none" type="text" name="caseId" />
-			<label  class="col-sm-4 control-label">是否绑定老客人</label>
-
-	              <input type="radio" name="isJudge" value="1" checked/>是
-      			  <input type="radio" name="isJudge" value="0" />否
-			<input type="submit" name="submit" value="提交"/> 
-		</form>
-	    </div><!-- modal-content -->
-  </div><!-- modal-dialog -->
- </div><!-- modal -->	
-</div>  --%> 
 
 	<%@ include file="../assets/pages/foot.jsp"%>
 	<script src="${rootPath}assets/js/select2.min.js"></script>

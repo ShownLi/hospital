@@ -28,7 +28,16 @@
 			u.exchange_rate as exchangeRate,
 			u.last_response as lastResponse,	
 			u.creat_time as creatTime,
-			u.isdel as isdel
+			u.isdel as isdel,
+			u.order_code as orderCode,
+			IFNULL(u.cost_budget,0 )as costBudget,
+			IFNULL(u.cost_budget_rmb,0 )  as costBudgetRmb,
+			IFNULL(u.cost_real,0 ) as costReal,
+			IFNULL(u.price_real,0 ) as priceReal,
+			IFNULL(u.cost_adjust,0 )as costAdjust,
+			IFNULL(u.price_adjust,0 ) as priceAdjust,
+			u.finance_status as financeStatus,
+			u.cost_receiver as costreceiver
 		from tm_order u  
 		where u.isdel = 0 
 		 <if test="customerName != null and customerName != ''">
@@ -54,6 +63,15 @@
          </if>
        	  <if test="status != null and status != ''">
          		and   status = #{status}
+         </if>
+       	  <if test="orderCode != null and orderCode != ''">
+         		and   order_code like '%${orderCode}%'
+         </if>
+         <if test="searchStartTime != null and searchStartTime != ''">
+         		and creat_time &gt;= #{searchStartTime};
+         </if>
+         <if test="searchEndTime != null and searchEndTime != ''">
+        	 	and creat_time &lt;= #{searchEndTime};
          </if>
 		order by u.creat_time desc
 		limit #{start},#{length}
@@ -128,6 +146,15 @@
          </if>
        	  <if test="status != null and status != ''">
          		and   status = #{status}
+         </if>
+       	  <if test="orderCode != null and orderCode != ''">
+         		and   order_code like '%${orderCode}%'
+         </if>
+         <if test="searchStartTime != null and searchStartTime != ''">
+         		and creat_time &gt;= #{searchStartTime};
+         </if>
+         <if test="searchEndTime != null and searchEndTime != ''">
+        	 	and creat_time &lt;= #{searchEndTime};
          </if>
 	</select>
 	
@@ -390,7 +417,16 @@
 		u.rmb_price as rmbPrice,
 		u.last_response as lastResponse,	
 		u.creat_time as creatTime,
-		u.isdel as isdel
+		u.isdel as isdel,
+		u.order_code as orderCode,
+		IFNULL(u.cost_budget,0) as costBudget,
+		IFNULL(u.cost_budget_rmb,0)  as costBudgetRmb,
+		IFNULL(u.cost_real,0) as costReal,
+		IFNULL(u.price_real,0) as priceReal,
+		IFNULL(u.cost_adjust,0) as costAdjust,
+		IFNULL(u.price_adjust,0) as priceAdjust,
+		u.finance_status as financeStatus,
+		u.cost_receiver as costreceiver
 		from tm_order u where u.order_id = #{orderId}
 	</select>
 	
