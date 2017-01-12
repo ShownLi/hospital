@@ -55,6 +55,7 @@
 						<value>/signout.do</value>
 						<value>/main.html</value>
 						<value>/main.do</value>
+						<value>/notfound.html</value>
 					</list>
 				</property>
 			</bean>
