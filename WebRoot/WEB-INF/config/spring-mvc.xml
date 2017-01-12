@@ -42,9 +42,8 @@
 	</mvc:annotation-driven>
 
 	<!-- 拦截器 -->
-	<mvc:interceptors>
+	<!-- <mvc:interceptors>
 		<mvc:interceptor>
-			<!-- 配置只拦截.html的请求 -->
 			<mvc:mapping path="/**/*.html" />
 			<bean class="com.tourmade.crm.common.interceptors.SecurityInterceptor">
 				<property name="excludeUrls">
@@ -55,12 +54,13 @@
 						<value>/signout.do</value>
 						<value>/main.html</value>
 						<value>/main.do</value>
+						<value>/notfound.html</value>
 					</list>
 				</property>
 			</bean>
 		</mvc:interceptor>
 	</mvc:interceptors> 
-
+ -->
 	<!--通用视图解析器 -->
 	<bean id="viewResolverCommon"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">

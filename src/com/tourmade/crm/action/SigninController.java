@@ -36,6 +36,14 @@ public class SigninController extends BaseSimpleFormController {
 	public String signin(Model model) {
 		return "/signin";
 	}
+	
+	/**
+	 * 跳转404页面
+	 */
+	@RequestMapping(value = "/notfound.html", method = { RequestMethod.POST, RequestMethod.GET })
+	public String notFonud(Model model) {
+		return "/notfound";
+	}
 
 	/**
 	 * 用户登出
