@@ -5,11 +5,14 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.http.HttpRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.tourmade.crm.common.action.BaseSimpleFormController;
@@ -21,6 +24,7 @@ import com.tourmade.crm.entity.Case;
 import com.tourmade.crm.entity.Customer;
 import com.tourmade.crm.entity.EntityList;
 import com.tourmade.crm.entity.Order;
+import com.tourmade.crm.entity.PriceRecord;
 import com.tourmade.crm.entity.Sale;
 import com.tourmade.crm.service.CaseService;
 import com.tourmade.crm.service.EmailService;
@@ -250,7 +254,9 @@ public class OrderController extends BaseSimpleFormController {
 		Json json = new Json();	
 		Order oldOrder = service.getOrderById(order.getOrderId());
 		Case crmcase = caseService.getCaseById(oldOrder.getCaseId());
-		
+		//System.out.println(priceRecordList);
+		System.out.println("---------");
+		//System.out.println(priceRecordList==null);
 		try {
 			service.updateOrder(order);			
 			crmcase.setStatus("3");
@@ -379,4 +385,21 @@ public class OrderController extends BaseSimpleFormController {
 		return json;
 	}
 
+	@RequestMapping(value="/addPriceRecord.do")
+	@ResponseBody
+	public Json addPriceRecord(HttpServletRequest request, @RequestParam("priceRecordList[]") List<PriceRecord> priceRecordList){
+		Json json = new Json();
+		try{
+			System.out.println("-----");
+			System.out.println(priceRecordList==null);
+			System.out.println(priceRecordList);
+			
+			json.setSuccess(true);
+		} catch(Exception e) {
+			json.setSuccess(false);
+			logger.error("OrderController.addPriceRecord() -->" + priceRecordList + "\n" +e.getMessage());
+		}
+		
+		return json;
+	}
 }
