@@ -57,7 +57,12 @@
                     <li><a href="${rootPath }user/add.html"><i class="fa fa-caret-right"></i> 新增用户</a></li>
                     
                 </ul>
-            </li>  
+            </li>
+            <li class="nav-parent"><a href="javascript:void(0);"><i class="fa fa-user"></i> <span>财务管理</span></a>
+                <ul class="children">
+                    <li><a href="${rootPath} finance/list.html"><i class="fa fa-caret-right"></i>财务管理列表</a></li>
+                </ul> 
+            </li> 
              <li class="nav-parent" id="stats"><a href="javascript:void(0);"><i class="fa fa-pie-chart"></i> <span>统计分析</span></a>
                 <ul class="children">
                    	<li><a href="${rootPath }statistics/caseSourceStats.html"><i class="fa fa-caret-right"></i>询单来源状态统计</a></li>

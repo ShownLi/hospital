@@ -13,76 +13,154 @@ import com.tourmade.crm.common.framework.BaseBean;
  */
 public class Order extends BaseBean<Order> {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1423523863575074623L;
 
 	private Integer orderId;
-	
+
 	private Integer caseId;
-	
+
 	private Integer customerId;
-	
+
 	private String customerName;
 
 	private Integer agencyId;
-	
+
 	private String agencyName;
-	
+
 	private Integer salesId;
-	
+
 	private String salesName;
-	
+
 	private String destination;
-	
+
 	private String budget;
-	
+
 	private String status;
-	
+
 	private String reason;
-	
+
 	private String currency;
-	
+
 	private Date groupTime;
 
 	private String groupNumber;
-	
+
 	private float exchangeRate;
-	
+
 	private String customerEmailReal;
-	
+
 	private String customerEmailAlias;
-	
+
 	private String agencyEmailReal;
-	
+
 	private String agencyEmailAlias;
-	
+
 	private BigDecimal groupPrice;
-	
+
 	private BigDecimal rmbPrice;
-	
+
 	private Date lastResponse;
-	
+
 	private Date startDate;
-	
+
 	private Date endDate;
-	
+
 	private Date creatTime;
-	
+
 	private Date updateTime;
-	
+
 	private String agencyReEmailAlias;
-	
+
 	private String agencySeEmailAlias;
-	
+
 	private String customerReEmailAlias;
-	
+
 	private String customerSeEmailAlias;
-	
+
 	private Integer operator;
-	
-	
+
+	private String orderCode;
+	private BigDecimal costBudget;
+	private BigDecimal costBudgetRmb;
+	private BigDecimal costReal;
+	private BigDecimal priceReal;
+	private BigDecimal costAdjust;
+	private BigDecimal priceAdjust;
+	private Integer financeStatus;
+	private Integer costReceiver;
+
+	public String getOrderCode() {
+		return orderCode;
+	}
+
+	public void setOrderCode(String orderCode) {
+		this.orderCode = orderCode;
+	}
+
+	public BigDecimal getCostBudget() {
+		return costBudget;
+	}
+
+	public void setCostBudget(BigDecimal costBudget) {
+		this.costBudget = costBudget;
+	}
+
+	public BigDecimal getCostBudgetRmb() {
+		return costBudgetRmb;
+	}
+
+	public void setCostBudgetRmb(BigDecimal costBudgetRmb) {
+		this.costBudgetRmb = costBudgetRmb;
+	}
+
+	public BigDecimal getCostReal() {
+		return costReal;
+	}
+
+	public void setCostReal(BigDecimal costReal) {
+		this.costReal = costReal;
+	}
+
+	public BigDecimal getPriceReal() {
+		return priceReal;
+	}
+
+	public void setPriceReal(BigDecimal priceReal) {
+		this.priceReal = priceReal;
+	}
+
+	public BigDecimal getCostAdjust() {
+		return costAdjust;
+	}
+
+	public void setCostAdjust(BigDecimal costAdjust) {
+		this.costAdjust = costAdjust;
+	}
+
+	public BigDecimal getPriceAdjust() {
+		return priceAdjust;
+	}
+
+	public void setPriceAdjust(BigDecimal priceAdjust) {
+		this.priceAdjust = priceAdjust;
+	}
+
+	public Integer getFinanceStatus() {
+		return financeStatus;
+	}
+
+	public void setFinanceStatus(Integer financeStatus) {
+		this.financeStatus = financeStatus;
+	}
+
+	public Integer getCostReceiver() {
+		return costReceiver;
+	}
+
+	public void setCostReceiver(Integer costReceiver) {
+		this.costReceiver = costReceiver;
+	}
+
 	public Integer getOperator() {
 		return operator;
 	}
@@ -345,24 +423,20 @@ public class Order extends BaseBean<Order> {
 
 	@Override
 	public String toString() {
-		return "Order [orderId=" + orderId + ", caseId=" + caseId
-				+ ", customerId=" + customerId + ", customerName="
-				+ customerName + ", agencyId=" + agencyId + ", agencyName="
-				+ agencyName + ", salesId=" + salesId + ", salesName="
-				+ salesName + ", destination=" + destination + ", budget="
-				+ budget + ", status=" + status + ", reason=" + reason
-				+ ", currency=" + currency + ", groupTime=" + groupTime
-				+ ", groupNumber=" + groupNumber + ", exchangeRate="
-				+ exchangeRate + ", customerEmailReal=" + customerEmailReal
-				+ ", customerEmailAlias=" + customerEmailAlias
-				+ ", agencyEmailReal=" + agencyEmailReal
-				+ ", agencyEmailAlias=" + agencyEmailAlias + ", groupPrice="
-				+ groupPrice + ", rmbPrice=" + rmbPrice + ", lastResponse="
-				+ lastResponse + ", startDate=" + startDate + ", endDate="
-				+ endDate + ", creatTime=" + creatTime + ", updateTime="
-				+ updateTime + ", agencyReEmailAlias=" + agencyReEmailAlias
-				+ ", agencySeEmailAlias=" + agencySeEmailAlias
-				+ ", customerReEmailAlias=" + customerReEmailAlias
-				+ ", customerSeEmailAlias=" + customerSeEmailAlias + "]";
+		return "Order [orderId=" + orderId + ", caseId=" + caseId + ", customerId=" + customerId + ", customerName="
+				+ customerName + ", agencyId=" + agencyId + ", agencyName=" + agencyName + ", salesId=" + salesId
+				+ ", salesName=" + salesName + ", destination=" + destination + ", budget=" + budget + ", status="
+				+ status + ", reason=" + reason + ", currency=" + currency + ", groupTime=" + groupTime
+				+ ", groupNumber=" + groupNumber + ", exchangeRate=" + exchangeRate + ", customerEmailReal="
+				+ customerEmailReal + ", customerEmailAlias=" + customerEmailAlias + ", agencyEmailReal="
+				+ agencyEmailReal + ", agencyEmailAlias=" + agencyEmailAlias + ", groupPrice=" + groupPrice
+				+ ", rmbPrice=" + rmbPrice + ", lastResponse=" + lastResponse + ", startDate=" + startDate
+				+ ", endDate=" + endDate + ", creatTime=" + creatTime + ", updateTime=" + updateTime
+				+ ", agencyReEmailAlias=" + agencyReEmailAlias + ", agencySeEmailAlias=" + agencySeEmailAlias
+				+ ", customerReEmailAlias=" + customerReEmailAlias + ", customerSeEmailAlias=" + customerSeEmailAlias
+				+ ", operator=" + operator + ", orderCode=" + orderCode + ", costBudget=" + costBudget
+				+ ", costBudgetRmb=" + costBudgetRmb + ", costReal=" + costReal + ", priceReal=" + priceReal
+				+ ", costAdjust=" + costAdjust + ", priceAdjust=" + priceAdjust + ", financeStatus=" + financeStatus
+				+ ", costReceiver=" + costReceiver + "]";
 	}
 }
