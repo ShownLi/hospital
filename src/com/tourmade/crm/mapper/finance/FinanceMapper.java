@@ -1,5 +1,5 @@
 package com.tourmade.crm.mapper.finance;
 
-public class FinanceMapper {
+public interface FinanceMapper {
 
 }
