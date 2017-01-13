@@ -117,8 +117,8 @@ public class MenuController extends BaseSimpleFormController {
 		String roleID = null;
 		Role role2 = new Role();
 		try {
-			menuService.saveRole(new String(name.getBytes("iso8859-1"),"utf-8"));
-			role2 = menuService.getRoleByName(new String(name.getBytes("iso8859-1"),"utf-8"));
+			menuService.saveRole(name);
+			role2 = menuService.getRoleByName(name);
 			roleID = role2.getRole_id().toString();
 			model.addAttribute("roleID",roleID);
 		} catch (Exception e) {
