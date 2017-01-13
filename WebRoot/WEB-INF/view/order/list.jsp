@@ -165,7 +165,7 @@
                   <div class="form-group col-sm-6">
                       <label class="col-sm-4 control-label">人民币成本<span class="asterisk">*</span></label>
                       <div class="col-sm-8">
-                        <input type="text" name="costBudgetRMB" placeholder="人民币成本" class="form-control"/>
+                        <input type="text" name="costBudgetRmb" placeholder="人民币成本" class="form-control"/>
                       </div>
                   </div>
                    <div class="form-group col-sm-6">
@@ -177,7 +177,7 @@
                   <div class="form-group col-sm-6">
                       <label class="col-sm-4 control-label">收款方<span class="asterisk">*</span></label>
                       <div class="col-sm-8">
-                        <input type="text" name="beneficiary" placeholder="收款方" class="beneficiary-select fullwidth"/>
+                        <input type="text" name="costReceiver" placeholder="收款方" class="beneficiary-select fullwidth"/>
                       </div>
                   </div>
                   <div class="form-group col-sm-6">
@@ -186,70 +186,70 @@
                         <input type="text" id="paymentMethod" name="paymentMethod" placeholder="付款方式" class="paymentMethod-select fullwidth"/>
                       </div>
                   </div>
-                  <table id="payTable" class="table">
-								<thead>
-									<tr>
-										<th>期数</th>
-										<th>款项</th>
-										<th>应收金额</th>
-										<th>收款截止日期</th>
-										<th>备注</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr id="tr_0">
-										 <td>第一期</td>
-										 <td><input type="text" name="paymentItem" placeholder="款项" class="funds-select fullwidth"/></td>
-										 <td><input type="text" name="priceBudget " placeholder="应收金额" class="form-control"/></td>
-										 <td> 
-										 <input type="text" name="deadline" placeholder="收款截止日期" class="form-control datepicker" autocomplete="off" />
-                        				 <!-- <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span> -->
-										 </td>
-										 <td><input type="text" name="comment" placeholder="备注" class="form-control"/></td>
-									</tr>
-									<tr id="tr_1">
-										 <td>第二期</td>
-										 <td><input type="text" name="paymentItem" placeholder="款项" class="funds-select fullwidth"/></td>
-										 <td><input type="text" name="priceBudget " placeholder="应收金额" class="form-control"/></td>
-										 <td> 
-										 <input type="text" name="deadline" placeholder="收款截止日期" class="form-control datepicker" autocomplete="off" />
-                        				 <!-- <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span> -->
-										 </td>
-										 <td><input type="text" name="comment" placeholder="备注" class="form-control"/></td>
-									</tr>
-									<tr id="tr_2">
-										 <td>第三期</td>
-										 <td><input type="text" name="paymentItem" placeholder="款项" class="funds-select fullwidth"/></td>
-										 <td><input type="text" name="priceBudget " placeholder="应收金额" class="form-control"/></td>
-										 <td> 
-										 <input type="text" name="deadline" placeholder="收款截止日期" class="form-control datepicker" autocomplete="off" />
-                        				 <!-- <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span> -->
-										 </td>
-										 <td><input type="text" name="comment" placeholder="备注" class="form-control"/></td>
-									</tr>
-									<tr id="tr_3">
-										 <td>第四期</td>
-										<td><input type="text" name="paymentItem" placeholder="款项" class="funds-select fullwidth"/></td>
-										 <td><input type="text" name="priceBudget " placeholder="应收金额" class="form-control"/></td>
-										 <td> 
-										 <input type="text" name="deadline" placeholder="收款截止日期" class="form-control datepicker" autocomplete="off" />
-                        				 <!-- <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span> -->
-										 </td>
-										 <td><input type="text" name="comment" placeholder="备注" class="form-control"/></td>
-									</tr>
-									<tr id="tr_4">
-										 <td>第五期</td>
-										<td><input type="text" name="paymentItem" placeholder="款项" class="funds-select fullwidth"/></td>
-										 <td><input type="text" name="priceBudget " placeholder="应收金额" class="form-control"/></td>
-										 <td> 
-										 <input type="text" name="deadline" placeholder="收款截止日期" class="form-control datepicker" autocomplete="off" />
-                        				 <!-- <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span> -->
-										 </td>
-										 <td><input type="text" name="comment" placeholder="备注" class="form-control"/></td>
-									</tr>
-								</tbody>
-							</table>
-                  
+                         
+			       <table id="payTable" class="table">
+						<thead>
+							<tr>
+								<th>期数</th>
+								<th>款项</th>
+								<th>应收金额</th>
+								<th>收款截止日期</th>
+								<th>备注</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr id="tr_0">
+								 <td>第一期</td>
+								 <td><input type="text" name="paymentItem" placeholder="款项" class="funds-select fullwidth"/></td>
+								 <td><input type="text" name="priceBudget " placeholder="应收金额" class="form-control"/></td>
+								 <td> 
+								 <input type="text" name="deadline" placeholder="收款截止日期" class="form-control datepicker" autocomplete="off" />
+				                  				 <!-- <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span> -->
+								 </td>
+								 <td><input type="text" name="comment" placeholder="备注" class="form-control"/></td>
+							</tr>
+							<tr id="tr_1">
+								 <td>第二期</td>
+								 <td><input type="text" name="paymentItem" placeholder="款项" class="funds-select fullwidth"/></td>
+								 <td><input type="text" name="priceBudget " placeholder="应收金额" class="form-control"/></td>
+								 <td> 
+								 <input type="text" name="deadline" placeholder="收款截止日期" class="form-control datepicker" autocomplete="off" />
+				                  				 <!-- <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span> -->
+								 </td>
+								 <td><input type="text" name="comment" placeholder="备注" class="form-control"/></td>
+							</tr>
+							<tr id="tr_2">
+								 <td>第三期</td>
+								 <td><input type="text" name="paymentItem" placeholder="款项" class="funds-select fullwidth"/></td>
+								 <td><input type="text" name="priceBudget " placeholder="应收金额" class="form-control"/></td>
+								 <td> 
+								 <input type="text" name="deadline" placeholder="收款截止日期" class="form-control datepicker" autocomplete="off" />
+				                  				 <!-- <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span> -->
+								 </td>
+								 <td><input type="text" name="comment" placeholder="备注" class="form-control"/></td>
+							</tr>
+							<tr id="tr_3">
+								 <td>第四期</td>
+								<td><input type="text" name="paymentItem" placeholder="款项" class="funds-select fullwidth"/></td>
+								 <td><input type="text" name="priceBudget " placeholder="应收金额" class="form-control"/></td>
+								 <td> 
+								 <input type="text" name="deadline" placeholder="收款截止日期" class="form-control datepicker" autocomplete="off" />
+				                  				 <!-- <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span> -->
+								 </td>
+								 <td><input type="text" name="comment" placeholder="备注" class="form-control"/></td>
+							</tr>
+							<tr id="tr_4">
+								 <td>第五期</td>
+								<td><input type="text" name="paymentItem" placeholder="款项" class="funds-select fullwidth"/></td>
+								 <td><input type="text" name="priceBudget " placeholder="应收金额" class="form-control"/></td>
+								 <td> 
+								 <input type="text" name="deadline" placeholder="收款截止日期" class="form-control datepicker" autocomplete="off" />
+				                  				 <!-- <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span> -->
+								 </td>
+								 <td><input type="text" name="comment" placeholder="备注" class="form-control"/></td>
+							</tr>
+						</tbody>
+					</table>
                   <input type="hidden" id="dealOrderId" name="orderId" value="${order.orderId}" />
                   <input type="hidden" name="caseId" value="${order.caseId}" />	
                   <input type="hidden" name="customerId" value="${order.customerId}" />	
@@ -259,7 +259,7 @@
           <button class="submit btn btn-primary">保存</button>
           <a class="cancel btn btn-primary" >取消</a>        
       </div>
-      </form>     
+      </form>   
 
     </div><!-- modal-content --> 
   </div><!-- modal-dialog -->
@@ -392,7 +392,7 @@
 	
 		jQuery(document).ready(function() {			
 			jQuery("#form-deal").validate({
-		        rules: {
+		         rules: {
 			        groupTime: {
 	                required: true,
 	                date: true
@@ -454,7 +454,7 @@
 	          },
 	          invalidHandler : function(){
 	            return false;
-	          },
+	          }, 
 	          submitHandler : function(){
 	          	$("#form-deal .submit").attr("disabled","disabled");
 	              deal_submit();
@@ -802,6 +802,7 @@
 	    
 		function deal_submit() {
 			var f = $("#form-deal").serialize();
+			alert(f);
 			$.post('${rootPath}order/orderDeal.do', f, function(result) {
 				var rmsg = result.msg;
 				if (result.success) {
@@ -811,6 +812,7 @@
 					$("#msgModal").modal('show');
 				}
 			}, "JSON");
+			
 		}
 		
 		function noDeal_submit() {

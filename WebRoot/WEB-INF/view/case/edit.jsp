@@ -363,7 +363,7 @@
 							<input class="btn btn-primary" type="submit" value="保存" />&nbsp;
 							<input class="btn btn-danger" id="btn-invalid"   type="button" value="无效"/>&nbsp; 
 							<input class="btn btn-danger" id="btn-nodeal" type="button" value="未成行" />&nbsp; 
-							<input class="btn btn-primary" id="btn-confirmpay" type="button" value="收款确认" />&nbsp; 
+							<!-- <input class="btn btn-primary" id="btn-confirmpay" type="button" value="收款确认" />&nbsp;  -->
 							<input class="btn btn-default" type="button" id="btn-back" value="返回" /> 
 							<input type="hidden"name="caseId" value="${crmcase.caseId}" />
 
@@ -827,9 +827,9 @@
 			$("#btn-addorder").css("display","none");
 		}
 		
-		if("${crmcase.status}"!=3){
+		/* if("${crmcase.status}"!=3){
 			$("#btn-confirmpay").css("display","none");
-		} 
+		}  */
 		
 	})
 	if("${crmcase.status}"==1){
@@ -1377,9 +1377,9 @@
 		 return false;
       });
       
-      $("#btn-confirmpay").click(function(){
+     /*  $("#btn-confirmpay").click(function(){
     	  confirmpaySubmit();
-      })
+      }) */
       
       $(".confirmDelModal .cancel").click(function(){
       	$(".confirmDelModal").modal("hide");
@@ -1528,7 +1528,7 @@
      	  }
       }
       
-      function confirmpaySubmit() {
+      /* function confirmpaySubmit() {
     	  $(".user-select").prop("disabled", false);
     	  $(".status-select").prop("disabled", false);
  			var f = $("#form-case").serialize();
@@ -1540,7 +1540,7 @@
  					$("#msgModal").modal('show');
  				}
  			}, "JSON");
-      }
+      } */
       
       
       //进入订单编辑页面

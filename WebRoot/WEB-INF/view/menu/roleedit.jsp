@@ -38,75 +38,363 @@
                   </div>
 	            </div>
 	            <div>
-	           		<ul>
-						<li>
-							询单栏列表&nbsp;<input type="button" value="全选"><br/><br/> 
-							<label><input name="menu_id" type="checkbox" value="3" />询单展示列表界面 </label> 
-							<label><input name="menu_id" type="checkbox" value="4" />新增询单界面 </label> 
-							<label><input name="menu_id" type="checkbox" value="5" />编辑询单页面 </label> 
-							<label><input name="menu_id" type="checkbox" value="18" />用户列表新增询单界面 </label> 
-							<label><input name="menu_id" type="checkbox" value="19" />询单处理界面 </label>
-						</li>
-						<li>
-							订单栏列表&nbsp;<input type="button" value="全选"><br/><br/> 
-							<label><input name="menu_id" type="checkbox" value="6" />订单展示列表界面 </label> 
-							<label><input name="menu_id" type="checkbox" value="7" />新增询订单界面 </label> 
-							<label><input name="menu_id" type="checkbox" value="8" />编辑订单页面 </label> 
-						</li>
-						<li>
-							客人栏列表&nbsp;<input type="button" value="全选"><br/><br/> 
-							<label><input name="menu_id" type="checkbox" value="9" />客人展示列表界面 </label> 
-							<label><input name="menu_id" type="checkbox" value="10" />新增客人界面 </label> 
-							<label><input name="menu_id" type="checkbox" value="11" />编辑客人页面 </label> 
-						</li>
-						<li>
-							地接社栏列表&nbsp;<input type="button" value="全选"><br/><br/> 
-							<label><input name="menu_id" type="checkbox" value="12" />地接社展示列表界面 </label> 
-							<label><input name="menu_id" type="checkbox" value="13" />新增地接社界面 </label> 
-							<label><input name="menu_id" type="checkbox" value="14" />编辑地接社页面 </label> 
-							<label><input name="menu_id" type="checkbox" value="45" />新增销售界面 </label> 
-							<label><input name="menu_id" type="checkbox" value="46" />编辑销售界面 </label> 
-							<label><input name="menu_id" type="checkbox" value="47" />销售列表界面 </label> 
-						</li>
-						<li>
-							用户栏列表&nbsp;<input type="button" value="全选"><br/><br/> 
-							<label><input name="menu_id" type="checkbox" value="15" />用户展示列表界面 </label> 
-							<label><input name="menu_id" type="checkbox" value="16" />新增用户界面 </label> 
-							<label><input name="menu_id" type="checkbox" value="17" />编辑用户页面 </label> 
-						</li>
-						<li>
-							统计栏列表&nbsp;<input type="button" value="全选"><br/><br/> 
-							<label><input name="menu_id" type="checkbox" value="20" />询单来源状态统计界面 </label> 
-							<label><input name="menu_id" type="checkbox" value="21" />沟通方式统计界面 </label> 
-							<label><input name="menu_id" type="checkbox" value="22" />询单分配统计界面</label> 
-							<label><input name="menu_id" type="checkbox" value="23" />流失原因统计界面 </label> 
-							<label><input name="menu_id" type="checkbox" value="24" />地接社业绩统计界面 </label> 
-							<label><input name="menu_id" type="checkbox" value="25" />跟单员询单状态统计界面 </label> 
-							<label><input name="menu_id" type="checkbox" value="26" />跟单员业绩统计 </label> 
-							<label><input name="menu_id" type="checkbox" value="27" />目的地询单状态统计界面 </label> 
-							<label><input name="menu_id" type="checkbox" value="28" />目的地咨询、成交统计界面 </label> 
-							<label><input name="menu_id" type="checkbox" value="29" />客人来源统计界面 </label> 
-							<label><input name="menu_id" type="checkbox" value="30" />客人来源级别统计界面 </label> 
-							<label><input name="menu_id" type="checkbox" value="31" />商家覆盖统计界面 </label> 
-							<label><input name="menu_id" type="checkbox" value="32" />商家未询统计界面 </label> 
-							<label><input name="menu_id" type="checkbox" value="33" />地接社订单状态统计界面 </label> 
-						</li>
-						<li>
-							系统参数栏列表&nbsp;<input type="button" value="全选"><br/><br/> 
-							<label><input name="menu_id" type="checkbox" value="34" />系统参数列表界面 </label> 
-							<label><input name="menu_id" type="checkbox" value="35" />新增系统参数界面 </label> 
-							<label><input name="menu_id" type="checkbox" value="36" />编辑系统参数界面 </label>
-						</li>
-						<li>
-							权限管理栏列表&nbsp;<input type="button" value="全选"><br/><br/> 
-							<label><input name="menu_id" type="checkbox" value="37" />权限列表界面 </label> 
-							<label><input name="menu_id" type="checkbox" value="38" />新增权限界面 </label> 
-							<label><input name="menu_id" type="checkbox" value="39" />编辑权限界面 </label>
-							<label><input name="menu_id" type="checkbox" value="42" />角色列表界面</label>
-							<label><input name="menu_id" type="checkbox" value="43" />新增角色界面</label>
-							<label><input name="menu_id" type="checkbox" value="44" />编辑角色界面 </label>
-						</li>
-					</ul>
+
+	           		<div class="container">
+		           		<div class="row">
+							<h4 class="col-md-12" style="margin-top: 20px; color: #000;">主菜单</h4>
+							<div class="col-md-2">
+								<div class="ckbox ckbox-primary">
+									<input id="selectall1" class="selectall" type="checkbox" value="" />
+									<label for="selectall1">全选 </label> 
+								</div>
+							</div>
+							<div class="col-md-2">
+								<div class="ckbox ckbox-primary">
+									<input name="menu_id" type="checkbox" value="1" />
+									<label>系统登录界面 </label> 
+								</div>
+							</div>
+							<div class="col-md-2">
+								<div class="ckbox ckbox-primary">
+									<input name="menu_id" type="checkbox" value="2" />
+									<label>系统主界面 </label>
+								</div>
+							</div>
+							<div class="col-md-2">
+								<div class="ckbox ckbox-primary">
+									<input name="menu_id" type="checkbox" value="40" />
+									<label>系统退出页面 </label> 
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<h4 class="col-md-12" style="margin-top: 20px; color: #000;">询单栏列表</h4><div class="col-md-2">
+								<div class="ckbox ckbox-primary">
+									<input id="selectall2" class="selectall" type="checkbox" value="" />
+									<label for="selectall2">全选 </label> 
+								</div>
+							</div>
+							<div class="col-md-2">
+								<div class="ckbox ckbox-primary">
+									<input name="menu_id" type="checkbox" value="3" />
+									<label>询单展示列表界面 </label> 
+								</div>
+							</div>
+							<div class="col-md-2">
+								<div class="ckbox ckbox-primary">
+									<input name="menu_id" type="checkbox" value="4" />
+									<label>新增询单界面 </label> 
+								</div>
+							</div>
+							<div class="col-md-2">
+								<div class="ckbox ckbox-primary">
+									<input name="menu_id" type="checkbox" value="5" />
+									<label>编辑询单页面 </label> 
+								</div>
+							</div>
+							<div class="col-md-2">
+								<div class="ckbox ckbox-primary">
+									<input name="menu_id" type="checkbox" value="18" />
+									<label>用户列表新增询单界面 </label> 
+								</div>
+							</div>
+							<div class="col-md-2">
+								<div class="ckbox ckbox-primary">
+									<input name="menu_id" type="checkbox" value="19" />
+									<label>询单处理界面 </label>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<h4 class="col-md-12" style="margin-top: 20px; color: #000;">订单栏列表</h4><div class="col-md-2">
+								<div class="ckbox ckbox-primary">
+									<input id="selectall3" class="selectall" type="checkbox" value="" />
+									<label for="selectall3">全选 </label> 
+								</div>
+							</div>
+							<div class="col-md-2">
+								<div class="ckbox ckbox-primary">
+									<input name="menu_id" type="checkbox" value="6" />
+									<label>订单展示列表界面 </label> 
+								</div>
+							</div>
+							<div class="col-md-2">
+								<div class="ckbox ckbox-primary">
+									<input name="menu_id" type="checkbox" value="7" />
+									<label>新增询订单界面 </label> 
+								</div>
+							</div>
+							<div class="col-md-2">
+								<div class="ckbox ckbox-primary">
+									<input name="menu_id" type="checkbox" value="8" />
+									<label>编辑订单页面 </label> 
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<h4 class="col-md-12" style="margin-top: 20px; color: #000;">客人栏列表</h4><div class="col-md-2">
+								<div class="ckbox ckbox-primary">
+									<input id="selectall4" class="selectall" type="checkbox" value="" />
+									<label for="selectall4">全选 </label> 
+								</div>
+							</div>
+							<div class="col-md-2">
+								<div class="ckbox ckbox-primary">
+									<input name="menu_id" type="checkbox" value="9" />
+									<label>客人展示列表界面 </label> 
+								</div>
+							</div>
+							<div class="col-md-2">
+								<div class="ckbox ckbox-primary">
+									<input name="menu_id" type="checkbox" value="10" />
+									<label>新增客人界面 </label>
+								</div>
+							</div> 
+							<div class="col-md-2">
+								<div class="ckbox ckbox-primary">
+									<input name="menu_id" type="checkbox" value="11" />
+									<label>编辑客人页面 </label> 
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<h4 class="col-md-12" style="margin-top: 20px; color: #000;">地接社栏列表</h4>
+							<div class="col-md-2">
+								<div class="ckbox ckbox-primary">
+									<input id="selectall5" class="selectall" type="checkbox" value="" />
+									<label for="selectall5">全选 </label> 
+								</div>
+							</div>
+							<div class="col-md-2">
+								<div class="ckbox ckbox-primary">
+									<input name="menu_id" type="checkbox" value="12" />
+									<label>地接社展示列表界面 </label> 
+								</div>
+							</div>
+							<div class="col-md-2">
+								<div class="ckbox ckbox-primary">
+									<input name="menu_id" type="checkbox" value="13" />
+									<label>新增地接社界面 </label> 
+								</div>
+							</div>
+							<div class="col-md-2">
+								<div class="ckbox ckbox-primary">
+									<input name="menu_id" type="checkbox" value="14" />
+									<label>编辑地接社页面 </label> 
+								</div>
+							</div>
+							<div class="col-md-2">
+								<div class="ckbox ckbox-primary">
+									<input name="menu_id" type="checkbox" value="45" />
+									<label>新增销售界面 </label> 
+								</div>
+							</div>
+							<div class="col-md-2">
+								<div class="ckbox ckbox-primary">
+									<input name="menu_id" type="checkbox" value="46" />
+									<label>编辑销售界面 </label> 
+								</div>
+							</div>
+							<div class="col-md-2">
+								<div class="ckbox ckbox-primary">
+									<input name="menu_id" type="checkbox" value="47" />
+									<label>销售列表界面 </label> 
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<h4 class="col-md-12" style="margin-top: 20px; color: #000;">用户栏列表</h4><div class="col-md-2">
+								<div class="ckbox ckbox-primary">
+									<input id="selectall0" class="selectall" type="checkbox" value="" />
+									<label for="selectall0">全选 </label> 
+								</div>
+							</div>
+							<div class="col-md-2">
+								<div class="ckbox ckbox-primary">
+									<input name="menu_id" type="checkbox" value="15" />
+									<label>用户展示列表界面 </label> 
+								</div>
+							</div>
+							<div class="col-md-2">
+								<div class="ckbox ckbox-primary">
+									<input name="menu_id" type="checkbox" value="16" />
+									<label>新增用户界面 </label>
+								</div>
+							</div> 
+							<div class="col-md-2">
+								<div class="ckbox ckbox-primary">
+									<input name="menu_id" type="checkbox" value="17" />
+									<label>编辑用户页面 </label> 
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<h4 class="col-md-12" style="margin-top: 20px; color: #000;">统计栏列表</h4><div class="col-md-3">
+								<div class="ckbox ckbox-primary">
+									<input id="selectall6" class="selectall" type="checkbox" value="" />
+									<label for="selectall6">全选 </label> 
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="ckbox ckbox-primary">
+									<input name="menu_id" type="checkbox" value="20" />
+									<label>询单来源状态统计界面 </label> 
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="ckbox ckbox-primary">
+									<input name="menu_id" type="checkbox" value="21" />
+									<label>沟通方式统计界面 </label> 
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="ckbox ckbox-primary">
+									<input name="menu_id" type="checkbox" value="22" />
+									<label>询单分配统计界面</label> 
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="ckbox ckbox-primary">
+									<input name="menu_id" type="checkbox" value="23" />
+									<label>流失原因统计界面 </label> 
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="ckbox ckbox-primary">
+									<input name="menu_id" type="checkbox" value="24" />
+									<label>地接社业绩统计界面 </label> 
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="ckbox ckbox-primary">
+									<input name="menu_id" type="checkbox" value="25" />
+									<label>跟单员询单状态统计界面 </label> 
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="ckbox ckbox-primary">
+									<input name="menu_id" type="checkbox" value="26" />
+									<label>跟单员业绩统计 </label> 
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="ckbox ckbox-primary">
+									<input name="menu_id" type="checkbox" value="27" />
+									<label>目的地询单状态统计界面 </label> 
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="ckbox ckbox-primary">
+									<input name="menu_id" type="checkbox" value="28" />
+									<label>目的地咨询、成交统计界面 </label> 
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="ckbox ckbox-primary">
+									<input name="menu_id" type="checkbox" value="29" />
+									<label>客人来源统计界面 </label> 
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="ckbox ckbox-primary">
+									<input name="menu_id" type="checkbox" value="30" />
+									<label>客人来源级别统计界面 </label> 
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="ckbox ckbox-primary">
+									<input name="menu_id" type="checkbox" value="31" />
+									<label>商家覆盖统计界面 </label> 
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="ckbox ckbox-primary">
+									<input name="menu_id" type="checkbox" value="32" />
+									<label>商家未询统计界面 </label> 
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="ckbox ckbox-primary">
+									<input name="menu_id" type="checkbox" value="33" />
+									<label>地接社订单状态统计界面 </label> 
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<h4 class="col-md-12" style="margin-top: 20px; color: #000;">系统参数栏列表</h4>
+							<div class="col-md-2">
+								<div class="ckbox ckbox-primary">
+									<input id="selectall7" class="selectall" type="checkbox" value="" />
+									<label for="selectall7">全选 </label> 
+								</div>
+							</div>
+							<div class="col-md-2">
+								<div class="ckbox ckbox-primary">
+									<input name="menu_id" type="checkbox" value="35" />
+									<label>系统参数列表界面 </label> 
+								</div>
+							</div>
+							<div class="col-md-2">
+								<div class="ckbox ckbox-primary">
+									<input name="menu_id" type="checkbox" value="35" />
+									<label>新增系统参数界面 </label>
+								</div>
+							</div>
+							<div class="col-md-2">
+								<div class="ckbox ckbox-primary"> 
+									<input name="menu_id" type="checkbox" value="36" />
+									<label>编辑系统参数界面 </label>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<h4 class="col-md-12" style="margin-top: 20px; color: #000;">权限管理栏列表</h4>
+							<div class="col-md-2">
+								<div class="ckbox ckbox-primary">
+									<input id="selectall8" class="selectall" type="checkbox" value="" />
+									<label for="selectall8">全选 </label> 
+								</div>
+							</div>
+							<div class="col-md-2">
+								<div class="ckbox ckbox-primary">
+									<input name="menu_id" type="checkbox" value="37" />
+									<label>权限列表界面 </label>
+								</div>
+							</div> 
+							<div class="col-md-2">
+								<div class="ckbox ckbox-primary">
+									<input name="menu_id" type="checkbox" value="38" />
+									<label>新增权限界面 </label> 
+								</div>
+							</div>
+							<div class="col-md-2">
+								<div class="ckbox ckbox-primary">
+									<input name="menu_id" type="checkbox" value="39" />
+									<label>编辑权限界面 </label>
+								</div>
+							</div>
+							<div class="col-md-2">
+								<div class="ckbox ckbox-primary">
+									<input name="menu_id" type="checkbox" value="42" />
+									<label>角色列表界面</label>
+								</div>
+							</div>
+							<div class="col-md-2">
+								<div class="ckbox ckbox-primary">
+									<input name="menu_id" type="checkbox" value="43" />
+									<label>新增角色界面</label>
+								</div>
+							</div>
+							<div class="col-md-2">
+								<div class="ckbox ckbox-primary">
+									<input name="menu_id" type="checkbox" value="44" />
+									<label>编辑角色界面 </label>
+								</div>
+							</div>
+						</div>
+					</div>
+
+	           		
 	            </div>
 	            </div>
 	        </div>
@@ -160,8 +448,16 @@
     
 	jQuery(document).ready(function() {
 
-		$(".nav-parent").eq(4).addClass("nav-active");
-  		$(".nav-parent").eq(4).find(".children").show();
+		$(".nav-parent").eq(7).addClass("nav-active");
+  		$(".nav-parent").eq(7).find(".children").show();
+
+  		$(".selectall").change(function () {
+  			if($(this).is(':checked')){
+  				$(this).parents(".row").find("input[type='checkbox']").attr("checked",true);
+  			}else{
+  				$(this).parents(".row").find("input[type='checkbox']").attr("checked",false);
+  			}
+  		})
   		
 		jQuery("#form").validate({
 		    highlight: function(element) {
