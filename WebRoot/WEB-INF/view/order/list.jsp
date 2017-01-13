@@ -392,7 +392,7 @@
 	
 		jQuery(document).ready(function() {			
 			jQuery("#form-deal").validate({
-		         rules: {
+		        /*  rules: {
 			        groupTime: {
 	                required: true,
 	                date: true
@@ -454,9 +454,9 @@
 	          },
 	          invalidHandler : function(){
 	            return false;
-	          }, 
+	          },  */
 	          submitHandler : function(){
-	          	$("#form-deal .submit").attr("disabled","disabled");
+	          	//$("#form-deal .submit").attr("disabled","disabled");
 	              deal_submit();
 	              return false;
 	          } 
@@ -802,7 +802,6 @@
 	    
 		function deal_submit() {
 			var f = $("#form-deal").serialize();
-			alert(f);
 			$.post('${rootPath}order/orderDeal.do', f, function(result) {
 				var rmsg = result.msg;
 				if (result.success) {

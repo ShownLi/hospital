@@ -1,5 +1,6 @@
 package com.tourmade.crm.action;
 
+import java.util.Enumeration;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -25,6 +26,7 @@ import com.tourmade.crm.entity.Customer;
 import com.tourmade.crm.entity.EntityList;
 import com.tourmade.crm.entity.Order;
 import com.tourmade.crm.entity.PriceRecord;
+import com.tourmade.crm.entity.PriceRecordList;
 import com.tourmade.crm.entity.Sale;
 import com.tourmade.crm.service.CaseService;
 import com.tourmade.crm.service.EmailService;
@@ -249,12 +251,22 @@ public class OrderController extends BaseSimpleFormController {
 
 	@RequestMapping(value = "/orderDeal.do")
 	@ResponseBody
-	public Json orderDeal(HttpServletRequest request, HttpSession session, Model model, Order order) {
+	public Json orderDeal(HttpServletRequest request, HttpSession session, Model model, Order order, PriceRecordList priceRecordList) {
+		Enumeration<String> rgp = request.getParameterNames();
+		String paraName,paraValue;
+		String[] paraValues;
+		while(rgp.hasMoreElements()){
+			paraName = rgp.nextElement();
+			paraValue = request.getParameter(paraName);
+			paraValues = request.getParameterValues(paraName);     
+			System.out.println("paraName:"+paraName+","+"paraValue:"+paraValue);
+		}
+		
 		
 		Json json = new Json();	
 		Order oldOrder = service.getOrderById(order.getOrderId());
 		Case crmcase = caseService.getCaseById(oldOrder.getCaseId());
-		//System.out.println(priceRecordList);
+		System.out.println(priceRecordList.getPaymentItem().size());
 		System.out.println("---------");
 		//System.out.println(priceRecordList==null);
 		try {
