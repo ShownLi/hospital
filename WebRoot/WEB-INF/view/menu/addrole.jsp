@@ -452,7 +452,7 @@
 		$.post('${rootPath}menu/addroleonly.do?name='+name, function(result) {
 		     if (result.role_id!=null) {
 			  	var f="";
-			    var casemenu = $("[:checkbox][calss="check"]"); 
+			    var casemenu = $(".check"); 
 			    for (var i=0;i<casemenu.length;i++ ){
 			       if(casemenu[i].checked){ //判断复选框是否选中
 			       	  var f = f +result.role_id+" "+casemenu[i].value+",";
