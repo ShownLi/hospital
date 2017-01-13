@@ -192,6 +192,14 @@
 		role_id = #{roleid}
 	</update>
 	
+	<select id="getMenuMessage" parameterType="int" resultType="Menu">
+		select 
+			t.menu_id as menuID,
+			m.menu_name as menuName,
+			m.menu_category as menuCategory
+		from tm_rolemixmenu t LEFT JOIN tm_menu m ON t.menu_id=m.menu_id
+		where role_id=#{roleid}
+	</select>
 </mapper>
 
 

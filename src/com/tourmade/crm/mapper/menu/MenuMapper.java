@@ -31,6 +31,8 @@ public interface MenuMapper extends BaseMapper {
 
 	public Menu getMenuById(int menuId);
 	
+	public  List<Menu> getMenuMessage(int roleid);
+	
 	public Role getRoleById(int role_id);
 	
 	public Role getRoleByName(String name);

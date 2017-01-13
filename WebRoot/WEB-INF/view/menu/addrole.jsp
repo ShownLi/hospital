@@ -1,4 +1,5 @@
 ﻿<%@ page language="java" pageEncoding="utf-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -182,9 +183,8 @@
 		var name = document.getElementById("role_id").value;
 		$.post('${rootPath}menu/addroleonly.do?name='+name, function(result) {
 		     if (result.role_id!=null) {
-			  	//window.parent.location = "${rootPath}menu/list.html";
 			  	var f="";
-			    var casemenu = document.getElementsByName('menu_id');
+			    var casemenu = $(":checkbox"); 
 			    for (var i=0;i<casemenu.length;i++ ){
 			       if(casemenu[i].checked){ //判断复选框是否选中
 			       	  var f = f +result.role_id+" "+casemenu[i].value+",";

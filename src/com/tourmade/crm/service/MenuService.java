@@ -409,6 +409,19 @@ public class MenuService extends BaseService {
 		}
 	}
 	
+	/**
+	 * 根据角色id获取所分配的权限页面信息
+	 * @param roleid
+	 * @return
+	 */
+	public QueryResult<Menu> getMenuMessage(int roleid, Menu menu, PageHelper ph, HttpServletRequest request){
+		QueryResult<Menu> result = new QueryResult<Menu>();
+		List<Menu> data = menuMapper.getMenuMessage(roleid);
+		result.setData(data);
+		return result ;
+	}
+	
+	
 	public String MD5(String pwd) {
 		StringBuffer md5StrBuff = new StringBuffer(); 
 		try{

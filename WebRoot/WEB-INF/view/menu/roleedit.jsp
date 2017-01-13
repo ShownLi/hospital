@@ -188,8 +188,8 @@
 	
 	function form_submit() {
 	    var f="";
-	    var casemenu = document.getElementsByName('menu_id');
 	    var rolename = document.getElementById('role_id').value;
+	    var casemenu = $(":checkbox"); 
 	    for (var i=0;i<casemenu.length;i++ ){
 	       if(casemenu[i].checked){ //判断复选框是否选中
 	       var f = f + ${role.role_id} +" "+casemenu[i].value+" "+rolename+",";
