@@ -1,6 +1,7 @@
 package com.tourmade.crm.action;
 
 import java.util.Enumeration;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -268,6 +269,11 @@ public class OrderController extends BaseSimpleFormController {
 		JSONObject priceRecordJson = JSONObject.fromObject(priceRecord);
 		System.out.println(priceRecordJson.getString("0"));
 		System.out.println(priceRecordJson.getJSONObject("0"));
+		Iterator it = priceRecordJson.keys();
+		while(it.hasNext()){
+			String key = (String)it.next();
+		}
+		
 		
 		Json json = new Json();	
 		Order oldOrder = service.getOrderById(order.getOrderId());
