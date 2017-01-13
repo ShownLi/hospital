@@ -619,10 +619,15 @@ public class StatisticsController extends BaseSimpleFormController {
 		
 		QueryResult<AgencyOrderStatus> caseResult2 = service.queryAgencyOrderStatusTotal(agencyOrderStatus, page,
 				request);
-		List<AgencyOrderStatus> data = caseResult2.getData();
-		data.get(0).setAgencyName("合计");
-		caseResult.getData().addAll(data);
 		
+		List<AgencyOrderStatus> data = caseResult2.getData();
+		
+		if(data.get(0)!=null && data.size()>1){
+			
+			data.get(0).setAgencyName("合计");
+			caseResult.getData().addAll(data);
+			
+		}
 		return caseResult;
 
 	}
