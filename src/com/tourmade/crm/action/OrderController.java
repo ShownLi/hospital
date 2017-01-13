@@ -33,6 +33,7 @@ import com.tourmade.crm.service.EmailService;
 import com.tourmade.crm.service.OrderService;
 
 import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 @Controller
 @RequestMapping("/order")
@@ -251,7 +252,7 @@ public class OrderController extends BaseSimpleFormController {
 
 	@RequestMapping(value = "/orderDeal.do")
 	@ResponseBody
-	public Json orderDeal(HttpServletRequest request, HttpSession session, Model model, Order order, PriceRecordList priceRecordList) {
+	public Json orderDeal(HttpServletRequest request, HttpSession session, Model model, Order order,String priceRecord) {
 		Enumeration<String> rgp = request.getParameterNames();
 		String paraName,paraValue;
 		String[] paraValues;
@@ -260,13 +261,17 @@ public class OrderController extends BaseSimpleFormController {
 			paraValue = request.getParameter(paraName);
 			paraValues = request.getParameterValues(paraName);     
 			System.out.println("paraName:"+paraName+","+"paraValue:"+paraValue);
+			
 		}
 		
+		System.out.println(priceRecord);
+		JSONObject priceRecordJson = JSONObject.fromObject(priceRecord);
+		System.out.println(priceRecordJson.getString("0"));
+		System.out.println(priceRecordJson.getJSONObject("0"));
 		
 		Json json = new Json();	
 		Order oldOrder = service.getOrderById(order.getOrderId());
 		Case crmcase = caseService.getCaseById(oldOrder.getCaseId());
-		System.out.println(priceRecordList.getPaymentItem().size());
 		System.out.println("---------");
 		//System.out.println(priceRecordList==null);
 		try {
