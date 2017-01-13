@@ -49,31 +49,31 @@
 						</div>
 						<div class="col-md-2">
 							<div class="ckbox ckbox-primary">
-								<input id="menu_id_4" name="casemenu" type="checkbox" value="3" />
+								<input id="menu_id_4" class="check" name="casemenu" type="checkbox" value="3" />
 								<label for="menu_id_4">询单展示列表界面 </label> 
 							</div>
 						</div>
 						<div class="col-md-2">
 							<div class="ckbox ckbox-primary">
-								<input id="menu_id_5" name="casemenu" type="checkbox" value="4" />
+								<input id="menu_id_5" class="check" name="casemenu" type="checkbox" value="4" />
 								<label for="menu_id_5">新增询单界面 </label> 
 							</div>
 						</div>
 						<div class="col-md-2">
 							<div class="ckbox ckbox-primary">
-								<input id="menu_id_6" name="casemenu" type="checkbox" value="5" />
+								<input id="menu_id_6" class="check" name="casemenu" type="checkbox" value="5" />
 								<label for="menu_id_6">编辑询单页面 </label>
 							</div>
 						</div> 
 						<div class="col-md-2">
 							<div class="ckbox ckbox-primary">
-								<input id="menu_id_7" name="casemenu" type="checkbox" value="18" />
+								<input id="menu_id_7" class="check" name="casemenu" type="checkbox" value="18" />
 								<label for="menu_id_7">用户列表新增询单界面 </label> 
 							</div>
 						</div>
 						<div class="col-md-2">
 							<div class="ckbox ckbox-primary">
-								<input id="menu_id_8" name="casemenu" type="checkbox" value="19" />
+								<input id="menu_id_8" class="check" name="casemenu" type="checkbox" value="19" />
 								<label for="menu_id_8">询单处理界面 </label>
 							</div>
 						</div>
@@ -88,19 +88,19 @@
 						</div> 
 						<div class="col-md-2">
 							<div class="ckbox ckbox-primary">
-								<input id="menu_id_9" name="ordermenu" type="checkbox" value="6" />
+								<input id="menu_id_9" class="check" name="ordermenu" type="checkbox" value="6" />
 								<label for="menu_id_9">订单展示列表界面 </label> 
 							</div>
 						</div>
 						<div class="col-md-2">
 							<div class="ckbox ckbox-primary">
-								<input id="menu_id_10" name="ordermenu" type="checkbox" value="7" />
+								<input id="menu_id_10" class="check" name="ordermenu" type="checkbox" value="7" />
 								<label for="menu_id_10">新增询订单界面 </label>
 							</div>
 						</div> 
 						<div class="col-md-2">
 							<div class="ckbox ckbox-primary">
-								<input id="menu_id_11" name="ordermenu" type="checkbox" value="8" />
+								<input id="menu_id_11" class="check" name="ordermenu" type="checkbox" value="8" />
 								<label for="menu_id_11">编辑订单页面 </label>
 							</div>
 						</div> 
@@ -115,19 +115,19 @@
 						</div> 
 						<div class="col-md-2">
 							<div class="ckbox ckbox-primary">
-								<input id="menu_id_12" name="customermenu" type="checkbox" value="9" />
+								<input id="menu_id_12" class="check" name="customermenu" type="checkbox" value="9" />
 								<label for="menu_id_12">客人展示列表界面 </label> 
 							</div>
 						</div>
 						<div class="col-md-2">
 							<div class="ckbox ckbox-primary">
-								<input id="menu_id_13" name="customermenu" type="checkbox" value="10" />
+								<input id="menu_id_13" class="check" name="customermenu" type="checkbox" value="10" />
 								<label for="menu_id_13">新增客人界面 </label> 
 							</div>
 						</div>
 						<div class="col-md-2">
 							<div class="ckbox ckbox-primary">
-								<input id="menu_id_14" name="customermenu" type="checkbox" value="11" />
+								<input id="menu_id_14" class="check" name="customermenu" type="checkbox" value="11" />
 								<label for="menu_id_14">编辑客人页面 </label>
 							</div>
 						</div> 
@@ -142,37 +142,37 @@
 						</div>
 						<div class="col-md-2">
 							<div class="ckbox ckbox-primary">
-								<input id="menu_id_15" name="agencymenu" type="checkbox" value="12" />
+								<input id="menu_id_15" class="check" name="agencymenu" type="checkbox" value="12" />
 								<label for="menu_id_15">地接社展示列表界面 </label> 
 							</div>
 						</div>
 						<div class="col-md-2">
 							<div class="ckbox ckbox-primary">
-								<input id="menu_id_16" name="agencymenu" type="checkbox" value="13" />
+								<input id="menu_id_16" class="check" name="agencymenu" type="checkbox" value="13" />
 								<label for="menu_id_16">新增地接社界面 </label> 
 							</div>
 						</div>
 						<div class="col-md-2">
 							<div class="ckbox ckbox-primary">
-								<input id="menu_id_17" name="agencymenu" type="checkbox" value="14" />
+								<input id="menu_id_17" class="check" name="agencymenu" type="checkbox" value="14" />
 								<label for="menu_id_17">编辑地接社页面 </label> 
 							</div>
 						</div>
 						<div class="col-md-2">
 							<div class="ckbox ckbox-primary">
-								<input id="menu_id_18" name="agencymenu" type="checkbox" value="45" />
+								<input id="menu_id_18" class="check" name="agencymenu" type="checkbox" value="45" />
 								<label for="menu_id_18">新增销售界面 </label> 
 							</div>
 						</div>
 						<div class="col-md-2">
 							<div class="ckbox ckbox-primary">
-								<input id="menu_id_19" name="agencymenu" type="checkbox" value="46" />
+								<input id="menu_id_19" class="check" name="agencymenu" type="checkbox" value="46" />
 								<label for="menu_id_19">编辑销售界面 </label> 
 							</div>
 						</div>
 						<div class="col-md-2">
 							<div class="ckbox ckbox-primary">
-								<input id="menu_id_20" name="agencymenu" type="checkbox" value="47" />
+								<input id="menu_id_20" class="check" name="agencymenu" type="checkbox" value="47" />
 								<label for="menu_id_20">销售列表界面 </label> 
 							</div>
 						</div>
@@ -187,19 +187,19 @@
 						</div>
 						<div class="col-md-2">
 							<div class="ckbox ckbox-primary">
-								<input id="menu_id_21" name="usermenu" type="checkbox" value="15" />
+								<input id="menu_id_21" class="check" name="usermenu" type="checkbox" value="15" />
 								<label for="menu_id_21">用户展示列表界面 </label> 
 							</div>
 						</div>
 						<div class="col-md-2">
 							<div class="ckbox ckbox-primary">
-								<input id="menu_id_22" name="usermenu" type="checkbox" value="16" />
+								<input id="menu_id_22" class="check" name="usermenu" type="checkbox" value="16" />
 								<label for="menu_id_22">新增用户界面 </label> 
 							</div>
 						</div>
 						<div class="col-md-2">
 							<div class="ckbox ckbox-primary">
-								<input id="menu_id_23" name="usermenu" type="checkbox" value="17" />
+								<input id="menu_id_23" class="check" name="usermenu" type="checkbox" value="17" />
 								<label for="menu_id_23">编辑用户页面 </label> 
 							</div>
 						</div>
@@ -214,85 +214,85 @@
 						</div>
 						<div class="col-md-3">
 							<div class="ckbox ckbox-primary">
-								<input name="menu_id_24" type="checkbox" value="20" />
+								<input name="menu_id_24" class="check" type="checkbox" value="20" />
 								<label for="menu_id_24">询单来源状态统计界面 </label>
 							</div>
 						</div> 
 						<div class="col-md-3">
 							<div class="ckbox ckbox-primary">
-								<input id="menu_id_25" name="statsmenu" type="checkbox" value="21" />
+								<input id="menu_id_25" class="check" name="statsmenu" type="checkbox" value="21" />
 								<label for="menu_id_25">沟通方式统计界面 </label> 
 							</div>
 						</div> 
 						<div class="col-md-3">
 							<div class="ckbox ckbox-primary">
-								<input name="menu_id_26" type="checkbox" value="22" />
+								<input name="menu_id_26" class="check" type="checkbox" value="22" />
 								<label for="menu_id_26">询单分配统计界面</label> 
 							</div>
 						</div> 
 						<div class="col-md-3">
 							<div class="ckbox ckbox-primary">
-								<input id="menu_id_27" name="statsmenu" type="checkbox" value="23" />
+								<input id="menu_id_27" class="check" name="statsmenu" type="checkbox" value="23" />
 								<label for="menu_id_27">流失原因统计界面 </label> 
 							</div>
 						</div> 
 						<div class="col-md-3">
 							<div class="ckbox ckbox-primary">
-								<input id="menu_id_28" name="statsmenu" type="checkbox" value="24" />
+								<input id="menu_id_28" class="check" name="statsmenu" type="checkbox" value="24" />
 								<label for="menu_id_28">地接社业绩统计界面 </label> 
 							</div>
 						</div> 
 						<div class="col-md-3">
 							<div class="ckbox ckbox-primary">
-								<input id="menu_id_29" name="statsmenu" type="checkbox" value="25" />
+								<input id="menu_id_29" class="check" name="statsmenu" type="checkbox" value="25" />
 								<label for="menu_id_29">跟单员询单状态统计界面 </label> 
 							</div>
 						</div> 
 						<div class="col-md-3">
 							<div class="ckbox ckbox-primary">
-								<input id="menu_id_30" name="statsmenu" type="checkbox" value="26" />
+								<input id="menu_id_30" class="check" name="statsmenu" type="checkbox" value="26" />
 								<label for="menu_id_30">跟单员业绩统计 </label> 
 							</div>
 						</div> 
 						<div class="col-md-3">
 							<div class="ckbox ckbox-primary">
-								<input id="menu_id_31" name="statsmenu" type="checkbox" value="27" />
+								<input id="menu_id_31" class="check" name="statsmenu" type="checkbox" value="27" />
 								<label for="menu_id_31">目的地询单状态统计界面 </label> 
 							</div>
 						</div> 
 						<div class="col-md-3">
 							<div class="ckbox ckbox-primary">
-								<input id="menu_id_32" name="statsmenu" type="checkbox" value="28" />
+								<input id="menu_id_32" class="check" name="statsmenu" type="checkbox" value="28" />
 								<label for="menu_id_32">目的地咨询、成交统计界面 </label> 
 							</div>
 						</div> 
 						<div class="col-md-3">
 							<div class="ckbox ckbox-primary">
-								<input id="menu_id_33" name="statsmenu" type="checkbox" value="29" />
+								<input id="menu_id_33" class="check" name="statsmenu" type="checkbox" value="29" />
 								<label for="menu_id_33">客人来源统计界面 </label> 
 							</div>
 						</div> 
 						<div class="col-md-3">
 							<div class="ckbox ckbox-primary">
-								<input id="menu_id_34" name="statsmenu" type="checkbox" value="30" />
+								<input id="menu_id_34" class="check" name="statsmenu" type="checkbox" value="30" />
 								<label for="menu_id_34">客人来源级别统计界面 </label> 
 							</div>
 						</div> 
 						<div class="col-md-3">
 							<div class="ckbox ckbox-primary">
-								<input id="menu_id_35" name="statsmenu" type="checkbox" value="31" />
+								<input id="menu_id_35" class="check" name="statsmenu" type="checkbox" value="31" />
 								<label for="menu_id_35">商家覆盖统计界面 </label> 
 							</div>
 						</div> 
 						<div class="col-md-3">
 							<div class="ckbox ckbox-primary">
-								<input id="menu_id_36" name="statsmenu" type="checkbox" value="32" />
+								<input id="menu_id_36" class="check" name="statsmenu" type="checkbox" value="32" />
 								<label for="menu_id_36">商家未询统计界面 </label> 
 							</div>
 						</div> 
 						<div class="col-md-3">
 							<div class="ckbox ckbox-primary">
-								<input id="menu_id_37" name="statsmenu" type="checkbox" value="33" />
+								<input id="menu_id_37" class="check" name="statsmenu" type="checkbox" value="33" />
 								<label for="menu_id_37">地接社订单状态统计界面 </label> 
 							</div>
 						</div>
@@ -307,19 +307,19 @@
 						</div>
 						<div class="col-md-2">
 							<div class="ckbox ckbox-primary">
-								<input id="menu_id_38" name="parametermenu" type="checkbox" value="34" />
+								<input id="menu_id_38" class="check" name="parametermenu" type="checkbox" value="34" />
 								<label for="menu_id_38">系统参数列表界面 </label> 
 							</div>
 						</div>
 						<div class="col-md-2">
 							<div class="ckbox ckbox-primary">
-								<input id="menu_id_39" name="parametermenu" type="checkbox" value="35" />
+								<input id="menu_id_39" class="check" name="parametermenu" type="checkbox" value="35" />
 								<label for="menu_id_39">新增系统参数界面 </label> 
 							</div>
 						</div>
 						<div class="col-md-2">
 							<div class="ckbox ckbox-primary">
-								<input id="menu_id_40" name="parametermenu" type="checkbox" value="36" />
+								<input id="menu_id_40" class="check" name="parametermenu" type="checkbox" value="36" />
 								<label for="menu_id_40">编辑系统参数界面 </label>
 							</div>
 						</div>
@@ -334,37 +334,37 @@
 						</div>
 						<div class="col-md-2">
 							<div class="ckbox ckbox-primary">
-								<input id="menu_id_41" name="powermenu" type="checkbox" value="37" />
+								<input id="menu_id_41" class="check" name="powermenu" type="checkbox" value="37" />
 								<label for="menu_id_41">权限列表界面 </label> 
 							</div>
 						</div>
 						<div class="col-md-2">
 							<div class="ckbox ckbox-primary">
-								<input id="menu_id_42" name="powermenu" type="checkbox" value="38" />
+								<input id="menu_id_42" class="check" name="powermenu" type="checkbox" value="38" />
 								<label for="menu_id_42">新增权限界面 </label> 
 							</div>
 						</div>
 						<div class="col-md-2">
 							<div class="ckbox ckbox-primary">
-								<input id="menu_id_43" name="powermenu" type="checkbox" value="39" />
+								<input id="menu_id_43" class="check" name="powermenu" type="checkbox" value="39" />
 								<label for="menu_id_43">编辑权限界面 </label>
 							</div>
 						</div>
 						<div class="col-md-2">
 							<div class="ckbox ckbox-primary">
-								<input id="menu_id_44" name="powermenu" type="checkbox" value="42" />
+								<input id="menu_id_44" class="check" name="powermenu" type="checkbox" value="42" />
 								<label for="menu_id_44">角色列表界面</label>
 							</div>
 						</div>
 						<div class="col-md-2">
 							<div class="ckbox ckbox-primary">
-								<input id="menu_id_45" name="powermenu" type="checkbox" value="43" />
+								<input id="menu_id_45" class="check" name="powermenu" type="checkbox" value="43" />
 								<label for="menu_id_45">新增角色界面</label>
 							</div>
 						</div>
 						<div class="col-md-2">
 							<div class="ckbox ckbox-primary">
-								<input id="menu_id_46" name="powermenu" type="checkbox" value="44" />
+								<input id="menu_id_46" class="check" name="powermenu" type="checkbox" value="44" />
 								<label for="menu_id_46">编辑角色界面 </label>
 							</div>
 						</div>
@@ -452,17 +452,17 @@
 		$.post('${rootPath}menu/addroleonly.do?name='+name, function(result) {
 		     if (result.role_id!=null) {
 			  	var f="";
-			    var casemenu = $(":checkbox"); 
+			    var casemenu = $("[:checkbox][calss="check"]"); 
 			    for (var i=0;i<casemenu.length;i++ ){
 			       if(casemenu[i].checked){ //判断复选框是否选中
 			       	  var f = f +result.role_id+" "+casemenu[i].value+",";
 			       } 
 			    } 
+			    
 			    f = f.substr(0,f.length-1);
-				 $.post('${rootPath}menu/addrole.do?f='+f, function(result) {
+				 $.post('${rootPath}menu/addrole.do',{"f":f}, function(result) {
 				  	 var rmsg = result.msg;
 				     if (result.success) {
-				    	 alert("保存角色成功");
 					  	 window.parent.location = "${rootPath}menu/rolelist.html";
 					  } else {
 						  alert("角色分配权限出错");

@@ -92,6 +92,7 @@ public class MenuController extends BaseSimpleFormController {
 	public Json addRole(HttpServletRequest request, HttpSession session, Model model, String f, Role role, PageHelper page) {
 		Json json = new Json();	
 		Role role1 = new Role();
+		
 		try {
 			String[] menuStr = f.split(",");
 			
@@ -121,7 +122,7 @@ public class MenuController extends BaseSimpleFormController {
 			roleID = role2.getRole_id().toString();
 			model.addAttribute("roleID",roleID);
 		} catch (Exception e) {
-			logger.error("MenuController.addRole() --> " + name + "\n" + e.getMessage());
+			logger.error("MenuController.addRoleOnly() --> " + name + "\n" + e.getMessage());
 		}
 		return role2;
 	}
@@ -159,7 +160,7 @@ public class MenuController extends BaseSimpleFormController {
 					String[] rmenuStr = menuStr[i].split(" ");
 					role.setRole_id(Integer.parseInt(rmenuStr[0])); 
 					role.setMenu_id(Integer.parseInt(rmenuStr[1]));
-					String roleName = new String(rmenuStr[2].getBytes("iso8859-1"),"utf-8"); 
+					String roleName = rmenuStr[2]; 
 					role.setRole_name(roleName);
 					menuService.saveRoleAllotMenu(role);
 					menuService.updateRoleName(role);
@@ -170,7 +171,7 @@ public class MenuController extends BaseSimpleFormController {
 					String[] rmenuStr = menuStr[i].split(" ");
 					role.setRole_id(Integer.parseInt(rmenuStr[0])); 
 					role.setMenu_id(Integer.parseInt(rmenuStr[1]));
-					String roleName = new String(rmenuStr[2].getBytes("iso8859-1"),"utf-8"); 
+					String roleName = rmenuStr[2]; 
 					role.setRole_name(roleName);
 					menuService.saveRoleAllotMenu(role);
 					menuService.updateRoleName(role);
@@ -300,6 +301,7 @@ public class MenuController extends BaseSimpleFormController {
 			if (null != id && !"".equals(id)) {
 				int roleid = Integer.parseInt(id);
 				menuService.deleteRoleById(roleid);
+				menuService.deleteRoleAllotMenu(roleid);
 				json.setSuccess(true);
 			} else {
 				json.setSuccess(false);

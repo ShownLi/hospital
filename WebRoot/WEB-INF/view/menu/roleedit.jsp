@@ -419,7 +419,7 @@
 	for(var i=0; i<menuList.length; i++){
 		var a = menuList[i];
 		var b = $("input[name='menu_id']");
-		$("input[name='menu_id'][value='"+a+"']").attr("checked","true");
+		$("input[value='"+a+"']").attr("checked","true");
 	}
     
 	jQuery(document).ready(function() {
@@ -468,7 +468,7 @@
 	     }
 	 }
 	 f = f.substr(0,f.length-1);
-	 $.post('${rootPath}menu/roleedit.do?f='+f, function(result) {
+	 $.post('${rootPath}menu/roleedit.do', {"f":f}, function(result) {
 	  	 var rmsg = result.msg;
 	     if (result.success) {
 	    	 alert("保存成功");
