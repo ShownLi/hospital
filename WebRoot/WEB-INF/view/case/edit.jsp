@@ -824,6 +824,8 @@
 	$(function(){
 		if("${crmcase.status}"==3||"${crmcase.status}"==5||"${crmcase.status}"==4){
 			$("#btn-nodeal").css("display","none");
+		}
+		if("${crmcase.status}"==5||"${crmcase.status}"==4){
 			$("#btn-addorder").css("display","none");
 		}
 		
