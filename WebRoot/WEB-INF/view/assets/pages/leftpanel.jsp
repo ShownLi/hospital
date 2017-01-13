@@ -58,7 +58,7 @@
                     
                 </ul>
             </li>
-            <li class="nav-parent"><a href="javascript:void(0);"><i class="fa fa-user"></i> <span>财务管理</span></a>
+            <li class="nav-parent"><a href="javascript:void(0);"><i class="fa fa-rmb" aria-hidden="true"></i><span>财务管理</span></a>
                 <ul class="children">
                     <li><a href="${rootPath} finance/list.html"><i class="fa fa-caret-right"></i>财务管理列表</a></li>
                 </ul> 
@@ -81,7 +81,7 @@
                     <li><a href="${rootPath }statistics/agencyOrderStatusStats.html"><i class="fa fa-caret-right"></i>地接社订单状态统计</a></li>
                 </ul>
             </li>  
-            <li class="nav-parent" id="menu"><a href="javascript:void(0);"><i class="glyphicon glyphicon-cog"></i> <span>权限管理</span></a>
+            <li class="nav-parent" id="menu"><a href="javascript:void(0);"><i class="fa fa-key" aria-hidden="true"></i> <span>权限管理</span></a>
                 <ul class="children">
                     <li><a href="${rootPath }menu/list.html"><i class="fa fa-caret-right"></i> 权限列表</a></li>
                     <li><a href="${rootPath }menu/add.html"><i class="fa fa-caret-right"></i> 新增权限</a></li>                   

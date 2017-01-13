@@ -99,8 +99,8 @@
 		
 		jQuery(document).ready(function() {
 
-			$(".nav-parent").eq(4).addClass("nav-active");
-      		$(".nav-parent").eq(4).find(".children").show();
+			$(".nav-parent").eq(7).addClass("nav-active");
+      		$(".nav-parent").eq(7).find(".children").show();
       		
 			jQuery("#form").validate({
 			    highlight: function(element) {
