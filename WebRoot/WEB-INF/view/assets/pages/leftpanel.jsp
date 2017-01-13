@@ -60,7 +60,7 @@
             </li>
             <li class="nav-parent"><a href="javascript:void(0);"><i class="fa fa-rmb" aria-hidden="true"></i><span>财务管理</span></a>
                 <ul class="children">
-                    <li><a href="${rootPath} finance/list.html"><i class="fa fa-caret-right"></i>财务管理列表</a></li>
+                    <li><a href="${rootPath}finance/list.html"><i class="fa fa-caret-right"></i>财务管理列表</a></li>
                 </ul> 
             </li> 
              <li class="nav-parent" id="stats"><a href="javascript:void(0);"><i class="fa fa-pie-chart"></i> <span>统计分析</span></a>

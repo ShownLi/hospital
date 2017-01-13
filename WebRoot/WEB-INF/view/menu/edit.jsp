@@ -13,7 +13,7 @@
 			<%@ include file="../assets/pages/headerbar.jsp"%>
 			<div class="pageheader">
 				<h2>
-					<i class="fa fa-user"></i> 菜单列表管理 <span>编辑菜单列表</span>
+					<i class="fa fa-user"></i> 权限管理 <span>编辑权限</span>
 				</h2>
 			</div>
 			<div class="contentpanel">
@@ -24,15 +24,15 @@
           <div class="panel-btns">
             <a href="" class="minimize">&minus;</a>
           </div>
-          <h4 class="panel-title">编辑菜单列表</h4>
-          <p>填写下表，完成菜单列表信息修改。</p>
+          <h4 class="panel-title">编辑权限</h4>
+          <p>填写下表，完成权限信息修改。</p>
         </div>
         <form class="form-horizontal" id="form">
         <div class="panel-body panel-body-nopadding">
           
 	        <div class="section-block"> 
 	            <div class="form-group col-sm-6">
-	              <label class="col-sm-3 control-label">菜单名称<span class="asterisk">*</span></label>
+	              <label class="col-sm-3 control-label">权限名称<span class="asterisk">*</span></label>
 	              <div class="col-sm-6">
 	                <input type="text" id="menuName" name="menuName" placeholder="菜单名称" class="form-control" value="${menu.menuName }" />
 	              </div>
@@ -44,7 +44,7 @@
 	              </div>
 	            </div> 
 	            <div class="form-group col-sm-6">
-	              <label class="col-sm-3 control-label">所属权限</label>
+	              <label class="col-sm-3 control-label">所属界面</label>
 	              <div class="col-sm-6">
                     <select name="menuCategory" class="menuCategory-select fullwidth" multiple="multiple" >
 					</select>     

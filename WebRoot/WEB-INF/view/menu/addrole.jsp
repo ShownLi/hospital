@@ -36,6 +36,7 @@
                   </div>
 	            </div>
 	            <div>
+
            		<div class="container">
 	           		<div class="row">
 						<h4 class="col-md-12" style="margin-top: 20px; color: #000;">主菜单</h4>
@@ -488,10 +489,10 @@
 				 $.post('${rootPath}menu/addrole.do?f='+f, function(result) {
 				  	 var rmsg = result.msg;
 				     if (result.success) {
-					  	//window.parent.location = "${rootPath}menu/list.html";
-					  	alert("角色分配权限出错");
+				    	 alert("保存角色成功");
+					  	 window.parent.location = "${rootPath}menu/rolelist.html";
 					  } else {
-						  alert("2");
+						  alert("角色分配权限出错");
 						$("#msgModal").modal('show');
 					  }
 				  }, "JSON"); 

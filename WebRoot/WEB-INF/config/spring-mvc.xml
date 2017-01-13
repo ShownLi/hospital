@@ -44,7 +44,6 @@
 	<!-- 拦截器 -->
 	<mvc:interceptors>
 		<mvc:interceptor>
-			<!-- 配置只拦截.html的请求 -->
 			<mvc:mapping path="/**/*.html" />
 			<bean class="com.tourmade.crm.common.interceptors.SecurityInterceptor">
 				<property name="excludeUrls">

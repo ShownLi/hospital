@@ -35,9 +35,9 @@
 							<table id="dataTable" class="table">
 								<thead>
 									<tr>
-										<th>菜单名称</th>
+										<th>权限名称</th>
 										<th>菜单URL</th>
-										<th>所属权限</th>
+										<th>所属界面</th>
 										<th>编辑</th>
 									</tr>
 								</thead>

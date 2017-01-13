@@ -88,6 +88,27 @@ public class Order extends BaseBean<Order> {
 	private BigDecimal priceAdjust;
 	private Integer financeStatus;
 	private Integer costReceiver;
+	
+	private Date searchStartTime;
+	private Date searchEndTime;
+	
+	
+	
+	public Date getSearchStartTime() {
+		return searchStartTime;
+	}
+
+	public void setSearchStartTime(Date searchStartTime) {
+		this.searchStartTime = searchStartTime;
+	}
+
+	public Date getSearchEndTime() {
+		return searchEndTime;
+	}
+
+	public void setSearchEndTime(Date searchEndTime) {
+		this.searchEndTime = searchEndTime;
+	}
 
 	public String getOrderCode() {
 		return orderCode;
@@ -440,3 +461,4 @@ public class Order extends BaseBean<Order> {
 				+ ", costReceiver=" + costReceiver + "]";
 	}
 }
+

@@ -38,6 +38,7 @@
                   </div>
 	            </div>
 	            <div>
+
 	           		<div class="container">
 		           		<div class="row">
 							<h4 class="col-md-12" style="margin-top: 20px; color: #000;">主菜单</h4>
@@ -392,6 +393,8 @@
 							</div>
 						</div>
 					</div>
+
+	           		
 	            </div>
 	            </div>
 	        </div>
@@ -492,8 +495,8 @@
 	 $.post('${rootPath}menu/roleedit.do?f='+f, function(result) {
 	  	 var rmsg = result.msg;
 	     if (result.success) {
-		  	//window.parent.location = "${rootPath}menu/list.html";
-		  	alert("保存成功");
+	    	 alert("保存成功");
+	    	 window.parent.location = "${rootPath}menu/rolelist.html";
 		  } else {
 			$("#msgModal").modal('show');
 		  }

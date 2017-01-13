@@ -1,4 +1,4 @@
-﻿<%@ page language="java" pageEncoding="utf-8"%>
+<%@ page language="java" pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -91,7 +91,147 @@
 	<script src="${rootPath}assets/js/datetimepicker-cn.js"></script>
 
 	<script type="text/javascript">
- 	
+	//设置日历控件
+	 $("#searchStartTime").datepicker({
+	        dateFormat: "yy-mm-dd",
+	        changeYear: true,
+	        changeMonth: true
+	     });
+	    
+   	$("#searchEndTime").datepicker({
+        dateFormat: "yy-mm-dd",
+        changeYear: true,
+        changeMonth: true
+     });
+	var table= $('#dataTable').DataTable({
+		searching:false,
+		pageLength: 10,
+		processing: true,
+		language: datatable_local_language, // my.js
+		serverSide: true,
+		stateSave: true,
+		ajax: {
+			url: '${rootPath}finance/list.do',
+			data:function(data){
+				data.status='2';//设置订单状态成行
+				data.orderCode =$("#searchOrderCode").val();
+				data.startTime =$("#searchStartTime").val();
+				data.endTime =$("#searchEndTime").val();
+			},
+			dataFilter: function(data){
+	            var json = jQuery.parseJSON( data );
+	            json.recordsTotal = json.countTotal;
+	            json.recordsFiltered = json.countFiltered;
+	            json.data = json.data;
+	            return JSON.stringify( json );
+	        }
+		},
+		columnDefs: [
+		             {
+		            	 targets: 0,
+		            	 data: "orderCode",
+		            	 orderable: false,
+		            	 render: function(data) {
+		            		 return data
+		            		 }
+		             },
+		             {
+		            	 targets: 1,
+		            	 data: "costBudgetRmb",
+		            	 orderable: false,
+		            	 render: function(data) {
+		            		 return data
+		            		 }
+		             },
+		             {
+		            	 targets: 2,
+		            	 data: "rmbPrice",
+		            	 orderable: false,
+		            	 render: function(data) {
+		            		 return data
+		            		 }
+		             },
+		             {
+		            	 targets: 3,
+		            	 data: "costReal",
+		            	 orderable: false,
+		            	 render: function(data) {
+		            		 return data;
+		            		 }
+		             },
+		             {
+		            	 targets: 4,
+		            	 data: "priceReal",
+		            	 orderable: false,
+		            	 render: function(data) {
+		            		 return data;
+		            		 }
+		             },
+		             {
+		            	 targets: 5,
+		            	 data: "costAdjust",
+		            	 orderable: false,
+		            	 render: function(data) {
+		            		 return data;
+		            		 }
+		             },
+		             {
+		            	 targets: 6,
+		            	 data: "priceAdjust",
+		            	 orderable: false,
+		            	 render: function(data) {
+		            		 return data;
+		            		 }
+		             },
+		             {
+		             	 //欠付
+		            	 targets: 7,
+		            	 orderable: false,
+		            	 render: function(data) {
+		            		 return "xxx";
+		            		 }
+		             },
+		             {
+		            	 //欠收
+		            	 targets: 8,
+		            	 orderable: false,
+		            	 render: function(data) {
+		            		 return "xx";
+		            		 }
+		             },
+		             {
+		            	 targets: 9,
+		            	 data: "financeStatus",
+		            	 orderable: false,
+		            	 render: function(data) {
+		            		 return data
+		            		 }
+		             },
+		             {
+		            	 targets: 10,
+		            	 data: "orderId",
+		            	 orderable: false,
+		            	 render: function(data) {
+		            		 return '<a class="btn btn-success btn-xs" href="${rootPath}finance/edit.html?id='+data+'"><span class="fa fa-edit"></span> 编辑</a>';
+		            		 }
+		             }
+		             ],
+		columns: [
+		            { data: "orderCode" },
+		            { data: "costBudgetRmb" },
+		            { data: "rmbPrice" },
+		            { data: "costReal" },
+		            { data: "priceReal" },
+		            { data: "costAdjust" },
+		            { data: "priceAdjust" },
+		            { data: "financeStatus"},
+		            { data: "orderId"}
+		        ]
+		});
+	//设置搜索的点击事件
+	 $('#searchBtn').on( 'click', function () {
+	        table.draw();
+	    } );
 	</script>
 </body>
 </html>
