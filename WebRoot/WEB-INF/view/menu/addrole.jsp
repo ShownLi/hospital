@@ -449,7 +449,7 @@
 	
 	function form_submit() {
 		var name = document.getElementById("role_id").value;
-		$.post('${rootPath}menu/addroleonly.do?name='+name, function(result) {
+		$.post('${rootPath}menu/addroleonly.do',{"name":name}, function(result) {
 		     if (result.role_id!=null) {
 			  	var f="";
 			    var casemenu = $(".check"); 
