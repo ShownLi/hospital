@@ -798,14 +798,28 @@
 	    	$(".noDealModal").modal('hide');
 	    });
 	    
-	    
+	    function getPriceRecord(){  
+	        var args = {};  
+	        $("#payTable tr:gt(0)").each(function(i){  
+	            var data = new Object();  
+	            $(this).find("input").each(function(){  
+	                var name = $(this).attr("name");  
+	                data[name]= $(this).val();  
+	            });  
+	            args[i]=data;  
+	        });  
+	        alert("data;"+JSON.stringify(args));  
+	        return JSON.stringify(args);  
+	    }  
 	    
 		function deal_submit() {
 			var f = $("#form-deal").serialize();
-			$.post('${rootPath}order/orderDeal.do', f, function(result) {
+			var jsonStr = getPriceRecord();
+			console.log(jsonStr);
+			$.post('${rootPath}order/orderDeal.do', $.param({'priceRecord':jsonStr})+'&'+f, function(result) {
 				var rmsg = result.msg;
 				if (result.success) {
-					window.parent.location = "${rootPath}order/list.html";
+					//window.parent.location = "${rootPath}order/list.html";
 				} 
 				else {
 					$("#msgModal").modal('show');
