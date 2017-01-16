@@ -967,7 +967,7 @@
 	<select id="queryUserAchiRate" parameterType="Map" resultType="com.tourmade.crm.entity.UserAchRate">
 		SELECT 
 		IFNULL(tm_user.user_name,'--') AS userName,
-		IFNULL(CONCAT(FORMAT( (SUM(IF(MONTH(tm_case.creat_time) = 1 &amp;&amp; tm_case.`status` = '3',1,0))+SUM(IF(MONTH(tm_case.creat_time) = 1 &amp;&amp; tm_case.`status` = '6',1,0))) /SUM(IF(MONTH(tm_case.creat_time) = 1 ,1,0))*100,2),'%'),'--') AS percentJan,
+		CONCAT(SUM(IF(MONTH(tm_case.creat_time) = 1 ,1,0)),'|',(SUM(IF(MONTH(tm_case.creat_time) = 1 &amp;&amp; tm_case.`status` = '3',1,0))+SUM(IF(MONTH(tm_case.creat_time) = 1 &amp;&amp; tm_case.`status` = '6',1,0))),'&lt;br&gt;',IFNULL(CONCAT(FORMAT((SUM(IF(MONTH(tm_case.creat_time) = 1 &amp;&amp; tm_case.`status` = '3',1,0))+SUM(IF(MONTH(tm_case.creat_time) = 1 &amp;&amp; tm_case.`status` = '6',1,0))) /SUM(IF(MONTH(tm_case.creat_time) = 1 ,1,0))*100,2),'%'),'--')) AS percentJan,
 		IFNULL(CONCAT(FORMAT((SUM(IF(MONTH(tm_case.creat_time) = 2 &amp;&amp; tm_case.`status` = '3',1,0))+SUM(IF(MONTH(tm_case.creat_time) = 2 &amp;&amp; tm_case.`status` = '6',1,0)))/SUM(IF(MONTH(tm_case.creat_time) = 2 ,1,0))*100,2),'%'),'--') AS percentFeb,
 		IFNULL(CONCAT(FORMAT((SUM(IF(MONTH(tm_case.creat_time) = 3 &amp;&amp; tm_case.`status` = '3',1,0))+SUM(IF(MONTH(tm_case.creat_time) = 3 &amp;&amp; tm_case.`status` = '6',1,0)))/SUM(IF(MONTH(tm_case.creat_time) = 3 ,1,0))*100,2),'%'),'--') AS percentMar,
 		IFNULL(CONCAT(FORMAT((SUM(IF(MONTH(tm_case.creat_time) = 4 &amp;&amp; tm_case.`status` = '3',1,0))+SUM(IF(MONTH(tm_case.creat_time) = 4 &amp;&amp; tm_case.`status` = '6',1,0)))/SUM(IF(MONTH(tm_case.creat_time) = 4 ,1,0))*100,2),'%'),'--') AS percentApr,
