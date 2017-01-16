@@ -440,7 +440,9 @@
 				</form>
 				</div>
 			</div>
+			<!-- modal-content -->
 		</div>
+		<!-- modal-dialog -->
 	</div>
 	<%@ include file="../assets/pages/foot.jsp"%>
   <script src="${rootPath}assets/js/jquery-ui-1.10.3.min.js"></script>
@@ -971,3 +973,4 @@
 
 </body>
 </html>
+>>>>>>> a69332784072cb4c1249a7ba96a7d6e312db8d6f

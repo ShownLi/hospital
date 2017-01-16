@@ -619,10 +619,15 @@ public class StatisticsController extends BaseSimpleFormController {
 		
 		QueryResult<AgencyOrderStatus> caseResult2 = service.queryAgencyOrderStatusTotal(agencyOrderStatus, page,
 				request);
-		List<AgencyOrderStatus> data = caseResult2.getData();
-		data.get(0).setAgencyName("合计");
-		caseResult.getData().addAll(data);
 		
+		List<AgencyOrderStatus> data = caseResult2.getData();
+		
+		if(data.get(0)!=null && data.size()>1){
+			
+			data.get(0).setAgencyName("合计");
+			caseResult.getData().addAll(data);
+			
+		}
 		return caseResult;
 
 	}
@@ -715,8 +720,8 @@ public class StatisticsController extends BaseSimpleFormController {
 		}
 
 		QueryResult<CaseSourceStats> caseResult = service.queryCaseSourceStats(caseSourceStats, page, request);
-		QueryResult<CaseSourceStats> caseResult2 = service.queryCaseSourceStatsTotal(caseSourceStats, page,
-				request);
+		QueryResult<CaseSourceStats> caseResult2 = service.queryCaseSourceStatsTotal(caseSourceStats, page, request);
+		
 		List<CaseSourceStats> data = caseResult2.getData();
 		data.get(0).setSourceName("合计");
 		caseResult.getData().addAll(data);

@@ -1,15 +1,20 @@
 package com.tourmade.crm.action;
 
+import java.util.Enumeration;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.http.HttpRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.tourmade.crm.common.action.BaseSimpleFormController;
@@ -21,12 +26,15 @@ import com.tourmade.crm.entity.Case;
 import com.tourmade.crm.entity.Customer;
 import com.tourmade.crm.entity.EntityList;
 import com.tourmade.crm.entity.Order;
+import com.tourmade.crm.entity.PriceRecord;
+import com.tourmade.crm.entity.PriceRecordList;
 import com.tourmade.crm.entity.Sale;
 import com.tourmade.crm.service.CaseService;
 import com.tourmade.crm.service.EmailService;
 import com.tourmade.crm.service.OrderService;
 
 import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 @Controller
 @RequestMapping("/order")
@@ -245,12 +253,33 @@ public class OrderController extends BaseSimpleFormController {
 
 	@RequestMapping(value = "/orderDeal.do")
 	@ResponseBody
-	public Json orderDeal(HttpServletRequest request, HttpSession session, Model model, Order order) {
+	public Json orderDeal(HttpServletRequest request, HttpSession session, Model model, Order order,String priceRecord) {
+		Enumeration<String> rgp = request.getParameterNames();
+		String paraName,paraValue;
+		String[] paraValues;
+		while(rgp.hasMoreElements()){
+			paraName = rgp.nextElement();
+			paraValue = request.getParameter(paraName);
+			paraValues = request.getParameterValues(paraName);     
+			System.out.println("paraName:"+paraName+","+"paraValue:"+paraValue);
+			
+		}
+		
+		System.out.println(priceRecord);
+		JSONObject priceRecordJson = JSONObject.fromObject(priceRecord);
+		System.out.println(priceRecordJson.getString("0"));
+		System.out.println(priceRecordJson.getJSONObject("0"));
+		Iterator it = priceRecordJson.keys();
+		while(it.hasNext()){
+			String key = (String)it.next();
+		}
+		
 		
 		Json json = new Json();	
 		Order oldOrder = service.getOrderById(order.getOrderId());
 		Case crmcase = caseService.getCaseById(oldOrder.getCaseId());
-		
+		System.out.println("---------");
+		//System.out.println(priceRecordList==null);
 		try {
 			service.updateOrder(order);			
 			crmcase.setStatus("3");
@@ -379,4 +408,21 @@ public class OrderController extends BaseSimpleFormController {
 		return json;
 	}
 
+	@RequestMapping(value="/addPriceRecord.do")
+	@ResponseBody
+	public Json addPriceRecord(HttpServletRequest request, @RequestParam("priceRecordList[]") List<PriceRecord> priceRecordList){
+		Json json = new Json();
+		try{
+			System.out.println("-----");
+			System.out.println(priceRecordList==null);
+			System.out.println(priceRecordList);
+			
+			json.setSuccess(true);
+		} catch(Exception e) {
+			json.setSuccess(false);
+			logger.error("OrderController.addPriceRecord() -->" + priceRecordList + "\n" +e.getMessage());
+		}
+		
+		return json;
+	}
 }

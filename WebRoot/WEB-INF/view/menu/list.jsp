@@ -35,9 +35,9 @@
 							<table id="dataTable" class="table">
 								<thead>
 									<tr>
-										<th>菜单名称</th>
+										<th>权限名称</th>
 										<th>菜单URL</th>
-										<th>所属权限</th>
+										<th>所属界面</th>
 										<th>编辑</th>
 									</tr>
 								</thead>
@@ -100,8 +100,8 @@
 	
 		jQuery(document).ready(function() {
 
-			$(".nav-parent").eq(4).addClass("nav-active");
-      		$(".nav-parent").eq(4).find(".children").show();
+			$(".nav-parent").eq(7).addClass("nav-active");
+      		$(".nav-parent").eq(7).find(".children").show();
       		     				
 			var t = jQuery('#dataTable').DataTable({
 				searching:false,

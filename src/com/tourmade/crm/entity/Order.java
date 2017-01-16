@@ -461,3 +461,4 @@ public class Order extends BaseBean<Order> {
 				+ ", costReceiver=" + costReceiver + "]";
 	}
 }
+

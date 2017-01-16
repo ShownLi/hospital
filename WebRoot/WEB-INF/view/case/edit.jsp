@@ -176,8 +176,7 @@
 							<div class="form-group col-sm-4">
 								<label class="col-sm-4 control-label">沟通方式</label>
 								<div class="col-sm-8">
-									<input type="text" name="contactReal"
-										class="contact-real-select fullwidth"/>
+									<input type="text" name="contactReal" id="contactReal" class="contact-real-select fullwidth" />
 								</div>
 							</div>
 						</div>
@@ -364,7 +363,7 @@
 							<input class="btn btn-primary" type="submit" value="保存" />&nbsp;
 							<input class="btn btn-danger" id="btn-invalid"   type="button" value="无效"/>&nbsp; 
 							<input class="btn btn-danger" id="btn-nodeal" type="button" value="未成行" />&nbsp; 
-							<input class="btn btn-primary" id="btn-confirmpay" type="button" value="收款确认" />&nbsp; 
+							<!-- <input class="btn btn-primary" id="btn-confirmpay" type="button" value="收款确认" />&nbsp;  -->
 							<input class="btn btn-default" type="button" id="btn-back" value="返回" /> 
 							<input type="hidden"name="caseId" value="${crmcase.caseId}" />
 
@@ -825,12 +824,14 @@
 	$(function(){
 		if("${crmcase.status}"==3||"${crmcase.status}"==5||"${crmcase.status}"==4){
 			$("#btn-nodeal").css("display","none");
+		}
+		if("${crmcase.status}"==5||"${crmcase.status}"==4){
 			$("#btn-addorder").css("display","none");
 		}
 		
-		if("${crmcase.status}"!=3){
+		/* if("${crmcase.status}"!=3){
 			$("#btn-confirmpay").css("display","none");
-		} 
+		}  */
 		
 	})
 	if("${crmcase.status}"==1){
@@ -1322,6 +1323,7 @@
             startMonth: "date",
             during: "digits",
             destination: "required",
+            contactReal: "required",
           },
           messages: {
             adult: "请输入一个整数",
@@ -1333,6 +1335,7 @@
             startMonth: "请输入正确的日期格式 mm/dd/yyyy",
             during: "请输入一个整数",
             destination:"请选择目的地",
+            contactReal:"请选择沟通方式",
           },
         
           highlight: function(element) {
@@ -1376,9 +1379,9 @@
 		 return false;
       });
       
-      $("#btn-confirmpay").click(function(){
+     /*  $("#btn-confirmpay").click(function(){
     	  confirmpaySubmit();
-      })
+      }) */
       
       $(".confirmDelModal .cancel").click(function(){
       	$(".confirmDelModal").modal("hide");
@@ -1527,7 +1530,7 @@
      	  }
       }
       
-      function confirmpaySubmit() {
+      /* function confirmpaySubmit() {
     	  $(".user-select").prop("disabled", false);
     	  $(".status-select").prop("disabled", false);
  			var f = $("#form-case").serialize();
@@ -1539,7 +1542,7 @@
  					$("#msgModal").modal('show');
  				}
  			}, "JSON");
-      }
+      } */
       
       
       //进入订单编辑页面
@@ -1816,11 +1819,6 @@
       }
 
   });
- 
-
-
 	</script>
-
-
 </body>
 </html>
