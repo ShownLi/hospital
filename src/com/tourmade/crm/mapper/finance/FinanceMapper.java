@@ -11,4 +11,27 @@ public interface FinanceMapper {
 
 	public List<PriceRecord> getPriceRecordListByOrderId(Integer id);
 
+	public int updatePriceRecord(PriceRecord priceRecord);
+
+	public PriceRecord getAllSumPriceRecord(Integer orderId);
+	
+	public int updateCostRecord(CostRecord costRecord);
+
+	public CostRecord getAllSumCostRecord(Integer orderId);
+	
+	public int updateOrderAfterUpdatePriceRecord(PriceRecord sumPriceRecord);
+
+	public int updateOrderAfterUpdateCostRecord(CostRecord sumCostRecord);
+	
+	public void balancePriceRecordByOrderId(int orderId);
+
+	public void balanceCostRecordByOrderId(int orderId);
+
+	public void balanceOrderByOrderId(int orderId);
+
+	public int priceAdjustMethod(PriceRecord priceRecord);
+
+	public int costAdjustMethod(CostRecord costRecord);
+
+
 }

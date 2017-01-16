@@ -80,9 +80,7 @@
 				</div>
 		<%@ include file="../assets/pages/rightpanel.jsp"%>
 	</section>
-
 	<%@ include file="../assets/pages/foot.jsp"%>
-
 	<script src="${rootPath}assets/js/jquery.datatables.min.js"></script>
 	<script src="${rootPath}assets/js/select2.min.js"></script>
 	<script src="${rootPath}assets/js/jquery-ui-1.10.3.min.js"></script>
@@ -103,6 +101,14 @@
         changeYear: true,
         changeMonth: true
      });
+  //将value值转换为text文本值
+	function changeValueToText(value,array){
+		for(var i = 0 ; i< array.length ; i++){
+			if(array[i].id==value)
+				return array[i].text;
+		}
+		return "";
+	}
 	var table= $('#dataTable').DataTable({
 		searching:false,
 		pageLength: 10,
@@ -187,16 +193,16 @@
 		             	 //欠付
 		            	 targets: 7,
 		            	 orderable: false,
-		            	 render: function(data) {
-		            		 return "xxx";
+		            	 render: function( data, type, full, meta ) {
+		            		 return full.costBudgetRmb-full.costReal-full.costAdjust;
 		            		 }
 		             },
 		             {
 		            	 //欠收
 		            	 targets: 8,
 		            	 orderable: false,
-		            	 render: function(data) {
-		            		 return "xx";
+		            	 render: function( data, type, full, meta ) {
+		            		 return full.rmbPrice-full.priceReal-full.priceAdjust;
 		            		 }
 		             },
 		             {
@@ -204,7 +210,7 @@
 		            	 data: "financeStatus",
 		            	 orderable: false,
 		            	 render: function(data) {
-		            		 return data
+		            		 return changeValueToText(data,${financeStatusList});
 		            		 }
 		             },
 		             {
