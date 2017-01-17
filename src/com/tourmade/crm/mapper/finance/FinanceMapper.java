@@ -3,6 +3,7 @@ package com.tourmade.crm.mapper.finance;
 import java.util.List;
 
 import com.tourmade.crm.entity.CostRecord;
+import com.tourmade.crm.entity.EntityList;
 import com.tourmade.crm.entity.PriceRecord;
 
 public interface FinanceMapper {
@@ -32,6 +33,10 @@ public interface FinanceMapper {
 	public int priceAdjustMethod(PriceRecord priceRecord);
 
 	public int costAdjustMethod(CostRecord costRecord);
+
+	public List<EntityList> getAllUser();
+
+	public List<EntityList> getAllAgency();
 
 
 }

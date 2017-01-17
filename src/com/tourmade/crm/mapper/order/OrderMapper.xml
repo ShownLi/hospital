@@ -41,37 +41,37 @@
 		from tm_order u  
 		where u.isdel = 0 
 		 <if test="customerName != null and customerName != ''">
-                and   customer_name like '%${customerName}%' 
+                and   u.customer_name like '%${customerName}%' 
          </if>
          <if test="orderId != null and orderId != ''">
-         		and   order_id = #{orderId}
+         		and   u.order_id = #{orderId}
          </if>
           <if test="agencyName != null and agencyName != ''">
-         		and   agency_name like '%${agencyName}%'
+         		and   u.agency_name like '%${agencyName}%'
          </if>
           <if test="salesName != null and salesName != ''">
-         		and   sales_name like '%${salesName}%'
+         		and   u.sales_name like '%${salesName}%'
          </if>
           <if test="destination != null and destination != ''">
-         		and   destination = #{destination}
+         		and   u.destination = #{destination}
          </if>
           <if test="budget != null and budget != ''">
-         		and   budget = #{budget}
+         		and  u.budget = #{budget}
          </if>
           <if test="operator != null and operator != ''">
-         		and   operator = #{operator}
+         		and   u.operator = #{operator}
          </if>
        	  <if test="status != null and status != ''">
-         		and   status = #{status}
+         		and   u.status = #{status}
          </if>
        	  <if test="orderCode != null and orderCode != ''">
-         		and   order_code like '%${orderCode}%'
+         		and   u.order_code like '%${orderCode}%'
          </if>
          <if test="searchStartTime != null and searchStartTime != ''">
-         		and creat_time &gt;= #{searchStartTime};
+         		and  u.creat_time >= #{searchStartTime};
          </if>
          <if test="searchEndTime != null and searchEndTime != ''">
-        	 	and creat_time &lt;= #{searchEndTime};
+        	 	and  u.creat_time &lt;= #{searchEndTime};
          </if>
 		order by u.creat_time desc
 		limit #{start},#{length}
@@ -79,16 +79,6 @@
 
 	<select id="queryOrderByCaseId" parameterType="Map" resultType="Order">
 		select
-			<!-- u.order_id as orderId,
-			u.customer_id as customerId,
-			u.customer_name as customerName,
-			u.agency_id as agencyId,
-			u.agency_name as agencyName,
-			u.sales_id as salesId,
-			u.sales_name as salesName,
-			u.destination as destination,
-			u.budget as budget,
-			u.status as status -->
 			u.order_id as orderId,
 			u.customer_id as customerId,
 			u.customer_name as customerName,
