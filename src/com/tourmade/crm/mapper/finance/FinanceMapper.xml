@@ -62,9 +62,9 @@
 		status = 2 ,
 		price_real = #{priceReal},
 		account = #{account},
-		received_time =
-		#{receivedTime},
+		received_time =	#{receivedTime},
 		summary = #{summary},
+		recorder = #{recorder},
 		update_time = NOW()
 		where
 		price_code = #{priceCode}
@@ -77,20 +77,18 @@
 		status = 2 ,
 		cost_real = #{costReal},
 		account = #{account},
-		pay_time =
-		#{payTime},
+		pay_time = #{payTime},
 		summary = #{summary},
+		recorder = #{recorder},
 		update_time = NOW()
-		where cost_id =
-		#{costId}
+		where cost_id =	#{costId}
 	</update>
 	
 	<update id="updateOrderAfterUpdatePriceRecord" parameterType="PriceRecord">
 		update tm_order
 		set
 		rmb_price = #{priceBudget},
-		price_real =
-		#{priceReal},
+		price_real = #{priceReal},
 		price_adjust = #{priceAdjust},
 		update_time = NOW()
 		where
@@ -152,8 +150,7 @@
 		set
 		status = 3,
 		update_time = NOW()
-		where order_id =
-		#{orderId}
+		where order_id = #{orderId}
 	</update>
 	
     <update id="priceAdjustMethod" parameterType="PriceRecord">
@@ -172,6 +169,7 @@
 	where cost_id = #{costId}
 	</update> 
 	
+
 	<insert id="savePriceRecord" parameterType="PriceRecord" flushCache="true" useGeneratedKeys="true" keyProperty="priceId" keyColumn="GENERATED_KEY">
 	insert into tm_price_record(
 	price_code,
@@ -217,4 +215,21 @@
 	update_time = NOW()
 	where price_id = #{priceId}
 	</update> 
+
+	<select id="getAllUser" resultType="EntityList">
+		select
+		u.user_id as id,
+		u.user_name as text,
+		u.isdel = 0
+		from tm_user u 
+	</select>
+	<select id="getAllAgency" resultType="EntityList">
+		select
+		agency_id as id,
+		agency_name as text,
+		isdel = 0
+		from tm_agency 
+	</select>
+		
+
 </mapper>

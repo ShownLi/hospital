@@ -5,6 +5,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.tourmade.crm.common.framework.BaseService;
 
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +18,7 @@ import com.tourmade.crm.common.framework.BaseService;
 import com.tourmade.crm.common.framework.bean.QueryResult;
 import com.tourmade.crm.common.model.base.value.baseconfig.PageHelper;
 import com.tourmade.crm.entity.CostRecord;
+import com.tourmade.crm.entity.EntityList;
 import com.tourmade.crm.entity.Order;
 import com.tourmade.crm.entity.PriceRecord;
 import com.tourmade.crm.mapper.finance.FinanceMapper;
@@ -38,48 +40,17 @@ public class FinanceService extends BaseService {
 		map.put("start", ph.getStart());
 		map.put("length", ph.getLength());
 
-		if (order.getCustomerName() != null) {
-			map.put("customerName", order.getCustomerName());
-		}
-
-		if (order.getOrderId() != null) {
-			map.put("orderId", order.getOrderId());
-		}
-
-		if (order.getAgencyName() != null) {
-			map.put("agencyName", order.getAgencyName());
-		}
-
-		if (order.getSalesName() != null) {
-			map.put("salesName", order.getSalesName());
-		}
-
-		if (order.getDestination() != null) {
-			map.put("destination", order.getDestination());
-		}
-
-		if (order.getBudget() != null) {
-			map.put("budget", order.getBudget());
-		}
-
-		if (order.getOperator() != null) {
-			map.put("operator", order.getOperator());
-		}
-
-		if (order.getStatus() != null) {
-			map.put("status", order.getStatus());
-		}
-		if (order.getCustomerEmailReal() != null) {
-			map.put("email", order.getCustomerEmailReal());
-		}
 		if (order.getOrderCode() != null) {
 			map.put("orderCode", order.getOrderCode());
 		}
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		if (order.getSearchStartTime() != null) {
-			map.put("searchStartTime", order.getSearchStartTime());
+			map.put("searchStartTime", format.format(order.getSearchStartTime()) + " 00:00:00");
+			System.out.println(map.get("searchStartTime"));
 		}
 		if (order.getSearchEndTime() != null) {
-			map.put("searchEndTime", order.getSearchEndTime());
+			map.put("searchEndTime", format.format(order.getSearchEndTime()) + " 23:59:59");
+			System.out.println(map.get("searchEndTime"));
 		}
 		List<Order> data = orderMapper.queryOrder(map);
 		long count = orderMapper.countOrder(order);
@@ -113,20 +84,18 @@ public class FinanceService extends BaseService {
 		PriceRecord sumPriceRecord = financeMapper.getAllSumPriceRecord(priceRecord.getOrderId());
 		sumPriceRecord.setOrderId(priceRecord.getOrderId());
 		// 修改订单信息
-		financeMapper.updateOrderAfterUpdatePriceRecord(sumPriceRecord);
 
 		return financeMapper.updateOrderAfterUpdatePriceRecord(sumPriceRecord);
 
 	}
 
-	public int orderBalance(int orderId) {
+	public void orderBalance(int orderId) {
 		// 通过订单id结算订单
 		financeMapper.balanceOrderByOrderId(orderId);
 		// 通过订单id结算收款记录
 		financeMapper.balancePriceRecordByOrderId(orderId);
 		// 通过订单id结算 付款记录
 		financeMapper.balanceCostRecordByOrderId(orderId);
-		return 0;
 	}
 
 	public int priceAdjustMethod(PriceRecord priceRecord) {
@@ -148,6 +117,7 @@ public class FinanceService extends BaseService {
 		// 修改订单信息
 		return financeMapper.updateOrderAfterUpdateCostRecord(sumCostRecord);
 	}
+
 	
 	public int savePriceRecord(PriceRecord priceRecord){
 		
@@ -167,5 +137,28 @@ public class FinanceService extends BaseService {
 		
 	}
 	
-}
 
+
+
+	public int updateCostRecord(CostRecord costRecord) {
+		// 先更新所修改的收款单
+		financeMapper.updateCostRecord(costRecord);
+		// 获取最新的收款单数据
+		CostRecord sumCostRecord = financeMapper.getAllSumCostRecord(costRecord.getOrderId());
+
+		sumCostRecord.setOrderId(costRecord.getOrderId());
+		// 修改订单信息
+		return financeMapper.updateOrderAfterUpdateCostRecord(sumCostRecord);
+
+	}
+
+	public List<EntityList> getAllUser() {
+
+		return financeMapper.getAllUser();
+	}
+
+	public List<EntityList> getAllAgency() {
+		// TODO Auto-generated method stub
+		return financeMapper.getAllAgency();
+	}
+}

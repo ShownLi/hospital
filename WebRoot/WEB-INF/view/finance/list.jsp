@@ -29,17 +29,17 @@
 						<div class="row" style="margin-top: 20px">
 							<div class="form-group col-sm-10">
 								<div class="col-sm-2">
-									<input type="text" name="orderCode" id="searchOrderCode" class="form-control" placeholder="订单编号"  value="" />
+									<input type="text" name="orderCode" id="searchOrderCode" class="form-control" placeholder="订单编号"  value="${searchFinanceOrder.orderCode }" />
 								</div>
 								<div class="col-sm-2">
 									<div class="input-group input-datepicker" style="padding: 0;">
-				                        <input readonly="readonly" id="searchStartTime" type="text" name="searchStartTime" class="form-control datepicker" placeholder="请点击输入查询开始日期" value="" autocomplete="on">
+				                        <input readonly="readonly" id="searchStartTime" type="text" name="searchStartTime" class="form-control datepicker" placeholder="请点击输入查询开始日期" value="${searchFinanceOrder.searchStartTime }" autocomplete="on">
 				                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
 				                    </div>
 				                </div>
 			                    <div class="col-sm-2">
 				                    <div class="input-group input-datepicker" style="padding: 0;">
-				                        <input readonly="readonly" id="searchEndTime" type="text" name="searchEndTime" class="form-control datepicker" placeholder="请点击输入查询截止日期" value="" autocomplete="on">
+				                        <input readonly="readonly" id="searchEndTime" type="text" name="searchEndTime" class="form-control datepicker" placeholder="请点击输入查询截止日期" value="${searchFinanceOrder.searchEndTime }" autocomplete="on">
 				                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
 				                    </div>
 			                    </div>
@@ -121,8 +121,8 @@
 			data:function(data){
 				data.status='2';//设置订单状态成行
 				data.orderCode =$("#searchOrderCode").val();
-				data.startTime =$("#searchStartTime").val();
-				data.endTime =$("#searchEndTime").val();
+				data.searchStartTime =$("#searchStartTime").val();
+				data.searchEndTime =$("#searchEndTime").val();
 			},
 			dataFilter: function(data){
 	            var json = jQuery.parseJSON( data );
@@ -236,8 +236,13 @@
 		});
 	//设置搜索的点击事件
 	 $('#searchBtn').on( 'click', function () {
+			//通知后台，使用界面的条件来重绘table
+			$('#searchCaseFlag').val("restart");
 	        table.draw();
 	    } );
+	if($('#searchCaseFlag').val()=="restart"){
+		t.ajax.reload();
+	}
 	</script>
 </body>
 </html>
