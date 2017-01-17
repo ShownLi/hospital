@@ -33,5 +33,9 @@ public interface FinanceMapper {
 
 	public int costAdjustMethod(CostRecord costRecord);
 
+	public int savePriceRecord(PriceRecord priceRecord);
+
+	public void updatePriceRecordPriceCode(PriceRecord priceRecord);
+
 
 }

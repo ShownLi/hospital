@@ -148,5 +148,24 @@ public class FinanceService extends BaseService {
 		// 修改订单信息
 		return financeMapper.updateOrderAfterUpdateCostRecord(sumCostRecord);
 	}
+	
+	public int savePriceRecord(PriceRecord priceRecord){
+		
+		financeMapper.savePriceRecord(priceRecord);
+		
+		return priceRecord.getPriceId();
+	}
+
+	public boolean updatePriceRecordPriceCode(PriceRecord priceRecord) {
+		if(priceRecord.getPriceId()!=null&&priceRecord.getOrderId()!=null){
+			String priceCode = priceRecord.getOrderId()+"-"+priceRecord.getPriceId();
+			priceRecord.setPriceCode(priceCode);
+			financeMapper.updatePriceRecordPriceCode(priceRecord);
+			return true;
+		}
+		else return false;
+		
+	}
+	
 }
 

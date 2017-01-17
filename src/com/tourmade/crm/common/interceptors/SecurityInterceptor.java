@@ -83,12 +83,14 @@ public class SecurityInterceptor implements HandlerInterceptor {
 				
 				if(request.getRequestURI().equals("/TmCRM/signin.html") || 
 						request.getRequestURI().equals("/TmCRM//main.html") || 
-						request.getRequestURI().equals("/TmCRM/signout.html")){
+						request.getRequestURI().equals("/TmCRM/signout.html") ||
+						request.getRequestURI().equals("/TmCRM/notfound.html")){
 					return true;
 				}else{
 					response.sendRedirect(contextPath + "/notfound.html");
 					return false;
 				}
+
 			}
 			else{
 				return true;

@@ -172,4 +172,49 @@
 	where cost_id = #{costId}
 	</update> 
 	
+	<insert id="savePriceRecord" parameterType="PriceRecord" flushCache="true" useGeneratedKeys="true" keyProperty="priceId" keyColumn="GENERATED_KEY">
+	insert into tm_price_record(
+	price_code,
+	order_id,
+	payment_item,
+	price_budget,
+	deadline,
+	price_real,
+	account,
+	received_time,
+	comment,
+	summary,
+	recorder,
+	price_adjust,
+	status,
+	create_time,
+	update_time,
+	isdel
+	) values (
+	#{priceCode,jdbcType=VARCHAR},
+	#{orderId,jdbcType=VARCHAR},	
+	#{paymentItem,jdbcType=VARCHAR},	
+	#{priceBudget,jdbcType=VARCHAR},	
+	#{deadline,jdbcType=VARCHAR},	
+	#{priceReal,jdbcType=VARCHAR},	
+	#{account,jdbcType=VARCHAR},	
+	#{receivedTime,jdbcType=VARCHAR},	
+	#{comment,jdbcType=VARCHAR},	
+	#{summary,jdbcType=VARCHAR},	
+	#{recorder,jdbcType=VARCHAR},	
+	#{priceAdjust,jdbcType=VARCHAR},	
+	#{STATUS,jdbcType=VARCHAR},	
+	NOW(),
+	NOW(),
+	0
+	)
+	</insert>
+	
+	<update id="updatePriceRecordPriceCode" parameterType="PriceRecord">
+	update tm_price_record
+	set
+	price_code = #{priceCode},
+	update_time = NOW()
+	where price_id = #{priceId}
+	</update> 
 </mapper>

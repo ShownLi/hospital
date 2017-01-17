@@ -34,6 +34,7 @@ import com.tourmade.crm.entity.PriceRecord;
 import com.tourmade.crm.entity.Sale;
 import com.tourmade.crm.service.CaseService;
 import com.tourmade.crm.service.EmailService;
+import com.tourmade.crm.service.FinanceService;
 import com.tourmade.crm.service.OrderService;
 
 import net.sf.json.JSONArray;
@@ -49,6 +50,8 @@ public class OrderController extends BaseSimpleFormController {
 	EmailService emailService = new EmailService();
 	@Autowired
 	CaseService caseService;
+	@Autowired
+	FinanceService financeService;
 
 	@RequestMapping(value = "/list.html", method = { RequestMethod.POST, RequestMethod.GET })
 	public String list(Model model,String flag,HttpSession session) {
@@ -254,6 +257,7 @@ public class OrderController extends BaseSimpleFormController {
 		return "/order/edit";
 	}
 
+
 	@RequestMapping(value = "/orderDeal.do")
 	@ResponseBody
 	public Json orderDeal(HttpServletRequest request, HttpSession session, Model model, Order order,String priceRecord) {
@@ -267,8 +271,7 @@ public class OrderController extends BaseSimpleFormController {
 			System.out.println("paraName:"+paraName+","+"paraValue:"+paraValue);
 			
 		}*/
-		System.out.println(order);
-		System.out.println(priceRecord);
+
 		JSONObject priceRecordJson = JSONObject.fromObject(priceRecord);
 		Iterator it = priceRecordJson.keys();
 		while(it.hasNext()){
@@ -278,12 +281,14 @@ public class OrderController extends BaseSimpleFormController {
 			String deadline = priceRecordJson.getJSONObject(key).getString("deadline");
 			String comment = priceRecordJson.getJSONObject(key).getString("comment");
 			
-			/*Iterator its = priceRecordJson.getJSONObject(key).keys();
+			Iterator its = priceRecordJson.getJSONObject(key).keys();
 			while(its.hasNext()){
 				System.out.println("keys:"+(String)its.next());
-			}*/
-			 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-			if(!paymentItem.equals("")&&paymentItem!=null){
+			}
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			if(!paymentItem.equals("")&&paymentItem!=null
+					&&!priceBudget.equals("")&&priceBudget!=null
+					&&!deadline.equals("")&&deadline!=null){
 				PriceRecord pRecord = new PriceRecord();
 				pRecord.setOrderId(order.getOrderId());
 				pRecord.setPaymentItem(Integer.valueOf(paymentItem));
@@ -295,8 +300,13 @@ public class OrderController extends BaseSimpleFormController {
 					e.printStackTrace();
 				}
 				pRecord.setComment(comment);
+				pRecord.setSTATUS(1);
+				
+				financeService.savePriceRecord(pRecord);
+				financeService.updatePriceRecordPriceCode(pRecord);
 				
 				System.out.println(pRecord);
+				
 				
 			}
 			
@@ -306,13 +316,13 @@ public class OrderController extends BaseSimpleFormController {
 		Json json = new Json();	
 		Order oldOrder = service.getOrderById(order.getOrderId());
 		Case crmcase = caseService.getCaseById(oldOrder.getCaseId());
-
+		
 		try {
 			service.updateOrder(order);			
 			crmcase.setStatus("3");
 			service.customerStatus(oldOrder.getCustomerId(), "3");
 			caseService.updateCaseStatus(crmcase);
-		
+			
 			json.setSuccess(true);
 		} catch (Exception e) {
 			json.setSuccess(false);

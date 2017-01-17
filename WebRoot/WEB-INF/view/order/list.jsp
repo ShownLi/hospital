@@ -392,7 +392,7 @@
 	
 		jQuery(document).ready(function() {			
 			jQuery("#form-deal").validate({
-		        /*  rules: {
+		          rules: {
 			        groupTime: {
 	                required: true,
 	                date: true
@@ -454,9 +454,9 @@
 	          },
 	          invalidHandler : function(){
 	            return false;
-	          },  */
+	          },  
 	          submitHandler : function(){
-	          	//$("#form-deal .submit").attr("disabled","disabled");
+	          	$("#form-deal .submit").attr("disabled","disabled");
 	              deal_submit();
 	              return false;
 	          } 
@@ -819,7 +819,7 @@
 			$.post('${rootPath}order/orderDeal.do', $.param({'priceRecord':jsonStr})+'&'+f, function(result) {
 				var rmsg = result.msg;
 				if (result.success) {
-					//window.parent.location = "${rootPath}order/list.html";
+					window.parent.location = "${rootPath}order/list.html";
 				} 
 				else {
 					$("#msgModal").modal('show');

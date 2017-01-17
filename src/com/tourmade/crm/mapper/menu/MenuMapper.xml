@@ -32,7 +32,7 @@
 
 	<select id="permissionCheckUrl" parameterType="String" resultType="String">
 		select url as url from tm_menu where menu_id in (
-			select menu_id from tm_rolemixmenu where role_id=(				
+			select menu_id from tm_role_x_menu where role_id=(				
 				select 
 				role_id 
 				from tm_user 
@@ -60,7 +60,7 @@
 	</insert>
 	
 	<insert id="saveRoleAllotMenu" parameterType="Role" >
-		insert into tm_rolemixmenu(
+		insert into tm_role_x_menu(
 			role_id,
 			menu_id
 		)values(
@@ -74,7 +74,7 @@
 	</insert>
 
 	<delete id="deleteRoleAllotMenu" parameterType="int">
-		delete from tm_rolemixmenu where role_id=#{role_id}
+		delete from tm_role_x_menu where role_id=#{role_id}
 	</delete>
 
 	<update id="updateMenu" parameterType="Menu" flushCache="true">
@@ -149,7 +149,7 @@
 	</select>
 	
 	<select id="getMenuIdByRoleId" parameterType="int" resultType="String">
-		select menu_id from tm_rolemixmenu where role_id=#{role_id}
+		select menu_id from tm_role_x_menu where role_id=#{role_id}
 	</select>
 	
 	<select id="queryRole" resultType="Role">
@@ -163,7 +163,7 @@
 	<select id="checkMenuHaveRole"  parameterType="int" resultType="String">
 		select 
 			r.role_id
-		from tm_rolemixmenu r left join tm_menu m on r.menu_id=m.menu_id
+		from tm_role_x_menu r left join tm_menu m on r.menu_id=m.menu_id
 		where m.menu_id=#{menuid}
 		GROUP BY r.role_id
 	</select>
@@ -197,7 +197,7 @@
 			t.menu_id as menuID,
 			m.menu_name as menuName,
 			m.menu_category as menuCategory
-		from tm_rolemixmenu t LEFT JOIN tm_menu m ON t.menu_id=m.menu_id
+		from tm_role_x_menu t LEFT JOIN tm_menu m ON t.menu_id=m.menu_id
 		where role_id=#{roleid}
 	</select>
 </mapper>
