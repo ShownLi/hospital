@@ -201,7 +201,7 @@
 							<tr id="tr_0">
 								 <td>第一期</td>
 								 <td><input type="text" name="paymentItem" placeholder="款项" class="funds-select fullwidth"/></td>
-								 <td><input type="text" name="priceBudget " placeholder="应收金额" class="form-control"/></td>
+								 <td><input type="text" name="priceBudget" placeholder="应收金额" class="form-control"/></td>
 								 <td> 
 								 <input type="text" name="deadline" placeholder="收款截止日期" class="form-control datepicker" autocomplete="off" />
 				                  				 <!-- <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span> -->
@@ -211,7 +211,7 @@
 							<tr id="tr_1">
 								 <td>第二期</td>
 								 <td><input type="text" name="paymentItem" placeholder="款项" class="funds-select fullwidth"/></td>
-								 <td><input type="text" name="priceBudget " placeholder="应收金额" class="form-control"/></td>
+								 <td><input type="text" name="priceBudget" placeholder="应收金额" class="form-control"/></td>
 								 <td> 
 								 <input type="text" name="deadline" placeholder="收款截止日期" class="form-control datepicker" autocomplete="off" />
 				                  				 <!-- <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span> -->
@@ -221,7 +221,7 @@
 							<tr id="tr_2">
 								 <td>第三期</td>
 								 <td><input type="text" name="paymentItem" placeholder="款项" class="funds-select fullwidth"/></td>
-								 <td><input type="text" name="priceBudget " placeholder="应收金额" class="form-control"/></td>
+								 <td><input type="text" name="priceBudget" placeholder="应收金额" class="form-control"/></td>
 								 <td> 
 								 <input type="text" name="deadline" placeholder="收款截止日期" class="form-control datepicker" autocomplete="off" />
 				                  				 <!-- <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span> -->
@@ -231,7 +231,7 @@
 							<tr id="tr_3">
 								 <td>第四期</td>
 								<td><input type="text" name="paymentItem" placeholder="款项" class="funds-select fullwidth"/></td>
-								 <td><input type="text" name="priceBudget " placeholder="应收金额" class="form-control"/></td>
+								 <td><input type="text" name="priceBudget" placeholder="应收金额" class="form-control"/></td>
 								 <td> 
 								 <input type="text" name="deadline" placeholder="收款截止日期" class="form-control datepicker" autocomplete="off" />
 				                  				 <!-- <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span> -->
@@ -241,7 +241,7 @@
 							<tr id="tr_4">
 								 <td>第五期</td>
 								<td><input type="text" name="paymentItem" placeholder="款项" class="funds-select fullwidth"/></td>
-								 <td><input type="text" name="priceBudget " placeholder="应收金额" class="form-control"/></td>
+								 <td><input type="text" name="priceBudget" placeholder="应收金额" class="form-control"/></td>
 								 <td> 
 								 <input type="text" name="deadline" placeholder="收款截止日期" class="form-control datepicker" autocomplete="off" />
 				                  				 <!-- <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span> -->

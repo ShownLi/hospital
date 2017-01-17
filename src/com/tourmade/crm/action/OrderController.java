@@ -1,5 +1,9 @@
 package com.tourmade.crm.action;
 
+import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.List;
@@ -27,7 +31,6 @@ import com.tourmade.crm.entity.Customer;
 import com.tourmade.crm.entity.EntityList;
 import com.tourmade.crm.entity.Order;
 import com.tourmade.crm.entity.PriceRecord;
-import com.tourmade.crm.entity.PriceRecordList;
 import com.tourmade.crm.entity.Sale;
 import com.tourmade.crm.service.CaseService;
 import com.tourmade.crm.service.EmailService;
@@ -254,7 +257,7 @@ public class OrderController extends BaseSimpleFormController {
 	@RequestMapping(value = "/orderDeal.do")
 	@ResponseBody
 	public Json orderDeal(HttpServletRequest request, HttpSession session, Model model, Order order,String priceRecord) {
-		Enumeration<String> rgp = request.getParameterNames();
+		/*Enumeration<String> rgp = request.getParameterNames();
 		String paraName,paraValue;
 		String[] paraValues;
 		while(rgp.hasMoreElements()){
@@ -263,23 +266,47 @@ public class OrderController extends BaseSimpleFormController {
 			paraValues = request.getParameterValues(paraName);     
 			System.out.println("paraName:"+paraName+","+"paraValue:"+paraValue);
 			
-		}
-		
+		}*/
+		System.out.println(order);
 		System.out.println(priceRecord);
 		JSONObject priceRecordJson = JSONObject.fromObject(priceRecord);
-		System.out.println(priceRecordJson.getString("0"));
-		System.out.println(priceRecordJson.getJSONObject("0"));
 		Iterator it = priceRecordJson.keys();
 		while(it.hasNext()){
 			String key = (String)it.next();
+			String paymentItem = priceRecordJson.getJSONObject(key).getString("paymentItem");
+			String priceBudget = priceRecordJson.getJSONObject(key).getString("priceBudget");
+			String deadline = priceRecordJson.getJSONObject(key).getString("deadline");
+			String comment = priceRecordJson.getJSONObject(key).getString("comment");
+			
+			/*Iterator its = priceRecordJson.getJSONObject(key).keys();
+			while(its.hasNext()){
+				System.out.println("keys:"+(String)its.next());
+			}*/
+			 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			if(!paymentItem.equals("")&&paymentItem!=null){
+				PriceRecord pRecord = new PriceRecord();
+				pRecord.setOrderId(order.getOrderId());
+				pRecord.setPaymentItem(Integer.valueOf(paymentItem));
+				pRecord.setPriceBudget(new BigDecimal(priceBudget));
+				try {
+					pRecord.setDeadline(sdf.parse(deadline));
+				} catch (ParseException e) {
+					logger.error("orderDeal:parseString2date"+pRecord);
+					e.printStackTrace();
+				}
+				pRecord.setComment(comment);
+				
+				System.out.println(pRecord);
+				
+			}
+			
 		}
 		
 		
 		Json json = new Json();	
 		Order oldOrder = service.getOrderById(order.getOrderId());
 		Case crmcase = caseService.getCaseById(oldOrder.getCaseId());
-		System.out.println("---------");
-		//System.out.println(priceRecordList==null);
+
 		try {
 			service.updateOrder(order);			
 			crmcase.setStatus("3");
