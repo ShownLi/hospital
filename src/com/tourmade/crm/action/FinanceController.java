@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.tourmade.crm.common.action.BaseSimpleFormController;
 import com.tourmade.crm.common.framework.bean.QueryResult;
+import com.tourmade.crm.common.model.base.value.baseconfig.Json;
 import com.tourmade.crm.common.model.base.value.baseconfig.PageHelper;
 import com.tourmade.crm.entity.Agency;
 import com.tourmade.crm.entity.CostRecord;
@@ -131,7 +132,7 @@ public class FinanceController extends BaseSimpleFormController {
 	@ResponseBody
 	public QueryResult<PriceRecord> getPriceRecordByOrderId(Integer id) {
 		QueryResult<PriceRecord> result = financeService.getPriceRecordListByOrderId(id);
-		;
+		
 		return result;
 	}
 
@@ -157,10 +158,56 @@ public class FinanceController extends BaseSimpleFormController {
 	@RequestMapping(value = "/updatePriceRecord.do", method = RequestMethod.POST)
 	@ResponseBody
 	public int updatePriceRecord(PriceRecord priceRecord) {
+								
 		return financeService.updatePriceRecord(priceRecord);
-
 	}
 
+	/**
+	 * 订单编辑，更新收款记录信息
+	 * 
+	 * @param priceRecord
+	 * @return
+	 */
+	@RequestMapping(value = "/updatePriceRecordOrder.do", method = RequestMethod.POST)
+	@ResponseBody
+	public Json updatePriceRecordOrder(PriceRecord priceRecord) {
+		Json json = new Json();
+		
+		try {
+			
+			if(priceRecord.getPriceCode().equals("")||priceRecord.getPriceCode()==null){
+				financeService.updatePriceRecordPriceCode(priceRecord);
+			}
+			financeService.updatePriceRecordOrder(priceRecord);
+			json.setSuccess(true);
+		} catch (Exception e) {
+			json.setSuccess(false);
+			logger.error("FinanceController.updatePriceRecord() --> " + priceRecord.toString() + "\n" + e.getMessage());
+		}
+		return json;
+	}
+	
+	/**
+	 * 订单编辑，更新付款记录信息
+	 * 
+	 * @param costRecord
+	 * @return
+	 */
+	@RequestMapping(value = "/updateCostRecordOrder.do", method = RequestMethod.POST)
+	@ResponseBody
+	public Json updateCostRecordOrder(CostRecord costRecord) {
+		Json json = new Json();
+		
+		try {
+			financeService.updateCostRecordOrder(costRecord);
+			json.setSuccess(true);
+		} catch (Exception e) {
+			json.setSuccess(false);
+			logger.error("FinanceController.updateCostRecordOrder() --> " + costRecord.toString() + "\n" + e.getMessage());
+		}
+		return json;
+	}
+	
 	/**
 	 * 财务管理，更新付款记录信息
 	 * 
@@ -213,5 +260,83 @@ public class FinanceController extends BaseSimpleFormController {
 
 		return financeService.costAdjustMethod(costRecord);
 
+	}
+	
+	/**
+	 * 保存收款记录
+	 * 
+	 * @param PriceRecord
+	 * @return
+	 */
+	@RequestMapping(value = "/savePriceRecord.do", method = RequestMethod.POST)
+	@ResponseBody
+	public Json savePriceRecord(PriceRecord priceRecord) {
+		
+		
+		Json json = new Json();	
+		
+		try {
+			priceRecord.setSTATUS(1);
+			financeService.savePriceRecord(priceRecord);
+			financeService.updatePriceRecordPriceCode(priceRecord);
+			json.setSuccess(true);
+		} catch (Exception e) {
+			json.setSuccess(false);
+			logger.error("FinanceController.savePriceRecord() --> " + priceRecord.toString() + "\n" + e.getMessage());
+		}
+		return json;
+	}
+	
+	/**
+	 * 保存付款记录
+	 * 
+	 * @param CostRecord
+	 * @return
+	 */
+	@RequestMapping(value = "/saveCostRecord.do", method = RequestMethod.POST)
+	@ResponseBody
+	public Json savePriceRecord(CostRecord costRecord) {
+		
+		
+		Json json = new Json();	
+		
+		try {
+			costRecord.setStatus(1);
+			financeService.saveCostRecord(costRecord);
+			json.setSuccess(true);
+		} catch (Exception e) {
+			json.setSuccess(false);
+			logger.error("FinanceController.saveCostRecord() --> " + costRecord.toString() + "\n" + e.getMessage());
+		}
+		return json;
+	}
+	
+	
+	/**
+	 * 删除收款记录
+	 * 
+	 * @param PriceRecord
+	 * @return
+	 */
+	@RequestMapping(value = "/delPriceRecord.do", method = RequestMethod.GET)
+	@ResponseBody
+	public void delPriceRecord(Integer id) {
+		
+		financeService.delPriceRecordByPriceId(id);
+		
+	}
+	
+	/**
+	 * 删除付款记录
+	 * 
+	 * @param PriceRecord
+	 * @return
+	 */
+	@RequestMapping(value = "/delCostRecord.do", method = RequestMethod.GET)
+	@ResponseBody
+	public void delCostRecord(Integer id) {
+		
+		financeService.delCostRecordByCostId(id);
+		
 	}
 }

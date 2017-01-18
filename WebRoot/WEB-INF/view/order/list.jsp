@@ -175,9 +175,9 @@
                       </div>
                   </div>
                   <div class="form-group col-sm-6">
-                      <label class="col-sm-4 control-label">收款方<span class="asterisk">*</span></label>
+                      <label class="col-sm-4 control-label">签约乙方<span class="asterisk">*</span></label>
                       <div class="col-sm-8">
-                        <input type="text" name="costReceiver" placeholder="收款方" class="beneficiary-select fullwidth"/>
+                        <input type="text" name="costReceiver" placeholder="签约乙方" class="costReceiver-select fullwidth"/>
                       </div>
                   </div>
                   <div class="form-group col-sm-6">
@@ -200,7 +200,7 @@
 						<tbody>
 							<tr id="tr_0">
 								 <td>第一期</td>
-								 <td><input type="text" name="paymentItem" placeholder="款项" class="funds-select fullwidth"/></td>
+								 <td><input type="text" name="paymentItem" placeholder="款项" class="financeItem-select fullwidth"/></td>
 								 <td><input type="text" name="priceBudget" placeholder="应收金额" class="form-control"/></td>
 								 <td> 
 								 <input type="text" name="deadline" placeholder="收款截止日期" class="form-control datepicker" autocomplete="off" />
@@ -210,7 +210,7 @@
 							</tr>
 							<tr id="tr_1">
 								 <td>第二期</td>
-								 <td><input type="text" name="paymentItem" placeholder="款项" class="funds-select fullwidth"/></td>
+								 <td><input type="text" name="paymentItem" placeholder="款项" class="financeItem-select fullwidth"/></td>
 								 <td><input type="text" name="priceBudget" placeholder="应收金额" class="form-control"/></td>
 								 <td> 
 								 <input type="text" name="deadline" placeholder="收款截止日期" class="form-control datepicker" autocomplete="off" />
@@ -220,7 +220,7 @@
 							</tr>
 							<tr id="tr_2">
 								 <td>第三期</td>
-								 <td><input type="text" name="paymentItem" placeholder="款项" class="funds-select fullwidth"/></td>
+								 <td><input type="text" name="paymentItem" placeholder="款项" class="financeItem-select fullwidth"/></td>
 								 <td><input type="text" name="priceBudget" placeholder="应收金额" class="form-control"/></td>
 								 <td> 
 								 <input type="text" name="deadline" placeholder="收款截止日期" class="form-control datepicker" autocomplete="off" />
@@ -230,7 +230,7 @@
 							</tr>
 							<tr id="tr_3">
 								 <td>第四期</td>
-								<td><input type="text" name="paymentItem" placeholder="款项" class="funds-select fullwidth"/></td>
+								<td><input type="text" name="paymentItem" placeholder="款项" class="financeItem-select fullwidth"/></td>
 								 <td><input type="text" name="priceBudget" placeholder="应收金额" class="form-control"/></td>
 								 <td> 
 								 <input type="text" name="deadline" placeholder="收款截止日期" class="form-control datepicker" autocomplete="off" />
@@ -240,7 +240,7 @@
 							</tr>
 							<tr id="tr_4">
 								 <td>第五期</td>
-								<td><input type="text" name="paymentItem" placeholder="款项" class="funds-select fullwidth"/></td>
+								<td><input type="text" name="paymentItem" placeholder="款项" class="financeItem-select fullwidth"/></td>
 								 <td><input type="text" name="priceBudget" placeholder="应收金额" class="form-control"/></td>
 								 <td> 
 								 <input type="text" name="deadline" placeholder="收款截止日期" class="form-control datepicker" autocomplete="off" />
@@ -322,9 +322,10 @@
 	var currency=${currency};
 	var user = ${user};
 	
-	var beneficiary =  [{ id: 0, text: '特美旅行' }, { id: 1, text: '地接社' }];
+	var costReceiver = ${costReceiver};
 	var paymentMethod = [{ id: 0, text: '一期' }, { id: 1, text: '两期' },{ id: 2, text: '三期' }, { id: 3, text: '四期' },{ id: 4, text: '五期' }]
-	var funds = [{ id: 0, text: '团款' }, { id: 1, text: '机票' }];
+	var financeItem = ${financeItem};
+	var financeAccount = ${financeAccount};
 	
 	for(var i=0;i<5;i++){
 		$("#tr_"+i).hide();
@@ -359,9 +360,9 @@
         allowClear: true
 	 });
     
-    $(".beneficiary-select").select2({
-    	placeholder:"收款方",
-    	data:beneficiary,
+    $(".costReceiver-select").select2({
+    	placeholder:"签约乙方",
+    	data:costReceiver,
     	allowClear:true
     });
     
@@ -371,9 +372,9 @@
     	allowClear:true
     });
     
-    $(".funds-select").select2({
+    $(".financeItem-select").select2({
     	placeholder:"款项",
-    	data:funds,
+    	data:financeItem,
     	allowClear:true
     });
     
@@ -815,7 +816,6 @@
 		function deal_submit() {
 			var f = $("#form-deal").serialize();
 			var jsonStr = getPriceRecord();
-			console.log(jsonStr);
 			$.post('${rootPath}order/orderDeal.do', $.param({'priceRecord':jsonStr})+'&'+f, function(result) {
 				var rmsg = result.msg;
 				if (result.success) {

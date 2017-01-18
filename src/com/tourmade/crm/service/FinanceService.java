@@ -161,4 +161,30 @@ public class FinanceService extends BaseService {
 		// TODO Auto-generated method stub
 		return financeMapper.getAllAgency();
 	}
+
+	public void delPriceRecordByPriceId(Integer id) {
+		
+		financeMapper.delPriceRecordByPriceId(id);
+		
+	}
+
+	public void saveCostRecord(CostRecord costRecord) {
+		
+		financeMapper.saveCostRecord(costRecord);
+	}
+
+	public void updateCostRecordOrder(CostRecord costRecord) {
+		
+		financeMapper.updateCostRecordOrder(costRecord);
+	}
+
+	public void updatePriceRecordOrder(PriceRecord priceRecord) {
+		
+		financeMapper.updatePriceRecordOrder(priceRecord);
+	}
+
+	public void delCostRecordByCostId(Integer id) {
+		
+		financeMapper.delCostRecordByCostId(id);
+	}
 }
