@@ -267,7 +267,7 @@
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"
 						aria-hidden="true">&times;</button>
-					<div class="nextModal-title">收款编辑</div>
+					<div class="nextModal-title">付款编辑</div>
 				</div>
 				<form class="form-horizontal" id="form-costRecordEdit" >
 					<div class="modal-body">
@@ -281,11 +281,11 @@
 								<label class="col-sm-8 " id="costFormPayItem"></label>
 							</div>
 							<div class="form-group col-sm-12">
-								<label class="col-sm-4 control-label">应收金额</label>
+								<label class="col-sm-4 control-label">应付金额</label>
 								<label class="col-sm-8 " id="costFormCostBudget"></label>
 							</div>
 							<div class="form-group col-sm-12">
-								<label class="col-sm-4 control-label">实收金额</label>
+								<label class="col-sm-4 control-label">实付 金额</label>
 								<input class="col-sm-8 " id="costFormCostReal" name="costReal" placeholder="实收金额"/>
 							</div>
 							<div class="form-group col-sm-12">
@@ -412,6 +412,7 @@
         changeYear: true,
         changeMonth: true
      });
+	
 	$("#costFormPayTime").datepicker({
 		placeholder:"付款日期",	
         dateFormat: "yy-mm-dd",
@@ -419,7 +420,7 @@
         changeMonth: true
      });
 	
-	
+	//界面加载完成后进行的操作
 	$(document).ready(function(){
 		
 		loadOrderInfo($("#orderId").val());
@@ -460,7 +461,7 @@
 			if(array[i].id==value)
 				return array[i].text;
 		}
-		return "";
+		return value;
 	}
 	
 	//加载收款记录
@@ -471,6 +472,7 @@
 		language: datatable_local_language, // my.js
 		serverSide: true,
 		stateSave: true,
+		bInfo : false,
 		ajax: {
 			url: '${rootPath}finance/getPriceRecordList.do',
 			data:{"id":$("#orderId").val()},
@@ -767,6 +769,7 @@
 		language: datatable_local_language, //my.js
 		serverSide: true,
 		stateSave: true,
+		bInfo : false,
 		ajax: {
 			url: '${rootPath}finance/getCostRecordList.do',
 			data:{"id":$("#orderId").val()},
@@ -1065,7 +1068,7 @@
 		
 	}
 	function backToList(){
-		window.location="${rootPath}finance/list.html";
+		window.location="${rootPath}finance/list.html?flag=old";
 	}
 	</script>
 </body>

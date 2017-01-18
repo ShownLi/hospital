@@ -39,19 +39,10 @@ public class FinanceService extends BaseService {
 
 		map.put("start", ph.getStart());
 		map.put("length", ph.getLength());
-
-		if (order.getOrderCode() != null) {
-			map.put("orderCode", order.getOrderCode());
-		}
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-		if (order.getSearchStartTime() != null) {
-			map.put("searchStartTime", format.format(order.getSearchStartTime()) + " 00:00:00");
-			System.out.println(map.get("searchStartTime"));
-		}
-		if (order.getSearchEndTime() != null) {
-			map.put("searchEndTime", format.format(order.getSearchEndTime()) + " 23:59:59");
-			System.out.println(map.get("searchEndTime"));
-		}
+		map.put("status", order.getStatus());
+		map.put("orderCode", order.getOrderCode());
+		map.put("searchStartTime", order.getSearchStartTime());
+		map.put("searchEndTime", order.getSearchEndTime());
 		List<Order> data = orderMapper.queryOrder(map);
 		long count = orderMapper.countOrder(order);
 

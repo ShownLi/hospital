@@ -91,8 +91,8 @@ public class CaseController extends BaseSimpleFormController {
 			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 
 			Calendar calendar = Calendar.getInstance(); // 获取当前日期
-			calendar.add(Calendar.MONTH, 0); // 设置当前月份
-			calendar.add(Calendar.DAY_OF_MONTH, -90); // 设置开始时间为90天
+			calendar.set(Calendar.MONTH, -3); // 设置当前月份
+			calendar.set(Calendar.DAY_OF_MONTH, 1); // 设置开始时间为90天
 			Calendar calendar1 = Calendar.getInstance();
 			model.addAttribute("flag", "restart");
 			session.removeAttribute("searchCase");
@@ -338,6 +338,10 @@ public class CaseController extends BaseSimpleFormController {
 		Map<String, Object> customerMap = new HashMap<String, Object>();
 		Map<String, String> map = new HashMap<>();
 		crmcase.setEmail(crmcase.getEmail().trim());
+		//添加询单时，统一真实的联系方式，为null或者""时，为""
+		if(crmcase.getContactReal()==null||crmcase.getContactReal()==""){
+			crmcase.setContactReal("");
+		}
 		try {
 			// 判断是否有老客人,通过联系方式和portalId判断(添加询单)
 			List<Customer> judgeCustomer = service.judgeCustomer(crmcase);
@@ -576,7 +580,9 @@ public class CaseController extends BaseSimpleFormController {
 
 		Map<String, Object> customerMap = new HashMap<String, Object>();
 		Map<String, String> map = new HashMap();
-
+		if(crmcase.getContactReal()==null||crmcase.getContactReal()==""){
+			crmcase.setContactReal("");
+		}
 		try {
 			// 判断是否有portalId
 			if (crmcase.getPortalId() != null && crmcase.getPortalId() != 0) {
@@ -753,7 +759,9 @@ public class CaseController extends BaseSimpleFormController {
 	@RequestMapping(value = "/edit.do")
 	@ResponseBody
 	public Json doEdit(HttpServletRequest request, HttpSession session, Model model, Case crmcase) {
-
+		if(crmcase.getContactReal()==null||crmcase.getContactReal()==""){
+			crmcase.setContactReal("");
+		}
 		Json json = new Json();
 		try {
 			service.updateCase(crmcase);

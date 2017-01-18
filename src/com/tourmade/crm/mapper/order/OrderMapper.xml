@@ -37,7 +37,7 @@
 			IFNULL(u.cost_adjust,0 )as costAdjust,
 			IFNULL(u.price_adjust,0 ) as priceAdjust,
 			u.finance_status as financeStatus,
-			u.cost_receiver as costreceiver
+			u.cost_receiver as costReceiver
 		from tm_order u  
 		where u.isdel = 0 
 		 <if test="customerName != null and customerName != ''">
@@ -68,10 +68,10 @@
          		and   u.order_code like '%${orderCode}%'
          </if>
          <if test="searchStartTime != null and searchStartTime != ''">
-         		and  u.creat_time >= #{searchStartTime};
+         		and  u.creat_time &gt;= #{searchStartTime}
          </if>
          <if test="searchEndTime != null and searchEndTime != ''">
-        	 	and  u.creat_time &lt;= #{searchEndTime};
+        	 	and  u.creat_time &lt;= #{searchEndTime}
          </if>
 		order by u.creat_time desc
 		limit #{start},#{length}
@@ -141,10 +141,10 @@
          		and   order_code like '%${orderCode}%'
          </if>
          <if test="searchStartTime != null and searchStartTime != ''">
-         		and creat_time &gt;= #{searchStartTime};
+         		and creat_time &gt;= #{searchStartTime}
          </if>
          <if test="searchEndTime != null and searchEndTime != ''">
-        	 	and creat_time &lt;= #{searchEndTime};
+        	 	and creat_time &lt;= #{searchEndTime}
          </if>
 	</select>
 	
