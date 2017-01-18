@@ -109,6 +109,28 @@ public class FinanceService extends BaseService {
 		return financeMapper.updateOrderAfterUpdateCostRecord(sumCostRecord);
 	}
 
+	
+	public int savePriceRecord(PriceRecord priceRecord){
+		
+		financeMapper.savePriceRecord(priceRecord);
+		
+		return priceRecord.getPriceId();
+	}
+
+	public boolean updatePriceRecordPriceCode(PriceRecord priceRecord) {
+		if(priceRecord.getPriceId()!=null&&priceRecord.getOrderId()!=null){
+			String priceCode = priceRecord.getOrderId()+"-"+priceRecord.getPriceId();
+			priceRecord.setPriceCode(priceCode);
+			financeMapper.updatePriceRecordPriceCode(priceRecord);
+			return true;
+		}
+		else return false;
+		
+	}
+	
+
+
+
 	public int updateCostRecord(CostRecord costRecord) {
 		// 先更新所修改的收款单
 		financeMapper.updateCostRecord(costRecord);
@@ -129,5 +151,31 @@ public class FinanceService extends BaseService {
 	public List<EntityList> getAllAgency() {
 		// TODO Auto-generated method stub
 		return financeMapper.getAllAgency();
+	}
+
+	public void delPriceRecordByPriceId(Integer id) {
+		
+		financeMapper.delPriceRecordByPriceId(id);
+		
+	}
+
+	public void saveCostRecord(CostRecord costRecord) {
+		
+		financeMapper.saveCostRecord(costRecord);
+	}
+
+	public void updateCostRecordOrder(CostRecord costRecord) {
+		
+		financeMapper.updateCostRecordOrder(costRecord);
+	}
+
+	public void updatePriceRecordOrder(PriceRecord priceRecord) {
+		
+		financeMapper.updatePriceRecordOrder(priceRecord);
+	}
+
+	public void delCostRecordByCostId(Integer id) {
+		
+		financeMapper.delCostRecordByCostId(id);
 	}
 }

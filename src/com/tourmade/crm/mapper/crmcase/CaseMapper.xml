@@ -483,7 +483,7 @@
 		u.user_id as id,
 		u.user_name as text,
 		u.isdel 
-		from tm_user u where u.isdel = 0 and u.role_id = 1
+		from tm_user u where u.isdel = 0 and (u.role_id = 2 or u.role_id = 3 or u.role_id = 4)
 	</select>
 	
 	<select id="getAllUser" parameterType="String" resultType="EntityList">
@@ -491,7 +491,7 @@
 		u.user_id as id,
 		u.user_name as text,
 		u.isdel 
-		from tm_user u where u.role_id = 1
+		from tm_user u where (u.role_id = 2 or u.role_id = 3 or u.role_id = 4)
 	</select>
 	
 	<select id="getSales" parameterType="String" resultType="EntityList">

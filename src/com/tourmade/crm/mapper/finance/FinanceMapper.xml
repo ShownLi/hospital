@@ -69,6 +69,19 @@
 		where
 		price_code = #{priceCode}
 	</update>
+	
+	<update id="updatePriceRecordOrder" parameterType="CostRecord">
+		update tm_price_record
+		set				
+		account = #{account},		
+		payment_item = #{paymentItem},
+		price_budget = #{priceBudget},				
+		deadline = #{deadline},
+		comment = #{comment},
+		update_time = NOW()
+		where
+		price_code = #{priceCode}
+	</update>
 
 	<update id="updateCostRecord" parameterType="CostRecord">
 		update
@@ -83,6 +96,20 @@
 		update_time = NOW()
 		where cost_id =	#{costId}
 	</update>
+	
+
+	<update id="updateCostRecordOrder" parameterType="CostRecord">
+		update
+		tm_cost_record
+		set
+		agency_id = #{agencyId},
+		payment_item = #{paymentItem},
+		cost_budget = #{costBudget},
+		comment = #{comment},
+		update_time = NOW()
+		where cost_id =	#{costId}
+	</update>
+	
 	
 	<update id="updateOrderAfterUpdatePriceRecord" parameterType="PriceRecord">
 		update tm_order
@@ -169,6 +196,53 @@
 	where cost_id = #{costId}
 	</update> 
 	
+
+	<insert id="savePriceRecord" parameterType="PriceRecord" flushCache="true" useGeneratedKeys="true" keyProperty="priceId" keyColumn="GENERATED_KEY">
+	insert into tm_price_record(
+	price_code,
+	order_id,
+	payment_item,
+	price_budget,
+	deadline,
+	price_real,
+	account,
+	received_time,
+	comment,
+	summary,
+	recorder,
+	price_adjust,
+	status,
+	create_time,
+	update_time,
+	isdel
+	) values (
+	#{priceCode,jdbcType=VARCHAR},
+	#{orderId,jdbcType=VARCHAR},	
+	#{paymentItem,jdbcType=VARCHAR},	
+	#{priceBudget,jdbcType=VARCHAR},	
+	#{deadline,jdbcType=VARCHAR},	
+	#{priceReal,jdbcType=VARCHAR},	
+	#{account,jdbcType=VARCHAR},	
+	#{receivedTime,jdbcType=VARCHAR},	
+	#{comment,jdbcType=VARCHAR},	
+	#{summary,jdbcType=VARCHAR},	
+	#{recorder,jdbcType=VARCHAR},	
+	#{priceAdjust,jdbcType=VARCHAR},	
+	#{STATUS,jdbcType=VARCHAR},	
+	NOW(),
+	NOW(),
+	0
+	)
+	</insert>
+	
+	<update id="updatePriceRecordPriceCode" parameterType="PriceRecord">
+	update tm_price_record
+	set
+	price_code = #{priceCode},
+	update_time = NOW()
+	where price_id = #{priceId}
+	</update> 
+
 	<select id="getAllUser" resultType="EntityList">
 		select
 		u.user_id as id,
@@ -184,4 +258,61 @@
 		from tm_agency 
 	</select>
 		
+	<update id="delPriceRecordByPriceId" parameterType="int" flushCache="true"
+		statementType="PREPARED">
+		update tm_price_record
+		set
+		isdel=1,update_time=NOW()
+		where
+		price_id = #{id}
+	</update>
+	
+	<update id="delCostRecordByCostId" parameterType="int" flushCache="true"
+		statementType="PREPARED">
+		update tm_cost_record
+		set
+		isdel=1,update_time=NOW()
+		where
+		cost_id = #{id}
+	</update>
+	
+	<insert id="saveCostRecord" parameterType="CostRecord" flushCache="true" useGeneratedKeys="true" keyProperty="costId" keyColumn="GENERATED_KEY">
+	insert into tm_cost_record(
+	order_id,
+	agency_id,
+	payment_item,
+	cost_budget,
+	cost_real,
+	account,
+	pay_time,
+	comment,
+	summary,
+	recorder,
+	cost_adjust,
+	status,
+	create_time,
+	update_time,
+	isdel
+	) values (
+	#{orderId,jdbcType=VARCHAR},	
+	#{agencyId,jdbcType=VARCHAR},	
+	#{paymentItem,jdbcType=VARCHAR},	
+	#{costBudget,jdbcType=VARCHAR},	
+	#{costReal,jdbcType=VARCHAR},	
+	#{account,jdbcType=VARCHAR},	
+	#{payTime,jdbcType=VARCHAR},	
+	#{comment,jdbcType=VARCHAR},	
+	#{summary,jdbcType=VARCHAR},	
+	#{recorder,jdbcType=VARCHAR},	
+	#{costAdjust,jdbcType=VARCHAR},	
+	#{status,jdbcType=VARCHAR},	
+	NOW(),
+	NOW(),
+	0
+	)
+	</insert>
+
 </mapper>
+
+
+

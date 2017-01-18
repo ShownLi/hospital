@@ -34,9 +34,24 @@ public interface FinanceMapper {
 
 	public int costAdjustMethod(CostRecord costRecord);
 
+
+	public int savePriceRecord(PriceRecord priceRecord);
+
+	public void updatePriceRecordPriceCode(PriceRecord priceRecord);
+
 	public List<EntityList> getAllUser();
 
 	public List<EntityList> getAllAgency();
+
+	public void delPriceRecordByPriceId(int id);
+
+	public void saveCostRecord(CostRecord costRecord);
+
+	public void updateCostRecordOrder(CostRecord costRecord);
+
+	public void updatePriceRecordOrder(PriceRecord priceRecord);
+
+	public void delCostRecordByCostId(int id);
 
 
 }

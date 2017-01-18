@@ -34,6 +34,7 @@ import com.tourmade.crm.entity.PriceRecord;
 import com.tourmade.crm.entity.Sale;
 import com.tourmade.crm.service.CaseService;
 import com.tourmade.crm.service.EmailService;
+import com.tourmade.crm.service.FinanceService;
 import com.tourmade.crm.service.OrderService;
 
 import net.sf.json.JSONArray;
@@ -49,6 +50,8 @@ public class OrderController extends BaseSimpleFormController {
 	EmailService emailService = new EmailService();
 	@Autowired
 	CaseService caseService;
+	@Autowired
+	FinanceService financeService;
 
 	@RequestMapping(value = "/list.html", method = { RequestMethod.POST, RequestMethod.GET })
 	public String list(Model model,String flag,HttpSession session) {
@@ -57,6 +60,11 @@ public class OrderController extends BaseSimpleFormController {
 		String status = "order.status";
 		String reason = "order.reason";
 		String email = "order.email";
+		String costReceiver = "order.cost_receiver";
+		String financeItem = "finance.item";
+		String financeAccount = "finance.account";
+		String priceStatus = "finance.price.status";
+		String costStatus = "finance.cost.status";
 		
 		List<EntityList> userList = caseService.getAllUser();
 		List<EntityList> currencyList = service.getParameterInfo(currency);
@@ -64,18 +72,34 @@ public class OrderController extends BaseSimpleFormController {
 		List<EntityList> countryList = service.getParameterInfo(country);
 		List<EntityList> reasonLiat = service.getParameterInfo(reason);
 		List<EntityList> emailList = service.getParameterInfo(email);
+		List<EntityList> costReceiverList = service.getParameterInfo(costReceiver);
+		List<EntityList> financeItemList = service.getParameterInfo(financeItem);
+		List<EntityList> financeAccountList = service.getParameterInfo(financeAccount);
+		List<EntityList> priceStatusList = service.getParameterInfo(priceStatus);
+		List<EntityList> costStatusList = service.getParameterInfo(costStatus);
+
 		JSONArray userResult = JSONArray.fromObject(userList);
 		JSONArray currencyResult = JSONArray.fromObject(currencyList);
 		JSONArray countryResult = JSONArray.fromObject(countryList);
 		JSONArray statusResult = JSONArray.fromObject(statusList);
 		JSONArray reasonResult = JSONArray.fromObject(reasonLiat);
 		JSONArray emailResult = JSONArray.fromObject(emailList);
+		JSONArray costReceiverResult = JSONArray.fromObject(costReceiverList);
+		JSONArray financeItemResult = JSONArray.fromObject(financeItemList);
+		JSONArray financeAccountResult = JSONArray.fromObject(financeAccountList);
+		JSONArray priceStatusResult = JSONArray.fromObject(priceStatusList);
+		JSONArray costStatusResult = JSONArray.fromObject(costStatusList);
 		model.addAttribute("user",userResult);
 		model.addAttribute("currency",currencyResult);
 		model.addAttribute("orderStatus",statusResult);
 		model.addAttribute("destination",countryResult);
 		model.addAttribute("reason",reasonResult);
 		model.addAttribute("email",emailResult);
+		model.addAttribute("costReceiver",costReceiverResult);
+		model.addAttribute("financeItem",financeItemResult);
+		model.addAttribute("financeAccount",financeAccountResult);
+		model.addAttribute("priceStatus",priceStatusResult);
+		model.addAttribute("costStatus",costStatusResult);
 		
 		if ("".equals(flag) || flag == null) {
 			model.addAttribute("flag", "restart");
@@ -237,22 +261,47 @@ public class OrderController extends BaseSimpleFormController {
 			String status = "order.status";
 			String country = "country";
 			String reason = "order.reason";
+			String costReceiver = "order.cost_receiver";
+			String financeItem = "finance.item";
+			String financeAccount = "finance.account";
+			String priceStatus = "finance.price.status";
+			String costStatus = "finance.cost.status";
+			
 			List<EntityList> currencyList = service.getParameterInfo(currency);
 			List<EntityList> statusList = service.getParameterInfo(status);
 			List<EntityList> countryList = service.getParameterInfo(country);
 			List<EntityList> reasonList = service.getParameterInfo(reason);
+			List<EntityList> costReceiverList = service.getParameterInfo(costReceiver);
+			List<EntityList> financeItemList = service.getParameterInfo(financeItem);
+			List<EntityList> financeAccountList = service.getParameterInfo(financeAccount);
+			List<EntityList> priceStatusList = service.getParameterInfo(priceStatus);
+			List<EntityList> costStatusList = service.getParameterInfo(costStatus);
+			List<EntityList> agencyList = financeService.getAllAgency();
 			JSONArray currencyResult = JSONArray.fromObject(currencyList);
 			JSONArray statusResult = JSONArray.fromObject(statusList);
 			JSONArray countryResult = JSONArray.fromObject(countryList);
 			JSONArray reasonResult = JSONArray.fromObject(reasonList);
+			JSONArray costReceiverResult = JSONArray.fromObject(costReceiverList);
+			JSONArray financeItemResult = JSONArray.fromObject(financeItemList);
+			JSONArray financeAccountResult = JSONArray.fromObject(financeAccountList);
+			JSONArray priceStatusResult = JSONArray.fromObject(priceStatusList);
+			JSONArray costStatusResult = JSONArray.fromObject(costStatusList);
+			JSONArray agencyResult = JSONArray.fromObject(agencyList);
 			model.addAttribute("currency",currencyResult);
 			model.addAttribute("orderStatus",statusResult);
 			model.addAttribute("order",order);
 			model.addAttribute("country",countryResult);
 			model.addAttribute("reason",reasonResult);
+			model.addAttribute("costReceiver",costReceiverResult);
+			model.addAttribute("financeItem",financeItemResult);
+			model.addAttribute("financeAccount",financeAccountResult);
+			model.addAttribute("priceStatus",priceStatusResult);
+			model.addAttribute("costStatus",costStatusResult);
+			model.addAttribute("allAgency",agencyResult);
 		}
 		return "/order/edit";
 	}
+
 
 	@RequestMapping(value = "/orderDeal.do")
 	@ResponseBody
@@ -267,8 +316,7 @@ public class OrderController extends BaseSimpleFormController {
 			System.out.println("paraName:"+paraName+","+"paraValue:"+paraValue);
 			
 		}*/
-		System.out.println(order);
-		System.out.println(priceRecord);
+
 		JSONObject priceRecordJson = JSONObject.fromObject(priceRecord);
 		Iterator it = priceRecordJson.keys();
 		while(it.hasNext()){
@@ -278,12 +326,14 @@ public class OrderController extends BaseSimpleFormController {
 			String deadline = priceRecordJson.getJSONObject(key).getString("deadline");
 			String comment = priceRecordJson.getJSONObject(key).getString("comment");
 			
-			/*Iterator its = priceRecordJson.getJSONObject(key).keys();
+			Iterator its = priceRecordJson.getJSONObject(key).keys();
 			while(its.hasNext()){
 				System.out.println("keys:"+(String)its.next());
-			}*/
-			 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-			if(!paymentItem.equals("")&&paymentItem!=null){
+			}
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			if(!paymentItem.equals("")&&paymentItem!=null
+					&&!priceBudget.equals("")&&priceBudget!=null
+					&&!deadline.equals("")&&deadline!=null){
 				PriceRecord pRecord = new PriceRecord();
 				pRecord.setOrderId(order.getOrderId());
 				pRecord.setPaymentItem(Integer.valueOf(paymentItem));
@@ -295,8 +345,14 @@ public class OrderController extends BaseSimpleFormController {
 					e.printStackTrace();
 				}
 				pRecord.setComment(comment);
+				pRecord.setAccount(order.getCostReceiver());
+				pRecord.setSTATUS(1);
+				
+				financeService.savePriceRecord(pRecord);
+				financeService.updatePriceRecordPriceCode(pRecord);
 				
 				System.out.println(pRecord);
+				
 				
 			}
 			
@@ -306,13 +362,13 @@ public class OrderController extends BaseSimpleFormController {
 		Json json = new Json();	
 		Order oldOrder = service.getOrderById(order.getOrderId());
 		Case crmcase = caseService.getCaseById(oldOrder.getCaseId());
-
+		
 		try {
 			service.updateOrder(order);			
 			crmcase.setStatus("3");
 			service.customerStatus(oldOrder.getCustomerId(), "3");
 			caseService.updateCaseStatus(crmcase);
-		
+			
 			json.setSuccess(true);
 		} catch (Exception e) {
 			json.setSuccess(false);
