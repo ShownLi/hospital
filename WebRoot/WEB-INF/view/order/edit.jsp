@@ -100,6 +100,12 @@
                           </div>
                       </div>
                       <div class="form-group col-sm-4">
+                          <label class="col-sm-4 control-label">成团人数</label>
+                          <div class="col-sm-8">
+                            <input type="text" name="groupNumber" value="${order.groupNumber}" placeholder="成团人数" class="form-control" />
+                          </div>
+                      </div>
+                      <div class="form-group col-sm-4">
                           <label class="col-sm-4 control-label">出发日期</label>
                           <div class="col-sm-8 input-group input-datepicker">
                             <input type="text" id="startDate" name="startDate" value="${order.startDate}" placeholder="出发日期" class="form-control datepicker" autocomplete="off" />
@@ -113,36 +119,56 @@
                           <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                         </div>
                       </div>
-                      <div class="form-group col-sm-4">
-                          <label class="col-sm-4 control-label">成团人数</label>
-                          <div class="col-sm-8">
-                            <input type="text" name="groupNumber" value="${order.groupNumber}" placeholder="成团人数" class="form-control" />
-                          </div>
-                      </div>
+                      
+		                      <div class="form-group col-sm-6">
+		                      <label class="col-sm-4 control-label">成团成本<span class="asterisk">*</span></label>
+		                      <div class="col-sm-8">
+		                        <input type="text" name="costBudget" value="${order.costBudget}" placeholder="成团成本" class="form-control"/>
+		                      </div>
+		                 	 </div>
+                 	 
                       <div class="form-group col-sm-4">
                           <label class="col-sm-4 control-label">成团价格</label>
                           <div class="col-sm-8">
                             <input type="text" name="groupPrice" value="${order.groupPrice}" placeholder="成团价格" class="form-control"/>
                           </div>
                       </div>
-                      <div class="form-group col-sm-4">
-                          <label class="col-sm-4 control-label">货币种类</label>
+		              <div class="form-group col-sm-4">
+                          <label class="col-sm-4 control-label">成团币种</label>
                           <div class="col-sm-8">
                             <input type="text" name="currency" value="${order.currency}" placeholder="货币种类" class="currency-select fullwidth"/>
                           </div>
-                      </div>
-                      <div class="form-group col-sm-4">
+                      </div>    	  
+                  	  <div class="form-group col-sm-4">
                           <label class="col-sm-4 control-label">汇率</label>
                           <div class="col-sm-8">
                             <input type="text" name="exchangeRate" value="${order.exchangeRate}" placeholder="汇率" class="form-control" />
                           </div>
                       </div>
-                      <div class="form-group col-sm-4">
+                      
+		                      <div class="form-group col-sm-6">
+		                      <label class="col-sm-4 control-label">人民币成本<span class="asterisk">*</span></label>
+		                      <div class="col-sm-8">
+		                        <input type="text" name="costBudgetRmb" value="${order.costBudgetRmb}" placeholder="人民币成本" class="form-control"/>
+		                      </div>
+		                 	  </div>
+		                 	  
+                  	  <div class="form-group col-sm-4">
                           <label class="col-sm-4 control-label">人民币价格</label>
                           <div class="col-sm-8">
                             <input type="text" name="rmbPrice" value="${order.rmbPrice}" placeholder="人民币价格" class="form-control"/>
                           </div>
                       </div>
+                      
+		                      <div class="form-group col-sm-6">
+		                      <label class="col-sm-4 control-label">签约乙方<span class="asterisk">*</span></label>
+		                      <div class="col-sm-8">
+		                        <input type="text" name="costReceiver" value="${order.costReceiver}" placeholder="签约乙方" class="costReceiver-select fullwidth"/>
+		                      </div>
+		                 	  </div>
+                  
+                      
+                      
                       <div class="form-group col-sm-4">
                       <div class="col-sm-6"></div>
                       		<!-- &nbsp;<input id="btn-updateDealModify" class="submit btn btn-primary" type="button" value="更改"/>&nbsp;
@@ -769,7 +795,7 @@
 	              <input  type="hidden" name="commentType" value="order" />
 	        </div>
 	        <div class="form-group col-sm-12 align-center">
-	          <button class="submit btn btn-primary">保存注释</button>
+	          <button class="submit btn btn-primary" >保存注释</button>
 	          <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
 	        </div>
         </form>
@@ -831,6 +857,7 @@
 	var priceStatus = ${priceStatus};
 	var costStatus = ${costStatus};
 	var allAgency = ${allAgency};
+	var financeStatus = ${order.financeStatus};
 
 	for(var i=0;i<5;i++){
 		$("#tr_"+i).hide();
@@ -927,74 +954,108 @@
 	
 	jQuery(document).ready(function() {
 		jQuery("#form-deal").validate({
-	        rules: {
+	           rules: {
 		        groupTime: {
-                required: true,
-                date: true
-              },
-		        startDate: {
-                required: true,
-                date: true
-              },
-		        endDate: {
-                required: true,
-                date: true
-              },
-		        groupNumber: {
-                required: true,
-                number: true
-              },
-		        groupPrice: {
-                required: true,
-                number: true
-              },
-                currency: {
-                required: true,
-              },
-		        exchangeRate: {
-                required: true,
-                number: true
-              },
-		        rmbPrice: {
-                required: true,
-                number: true
-              },
-		      },
-		        messages: {
-		        groupTime: {
-                required: "请输入成团日期",
-                date: "日期格式 mm/dd/yyyy"
-              },
+             required: true,
+             date: true
+           },
 		          startDate: {
-                required: "请输入出发日期",
-                date: "日期格式 mm/dd/yyyy"
-              },
-		        endDate: {
-                required: "请输入返回日期",
-                date: "日期格式 mm/dd/yyyy"
-              },
-		          groupNumber: "请输入一个数字",
-		          groupPrice: "请输入一个数字",
-              	  currency: "请选择货币种类",
-		          exchangeRate: "请输入一个数字",
-		          rmbPrice: "请输入一个数字",
-
-		      },
-          highlight: function(element) {
-            jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
-          }, 
-          success: function(element) {
-            jQuery(element).closest('.form-group').removeClass('has-error');
+             required: true,
+             date: true
+           },
+		          endDate: {
+             required: true,
+             date: true
+           },
+		          groupNumber: {
+             required: true,
+             number: true
+           },
+		          groupPrice: {
+             required: true,
+             number: true
+           },
+           currency: {
+             required: true,
+           },
+		          exchangeRate: {
+             required: true,
+             number: true
+           },
+		          rmbPrice: {
+             required: true,
+             number: true
+           },
+           	  costBudget: {
+             required: true,
+             number: true
+           },
+           	  costBudgetRmb: {
+             required: true,
+             number: true
+           },
+           	  costReceiver: {
+             required: true
+           },
+		   },
+		   
+	      messages: {
+	        groupTime: {
+             required: "请输入成团日期",
+             date: "日期格式 mm/dd/yyyy"
+      	 },
+	          startDate: {
+             required: "请输入出发日期",
+             date: "日期格式 mm/dd/yyyy"
           },
-          invalidHandler : function(){
-            return false;
-          },
-          submitHandler : function(){
-            $("#form-deal .submit").attr("disabled","disabled");
-              deal_submit();
-              return false;
-          }
-		});
+	           endDate: {
+             required: "请输入返回日期",
+             date: "日期格式 mm/dd/yyyy"
+       	 },
+	          groupNumber: "请输入一个数字",
+	          groupPrice: "请输入一个数字",
+       	  currency: "请选择货币种类",
+	          exchangeRate: "请输入一个数字",
+	          rmbPrice: "请输入一个数字",
+	          costBudget: "请输入一个数字",
+	          costBudgetRmb: "请输入一个数字",
+	          costReceiver: "请输入签约乙方"
+	      },
+	      
+       highlight: function(element) {
+         jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+       },
+       success: function(element) {
+         jQuery(element).closest('.form-group').removeClass('has-error');
+       },
+       invalidHandler : function(){
+         return false;
+       },   
+       submitHandler : function(){
+     	  var rmbPrice =parseInt($.trim($("input[name=rmbPrice]").val())),
+     	  	priceBudget1 =parseInt($.trim($('#priceBudget1').val())),
+     	  	priceBudget2 =parseInt($.trim($('#priceBudget2').val())),
+     	  	priceBudget3 =parseInt($.trim($('#priceBudget3').val())),
+     	  	priceBudget4 =parseInt($.trim($('#priceBudget4').val())),
+     	  	priceBudget5 =parseInt($.trim($('#priceBudget5').val()));
+     	  if(isNaN(priceBudget1)){priceBudget1 = 0}
+     	  if(isNaN(priceBudget2)){priceBudget2 = 0}
+     	  if(isNaN(priceBudget3)){priceBudget3 = 0}
+     	  if(isNaN(priceBudget4)){priceBudget4 = 0}
+     	  if(isNaN(priceBudget5)){priceBudget5 = 0}
+     	  	var sumPriceBudget = priceBudget1+priceBudget2+priceBudget3+priceBudget4+priceBudget5;
+     	 
+     	  	if(sumPriceBudget==rmbPrice){
+     	  	 $("#form-deal .submit").attr("disabled","disabled");
+	              deal_submit();
+	              return false;
+     	  	}
+     	  	else{
+     	  		return false;
+     	  	}
+       
+       } 
+     });
 		
 		jQuery("#form-updateDeal").validate({
 	        rules: {
@@ -1457,8 +1518,8 @@
 						  data: "receivedTime",
 						  render: function ( data, type, full, meta ) {
 							if(data){
-								var receivedTime = new Date(data.time);
-			                    return receivedTime.format("yyyy/MM/dd");
+								var receivedTime = new Date(data);
+			                    return receivedTime.format("yyyy-MM-dd");
 							}
 							else return null;
 		                },
@@ -1483,7 +1544,7 @@
 						  render: function ( data, type, full, meta ) {
 							  if(data){
 								  var deadline = new Date(data);
-				                  return deadline.format("yyyy/MM/dd");
+				                  return deadline.format("yyyy-MM-dd");
 							  }
 							  else return null;
 		                },
@@ -1953,6 +2014,15 @@
       $("#endDate").val(dateformat)
   }
 	
+  if(financeStatus==3){
+	  alert(financeStatus);
+	  $("input").attr("disabled",true);
+	  $("button").attr("disabled",true);
+	  $("a").attr("disabled",true);
+	  
+	  
+  }
+  
 </script>
 
 </body>

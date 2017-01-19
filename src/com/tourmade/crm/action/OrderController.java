@@ -317,6 +317,8 @@ public class OrderController extends BaseSimpleFormController {
 			
 		}*/
 
+		System.out.println(order);
+		
 		JSONObject priceRecordJson = JSONObject.fromObject(priceRecord);
 		Iterator it = priceRecordJson.keys();
 		while(it.hasNext()){
@@ -326,10 +328,10 @@ public class OrderController extends BaseSimpleFormController {
 			String deadline = priceRecordJson.getJSONObject(key).getString("deadline");
 			String comment = priceRecordJson.getJSONObject(key).getString("comment");
 			
-			Iterator its = priceRecordJson.getJSONObject(key).keys();
+			/*Iterator its = priceRecordJson.getJSONObject(key).keys();
 			while(its.hasNext()){
 				System.out.println("keys:"+(String)its.next());
-			}
+			}*/
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			if(!paymentItem.equals("")&&paymentItem!=null
 					&&!priceBudget.equals("")&&priceBudget!=null
@@ -486,24 +488,6 @@ public class OrderController extends BaseSimpleFormController {
 		} catch (Exception e) {
 			json.setSuccess(false);
 			logger.error("OrderController.doDel() --> " + id + "\n" + e.getMessage());
-		}
-		
-		return json;
-	}
-
-	@RequestMapping(value="/addPriceRecord.do")
-	@ResponseBody
-	public Json addPriceRecord(HttpServletRequest request, @RequestParam("priceRecordList[]") List<PriceRecord> priceRecordList){
-		Json json = new Json();
-		try{
-			System.out.println("-----");
-			System.out.println(priceRecordList==null);
-			System.out.println(priceRecordList);
-			
-			json.setSuccess(true);
-		} catch(Exception e) {
-			json.setSuccess(false);
-			logger.error("OrderController.addPriceRecord() -->" + priceRecordList + "\n" +e.getMessage());
 		}
 		
 		return json;
