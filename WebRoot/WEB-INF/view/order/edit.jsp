@@ -857,7 +857,7 @@
 	var priceStatus = ${priceStatus};
 	var costStatus = ${costStatus};
 	var allAgency = ${allAgency};
-
+	var financeStatus = ${order.financeStatus};
 	for(var i=0;i<5;i++){
 		$("#tr_"+i).hide();
 	}
@@ -1830,7 +1830,7 @@
 		
 	function delPriceRecord(id) {
 		$.ajax({
-			url: "${rootPath}finance/delPriceRecord.do?id=" + id+"&orderId=${order.orderId}", 
+			url: "${rootPath}finance/delPriceRecord.do?id=" + id, 
 			async: true,
 			success: function(o) {
 				window.location.reload();
@@ -1842,7 +1842,7 @@
 	}
 	function delCostRecord(id) {
 		$.ajax({
-			url: "${rootPath}finance/delCostRecord.do?id=" + id+"&orderId=${order.orderId}", 
+			url: "${rootPath}finance/delCostRecord.do?id=" + id, 
 			async: true,
 			success: function(o) {
 				window.location.reload();
@@ -2013,9 +2013,8 @@
       $("#endDate").val(dateformat)
   }
 	
-/*   alert(typeof(Number("${order.financeStatus}")));
-  alert(Number("${order.financeStatus}")==3); */
-  if('${order.financeStatus}'=='3'){
+
+  if(financeStatus==3){
 	  alert(financeStatus);
 	  $("input").attr("disabled",true);
 	  $("button").attr("disabled",true);
