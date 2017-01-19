@@ -635,6 +635,18 @@ public class OrderService extends BaseService {
 		return sale;
 	}
 
+	public void updateOrderDeal(Order order) {
+		
+		orderMapper.updateOrderDeal(order);
+		
+	}
+
+	public void updateOrderNoDeal(Order order) {
+		
+		orderMapper.updateOrderNoDeal(order);
+		
+	}
+
 	
 
 }

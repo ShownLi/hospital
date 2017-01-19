@@ -67,4 +67,8 @@ public interface OrderMapper extends BaseMapper {
 	public int deleteOrderNodealByCaseId(Map<String, Object> map);
 
 	public Sale getSaleBySalesId(int salesId);
+
+	public void updateOrderDeal(Order order);
+
+	public void updateOrderNoDeal(Order order);
 }

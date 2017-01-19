@@ -380,7 +380,9 @@ public class OrderController extends BaseSimpleFormController {
 		return json;
 	}
 	
-	
+	/*
+	 * 更新未成行信息
+	 */
 	@RequestMapping(value = "/orderNoDeal.do")
 	@ResponseBody
 	public Json orderNoDeal(HttpServletRequest request, HttpSession session, Model model, Order order) {
@@ -388,7 +390,7 @@ public class OrderController extends BaseSimpleFormController {
 		Json json = new Json();
 		Case crmcase = caseService.getCaseByOrderId(order.getOrderId());
 		try {
-			service.updateOrder(order);
+			service.updateOrderNoDeal(order);
 			int i = caseService.caseStatus(crmcase.getCaseId());
 			if(i==0){
 				crmcase.setStatus("4");
@@ -462,7 +464,7 @@ public class OrderController extends BaseSimpleFormController {
 
 		Json json = new Json();	
 		try {
-			service.updateOrder(order);	
+			service.updateOrderDeal(order);	
 			json.setSuccess(true);
 		} catch (Exception e) {
 			json.setSuccess(false);
