@@ -8,9 +8,11 @@
 		SELECT
 		price_id as priceId,
 		price_code as priceCode,
-		order_id as orderId,
+		order_id
+		as orderId,
 		payment_item as paymentItem,
-		IFNULL(price_budget,0) as priceBudget,
+		IFNULL(price_budget,0) as
+		priceBudget,
 		deadline,
 		IFNULL(price_real,0) as priceReal,
 		account,
@@ -20,19 +22,22 @@
 		recorder,
 		IFNULL(price_adjust,0) as priceAdjust,
 		status,
-		create_time as createTime,
+		create_time as
+		createTime,
 		update_time as updateTime,
 		isdel
 		FROM tm_price_record
-		WHERE isdel = 0  and  order_id = #{id};
-	</select>
+		WHERE
+		isdel = 0 and order_id = #{id};
+	</select> 
 
 	<select id="getCostRecordListByOrderId" parameterType="int"
 		resultType="com.tourmade.crm.entity.CostRecord">
+
 		SELECT
 		cost_id as costId,
 		order_id as orderId,
-		agency_id as agencyId, 
+		agency_id as agencyId,
 		payment_item as paymentItem,
 		IFNULL(cost_budget,0) as costBudget,
 		IFNULL(cost_real,0) as costReal,
@@ -46,7 +51,268 @@
 		create_time as createTime,
 		update_time as updateTime,
 		isdel
-		FROM tm_cost_record
-		WHERE isdel = 0  and order_id = #{id};
+		FROM
+		tm_cost_record
+		WHERE isdel = 0 and order_id = #{id};
 	</select>
+	
+	<update id="updatePriceRecord" parameterType="PriceRecord">
+		update tm_price_record
+		set
+		status = 2 ,
+		price_real = #{priceReal},
+		account = #{account},
+		received_time =	#{receivedTime},
+		summary = #{summary},
+		recorder = #{recorder},
+		update_time = NOW()
+		where
+		price_code = #{priceCode}
+	</update>
+	
+	<update id="updatePriceRecordOrder" parameterType="CostRecord">
+		update tm_price_record
+		set				
+		account = #{account},		
+		payment_item = #{paymentItem},
+		price_budget = #{priceBudget},				
+		deadline = #{deadline},
+		comment = #{comment},
+		update_time = NOW()
+		where
+		price_code = #{priceCode}
+	</update>
+
+	<update id="updateCostRecord" parameterType="CostRecord">
+		update
+		tm_cost_record
+		set
+		status = 2 ,
+		cost_real = #{costReal},
+		account = #{account},
+		pay_time = #{payTime},
+		summary = #{summary},
+		recorder = #{recorder},
+		update_time = NOW()
+		where cost_id =	#{costId}
+	</update>
+	
+
+	<update id="updateCostRecordOrder" parameterType="CostRecord">
+		update
+		tm_cost_record
+		set
+		agency_id = #{agencyId},
+		payment_item = #{paymentItem},
+		cost_budget = #{costBudget},
+		comment = #{comment},
+		update_time = NOW()
+		where cost_id =	#{costId}
+	</update>
+	
+	
+	<update id="updateOrderAfterUpdatePriceRecord" parameterType="PriceRecord">
+		update tm_order
+		set
+		rmb_price = #{priceBudget},
+		price_real = #{priceReal},
+		price_adjust = #{priceAdjust},
+		update_time = NOW()
+		where
+		order_id = #{orderId}
+	</update>
+
+	<select id="getAllSumPriceRecord" parameterType="int"
+		resultType="PriceRecord">
+		SELECT
+		SUM(IFNULL(price_budget,0)) AS priceBudget,
+		SUM(IFNULL(price_real,0)) AS priceReal,
+		SUM(IFNULL(price_adjust,0)) AS priceAdjust
+		FROM tm_price_record
+		WHERE isdel=0 and
+		order_id = #{orderId};
+	</select>
+	
+	<select id="getAllSumCostRecord" parameterType="int" resultType="CostRecord">
+		SELECT
+		SUM(IFNULL(cost_budget,0)) AS costBudget,
+		SUM(IFNULL(cost_real,0)) AS costReal,
+		SUM(IFNULL(cost_adjust,0)) AS costAdjust
+		FROM tm_cost_record
+		WHERE isdel=0 and
+		order_id = #{orderId};
+	</select>
+	
+	<update id="updateOrderAfterUpdateCostRecord" parameterType="CostRecord">
+		update tm_order
+		set
+		cost_budget = #{costBudget},
+		cost_real = #{costReal},
+		cost_adjust = #{costAdjust},
+		update_time = NOW()
+		where order_id = #{orderId}
+	</update>
+	
+	<update id="balanceOrderByOrderId" parameterType="int">
+		update tm_order
+		set
+		finance_status = 3,
+		update_time = NOW()
+		where order_id = #{orderId}
+	</update>
+	
+	<update id="balancePriceRecordByOrderId" parameterType="int">
+		update
+		tm_price_record
+		set
+		status = 3,
+		update_time = NOW()
+		where isdel=0 and  order_id =
+		#{orderId}
+	</update>
+	
+	<update id="balanceCostRecordByOrderId" parameterType="int">
+		update
+		tm_cost_record
+		set
+		status = 3,
+		update_time = NOW()
+		where isdel=0 and order_id = #{orderId}
+	</update>
+	
+    <update id="priceAdjustMethod" parameterType="PriceRecord">
+		update tm_price_record
+		set
+		price_adjust = #{priceAdjust},
+		update_time = NOW()
+		where price_code = #{priceCode}
+	</update>
+	
+	<update id="costAdjustMethod" parameterType="CostRecord">
+	update tm_cost_record
+	set
+	cost_adjust = #{costAdjust},
+	update_time = NOW()
+	where cost_id = #{costId}
+	</update> 
+	
+
+	<insert id="savePriceRecord" parameterType="PriceRecord" flushCache="true" useGeneratedKeys="true" keyProperty="priceId" keyColumn="GENERATED_KEY">
+	insert into tm_price_record(
+	price_code,
+	order_id,
+	payment_item,
+	price_budget,
+	deadline,
+	price_real,
+	account,
+	received_time,
+	comment,
+	summary,
+	recorder,
+	price_adjust,
+	status,
+	create_time,
+	update_time,
+	isdel
+	) values (
+	#{priceCode,jdbcType=VARCHAR},
+	#{orderId,jdbcType=VARCHAR},	
+	#{paymentItem,jdbcType=VARCHAR},	
+	#{priceBudget,jdbcType=VARCHAR},	
+	#{deadline,jdbcType=VARCHAR},	
+	#{priceReal,jdbcType=VARCHAR},	
+	#{account,jdbcType=VARCHAR},	
+	#{receivedTime,jdbcType=VARCHAR},	
+	#{comment,jdbcType=VARCHAR},	
+	#{summary,jdbcType=VARCHAR},	
+	#{recorder,jdbcType=VARCHAR},	
+	#{priceAdjust,jdbcType=VARCHAR},	
+	#{STATUS,jdbcType=VARCHAR},	
+	NOW(),
+	NOW(),
+	0
+	)
+	</insert>
+	
+	<update id="updatePriceRecordPriceCode" parameterType="PriceRecord">
+	update tm_price_record
+	set
+	price_code = #{priceCode},
+	update_time = NOW()
+	where price_id = #{priceId}
+	</update> 
+
+	<select id="getAllUser" resultType="EntityList">
+		select
+		u.user_id as id,
+		u.user_name as text,
+		u.isdel = 0
+		from tm_user u 
+	</select>
+	<select id="getAllAgency" resultType="EntityList">
+		select
+		agency_id as id,
+		agency_name as text,
+		isdel = 0
+		from tm_agency 
+	</select>
+		
+	<update id="delPriceRecordByPriceId" parameterType="int" flushCache="true"
+		statementType="PREPARED">
+		update tm_price_record
+		set
+		isdel=1,update_time=NOW()
+		where
+		price_id = #{id}
+	</update>
+	
+	<update id="delCostRecordByCostId" parameterType="int" flushCache="true"
+		statementType="PREPARED">
+		update tm_cost_record
+		set
+		isdel=1,update_time=NOW()
+		where
+		cost_id = #{id}
+	</update>
+	
+	<insert id="saveCostRecord" parameterType="CostRecord" flushCache="true" useGeneratedKeys="true" keyProperty="costId" keyColumn="GENERATED_KEY">
+	insert into tm_cost_record(
+	order_id,
+	agency_id,
+	payment_item,
+	cost_budget,
+	cost_real,
+	account,
+	pay_time,
+	comment,
+	summary,
+	recorder,
+	cost_adjust,
+	status,
+	create_time,
+	update_time,
+	isdel
+	) values (
+	#{orderId,jdbcType=VARCHAR},	
+	#{agencyId,jdbcType=VARCHAR},	
+	#{paymentItem,jdbcType=VARCHAR},	
+	#{costBudget,jdbcType=VARCHAR},	
+	#{costReal,jdbcType=VARCHAR},	
+	#{account,jdbcType=VARCHAR},	
+	#{payTime,jdbcType=VARCHAR},	
+	#{comment,jdbcType=VARCHAR},	
+	#{summary,jdbcType=VARCHAR},	
+	#{recorder,jdbcType=VARCHAR},	
+	#{costAdjust,jdbcType=VARCHAR},	
+	#{status,jdbcType=VARCHAR},	
+	NOW(),
+	NOW(),
+	0
+	)
+	</insert>
+
 </mapper>
+
+
+

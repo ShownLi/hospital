@@ -157,6 +157,7 @@
 			u.score as score,
 			u.status as status,
 			u.creat_time as creatTime,
+			u.sendmail as isSendmail,
 			u.isdel as isdel
 		from tm_agency u where u.agency_id = #{agencyId}
 	</select>

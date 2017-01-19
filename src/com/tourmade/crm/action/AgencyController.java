@@ -148,6 +148,7 @@ public class AgencyController extends BaseSimpleFormController {
 			JSONArray currencyResult = JSONArray.fromObject(currencyList);
 			JSONArray paymentResult = JSONArray.fromObject(paymentList);
 			JSONArray statusResult = JSONArray.fromObject(statusList);
+			JSONArray sendmailResult = JSONArray.fromObject(agency.getIsSendmail());
 			model.addAttribute("country", countryResult);
 			model.addAttribute("language", languageResult);
 			model.addAttribute("agencyService", agencyServiceResult);
@@ -156,6 +157,7 @@ public class AgencyController extends BaseSimpleFormController {
 			model.addAttribute("payment", paymentResult);
 			model.addAttribute("status", statusResult);
 			model.addAttribute("agency", agency);
+			model.addAttribute("sendmail", sendmailResult);
 		}
 		return "/agency/edit";
 	}

@@ -269,6 +269,7 @@
 	var currency= ${currency};
 	var payment= ${payment};
 	var statusA= ${status};
+	var isSendmail= ${sendmail};
 	//var agency= ${agency};
 	
 	//返回到list.html记录数
@@ -453,7 +454,6 @@
 		});
 	    
 	jQuery('select').removeClass('form-control');
-		
 	
 	function edit(id) {
 		window.parent.location = "${rootPath}sale/edit.html?id="+id;

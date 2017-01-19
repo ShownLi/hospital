@@ -37,41 +37,41 @@
 			IFNULL(u.cost_adjust,0 )as costAdjust,
 			IFNULL(u.price_adjust,0 ) as priceAdjust,
 			u.finance_status as financeStatus,
-			u.cost_receiver as costreceiver
+			u.cost_receiver as costReceiver
 		from tm_order u  
 		where u.isdel = 0 
 		 <if test="customerName != null and customerName != ''">
-                and   customer_name like '%${customerName}%' 
+                and   u.customer_name like '%${customerName}%' 
          </if>
          <if test="orderId != null and orderId != ''">
-         		and   order_id = #{orderId}
+         		and   u.order_id = #{orderId}
          </if>
           <if test="agencyName != null and agencyName != ''">
-         		and   agency_name like '%${agencyName}%'
+         		and   u.agency_name like '%${agencyName}%'
          </if>
           <if test="salesName != null and salesName != ''">
-         		and   sales_name like '%${salesName}%'
+         		and   u.sales_name like '%${salesName}%'
          </if>
           <if test="destination != null and destination != ''">
-         		and   destination = #{destination}
+         		and   u.destination = #{destination}
          </if>
           <if test="budget != null and budget != ''">
-         		and   budget = #{budget}
+         		and  u.budget = #{budget}
          </if>
           <if test="operator != null and operator != ''">
-         		and   operator = #{operator}
+         		and   u.operator = #{operator}
          </if>
        	  <if test="status != null and status != ''">
-         		and   status = #{status}
+         		and   u.status = #{status}
          </if>
        	  <if test="orderCode != null and orderCode != ''">
-         		and   order_code like '%${orderCode}%'
+         		and   u.order_code like '%${orderCode}%'
          </if>
          <if test="searchStartTime != null and searchStartTime != ''">
-         		and creat_time &gt;= #{searchStartTime};
+         		and  u.creat_time &gt;= #{searchStartTime}
          </if>
          <if test="searchEndTime != null and searchEndTime != ''">
-        	 	and creat_time &lt;= #{searchEndTime};
+        	 	and  u.creat_time &lt;= #{searchEndTime}
          </if>
 		order by u.creat_time desc
 		limit #{start},#{length}
@@ -79,16 +79,6 @@
 
 	<select id="queryOrderByCaseId" parameterType="Map" resultType="Order">
 		select
-			<!-- u.order_id as orderId,
-			u.customer_id as customerId,
-			u.customer_name as customerName,
-			u.agency_id as agencyId,
-			u.agency_name as agencyName,
-			u.sales_id as salesId,
-			u.sales_name as salesName,
-			u.destination as destination,
-			u.budget as budget,
-			u.status as status -->
 			u.order_id as orderId,
 			u.customer_id as customerId,
 			u.customer_name as customerName,
@@ -151,10 +141,10 @@
          		and   order_code like '%${orderCode}%'
          </if>
          <if test="searchStartTime != null and searchStartTime != ''">
-         		and creat_time &gt;= #{searchStartTime};
+         		and creat_time &gt;= #{searchStartTime}
          </if>
          <if test="searchEndTime != null and searchEndTime != ''">
-        	 	and creat_time &lt;= #{searchEndTime};
+        	 	and creat_time &lt;= #{searchEndTime}
          </if>
 	</select>
 	
@@ -226,6 +216,13 @@
 		group_price,
 		currency,
 		exchange_rate,
+		
+		cost_budget,
+		cost_budget_rmb,
+		cost_receiver,
+		finance_status,
+		
+		
 		last_response,
 		creat_time,
 		isdel
@@ -250,6 +247,10 @@
 		#{groupPrice,jdbcType=VARCHAR},
 		#{currency,jdbcType=VARCHAR},
 		#{groupPrice,jdbcType=VARCHAR},
+		#{costBudget},
+		#{costBudgetRmb},
+		#{costReceiver},
+		1,
 		NOW(),
 		NOW(),
 		0
@@ -284,6 +285,37 @@
 		where
 		order_id=#{orderId}
 	</update>
+	<!-- 更新订单成行信息 -->
+	<update id="updateOrderDeal" parameterType="Order" flushCache="true">
+		update tm_order
+		set
+		group_time=#{groupTime},
+		group_number=#{groupNumber},
+		start_date=#{startDate},
+		end_date=#{endDate},
+		cost_budget = #{costBudget},
+		group_price=#{groupPrice},
+		currency=#{currency},
+		exchange_rate=#{exchangeRate},
+		cost_budget_rmb =#{costBudgetRmb},
+		rmb_price=#{rmbPrice},
+		cost_receiver = #{costReceiver},
+		cost_receiver = #{costReceiver},
+		status = #{status},
+		update_time=NOW()
+		where
+		order_id=#{orderId}
+	</update>
+	<update id="updateOrderNoDeal" parameterType="Order" flushCache="true">
+		update tm_order
+		set
+		reason = #{reason},
+		status = #{status},
+		update_time=NOW()
+		where
+		order_id=#{orderId}
+	</update>
+	
 	
 	<update id="updateCustomer" parameterType="Customer" flushCache="true">
 		update tm_customer
@@ -425,7 +457,7 @@
 		IFNULL(u.price_real,0) as priceReal,
 		IFNULL(u.cost_adjust,0) as costAdjust,
 		IFNULL(u.price_adjust,0) as priceAdjust,
-		u.finance_status as financeStatus,
+		IFNULL(u.finance_status,0) as financeStatus,
 		u.cost_receiver as costreceiver
 		from tm_order u where u.order_id = #{orderId}
 	</select>

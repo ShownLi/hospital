@@ -537,6 +537,12 @@
                         <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                       </div>
                   </div>
+                   <div class="form-group col-sm-6">
+                      <label class="col-sm-4 control-label">成团人数<span class="asterisk">*</span></label>
+                      <div class="col-sm-8">
+                        <input type="text" name="groupNumber" placeholder="成团人数" class="form-control"/>
+                      </div>
+                  </div>
                   <div class="form-group col-sm-6">
                       <label class="col-sm-4 control-label">出发日期<span class="asterisk">*</span></label>
                       <div class="col-sm-8 input-group input-datepicker">
@@ -552,9 +558,9 @@
                     </div>
                   </div>
                   <div class="form-group col-sm-6">
-                      <label class="col-sm-4 control-label">成团人数<span class="asterisk">*</span></label>
+                      <label class="col-sm-4 control-label">成团成本<span class="asterisk">*</span></label>
                       <div class="col-sm-8">
-                        <input type="text" name="groupNumber" placeholder="成团人数" class="form-control"/>
+                        <input type="text" name="costBudget" placeholder="成团成本" class="form-control"/>
                       </div>
                   </div>
                   <div class="form-group col-sm-6">
@@ -564,9 +570,9 @@
                       </div>
                   </div>
                   <div class="form-group col-sm-6">
-                      <label class="col-sm-4 control-label">货币种类<span class="asterisk">*</span></label>
+                      <label class="col-sm-4 control-label">成团币种<span class="asterisk">*</span></label>
                       <div class="col-sm-8">
-                        <input type="text" name="currency" placeholder="货币种类" class="currency-select fullwidth"/>
+                        <input type="text" name="currency" placeholder="成团币种" class="currency-select fullwidth"/>
                       </div>
                   </div>
                   <div class="form-group col-sm-6">
@@ -576,11 +582,93 @@
                       </div>
                   </div>
                   <div class="form-group col-sm-6">
-                      <label class="col-sm-4 control-label">人民币价格<span class="asterisk">*</span></label>
+                      <label class="col-sm-4 control-label">人民币成本<span class="asterisk">*</span></label>
                       <div class="col-sm-8">
-                        <input type="text" name="rmbPrice" placeholder="人民币价格" class="form-control"/>
+                        <input type="text" name="costBudgetRmb" placeholder="人民币成本" class="form-control"/>
                       </div>
                   </div>
+                   <div class="form-group col-sm-6">
+                      <label class="col-sm-4 control-label">人民币价格<span class="asterisk">*</span></label>
+                      <div class="col-sm-8">
+                        <input type="text" id="rmbPrice" name="rmbPrice" placeholder="人民币价格" class="form-control"/>
+                      </div>
+                  </div>
+                  <div class="form-group col-sm-6">
+                      <label class="col-sm-4 control-label">签约乙方<span class="asterisk">*</span></label>
+                      <div class="col-sm-8">
+                        <input type="text" name="costReceiver" placeholder="签约乙方" class="costReceiver-select fullwidth"/>
+                      </div>
+                  </div>
+                  <div class="form-group col-sm-6">
+                      <label class="col-sm-4 control-label">付款方式<span class="asterisk">*</span></label>
+                      <div class="col-sm-8">
+                        <input type="text" id="paymentMethod" name="paymentMethod" placeholder="付款方式" class="paymentMethod-select fullwidth"/>
+                      </div>
+                  </div>
+                         
+			       <table id="payTable" class="table">
+						<thead>
+							<tr>
+								<th>期数</th>
+								<th>款项</th>
+								<th>应收金额</th>
+								<th>收款截止日期</th>
+								<th>备注</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr id="tr_0">
+								 <td>第一期</td>
+								 <td><input type="text" name="paymentItem" placeholder="款项" class="financeItem-select fullwidth"/></td>
+								 <td><input type="text" id="priceBudget1" name="priceBudget" placeholder="应收金额" class="form-control"/></td>
+								 <td> 
+								 <input type="text" name="deadline" placeholder="收款截止日期" class="form-control datepicker" autocomplete="off" />
+				                  				 <!-- <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span> -->
+								 </td>
+								 <td><input type="text" name="comment" placeholder="备注" class="form-control"/></td>
+							</tr>
+							<tr id="tr_1">
+								 <td>第二期</td>
+								 <td><input type="text" name="paymentItem" placeholder="款项" class="financeItem-select fullwidth"/></td>
+								 <td><input type="text" id="priceBudget2" name="priceBudget" placeholder="应收金额" class="form-control"/></td>
+								 <td> 
+								 <input type="text" name="deadline" placeholder="收款截止日期" class="form-control datepicker" autocomplete="off" />
+				                  				 <!-- <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span> -->
+								 </td>
+								 <td><input type="text" name="comment" placeholder="备注" class="form-control"/></td>
+							</tr>
+							<tr id="tr_2">
+								 <td>第三期</td>
+								 <td><input type="text" name="paymentItem" placeholder="款项" class="financeItem-select fullwidth"/></td>
+								 <td><input type="text" id="priceBudget3" name="priceBudget" placeholder="应收金额" class="form-control"/></td>
+								 <td> 
+								 <input type="text" name="deadline" placeholder="收款截止日期" class="form-control datepicker" autocomplete="off" />
+				                  				 <!-- <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span> -->
+								 </td>
+								 <td><input type="text" name="comment" placeholder="备注" class="form-control"/></td>
+							</tr>
+							<tr id="tr_3">
+								 <td>第四期</td>
+								<td><input type="text" name="paymentItem" placeholder="款项" class="financeItem-select fullwidth"/></td>
+								 <td><input type="text" id="priceBudget4" name="priceBudget" placeholder="应收金额" class="form-control"/></td>
+								 <td> 
+								 <input type="text" name="deadline" placeholder="收款截止日期" class="form-control datepicker" autocomplete="off" />
+				                  				 <!-- <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span> -->
+								 </td>
+								 <td><input type="text" name="comment" placeholder="备注" class="form-control"/></td>
+							</tr>
+							<tr id="tr_4">
+								 <td>第五期</td>
+								<td><input type="text" name="paymentItem" placeholder="款项" class="financeItem-select fullwidth"/></td>
+								 <td><input type="text" id="priceBudget5" name="priceBudget" placeholder="应收金额" class="form-control"/></td>
+								 <td> 
+								 <input type="text" name="deadline" placeholder="收款截止日期" class="form-control datepicker" autocomplete="off" />
+				                  				 <!-- <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span> -->
+								 </td>
+								 <td><input type="text" name="comment" placeholder="备注" class="form-control"/></td>
+							</tr>
+						</tbody>
+					</table>
                   <input type="hidden" id="dealOrderId" name="orderId" value="${order.orderId}" />
                   <input type="hidden" name="caseId" value="${order.caseId}" />	
                   <input type="hidden" name="customerId" value="${order.customerId}" />	
@@ -590,12 +678,11 @@
           <button class="submit btn btn-primary">保存</button>
           <a class="cancel btn btn-primary" >取消</a>        
       </div>
-      </form>     
+      </form>   
 
     </div><!-- modal-content --> 
   </div><!-- modal-dialog -->
 </div><!-- dealModal -->
-
 <!-- noDealModal -->
 <!-- noDealModal -->
 <div class="noDealModal modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -863,11 +950,21 @@
 	 var orderNoDealReason=${orderNoDealReason};
 	var currency =${currency};
 	var contact =${contact};
+	var costReceiver = ${costReceiver};
+	var paymentMethod = [{ id: 0, text: '一期' }, { id: 1, text: '两期' },{ id: 2, text: '三期' }, { id: 3, text: '四期' },{ id: 4, text: '五期' }]
+	var financeItem = ${financeItem};
+	var financeAccount = ${financeAccount};
 
 	//接收联系方式
 	var contactData=${contact};
 	//接收询单未成行原因
 	var reasonNodeal=${reasonNodeal};
+	
+	for(var i=0;i<5;i++){
+		$("#tr_"+i).hide();
+	}
+	
+	
 	
  	$("#level").select2({
         data: level
@@ -888,6 +985,23 @@
         data: country
     }); 
 	
+    $(".costReceiver-select").select2({
+    	placeholder:"签约乙方",
+    	data:costReceiver,
+    	allowClear:true
+    });
+    
+    $(".paymentMethod-select").select2({
+    	placeholder:"分几期付款",
+    	data:paymentMethod,
+    	allowClear:true
+    });
+    
+    $(".financeItem-select").select2({
+    	placeholder:"款项",
+    	data:financeItem,
+    	allowClear:true
+    });
 
     $(".language-select").select2({
     	placeholder: '选择一个沟通语言',
@@ -1008,9 +1122,20 @@
       	 };
       /*  设置未成行原因下拉框 结束*/
 	
+       $('.paymentMethod-select').change(function(){
+   		//var payMethod = $("#paymentMethod").select2('data')[0].id;
+   		var payVal = $("#paymentMethod").val();
+   		for(var i=0;i<parseInt(payVal)+1;i++){
+   			$("#tr_"+i).show();
+   		}
+   		for(var i=5;i>parseInt(payVal);i--){
+   			$("#tr_"+i).hide();
+   		}
+    });
+      
     	jQuery(document).ready(function() {
     		jQuery("#form-deal").validate({
-		        rules: {
+		           rules: {
 			        groupTime: {
 	                required: true,
 	                date: true
@@ -1042,26 +1167,40 @@
 	                required: true,
 	                number: true
 	              },
+	              	  costBudget: {
+	                required: true,
+	                number: true
+	              },
+	              	  costBudgetRmb: {
+	                required: true,
+	                number: true
+	              },
+	              	  costReceiver: {
+	                required: true
+	              },
 			   },
 			   
 		      messages: {
 		        groupTime: {
 	                required: "请输入成团日期",
 	                date: "日期格式 mm/dd/yyyy"
-             	 },
+          	 },
 		          startDate: {
 	                required: "请输入出发日期",
 	                date: "日期格式 mm/dd/yyyy"
-                 },
+              },
 		           endDate: {
 	                required: "请输入返回日期",
 	                date: "日期格式 mm/dd/yyyy"
-              	 },
+           	 },
 		          groupNumber: "请输入一个数字",
 		          groupPrice: "请输入一个数字",
-              	  currency: "请选择货币种类",
+           	  currency: "请选择货币种类",
 		          exchangeRate: "请输入一个数字",
 		          rmbPrice: "请输入一个数字",
+		          costBudget: "请输入一个数字",
+		          costBudgetRmb: "请输入一个数字",
+		          costReceiver: "请输入签约乙方"
 		      },
 		      
 	          highlight: function(element) {
@@ -1072,11 +1211,30 @@
 	          },
 	          invalidHandler : function(){
 	            return false;
-	          },
+	          },   
 	          submitHandler : function(){
-	          	$("#form-deal .submit").attr("disabled","disabled");
-	              deal_submit();
-	              return false;
+	        	  var rmbPrice =parseInt($.trim($("input[name=rmbPrice]").val())),
+	        	  	priceBudget1 =parseInt($.trim($('#priceBudget1').val())),
+	        	  	priceBudget2 =parseInt($.trim($('#priceBudget2').val())),
+	        	  	priceBudget3 =parseInt($.trim($('#priceBudget3').val())),
+	        	  	priceBudget4 =parseInt($.trim($('#priceBudget4').val())),
+	        	  	priceBudget5 =parseInt($.trim($('#priceBudget5').val()));
+	        	  if(isNaN(priceBudget1)){priceBudget1 = 0}
+	        	  if(isNaN(priceBudget2)){priceBudget2 = 0}
+	        	  if(isNaN(priceBudget3)){priceBudget3 = 0}
+	        	  if(isNaN(priceBudget4)){priceBudget4 = 0}
+	        	  if(isNaN(priceBudget5)){priceBudget5 = 0}
+	        	  	var sumPriceBudget = priceBudget1+priceBudget2+priceBudget3+priceBudget4+priceBudget5;
+	        	 
+	        	  	if(sumPriceBudget==rmbPrice){
+	        	  	 $("#form-deal .submit").attr("disabled","disabled");
+	  	              deal_submit();
+	  	              return false;
+	        	  	}
+	        	  	else{
+	        	  		return false;
+	        	  	}
+	          
 	          } 
 	        });
     		//订单未成行
@@ -1128,18 +1286,34 @@
 			}
 		});
    	});
+    	
+    	function getPriceRecord(){  
+	        var args = {};  
+	        $("#payTable tr:gt(0)").each(function(i){  
+	            var data = new Object();  
+	            $(this).find("input").each(function(){  
+	                var name = $(this).attr("name");  
+	                data[name]= $(this).val();  
+	            });  
+	            args[i]=data;  
+	        });  
+	        return JSON.stringify(args);  
+	    }  
+    	
       //订单成行
     	function deal_submit() {
 			var f = $("#form-deal").serialize();
-			$.post('${rootPath}order/orderDeal.do', f, function(result) {
+			var jsonStr = getPriceRecord();
+			$.post('${rootPath}order/orderDeal.do', $.param({'priceRecord':jsonStr})+'&'+f, function(result) {
 				var rmsg = result.msg;
 				if (result.success) {
-					window.parent.location = "${rootPath}case/edit.html?id=${crmcase.caseId}";
+					window.parent.location = "${rootPath}order/list.html";
 				} 
 				else {
 					$("#msgModal").modal('show');
 				}
 			}, "JSON");
+			
 		}
       //订单未成行
     	function noDeal_submit() {

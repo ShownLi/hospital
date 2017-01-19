@@ -29,24 +29,24 @@
 						<div class="row" style="margin-top: 20px">
 							<div class="form-group col-sm-10">
 								<div class="col-sm-2">
-									<input type="text" name="orderCode" id="searchOrderCode" class="form-control" placeholder="订单编号"  value="" />
+									<input type="text" name="orderCode" id="searchOrderCode" class="form-control" placeholder="订单编号"  value="${searchFinanceOrder.orderCode }" />
 								</div>
 								<div class="col-sm-2">
 									<div class="input-group input-datepicker" style="padding: 0;">
-				                        <input readonly="readonly" id="searchStartTime" type="text" name="searchStartTime" class="form-control datepicker" placeholder="请点击输入查询开始日期" value="" autocomplete="on">
+				                        <input readonly="readonly" id="searchStartTime" type="text" name="searchStartTime" class="form-control datepicker" placeholder="请点击输入查询开始日期" value="${searchFinanceOrder.searchStartTime }" autocomplete="on">
 				                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
 				                    </div>
 				                </div>
 			                    <div class="col-sm-2">
 				                    <div class="input-group input-datepicker" style="padding: 0;">
-				                        <input readonly="readonly" id="searchEndTime" type="text" name="searchEndTime" class="form-control datepicker" placeholder="请点击输入查询截止日期" value="" autocomplete="on">
+				                        <input readonly="readonly" id="searchEndTime" type="text" name="searchEndTime" class="form-control datepicker" placeholder="请点击输入查询截止日期" value="${searchFinanceOrder.searchEndTime }" autocomplete="on">
 				                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
 				                    </div>
 			                    </div>
 								</div>	
 									<div class="col-sm-2">					 		                        		
 									<input class="btn btn-primary" type="button" id="searchBtn" value="搜索"/>
-									<input type="hidden" id="searchCaseFlag"  value="${flag}" />
+									<input type="hidden" id="searchFinanceFlag"  value="${flag}" />
 								</div> 	
 							</div>
 
@@ -80,9 +80,7 @@
 				</div>
 		<%@ include file="../assets/pages/rightpanel.jsp"%>
 	</section>
-
 	<%@ include file="../assets/pages/foot.jsp"%>
-
 	<script src="${rootPath}assets/js/jquery.datatables.min.js"></script>
 	<script src="${rootPath}assets/js/select2.min.js"></script>
 	<script src="${rootPath}assets/js/jquery-ui-1.10.3.min.js"></script>
@@ -103,6 +101,14 @@
         changeYear: true,
         changeMonth: true
      });
+  //将value值转换为text文本值
+	function changeValueToText(value,array){
+		for(var i = 0 ; i< array.length ; i++){
+			if(array[i].id==value)
+				return array[i].text;
+		}
+		return "";
+	}
 	var table= $('#dataTable').DataTable({
 		searching:false,
 		pageLength: 10,
@@ -115,8 +121,8 @@
 			data:function(data){
 				data.status='2';//设置订单状态成行
 				data.orderCode =$("#searchOrderCode").val();
-				data.startTime =$("#searchStartTime").val();
-				data.endTime =$("#searchEndTime").val();
+				data.searchStartTime =$("#searchStartTime").val();
+				data.searchEndTime =$("#searchEndTime").val();
 			},
 			dataFilter: function(data){
 	            var json = jQuery.parseJSON( data );
@@ -187,16 +193,16 @@
 		             	 //欠付
 		            	 targets: 7,
 		            	 orderable: false,
-		            	 render: function(data) {
-		            		 return "xxx";
+		            	 render: function( data, type, full, meta ) {
+		            		 return full.costBudgetRmb-full.costReal-full.costAdjust;
 		            		 }
 		             },
 		             {
 		            	 //欠收
 		            	 targets: 8,
 		            	 orderable: false,
-		            	 render: function(data) {
-		            		 return "xx";
+		            	 render: function( data, type, full, meta ) {
+		            		 return full.rmbPrice-full.priceReal-full.priceAdjust;
 		            		 }
 		             },
 		             {
@@ -204,7 +210,7 @@
 		            	 data: "financeStatus",
 		            	 orderable: false,
 		            	 render: function(data) {
-		            		 return data
+		            		 return changeValueToText(data,${financeStatusList});
 		            		 }
 		             },
 		             {
@@ -229,9 +235,14 @@
 		        ]
 		});
 	//设置搜索的点击事件
-	 $('#searchBtn').on( 'click', function () {
-	        table.draw();
-	    } );
+	$('#searchBtn').on( 'click', function () {
+			//通知后台，使用界面的条件来重绘table
+		$('#searchFinanceFlag').val("restart");
+        table.draw();
+	} );
+	if($('#searchFinanceFlag').val()=="restart"){
+		table.ajax.reload();
+	}
 	</script>
 </body>
 </html>
