@@ -129,7 +129,7 @@
 		SUM(IFNULL(price_real,0)) AS priceReal,
 		SUM(IFNULL(price_adjust,0)) AS priceAdjust
 		FROM tm_price_record
-		WHERE
+		WHERE isdel=0 and
 		order_id = #{orderId};
 	</select>
 	
@@ -139,7 +139,7 @@
 		SUM(IFNULL(cost_real,0)) AS costReal,
 		SUM(IFNULL(cost_adjust,0)) AS costAdjust
 		FROM tm_cost_record
-		WHERE
+		WHERE isdel=0 and
 		order_id = #{orderId};
 	</select>
 	
@@ -167,7 +167,7 @@
 		set
 		status = 3,
 		update_time = NOW()
-		where order_id =
+		where isdel=0 and  order_id =
 		#{orderId}
 	</update>
 	
@@ -177,7 +177,7 @@
 		set
 		status = 3,
 		update_time = NOW()
-		where order_id = #{orderId}
+		where isdel=0 and order_id = #{orderId}
 	</update>
 	
     <update id="priceAdjustMethod" parameterType="PriceRecord">

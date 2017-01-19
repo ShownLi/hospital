@@ -290,6 +290,7 @@ public class FinanceController extends BaseSimpleFormController {
 			priceRecord.setSTATUS(1);
 			financeService.savePriceRecord(priceRecord);
 			financeService.updatePriceRecordPriceCode(priceRecord);
+			
 			json.setSuccess(true);
 		} catch (Exception e) {
 			json.setSuccess(false);
@@ -331,9 +332,9 @@ public class FinanceController extends BaseSimpleFormController {
 	 */
 	@RequestMapping(value = "/delPriceRecord.do", method = RequestMethod.GET)
 	@ResponseBody
-	public void delPriceRecord(Integer id) {
+	public void delPriceRecord(Integer id,Integer orderId) {
 		
-		financeService.delPriceRecordByPriceId(id);
+		financeService.delPriceRecordByPriceId(id,orderId);
 		
 	}
 	
@@ -345,9 +346,9 @@ public class FinanceController extends BaseSimpleFormController {
 	 */
 	@RequestMapping(value = "/delCostRecord.do", method = RequestMethod.GET)
 	@ResponseBody
-	public void delCostRecord(Integer id) {
+	public void delCostRecord(Integer id,Integer orderId) {
 		
-		financeService.delCostRecordByCostId(id);
+		financeService.delCostRecordByCostId(id,orderId);
 		
 	}
 }
