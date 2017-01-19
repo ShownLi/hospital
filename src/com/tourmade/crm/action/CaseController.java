@@ -91,8 +91,8 @@ public class CaseController extends BaseSimpleFormController {
 			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 
 			Calendar calendar = Calendar.getInstance(); // 获取当前日期
-			calendar.set(Calendar.MONTH, -3); // 设置当前月份
-			calendar.set(Calendar.DAY_OF_MONTH, 1); // 设置开始时间为90天
+			calendar.add(Calendar.MONTH, 0); // 设置当前月份
+			calendar.add(Calendar.DAY_OF_MONTH, -90); // 设置开始时间为90天
 			Calendar calendar1 = Calendar.getInstance();
 			model.addAttribute("flag", "restart");
 			session.removeAttribute("searchCase");
@@ -338,10 +338,6 @@ public class CaseController extends BaseSimpleFormController {
 		Map<String, Object> customerMap = new HashMap<String, Object>();
 		Map<String, String> map = new HashMap<>();
 		crmcase.setEmail(crmcase.getEmail().trim());
-		//添加询单时，统一真实的联系方式，为null或者""时，为""
-		if(crmcase.getContactReal()==null||crmcase.getContactReal()==""){
-			crmcase.setContactReal("");
-		}
 		try {
 			// 判断是否有老客人,通过联系方式和portalId判断(添加询单)
 			List<Customer> judgeCustomer = service.judgeCustomer(crmcase);
@@ -580,9 +576,7 @@ public class CaseController extends BaseSimpleFormController {
 
 		Map<String, Object> customerMap = new HashMap<String, Object>();
 		Map<String, String> map = new HashMap();
-		if(crmcase.getContactReal()==null||crmcase.getContactReal()==""){
-			crmcase.setContactReal("");
-		}
+
 		try {
 			// 判断是否有portalId
 			if (crmcase.getPortalId() != null && crmcase.getPortalId() != 0) {
@@ -669,7 +663,12 @@ public class CaseController extends BaseSimpleFormController {
 			String orderStatus = "order.status";
 			String contact = "case.contact";
 			String reasonNodeal = "case.reasonnodeal";
-
+			String costReceiver = "order.cost_receiver";
+			String financeItem = "finance.item";
+			String financeAccount = "finance.account";
+			String priceStatus = "finance.price.status";
+			String costStatus = "finance.cost.status";
+			
 			List<EntityList> countryList = service.getParameterInfo(country);
 			List<EntityList> languageList = service.getParameterInfo(language);
 			List<EntityList> withwhoList = service.getParameterInfo(withwho);
@@ -693,6 +692,11 @@ public class CaseController extends BaseSimpleFormController {
 			// 获取联系方式
 			List<EntityList> contactList = service.getParameterInfo(contact);
 			List<EntityList> reasonNodealList = service.getParameterInfo(reasonNodeal);
+			List<EntityList> costReceiverList = service.getParameterInfo(costReceiver);
+			List<EntityList> financeItemList = service.getParameterInfo(financeItem);
+			List<EntityList> financeAccountList = service.getParameterInfo(financeAccount);
+			List<EntityList> priceStatusList = service.getParameterInfo(priceStatus);
+			List<EntityList> costStatusList = service.getParameterInfo(costStatus);
 
 			JSONArray countryResult = JSONArray.fromObject(countryList);
 			JSONArray languageResult = JSONArray.fromObject(languageList);
@@ -720,7 +724,12 @@ public class CaseController extends BaseSimpleFormController {
 			String orderNoDeal = "order.reason";
 			List<EntityList> orderNoDealList = service.getParameterInfo(orderNoDeal);
 			JSONArray orderNoDealResult = JSONArray.fromObject(orderNoDealList);
-
+			JSONArray costReceiverResult = JSONArray.fromObject(costReceiverList);
+			JSONArray financeItemResult = JSONArray.fromObject(financeItemList);
+			JSONArray financeAccountResult = JSONArray.fromObject(financeAccountList);
+			JSONArray priceStatusResult = JSONArray.fromObject(priceStatusList);
+			JSONArray costStatusResult = JSONArray.fromObject(costStatusList);
+			
 			model.addAttribute("orderNoDealReason", orderNoDealResult);
 			model.addAttribute("country", countryResult);
 			model.addAttribute("language", languageResult);
@@ -747,6 +756,12 @@ public class CaseController extends BaseSimpleFormController {
 			model.addAttribute("orderStatus", orderStatusResult);
 			model.addAttribute("contact", contactResult);
 			model.addAttribute("reasonNodeal", reasonNodealResult);
+			model.addAttribute("costReceiver",costReceiverResult);
+			model.addAttribute("financeItem",financeItemResult);
+			model.addAttribute("financeAccount",financeAccountResult);
+			model.addAttribute("priceStatus",priceStatusResult);
+			model.addAttribute("costStatus",costStatusResult);
+			
 
 			String currency = "order.currency";
 			List<EntityList> currencyList = service.getParameterInfo(currency);
@@ -759,9 +774,7 @@ public class CaseController extends BaseSimpleFormController {
 	@RequestMapping(value = "/edit.do")
 	@ResponseBody
 	public Json doEdit(HttpServletRequest request, HttpSession session, Model model, Case crmcase) {
-		if(crmcase.getContactReal()==null||crmcase.getContactReal()==""){
-			crmcase.setContactReal("");
-		}
+
 		Json json = new Json();
 		try {
 			service.updateCase(crmcase);
@@ -870,4 +883,5 @@ public class CaseController extends BaseSimpleFormController {
 
 		return json;
 	}
+
 }
