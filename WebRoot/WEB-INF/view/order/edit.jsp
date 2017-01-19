@@ -1845,7 +1845,7 @@
 		
 	function delPriceRecord(id) {
 		$.ajax({
-			url: "${rootPath}finance/delPriceRecord.do?id=" + id, 
+			url: "${rootPath}finance/delPriceRecord.do?id=" + id+"&orderId=${order.orderId}", 
 			async: true,
 			success: function(o) {
 				window.location.reload();
