@@ -90,7 +90,7 @@
               <h4 class="panel-title">成行信息</h4>
           </div>
           <div class="panel-body panel-body-nopadding">
-              <form id="form-updateDeal" class="form-horizontal form-updateDeal" >
+              <form id="form-updateDeal" class="form-horizontal form-updateDeal"  style="display: none">
                   <div class="section-block">
                       <div class="form-group col-sm-4">
                           <label class="col-sm-4 control-label">成团日期</label>
@@ -179,7 +179,7 @@
                   <input type="hidden" name="caseId" value="${order.caseId}" />	
                   <input type="hidden" name="customerId" value="${order.customerId}" />	
               </form> 
-              <form id="form-updateNoDeal" class="form-horizontal" style="display:none">
+              <form id="form-updateNoDeal" class="form-horizontal" style="display: none">
                   <div class="section-block">
                       <div class="form-group col-sm-6">
                         <label class="col-sm-4 control-label">未成行原因</label>
@@ -416,7 +416,7 @@
                    <div class="form-group col-sm-6">
                       <label class="col-sm-4 control-label">人民币价格<span class="asterisk">*</span></label>
                       <div class="col-sm-8">
-                        <input type="text" name="rmbPrice" placeholder="人民币价格" class="form-control"/>
+                        <input type="text" id="rmbPrice" name="rmbPrice" placeholder="人民币价格" class="form-control"/>
                       </div>
                   </div>
                   <div class="form-group col-sm-6">
@@ -446,7 +446,7 @@
 							<tr id="tr_0">
 								 <td>第一期</td>
 								 <td><input type="text" name="paymentItem" placeholder="款项" class="financeItem-select fullwidth"/></td>
-								 <td><input type="text" name="priceBudget" placeholder="应收金额" class="form-control"/></td>
+								 <td><input type="text" id="priceBudget1" name="priceBudget" placeholder="应收金额" class="form-control"/></td>
 								 <td> 
 								 <input type="text" name="deadline" placeholder="收款截止日期" class="form-control datepicker" autocomplete="off" />
 				                  				 <!-- <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span> -->
@@ -456,7 +456,7 @@
 							<tr id="tr_1">
 								 <td>第二期</td>
 								 <td><input type="text" name="paymentItem" placeholder="款项" class="financeItem-select fullwidth"/></td>
-								 <td><input type="text" name="priceBudget" placeholder="应收金额" class="form-control"/></td>
+								 <td><input type="text" id="priceBudget2" name="priceBudget" placeholder="应收金额" class="form-control"/></td>
 								 <td> 
 								 <input type="text" name="deadline" placeholder="收款截止日期" class="form-control datepicker" autocomplete="off" />
 				                  				 <!-- <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span> -->
@@ -466,7 +466,7 @@
 							<tr id="tr_2">
 								 <td>第三期</td>
 								 <td><input type="text" name="paymentItem" placeholder="款项" class="financeItem-select fullwidth"/></td>
-								 <td><input type="text" name="priceBudget" placeholder="应收金额" class="form-control"/></td>
+								 <td><input type="text" id="priceBudget3" name="priceBudget" placeholder="应收金额" class="form-control"/></td>
 								 <td> 
 								 <input type="text" name="deadline" placeholder="收款截止日期" class="form-control datepicker" autocomplete="off" />
 				                  				 <!-- <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span> -->
@@ -476,7 +476,7 @@
 							<tr id="tr_3">
 								 <td>第四期</td>
 								<td><input type="text" name="paymentItem" placeholder="款项" class="financeItem-select fullwidth"/></td>
-								 <td><input type="text" name="priceBudget" placeholder="应收金额" class="form-control"/></td>
+								 <td><input type="text" id="priceBudget4" name="priceBudget" placeholder="应收金额" class="form-control"/></td>
 								 <td> 
 								 <input type="text" name="deadline" placeholder="收款截止日期" class="form-control datepicker" autocomplete="off" />
 				                  				 <!-- <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span> -->
@@ -486,7 +486,7 @@
 							<tr id="tr_4">
 								 <td>第五期</td>
 								<td><input type="text" name="paymentItem" placeholder="款项" class="financeItem-select fullwidth"/></td>
-								 <td><input type="text" name="priceBudget" placeholder="应收金额" class="form-control"/></td>
+								 <td><input type="text" id="priceBudget5" name="priceBudget" placeholder="应收金额" class="form-control"/></td>
 								 <td> 
 								 <input type="text" name="deadline" placeholder="收款截止日期" class="form-control datepicker" autocomplete="off" />
 				                  				 <!-- <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span> -->
@@ -525,19 +525,26 @@
                     <label class="col-sm-4 control-label">未成行原因</label>
                     <div class="col-sm-8">
                       <input class="reason-select fullwidth" name="reason" placeholder="若未成行，原因是" />
-                      <input type="hidden" name="orderId" value="${order.orderId}" />	
-                      <input type="hidden" name="caseId" value="${order.caseId}" />		                     
-                      <input type="hidden" name="status" value="3" />
                     </div>
                   </div>
-              </div><!-- noDealModal-body -->
+                  <div class="form-group col-sm-12">
+                  <label class="col-sm-4 control-label">备注</label>
+                    <div class="col-sm-8">
+                      <textarea name="content" class="form-control" rows="5"></textarea>
+                    </div>
+                  </div>
+                  <input type="hidden" name="orderId" value="${order.orderId}" />	
+                  <input type="hidden" name="caseId" value="${order.caseId}" />		                     
+                  <input type="hidden" name="status" value="3" />
+                  <input  type="hidden" name="userId" value="${loginUser.userId}" />
+	              <input  type="hidden" name="userName" value="${loginUser.name}" />
+	              <input  type="hidden" name="objectId" value="${order.orderId}" />
+	              <input  type="hidden" name="commentType" value="order" />
+              </div>
           </div>
           <div class="modal-footer align-center">
-               <!-- <button class="submit btn btn-primary">保存</button>-->
             <button class="btn btn-primary" >保存</button> 
-
-            <!--   <button class="btn btn-primary" onclick="form2_submit()">保存</button> -->
-              <a class="cancel btn btn-primary" >取消</a>
+            <a class="cancel btn btn-primary" >取消</a>
           </div>
       </form>
     </div><!-- modal-content -->
@@ -584,11 +591,8 @@
               </div><!-- noDealModal-body -->
           </div>
           <div class="modal-footer align-center">
-               <!-- <button class="submit btn btn-primary">保存</button>-->
             <input class="submit btn btn-primary" type="submit" value="保存"/>
-
-            <!--   <button class="btn btn-primary" onclick="form2_submit()">保存</button> -->
-              <a class="cancel btn btn-primary" >取消</a>
+            <a class="cancel btn btn-primary" >取消</a>
           </div>
       </form>
     </div><!-- modal-content -->
@@ -629,10 +633,7 @@
               </div><!-- noDealModal-body -->
           </div>
           <div class="modal-footer align-center">
-               <!-- <button class="submit btn btn-primary">保存</button>-->
             <input class="submit btn btn-primary" type="submit" value="保存"/>
-
-            <!--   <button class="btn btn-primary" onclick="form2_submit()">保存</button> -->
               <a class="cancel btn btn-primary" >取消</a>
           </div>
       </form>
@@ -723,7 +724,7 @@
                       <input type="hidden" name="orderId" value="${order.orderId}" />	
                       <input type="hidden" id="crCostId" name="costId" value="" />		
                   </div>
-              </div><!-- noDealModal-body -->
+              </div>
           </div>
           <div class="modal-footer align-center">
                <!-- <button class="submit btn btn-primary">保存</button>-->
@@ -778,7 +779,7 @@
 </div><!-- modal -->
 
 
-<div class="noDealModal modal fade" id="addNote2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="commentModal modal fade" id="addNote2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -800,9 +801,9 @@
 	        </div>
         </form>
         </div>
-    </div><!-- modal-content -->
-  </div><!-- modal-dialog -->
-</div><!-- bmodal -->
+    </div>
+  </div>
+</div>
 
 	<!-- Modal 保存注释信息-->
 	<div class="modal fade" id="addNote2" tabindex="-1" role="dialog"
@@ -866,6 +867,7 @@
 	
 	if('${order.status}'=='2'){
 		$("#dealInfo").css("display","block");
+		$("#form-updateDeal").css("display","block");
 	}
  	$(".currency-select").select2({
 		data: currency
@@ -948,7 +950,8 @@
  	 }
     
 	if("${order.status}"==3){
-      $("#form-updateNoDeal").show();
+	  $("#dealInfo").css("display","block");
+      $("#form-updateNoDeal").css("display","block");
       $("#btn-baseDeal").attr("disabled",true);
       $("#btn-baseNoDeal").attr("disabled",true);
   	}		
@@ -957,21 +960,21 @@
 		jQuery("#form-deal").validate({
 	           rules: {
 		        groupTime: {
-             required: true,
-             date: true
-           },
-		          startDate: {
-             required: true,
-             date: true
-           },
-		          endDate: {
-             required: true,
-             date: true
-           },
+	             	required: true,
+	            	date: true
+           		},
+		        startDate: {
+             		required: true,
+            	 	date: true
+           		},
+		        endDate: {
+		             required: true,
+		             date: true
+        	   },
 		          groupNumber: {
-             required: true,
-             number: true
-           },
+		             required: true,
+		             number: true
+		       },
 		          groupPrice: {
              required: true,
              number: true
@@ -1033,7 +1036,8 @@
          return false;
        },   
        submitHandler : function(){
-     	  var rmbPrice =parseInt($.trim($("input[name=rmbPrice]").val())),
+    	   alert(11);
+     	  var rmbPrice =parseInt($.trim($("#rmbPrice").val())),
      	  	priceBudget1 =parseInt($.trim($('#priceBudget1').val())),
      	  	priceBudget2 =parseInt($.trim($('#priceBudget2').val())),
      	  	priceBudget3 =parseInt($.trim($('#priceBudget3').val())),
@@ -1045,7 +1049,8 @@
      	  if(isNaN(priceBudget4)){priceBudget4 = 0}
      	  if(isNaN(priceBudget5)){priceBudget5 = 0}
      	  	var sumPriceBudget = priceBudget1+priceBudget2+priceBudget3+priceBudget4+priceBudget5;
-     	 
+     	 alert("tmbPrice="+rmbPrice);
+     	 alert("sumPriceBudget="+sumPriceBudget);
      	  	if(sumPriceBudget==rmbPrice){
      	  	 $("#form-deal .submit").attr("disabled","disabled");
 	              deal_submit();
@@ -1484,11 +1489,11 @@
 	
 	var p = jQuery('#dataTable-priceRecord').DataTable({
 		searching:false,
-		pageLength:10,
 		paging:false,
 		processing:true,
 		language: datatable_local_language, // my.js
 		serverSide:true,
+		bInfo : false,
 		ajax: {
 			url:'${rootPath}finance/getPriceRecordList.do?id=${order.orderId}',
 			dataFilter: function(data){
@@ -1591,10 +1596,11 @@
 	
 	    var c = jQuery('#dataTable-costRecord').DataTable({
 		searching:false,
-		pageLength:10,
+		paging:false,
 		processing:true,
 		language: datatable_local_language, // my.js
 		serverSide:true,
+		bInfo : false,
 		ajax: {
 			url:'${rootPath}finance/getCostRecordList.do?id=${order.orderId}',
 			dataFilter: function(data){
@@ -1857,7 +1863,7 @@
 	}
 	function delCostRecord(id) {
 		$.ajax({
-			url: "${rootPath}finance/delCostRecord.do?id=" + id, 
+			url: "${rootPath}finance/delCostRecord.do?id=" + id+"&orderId=${order.orderId}", 
 			async: true,
 			success: function(o) {
 				window.location.reload();
@@ -1952,10 +1958,7 @@
  			$.post('${rootPath}order/orderNoDeal.do?rand='+Math.random(), f1, function(result) {
 				var rmsg = result.msg;
 				if (result.success) {
-					//alert("${rootPath}order/edit.html?id=${order.orderId}");
 					window.location.href = "${rootPath}order/edit.html?id=${order.orderId}";
-					
-					//window.location.assign("${rootPath}order/edit.html?id=${order.orderId}");
 				} 
 				else {
 					$("#msgModal").modal('show');

@@ -281,11 +281,21 @@
                     <label class="col-sm-4 control-label">未成行原因</label>
                     <div class="col-sm-8">
                       <input class="reason-select fullwidth" name="reason" placeholder="若未成行，原因是" />
-                      <input type="hidden" id="noDeal-orderId" name="orderId" value="${order.orderId}" />	
-                      <input type="hidden" name="caseId" value="${order.caseId}" />		                     
-                      <input type="hidden" name="status" value="3" />
                     </div>
                   </div>
+                   <div class="form-group col-sm-12">
+                  <label class="col-sm-4 control-label">备注</label>
+                    <div class="col-sm-8">
+                      <textarea name="content" class="form-control" rows="5"></textarea>
+                    </div>
+                  </div>
+                  <input type="hidden" id="noDeal-orderId" name="orderId"  />	
+                  <input type="hidden" name="status" value="3" />
+                  <input  type="hidden" name="userId" value="${loginUser.userId}" />
+	              <input  type="hidden" name="userName" value="${loginUser.name}" />
+	              <input  type="hidden" id="noDeal-objectId" name="objectId"  />
+	              <input  type="hidden" name="commentType" value="order" />
+              </div>
               </div><!-- noDealModal-body -->
           </div>
           <div class="modal-footer align-center">
@@ -768,6 +778,7 @@
 		
 		function nogroup(id) {
 			$("#noDeal-orderId").val(id);
+			$("#noDeal-objectId").val(id);
 			$(".noDealModal").modal('show');
 		}
 		
