@@ -857,7 +857,6 @@
 	var priceStatus = ${priceStatus};
 	var costStatus = ${costStatus};
 	var allAgency = ${allAgency};
-	var financeStatus = ${order.financeStatus};
 
 	for(var i=0;i<5;i++){
 		$("#tr_"+i).hide();
@@ -2014,7 +2013,9 @@
       $("#endDate").val(dateformat)
   }
 	
-  if(financeStatus==3){
+/*   alert(typeof(Number("${order.financeStatus}")));
+  alert(Number("${order.financeStatus}")==3); */
+  if('${order.financeStatus}'=='3'){
 	  alert(financeStatus);
 	  $("input").attr("disabled",true);
 	  $("button").attr("disabled",true);
