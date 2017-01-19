@@ -146,7 +146,7 @@
 	<update id="updateOrderAfterUpdateCostRecord" parameterType="CostRecord">
 		update tm_order
 		set
-		cost_budget = #{costBudget},
+		cost_budget_rmb = #{costBudget},
 		cost_real = #{costReal},
 		cost_adjust = #{costAdjust},
 		update_time = NOW()
