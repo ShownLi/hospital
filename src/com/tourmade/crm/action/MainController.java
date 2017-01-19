@@ -32,8 +32,6 @@ public class MainController extends BaseSimpleFormController {
 
 		try{
 			String result = service.Validate(table, field, filter_field, filter_name, name);
-			//System.out.println("table="+table+"\nfield="+field+"\nfilter_field="+filter_field+"\nfilter_name="+filter_name+"\nname="+name);
-			//System.out.println(result);
 			if(name.equals(result)){
 				response.getWriter().print(false);
 			}

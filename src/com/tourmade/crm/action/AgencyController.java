@@ -75,12 +75,32 @@ public class AgencyController extends BaseSimpleFormController {
 
 		String country = "country";
 		String language = "agency.language";
+		String agencyService = "agency.service";
+		String source = "agency.source";
+		String currency = "agency.currency";
+		String payment = "agency.payment";
+		String status = "agency.status";
 		List<EntityList> countryList = service.getParameterInfo(country);
 		List<EntityList> languageList = service.getParameterInfo(language);
+		List<EntityList> agencyServiceList = service.getParameterInfo(agencyService);
+		List<EntityList> sourceList = service.getParameterInfo(source);
+		List<EntityList> currencyList = service.getParameterInfo(currency);
+		List<EntityList> paymentList = service.getParameterInfo(payment);
+		List<EntityList> statusList = service.getParameterInfo(status);
 		JSONArray countryResult = JSONArray.fromObject(countryList);
 		JSONArray languageResult = JSONArray.fromObject(languageList);
+		JSONArray agencyServiceResult = JSONArray.fromObject(agencyServiceList);
+		JSONArray sourceResult = JSONArray.fromObject(sourceList);
+		JSONArray currencyResult = JSONArray.fromObject(currencyList);
+		JSONArray paymentResult = JSONArray.fromObject(paymentList);
+		JSONArray statusResult = JSONArray.fromObject(statusList);
 		model.addAttribute("country", countryResult);
 		model.addAttribute("language", languageResult);
+		model.addAttribute("agencyService", agencyServiceResult);
+		model.addAttribute("source", sourceResult);
+		model.addAttribute("currency", currencyResult);
+		model.addAttribute("payment", paymentResult);
+		model.addAttribute("status", statusResult);
 
 		return "/agency/add";
 	}
@@ -109,12 +129,32 @@ public class AgencyController extends BaseSimpleFormController {
 			Agency agency = service.getAgencyById(agencyId);
 			String country = "country";
 			String language = "agency.language";
+			String agencyService = "agency.service";
+			String source = "agency.source";
+			String currency = "agency.currency";
+			String payment = "agency.payment";
+			String status = "agency.status";
 			List<EntityList> countryList = service.getParameterInfo(country);
 			List<EntityList> languageList = service.getParameterInfo(language);
+			List<EntityList> agencyServiceList = service.getParameterInfo(agencyService);
+			List<EntityList> sourceList = service.getParameterInfo(source);
+			List<EntityList> currencyList = service.getParameterInfo(currency);
+			List<EntityList> paymentList = service.getParameterInfo(payment);
+			List<EntityList> statusList = service.getParameterInfo(status);
 			JSONArray countryResult = JSONArray.fromObject(countryList);
 			JSONArray languageResult = JSONArray.fromObject(languageList);
+			JSONArray agencyServiceResult = JSONArray.fromObject(agencyServiceList);
+			JSONArray sourceResult = JSONArray.fromObject(sourceList);
+			JSONArray currencyResult = JSONArray.fromObject(currencyList);
+			JSONArray paymentResult = JSONArray.fromObject(paymentList);
+			JSONArray statusResult = JSONArray.fromObject(statusList);
 			model.addAttribute("country", countryResult);
 			model.addAttribute("language", languageResult);
+			model.addAttribute("agencyService", agencyServiceResult);
+			model.addAttribute("source", sourceResult);
+			model.addAttribute("currency", currencyResult);
+			model.addAttribute("payment", paymentResult);
+			model.addAttribute("status", statusResult);
 			model.addAttribute("agency", agency);
 		}
 		return "/agency/edit";

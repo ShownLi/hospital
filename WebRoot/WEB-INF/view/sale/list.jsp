@@ -62,11 +62,6 @@
 					<!-- panel-body -->
 				</div>
 				<!-- panel -->
-
-
-
-
-
 			</div>
 
 		</div>
@@ -149,7 +144,6 @@
 
 			$('#dataTable tbody').on( 'click', 'a.btn-danger', function () {
 		        var data = t.row($(this).parents('tr')).data();
-		        //alert($(this).attr('id'));
 		        del($(this).attr('id'));
 		    } );
 			
@@ -164,8 +158,6 @@
 		    });
 		    
 		    jQuery('select').removeClass('form-control');
-			
-			
 		});
 		
 		function edit(id) {

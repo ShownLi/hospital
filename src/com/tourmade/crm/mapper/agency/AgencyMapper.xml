@@ -7,9 +7,23 @@
 		SELECT 
 			u.agency_id as agencyId,
 			u.agency_name as name,
+			u.service as service,
 			u.country as country,
 			u.destination as destination,
 			u.language as language,
+			u.source as source,
+			u.agency_name_en as nameEn,
+			u.website as website,
+			u.found_time as foundTime,
+			u.location as location,
+			u.introduction as introduction,
+			u.account as account,
+			u.currency as currency,
+			u.bank as bank,
+			u.payment as payment,
+			u.license as license,
+			u.score as score,
+			u.status as status,
 			u.creat_time as creatTime,
 			u.isdel as isdel
 		from tm_agency u  
@@ -45,19 +59,48 @@
 	
 	<insert id="saveAgency" parameterType="Agency" flushCache="true" useGeneratedKeys="true" keyProperty="agencyId" keyColumn="GENERATED_KEY">
 		insert into tm_agency(
-		agency_name,
-		country,
-		language,
-		destination,
-		creat_time,
-		update_time,
-		sendmail,
-		isdel
+			agency_name,
+			country,
+			language,
+			destination,
+			service,
+			source,
+			agency_name_en,
+			website,
+			found_time,
+			location,
+			introduction,
+			account,
+			currency,
+			bank,
+			payment,
+			license,
+			score,
+			status,
+			creat_time,
+			update_time,
+			sendmail,
+			isdel
+		
 		)values(
 			#{name,jdbcType=VARCHAR},
 			#{country,jdbcType=VARCHAR},
 			#{language,jdbcType=VARCHAR},
 			#{destination,jdbcType=VARCHAR},
+			#{service,jdbcType=VARCHAR},
+			#{source,jdbcType=VARCHAR},
+			#{nameEn,jdbcType=VARCHAR},
+			#{website,jdbcType=VARCHAR},
+			#{foundTime,jdbcType=VARCHAR},
+			#{location,jdbcType=VARCHAR},
+			#{introduction,jdbcType=VARCHAR},
+			#{account,jdbcType=VARCHAR},
+			#{currency,jdbcType=VARCHAR},
+			#{bank,jdbcType=VARCHAR},
+			#{payment,jdbcType=VARCHAR},
+			#{license,jdbcType=VARCHAR},
+			#{score,jdbcType=VARCHAR},
+			#{status,jdbcType=VARCHAR},
 			NOW(),
 			NOW(),
 			#{isSendmail},
@@ -68,26 +111,53 @@
 	<update id="updateAgency" parameterType="Agency" flushCache="true">
 		update tm_agency
 		set
-		agency_name=#{name},
-		country=#{country},
-		destination=#{destination},
-		language=#{language},
-		sendmail=#{isSendmail},
-		
-		update_time=NOW()
+			agency_name=#{name},
+			country=#{country},
+			destination=#{destination},
+			language=#{language},
+			sendmail=#{isSendmail},
+			service=#{service},
+			source=#{source},
+			agency_name_en=#{nameEn},
+			website=#{website},
+			found_time=#{foundTime},
+			location=#{location},
+			introduction=#{introduction},
+			account=#{account},
+			currency=#{currency},
+			bank=#{bank},
+			payment=#{payment},
+			license=#{license},
+			score=#{score},
+			status=#{status},
+			update_time=NOW()
 		where
 		agency_id=#{agencyId}
 	</update>
 	
 	<select id="getAgencyById" parameterType="int" resultType="Agency">
 		select
-		u.agency_id as agencyId,
-		u.agency_name as name,
-		u.country as country,
-		u.language as language,
-		u.destination as destination,
-		u.sendmail as isSendmail,
-		u.isdel as isdel
+			u.agency_id as agencyId,
+			u.agency_name as name,
+			u.service as service,
+			u.country as country,
+			u.destination as destination,
+			u.language as language,
+			u.source as source,
+			u.agency_name_en as nameEn,
+			u.website as website,
+			u.found_time as foundTime,
+			u.location as location,
+			u.introduction as introduction,
+			u.account as account,
+			u.currency as currency,
+			u.bank as bank,
+			u.payment as payment,
+			u.license as license,
+			u.score as score,
+			u.status as status,
+			u.creat_time as creatTime,
+			u.isdel as isdel
 		from tm_agency u where u.agency_id = #{agencyId}
 	</select>
 	
