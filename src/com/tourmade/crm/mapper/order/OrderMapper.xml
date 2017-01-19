@@ -300,7 +300,8 @@
 		cost_budget_rmb =#{costBudgetRmb},
 		rmb_price=#{rmbPrice},
 		cost_receiver = #{costReceiver},
-		
+		cost_receiver = #{costReceiver},
+		status = #{status},
 		update_time=NOW()
 		where
 		order_id=#{orderId}
@@ -309,6 +310,7 @@
 		update tm_order
 		set
 		reason = #{reason},
+		status = #{status},
 		update_time=NOW()
 		where
 		order_id=#{orderId}

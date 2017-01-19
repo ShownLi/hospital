@@ -1059,59 +1059,72 @@
      });
 		
 		jQuery("#form-updateDeal").validate({
-	        rules: {
-		        groupTime: {
-                required: true,
-                date: true
-              },
-		        startDate: {
-                required: true,
-                date: true
-              },
-		        endDate: {
-                required: true,
-                date: true
-              },
-		        groupNumber: {
-                required: true,
-                number: true
-              },
-		        groupPrice: {
-                required: true,
-                number: true
-              },
-                currency: {
-                required: true,
-              },
-		        exchangeRate: {
-                required: true,
-                number: true
-              },
-		        rmbPrice: {
-                required: true,
-                number: true
-              },
-		      },
-		        messages: {
-		        groupTime: {
-                required: "请输入成团日期",
-                date: "日期格式 mm/dd/yyyy"
-              },
-		          startDate: {
-                required: "请输入出发日期",
-                date: "日期格式 mm/dd/yyyy"
-              },
-		        endDate: {
-                required: "请输入返回日期",
-                date: "日期格式 mm/dd/yyyy"
-              },
-		          groupNumber: "请输入一个数字",
-		          groupPrice: "请输入一个数字",
-              	  currency: "请选择货币种类",
-		          exchangeRate: "请输入一个数字",
-		          rmbPrice: "请输入一个数字",
-
-		      },
+			 rules: {
+			        groupTime: {
+	                required: true,
+	                date: true
+	              },
+			          startDate: {
+	                required: true,
+	                date: true
+	              },
+			          endDate: {
+	                required: true,
+	                date: true
+	              },
+			          groupNumber: {
+	                required: true,
+	                number: true
+	              },
+			          groupPrice: {
+	                required: true,
+	                number: true
+	              },
+	              currency: {
+	                required: true,
+	              },
+			          exchangeRate: {
+	                required: true,
+	                number: true
+	              },
+			          rmbPrice: {
+	                required: true,
+	                number: true
+	              },
+	              	  costBudget: {
+	                required: true,
+	                number: true
+	              },
+	              	  costBudgetRmb: {
+	                required: true,
+	                number: true
+	              },
+	              	  costReceiver: {
+	                required: true
+	              },
+			   },
+			   messages: {
+			        groupTime: {
+		                required: "请输入成团日期",
+		                date: "日期格式 mm/dd/yyyy"
+	             	 },
+			          startDate: {
+		                required: "请输入出发日期",
+		                date: "日期格式 mm/dd/yyyy"
+	                 },
+			           endDate: {
+		                required: "请输入返回日期",
+		                date: "日期格式 mm/dd/yyyy"
+	              	 },
+			          groupNumber: "请输入一个数字",
+			          groupPrice: "请输入一个数字",
+	              	  currency: "请选择货币种类",
+			          exchangeRate: "请输入一个数字",
+			          rmbPrice: "请输入一个数字",
+			          costBudget: "请输入一个数字",
+			          costBudgetRmb: "请输入一个数字",
+			          costReceiver: "请输入签约乙方"
+			      },
           highlight: function(element) {
             jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
           }, 
@@ -1122,8 +1135,30 @@
             return false;
           },
           submitHandler : function(){
-        	  updateDeal_submit();
-              return false;
+        	  
+        	  var rmbPrice =parseInt($.trim($("input[name=rmbPrice]").val())),
+      	  	priceBudget1 =parseInt($.trim($('#priceBudget1').val())),
+      	  	priceBudget2 =parseInt($.trim($('#priceBudget2').val())),
+      	  	priceBudget3 =parseInt($.trim($('#priceBudget3').val())),
+      	  	priceBudget4 =parseInt($.trim($('#priceBudget4').val())),
+      	  	priceBudget5 =parseInt($.trim($('#priceBudget5').val()));
+      	  if(isNaN(priceBudget1)){priceBudget1 = 0}
+      	  if(isNaN(priceBudget2)){priceBudget2 = 0}
+      	  if(isNaN(priceBudget3)){priceBudget3 = 0}
+      	  if(isNaN(priceBudget4)){priceBudget4 = 0}
+      	  if(isNaN(priceBudget5)){priceBudget5 = 0}
+      	  	var sumPriceBudget = priceBudget1+priceBudget2+priceBudget3+priceBudget4+priceBudget5;
+      	 
+      	  	if(sumPriceBudget==rmbPrice){
+      	   		updateDeal_submit();
+          		 return false;
+      	  	}
+      	  	else{
+      	  		return false;
+      	  	}
+      	  	
+      	  	
+        	 
           }
 		});
 		

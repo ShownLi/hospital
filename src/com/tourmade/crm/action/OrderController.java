@@ -318,6 +318,7 @@ public class OrderController extends BaseSimpleFormController {
 		}*/
 
 		System.out.println(order);
+		order.setStatus("2");
 		
 		JSONObject priceRecordJson = JSONObject.fromObject(priceRecord);
 		Iterator it = priceRecordJson.keys();
@@ -390,6 +391,8 @@ public class OrderController extends BaseSimpleFormController {
 		Json json = new Json();
 		Case crmcase = caseService.getCaseByOrderId(order.getOrderId());
 		try {
+			System.out.println(order);
+			order.setStatus("3");
 			service.updateOrderNoDeal(order);
 			int i = caseService.caseStatus(crmcase.getCaseId());
 			if(i==0){
@@ -464,6 +467,7 @@ public class OrderController extends BaseSimpleFormController {
 
 		Json json = new Json();	
 		try {
+			order.setStatus("2");
 			service.updateOrderDeal(order);	
 			json.setSuccess(true);
 		} catch (Exception e) {
