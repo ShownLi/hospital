@@ -857,7 +857,9 @@
 	var priceStatus = ${priceStatus};
 	var costStatus = ${costStatus};
 	var allAgency = ${allAgency};
+
 	var financeStatus = ${order.financeStatus};
+
 	for(var i=0;i<5;i++){
 		$("#tr_"+i).hide();
 	}
@@ -2015,13 +2017,12 @@
 	
 
   if(financeStatus==3){
-	  alert(financeStatus);
 	  $("input").attr("disabled",true);
 	  $("button").attr("disabled",true);
 	  $("a").attr("disabled",true);
 	  
 	  
-  }
+  } 
   
 </script>
 
