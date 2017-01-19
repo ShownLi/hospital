@@ -172,7 +172,7 @@
                       <div class="form-group col-sm-4">
                       <div class="col-sm-6"></div>
                       		<!-- &nbsp;<input id="btn-updateDealModify" class="submit btn btn-primary" type="button" value="更改"/>&nbsp;
- -->                      		<button class="submit btn btn-primary" >更改</button>
+ -->                      		<input type="submit" class="submit btn btn-primary" value="更改"/>
                       	</div>
                   </div>
                   <input type="hidden" name="orderId" value="${order.orderId}" />
@@ -1135,30 +1135,8 @@
             return false;
           },
           submitHandler : function(){
-        	  
-        	  var rmbPrice =parseInt($.trim($("input[name=rmbPrice]").val())),
-      	  	priceBudget1 =parseInt($.trim($('#priceBudget1').val())),
-      	  	priceBudget2 =parseInt($.trim($('#priceBudget2').val())),
-      	  	priceBudget3 =parseInt($.trim($('#priceBudget3').val())),
-      	  	priceBudget4 =parseInt($.trim($('#priceBudget4').val())),
-      	  	priceBudget5 =parseInt($.trim($('#priceBudget5').val()));
-      	  if(isNaN(priceBudget1)){priceBudget1 = 0}
-      	  if(isNaN(priceBudget2)){priceBudget2 = 0}
-      	  if(isNaN(priceBudget3)){priceBudget3 = 0}
-      	  if(isNaN(priceBudget4)){priceBudget4 = 0}
-      	  if(isNaN(priceBudget5)){priceBudget5 = 0}
-      	  	var sumPriceBudget = priceBudget1+priceBudget2+priceBudget3+priceBudget4+priceBudget5;
-      	 
-      	  	if(sumPriceBudget==rmbPrice){
-      	   		updateDeal_submit();
-          		 return false;
-      	  	}
-      	  	else{
-      	  		return false;
-      	  	}
-      	  	
-      	  	
-        	 
+   
+      	   		updateDeal_submit();   	 
           }
 		});
 		
