@@ -39,19 +39,10 @@ public class FinanceService extends BaseService {
 
 		map.put("start", ph.getStart());
 		map.put("length", ph.getLength());
-
-		if (order.getOrderCode() != null) {
-			map.put("orderCode", order.getOrderCode());
-		}
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-		if (order.getSearchStartTime() != null) {
-			map.put("searchStartTime", format.format(order.getSearchStartTime()) + " 00:00:00");
-			System.out.println(map.get("searchStartTime"));
-		}
-		if (order.getSearchEndTime() != null) {
-			map.put("searchEndTime", format.format(order.getSearchEndTime()) + " 23:59:59");
-			System.out.println(map.get("searchEndTime"));
-		}
+		map.put("status", order.getStatus());
+		map.put("orderCode", order.getOrderCode());
+		map.put("searchStartTime", order.getSearchStartTime());
+		map.put("searchEndTime", order.getSearchEndTime());
 		List<Order> data = orderMapper.queryOrder(map);
 		long count = orderMapper.countOrder(order);
 
@@ -118,27 +109,27 @@ public class FinanceService extends BaseService {
 		return financeMapper.updateOrderAfterUpdateCostRecord(sumCostRecord);
 	}
 
-	
-	public int savePriceRecord(PriceRecord priceRecord){
-		
+	public int savePriceRecord(PriceRecord priceRecord) {
+
 		financeMapper.savePriceRecord(priceRecord);
-		
+
 		return priceRecord.getPriceId();
 	}
 
 	public boolean updatePriceRecordPriceCode(PriceRecord priceRecord) {
-		if(priceRecord.getPriceId()!=null&&priceRecord.getOrderId()!=null){
-			String priceCode = priceRecord.getOrderId()+"-"+priceRecord.getPriceId();
+		if (priceRecord.getPriceId() != null && priceRecord.getOrderId() != null) {
+			String priceCode = priceRecord.getOrderId() + "-" + priceRecord.getPriceId();
 			priceRecord.setPriceCode(priceCode);
 			financeMapper.updatePriceRecordPriceCode(priceRecord);
+			// 先获取更新后，最新的订单信息
+			PriceRecord sumPriceRecord = financeMapper.getAllSumPriceRecord(priceRecord.getOrderId());
+			sumPriceRecord.setOrderId(priceRecord.getOrderId());
+			financeMapper.updateOrderAfterUpdatePriceRecord(sumPriceRecord);
 			return true;
-		}
-		else return false;
-		
+		} else
+			return false;
+
 	}
-	
-
-
 
 	public int updateCostRecord(CostRecord costRecord) {
 		// 先更新所修改的收款单
@@ -162,29 +153,52 @@ public class FinanceService extends BaseService {
 		return financeMapper.getAllAgency();
 	}
 
-	public void delPriceRecordByPriceId(Integer id) {
-		
+	public void delPriceRecordByPriceId(Integer id, Integer orderId) {
+
 		financeMapper.delPriceRecordByPriceId(id);
-		
+		// 先获取更新后，最新的订单信息
+		PriceRecord sumPriceRecord = financeMapper.getAllSumPriceRecord(orderId);
+		sumPriceRecord.setOrderId(orderId);
+		financeMapper.updateOrderAfterUpdatePriceRecord(sumPriceRecord);
+
 	}
 
 	public void saveCostRecord(CostRecord costRecord) {
-		
+
 		financeMapper.saveCostRecord(costRecord);
+
+		// 先获取更新后，最新的订单信息
+		CostRecord sumCostRecord = financeMapper.getAllSumCostRecord(costRecord.getOrderId());
+		sumCostRecord.setOrderId(costRecord.getOrderId());
+		financeMapper.updateOrderAfterUpdateCostRecord(sumCostRecord);
 	}
 
 	public void updateCostRecordOrder(CostRecord costRecord) {
-		
+
 		financeMapper.updateCostRecordOrder(costRecord);
+		// 先获取更新后，最新的订单信息
+		CostRecord sumCostRecord = financeMapper.getAllSumCostRecord(costRecord.getOrderId());
+		sumCostRecord.setOrderId(costRecord.getOrderId());
+		financeMapper.updateOrderAfterUpdateCostRecord(sumCostRecord);
 	}
 
 	public void updatePriceRecordOrder(PriceRecord priceRecord) {
-		
+
 		financeMapper.updatePriceRecordOrder(priceRecord);
+
+		// 先获取更新后，最新的订单信息
+		PriceRecord sumPriceRecord = financeMapper.getAllSumPriceRecord(priceRecord.getOrderId());
+		sumPriceRecord.setOrderId(priceRecord.getOrderId());
+		financeMapper.updateOrderAfterUpdatePriceRecord(sumPriceRecord);
 	}
 
-	public void delCostRecordByCostId(Integer id) {
-		
+	public void delCostRecordByCostId(Integer id, Integer orderId) {
+
 		financeMapper.delCostRecordByCostId(id);
+
+		// 先获取更新后，最新的订单信息
+		CostRecord sumCostRecord = financeMapper.getAllSumCostRecord(orderId);
+		sumCostRecord.setOrderId(orderId);
+		financeMapper.updateOrderAfterUpdateCostRecord(sumCostRecord);
 	}
 }

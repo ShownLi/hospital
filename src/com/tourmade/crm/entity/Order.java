@@ -88,30 +88,28 @@ public class Order extends BaseBean<Order> {
 	private BigDecimal priceAdjust;
 	private Integer financeStatus;
 	private Integer costReceiver;
-	
-	private Date searchStartTime;
-	private Date searchEndTime;
-	
-	
-	
-	public Date getSearchStartTime() {
-		return searchStartTime;
-	}
 
-	public void setSearchStartTime(Date searchStartTime) {
-		this.searchStartTime = searchStartTime;
-	}
-
-	public Date getSearchEndTime() {
-		return searchEndTime;
-	}
-
-	public void setSearchEndTime(Date searchEndTime) {
-		this.searchEndTime = searchEndTime;
-	}
+	private String searchStartTime;
+	private String searchEndTime;
 
 	public String getOrderCode() {
 		return orderCode;
+	}
+
+	public String getSearchStartTime() {
+		return searchStartTime;
+	}
+
+	public void setSearchStartTime(String searchStartTime) {
+		this.searchStartTime = searchStartTime;
+	}
+
+	public String getSearchEndTime() {
+		return searchEndTime;
+	}
+
+	public void setSearchEndTime(String searchEndTime) {
+		this.searchEndTime = searchEndTime;
 	}
 
 	public void setOrderCode(String orderCode) {
@@ -458,7 +456,7 @@ public class Order extends BaseBean<Order> {
 				+ ", operator=" + operator + ", orderCode=" + orderCode + ", costBudget=" + costBudget
 				+ ", costBudgetRmb=" + costBudgetRmb + ", costReal=" + costReal + ", priceReal=" + priceReal
 				+ ", costAdjust=" + costAdjust + ", priceAdjust=" + priceAdjust + ", financeStatus=" + financeStatus
-				+ ", costReceiver=" + costReceiver + "]";
+				+ ", costReceiver=" + costReceiver + ", searchStartTime=" + searchStartTime + ", searchEndTime="
+				+ searchEndTime + "]";
 	}
 }
-

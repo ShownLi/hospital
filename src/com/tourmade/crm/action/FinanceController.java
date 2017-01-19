@@ -2,6 +2,7 @@
 package com.tourmade.crm.action;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -17,12 +18,10 @@ import com.tourmade.crm.common.action.BaseSimpleFormController;
 import com.tourmade.crm.common.framework.bean.QueryResult;
 import com.tourmade.crm.common.model.base.value.baseconfig.Json;
 import com.tourmade.crm.common.model.base.value.baseconfig.PageHelper;
-import com.tourmade.crm.entity.Agency;
 import com.tourmade.crm.entity.CostRecord;
 import com.tourmade.crm.entity.EntityList;
 import com.tourmade.crm.entity.Order;
 import com.tourmade.crm.entity.PriceRecord;
-import com.tourmade.crm.service.CaseService;
 import com.tourmade.crm.service.FinanceService;
 import com.tourmade.crm.service.OrderService;
 
@@ -39,15 +38,24 @@ public class FinanceController extends BaseSimpleFormController {
 	@RequestMapping("/list.html")
 	public String list(Model model, String flag, HttpSession session) {
 
-		String financeStatus = "finance.finance_status";
+		String financeStatus = "order.finance_status";
 		List<EntityList> financeStatusList = orderService.getParameterInfo(financeStatus);
 		JSONArray financeStatusListResult = JSONArray.fromObject(financeStatusList);
 		model.addAttribute("financeStatusList", financeStatusListResult);
 
 		// 没有传递flag参数时，表示时从侧边栏访问的
 		if ("".equals(flag) || flag == null) {
+
+			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 			model.addAttribute("flag", "restart");
-			session.removeAttribute("searchFinanceOrder");
+			Calendar calendar = Calendar.getInstance(); // 获取当前日期
+			Order order = new Order();
+
+			order.setSearchEndTime(format.format(calendar.getTime()));
+			calendar.set(Calendar.MONTH, -3);
+			calendar.set(Calendar.DAY_OF_MONTH, 1);
+			order.setSearchStartTime(format.format(calendar.getTime()));
+			model.addAttribute("searchFinanceOrder", order);
 		} else
 			model.addAttribute("flag", flag);
 		return "/finance/list";
@@ -64,8 +72,11 @@ public class FinanceController extends BaseSimpleFormController {
 		} else {
 			session.setAttribute("searchFinanceOrder", order);
 		}
+		order.setSearchStartTime(order.getSearchStartTime()+ " 00:00:00");
+		order.setSearchEndTime(order.getSearchEndTime()+ " 24:00:00");
 		QueryResult<Order> queryResult = financeService.queryOrder(order, page);
-
+		order.setSearchStartTime(order.getSearchStartTime().substring(0,10));
+		order.setSearchEndTime(order.getSearchEndTime().substring(0,10));
 		return queryResult;
 	}
 
@@ -279,6 +290,7 @@ public class FinanceController extends BaseSimpleFormController {
 			priceRecord.setSTATUS(1);
 			financeService.savePriceRecord(priceRecord);
 			financeService.updatePriceRecordPriceCode(priceRecord);
+			
 			json.setSuccess(true);
 		} catch (Exception e) {
 			json.setSuccess(false);
@@ -320,9 +332,9 @@ public class FinanceController extends BaseSimpleFormController {
 	 */
 	@RequestMapping(value = "/delPriceRecord.do", method = RequestMethod.GET)
 	@ResponseBody
-	public void delPriceRecord(Integer id) {
+	public void delPriceRecord(Integer id,Integer orderId) {
 		
-		financeService.delPriceRecordByPriceId(id);
+		financeService.delPriceRecordByPriceId(id,orderId);
 		
 	}
 	
@@ -334,9 +346,9 @@ public class FinanceController extends BaseSimpleFormController {
 	 */
 	@RequestMapping(value = "/delCostRecord.do", method = RequestMethod.GET)
 	@ResponseBody
-	public void delCostRecord(Integer id) {
+	public void delCostRecord(Integer id,Integer orderId) {
 		
-		financeService.delCostRecordByCostId(id);
+		financeService.delCostRecordByCostId(id,orderId);
 		
 	}
 }

@@ -46,7 +46,7 @@
 								</div>	
 									<div class="col-sm-2">					 		                        		
 									<input class="btn btn-primary" type="button" id="searchBtn" value="搜索"/>
-									<input type="hidden" id="searchCaseFlag"  value="${flag}" />
+									<input type="hidden" id="searchFinanceFlag"  value="${flag}" />
 								</div> 	
 							</div>
 
@@ -235,13 +235,13 @@
 		        ]
 		});
 	//设置搜索的点击事件
-	 $('#searchBtn').on( 'click', function () {
+	$('#searchBtn').on( 'click', function () {
 			//通知后台，使用界面的条件来重绘table
-			$('#searchCaseFlag').val("restart");
-	        table.draw();
-	    } );
-	if($('#searchCaseFlag').val()=="restart"){
-		t.ajax.reload();
+		$('#searchFinanceFlag').val("restart");
+        table.draw();
+	} );
+	if($('#searchFinanceFlag').val()=="restart"){
+		table.ajax.reload();
 	}
 	</script>
 </body>
