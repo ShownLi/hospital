@@ -366,7 +366,7 @@ public class OrderController extends BaseSimpleFormController {
 		Case crmcase = caseService.getCaseById(oldOrder.getCaseId());
 		
 		try {
-			service.updateOrder(order);			
+			service.updateOrderDeal(order);			
 			crmcase.setStatus("3");
 			service.customerStatus(oldOrder.getCustomerId(), "3");
 			caseService.updateCaseStatus(crmcase);
