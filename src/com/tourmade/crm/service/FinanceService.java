@@ -158,6 +158,7 @@ public class FinanceService extends BaseService {
 		financeMapper.delPriceRecordByPriceId(id);
 		// 先获取更新后，最新的订单信息
 		PriceRecord sumPriceRecord = financeMapper.getAllSumPriceRecord(orderId);
+		System.out.println(orderId);
 		sumPriceRecord.setOrderId(orderId);
 		financeMapper.updateOrderAfterUpdatePriceRecord(sumPriceRecord);
 
