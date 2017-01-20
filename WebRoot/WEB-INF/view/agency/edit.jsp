@@ -462,9 +462,11 @@
 	function del(id) {
 		$("#confirmDelModal .hiddenId").val("");
 		$("#confirmDelModal .hiddenId").val(id);
+		$("#confirmDelModal").modal('show');
 	}
 	
 	function doDel(id){
+		alert("0000");
 		$.ajax({
 			url: "${rootPath}sale/del.do?id=" + id, 
 			async: true,

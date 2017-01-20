@@ -46,7 +46,7 @@
 	</mvc:annotation-driven>
 
 	<!-- 拦截器 -->
-<!-- 	<mvc:interceptors>
+ 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/**/*.html" />
 			<bean class="com.tourmade.crm.common.interceptors.SecurityInterceptor">
@@ -63,7 +63,7 @@
 				</property>
 			</bean>
 		</mvc:interceptor>
-	</mvc:interceptors>  -->
+	</mvc:interceptors>
 
 	<!--通用视图解析器 -->
 	<bean id="viewResolverCommon"
