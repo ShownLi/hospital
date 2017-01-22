@@ -91,8 +91,8 @@ public class CaseController extends BaseSimpleFormController {
 			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 
 			Calendar calendar = Calendar.getInstance(); // 获取当前日期
-			calendar.add(Calendar.MONTH, 0); // 设置当前月份
-			calendar.add(Calendar.DAY_OF_MONTH, -90); // 设置开始时间为90天
+			calendar.set(Calendar.MONTH, -3); // 设置当前月份
+			calendar.set(Calendar.DAY_OF_MONTH, 1);
 			Calendar calendar1 = Calendar.getInstance();
 			model.addAttribute("flag", "restart");
 			session.removeAttribute("searchCase");

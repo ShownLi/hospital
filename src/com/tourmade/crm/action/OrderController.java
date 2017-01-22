@@ -322,7 +322,6 @@ public class OrderController extends BaseSimpleFormController {
 			
 		}*/
 
-		System.out.println(order);
 		order.setStatus("2");
 		
 		JSONObject priceRecordJson = JSONObject.fromObject(priceRecord);
@@ -334,10 +333,6 @@ public class OrderController extends BaseSimpleFormController {
 			String deadline = priceRecordJson.getJSONObject(key).getString("deadline");
 			String comment = priceRecordJson.getJSONObject(key).getString("comment");
 			
-			/*Iterator its = priceRecordJson.getJSONObject(key).keys();
-			while(its.hasNext()){
-				System.out.println("keys:"+(String)its.next());
-			}*/
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			if(!paymentItem.equals("")&&paymentItem!=null
 					&&!priceBudget.equals("")&&priceBudget!=null
@@ -359,7 +354,6 @@ public class OrderController extends BaseSimpleFormController {
 				financeService.savePriceRecord(pRecord);
 				financeService.updatePriceRecordPriceCode(pRecord);
 				
-				System.out.println(pRecord);
 				
 				
 			}
@@ -398,7 +392,6 @@ public class OrderController extends BaseSimpleFormController {
 	@ResponseBody
 	public Json orderNoDeal(HttpServletRequest request, HttpSession session, Model model, Order order,Comment comment) {
 
-		System.out.println(comment);
 		if(comment.getContent()!=null&&comment.getContent()!=""&&comment.getContent().trim()!=""){
 			commentService.saveComment(comment);
 		}
@@ -406,7 +399,6 @@ public class OrderController extends BaseSimpleFormController {
 		Json json = new Json();
 		Case crmcase = caseService.getCaseByOrderId(order.getOrderId());
 		try {
-			System.out.println(order);
 			order.setStatus("3");
 			service.updateOrderNoDeal(order);
 			int i = caseService.caseStatus(crmcase.getCaseId());
