@@ -22,10 +22,14 @@
 	</context:component-scan>
 
 	<!-- 启动Spring MVC的注解功能，完成请求和注解POJO的映射 -->
-	<bean id="multipartResolver"
+	<!-- <bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<property name="defaultEncoding" value="UTF-8"></property>
-	</bean>
+	</bean> -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">   
+          <property name="maxUploadSize"><value>10000000</value></property> 
+          <property name="defaultEncoding"><value>UTF-8</value></property> 
+    </bean>
 	<!-- Spring MVC JSON配置 -->
 	<mvc:annotation-driven
 		ignoreDefaultModelOnRedirect="true">
@@ -42,7 +46,7 @@
 	</mvc:annotation-driven>
 
 	<!-- 拦截器 -->
-<!-- 	<mvc:interceptors>
+ 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/**/*.html" />
 			<bean class="com.tourmade.crm.common.interceptors.SecurityInterceptor">
@@ -59,7 +63,7 @@
 				</property>
 			</bean>
 		</mvc:interceptor>
-	</mvc:interceptors>  -->
+	</mvc:interceptors>
 
 	<!--通用视图解析器 -->
 	<bean id="viewResolverCommon"
@@ -86,7 +90,5 @@
 	<mvc:resources mapping="assets/**" location="WEB-INF/view/assets/" cache-period="31556926" />
 
 	<task:annotation-driven />
-
-
 
 </beans> 

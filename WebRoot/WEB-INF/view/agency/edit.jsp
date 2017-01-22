@@ -36,7 +36,19 @@
 			            		<div class="form-group col-sm-4">
 			              			<label class="col-sm-4 control-label">地接社名称 <span class="asterisk">*</span></label>
 			              			<div class="col-sm-8">
-			              				<input type="text" id="agencyName" name="name" placeholder="地接社名称" class="form-control" value="${agency.name }" />
+			              				<input type="text" id="agencyName" name="name" placeholder="地接社名称" class="form-control" value="${agency.name}" />
+			              			</div>
+			              		</div>         
+			            		<div class="form-group col-sm-4">
+			              			<label class="col-sm-4 control-label">英文名称 <span class="asterisk"></span></label>
+			              			<div class="col-sm-8">
+			              				<input type="text" id="nameEn" name="nameEn" placeholder="地接社英文名称" class="form-control" value="${agency.nameEn}" />
+			              			</div>
+			              		</div>         
+			            		<div class="form-group col-sm-4">
+			              			<label class="col-sm-4 control-label">服务类型<span class="asterisk"></span></label>
+			              			<div class="col-sm-8">
+									<input name="service" class="service-select fullwidth" value="${agency.service}">
 			              			</div>
 			              		</div>         
 			            		<div class="form-group col-sm-4">
@@ -44,7 +56,83 @@
 			               			<div class="col-sm-8">
 			               				<input type="text" id="language" name="language" class="language-select fullwidth" value="${agency.language }"/>
 			               			</div>
-			            		</div>              
+			            		</div> 
+			            		<div class="form-group col-sm-4">
+			              			<label class="col-sm-4 control-label">旅行社来源<span class="asterisk"></span></label>
+			              			<div class="col-sm-8">
+										<input name="source" class="source-select fullwidth"  value="${agency.source}">
+			              			</div>
+			              		</div>  
+			              		<div class="form-group col-sm-4">
+			              			<label class="col-sm-4 control-label">公司网址 <span class="asterisk"></span></label>
+			              			<div class="col-sm-8">
+			              				<input type="text" id="website" name="website" placeholder="公司网址" class="form-control" value="${agency.website }" />
+			              			</div>
+			              		</div>  
+			              		<div class="form-group col-sm-4">
+			              			<label class="col-sm-4 control-label">所在地 <span class="asterisk"></span></label>
+			              			<div class="col-sm-8">
+			              				<input type="text" id="location" name="location" placeholder="所在地" class="form-control" value="${agency.location }" />
+			              			</div>
+			              		</div>  
+			              		<div class="form-group col-sm-4">
+			              			<label class="col-sm-4 control-label">成立时间</label>
+			              			<div class="col-sm-8 input-group input-datepicker">
+									<input type="text" id="foundTime" name="foundTime"
+										class="form-control datepicker" placeholder="yyyy/mm/dd"
+										value="${agency.foundTime}" autocomplete="off"> <span
+										class="input-group-addon"><i
+										class="glyphicon glyphicon-calendar"></i></span>
+									</div>
+			              		</div>  
+			              		<div class="form-group col-sm-4">
+			              			<label class="col-sm-4 control-label">银行账号 <span class="asterisk"></span></label>
+			              			<div class="col-sm-8">
+			              				<input type="text" id="account" name="account" placeholder="银行账号" class="form-control" value="${agency.account }" />
+			              			</div>
+			              		</div>  
+			              		<div class="form-group col-sm-4">
+			              			<label class="col-sm-4 control-label">币种<span class="asterisk"></span></label>
+			              			<div class="col-sm-8">
+										<input name="currency" class="currency-select fullwidth" value="${agency.currency}">
+			              			</div>
+			              		</div>
+			              		 <div class="form-group col-sm-4">
+			              			<label class="col-sm-4 control-label">开户行 <span class="asterisk"></span></label>
+			              			<div class="col-sm-8">
+			              				<input type="text" id="bank" name="bank" placeholder="开户行" class="form-control" value="${agency.bank}" />
+			              			</div>
+			              		</div> 
+			              		 <div class="form-group col-sm-4">
+			              			<label class="col-sm-4 control-label">付款方式<span class="asterisk"></span></label>
+			              			<div class="col-sm-8">
+										<input name="payment" class="payment-select fullwidth" value="${agency.payment}">
+			              			</div>
+			              		</div>
+			              		<div class="form-group col-sm-4">
+			              			<label class="col-sm-4 control-label">公司执照 <span class="asterisk"></span></label>
+			              			<div class="col-sm-8">
+			              				<input type="text" id="license" name="license" placeholder="公司执照" class="form-control" value="${agency.license}" />
+			              			</div>
+			              		</div>
+			              		<div class="form-group col-sm-4">
+			              			<label class="col-sm-4 control-label">评定总分 <span class="asterisk"></span></label>
+			              			<div class="col-sm-8">
+			              				<input type="text" id="score" name="score" placeholder="评定总分" class="form-control" value="${agency.score}" />
+			              			</div>
+			              		</div>
+			              		<div class="form-group col-sm-4">
+			              			<label class="col-sm-4 control-label">状态 <span class="asterisk"></span></label>
+			              			<div class="col-sm-8">
+			              				<input name="status" class="status-select fullwidth" value="${agency.status}">
+			              			</div>
+			              		</div>
+			              		<div class="form-group col-sm-4">
+			              			<label class="col-sm-4 control-label">公司介绍 <span class="asterisk"></span></label>
+			              			<div class="col-sm-8">
+			              				<input type="text" id="introduction" name="introduction" placeholder="公司介绍" class="form-control" value="${agency.introduction}" />
+			              			</div>
+			              		</div>
 			            		<div class="form-group col-sm-4">
 			              			<label class="col-sm-4 control-label">国家</label>
 			              			<div class="col-sm-8">
@@ -54,7 +142,7 @@
 			            		<div class="form-group col-sm-4">
 					              <label  class="col-sm-4 control-label">目的地</label>
 					              <div class="col-sm-8">
-					                <select name="destination" class="destination-select fullwidth" multiple="multiple">
+					                <select name="destination" class="destination-select fullwidth" multiple="multiple" >
 									</select>
 					              </div>
 					            </div>
@@ -167,14 +255,22 @@
 		</div><!-- modal -->
 
 	<%@ include file="../assets/pages/foot.jsp"%>
+	<script src="${rootPath}assets/js/jquery-ui-1.10.3.min.js"></script>
+	<script src="${rootPath}assets/js/datepicker-zh-CN.js"></script>
 	<script src="${rootPath}assets/js/jquery.datatables.min.js"></script>
 	<script src="${rootPath}assets/js/select2.min.js"></script>
 	<script src="${rootPath}assets/js/jquery.validate.min.js"></script>
 	
-
 <script type="text/javascript">
 	var country = ${country};
 	var language= ${language};
+	var service= ${agencyService};
+	var source= ${source};
+	var currency= ${currency};
+	var payment= ${payment};
+	var statusA= ${status};
+	var isSendmail= ${sendmail};
+	//var agency= ${agency};
 	
 	//返回到list.html记录数
 	var backNum = -1;
@@ -189,6 +285,44 @@
     	minimumResultsForSearch: Infinity,
     	data: country
      });
+	$(".service-select").select2({
+		minimumResultsForSearch: Infinity,
+		placeholder:'选择服务类型',
+    	data: service
+     });
+	$(".source-select").select2({
+		minimumResultsForSearch: Infinity,
+		placeholder:'选择来源',
+    	data: source
+     });
+	$(".currency-select").select2({
+		minimumResultsForSearch: Infinity,
+		placeholder:'选择币种',
+    	data: currency
+     });
+	$(".payment-select").select2({
+		minimumResultsForSearch: Infinity,
+		placeholder:'选择付款方式',
+    	data: payment
+     });
+	$(".status-select").select2({
+		minimumResultsForSearch: Infinity,
+		placeholder:'选择状态',
+    	data: statusA
+     });
+	jQuery("#foundTime").datepicker({
+        dateFormat: "yy-mm-dd",
+        changeYear: true,
+        changeMonth: true,
+      });
+	
+	//成立时间格式转换
+    var date = $("#foundTime").val();  
+    if(date !== ""){
+      var dateformat = new Date(date).toISOString("yyyy-MM-dd hh:mm:ss.S").substring(0,10);
+      $("#foundTime").val(dateformat);
+    }
+    
     $(".destination-select").val('${agency.destination}'.split(",")).trigger("change");
 	if("${agency.isSendmail}"==1){
     	$('#yes').attr('checked','true');
@@ -320,7 +454,6 @@
 		});
 	    
 	jQuery('select').removeClass('form-control');
-		
 	
 	function edit(id) {
 		window.parent.location = "${rootPath}sale/edit.html?id="+id;
@@ -329,9 +462,11 @@
 	function del(id) {
 		$("#confirmDelModal .hiddenId").val("");
 		$("#confirmDelModal .hiddenId").val(id);
+		$("#confirmDelModal").modal('show');
 	}
 	
 	function doDel(id){
+		alert("0000");
 		$.ajax({
 			url: "${rootPath}sale/del.do?id=" + id, 
 			async: true,

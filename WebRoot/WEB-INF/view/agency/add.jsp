@@ -34,45 +34,127 @@
           
           
             <div class="section-block">
-	            <div class="form-group col-sm-4">
-	              <label class="col-sm-4 control-label">地接社名称 <span class="asterisk">*</span></label>
-	              <div class="col-sm-8">
-	                <input type="text" id="agencyName" name="name" placeholder="地接社名称" class="form-control" />
-	              </div>
-	            </div>			   
-	            <div class="form-group col-sm-4">
-	              <label  class="col-sm-4 control-label">语言</label>
-	              <div class="col-sm-8">
-	              	<input type="text" name="language" class="language-select fullwidth"/>
-	              </div>
-	            </div>                                 
-	            <div class="form-group col-sm-4">
-	              <label  class="col-sm-4 control-label">所在国家</label>
-	              <div class="col-sm-8">
-	                <input type="text" name="country" class="country-select fullwidth"/>
-	              </div>
-	            </div>
-	            <div class="form-group col-sm-4">
+           		<div class="form-group col-sm-4">
+             			<label class="col-sm-4 control-label">地接社名称 <span class="asterisk">*</span></label>
+             			<div class="col-sm-8">
+             				<input type="text" id="agencyName" name="name" placeholder="地接社名称" class="form-control" />
+             			</div>
+             		</div>         
+           		<div class="form-group col-sm-4">
+             			<label class="col-sm-4 control-label">英文名称 <span class="asterisk"></span></label>
+             			<div class="col-sm-8">
+             				<input type="text" id="nameEn" name="nameEn" placeholder="地接社英文名称" class="form-control" />
+             			</div>
+             		</div>         
+           		<div class="form-group col-sm-4">
+             			<label class="col-sm-4 control-label">服务类型<span class="asterisk"></span></label>
+             			<div class="col-sm-8">
+					<input name="service" class="service-select fullwidth">
+             			</div>
+             		</div>         
+           		<div class="form-group col-sm-4">
+             			<label class="col-sm-4 control-label">语言</label>
+              			<div class="col-sm-8">
+              				<input type="text" id="language" name="language" class="language-select fullwidth"/>
+              			</div>
+           		</div> 
+           		<div class="form-group col-sm-4">
+             			<label class="col-sm-4 control-label">旅行社来源<span class="asterisk"></span></label>
+             			<div class="col-sm-8">
+						<input name="source" class="source-select fullwidth">
+             			</div>
+             		</div>  
+             		<div class="form-group col-sm-4">
+             			<label class="col-sm-4 control-label">公司网址 <span class="asterisk"></span></label>
+             			<div class="col-sm-8">
+             				<input type="text" id="website" name="website" placeholder="公司网址" class="form-control" />
+             			</div>
+             		</div>  
+             		<div class="form-group col-sm-4">
+             			<label class="col-sm-4 control-label">所在地 <span class="asterisk"></span></label>
+             			<div class="col-sm-8">
+             				<input type="text" id="location" name="location" placeholder="所在地" class="form-control" />
+             			</div>
+             		</div>  
+             		<div class="form-group col-sm-4">
+             			<label class="col-sm-4 control-label">成立时间</label>
+             			<div class="col-sm-8 input-group input-datepicker">
+					<input type="text" id="foundTime" name="foundTime"
+						class="form-control datepicker" placeholder="yyyy/mm/dd"
+						autocomplete="off"> <span
+						class="input-group-addon"><i
+						class="glyphicon glyphicon-calendar"></i></span>
+					</div>
+             		</div>  
+             		<div class="form-group col-sm-4">
+             			<label class="col-sm-4 control-label">银行账号 <span class="asterisk"></span></label>
+             			<div class="col-sm-8">
+             				<input type="text" id="account" name="account" placeholder="银行账号" class="form-control" />
+             			</div>
+             		</div>  
+             		<div class="form-group col-sm-4">
+             			<label class="col-sm-4 control-label">币种<span class="asterisk"></span></label>
+             			<div class="col-sm-8">
+						<input name="currency" class="currency-select fullwidth">
+             			</div>
+             		</div>
+             		 <div class="form-group col-sm-4">
+             			<label class="col-sm-4 control-label">开户行 <span class="asterisk"></span></label>
+             			<div class="col-sm-8">
+             				<input type="text" id="bank" name="bank" placeholder="开户行" class="form-control" />
+             			</div>
+             		</div> 
+             		 <div class="form-group col-sm-4">
+             			<label class="col-sm-4 control-label">付款方式<span class="asterisk"></span></label>
+             			<div class="col-sm-8">
+						<input name="payment" class="payment-select fullwidth">
+             			</div>
+             		</div>
+             		<div class="form-group col-sm-4">
+             			<label class="col-sm-4 control-label">公司执照 <span class="asterisk"></span></label>
+             			<div class="col-sm-8">
+             				<input type="text" id="license" name="license" placeholder="公司执照" class="form-control" />
+             			</div>
+             		</div>
+             		<div class="form-group col-sm-4">
+             			<label class="col-sm-4 control-label">评定总分 <span class="asterisk"></span></label>
+             			<div class="col-sm-8">
+             				<input type="text" id="score" name="score" placeholder="评定总分" class="form-control" />
+             			</div>
+             		</div>
+             		<div class="form-group col-sm-4">
+             			<label class="col-sm-4 control-label">状态 <span class="asterisk"></span></label>
+             			<div class="col-sm-8">
+             				<input name="status" class="status-select fullwidth">
+             			</div>
+             		</div>
+             		<div class="form-group col-sm-4">
+             			<label class="col-sm-4 control-label">公司介绍 <span class="asterisk"></span></label>
+             			<div class="col-sm-8">
+             				<input type="text" id="introduction" name="introduction" placeholder="公司介绍" class="form-control"/>
+             			</div>
+             		</div>
+           		<div class="form-group col-sm-4">
+             			<label class="col-sm-4 control-label">国家</label>
+             			<div class="col-sm-8">
+             				<input type="text" id="country" name="country" class="country-select fullwidth" />
+             			</div>
+           		</div>
+           		<div class="form-group col-sm-4">
 	              <label  class="col-sm-4 control-label">目的地</label>
 	              <div class="col-sm-8">
-	                <select name="destination" class="destination-select fullwidth" multiple="multiple">
+	                <select name="destination" class="destination-select fullwidth" multiple="multiple" >
 					</select>
 	              </div>
 	            </div>
- 	            <div class="form-group col-sm-4">
+           		<div class="form-group col-sm-4">
 	              <label  class="col-sm-4 control-label">是否发邮件</label>
 	              <div class="col-sm-8">
-	                <div class="rdio rdio-primary rdio-inline">
-	                  <input id="yesSendmail" type="radio" name="isSendmail" value="1" />
-	                  <label for="yesSendmail">是</label>
-	                </div>
-	                <div class="rdio rdio-primary rdio-inline">
-	                  <input id="noSendmail" type="radio" name="isSendmail" value="0" checked/>
-	                  <label for="noSendmail">否</label>
-	                </div>
+	                   <input type="radio" id="yes" name="isSendmail" value="1" />是
+      				   <input type="radio" id="no" name="isSendmail" value="0"/>否
 	              </div>
-	            </div> 	 	                   
-	        </div>
+	            </div>            
+       		</div>
         </div><!-- panel-body -->
         <div class="panel-footer align-center">
 			<input id="addAgency" class="btn btn-primary" type="submit" value="保存"/>&nbsp;
@@ -121,27 +203,72 @@
 
 
 	<%@ include file="../assets/pages/foot.jsp"%>
+	<script src="${rootPath}assets/js/jquery-ui-1.10.3.min.js"></script>
+	<script src="${rootPath}assets/js/datepicker-zh-CN.js"></script>
+	<script src="${rootPath}assets/js/jquery.datatables.min.js"></script>
 	<script src="${rootPath}assets/js/select2.min.js"></script>
 	<script src="${rootPath}assets/js/jquery.validate.min.js"></script>
 	
 	<script type="text/javascript">
 	var country = ${country};
-	var language = ${language};
+	var language= ${language};
+	var service= ${agencyService};
+	var source= ${source};
+	var currency= ${currency};
+	var payment= ${payment};
+	var statusA= ${status};
+	//var agency= ${agency};
+	
+	//返回到list.html记录数
+	var backNum = -1;
 	$(".country-select").select2({
-		placeholder: '选择一个国家',
 	  	data: country
 	})
-
 	$(".language-select").select2({
-	    placeholder: '选择一个语言选项',
-     	data: language
+	  	data: language
 	})
-	
 	$(".destination-select").select2({
     	placeholder: '可多选',
     	minimumResultsForSearch: Infinity,
     	data: country
      });
+	$(".service-select").select2({
+		minimumResultsForSearch: Infinity,
+		placeholder:'选择服务类型',
+    	data: service
+     });
+	$(".source-select").select2({
+		minimumResultsForSearch: Infinity,
+		placeholder:'选择来源',
+    	data: source
+     });
+	$(".currency-select").select2({
+		minimumResultsForSearch: Infinity,
+		placeholder:'选择币种',
+    	data: currency
+     });
+	$(".payment-select").select2({
+		minimumResultsForSearch: Infinity,
+		placeholder:'选择付款方式',
+    	data: payment
+     });
+	$(".status-select").select2({
+		minimumResultsForSearch: Infinity,
+		placeholder:'选择状态',
+    	data: statusA
+     });
+	jQuery("#foundTime").datepicker({
+        dateFormat: "yy-mm-dd",
+        changeYear: true,
+        changeMonth: true,
+      });
+	
+	//成立时间格式转换
+    var date = $("#foundTime").val();  
+    if(date !== ""){
+      var dateformat = new Date(date).toISOString("yyyy-MM-dd hh:mm:ss.S").substring(0,10);
+      $("#foundTime").val(dateformat);
+    }
     //$(".destination-select").val('${crmcase.destination}'.split(",")).trigger("change");
 	jQuery(document).ready(function() {	
 

@@ -1,8 +1,13 @@
 package com.tourmade.crm.action;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +15,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.tourmade.crm.common.action.BaseSimpleFormController;
 import com.tourmade.crm.common.framework.bean.QueryResult;
@@ -56,19 +63,31 @@ public class SaleController extends BaseSimpleFormController {
 	}
 
 	@RequestMapping(value = "/add.do")
-	@ResponseBody
-	public Json doAdd(HttpServletRequest request, HttpSession session, Model model, Sale sale) {
-		Json json = new Json();
+	public String doAdd(HttpServletRequest request, HttpSession session, Model model, Sale sale, @RequestParam("upnamecard")MultipartFile namecard, @RequestParam("upphoto")MultipartFile photo) {
 		
 		try {
+			String photoName = "photo"+sale.getAgencyId()+sale.getSalesId()+photo.getOriginalFilename();  
+			String photoPath = request.getSession().getServletContext().getRealPath("/WEB-INF/view/attachment/")+photoName;
+			String cardName = "namecard"+sale.getAgencyId()+sale.getSalesId()+namecard.getOriginalFilename();  
+			String cardPath = request.getSession().getServletContext().getRealPath("/WEB-INF/view/attachment/")+cardName;
+			File photoFile = new File(photoPath);  
+			File cardFile = new File(cardPath);  
+	        if (!photoFile.getParentFile().exists()) {  
+	        	photoFile.getParentFile().mkdirs();  
+	        }  
+	        if (!photoFile.exists()) {  
+	        	photoFile.createNewFile();  
+	        }  
+	        photo.transferTo(photoFile); //保存图片
+	        namecard.transferTo(cardFile); //保存图片
+	        sale.setPhoto(photoPath);
+	        sale.setNamecard(cardPath);
 			service.saveSale(sale);
-			json.setSuccess(true);
 		} catch (Exception e) {
-			json.setSuccess(false);
 			logger.error("SaleController.doAdd() --> " + sale.toString() + "\n" + e.getMessage());
 		}
 		
-		return json;
+		return "redirect:/agency/edit.html?id="+sale.getAgencyId();
 	}
 
 	@RequestMapping(value = "/edit.html", method = { RequestMethod.POST, RequestMethod.GET })
@@ -77,35 +96,53 @@ public class SaleController extends BaseSimpleFormController {
 		if (null != id && !"".equals(id)) {
 			int i = Integer.parseInt(id);
 			Sale u = service.getSaleById(i);
+			
+			String photoPath = u.getPhoto().split("view")[1].toString().replaceAll("\\\\", "/");
+			String cardPath = u.getNamecard().split("view")[1].toString().replaceAll("\\\\", "/");
+			
+			u.setPhotoPath("WEB-INF/view"+photoPath);
+			u.setNameCardPath("WEB-INF/view"+cardPath);
+			
 			List<EntityList> v = service.getAgency();
 			JSONArray result = JSONArray.fromObject(v);
 			model.addAttribute("agency",result);
 			model.addAttribute("sales",u);
 		}
 		
-		
 		return "/sale/edit";
 	}
 
 	@RequestMapping(value = "/edit.do")
-	@ResponseBody
-	public Json doEdit(HttpServletRequest request, HttpSession session, Model model, Sale sale) {
-		
-		Json json = new Json();
-		
+	public String doEdit(HttpServletRequest request, HttpSession session, Model model, Sale sale, @RequestParam("upnamecard")MultipartFile namecard, @RequestParam("upphoto")MultipartFile photo) {
 		try {
 			//如果邮箱不为空，找到该客人对应的没有保存邮箱的订单，更新邮箱
 			if(sale.getSalesEmail()!=""&&sale.getSalesEmail()!=null){
 				service.updateOrderEmail(sale);
 			}
+			
+			String photoName = "photo"+sale.getAgencyId()+sale.getSalesId()+photo.getOriginalFilename();  
+			String photoPath = request.getSession().getServletContext().getRealPath("/WEB-INF/view/attachment/")+photoName;
+			String cardName = "namecard"+sale.getAgencyId()+sale.getSalesId()+namecard.getOriginalFilename();  
+			String cardPath = request.getSession().getServletContext().getRealPath("/WEB-INF/view/attachment/")+cardName;
+			File photoFile = new File(photoPath);  
+			File cardFile = new File(cardPath);  
+			
+	        if (!photoFile.exists()) {  
+	        	photoFile.mkdirs();  
+	        }  
+	        if (!photoFile.exists()) {  
+	        	photoFile.createNewFile();  
+	        }  
+	        photo.transferTo(photoFile); //保存图片
+	        namecard.transferTo(cardFile); //保存图片
+	        sale.setPhoto(photoPath);
+	        sale.setNamecard(cardPath);
+	        
 			service.updateSale(sale);
-			json.setSuccess(true);
 		} catch (Exception e) {
-			json.setSuccess(false);
 			logger.error("SaleController.doEdit() --> " + sale.toString() + "\n" + e.getMessage());
 		}
-		
-		return json;
+		return "redirect:/agency/edit.html?id="+sale.getAgencyId();
 	}
 	
 	@RequestMapping(value = "/del.do")
@@ -128,5 +165,4 @@ public class SaleController extends BaseSimpleFormController {
 		
 		return json;
 	}
-	
 }
