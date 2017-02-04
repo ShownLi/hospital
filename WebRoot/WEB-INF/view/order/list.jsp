@@ -101,7 +101,7 @@
 
 <!-- dealModal -->
 <div class="dealModal modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
+  <div class="modal-dialog" style="width:880px;">
     <div class="modal-content">         
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -111,76 +111,77 @@
       <form class="form-horizontal" id="form-deal">
       <div class="modal-body">
               <div class="section-block noline">
-                  <div class="form-group col-sm-6">
+                  <div class="form-group col-sm-4" style="margin-left: 0; margin-right: 0;">
                       <label class="col-sm-4 control-label">成团日期<span class="asterisk">*</span></label>
                       <div class="col-sm-8 input-group input-datepicker">
                         <input type="text" name="groupTime" class="form-control datepicker" autocomplete="off" placeholder="成团日期">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                       </div>
                   </div>
-                   <div class="form-group col-sm-6">
+                   <div class="form-group col-sm-4" style="margin-left: 0; margin-right: 0;">
                       <label class="col-sm-4 control-label">成团人数<span class="asterisk">*</span></label>
                       <div class="col-sm-8">
                         <input type="text" name="groupNumber" placeholder="成团人数" class="form-control"/>
                       </div>
                   </div>
-                  <div class="form-group col-sm-6">
+                  <div class="form-group col-sm-4" style="margin-left: 0; margin-right: 0;">
                       <label class="col-sm-4 control-label">出发日期<span class="asterisk">*</span></label>
                       <div class="col-sm-8 input-group input-datepicker">
                         <input type="text" name="startDate" placeholder="出发日期" class="form-control datepicker" autocomplete="off" />
                         <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                       </div>
                   </div>
-                  <div class="form-group col-sm-6">
+                  <div class="form-group col-sm-4" style="margin-left: 0; margin-right: 0;">
                     <label class="col-sm-4 control-label">返回日期<span class="asterisk">*</span></label>
                     <div class="col-sm-8 input-group input-datepicker">
                       <input type="text" name="endDate" placeholder="返回日期" class="form-control datepicker" autocomplete="off" />
                       <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                     </div>
                   </div>
-                  <div class="form-group col-sm-6">
+                  <div class="form-group col-sm-4" style="margin-left: 0; margin-right: 0;">
                       <label class="col-sm-4 control-label">成团成本<span class="asterisk">*</span></label>
                       <div class="col-sm-8">
                         <input type="text" name="costBudget" placeholder="成团成本" class="form-control"/>
                       </div>
                   </div>
-                  <div class="form-group col-sm-6">
+                  <div class="form-group col-sm-4" style="margin-left: 0; margin-right: 0;">
                       <label class="col-sm-4 control-label">成团价格<span class="asterisk">*</span></label>
                       <div class="col-sm-8">
                         <input type="text" name="groupPrice" placeholder="成团价格" class="form-control" />
                       </div>
                   </div>
-                  <div class="form-group col-sm-6">
+                  <div class="form-group col-sm-4" style="margin-left: 0; margin-right: 0;">
                       <label class="col-sm-4 control-label">成团币种<span class="asterisk">*</span></label>
                       <div class="col-sm-8">
                         <input type="text" name="currency" placeholder="成团币种" class="currency-select fullwidth"/>
                       </div>
                   </div>
-                  <div class="form-group col-sm-6">
+                  <div class="form-group col-sm-4" style="margin-left: 0; margin-right: 0;">
                       <label class="col-sm-4 control-label">汇率<span class="asterisk">*</span></label>
                       <div class="col-sm-8">
                         <input type="text" name="exchangeRate" placeholder="汇率" class="form-control" value="" />
                       </div>
                   </div>
-                  <div class="form-group col-sm-6">
+                  <div class="form-group col-sm-4" style="margin-left: 0; margin-right: 0;">
                       <label class="col-sm-4 control-label">人民币成本<span class="asterisk">*</span></label>
                       <div class="col-sm-8">
                         <input type="text" name="costBudgetRmb" placeholder="人民币成本" class="form-control"/>
                       </div>
                   </div>
-                   <div class="form-group col-sm-6">
+                   <div class="form-group col-sm-4" style="margin-left: 0; margin-right: 0;">
                       <label class="col-sm-4 control-label">人民币价格<span class="asterisk">*</span></label>
                       <div class="col-sm-8">
                         <input type="text" id="rmbPrice" name="rmbPrice" placeholder="人民币价格" class="form-control"/>
+                        <span class="rmbpriceErrorMsg" style="color: #b94a48; display: none; font-size: 14px;">人民币价格与应收金额之和应该相同</span>
                       </div>
                   </div>
-                  <div class="form-group col-sm-6">
+                  <div class="form-group col-sm-4" style="margin-left: 0; margin-right: 0;">
                       <label class="col-sm-4 control-label">签约乙方<span class="asterisk">*</span></label>
                       <div class="col-sm-8">
                         <input type="text" name="costReceiver" placeholder="签约乙方" class="costReceiver-select fullwidth"/>
                       </div>
                   </div>
-                  <div class="form-group col-sm-6">
+                  <div class="form-group col-sm-4" style="margin-left: 0; margin-right: 0;">
                       <label class="col-sm-4 control-label">付款方式<span class="asterisk">*</span></label>
                       <div class="col-sm-8">
                         <input type="text" id="paymentMethod" name="paymentMethod" placeholder="付款方式" class="paymentMethod-select fullwidth"/>
@@ -495,10 +496,12 @@
 	        	 
 	        	  	if(sumPriceBudget==rmbPrice){
 	        	  	 $("#form-deal .submit").attr("disabled","disabled");
+	        	  	 $(".rmbpriceErrorMsg").hide();
 	  	              deal_submit();
 	  	              return false;
 	        	  	}
 	        	  	else{
+	        	  		$(".rmbpriceErrorMsg").show();
 	        	  		return false;
 	        	  	}
 	          
