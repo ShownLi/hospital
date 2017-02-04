@@ -785,7 +785,7 @@
 
 
 
-<div class="modal fade" id="addNote3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="addNote2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 
   <div class="modal-dialog">
     <div class="modal-content">
@@ -812,7 +812,7 @@
   </div>
 </div>
 
-	<!-- Modal 保存注释信息-->
+	<%-- <!-- Modal 保存注释信息-->
 	<div class="modal fade" id="addNote2" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
@@ -841,7 +841,7 @@
 			<!-- modal-content -->
 		</div>
 		<!-- modal-dialog -->
-	</div>
+	</div> --%>
 	<%@ include file="../assets/pages/foot.jsp"%>
   <script src="${rootPath}assets/js/jquery-ui-1.10.3.min.js"></script>
 	<script src="${rootPath}assets/js/jquery.datatables.min.js"></script>
