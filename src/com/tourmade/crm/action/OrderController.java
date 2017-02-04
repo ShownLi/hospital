@@ -27,6 +27,7 @@ import com.tourmade.crm.common.framework.util.JSONUtilS;
 import com.tourmade.crm.common.model.base.value.baseconfig.Json;
 import com.tourmade.crm.common.model.base.value.baseconfig.PageHelper;
 import com.tourmade.crm.entity.Case;
+import com.tourmade.crm.entity.CostRecord;
 import com.tourmade.crm.entity.Customer;
 import com.tourmade.crm.entity.EntityList;
 import com.tourmade.crm.entity.Order;
@@ -317,7 +318,6 @@ public class OrderController extends BaseSimpleFormController {
 			
 		}*/
 
-		System.out.println(order);
 		order.setStatus("2");
 		
 		JSONObject priceRecordJson = JSONObject.fromObject(priceRecord);
@@ -354,12 +354,19 @@ public class OrderController extends BaseSimpleFormController {
 				financeService.savePriceRecord(pRecord);
 				financeService.updatePriceRecordPriceCode(pRecord);
 				
-				System.out.println(pRecord);
 				
 				
 			}
 			
 		}
+		
+		CostRecord cRecord = new CostRecord();
+		cRecord.setAgencyId(order.getAgencyId());
+		cRecord.setPaymentItem(1);
+		cRecord.setCostBudget(order.getRmbPrice());
+		cRecord.setOrderId(order.getOrderId());
+		
+		financeService.saveCostRecord(cRecord);
 		
 		
 		Json json = new Json();	
@@ -391,7 +398,6 @@ public class OrderController extends BaseSimpleFormController {
 		Json json = new Json();
 		Case crmcase = caseService.getCaseByOrderId(order.getOrderId());
 		try {
-			System.out.println(order);
 			order.setStatus("3");
 			service.updateOrderNoDeal(order);
 			int i = caseService.caseStatus(crmcase.getCaseId());

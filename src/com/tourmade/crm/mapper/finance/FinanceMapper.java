@@ -53,5 +53,9 @@ public interface FinanceMapper {
 
 	public void delCostRecordByCostId(int id);
 
+	public PriceRecord getPriceRecordById(int id);
+
+	public CostRecord getCostRecordById(int id);
+
 
 }

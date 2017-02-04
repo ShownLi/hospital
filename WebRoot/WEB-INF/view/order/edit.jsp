@@ -6,7 +6,7 @@
 <link href="${rootPath }assets/css/jquery.datatables.css" rel="stylesheet">
 </head>
 
-<body>
+<body onload="load()">
 	<%@ include file="../assets/pages/preloader.jsp"%>
 	<section>
 		<%@ include file="../assets/pages/leftpanel.jsp"%>
@@ -179,7 +179,7 @@
                   <input type="hidden" name="caseId" value="${order.caseId}" />	
                   <input type="hidden" name="customerId" value="${order.customerId}" />	
               </form> 
-              <form id="form-updateNoDeal" class="form-horizontal" style="display:none">
+              <form id="form-updateNoDeal" class="form-horizontal">
                   <div class="section-block">
                       <div class="form-group col-sm-6">
                         <label class="col-sm-4 control-label">未成行原因</label>
@@ -416,7 +416,7 @@
                    <div class="form-group col-sm-6">
                       <label class="col-sm-4 control-label">人民币价格<span class="asterisk">*</span></label>
                       <div class="col-sm-8">
-                        <input type="text" name="rmbPrice" placeholder="人民币价格" class="form-control"/>
+                        <input type="text" id="dealRmbPrice" name="rmbPrice" placeholder="人民币价格" class="form-control"/>
                       </div>
                   </div>
                   <div class="form-group col-sm-6">
@@ -446,7 +446,7 @@
 							<tr id="tr_0">
 								 <td>第一期</td>
 								 <td><input type="text" name="paymentItem" placeholder="款项" class="financeItem-select fullwidth"/></td>
-								 <td><input type="text" name="priceBudget" placeholder="应收金额" class="form-control"/></td>
+								 <td><input type="text" id="priceBudget1" name="priceBudget" placeholder="应收金额" class="form-control"/></td>
 								 <td> 
 								 <input type="text" name="deadline" placeholder="收款截止日期" class="form-control datepicker" autocomplete="off" />
 				                  				 <!-- <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span> -->
@@ -456,7 +456,7 @@
 							<tr id="tr_1">
 								 <td>第二期</td>
 								 <td><input type="text" name="paymentItem" placeholder="款项" class="financeItem-select fullwidth"/></td>
-								 <td><input type="text" name="priceBudget" placeholder="应收金额" class="form-control"/></td>
+								 <td><input type="text" id="priceBudget2" name="priceBudget" placeholder="应收金额" class="form-control"/></td>
 								 <td> 
 								 <input type="text" name="deadline" placeholder="收款截止日期" class="form-control datepicker" autocomplete="off" />
 				                  				 <!-- <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span> -->
@@ -466,7 +466,7 @@
 							<tr id="tr_2">
 								 <td>第三期</td>
 								 <td><input type="text" name="paymentItem" placeholder="款项" class="financeItem-select fullwidth"/></td>
-								 <td><input type="text" name="priceBudget" placeholder="应收金额" class="form-control"/></td>
+								 <td><input type="text" id="priceBudget3" name="priceBudget" placeholder="应收金额" class="form-control"/></td>
 								 <td> 
 								 <input type="text" name="deadline" placeholder="收款截止日期" class="form-control datepicker" autocomplete="off" />
 				                  				 <!-- <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span> -->
@@ -476,7 +476,7 @@
 							<tr id="tr_3">
 								 <td>第四期</td>
 								<td><input type="text" name="paymentItem" placeholder="款项" class="financeItem-select fullwidth"/></td>
-								 <td><input type="text" name="priceBudget" placeholder="应收金额" class="form-control"/></td>
+								 <td><input type="text" id="priceBudget4" name="priceBudget" placeholder="应收金额" class="form-control"/></td>
 								 <td> 
 								 <input type="text" name="deadline" placeholder="收款截止日期" class="form-control datepicker" autocomplete="off" />
 				                  				 <!-- <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span> -->
@@ -486,7 +486,7 @@
 							<tr id="tr_4">
 								 <td>第五期</td>
 								<td><input type="text" name="paymentItem" placeholder="款项" class="financeItem-select fullwidth"/></td>
-								 <td><input type="text" name="priceBudget" placeholder="应收金额" class="form-control"/></td>
+								 <td><input type="text" id="priceBudget5" name="priceBudget" placeholder="应收金额" class="form-control"/></td>
 								 <td> 
 								 <input type="text" name="deadline" placeholder="收款截止日期" class="form-control datepicker" autocomplete="off" />
 				                  				 <!-- <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span> -->
@@ -498,6 +498,7 @@
                   <input type="hidden" id="dealOrderId" name="orderId" value="${order.orderId}" />
                   <input type="hidden" name="caseId" value="${order.caseId}" />	
                   <input type="hidden" name="customerId" value="${order.customerId}" />	
+                  <input type="hidden" name="agencyId" value="${order.agencyId}" />	
               </div>           
       </div>
       <div class="modal-footer align-center">
@@ -617,7 +618,7 @@
                     </div>
                     <label class="col-sm-4 control-label">应付金额</label>
                     <div class="col-sm-8">
-                      <input class="form-control" name="costBudget" placeholder="应收金额" />
+                      <input class="form-control" name="costBudget" placeholder="应付金额" />
                     </div>
                     <label class="col-sm-4 control-label">备注</label>
                     <div class="col-sm-8">
@@ -778,7 +779,7 @@
 </div><!-- modal -->
 
 
-<div class="noDealModal modal fade" id="addNote2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="addNote3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -867,6 +868,9 @@
 	if('${order.status}'=='2'){
 		$("#dealInfo").css("display","block");
 	}
+	if('${order.status}'=='3'){
+		$("#dealInfo").css("display","block");
+	}
  	$(".currency-select").select2({
 		data: currency
 	})  
@@ -943,19 +947,20 @@
      
 	if("${order.status}"==2){
  	  $("#form-updateDeal").show();
+ 	 $("#form-updateNoDeal").hide();
       $("#btn-baseDeal").attr("disabled",true);
       $("#btn-baseNoDeal").attr("disabled",true);
  	 }
-    
 	if("${order.status}"==3){
       $("#form-updateNoDeal").show();
+      $("#form-updateDeal").hide();
       $("#btn-baseDeal").attr("disabled",true);
       $("#btn-baseNoDeal").attr("disabled",true);
   	}		
 	
 	jQuery(document).ready(function() {
 		jQuery("#form-deal").validate({
-	           rules: {
+	            rules: {
 		        groupTime: {
              required: true,
              date: true
@@ -1022,7 +1027,7 @@
 	          costBudgetRmb: "请输入一个数字",
 	          costReceiver: "请输入签约乙方"
 	      },
-	      
+	       
        highlight: function(element) {
          jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
        },
@@ -1033,7 +1038,7 @@
          return false;
        },   
        submitHandler : function(){
-     	  var rmbPrice =parseInt($.trim($("input[name=rmbPrice]").val())),
+     	  var rmbPrice =parseInt($.trim($("#dealRmbPrice").val())),
      	  	priceBudget1 =parseInt($.trim($('#priceBudget1').val())),
      	  	priceBudget2 =parseInt($.trim($('#priceBudget2').val())),
      	  	priceBudget3 =parseInt($.trim($('#priceBudget3').val())),
@@ -1045,7 +1050,6 @@
      	  if(isNaN(priceBudget4)){priceBudget4 = 0}
      	  if(isNaN(priceBudget5)){priceBudget5 = 0}
      	  	var sumPriceBudget = priceBudget1+priceBudget2+priceBudget3+priceBudget4+priceBudget5;
-     	 
      	  	if(sumPriceBudget==rmbPrice){
      	  	 $("#form-deal .submit").attr("disabled","disabled");
 	              deal_submit();
@@ -1927,7 +1931,7 @@
 	            });  
 	            args[i]=data;  
 	        });  
-	        alert("data;"+JSON.stringify(args));  
+	        //alert("data;"+JSON.stringify(args));  
 	        return JSON.stringify(args);  
 	    }  
 	 
@@ -2028,14 +2032,19 @@
       $("#endDate").val(dateformat)
   }
 	
+  function load(){
+	  if(financeStatus==3){
+		  $("input").attr("disabled",true);
+		  $("button").attr("disabled",true);
+		  $('a').attr("disabled",true);
+		  $('#addNote').attr("disabled",false);
+		  //$("#addNote3").children().attr("disabled",false);
+		  
+		  
+	  } 
+  }
 
-  if(financeStatus==3){
-	  $("input").attr("disabled",true);
-	  $("button").attr("disabled",true);
-	  $("a").attr("disabled",true);
-	  
-	  
-  } 
+ 
   
 </script>
 

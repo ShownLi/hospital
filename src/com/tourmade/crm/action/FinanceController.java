@@ -333,8 +333,10 @@ public class FinanceController extends BaseSimpleFormController {
 	@RequestMapping(value = "/delPriceRecord.do", method = RequestMethod.GET)
 	@ResponseBody
 	public void delPriceRecord(Integer id,Integer orderId) {
-		
-		financeService.delPriceRecordByPriceId(id,orderId);
+		PriceRecord pr = financeService.getPriceRecordById(id);
+		if(pr.getSTATUS()==1||pr.getSTATUS()==null){
+			financeService.delPriceRecordByPriceId(id,orderId);
+		}
 		
 	}
 	
@@ -347,8 +349,10 @@ public class FinanceController extends BaseSimpleFormController {
 	@RequestMapping(value = "/delCostRecord.do", method = RequestMethod.GET)
 	@ResponseBody
 	public void delCostRecord(Integer id,Integer orderId) {
-		
-		financeService.delCostRecordByCostId(id,orderId);
+		CostRecord cr = financeService.getCostRecordById(id);
+		if(cr.getStatus()==1||cr.getStatus()==null){
+			financeService.delCostRecordByCostId(id,orderId);
+		}	
 		
 	}
 }
