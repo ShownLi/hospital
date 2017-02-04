@@ -9,6 +9,19 @@
 			u.sales_portal_id as salesPortalId,
 			u.sales_name as salesName,
 			u.sales_email as salesEmail,
+			u.title as title,
+			u.sales_name_en as salesEnglishName,
+			u.telephone as telephone,
+			u.mobilephone as mobilephone,
+			u.fax as fax,
+			u.qq as qq,
+			u.skype as skype,
+			u.wechat as wechat,
+			u.skill as skill,
+			u.introduction as introduction,
+			u.address as address,
+			u.photo as photo,
+			u.namecard as namecard,
 			u.isdel
 		from tm_sales u where u.agency_id = #{agencyId} and u.isdel = 0
 		order by u.creat_time
@@ -29,6 +42,18 @@
 			sales_email,
 			creat_time,
 			update_time,
+			title,
+			telephone,
+			mobilephone,
+			fax,
+			qq,
+			skype,
+			wechat,
+			skill,
+			introduction,
+			address,
+			photo,
+			namecard,
 			isdel
 		)values(
 			#{salesName,jdbcType=VARCHAR},
@@ -38,6 +63,18 @@
 			#{salesEmail,jdbcType=VARCHAR},
 			NOW(),
 			NOW(),
+			#{title,jdbcType=VARCHAR},
+			#{telephone,jdbcType=VARCHAR},
+			#{mobilephone,jdbcType=VARCHAR},
+			#{fax,jdbcType=VARCHAR},
+			#{qq,jdbcType=VARCHAR},
+			#{skype,jdbcType=VARCHAR},
+			#{wechat,jdbcType=VARCHAR},
+			#{skill,jdbcType=VARCHAR},
+			#{introduction,jdbcType=VARCHAR},
+			#{address,jdbcType=VARCHAR},
+			#{photo,jdbcType=VARCHAR},
+			#{namecard,jdbcType=VARCHAR},
 			0
 		)
 	</insert>
@@ -45,21 +82,45 @@
 	<update id="updateSale" parameterType="Sale" flushCache="true">
 		update tm_sales set
 			sales_name=#{salesName},
+			title=#{title},
 			sales_name_en=#{salesEnglishName},
 			sales_portal_id=#{salesPortalId},
 			sales_email=#{salesEmail},
+			telephone=#{telephone},
+			mobilephone=#{mobilephone},
+			fax=#{fax},
+			qq=#{qq},
+			skype=#{skype},
+			wechat=#{wechat},
+			skill=#{skill},
+			introduction=#{introduction},
+			address=#{address},
+			photo=#{photo},
+			namecard=#{namecard},
 			update_time=NOW()
 		where sales_id=#{salesId}
 	</update>
 	
 	<select id="getSaleById" parameterType="int" resultType="Sale">
 		select
+			u.agency_id as agencyId,
 			u.sales_id as salesId,
 			u.sales_portal_id as salesPortalId,
 			u.sales_name as salesName,
-			u.sales_name_en as salesEnglishName,
-			u.agency_id as agencyId,
 			u.sales_email as salesEmail,
+			u.title as title,
+			u.sales_name_en as salesEnglishName,
+			u.telephone as telephone,
+			u.mobilephone as mobilephone,
+			u.fax as fax,
+			u.qq as qq,
+			u.skype as skype,
+			u.wechat as wechat,
+			u.skill as skill,
+			u.introduction as introduction,
+			u.address as address,
+			u.photo as photo,
+			u.namecard as namecard,
 			u.isdel as isdel
 		from tm_sales u where u.sales_id = #{salesId}
 	</select>
@@ -71,7 +132,6 @@
 		u.isdel 
 		from tm_agency u where u.isdel = 0
 	</select>
-	
 
 	<update id="deleteSaleById" parameterType="int" flushCache="true"
 		statementType="PREPARED">

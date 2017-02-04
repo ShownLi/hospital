@@ -27,6 +27,7 @@ import com.tourmade.crm.common.framework.util.JSONUtilS;
 import com.tourmade.crm.common.model.base.value.baseconfig.Json;
 import com.tourmade.crm.common.model.base.value.baseconfig.PageHelper;
 import com.tourmade.crm.entity.Case;
+import com.tourmade.crm.entity.Comment;
 import com.tourmade.crm.entity.CostRecord;
 import com.tourmade.crm.entity.Customer;
 import com.tourmade.crm.entity.EntityList;
@@ -34,6 +35,7 @@ import com.tourmade.crm.entity.Order;
 import com.tourmade.crm.entity.PriceRecord;
 import com.tourmade.crm.entity.Sale;
 import com.tourmade.crm.service.CaseService;
+import com.tourmade.crm.service.CommentService;
 import com.tourmade.crm.service.EmailService;
 import com.tourmade.crm.service.FinanceService;
 import com.tourmade.crm.service.OrderService;
@@ -53,6 +55,8 @@ public class OrderController extends BaseSimpleFormController {
 	CaseService caseService;
 	@Autowired
 	FinanceService financeService;
+	@Autowired
+	CommentService commentService;
 
 	@RequestMapping(value = "/list.html", method = { RequestMethod.POST, RequestMethod.GET })
 	public String list(Model model,String flag,HttpSession session) {
@@ -359,15 +363,16 @@ public class OrderController extends BaseSimpleFormController {
 			}
 			
 		}
-		
+
+		//生成一条总的付款记录
 		CostRecord cRecord = new CostRecord();
 		cRecord.setAgencyId(order.getAgencyId());
 		cRecord.setPaymentItem(1);
-		cRecord.setCostBudget(order.getRmbPrice());
+		cRecord.setStatus(1);
+		cRecord.setCostBudget(order.getCostBudgetRmb());
 		cRecord.setOrderId(order.getOrderId());
 		
 		financeService.saveCostRecord(cRecord);
-		
 		
 		Json json = new Json();	
 		Order oldOrder = service.getOrderById(order.getOrderId());
@@ -393,8 +398,13 @@ public class OrderController extends BaseSimpleFormController {
 	 */
 	@RequestMapping(value = "/orderNoDeal.do")
 	@ResponseBody
-	public Json orderNoDeal(HttpServletRequest request, HttpSession session, Model model, Order order) {
+	public Json orderNoDeal(HttpServletRequest request, HttpSession session, Model model, Order order,Comment comment) {
 
+		System.out.println(comment);
+		if(comment.getContent()!=null&&comment.getContent()!=""&&comment.getContent().trim()!=""){
+			commentService.saveComment(comment);
+		}
+		
 		Json json = new Json();
 		Case crmcase = caseService.getCaseByOrderId(order.getOrderId());
 		try {

@@ -62,11 +62,6 @@
 					<!-- panel-body -->
 				</div>
 				<!-- panel -->
-
-
-
-
-
 			</div>
 
 		</div>
@@ -146,15 +141,13 @@
 		        //alert($(this).attr('id'));
 		        edit($(this).attr('id'));
 		    } );
-
 			$('#dataTable tbody').on( 'click', 'a.btn-danger', function () {
-		        var data = t.row($(this).parents('tr')).data();
-		        //alert($(this).attr('id'));
+				 var data = t.row($(this).parents('tr')).data();
 		        del($(this).attr('id'));
 		    } );
 			
 			$('#confirmDelModal').on( 'click', 'button.btn-danger', function () {
-		        var id = $("#confirmDelModal .hiddenId").val();
+		        var id = $("#confirmDelModal.hiddenId").val();
 		        doDel(id);
 		    } ); 
 		    
@@ -164,8 +157,6 @@
 		    });
 		    
 		    jQuery('select').removeClass('form-control');
-			
-			
 		});
 		
 		function edit(id) {
@@ -173,8 +164,8 @@
 		}
 		
 		function del(id) {
-			$("#confirmDelModal .hiddenId").val("");
-			$("#confirmDelModal .hiddenId").val(id);
+			$("#confirmDelModal.hiddenId").val("");
+			$("#confirmDelModal.hiddenId").val(id);
 			$("#confirmDelModal").modal('show');
 		}
 		

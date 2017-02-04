@@ -28,40 +28,110 @@
           <h4 class="panel-title">销售基本信息</h4>
           <p>填写下表，完成销售创建。</p>
         </div>
-        <form class="form-horizontal form-bordered" id="form">
+         <form class="form-horizontal form-bordered" action="${rootPath}sale/add.do" id="form" method="post" enctype="multipart/form-data">
         <div class="panel-body panel-body-nopadding">
-          
-          
-            
             <div class="form-group">
               <label class="col-sm-4 control-label">销售名称 <span class="asterisk">*</span></label>
               <div class="col-sm-4">
-                <input type="text" name="salesName" placeholder="销售名称" class="form-control" />
+                <input type="text" name="salesName" placeholder="销售名" class="form-control" value="${sales.salesName }" />
+                <input type="text" name="salesId" placeholder="销售名" class="form-control" value="${sales.salesId}" style="display:none" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-4 control-label">职称</label>
+              <div class="col-sm-4">
+                <input type="text" name="title" placeholder="职称" class="form-control" value="${sales.title}" />
               </div>
             </div>
             <div class="form-group">
               <label class="col-sm-4 control-label">PortalID <span class="asterisk">*</span></label>
               <div class="col-sm-4">
-                <input type="text" id="salesPortalId" name="salesPortalId" placeholder="官网ID" class="form-control" />
+                <input type="text" id="salesPortalId" name="salesPortalId" placeholder="官网ID" class="form-control" value="${sales.salesPortalId }"/>
               </div>
-            </div>
+            </div>       
             <div class="form-group">
-              <label  class="col-sm-4 control-label">所属地接社 <span class="asterisk">*</span></label>
-              <input type="text" name="agencyId" class="agency-select col-sm-4" value="${agencyId}" readonly/>
-            </div>                   			
+              <label class="col-sm-4 control-label">所属地接社 <span class="asterisk">*</span></label>
+              <input type="text" name="agencyId" class="agency-select col-sm-4" value="${sales.agencyId }" readonly/>
+            </div>               
             <div class="form-group">
               <label class="col-sm-4 control-label">邮件地址 <span class="asterisk">*</span></label>
               <div class="col-sm-4">
-                <input type="text" name="salesEmail" placeholder="邮件地址" class="form-control" />
+                <input type="text" name="salesEmail" placeholder="邮件地址" class="form-control" value="${sales.salesEmail }" />
               </div>
-            </div> 	          
+            </div>      
+            <div class="form-group">
+              <label class="col-sm-4 control-label">电话</label>
+              <div class="col-sm-4">
+                <input type="text" name="telephone" placeholder="电话" class="form-control" value="${sales.telephone }" />
+              </div>
+            </div>      
+            <div class="form-group">
+              <label class="col-sm-4 control-label">手机</label>
+              <div class="col-sm-4">
+                <input type="text" name="mobilephone" placeholder="手机" class="form-control" value="${sales.mobilephone }" />
+              </div>
+            </div>      
+            <div class="form-group">
+              <label class="col-sm-4 control-label">传真</label>
+              <div class="col-sm-4">
+                <input type="text" name="fax" placeholder="邮件地址" class="form-control" value="${sales.fax }" />
+              </div>
+            </div>      
+            <div class="form-group">
+              <label class="col-sm-4 control-label">QQ</label>
+              <div class="col-sm-4">
+                <input type="text" name="qq" placeholder=QQ class="form-control" value="${sales.qq }" />
+              </div>
+            </div>      
+            <div class="form-group">
+              <label class="col-sm-4 control-label">skype</label>
+              <div class="col-sm-4">
+                <input type="text" name="skype" placeholder="skype" class="form-control" value="${sales.skype }" />
+              </div>
+            </div>      
+            <div class="form-group">
+              <label class="col-sm-4 control-label">微信 </label>
+              <div class="col-sm-4">
+                <input type="text" name="wechat" placeholder="微信" class="form-control" value="${sales.wechat}" />
+              </div>
+            </div>      
+            <div class="form-group">
+              <label class="col-sm-4 control-label">销售专长</label>
+              <div class="col-sm-4">
+                <input type="text" name="skill" placeholder="销售专长" class="form-control" value="${sales.skill }" />
+              </div>
+            </div>      
+            <div class="form-group">
+              <label class="col-sm-4 control-label">销售介绍</label>
+              <div class="col-sm-4">
+                <input type="text" name="introduction" placeholder="销售介绍" class="form-control" value="${sales.introduction }" />
+              </div>
+            </div> 
+            <div class="form-group">
+              <label class="col-sm-4 control-label">销售照片</label>
+              <div class="col-sm-2">
+					<input type="file" name="upphoto" title="请选择照片" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-4 control-label">销售名片</label>
+              <div class="col-sm-2">
+					<input type="file"  name="upnamecard" title="请选择照片" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-4 control-label">地址</label>
+              <div class="col-sm-4">
+                <input type="text" name="address" placeholder="地址" class="form-control" value="${sales.address }" />
+              </div>
+            </div>      
         </div><!-- panel-body -->
-        
         <div class="panel-footer align-center">
-			<input class="btn btn-primary" type="submit" value="提交"/>&nbsp;
-			<input class="btn btn-default" type="button" id="btn-back" value="取消"/>
+        	<input class="btn btn-primary" type="submit" value="保存"/>&nbsp;
+			<input class="btn btn-default" type="button" id="btn-back" value="返回"/>&nbsp;
+			<input type="hidden" name="salesid" value="${sales.salesId }" />
 		</div><!-- panel-footer -->
-    </form>   
+     </form> 
     </div><!-- panel -->
 			</div>
 
@@ -151,7 +221,7 @@
 	    } ); 
 	});
 //			      
-		function form_submit() {
+		/* function form_submit() {
 			var f = $("#form").serialize();
 			$.post('${rootPath}sale/add.do', f, function(result) {
 				var rmsg = result.msg;
@@ -161,7 +231,7 @@
 					$("#msgModal").modal('show');
 				}
 			}, "JSON");
-		}
+		} */
 	
 		
 	</script>
