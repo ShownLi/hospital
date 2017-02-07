@@ -221,7 +221,7 @@
 			</div>
 		</div>
 	</div>
-	<!-- 金额调整 -->
+	<!--收款 金额调整 -->
 	<div class="priceAdjustModal modal fade" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">

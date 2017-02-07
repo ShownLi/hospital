@@ -76,7 +76,11 @@ public class FinanceService extends BaseService {
 		PriceRecord sumPriceRecord = financeMapper.getAllSumPriceRecord(priceRecord.getOrderId());
 		sumPriceRecord.setOrderId(priceRecord.getOrderId());
 		// 修改订单信息
-
+		Map<String,Object> map =new HashMap<>();
+		map.put("orderId", priceRecord.getOrderId());
+		map.put("financeStatus", 2);
+		//更新订单状态为已收
+		financeMapper.updateOrderFinanceStatus(map);
 		return financeMapper.updateOrderAfterUpdatePriceRecord(sumPriceRecord);
 
 	}
