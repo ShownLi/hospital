@@ -1,6 +1,7 @@
 package com.tourmade.crm.mapper.finance;
 
 import java.util.List;
+import java.util.Map;
 
 import com.tourmade.crm.entity.CostRecord;
 import com.tourmade.crm.entity.EntityList;
@@ -24,6 +25,7 @@ public interface FinanceMapper {
 
 	public int updateOrderAfterUpdateCostRecord(CostRecord sumCostRecord);
 	
+	public int updateOrderFinanceStatus(Map<String,Object> map);
 	public void balancePriceRecordByOrderId(int orderId);
 
 	public void balanceCostRecordByOrderId(int orderId);
