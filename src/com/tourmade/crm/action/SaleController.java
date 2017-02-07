@@ -97,12 +97,13 @@ public class SaleController extends BaseSimpleFormController {
 			int i = Integer.parseInt(id);
 			Sale u = service.getSaleById(i);
 			
-			String photoPath = u.getPhoto().split("view")[1].toString().replaceAll("\\\\", "/");
-			String cardPath = u.getNamecard().split("view")[1].toString().replaceAll("\\\\", "/");
-			
-			u.setPhotoPath("WEB-INF/view"+photoPath);
-			u.setNameCardPath("WEB-INF/view"+cardPath);
-			
+			if(u.getPhoto()!=null && u.getNamecard()!=null){
+				String photoPath = u.getPhoto().split("view")[1].toString().replaceAll("\\\\", "/");
+				String cardPath = u.getNamecard().split("view")[1].toString().replaceAll("\\\\", "/");
+				
+				u.setPhotoPath("WEB-INF/view"+photoPath);
+				u.setNameCardPath("WEB-INF/view"+cardPath);
+			}
 			List<EntityList> v = service.getAgency();
 			JSONArray result = JSONArray.fromObject(v);
 			model.addAttribute("agency",result);
