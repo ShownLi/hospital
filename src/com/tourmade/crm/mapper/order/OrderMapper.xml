@@ -281,6 +281,8 @@
 		currency=#{currency},
 		exchange_rate=#{exchangeRate},
 		last_response=#{lastResponse},
+		order_code=#{orderCode},
+		finance_status=#{financeStatus},
 		update_time=NOW()
 		where
 		order_id=#{orderId}
