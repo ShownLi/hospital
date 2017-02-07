@@ -363,6 +363,12 @@
 		tm_cost_record
 		WHERE isdel = 0 and cost_id = #{id};
 	</select>
+	<update id="updateOrderFinanceStatus" parameterType="map">
+	update tm_order
+	set finance_status = #{financeStatus} 
+	where order_id = #{orderId}
+	
+	</update>
 </mapper>
 
 

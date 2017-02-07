@@ -323,6 +323,8 @@ public class OrderController extends BaseSimpleFormController {
 		}*/
 
 		order.setStatus("2");
+		order.setOrderCode(order.getCaseId()+"-"+order.getOrderId());
+		order.setFinanceStatus(1);
 		
 		JSONObject priceRecordJson = JSONObject.fromObject(priceRecord);
 		Iterator it = priceRecordJson.keys();

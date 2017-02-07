@@ -5,6 +5,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.tourmade.crm.common.framework.BaseService;
 
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
@@ -75,7 +76,11 @@ public class FinanceService extends BaseService {
 		PriceRecord sumPriceRecord = financeMapper.getAllSumPriceRecord(priceRecord.getOrderId());
 		sumPriceRecord.setOrderId(priceRecord.getOrderId());
 		// 修改订单信息
-
+		Map<String,Object> map =new HashMap<>();
+		map.put("orderId", priceRecord.getOrderId());
+		map.put("financeStatus", 2);
+		//更新订单状态为已收
+		financeMapper.updateOrderFinanceStatus(map);
 		return financeMapper.updateOrderAfterUpdatePriceRecord(sumPriceRecord);
 
 	}
@@ -158,6 +163,13 @@ public class FinanceService extends BaseService {
 		financeMapper.delPriceRecordByPriceId(id);
 		// 先获取更新后，最新的订单信息
 		PriceRecord sumPriceRecord = financeMapper.getAllSumPriceRecord(orderId);
+		if(sumPriceRecord==null){
+			sumPriceRecord = new PriceRecord();
+			sumPriceRecord.setPriceBudget(new BigDecimal(0));
+			sumPriceRecord.setPriceReal(new BigDecimal(0));
+			sumPriceRecord.setPriceAdjust(new BigDecimal(0));
+			
+		}
 		sumPriceRecord.setOrderId(orderId);
 		financeMapper.updateOrderAfterUpdatePriceRecord(sumPriceRecord);
 
@@ -198,6 +210,12 @@ public class FinanceService extends BaseService {
 
 		// 先获取更新后，最新的订单信息
 		CostRecord sumCostRecord = financeMapper.getAllSumCostRecord(orderId);
+		if(sumCostRecord==null){
+			sumCostRecord = new CostRecord();
+			sumCostRecord.setCostBudget(new BigDecimal(0));
+			sumCostRecord.setCostReal(new BigDecimal(0));
+			sumCostRecord.setCostAdjust(new BigDecimal(0));
+		}
 		sumCostRecord.setOrderId(orderId);
 		financeMapper.updateOrderAfterUpdateCostRecord(sumCostRecord);
 	}
