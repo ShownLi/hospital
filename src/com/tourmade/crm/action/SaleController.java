@@ -2,6 +2,8 @@ package com.tourmade.crm.action;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -59,6 +61,7 @@ public class SaleController extends BaseSimpleFormController {
 		JSONArray result = JSONArray.fromObject(agencyList);
 		model.addAttribute("agency",result);
 		model.addAttribute("agencyId",agencyId);
+		
 		return "/sale/add";
 	}
 
@@ -67,11 +70,10 @@ public class SaleController extends BaseSimpleFormController {
 		
 		try {
 			
-			String photoName = "photo"+sale.getAgencyId()+sale.getSalesId()+photo.getOriginalFilename();  
-			String photoPath = request.getSession().getServletContext().getRealPath("/WEB-INF/view/attachment/")+photoName;
-			
-			String cardName = "namecard"+sale.getAgencyId()+sale.getSalesId()+namecard.getOriginalFilename();  
-			String cardPath = request.getSession().getServletContext().getRealPath("/WEB-INF/view/attachment/")+cardName;
+			String photoName = "/photo"+sale.getAgencyId()+sale.getSalesId()+photo.getOriginalFilename();  
+			String photoPath = request.getSession().getServletContext().getRealPath("/WEB-INF/view/attachment")+photoName;
+			String cardName = "/namecard"+sale.getAgencyId()+sale.getSalesId()+namecard.getOriginalFilename();  
+			String cardPath = request.getSession().getServletContext().getRealPath("/WEB-INF/view/attachment")+cardName;
 			
 			File photoFile = new File(photoPath);  
 			File cardFile = new File(cardPath);  
@@ -84,8 +86,8 @@ public class SaleController extends BaseSimpleFormController {
 	        }  
 	        photo.transferTo(photoFile); //保存图片
 	        namecard.transferTo(cardFile); //保存图片
-	        sale.setPhoto("attachment/"+photoName);
-	        sale.setNamecard("attachment/"+cardName);
+	        sale.setPhoto("attachment"+photoName);
+	        sale.setNamecard("attachment"+cardName);
 			service.saveSale(sale);
 		} catch (Exception e) {
 			logger.error("SaleController.doAdd() --> " + sale.toString() + "\n" + e.getMessage());
@@ -100,7 +102,6 @@ public class SaleController extends BaseSimpleFormController {
 		if (null != id && !"".equals(id)) {
 			int i = Integer.parseInt(id);
 			Sale u = service.getSaleById(i);
-		
 			List<EntityList> v = service.getAgency();
 			JSONArray result = JSONArray.fromObject(v);
 			model.addAttribute("agency",result);
@@ -118,10 +119,15 @@ public class SaleController extends BaseSimpleFormController {
 				service.updateOrderEmail(sale);
 			}
 			
-			String photoName = "photo"+sale.getAgencyId()+sale.getSalesId()+photo.getOriginalFilename();  
-			String photoPath = request.getSession().getServletContext().getRealPath("/WEB-INF/view/attachment/")+photoName;
-			String cardName = "namecard"+sale.getAgencyId()+sale.getSalesId()+namecard.getOriginalFilename();  
-			String cardPath = request.getSession().getServletContext().getRealPath("/WEB-INF/view/attachment/")+cardName;
+			Date d = new Date();
+		    SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+		    String date = sdf.format(d);
+			
+			String photoName = "/photo"+date+photo.getContentType().replace("image/", ".");  
+			System.out.println(photoName);
+			String photoPath = request.getSession().getServletContext().getRealPath("/WEB-INF/view/attachment")+"/"+sale.getAgencyId()+photoName;
+			String cardName = "/namecard"+date+namecard.getContentType().replace("image/", ".");  
+			String cardPath = request.getSession().getServletContext().getRealPath("/WEB-INF/view/attachment")+"/"+sale.getAgencyId()+cardName;
 			File photoFile = new File(photoPath);  
 			File cardFile = new File(cardPath);  
 			
@@ -134,8 +140,8 @@ public class SaleController extends BaseSimpleFormController {
 	        photo.transferTo(photoFile); //保存图片
 	        namecard.transferTo(cardFile); //保存图片
 	        //保存文件的相对路径
-	        sale.setPhoto("attachment/"+photoName);
-	        sale.setNamecard("attachment/"+cardName);
+	        sale.setPhoto("attachment"+"/"+sale.getAgencyId()+photoName);
+	        sale.setNamecard("attachment"+"/"+sale.getAgencyId()+cardName);
 			service.updateSale(sale);
 		} catch (Exception e) {
 			logger.error("SaleController.doEdit() --> " + sale.toString() + "\n" + e.getMessage());
