@@ -348,7 +348,7 @@
 
 <!-- dealModal -->
 <div class="dealModal modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
+  <div class="modal-dialog" style="width:880px;">
     <div class="modal-content">         
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -358,78 +358,77 @@
       <form class="form-horizontal" id="form-deal">
       <div class="modal-body">
               <div class="section-block noline">
-                  <div class="form-group col-sm-6">
+                  <div class="form-group col-sm-4" style="margin-left: 0; margin-right: 0;">
                       <label class="col-sm-4 control-label">成团日期<span class="asterisk">*</span></label>
                       <div class="col-sm-8 input-group input-datepicker">
                         <input type="text" name="groupTime" class="form-control datepicker" autocomplete="off" placeholder="成团日期">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                       </div>
                   </div>
-                   <div class="form-group col-sm-6">
+                   <div class="form-group col-sm-4" style="margin-left: 0; margin-right: 0;">
                       <label class="col-sm-4 control-label">成团人数<span class="asterisk">*</span></label>
                       <div class="col-sm-8">
                         <input type="text" name="groupNumber" placeholder="成团人数" class="form-control"/>
                       </div>
                   </div>
-                  <div class="form-group col-sm-6">
+                  <div class="form-group col-sm-4" style="margin-left: 0; margin-right: 0;">
                       <label class="col-sm-4 control-label">出发日期<span class="asterisk">*</span></label>
                       <div class="col-sm-8 input-group input-datepicker">
                         <input type="text" name="startDate" placeholder="出发日期" class="form-control datepicker" autocomplete="off" />
                         <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                       </div>
                   </div>
-                  <div class="form-group col-sm-6">
+                  <div class="form-group col-sm-4" style="margin-left: 0; margin-right: 0;">
                     <label class="col-sm-4 control-label">返回日期<span class="asterisk">*</span></label>
                     <div class="col-sm-8 input-group input-datepicker">
                       <input type="text" name="endDate" placeholder="返回日期" class="form-control datepicker" autocomplete="off" />
                       <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                     </div>
                   </div>
-                  <div class="form-group col-sm-6">
+                  <div class="form-group col-sm-4" style="margin-left: 0; margin-right: 0;">
                       <label class="col-sm-4 control-label">成团成本<span class="asterisk">*</span></label>
                       <div class="col-sm-8">
                         <input type="text" name="costBudget" placeholder="成团成本" class="form-control"/>
                       </div>
                   </div>
-                  <div class="form-group col-sm-6">
+                  <div class="form-group col-sm-4" style="margin-left: 0; margin-right: 0;">
                       <label class="col-sm-4 control-label">成团价格<span class="asterisk">*</span></label>
                       <div class="col-sm-8">
                         <input type="text" name="groupPrice" placeholder="成团价格" class="form-control" />
                       </div>
                   </div>
-                  <div class="form-group col-sm-6">
+                  <div class="form-group col-sm-4" style="margin-left: 0; margin-right: 0;">
                       <label class="col-sm-4 control-label">成团币种<span class="asterisk">*</span></label>
                       <div class="col-sm-8">
                         <input type="text" name="currency" placeholder="成团币种" class="currency-select fullwidth"/>
                       </div>
                   </div>
-                  <div class="form-group col-sm-6">
+                  <div class="form-group col-sm-4" style="margin-left: 0; margin-right: 0;">
                       <label class="col-sm-4 control-label">汇率<span class="asterisk">*</span></label>
                       <div class="col-sm-8">
                         <input type="text" name="exchangeRate" placeholder="汇率" class="form-control" value="" />
                       </div>
                   </div>
-                  <div class="form-group col-sm-6">
+                  <div class="form-group col-sm-4" style="margin-left: 0; margin-right: 0;">
                       <label class="col-sm-4 control-label">人民币成本<span class="asterisk">*</span></label>
                       <div class="col-sm-8">
                         <input type="text" name="costBudgetRmb" placeholder="人民币成本" class="form-control"/>
                       </div>
                   </div>
-                   <div class="form-group col-sm-6">
+                   <div class="form-group col-sm-4" style="margin-left: 0; margin-right: 0;">
                       <label class="col-sm-4 control-label">人民币价格<span class="asterisk">*</span></label>
                       <div class="col-sm-8">
-                      
-                        <input type="text" id="dealRmbPrice" name="rmbPrice" placeholder="人民币价格" class="form-control"/>
-
+                        <input type="text" id="rmbPrice" name="rmbPrice" placeholder="人民币价格" class="form-control"/>
+                        <span class="rmbpriceErrorMsg" style="color: #b94a48; display: none; font-size: 14px;">人民币价格与应收金额之和应该相同</span>
                       </div>
                   </div>
-                  <div class="form-group col-sm-6">
+                  <div class="form-group col-sm-4" style="margin-left: 0; margin-right: 0;">
                       <label class="col-sm-4 control-label">签约乙方<span class="asterisk">*</span></label>
                       <div class="col-sm-8">
                         <input type="text" name="costReceiver" placeholder="签约乙方" class="costReceiver-select fullwidth"/>
                       </div>
                   </div>
-                  <div class="form-group col-sm-6">
+                  <div class="form-group col-sm-4" style="margin-left: 0; margin-right: 0;">
                       <label class="col-sm-4 control-label">付款方式<span class="asterisk">*</span></label>
                       <div class="col-sm-8">
                         <input type="text" id="paymentMethod" name="paymentMethod" placeholder="付款方式" class="paymentMethod-select fullwidth"/>
@@ -499,7 +498,7 @@
 							</tr>
 						</tbody>
 					</table>
-                  <input type="hidden" id="dealOrderId" name="orderId" value="${order.orderId}" />
+                   <input type="hidden" id="dealOrderId" name="orderId" value="${order.orderId}" />
                   <input type="hidden" name="caseId" value="${order.caseId}" />	
                   <input type="hidden" name="customerId" value="${order.customerId}" />	
                   <input type="hidden" name="agencyId" value="${order.agencyId}" />	
@@ -796,15 +795,15 @@
       <div class="modal-body">
 	      <form id="form-comment" class="form row">
 	        <div class="form-group col-sm-6 col-sm-offset-3">
-	              <textarea name="content" class="form-control" rows="5"></textarea>
-	              <input  type="hidden" name="userId" value="${loginUser.userId}" />
-	              <input  type="hidden" name="userName" value="${loginUser.name}" />
-	              <input  type="hidden" name="objectId" value="${order.orderId}" />
-	              <input  type="hidden" name="commentType" value="order" />
+	              <textarea name="content" class="addNote form-control" rows="5"></textarea>
+	              <input  type="hidden" name="userId" class="addNote" value="${loginUser.userId}" />
+	              <input  type="hidden" name="userName" class="addNote" value="${loginUser.name}" />
+	              <input  type="hidden" name="objectId" class="addNote" value="${order.orderId}" />
+	              <input  type="hidden" name="commentType" class="addNote" value="order" />
 	        </div>
 	        <div class="form-group col-sm-12 align-center">
-	          <button class="submit btn btn-primary" >保存注释</button>
-	          <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+	          <input class="addNote btn btn-primary" type="submit" value="保存注释"/>
+	          <button type="button" class="addNote btn btn-default" data-dismiss="modal">关闭</button>
 	        </div>
         </form>
         </div>
@@ -969,23 +968,23 @@
 	
 	jQuery(document).ready(function() {
 		jQuery("#form-deal").validate({
-	            rules: {
+	       rules: {
 		        groupTime: {
-	             	required: true,
-	            	date: true
-           		},
-		        startDate: {
-             		required: true,
-            	 	date: true
-           		},
-		        endDate: {
-		             required: true,
-		             date: true
-        	   },
+             required: true,
+             date: true
+           },
+		          startDate: {
+             required: true,
+             date: true
+           },
+		          endDate: {
+             required: true,
+             date: true
+           },
 		          groupNumber: {
-		             required: true,
-		             number: true
-		       },
+             required: true,
+             number: true
+           },
 		          groupPrice: {
              required: true,
              number: true
@@ -1035,8 +1034,8 @@
 	          costBudget: "请输入一个数字",
 	          costBudgetRmb: "请输入一个数字",
 	          costReceiver: "请输入签约乙方"
-	      },
-	       
+	      }, 
+	      
        highlight: function(element) {
          jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
        },
@@ -1047,9 +1046,7 @@
          return false;
        },   
        submitHandler : function(){
-
-     	  var rmbPrice =parseInt($.trim($("#dealRmbPrice").val())),
-
+     	  var rmbPrice =parseInt($.trim($("#rmbPrice").val())),
      	  	priceBudget1 =parseInt($.trim($('#priceBudget1').val())),
      	  	priceBudget2 =parseInt($.trim($('#priceBudget2').val())),
      	  	priceBudget3 =parseInt($.trim($('#priceBudget3').val())),
@@ -1061,100 +1058,20 @@
      	  if(isNaN(priceBudget4)){priceBudget4 = 0}
      	  if(isNaN(priceBudget5)){priceBudget5 = 0}
      	  	var sumPriceBudget = priceBudget1+priceBudget2+priceBudget3+priceBudget4+priceBudget5;
-
+     	  	//alert("sumPriceBudget:"+sumPriceBudget+"  "+"rmbPrice"+rmbPrice);
      	  	if(sumPriceBudget==rmbPrice){
      	  	 $("#form-deal .submit").attr("disabled","disabled");
+     	  	 $(".rmbpriceErrorMsg").hide();
 	              deal_submit();
 	              return false;
      	  	}
      	  	else{
+     	  		$(".rmbpriceErrorMsg").show();
      	  		return false;
      	  	}
        
        } 
      });
-		
-		jQuery("#form-updateDeal").validate({
-			 rules: {
-			        groupTime: {
-	                required: true,
-	                date: true
-	              },
-			          startDate: {
-	                required: true,
-	                date: true
-	              },
-			          endDate: {
-	                required: true,
-	                date: true
-	              },
-			          groupNumber: {
-	                required: true,
-	                number: true
-	              },
-			          groupPrice: {
-	                required: true,
-	                number: true
-	              },
-	              currency: {
-	                required: true,
-	              },
-			          exchangeRate: {
-	                required: true,
-	                number: true
-	              },
-			          rmbPrice: {
-	                required: true,
-	                number: true
-	              },
-	              	  costBudget: {
-	                required: true,
-	                number: true
-	              },
-	              	  costBudgetRmb: {
-	                required: true,
-	                number: true
-	              },
-	              	  costReceiver: {
-	                required: true
-	              },
-			   },
-			   messages: {
-			        groupTime: {
-		                required: "请输入成团日期",
-		                date: "日期格式 mm/dd/yyyy"
-	             	 },
-			          startDate: {
-		                required: "请输入出发日期",
-		                date: "日期格式 mm/dd/yyyy"
-	                 },
-			           endDate: {
-		                required: "请输入返回日期",
-		                date: "日期格式 mm/dd/yyyy"
-	              	 },
-			          groupNumber: "请输入一个数字",
-			          groupPrice: "请输入一个数字",
-	              	  currency: "请选择货币种类",
-			          exchangeRate: "请输入一个数字",
-			          rmbPrice: "请输入一个数字",
-			          costBudget: "请输入一个数字",
-			          costBudgetRmb: "请输入一个数字",
-			          costReceiver: "请输入签约乙方"
-			      },
-          highlight: function(element) {
-            jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
-          }, 
-          success: function(element) {
-            jQuery(element).closest('.form-group').removeClass('has-error');
-          },
-          invalidHandler : function(){
-            return false;
-          },
-          submitHandler : function(){
-   
-      	   		updateDeal_submit();   	 
-          }
-		});
 		
 		jQuery("#form-noDeal").validate({
 		        rules: {
@@ -2049,6 +1966,7 @@
 		  $('a').attr("disabled",true);
 		  $('#addNote').attr("disabled",false);
 		  //$("#addNote3").children().attr("disabled",false);
+		  $('.addNote').attr("disabled",false);
 		  
 		  
 	  } 

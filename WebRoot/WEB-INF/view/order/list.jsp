@@ -298,7 +298,7 @@
 	              <input  type="hidden" name="commentType" value="order" />
               </div>
               </div><!-- noDealModal-body -->
-          </div>
+         
           <div class="modal-footer align-center">
             <button class="btn btn-primary" >保存</button> 
             <a class="cancel btn btn-primary" >取消</a>
