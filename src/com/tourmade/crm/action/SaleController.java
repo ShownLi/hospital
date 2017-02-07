@@ -67,9 +67,9 @@ public class SaleController extends BaseSimpleFormController {
 		
 		try {
 			String photoName = "photo"+sale.getAgencyId()+sale.getSalesId()+photo.getOriginalFilename();  
-			String photoPath = request.getSession().getServletContext().getRealPath("/WEB-INF/view/attachment/")+photoName;
+			String photoPath = request.getSession().getServletContext().getRealPath("/WEB-INF/view/attachment")+File.separator+photoName;
 			String cardName = "namecard"+sale.getAgencyId()+sale.getSalesId()+namecard.getOriginalFilename();  
-			String cardPath = request.getSession().getServletContext().getRealPath("/WEB-INF/view/attachment/")+cardName;
+			String cardPath = request.getSession().getServletContext().getRealPath("/WEB-INF/view/attachment")+File.separator+cardName;
 			File photoFile = new File(photoPath);  
 			File cardFile = new File(cardPath);  
 	        if (!photoFile.getParentFile().exists()) {  
