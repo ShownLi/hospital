@@ -222,7 +222,5 @@
 			}, "JSON");
 		}
 	</script>
-
-
 </body>
 </html>
