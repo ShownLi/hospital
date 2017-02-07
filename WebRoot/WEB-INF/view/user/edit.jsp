@@ -70,8 +70,9 @@
 	            <div class="form-group col-sm-6">
                   <label class="col-sm-3 control-label">用户权限授权</label>
                   <div class="col-sm-6">
-                    <select name="role_id" class="permission-select fullwidth" multiple="multiple">
-					</select>     
+					<div class="col-sm-8">
+						<input name="role_id" class="permission-select fullwidth" value="${roleName}">
+            		</div>     
                   </div>
                 </div>  
 	        </div>
@@ -120,11 +121,12 @@
 	
 	<script type="text/javascript">
 		var role = ${role_id}
+		var role_id = ${role_id};
 		$(".permission-select").select2({
-	        placeholder: '${roleName}',
-	        data: role
+			minimumResultsForSearch: Infinity,
+			placeholder:'${roleName}',
+	    	data: role_id
 	     });
-		
 		jQuery(document).ready(function() {
 
 			$(".nav-parent").eq(4).addClass("nav-active");
