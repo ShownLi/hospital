@@ -91,8 +91,8 @@ public class CaseController extends BaseSimpleFormController {
 			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 
 			Calendar calendar = Calendar.getInstance(); // 获取当前日期
-			calendar.add(Calendar.MONTH, 0); // 设置当前月份
-			calendar.add(Calendar.DAY_OF_MONTH, -90); // 设置开始时间为90天
+			calendar.set(Calendar.MONTH, -3); // 设置当前月份
+			calendar.set(Calendar.DAY_OF_MONTH, 1);
 			Calendar calendar1 = Calendar.getInstance();
 			model.addAttribute("flag", "restart");
 			session.removeAttribute("searchCase");
@@ -304,30 +304,7 @@ public class CaseController extends BaseSimpleFormController {
 		return "/case/addCase";
 	}
 
-	// map形式，在table里追加,直接生成询单再操作
-	/*
-	 * @RequestMapping(value = "/add.do")
-	 * 
-	 * @ResponseBody
-	 * 
-	 * public Map doAdd(HttpServletRequest request, HttpSession session, Model
-	 * model, Case crmcase) {
-	 * 
-	 * Map<String,Object> customerMap =new HashMap<String,Object>();
-	 * Map<String,String> map =new HashMap();
-	 * 
-	 * try { //判断是否有老客人,(添加询单) List judgeCustomer =
-	 * service.judgeCustomer(crmcase); if(judgeCustomer.size()>0){
-	 * customerMap.put("cust", judgeCustomer); service.saveCase(crmcase);
-	 * customerMap.put("cid",crmcase.getCaseId()); return customerMap;
-	 * //没有老客人，添加客人和询单 }else{ service.saveCustomer(crmcase);
-	 * crmcase.setCustomerId(crmcase.getCustomerId());
-	 * service.saveCase(crmcase); map.put("ok","ok"); return map; }
-	 * 
-	 * } catch (Exception e) { logger.error("CaseController.doAdd() --> " +
-	 * crmcase.toString() + "\n" + e.getMessage()); map.put("error", "error");
-	 * return map; } }
-	 */
+	
 
 	// map形式，在table里追加,先判断联系方式是否已存在，然后选择是否绑定再保存询单
 	@RequestMapping(value = "/add.do")

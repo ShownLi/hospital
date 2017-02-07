@@ -171,8 +171,7 @@
                       
                       <div class="form-group col-sm-4">
                       <div class="col-sm-6"></div>
-                      		<!-- &nbsp;<input id="btn-updateDealModify" class="submit btn btn-primary" type="button" value="更改"/>&nbsp;
- -->                      		<input type="submit" class="submit btn btn-primary" value="更改"/>
+                   		<input type="submit" class="submit btn btn-primary" value="更改"/>
                       	</div>
                   </div>
                   <input type="hidden" name="orderId" value="${order.orderId}" />
@@ -189,7 +188,6 @@
                           <input class="reason-select fullwidth" name="reason" value="${order.reason}" placeholder="若未成行，原因是" />
                         </div>
                     	<button class="btn btn-primary">更改</button>
-<!--                     	<input id="btn-updateNoDealModify" class="btn btn-primary" type="button" value="更改">&nbsp; -->
                       </div>
                   </div><!-- panel-body -->
                       <input type="hidden" name="orderId" value="${order.orderId}" />	
@@ -1102,11 +1100,12 @@
 		        rules: {
 			        reason: {
 			        	required: true,
-			        },	              	
-				},				
+			        },  	
+				},
 		     	 messages: {
 		            reason: "请选择一个原因",
 		      	 },			      
+		      	 
 		          highlight: function(element) {
 		            jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
 		          },

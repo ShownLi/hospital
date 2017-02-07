@@ -333,10 +333,6 @@ public class OrderController extends BaseSimpleFormController {
 			String deadline = priceRecordJson.getJSONObject(key).getString("deadline");
 			String comment = priceRecordJson.getJSONObject(key).getString("comment");
 			
-			/*Iterator its = priceRecordJson.getJSONObject(key).keys();
-			while(its.hasNext()){
-				System.out.println("keys:"+(String)its.next());
-			}*/
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			if(!paymentItem.equals("")&&paymentItem!=null
 					&&!priceBudget.equals("")&&priceBudget!=null
@@ -400,7 +396,6 @@ public class OrderController extends BaseSimpleFormController {
 	@ResponseBody
 	public Json orderNoDeal(HttpServletRequest request, HttpSession session, Model model, Order order,Comment comment) {
 
-		System.out.println(comment);
 		if(comment.getContent()!=null&&comment.getContent()!=""&&comment.getContent().trim()!=""){
 			commentService.saveComment(comment);
 		}

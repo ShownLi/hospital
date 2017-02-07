@@ -58,7 +58,7 @@
                     
                 </ul>
             </li>
-            <li class="nav-parent"><a href="javascript:void(0);"><i class="fa fa-rmb" aria-hidden="true"></i><span>财务管理</span></a>
+            <li class="nav-parent" id="finance"><a href="javascript:void(0);"><i class="fa fa-rmb" aria-hidden="true"></i><span>财务管理</span></a>
                 <ul class="children">
                     <li><a href="${rootPath}finance/list.html"><i class="fa fa-caret-right"></i>财务管理列表</a></li>
                 </ul> 
@@ -111,6 +111,7 @@
 				document.getElementById("parameter").style.display = "block"
 				document.getElementById("signout").style.display = "block"
 				document.getElementById("menu").style.display = "block"
+				document.getElementById("finance").style.display = "block"
 			}
 			if(roleID==2){
 				document.getElementById("case").style.display = "block"
@@ -121,6 +122,7 @@
 				document.getElementById("user").style.display = "none"
 				document.getElementById("parameter").style.display = "none"
 				document.getElementById("signout").style.display = "block"
+				document.getElementById("finance").style.display = "block"
 				document.getElementById("menu").style.display = "none"
 			}
 			if(roleID==3){
@@ -133,6 +135,7 @@
 				document.getElementById("parameter").style.display = "none"
 				document.getElementById("signout").style.display = "block"
 				document.getElementById("menu").style.display = "none"
+				document.getElementById("finance").style.display = "none"
 			}
 			if(roleID==4){
 				document.getElementById("case").style.display = "block"
@@ -144,6 +147,7 @@
 				document.getElementById("parameter").style.display = "none"
 				document.getElementById("signout").style.display = "block"
 				document.getElementById("menu").style.display = "none"
+				document.getElementById("finance").style.display = "none"
 			}
 			if(roleID==5){
 				document.getElementById("case").style.display = "none"
@@ -155,6 +159,19 @@
 				document.getElementById("parameter").style.display = "none"
 				document.getElementById("signout").style.display = "block"
 				document.getElementById("menu").style.display = "none"
+				document.getElementById("finance").style.display = "none"
+			}
+			if(roleID==6){
+				document.getElementById("case").style.display = "none"
+				document.getElementById("order").style.display = "none"
+				document.getElementById("customer").style.display = "none"
+				document.getElementById("agency").style.display = "none"
+				document.getElementById("stats").style.display = "none"
+				document.getElementById("user").style.display = "none"
+				document.getElementById("parameter").style.display = "none"
+				document.getElementById("signout").style.display = "block"
+				document.getElementById("menu").style.display = "none"
+				document.getElementById("finance").style.display = "block"
 			}
 		</script>
 

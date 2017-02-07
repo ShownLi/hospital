@@ -325,6 +325,27 @@
 						</div>
 					</div>
 					<div class="row">
+						<h4 class="col-md-12" style="margin-top: 20px; color: #000;">财务管理栏列表</h4>
+						<div class="col-md-2">
+							<div class="ckbox ckbox-primary">
+								<input id="selectall9" class="selectall" type="checkbox" value="" />
+								<label for="selectall9">全选 </label> 
+							</div>
+						</div>
+						<div class="col-md-2">
+							<div class="ckbox ckbox-primary">
+								<input id="menu_id_52" class="check" name="parametermenu" type="checkbox" value="48" />
+								<label for="menu_id_52">财务管理列表 </label> 
+							</div>
+						</div>
+						<div class="col-md-2">
+							<div class="ckbox ckbox-primary">
+								<input id="menu_id_53" class="check" name="parametermenu" type="checkbox" value="49" />
+								<label for="menu_id_53">财务管理编辑 </label> 
+							</div>
+						</div>
+					</div>
+					<div class="row">
 						<h4 class="col-md-12" style="margin-top: 20px; color: #000;">权限管理栏列表</h4>
 						<div class="col-md-2">
 							<div class="ckbox ckbox-primary">
