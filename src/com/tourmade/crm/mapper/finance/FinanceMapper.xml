@@ -312,6 +312,57 @@
 	)
 	</insert>
 
+	<select id="getPriceRecordById" parameterType="int"
+			resultType="com.tourmade.crm.entity.PriceRecord">
+			SELECT
+			price_id as priceId,
+			price_code as priceCode,
+			order_id
+			as orderId,
+			payment_item as paymentItem,
+			IFNULL(price_budget,0) as
+			priceBudget,
+			deadline,
+			IFNULL(price_real,0) as priceReal,
+			account,
+			received_time as receivedTime,
+			comment,
+			summary,
+			recorder,
+			IFNULL(price_adjust,0) as priceAdjust,
+			status,
+			create_time as
+			createTime,
+			update_time as updateTime,
+			isdel
+			FROM tm_price_record
+			WHERE
+			isdel = 0 and price_id = #{id};
+		</select> 
+		
+		<select id="getCostRecordById" parameterType="int"
+		resultType="com.tourmade.crm.entity.CostRecord">
+		SELECT
+		cost_id as costId,
+		order_id as orderId,
+		agency_id as agencyId,
+		payment_item as paymentItem,
+		IFNULL(cost_budget,0) as costBudget,
+		IFNULL(cost_real,0) as costReal,
+		account,
+		pay_time as payTime,
+		comment,
+		summary,
+		recorder,
+		IFNULL(cost_adjust,0) as costAdjust,
+		status,
+		create_time as createTime,
+		update_time as updateTime,
+		isdel
+		FROM
+		tm_cost_record
+		WHERE isdel = 0 and cost_id = #{id};
+	</select>
 </mapper>
 
 

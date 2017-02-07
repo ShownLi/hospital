@@ -6,7 +6,7 @@
 <link href="${rootPath }assets/css/jquery.datatables.css" rel="stylesheet">
 </head>
 
-<body>
+<body onload="load()">
 	<%@ include file="../assets/pages/preloader.jsp"%>
 	<section>
 		<%@ include file="../assets/pages/leftpanel.jsp"%>
@@ -178,7 +178,9 @@
                   <input type="hidden" name="caseId" value="${order.caseId}" />	
                   <input type="hidden" name="customerId" value="${order.customerId}" />	
               </form> 
-              <form id="form-updateNoDeal" class="form-horizontal" style="display: none">
+
+              <form id="form-updateNoDeal" class="form-horizontal">
+
                   <div class="section-block">
                       <div class="form-group col-sm-6">
                         <label class="col-sm-4 control-label">未成行原因</label>
@@ -414,7 +416,9 @@
                    <div class="form-group col-sm-6">
                       <label class="col-sm-4 control-label">人民币价格<span class="asterisk">*</span></label>
                       <div class="col-sm-8">
-                        <input type="text" id="rmbPrice" name="rmbPrice" placeholder="人民币价格" class="form-control"/>
+                      
+                        <input type="text" id="dealRmbPrice" name="rmbPrice" placeholder="人民币价格" class="form-control"/>
+
                       </div>
                   </div>
                   <div class="form-group col-sm-6">
@@ -496,6 +500,7 @@
                   <input type="hidden" id="dealOrderId" name="orderId" value="${order.orderId}" />
                   <input type="hidden" name="caseId" value="${order.caseId}" />	
                   <input type="hidden" name="customerId" value="${order.customerId}" />	
+                  <input type="hidden" name="agencyId" value="${order.agencyId}" />	
               </div>           
       </div>
       <div class="modal-footer align-center">
@@ -619,7 +624,7 @@
                     </div>
                     <label class="col-sm-4 control-label">应付金额</label>
                     <div class="col-sm-8">
-                      <input class="form-control" name="costBudget" placeholder="应收金额" />
+                      <input class="form-control" name="costBudget" placeholder="应付金额" />
                     </div>
                     <label class="col-sm-4 control-label">备注</label>
                     <div class="col-sm-8">
@@ -777,7 +782,9 @@
 </div><!-- modal -->
 
 
-<div class="commentModal modal fade" id="addNote2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+<div class="modal fade" id="addNote2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -803,7 +810,7 @@
   </div>
 </div>
 
-	<!-- Modal 保存注释信息-->
+	<%-- <!-- Modal 保存注释信息-->
 	<div class="modal fade" id="addNote2" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
@@ -832,7 +839,7 @@
 			<!-- modal-content -->
 		</div>
 		<!-- modal-dialog -->
-	</div>
+	</div> --%>
 	<%@ include file="../assets/pages/foot.jsp"%>
   <script src="${rootPath}assets/js/jquery-ui-1.10.3.min.js"></script>
 	<script src="${rootPath}assets/js/jquery.datatables.min.js"></script>
@@ -866,6 +873,10 @@
 	if('${order.status}'=='2'){
 		$("#dealInfo").css("display","block");
 		$("#form-updateDeal").css("display","block");
+	}
+	if('${order.status}'=='3'){
+		$("#dealInfo").css("display","block");
+		$("#form-updateNoDeal").css("display","block");
 	}
  	$(".currency-select").select2({
 		data: currency
@@ -943,20 +954,20 @@
      
 	if("${order.status}"==2){
  	  $("#form-updateDeal").show();
+ 	 $("#form-updateNoDeal").hide();
       $("#btn-baseDeal").attr("disabled",true);
       $("#btn-baseNoDeal").attr("disabled",true);
  	 }
-    
 	if("${order.status}"==3){
-	  $("#dealInfo").css("display","block");
-      $("#form-updateNoDeal").css("display","block");
+      $("#form-updateNoDeal").show();
+      $("#form-updateDeal").hide();
       $("#btn-baseDeal").attr("disabled",true);
       $("#btn-baseNoDeal").attr("disabled",true);
   	}		
 	
 	jQuery(document).ready(function() {
 		jQuery("#form-deal").validate({
-	           rules: {
+	            rules: {
 		        groupTime: {
 	             	required: true,
 	            	date: true
@@ -1023,7 +1034,7 @@
 	          costBudgetRmb: "请输入一个数字",
 	          costReceiver: "请输入签约乙方"
 	      },
-	      
+	       
        highlight: function(element) {
          jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
        },
@@ -1034,8 +1045,9 @@
          return false;
        },   
        submitHandler : function(){
-    	   alert(11);
-     	  var rmbPrice =parseInt($.trim($("#rmbPrice").val())),
+
+     	  var rmbPrice =parseInt($.trim($("#dealRmbPrice").val())),
+
      	  	priceBudget1 =parseInt($.trim($('#priceBudget1').val())),
      	  	priceBudget2 =parseInt($.trim($('#priceBudget2').val())),
      	  	priceBudget3 =parseInt($.trim($('#priceBudget3').val())),
@@ -1047,8 +1059,7 @@
      	  if(isNaN(priceBudget4)){priceBudget4 = 0}
      	  if(isNaN(priceBudget5)){priceBudget5 = 0}
      	  	var sumPriceBudget = priceBudget1+priceBudget2+priceBudget3+priceBudget4+priceBudget5;
-     	 alert("tmbPrice="+rmbPrice);
-     	 alert("sumPriceBudget="+sumPriceBudget);
+
      	  	if(sumPriceBudget==rmbPrice){
      	  	 $("#form-deal .submit").attr("disabled","disabled");
 	              deal_submit();
@@ -1932,7 +1943,7 @@
 	            });  
 	            args[i]=data;  
 	        });  
-	        alert("data;"+JSON.stringify(args));  
+	        //alert("data;"+JSON.stringify(args));  
 	        return JSON.stringify(args);  
 	    }  
 	 
@@ -2030,14 +2041,19 @@
       $("#endDate").val(dateformat)
   }
 	
+  function load(){
+	  if(financeStatus==3){
+		  $("input").attr("disabled",true);
+		  $("button").attr("disabled",true);
+		  $('a').attr("disabled",true);
+		  $('#addNote').attr("disabled",false);
+		  //$("#addNote3").children().attr("disabled",false);
+		  
+		  
+	  } 
+  }
 
-  if(financeStatus==3){
-	  $("input").attr("disabled",true);
-	  $("button").attr("disabled",true);
-	  $("a").attr("disabled",true);
-	  
-	  
-  } 
+ 
   
 </script>
 
