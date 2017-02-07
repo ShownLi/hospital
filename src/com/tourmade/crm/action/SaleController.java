@@ -98,11 +98,11 @@ public class SaleController extends BaseSimpleFormController {
 			Sale u = service.getSaleById(i);
 			
 			if(u.getPhoto()!=null && u.getNamecard()!=null){
+				
 				String photoPath = u.getPhoto().split("view")[1].toString().replaceAll("\\\\", "/");
 				String cardPath = u.getNamecard().split("view")[1].toString().replaceAll("\\\\", "/");
-				
-				u.setPhotoPath("WEB-INF/view"+photoPath);
-				u.setNameCardPath("WEB-INF/view"+cardPath);
+				u.setPhotoPath("WEB-INF"+File.separator+"view"+photoPath);
+				u.setNameCardPath("WEB-INF"+File.separator+"view"+cardPath);
 			}
 			List<EntityList> v = service.getAgency();
 			JSONArray result = JSONArray.fromObject(v);
