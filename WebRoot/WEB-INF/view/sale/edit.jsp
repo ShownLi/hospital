@@ -111,14 +111,14 @@
             <div class="form-group">
               <label class="col-sm-4 control-label">销售照片</label>
               <div class="col-sm-2">
-              		<img alt="" src="${rootPath}${sales.photoPath}" width="200px" height="200px">
+              		<img alt="" src="${rootPath}${sales.photo}" width="200px" height="200px">
 					<input type="file" name="upphoto" title="请选择照片" />
               </div>
             </div>
             <div class="form-group">
               <label class="col-sm-4 control-label">销售名片</label>
               <div class="col-sm-2">
-              		<img alt="" src="${rootPath}${sales.nameCardPath}" width="200px" height="200px">
+              		<img alt="" src="${rootPath}${sales.namecard}" width="200px" height="200px">
 					<input type="file"  name="upnamecard" title="请选择照片" />
               </div>
             </div>

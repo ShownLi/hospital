@@ -88,7 +88,7 @@
 	<!-- 定时任务end -->
 
 	<mvc:resources mapping="assets/**" location="WEB-INF/view/assets/" cache-period="31556926" />
-
+	<mvc:resources mapping="attachment/**" location="WEB-INF/view/attachment/" cache-period="31556926" />
 	<task:annotation-driven />
 
 </beans> 
