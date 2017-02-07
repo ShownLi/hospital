@@ -69,6 +69,7 @@ public class SaleController extends BaseSimpleFormController {
 			
 			String photoName = "photo"+sale.getAgencyId()+sale.getSalesId()+photo.getOriginalFilename();  
 			String photoPath = request.getSession().getServletContext().getRealPath("/WEB-INF/view/attachment/")+photoName;
+			
 			String cardName = "namecard"+sale.getAgencyId()+sale.getSalesId()+namecard.getOriginalFilename();  
 			String cardPath = request.getSession().getServletContext().getRealPath("/WEB-INF/view/attachment/")+cardName;
 			
