@@ -67,9 +67,10 @@ public class SaleController extends BaseSimpleFormController {
 		
 		try {
 			String photoName = "photo"+sale.getAgencyId()+sale.getSalesId()+photo.getOriginalFilename();  
-			String photoPath = request.getSession().getServletContext().getRealPath("/WEB-INF/view/attachment")+File.separator+photoName;
+			String photoPath = request.getSession().getServletContext().getRealPath("/WEB-INF/view/attachment/")+photoName;
 			String cardName = "namecard"+sale.getAgencyId()+sale.getSalesId()+namecard.getOriginalFilename();  
-			String cardPath = request.getSession().getServletContext().getRealPath("/WEB-INF/view/attachment")+File.separator+cardName;
+			String cardPath = request.getSession().getServletContext().getRealPath("/WEB-INF/view/attachment/")+cardName;
+			
 			File photoFile = new File(photoPath);  
 			File cardFile = new File(cardPath);  
 	        if (!photoFile.getParentFile().exists()) {  
@@ -80,8 +81,8 @@ public class SaleController extends BaseSimpleFormController {
 	        }  
 	        photo.transferTo(photoFile); //保存图片
 	        namecard.transferTo(cardFile); //保存图片
-	        sale.setPhoto(photoPath);
-	        sale.setNamecard(cardPath);
+	        sale.setPhoto("attachment/"+photoName);
+	        sale.setNamecard("attachment/"+cardName);
 			service.saveSale(sale);
 		} catch (Exception e) {
 			logger.error("SaleController.doAdd() --> " + sale.toString() + "\n" + e.getMessage());
@@ -96,14 +97,7 @@ public class SaleController extends BaseSimpleFormController {
 		if (null != id && !"".equals(id)) {
 			int i = Integer.parseInt(id);
 			Sale u = service.getSaleById(i);
-			
-			if(u.getPhoto()!=null && u.getNamecard()!=null){
-				
-				String photoPath = u.getPhoto().split("view")[1].toString().replaceAll("\\\\", "/");
-				String cardPath = u.getNamecard().split("view")[1].toString().replaceAll("\\\\", "/");
-				u.setPhotoPath("WEB-INF"+File.separator+"view"+photoPath);
-				u.setNameCardPath("WEB-INF"+File.separator+"view"+cardPath);
-			}
+		
 			List<EntityList> v = service.getAgency();
 			JSONArray result = JSONArray.fromObject(v);
 			model.addAttribute("agency",result);
@@ -136,9 +130,9 @@ public class SaleController extends BaseSimpleFormController {
 	        }  
 	        photo.transferTo(photoFile); //保存图片
 	        namecard.transferTo(cardFile); //保存图片
-	        sale.setPhoto(photoPath);
-	        sale.setNamecard(cardPath);
-	        
+	        //保存文件的相对路径
+	        sale.setPhoto("attachment/"+photoName);
+	        sale.setNamecard("attachment/"+cardName);
 			service.updateSale(sale);
 		} catch (Exception e) {
 			logger.error("SaleController.doEdit() --> " + sale.toString() + "\n" + e.getMessage());
