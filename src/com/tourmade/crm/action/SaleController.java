@@ -66,10 +66,11 @@ public class SaleController extends BaseSimpleFormController {
 	public String doAdd(HttpServletRequest request, HttpSession session, Model model, Sale sale, @RequestParam("upnamecard")MultipartFile namecard, @RequestParam("upphoto")MultipartFile photo) {
 		
 		try {
-			String photoName = "photo"+sale.getAgencyId()+sale.getSalesId()+photo.getOriginalFilename();  
-			String photoPath = request.getSession().getServletContext().getRealPath("/WEB-INF/view/attachment/")+photoName;
-			String cardName = "namecard"+sale.getAgencyId()+sale.getSalesId()+namecard.getOriginalFilename();  
-			String cardPath = request.getSession().getServletContext().getRealPath("/WEB-INF/view/attachment/")+cardName;
+			String photoName = "/photo"+sale.getAgencyId()+sale.getSalesId()+photo.getOriginalFilename();  
+			String photoPath = request.getSession().getServletContext().getRealPath("/WEB-INF/view/attachment")+photoName;
+			System.out.println(photoPath);
+			String cardName = "/namecard"+sale.getAgencyId()+sale.getSalesId()+namecard.getOriginalFilename();  
+			String cardPath = request.getSession().getServletContext().getRealPath("/WEB-INF/view/attachment")+cardName;
 			
 			File photoFile = new File(photoPath);  
 			File cardFile = new File(cardPath);  
@@ -81,8 +82,8 @@ public class SaleController extends BaseSimpleFormController {
 	        }  
 	        photo.transferTo(photoFile); //保存图片
 	        namecard.transferTo(cardFile); //保存图片
-	        sale.setPhoto("attachment/"+photoName);
-	        sale.setNamecard("attachment/"+cardName);
+	        sale.setPhoto("attachment"+photoName);
+	        sale.setNamecard("attachment"+cardName);
 			service.saveSale(sale);
 		} catch (Exception e) {
 			logger.error("SaleController.doAdd() --> " + sale.toString() + "\n" + e.getMessage());
