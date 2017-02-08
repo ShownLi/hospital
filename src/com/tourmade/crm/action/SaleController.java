@@ -1,15 +1,11 @@
 package com.tourmade.crm.action;
 
 import java.io.File;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,13 +66,13 @@ public class SaleController extends BaseSimpleFormController {
 		
 		try {
 			Date d = new Date();
-		    SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+		    SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssSSS");
 		    String date = sdf.format(d);
 			
 			String photoName = "/photo"+date+photo.getContentType().replace("image/", ".");  
-			String photoPath = request.getSession().getServletContext().getRealPath("/WEB-INF/view/attachment")+"/"+sale.getAgencyId()+photoName;
+			String photoPath = request.getSession().getServletContext().getRealPath("/WEB-INF/view/attachment/sales")+"/"+sale.getAgencyId()+photoName;
 			String cardName = "/namecard"+date+namecard.getContentType().replace("image/", ".");  
-			String cardPath = request.getSession().getServletContext().getRealPath("/WEB-INF/view/attachment")+"/"+sale.getAgencyId()+cardName;
+			String cardPath = request.getSession().getServletContext().getRealPath("/WEB-INF/view/attachment/sales")+"/"+sale.getAgencyId()+cardName;
 			
 			File photoFile = new File(photoPath);  
 			File cardFile = new File(cardPath);  
@@ -89,8 +85,8 @@ public class SaleController extends BaseSimpleFormController {
 	        }  
 	        photo.transferTo(photoFile); //保存图片
 	        namecard.transferTo(cardFile); //保存图片
-	        sale.setPhoto("attachment"+"/"+sale.getAgencyId()+photoName);
-	        sale.setNamecard("attachment"+"/"+sale.getAgencyId()+cardName);
+	        sale.setPhoto("attachment/sales"+"/"+sale.getAgencyId()+photoName);
+	        sale.setNamecard("attachment/sales"+"/"+sale.getAgencyId()+cardName);
 			service.saveSale(sale);
 		} catch (Exception e) {
 			logger.error("SaleController.doAdd() --> " + sale.toString() + "\n" + e.getMessage());
@@ -123,27 +119,37 @@ public class SaleController extends BaseSimpleFormController {
 			}
 			
 			Date d = new Date();
-		    SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+		    SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssSSS");
 		    String date = sdf.format(d);
 			
+		    Sale oldSale = service.getSaleById(sale.getSalesId());
+		    
 			String photoName = "/photo"+date+photo.getContentType().replace("image/", ".");  
-			String photoPath = request.getSession().getServletContext().getRealPath("/WEB-INF/view/attachment")+"/"+sale.getAgencyId()+photoName;
+			String photoPath = request.getSession().getServletContext().getRealPath("/WEB-INF/view/attachment/sales")+"/"+sale.getAgencyId()+photoName;
 			String cardName = "/namecard"+date+namecard.getContentType().replace("image/", ".");  
-			String cardPath = request.getSession().getServletContext().getRealPath("/WEB-INF/view/attachment")+"/"+sale.getAgencyId()+cardName;
+			String cardPath = request.getSession().getServletContext().getRealPath("/WEB-INF/view/attachment/sales")+"/"+sale.getAgencyId()+cardName;
 			File photoFile = new File(photoPath);  
 			File cardFile = new File(cardPath);  
 			
 	        if (!photoFile.exists()) {  
-	        	photoFile.mkdirs();  
+	        	photoFile.mkdirs(); 
 	        }  
 	        if (!photoFile.exists()) {  
-	        	photoFile.createNewFile();  
+	        	photoFile.createNewFile(); 
 	        }  
-	        photo.transferTo(photoFile); //保存图片
-	        namecard.transferTo(cardFile); //保存图片
-	        //保存文件的相对路径
-	        sale.setPhoto("attachment"+"/"+sale.getAgencyId()+photoName);
-	        sale.setNamecard("attachment"+"/"+sale.getAgencyId()+cardName);
+	        if(photo.getContentType().contains("image")){
+	        	photo.transferTo(photoFile); //保存图片
+	        	sale.setPhoto("attachment/sales"+"/"+sale.getAgencyId()+photoName);//保存文件的相对路径
+	        }else{
+	        	sale.setPhoto(oldSale.getPhoto());
+	        }
+	        if(namecard.getContentType().contains("image")){
+	        	namecard.transferTo(cardFile); //保存图片
+	        	sale.setNamecard("attachment/sales"+"/"+sale.getAgencyId()+cardName);//保存文件的相对路径
+	        }else{
+	        	sale.setNamecard(oldSale.getNamecard());
+	        }
+	        
 			service.updateSale(sale);
 		} catch (Exception e) {
 			logger.error("SaleController.doEdit() --> " + sale.toString() + "\n" + e.getMessage());

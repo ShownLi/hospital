@@ -382,9 +382,15 @@ public class OrderController extends BaseSimpleFormController {
 			
 		}
 
+	
+		
+		Json json = new Json();	
+		Order oldOrder = service.getOrderById(order.getOrderId());
+		Case crmcase = caseService.getCaseById(oldOrder.getCaseId());
+		
 		//生成一条总的付款记录
 		CostRecord cRecord = new CostRecord();
-		cRecord.setAgencyId(order.getAgencyId());
+		cRecord.setAgencyId(oldOrder.getAgencyId());
 		cRecord.setPaymentItem(1);
 		cRecord.setStatus(1);
 		cRecord.setCostBudget(order.getCostBudgetRmb());
@@ -392,9 +398,7 @@ public class OrderController extends BaseSimpleFormController {
 		
 		financeService.saveCostRecord(cRecord);
 		
-		Json json = new Json();	
-		Order oldOrder = service.getOrderById(order.getOrderId());
-		Case crmcase = caseService.getCaseById(oldOrder.getCaseId());
+		
 		
 		order.setStatus("2");
 		order.setOrderCode(oldOrder.getCaseId()+"-"+order.getOrderId());
