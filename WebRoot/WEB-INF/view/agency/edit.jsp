@@ -466,12 +466,10 @@
 	}
 	
 	function doDel(id){
-		alert("0000");
 		$.ajax({
 			url: "${rootPath}sale/del.do?id=" + id, 
 			async: true,
 			success: function() {
-				alert(22);
 				window.location.reload();
 			},
 			error: function() {

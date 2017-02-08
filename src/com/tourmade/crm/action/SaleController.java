@@ -1,15 +1,11 @@
 package com.tourmade.crm.action;
 
 import java.io.File;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,7 +66,7 @@ public class SaleController extends BaseSimpleFormController {
 		
 		try {
 			Date d = new Date();
-		    SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+		    SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssSSS");
 		    String date = sdf.format(d);
 			
 			String photoName = "/photo"+date+photo.getContentType().replace("image/", ".");  
@@ -123,7 +119,7 @@ public class SaleController extends BaseSimpleFormController {
 			}
 			
 			Date d = new Date();
-		    SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+		    SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssSSS");
 		    String date = sdf.format(d);
 			
 			String photoName = "/photo"+date+photo.getContentType().replace("image/", ".");  
