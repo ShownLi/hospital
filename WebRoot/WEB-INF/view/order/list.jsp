@@ -110,6 +110,7 @@
 	<script src="${rootPath}assets/js/jquery.datatables.min.js"></script>
 	<script src="${rootPath}assets/js/select2.min.js"></script>
 	<script src="${rootPath}assets/js/jquery.validate.min.js"></script>
+	<script src="${rootPath}assets/js/jquery-ui-timepicker-addon.js"></script>
 
 
 <!-- dealModal -->
@@ -856,7 +857,7 @@
 		  
 		// Date Picker
 		jQuery(".datepicker").datepicker({
-			  dateFormat: "yy-mm-dd"
+			  dateFormat: "yy-mm-dd",
 	  	});
 /*  	    $(".dealModal .submit").click(function(){
 	    	deal_submit();
