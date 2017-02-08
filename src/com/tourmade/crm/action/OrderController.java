@@ -321,8 +321,8 @@ public class OrderController extends BaseSimpleFormController {
 			System.out.println("paraName:"+paraName+","+"paraValue:"+paraValue);
 			
 		}*/
-
-		order.setStatus("2");
+		
+		
 		
 		JSONObject priceRecordJson = JSONObject.fromObject(priceRecord);
 		Iterator it = priceRecordJson.keys();
@@ -373,6 +373,10 @@ public class OrderController extends BaseSimpleFormController {
 		Json json = new Json();	
 		Order oldOrder = service.getOrderById(order.getOrderId());
 		Case crmcase = caseService.getCaseById(oldOrder.getCaseId());
+		
+		order.setStatus("2");
+		order.setOrderCode(oldOrder.getCaseId()+"-"+order.getOrderId());
+		order.setFinanceStatus(1);
 		
 		try {
 			service.updateOrderDeal(order);			
