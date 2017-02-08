@@ -179,15 +179,21 @@
 						<div class="section-block noline">
 							<div class="form-group col-sm-12">
 								<label class="col-sm-4 control-label">款项</label>
-								<label class="col-sm-8 " id="priceFormPayItem">团款</label>
+								<div class="col-sm-8">	
+									<div class="form-text" id="priceFormPayItem">团款</div>
+								</div>
 							</div>
 							<div class="form-group col-sm-12">
 								<label class="col-sm-4 control-label">应收金额</label>
-								<label class="col-sm-8 " id="priceFormPriceBudget"></label>
+								<div class="col-sm-8">	
+									<div class="form-text" id="priceFormPriceBudget"></div>
+								</div>
 							</div>
 							<div class="form-group col-sm-12">
 								<label class="col-sm-4 control-label">实收金额</label>
-								<input class="col-sm-8 " id="priceFormPriceReal" name="priceReal" placeholder="实收金额"/>
+								<div class="col-sm-8">	
+									<input class="form-control" id="priceFormPriceReal" name="priceReal" placeholder="实收金额"/>
+								</div>
 							</div>
 							<div class="form-group col-sm-12">
 								<label class="col-sm-4 control-label">收款账户</label>
@@ -201,12 +207,14 @@
 									<div class="input-group input-datepicker" style="padding: 0;">
 				                        <input readonly="readonly" id="priceFormReceivedTime" type="text" name="receivedTime" class="form-control datepicker" placeholder="收款日期" autocomplete="on">
 				                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-				                </div>
-				            </div>
+					                </div>
+					            </div>
 							</div>
 							<div class="form-group col-sm-12">
 								<label class="col-sm-4 control-label">摘要</label>
-								<textarea class="col-sm-8 " name="summary" id="priceFormSummary">款项</textarea>
+								<div class="col-sm-8">	
+									<textarea class="form-control" name="summary" id="priceFormSummary">款项</textarea>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -237,15 +245,21 @@
 							
 							<div class="form-group col-sm-12">
 								<label class="col-sm-4 control-label">应收金额</label>
-								<label class="col-sm-8 " id="AdjustFormPriceBudget"></label>
+								<div class="col-sm-8">	
+									<div class="form-text" id="AdjustFormPriceBudget"></div>
+								</div>
 							</div>
 							<div class="form-group col-sm-12">
 								<label class="col-sm-4 control-label">实收金额</label>
-								<label class="col-sm-8 " id="AdjustFormPriceReal"></label>
+								<div class="col-sm-8">	
+									<div class="form-text" id="AdjustFormPriceReal"></div>
+								</div>
 							</div>
 							<div class="form-group col-sm-12">
 								<label class="col-sm-4 control-label">调整金额</label>
-								<input class="col-sm-8 " id="AdjustFormPriceAdjust" name="priceAdjust" placeholder="调整金额"/>
+								<div class="col-sm-8">	
+									<input class="form-control" id="AdjustFormPriceAdjust" name="priceAdjust" placeholder="调整金额"/>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -274,19 +288,27 @@
 						<div class="section-block noline">
 						<div class="form-group col-sm-12">
 								<label class="col-sm-4 control-label">供应商</label>
-								<label class="col-sm-8 " id="costFormAgency"></label>
+								<div class="col-sm-8">
+									<div class="form-text" id="costFormAgency"></div>
+								</div>
 							</div>
 							<div class="form-group col-sm-12">
 								<label class="col-sm-4 control-label">款项</label>
-								<label class="col-sm-8 " id="costFormPayItem"></label>
+								<div class="col-sm-8">
+									<div class="form-text" id="costFormPayItem"></div>
+								</div>
 							</div>
 							<div class="form-group col-sm-12">
 								<label class="col-sm-4 control-label">应付金额</label>
-								<label class="col-sm-8 " id="costFormCostBudget"></label>
+								<div class="col-sm-8">
+									<div class="form-text" id="costFormCostBudget"></div>
+								</div>
 							</div>
 							<div class="form-group col-sm-12">
 								<label class="col-sm-4 control-label">实付 金额</label>
-								<input class="col-sm-8 " id="costFormCostReal" name="costReal" placeholder="实收金额"/>
+								<div class="col-sm-8">
+									<input class="form-control" id="costFormCostReal" name="costReal" placeholder="实收金额"/>
+								</div>
 							</div>
 							<div class="form-group col-sm-12">
 								<label class="col-sm-4 control-label">付款账户</label>
@@ -305,7 +327,9 @@
 							</div>
 							<div class="form-group col-sm-12">
 								<label class="col-sm-4 control-label">摘要</label>
-								<textarea class="col-sm-8 " name="summary" id="costFormSummary">款项</textarea>
+								<div class="col-sm-8">	
+									<textarea class="form-control" name="summary" id="costFormSummary">款项</textarea>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -336,15 +360,21 @@
 							
 							<div class="form-group col-sm-12">
 								<label class="col-sm-4 control-label">应付金额</label>
-								<label class="col-sm-8 " id="AdjustFormCostBudget"></label>
+								<div class="col-sm-8">	
+									<div class="form-text" id="AdjustFormCostBudget"></div>
+								</div>
 							</div>
 							<div class="form-group col-sm-12">
 								<label class="col-sm-4 control-label">实付金额</label>
-								<label class="col-sm-8 " id="AdjustFormCostReal"></label>
+								<div class="col-sm-8">	
+									<div class="form-text" id="AdjustFormCostReal"></div>
+								</div>
 							</div>
 							<div class="form-group col-sm-12">
 								<label class="col-sm-4 control-label">调整金额</label>
-								<input class="col-sm-8 " id="AdjustFormCostAdjust" name="costAdjust" placeholder="调整金额"/>
+								<div class="col-sm-8">	
+									<input class="form-control" id="AdjustFormCostAdjust" name="costAdjust" placeholder="调整金额"/>
+								</div>
 							</div>
 						</div>
 					</div>
