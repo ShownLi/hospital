@@ -69,11 +69,14 @@ public class SaleController extends BaseSimpleFormController {
 	public String doAdd(HttpServletRequest request, HttpSession session, Model model, Sale sale, @RequestParam("upnamecard")MultipartFile namecard, @RequestParam("upphoto")MultipartFile photo) {
 		
 		try {
+			Date d = new Date();
+		    SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+		    String date = sdf.format(d);
 			
-			String photoName = "/photo"+sale.getAgencyId()+sale.getSalesId()+photo.getOriginalFilename();  
-			String photoPath = request.getSession().getServletContext().getRealPath("/WEB-INF/view/attachment")+photoName;
-			String cardName = "/namecard"+sale.getAgencyId()+sale.getSalesId()+namecard.getOriginalFilename();  
-			String cardPath = request.getSession().getServletContext().getRealPath("/WEB-INF/view/attachment")+cardName;
+			String photoName = "/photo"+date+photo.getContentType().replace("image/", ".");  
+			String photoPath = request.getSession().getServletContext().getRealPath("/WEB-INF/view/attachment")+"/"+sale.getAgencyId()+photoName;
+			String cardName = "/namecard"+date+namecard.getContentType().replace("image/", ".");  
+			String cardPath = request.getSession().getServletContext().getRealPath("/WEB-INF/view/attachment")+"/"+sale.getAgencyId()+cardName;
 			
 			File photoFile = new File(photoPath);  
 			File cardFile = new File(cardPath);  
@@ -86,8 +89,8 @@ public class SaleController extends BaseSimpleFormController {
 	        }  
 	        photo.transferTo(photoFile); //保存图片
 	        namecard.transferTo(cardFile); //保存图片
-	        sale.setPhoto("attachment"+photoName);
-	        sale.setNamecard("attachment"+cardName);
+	        sale.setPhoto("attachment"+"/"+sale.getAgencyId()+photoName);
+	        sale.setNamecard("attachment"+"/"+sale.getAgencyId()+cardName);
 			service.saveSale(sale);
 		} catch (Exception e) {
 			logger.error("SaleController.doAdd() --> " + sale.toString() + "\n" + e.getMessage());
