@@ -334,13 +334,13 @@
 						</div>
 						<div class="col-md-2">
 							<div class="ckbox ckbox-primary">
-								<input id="menu_id_52" class="check" name="parametermenu" type="checkbox" value="48" />
+								<input id="menu_id_52" class="check" name="parametermenu" type="checkbox" value="54" />
 								<label for="menu_id_52">财务管理列表 </label> 
 							</div>
 						</div>
 						<div class="col-md-2">
 							<div class="ckbox ckbox-primary">
-								<input id="menu_id_53" class="check" name="parametermenu" type="checkbox" value="49" />
+								<input id="menu_id_53" class="check" name="parametermenu" type="checkbox" value="55" />
 								<label for="menu_id_53">财务管理编辑 </label> 
 							</div>
 						</div>
