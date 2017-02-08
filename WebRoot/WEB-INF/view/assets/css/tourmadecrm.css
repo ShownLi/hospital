@@ -269,4 +269,5 @@ label.error{
     font-size: 14px;
     line-height: 1.42857;
     padding: 10px;
+    min-height: 44px;
 }
