@@ -262,7 +262,7 @@ label.error{
 .form-text{
 	background-color: #fff;
     background-image: none;
-    border: 1px solid #ccc;
+/*    border: 1px solid #ccc;*/
     border-radius: 4px;
     color: #555;
     display: block;
