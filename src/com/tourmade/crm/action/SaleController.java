@@ -116,10 +116,10 @@ public class SaleController extends BaseSimpleFormController {
 				service.updateOrderEmail(sale);
 			}
 			
-			String photoName = "photo"+sale.getAgencyId()+sale.getSalesId()+photo.getOriginalFilename();  
-			String photoPath = request.getSession().getServletContext().getRealPath("/WEB-INF/view/attachment/")+photoName;
-			String cardName = "namecard"+sale.getAgencyId()+sale.getSalesId()+namecard.getOriginalFilename();  
-			String cardPath = request.getSession().getServletContext().getRealPath("/WEB-INF/view/attachment/")+cardName;
+			String photoName = "/photo"+sale.getAgencyId()+sale.getSalesId()+photo.getOriginalFilename();  
+			String photoPath = request.getSession().getServletContext().getRealPath("/WEB-INF/view/attachment")+photoName;
+			String cardName = "/namecard"+sale.getAgencyId()+sale.getSalesId()+namecard.getOriginalFilename();  
+			String cardPath = request.getSession().getServletContext().getRealPath("/WEB-INF/view/attachment")+cardName;
 			File photoFile = new File(photoPath);  
 			File cardFile = new File(cardPath);  
 			
@@ -132,8 +132,8 @@ public class SaleController extends BaseSimpleFormController {
 	        photo.transferTo(photoFile); //保存图片
 	        namecard.transferTo(cardFile); //保存图片
 	        //保存文件的相对路径
-	        sale.setPhoto("attachment/"+photoName);
-	        sale.setNamecard("attachment/"+cardName);
+	        sale.setPhoto("attachment"+photoName);
+	        sale.setNamecard("attachment"+cardName);
 			service.updateSale(sale);
 		} catch (Exception e) {
 			logger.error("SaleController.doEdit() --> " + sale.toString() + "\n" + e.getMessage());
