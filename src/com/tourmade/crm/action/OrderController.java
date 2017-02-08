@@ -3,6 +3,7 @@ package com.tourmade.crm.action;
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.Iterator;
@@ -107,29 +108,50 @@ public class OrderController extends BaseSimpleFormController {
 		model.addAttribute("costStatus",costStatusResult);
 		
 		if ("".equals(flag) || flag == null) {
+			
+			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+
+			Calendar calendar = Calendar.getInstance(); // 获取当前日期
+			calendar.set(Calendar.MONTH, -3); // 设置当前月份
+			calendar.set(Calendar.DAY_OF_MONTH, 1);
+			Calendar calendar1 = Calendar.getInstance();
 			model.addAttribute("flag", "restart");
 			session.removeAttribute("searchOrder");
+			Order cs= new Order();
+			cs.setSearchStartTime(format.format(calendar.getTime()));
+			cs.setSearchEndTime(format.format(calendar1.getTime()));
+			
+			session.setAttribute("searchOrder",cs);
 		} else
 			model.addAttribute("flag", flag);
 		return "/order/list";
 	}
 	
-	@RequestMapping(value = "/list.do",produces="application/json;charset=utf-8")
+	@RequestMapping(value = "/list.do", produces = "application/json;charset=utf-8")
 	@ResponseBody
-	public String queryData(String flag,HttpServletRequest request, HttpSession session, Model model, Order order, PageHelper page) {
-
+	public String queryData(String flag, HttpServletRequest request, HttpSession session, Model model, Order order,
+			PageHelper page) {
+		if (order.getSearchStartTime() == null) {
+			order.setSearchStartTime("");
+		}
+		if (order.getSearchEndTime() == null) {
+			order.setSearchEndTime("");
+		}
 		if ("old".equals(flag)) {
 			Order search = (Order) session.getAttribute("searchOrder");
-			if(search==null)
-				search=new Order();
+			if (search == null)
+				search = new Order();
 			order = search;
-		}else{
+		} else {
 			session.setAttribute("searchOrder", order);
 		}
-		
+
 		QueryResult<Order> queryResult = service.queryOrder(order, page, request);
 		String result = JSONUtilS.object2json(queryResult);
-
+		if (order.getSearchStartTime() != null && order.getSearchStartTime() != "")
+			order.setSearchStartTime(order.getSearchStartTime().substring(0, 10));
+		if (order.getSearchEndTime() != null && order.getSearchEndTime() != "")
+			order.setSearchEndTime(order.getSearchEndTime().substring(0, 10));
 		return result;
 	}
 

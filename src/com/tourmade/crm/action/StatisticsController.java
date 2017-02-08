@@ -1195,7 +1195,7 @@ public class StatisticsController extends BaseSimpleFormController {
 		Map<String, Object> dataMap = new HashMap<>();
 		QueryResult<CaseAllotStats> result = queryCaseAllotStatsMethod(request, caseAllotStats, page);
 		dataMap.put("dataList", result.getData());// 将数据放入Map中
-		String title = "跟单员,询单总数量,网站表单询单数,手机表单,直发表单,微信表单,网站在线客服,手机在线客服,电话客服,微信客服,线下活动,邮件咨询,朋友介绍,老客人,携程";
+		String title = "跟单员,网站表单询单数,手机表单,直发表单,微信表单,网站在线客服,手机在线客服,电话客服,微信客服,线下活动,邮件咨询,朋友介绍,老客人,携程,询单总数量";
 		dataMap.put("fileName", "询单分配统计表（" + caseAllotStats.getSearchStartTime().substring(0,caseAllotStats.getSearchStartTime().length()-9 ) + "-"
 				+ caseAllotStats.getSearchEndTime().substring(0,caseAllotStats.getSearchEndTime().length()-9 ) + "）.csv");// 拼接csv表名
 		try {
