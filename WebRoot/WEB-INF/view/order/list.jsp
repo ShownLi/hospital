@@ -48,6 +48,19 @@
 								<div class="col-sm-2">
 									<input type="text" id="searchStatus" class="status-select fullwidth" value="${searchOrder.status }" />
 								</div>
+								
+								<div class="col-sm-2">
+									<div class="input-group input-datepicker" style="padding: 0;">
+				                        <input readonly="readonly" id="searchStartTime" type="text" name="searchStartTime" class="form-control datepicker" placeholder="请点击输入查询开始日期" value="${searchOrder.searchStartTime}" autocomplete="on">
+				                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+				                    </div>
+				                </div>
+			                    <div class="col-sm-2">
+				                    <div class="input-group input-datepicker" style="padding: 0;">
+				                        <input readonly="readonly" id="searchEndTime" type="text" name="searchEndTime" class="form-control datepicker" placeholder="请点击输入查询截止日期" value="${searchOrder.searchEndTime}" autocomplete="on">
+				                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+				                    </div>
+			                    </div>
 							</div>	
 							<div class="col-sm-2">					 		                        		
 								<input class="btn btn-primary" type="button" id="searchBtn" value="搜索"/>
@@ -326,7 +339,8 @@
     </div><!-- modal-content -->
   </div><!-- modal-dialog -->
 </div><!-- modal -->
-
+<script src="${rootPath}assets/js/datepicker-zh-CN.js"></script>
+	<script src="${rootPath}assets/js/datetimepicker-cn.js"></script>
 	<script type="text/javascript">
 	var orderStatus = ${orderStatus};
 	var destination = ${destination};
@@ -389,7 +403,18 @@
     	data:financeItem,
     	allowClear:true
     });
-    
+  //设置日历控件
+	 $("#searchStartTime").datepicker({
+	        dateFormat: "yy-mm-dd",
+	        changeYear: true,
+	        changeMonth: true
+	     });
+	    
+  	$("#searchEndTime").datepicker({
+       dateFormat: "yy-mm-dd",
+       changeYear: true,
+       changeMonth: true
+    });
     
     $('.paymentMethod-select').change(function(){
    		//var payMethod = $("#paymentMethod").select2('data')[0].id;
@@ -581,6 +606,8 @@
 			 			if(searchStatus !=null && searchStatus !="" ){
 							data.status = searchStatus;
 			 			} 
+			 			data.searchStartTime = $('#searchStartTime').val();
+			 			data.searchEndTime = $('#searchEndTime').val();
 			 			
 					},
 
