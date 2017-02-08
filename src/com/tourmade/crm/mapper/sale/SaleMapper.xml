@@ -10,7 +10,6 @@
 			u.sales_name as salesName,
 			u.sales_email as salesEmail,
 			u.title as title,
-			u.sales_name_en as salesEnglishName,
 			u.telephone as telephone,
 			u.mobilephone as mobilephone,
 			u.fax as fax,
@@ -36,7 +35,6 @@
 	<insert id="saveSale" parameterType="Sale" flushCache="true" useGeneratedKeys="true" keyProperty="salesId" keyColumn="GENERATED_KEY">
 		insert into tm_sales(
 			sales_name,
-			sales_name_en,
 			sales_portal_id,
 			agency_id,
 			sales_email,
@@ -57,7 +55,6 @@
 			isdel
 		)values(
 			#{salesName,jdbcType=VARCHAR},
-			#{salesEnglishName,jdbcType=VARCHAR},
 			#{salesPortalId,jdbcType=VARCHAR},
 			#{agencyId,jdbcType=VARCHAR},
 			#{salesEmail,jdbcType=VARCHAR},
@@ -83,7 +80,6 @@
 		update tm_sales set
 			sales_name=#{salesName},
 			title=#{title},
-			sales_name_en=#{salesEnglishName},
 			sales_portal_id=#{salesPortalId},
 			sales_email=#{salesEmail},
 			telephone=#{telephone},
@@ -109,7 +105,6 @@
 			u.sales_name as salesName,
 			u.sales_email as salesEmail,
 			u.title as title,
-			u.sales_name_en as salesEnglishName,
 			u.telephone as telephone,
 			u.mobilephone as mobilephone,
 			u.fax as fax,
