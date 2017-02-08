@@ -140,8 +140,8 @@ public class SaleController extends BaseSimpleFormController {
 	        photo.transferTo(photoFile); //保存图片
 	        namecard.transferTo(cardFile); //保存图片
 	        //保存文件的相对路径
-	        sale.setPhoto("attachment"+"/"+sale.getAgencyId()+photoName);
-	        sale.setNamecard("attachment"+"/"+sale.getAgencyId()+cardName);
+	        sale.setPhoto("attachment"+photoName);
+	        sale.setNamecard("attachment"+cardName);
 			service.updateSale(sale);
 		} catch (Exception e) {
 			logger.error("SaleController.doEdit() --> " + sale.toString() + "\n" + e.getMessage());
