@@ -172,7 +172,7 @@
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"
 						aria-hidden="true">&times;</button>
-					<div class="nextModal-title">收款编辑</div>
+					<div class="nextModal-title" style="text-align: center;">收款编辑</div>
 				</div>
 				<form class="form-horizontal" id="form-priceRecordEdit" >
 					<div class="modal-body">
