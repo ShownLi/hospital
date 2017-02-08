@@ -77,7 +77,7 @@ public class AgencyController extends BaseSimpleFormController {
 		String language = "agency.language";
 		String agencyService = "agency.service";
 		String source = "agency.source";
-		String currency = "agency.currency";
+		String currency = "order.currency";
 		String payment = "agency.payment";
 		String status = "agency.status";
 		List<EntityList> countryList = service.getParameterInfo(country);
@@ -131,7 +131,7 @@ public class AgencyController extends BaseSimpleFormController {
 			String language = "agency.language";
 			String agencyService = "agency.service";
 			String source = "agency.source";
-			String currency = "agency.currency";
+			String currency = "order.currency";
 			String payment = "agency.payment";
 			String status = "agency.status";
 			List<EntityList> countryList = service.getParameterInfo(country);
