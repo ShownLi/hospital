@@ -442,4 +442,14 @@ public class MenuService extends BaseService {
 		
 		return md5StrBuff.toString();		
 	}
+	
+	public List<Menu> getMenuRoleList(){
+		List<Menu> menu = null;
+		try{
+			menu = menuMapper.getMenuRoleList();
+		}catch(Exception e){
+			logger.error("MenuService.getMenuRoleList() --> " +  "-->" + e.getMessage());
+		}
+		return menu;
+	}
 }
