@@ -73,6 +73,7 @@
          <if test="searchEndTime != null and searchEndTime != ''">
         	 	and  u.creat_time &lt;= #{searchEndTime}
          </if>
+         
 		order by u.creat_time desc
 		limit #{start},#{length}
 	</select>

@@ -545,7 +545,7 @@
 		            	 orderable: false,
 		            	 render: function(data) {
 		            		 if(data)
-		            			 return new Date(data).format("yyyy-MM-dd hh:mm:ss");
+		            			 return new Date(data).format("yyyy-MM-dd hh时");
 		            		 else
 		            			 return '';
 		            		 }

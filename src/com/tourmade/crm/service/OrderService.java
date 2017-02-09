@@ -87,6 +87,15 @@ public class OrderService extends BaseService {
 		if(order.getCustomerEmailReal()!=null){
 			map.put("email", order.getCustomerEmailReal());
 		}
+		
+		if (order.getSearchStartTime() != null) {
+			order.setSearchStartTime(order.getSearchStartTime() + " 00:00:00");
+			map.put("searchStartTime", order.getSearchStartTime());
+		}
+		if (order.getSearchEndTime() != null) {
+			order.setSearchEndTime(order.getSearchEndTime() + " 24:00:00");
+			map.put("searchEndTime", order.getSearchEndTime());
+		}
 		List<Order> data = orderMapper.queryOrder(map);
 		long count = orderMapper.countOrder(order);
 			
