@@ -1,4 +1,5 @@
 ﻿<%@ page language="java" pageEncoding="utf-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -39,7 +40,7 @@
 	            </div>
 	            <div>
 
-	           		<div class="container">
+	           	<div class="container">
 					<div class="row">
 						<h4 class="col-md-12" style="margin-top: 20px; color: #000;">询单栏列表</h4>
 						<div class="col-md-2">
@@ -48,37 +49,18 @@
 								<label for="selectall1">全选 </label> 
 							</div>
 						</div>
-						<div class="col-md-2">
-							<div class="ckbox ckbox-primary">
-								<input id="menu_id_4" class="check" name="casemenu" type="checkbox" value="3" />
-								<label for="menu_id_4">询单展示列表界面 </label> 
-							</div>
-						</div>
-						<div class="col-md-2">
-							<div class="ckbox ckbox-primary">
-								<input id="menu_id_5" class="check" name="casemenu" type="checkbox" value="4" />
-								<label for="menu_id_5">新增询单界面 </label> 
-							</div>
-						</div>
-						<div class="col-md-2">
-							<div class="ckbox ckbox-primary">
-								<input id="menu_id_6" class="check" name="casemenu" type="checkbox" value="5" />
-								<label for="menu_id_6">编辑询单页面 </label>
-							</div>
-						</div> 
-						<div class="col-md-2">
-							<div class="ckbox ckbox-primary">
-								<input id="menu_id_7" class="check" name="casemenu" type="checkbox" value="18" />
-								<label for="menu_id_7">用户列表新增询单界面 </label> 
-							</div>
-						</div>
-						<div class="col-md-2">
-							<div class="ckbox ckbox-primary">
-								<input id="menu_id_8" class="check" name="casemenu" type="checkbox" value="19" />
-								<label for="menu_id_8">询单处理界面 </label>
-							</div>
-						</div>
+						  <c:forEach items="${menu}" var="menu">
+							<c:if test="${menu.menuCategory eq 'casemenu'}">
+								<div class="col-md-2">
+									<div class="ckbox ckbox-primary">
+										<input id="${menu.menuID}" class="check" name="casemenu" type="checkbox" value="${menu.menuID}"/>
+										<label for="${menu.menuID}">${menu.menuName}</label> 
+									</div>
+								</div>
+							</c:if>
+s						</c:forEach>  
 					</div>
+					
 					<div class="row">
 						<h4 class="col-md-12" style="margin-top: 20px; color: #000;">订单栏列表</h4>
 						<div class="col-md-2">
@@ -86,26 +68,19 @@
 								<input id="selectall2" class="selectall" type="checkbox" value="" />
 								<label for="selectall2">全选 </label> 
 							</div>
-						</div> 
-						<div class="col-md-2">
-							<div class="ckbox ckbox-primary">
-								<input id="menu_id_9" class="check" name="ordermenu" type="checkbox" value="6" />
-								<label for="menu_id_9">订单展示列表界面 </label> 
-							</div>
 						</div>
-						<div class="col-md-2">
-							<div class="ckbox ckbox-primary">
-								<input id="menu_id_10" class="check" name="ordermenu" type="checkbox" value="7" />
-								<label for="menu_id_10">新增询订单界面 </label>
-							</div>
-						</div> 
-						<div class="col-md-2">
-							<div class="ckbox ckbox-primary">
-								<input id="menu_id_11" class="check" name="ordermenu" type="checkbox" value="8" />
-								<label for="menu_id_11">编辑订单页面 </label>
-							</div>
-						</div> 
+						  <c:forEach items="${menu}" var="menu">
+							<c:if test="${menu.menuCategory eq 'ordermenu'}">
+								<div class="col-md-2">
+									<div class="ckbox ckbox-primary">
+										<input id="${menu.menuID}" class="check" name="ordermenu" type="checkbox" value="${menu.menuID}"/>
+										<label for="${menu.menuID}">${menu.menuName}</label> 
+									</div>
+								</div>
+							</c:if>
+s						</c:forEach>  
 					</div>
+					
 					<div class="row">
 						<h4 class="col-md-12" style="margin-top: 20px; color: #000;">客人栏列表</h4>
 						<div class="col-md-2">
@@ -113,26 +88,19 @@
 								<input id="selectall3" class="selectall" type="checkbox" value="" />
 								<label for="selectall3">全选 </label> 
 							</div>
-						</div> 
-						<div class="col-md-2">
-							<div class="ckbox ckbox-primary">
-								<input id="menu_id_12" class="check" name="customermenu" type="checkbox" value="9" />
-								<label for="menu_id_12">客人展示列表界面 </label> 
-							</div>
 						</div>
-						<div class="col-md-2">
-							<div class="ckbox ckbox-primary">
-								<input id="menu_id_13" class="check" name="customermenu" type="checkbox" value="10" />
-								<label for="menu_id_13">新增客人界面 </label> 
-							</div>
-						</div>
-						<div class="col-md-2">
-							<div class="ckbox ckbox-primary">
-								<input id="menu_id_14" class="check" name="customermenu" type="checkbox" value="11" />
-								<label for="menu_id_14">编辑客人页面 </label>
-							</div>
-						</div> 
+						  <c:forEach items="${menu}" var="menu">
+							<c:if test="${menu.menuCategory eq 'customermenu'}">
+								<div class="col-md-2">
+									<div class="ckbox ckbox-primary">
+										<input id="${menu.menuID}" class="check" name="customermenu" type="checkbox" value="${menu.menuID}"/>
+										<label for="${menu.menuID}">${menu.menuName}</label> 
+									</div>
+								</div>
+							</c:if>
+s						</c:forEach>  
 					</div>
+					
 					<div class="row">
 						<h4 class="col-md-12" style="margin-top: 20px; color: #000;">地接社栏列表</h4>
 						<div class="col-md-2">
@@ -141,43 +109,18 @@
 								<label for="selectall4">全选 </label> 
 							</div>
 						</div>
-						<div class="col-md-2">
-							<div class="ckbox ckbox-primary">
-								<input id="menu_id_15" class="check" name="agencymenu" type="checkbox" value="12" />
-								<label for="menu_id_15">地接社展示列表界面 </label> 
-							</div>
-						</div>
-						<div class="col-md-2">
-							<div class="ckbox ckbox-primary">
-								<input id="menu_id_16" class="check" name="agencymenu" type="checkbox" value="13" />
-								<label for="menu_id_16">新增地接社界面 </label> 
-							</div>
-						</div>
-						<div class="col-md-2">
-							<div class="ckbox ckbox-primary">
-								<input id="menu_id_17" class="check" name="agencymenu" type="checkbox" value="14" />
-								<label for="menu_id_17">编辑地接社页面 </label> 
-							</div>
-						</div>
-						<div class="col-md-2">
-							<div class="ckbox ckbox-primary">
-								<input id="menu_id_18" class="check" name="agencymenu" type="checkbox" value="45" />
-								<label for="menu_id_18">新增销售界面 </label> 
-							</div>
-						</div>
-						<div class="col-md-2">
-							<div class="ckbox ckbox-primary">
-								<input id="menu_id_19" class="check" name="agencymenu" type="checkbox" value="46" />
-								<label for="menu_id_19">编辑销售界面 </label> 
-							</div>
-						</div>
-						<div class="col-md-2">
-							<div class="ckbox ckbox-primary">
-								<input id="menu_id_20" class="check" name="agencymenu" type="checkbox" value="47" />
-								<label for="menu_id_20">销售列表界面 </label> 
-							</div>
-						</div>
+						  <c:forEach items="${menu}" var="menu">
+							<c:if test="${menu.menuCategory eq 'agencymenu'}">
+								<div class="col-md-2">
+									<div class="ckbox ckbox-primary">
+										<input id="${menu.menuID}" class="check" name="agencymenu" type="checkbox" value="${menu.menuID}"/>
+										<label for="${menu.menuID}">${menu.menuName}</label> 
+									</div>
+								</div>
+							</c:if>
+s						</c:forEach>  
 					</div>
+					
 					<div class="row">
 						<h4 class="col-md-12" style="margin-top: 20px; color: #000;">用户栏列表</h4>
 						<div class="col-md-2">
@@ -186,118 +129,38 @@
 								<label for="selectall5">全选 </label> 
 							</div>
 						</div>
-						<div class="col-md-2">
-							<div class="ckbox ckbox-primary">
-								<input id="menu_id_21" class="check" name="usermenu" type="checkbox" value="15" />
-								<label for="menu_id_21">用户展示列表界面 </label> 
-							</div>
-						</div>
-						<div class="col-md-2">
-							<div class="ckbox ckbox-primary">
-								<input id="menu_id_22" class="check" name="usermenu" type="checkbox" value="16" />
-								<label for="menu_id_22">新增用户界面 </label> 
-							</div>
-						</div>
-						<div class="col-md-2">
-							<div class="ckbox ckbox-primary">
-								<input id="menu_id_23" class="check" name="usermenu" type="checkbox" value="17" />
-								<label for="menu_id_23">编辑用户页面 </label> 
-							</div>
-						</div>
+						  <c:forEach items="${menu}" var="menu">
+							<c:if test="${menu.menuCategory eq 'usermenu'}">
+								<div class="col-md-2">
+									<div class="ckbox ckbox-primary">
+										<input id="${menu.menuID}" class="check" name="usermenu" type="checkbox" value="${menu.menuID}"/>
+										<label for="${menu.menuID}">${menu.menuName}</label> 
+									</div>
+								</div>
+							</c:if>
+s						</c:forEach>  
 					</div>
+					
 					<div class="row">
 						<h4 class="col-md-12" style="margin-top: 20px; color: #000;">统计栏列表</h4>
-						<div class="col-md-3">
+						<div class="col-md-2">
 							<div class="ckbox ckbox-primary">
 								<input id="selectall6" class="selectall" type="checkbox" value="" />
 								<label for="selectall6">全选 </label> 
 							</div>
 						</div>
-						<div class="col-md-3">
-							<div class="ckbox ckbox-primary">
-								<input name="menu_id_24" class="check" type="checkbox" value="20" />
-								<label for="menu_id_24">询单来源状态统计界面 </label>
-							</div>
-						</div> 
-						<div class="col-md-3">
-							<div class="ckbox ckbox-primary">
-								<input id="menu_id_25" class="check" name="statsmenu" type="checkbox" value="21" />
-								<label for="menu_id_25">沟通方式统计界面 </label> 
-							</div>
-						</div> 
-						<div class="col-md-3">
-							<div class="ckbox ckbox-primary">
-								<input name="menu_id_26" class="check" type="checkbox" value="22" />
-								<label for="menu_id_26">询单分配统计界面</label> 
-							</div>
-						</div> 
-						<div class="col-md-3">
-							<div class="ckbox ckbox-primary">
-								<input id="menu_id_27" class="check" name="statsmenu" type="checkbox" value="23" />
-								<label for="menu_id_27">流失原因统计界面 </label> 
-							</div>
-						</div> 
-						<div class="col-md-3">
-							<div class="ckbox ckbox-primary">
-								<input id="menu_id_28" class="check" name="statsmenu" type="checkbox" value="24" />
-								<label for="menu_id_28">地接社业绩统计界面 </label> 
-							</div>
-						</div> 
-						<div class="col-md-3">
-							<div class="ckbox ckbox-primary">
-								<input id="menu_id_29" class="check" name="statsmenu" type="checkbox" value="25" />
-								<label for="menu_id_29">跟单员询单状态统计界面 </label> 
-							</div>
-						</div> 
-						<div class="col-md-3">
-							<div class="ckbox ckbox-primary">
-								<input id="menu_id_30" class="check" name="statsmenu" type="checkbox" value="26" />
-								<label for="menu_id_30">跟单员业绩统计 </label> 
-							</div>
-						</div> 
-						<div class="col-md-3">
-							<div class="ckbox ckbox-primary">
-								<input id="menu_id_31" class="check" name="statsmenu" type="checkbox" value="27" />
-								<label for="menu_id_31">目的地询单状态统计界面 </label> 
-							</div>
-						</div> 
-						<div class="col-md-3">
-							<div class="ckbox ckbox-primary">
-								<input id="menu_id_32" class="check" name="statsmenu" type="checkbox" value="28" />
-								<label for="menu_id_32">目的地咨询、成交统计界面 </label> 
-							</div>
-						</div> 
-						<div class="col-md-3">
-							<div class="ckbox ckbox-primary">
-								<input id="menu_id_33" class="check" name="statsmenu" type="checkbox" value="29" />
-								<label for="menu_id_33">客人来源统计界面 </label> 
-							</div>
-						</div> 
-						<div class="col-md-3">
-							<div class="ckbox ckbox-primary">
-								<input id="menu_id_34" class="check" name="statsmenu" type="checkbox" value="30" />
-								<label for="menu_id_34">客人来源级别统计界面 </label> 
-							</div>
-						</div> 
-						<div class="col-md-3">
-							<div class="ckbox ckbox-primary">
-								<input id="menu_id_35" class="check" name="statsmenu" type="checkbox" value="31" />
-								<label for="menu_id_35">商家覆盖统计界面 </label> 
-							</div>
-						</div> 
-						<div class="col-md-3">
-							<div class="ckbox ckbox-primary">
-								<input id="menu_id_36" class="check" name="statsmenu" type="checkbox" value="32" />
-								<label for="menu_id_36">商家未询统计界面 </label> 
-							</div>
-						</div> 
-						<div class="col-md-3">
-							<div class="ckbox ckbox-primary">
-								<input id="menu_id_37" class="check" name="statsmenu" type="checkbox" value="33" />
-								<label for="menu_id_37">地接社订单状态统计界面 </label> 
-							</div>
-						</div>
+						  <c:forEach items="${menu}" var="menu">
+							<c:if test="${menu.menuCategory eq 'statisticsmenu'}">
+								<div class="col-md-2">
+									<div class="ckbox ckbox-primary">
+										<input id="${menu.menuID}" class="check" name="statisticsmenu" type="checkbox" value="${menu.menuID}"/>
+										<label for="${menu.menuID}">${menu.menuName}</label> 
+									</div>
+								</div>
+							</c:if>
+s						</c:forEach>  
 					</div>
+					
 					<div class="row">
 						<h4 class="col-md-12" style="margin-top: 20px; color: #000;">系统参数栏列表</h4>
 						<div class="col-md-2">
@@ -306,94 +169,61 @@
 								<label for="selectall7">全选 </label> 
 							</div>
 						</div>
-						<div class="col-md-2">
-							<div class="ckbox ckbox-primary">
-								<input id="menu_id_38" class="check" name="parametermenu" type="checkbox" value="34" />
-								<label for="menu_id_38">系统参数列表界面 </label> 
-							</div>
-						</div>
-						<div class="col-md-2">
-							<div class="ckbox ckbox-primary">
-								<input id="menu_id_39" class="check" name="parametermenu" type="checkbox" value="35" />
-								<label for="menu_id_39">新增系统参数界面 </label> 
-							</div>
-						</div>
-						<div class="col-md-2">
-							<div class="ckbox ckbox-primary">
-								<input id="menu_id_40" class="check" name="parametermenu" type="checkbox" value="36" />
-								<label for="menu_id_40">编辑系统参数界面 </label>
-							</div>
-						</div>
+						  <c:forEach items="${menu}" var="menu">
+							<c:if test="${menu.menuCategory eq 'parametermenu'}">
+								<div class="col-md-2">
+									<div class="ckbox ckbox-primary">
+										<input id="${menu.menuID}" class="check" name="parametermenu" type="checkbox" value="${menu.menuID}"/>
+										<label for="${menu.menuID}">${menu.menuName}</label> 
+									</div>
+								</div>
+							</c:if>
+s						</c:forEach>  
 					</div>
+					
 					<div class="row">
 						<h4 class="col-md-12" style="margin-top: 20px; color: #000;">财务管理栏列表</h4>
-						<div class="col-md-2">
-							<div class="ckbox ckbox-primary">
-								<input id="selectall9" class="selectall" type="checkbox" value="" />
-								<label for="selectall9">全选 </label> 
-							</div>
-						</div>
-						<div class="col-md-2">
-							<div class="ckbox ckbox-primary">
-								<input id="menu_id_52" class="check" name="parametermenu" type="checkbox" value="54" />
-								<label for="menu_id_52">财务管理列表 </label> 
-							</div>
-						</div>
-						<div class="col-md-2">
-							<div class="ckbox ckbox-primary">
-								<input id="menu_id_53" class="check" name="parametermenu" type="checkbox" value="55" />
-								<label for="menu_id_53">财务管理编辑 </label> 
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<h4 class="col-md-12" style="margin-top: 20px; color: #000;">权限管理栏列表</h4>
 						<div class="col-md-2">
 							<div class="ckbox ckbox-primary">
 								<input id="selectall8" class="selectall" type="checkbox" value="" />
 								<label for="selectall8">全选 </label> 
 							</div>
 						</div>
-						<div class="col-md-2">
-							<div class="ckbox ckbox-primary">
-								<input id="menu_id_41" class="check" name="powermenu" type="checkbox" value="37" />
-								<label for="menu_id_41">权限列表界面 </label> 
-							</div>
-						</div>
-						<div class="col-md-2">
-							<div class="ckbox ckbox-primary">
-								<input id="menu_id_42" class="check" name="powermenu" type="checkbox" value="38" />
-								<label for="menu_id_42">新增权限界面 </label> 
-							</div>
-						</div>
-						<div class="col-md-2">
-							<div class="ckbox ckbox-primary">
-								<input id="menu_id_43" class="check" name="powermenu" type="checkbox" value="39" />
-								<label for="menu_id_43">编辑权限界面 </label>
-							</div>
-						</div>
-						<div class="col-md-2">
-							<div class="ckbox ckbox-primary">
-								<input id="menu_id_44" class="check" name="powermenu" type="checkbox" value="42" />
-								<label for="menu_id_44">角色列表界面</label>
-							</div>
-						</div>
-						<div class="col-md-2">
-							<div class="ckbox ckbox-primary">
-								<input id="menu_id_45" class="check" name="powermenu" type="checkbox" value="43" />
-								<label for="menu_id_45">新增角色界面</label>
-							</div>
-						</div>
-						<div class="col-md-2">
-							<div class="ckbox ckbox-primary">
-								<input id="menu_id_46" class="check" name="powermenu" type="checkbox" value="44" />
-								<label for="menu_id_46">编辑角色界面 </label>
-							</div>
-						</div>
+						  <c:forEach items="${menu}" var="menu">
+							<c:if test="${menu.menuCategory eq 'finance'}">
+								<div class="col-md-2">
+									<div class="ckbox ckbox-primary">
+										<input id="${menu.menuID}" class="check" name="finance" type="checkbox" value="${menu.menuID}"/>
+										<label for="${menu.menuID}">${menu.menuName}</label> 
+									</div>
+								</div>
+							</c:if>
+s						</c:forEach>  
 					</div>
-	            </div>
-	            </div>
-	            </div>
+					
+					<div class="row">
+						<h4 class="col-md-12" style="margin-top: 20px; color: #000;">权限管理栏列表</h4>
+						<div class="col-md-2">
+							<div class="ckbox ckbox-primary">
+								<input id="selectall9" class="selectall" type="checkbox" value="" />
+								<label for="selectall9">全选 </label> 
+							</div>
+						</div>
+						  <c:forEach items="${menu}" var="menu">
+							<c:if test="${menu.menuCategory eq 'listmenu'}">
+								<div class="col-md-2">
+									<div class="ckbox ckbox-primary">
+										<input id="${menu.menuID}" class="check" name="listmenu" type="checkbox" value="${menu.menuID}"/>
+										<label for="${menu.menuID}">${menu.menuName}</label> 
+									</div>
+								</div>
+							</c:if>
+s						</c:forEach>  
+					</div>
+					
+	           </div>
+	          </div>
+	         </div>
 	        </div>
           
         </div><!-- panel-body -->

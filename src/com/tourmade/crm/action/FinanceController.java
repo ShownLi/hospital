@@ -239,10 +239,9 @@ public class FinanceController extends BaseSimpleFormController {
 	 * @return
 	 */
 	@RequestMapping(value = "/orderBalance.do", method = RequestMethod.GET)
-	@ResponseBody
 	public String orderBalance(Integer orderId) {
 		financeService.orderBalance(orderId);
-		return "/finance/edit.html?id=" + orderId;
+		return "redirect:/finance/edit.html?id=" + orderId;
 
 	}
 

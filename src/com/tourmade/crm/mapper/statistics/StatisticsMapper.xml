@@ -426,33 +426,29 @@
 				sum(case when c.customer_level=2 then 1 else 0 end) as level2 ,
 				sum(case when c.customer_level=3 then 1 else 0 end) as level3 ,
 				concat ( FORMAT (sum(case when c.customer_level=3 then 1 else 0 end) / count(1) *100,2),'%') as rate
-		from tm_customer c left join tm_parameter p on c.source = p.para_value
-		where c.isdel = 0
+		from tm_customer c left join (
+			select para_value,chinese
+			from tm_parameter
+			where para_domain = 'customer.source' and isdel = 0
+		) p on c.source = p.para_value
 		group by c.source    
 	</select>
 	
 	<select id="queryCustomerSourceLevelStatsTotal" parameterType="Map" resultType="CustomerSourceLevelStats">
-		select
-			sum(level0) as level0,
-			sum(level1) as level1,
-			sum(level2) as level2,
-			sum(level3) as level3,
-			sum(level0)+sum(level1)+sum(level2)+sum(level3) as sumT2,
-			concat ( FORMAT (sum(level3) / (sum(level0)+sum(level1)+sum(level2)+sum(level3)) *100,2),'%') as rate 
-		from(
-			select 
-				c.source as source_en,
-				p.chinese as source,
-				count(1) as sumT,
-					sum(case when c.customer_level=0 then 1 else 0 end) as level0 ,
-					sum(case when c.customer_level=1 then 1 else 0 end) as level1,
-					sum(case when c.customer_level=2 then 1 else 0 end) as level2 ,
-					sum(case when c.customer_level=3 then 1 else 0 end) as level3 ,
-					concat ( FORMAT (sum(case when c.customer_level=3 then 1 else 0 end) / count(1) *100,2),'%') as rate
-			from tm_customer c left join tm_parameter p on c.source = p.para_value
-			where c.isdel = 0
-			group by c.source 
-		) temp   
+		select 
+			c.source as source_en,
+			p.chinese as source,
+			count(1),
+				sum(case when c.customer_level=0 then 1 else 0 end) as level0 ,
+				sum(case when c.customer_level=1 then 1 else 0 end) as level1,
+				sum(case when c.customer_level=2 then 1 else 0 end) as level2 ,
+				sum(case when c.customer_level=3 then 1 else 0 end) as level3 ,
+				concat ( FORMAT (sum(case when c.customer_level=3 then 1 else 0 end) / count(1) *100,2),'%') as rate
+		from tm_customer c left join (
+			select para_value,chinese
+			from tm_parameter
+			where para_domain = 'customer.source' and isdel = 0
+		) p on c.source = p.para_value 
 	</select>
 	
 	<select id="countCustomerSourceLevelStats" parameterType="CustomerSourceLevelStats" resultType="long">

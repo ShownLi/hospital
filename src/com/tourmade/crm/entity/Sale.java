@@ -29,8 +29,6 @@ public class Sale extends BaseBean<Sale> {
 	
 	private String salesName;
 	
-	private String salesEnglishName;
-	
 	private String salesEmail;
 	
 	private String title;
@@ -107,14 +105,6 @@ public class Sale extends BaseBean<Sale> {
 
 	public void setSalesName(String salesName) {
 		this.salesName = salesName;
-	}
-
-	public String getSalesEnglishName() {
-		return salesEnglishName;
-	}
-
-	public void setSalesEnglishName(String salesEnglishName) {
-		this.salesEnglishName = salesEnglishName;
 	}
 
 	public String getSalesEmail() {
@@ -245,7 +235,7 @@ public class Sale extends BaseBean<Sale> {
 	public String toString() {
 		return "Sale [salesId=" + salesId + ", agencyId=" + agencyId + ", salesPortalId=" + salesPortalId
 				+ ", wxUnionId=" + wxUnionId + ", wxOpenId=" + wxOpenId + ", salesName=" + salesName
-				+ ", salesEnglishName=" + salesEnglishName + ", salesEmail=" + salesEmail + ", title=" + title
+				+ ", salesEmail=" + salesEmail + ", title=" + title
 				+ ", telephone=" + telephone + ", mobilephone=" + mobilephone + ", fax=" + fax + ", qq=" + qq
 				+ ", skype=" + skype + ", wechat=" + wechat + ", skill=" + skill + ", introduction=" + introduction
 				+ ", address=" + address + ", photo=" + photo + ", namecard=" + namecard + ", photoPath=" + photoPath
