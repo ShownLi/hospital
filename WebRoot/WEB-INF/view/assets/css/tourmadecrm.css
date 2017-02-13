@@ -271,3 +271,6 @@ label.error{
     padding: 10px;
     min-height: 44px;
 }
+.ui-slider{
+	background: #fff;
+}

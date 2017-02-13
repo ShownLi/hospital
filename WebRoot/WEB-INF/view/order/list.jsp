@@ -855,8 +855,11 @@
 		}
 		  
 		// Date Picker
-		jQuery(".datepicker").datepicker({
+		jQuery(".datepicker").datetimepicker({
 			  dateFormat: "yy-mm-dd",
+			  //controlType: 'select',
+			  timeFormat: 'HH:mm',
+			  showMinute: false
 	  	});
 /*  	    $(".dealModal .submit").click(function(){
 	    	deal_submit();
