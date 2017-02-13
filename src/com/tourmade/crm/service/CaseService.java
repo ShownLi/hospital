@@ -952,4 +952,10 @@ public class CaseService extends BaseService {
 
 	}
 
+	public void updateUser(Case crmcase) {
+		//跟新订单信息
+		caseMapper.updateOrderUserByCaseId(crmcase);
+		caseMapper.updateCaseUserByCaseId(crmcase);
+	}
+
 }

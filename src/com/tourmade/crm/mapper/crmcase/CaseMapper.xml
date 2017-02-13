@@ -800,5 +800,22 @@
 		where
 		case_id=#{caseId}
 	</update>
+	
+	<update id="updateOrderUserByCaseId" parameterType="Case">
+	 	update tm_order
+	 	set 
+	 	operator = #{operator},
+	 	update_time = NOW()
+	 	where 
+	 	case_id = #{caseId}
+	</update>	
+	<update id="updateCaseUserByCaseId" parameterType="Case">
+	 	update tm_case
+	 	set 
+	 	operator = #{operator},
+	 	update_time = NOW()
+	 	where 
+	 	case_id = #{caseId}
+	</update>
 </mapper>
 

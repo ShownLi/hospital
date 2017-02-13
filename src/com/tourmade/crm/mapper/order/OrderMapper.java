@@ -71,4 +71,6 @@ public interface OrderMapper extends BaseMapper {
 	public void updateOrderDeal(Order order);
 
 	public void updateOrderNoDeal(Order order);
+
+	
 }

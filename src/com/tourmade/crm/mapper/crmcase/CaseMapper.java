@@ -71,4 +71,8 @@ public interface CaseMapper extends BaseMapper {
 
 	public void updateCaseStatus(Case crmcase);
 
+	public void updateOrderUserByCaseId(Case crmcase);
+
+	public void updateCaseUserByCaseId(Case crmcase);
+
 }

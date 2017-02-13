@@ -860,5 +860,21 @@ public class CaseController extends BaseSimpleFormController {
 
 		return json;
 	}
+	@RequestMapping(value = "/updateUser.do")
+	@ResponseBody
+	public Json updateUser(Case crmcase) {
+
+		
+		Json json = new Json();
+		try {
+			System.out.println(crmcase);
+			service.updateUser(crmcase);
+			json.setSuccess(true);
+		} catch (Exception e) {
+			json.setSuccess(false);
+			logger.error("OrderController.updateUser() --> " + crmcase + "\n" + e.getMessage());
+		}
+		return json;
+	}
 
 }

@@ -139,11 +139,40 @@
 						</div>
 					</div>
 				</div>
+				
 		<%@ include file="../assets/pages/rightpanel.jsp"%>
 	</section>
 
 	<%@ include file="../assets/pages/foot.jsp"%>
 
+<div class="updateUserModal modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <div class="nextModal-title">更改跟单员</div>
+      </div>
+      <form class="form-horizontal" id="form-updateUser">
+          <div class="modal-body">     
+              <div class="section-block noline">
+                  <div class="form-group col-sm-12">
+                    <label class="col-sm-4 control-label">跟单员</label>
+                    <div class="col-sm-8">
+                      <input class="updateUser-select fullwidth" name="operator" />
+                    </div>
+                  </div>
+                  <input type="hidden" id="updateUser-caseId" name="caseId"  />
+              </div>
+              </div><!-- noDealModal-body -->
+         
+          <div class="modal-footer align-center">
+            <button class="btn btn-primary" >保存</button> 
+            <a class="cancel btn btn-primary" >取消</a>
+          </div>
+      </form>
+    </div><!-- modal-content -->
+  </div><!-- modal-dialog -->
+</div><!-- bmodal -->
 	<script src="${rootPath}assets/js/jquery.datatables.min.js"></script>
 	<script src="${rootPath}assets/js/select2.min.js"></script>
 	<script src="${rootPath}assets/js/jquery-ui-1.10.3.min.js"></script>
@@ -216,7 +245,11 @@
         changeYear: true,
         changeMonth: true,
      });
-    
+    $(".updateUser-select").select2({
+    	placeholder:"选择跟单员",
+    	data:user,
+        allowClear: true
+	 });
     if($('#searchCaseFlag').val()=="old"){
 	    if("${searchCase.status}" == ""){
 	    	$("#statusAll").attr("checked",true);
@@ -506,12 +539,28 @@
 		                  data: "caseId",
 		                  orderable: false,
 		                  render: function ( data, type, full, meta ) {
-		                	  
+		                	 
 		                	  if(full.status==0){
 		                		  return '<a class="btn btn-primary btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 处理</a> &nbsp;';  
 		                	  }
 		                	  else {
-		                		  return '<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a>&nbsp;';    
+		                		  
+		                		  var reContent ='<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a>'+
+		                		  '&nbsp;<a name="btnUpdateUser"  class="btn btn-default btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 修改跟单员</a>';
+		                		  
+		                		  if(full.status!=5&&full.status!=4){
+		                			  reContent+='&nbsp;<a name="btn-addorder"  class="btn btn-primary btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 分配地接社</a>';
+		                		 }
+		                		  if(full.status==1){
+		                			  reContent+='&nbsp;<a name="btn-invalid"  class="btn btn-danger btn-xs" id="'+data+'">无效</a>';
+		                		  }
+		                		  
+		                		  if(full.status!=3&&full.status!=5&&full.status!=4){
+		                			  reContent+='&nbsp;<a name="btn-nodeal"  class="btn btn-danger btn-xs" id="'+data+'">未成行</a>';
+		                			 
+		                			}
+		                		  return reContent;  
+		                		  
 		                	  }
 		                      
 		                  },
@@ -553,7 +602,40 @@
 				$('#searchCaseFlag').val("restart");
 				t.draw();
 			});
+			//修改跟单员
+			 $('#dataTable tbody').on( 'click', 'a[name=btnUpdateUser]', function () {
+				 $(".updateUserModal").modal('show');
+				 $("#updateUser-caseId").val($(this).attr('id'));
+		     } );
 			
+			 jQuery("#form-updateUser").validate({
+			        rules: {
+				        operator: {
+				        	required: true,
+				        },	              	
+					},				
+			     	 messages: {
+			     		operator: "请选择跟单员",
+			      	 },			      
+			          highlight: function(element) {
+			            jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+			          },
+			          success: function(element) {
+			            jQuery(element).closest('.form-group').removeClass('has-error');
+			          },
+			          invalidHandler : function(){
+			            return false;
+			          },
+			          submitHandler : function(){
+			          	$("#form-updateUser .submit").attr("disabled","disabled");
+			              updateUser_submit();
+			              return false;
+			          } 
+		        });
+			 
+			 $(".updateUserModal .cancel").click(function(){
+			    	$(".updateUserModal").modal('hide');
+			    });
 			/*if($('#searchCaseFlag').val()=="old"){
 			    if("${searchCase.status}" == ""){
 			    	$("#statusAll").attr("checked",true).click();
@@ -584,7 +666,18 @@
 		        var data = t.row($(this).parents('tr')).data();
 		        handle($(this).attr('id'));
 		    } );
-
+			function updateUser_submit(){
+				var f = $("#form-updateUser").serialize();
+				$.post('${rootPath}case/updateUser.do', f, function(result) {
+					var rmsg = result.msg;
+					if (result.success) {
+						window.parent.location = "${rootPath}case/list.html?flag=old";
+					} 
+					else {
+						$("#msgModal").modal('show');
+					}
+				}, "JSON");
+			}
 	    
 		// Select2
 	    jQuery('select').select2({
