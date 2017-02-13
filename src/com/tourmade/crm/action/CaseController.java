@@ -645,6 +645,7 @@ public class CaseController extends BaseSimpleFormController {
 			String financeAccount = "finance.account";
 			String priceStatus = "finance.price.status";
 			String costStatus = "finance.cost.status";
+			String orderService = "order.service";
 			
 			List<EntityList> countryList = service.getParameterInfo(country);
 			List<EntityList> languageList = service.getParameterInfo(language);
@@ -674,6 +675,7 @@ public class CaseController extends BaseSimpleFormController {
 			List<EntityList> financeAccountList = service.getParameterInfo(financeAccount);
 			List<EntityList> priceStatusList = service.getParameterInfo(priceStatus);
 			List<EntityList> costStatusList = service.getParameterInfo(costStatus);
+			List<EntityList> orderServiceList = service.getParameterInfo(orderService);
 
 			JSONArray countryResult = JSONArray.fromObject(countryList);
 			JSONArray languageResult = JSONArray.fromObject(languageList);
@@ -706,6 +708,7 @@ public class CaseController extends BaseSimpleFormController {
 			JSONArray financeAccountResult = JSONArray.fromObject(financeAccountList);
 			JSONArray priceStatusResult = JSONArray.fromObject(priceStatusList);
 			JSONArray costStatusResult = JSONArray.fromObject(costStatusList);
+			JSONArray orderServiceResult = JSONArray.fromObject(orderServiceList);
 			
 			model.addAttribute("orderNoDealReason", orderNoDealResult);
 			model.addAttribute("country", countryResult);
@@ -738,7 +741,7 @@ public class CaseController extends BaseSimpleFormController {
 			model.addAttribute("financeAccount",financeAccountResult);
 			model.addAttribute("priceStatus",priceStatusResult);
 			model.addAttribute("costStatus",costStatusResult);
-			
+			model.addAttribute("service",orderServiceResult);
 
 			String currency = "order.currency";
 			List<EntityList> currencyList = service.getParameterInfo(currency);
@@ -776,6 +779,26 @@ public class CaseController extends BaseSimpleFormController {
 			destinationList.add(dStr[i]);
 		}
 		List<EntityList> sales = service.getSalesByAgency(destinationList);
+		return sales;
+	}
+	
+	//选择服务类型所属销售显示的联动
+	@RequestMapping(value="/getSalesByServiceId.do")
+	@ResponseBody
+	public List<EntityList> getSalesById(Model model, String serviceID){
+		List<EntityList> sales = null;
+		if(("3").equals(serviceID)){
+			String ID = "1";
+			sales = service.getSalesByServiceId(ID);
+		}
+		if(("4").equals(serviceID)){
+			String ID = "2";
+			sales = service.getSalesByServiceId(ID);
+		}
+		if(("5").equals(serviceID)){
+			String ID = "3";
+			sales = service.getSalesByServiceId(ID);
+		}
 		return sales;
 	}
 

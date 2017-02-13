@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.itextpdf.text.log.SysoLogger;
 import com.tourmade.crm.common.framework.BaseService;
 import com.tourmade.crm.common.framework.bean.QueryResult;
 import com.tourmade.crm.common.model.base.value.baseconfig.Json;
@@ -22,7 +21,6 @@ import com.tourmade.crm.entity.Case;
 import com.tourmade.crm.entity.CaseStatus;
 import com.tourmade.crm.entity.Customer;
 import com.tourmade.crm.entity.EntityList;
-import com.tourmade.crm.entity.Parameter;
 import com.tourmade.crm.mapper.crmcase.CaseMapper;
 
 import net.sf.json.JSONObject;
@@ -546,6 +544,18 @@ public class CaseService extends BaseService {
 			agencys = caseMapper.getSalesByAgency(destinationList);
 		} catch (Exception e) {
 			logger.error("CaseService.getSalesByAgency() --> -->" + e.getMessage());
+			agencys = null;
+		}
+		return agencys;
+	}
+	
+	//
+	public List<EntityList> getSalesByServiceId(String serviceID) {
+		List<EntityList> agencys = new ArrayList<>();
+		try {
+			agencys = caseMapper.getSalesByServiceId(serviceID);
+		} catch (Exception e) {
+			logger.error("CaseService.getSalesByServiceId() --> -->" + e.getMessage());
 			agencys = null;
 		}
 		return agencys;

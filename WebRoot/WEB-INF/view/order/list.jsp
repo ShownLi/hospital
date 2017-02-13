@@ -582,7 +582,6 @@
 			 			var searchBudget=$('#searchBudget').val();
 			 			var searchStatus=$('#searchStatus').val();
 			 			var searchOperator=$('#searchOperator').val();
-			 			
 			 			var searchFlag=$('#searchFlag').val();
 			 			data.flag = searchFlag;
 			 			if(searchCustomerName !=null && searchCustomerName !="" ){
@@ -860,8 +859,11 @@
 		}
 		  
 		// Date Picker
-		jQuery(".datepicker").datepicker({
+		jQuery(".datepicker").datetimepicker({
 			  dateFormat: "yy-mm-dd",
+			  //controlType: 'select',
+			  timeFormat: 'HH:mm',
+			  showMinute: false
 	  	});
 /*  	    $(".dealModal .submit").click(function(){
 	    	deal_submit();

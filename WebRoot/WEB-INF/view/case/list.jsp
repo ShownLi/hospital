@@ -144,7 +144,72 @@
 	</section>
 
 	<%@ include file="../assets/pages/foot.jsp"%>
-
+<!-- Modal 添加订单没有地址 -->
+	<div class="modal fade" id="msgDestination" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel">信息</h4>
+				</div>
+				<div class="modal-body">请选择目的地，再添加订单</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				</div>
+			</div>
+			<!-- modal-content -->
+		</div>
+		<!-- modal-dialog -->
+	</div>
+	<!-- modal -->
+	<!-- 分配地接社Modal -->
+	<div class="nextModal modal fade" id="nextModal" tabindex="-1"
+		role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-body align-center">
+					<div class="section-block">
+						<form id="form-order">
+							<div class="section-title">选择目的地及地接社,添加订单</div>
+							<div class="form-group col-sm-8 col-sm-offset-2">
+								<label class="col-sm-3 control-label">目的地</label>
+								<div class="col-sm-9">
+									<input type="text" id="orderDestinationText"
+										readonly="readonly" class="form-control" value="" /> <input
+										type="hidden" id="orderDestination" name="destination"
+										value="" />
+								</div>
+							</div>
+							<div class="form-group col-sm-8 col-sm-offset-2">
+								<label class="col-sm-3 control-label">服务类型</label>
+								<div class="col-sm-9">
+									<input type="text" id="serviceID" name="service"
+										placeholder="选择服务类型" class="service-select fullwidth" value="" />
+								</div>
+							</div>
+							<div class="form-group col-sm-8 col-sm-offset-2">
+								<label class="col-sm-3 control-label">所属销售</label>
+								<div class="col-sm-9">
+									<input type="text" id="salesId" name="salesId"
+										placeholder="选择一个销售" class="sales-select fullwidth" value="" />
+								</div>
+							</div>
+							<div class="col-sm-12">
+								<a class="submit btn btn-primary" >保存</a> 
+								<input type="hidden" name="caseId" value="${crmcase.caseId}" /> 
+								<input type="hidden" name="customerId" value="${crmcase.customerId}" />
+								<input type="hidden" name="operator" value="${crmcase.operator}" />
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+			<!-- modal-content -->
+		</div>
+		<!-- modal-dialog -->
+	</div> 
 <div class="updateUserModal modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -466,25 +531,24 @@
 				                render:  function ( data, type, full, meta ) {
 				                	var dataSource = full.source;
 				                	var dataCaseStatus = full.status;
-				                	
 				                	var m = "";
 				                	var n = "";
-					                	for(var i=0;i < source.length;i++){
-					                		
-					                		if(dataSource==source[i].id){
-					                			m = source[i].text;
-					                			break;
-					                		}	
-					                	}
-					                	
-					                	for(var i=0;i<caseStatus.length;i++){
-					                		if(dataCaseStatus==caseStatus[i].id){
-					                			n=caseStatus[i].text;
-					                			break;
-					                		}
-					                	}
-					                	
-					                	return "<div class='width85'>" + m + "</div>" + "<div class='width85'>" + n + "</div>";
+				                	for(var i=0;i < source.length;i++){
+				                		
+				                		if(dataSource==source[i].id){
+				                			m = source[i].text;
+				                			break;
+				                		}	
+				                	}
+				                	
+				                	for(var i=0;i<caseStatus.length;i++){
+				                		if(dataCaseStatus==caseStatus[i].id){
+				                			n=caseStatus[i].text;
+				                			break;
+				                		}
+				                	}
+				                	
+				                	return "<div class='width85'>" + m + "</div>" + "<div class='width85'>" + n + "</div>";
 				                },
 				                targets: 6
 						},
@@ -744,6 +808,107 @@
      	  }
      	 alert("页面正在加载，请稍后...");
       }
+  	//分配地接社按钮
+      $("#btn-addorder").click(function(){
+      	  var destination = $("#destination").val();
+      	  $("#englishDestination").val(destination);
+      	  if(destination=="" || destination == null){
+      	  	$("#msgDestination").modal('show');
+ 		  }else{ 
+      			var destinationText;
+      			for(var i=0; i<$("#destination").select2('data').length; i++){
+      				if(destinationText==null){
+      					destinationText = $("#destination").select2('data')[i].text + ",";
+      				}else{
+      					destinationText = destinationText + $("#destination").select2('data')[i].text + ",";
+      				}
+      			}
+      			var destinationText = destinationText.substring(0,destinationText.length-1);
+      	  		$("#orderDestinationText").val(destinationText); 
+      	  		$("#orderDestination").val(destination);
+	      	  	$.ajax({
+	              type: "post",
+	              url: "${rootPath}case/getSales.do?destination="+destination,
+	              data: destination,
+	              success: function(sales){
+	            	  var json = jQuery.parseJSON(sales);
+	                  $("#salesId").select2({	
+	                      placeholder: '销售',
+	                      data: json
+	                  });
+	              }  
+	            });  
+      	  	    $("#nextModal").modal('show');         	         	  
+      	    }  
+            return false;
+        });
+  	
+    //选择服务类型所属销售显示的联动
+	  	$("#serviceID").change(function(){
+	  		var serviceID = $("#serviceID").val();
+	  		if(serviceID==3 || serviceID==4 || serviceID==5){
+	  			$.ajax({
+		              type: "post",
+		              url: "${rootPath}case/getSalesByServiceId.do?serviceID="+serviceID,
+		              data: serviceID,
+		              success: function(sales){
+		            	  var json = jQuery.parseJSON(sales);
+		                  $("#salesId").select2({	
+		                      placeholder: '销售',
+		                      data: json
+		                  });
+		              }  
+		        }); 
+	  		}else{
+	  			var destination = $("#destination").val();
+	  			$.ajax({
+		              type: "post",
+		              url: "${rootPath}case/getSales.do?destination="+destination,
+		              data: destination,
+		              success: function(sales){
+		            	  var json = jQuery.parseJSON(sales);
+		                  $("#salesId").select2({	
+		                      placeholder: '销售',
+		                      data: json
+		                  });
+		              }  
+		            });
+	  		}
+	  	}) 
+	  	$("#nextModal .submit").click(function(){
+          $(this).attr("disabled","disabled");
+      	  order_submit();
+        }); 
+    
+	  	function order_submit() {
+			var f = $("#form-order").serialize();
+			$.post('${rootPath}order/add.do', f, function(result) {
+				var rmsg = result.msg;
+				if (result.success) {
+					window.parent.location = "${rootPath}case/edit.html?id=${crmcase.caseId}";
+				} else {
+					if(result.text=="noCustomerEmail"){
+						alert("分配地接社成功，由于客人没有邮箱，无法发送订单邮件");
+						$('#nextModal').modal('hide');
+						window.parent.location = "${rootPath}case/edit.html?id=${crmcase.caseId}";
+					}
+					else if(result.text=="noSaleEmail"){
+						alert("分配地接社成功，由于销售没有邮箱，无法发送订单邮件");
+						$('#nextModal').modal('hide');
+						window.parent.location = "${rootPath}case/edit.html?id=${crmcase.caseId}";
+
+					}
+					else if(result.text=="noSendmail"){
+						alert("分配地接社成功，由于地接社设置为不发送邮件，所以未发送订单邮件");
+						$('#nextModal').modal('hide');
+						window.parent.location = "${rootPath}case/edit.html?id=${crmcase.caseId}";
+					}
+					//$("#NoEmail").modal('show');
+	         		//$("#nextModal").modal('hide');
+	         		else {window.parent.location = "${rootPath}case/edit.html?id=${crmcase.caseId}";}
+				}
+			}, "JSON");
+	      }
 	</script>
 </body>
 </html>

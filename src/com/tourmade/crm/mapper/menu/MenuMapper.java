@@ -55,6 +55,8 @@ public interface MenuMapper extends BaseMapper {
 	
 	public List<EntityList> getParameterInfo(String domain);
 	
+	public List<Menu> getMenuRoleList();
+	
 	public String validate(@Param("table")String table, @Param("field")String field, 
 			@Param("filter_field")String filter_field, @Param("filter_name")String filter_name,
 			@Param("name")String name);

@@ -200,6 +200,14 @@
 		from tm_role_x_menu t LEFT JOIN tm_menu m ON t.menu_id=m.menu_id
 		where role_id=#{roleid}
 	</select>
+	<select id="getMenuRoleList" resultType="Menu">
+		select 
+			menu_id as menuID, 
+			menu_name as menuName, 
+			menu_category as menuCategory 
+		from tm_menu where isdel=0 
+		ORDER BY menu_category
+	</select>
 </mapper>
 
 

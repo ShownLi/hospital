@@ -304,6 +304,7 @@ public class OrderController extends BaseSimpleFormController {
 			List<EntityList> priceStatusList = service.getParameterInfo(priceStatus);
 			List<EntityList> costStatusList = service.getParameterInfo(costStatus);
 			List<EntityList> agencyList = financeService.getAllAgency();
+			
 			JSONArray currencyResult = JSONArray.fromObject(currencyList);
 			JSONArray statusResult = JSONArray.fromObject(statusList);
 			JSONArray countryResult = JSONArray.fromObject(countryList);
@@ -314,6 +315,7 @@ public class OrderController extends BaseSimpleFormController {
 			JSONArray priceStatusResult = JSONArray.fromObject(priceStatusList);
 			JSONArray costStatusResult = JSONArray.fromObject(costStatusList);
 			JSONArray agencyResult = JSONArray.fromObject(agencyList);
+			
 			model.addAttribute("currency",currencyResult);
 			model.addAttribute("orderStatus",statusResult);
 			model.addAttribute("order",order);
@@ -343,9 +345,6 @@ public class OrderController extends BaseSimpleFormController {
 			System.out.println("paraName:"+paraName+","+"paraValue:"+paraValue);
 			
 		}*/
-		
-		
-		
 		JSONObject priceRecordJson = JSONObject.fromObject(priceRecord);
 		Iterator it = priceRecordJson.keys();
 		while(it.hasNext()){

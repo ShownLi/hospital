@@ -360,7 +360,6 @@
 						<!-- panel-body -->
 
 						<div class="panel-footer align-center">
-
 							<input class="btn btn-primary" id="btn-addorder" type="button" value="分配地接社" />&nbsp; 
 							<input class="btn btn-primary" id="btn-updateUser" type="button" value="修改跟单员" />&nbsp; 
 							<input class="btn btn-primary" type="submit" value="保存" />&nbsp;
@@ -821,7 +820,13 @@
 										readonly="readonly" class="form-control" value="" /> <input
 										type="hidden" id="orderDestination" name="destination"
 										value="" />
-
+								</div>
+							</div>
+							<div class="form-group col-sm-8 col-sm-offset-2">
+								<label class="col-sm-3 control-label">服务类型</label>
+								<div class="col-sm-9">
+									<input type="text" id="serviceID" name="service"
+										placeholder="选择服务类型" class="service-select fullwidth" value="" />
 								</div>
 							</div>
 							<div class="form-group col-sm-8 col-sm-offset-2">
@@ -831,7 +836,6 @@
 										placeholder="选择一个销售" class="sales-select fullwidth" value="" />
 								</div>
 							</div>
-							
 							<div class="col-sm-12">
 								<a class="submit btn btn-primary" >保存</a> 
 								<input type="hidden" name="caseId" value="${crmcase.caseId}" /> 
@@ -996,13 +1000,14 @@
 	var agegroup = ${ageGroup}; 
 	var genderData = [{ id: 'male', text: '男' }, { id:'female' , text: '女' }];
 	var reason = ${reason};
-	 var orderNoDealReason=${orderNoDealReason};
+	var orderNoDealReason=${orderNoDealReason};
 	var currency =${currency};
 	var contact =${contact};
 	var costReceiver = ${costReceiver};
 	var paymentMethod = [{ id: 0, text: '一期' }, { id: 1, text: '两期' },{ id: 2, text: '三期' }, { id: 3, text: '四期' },{ id: 4, text: '五期' }]
 	var financeItem = ${financeItem};
 	var financeAccount = ${financeAccount};
+	var service = ${service};
 
 	//接收联系方式
 	var contactData=${contact};
@@ -1012,8 +1017,6 @@
 	for(var i=0;i<5;i++){
 		$("#tr_"+i).hide();
 	}
-	
-	
 	
  	$("#level").select2({
         data: level
@@ -1060,7 +1063,6 @@
     	placeholder: '可多选',
     	minimumResultsForSearch: Infinity,
     	data: contact
-
      });
 
     $(".contact-select").val('${crmcase.contactType}'.split(",")).trigger("change");
@@ -1089,11 +1091,14 @@
         data: contactData
      });
     $(".contact-real-select").val('${crmcase.contactReal}').trigger("change");
-
     
     $(".withwho-select").select2({
     	placeholder: '与谁同行',
      	data: withwho
+    });
+    $(".service-select").select2({
+    	placeholder: '选择服务类型',
+     	data: service
     });
     $(".hotel-select").select2({
        placeholder: '选择一个住宿方式',
@@ -1189,9 +1194,8 @@
   	 $('#btnUpdateUser').click( function () {
 		 $(".updateUserModal").modal('show');
      } );
-  	 $('#btn-updateUser').click( function () {
-		 $(".updateUserModal").modal('show');
-     } );
+      
+  	
   	 $(".updateUserModal .cancel").click(function(){
 	    	$(".updateUserModal").modal('hide');
 	 });
@@ -1324,7 +1328,6 @@
 	        	  		$(".rmbpriceErrorMsg").show();
 	        	  		return false;
 	        	  	}
-	          
 	          } 
 	        });
     		//订单未成行
@@ -1403,7 +1406,6 @@
 					$("#msgModal").modal('show');
 				}
 			}, "JSON");
-			
 		}
       //订单未成行
     	function noDeal_submit() {
@@ -1673,7 +1675,6 @@
 			    return false;
 			}
 		});
-     
  
       //订单为未成行
       $("#btn-nodeal").click(function(){
@@ -1684,9 +1685,7 @@
       $(".confirmNoDealModal .cancel").click(function(){
         	$(".confirmNoDealModal").modal("hide");
     	  });
- 	
-	  //添加订单
-
+	  //分配地接社按钮
       $("#btn-addorder").click(function(){
       	  var destination = $("#destination").val();
       	  $("#englishDestination").val(destination);
@@ -1702,10 +1701,8 @@
       				}
       			}
       			var destinationText = destinationText.substring(0,destinationText.length-1);
-
       	  		$("#orderDestinationText").val(destinationText); 
       	  		$("#orderDestination").val(destination);
-
 	      	  	$.ajax({
 	              type: "post",
 	              url: "${rootPath}case/getSales.do?destination="+destination,
@@ -1722,7 +1719,40 @@
       	    }  
             return false;
         });
-      
+        
+	  	//选择服务类型所属销售显示的联动
+	  	$("#serviceID").change(function(){
+	  		var serviceID = $("#serviceID").val();
+	  		if(serviceID==3 || serviceID==4 || serviceID==5){
+	  			$.ajax({
+		              type: "post",
+		              url: "${rootPath}case/getSalesByServiceId.do?serviceID="+serviceID,
+		              data: serviceID,
+		              success: function(sales){
+		            	  var json = jQuery.parseJSON(sales);
+		                  $("#salesId").select2({	
+		                      placeholder: '销售',
+		                      data: json
+		                  });
+		              }  
+		        }); 
+	  		}else{
+	  			var destination = $("#destination").val();
+	  			$.ajax({
+		              type: "post",
+		              url: "${rootPath}case/getSales.do?destination="+destination,
+		              data: destination,
+		              success: function(sales){
+		            	  var json = jQuery.parseJSON(sales);
+		                  $("#salesId").select2({	
+		                      placeholder: '销售',
+		                      data: json
+		                  });
+		              }  
+		            });
+	  		}
+	  	}) 
+	  
         $("#nextModal .submit").click(function(){
           $(this).attr("disabled","disabled");
       	  order_submit();

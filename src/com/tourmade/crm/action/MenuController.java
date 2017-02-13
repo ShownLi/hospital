@@ -1,5 +1,6 @@
 package com.tourmade.crm.action;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -81,6 +82,8 @@ public class MenuController extends BaseSimpleFormController {
 		String roleId = (String) session.getAttribute("roleID");
 		QueryResult<Menu> menuMessageList = menuService.getMenuMessage(Integer.parseInt(roleId),menu, page, request);
 		JSONArray menuMessageResult = JSONArray.fromObject(menuMessageList);
+		List<Menu> menuList = menuService.getMenuRoleList();
+		model.addAttribute("menu", menuList);
 		model.addAttribute("menuMessage", menuMessageResult);
 		
 		return "/menu/addrole";
@@ -135,11 +138,13 @@ public class MenuController extends BaseSimpleFormController {
 			Role role = menuService.getRoleById(role_id);
 			model.addAttribute("role",role);
 			
+			List<Menu> menuList = menuService.getMenuRoleList();
+			model.addAttribute("menu", menuList);
+			
 			//根据角色获取已分配权限
 			List<?> menu = menuService.getMenuIdByRoleId(role.getRole_id());
 			model.addAttribute("menuList",menu);
 		}	
-		
 		return "/menu/roleedit";
 	}
 	
@@ -338,3 +343,5 @@ public class MenuController extends BaseSimpleFormController {
 		return json;
 	}
 }
+
+

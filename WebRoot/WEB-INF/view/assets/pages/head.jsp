@@ -8,6 +8,7 @@
 
 <title>特美旅行CRM系统</title>
 <link href="${rootPath}assets/css/style.default.css" rel="stylesheet">
+<link href="${rootPath}assets/css/jquery-ui-timepicker-addon.css" rel="stylesheet">
 
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>

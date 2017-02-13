@@ -1,5 +1,8 @@
 package com.tourmade.crm.action;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.itextpdf.text.log.SysoLogger;
 import com.tourmade.crm.common.action.BaseSimpleFormController;
 import com.tourmade.crm.common.framework.bean.QueryResult;
 import com.tourmade.crm.common.framework.util.JSONUtilS;
@@ -38,26 +40,36 @@ public class CustomerController extends BaseSimpleFormController {
 	public String list(Model model,String flag,HttpSession session) {
 		String ageGroup = "customer.agegroup";
 		String level = "customer.level";
+		String source = "customer.source";
 		List<EntityList> ageGroupList = customerService.getParameterInfo(ageGroup);
 		List<EntityList> levelList = customerService.getParameterInfo(level);
+		List<EntityList> sourceList = customerService.getParameterInfo(source);
 		JSONArray ageGroupResult = JSONArray.fromObject(ageGroupList);
 		JSONArray levelResult = JSONArray.fromObject(levelList);
+		JSONArray sourceResult = JSONArray.fromObject(sourceList);
 		model.addAttribute("ageGroup",ageGroupResult);
 		model.addAttribute("level",levelResult);
-		
-			//没有传递flag参数时，表示时从侧边栏访问的
-				if ("".equals(flag) || flag == null) {
-					model.addAttribute("flag", "restart");
-					session.removeAttribute("searchCustomer");
-				} else
-					model.addAttribute("flag", flag);
+		model.addAttribute("source",sourceResult);
+	
+		//没有传递flag参数时，表示时从侧边栏访问的
+		if ("".equals(flag) || flag == null) {
+			model.addAttribute("flag", "restart");
+			session.removeAttribute("searchCustomer");
+		} else
+		model.addAttribute("flag", flag);
 					
 		return "/customer/list";
 	}
 	
 	@RequestMapping(value = "/list.do",produces="application/json;charset=utf-8")
 	@ResponseBody
-	public String queryData(String flag,HttpServletRequest request, HttpSession session, Model model, Customer customer, PageHelper page) {
+	public String queryData(String flag,HttpServletRequest request, HttpSession session, Model model, Customer customer, PageHelper page) throws Exception {
+		if (customer.getSearchStartTime() == null) {
+			customer.setSearchStartTime("");
+		}
+		if (customer.getSearchEndTime() == null) {
+			customer.setSearchEndTime("");
+		}
 		if ("old".equals(flag)) {
 			Customer search = (Customer) session.getAttribute("searchCustomer");
 			if(search==null)

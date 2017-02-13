@@ -80,17 +80,28 @@ public class Order extends BaseBean<Order> {
 	private Integer operator;
 
 	private String orderCode;
+	
 	private BigDecimal costBudget;
+	
 	private BigDecimal costBudgetRmb;
+	
 	private BigDecimal costReal;
+	
 	private BigDecimal priceReal;
+	
 	private BigDecimal costAdjust;
+	
 	private BigDecimal priceAdjust;
+	
 	private Integer financeStatus;
+	
 	private Integer costReceiver;
 
 	private String searchStartTime;
+	
 	private String searchEndTime;
+	
+	private String service;
 
 	public String getOrderCode() {
 		return orderCode;
@@ -440,6 +451,14 @@ public class Order extends BaseBean<Order> {
 		this.customerSeEmailAlias = customerSeEmailAlias;
 	}
 
+	public String getService() {
+		return service;
+	}
+
+	public void setService(String service) {
+		this.service = service;
+	}
+
 	@Override
 	public String toString() {
 		return "Order [orderId=" + orderId + ", caseId=" + caseId + ", customerId=" + customerId + ", customerName="
@@ -457,6 +476,6 @@ public class Order extends BaseBean<Order> {
 				+ ", costBudgetRmb=" + costBudgetRmb + ", costReal=" + costReal + ", priceReal=" + priceReal
 				+ ", costAdjust=" + costAdjust + ", priceAdjust=" + priceAdjust + ", financeStatus=" + financeStatus
 				+ ", costReceiver=" + costReceiver + ", searchStartTime=" + searchStartTime + ", searchEndTime="
-				+ searchEndTime + "]";
+				+ searchEndTime + ", service=" + service + "]";
 	}
 }

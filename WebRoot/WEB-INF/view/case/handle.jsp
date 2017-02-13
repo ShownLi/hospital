@@ -161,11 +161,11 @@
                 </div>
                 </div> 
                 <div class="form-group col-sm-4">
-	                    <label class="col-sm-4 control-label">沟通方式</label>
-	                    <div class="col-sm-8">
-	                      <input type="text"  name="contactReal" class="contact-real-select fullwidth" value="0" />
-	                    </div>
-	                </div>       
+                    <label class="col-sm-4 control-label">沟通方式</label>
+                    <div class="col-sm-8">
+                      <input type="text"  name="contactReal" class="contact-real-select fullwidth" value="0" />
+                    </div>
+	            </div>       
             </div>
             
             <div class="section-block">
@@ -432,11 +432,19 @@
                 </div>
             </div>
             <div class="form-group col-sm-8 col-sm-offset-2">
-                <label class="col-sm-3 control-label">所属销售</label>
-                <div class="col-sm-9">
-                    <input type="text" id="salesId" name="salesId" placeholder="选择一个销售" class="sales-select fullwidth" value="" />
-                </div>
-            </div>
+				<label class="col-sm-3 control-label">服务类型</label>
+				<div class="col-sm-9">
+					<input type="text" id="serviceID" name="service"
+						placeholder="选择服务类型" class="service-select fullwidth" value="" />
+				</div>
+			</div>
+			<div class="form-group col-sm-8 col-sm-offset-2">
+				<label class="col-sm-3 control-label">所属销售</label>
+				<div class="col-sm-9">
+					<input type="text" id="salesId" name="salesId"
+						placeholder="选择一个销售" class="sales-select fullwidth" value="" />
+				</div>
+			</div>
             <div class="col-sm-12">
              <a class="submit btn btn-primary">保存</a>
              <input  type="hidden" name="caseId" value="${crmcase.caseId}" />
@@ -894,6 +902,39 @@
           return false;
       });
       
+    //选择服务类型所属销售显示的联动
+	  	$("#serviceID").change(function(){
+	  		var serviceID = $("#serviceID").val();
+	  		if(serviceID==3 || serviceID==4 || serviceID==5){
+	  			$.ajax({
+		              type: "post",
+		              url: "${rootPath}case/getSalesByServiceId.do?serviceID="+serviceID,
+		              data: serviceID,
+		              success: function(sales){
+		            	  var json = jQuery.parseJSON(sales);
+		                  $("#salesId").select2({	
+		                      placeholder: '销售',
+		                      data: json
+		                  });
+		              }  
+		        }); 
+	  		}else{
+	  			var destination = $("#destination").val();
+	  			$.ajax({
+		              type: "post",
+		              url: "${rootPath}case/getSales.do?destination="+destination,
+		              data: destination,
+		              success: function(sales){
+		            	  var json = jQuery.parseJSON(sales);
+		                  $("#salesId").select2({	
+		                      placeholder: '销售',
+		                      data: json
+		                  });
+		              }  
+		            });
+	  		}
+	  	}) 
+	  
        $(".nextModal .submit").click(function(){
       	  order_submit();
       });  

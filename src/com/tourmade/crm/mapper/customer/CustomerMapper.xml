@@ -44,6 +44,15 @@
         <if test="level != null and level != ''">
                 and   customer_level = #{level}
         </if>
+        <if test="source != null and source != ''">
+                and   source = #{source}
+        </if>
+        <if test="searchStartTime != null and searchStartTime != ''">
+			and creat_time >= '${searchStartTime}'
+		</if> 
+		<if test="searchEndTime != null and searchEndTime != ''">
+			and  creat_time &lt;= '${searchEndTime}'
+		</if>
 		order by u.creat_time desc
 		limit #{start},#{length}
 	</select>
@@ -73,7 +82,15 @@
         <if test="level != null and level != ''">
                 and   customer_level = #{level}
         </if>
-
+		<if test="source != null and source != ''">
+                and   source = #{source}
+        </if>
+        <if test="searchStartTime != null and searchStartTime != ''">
+			and creat_time >= '${searchStartTime}'
+		</if> 
+		<if test="searchEndTime != null and searchEndTime != ''">
+			and  creat_time &lt;= '${searchEndTime}'
+		</if> 
 	</select>
 	
  	<insert id="saveCustomer" parameterType="Customer" flushCache="true" useGeneratedKeys="true" keyProperty="id" keyColumn="GENERATED_KEY">
