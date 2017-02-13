@@ -139,11 +139,105 @@
 						</div>
 					</div>
 				</div>
+				
 		<%@ include file="../assets/pages/rightpanel.jsp"%>
 	</section>
 
 	<%@ include file="../assets/pages/foot.jsp"%>
-
+<!-- Modal 添加订单没有地址 -->
+	<div class="modal fade" id="msgDestination" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel">信息</h4>
+				</div>
+				<div class="modal-body">请选择目的地，再添加订单</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				</div>
+			</div>
+			<!-- modal-content -->
+		</div>
+		<!-- modal-dialog -->
+	</div>
+	<!-- modal -->
+	<!-- 分配地接社Modal -->
+	<div class="nextModal modal fade" id="nextModal" tabindex="-1"
+		role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-body align-center">
+					<div class="section-block">
+						<form id="form-order">
+							<div class="section-title">选择目的地及地接社,添加订单</div>
+							<div class="form-group col-sm-8 col-sm-offset-2">
+								<label class="col-sm-3 control-label">目的地</label>
+								<div class="col-sm-9">
+									<input type="text" id="orderDestinationText"
+										readonly="readonly" class="form-control" value="" /> <input
+										type="hidden" id="orderDestination" name="destination"
+										value="" />
+								</div>
+							</div>
+							<div class="form-group col-sm-8 col-sm-offset-2">
+								<label class="col-sm-3 control-label">服务类型</label>
+								<div class="col-sm-9">
+									<input type="text" id="serviceID" name="service"
+										placeholder="选择服务类型" class="service-select fullwidth" value="" />
+								</div>
+							</div>
+							<div class="form-group col-sm-8 col-sm-offset-2">
+								<label class="col-sm-3 control-label">所属销售</label>
+								<div class="col-sm-9">
+									<input type="text" id="salesId" name="salesId"
+										placeholder="选择一个销售" class="sales-select fullwidth" value="" />
+								</div>
+							</div>
+							<div class="col-sm-12">
+								<a class="submit btn btn-primary" >保存</a> 
+								<input type="hidden" name="caseId" value="${crmcase.caseId}" /> 
+								<input type="hidden" name="customerId" value="${crmcase.customerId}" />
+								<input type="hidden" name="operator" value="${crmcase.operator}" />
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+			<!-- modal-content -->
+		</div>
+		<!-- modal-dialog -->
+	</div> 
+<div class="updateUserModal modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <div class="nextModal-title">更改跟单员</div>
+      </div>
+      <form class="form-horizontal" id="form-updateUser">
+          <div class="modal-body">     
+              <div class="section-block noline">
+                  <div class="form-group col-sm-12">
+                    <label class="col-sm-4 control-label">跟单员</label>
+                    <div class="col-sm-8">
+                      <input class="updateUser-select fullwidth" name="operator" />
+                    </div>
+                  </div>
+                  <input type="hidden" id="updateUser-caseId" name="caseId"  />
+              </div>
+              </div><!-- noDealModal-body -->
+         
+          <div class="modal-footer align-center">
+            <button class="btn btn-primary" >保存</button> 
+            <a class="cancel btn btn-primary" >取消</a>
+          </div>
+      </form>
+    </div><!-- modal-content -->
+  </div><!-- modal-dialog -->
+</div><!-- bmodal -->
 	<script src="${rootPath}assets/js/jquery.datatables.min.js"></script>
 	<script src="${rootPath}assets/js/select2.min.js"></script>
 	<script src="${rootPath}assets/js/jquery-ui-1.10.3.min.js"></script>
@@ -216,7 +310,11 @@
         changeYear: true,
         changeMonth: true,
      });
-    
+    $(".updateUser-select").select2({
+    	placeholder:"选择跟单员",
+    	data:user,
+        allowClear: true
+	 });
     if($('#searchCaseFlag').val()=="old"){
 	    if("${searchCase.status}" == ""){
 	    	$("#statusAll").attr("checked",true);
@@ -505,12 +603,28 @@
 		                  data: "caseId",
 		                  orderable: false,
 		                  render: function ( data, type, full, meta ) {
-		                	  
+		                	 
 		                	  if(full.status==0){
 		                		  return '<a class="btn btn-primary btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 处理</a> &nbsp;';  
 		                	  }
 		                	  else {
-		                		  return '<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a>&nbsp;';    
+		                		  
+		                		  var reContent ='<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a>'+
+		                		  '&nbsp;<a name="btnUpdateUser"  class="btn btn-default btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 修改跟单员</a>';
+		                		  
+		                		  if(full.status!=5&&full.status!=4){
+		                			  reContent+='&nbsp;<a name="btn-addorder"  class="btn btn-primary btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 分配地接社</a>';
+		                		 }
+		                		  if(full.status==1){
+		                			  reContent+='&nbsp;<a name="btn-invalid"  class="btn btn-danger btn-xs" id="'+data+'">无效</a>';
+		                		  }
+		                		  
+		                		  if(full.status!=3&&full.status!=5&&full.status!=4){
+		                			  reContent+='&nbsp;<a name="btn-nodeal"  class="btn btn-danger btn-xs" id="'+data+'">未成行</a>';
+		                			 
+		                			}
+		                		  return reContent;  
+		                		  
 		                	  }
 		                      
 		                  },
@@ -552,7 +666,40 @@
 				$('#searchCaseFlag').val("restart");
 				t.draw();
 			});
+			//修改跟单员
+			 $('#dataTable tbody').on( 'click', 'a[name=btnUpdateUser]', function () {
+				 $(".updateUserModal").modal('show');
+				 $("#updateUser-caseId").val($(this).attr('id'));
+		     } );
 			
+			 jQuery("#form-updateUser").validate({
+			        rules: {
+				        operator: {
+				        	required: true,
+				        },	              	
+					},				
+			     	 messages: {
+			     		operator: "请选择跟单员",
+			      	 },			      
+			          highlight: function(element) {
+			            jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+			          },
+			          success: function(element) {
+			            jQuery(element).closest('.form-group').removeClass('has-error');
+			          },
+			          invalidHandler : function(){
+			            return false;
+			          },
+			          submitHandler : function(){
+			          	$("#form-updateUser .submit").attr("disabled","disabled");
+			              updateUser_submit();
+			              return false;
+			          } 
+		        });
+			 
+			 $(".updateUserModal .cancel").click(function(){
+			    	$(".updateUserModal").modal('hide');
+			    });
 			/*if($('#searchCaseFlag').val()=="old"){
 			    if("${searchCase.status}" == ""){
 			    	$("#statusAll").attr("checked",true).click();
@@ -583,7 +730,18 @@
 		        var data = t.row($(this).parents('tr')).data();
 		        handle($(this).attr('id'));
 		    } );
-
+			function updateUser_submit(){
+				var f = $("#form-updateUser").serialize();
+				$.post('${rootPath}case/updateUser.do', f, function(result) {
+					var rmsg = result.msg;
+					if (result.success) {
+						window.parent.location = "${rootPath}case/list.html?flag=old";
+					} 
+					else {
+						$("#msgModal").modal('show');
+					}
+				}, "JSON");
+			}
 	    
 		// Select2
 	    jQuery('select').select2({
@@ -650,6 +808,107 @@
      	  }
      	 alert("页面正在加载，请稍后...");
       }
+  	//分配地接社按钮
+      $("#btn-addorder").click(function(){
+      	  var destination = $("#destination").val();
+      	  $("#englishDestination").val(destination);
+      	  if(destination=="" || destination == null){
+      	  	$("#msgDestination").modal('show');
+ 		  }else{ 
+      			var destinationText;
+      			for(var i=0; i<$("#destination").select2('data').length; i++){
+      				if(destinationText==null){
+      					destinationText = $("#destination").select2('data')[i].text + ",";
+      				}else{
+      					destinationText = destinationText + $("#destination").select2('data')[i].text + ",";
+      				}
+      			}
+      			var destinationText = destinationText.substring(0,destinationText.length-1);
+      	  		$("#orderDestinationText").val(destinationText); 
+      	  		$("#orderDestination").val(destination);
+	      	  	$.ajax({
+	              type: "post",
+	              url: "${rootPath}case/getSales.do?destination="+destination,
+	              data: destination,
+	              success: function(sales){
+	            	  var json = jQuery.parseJSON(sales);
+	                  $("#salesId").select2({	
+	                      placeholder: '销售',
+	                      data: json
+	                  });
+	              }  
+	            });  
+      	  	    $("#nextModal").modal('show');         	         	  
+      	    }  
+            return false;
+        });
+  	
+    //选择服务类型所属销售显示的联动
+	  	$("#serviceID").change(function(){
+	  		var serviceID = $("#serviceID").val();
+	  		if(serviceID==3 || serviceID==4 || serviceID==5){
+	  			$.ajax({
+		              type: "post",
+		              url: "${rootPath}case/getSalesByServiceId.do?serviceID="+serviceID,
+		              data: serviceID,
+		              success: function(sales){
+		            	  var json = jQuery.parseJSON(sales);
+		                  $("#salesId").select2({	
+		                      placeholder: '销售',
+		                      data: json
+		                  });
+		              }  
+		        }); 
+	  		}else{
+	  			var destination = $("#destination").val();
+	  			$.ajax({
+		              type: "post",
+		              url: "${rootPath}case/getSales.do?destination="+destination,
+		              data: destination,
+		              success: function(sales){
+		            	  var json = jQuery.parseJSON(sales);
+		                  $("#salesId").select2({	
+		                      placeholder: '销售',
+		                      data: json
+		                  });
+		              }  
+		            });
+	  		}
+	  	}) 
+	  	$("#nextModal .submit").click(function(){
+          $(this).attr("disabled","disabled");
+      	  order_submit();
+        }); 
+    
+	  	function order_submit() {
+			var f = $("#form-order").serialize();
+			$.post('${rootPath}order/add.do', f, function(result) {
+				var rmsg = result.msg;
+				if (result.success) {
+					window.parent.location = "${rootPath}case/edit.html?id=${crmcase.caseId}";
+				} else {
+					if(result.text=="noCustomerEmail"){
+						alert("分配地接社成功，由于客人没有邮箱，无法发送订单邮件");
+						$('#nextModal').modal('hide');
+						window.parent.location = "${rootPath}case/edit.html?id=${crmcase.caseId}";
+					}
+					else if(result.text=="noSaleEmail"){
+						alert("分配地接社成功，由于销售没有邮箱，无法发送订单邮件");
+						$('#nextModal').modal('hide');
+						window.parent.location = "${rootPath}case/edit.html?id=${crmcase.caseId}";
+
+					}
+					else if(result.text=="noSendmail"){
+						alert("分配地接社成功，由于地接社设置为不发送邮件，所以未发送订单邮件");
+						$('#nextModal').modal('hide');
+						window.parent.location = "${rootPath}case/edit.html?id=${crmcase.caseId}";
+					}
+					//$("#NoEmail").modal('show');
+	         		//$("#nextModal").modal('hide');
+	         		else {window.parent.location = "${rootPath}case/edit.html?id=${crmcase.caseId}";}
+				}
+			}, "JSON");
+	      }
 	</script>
 </body>
 </html>

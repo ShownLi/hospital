@@ -447,6 +447,7 @@ public class OrderController extends BaseSimpleFormController {
 		return json;
 	}
 	
+	
 	@RequestMapping(value = "/orderSendEmail.do")
 	@ResponseBody
 	public Json orderSendEmail(HttpServletRequest request, HttpSession session, Model model, Integer orderId) {

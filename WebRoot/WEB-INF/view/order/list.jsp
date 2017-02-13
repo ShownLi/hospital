@@ -374,6 +374,8 @@
         allowClear: true
     });
     
+   
+    
     $(".reason-select").select2({
     	placeholder:"未成行原因",
     	data:reason,
@@ -559,6 +561,7 @@
 		              return false;
 		          } 
 	        });
+			
           });  
 			
 			 var t = jQuery('#dataTable').DataTable({
@@ -751,7 +754,7 @@
 		             { data: "operator"},
 		             { data: "creatTime"}, 
 			 		 { data: "lastResponse"}
-		         ]
+		         ]	
 			 });
 			 if($('#searchFlag').val()=="restart"){
 					t.ajax.reload();
@@ -768,6 +771,7 @@
 		         var data = t.row($(this).parents('tr')).data();
 		         edit($(this).attr('id'));
 		     } );
+			 
 			
 			 $('#dataTable tbody').on( 'click', 'a[name=btnDeal]', function () {
 		         var data = t.row($(this).parents('tr')).data();
@@ -871,6 +875,7 @@
 	    $(".dealModal .cancel").click(function(){
 	    	$(".dealModal").modal('hide');
 	    });
+	    
 	    $(".noDealModal .cancel").click(function(){
 	    	$(".noDealModal").modal('hide');
 	    });
@@ -914,7 +919,8 @@
 					$("#msgModal").modal('show');
 				}
 			}, "JSON");
-		}		
+		}	
+		
 		 function doDel(id){
 			$.ajax({
 				url: "${rootPath}user/del.do?id=" + id, 

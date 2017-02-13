@@ -5,6 +5,7 @@
 	<select id="queryOrder" parameterType="Map" resultType="Order">
 		select
 			u.order_id as orderId,
+			u.case_id as caseId,
 			u.customer_id as customerId,
 			u.customer_name as customerName,
 			u.agency_id as agencyId,
@@ -560,5 +561,6 @@
 			u.sales_email as salesEmail,
 			u.isdel as isdel
 		from tm_sales u where u.sales_id = #{salesId}
-	</select>	
+	</select>
+		
 </mapper>

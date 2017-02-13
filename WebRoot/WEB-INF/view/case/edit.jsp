@@ -171,7 +171,9 @@
 								<div class="col-sm-8">
 									<input type="text" name="operator"
 										class="user-select fullwidth" value="${crmcase.operator}" />
+									<span id="btnUpdateUser" class="fa fa-edit"></span>
 								</div>
+								
 							</div>
 							<div class="form-group col-sm-4">
 								<label class="col-sm-4 control-label">沟通方式</label>
@@ -359,6 +361,7 @@
 
 						<div class="panel-footer align-center">
 							<input class="btn btn-primary" id="btn-addorder" type="button" value="分配地接社" />&nbsp; 
+							<input class="btn btn-primary" id="btn-updateUser" type="button" value="修改跟单员" />&nbsp; 
 							<input class="btn btn-primary" type="submit" value="保存" />&nbsp;
 							<input class="btn btn-danger" id="btn-invalid"   type="button" value="无效"/>&nbsp; 
 							<input class="btn btn-danger" id="btn-nodeal" type="button" value="未成行" />&nbsp; 
@@ -475,6 +478,40 @@
 		<%@ include file="../assets/pages/rightpanel.jsp"%>
 	</section>
 
+	<div class="updateUserModal modal fade" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<div class="nextModal-title">更改跟单员</div>
+				</div>
+				<form class="form-horizontal" id="form-updateUser">
+					<div class="modal-body">
+						<div class="section-block noline">
+							<div class="form-group col-sm-12">
+								<label class="col-sm-4 control-label">跟单员</label>
+								<div class="col-sm-8">
+									<input class="updateUser-select fullwidth" name="operator" />
+								</div>
+							</div>
+							<input type="hidden" name="caseId" value="${crmcase.caseId} " />
+						</div>
+					</div>
+					<!-- noDealModal-body -->
+
+					<div class="modal-footer align-center">
+						<button class="btn btn-primary">保存</button>
+						<a class="cancel btn btn-primary">取消</a>
+					</div>
+				</form>
+			</div>
+			<!-- modal-content -->
+		</div>
+		<!-- modal-dialog -->
+	</div>
+	<!-- bmodal -->
 
 	<!-- Modal 保存数据时出错-->
 	<div class="modal fade" id="msgModal" tabindex="-1" role="dialog"
@@ -1123,6 +1160,12 @@
     	placeholder:"未成行原因",
     	data:orderNoDealReason
     });
+    //修改跟单员弹出框
+    $(".updateUser-select").select2({
+    	placeholder:"选择跟单员",
+    	data:user,
+        allowClear: true
+	 });
     
 	if("${crmcase.status}"==5){
    	  $("#div-delInfo").show();
@@ -1147,8 +1190,42 @@
    			$("#tr_"+i).hide();
    		}
     });
+      //设置更改跟单员
+  	 $('#btnUpdateUser').click( function () {
+		 $(".updateUserModal").modal('show');
+     } );
       
+  	
+  	 $(".updateUserModal .cancel").click(function(){
+	    	$(".updateUserModal").modal('hide');
+	 });
     	jQuery(document).ready(function() {
+    		
+    		jQuery("#form-updateUser").validate({
+		        rules: {
+			        operator: {
+			        	required: true,
+			        },	              	
+				},				
+		     	 messages: {
+		     		operator: "请选择跟单员",
+		      	 },			      
+		          highlight: function(element) {
+		            jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+		          },
+		          success: function(element) {
+		            jQuery(element).closest('.form-group').removeClass('has-error');
+		          },
+		          invalidHandler : function(){
+		            return false;
+		          },
+		          submitHandler : function(){
+		          	$("#form-updateUser .submit").attr("disabled","disabled");
+		              updateUser_submit();
+		              return false;
+		          } 
+	        });
+    		
     		jQuery("#form-deal").validate({
 		           rules: {
 			        groupTime: {
@@ -1956,6 +2033,7 @@
 
 
   jQuery(document).ready(function() {
+	  
       // Select2
       jQuery('select').select2({
           minimumResultsForSearch: -1
@@ -2033,6 +2111,19 @@
           $(".start-time").show();
       }
   });
+  
+  function updateUser_submit(){
+		var f = $("#form-updateUser").serialize();
+		$.post('${rootPath}case/updateUser.do', f, function(result) {
+			var rmsg = result.msg;
+			if (result.success) {
+				window.parent.location = "${rootPath}case/edit.html?id=${crmcase.caseId}";
+			} 
+			else {
+				$("#msgModal").modal('show');
+			}
+		}, "JSON");
+	}
 	</script>
 </body>
 </html>
