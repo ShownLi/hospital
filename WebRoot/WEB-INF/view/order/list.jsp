@@ -858,7 +858,7 @@
 		// Date Picker
 		jQuery(".datepicker").datetimepicker({
 			  dateFormat: "yy-mm-dd",
-			  controlType: 'select',
+			  //controlType: 'select',
 			  timeFormat: 'HH:mm',
 			  showMinute: false
 	  	});
