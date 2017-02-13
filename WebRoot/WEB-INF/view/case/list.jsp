@@ -433,25 +433,24 @@
 				                render:  function ( data, type, full, meta ) {
 				                	var dataSource = full.source;
 				                	var dataCaseStatus = full.status;
-				                	
 				                	var m = "";
 				                	var n = "";
-					                	for(var i=0;i < source.length;i++){
-					                		
-					                		if(dataSource==source[i].id){
-					                			m = source[i].text;
-					                			break;
-					                		}	
-					                	}
-					                	
-					                	for(var i=0;i<caseStatus.length;i++){
-					                		if(dataCaseStatus==caseStatus[i].id){
-					                			n=caseStatus[i].text;
-					                			break;
-					                		}
-					                	}
-					                	
-					                	return "<div class='width85'>" + m + "</div>" + "<div class='width85'>" + n + "</div>";
+				                	for(var i=0;i < source.length;i++){
+				                		
+				                		if(dataSource==source[i].id){
+				                			m = source[i].text;
+				                			break;
+				                		}	
+				                	}
+				                	
+				                	for(var i=0;i<caseStatus.length;i++){
+				                		if(dataCaseStatus==caseStatus[i].id){
+				                			n=caseStatus[i].text;
+				                			break;
+				                		}
+				                	}
+				                	
+				                	return "<div class='width85'>" + m + "</div>" + "<div class='width85'>" + n + "</div>";
 				                },
 				                targets: 6
 						},

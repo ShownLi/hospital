@@ -30,6 +30,7 @@
 			u.creat_time as creatTime,
 			u.isdel as isdel,
 			u.order_code as orderCode,
+			u.service as service,
 			IFNULL(u.cost_budget,0 )as costBudget,
 			IFNULL(u.cost_budget_rmb,0 )  as costBudgetRmb,
 			IFNULL(u.cost_real,0 ) as costReal,
@@ -101,7 +102,8 @@
 			u.currency as currency,
 			u.rmb_price as rmbPrice,
 			u.exchange_rate as exchangeRate,
-			u.last_response as lastResponse,	
+			u.last_response as lastResponse,
+			u.service as service,	
 			u.creat_time as creatTime
 		from tm_order u  
 		where u.isdel = 0 and u.case_id = #{caseId}
@@ -217,15 +219,13 @@
 		group_price,
 		currency,
 		exchange_rate,
-		
 		cost_budget,
 		cost_budget_rmb,
 		cost_receiver,
 		finance_status,
-		
-		
 		last_response,
 		creat_time,
+		service,
 		isdel
 		)values(
 		#{caseId,jdbcType=VARCHAR},
@@ -254,6 +254,7 @@
 		1,
 		NOW(),
 		NOW(),
+		#{service},
 		0
 		)
 	</insert>
@@ -282,6 +283,7 @@
 		currency=#{currency},
 		exchange_rate=#{exchangeRate},
 		last_response=#{lastResponse},
+		service=#{service},
 		update_time=NOW()
 		where
 		order_id=#{orderId}
@@ -431,15 +433,12 @@
 		u.sales_name as salesName,
 		u.destination as destination,
 		u.operator as operator,
-		
 		u.customer_email_real as customerEmailReal,
 		u.agency_email_real as agencyEmailReal,
-				
 		u.customer_re_email_alias as customerReEmailAlias,
 		u.customer_se_email_alias as customerSeEmailAlias,
 		u.agency_re_email_alias as agencyReEmailAlias,
 		u.agency_se_email_alias as agencySeEmailAlias,
-		
 		u.status as status,
 		u.reason as reason,
 		u.group_time as groupTime,
@@ -454,6 +453,7 @@
 		u.creat_time as creatTime,
 		u.isdel as isdel,
 		u.order_code as orderCode,
+		u.service as service,
 		IFNULL(u.cost_budget,0) as costBudget,
 		IFNULL(u.cost_budget_rmb,0)  as costBudgetRmb,
 		IFNULL(u.cost_real,0) as costReal,
@@ -534,19 +534,15 @@
 		u.case_id as caseId,
 		u.agency_name as agencyName,
 		u.last_response as lastResponse,
-		
 		u.customer_re_email_alias as customerReEmailAlias,
 		u.customer_se_email_alias as customerSeEmailAlias,
 		u.agency_re_email_alias as agencyReEmailAlias,
 		u.agency_se_email_alias as agencySeEmailAlias,
 		u.operator as operator,
-		
-		
 		u.agency_email_real as agencyEmailReal,
 		u.customer_email_real as customerEmailReal,
 		u.customer_name as customerName,
 		u.sales_name as salesName
-		
 		from tm_order u 
 		where  u.isdel = 0 and 
 		(u.customer_re_email_alias = #{recieverEmail} 

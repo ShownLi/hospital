@@ -579,7 +579,6 @@
 			 			var searchBudget=$('#searchBudget').val();
 			 			var searchStatus=$('#searchStatus').val();
 			 			var searchOperator=$('#searchOperator').val();
-			 			
 			 			var searchFlag=$('#searchFlag').val();
 			 			data.flag = searchFlag;
 			 			if(searchCustomerName !=null && searchCustomerName !="" ){

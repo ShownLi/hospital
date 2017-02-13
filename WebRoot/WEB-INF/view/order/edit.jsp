@@ -166,9 +166,6 @@
 		                        <input type="text" name="costReceiver" value="${order.costReceiver}" placeholder="签约乙方" class="costReceiver-select fullwidth"/>
 		                      </div>
 		                 	  </div>
-                  
-                      
-                      
                       <div class="form-group col-sm-4">
                       <div class="col-sm-6"></div>
                    		<input type="submit" class="submit btn btn-primary" value="更改"/>
@@ -854,7 +851,7 @@
 	var orderStatus = ${orderStatus};
 	var country = ${country};
 	var reason = ${reason};
-	var currency=${currency};
+	var currency = ${currency};
 	var costReceiver =  ${costReceiver};
 	var paymentMethod = [{ id: 0, text: '一期' }, { id: 1, text: '两期' },{ id: 2, text: '三期' }, { id: 3, text: '四期' },{ id: 4, text: '五期' }]
 	var financeItem = ${financeItem};
@@ -862,7 +859,6 @@
 	var priceStatus = ${priceStatus};
 	var costStatus = ${costStatus};
 	var allAgency = ${allAgency};
-
 	var financeStatus = ${order.financeStatus};
 
 	for(var i=0;i<5;i++){
@@ -937,8 +933,6 @@
     	data:allAgency,
     	allowClear:true
     });
-    
-    
      
      $('.paymentMethod-select').change(function(){
     		//var payMethod = $("#paymentMethod").select2('data')[0].id;
@@ -1045,11 +1039,11 @@
        },   
        submitHandler : function(){
      	  var rmbPrice =parseInt($.trim($("#rmbPrice").val())),
-     	  	priceBudget1 =parseInt($.trim($('#priceBudget1').val())),
-     	  	priceBudget2 =parseInt($.trim($('#priceBudget2').val())),
-     	  	priceBudget3 =parseInt($.trim($('#priceBudget3').val())),
-     	  	priceBudget4 =parseInt($.trim($('#priceBudget4').val())),
-     	  	priceBudget5 =parseInt($.trim($('#priceBudget5').val()));
+	   	  	priceBudget1 =parseInt($.trim($('#priceBudget1').val())),
+	   	  	priceBudget2 =parseInt($.trim($('#priceBudget2').val())),
+	   	  	priceBudget3 =parseInt($.trim($('#priceBudget3').val())),
+	   	  	priceBudget4 =parseInt($.trim($('#priceBudget4').val())),
+	   	  	priceBudget5 =parseInt($.trim($('#priceBudget5').val()));
      	  if(isNaN(priceBudget1)){priceBudget1 = 0}
      	  if(isNaN(priceBudget2)){priceBudget2 = 0}
      	  if(isNaN(priceBudget3)){priceBudget3 = 0}
@@ -1288,35 +1282,6 @@
 		$(".nav-parent").eq(1).addClass("nav-active");
    	    $(".nav-parent").eq(1).find(".children").show();
       		
-		/* jQuery("#baseForm").validate({
-				
-			highlight: function(element) {
-				jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
-			},
-			success: function(element) {
-				jQuery(element).closest('.form-group').removeClass('has-error');
-			},
-			invalidHandler : function(){
-				return false;
-			},
-			submitHandler : function(){
-				baseForm_submit();
-			    return false;
-			}
-		}); */
-		
-		/* function baseForm_submit() {
-			var f = $("#baseForm").serialize();
-			$.post('${rootPath}order/edit.do', f, function(result) {
-				var rmsg = result.msg;
-				if (result.success) {
-					window.parent.location = "${rootPath}order/list.html";
-				} 
-				else {
-					$("#msgModal").modal('show');
-				}
-			}, "JSON");
-        } */
 		
 		jQuery("#form-comment").validate({
 			rules:{
@@ -1339,8 +1304,6 @@
 			    return false;
 			}
 		});
-
-        
 			
 	});
 	//注释分页
@@ -1966,14 +1929,8 @@
 		  $('#addNote').attr("disabled",false);
 		  //$("#addNote3").children().attr("disabled",false);
 		  $('.addNote').attr("disabled",false);
-		  
-		  
 	  } 
   }
-
- 
-  
 </script>
-
 </body>
 </html>

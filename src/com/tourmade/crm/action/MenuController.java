@@ -82,6 +82,8 @@ public class MenuController extends BaseSimpleFormController {
 		String roleId = (String) session.getAttribute("roleID");
 		QueryResult<Menu> menuMessageList = menuService.getMenuMessage(Integer.parseInt(roleId),menu, page, request);
 		JSONArray menuMessageResult = JSONArray.fromObject(menuMessageList);
+		List<Menu> menuList = menuService.getMenuRoleList();
+		model.addAttribute("menu", menuList);
 		model.addAttribute("menuMessage", menuMessageResult);
 		
 		return "/menu/addrole";
@@ -138,17 +140,6 @@ public class MenuController extends BaseSimpleFormController {
 			
 			List<Menu> menuList = menuService.getMenuRoleList();
 			model.addAttribute("menu", menuList);
-			System.out.println(menuList);
-//			for(int i=0; i<menuList.size(); i++){
-//				//System.out.println(menuList.get(i));
-//				List menuIdList = new ArrayList();
-//				menuIdList.add(menuList.get(i).getMenuID());
-//				System.out.println(menuIdList);
-//				model.addAttribute("menuName",menuList.get(i).getMenuName());
-//				//model.addAttribute("menuId", menuIdList);
-//				model.addAllAttributes(menuIdList);
-//				model.addAttribute("menuCategory", menuList.get(i).getMenuCategory());
-//			}
 			
 			//根据角色获取已分配权限
 			List<?> menu = menuService.getMenuIdByRoleId(role.getRole_id());

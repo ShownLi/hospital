@@ -71,6 +71,15 @@ public class CustomerService extends BaseService {
 		if(customer.getLevel()!=null){
 			map.put("level",customer.getLevel());
 		}
+		if(customer.getSource()!=null){
+			map.put("source",customer.getSource());
+		}
+		if(customer.getSearchEndTime()!=null){
+			map.put("searchEndTime",customer.getSearchEndTime());
+		}
+		if(customer.getSearchStartTime()!=null){
+			map.put("searchStartTime",customer.getSearchStartTime());
+		}
 		
 		List<Customer> data = customerMapper.queryCustomer(map);
 		long count = customerMapper.countCustomer(customer);

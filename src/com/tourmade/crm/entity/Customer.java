@@ -50,6 +50,10 @@ public class Customer extends BaseBean<Customer> {
 	
 	private Date updateTime;
 
+	private String searchStartTime;
+	
+	private String searchEndTime;
+	
 	public Integer getCustomerId() {
 		return customerId;
 	}
@@ -190,16 +194,29 @@ public class Customer extends BaseBean<Customer> {
 		return serialVersionUID;
 	}
 
+	public String getSearchStartTime() {
+		return searchStartTime;
+	}
+
+	public void setSearchStartTime(String searchStartTime) {
+		this.searchStartTime = searchStartTime;
+	}
+
+	public String getSearchEndTime() {
+		return searchEndTime;
+	}
+
+	public void setSearchEndTime(String searchEndTime) {
+		this.searchEndTime = searchEndTime;
+	}
+
 	@Override
 	public String toString() {
-		return "Customer [customerId=" + customerId + ", portalId=" + portalId
-				+ ", chineseName=" + chineseName + ", englishName="
-				+ englishName + ", level=" + level + ", location=" + location
-				+ ", source=" + source + ", ageGroup=" + ageGroup + ", gender="
-				+ gender + ", telephone=" + telephone + ", mobilephone="
-				+ mobilephone + ", wechat=" + wechat + ", qq=" + qq
-				+ ", email=" + email + ", birthday=" + birthday
-				+ ", creatTime=" + creatTime + ", updateTime=" + updateTime
-				+ "]";
+		return "Customer [customerId=" + customerId + ", portalId=" + portalId + ", chineseName=" + chineseName
+				+ ", englishName=" + englishName + ", level=" + level + ", location=" + location + ", source=" + source
+				+ ", ageGroup=" + ageGroup + ", gender=" + gender + ", telephone=" + telephone + ", mobilephone="
+				+ mobilephone + ", wechat=" + wechat + ", qq=" + qq + ", email=" + email + ", birthday=" + birthday
+				+ ", creatTime=" + creatTime + ", updateTime=" + updateTime + ", searchStartTime=" + searchStartTime
+				+ ", searchEndTime=" + searchEndTime + "]";
 	}
 }
