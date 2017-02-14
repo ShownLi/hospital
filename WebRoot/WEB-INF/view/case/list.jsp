@@ -727,13 +727,13 @@
 		                			  reContent+='&nbsp;<a name="btn-addorder"  class="btn btn-primary btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 分配地接社</a>';
 		                		  }
 		                		  if("${sessionScope.buttonId1}" != ""){
-		                			  reContent+='&nbsp;<a name="btnUpdateUser"  class="btn btn-default btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 修改跟单员</a>';
+		                			  reContent+='&nbsp;<a name="btnUpdateUser"  class="btn btn-default btn-orange btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 修改跟单员</a>';
 		                		  }
 		                		  if(full.status==1){
 		                			  reContent+='&nbsp;<a name="btn-invalid"  class="btn btn-danger btn-xs" id="'+data+'">无效</a>';
 		                		  }
 		                		  if(full.status!=3&&full.status!=5&&full.status!=4){
-		                			  reContent+='&nbsp;<a name="btn-nodeal"  class="btn btn-danger btn-xs" id="'+data+'">未成行</a>';
+		                			  reContent+='&nbsp;<a name="btn-nodeal"  class="btn btn-danger btn-darkblue btn-xs" id="'+data+'">未成行</a>';
 		                		  }
 		                		  return reContent;  
 		                	  }
