@@ -68,15 +68,12 @@
 				                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
 				                    </div>
 			                    </div>
-							 
-
 								</div>	
-									<div class="col-sm-2">					 		                        		
+								<div class="col-sm-2">					 		                        		
 									<input class="btn btn-primary" type="button" id="searchBtn" value="搜索"/>
 									<input type="hidden" id="searchCaseFlag"  value="${flag}" />
 								</div> 	
 							</div>
-
 							</div>	
 						</div>
 					</div>
@@ -138,7 +135,6 @@
 						</div>
 					</div>
 				</div>
-				
 		<%@ include file="../assets/pages/rightpanel.jsp"%>
 	</section>
 
@@ -175,10 +171,8 @@
 							<div class="form-group col-sm-8 col-sm-offset-2">
 								<label class="col-sm-3 control-label">目的地</label>
 								<div class="col-sm-9">
-									<input type="text" id="orderDestinationText"
-										readonly="readonly" class="form-control" value="" /> <input
-										type="hidden" id="orderDestination" name="destination"
-										value="" />
+									<input type="text" id="orderDestinationText" readonly="readonly" class="form-control" value="" /> 
+									<input type="hidden" id="orderDestination" name="destination" value="" />
 								</div>
 							</div>
 							<div class="form-group col-sm-8 col-sm-offset-2">
@@ -227,7 +221,7 @@
                   </div>
                   <input type="hidden" id="updateUser-caseId" name="caseId"  />
               </div>
-              </div><!-- noDealModal-body -->
+          </div><!-- noDealModal-body -->
          
           <div class="modal-footer align-center">
             <button class="btn btn-primary" >保存</button> 
@@ -606,12 +600,10 @@
 		                		  return '<a class="btn btn-primary btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 处理</a> &nbsp;';  
 		                	  }
 		                	  else {
-		                		  
 		                		  var reContent ='<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a>';
-		                		  
 		                		  if(full.status!=5&&full.status!=4){
 		                			  reContent+='&nbsp;<a name="btn-addorder"  class="btn btn-primary btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 分配地接社</a>';
-		                		 }
+		                		  }
 		                		  if("${sessionScope.buttonId1}" != ""){
 		                			  reContent+='&nbsp;<a name="btnUpdateUser"  class="btn btn-default btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 修改跟单员</a>';
 		                		  }
@@ -620,11 +612,9 @@
 		                		  }
 		                		  if(full.status!=3&&full.status!=5&&full.status!=4){
 		                			  reContent+='&nbsp;<a name="btn-nodeal"  class="btn btn-danger btn-xs" id="'+data+'">未成行</a>';
-		                			}
+		                		  }
 		                		  return reContent;  
-		                		  
 		                	  }
-		                      
 		                  },
 		                  targets: 9
 					    },
