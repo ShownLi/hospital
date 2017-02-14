@@ -56,17 +56,11 @@
                         <select id="destination" name="destination" class="contact-select-country fullwidth" multiple="multiple"></select>
                       </div>
                     </div>
-                    <div class="form-group col-sm-4">
-                      <label class="col-sm-4 control-label">预算(元/人)</label>
-                      <div class="col-sm-8">
-                        <input type="text" name="budget" placeholder="预算" class="form-control" readonly value="${order.budget}" />
-                        <span style="position: absolute; right: 15px; top: 10px;">￥/人</span>
-                      </div>
-                    </div>
+                    
                     <div class="form-group col-sm-4">
                       <label class="col-sm-4 control-label">状态</label>
                       <div class="col-sm-8">
-                        <input type="text" name="status" placeholder="状态" class="status-select fullwidth" readonly value="${order.status}" />
+                        <input type="text" name="status" placeholder="状态" disabled="disabled" class="status-select fullwidth" readonly value="${order.status}" />
                       </div>
                     </div>
                 </div> 

@@ -171,7 +171,8 @@
 								<div class="col-sm-8">
 									<input type="text" name="operator"
 										class="user-select fullwidth" value="${crmcase.operator}" />
-									<span id="btnUpdateUser" class="fa fa-edit"></span>
+									<!-- 	修改跟单员图标
+									<span id="btnUpdateUser" class="fa fa-edit"></span> -->
 								</div>
 								
 							</div>
@@ -1192,6 +1193,10 @@
     });
       //设置更改跟单员
   	 $('#btnUpdateUser').click( function () {
+		 $(".updateUserModal").modal('show');
+     } );
+      
+  	 $('#btn-updateUser').click( function () {
 		 $(".updateUserModal").modal('show');
      } );
       

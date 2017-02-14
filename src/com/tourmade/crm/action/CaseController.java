@@ -85,6 +85,12 @@ public class CaseController extends BaseSimpleFormController {
 		JSONArray contactResult = JSONArray.fromObject(contactList);
 		model.addAttribute("contactReal", contactResult);
 
+		String orderService = "order.service";
+		List<EntityList> orderServiceList = service.getParameterInfo(orderService);
+		JSONArray orderServiceResult = JSONArray.fromObject(orderServiceList);
+		model.addAttribute("service",orderServiceResult);
+		
+		
 		// 没有传递flag参数时，表示时从侧边栏访问的
 		if ("".equals(flag) || flag == null) {
 
@@ -890,7 +896,6 @@ public class CaseController extends BaseSimpleFormController {
 		
 		Json json = new Json();
 		try {
-			System.out.println(crmcase);
 			service.updateUser(crmcase);
 			json.setSuccess(true);
 		} catch (Exception e) {
