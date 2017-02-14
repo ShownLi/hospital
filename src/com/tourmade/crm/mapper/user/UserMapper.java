@@ -25,6 +25,10 @@ public interface UserMapper extends BaseMapper {
 	
 	public String getRoleNameByid(int userId);
 	
+	public String checkButtonId(String menuName);
+	
+	public String checkButtonIdExist(String menuId, String roleId);
+	
 	public User signin(User user);
 	
 	public List<?> permissionCheckUrl(String username);

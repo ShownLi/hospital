@@ -50,7 +50,6 @@
 								<div class="col-sm-2">
 									<input type="text" id="searchOperator" class="operator-select fullwidth" value="${searchCase.operator }" />
 								</div>
-								
 								<div class="col-sm-2">
 									<input type="text" id="searchRequirment" class="form-control" placeholder="客人要求" value="${searchCase.requirement }" />
 								</div>
@@ -254,7 +253,6 @@
     var sales = ${sales};
 	var reason = ${reason};
 	var reasonNodeal =${reasonNodeal};
-
 	var contactReal =${contactReal};
 	
 	$(".destination-select").select2({
@@ -609,19 +607,19 @@
 		                	  }
 		                	  else {
 		                		  
-		                		  var reContent ='<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a>'+
-		                		  '&nbsp;<a name="btnUpdateUser"  class="btn btn-default btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 修改跟单员</a>';
+		                		  var reContent ='<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a>';
 		                		  
 		                		  if(full.status!=5&&full.status!=4){
 		                			  reContent+='&nbsp;<a name="btn-addorder"  class="btn btn-primary btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 分配地接社</a>';
 		                		 }
+		                		  if("${sessionScope.buttonId1}" != ""){
+		                			  reContent+='&nbsp;<a name="btnUpdateUser"  class="btn btn-default btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 修改跟单员</a>';
+		                		  }
 		                		  if(full.status==1){
 		                			  reContent+='&nbsp;<a name="btn-invalid"  class="btn btn-danger btn-xs" id="'+data+'">无效</a>';
 		                		  }
-		                		  
 		                		  if(full.status!=3&&full.status!=5&&full.status!=4){
 		                			  reContent+='&nbsp;<a name="btn-nodeal"  class="btn btn-danger btn-xs" id="'+data+'">未成行</a>';
-		                			 
 		                			}
 		                		  return reContent;  
 		                		  
