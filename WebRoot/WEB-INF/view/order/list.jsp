@@ -688,7 +688,7 @@
 					                orderable: false,
 					                render: function ( data, type, full, meta )  {
 					                	if(full.startDate&&full.endDate){
-					                		return new Date(full.startDate.time).format("yyyy-MM-dd")+"<br>"+new Date(full.startDate.time).format("yyyy-MM-dd");
+					                		return new Date(full.startDate.time).format("yyyy-MM-dd")+"<br>"+new Date(full.endDate.time).format("yyyy-MM-dd");
 					                	}
 					                	return "";
 					                },
@@ -734,11 +734,12 @@
 							          data: "orderId",
 							 	      orderable: false,
 							 	      render: function ( data, type, full, meta ) {
-						              	return '<a name="btnEdit" class="btn btn-default btn-xs" id="'+data+
-						              	'"><span class="fa fa-edit"></span> 编辑</a>&nbsp<a name="btnDeal" class="btn btn-success btn-xs" id="'+data+
-						              	'"> 成行</a>&nbsp<a name="btnNoDeal" class="btn btn-warning btn-xs" id="'+data+
-						              	'">未成行</a>&nbsp<a name="btnSendEmail" class="btn btn-primary btn-sendMaile btn-xs" id="'+data+
-						              	'"> 发订单邮件</a>';
+							 	    	  var reContent='<a name="btnEdit" class="btn btn-default btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a>';
+							 	    	  if(full.status!=2&&full.status!=3){
+							 	    		 reContent+='&nbsp;<a name="btnDeal" class="btn btn-success btn-xs" id="'+data+'"> 成行</a>&nbsp;<a name="btnNoDeal" class="btn btn-warning btn-xs" id="'+data+'">未成行</a>';
+							 	    	  }
+							 	    	  reContent+='&nbsp<a name="btnSendEmail" class="btn btn-primary btn-sendMaile btn-xs" id="'+data+'"> 发订单邮件</a>';
+						              	return reContent;
 							 	  	  },
 							 	    	targets: 9
 							 	}
@@ -865,9 +866,10 @@
 			  timeFormat: 'HH:mm',
 			  showMinute: false
 	  	});
-/*  	    $(".dealModal .submit").click(function(){
+		/*$(".dealModal .submit").click(function(){
 	    	deal_submit();
-	      });  */
+	      });  
+	      */
  	    /* $(".noDealModal .submit").click(function(){
 	    	noDeal_submit();
 	      }); 

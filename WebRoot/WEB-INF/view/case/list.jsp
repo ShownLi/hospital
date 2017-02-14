@@ -198,9 +198,9 @@
 							</div>
 							<div class="col-sm-12">
 								<a class="submit btn btn-primary" >保存</a> 
-								<input type="hidden" name="caseId" value="${crmcase.caseId}" /> 
-								<input type="hidden" name="customerId" value="${crmcase.customerId}" />
-								<input type="hidden" name="operator" value="${crmcase.operator}" />
+								<input type="hidden" id="addOrderCaseId" name="caseId"  /> 
+								<input type="hidden" id="addOrderCustomerId" name="customerId" />
+								<input type="hidden" id="addOrderOperator" name="operator" />
 							</div>
 						</form>
 					</div>
@@ -209,35 +209,112 @@
 			<!-- modal-content -->
 		</div>
 		<!-- modal-dialog -->
-	</div> 
-<div class="updateUserModal modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <div class="nextModal-title">更改跟单员</div>
-      </div>
-      <form class="form-horizontal" id="form-updateUser">
-          <div class="modal-body">     
-              <div class="section-block noline">
-                  <div class="form-group col-sm-12">
-                    <label class="col-sm-4 control-label">跟单员</label>
-                    <div class="col-sm-8">
-                      <input class="updateUser-select fullwidth" name="operator" />
-                    </div>
-                  </div>
-                  <input type="hidden" id="updateUser-caseId" name="caseId"  />
-              </div>
-              </div><!-- noDealModal-body -->
-         
-          <div class="modal-footer align-center">
-            <button class="btn btn-primary" >保存</button> 
-            <a class="cancel btn btn-primary" >取消</a>
-          </div>
-      </form>
-    </div><!-- modal-content -->
-  </div><!-- modal-dialog -->
-</div><!-- bmodal -->
+	</div>
+	<div class="updateUserModal modal fade" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<div class="nextModal-title">更改跟单员</div>
+				</div>
+				<form class="form-horizontal" id="form-updateUser">
+					<div class="modal-body">
+						<div class="section-block noline">
+							<div class="form-group col-sm-12">
+								<label class="col-sm-4 control-label">跟单员</label>
+								<div class="col-sm-8">
+									<input class="updateUser-select fullwidth" name="operator" />
+								</div>
+							</div>
+							<input type="hidden" id="updateUser-caseId" name="caseId" />
+						</div>
+					</div>
+					<!-- noDealModal-body -->
+
+					<div class="modal-footer align-center">
+						<button class="btn btn-primary">保存</button>
+						<a class="cancel btn btn-primary">取消</a>
+					</div>
+				</form>
+			</div>
+			<!-- modal-content -->
+		</div>
+		<!-- modal-dialog -->
+	</div>
+	<!-- bmodal -->
+
+	<!-- 询单无效 -->
+	<div class="confirmDelModal modal fade" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<div class="nextModal-title">请填写无效原因</div>
+				</div>
+				<form class="form-horizontal" id="form-del">
+					<div class="modal-body">
+						<div class="section-block noline">
+							<div class="form-group col-sm-12">
+								<label class="col-sm-4 control-label">无效原因是</label>
+								<div class="col-sm-8">
+									<input class="reason-select fullwidth" name="reason"
+										placeholder="无效原因是" /> <input type="hidden" id="invalidCaseId" name="caseId"/>
+								</div>
+							</div>
+						</div>
+						<!-- noDealModal-body -->
+					</div>
+					<div class="modal-footer align-center">
+						<input type="submit" class="submit btn btn-primary" value="保存" />
+						<a class="cancel btn btn-primary">取消</a>
+					</div>
+				</form>
+			</div>
+			<!-- modal-content -->
+		</div>
+		<!-- modal-dialog -->
+	</div>
+	<!-- bmodal -->
+	
+	<!-- 询单未成行 -->
+	<div class="confirmNoDealModal modal fade" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<div class="nextModal-title">请填写未成行原因</div>
+				</div>
+				<form class="form-horizontal" id="form-nodeal">
+					<div class="modal-body">
+						<div class="section-block noline">
+							<div class="form-group col-sm-12">
+								<label class="col-sm-4 control-label">未成行原因是</label>
+								<div class="col-sm-8">
+									<input class="reason-nodeal-select fullwidth"
+										name="reasonNodeal" placeholder="未成行原因是" /> <input
+										type="hidden" id="caseNoDealCaseId" name="caseId" value="${crmcase.caseId}" />
+								</div>
+							</div>
+						</div>
+						<!-- noDealModal-body -->
+					</div>
+					<div class="modal-footer align-center">
+						<input class="submit btn btn-primary" type="submit" value="保存">&nbsp;
+						<a class="cancel btn btn-primary">取消</a>
+					</div>
+				</form>
+			</div>
+			<!-- modal-content -->
+		</div>
+		<!-- modal-dialog -->
+	</div>
+	
 	<script src="${rootPath}assets/js/jquery.datatables.min.js"></script>
 	<script src="${rootPath}assets/js/select2.min.js"></script>
 	<script src="${rootPath}assets/js/jquery-ui-1.10.3.min.js"></script>
@@ -256,6 +333,8 @@
 	var reasonNodeal =${reasonNodeal};
 
 	var contactReal =${contactReal};
+	
+	var service = ${service};
 	
 	$(".destination-select").select2({
         placeholder: '国家',
@@ -299,6 +378,11 @@
         allowClear: true
     });
     
+    /* 	 设置未成行原因下拉框 开始 */
+	$(".reason-nodeal-select").select2({
+ 	placeholder:"未成行原因",
+ 	data:reasonNodeal
+ 	});
     jQuery("#searchStartDateTime").datepicker({
         dateFormat: "yy-mm-dd",
         changeYear: true,
@@ -315,6 +399,13 @@
     	data:user,
         allowClear: true
 	 });
+    
+    $(".service-select").select2({
+    	placeholder: '选择服务类型',
+     	data: service
+    });
+    
+    
     if($('#searchCaseFlag').val()=="old"){
 	    if("${searchCase.status}" == ""){
 	    	$("#statusAll").attr("checked",true);
@@ -605,11 +696,11 @@
 		                  render: function ( data, type, full, meta ) {
 		                	 
 		                	  if(full.status==0){
-		                		  return '<a class="btn btn-primary btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 处理</a> &nbsp;';  
+		                		  return '<a name="btn-handle" class="btn btn-primary btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 处理</a> &nbsp;';  
 		                	  }
 		                	  else {
 		                		  
-		                		  var reContent ='<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a>'+
+		                		  var reContent ='<a name="btn-edit" class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a>'+
 		                		  '&nbsp;<a name="btnUpdateUser"  class="btn btn-default btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 修改跟单员</a>';
 		                		  
 		                		  if(full.status!=5&&full.status!=4){
@@ -666,11 +757,42 @@
 				$('#searchCaseFlag').val("restart");
 				t.draw();
 			});
+
+			$('#dataTable tbody').on( 'click', 'a[name=btn-edit]', function () {
+		        var data = t.row($(this).parents('tr')).data();
+		        edit($(this).attr('id'));
+		    } );
+			
+			$('#dataTable tbody').on( 'click', 'a[name=btn-handle]', function () {
+		        var data = t.row($(this).parents('tr')).data();
+		        handle($(this).attr('id'));
+		    } );
+			//分配地接社
+			$('#dataTable tbody').on( 'click', 'a[name=btn-addorder]', function () {
+				var data = t.row($(this).parents('tr')).data();
+				console.log(data);
+		       	addOrder(data);
+		    } );
 			//修改跟单员
 			 $('#dataTable tbody').on( 'click', 'a[name=btnUpdateUser]', function () {
 				 $(".updateUserModal").modal('show');
 				 $("#updateUser-caseId").val($(this).attr('id'));
 		     } );
+			
+			//询单无效
+			$('#dataTable tbody').on( 'click', 'a[name=btn-invalid]', function () {
+				var data = t.row($(this).parents('tr')).data();
+				$("#invalidCaseId").val(data.caseId);
+				$(".confirmDelModal").modal('show');
+		    } );
+			
+			//询单未成行
+			$('#dataTable tbody').on( 'click', 'a[name=btn-nodeal]', function () {
+				var data = t.row($(this).parents('tr')).data();
+				$("#caseNoDealCaseId").val(data.caseId);
+				$(".confirmNoDealModal").modal('show');
+		    } );
+		    
 			
 			 jQuery("#form-updateUser").validate({
 			        rules: {
@@ -700,36 +822,8 @@
 			 $(".updateUserModal .cancel").click(function(){
 			    	$(".updateUserModal").modal('hide');
 			    });
-			/*if($('#searchCaseFlag').val()=="old"){
-			    if("${searchCase.status}" == ""){
-			    	$("#statusAll").attr("checked",true).click();
-			    }else if("${searchCase.status}" == "0"){
-			    	$("#status0").attr("checked",true).click();
-			    }else if("${searchCase.status}" == "1"){
-			    	$("#status1").attr("checked",true).click();
-			    }else if("${searchCase.status}" == "2"){
-			    	$("#status2").attr("checked",true).click();
-			    }else if("${searchCase.status}" == "3"){
-			    	$("#status3").attr("checked",true).click();
-			    }else if("${searchCase.status}" == "4"){
-			    	$("#status4").attr("checked",true).click();
-			    }else if("${searchCase.status}" == "5"){
-			    	$("#status5").attr("checked",true).click();
-			    }else if("${searchCase.status}" == "6"){
-			    	$("#status6").attr("checked",true).click();
-			    }
-			} else{
-				//若是从侧边栏进如，则flag默认为‘restart’
-				t.ajax.reload();
-			} */
-			$('#dataTable tbody').on( 'click', 'a.btn-success', function () {
-		        var data = t.row($(this).parents('tr')).data();
-		        edit($(this).attr('id'));
-		    } );
-			$('#dataTable tbody').on( 'click', 'a.btn-primary', function () {
-		        var data = t.row($(this).parents('tr')).data();
-		        handle($(this).attr('id'));
-		    } );
+			 
+			
 			function updateUser_submit(){
 				var f = $("#form-updateUser").serialize();
 				$.post('${rootPath}case/updateUser.do', f, function(result) {
@@ -742,7 +836,98 @@
 					}
 				}, "JSON");
 			}
-	    
+			
+			 //询单无效
+		      
+		      $(".confirmDelModal .cancel").click(function(){
+		        	$(".confirmDelModal").modal("hide");
+		    	  });
+			 jQuery("#form-del").validate({
+					rules:{
+						reason: "required"
+					},
+					messages:{
+						reason:"请输入无效原因"
+					},
+					highlight: function(element) {
+						jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+					},
+					success: function(element) {
+						jQuery(element).closest('.form-group').removeClass('has-error');
+					},
+					invalidHandler : function(){
+						return false;
+					},
+					submitHandler : function(){
+						$("#form-del .submit").attr("disabled","disabled");
+						delSubmit();
+					    return false;
+					}
+				});
+			//询单无效
+		      function delSubmit() {
+		    	  var f1=$("#form-del").serialize();
+		     	  try{
+		     		  $.post("${rootPath}case/del.do", f1, function(result) {
+						var rmsg = result.msg;
+						if (result.success) {
+							window.location = "${rootPath}case/list.html?flag=old";
+						} 
+						else {
+							$("#msgModal").modal('show');
+						}
+					}, "JSON");
+		     		  }
+		     	  catch(e) {
+		     		  alert(e);
+		     	  }
+		      }
+			//询单未成行
+			//设置取消键隐藏
+     	 $(".confirmNoDealModal .cancel").click(function(){
+        	$(".confirmNoDealModal").modal("hide");
+    	  });
+     	//询单未成行
+    		jQuery("#form-nodeal").validate({
+ 			rules:{
+ 				reasonNodeal: "required"
+ 			},
+ 			messages:{
+ 				reasonNodeal:"请输入未成行原因"
+ 			},
+ 			highlight: function(element) {
+ 				jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+ 			},
+ 			success: function(element) {
+ 				jQuery(element).closest('.form-group').removeClass('has-error');
+ 			},
+ 			invalidHandler : function(){
+ 				return false;
+ 			},
+ 			submitHandler : function(){
+ 				$("#form-nodeal .submit").attr("disabled","disabled");
+ 				nodealSubmit();
+ 			    return false;
+ 			}
+ 		});
+    		 //询单未成行
+    	      function nodealSubmit() {
+    	    	  var f1=$("#form-nodeal").serialize();
+    	     	  try{
+    	     		  $.post("${rootPath}case/nodeal.do", f1, function(result) {
+    					var rmsg = result.msg;
+    					if (result.success) {
+    						window.parent.location = "${rootPath}case/list.html?flag=old";
+    					} 
+    					else {
+    						$("#msgModal").modal('show');
+    					}
+    				}, "JSON");
+    	     		  }
+    	     	  catch(e) {
+    	     		  alert(e);
+    	     	  }
+    	      }
 		// Select2
 	    jQuery('select').select2({
 	        minimumResultsForSearch: -1
@@ -777,58 +962,33 @@
 			});			
 		}
 		
-  		function order_submit() {
-			var order= $("#form-order").serialize();
-			$.post('${rootPath}order/add.do', order, function(result) {
-				var rmsg = result.msg;
-				if (result.success) {
-					window.parent.location = "${rootPath}case/list.html";
-				} else {
-					$("#nextModal").modal('hide');
-					$("#NoEmail").modal('show');
-				}
-			}, "JSON");
-		}
-  	  
-  	  function delSubmit() {
-    	  var f1=$("#form-del").serialize();
-     	  try{
-     		  $.post("${rootPath}case/del.do", f1, function(result) {
-				var rmsg = result.msg;
-				if (result.success) {
-					window.parent.location = "${rootPath}case/list.html";
-				} 
-				else {
-					$("#msgModal").modal('show');
-				}
-			}, "JSON");
-     		  }
-     	  catch(e) {
-     		  alert(e);
-     	  }
-     	 alert("页面正在加载，请稍后...");
-      }
+  	
+  	 //将value值转换为text文本值
+  	function changeValueToText(value,array){
+  		for(var i = 0 ; i< array.length ; i++){
+  			if(array[i].id==value)
+  				return array[i].text;
+  		}
+  		return "";
+  	}
   	//分配地接社按钮
-      $("#btn-addorder").click(function(){
-      	  var destination = $("#destination").val();
-      	  $("#englishDestination").val(destination);
-      	  if(destination=="" || destination == null){
+      function addOrder(data){
+      	  var des = data.destination;
+      	  if(des=="" || des == null){
       	  	$("#msgDestination").modal('show');
  		  }else{ 
-      			var destinationText;
-      			for(var i=0; i<$("#destination").select2('data').length; i++){
-      				if(destinationText==null){
-      					destinationText = $("#destination").select2('data')[i].text + ",";
-      				}else{
-      					destinationText = destinationText + $("#destination").select2('data')[i].text + ",";
-      				}
+ 			  var desArray = des.split(',');
+      			var destinationText = "";
+      			for(var i = 0 ;i< desArray.length;i++){
+      				destinationText+=changeValueToText(desArray[i],destination)+",";
       			}
       			var destinationText = destinationText.substring(0,destinationText.length-1);
       	  		$("#orderDestinationText").val(destinationText); 
-      	  		$("#orderDestination").val(destination);
+      	  		$("#orderDestination").val(des);
+      	  		
 	      	  	$.ajax({
 	              type: "post",
-	              url: "${rootPath}case/getSales.do?destination="+destination,
+	              url: "${rootPath}case/getSales.do?destination="+des,
 	              data: destination,
 	              success: function(sales){
 	            	  var json = jQuery.parseJSON(sales);
@@ -837,13 +997,18 @@
 	                      data: json
 	                  });
 	              }  
-	            });  
-      	  	    $("#nextModal").modal('show');         	         	  
+	            });
+	      	  $("#addOrderCaseId").val(data.caseId);
+	      	  $("#addOrderCustomerId").val(data.customerId);
+	      	  $("#addOrderOperator").val(data.operator);
+	      	  
+      	  	  $("#nextModal").modal('show');   
+      	  	    
       	    }  
             return false;
-        });
+        }
   	
-    //选择服务类型所属销售显示的联动
+    	//选择服务类型所属销售显示的联动
 	  	$("#serviceID").change(function(){
 	  		var serviceID = $("#serviceID").val();
 	  		if(serviceID==3 || serviceID==4 || serviceID==5){
@@ -885,27 +1050,27 @@
 			$.post('${rootPath}order/add.do', f, function(result) {
 				var rmsg = result.msg;
 				if (result.success) {
-					window.parent.location = "${rootPath}case/edit.html?id=${crmcase.caseId}";
+					window.parent.location = "${rootPath}case/list.html?flag=old";
 				} else {
 					if(result.text=="noCustomerEmail"){
 						alert("分配地接社成功，由于客人没有邮箱，无法发送订单邮件");
 						$('#nextModal').modal('hide');
-						window.parent.location = "${rootPath}case/edit.html?id=${crmcase.caseId}";
+						window.parent.location = "${rootPath}case/list.html?flag=old";
 					}
 					else if(result.text=="noSaleEmail"){
 						alert("分配地接社成功，由于销售没有邮箱，无法发送订单邮件");
 						$('#nextModal').modal('hide');
-						window.parent.location = "${rootPath}case/edit.html?id=${crmcase.caseId}";
+						window.parent.location = "${rootPath}case/list.html?flag=old";
 
 					}
 					else if(result.text=="noSendmail"){
 						alert("分配地接社成功，由于地接社设置为不发送邮件，所以未发送订单邮件");
 						$('#nextModal').modal('hide');
-						window.parent.location = "${rootPath}case/edit.html?id=${crmcase.caseId}";
+						window.parent.location = "${rootPath}case/list.html?flag=old";
 					}
 					//$("#NoEmail").modal('show');
 	         		//$("#nextModal").modal('hide');
-	         		else {window.parent.location = "${rootPath}case/edit.html?id=${crmcase.caseId}";}
+	         		else {window.parent.location = "${rootPath}case/list.html?flag=old";}
 				}
 			}, "JSON");
 	      }
