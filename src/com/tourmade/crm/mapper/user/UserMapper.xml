@@ -32,6 +32,17 @@
 	<select id="permissionCheckRole" parameterType="String" resultType="String">
 		select role_id from tm_user where loginname=#{username}
 	</select>
+	
+	<select id="checkButtonIdExist" parameterType="String" resultType="String">
+		select menu_id as menuId from tm_role_x_menu where role_id=#{1} and menu_id=#{0}
+	</select>
+	
+	<select id="checkButtonId" parameterType="String" resultType="String">
+		select 
+			menu_id as menuId
+		from tm_menu 
+		where menu_name=#{menuName}
+	</select>
 
 	<select id="countUser" parameterType="User" resultType="long">
 		select count(u.user_id) from tm_user u

@@ -90,7 +90,6 @@ public class SecurityInterceptor implements HandlerInterceptor {
 					response.sendRedirect(contextPath + "/notfound.html");
 					return false;
 				}
-
 			}
 			else{
 				return true;

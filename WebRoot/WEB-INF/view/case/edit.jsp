@@ -1754,7 +1754,7 @@
 		                      data: json
 		                  });
 		              }  
-		            });
+		        });
 	  		}
 	  	}) 
 	  
@@ -1779,7 +1779,6 @@
 					alert("分配地接社成功，由于销售没有邮箱，无法发送订单邮件");
 					$('#nextModal').modal('hide');
 					window.parent.location = "${rootPath}case/edit.html?id=${crmcase.caseId}";
-
 				}
 				else if(result.text=="noSendmail"){
 					alert("分配地接社成功，由于地接社设置为不发送邮件，所以未发送订单邮件");
@@ -1842,7 +1841,6 @@
  				}
  			}, "JSON");
       } */
-      
       
       //进入订单编辑页面
 		 $('#dataTable-order tbody').on( 'click', 'a[name=btnEdit]', function () {
@@ -1930,7 +1928,6 @@
 				$('#addEmail').attr("href",newHref)
 			}
 		}
-		  
   		
 		//沟通记录   回显
   		var recordTable = jQuery('#dataTable-record').DataTable({
@@ -2118,7 +2115,6 @@
           $(".start-date").hide();
           $(".start-time").show();
       }
-
   });
   
   function updateUser_submit(){

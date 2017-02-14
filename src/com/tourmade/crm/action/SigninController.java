@@ -84,6 +84,12 @@ public class SigninController extends BaseSimpleFormController {
 				 
 				//将登录者的权限ID和可以访问的URl放在session中
 				String roleID = service.permissionCheckRole(realUser.getLoginName());
+				String menuId = service.checkButtonId("修改跟单员权限");
+				String menuName = service.checkButtonIdExist(menuId,roleID);
+				if(!("").equals(menuName) || menuName != null){
+					session.setAttribute("buttonId1", menuName);
+				}
+				
 				List<?> url = service.permissionCheckUrl(realUser.getLoginName());
 				session.setAttribute("roleID", roleID);
 				session.setAttribute("url", url);
