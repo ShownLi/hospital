@@ -69,7 +69,7 @@
 			              				<input type="text" id="website" name="website" placeholder="公司网址" class="form-control" value="${agency.website }" />
 			              			</div>
 			              		</div>  
-			              		<div class="form-group col-sm-4">
+			              		<div class="form-group col-sm-4" style="clear: both;">
 			              			<label class="col-sm-4 control-label">所在地 <span class="asterisk"></span></label>
 			              			<div class="col-sm-8">
 			              				<input type="text" id="location" name="location" placeholder="所在地" class="form-control" value="${agency.location }" />
@@ -149,8 +149,14 @@
 			            		<div class="form-group col-sm-4">
 					              <label  class="col-sm-4 control-label">是否发邮件</label>
 					              <div class="col-sm-8">
-					                   <input type="radio" id="yes" name="isSendmail" value="1" />是
-				      				   <input type="radio" id="no" name="isSendmail" value="0"/>否
+					              		<div class="rdio rdio-primary rdio-inline">
+					                   		<input type="radio" id="yes" name="isSendmail" value="1" />
+					                   		<label for="yes">是</label>
+					                   </div>
+					                   <div class="rdio rdio-primary rdio-inline">
+				      				   		<input type="radio" id="no" name="isSendmail" value="0"/>
+				      				   		<label for="no">否</label>
+				      				   </div>
 					              </div>
 					            </div>            
 			        		</div>
