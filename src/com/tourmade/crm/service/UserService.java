@@ -217,8 +217,8 @@ public class UserService extends BaseService {
 	/**
 	 * 根据客人id获取角色名称
 	 */
-	public String getRoleNameByid(int userId) {
-		String result = userMapper.getRoleNameByid(userId);
+	public String getRoleNameById(int userId) {
+		String result = userMapper.getRoleNameById(userId);
 		return result ;
 	}
 	

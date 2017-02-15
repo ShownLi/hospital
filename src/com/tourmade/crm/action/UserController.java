@@ -73,7 +73,7 @@ public class UserController extends BaseSimpleFormController {
 	public String edit(Model model, String id) {
 		
 		List<EntityList> roleList = service.getUserRoles();
-		String roleName = service.getRoleNameByid(Integer.parseInt(id));
+		String roleName = service.getRoleNameById(Integer.parseInt(id));
 		JSONArray roleResult = JSONArray.fromObject(roleList);
 		model.addAttribute("role_id", roleResult);
 		model.addAttribute("roleName", roleName);

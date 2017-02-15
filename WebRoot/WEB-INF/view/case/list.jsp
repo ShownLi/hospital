@@ -638,7 +638,7 @@
 									return "<div class='width150'>" + data + "</div>"
 								}
 							},
-							  targets: 5
+							targets: 5
 						},
 						{
 			                  orderable: false,
@@ -654,14 +654,12 @@
 				                			break;
 				                		}	
 				                	}
-				                	
 				                	for(var i=0;i<caseStatus.length;i++){
 				                		if(dataCaseStatus==caseStatus[i].id){
 				                			n=caseStatus[i].text;
 				                			break;
 				                		}
 				                	}
-				                	
 				                	return "<div class='width85'>" + m + "</div>" + "<div class='width85'>" + n + "</div>";
 				                },
 				                targets: 6
@@ -679,10 +677,8 @@
 			                			break;
 			                		}
 			                	}
-								
 								for(var i=0;i < contactReal.length;i++){
 			                		if(full.contactReal==contactReal[i].id){
-			                			
 			                			contRealText=contactReal[i].text;
 			                			break;
 			                		}
@@ -690,9 +686,7 @@
 								return "<div class='width85'>" + operator + "</div>" + "<div class='width85'>" +contRealText+ "</div>";
 							},
 							  targets: 7
-						
 						},{
-			                  
 			                  orderable: false,
 			                  render: function ( data, type, full, meta ) {
 			                	  
