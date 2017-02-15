@@ -98,6 +98,7 @@
 		u.user_email as email,
 		u.mobilephone as mobilephone,
 		u.creat_time as creatTime,
+		u.role_id as role_id,
 		u.isdel as isdel
 		from tm_user u where u.isdel = 0 and u.user_id = #{userId}
 	</select>

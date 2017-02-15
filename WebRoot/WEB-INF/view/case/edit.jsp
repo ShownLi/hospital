@@ -34,9 +34,6 @@
 					</div>
 					<form class="form-horizontal" id="form-case">
 						<div class="panel-body panel-body-nopadding">
-
-
-
 							<div class="section-block">
 								<h5 class="section-title">客人基本信息</h5>
 								<div class="form-group col-sm-4">
@@ -111,7 +108,6 @@
 									<div class="col-sm-8">
 										<select name="contactType" class="contact-select fullwidth"
 											multiple="multiple">
-
 										</select>
 									</div>
 								</div>
