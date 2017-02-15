@@ -50,6 +50,16 @@ public class Customer extends BaseBean<Customer> {
 	
 	private Date updateTime;
 
+	private String huanxinId;
+	
+	public String getHuanxinId() {
+		return huanxinId;
+	}
+
+	public void setHuanxinId(String huanxinId) {
+		this.huanxinId = huanxinId;
+	}
+
 	public Integer getCustomerId() {
 		return customerId;
 	}

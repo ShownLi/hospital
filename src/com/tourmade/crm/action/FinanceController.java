@@ -287,6 +287,7 @@ public class FinanceController extends BaseSimpleFormController {
 		
 		try {
 			priceRecord.setSTATUS(1);
+			System.out.println(priceRecord);
 			financeService.savePriceRecord(priceRecord);
 			financeService.updatePriceRecordPriceCode(priceRecord);
 			

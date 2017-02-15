@@ -243,6 +243,9 @@ public class CaseService extends BaseService {
 		if (crmcase.getEmail() != null) {
 			cus.setEmail(crmcase.getEmail());
 		}
+		if (crmcase.getHuanxinId() != null) {
+			cus.setHuanxinId(crmcase.getHuanxinId());
+		}
 
 		return cus;
 	}
@@ -308,6 +311,9 @@ public class CaseService extends BaseService {
 			}
 			if (crmcase.getWechat() != null) {
 				customer.setWechat(crmcase.getWechat());
+			}
+			if (crmcase.getHuanxinId() != null) {
+				customer.setHuanxinId(crmcase.getHuanxinId());
 			}
 			caseMapper.updateCustomer(customer);
 

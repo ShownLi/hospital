@@ -218,7 +218,7 @@
 								 <td><input type="text" name="paymentItem" placeholder="款项" class="financeItem-select fullwidth"/></td>
 								 <td><input type="text" id="priceBudget1" name="priceBudget" placeholder="应收金额" class="form-control"/></td>
 								 <td> 
-								 <input type="text" name="deadline" placeholder="收款截止日期" class="form-control datepicker" autocomplete="off" />
+								 <input type="text" name="deadline" placeholder="收款截止日期" class="form-control datetimepicker" autocomplete="off" />
 				                  				 <!-- <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span> -->
 								 </td>
 								 <td><input type="text" name="comment" placeholder="备注" class="form-control"/></td>
@@ -228,7 +228,7 @@
 								 <td><input type="text" name="paymentItem" placeholder="款项" class="financeItem-select fullwidth"/></td>
 								 <td><input type="text" id="priceBudget2" name="priceBudget" placeholder="应收金额" class="form-control"/></td>
 								 <td> 
-								 <input type="text" name="deadline" placeholder="收款截止日期" class="form-control datepicker" autocomplete="off" />
+								 <input type="text" name="deadline" placeholder="收款截止日期" class="form-control datetimepicker" autocomplete="off" />
 				                  				 <!-- <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span> -->
 								 </td>
 								 <td><input type="text" name="comment" placeholder="备注" class="form-control"/></td>
@@ -238,7 +238,7 @@
 								 <td><input type="text" name="paymentItem" placeholder="款项" class="financeItem-select fullwidth"/></td>
 								 <td><input type="text" id="priceBudget3" name="priceBudget" placeholder="应收金额" class="form-control"/></td>
 								 <td> 
-								 <input type="text" name="deadline" placeholder="收款截止日期" class="form-control datepicker" autocomplete="off" />
+								 <input type="text" name="deadline" placeholder="收款截止日期" class="form-control datetimepicker" autocomplete="off" />
 				                  				 <!-- <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span> -->
 								 </td>
 								 <td><input type="text" name="comment" placeholder="备注" class="form-control"/></td>
@@ -248,7 +248,7 @@
 								<td><input type="text" name="paymentItem" placeholder="款项" class="financeItem-select fullwidth"/></td>
 								 <td><input type="text" id="priceBudget4" name="priceBudget" placeholder="应收金额" class="form-control"/></td>
 								 <td> 
-								 <input type="text" name="deadline" placeholder="收款截止日期" class="form-control datepicker" autocomplete="off" />
+								 <input type="text" name="deadline" placeholder="收款截止日期" class="form-control datetimepicker" autocomplete="off" />
 				                  				 <!-- <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span> -->
 								 </td>
 								 <td><input type="text" name="comment" placeholder="备注" class="form-control"/></td>
@@ -258,7 +258,7 @@
 								<td><input type="text" name="paymentItem" placeholder="款项" class="financeItem-select fullwidth"/></td>
 								 <td><input type="text" id="priceBudget5" name="priceBudget" placeholder="应收金额" class="form-control"/></td>
 								 <td> 
-								 <input type="text" name="deadline" placeholder="收款截止日期" class="form-control datepicker" autocomplete="off" />
+								 <input type="text" name="deadline" placeholder="收款截止日期" class="form-control datetimepicker" autocomplete="off" />
 				                  				 <!-- <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span> -->
 								 </td>
 								 <td><input type="text" name="comment" placeholder="备注" class="form-control"/></td>
@@ -856,9 +856,11 @@
 		}
 		  
 		// Date Picker
-		jQuery(".datepicker").datetimepicker({
+		jQuery(".datepicker").datepicker({
+			  dateFormat: "yy-mm-dd"
+	  	});
+		jQuery(".datetimepicker").datetimepicker({
 			  dateFormat: "yy-mm-dd",
-			  controlType: 'select',
 			  timeFormat: 'HH:mm',
 			  showMinute: false
 	  	});

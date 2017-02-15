@@ -430,6 +430,7 @@ public class CaseController extends BaseSimpleFormController {
 		if (null != id && !"".equals(id)) {
 			int caseId = Integer.parseInt(id);
 			Case crmcase = service.getCaseById(caseId);
+			System.out.println(crmcase);
 
 			// 解决客人的要求换行符问题
 			/*
@@ -567,6 +568,7 @@ public class CaseController extends BaseSimpleFormController {
 			} else {
 				// 判断是否有老客人
 				List judgeCustomer = service.judgeCustomer(crmcase);
+				System.out.println(crmcase);
 				if (judgeCustomer.size() > 0) {
 
 					service.updateCase(crmcase);
@@ -823,7 +825,7 @@ public class CaseController extends BaseSimpleFormController {
 				map.put("reasonNodeal", reasonNodeal);
 				map.put("caseId", caseId2);
 				service.deleteCaseNodealById(map);
-				orderService.deleteOrderNodealByCaseId(map);
+				//orderService.deleteOrderNodealByCaseId(map);
 				// 如果询单修改成功，则修改询单下的订单
 				/*
 				 * if(res){ boolean result =

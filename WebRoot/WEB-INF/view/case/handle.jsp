@@ -52,6 +52,12 @@
 	                <input type="text" name="englishName" placeholder="英文名" class="form-control" value="${crmcase.englishName}"/>
 	              </div>
 	            </div> 	
+ 	            <div class="form-group col-sm-4">
+	              <label class="col-sm-3 control-label">环信ID</label>
+	              <div class="col-sm-9">
+	                <input type="text" name="huanxinId" placeholder="环信ID" class="form-control" value="${crmcase.huanxinId}"/>
+	              </div>
+	            </div> 	
 	            <input type="text" style="display: none" name="portalId" placeholder="portalId" class="form-control" value="${crmcase.portalId}"/>
 	             	
 	        </div>
@@ -837,7 +843,9 @@
 								"<td align='center' name='email'>"+custumerList[i].email+"</td>"+
 								"<td align='center' name='qq'>"+custumerList[i].qq+"</td>"+
 								"<td align='center' name='wechat'>"+custumerList[i].wechat+"</td>"+
-								"<td align='center' style='display:none'><input type='checkbox' name='customerId' checked='true' value="+custumerList[i].customerId+"></td></tr>" 																				
+								"<td align='center' style='display:none'><input type='checkbox' name='customerId' checked='true' value="+custumerList[i].customerId+"></td>"+
+								"<td align='center' style='dispaly:none><input type='text' name='huanxinId' value="+custumerList[i].customerId+"></td>"
+								+"</tr>" 																				
 							);
 					}
 					$("#bindCustomer").modal('show'); 										
@@ -1095,7 +1103,6 @@
         var dateformat = new Date(date).toISOString("yyyy-MM-dd hh:mm:ss.S").substring(0,10);
         $("#endDate").val(dateformat);
       }
-  	  
 
   	  if("${crmcase.startTime}"==1){
     	   $('#yes').attr('checked','true');

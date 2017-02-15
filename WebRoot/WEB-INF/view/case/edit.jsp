@@ -623,7 +623,7 @@
 								 <td><input type="text" name="paymentItem" placeholder="款项" class="financeItem-select fullwidth"/></td>
 								 <td><input type="text" id="priceBudget1" name="priceBudget" placeholder="应收金额" class="form-control"/></td>
 								 <td> 
-								 <input type="text" name="deadline" placeholder="收款截止日期" class="form-control datepicker" autocomplete="off" />
+								 <input type="text" name="deadline" placeholder="收款截止日期" class="form-control datetimepicker" autocomplete="off" />
 				                  				 <!-- <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span> -->
 								 </td>
 								 <td><input type="text" name="comment" placeholder="备注" class="form-control"/></td>
@@ -633,7 +633,7 @@
 								 <td><input type="text" name="paymentItem" placeholder="款项" class="financeItem-select fullwidth"/></td>
 								 <td><input type="text" id="priceBudget2" name="priceBudget" placeholder="应收金额" class="form-control"/></td>
 								 <td> 
-								 <input type="text" name="deadline" placeholder="收款截止日期" class="form-control datepicker" autocomplete="off" />
+								 <input type="text" name="deadline" placeholder="收款截止日期" class="form-control datetimepicker" autocomplete="off" />
 				                  				 <!-- <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span> -->
 								 </td>
 								 <td><input type="text" name="comment" placeholder="备注" class="form-control"/></td>
@@ -643,7 +643,7 @@
 								 <td><input type="text" name="paymentItem" placeholder="款项" class="financeItem-select fullwidth"/></td>
 								 <td><input type="text" id="priceBudget3" name="priceBudget" placeholder="应收金额" class="form-control"/></td>
 								 <td> 
-								 <input type="text" name="deadline" placeholder="收款截止日期" class="form-control datepicker" autocomplete="off" />
+								 <input type="text" name="deadline" placeholder="收款截止日期" class="form-control datetimepicker" autocomplete="off" />
 				                  				 <!-- <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span> -->
 								 </td>
 								 <td><input type="text" name="comment" placeholder="备注" class="form-control"/></td>
@@ -653,7 +653,7 @@
 								<td><input type="text" name="paymentItem" placeholder="款项" class="financeItem-select fullwidth"/></td>
 								 <td><input type="text" id="priceBudget4" name="priceBudget" placeholder="应收金额" class="form-control"/></td>
 								 <td> 
-								 <input type="text" name="deadline" placeholder="收款截止日期" class="form-control datepicker" autocomplete="off" />
+								 <input type="text" name="deadline" placeholder="收款截止日期" class="form-control datetimepicker" autocomplete="off" />
 				                  				 <!-- <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span> -->
 								 </td>
 								 <td><input type="text" name="comment" placeholder="备注" class="form-control"/></td>
@@ -663,7 +663,7 @@
 								<td><input type="text" name="paymentItem" placeholder="款项" class="financeItem-select fullwidth"/></td>
 								 <td><input type="text" id="priceBudget5" name="priceBudget" placeholder="应收金额" class="form-control"/></td>
 								 <td> 
-								 <input type="text" name="deadline" placeholder="收款截止日期" class="form-control datepicker" autocomplete="off" />
+								 <input type="text" name="deadline" placeholder="收款截止日期" class="form-control datetimepicker" autocomplete="off" />
 				                  				 <!-- <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span> -->
 								 </td>
 								 <td><input type="text" name="comment" placeholder="备注" class="form-control"/></td>
@@ -784,7 +784,6 @@
 										readonly="readonly" class="form-control" value="" /> <input
 										type="hidden" id="orderDestination" name="destination"
 										value="" />
-
 								</div>
 							</div>
 							<div class="form-group col-sm-8 col-sm-offset-2">
@@ -913,6 +912,9 @@
 	<script src="${rootPath}assets/js/jquery.datatables.min.js"></script>
 	<script src="${rootPath}assets/js/select2.min.js"></script>
 	<script src="${rootPath}assets/js/jquery.validate.min.js"></script>
+	<script src="${rootPath}assets/js/jquery-ui-timepicker-addon.js"></script>
+	<script src="${rootPath}assets/js/datepicker-zh-CN.js"></script>
+	<script src="${rootPath}assets/js/datetimepicker-cn.js"></script>
 
 	<script type="text/javascript">
 	
@@ -921,9 +923,9 @@
 	}
 	
 	$(function(){
-		if("${crmcase.status}"==3||"${crmcase.status}"==5||"${crmcase.status}"==4){
+		if("${crmcase.status}"==2||"${crmcase.status}"==3||"${crmcase.status}"==5||"${crmcase.status}"==4){
 			$("#btn-nodeal").css("display","none");
-		}
+		} 
 		if("${crmcase.status}"==5||"${crmcase.status}"==4){
 			$("#btn-addorder").css("display","none");
 		}
@@ -1782,6 +1784,11 @@
         changeMonth: true,
         minDate: 0
      	});
+	    jQuery(".datetimepicker").datetimepicker({
+			  dateFormat: "yy-mm-dd",
+			  timeFormat: 'HH:mm',
+			  showMinute: false
+	  	});
 		//判断客人是否有邮箱  有的话发送邮件 没有的话绑定邮箱
 		function sendOrderEmail(data){
 			if(data.customerEmailReal!=null&&data.customerEmailReal!=""){

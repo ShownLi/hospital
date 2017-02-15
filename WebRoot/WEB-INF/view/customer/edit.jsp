@@ -57,6 +57,13 @@
 								</div><!-- rdio -->
 							</div>
 			            </div>
+			            
+			            <div class="form-group col-sm-4">
+			            	<label class="col-sm-3 control-label">环信ID</label>
+							<div class="col-sm-9">
+							    <input type="text" name="huanxinId" placeholder="环信ID" class="form-control" value="${customer.huanxinId}"/>
+							</div>
+			            </div> 
 			            <div class="form-group col-sm-4">
 			            	<label class="col-sm-3 control-label">生日</label>
 			            	<div class="col-sm-9 input-group input-datepicker">

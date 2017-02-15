@@ -144,6 +144,7 @@
 	<select id="getCustomerById" parameterType="int" resultType="Customer">
 		select
 		u.customer_id as customerId,
+		u.customer_huanxin_id as huanxinId,
 		u.customer_name_zh as chineseName,
 		u.customer_name_en as englishName,
 		u.customer_level as level,
