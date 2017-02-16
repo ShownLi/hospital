@@ -80,6 +80,16 @@ public class Case extends BaseBean<Case> {
 	
 	private String contactReal;
 	
+	private String huanxinId;
+	
+	public String getHuanxinId() {
+		return huanxinId;
+	}
+
+	public void setHuanxinId(String huanxinId) {
+		this.huanxinId = huanxinId;
+	}
+
 	public String getContactReal() {
 		return contactReal;
 	}
@@ -585,7 +595,7 @@ public class Case extends BaseBean<Case> {
 				+ submitType + ", ipAddress=" + ipAddress + ", source=" + source + ", promoteCode=" + promoteCode
 				+ ", status=" + status + ", startMonth=" + startMonth + ", creatTime=" + creatTime + ", updateTime="
 				+ updateTime + ", reason=" + reason + ", reasonNodeal=" + reasonNodeal + ", portalId=" + portalId
-				+ ", comment=" + comment + "]";
+				+ ", comment=" + comment + ", huanxinId=" + huanxinId + "]";
 	}
 
 }

@@ -354,7 +354,7 @@ public class OrderController extends BaseSimpleFormController {
 			String deadline = priceRecordJson.getJSONObject(key).getString("deadline");
 			String comment = priceRecordJson.getJSONObject(key).getString("comment");
 			
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 			if(!paymentItem.equals("")&&paymentItem!=null
 					&&!priceBudget.equals("")&&priceBudget!=null
 					&&!deadline.equals("")&&deadline!=null){

@@ -27,7 +27,7 @@ public class BaseSimpleFormController extends BaseController{
 	@InitBinder
 	protected void initBinder(HttpServletRequest request,
 			ServletRequestDataBinder binder) throws Exception {
-		DateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
+		DateFormat fmt = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		CustomDateEditor dateEditor = new CustomDateEditor(fmt, true);
 		binder.registerCustomEditor(Date.class, dateEditor);
 		this.setRequest(request);

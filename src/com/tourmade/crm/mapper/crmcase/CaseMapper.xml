@@ -381,6 +381,7 @@
 		u.reason as reason,
 		u.reason_nodeal as reasonNodeal,
 		u.customer_portal_id as portalId,
+		u.customer_huanxin_id as huanxinId,
 		u.isdel
 		from tm_case u where u.isdel = 0 and u.case_id = #{caseId}
 	</select>
@@ -556,6 +557,7 @@
 		select
 			customer_id as customerId,
 			customer_portal_id as portalId,
+			customer_huanxin_id as huanxinId,
 			customer_name_zh as chineseName,
 			email as email,
 			mobilephone as mobilephone,
@@ -608,6 +610,7 @@
 	 <update id="updateCustomer" parameterType="Customer" flushCache="true">
 		update tm_customer
 		set
+		customer_huanxin_id=#{huanxinId},
 		customer_name_zh=#{chineseName},
 		customer_name_en=#{englishName},
 		customer_level=#{level},
@@ -630,6 +633,7 @@
 	<insert id="saveCustomer" parameterType="Customer" flushCache="true" useGeneratedKeys="true" keyProperty="customerId" keyColumn="GENERATED_KEY">
 		insert into tm_customer(
 		customer_portal_id,
+		customer_huanxin_id,
 		customer_name_zh,
 		customer_name_en,
 		customer_level,
@@ -648,6 +652,7 @@
 		isdel
 		)values(
 		#{portalId,jdbcType=VARCHAR},
+		#{huanxinId,jdbcType=VARCHAR},
 		#{chineseName,jdbcType=VARCHAR},
 		#{englishName,jdbcType=VARCHAR},
 		#{level,jdbcType=VARCHAR},
