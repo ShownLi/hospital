@@ -68,10 +68,10 @@
 	              </div>
 	            </div>
 	            <div class="form-group col-sm-6">
-                  <label class="col-sm-3 control-label">用户权限授权</label>
+                  <label class="col-sm-3 control-label">用户权限授权<span class="asterisk">*</span></label>
                   <div class="col-sm-6">
 					<div class="col-sm-8">
-						<input name="role_id" class="permission-select fullwidth" value="${roleName}">
+						<input name="role_id" type="text" class="permission-select fullwidth" value="${user.role_id}">
             		</div>     
                   </div>
                 </div>  
@@ -149,6 +149,9 @@
 					repwd: {
 						equalTo: "[name='pwd']"
 					},
+					role_id: {
+						required: true,
+					},
 					email:"required",
 					mobilephone:{
 						isMobile:true,
@@ -183,7 +186,11 @@
 					repwd: {
 						required: "请输入密码确认",
 						equalTo: "两次输入的密码不一致"
-					}
+					},
+					role_id: {
+						required: "请为用户分配权限",
+					},
+					email: "请输入有效的邮箱",
 				},
 				
 			    highlight: function(element) {

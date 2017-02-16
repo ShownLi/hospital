@@ -23,7 +23,11 @@ public interface UserMapper extends BaseMapper {
 
 	public User getUserById(int userId);
 	
-	public String getRoleNameByid(int userId);
+	public String getRoleNameById(int userId);
+	
+	public String checkButtonId(String menuName);
+	
+	public String checkButtonIdExist(String menuId, String roleId);
 	
 	public User signin(User user);
 	

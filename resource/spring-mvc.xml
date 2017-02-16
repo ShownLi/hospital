@@ -13,7 +13,6 @@
         http://www.springframework.org/schema/task    
         http://www.springframework.org/schema/task/spring-task-3.0.xsd">
 
-
 	<!-- <context:annotation-config /> -->
 	<!-- 扫描业务组件,让spring不扫描带有@Service注解的类(留在root-context.xml中扫描@Service注解的类),防止事务失效 -->
 	<context:component-scan base-package="com.tourmade">
@@ -38,7 +37,6 @@
 				<property name="supportedMediaTypes" value="text/plain;charset=UTF-8" />
 			</bean>
 		</mvc:message-converters>
-
 	</mvc:annotation-driven>
 
 	<!-- 拦截器 -->
@@ -56,7 +54,6 @@
 		</mvc:interceptor>
 	</mvc:interceptors>
 
-
 	<!--通用视图解析器 -->
 	<bean id="viewResolverCommon"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -69,7 +66,6 @@
 		<property name="order" value="0" />
 	</bean>
 
-
 	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
 		<property name="triggers">
 			<list>
@@ -81,9 +77,5 @@
 
 	<mvc:resources mapping="assets/**" location="WEB-INF/view/assets/" cache-period="31556926" />
 
-
 	<task:annotation-driven />
-
-
-
 </beans> 

@@ -58,7 +58,7 @@
 									</div>
 								</div>
 							</c:if>
-s						</c:forEach>  
+						</c:forEach>  
 					</div>
 					
 					<div class="row">
@@ -78,7 +78,7 @@ s						</c:forEach>
 									</div>
 								</div>
 							</c:if>
-s						</c:forEach>  
+						</c:forEach>  
 					</div>
 					
 					<div class="row">
@@ -98,7 +98,7 @@ s						</c:forEach>
 									</div>
 								</div>
 							</c:if>
-s						</c:forEach>  
+						</c:forEach>  
 					</div>
 					
 					<div class="row">
@@ -118,7 +118,7 @@ s						</c:forEach>
 									</div>
 								</div>
 							</c:if>
-s						</c:forEach>  
+						</c:forEach>  
 					</div>
 					
 					<div class="row">
@@ -138,12 +138,12 @@ s						</c:forEach>
 									</div>
 								</div>
 							</c:if>
-s						</c:forEach>  
+						</c:forEach>  
 					</div>
 					
 					<div class="row">
 						<h4 class="col-md-12" style="margin-top: 20px; color: #000;">统计栏列表</h4>
-						<div class="col-md-2">
+						<div class="col-md-3">
 							<div class="ckbox ckbox-primary">
 								<input id="selectall6" class="selectall" type="checkbox" value="" />
 								<label for="selectall6">全选 </label> 
@@ -151,14 +151,14 @@ s						</c:forEach>
 						</div>
 						  <c:forEach items="${menu}" var="menu">
 							<c:if test="${menu.menuCategory eq 'statisticsmenu'}">
-								<div class="col-md-2">
+								<div class="col-md-3">
 									<div class="ckbox ckbox-primary">
 										<input id="${menu.menuID}" class="check" name="statisticsmenu" type="checkbox" value="${menu.menuID}"/>
 										<label for="${menu.menuID}">${menu.menuName}</label> 
 									</div>
 								</div>
 							</c:if>
-s						</c:forEach>  
+						</c:forEach>  
 					</div>
 					
 					<div class="row">
@@ -178,7 +178,7 @@ s						</c:forEach>
 									</div>
 								</div>
 							</c:if>
-s						</c:forEach>  
+						</c:forEach>  
 					</div>
 					
 					<div class="row">
@@ -198,7 +198,7 @@ s						</c:forEach>
 									</div>
 								</div>
 							</c:if>
-s						</c:forEach>  
+						</c:forEach>  
 					</div>
 					
 					<div class="row">
@@ -218,7 +218,7 @@ s						</c:forEach>
 									</div>
 								</div>
 							</c:if>
-s						</c:forEach>  
+						</c:forEach>  
 					</div>
 					
 	           </div>

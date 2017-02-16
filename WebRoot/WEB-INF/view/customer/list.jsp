@@ -50,6 +50,21 @@
 								<div class="col-sm-2">
 									<input type="text" id="searchLevel" class="level-select fullwidth" value="${searchCustomer.level }" />
 								</div>
+								<div class="col-sm-2">
+									<input type="text" id="searchSource" class="source-select fullwidth" value="${searchCustomer.source }" />
+								</div>
+				                <div class="col-sm-2">
+									<div class="input-group input-datepicker" style="padding: 0;">
+				                        <input readonly="readonly" id="searchStartDateTime" type="text" name="searchStartDateTime" class="form-control datepicker" placeholder="请点击输入查询开始日期" value="${searchCustomer.searchStartTime}" autocomplete="on">
+				                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+				                    </div>
+				                </div>
+			                    <div class="col-sm-2">
+				                    <div class="input-group input-datepicker" style="padding: 0;">
+				                        <input readonly="readonly" id="searchEndDateTime" type="text" name="searchEndDateTime" class="form-control datepicker" placeholder="请点击输入查询截止日期" value="${searchCustomer.searchEndTime}" autocomplete="on">
+				                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+				                    </div>
+			                    </div>
 							</div>	
 							<div class="col-sm-2">					 		                        		
 								<input class="btn btn-primary" type="button" id="searchBtn" value="搜索"/>
@@ -73,6 +88,8 @@
 										<th>邮箱</th>
 										<th>所在地</th>
 										<th>客人级别</th>
+										<th>客人来源</th>
+										<th>创建时间</th>
 										<th>编辑</th>
 									</tr>
 								</thead>								
@@ -94,7 +111,10 @@
 	<%@ include file="../assets/pages/foot.jsp"%>
 	<script src="${rootPath}assets/js/jquery.datatables.min.js"></script>
 	<script src="${rootPath}assets/js/select2.min.js"></script>
-
+	<script src="${rootPath}assets/js/jquery-ui-1.10.3.min.js"></script>
+	<script src="${rootPath}assets/js/jquery.validate.min.js"></script>
+	<script src="${rootPath}assets/js/datepicker-zh-CN.js"></script>
+	<script src="${rootPath}assets/js/datetimepicker-cn.js"></script>
 <!-- Modal -->
 <div class="modal fade" id="confirmDelModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
   <div class="modal-dialog modal-sm">
@@ -119,12 +139,29 @@
 	<script type="text/javascript">
 	var ageGroup = ${ageGroup};
 	var leval = ${level};
+	var source = ${source};
 	
 	$(".level-select").select2({
         placeholder: '客人级别',
         data: leval,
         allowClear: true
     });
+	$(".source-select").select2({
+        placeholder: '客人来源',
+        data: source,
+        allowClear: true
+    });
+	jQuery("#searchStartDateTime").datepicker({
+        dateFormat: "yy-mm-dd",
+        changeYear: true,
+        changeMonth: true,
+     });
+    
+    jQuery("#searchEndDateTime").datepicker({
+        dateFormat: "yy-mm-dd",
+        changeYear: true,
+        changeMonth: true,
+     });
 	
 		jQuery(document).ready(function() {
 			$(".nav-parent").eq(2).addClass("nav-active");
@@ -147,6 +184,9 @@
 			 			var searchEmail=$('#searchEmail').val();
 			 			var searchLocation=$('#searchLocation').val();
 			 			var searchLevel=$('#searchLevel').val();
+			 			var searchSource=$('#searchSource').val();
+			 			var searchStartDateTime=$("#searchStartDateTime").val();
+			 			var searchEndDateTime=$("#searchEndDateTime").val();
 			 			var searchFlag=$('#searchFlag').val();
 			 			data.flag = searchFlag;
 			 			if(searchChineseName !=null && searchChineseName !="" ){
@@ -167,11 +207,18 @@
 			 			if(searchLocation !=null && searchLocation !="" ){
 							data.location = searchLocation;
 			 			}
+			 			if(searchSource !=null && searchSource !="" ){
+							data.source = searchSource;
+			 			}
+			 			if(searchStartDateTime !=null && searchStartDateTime !=""){
+			 				data.searchStartTime = searchStartDateTime;
+			 			}
+			 			if(searchEndDateTime !=null && searchEndDateTime !=""){
+			 				data.searchEndTime = searchEndDateTime;
+			 			}
 			 			if(searchLevel !=null && searchLevel !="" ){
 							data.level = searchLevel;
 			 			}  
-			 			
-			 			
 					},
 					dataFilter: function(data){
 			            var json = jQuery.parseJSON( data );
@@ -188,7 +235,7 @@
 						render: function ( data, type, full, meta ) {
 							return '<a class="btn btn-success btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 编辑</a> &nbsp; <a class="btn btn-primary btn-xs" id="'+data+'"><span class="fa fa-edit"></span> 增加询单</a> &nbsp;';
 						},
-						targets: 9
+						targets: 11
 					},
 
 					  {
@@ -227,7 +274,30 @@
 		                  },
 		                  targets: 4
 					  },
-					
+					  {
+			                data: "source",
+			                orderable: false,
+			                render: function ( data ) {
+			                	for(var i=0;i<source.length;i++){
+			                		if(data==source[i].id){
+			                			return source[i].text
+			                		}
+			                		if(data==''){return '无';}
+			                	}
+			                },
+			                targets: 9
+					  },
+					  {
+			                data: "creatTime",
+			                orderable: false,
+			                render: function ( data ) {
+			                	if(data){
+			                		return new Date(data.time).format("yyyy-MM-dd hh:mm:ss");
+			                	}
+			                	else{return ""}
+			                },
+			                  targets: 10
+						},
 				    {
 					  orderable: false,
 					  searchable: false,
@@ -243,7 +313,9 @@
 		            { data: "mobilephone" },
 		            { data: "email" },
 		            { data: "location" },
-		            { data: "level" }
+		            { data: "level" },
+		            { data: "source" },
+		            { data: "creatTime" }
 		        ]
 			});
 			

@@ -1,4 +1,4 @@
-﻿<%@ page language="java" pageEncoding="utf-8"%>
+<%@ page language="java" pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -50,12 +50,6 @@
 	              <label class="col-sm-3 control-label">英文名</label>
 	              <div class="col-sm-9">
 	                <input type="text" name="englishName" placeholder="英文名" class="form-control" value="${crmcase.englishName}"/>
-	              </div>
-	            </div> 	
- 	            <div class="form-group col-sm-4">
-	              <label class="col-sm-3 control-label">环信ID</label>
-	              <div class="col-sm-9">
-	                <input type="text" name="huanxinId" placeholder="环信ID" class="form-control" value="${crmcase.huanxinId}"/>
 	              </div>
 	            </div> 	
 	            <input type="text" style="display: none" name="portalId" placeholder="portalId" class="form-control" value="${crmcase.portalId}"/>
@@ -167,11 +161,11 @@
                 </div>
                 </div> 
                 <div class="form-group col-sm-4">
-	                    <label class="col-sm-4 control-label">沟通方式</label>
-	                    <div class="col-sm-8">
-	                      <input type="text"  name="contactReal" class="contact-real-select fullwidth" value="0" />
-	                    </div>
-	                </div>       
+                    <label class="col-sm-4 control-label">沟通方式</label>
+                    <div class="col-sm-8">
+                      <input type="text"  name="contactReal" class="contact-real-select fullwidth" value="0" />
+                    </div>
+	            </div>       
             </div>
             
             <div class="section-block">
@@ -438,11 +432,19 @@
                 </div>
             </div>
             <div class="form-group col-sm-8 col-sm-offset-2">
-                <label class="col-sm-3 control-label">所属销售</label>
-                <div class="col-sm-9">
-                    <input type="text" id="salesId" name="salesId" placeholder="选择一个销售" class="sales-select fullwidth" value="" />
-                </div>
-            </div>
+				<label class="col-sm-3 control-label">服务类型</label>
+				<div class="col-sm-9">
+					<input type="text" id="serviceID" name="service"
+						placeholder="选择服务类型" class="service-select fullwidth" value="" />
+				</div>
+			</div>
+			<div class="form-group col-sm-8 col-sm-offset-2">
+				<label class="col-sm-3 control-label">所属销售</label>
+				<div class="col-sm-9">
+					<input type="text" id="salesId" name="salesId"
+						placeholder="选择一个销售" class="sales-select fullwidth" value="" />
+				</div>
+			</div>
             <div class="col-sm-12">
              <a class="submit btn btn-primary">保存</a>
              <input  type="hidden" name="caseId" value="${crmcase.caseId}" />
@@ -843,9 +845,7 @@
 								"<td align='center' name='email'>"+custumerList[i].email+"</td>"+
 								"<td align='center' name='qq'>"+custumerList[i].qq+"</td>"+
 								"<td align='center' name='wechat'>"+custumerList[i].wechat+"</td>"+
-								"<td align='center' style='display:none'><input type='checkbox' name='customerId' checked='true' value="+custumerList[i].customerId+"></td>"+
-								"<td align='center' style='dispaly:none><input type='text' name='huanxinId' value="+custumerList[i].customerId+"></td>"
-								+"</tr>" 																				
+								"<td align='center' style='display:none'><input type='checkbox' name='customerId' checked='true' value="+custumerList[i].customerId+"></td></tr>" 																				
 							);
 					}
 					$("#bindCustomer").modal('show'); 										
@@ -902,6 +902,39 @@
           return false;
       });
       
+    //选择服务类型所属销售显示的联动
+	  	$("#serviceID").change(function(){
+	  		var serviceID = $("#serviceID").val();
+	  		if(serviceID==3 || serviceID==4 || serviceID==5){
+	  			$.ajax({
+		              type: "post",
+		              url: "${rootPath}case/getSalesByServiceId.do?serviceID="+serviceID,
+		              data: serviceID,
+		              success: function(sales){
+		            	  var json = jQuery.parseJSON(sales);
+		                  $("#salesId").select2({	
+		                      placeholder: '销售',
+		                      data: json
+		                  });
+		              }  
+		        }); 
+	  		}else{
+	  			var destination = $("#destination").val();
+	  			$.ajax({
+		              type: "post",
+		              url: "${rootPath}case/getSales.do?destination="+destination,
+		              data: destination,
+		              success: function(sales){
+		            	  var json = jQuery.parseJSON(sales);
+		                  $("#salesId").select2({	
+		                      placeholder: '销售',
+		                      data: json
+		                  });
+		              }  
+		            });
+	  		}
+	  	}) 
+	  
        $(".nextModal .submit").click(function(){
       	  order_submit();
       });  
@@ -1103,6 +1136,7 @@
         var dateformat = new Date(date).toISOString("yyyy-MM-dd hh:mm:ss.S").substring(0,10);
         $("#endDate").val(dateformat);
       }
+  	  
 
   	  if("${crmcase.startTime}"==1){
     	   $('#yes').attr('checked','true');

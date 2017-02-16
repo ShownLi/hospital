@@ -34,9 +34,6 @@
 					</div>
 					<form class="form-horizontal" id="form-case">
 						<div class="panel-body panel-body-nopadding">
-
-
-
 							<div class="section-block">
 								<h5 class="section-title">客人基本信息</h5>
 								<div class="form-group col-sm-4">
@@ -111,7 +108,6 @@
 									<div class="col-sm-8">
 										<select name="contactType" class="contact-select fullwidth"
 											multiple="multiple">
-
 										</select>
 									</div>
 								</div>
@@ -171,7 +167,10 @@
 								<div class="col-sm-8">
 									<input type="text" name="operator"
 										class="user-select fullwidth" value="${crmcase.operator}" />
+									<!-- 	修改跟单员图标
+									<span id="btnUpdateUser" class="fa fa-edit"></span> -->
 								</div>
+								
 							</div>
 							<div class="form-group col-sm-4">
 								<label class="col-sm-4 control-label">沟通方式</label>
@@ -358,8 +357,8 @@
 						<!-- panel-body -->
 
 						<div class="panel-footer align-center">
-
 							<input class="btn btn-primary" id="btn-addorder" type="button" value="分配地接社" />&nbsp; 
+							<input class="btn btn-primary" id="btn-updateUser" type="button" value="修改跟单员" />&nbsp; 
 							<input class="btn btn-primary" type="submit" value="保存" />&nbsp;
 							<input class="btn btn-danger" id="btn-invalid"   type="button" value="无效"/>&nbsp; 
 							<input class="btn btn-danger" id="btn-nodeal" type="button" value="未成行" />&nbsp; 
@@ -476,6 +475,40 @@
 		<%@ include file="../assets/pages/rightpanel.jsp"%>
 	</section>
 
+	<div class="updateUserModal modal fade" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<div class="nextModal-title">更改跟单员</div>
+				</div>
+				<form class="form-horizontal" id="form-updateUser">
+					<div class="modal-body">
+						<div class="section-block noline">
+							<div class="form-group col-sm-12">
+								<label class="col-sm-4 control-label">跟单员</label>
+								<div class="col-sm-8">
+									<input class="updateUser-select fullwidth" name="operator" />
+								</div>
+							</div>
+							<input type="hidden" name="caseId" value="${crmcase.caseId} " />
+						</div>
+					</div>
+					<!-- noDealModal-body -->
+
+					<div class="modal-footer align-center">
+						<button class="btn btn-primary">保存</button>
+						<a class="cancel btn btn-primary">取消</a>
+					</div>
+				</form>
+			</div>
+			<!-- modal-content -->
+		</div>
+		<!-- modal-dialog -->
+	</div>
+	<!-- bmodal -->
 
 	<!-- Modal 保存数据时出错-->
 	<div class="modal fade" id="msgModal" tabindex="-1" role="dialog"
@@ -787,13 +820,19 @@
 								</div>
 							</div>
 							<div class="form-group col-sm-8 col-sm-offset-2">
+								<label class="col-sm-3 control-label">服务类型</label>
+								<div class="col-sm-9">
+									<input type="text" id="serviceID" name="service"
+										placeholder="选择服务类型" class="service-select fullwidth" value="" />
+								</div>
+							</div>
+							<div class="form-group col-sm-8 col-sm-offset-2">
 								<label class="col-sm-3 control-label">所属销售</label>
 								<div class="col-sm-9">
 									<input type="text" id="salesId" name="salesId"
 										placeholder="选择一个销售" class="sales-select fullwidth" value="" />
 								</div>
 							</div>
-							
 							<div class="col-sm-12">
 								<a class="submit btn btn-primary" >保存</a> 
 								<input type="hidden" name="caseId" value="${crmcase.caseId}" /> 
@@ -961,13 +1000,14 @@
 	var agegroup = ${ageGroup}; 
 	var genderData = [{ id: 'male', text: '男' }, { id:'female' , text: '女' }];
 	var reason = ${reason};
-	 var orderNoDealReason=${orderNoDealReason};
+	var orderNoDealReason=${orderNoDealReason};
 	var currency =${currency};
 	var contact =${contact};
 	var costReceiver = ${costReceiver};
 	var paymentMethod = [{ id: 0, text: '一期' }, { id: 1, text: '两期' },{ id: 2, text: '三期' }, { id: 3, text: '四期' },{ id: 4, text: '五期' }]
 	var financeItem = ${financeItem};
 	var financeAccount = ${financeAccount};
+	var service = ${service};
 
 	//接收联系方式
 	var contactData=${contact};
@@ -977,8 +1017,6 @@
 	for(var i=0;i<5;i++){
 		$("#tr_"+i).hide();
 	}
-	
-	
 	
  	$("#level").select2({
         data: level
@@ -1025,7 +1063,6 @@
     	placeholder: '可多选',
     	minimumResultsForSearch: Infinity,
     	data: contact
-
      });
 
     $(".contact-select").val('${crmcase.contactType}'.split(",")).trigger("change");
@@ -1054,11 +1091,14 @@
         data: contactData
      });
     $(".contact-real-select").val('${crmcase.contactReal}').trigger("change");
-
     
     $(".withwho-select").select2({
     	placeholder: '与谁同行',
      	data: withwho
+    });
+    $(".service-select").select2({
+    	placeholder: '选择服务类型',
+     	data: service
     });
     $(".hotel-select").select2({
        placeholder: '选择一个住宿方式',
@@ -1120,8 +1160,12 @@
     	placeholder:"未成行原因",
     	data:orderNoDealReason
     });
-    
-
+    //修改跟单员弹出框
+    $(".updateUser-select").select2({
+    	placeholder:"选择跟单员",
+    	data:user,
+        allowClear: true
+	 });
     
 	if("${crmcase.status}"==5){
    	  $("#div-delInfo").show();
@@ -1146,8 +1190,46 @@
    			$("#tr_"+i).hide();
    		}
     });
+      //设置更改跟单员
+  	 $('#btnUpdateUser').click( function () {
+		 $(".updateUserModal").modal('show');
+     } );
       
+  	 $('#btn-updateUser').click( function () {
+		 $(".updateUserModal").modal('show');
+     } );
+      
+  	
+  	 $(".updateUserModal .cancel").click(function(){
+	    	$(".updateUserModal").modal('hide');
+	 });
     	jQuery(document).ready(function() {
+    		
+    		jQuery("#form-updateUser").validate({
+		        rules: {
+			        operator: {
+			        	required: true,
+			        },	              	
+				},				
+		     	 messages: {
+		     		operator: "请选择跟单员",
+		      	 },			      
+		          highlight: function(element) {
+		            jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+		          },
+		          success: function(element) {
+		            jQuery(element).closest('.form-group').removeClass('has-error');
+		          },
+		          invalidHandler : function(){
+		            return false;
+		          },
+		          submitHandler : function(){
+		          	$("#form-updateUser .submit").attr("disabled","disabled");
+		              updateUser_submit();
+		              return false;
+		          } 
+	        });
+    		
     		jQuery("#form-deal").validate({
 		           rules: {
 			        groupTime: {
@@ -1250,7 +1332,6 @@
 	        	  		$(".rmbpriceErrorMsg").show();
 	        	  		return false;
 	        	  	}
-	          
 	          } 
 	        });
     		//订单未成行
@@ -1329,7 +1410,6 @@
 					$("#msgModal").modal('show');
 				}
 			}, "JSON");
-			
 		}
       //订单未成行
     	function noDeal_submit() {
@@ -1599,7 +1679,6 @@
 			    return false;
 			}
 		});
-     
  
       //订单为未成行
       $("#btn-nodeal").click(function(){
@@ -1610,9 +1689,7 @@
       $(".confirmNoDealModal .cancel").click(function(){
         	$(".confirmNoDealModal").modal("hide");
     	  });
- 	
-	  //添加订单
-
+	  //分配地接社按钮
       $("#btn-addorder").click(function(){
       	  var destination = $("#destination").val();
       	  $("#englishDestination").val(destination);
@@ -1628,10 +1705,8 @@
       				}
       			}
       			var destinationText = destinationText.substring(0,destinationText.length-1);
-
       	  		$("#orderDestinationText").val(destinationText); 
       	  		$("#orderDestination").val(destination);
-
 	      	  	$.ajax({
 	              type: "post",
 	              url: "${rootPath}case/getSales.do?destination="+destination,
@@ -1648,7 +1723,40 @@
       	    }  
             return false;
         });
-      
+        
+	  	//选择服务类型所属销售显示的联动
+	  	$("#serviceID").change(function(){
+	  		var serviceID = $("#serviceID").val();
+	  		if(serviceID==3 || serviceID==4 || serviceID==5){
+	  			$.ajax({
+		              type: "post",
+		              url: "${rootPath}case/getSalesByServiceId.do?serviceID="+serviceID,
+		              data: serviceID,
+		              success: function(sales){
+		            	  var json = jQuery.parseJSON(sales);
+		                  $("#salesId").select2({	
+		                      placeholder: '销售',
+		                      data: json
+		                  });
+		              }  
+		        }); 
+	  		}else{
+	  			var destination = $("#destination").val();
+	  			$.ajax({
+		              type: "post",
+		              url: "${rootPath}case/getSales.do?destination="+destination,
+		              data: destination,
+		              success: function(sales){
+		            	  var json = jQuery.parseJSON(sales);
+		                  $("#salesId").select2({	
+		                      placeholder: '销售',
+		                      data: json
+		                  });
+		              }  
+		        });
+	  		}
+	  	}) 
+	  
         $("#nextModal .submit").click(function(){
           $(this).attr("disabled","disabled");
       	  order_submit();
@@ -1670,7 +1778,6 @@
 					alert("分配地接社成功，由于销售没有邮箱，无法发送订单邮件");
 					$('#nextModal').modal('hide');
 					window.parent.location = "${rootPath}case/edit.html?id=${crmcase.caseId}";
-
 				}
 				else if(result.text=="noSendmail"){
 					alert("分配地接社成功，由于地接社设置为不发送邮件，所以未发送订单邮件");
@@ -1733,7 +1840,6 @@
  				}
  			}, "JSON");
       } */
-      
       
       //进入订单编辑页面
 		 $('#dataTable-order tbody').on( 'click', 'a[name=btnEdit]', function () {
@@ -1826,7 +1932,6 @@
 				$('#addEmail').attr("href",newHref)
 			}
 		}
-		  
   		
 		//沟通记录   回显
   		var recordTable = jQuery('#dataTable-record').DataTable({
@@ -1937,6 +2042,7 @@
 
 
   jQuery(document).ready(function() {
+	  
       // Select2
       jQuery('select').select2({
           minimumResultsForSearch: -1
@@ -2013,8 +2119,20 @@
           $(".start-date").hide();
           $(".start-time").show();
       }
-
   });
+  
+  function updateUser_submit(){
+		var f = $("#form-updateUser").serialize();
+		$.post('${rootPath}case/updateUser.do', f, function(result) {
+			var rmsg = result.msg;
+			if (result.success) {
+				window.parent.location = "${rootPath}case/edit.html?id=${crmcase.caseId}";
+			} 
+			else {
+				$("#msgModal").modal('show');
+			}
+		}, "JSON");
+	}
 	</script>
 </body>
 </html>

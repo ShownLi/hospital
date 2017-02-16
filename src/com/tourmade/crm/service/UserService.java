@@ -69,6 +69,24 @@ public class UserService extends BaseService {
 	}
 	
 	/**
+	 * 校验按钮权限名称为此的menuId
+	 * 
+	 */
+	public String checkButtonId(String menuName){
+		String buttonId = userMapper.checkButtonId(menuName);
+		return buttonId;
+	}
+	
+	/**
+	 * 校验校验按钮权限是否存在
+	 * 
+	 */
+	public String checkButtonIdExist(String menuId, String roleId){
+		String IdExist = userMapper.checkButtonIdExist(menuId, roleId);
+		return IdExist;
+	}
+	
+	/**
 	 * 权限检验，根据用户登录名可以访问的URL
 	 * 
 	 */
@@ -199,8 +217,8 @@ public class UserService extends BaseService {
 	/**
 	 * 根据客人id获取角色名称
 	 */
-	public String getRoleNameByid(int userId) {
-		String result = userMapper.getRoleNameByid(userId);
+	public String getRoleNameById(int userId) {
+		String result = userMapper.getRoleNameById(userId);
 		return result ;
 	}
 	

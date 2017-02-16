@@ -49,6 +49,8 @@ public interface CaseMapper extends BaseMapper {
 	public List<EntityList> getSales();
 	
 	public List<EntityList> getSalesByAgency(List<String> sList);
+	
+	public List<EntityList> getSalesByServiceId(String serviceID);
 
 	public Case getCaseByOrderId(int orderId);
 	
@@ -70,5 +72,9 @@ public interface CaseMapper extends BaseMapper {
 	public void updateOrderConPay(Case crmcase);
 
 	public void updateCaseStatus(Case crmcase);
+
+	public void updateOrderUserByCaseId(Case crmcase);
+
+	public void updateCaseUserByCaseId(Case crmcase);
 
 }

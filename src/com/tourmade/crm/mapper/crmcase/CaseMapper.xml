@@ -506,14 +506,25 @@
 	<select id="getSalesByAgency" parameterType="list" resultType="EntityList">
 		select
 		u.sales_id as id,
-		u.sales_name as text,
+		concat(v.agency_name,"--",u.sales_name) as text,
 		u.isdel
 		from tm_sales u 
 		left join tm_agency v on u.agency_id = v.agency_id 
 		where u.isdel = 0 and 
-		 <foreach collection="list" item="item" index="index" open="" separator="OR" close="">  
+		<foreach collection="list" item="item" index="index" open="" separator="OR" close="">  
              v.destination LIKE '%${item}%'
         </foreach>
+	</select>
+	
+	<select id="getSalesByServiceId" parameterType="String" resultType="EntityList">
+		select
+			u.sales_id as id,
+			concat(v.agency_name,"--",u.sales_name) as text,
+			u.isdel
+		from tm_sales u 
+		left join tm_agency v on u.agency_id = v.agency_id 
+		where u.isdel = 0 
+		and v.service = #{serviceID}
 	</select>
 	
 	<select id="caseStatus" parameterType="int" resultType="int">
@@ -620,7 +631,6 @@
 	
 	
 	<insert id="saveCustomer" parameterType="Customer" flushCache="true" useGeneratedKeys="true" keyProperty="customerId" keyColumn="GENERATED_KEY">
-
 		insert into tm_customer(
 		customer_portal_id,
 		customer_huanxin_id,
@@ -804,6 +814,23 @@
 		update_time=NOW()
 		where
 		case_id=#{caseId}
+	</update>
+	
+	<update id="updateOrderUserByCaseId" parameterType="Case">
+	 	update tm_order
+	 	set 
+	 	operator = #{operator},
+	 	update_time = NOW()
+	 	where 
+	 	case_id = #{caseId}
+	</update>	
+	<update id="updateCaseUserByCaseId" parameterType="Case">
+	 	update tm_case
+	 	set 
+	 	operator = #{operator},
+	 	update_time = NOW()
+	 	where 
+	 	case_id = #{caseId}
 	</update>
 </mapper>
 
