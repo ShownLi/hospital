@@ -234,40 +234,6 @@
 </div><!-- bmodal -->
 
 	</div>
-	<div class="updateUserModal modal fade" tabindex="-1" role="dialog"
-		aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-hidden="true">&times;</button>
-					<div class="nextModal-title">更改跟单员</div>
-				</div>
-				<form class="form-horizontal" id="form-updateUser">
-					<div class="modal-body">
-						<div class="section-block noline">
-							<div class="form-group col-sm-12">
-								<label class="col-sm-4 control-label">跟单员</label>
-								<div class="col-sm-8">
-									<input class="updateUser-select fullwidth" name="operator" />
-								</div>
-							</div>
-							<input type="hidden" id="updateUser-caseId" name="caseId" />
-						</div>
-					</div>
-					<!-- noDealModal-body -->
-
-					<div class="modal-footer align-center">
-						<button class="btn btn-primary">保存</button>
-						<a class="cancel btn btn-primary">取消</a>
-					</div>
-				</form>
-			</div>
-			<!-- modal-content -->
-		</div>
-		<!-- modal-dialog -->
-	</div>
-	<!-- bmodal -->
 
 	<!-- 询单无效 -->
 	<div class="confirmDelModal modal fade" tabindex="-1" role="dialog"
@@ -805,7 +771,6 @@
 				$(".confirmNoDealModal").modal('show');
 		    } );
 		    
-			
 			 jQuery("#form-updateUser").validate({
 			        rules: {
 				        operator: {
@@ -825,7 +790,7 @@
 			            return false;
 			          },
 			          submitHandler : function(){
-			          	$("#form-updateUser .submit").attr("disabled","disabled");
+			          	$("#form-updateUser.submit").attr("disabled","disabled");
 			              updateUser_submit();
 			              return false;
 			          } 

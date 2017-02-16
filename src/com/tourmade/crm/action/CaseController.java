@@ -71,9 +71,6 @@ public class CaseController extends BaseSimpleFormController {
 		model.addAttribute("sales", salesResult);
 		model.addAttribute("reason", reasonResult);
 
-
-		
-
 		// 添加未成行
 		String reasonNodeal = "case.reasonnodeal";
 		List<EntityList> reasonNodealList = service.getParameterInfo(reasonNodeal);
@@ -89,7 +86,6 @@ public class CaseController extends BaseSimpleFormController {
 		List<EntityList> orderServiceList = service.getParameterInfo(orderService);
 		JSONArray orderServiceResult = JSONArray.fromObject(orderServiceList);
 		model.addAttribute("service",orderServiceResult);
-		
 		
 		// 没有传递flag参数时，表示时从侧边栏访问的
 		if ("".equals(flag) || flag == null) {
@@ -893,7 +889,6 @@ public class CaseController extends BaseSimpleFormController {
 	@ResponseBody
 	public Json updateUser(Case crmcase) {
 
-		
 		Json json = new Json();
 		try {
 			service.updateUser(crmcase);

@@ -111,8 +111,6 @@
   </div><!-- modal-dialog -->
 </div><!-- modal -->
 
-
-
 	<%@ include file="../assets/pages/foot.jsp"%>
 	<script src="${rootPath}assets/js/select2.min.js"></script>
 	<script src="${rootPath}assets/js/jquery-ui-1.10.3.min.js"></script>
@@ -124,14 +122,17 @@
 		var role_id = ${role_id};
 		$(".permission-select").select2({
 			minimumResultsForSearch: Infinity,
-			placeholder:'${roleName}',
-	    	data: role_id
+			placeholder:'请分配权限',
+	    	data: role
 	     });
 		jQuery(document).ready(function() {
 
 			$(".nav-parent").eq(4).addClass("nav-active");
       		$(".nav-parent").eq(4).find(".children").show();
       		
+      		
+      		
+      		  
       		$.validator.addMethod("passrule",function(value,element,params){
       			var re = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,12}$/
       			if(!re.test(value)){
@@ -224,7 +225,6 @@
 			$("#btn-back").click( function () {
 				history.go(-1);
 		    } ); 
-			
 		});
 			      
 		function form_submit() {
