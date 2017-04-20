@@ -21,7 +21,7 @@
 					<div class="signin-info">
 						<div class="logopanel">
 							<h1>
-								<span>[</span> 特美旅行CRM系统 <span>]</span>
+								<span>[</span> 智能医院挂号系统 <span>]</span>
 							</h1>
 						</div>
 						<!-- logopanel -->
@@ -29,7 +29,7 @@
 						<div class="mb20"></div>
 
 						<h5>
-							<strong>欢  迎</strong>
+							<strong>欢 迎 使 用</strong>
 						</h5>
 						<ul>
 						</ul>
@@ -44,7 +44,7 @@
 
 					<form method="post" id="form">
 						<h4 class="nomargin">登  录</h4>
-						<p class="mt5 mb20">输入您的账号和密码</p>
+						<p class="mt5 mb20">请输入您的账号和密码</p>
 						<div class="error">
 							<label class="error"></label>
 						</div>

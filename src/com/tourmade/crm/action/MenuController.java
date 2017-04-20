@@ -1,6 +1,5 @@
 package com.tourmade.crm.action;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;

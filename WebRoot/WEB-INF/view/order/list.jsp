@@ -865,10 +865,6 @@
 	  	});
 		jQuery(".datetimepicker").datetimepicker({
 			  dateFormat: "yy-mm-dd",
-<<<<<<< HEAD
-=======
-			  //controlType: 'select',
->>>>>>> ac651648ab3b8891708a69f6ac4baec3f5013c34
 			  timeFormat: 'HH:mm',
 			  showMinute: false
 	  	});

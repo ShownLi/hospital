@@ -358,7 +358,6 @@ public class CaseController extends BaseSimpleFormController {
 			map.put("cid", crmcase.getCaseId());
 			map.put("success", true);
 			return map;
-
 		} catch (Exception e) {
 			logger.error("CaseController.doAddCase() --> " + crmcase.toString() + "\n" + e.getMessage());
 			map.put("error", "error");

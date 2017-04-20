@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="GBK" ?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tourmade.crm.mapper.registration.RegistrationMapper">
+
+	<select id="queryRegistration" parameterType="Map" resultType="Registration">
+		SELECT 
+			p.name as pname,
+			p.birthday as pbirthday,
+			p.sex as psex,
+			p.phone as pphone,
+			p.address as paddress,
+			p.date as pdate,
+			d.name as dname,
+			d.area as darea,
+			d.classify as dclassify,
+			o.doctorId as doctorId,
+			o.name as oname,
+			o.age as oage,
+			o.sex as osex,
+			o.dept as odept
+		from r_registration r 
+		INNER JOIN r_patient p on r.patientId=p.patientId 
+		INNER JOIN r_doctor o on r.doctorId=o.doctorId
+		INNER JOIN r_dept d on r.deptId=d.deptId
+		where r.isdel=0 and p.isdel=0 and o.isdel=0 and d.isdel=0
+		ORDER BY r.createTime DESC
+		limit #{start},#{length}
+	</select>
+
+	<select id="countRegistration" parameterType="Registration" resultType="long">
+		select count(r.registrationId) from r_registration r
+		where
+		r.isdel = 0
+	</select>
+
+	<insert id="saveRegistration" parameterType="Registration" flushCache="true" useGeneratedKeys="true" keyProperty="registrationId" keyColumn="GENERATED_KEY">
+		insert into r_patient(
+		name,
+		phone,
+		address,
+		birthday,
+		sex,
+		urgentPhone,
+		source,
+		date,
+		createTime,
+		uptateTime,
+		patientId,
+		isdel
+		)values(
+		#{name,jdbcType=VARCHAR},
+		#{phone,jdbcType=VARCHAR},
+		#{address,jdbcType=VARCHAR},
+		#{birthday,jdbcType=VARCHAR},
+		#{sex,jdbcType=VARCHAR},
+		#{urgentPhone,jdbcType=VARCHAR},
+		#{source,jdbcType=VARCHAR},
+		#{date,jdbcType=VARCHAR},
+		NOW(),
+		NOW(),
+		#{patientId},
+		0
+		)
+	</insert>
+
+	<update id="updateRegistration" parameterType="Registration" flushCache="true">
+		update r_patient
+		<set>
+			<if test="name != null">name=#{name},</if>
+			<if test="phone != null">phone=#{phone},</if>
+			<if test="address != null">address=#{address},	</if>
+			<if test="birthday != null">birthday=#{birthday},</if>
+			<if test="sex != null">sex=#{sex},</if>
+			<if test="urgentPhone != null">urgentPhone=#{urgentPhone},</if>
+			<if test="source != null">source=#{source},</if>
+			<if test="date != null">date=#{date},</if>
+			uptateTime=NOW(),
+		</set>
+		where
+		patientId=#{patientId}
+	</update>
+
+	<select id="getRegistrationById" parameterType="int" resultType="Registration">
+		SELECT 
+			p.name as pname,
+			p.birthday as pbirthday,
+			p.sex as psex,
+			p.phone as pphone,
+			p.address as paddress,
+			p.date as pdate,
+			d.name as dname,
+			d.area as darea,
+			d.classify as dclassify,
+			o.doctorId as doctorId,
+			o.name as oname,
+			o.age as oage,
+			o.sex as osex,
+			o.dept as odept
+		from r_registration r 
+		INNER JOIN r_patient p on r.patientId=p.patientId 
+		INNER JOIN r_doctor o on r.doctorId=o.doctorId
+		INNER JOIN r_dept d on r.deptId=d.deptId
+		where r.isdel=0 and p.isdel=0 and o.isdel=0 and d.isdel=0 and r.registrationId = #{registrationId}
+	</select>
+
+	<update id="deleteRegistrationById" parameterType="int" flushCache="true"
+		statementType="PREPARED">
+		update r_registration
+		set
+		iisdel=1,updateTime=NOW()
+		where
+		registrationId = #{registrationId}
+	</update>
+	
+	<select id="getParameterInfo" parameterType="String" resultType="EntityList">
+		select
+		u.para_domain,
+		u.para_value as id,
+		u.chinese as text,
+		u.isdisplay,
+		u.isdel 
+		from tm_parameter u where u.isdisplay = 1 and u.isdel = 0 and u.para_domain = #{domain}
+		ORDER BY u.para_sort desc, u.para_value
+	</select>
+	
+</mapper>
+
+
+
+
+
+
+
+

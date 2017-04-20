@@ -41,6 +41,64 @@
 	            <div>
 
 	           	<div class="container">
+	           	
+	           		<div class="row">
+							<h4 class="col-md-12" style="margin-top: 20px; color: #000;">科室栏列表</h4>
+							<div class="col-md-2">
+								<div class="ckbox ckbox-primary">
+									<input id="selectall10" class="selectall" type="checkbox" value="" />
+									<label for="selectall10">全选 </label> 
+								</div>
+							</div>
+							  <c:forEach items="${menu}" var="menu">
+								<c:if test="${menu.menuCategory eq 'deptmenu'}">
+									<div class="col-md-2">
+										<div class="ckbox ckbox-primary">
+											<input id="${menu.menuID}" class="check" name="deptmenu" type="checkbox" value="${menu.menuID}"/>
+											<label for="${menu.menuID}">${menu.menuName}</label> 
+										</div>
+									</div>
+								</c:if>
+							</c:forEach>  
+						</div>
+	           		<div class="row">
+							<h4 class="col-md-12" style="margin-top: 20px; color: #000;">医生栏列表</h4>
+							<div class="col-md-2">
+								<div class="ckbox ckbox-primary">
+									<input id="selectall11" class="selectall" type="checkbox" value="" />
+									<label for="selectall11">全选 </label> 
+								</div>
+							</div>
+							  <c:forEach items="${menu}" var="menu">
+								<c:if test="${menu.menuCategory eq 'doctormenu'}">
+									<div class="col-md-2">
+										<div class="ckbox ckbox-primary">
+											<input id="${menu.menuID}" class="check" name="doctormenu" type="checkbox" value="${menu.menuID}"/>
+											<label for="${menu.menuID}">${menu.menuName}</label> 
+										</div>
+									</div>
+								</c:if>
+							</c:forEach>  
+						</div>
+						<div class="row">
+							<h4 class="col-md-12" style="margin-top: 20px; color: #000;">患者栏列表</h4>
+							<div class="col-md-2">
+								<div class="ckbox ckbox-primary">
+									<input id="selectall12" class="selectall" type="checkbox" value="" />
+									<label for="selectall12">全选 </label> 
+								</div>
+							</div>
+							  <c:forEach items="${menu}" var="menu">
+								<c:if test="${menu.menuCategory eq 'patientmenu'}">
+									<div class="col-md-2">
+										<div class="ckbox ckbox-primary">
+											<input id="${menu.menuID}" class="check" name="doctormenu" type="checkbox" value="${menu.menuID}"/>
+											<label for="${menu.menuID}">${menu.menuName}</label> 
+										</div>
+									</div>
+								</c:if>
+							</c:forEach>  
+						</div>
 					<div class="row">
 						<h4 class="col-md-12" style="margin-top: 20px; color: #000;">询单栏列表</h4>
 						<div class="col-md-2">

@@ -2,7 +2,7 @@
 <div class="leftpanel">
 
     <div class="logopanel">
-        <h1><span></span> 特美旅行 <span></span></h1>
+        <h1><span></span> 智能挂号系统 <span></span></h1>
     </div><!-- logopanel -->
 
     <div class="leftpanelinner">
@@ -27,14 +27,32 @@
         </div>
 
         <h5 class="sidebartitle"></h5>
-        <ul class="nav nav-pills nav-stacked nav-bracket">  
-            <li class="nav-parent" id="case"><a href="javascript:void(0);"><i class="fa fa-paw"></i> <span>询单管理</span></a>
+        <ul class="nav nav-pills nav-stacked nav-bracket"> 
+        	<li class="nav-parent" id="dept"><a href="javascript:void(0);"><i class="glyphicon glyphicon-briefcase"></i> <span>科室管理</span></a>
                 <ul class="children">
-                    <li><a href="${rootPath }case/list.html"><i class="fa fa-caret-right"></i> 询单列表</a></li>
-                    <li><a href="${rootPath }case/add.html"><i class="fa fa-caret-right"></i> 新增询单</a></li>
+                    <li><a href="${rootPath }dept/list.html"><i class="fa fa-caret-right"></i> 科室列表</a></li>
+                    <li><a href="${rootPath }dept/add.html"><i class="fa fa-caret-right"></i> 新增科室</a></li>
+                </ul>
+            </li>  
+        	<li class="nav-parent" id="doctor"><a href="javascript:void(0);"><i class="fa fa-pie-chart"></i> <span>医生管理</span></a>
+                <ul class="children">
+                    <li><a href="${rootPath }doctor/list.html"><i class="fa fa-caret-right"></i> 医生列表</a></li>
+                    <li><a href="${rootPath }doctor/add.html"><i class="fa fa-caret-right"></i> 新增医生</a></li>
+                </ul>
+            </li>  
+        	<li class="nav-parent" id="patient"><a href="javascript:void(0);"><i class="fa fa-address-book"></i> <span>患者管理</span></a>
+                <ul class="children">
+                    <li><a href="${rootPath }patient/list.html"><i class="fa fa-caret-right"></i> 患者列表</a></li>
+                    <li><a href="${rootPath }patient/add.html"><i class="fa fa-caret-right"></i> 新增患者</a></li>
+                </ul>
+            </li>  
+            <li class="nav-parent" id="case"><a href="javascript:void(0);"><i class="fa fa-paw"></i> <span>挂号管理</span></a>
+                <ul class="children">
+                    <li><a href="${rootPath }case/list.html"><i class="fa fa-caret-right"></i> 挂号信息列表</a></li>
+                    <li><a href="${rootPath }case/add.html"><i class="fa fa-caret-right"></i> 挂号</a></li>
                 </ul>
             </li> 
-            <li class="nav-parent" id="order"><a href="javascript:void(0);"><i class="fa fa-envelope"></i> <span>订单管理</span></a>
+            <%-- <li class="nav-parent" id="order"><a href="javascript:void(0);"><i class="fa fa-envelope"></i> <span>订单管理</span></a>
                 <ul class="children">
                     <li><a href="${rootPath }order/list.html"><i class="fa fa-caret-right"></i> 订单列表</a></li>
                 </ul>
@@ -50,7 +68,7 @@
                     <li><a href="${rootPath }agency/list.html"><i class="fa fa-caret-right"></i> 地接社列表</a></li>
                     <li><a href="${rootPath }agency/add.html"><i class="fa fa-caret-right"></i> 新增地接社</a></li>
                 </ul>
-            </li> 
+            </li>  --%>
             <li class="nav-parent" id="user"><a href="javascript:void(0);"><i class="fa fa-user"></i> <span>用户管理</span></a>
                 <ul class="children">
                     <li><a href="${rootPath }user/list.html"><i class="fa fa-caret-right"></i> 用户列表</a></li>
@@ -58,12 +76,12 @@
                     
                 </ul>
             </li>
-            <li class="nav-parent" id="finance"><a href="javascript:void(0);"><i class="fa fa-rmb" aria-hidden="true"></i><span>财务管理</span></a>
+            <%-- <li class="nav-parent" id="finance"><a href="javascript:void(0);"><i class="fa fa-rmb" aria-hidden="true"></i><span>财务管理</span></a>
                 <ul class="children">
                     <li><a href="${rootPath}finance/list.html"><i class="fa fa-caret-right"></i>财务管理列表</a></li>
                 </ul> 
-            </li> 
-             <li class="nav-parent" id="stats"><a href="javascript:void(0);"><i class="fa fa-pie-chart"></i> <span>统计分析</span></a>
+            </li> --%> 
+             <%-- <li class="nav-parent" id="stats"><a href="javascript:void(0);"><i class="fa fa-pie-chart"></i> <span>统计分析</span></a>
                 <ul class="children">
                    	<li><a href="${rootPath }statistics/caseSourceStats.html"><i class="fa fa-caret-right"></i>询单来源状态统计</a></li>
                     <li><a href="${rootPath }statistics/contactrealstats.html"><i class="fa fa-caret-right"></i>沟通方式统计 </a></li>
@@ -80,7 +98,7 @@
                     <li><a href="${rootPath }statistics/sellerNotAskStats.html"><i class="fa fa-caret-right"></i>商家未询统计</a></li>
                     <li><a href="${rootPath }statistics/agencyOrderStatusStats.html"><i class="fa fa-caret-right"></i>地接社订单状态统计</a></li>
                 </ul>
-            </li>  
+            </li>  --%> 
             <li class="nav-parent" id="menu"><a href="javascript:void(0);"><i class="fa fa-key" aria-hidden="true"></i> <span>权限管理</span></a>
                 <ul class="children">
                     <li><a href="${rootPath }menu/list.html"><i class="fa fa-caret-right"></i> 权限列表</a></li>
@@ -112,8 +130,12 @@
 				document.getElementById("signout").style.display = "block"
 				document.getElementById("menu").style.display = "block"
 				document.getElementById("finance").style.display = "block"
+				document.getElementById("dept").style.display = "block"
+				document.getElementById("doctor").style.display = "block"
+				document.getElementById("patient").style.display = "block"
 			}
 			if(roleID==2){
+				document.getElementById("dept").style.display = "block"
 				document.getElementById("case").style.display = "block"
 				document.getElementById("order").style.display = "block"
 				document.getElementById("customer").style.display = "block"
@@ -124,8 +146,11 @@
 				document.getElementById("signout").style.display = "block"
 				document.getElementById("finance").style.display = "block"
 				document.getElementById("menu").style.display = "none"
+				document.getElementById("doctor").style.display = "block"
+				document.getElementById("patient").style.display = "block"
 			}
 			if(roleID==3){
+				document.getElementById("dept").style.display = "block"
 				document.getElementById("case").style.display = "block"
 				document.getElementById("order").style.display = "block"
 				document.getElementById("customer").style.display = "block"
@@ -136,8 +161,11 @@
 				document.getElementById("signout").style.display = "block"
 				document.getElementById("menu").style.display = "none"
 				document.getElementById("finance").style.display = "none"
+				document.getElementById("doctor").style.display = "block"
+				document.getElementById("patient").style.display = "block"
 			}
 			if(roleID==4){
+				document.getElementById("dept").style.display = "block"
 				document.getElementById("case").style.display = "block"
 				document.getElementById("order").style.display = "block"
 				document.getElementById("customer").style.display = "block"
@@ -148,8 +176,11 @@
 				document.getElementById("signout").style.display = "block"
 				document.getElementById("menu").style.display = "none"
 				document.getElementById("finance").style.display = "none"
+				document.getElementById("doctor").style.display = "block
+				document.getElementById("patient").style.display = "block"
 			}
 			if(roleID==5){
+				document.getElementById("dept").style.display = "block"
 				document.getElementById("case").style.display = "none"
 				document.getElementById("order").style.display = "none"
 				document.getElementById("customer").style.display = "none"
@@ -160,8 +191,11 @@
 				document.getElementById("signout").style.display = "block"
 				document.getElementById("menu").style.display = "none"
 				document.getElementById("finance").style.display = "none"
+				document.getElementById("doctor").style.display = "block"
+				document.getElementById("patient").style.display = "block"
 			}
 			if(roleID==6){
+				document.getElementById("dept").style.display = "block"
 				document.getElementById("case").style.display = "none"
 				document.getElementById("order").style.display = "none"
 				document.getElementById("customer").style.display = "none"
@@ -172,6 +206,8 @@
 				document.getElementById("signout").style.display = "block"
 				document.getElementById("menu").style.display = "none"
 				document.getElementById("finance").style.display = "block"
+				document.getElementById("doctor").style.display = "block"
+				document.getElementById("patient").style.display = "block"
 			}
 		</script>
 

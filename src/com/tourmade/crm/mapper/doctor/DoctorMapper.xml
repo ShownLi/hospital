@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="GBK" ?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tourmade.crm.mapper.doctor.DoctorMapper">
+
+	<select id="queryDoctor" parameterType="Map" resultType="Doctor">
+		select 
+			r.doctorId as doctorId,
+			r.name as name,
+			r.age as age,
+			r.sex as sex,
+			r.phone as phone,
+			r.dept as dept,
+			r.level as level,
+			r.number as number,
+			r.createTime as createTime,
+			r.isdel as isdel
+		from r_doctor r where r.isdel = 0
+		<if test="name != null and name != ''">
+            and name like '%${name}%' 
+        </if>
+		<if test="doctorId != null and doctorId != ''">
+            and doctorId like '%${doctorId}%' 
+        </if>
+		<if test="dept != null and dept != ''">
+            and dept = #{dept} 
+        </if>
+		<if test="level != null and level != ''">
+            and level = #{level} 
+        </if>
+		ORDER BY r.createTime DESC
+		limit #{start},#{length}
+	</select>
+
+	<select id="countDoctor" parameterType="Doctor" resultType="long">
+		select count(r.doctorId) from r_doctor r
+		where
+		r.isdel = 0
+		<if test="name != null and name != ''">
+            and name like '%${name}%' 
+        </if>
+		<if test="doctorId != null and doctorId != ''">
+            and doctorId like '%${doctorId}%' 
+        </if>
+		<if test="dept != null and dept != ''">
+            and dept like '%${dept}%'
+        </if>
+		<if test="level != null and level != ''">
+            and level = #{level} 
+        </if>
+	</select>
+
+	<select id="queryDept" resultType="String">
+		SELECT name from r_dept where isdel=0
+	</select>
+
+	<insert id="saveDoctor" parameterType="Doctor" flushCache="true" useGeneratedKeys="true" keyProperty="doctorId" keyColumn="GENERATED_KEY">
+		insert into r_doctor(
+		name,
+		age,
+		sex,
+		phone,
+		dept,
+		level,
+		number,
+		createTime,
+		updateTime,
+		doctorId,
+		isdel
+		)values(
+		#{name,jdbcType=VARCHAR},
+		#{age,jdbcType=VARCHAR},
+		#{sex,jdbcType=VARCHAR},
+		#{phone,jdbcType=VARCHAR},
+		#{dept,jdbcType=VARCHAR},
+		#{level,jdbcType=VARCHAR},
+		#{number,jdbcType=VARCHAR},
+		NOW(),
+		NOW(),
+		#{doctorId},
+		0
+		)
+	</insert>
+
+	<update id="updateDoctor" parameterType="Doctor" flushCache="true">
+		update r_doctor
+		<set>
+			<if test="name != null">name=#{name},</if>
+			<if test="age != null">age=#{age},</if>
+			<if test="sex != null">sex=#{sex},	</if>
+			<if test="phone != null">phone=#{phone},</if>
+			<if test="dept != null">dept=#{dept},</if>
+			<if test="level != null">level=#{level},</if>
+			<if test="number != null">number=#{number},</if>
+			updateTime=NOW(),
+		</set>
+		where
+		doctorId=#{doctorId}
+	</update>
+
+	<select id="getDoctorById" parameterType="int" resultType="Doctor">
+		select 
+			r.doctorId as doctorId,
+			r.name as name,
+			r.age as age,
+			r.sex as sex,
+			r.phone as phone,
+			r.dept as dept,
+			r.level as level,
+			r.number as number,
+			r.createTime as createTime,
+			r.isdel as isdel
+		from r_doctor r where r.isdel = 0 and doctorId = #{doctorId}
+	</select>
+
+	<update id="deleteDoctorById" parameterType="int" flushCache="true"
+		statementType="PREPARED">
+		update r_doctor
+		set
+		isdel=1,updateTime=NOW()
+		where
+		doctorId = #{doctorId}
+	</update>
+	
+	<select id="getParameterInfo" parameterType="String" resultType="EntityList">
+		select
+		u.para_domain,
+		u.para_value as id,
+		u.chinese as text,
+		u.isdisplay,
+		u.isdel 
+		from tm_parameter u where u.isdisplay = 1 and u.isdel = 0 and u.para_domain = #{domain}
+		ORDER BY u.para_sort desc, u.para_value
+	</select>
+	
+</mapper>
+
+
+
+
+
+
+
+

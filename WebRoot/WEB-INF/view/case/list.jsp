@@ -815,7 +815,6 @@
 			}
 			
 			 //询单无效
-		      
 		      $(".confirmDelModal .cancel").click(function(){
 		        	$(".confirmDelModal").modal("hide");
 		    	  });

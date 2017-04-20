@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 public class BaseBean<T> implements Serializable,Cloneable{
 	
+	private static final long serialVersionUID = -1710030123175600297L;
 	private String mapperNameSpace;
 	private String seachValue;
 	

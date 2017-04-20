@@ -233,7 +233,7 @@
 		                 }
 	                },
 	                  targets: 3
-				  },
+			  },
 			  {
 				  orderable: false,
 				  searchable: false,

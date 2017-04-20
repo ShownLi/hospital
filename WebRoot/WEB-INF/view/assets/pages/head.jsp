@@ -6,7 +6,7 @@
 <meta name="author" content="">
 <link rel="shortcut icon" href="${rootPath}assets/images/favicon.png" type="image/png">
 
-<title>特美旅行CRM系统</title>
+<title>智能医院挂号系统-Li</title>
 <link href="${rootPath}assets/css/style.default.css" rel="stylesheet">
 <link href="${rootPath}assets/css/jquery-ui-timepicker-addon.css" rel="stylesheet">
 

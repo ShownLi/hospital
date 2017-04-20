@@ -130,9 +130,6 @@
 			$(".nav-parent").eq(4).addClass("nav-active");
       		$(".nav-parent").eq(4).find(".children").show();
       		
-      		
-      		
-      		  
       		$.validator.addMethod("passrule",function(value,element,params){
       			var re = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,12}$/
       			if(!re.test(value)){
